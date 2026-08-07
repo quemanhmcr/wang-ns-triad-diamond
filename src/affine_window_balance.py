@@ -145,9 +145,10 @@ scale.  Thus the affine window retains the same square-root balance
 - extreme transformed condition number: `{out.extreme_condition_number:.3e}`
 - extreme leakage/bound ratio: `{out.extreme_leakage_ratio:.9f}`
 
-This closes the geometry of an ellipsoidal moving moat.  It does not yet prove
-the full SGS/filter commutator coefficient or pressure/window overlap for the
-actual PDE packetization; those remain continuum terms.
+This closes the geometry of an ellipsoidal moving moat and the generic physical
+convolution-filter commutator coefficient.  It does not yet insert those bounds
+into the full localized SGS/pressure wave-packet identity; pressure/window, `RU`,
+viscous-boundary and partition-overlap terms remain continuum terms.
 """
     (args.outdir/'summary.md').write_text(md);print(md)
 
