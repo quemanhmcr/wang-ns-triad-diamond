@@ -247,9 +247,12 @@ rather than a numerical candidate.
 
 ## 6. Remaining analytic bridge
 
-The finite-dimensional single-edge stability input is now certified.  For the
-actual Navier--Stokes PDE one still has to prove a transfer-adapted Gaussian
-atomic extraction with uniform synthesis constants, an exact or controlled
-scale-flux weighting that produces the `w_e` used above, and summable
-localization/near-extremal errors.  Pressure, time synchronization, and the
-critical local-energy charge remain part of that PDE bridge.
+The finite-dimensional single-edge stability input is now certified.  Moreover,
+the sharp-cutoff single-triad Mellin identity explains the `log(q/p)` progress
+exactly and retains at least `9/10` of the upper forward segment on the certified
+local box.  For the actual Navier--Stokes PDE one still has to globalize this
+identity: prove a transfer-adapted Gaussian atomic extraction with uniform
+synthesis constants, control cancellation among many triads, produce the
+positive normalized `w_e` used above, compare sharp and packet-compatible
+localized fluxes, and keep the errors summable.  Pressure, time synchronization,
+and the critical local-energy charge remain part of that PDE bridge.

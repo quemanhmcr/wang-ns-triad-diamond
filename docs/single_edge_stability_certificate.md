@@ -1,8 +1,10 @@
 # Certified single-edge helical stability
 
 This module is a finite-dimensional theorem for the scale-normalized helical
-transfer edge.  It is **not** the missing PDE flux bridge and is not a proof of
-Navier--Stokes regularity.
+transfer edge.  By itself it is not a Navier--Stokes regularity theorem.  The
+exact finite-triad sharp-cutoff flux connection is recorded separately in
+`docs/log_scale_flux_bridge.md`; the global packet/localization bridge remains
+open.
 
 ## 1. Exact reduction over helicity signs
 

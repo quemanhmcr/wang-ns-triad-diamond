@@ -1,0 +1,14 @@
+{
+  "rstar": 0.610904101586766,
+  "gamma": 0.4928152853421352,
+  "symmetric_mellin": {
+    "lower": -0.0,
+    "upper": 0.6021257582803257,
+    "total": 0.6021257582803257
+  },
+  "stress": {
+    "grid_points": 10000,
+    "worst_adverse_ratio": 0.054942560768592524,
+    "minimum_retention": 0.9450574392314075
+  }
+}

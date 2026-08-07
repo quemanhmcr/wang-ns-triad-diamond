@@ -1,0 +1,45 @@
+{
+  "certificate": {
+    "precision_bits": 160,
+    "rstar_bracket": [
+      "30545205079/50000000000",
+      "763630127/1250000000"
+    ],
+    "rstar_ball": "[0.6109041016 +/- 2.01e-11]",
+    "gamma_ball": "[0.4928152853 +/- 5.33e-11]",
+    "jstar_ball": "[0.1001101759 +/- 5.38e-11]",
+    "local_box": {
+      "u_max": "2/25",
+      "v_abs_max": "2/25"
+    },
+    "mixed_stability": {
+      "A": "1/50",
+      "B": "1/1"
+    },
+    "transverse_derivative_lower_bound": "[0.046811393544502673280151283652372740107239224017 +/- 3.34e-49]",
+    "local_derivative_boxes": 6,
+    "local_derivative_max_depth": 3,
+    "tangent_second_derivative_lower_bound": "6.8056815564632415771484375000000000000000000000",
+    "tangent_derivative_boxes": 1,
+    "tangent_derivative_max_depth": 0,
+    "hodge_coefficient_lower_bound": "1/2",
+    "mellin_adverse_ratio_upper_bound": "[0.08296357711552840288318294177429262864534165217 +/- 2.33e-48]",
+    "mellin_flux_retention_lower_bound": "9/10",
+    "global_gap": "1/100",
+    "y_cutoff": "9/10",
+    "corner_upper_ball": "[0.07450113509096039668367846364159696261312372323 +/- 3.40e-48]",
+    "global_boxes_gap": 637,
+    "global_boxes_local": 93,
+    "global_max_depth": 15,
+    "global_max_queue": 11,
+    "worst_reported_gap_ratio": 0.9999947839234934,
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples_local": 100000,
+    "samples_global": 100000,
+    "worst_local_mixed_margin": 9.024930972679847e-06,
+    "worst_global_gap_margin": 0.023987678800867836,
+    "largest_global_ratio_seen": 0.9998609067996633
+  }
+}

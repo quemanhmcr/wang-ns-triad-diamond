@@ -106,7 +106,35 @@ The research diagnostic used throughout the finite model is
 }
 \]
 
-It measures transfer strength times logarithmic scale progress. It is **not** claimed to be a literature-standard Navier–Stokes flux functional; the PDE bridge must still identify the corresponding exact scale-flux ledger.
+It measures transfer strength times logarithmic scale progress.  The functional
+`mathcal J` itself is still a normalized finite-edge coefficient rather than the
+full Navier--Stokes flux, but the logarithmic progress factor now has an exact
+PDE-facing origin.  For one conservative ordered Fourier triad `k<=p<=q`, the
+sharp-cutoff outward nonlinear energy flux satisfies
+
+\[
+\boxed{
+\int_0^\infty \Pi_K^{(e)}\,\frac{dK}{K}
+=-\dot E_k\log\frac pk
++\dot E_q\log\frac qp.
+}
+\]
+
+Thus at the equal-parent extremizer `k=p` the lower segment vanishes exactly and
+the surviving term is `dot E_q log(q/p)`.  Near the extremizer the omitted lower
+segment is turned on by the same parent-imbalance variable that has cusp
+stability.  The certified local box gives, even for the adverse maximizing child
+helicity,
+
+\[
+\left|F_{low}\right|/F_{upper}<0.08296357712<0.1,
+\qquad
+F_{Mellin}\ge0.9F_{upper}.
+\]
+
+So the remaining PDE bridge is no longer the origin of the logarithm; it is the
+global packet/triad synthesis, cancellation, localization, and construction of
+the positive transfer weights used by the finite-dimensional ledger.
 
 For symmetric opposite-helicity parents, `k=p=xq`,
 
@@ -751,7 +779,10 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 - Arb-certified global uniqueness/maximality of the single-edge optimizer;
 - Arb-certified mixed single-edge stability
   `Def_e >= (1/50)u+v^2`, the local edge-to-Hodge constant `c_stab=1/2`, and
-  the global outside-neighborhood gap `Def_e>=1/100`.
+  the global outside-neighborhood gap `Def_e>=1/100`;
+- exact sharp-cutoff single-triad Mellin flux identity
+  `int Pi_K dK/K = -dot E_k log(p/k)+dot E_q log(q/p)` and the Arb-certified
+  `>=9/10` retention of the upper progress segment on the local stability box.
 
 ### Computationally supported, not interval-certified
 
@@ -760,7 +791,7 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Exact PDE scale-flux connection.** Relate the progress-weighted diagnostic `\mathcal J` to a rigorous Navier–Stokes scale-flux ledger with controlled symmetrization/localization errors.
+1. **Globalize the exact finite-triad scale-flux bridge.** The sharp-cutoff Mellin identity is exact triad-by-triad and its adverse lower segment is locally controlled.  What remains is to justify the summable packet/triad decomposition of a genuine PDE flux block, control cancellation between many triads, and replace/compare the sharp cutoff with a localization compatible with the grain extraction and local-energy argument.
 2. **Gaussian atomic extraction from an arbitrary near-extremal PDE block.** Need an iterative profile extraction with controlled synthesis constants and transfer-small remainder, without assuming a global `\|\widehat u\|_{3/2}` bound.
 3. **Summable perturbation ledger.** Convert near-extremal PDE errors into the `\zeta_j` and logarithmic cross-error terms required by the master theorem.
 4. **PDE weighting of the certified edge deficit.** The finite-dimensional multiplier gap is now certified.  What remains is to prove that a genuine near-extremal Navier–Stokes scale-flux block produces the normalized transfer-weighted atomic edge measure to which
@@ -790,10 +821,13 @@ The most useful recorded runs, in chronological order, are:
 | `31152386368` | no-log resistance-to-Bellman stopping |
 | `31153769553` | corrected cap-reset master theorem regression run |
 | `31154025683` | barycentric master no-escape theorem; `72` tests + `20,000` episode traces |
-| `31157463384` | Arb-certified full single-edge sign/global/local stability; `76` tests + `200,000` adversarial samples |
+| `31157463384` | first Arb-certified full single-edge sign/global/local stability; `76` tests + `200,000` adversarial samples |
+| `31159084424` | exact sharp-cutoff log-scale flux bridge; `84` tests + local retention grid |
+| `31159086953` | updated Arb single-edge certificate including `>=9/10` Mellin-flux retention; `84` tests + `200,000` adversarial samples |
 
 The current preferred master regression artifact is `recorded-results/31154025683/`.
-The preferred single-edge theorem certificate is `recorded-results/31157463384/`.
+The preferred PDE-facing flux artifact is `recorded-results/31159084424/`.
+The preferred single-edge theorem certificate is `recorded-results/31159086953/`.
 
 ## 18. Current research frontier
 
@@ -824,9 +858,10 @@ positive constant.  The next mathematically decisive work should therefore move
 **back toward the PDE**, not add more graph combinatorics.  The two
 highest-priority targets are:
 
-1. identify an exact/symmetrized Navier–Stokes scale-flux ledger whose
-   transfer weights produce the certified edge deficit and hence the Hodge
-   block cost `c_{0,H}=h_H/2`;
+1. globalize the now-exact single-triad sharp-cutoff Mellin flux identity into
+   a packetized Navier--Stokes scale-flux ledger with controlled cancellation,
+   smooth localization, and positive transfer weights `w_e` feeding the
+   certified Hodge block cost `c_{0,H}=h_H/2`;
 2. prove a transfer-adapted Gaussian atomic extraction theorem for genuine
    near-extremal Navier–Stokes blocks, with summable synthesis/localization
    errors.
@@ -844,12 +879,13 @@ For a new reader, the recommended order is:
 
 1. `RESEARCH_LEDGER.md` — this document;
 2. `docs/single_edge_stability_certificate.md`;
-3. `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
-4. `docs/scale_holonomy.md`;
-5. `docs/multiscale_bellman.md`;
-6. `docs/nested_grain_extraction.md`;
-7. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
-8. `docs/atomic_component_entropy.md`;
-9. `docs/multicommodity_hodge_routing.md`;
-10. `docs/resistance_bellman_stopping.md`;
-11. `docs/master_no_escape.md`.
+3. `docs/log_scale_flux_bridge.md`;
+4. `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
+5. `docs/scale_holonomy.md`;
+6. `docs/multiscale_bellman.md`;
+7. `docs/nested_grain_extraction.md`;
+8. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
+9. `docs/atomic_component_entropy.md`;
+10. `docs/multicommodity_hodge_routing.md`;
+11. `docs/resistance_bellman_stopping.md`;
+12. `docs/master_no_escape.md`.
