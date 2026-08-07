@@ -56,3 +56,13 @@ def test_diamond_phase_frustration_is_finite():
     c=np.array([0.3,-0.1,1.2])
     m=diamond_metrics(a,b,c,(1,-1,1,-1,1,-1))
     assert 0 <= m["phase_frustration"] <= math.pi
+
+
+def test_exact_scale_holonomy_identity():
+    gamma=0.493
+    la,lb,lc,lm=0.17,-0.31,0.44,1.08
+    r1=la-lb
+    r2=lm-(la+lb)/2-gamma
+    r3=lm-lc
+    r4=lb-lc
+    assert abs((r2-r3+0.5*r1+r4)+gamma) < 1e-12
