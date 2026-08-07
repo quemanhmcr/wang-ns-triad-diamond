@@ -1,0 +1,48 @@
+name: triad-diamond
+
+on:
+  workflow_dispatch:
+    inputs:
+      quick:
+        description: "Run reduced search"
+        required: false
+        default: "false"
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  PYTHONHASHSEED: "0"
+
+jobs:
+  test-and-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - name: Run optimisation
+        shell: bash
+        run: |
+          if [[ "${{ github.event.inputs.quick || 'false' }}" == "true" ]]; then
+            python -m src.optimize_diamond --quick --outdir results
+          else
+            python -m src.optimize_diamond --outdir results
+          fi
+      - name: Write job summary
+        if: always()
+        run: cat results/summary.md >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: triad-diamond-results
+          path: results/
+          if-no-files-found: warn
