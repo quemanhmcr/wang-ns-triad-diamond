@@ -1,0 +1,22 @@
+name: objective-strain-collision
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - name: Objective-strain source collision stress
+        run: python -m src.objective_strain_collision --samples 50000 --outdir results-objective-strain
+      - run: cat results-objective-strain/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: objective-strain-collision-results
+          path: results-objective-strain/
