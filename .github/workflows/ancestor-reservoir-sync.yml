@@ -1,0 +1,19 @@
+name: Ancestor reservoir synchronization
+on:
+  workflow_dispatch:
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.ancestor_reservoir_sync --samples 50000 --outdir results-ancestor-reservoir-sync
+      - run: cat results-ancestor-reservoir-sync/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ancestor-reservoir-sync-results
+          path: results-ancestor-reservoir-sync/
