@@ -28,27 +28,51 @@ Thus replication has a strict convexity cost. Two equal disconnected copies prod
 
 ## Quantitative dominant-component certificate
 
-Assume `S=s`. Choose `C_*` maximizing `X_C`. Since
+Assume `S=s`. Let
 
 \[
-s\le(\sum X_C^2)^{1/3},
+Q_X=\sum_CX_C^2,\qquad Q_Y=\sum_CY_C^2,\qquad Q_Z=\sum_CZ_C^2.
 \]
 
-we have `X_{C_*} >= s^3`. The contribution away from `C_*` is at most
+Hölder gives
 
 \[
-\left(\sum_{C\ne C_*}X_C^2\right)^{1/3}
-\le(1-s^3)^{1/3}.
+s\le(Q_XQ_YQ_Z)^{1/3}.
 \]
 
-Consequently
+Since every `Q` is at most one, each one is at least `s^3`. If `C_*` maximizes `X_C`, then
 
 \[
-Y_{C_*},Z_{C_*}\ge
-\left[s-(1-s^3)^{1/3}\right]_+^{3/2}.
+X_{C_*}\ge Q_X\ge s^3.
 \]
 
-This is an exact finite-dimensional lemma. Near-maximal transfer selects one common interaction component before any Gaussian classification is invoked.
+The key stability identity is
+
+\[
+\frac{x^2+y^2+z^2}{3}-(xyz)^{2/3}
+\ge
+\frac{(x-y)^2+(y-z)^2+(z-x)^2}{6},
+\]
+
+because the difference between the two sides is `(xy+yz+zx-3(xyz)^{2/3})/3 >= 0`. Summing over components and using `S>=1-epsilon` yields
+
+\[
+\|X-Y\|_2^2+\|Y-Z\|_2^2+\|Z-X\|_2^2\le6\epsilon.
+\]
+
+Therefore the same component dominates all three sides:
+
+\[
+X_{C_*}\ge(1-\epsilon)^3,
+\]
+
+\[
+Y_{C_*},Z_{C_*}
+\ge
+(1-\epsilon)^3-\sqrt{6\epsilon}.
+\]
+
+This is an exact finite-dimensional lemma. Near-maximal transfer selects one common interaction component before any Gaussian classification is invoked. The `O(sqrt(epsilon))` loss comes from the stability of AM--GM/Hölder, not from a compactness argument.
 
 ## Approximate components
 

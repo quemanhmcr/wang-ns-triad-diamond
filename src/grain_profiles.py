@@ -56,15 +56,17 @@ def dominant_component_certificate(x: np.ndarray, y: np.ndarray, z: np.ndarray) 
 
     If S is the component score and C* maximizes x, then
       x_C* >= S^3,
-      y_C*, z_C* >= max(0, S - (1-S^3)^(1/3))^(3/2).
+      y_C*, z_C* >= max(0, S^3 - sqrt(6(1-S))).
+
+    The shared-component bound follows from the exact AM--GM stability
+      (x^2+y^2+z^2)/3-(xyz)^(2/3)
+        >= ((x-y)^2+(y-z)^2+(z-x)^2)/6.
     """
     x, y, z = map(probability_vector, (x, y, z))
     s = component_score(x, y, z)
     i = int(np.argmax(x))
     x_lower = s ** 3
-    tail = max(0.0, 1.0 - x_lower)
-    local = max(0.0, s - tail ** (1.0 / 3.0))
-    yz_lower = local ** 1.5
+    yz_lower = max(0.0, x_lower - math.sqrt(max(0.0, 6.0 * (1.0 - s))))
     return DominantCertificate(
         score=s,
         index=i,
@@ -225,7 +227,7 @@ def main() -> None:
             "two_equal_disconnected_components": equal_two,
             "dominant_certificate_formula": {
                 "X_Cstar": "at least S^3",
-                "Y_Cstar_and_Z_Cstar": "at least max(0,S-(1-S^3)^(1/3))^(3/2)",
+                "Y_Cstar_and_Z_Cstar": "at least max(0,S^3-sqrt(6(1-S)))",
             },
         },
         "dominant_examples": dominant_examples,

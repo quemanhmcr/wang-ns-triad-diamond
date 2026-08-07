@@ -45,3 +45,12 @@ def test_cross_interaction_decays_with_spatial_separation():
     cross0 = max(k0[i,j,l] for i in range(2) for j in range(2) for l in range(2) if not (i==j==l))
     cross2 = max(k2[i,j,l] for i in range(2) for j in range(2) for l in range(2) if not (i==j==l))
     assert cross2 < cross0
+
+def test_sharp_shared_component_certificate_near_one():
+    x = np.array([0.995, 0.005])
+    y = np.array([0.994, 0.006])
+    z = np.array([0.996, 0.004])
+    cert = dominant_component_certificate(x, y, z)
+    assert cert.index == 0
+    assert cert.y_mass + 1e-12 >= cert.yz_lower_each
+    assert cert.z_mass + 1e-12 >= cert.yz_lower_each
