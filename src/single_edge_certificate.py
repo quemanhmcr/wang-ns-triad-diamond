@@ -210,16 +210,47 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
 
     # Along u=0, D(v)=1-J(0,v)/J*, D(0)=D'(0)=0 by the defining root equation.
     # Here q=sqrt(4-R^{-2}); differentiating twice gives the exact expression below.
-    v = interval(-V0, V0)
-    Rt = rstar * (-v).exp()
-    aa = 1 / (Rt * Rt)
-    q = (4 - aa).sqrt()
-    Lv = gamma + v
-    d2_def = (
-        2 * aa / q + Lv * (2 * aa / q + aa * aa / (q ** 3))
-    ) / (4 * sqrt2 * jstar)
-    if not (d2_def.lower() > 2 * aq(B_TANGENT)):
-        raise AssertionError(f"tangent curvature certificate failed: {d2_def}")
+    # As for the transverse direction, subdivide to eliminate interval wrapping.
+    @dataclass(frozen=True)
+    class TangentBox:
+        v0: Fraction
+        v1: Fraction
+        depth: int = 0
+
+        def split(self):
+            m = (self.v0 + self.v1) / 2
+            return TangentBox(self.v0, m, self.depth + 1), TangentBox(m, self.v1, self.depth + 1)
+
+    def tangent_second_derivative(box: TangentBox):
+        v = interval(box.v0, box.v1)
+        Rt = rstar * (-v).exp()
+        aa = 1 / (Rt * Rt)
+        q = (4 - aa).sqrt()
+        Lv = gamma + v
+        return (
+            2 * aa / q + Lv * (2 * aa / q + aa * aa / (q ** 3))
+        ) / (4 * sqrt2 * jstar)
+
+    tangent_queue: deque[TangentBox] = deque([TangentBox(-V0, V0, 0)])
+    tangent_boxes = 0
+    tangent_max_depth = 0
+    worst_d2_lower = None
+    while tangent_queue:
+        box = tangent_queue.pop()
+        d2 = tangent_second_derivative(box)
+        if d2.lower() > 2 * aq(B_TANGENT):
+            tangent_boxes += 1
+            tangent_max_depth = max(tangent_max_depth, box.depth)
+            if worst_d2_lower is None or d2.lower() < worst_d2_lower:
+                worst_d2_lower = d2.lower()
+            continue
+        if box.depth >= 16:
+            raise AssertionError(f"tangent curvature subdivision failed: box={box}, d2={d2}")
+        b0, b1 = box.split()
+        tangent_queue.append(b0)
+        tangent_queue.append(b1)
+
+    assert worst_d2_lower is not None
 
     # This proves D >= A u + B v^2 on the whole local rectangle by integration.
     # Since u<=2/25, A u >= u^2/4, hence D >= 1/2*(u^2/2+2v^2).
@@ -305,7 +336,9 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
         "transverse_derivative_lower_bound": str(worst_du_lower),
         "local_derivative_boxes": local_boxes,
         "local_derivative_max_depth": local_max_depth,
-        "tangent_second_derivative_ball": str(d2_def),
+        "tangent_second_derivative_lower_bound": str(worst_d2_lower),
+        "tangent_derivative_boxes": tangent_boxes,
+        "tangent_derivative_max_depth": tangent_max_depth,
         "hodge_coefficient_lower_bound": "1/2",
         "global_gap": _qstr(GLOBAL_GAP),
         "y_cutoff": _qstr(Y_CUTOFF),
@@ -389,7 +422,8 @@ def render_summary(cert: dict[str, Any], stress: dict[str, float] | None = None)
         f"- J*: `{cert['jstar_ball']}`",
         f"- certified lower bound for local transverse derivative: `{cert['transverse_derivative_lower_bound']}`",
         f"- local derivative leaf boxes: `{cert['local_derivative_boxes']}` (max depth `{cert['local_derivative_max_depth']}`)",
-        f"- inf symmetric second-derivative enclosure: `{cert['tangent_second_derivative_ball']}`",
+        f"- certified lower bound for symmetric second derivative: `{cert['tangent_second_derivative_lower_bound']}`",
+        f"- tangent derivative leaf boxes: `{cert['tangent_derivative_boxes']}` (max depth `{cert['tangent_derivative_max_depth']}`)",
         f"- y>=0.9 analytic upper bound: `{cert['corner_upper_ball']}`",
         "",
         "## Global branch-and-bound",
