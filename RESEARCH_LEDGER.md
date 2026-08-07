@@ -2715,6 +2715,183 @@ graph checks; the class-mass and collision-chain identities were accurate to
 test fixture contained only one cross edge out of three while incorrectly
 expecting a majority-cross branch; the theorem routed it correctly to Bellman.
 
+#### Physical `H_1` / swirl bridge and mild-aspect no-escape
+
+The five-dimensional hook sector can now be connected to the **transfer-facing
+relative-parent/child polarization variables** on a controlled mild-aspect
+branch, without using the scalar shape term `D_Pi`.
+
+For hook curvature `B^H`, let the physical affine grain factor be `L` and define
+physical symmetric strain-gradient slices
+
+\[
+\boxed{
+C_c^{phys}=\operatorname{Sym}(L B_c^H L^{-1}).
+}
+\]
+
+At the symmetric extremal triad define the polarization-only observable
+
+\[
+\boxed{
+Q_{pol}(C)=\sum_c\left(
+\|D_1(C_c)-D_2(C_c)\|_F^2+
+\|D_3(C_c)\|_F^2
+\right).
+}
+\]
+
+No `D_Pi` term appears.  At an isotropic grain `L=I`, direct expansion in the
+five symmetric trace-free swirl variables makes
+`Q_pol-(1/10)||B^H||^2` block diagonal; Arb certifies positivity of all scalar
+blocks and the `(a,d)` Sylvester determinant throughout the certified `r_*`
+bracket.  Hence
+
+\[
+\boxed{Q_{pol}(I)\ge\frac1{10}\|B^H\|_F^2.}
+\]
+
+For a general grain, remove the physical orthogonal polar factor and a common
+scalar.  With `kappa=cond(L)` the normalized positive factor has spectrum in
+`[kappa^(-1/2),kappa^(1/2)]`, and
+
+\[
+\boxed{
+\|C^{phys}(L)-C^{phys}(I)\|_F
+\le(\kappa-1)\|B^H\|_F.
+}
+\]
+
+For every physical symmetric strain slice the polarization-only observable has
+operator norm at most `sqrt(5)`, so the triangle inequality gives
+
+\[
+\sqrt{Q_{pol}(L)}
+\ge
+\left(
+\frac1{\sqrt{10}}-\sqrt5(\kappa-1)
+\right)\|B^H\|_F.
+\]
+
+On the explicit mild-aspect branch
+
+\[
+\boxed{\operatorname{cond}L\le21/20,}
+\]
+
+Arb certifies
+
+\[
+\boxed{Q_{pol}(L)\ge\frac1{25}\|B^H\|_F^2.}
+\]
+
+Every real symmetric trace-free `2x2` generator satisfies
+
+\[
+D^2=\frac12\|D\|_F^2I.
+\]
+
+Therefore its norm on **every** unit complex helicity spinor is fixed, and the
+combined relative-parent/child `H_1` sideband forcing energy obeys
+
+\[
+\boxed{
+\mathbb E_z\|F_{H1}^{rel}\|^2
+\ge\frac1{50}\|B^H\|_F^2.
+}
+\]
+
+This is precisely transfer-facing: it uses `D_1-D_2` and `D_3`, not absolute
+parent mixing.  Action `31194787885` passed `234` tests plus `50,000` mild-aspect
+hook configurations and was Arb-certified.  The worst sampled isotropic and
+mild-aspect ratios were `0.121618531` and `0.104335578`, while the arbitrary
+spinor-action identity residual was `7.105e-15`.  A transient GitHub API `500`
+occurred only while listing the run immediately after dispatch; direct run
+inspection showed success.
+
+This theorem **does not charge high aspect**.  If `cond(L)>21/20`, the packet
+simply leaves this branch and remains subject to affine fresh/reuse ancestry.
+Static affine anisotropy is still an exact Young symmetry.
+
+The same first-Duhamel machinery now yields a local mild-aspect `H_1` no-escape
+theorem.  Assume `cond(L(t))<=21/20` over one packet lifetime and put
+
+\[
+I_1=\int_0^T\|B^H(t)\|_Fdt.
+\]
+
+In the fully pulled-back relative-helicity interaction frame, the physical
+forcing lower bound and Banach variation theorem give either covariant `H_1`
+forcing variation
+
+\[
+\boxed{
+J_1\ge\frac{I_1}{\sqrt{50}\,T},
+}
+\]
+
+or a first-Duhamel daughter
+
+\[
+\boxed{\delta_1^2\ge\frac1{200}I_1^2.}
+\]
+
+If nonlinear sideband feedback cancels at least half of `delta_1`, it is already
+a high--high sideband branch.  Otherwise the surviving daughter has
+`delta^2>=I_1^2/800`.  The critical `|G|^(3/2)` Gaussian has variance `4/3` in
+the degree-one coordinate, so its critical second moment dominates the `L^2`
+daughter norm.  At critical sideband size `>=1/80` there is a definite daughter
+capacity event.  Below that threshold, odd-Hermite uniform convexity and the
+pair-rescue split give
+
+\[
+\boxed{
+\operatorname{Def}_{transfer}\ge\frac{I_1^2}{25600}
+\quad\text{or}\quad
+R_{pair}\ge\frac{I_1^2}{25600}.
+}
+\]
+
+Thus
+
+\[
+\boxed{c_{H1}=1/25600.}
+\]
+
+The irreducible curvature split also supplies a full mild-aspect consequence.
+If
+
+\[
+I_B=\int_0^T\|B(t)\|_Fdt,
+\]
+
+then
+
+\[
+\boxed{I_B\le\sqrt6\,I_3+I_1.}
+\]
+
+Hence either `I_3>=I_B/(2 sqrt(6))` or `I_1>=I_B/2`.  The `H_3` branch then has
+cost at least `I_B^2/32768`, while the `H_1` branch has cost at least
+`I_B^2/102400`.  The common clean constant is therefore
+
+\[
+\boxed{c_{mild,curv}=1/102400.}
+\]
+
+outside source/dephasing, nonlinear-feedback, large-daughter, and pair-rescue
+branches.  Action `31195130386` passed `233` tests (`2` optional dependency
+skips) plus `50,000` five-branch checks.  Its minimum `H_1` pair-cost,
+transfer-deficit, and full-channel margins were `6.759e-12`, `1.248e-11`, and
+`5.238e-09`.
+
+The remaining caveat is now sharply localized: `J_1` is a **covariant
+relative-helicity forcing variation**, but it has not yet been expanded into
+explicit pressure / differentiated-SGS / viscous / carrier-frame source terms
+with the source-locality constants available for `H_3`.  That source calculus,
+not the existence of an `H_1` cost on mild-aspect grains, is the next sideband
+PDE target.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -3437,6 +3614,20 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   same-ancestry pair/cycle mass without assuming spatially disjoint Hermite
   packets;
 
+- Arb-certified physical hook/swirl polarization bridge on the
+  mild-aspect branch: the transfer-facing observable with **no scalar `D_Pi`
+  term** satisfies `Q_pol(I)>=(1/10)||B_hook||^2`; for
+  `cond(L)<=21/20`, `Q_pol(L)>=(1/25)||B_hook||^2`, hence arbitrary unit
+  relative-parent/child helicity spinors receive `H_1` forcing energy
+  `>=(1/50)||B_hook||^2`; high aspect is routed to affine ancestry rather than
+  charged as a defect;
+- exact mild-aspect `H_1` sideband no-escape theorem: with
+  `I_1=int||B_hook||`, either the covariant relative-helicity forcing variation
+  is `>=I_1/(sqrt(50)T)`, nonlinear feedback / large daughter occurs, or
+  transfer deficit / pair rescue is `>=I_1^2/25600`; combining with the `H_3`
+  theorem and `I_B<=sqrt(6)I_3+I_1` gives the clean full-curvature mild-aspect
+  cost `I_B^2/102400` outside source/feedback/daughter/rescue branches;
+
 ### Computationally supported, not interval-certified
 
 - numerical reuse-gap constants from nonlinear optimization;
@@ -3444,35 +3635,34 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Close the physical `H_1` / swirl sideband branch.**  The intrinsic affine
-   curvature split is now coercive and the `H_3` branch has a quantitative
-   no-escape theorem.  What remains is to propagate the five-dimensional hook
-   sector through the actual three-role relative-helicity dynamics with a
-   transfer-facing spacetime theorem.  The old caveat remains essential:
-   physical Euclidean polarization curvature can deteriorate with affine aspect,
-   so no false aspect-uniform coercivity may be inserted.
-2. **Convert persistent cubic SGS increment charge into the ancestry ledger.**
+1. **Expand the physical `H_1` covariant dephasing source.**  The mild-aspect
+   transfer-facing hook branch is now quantitative:
+   `Q_pol>=1/25||B_hook||^2`, `H_1` forcing energy `>=1/50||B_hook||^2`, and
+   local pair-rescue/deficit cost `I_1^2/25600`.  What remains is to differentiate
+   that forcing in the fully pulled-back relative-helicity frame and express the
+   covariant variation `J_1` in explicit pressure, differentiated-SGS, viscous,
+   carrier-direction and frame-connection source terms with summable constants.
+2. **Handle high-aspect reuse without an aspect defect.**  The `H_1` theorem is
+   deliberately restricted to `cond(L)<=21/20`.  Grains leaving that branch
+   must be synchronized through affine fresh/reuse ancestry, covariance,
+   geometric radius `r_g`, scale/spin holonomy and relative polarization; aspect
+   itself remains an exact Young symmetry and is not a positive cost.
+3. **Convert persistent cubic SGS increment charge into the ancestry ledger.**
    Large `RU` leakage forces a scale-critical cubic velocity-increment charge at
-   the filter scale.  One still needs a transfer-adapted Littlewood--Paley /
-   affine-grain extraction showing that persistent charge yields a fresh/reused
-   critical grain, dissipation event or Bellman cost with uniform constants.
-3. **Control selected-subfamily interfaces through spacetime.**  A complete
-   quadratic partition has zero total boundary flux, degree-zero profile
-   remainders are work-level `Xi`, and pair-Hermite rescue now has its own
-   ancestry graph.  The continuum construction must propagate a selected
-   lineage while keeping uncancelled spatial/frequency interfaces summable
-   relative to transfer weight.
-4. **Synchronize affine spacetime ancestry.**  Fresh grains obey
-   `M_aff>=3/10` and the radius budget `sum r_g<=P E/eta`; dominant reused
-   sideband daughters and cycle attachments must be synchronized across
-   successive `N^-2` lifetimes using covariance, scale/spin holonomy, relative
-   polarization and the one-sided `r_g` dynamics.
-5. **Feed the sideband/source branches into the master theorem.**  The local
-   `H_3` constant `3/4096`, pair-rescue ancestry routing, `Xi`, cubic-increment
-   annular events, pressure/source alternatives and affine moat errors must be
-   registered as summable perturbations or positive fresh/reuse/Bellman costs.
-   No continuum theorem yet proves a uniform lower threshold for the relevant
-   `I_3`/`H_1` impulses on every efficient PDE block.
+   the filter scale.  A transfer-adapted Littlewood--Paley / affine-grain
+   extraction must show that persistent charge yields a fresh/reused critical
+   grain, dissipation event or Bellman/CKN cost with uniform constants.
+4. **Control selected-subfamily interfaces through spacetime.**  Complete
+   partitions cancel globally, degree-zero profile remainders are work-level
+   `Xi`, and pair-Hermite rescue has an exact ancestry graph.  The continuum
+   lineage must keep the uncancelled spatial/frequency interfaces summable
+   relative to its transfer weight.
+5. **Insert uniform curvature thresholds into the master theorem.**  On a
+   mild-aspect block a full affine-curvature impulse `I_B` has local clean cost
+   `I_B^2/102400` outside the named source/feedback/daughter/pair branches.  A
+   continuum theorem still has to produce a uniform lower threshold for the
+   relevant `I_B` (or route small `I_B` into the flat/reuse episode) and register
+   the resulting source or ancestry branches without double counting.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier–Stokes global regularity is made.
 
@@ -3566,6 +3756,9 @@ The most useful recorded runs, in chronological order, are:
 | `31193125969` | preferred local H3 no-escape theorem with clean cost `3 I_3^2/4096`; `229` tests + `1` optional skip + `50,000` five-branch checks |
 | `31193443926` | pair-ancestry workflow failed because its hand-written test graph had cross fraction `1/3` while expecting the majority-cross branch; fixture failure, theorem routing was correct |
 | `31193531201` | preferred odd-sideband pair-rescue ancestry graph: `Xi` / dominant reuse / Bellman entropy / same-ancestry cycles; `231` tests + `1` optional skip + `50,000` graphs |
+| `31194159878`--`31194224545` | twelve-workflow Hermite-sideband integration on `e45eaea`: coherence, parity, curvature irrep, `H_3` no-escape, pair ancestry, curvature source, Hermite-helicity, physical polarization curvature, one-shot profile, relative polarization, localized pressure and master all green; master `231` tests + `1` optional skip + `20,000` traces with worst margin `0` |
+| `31194787885` | Arb-certified physical `H_1`/swirl mild-aspect bridge: isotropic `Q_pol>=1/10`, `cond(L)<=21/20` gives `Q_pol>=1/25`, arbitrary-spinor forcing energy `>=1/50`; `234` tests + `50,000` configurations |
+| `31195130386` | mild-aspect `H_1` local no-escape `I_1^2/25600` and full-curvature clean cost `I_B^2/102400`; `233` tests + `2` optional skips + `50,000` five-branch checks |
 
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
@@ -3609,69 +3802,85 @@ Arb-certified in run `31161914134`.
 
 ## 18. Current research frontier
 
-The scalar `H_3` daughter channel is no longer an unidentified sideband escape.
-In the affine curvature interaction frame the programme now has
+The orthogonal curvature sidebands are now quantitatively controlled on the
+mild-aspect branch.  The intrinsic affine curvature decomposition
+
+\[
+15=(7\oplus3)_{H_3/envelope}\oplus5_{H_1/swirl}
+\]
+
+feeds two transfer-facing local no-escape theorems:
 
 \[
 \boxed{
-H_3\text{ curvature impulse}
-\to
-\begin{cases}
-\text{acceleration-Hessian source},\\
-\text{nonlinear sideband feedback},\\
-\text{definite daughter capacity},\\
-\text{transfer deficit }\ge(3/4096)I_3^2,\\
-\text{pair-sideband rescue }\ge(3/4096)I_3^2.
-\end{cases}}
+H_3:\quad
+\operatorname{Def}\ \text{or}\ R_{pair}
+\ge\frac3{4096}I_3^2,
+}
 \]
 
-Odd-Hermite parity then prevents the last branch from remaining a new error
-currency: rescue edges contain exactly two odd daughter endpoints and form an
-ordinary weighted ancestry graph.  They route into cross-component `Xi`, a
-dominant reused daughter, Bellman component entropy, or same-ancestry cycle
-attachments.  This routing uses transfer-weighted endpoint laws and does not
-assume spatial disjointness of Hermite modes.
-
-The affine-normalized non-affine curvature also has a complete intrinsic static
-split
+and, when `cond(L(t))<=21/20`,
 
 \[
-\boxed{15=(7\oplus3)_{H_3/envelope}\oplus5_{H_1/swirl}},
+\boxed{
+H_1:\quad
+\operatorname{Def}\ \text{or}\ R_{pair}
+\ge\frac1{25600}I_1^2,
+}
+\]
+
+outside the named dephasing-source, nonlinear-feedback and large-daughter
+branches.  The `H_1` estimate is physical and transfer-facing: it uses only the
+relative-parent/child polarization observable
+
+\[
+Q_{pol}=\sum_c(\|D_1-D_2\|^2+\|D_3\|^2),
 \]
 
 with
 
 \[
+\boxed{Q_{pol}\ge\frac1{25}\|B^H\|^2,\qquad
+E\|F_{H1}^{rel}\|^2\ge\frac1{50}\|B^H\|^2.}
+\]
+
+No scalar `D_Pi` or absolute parent-helicity mixing is charged.
+
+Combining both irreducible sectors gives, on the same mild-aspect lifetime,
+
+\[
 \boxed{
-\|\operatorname{Sym}B\|^2+\|C_{hook}\|^2\ge\frac16\|B\|^2.
+I_B\le\sqrt6 I_3+I_1
+\quad\Longrightarrow\quad
+\operatorname{Def}\ \text{or}\ R_{pair}
+\ge\frac1{102400}I_B^2
 }
 \]
 
-Thus there is no third hidden curvature sector.  The remaining difficulty is
-not to discover another norm, but to connect the **intrinsic hook/H1 sector** to
-the actual physical three-role relative-helicity transfer through spacetime.
-The aspect-sensitive caveat remains: static affine anisotropy is an exact Young
-symmetry and physical Euclidean polarization curvature need not be uniformly
-comparable to `||B||`.
+unless a source/dephasing, nonlinear-feedback or large-daughter branch occurs.
+Pair rescue is no longer a free error: odd parity converts it to a daughter
+ancestry graph which routes into `Xi`, dominant reuse, Bellman entropy or
+same-ancestry cycles.
 
-The decisive next work is therefore:
+The decisive remaining work has therefore moved again:
 
-1. prove a **physical H1/swirl no-escape theorem** in the transfer-facing
-   three-role polarization system, respecting the common-parent `SL(2)` gauge
-   and without an aspect penalty;
-2. convert persistent **cubic SGS velocity-increment charge** into a
-   fresh/reused affine grain, dissipation event, or Bellman/CKN cost without a
-   global `L^3` assumption;
-3. synchronize the newly identified **dominant reused daughters and
-   same-ancestry pair cycles** through successive packet lifetimes using `r_g`,
-   covariance, scale/spin holonomy and relative polarization;
-4. propagate selected moving partitions so remaining interface terms enter
-   summable `Xi`, then insert the quantitative `H3` and future `H1` branches into
-   the master `zeta_j`/Bellman episode ledger.
+1. derive the **`H_1` covariant source calculus**.  Differentiate the physical
+   relative-parent/child forcing in the fully pulled-back affine/helicity frame
+   and split `J_1` into pressure, differentiated-SGS, viscous,
+   carrier-direction and frame-connection source terms with explicit locality
+   constants;
+2. treat **high-aspect lifetimes as ancestry/reuse**, not as a defect: synchronize
+   covariance ellipsoids, `r_g`, scale/spin holonomy and relative polarization
+   when `cond(L)>21/20`;
+3. convert persistent **cubic SGS velocity-increment charge** into a fresh/reused
+   affine grain, dissipation event or Bellman/CKN charge without a global `L^3`
+   assumption;
+4. propagate selected moving partitions with summable `Xi` interfaces and feed
+   uniform curvature/source thresholds into the master episode theorem.
 
-Further raw `L^2` residual estimates, single-edge optimization, common-parent
-Magnus control, or aspect-ratio penalties would discard structure already
-identified as gauge or symmetry.
+Further raw residual norms, aspect-ratio penalties, absolute helicity mixing or
+common-parent Magnus control would now discard structure already identified as
+symmetry or gauge.
 
 ---
 
@@ -3687,7 +3896,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, and `docs/sideband_pair_ancestry.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, and `docs/h1_swirl_no_escape.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

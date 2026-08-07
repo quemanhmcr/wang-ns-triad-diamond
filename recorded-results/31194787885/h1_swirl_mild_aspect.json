@@ -1,0 +1,20 @@
+{
+  "certificate": {
+    "rstar_ball": "[0.6109041016 +/- 2.01e-11]",
+    "C_ball": "[0.6698752416 +/- 5.99e-11]",
+    "isotropic_Qpol_lower": "1/10",
+    "aspect_threshold": "21/20",
+    "mild_raw_square_ball": "[0.041789321881345247559915563789515096071516406231 +/- 4.00e-49]",
+    "mild_Qpol_lower": "1/25",
+    "spinor_H1_energy_lower": "1/50",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_isotropic_ratio": 0.12161853135966372,
+    "worst_mild_ratio": 0.10433557793892166,
+    "worst_mild_bound_margin": 0.06254625605757706,
+    "worst_spinor_identity_residual": 7.105427357601002e-15,
+    "maximum_condition_number": 1.0500000000000018
+  }
+}

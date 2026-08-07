@@ -1,0 +1,23 @@
+{
+  "certificate": {
+    "H1_first_duhamel_square": "I_1^2/200",
+    "H1_post_feedback_square": "I_1^2/800",
+    "H1_pair_or_deficit": "I_1^2/25600",
+    "full_mild_pair_or_deficit": "I_B^2/102400",
+    "aspect_condition": "cond(L)<=21/20 throughout lifetime",
+    "status": "EXACT_GIVEN_MILD_ASPECT_H1_BRIDGE_AND_SIDEBAND_THEOREMS"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_H1_pair_margin": 6.758609169060749e-12,
+    "minimum_H1_deficit_margin": 1.2479086490481803e-11,
+    "minimum_full_channel_margin": 5.237502220348266e-09,
+    "branch_counts": {
+      "H1_covariant_dephasing": 9978,
+      "nonlinear_sideband_feedback": 10144,
+      "pair_sideband_rescue": 10006,
+      "transfer_deficit": 9926,
+      "large_daughter_capacity": 9946
+    }
+  }
+}

@@ -642,8 +642,8 @@ and a complete quadratic spatial partition cancels globally.  These terms are
 not inserted again into microscopic spinor forcing.
 
 What remains conditional for the master theorem is now the **spacetime
-registration**: the `H_3` sideband has a local no-escape theorem and pair-rescue
-ancestry routing, while the physical `H_1/swirl` branch remains open; persistent
+registration**: the `H_3` sideband and the mild-aspect physical `H_1/swirl` branch both have local no-escape theorems and pair-rescue
+ancestry routing; persistent
 cubic increment charge must enter fresh/reuse, dissipation or Bellman
 bookkeeping; and selected-subfamily interfaces must stay summable in `Xi`.
 
@@ -700,3 +700,71 @@ block.  In particular the intrinsic affine curvature bound
 \]
 
 must not be converted into an aspect-independent Euclidean polarization cost.
+
+
+## Mild-aspect H1/swirl insertion
+
+The hook sector now has a genuinely transfer-facing physical branch.  Define
+
+\[
+Q_{pol}=\sum_c\left(
+\|D_1(C_c)-D_2(C_c)\|_F^2+
+\|D_3(C_c)\|_F^2
+\right),
+\]
+
+with no scalar `D_Pi` term.  Arb certifies `Q_pol>=1/10||B_hook||^2` for an
+isotropic grain.  After polar/global-scalar normalization, the mild-aspect
+condition
+
+\[
+\operatorname{cond}L\le21/20
+\]
+
+implies
+
+\[
+\boxed{Q_{pol}\ge\frac1{25}\|B_{hook}\|^2.}
+\]
+
+Because every trace-free symmetric `2x2` generator obeys
+`D^2=(||D||_F^2/2)I`, the combined relative-parent/child `H1` forcing energy on
+arbitrary unit spinors is at least
+
+\[
+\boxed{\frac1{50}\|B_{hook}\|^2.}
+\]
+
+Over one mild-aspect lifetime, with `I_1=int||B_hook||`, the local no-escape
+branch therefore gives
+
+\[
+\boxed{
+J_1\ge\frac{I_1}{\sqrt{50}T}
+\quad\text{or}\quad
+\text{feedback / large daughter / pair rescue / }
+\operatorname{Def}\ge\frac{I_1^2}{25600}.
+}
+\]
+
+Together with the `H3` branch and
+
+\[
+I_B\le\sqrt6 I_3+I_1,
+\]
+
+a mild-aspect full-curvature impulse has the common clean local cost
+
+\[
+\boxed{c_{mild,curv}(I_B)=I_B^2/102400}
+\]
+
+outside source/dephasing, nonlinear-feedback, large-daughter and pair-rescue
+branches.  Pair rescue already routes to `Xi`, dominant reuse, Bellman entropy
+or ancestry cycles.
+
+The missing piece is not an `H1` cost but its **source calculus**: the covariant
+forcing variation `J_1` must be expanded into pressure, SGS, viscous and
+carrier/frame source terms with explicit constants.  Grains with
+`cond(L)>21/20` are not charged by aspect; they leave this theorem and enter the
+affine fresh/reuse ancestry branch.
