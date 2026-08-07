@@ -115,3 +115,74 @@ A general flat graded network may contain larger equal-length diamonds. The
 remaining task is to decompose such networks into flat cells and prove that a
 positive density of their boundary companions is fresh, unless an even more
 rigid geometric class occurs.
+
+## Planar flat erosion theorem
+
+The flat butterfly suggests a stronger ledger when a component is contained in
+a lifted planar angular chart. Write directions by real angles. An exact
+extremal triad takes two parent angles `x<y` with
+
+\[
+y-x=\theta_*
+\]
+
+and produces the midpoint angle
+
+\[
+z=(x+y)/2.
+\]
+
+For a finite parent set `S`, every eligible midpoint lies in
+
+\[
+[\min S+\theta_*/2,\;\max S-\theta_*/2].
+\]
+
+Hence
+
+\[
+\boxed{\operatorname{diam} S_{j+1}\le
+\operatorname{diam} S_j-\theta_*}
+\]
+
+whenever no fresh directions are inserted. A flat exact cascade in a fixed
+angular chart therefore dies after at most `diam(S_0)/theta_*` generations.
+
+More generally, let `F_j` be fresh boundary directions and put
+
+\[
+E_j=\operatorname{diam}(S_j\cup F_j)-\operatorname{diam}S_j.
+\]
+
+Then
+
+\[
+\operatorname{diam}S_{j+1}
+\le \operatorname{diam}S_j+E_j-\theta_*.
+\]
+
+After `L` generations,
+
+\[
+\boxed{
+\sum_{j=0}^{L-1}E_j
+\ge L\theta_*+\operatorname{diam}S_L-\operatorname{diam}S_0.
+}
+\]
+
+Thus a planar flat cascade can avoid Hodge curvature only by importing angular
+boundary span at a linear rate.
+
+For near-extremal pairs with angular separation at least
+`theta_*-delta_j` and child-angle error at most `epsilon_j`, the same proof gives
+
+\[
+\operatorname{diam}S_{j+1}
+\le \operatorname{diam}S_j+E_j
+-(\theta_*-\delta_j)+2\epsilon_j.
+\]
+
+This is a second additive cocycle: curved networks pay Hodge energy, while
+planar flat networks pay fresh angular span. Converting fresh span into
+critical-mass entropy requires the packet inverse theorem's comparable-mass
+conclusion.

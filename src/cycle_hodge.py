@@ -188,6 +188,76 @@ def perturb_butterfly(cos_theta: float, eps: float, samples: int = 20000, seed: 
     }
 
 
+
+def planar_midpoint_children(angles: Sequence[float], theta: float, tolerance: float = 1e-12) -> list[float]:
+    """All lifted-angle midpoints of pairs separated by theta.
+
+    Angles live on the real line, not modulo 2*pi. This is the exact planar
+    flat-extremal model inside a chosen angular chart.
+    """
+    a = sorted(float(x) for x in angles)
+    out: list[float] = []
+    for i in range(len(a)):
+        for j in range(i + 1, len(a)):
+            if abs((a[j] - a[i]) - theta) <= tolerance:
+                out.append(0.5 * (a[i] + a[j]))
+    return sorted(out)
+
+
+def planar_erosion_step(
+    internal_angles: Sequence[float],
+    theta: float,
+    fresh_angles: Sequence[float] = (),
+    pair_tolerance: float = 0.0,
+    midpoint_error: float = 0.0,
+) -> dict[str, float]:
+    """Exact/near-exact angular erosion ledger.
+
+    If parent pairs have separation at least theta-pair_tolerance and children
+    are within midpoint_error of their angular midpoint, then
+      diameter(next) <= diameter(internal union fresh)
+                        -(theta-pair_tolerance)+2 midpoint_error.
+    The returned bound is theorem-level; `children` are generated exactly only
+    for the zero-tolerance diagnostic model.
+    """
+    internal = sorted(float(x) for x in internal_angles)
+    if not internal:
+        raise ValueError("nonempty internal angle set required")
+    augmented = sorted(internal + [float(x) for x in fresh_angles])
+    d_internal = internal[-1] - internal[0]
+    d_augmented = augmented[-1] - augmented[0]
+    fresh_expansion = d_augmented - d_internal
+    bound = max(0.0, d_augmented - (theta - pair_tolerance) + 2.0 * midpoint_error)
+    children = planar_midpoint_children(augmented, theta) if pair_tolerance == 0.0 and midpoint_error == 0.0 else []
+    actual = 0.0 if len(children) <= 1 else children[-1] - children[0]
+    return {
+        "internal_diameter": d_internal,
+        "augmented_diameter": d_augmented,
+        "fresh_expansion": fresh_expansion,
+        "next_diameter_bound": bound,
+        "actual_exact_next_diameter": actual,
+        "child_count": float(len(children)),
+    }
+
+
+def planar_fresh_span_lower_bound(
+    initial_diameter: float,
+    final_diameter: float,
+    depth: int,
+    theta: float,
+    pair_tolerances: Sequence[float] | None = None,
+    midpoint_errors: Sequence[float] | None = None,
+) -> float:
+    """Minimum total boundary expansion needed by a depth-L near-flat cascade."""
+    if depth < 0:
+        raise ValueError("depth must be nonnegative")
+    pt = [0.0] * depth if pair_tolerances is None else list(pair_tolerances)
+    me = [0.0] * depth if midpoint_errors is None else list(midpoint_errors)
+    if len(pt) != depth or len(me) != depth:
+        raise ValueError("one tolerance and midpoint error per level required")
+    erosion = sum(theta - pt[j] - 2.0 * me[j] for j in range(depth))
+    return max(0.0, final_diameter - initial_diameter + erosion)
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--outdir", type=Path, default=Path("results-cycle-hodge"))

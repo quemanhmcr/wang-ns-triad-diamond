@@ -41,3 +41,27 @@ def test_exact_butterfly_returns_central_direction():
     assert abs(row["m_dot_n"] - geom["c"]) < 1e-12
     assert row["d_error"] < 1e-12
     assert abs(row["internal_angle_gap"] - 0.5 * geom["theta"]) < 1e-12
+
+
+def test_planar_exact_erosion():
+    from src.cycle_hodge import planar_erosion_step
+    theta = 1.0
+    # Pairs (0,1), (1,2), (2,3) give children 0.5,1.5,2.5.
+    row = planar_erosion_step([0.0, 1.0, 2.0, 3.0], theta)
+    assert row["actual_exact_next_diameter"] == 2.0
+    assert row["next_diameter_bound"] == 2.0
+
+
+def test_planar_fresh_span_telescopes():
+    from src.cycle_hodge import planar_fresh_span_lower_bound
+    theta = 1.2
+    # Maintaining the same diameter for 5 exact generations costs at least 5 theta.
+    cost = planar_fresh_span_lower_bound(3.0, 3.0, 5, theta)
+    assert abs(cost - 6.0) < 1e-12
+
+
+def test_near_planar_erosion_bound():
+    from src.cycle_hodge import planar_erosion_step
+    row = planar_erosion_step([0.0, 3.0], 1.0, fresh_angles=[-0.2, 3.4], pair_tolerance=0.1, midpoint_error=0.02)
+    assert abs(row["fresh_expansion"] - 0.6) < 1e-12
+    assert abs(row["next_diameter_bound"] - (3.6 - 0.9 + 0.04)) < 1e-12
