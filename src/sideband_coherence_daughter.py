@@ -203,33 +203,21 @@ def stress(samples: int = 20_000, seed: int = 20260807) -> SidebandCoherenceStre
         x = basis @ rng.normal(size=basis.shape[1]); B0 = coeff_to_curvature(x)
         S = rng.normal(size=(3,3,3)); S = 0.5*(S+np.swapaxes(S,1,2))
         t = float(rng.uniform(0.0, 0.08))
-        # exact constant-source solution by augmented block exponential via quadrature-free formula when A invertible is awkward;
-        # use one tiny centered finite difference only as regression evidence.
-        h = 2e-7
-        def rhs(B): return -2*np.einsum('ad,dbc->abc', A, B) + S
-        Bm = B0 + (t-h)*rhs(B0)  # first-order local model sufficient for derivative identity stress at t~0
-        Bp = B0 + (t+h)*rhs(B0)
-        pull_m = curvature_interaction_pullback(A, t-h, Bm)
-        pull_p = curvature_interaction_pullback(A, t+h, Bp)
-        fd = (pull_p-pull_m)/(2*h)
-        ps = pulled_source(A,t,S)
-        # Because Bm/Bp use first-order-in-t states, compare only very small t subset tightly.
-        if t < 2e-4:
-            rr = float(np.linalg.norm(fd-ps))/max(1.0,float(np.linalg.norm(ps)))
-            wpull=max(wpull,rr)
-        # exact t=0 derivative identity
-        fd0 = 2*np.einsum('ad,dbc->abc',A,B0) + rhs(B0)
-        rr0=float(np.linalg.norm(fd0-S)); wpull=max(wpull,rr0)
-        if rr0>5e-12: raise AssertionError("curvature interaction pullback derivative failed")
-        T0=sym3(B0); S0=sym3(S)
-        f0=h3_forcing_vector(T0); fs=h3_forcing_vector(S0)
-        eps=1e-7
-        B1=B0+eps*rhs(B0)
-        pull1=curvature_interaction_pullback(A,eps,B1)
-        f1=h3_forcing_vector(sym3(pull1))
-        hres=float(np.linalg.norm((f1-f0)/eps-fs))/max(1.,float(np.linalg.norm(fs)))
+        # Exact instantaneous constant-connection identity at arbitrary t.
+        # P=exp(2At) commutes with A, so d(PB)/dt=2APB+P(-2AB+S)=PS.
+        P=expm(2.0*A*t)
+        rhs=-2*np.einsum('ad,dbc->abc',A,B0)+S
+        lhs=2*np.einsum('ad,dbc->abc',A,np.einsum('de,ebc->dbc',P,B0)) + np.einsum('ad,dbc->abc',P,rhs)
+        ps=np.einsum('ad,dbc->abc',P,S)
+        rr=float(np.linalg.norm(lhs-ps))/max(1.0,float(np.linalg.norm(ps)))
+        wpull=max(wpull,rr)
+        if rr>5e-11: raise AssertionError('curvature interaction pullback derivative failed')
+        # H3 projection is linear, so the pulled H3 forcing derivative is exactly the H3 projection of PS.
+        fd=h3_forcing_vector(sym3(lhs))
+        fs=h3_forcing_vector(sym3(ps))
+        hres=float(np.linalg.norm(fd-fs))/max(1.,float(np.linalg.norm(fs)))
         wh3=max(wh3,hres)
-        if hres>3e-5: raise AssertionError("H3 pulled-source derivative regression failed")
+        if hres>5e-11: raise AssertionError('H3 pulled-source derivative failed')
     return SidebandCoherenceStress(samples,wvar,wpull,wh3,mind)
 
 
