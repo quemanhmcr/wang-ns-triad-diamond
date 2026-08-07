@@ -1,0 +1,22 @@
+name: curvature-moat-balance
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - name: Exact balance algebra and schedule countermodel stress
+        run: python -m src.curvature_moat_balance --samples 100000 --outdir results-curvature-moat
+      - run: cat results-curvature-moat/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: curvature-moat-balance-results
+          path: results-curvature-moat/
