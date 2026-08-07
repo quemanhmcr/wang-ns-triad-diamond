@@ -702,69 +702,72 @@ block.  In particular the intrinsic affine curvature bound
 must not be converted into an aspect-independent Euclidean polarization cost.
 
 
-## Mild-aspect H1/swirl insertion
+## Physical mild-aspect H1/swirl insertion
 
-The hook sector now has a genuinely transfer-facing physical branch.  Define
-
-\[
-Q_{pol}=\sum_c\left(
-\|D_1(C_c)-D_2(C_c)\|_F^2+
-\|D_3(C_c)\|_F^2
-\right),
-\]
-
-with no scalar `D_Pi` term.  Arb certifies `Q_pol>=1/10||B_hook||^2` for an
-isotropic grain.  After polar/global-scalar normalization, the mild-aspect
-condition
+The hook sector has a transfer-facing pointwise bridge with no scalar `D_Pi`:
 
 \[
-\operatorname{cond}L\le21/20
+Q_{pol}=\sum_c(\|D_1-D_2\|_F^2+\|D_3\|_F^2),
+\qquad
+Q_{pol}\ge\frac1{25}\|B_{hook}\|^2
 \]
 
-implies
-
-\[
-\boxed{Q_{pol}\ge\frac1{25}\|B_{hook}\|^2.}
-\]
-
-Because every trace-free symmetric `2x2` generator obeys
-`D^2=(||D||_F^2/2)I`, the combined relative-parent/child `H1` forcing energy on
-arbitrary unit spinors is at least
-
-\[
-\boxed{\frac1{50}\|B_{hook}\|^2.}
-\]
-
-Over one mild-aspect lifetime, with `I_1=int||B_hook||`, the local no-escape
-branch therefore gives
+on `cond(L)<=21/20`.  The relative-coordinate action energy is `Q_pol/2`, but
+that coordinate evolves by nonunitary `SL(2)` and is not itself one Young role.
+For the three physical packet roles,
 
 \[
 \boxed{
-J_1\ge\frac{I_1}{\sqrt{50}T}
-\quad\text{or}\quad
-\text{feedback / large daughter / pair rescue / }
-\operatorname{Def}\ge\frac{I_1^2}{25600}.
+\sum_i\|F_i^{H1}\|^2
+\ge\frac14Q_{pol}
+\ge\frac1{100}\|B_{hook}\|^2.
 }
 \]
 
-Together with the `H3` branch and
+On the existing low-strain lifetime branch, each base role has
 
 \[
-I_B\le\sqrt6 I_3+I_1,
+K=\int_0^T\|G_i\|_{op}dt\le1/30.
 \]
 
-a mild-aspect full-curvature impulse has the common clean local cost
+Conditioning of both the interaction pullback and physical pushforward gives
 
 \[
-\boxed{c_{mild,curv}(I_B)=I_B^2/102400}
+\boxed{
+J_1\ge I_1/(11T)
+\quad\text{or}\quad
+\delta_1^2\ge I_1^2/480.
+}
+\]
+
+After physical feedback, one-of-three-role selection, odd-Hermite convexity and
+pair-rescue splitting, the preferred physical local H1 alternative is
+
+\[
+\boxed{
+\operatorname{Def}\ge I_1^2/184320
+\quad\text{or}\quad
+R_{pair}\ge I_1^2/184320.
+}
+\]
+
+Together with `I_B<=sqrt(6)I_3+I_1` and the stronger H3 branch, a physical
+low-strain mild-aspect full-curvature impulse has common clean cost
+
+\[
+\boxed{c_{mild,curv}^{phys}(I_B)=I_B^2/737280}
 \]
 
 outside source/dephasing, nonlinear-feedback, large-daughter and pair-rescue
-branches.  Pair rescue already routes to `Xi`, dominant reuse, Bellman entropy
-or ancestry cycles.
+branches.  Pair rescue routes to `Xi`, dominant reuse, Bellman entropy or
+ancestry cycles.
 
-The missing piece is not an `H1` cost but its **source calculus**: the covariant
-forcing variation `J_1` must be expanded into pressure, SGS, viscous and
-carrier/frame source terms with explicit constants.  Grains with
-`cond(L)>21/20` are not charged by aspect; they leave this theorem and enter the
-affine fresh/reuse ancestry branch.
+These constants supersede the idealized `1/25600` and `1/102400` calculation
+which treated the relative-coordinate pullback as an isometry and did not split
+the daughter among three physical roles.  The pointwise Arb theorem
+`Q_pol>=1/25||B_hook||^2` is unchanged.
+
+The missing H1 piece is now source calculus for `J_1`.  Grains outside
+`cond(L)<=21/20` or outside the low-strain action branch are not charged by
+aspect/propagator size; they enter the existing affine ancestry or source
+branches.

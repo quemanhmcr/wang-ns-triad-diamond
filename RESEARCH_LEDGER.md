@@ -2715,22 +2715,19 @@ graph checks; the class-mass and collision-chain identities were accurate to
 test fixture contained only one cross edge out of three while incorrectly
 expecting a majority-cross branch; the theorem routed it correctly to Bellman.
 
-#### Physical `H_1` / swirl bridge and mild-aspect no-escape
+#### Physical `H_1` / swirl bridge and physical mild-aspect no-escape
 
-The five-dimensional hook sector can now be connected to the **transfer-facing
+The five-dimensional hook sector is connected to the **transfer-facing
 relative-parent/child polarization variables** on a controlled mild-aspect
-branch, without using the scalar shape term `D_Pi`.
+branch, with no scalar-shape `D_Pi` term.
 
-For hook curvature `B^H`, let the physical affine grain factor be `L` and define
-physical symmetric strain-gradient slices
+For hook curvature `B^H`, define the physical strain-gradient slices
 
 \[
-\boxed{
-C_c^{phys}=\operatorname{Sym}(L B_c^H L^{-1}).
-}
+\boxed{C_c^{phys}=\operatorname{Sym}(L B_c^H L^{-1})}
 \]
 
-At the symmetric extremal triad define the polarization-only observable
+and
 
 \[
 \boxed{
@@ -2741,39 +2738,30 @@ Q_{pol}(C)=\sum_c\left(
 }
 \]
 
-No `D_Pi` term appears.  At an isotropic grain `L=I`, direct expansion in the
-five symmetric trace-free swirl variables makes
-`Q_pol-(1/10)||B^H||^2` block diagonal; Arb certifies positivity of all scalar
-blocks and the `(a,d)` Sylvester determinant throughout the certified `r_*`
-bracket.  Hence
+At `L=I`, direct expansion in the five symmetric trace-free swirl variables
+makes `Q_pol-(1/10)||B^H||^2` block diagonal; Arb certifies positivity throughout
+the `r_*` bracket:
 
 \[
 \boxed{Q_{pol}(I)\ge\frac1{10}\|B^H\|_F^2.}
 \]
 
-For a general grain, remove the physical orthogonal polar factor and a common
-scalar.  With `kappa=cond(L)` the normalized positive factor has spectrum in
-`[kappa^(-1/2),kappa^(1/2)]`, and
+After polar/global-scalar normalization, if `kappa=cond(L)`,
 
 \[
-\boxed{
 \|C^{phys}(L)-C^{phys}(I)\|_F
-\le(\kappa-1)\|B^H\|_F.
-}
+\le(\kappa-1)\|B^H\|_F,
 \]
 
-For every physical symmetric strain slice the polarization-only observable has
-operator norm at most `sqrt(5)`, so the triangle inequality gives
+while the observable has operator norm at most `sqrt(5)`.  Hence
 
 \[
 \sqrt{Q_{pol}(L)}
 \ge
-\left(
-\frac1{\sqrt{10}}-\sqrt5(\kappa-1)
-\right)\|B^H\|_F.
+\left(\frac1{\sqrt{10}}-\sqrt5(\kappa-1)\right)\|B^H\|_F.
 \]
 
-On the explicit mild-aspect branch
+On
 
 \[
 \boxed{\operatorname{cond}L\le21/20,}
@@ -2785,112 +2773,142 @@ Arb certifies
 \boxed{Q_{pol}(L)\ge\frac1{25}\|B^H\|_F^2.}
 \]
 
-Every real symmetric trace-free `2x2` generator satisfies
+For a real symmetric trace-free `2x2` generator,
 
 \[
 D^2=\frac12\|D\|_F^2I.
 \]
 
-Therefore its norm on **every** unit complex helicity spinor is fixed, and the
-combined relative-parent/child `H_1` sideband forcing energy obeys
+Thus the **auxiliary relative-parent/child coordinate** has forcing energy
+`Q_pol/2`, hence at least `||B^H||^2/50`.  That auxiliary number is useful for
+polarization algebra but is **not yet one physical Young role**.
+
+For the three physical packet roles separately,
+
+\[
+\begin{aligned}
+\sum_{i=1}^3\|F_i^{H1}\|^2
+&=\frac12(\|D_1\|_F^2+\|D_2\|_F^2+\|D_3\|_F^2)\\
+&\ge\frac14(\|D_1-D_2\|_F^2+\|D_3\|_F^2)
+=\frac14Q_{pol},
+\end{aligned}
+\]
+
+so the physical role-level bound used by the odd-Hermite transfer theorem is
 
 \[
 \boxed{
-\mathbb E_z\|F_{H1}^{rel}\|^2
-\ge\frac1{50}\|B^H\|_F^2.
+\sum_i\|F_i^{H1}\|^2
+\ge\frac1{100}\|B^H\|_F^2.
 }
 \]
 
-This is precisely transfer-facing: it uses `D_1-D_2` and `D_3`, not absolute
-parent mixing.  Action `31194787885` passed `234` tests plus `50,000` mild-aspect
-hook configurations and was Arb-certified.  The worst sampled isotropic and
-mild-aspect ratios were `0.121618531` and `0.104335578`, while the arbitrary
-spinor-action identity residual was `7.105e-15`.  A transient GitHub API `500`
-occurred only while listing the run immediately after dispatch; direct run
-inspection showed success.
+Action `31196456570` on commit `4a5729c` passed `237` tests plus `50,000`
+configurations and was Arb-certified.  It retained the previous worst isotropic
+and mild-aspect ratios `0.121618531` and `0.104335578`, while explicitly
+recording that the relative coordinate is non-unitary and not itself a Young
+role.  The earlier run `31194787885` remains valid provenance for the pointwise
+`Q_pol` theorem but predates this role-level distinction.
 
-This theorem **does not charge high aspect**.  If `cond(L)>21/20`, the packet
-simply leaves this branch and remains subject to affine fresh/reuse ancestry.
-Static affine anisotropy is still an exact Young symmetry.
+The spacetime theorem must also respect the fact that homogeneous polarization
+transport is `SL(2)`, not unitary.  On the existing low-strain lifetime branch,
+each physical role has base action budget
 
-The same first-Duhamel machinery now yields a local mild-aspect `H_1` no-escape
-theorem.  Assume `cond(L(t))<=21/20` over one packet lifetime and put
+\[
+\boxed{
+K:=\int_0^T\|G_i(t)\|_{op}dt\le1/30.
+}
+\]
+
+Therefore every base propagator and inverse has singular values in
+`[e^{-K},e^K]`.  Let
 
 \[
 I_1=\int_0^T\|B^H(t)\|_Fdt.
 \]
 
-In the fully pulled-back relative-helicity interaction frame, the physical
-forcing lower bound and Banach variation theorem give either covariant `H_1`
-forcing variation
+Pulling the physical forcing into the interaction picture costs one factor
+`e^{-K}`; pushing the Duhamel impulse back to physical roles costs a second.
+Arb certifies
+
+\[
+\frac{e^{-1/30}}{10}>\frac1{11},
+\qquad
+ e^{-2/15}>\frac56.
+\]
+
+Thus the Banach variation theorem gives either
+
+\[
+\boxed{J_1\ge\frac{I_1}{11T}}
+\]
+
+for the interaction-picture covariant forcing variation, or a **physical
+three-role** first-Duhamel daughter with
+
+\[
+\boxed{\delta_1^2\ge\frac{I_1^2}{480}.}
+\]
+
+If physical nonlinear sideband feedback cancels at least half of `delta_1`, it
+is already a high--high sideband-interaction branch.  Otherwise surviving total
+role-daughter energy is at least
+
+\[
+\delta^2\ge I_1^2/1920.
+\]
+
+At least one of the three physical roles therefore has daughter energy
+`>=I_1^2/5760`.  Below critical sideband size `1/80`, the one-role odd-Hermite
+uniform-convexity theorem gives deficit at least `I_1^2/92160`; splitting this
+against possible pair rescue yields the final physical local alternative
 
 \[
 \boxed{
-J_1\ge\frac{I_1}{\sqrt{50}\,T},
-}
-\]
-
-or a first-Duhamel daughter
-
-\[
-\boxed{\delta_1^2\ge\frac1{200}I_1^2.}
-\]
-
-If nonlinear sideband feedback cancels at least half of `delta_1`, it is already
-a high--high sideband branch.  Otherwise the surviving daughter has
-`delta^2>=I_1^2/800`.  The critical `|G|^(3/2)` Gaussian has variance `4/3` in
-the degree-one coordinate, so its critical second moment dominates the `L^2`
-daughter norm.  At critical sideband size `>=1/80` there is a definite daughter
-capacity event.  Below that threshold, odd-Hermite uniform convexity and the
-pair-rescue split give
-
-\[
-\boxed{
-\operatorname{Def}_{transfer}\ge\frac{I_1^2}{25600}
+\operatorname{Def}_{transfer}\ge\frac{I_1^2}{184320}
 \quad\text{or}\quad
-R_{pair}\ge\frac{I_1^2}{25600}.
+R_{pair}\ge\frac{I_1^2}{184320}.
 }
 \]
 
-Thus
+Hence
 
 \[
-\boxed{c_{H1}=1/25600.}
+\boxed{c_{H1}^{phys}=1/184320.}
 \]
 
-The irreducible curvature split also supplies a full mild-aspect consequence.
-If
+The irreducible curvature split still gives
 
 \[
-I_B=\int_0^T\|B(t)\|_Fdt,
+I_B\le\sqrt6 I_3+I_1.
 \]
 
-then
+Therefore either `I_3>=I_B/(2 sqrt(6))` or `I_1>=I_B/2`.  The `H_3` branch
+remains stronger; the `H_1` branch gives the common physical mild-aspect
+full-curvature constant
 
 \[
-\boxed{I_B\le\sqrt6\,I_3+I_1.}
+\boxed{c_{mild,curv}^{phys}=1/737280.}
 \]
 
-Hence either `I_3>=I_B/(2 sqrt(6))` or `I_1>=I_B/2`.  The `H_3` branch then has
-cost at least `I_B^2/32768`, while the `H_1` branch has cost at least
-`I_B^2/102400`.  The common clean constant is therefore
+Action `31196458909` on `4a5729c` passed `237` tests plus `50,000` physical
+five-branch checks and was Arb-certified for the nonunitary conditioning.  Its
+minimum pair-cost, transfer-deficit and full-channel margins were `1.546e-11`,
+`5.585e-12`, and `5.238e-09`.
 
-\[
-\boxed{c_{mild,curv}=1/102400.}
-\]
+This **supersedes** the idealized constants `1/25600` and `1/102400` printed by
+run `31195130386`, which treated the relative-coordinate pullback as if it were
+an isometry and did not split the final daughter across the three physical Young
+roles.  That run is retained as algebra/provenance, not as the preferred
+physical H1 no-escape theorem.  The pointwise `Q_pol>=1/25||B^H||^2` theorem is
+unchanged.
 
-outside source/dephasing, nonlinear-feedback, large-daughter, and pair-rescue
-branches.  Action `31195130386` passed `233` tests (`2` optional dependency
-skips) plus `50,000` five-branch checks.  Its minimum `H_1` pair-cost,
-transfer-deficit, and full-channel margins were `6.759e-12`, `1.248e-11`, and
-`5.238e-09`.
-
-The remaining caveat is now sharply localized: `J_1` is a **covariant
-relative-helicity forcing variation**, but it has not yet been expanded into
-explicit pressure / differentiated-SGS / viscous / carrier-frame source terms
-with the source-locality constants available for `H_3`.  That source calculus,
-not the existence of an `H_1` cost on mild-aspect grains, is the next sideband
-PDE target.
+The remaining H1 caveat is now precisely the source calculus: `J_1` is a
+covariant interaction-picture forcing variation, but it has not yet been
+expanded into explicit pressure / differentiated-SGS / viscous /
+carrier-direction / frame-connection terms with summable constants.  High
+aspect is never charged here; packets leaving `cond(L)<=21/20` return to affine
+fresh/reuse ancestry.
 
 #### Spatial moat width must balance curvature
 
@@ -3615,18 +3633,19 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   packets;
 
 - Arb-certified physical hook/swirl polarization bridge on the
-  mild-aspect branch: the transfer-facing observable with **no scalar `D_Pi`
-  term** satisfies `Q_pol(I)>=(1/10)||B_hook||^2`; for
-  `cond(L)<=21/20`, `Q_pol(L)>=(1/25)||B_hook||^2`, hence arbitrary unit
-  relative-parent/child helicity spinors receive `H_1` forcing energy
-  `>=(1/50)||B_hook||^2`; high aspect is routed to affine ancestry rather than
+  mild-aspect branch: with no scalar `D_Pi`, `Q_pol(I)>=(1/10)||B_hook||^2`
+  and `cond(L)<=21/20` gives `Q_pol(L)>=(1/25)||B_hook||^2`; the auxiliary
+  relative-coordinate forcing energy is `>=1/50||B_hook||^2`, while the sum of
+  the **three physical Young-role sideband energies** is
+  `>=1/100||B_hook||^2`; high aspect is routed to affine ancestry rather than
   charged as a defect;
-- exact mild-aspect `H_1` sideband no-escape theorem: with
-  `I_1=int||B_hook||`, either the covariant relative-helicity forcing variation
-  is `>=I_1/(sqrt(50)T)`, nonlinear feedback / large daughter occurs, or
-  transfer deficit / pair rescue is `>=I_1^2/25600`; combining with the `H_3`
-  theorem and `I_B<=sqrt(6)I_3+I_1` gives the clean full-curvature mild-aspect
-  cost `I_B^2/102400` outside source/feedback/daughter/rescue branches;
+- Arb-certified physical mild-aspect `H_1` no-escape theorem on the low-strain
+  action branch `K<=1/30`: nonunitary pullback/pushforward gives
+  `J_1>=I_1/(11T)` or a physical three-role daughter
+  `delta_1^2>=I_1^2/480`; after role splitting and odd-Hermite rescue,
+  transfer deficit / pair rescue is `>=I_1^2/184320`; with the `H_3` theorem,
+  full mild-aspect curvature has clean cost `I_B^2/737280` outside the named
+  source/feedback/daughter/rescue branches;
 
 ### Computationally supported, not interval-certified
 
@@ -3635,18 +3654,18 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Expand the physical `H_1` covariant dephasing source.**  The mild-aspect
-   transfer-facing hook branch is now quantitative:
-   `Q_pol>=1/25||B_hook||^2`, `H_1` forcing energy `>=1/50||B_hook||^2`, and
-   local pair-rescue/deficit cost `I_1^2/25600`.  What remains is to differentiate
-   that forcing in the fully pulled-back relative-helicity frame and express the
-   covariant variation `J_1` in explicit pressure, differentiated-SGS, viscous,
+1. **Expand the physical `H_1` covariant dephasing source.**  The preferred
+   physical mild-aspect theorem now includes nonunitary base transport and role
+   splitting: `Q_pol>=1/25||B_hook||^2`, three-role forcing energy
+   `>=1/100||B_hook||^2`, `J_1>=I_1/(11T)` or physical transfer cost / pair
+   rescue `>=I_1^2/184320`.  What remains is to differentiate the interaction
+   forcing and express `J_1` in explicit pressure, differentiated-SGS, viscous,
    carrier-direction and frame-connection source terms with summable constants.
-2. **Handle high-aspect reuse without an aspect defect.**  The `H_1` theorem is
-   deliberately restricted to `cond(L)<=21/20`.  Grains leaving that branch
-   must be synchronized through affine fresh/reuse ancestry, covariance,
-   geometric radius `r_g`, scale/spin holonomy and relative polarization; aspect
-   itself remains an exact Young symmetry and is not a positive cost.
+2. **Handle high-aspect reuse without an aspect defect.**  The physical `H_1`
+   theorem is deliberately restricted to `cond(L)<=21/20` and the existing
+   low-strain action branch.  Packets leaving that branch must be synchronized
+   through affine fresh/reuse ancestry, covariance, `r_g`, scale/spin holonomy
+   and relative polarization; aspect itself remains an exact Young symmetry.
 3. **Convert persistent cubic SGS increment charge into the ancestry ledger.**
    Large `RU` leakage forces a scale-critical cubic velocity-increment charge at
    the filter scale.  A transfer-adapted Littlewood--Paley / affine-grain
@@ -3655,14 +3674,14 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 4. **Control selected-subfamily interfaces through spacetime.**  Complete
    partitions cancel globally, degree-zero profile remainders are work-level
    `Xi`, and pair-Hermite rescue has an exact ancestry graph.  The continuum
-   lineage must keep the uncancelled spatial/frequency interfaces summable
-   relative to its transfer weight.
-5. **Insert uniform curvature thresholds into the master theorem.**  On a
-   mild-aspect block a full affine-curvature impulse `I_B` has local clean cost
-   `I_B^2/102400` outside the named source/feedback/daughter/pair branches.  A
-   continuum theorem still has to produce a uniform lower threshold for the
-   relevant `I_B` (or route small `I_B` into the flat/reuse episode) and register
-   the resulting source or ancestry branches without double counting.
+   lineage must keep uncancelled spatial/frequency interfaces summable relative
+   to transfer weight.
+5. **Insert uniform physical curvature thresholds into the master theorem.**
+   On a low-strain mild-aspect block a full affine-curvature impulse `I_B` has
+   physical clean cost `I_B^2/737280` outside the named source/feedback/daughter/
+   pair branches.  A continuum theorem must produce a uniform lower threshold
+   for `I_B` (or route small curvature into the flat/reuse episode) and register
+   all source/ancestry branches without double counting.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier–Stokes global regularity is made.
 
@@ -3757,8 +3776,10 @@ The most useful recorded runs, in chronological order, are:
 | `31193443926` | pair-ancestry workflow failed because its hand-written test graph had cross fraction `1/3` while expecting the majority-cross branch; fixture failure, theorem routing was correct |
 | `31193531201` | preferred odd-sideband pair-rescue ancestry graph: `Xi` / dominant reuse / Bellman entropy / same-ancestry cycles; `231` tests + `1` optional skip + `50,000` graphs |
 | `31194159878`--`31194224545` | twelve-workflow Hermite-sideband integration on `e45eaea`: coherence, parity, curvature irrep, `H_3` no-escape, pair ancestry, curvature source, Hermite-helicity, physical polarization curvature, one-shot profile, relative polarization, localized pressure and master all green; master `231` tests + `1` optional skip + `20,000` traces with worst margin `0` |
-| `31194787885` | Arb-certified physical `H_1`/swirl mild-aspect bridge: isotropic `Q_pol>=1/10`, `cond(L)<=21/20` gives `Q_pol>=1/25`, arbitrary-spinor forcing energy `>=1/50`; `234` tests + `50,000` configurations |
-| `31195130386` | mild-aspect `H_1` local no-escape `I_1^2/25600` and full-curvature clean cost `I_B^2/102400`; `233` tests + `2` optional skips + `50,000` five-branch checks |
+| `31194787885` | first Arb-certified mild-aspect `H_1` polarization bridge (`Q_pol>=1/10`, mild `>=1/25`, auxiliary relative-coordinate energy `>=1/50`); valid pointwise provenance but predates the explicit three-physical-role distinction |
+| `31195130386` | superseded idealized H1 no-escape algebra (`1/25600`, `1/102400`): treated the relative-coordinate pullback as isometric and did not split the daughter among physical Young roles; retained as correction provenance, not preferred theorem |
+| `31196456570` | preferred physical mild-aspect H1 bridge on `4a5729c`: `Q_pol>=1/25`, auxiliary relative energy `>=1/50`, three-role physical sideband energy `>=1/100`; `237` tests + `50,000` configurations, Arb-certified |
+| `31196458909` | preferred physical H1 no-escape on `4a5729c`: nonunitary low-strain conditioning, `J_1>=I_1/(11T)`, `delta_1^2>=I_1^2/480`, pair/deficit `>=I_1^2/184320`, full mild-curvature `>=I_B^2/737280`; `237` tests + `50,000` checks |
 
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
@@ -3803,84 +3824,93 @@ Arb-certified in run `31161914134`.
 ## 18. Current research frontier
 
 The orthogonal curvature sidebands are now quantitatively controlled on the
-mild-aspect branch.  The intrinsic affine curvature decomposition
+**physical low-strain mild-aspect branch**, with the nonunitary polarization
+transport and the three distinct Young roles explicitly accounted for.
 
-\[
-15=(7\oplus3)_{H_3/envelope}\oplus5_{H_1/swirl}
-\]
-
-feeds two transfer-facing local no-escape theorems:
+The `H_3` branch remains
 
 \[
 \boxed{
-H_3:\quad
 \operatorname{Def}\ \text{or}\ R_{pair}
-\ge\frac3{4096}I_3^2,
+\ge\frac3{4096}I_3^2
 }
 \]
 
-and, when `cond(L(t))<=21/20`,
+outside its source/dephasing, feedback and large-daughter exits.  For the hook
+sector, Arb gives the pointwise physical polarization bridge
+
+\[
+\boxed{Q_{pol}\ge\frac1{25}\|B^H\|^2}
+\]
+
+when `cond(L)<=21/20`.  The auxiliary relative-coordinate forcing energy is
+`Q_pol/2`, but the physically relevant three-role sideband energy is only
+bounded by
 
 \[
 \boxed{
-H_1:\quad
-\operatorname{Def}\ \text{or}\ R_{pair}
-\ge\frac1{25600}I_1^2,
+\sum_i\|F_i^{H1}\|^2
+\ge\frac14Q_{pol}
+\ge\frac1{100}\|B^H\|^2.
 }
 \]
 
-outside the named dephasing-source, nonlinear-feedback and large-daughter
-branches.  The `H_1` estimate is physical and transfer-facing: it uses only the
-relative-parent/child polarization observable
+On the existing low-strain action branch `K<=1/30`, singular-value control of
+the nonunitary base propagators then gives
 
 \[
-Q_{pol}=\sum_c(\|D_1-D_2\|^2+\|D_3\|^2),
+\boxed{J_1\ge I_1/(11T)}
 \]
 
-with
+or a physical first-Duhamel three-role daughter
 
 \[
-\boxed{Q_{pol}\ge\frac1{25}\|B^H\|^2,\qquad
-E\|F_{H1}^{rel}\|^2\ge\frac1{50}\|B^H\|^2.}
+\boxed{\delta_1^2\ge I_1^2/480.}
 \]
 
-No scalar `D_Pi` or absolute parent-helicity mixing is charged.
-
-Combining both irreducible sectors gives, on the same mild-aspect lifetime,
+After feedback, selection of one physical role, odd-Hermite convexity and the
+pair-rescue split,
 
 \[
 \boxed{
-I_B\le\sqrt6 I_3+I_1
-\quad\Longrightarrow\quad
 \operatorname{Def}\ \text{or}\ R_{pair}
-\ge\frac1{102400}I_B^2
+\ge\frac{I_1^2}{184320}.
 }
 \]
 
-unless a source/dephasing, nonlinear-feedback or large-daughter branch occurs.
-Pair rescue is no longer a free error: odd parity converts it to a daughter
-ancestry graph which routes into `Xi`, dominant reuse, Bellman entropy or
-same-ancestry cycles.
+Combining the irreducible sectors with `I_B<=sqrt(6)I_3+I_1` gives the preferred
+physical mild-aspect local curvature constant
 
-The decisive remaining work has therefore moved again:
+\[
+\boxed{
+\operatorname{Def}\ \text{or}\ R_{pair}
+\ge\frac{I_B^2}{737280},
+}
+\]
 
-1. derive the **`H_1` covariant source calculus**.  Differentiate the physical
-   relative-parent/child forcing in the fully pulled-back affine/helicity frame
-   and split `J_1` into pressure, differentiated-SGS, viscous,
-   carrier-direction and frame-connection source terms with explicit locality
+again outside source/dephasing, nonlinear-feedback and large-daughter branches.
+Pair rescue still routes into `Xi`, dominant reuse, Bellman entropy or
+same-ancestry cycles.  The earlier larger H1 constants were an idealized
+relative-coordinate calculation and have been explicitly superseded.
+
+The decisive remaining work is now:
+
+1. derive the **physical H1 covariant source calculus**: differentiate the
+   interaction forcing and split `J_1` into pressure, differentiated-SGS,
+   viscous, carrier-direction and helical-frame terms with explicit locality
    constants;
-2. treat **high-aspect lifetimes as ancestry/reuse**, not as a defect: synchronize
-   covariance ellipsoids, `r_g`, scale/spin holonomy and relative polarization
-   when `cond(L)>21/20`;
-3. convert persistent **cubic SGS velocity-increment charge** into a fresh/reused
-   affine grain, dissipation event or Bellman/CKN charge without a global `L^3`
-   assumption;
+2. treat **high-aspect or high-strain lifetimes as ancestry/source branches**,
+   not as aspect defects: synchronize covariance ellipsoids, `r_g`, scale/spin
+   holonomy and relative polarization;
+3. convert persistent **cubic SGS velocity-increment charge** into a
+   fresh/reused affine grain, dissipation event or Bellman/CKN charge without a
+   global `L^3` assumption;
 4. propagate selected moving partitions with summable `Xi` interfaces and feed
-   uniform curvature/source thresholds into the master episode theorem.
+   a uniform physical curvature threshold into the master episode theorem.
 
-Further raw residual norms, aspect-ratio penalties, absolute helicity mixing or
-common-parent Magnus control would now discard structure already identified as
-symmetry or gauge.
+Further raw residual norms, Euclidean propagator distances, aspect penalties,
+absolute helicity mixing or common-parent Magnus control would now discard
+structure already identified as symmetry or gauge.
 
 ---
 

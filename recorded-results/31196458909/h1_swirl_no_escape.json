@@ -1,0 +1,31 @@
+{
+  "arb_certificate": {
+    "base_role_action_budget": "K<=1/30",
+    "interaction_variation_clean": "I_1/(11 T)",
+    "physical_first_duhamel_square": "I_1^2/480",
+    "post_feedback_total_square": "I_1^2/1920",
+    "one_role_square": "I_1^2/5760",
+    "single_role_deficit_before_rescue": "I_1^2/92160",
+    "pair_or_deficit": "I_1^2/184320",
+    "full_mild_pair_or_deficit": "I_B^2/737280",
+    "status": "CERTIFIED_PHYSICAL_LOW_STRAIN_CONDITIONING"
+  },
+  "exact_certificate": {
+    "physical_H1_pair_or_deficit": "I_1^2/184320",
+    "full_mild_pair_or_deficit": "I_B^2/737280",
+    "status": "EXACT_AFTER_PHYSICAL_ROLE_SPLIT"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_H1_pair_margin": 1.5461825388862114e-11,
+    "minimum_H1_deficit_margin": 5.584651866190891e-12,
+    "minimum_full_channel_margin": 5.237502220348266e-09,
+    "branch_counts": {
+      "H1_covariant_dephasing": 9978,
+      "nonlinear_sideband_feedback": 10144,
+      "pair_sideband_rescue": 10006,
+      "transfer_deficit": 9926,
+      "large_daughter_capacity": 9946
+    }
+  }
+}
