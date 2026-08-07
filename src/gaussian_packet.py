@@ -192,7 +192,7 @@ def main() -> None:
     ]
     for row in cap:
         deficit = 1.0 - row["mean_ratio"]
-        lines.append(f"| {row['sigma']:.4f} | {row['mean_ratio']:.9f} | {deficit:.9f} | {deficit/(row['sigma']**2):.6f} |")
+        lines.append(f"| {row['sigma']:.4f} | {row['mean_ratio']:.9f} | {deficit:.9f} | {deficit/row['sigma']:.6f} |")
     curv = result["single_edge_curvature"]
     lines += [
         "",
