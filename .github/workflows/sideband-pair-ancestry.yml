@@ -1,0 +1,19 @@
+name: Sideband pair ancestry graph
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - run: python -m src.sideband_pair_ancestry --samples 50000 --outdir results-sideband-pair-ancestry
+      - run: cat results-sideband-pair-ancestry/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sideband-pair-ancestry-results
+          path: results-sideband-pair-ancestry/
