@@ -1,0 +1,20 @@
+name: Divergence-free affine packet test
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint==0.8.0
+      - run: pytest -q
+      - name: Divergence-free packet stress
+        run: python -m src.divfree_affine_packet_test --samples 50000 --outdir results-divfree-affine-packet
+      - run: cat results-divfree-affine-packet/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: divfree-affine-packet-results
+          path: results-divfree-affine-packet/
