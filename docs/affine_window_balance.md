@@ -58,9 +58,36 @@ N^{-1}\|\nabla_x\chi_{L,M}\|_\infty
 }
 \]
 
-Therefore any SGS/filter commutator estimate linear in the normalized window
-gradient and any material-window estimate linear in the Taylor remainder have
-the affine form
+For a physical coarse-graining kernel `G_N(y)=N^3G(Ny)`, this normalized
+gradient gives an exact commutator estimate rather than only dimensional
+scaling.  Indeed
+
+\[
+[\chi,G_N*]f(x)
+=\int G_N(y)(\chi(x)-\chi(x-y))f(x-y)\,dy,
+\]
+
+so the mean-value theorem and Young inequality yield
+
+\[
+\boxed{
+\|[\chi,G_N*]f\|_2
+\le \frac{m_1(G)}{N}\|\nabla\chi\|_\infty\|f\|_2,
+\qquad
+m_1(G)=\int |y||G(y)|\,dy.
+}
+\]
+
+Consequently the affine shell bound gives
+
+\[
+\boxed{
+\|[\chi_{L,M},G_N*]f\|_2
+\le \frac{3m_1(G)C_\chi}{2M}\|f\|_2.
+}
+\]
+
+Thus the filter commutator and material-window remainder have the affine form
 
 \[
 \boxed{

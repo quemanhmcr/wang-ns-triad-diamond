@@ -44,6 +44,18 @@ def clean_shell_gradient_bound(N: float, M: float, grad_base: float=1.0) -> floa
     return 1.5*grad_base/M
 
 
+def convolution_commutator_bound(filter_first_moment: float, N: float, grad_chi: float, f_l2: float=1.0) -> float:
+    """Young/MVT bound for [chi,G_N*]f with dimensionless first moment m1(G)."""
+    if min(filter_first_moment,N,grad_chi,f_l2)<0 or N==0: raise ValueError('invalid parameters')
+    return filter_first_moment*grad_chi*f_l2/N
+
+
+def clean_affine_commutator_bound(filter_first_moment: float, M: float, grad_base: float=1.0, f_l2: float=1.0) -> float:
+    """Shell-axis consequence: <=(3/2)m1(G) C_chi M^-1 ||f||_2."""
+    if M<=0: raise ValueError('M>0 required')
+    return 1.5*filter_first_moment*grad_base*f_l2/M
+
+
 def affine_balance_optimum(a: float, b: float, kappa_aff: float) -> tuple[float,float]:
     if min(a,b,kappa_aff)<=0: raise ValueError('positive a,b,kappa_aff')
     M=math.sqrt(a/(b*kappa_aff))
@@ -108,6 +120,7 @@ def main()->None:
         'curvature':'kappa_aff=sup ||L^-1(nabla^2U)[L,L]||',
         'window_leakage':'|D_t chi(z/M)| <= (Cgrad Rchi^2/2) kappa_aff M',
         'shell_gradient':'N^-1||grad_x chi|| <= (3/2) Cgrad/M',
+        'filter_commutator':'||[chi,G_N*]f||_2 <= m1(G) N^-1||grad chi||_inf||f||_2 <= (3/2)m1(G)Cgrad M^-1||f||_2',
         'balance':'a/M+b kappa_aff M, M*=sqrt(a/(b kappa_aff))',
     },'stress':asdict(out)}
     (args.outdir/'affine_window_balance.json').write_text(json.dumps(payload,indent=2))
