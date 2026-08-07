@@ -1,0 +1,21 @@
+{
+  "certificate": {
+    "stress_support_ratio": "1/2",
+    "transporter_support_ratio": "1/4",
+    "sgs_l32_to_source_constant_ball": "[0.0011166644375932646892339655772448251069923824270876041 +/- 4.16e-56]",
+    "sgs_clean_constant": "1/800",
+    "viscous_grad_to_source_constant_ball": "[0.00014653585874952898267499986832792001670972886555260752 +/- 4.12e-57]",
+    "viscous_clean_constant": "1/6000",
+    "mild_aspect_kappa_squared_upper": "6/5",
+    "normalized_sgs_source_upper": "(3/2000) s ||R||_(3/2)",
+    "normalized_viscous_source_upper": "(nu s/5000) sqrt(d_V)",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_affine_factor_ratio": 0.9999998601689314,
+    "minimum_sgs_collision_margin": 4.78871771790712e-08,
+    "minimum_viscous_collision_margin": 2.3766655860134584e-08,
+    "minimum_large_radius_mass_margin": 0.0
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "status": "EXACT_SEQUENCE_ALGEBRA_GIVEN_STANDARD_LP_BERNSTEIN",
+  "stress": {
+    "samples": 50000,
+    "worst_exact_over_coarse_weight": 0.3472525068802204,
+    "minimum_collision_margin": 11.354672012616854,
+    "minimum_entropy_margin": 0.0,
+    "branch_counts": {
+      "ancestry_Bellman_entropy": 30745,
+      "dominant_packet": 15497,
+      "same_ancestry_pair_cycle": 3758
+    }
+  },
+  "theorem": {
+    "increment_upper": "Q_N <= g1(C_LP C_B)^3[(4/3)(beta R_G)^2 mu_low_max+2 d_high]^(3/2)",
+    "mass_threshold": "mu_low_max >= 3X/[8(beta R_G)^2]",
+    "enstrophy_threshold": "d_high >= X/4",
+    "X": "[Q_N/(g1(C_LP C_B)^3)]^(2/3)",
+    "atom_entropy": "no atom >=theta aggregate mass => H_atomic>=-log theta",
+    "ancestry_pair": "if H_anc<alpha(-log theta), hidden pair mass >=theta^alpha-theta"
+  }
+}

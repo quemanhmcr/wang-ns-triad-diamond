@@ -1,0 +1,41 @@
+{
+  "certificate": {
+    "extended_aspect_threshold": "567/500",
+    "old_mild_threshold": "21/20",
+    "low_strain_action": "1/30",
+    "extended_qpol_ball": "[0.000275382642005263460573710955900457471663968699488958 +/- 4.24e-55]",
+    "extended_qpol_lower": "1/4000",
+    "physical_three_role_energy_lower": "1/16000",
+    "condition_growth_clean": "exp(1/15)<27/25",
+    "interaction_forcing_norm_lower": "1/132",
+    "physical_first_daughter_energy_lower": "1/75000",
+    "extended_h1_pair_or_deficit": "1/28800000",
+    "extended_full_curvature_pair_or_deficit": "1/115200000",
+    "source_coefficient_upper": "11/5",
+    "connection_coefficient_upper": "60",
+    "extended_source_or_AB": "int||S||>=I1/(600T) or int||A||||B||>=I1/(16000T)",
+    "h1_dominant_gradient_action_threshold": "1/32000",
+    "one_physical_source_threshold": "I1/(1800T)",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_condition_rate_margin": 0.12181674212483329,
+    "maximum_viscous_anisotropy_contribution": -4.405458652854253e-06,
+    "minimum_shell_radius_margin": 0.14417727508967304,
+    "minimum_fresh_mass_margin": 0.04325318252690191,
+    "minimum_predecessor_margin": -3.552713678800501e-15
+  },
+  "no_escape_constants": {
+    "extended_qpol": 0.00025,
+    "physical_three_role_energy": 6.25e-05,
+    "interaction_forcing_norm": 0.007575757575757576,
+    "physical_first_daughter_energy": 1.3333333333333333e-05,
+    "h1_pair_or_deficit": 3.472222222222222e-08,
+    "full_curvature_pair_or_deficit": 8.680555555555555e-09,
+    "source_integral": 0.0016666666666666668,
+    "strain_curvature_integral": 6.25e-05,
+    "h1_dominant_gradient_action": 3.125e-05,
+    "one_physical_source": 0.0005555555555555556
+  }
+}

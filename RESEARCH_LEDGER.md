@@ -1,6 +1,6 @@
 # Research Ledger — Wang–Zahl-style rigidity programme for 3D Navier–Stokes
 
-**Status date:** 2026-08-07  
+**Status date:** 2026-08-08
 **Repository:** `quemanhmcr/wang-ns-triad-diamond`  
 **Scope:** finite-dimensional / Gaussian-grain research programme; **not** a proof of global regularity.
 
@@ -2903,12 +2903,333 @@ roles.  That run is retained as algebra/provenance, not as the preferred
 physical H1 no-escape theorem.  The pointwise `Q_pol>=1/25||B^H||^2` theorem is
 unchanged.
 
-The remaining H1 caveat is now precisely the source calculus: `J_1` is a
-covariant interaction-picture forcing variation, but it has not yet been
-expanded into explicit pressure / differentiated-SGS / viscous /
-carrier-direction / frame-connection terms with summable constants.  High
-aspect is never charged here; packets leaving `cond(L)<=21/20` return to affine
-fresh/reuse ancestry.
+The earlier open `H_1` source branch is now expanded quantitatively.  Let
+`P_H` be the fixed hook projector, `B^H=P_HB`, and
+
+\[
+G_c=L B_c^H L^{-1}.
+\]
+
+The exact projector/product rules are
+
+\[
+\boxed{
+\dot B^H=P_H(-2A_{aff}B+S),
+\qquad
+\dot G_c=A G_c+L\dot B_c^H L^{-1}-G_cA.
+}
+\]
+
+No commutation of `P_H` with affine transport is assumed.  On the original
+`cond(L)<=21/20`, `K<=1/30` branch, the three-role interaction forcing
+variation obeys
+
+\[
+\boxed{
+J_1
+\le
+2\int_0^T\|S_{src}\|dt
++54\int_0^T\|A\|\,\|B\|dt.
+}
+\]
+
+Hence `J_1>=I_1/(11T)` implies
+
+\[
+\boxed{
+\int\|S_{src}\|dt\ge I_1/(44T)
+}
+\]
+
+or
+
+\[
+\boxed{
+\int\|A\|\,\|B\|dt\ge I_1/(1188T).
+}
+\]
+
+Here `A=grad V`; the second quantity is deliberately called a
+**velocity-gradient/frame coupling**, not a pure strain defect.  On the
+H1-dominant branch, if the base-gradient action is below `1/2376`, one of
+pressure-third, differentiated-SGS, or viscous-fourth source channels has
+integrated norm at least `I_1/(132T)`.  Action `31198595416` passed `240` tests
+plus `50,000` exact-algebra/source checks; hook-projector and physical product-rule
+residuals were `3.472e-15` and `2.278e-15`.  The earlier failed source run used a
+strict Arb comparison at an exact rational touching equality and is certificate
+semantics, not a mathematical countermodel.
+
+#### Filtered SGS / viscous source collision
+
+The differentiated-SGS source is now reduced to the primitive LES/Onsager
+observable without differentiating raw turbulence.  The transporter is
+
+\[
+V=S_{N/4}u,
+\qquad \operatorname{supp}\widehat V\subset B_{N/4},
+\]
+
+so its SGS stress has
+
+\[
+\boxed{\operatorname{supp}\widehat R\subset B_{N/2}.}
+\]
+
+Vector-valued Hausdorff--Young/Bernstein, the affine factor
+`N||L^-1||||L||^2<=cond(L)^2 Nr_g`, and the mild-aspect bound give
+
+\[
+\boxed{
+N^{-4}\|S_R\|
+\le \frac3{2000}s\|R\|_{3/2},
+\qquad s=Nr_g.
+}
+\]
+
+Thus on `s<=s_0`, a normalized differentiated-SGS source `rho_R` forces
+
+\[
+\boxed{
+\|R\|_{3/2}
+\ge\frac{2000}{3s_0}\rho_R,
+}
+\]
+
+and the exact Germano increment identity gives a cubic increment charge
+proportional to `rho_R^(3/2)` at the actual filter scale.  If instead `s>s_0`,
+the already-certified affine grain itself has
+
+\[
+\boxed{
+N\int_{E_2}|u|^2\ge \frac3{10}s_0,
+}
+\]
+
+which is a radius-energy/ancestry event, not an aspect penalty.
+
+For viscosity, band support of `V` gives
+
+\[
+\boxed{
+N^{-4}\|S_\nu\|
+\le\frac{\nu s}{5000}\sqrt{\mathfrak d_V},
+\qquad
+\mathfrak d_V=N^{-1}\|\nabla V\|_2^2.
+}
+\]
+
+Hence on `s<=s_0`, source level `rho_nu` forces
+
+\[
+\boxed{
+\mathfrak d_V
+\ge
+\left(\frac{5000\rho_\nu}{\nu s_0}\right)^2.
+}
+\]
+
+Action `31226401666` passed `246` tests plus `50,000` checks; the worst affine
+factor ratio was `0.999999860` and the minimum SGS/viscous collision margins
+were `4.789e-08` and `2.377e-08`.
+
+#### Onsager cubic increments: grain, entropy, or dissipation
+
+Let `u=sum_j u_j`, `N_j=2^jN`, and
+
+\[
+\mu_j=N_j\|u_j\|_2^2.
+\]
+
+Standard 3D `L^3` Littlewood--Paley square-function plus band Bernstein gives,
+for filter support `|r|<=R_G/N`,
+
+\[
+\boxed{
+Q_N
+\le
+g_1(C_{LP}C_B)^3
+\left[
+\frac43(\beta R_G)^2\mu_{\le N}^{max}
++2\mathfrak d_{>N}
+\right]^{3/2},
+}
+\]
+
+where
+
+\[
+\mathfrak d_{>N}
+=\sum_{j\ge1}2^j\mu_j
+\simeq N^{-1}\|\nabla P_{>N}u\|_2^2.
+\]
+
+For
+
+\[
+X=\left[Q_N/(g_1(C_{LP}C_B)^3)\right]^{2/3},
+\]
+
+one has the exact low/high collision
+
+\[
+\boxed{
+\mu_{\le N}^{max}
+\ge\frac{3X}{8(\beta R_G)^2}
+\quad\text{or}\quad
+\mathfrak d_{>N}\ge X/4.
+}
+\]
+
+There is no logarithmic loss in the number of dyadic bands.  If the winning
+aggregate band is packetized with normalized masses `w_a`, choosing
+`theta=1/4`, `alpha=1/2` gives
+
+\[
+\boxed{
+\mu_{atom}\ge\frac14\mu_{band}
+}
+\]
+
+or
+
+\[
+\boxed{H_{anc}\ge\log2}
+\]
+
+or
+
+\[
+\boxed{Q_{anc}-Q_{at}\ge\frac14.}
+\]
+
+Thus cubic increments route into a dominant fresh/reused reservoir, uniform
+Bellman entropy / ancestry cycles, or high-frequency enstrophy.  Action
+`31226526751` passed `246` tests (`5` optional dependency skips) plus `50,000`
+checks.  Its status is exact sequence algebra given the standard LP/Bernstein
+analytic input.
+
+The source-to-increment power `rho_R^(3/2)` and the increment collision power
+`2/3` cancel exactly.  Therefore source episodes are best partitioned by
+**source weight**, not time measure.  If one H1 physical source channel carries
+
+\[
+\Sigma_*=\int_0^c\rho_*(\tau)d\tau,
+\]
+
+then `Sigma_*>=I_1/(132c)` on the original mild strip and
+`Sigma_*>=I_1/(1800c)` on the extended strip below.  Outside a large-radius
+branch carrying half the source weight, either the mass or enstrophy branch
+carries at least one quarter.  Consequently
+
+\[
+\boxed{D_{>N}\ge(c_d/4)\Sigma_*}
+\]
+
+on the high-frequency branch.  For viscosity, `d_V>=b rho_nu^2` and Cauchy on
+the whole scaled lifetime gives
+
+\[
+\boxed{D_V\ge b\Sigma_*^2/(4c).}
+\]
+
+Thus temporal concentration is not a free SGS/viscous escape; for viscosity it
+only raises the quadratic dissipation price.  Preferred Action `31227535026`
+passed `264` tests plus `50,000` checks.  Run `31226868712` failed only because
+an algebraically identical viscous expression was checked with an absolute
+floating tolerance after a very large coefficient; runs `31227448616` and
+`31227450217` failed only because an extended-source parameter was wired into a
+function body before its signature.  These are implementation provenance, not
+countermodels.
+
+#### Extended aspect bridge and sticky anisotropy ancestry
+
+The physical H1 bridge does not stop abruptly at `21/20`.  The perturbative
+formula
+
+\[
+\sqrt{Q_{pol}}
+\ge
+\left[\frac1{\sqrt{10}}-\sqrt5(\kappa-1)\right]\|B^H\|
+\]
+
+remains positive on the exact transition strip
+
+\[
+\boxed{\kappa=\operatorname{cond}L\le567/500.}
+\]
+
+Arb certifies
+
+\[
+\boxed{Q_{pol}\ge\frac1{4000}\|B^H\|^2,}
+\qquad
+\boxed{\sum_i\|F_i^{H1}\|^2\ge\frac1{16000}\|B^H\|^2.}
+\]
+
+After the same physical nonunitary Duhamel bookkeeping,
+
+\[
+\boxed{
+\operatorname{Def}\ \text{or}\ R_{pair}
+\ge I_1^2/28\,800\,000,
+}
+\]
+
+and the full-curvature transition-strip clean constant is
+
+\[
+\boxed{
+\operatorname{Def}\ \text{or}\ R_{pair}
+\ge I_B^2/115\,200\,000
+}
+\]
+
+outside source/feedback/large-daughter/rescue branches.
+
+High aspect beyond that strip is not charged.  Covariance dynamics gives, with
+`S=sym A`,
+
+\[
+\boxed{
+\frac d{dt}\log\operatorname{cond}L
+\le2\|S\|_{op};
+}
+\]
+
+viscosity contributes nonpositively.  On `int||S||dt<=1/30`,
+`exp(1/15)<27/25`, so
+
+\[
+\boxed{
+\kappa(t_1)>567/500
+\Longrightarrow
+\kappa(t_0)>21/20
+}
+\]
+
+for the same transported covariance ancestry.  Strong anisotropy is therefore
+sticky/inherited; if the predecessor identification breaks, the occurrence is
+fresh/relinked.
+
+For a fresh grain the shell lower axes imply
+
+\[
+\boxed{s=Nr_g>\frac23\kappa^{1/3},}
+\qquad
+\boxed{N\int_{E_2}|u|^2>\frac15\kappa^{1/3}.}
+\]
+
+Again this is **not** an aspect deficit: shell concentration forbids arbitrarily
+small squeeze, so fresh high aspect can only be produced by elongation and
+larger physical radius occupancy.  The extended source calculus gives
+`J_1>=I_1/(132T)` -> `int||S_src||>=I_1/(600T)` or
+`int||A||||B||>=I_1/(16000T)`; the latter is a conservative full
+velocity-gradient/frame coupling, not a pure strain defect.  If that base
+coupling action is below `1/32000` on the H1-dominant branch, one physical source
+channel is at least `I_1/(1800T)` and feeds the same source-weighted collision
+machinery.  Preferred Action `31227536542` passed `264` tests plus `50,000`
+checks; viscosity's sampled contribution to anisotropy growth was always
+negative.
 
 #### Spatial moat width must balance curvature
 
@@ -3647,6 +3968,32 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   full mild-aspect curvature has clean cost `I_B^2/737280` outside the named
   source/feedback/daughter/rescue branches;
 
+- Arb-certified physical `H_1` covariant source calculus:
+  `J_1<=2 int||S_src||+54 int||A||||B||` on the original mild branch; H1
+  dephasing forces a physical curvature source or velocity-gradient/frame
+  coupling, and below the stated base-action threshold one of pressure-third,
+  differentiated-SGS, or viscous-fourth channels has a quantitative source
+  integral;
+- Arb-certified filtered differentiated-SGS/viscous collision: because
+  `V=S_(N/4)u` and `supp Rhat subset B_(N/2)`, `N^-4||S_R||<=(3/2000)s||R||_(3/2)`
+  and `N^-4||S_nu||<=(nu s/5000)sqrt(d_V)`; large radius is routed to affine
+  critical mass instead of aspect cost;
+- exact dyadic Onsager collision given standard `L^3` Littlewood--Paley and
+  Bernstein: cubic increment charge satisfies
+  `Q_N<=g1(C_LP C_B)^3[(4/3)(beta R_G)^2 mu_low_max+2 d_high]^(3/2)`, hence a
+  low/base critical-mass reservoir or high-frequency normalized enstrophy;
+  packet fragmentation yields a dominant `1/4` atom, ancestry entropy `>=log 2`,
+  or same-ancestry pair/cycle mass `>=1/4`;
+- exact source-weighted SGS/viscous episode routing: the `3/2` and `2/3`
+  homogeneities cancel, so SGS source weight converts linearly to mass/enstrophy
+  without a temporal-persistence assumption; viscous source concentration only
+  increases the quadratic dissipation cost;
+- Arb-certified no-gap aspect transition: `cond(L)<=567/500` retains
+  `Q_pol>=1/4000||B_hook||^2` and a positive physical H1/full-curvature cost;
+  above `567/500`, low symmetric-strain action implies the predecessor was
+  already above `21/20` unless the grain is fresh/relinked.  Fresh aspect obeys
+  `N int_E|u|^2>(1/5)cond(L)^(1/3)` through physical radius, not a Young deficit;
+
 ### Computationally supported, not interval-certified
 
 - numerical reuse-gap constants from nonlinear optimization;
@@ -3654,36 +4001,35 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Expand the physical `H_1` covariant dephasing source.**  The preferred
-   physical mild-aspect theorem now includes nonunitary base transport and role
-   splitting: `Q_pol>=1/25||B_hook||^2`, three-role forcing energy
-   `>=1/100||B_hook||^2`, `J_1>=I_1/(11T)` or physical transfer cost / pair
-   rescue `>=I_1^2/184320`.  What remains is to differentiate the interaction
-   forcing and express `J_1` in explicit pressure, differentiated-SGS, viscous,
-   carrier-direction and frame-connection source terms with summable constants.
-2. **Handle high-aspect reuse without an aspect defect.**  The physical `H_1`
-   theorem is deliberately restricted to `cond(L)<=21/20` and the existing
-   low-strain action branch.  Packets leaving that branch must be synchronized
-   through affine fresh/reuse ancestry, covariance, `r_g`, scale/spin holonomy
-   and relative polarization; aspect itself remains an exact Young symmetry.
-3. **Convert persistent cubic SGS increment charge into the ancestry ledger.**
-   Large `RU` leakage forces a scale-critical cubic velocity-increment charge at
-   the filter scale.  A transfer-adapted Littlewood--Paley / affine-grain
-   extraction must show that persistent charge yields a fresh/reused critical
-   grain, dissipation event or Bellman/CKN cost with uniform constants.
+1. **Synchronize the winning low/base increment reservoir through spacetime.**
+   Cubic SGS increments now force a dominant coarse/base band, Bellman/cycle
+   entropy, or high-frequency dissipation.  Because the strict transporter is at
+   `N/4`, the winning low/base packet is naturally an ancestor reservoir, not
+   automatically the selected high-frequency daughter.  One must prove that
+   repeated servicing of many generations by the same reservoir creates
+   covariance/scale/spin holonomy, ancestry cycles, or a fresh-radius event.
+2. **Close the pressure-third near-field registration.**  Far pressure-third
+   already has the summable `6-3=3` exponent.  The near physical packet
+   coefficient must be inserted into the same adaptive affine frame and routed
+   to fresh/reused critical mass without double counting the pressure already
+   removed from microscopic Leray packet equations.
+3. **Control replication of source events.**  Several separated H1 source grains
+   could in principle sample the same band-limited stress or dissipation
+   reservoir.  A Plancherel--Polya / band-limited sampling or bounded-overlap
+   theorem is needed to convert many separated source events into additive
+   `L^(3/2)` stress charge, energy-radius cost, or dissipation.
 4. **Control selected-subfamily interfaces through spacetime.**  Complete
    partitions cancel globally, degree-zero profile remainders are work-level
-   `Xi`, and pair-Hermite rescue has an exact ancestry graph.  The continuum
+   `Xi`, and pair-Hermite rescue has an exact ancestry graph.  The selected
    lineage must keep uncancelled spatial/frequency interfaces summable relative
    to transfer weight.
-5. **Insert uniform physical curvature thresholds into the master theorem.**
-   On a low-strain mild-aspect block a full affine-curvature impulse `I_B` has
-   physical clean cost `I_B^2/737280` outside the named source/feedback/daughter/
-   pair branches.  A continuum theorem must produce a uniform lower threshold
-   for `I_B` (or route small curvature into the flat/reuse episode) and register
-   all source/ancestry branches without double counting.
+5. **Feed a uniform physical block threshold into the master episode theorem.**
+   The local curvature/source/SGS/aspect exits now have named positive currencies,
+   but a continuum theorem must still prove that every efficient PDE block either
+   has a uniform curvature/source threshold or enters the flat/reuse lineage,
+   and then telescope those block costs without duplicate charging.
 
-No statement in this repository currently closes these PDE gaps, and no claim of Navier–Stokes global regularity is made.
+No statement in this repository currently closes these PDE gaps, and no claim of Navier--Stokes global regularity is made.
 
 ## 17. Reproducible provenance
 
@@ -3783,6 +4129,14 @@ The most useful recorded runs, in chronological order, are:
 
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
+| `31198595416` | preferred physical H1 covariant-source calculus: `J_1<=2 int||S_src||+54 int||A||||B||`, source/coupling routing; `240` tests + `50,000` checks, exact projector/product-rule residuals at `1e-15` |
+| `31226401666` | filtered differentiated-SGS / viscous collision: `N^-4||S_R||<=(3/2000)s||R||_(3/2)`, `N^-4||S_nu||<=(nu s/5000)sqrt(d_V)`; `246` tests + `50,000` checks, Arb-certified |
+| `31226526751` | Onsager increment collision: cubic increments -> low/base critical mass or high-frequency enstrophy; packet split -> dominant atom / `log 2` ancestry entropy / `1/4` cycle mass; `246` tests + `5` optional skips + `50,000` checks |
+| `31226868712` | source-weighted episode stress failed only because a large algebraic viscous identity was compared with an absolute floating tolerance; diagnostic failure, no theorem countermodel |
+| `31227448616`, `31227450217` | unified mild/extended reruns failed because `source_divisor` was referenced in a function body before being added to its signature; implementation wiring only |
+| `31227535026` | preferred unified source-weighted H1 episode on `2861f9a`: `C_src=132` mild, `1800` extended; SGS source weight -> mass/enstrophy/dissipation, viscous concentration raises dissipation; `264` tests + `50,000` checks |
+| `31227536542` | preferred no-gap affine-aspect theorem on `2861f9a`: transition `567/500`, `Q_pol>=1/4000`, extended H1/full costs, condition-growth/inheritance law, fresh aspect-radius mass; `264` tests + `50,000` checks, Arb-certified |
+
 The current preferred master regression is run `31189378786` on exact-SHA
 actual-packet validation commit `f27ed04` (`217` tests plus `20,000` episode
 traces, worst margin `0`).  The earlier nine-workflow affine master `31182796814`,
@@ -3823,94 +4177,117 @@ Arb-certified in run `31161914134`.
 
 ## 18. Current research frontier
 
-The orthogonal curvature sidebands are now quantitatively controlled on the
-**physical low-strain mild-aspect branch**, with the nonunitary polarization
-transport and the three distinct Young roles explicitly accounted for.
+The H1 sideband/source problem, cubic SGS increment problem, and the previous
+mild/high-aspect gap have all changed form.
 
-The `H_3` branch remains
+On the full physical transition strip
+
+\[
+\boxed{\operatorname{cond}L\le567/500,}
+\]
+
+hook curvature remains transfer-visible:
+
+\[
+\boxed{Q_{pol}\ge\frac1{4000}\|B^H\|^2,}
+\qquad
+\boxed{\sum_i\|F_i^{H1}\|^2\ge\frac1{16000}\|B^H\|^2.}
+\]
+
+Outside source/feedback/large-daughter/pair exits this gives
 
 \[
 \boxed{
 \operatorname{Def}\ \text{or}\ R_{pair}
-\ge\frac3{4096}I_3^2
+\ge I_1^2/28\,800\,000,
 }
 \]
 
-outside its source/dephasing, feedback and large-daughter exits.  For the hook
-sector, Arb gives the pointwise physical polarization bridge
-
-\[
-\boxed{Q_{pol}\ge\frac1{25}\|B^H\|^2}
-\]
-
-when `cond(L)<=21/20`.  The auxiliary relative-coordinate forcing energy is
-`Q_pol/2`, but the physically relevant three-role sideband energy is only
-bounded by
-
-\[
-\boxed{
-\sum_i\|F_i^{H1}\|^2
-\ge\frac14Q_{pol}
-\ge\frac1{100}\|B^H\|^2.
-}
-\]
-
-On the existing low-strain action branch `K<=1/30`, singular-value control of
-the nonunitary base propagators then gives
-
-\[
-\boxed{J_1\ge I_1/(11T)}
-\]
-
-or a physical first-Duhamel three-role daughter
-
-\[
-\boxed{\delta_1^2\ge I_1^2/480.}
-\]
-
-After feedback, selection of one physical role, odd-Hermite convexity and the
-pair-rescue split,
+and, after the irreducible H3/H1 split,
 
 \[
 \boxed{
 \operatorname{Def}\ \text{or}\ R_{pair}
-\ge\frac{I_1^2}{184320}.
+\ge I_B^2/115\,200\,000.
 }
 \]
 
-Combining the irreducible sectors with `I_B<=sqrt(6)I_3+I_1` gives the preferred
-physical mild-aspect local curvature constant
+For stronger aspect, covariance dynamics supplies the sticky alternative
 
 \[
 \boxed{
-\operatorname{Def}\ \text{or}\ R_{pair}
-\ge\frac{I_B^2}{737280},
+\kappa(t_1)>567/500
+\Longrightarrow
+\kappa(t_0)>21/20
 }
 \]
 
-again outside source/dephasing, nonlinear-feedback and large-daughter branches.
-Pair rescue still routes into `Xi`, dominant reuse, Bellman entropy or
-same-ancestry cycles.  The earlier larger H1 constants were an idealized
-relative-coordinate calculation and have been explicitly superseded.
+on a low symmetric-strain lifetime, unless ancestry breaks and the grain is
+fresh/relinked.  Fresh high aspect pays physical radius occupancy
 
-The decisive remaining work is now:
+\[
+\boxed{
+N\int_{E_2}|u|^2>\frac15\kappa^{1/3},
+}
+\]
 
-1. derive the **physical H1 covariant source calculus**: differentiate the
-   interaction forcing and split `J_1` into pressure, differentiated-SGS,
-   viscous, carrier-direction and helical-frame terms with explicit locality
-   constants;
-2. treat **high-aspect or high-strain lifetimes as ancestry/source branches**,
-   not as aspect defects: synchronize covariance ellipsoids, `r_g`, scale/spin
-   holonomy and relative polarization;
-3. convert persistent **cubic SGS velocity-increment charge** into a
-   fresh/reused affine grain, dissipation event or Bellman/CKN charge without a
-   global `L^3` assumption;
-4. propagate selected moving partitions with summable `Xi` interfaces and feed
-   a uniform physical curvature threshold into the master episode theorem.
+not an aspect/Young deficit.
 
-Further raw residual norms, Euclidean propagator distances, aspect penalties,
-absolute helicity mixing or common-parent Magnus control would now discard
-structure already identified as symmetry or gauge.
+H1 dephasing now reaches actual Navier--Stokes sources.  Differentiated SGS and
+viscous-fourth sources no longer remain high-derivative mysteries:
+
+\[
+\boxed{
+S_R\to R\to |\delta_\ell u|^3
+\to
+\{\text{low/base mass},\text{entropy/cycles},\text{dissipation}\},
+}
+\]
+
+\[
+\boxed{
+S_\nu\to N^{-1}\|\nabla V\|_2^2
+\to\text{dissipation}.
+}
+\]
+
+The key Onsager/LP estimate is
+
+\[
+\boxed{
+Q_N
+\le
+g_1(C_{LP}C_B)^3
+\left[
+\frac43(\beta R_G)^2\mu_{low}^{max}
++2\mathfrak d_{>N}
+\right]^{3/2}.
+}
+\]
+
+Because the SGS source-to-increment power is `3/2` and this collision takes the
+`2/3` power, the final mass/enstrophy currency is linear in instantaneous source
+density.  Source weight, rather than the duration of a superlevel set, can be
+pigeonholed; temporal concentration is therefore not a free SGS/viscous exit.
+
+The decisive next theorem is now **ancestor-reservoir synchronization**.  The
+winning low/base band produced by the increment collision lives naturally near
+the coarse transporter scale.  If the same reservoir repeatedly services
+successive high-frequency near-extremal blocks, the programme must prove that it
+is either:
+
+1. a fresh affine reservoir and pays the `r_g` energy budget;
+2. a reused reservoir whose covariance/scale/spin history creates holonomy or
+   relative-polarization cost;
+3. fragmented across many packets and therefore pays `log 2` Bellman entropy or
+   `1/4` same-ancestry cycle mass; or
+4. accompanied by additive high-frequency dissipation.
+
+After that, the remaining analytic work is pressure-third near-field
+registration, source-event sampling/packing, and selected-interface `Xi`
+summability.  Further raw high-derivative residual bounds, aspect penalties,
+global `L^3` assumptions, or treating short source bursts as a free escape would
+throw away structure already exposed by the filtered Navier--Stokes physics.
 
 ---
 
@@ -3926,7 +4303,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, and `docs/h1_swirl_no_escape.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, and `docs/affine_aspect_sticky.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

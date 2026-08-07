@@ -1,0 +1,17 @@
+{
+  "status": "EXACT_SOURCE_WEIGHTED_ROUTING_GIVEN_H1_SOURCE_AND_STANDARD_LP_BERNSTEIN",
+  "stress": {
+    "samples": 50000,
+    "minimum_sgs_homogeneity_margin": -8.881784197001252e-16,
+    "minimum_sgs_dissipation_margin": 0.0,
+    "minimum_viscous_dissipation_margin": -4.115307456808255e-16,
+    "minimum_partition_margin": 0.0
+  },
+  "clean_entropy_constants": {
+    "dominant_fraction": "1/4",
+    "atomic_entropy": "log 4",
+    "ancestry_entropy": "log 2",
+    "same_ancestry_pair_mass": "1/4"
+  },
+  "principle": "temporal concentration is not a free SGS/viscous exit: homogeneity converts source weight directly to mass/enstrophy, and viscous concentration increases the quadratic dissipation cost"
+}

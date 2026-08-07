@@ -1,0 +1,22 @@
+{
+  "certificate": {
+    "mild_aspect_kappa": "21/20",
+    "base_action_budget": "1/30",
+    "raw_source_coefficient_ball": "[1.9440296834190450620027140238677401176101520652 +/- 4.97e-47]",
+    "clean_source_coefficient": "2",
+    "raw_connection_coefficient_ball": "[53.097678228062493458924492819734406954898892623 +/- 5.22e-46]",
+    "clean_connection_coefficient": "54",
+    "dephasing_source_threshold": "I_1/(44 T)",
+    "dephasing_strain_curvature_threshold": "I_1/(1188 T)",
+    "H1_dominant_strain_action_threshold": "1/2376",
+    "per_NS_source_channel_threshold": "I_1/(132 T)",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_hook_rate_projection_residual": 3.4724432602736084e-15,
+    "worst_physical_matrix_rate_residual": 2.2781562751784003e-15,
+    "worst_clean_density_margin": 0.14807875527407255,
+    "minimum_route_margin": 1.327355587010045e-09
+  }
+}

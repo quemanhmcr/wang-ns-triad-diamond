@@ -36,7 +36,6 @@ def sgs_source_linear_collision_coefficients(
     bernstein_constant: float,
     filter_radius: float = 1.0,
     band_support_factor: float = 1.0,
-    source_divisor: float = 132.0,
 ) -> dict[str, float]:
     """Coefficients mu_band>=c_mu*rho or d_high>=c_d*rho.
 
