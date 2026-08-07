@@ -167,6 +167,19 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
     if not (physical_weight_cond < aq(PHYSICAL_WEIGHT_COND)):
         raise AssertionError(f"physical transfer/capacity weight comparison failed: {physical_weight_cond}")
 
+    # Certified countermodel to using the *all-scale* Mellin moment as the edge
+    # functional.  At x=13/40, y=17/20 and helicities (-,+,-), choose the
+    # common phase so the child gains energy.  The full Mellin coefficient is
+    # g*((1+y)log(y/x)+(x+y)log(1/y)), which is already > 3J*/2.
+    cx = aq(Fraction(13, 40))
+    cy = aq(Fraction(17, 20))
+    heron = (cx + cy + 1) * (-cx + cy + 1) * (cx - cy + 1) * (cx + cy - 1)
+    carea = heron.sqrt() / 4
+    cg = carea * (1 + cx - cy) / (2 * sqrt2 * cx * cy)
+    full_mellin_counter = cg * ((1 + cy) * (cy / cx).log() + (cx + cy) * (1 / cy).log())
+    if not (full_mellin_counter > arb(3) * jstar / 2):
+        raise AssertionError(f"full Mellin countermodel failed: {full_mellin_counter} vs J*={jstar}")
+
     # --- Local certificate in exact log coordinates. ---
     # Direct interval evaluation on the whole rectangle has severe dependency
     # wrapping, so certify the derivative by adaptive dyadic subdivision.
@@ -388,6 +401,11 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
         "physical_gap_radius": _qstr(PHYSICAL_GAP_RADIUS),
         "physical_weight_condition_upper": _qstr(PHYSICAL_WEIGHT_COND),
         "physical_weight_condition_ball": str(physical_weight_cond),
+        "full_mellin_countermodel_x": "13/40",
+        "full_mellin_countermodel_y": "17/20",
+        "full_mellin_countermodel_signs": "(-,+,-)",
+        "full_mellin_countermodel_ball": str(full_mellin_counter),
+        "full_mellin_countermodel_ratio_lower": "3/2",
         "global_gap": _qstr(GLOBAL_GAP),
         "y_cutoff": _qstr(Y_CUTOFF),
         "corner_upper_ball": str(corner_upper),
@@ -464,6 +482,7 @@ def render_summary(cert: dict[str, Any], stress: dict[str, float] | None = None)
         f"- adverse sharp-cutoff Mellin retention: `>= {cert['mellin_flux_retention_lower_bound']}` of the upper progress segment",
         f"- smooth common-midgap moat: shell `{cert['smooth_midgap_shell_halfwidth']}`, filter `{cert['smooth_midgap_filter_halfwidth']}`, residual `>= {cert['smooth_midgap_moat_lower_bound']}`",
         f"- physical good-core threshold: `eta={cert['physical_good_eta']}`, gap radius `<= {cert['physical_gap_radius']}`, transfer/capacity condition `< {cert['physical_weight_condition_upper']}`",
+        f"- full all-scale Mellin countermodel: `x={cert['full_mellin_countermodel_x']}`, `y={cert['full_mellin_countermodel_y']}`, signs `{cert['full_mellin_countermodel_signs']}`, coefficient `> {cert['full_mellin_countermodel_ratio_lower']} J*`",
         f"- global exclusion outside the local box: `Def >= {cert['global_gap']}`",
         "",
         "## Certified enclosures",
@@ -478,6 +497,7 @@ def render_summary(cert: dict[str, Any], stress: dict[str, float] | None = None)
         f"- adverse lower/upper Mellin segment ratio upper bound: `{cert['mellin_adverse_ratio_upper_bound']}`",
         f"- smooth common-midgap moat enclosure: `{cert['smooth_midgap_moat_ball']}`",
         f"- physical transfer/capacity condition enclosure: `{cert['physical_weight_condition_ball']}`",
+        f"- full Mellin countermodel enclosure: `{cert['full_mellin_countermodel_ball']}`",
         f"- y>=0.9 analytic upper bound: `{cert['corner_upper_ball']}`",
         "",
         "## Global branch-and-bound",
