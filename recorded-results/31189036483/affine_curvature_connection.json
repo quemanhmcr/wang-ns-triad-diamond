@@ -1,0 +1,15 @@
+{
+  "stress": {
+    "samples": 50000,
+    "worst_connection_residual": 1.3608647443824605e-13,
+    "worst_source_split_residual": 0.0,
+    "worst_homogeneity_residual": 0.0
+  },
+  "identities": {
+    "connection": "dot B+2 A_aff B=L^-1 Hess(F)[L,L]",
+    "resolved_F": "F=-grad P-div R+nu Delta V",
+    "resolved_source": "Hess F=-nabla^3 P-nabla^2 div R+nu nabla^2 Delta V",
+    "pressure_far_exponent": "6-3=3"
+  },
+  "far_pressure_third_geometric_sum_n0_3": 0.002232142857142857
+}

@@ -2352,6 +2352,65 @@ H_1,H_3\text{ sidebands}&\text{pressure annular charge}\\
 
 Pressure, `RU`, viscosity and curvature must never be charged in both columns.
 
+#### Affine curvature connection: sideband dephasing sources
+
+The `H_1/H_3` sideband geometry itself has a common affine transport gauge.  For
+any smooth transporter `V`, along
+
+\[
+\dot X=V(X),\qquad \dot L=A L,
+\qquad A=\nabla V(X),
+\]
+
+let `H=nabla^2 V(X)`, `F=D_t^V V`, and
+
+\[
+B=L^{-1}H[L,L],\qquad A_{aff}=L^{-1}AL.
+\]
+
+The material Hessian commutator gives the exact covariant identity
+
+\[
+\boxed{
+\dot B+2A_{aff}B=L^{-1}(\nabla^2F)[L,L].
+}
+\]
+
+Thus raw `dot B` is not itself a defect: common affine deformation acts as a
+connection on curvature.  For the resolved Navier--Stokes transporter
+
+\[
+D_t^V V=-\nabla P-\nabla\cdot R+\nu\Delta V,
+\]
+
+so
+
+\[
+\boxed{
+\dot B+2A_{aff}B
+=L^{-1}\left[-\nabla^3P-\nabla^2\nabla\cdot R
++\nu\nabla^2\Delta V\right][L,L].
+}
+\]
+
+This identifies the only source channels for curvature-sideband dephasing after
+the affine connection is removed: pressure third derivatives, differentiated
+SGS stress, or viscous fourth velocity derivatives.  It is a source theorem,
+not yet a positive sideband-coherence cost.
+
+At this derivative level pressure is even more local.  The 3D pressure kernel
+has homogeneity `-3`; three derivatives have homogeneity `-6`.  Dyadic
+three-dimensional packet packing therefore leaves
+
+\[
+\boxed{6-3=3}
+\]
+
+summable powers in the far field.  Action `31189036483` passed `217` tests plus
+`50,000` curvature-connection checks; the worst normalized connection residual
+was `1.361e-13`, while the resolved-source split and `6-3=3` homogeneity
+residuals were zero in the stress suite.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -3044,6 +3103,12 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   exact total boundary cancellation, and `R` has the exact velocity-increment
   representation with the cubic increment upper bound recorded above;
 
+- exact affine curvature connection
+  `dot B+2 A_aff B=L^-1 Hess(D_t^V V)[L,L]`; for a resolved Navier--Stokes
+  transporter this becomes the source split
+  `-nabla^3 P-nabla^2 div R+nu nabla^2 Delta V`; pressure-third far-field
+  homogeneity leaves the 3D packing exponent `6-3=3`;
+
 ### Computationally supported, not interval-certified
 
 - numerical reuse-gap constants from nonlinear optimization;
@@ -3056,8 +3121,9 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
    `H_1`/`H_3` curvature forcing has zero base-spinor projection.  The missing
    theorem must show that persistent sideband excitation either creates a
    trackable daughter/fresh affine grain or pays a transfer/coherence deficit;
-   rapid sideband dephasing should be routed to higher velocity/pressure source
-   derivatives rather than hidden in a norm error.
+   rapid sideband dephasing is now routed by the exact curvature connection to
+   pressure-third, differentiated-SGS or viscous-fourth-derivative sources rather
+   than hidden in a norm error.
 2. **Convert persistent cubic SGS increment charge into the ancestry ledger.**
    Large `RU` leakage now forces a scale-critical cubic velocity-increment charge
    at the filter scale.  One still needs a transfer-adapted Littlewood--Paley /
@@ -3159,6 +3225,9 @@ The most useful recorded runs, in chronological order, are:
 | `31187768828` | preferred affine-SGS boundary continuation including exact SGS velocity-increment identity and cubic increment bound; `212` tests + `50,000` checks |
 | `31188118452` | divergence-free localized weak packet equation; Leray pressure cancellation and shell multiplier/window commutator; `215` tests + `50,000` checks |
 
+| `31188755726`--`31188831280` | twelve-workflow actual-packet integration on `88f5173`: smooth-SGS role separation, affine Kelvin PDE, divergence-free packet, Hermite sidebands, base-spinor cross forcing, affine SGS boundary/increments, one-shot profile, symbol freezing, affine window, relative polarization, localized pressure and master all green; `215` tests per workflow, master `20,000` traces with worst margin `0` |
+| `31189036483` | exact affine curvature connection / resolved acceleration-Hessian source split and pressure-third `6-3=3` far locality; `217` tests + `50,000` checks |
+
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
 The current preferred master regression is run `31183274599` on exact-SHA
@@ -3181,7 +3250,7 @@ preferred single-edge/physical-weight certificate is
 `recorded-results/31165654509/`.  The preferred smooth-symbol freezing artifact
 is `recorded-results/31165838379/`.  The preferred affine-spacetime dynamics artifacts are
 `recorded-results/31168393589/`, `recorded-results/31168671304/`,
-`recorded-results/31168888413/`, and `recorded-results/31169128097/`, plus the intrinsic 3D continuation `recorded-results/31170015795/`.  The preferred actual-packet PDE artifacts are `recorded-results/31186597005/`, `recorded-results/31187104071/`, `recorded-results/31187443147/`, `recorded-results/31187637446/`, `recorded-results/31187768828/`, and `recorded-results/31188118452/`; the certificate-semantics failure is `recorded-results/31186600162/`.  The preferred helical artifacts are
+`recorded-results/31168888413/`, and `recorded-results/31169128097/`, plus the intrinsic 3D continuation `recorded-results/31170015795/`.  The preferred actual-packet PDE artifacts are `recorded-results/31186597005/`, `recorded-results/31187104071/`, `recorded-results/31187443147/`, `recorded-results/31187637446/`, `recorded-results/31187768828/`, `recorded-results/31188118452/`, and `recorded-results/31189036483/`; the certificate-semantics failure is `recorded-results/31186600162/`.  The preferred helical artifacts are
 `recorded-results/31171018560/`, `recorded-results/31171127537/`,
 `recorded-results/31171360107/`, `recorded-results/31171484247/`, and the
 symplectic correction `recorded-results/31172607991/`, good-core frame
