@@ -87,3 +87,19 @@ identity and very ill-conditioned, while the parent wedge remains exactly
 invariant.  Any future packet theorem must therefore estimate the wedge/relative
 generator, not Euclidean propagator distance.
 \n\n## Forced packet identity\n\nA localized Navier--Stokes packet has residual forcing.  If\n\n\[\n\dot U=-D_1U+F_1,\qquad\n\dot V=-D_2V+F_2,\qquad\n\dot Z=-D_3Z+F_3,\n\]\n\nthe polarization identity acquires exactly the additive term\n\n\[\n\boxed{\n\mathcal R_F\n=(F_1^TJV+U^TJF_2)(\lambda^TZ)\n+(U^TJV)(\lambda^TF_3).\n}\n\]\n\nIt obeys\n\n\[\n\boxed{\n|\mathcal R_F|\n\le\sqrt2\big(\n\|F_1\|\|V\|\|Z\|\n+\|U\|\|F_2\|\|Z\|\n+\|U\|\|V\|\|F_3\|\big).\n}\n\]\n\nThus nonlinear packet forcing is an additive cross-error/fresh-mass ledger term;\nit does not destroy the exact common-parent `SL(2)` cancellation.  The remaining\nPDE task is to estimate the forcing norms from SGS transport, curvature, pressure\nand packet overlap.\n
+
+## Common material phase is not part of `F_i`
+
+For phase variables, a parallel cancellation holds to all spatial orders.  If
+all roles use the same resolved velocity `U`, then
+
+\[
+(\partial_t+U\cdot\nabla)(\phi_1+\phi_2-\phi_3)
+=\rho_1+\rho_2-\rho_3.
+\]
+
+At exact carrier resonance, the common velocity-Hessian source cancels from the
+chirp/Hessian lock as well.  If the three transport velocities differ, only the
+differences `U-U_i` remain.  Consequently the forced polarization ledger should
+not count common non-affine phase/chirp evolution inside `F_i`; it belongs to the
+osculating packet gauge.  See `docs/material_phase_lock.md`.

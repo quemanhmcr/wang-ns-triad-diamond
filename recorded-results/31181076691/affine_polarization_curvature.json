@@ -1,0 +1,15 @@
+{
+  "theorem": {
+    "strain_gradient": "C_ijc=sym_ij(H_ijk L_kc)",
+    "gaussian_rms": "E||S(z)||_F^2=||C||_F^2",
+    "transfer_rms": "E Q_rel(S(z))=sum_c Q_rel(C_c)>=1/2||C||_F^2",
+    "interpretation": "spatial strain/helical-generator curvature is the vector channel complementary to scalar third-Hermite forcing"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_rms_observability_ratio": 0.5066835129816544,
+    "worst_gaussian_expectation_residual": 0.061238756109581,
+    "worst_swirl_scalar_kernel": 8.639472492913416e-16,
+    "minimum_swirl_polarization_signal": 0.0798516598235906
+  }
+}

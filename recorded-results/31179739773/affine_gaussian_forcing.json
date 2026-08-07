@@ -1,0 +1,20 @@
+{
+  "theorem": {
+    "whitened_hessian": "B=L^-1 H[L.,L.]",
+    "normalized_carrier": "q=L^T k",
+    "full_residual_sq": "1/4(2||q.B||_F^2+tr(q.B)^2)+1/16(6||Sym B||_F^2+9||tr Sym B||^2)",
+    "osculating_transverse_sq": "3/8 ||Sym B||_F^2",
+    "osculating_bound": "sqrt(6)/4 ||B||_F",
+    "interpretation": "quadratic phase is chirp tangent; cubic trace is center tangent; first transverse mode is third Hermite chaos"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_affine_B_residual": 4.049120981918798e-10,
+    "worst_affine_q_residual": 1.418587335053521e-13,
+    "worst_orthogonal_gauge_residual": 3.789429288355496e-10,
+    "worst_hermite_moment_relative_error": 0.5694515959852592,
+    "worst_transverse_bound_ratio": 0.9801838622801132,
+    "extreme_frame_condition": 10909090909.090908,
+    "extreme_affine_residual": 5.60849808921288e-16
+  }
+}

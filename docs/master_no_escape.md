@@ -347,11 +347,12 @@ triad-normal gauge satisfies the scale-free local estimate
 (\|\dot{\widehat k}\|+\|\dot{\widehat p}\|)
 \]
 
-for a parent role.  Hence the global Chern topology does not introduce a local
-chart singularity inside an efficient packet; the remaining PDE burden is to
-control the carrier-direction variation itself.  What remains is the localized
-nonlinear packet realization and full time-ordered phase control, not the
-identification of the correct geometric connection.
+for a parent role.  Hence the global Chern topology does not introduce a local chart singularity
+inside an efficient packet.  The transfer-facing common-parent time ordering is
+also closed exactly by the symplectic wedge identity; individual-spinor Magnus
+phases are not the quantity charged by the nonlinear transfer.  The remaining
+PDE burden is localized **differential** transport/SGS/window forcing and its
+registration in ancestry.
 
 The transfer-facing time dependence can now be written without a Magnus
 truncation.  After scalar attenuation is factored out,
@@ -372,9 +373,48 @@ certified helical frame moat gives
 
 Hence the polarization bridge does not introduce a new localization scale: it
 renormalizes the existing curvature coefficient and adds a summable frequency-
-cell `O(h)` term.  The remaining PDE burden is to estimate the actual residual
-forcing `F_i`, not to choose a polarization matrix metric or prove a common-
-parent full Magnus theorem.
+cell `O(h)` term.
+
+The residual forcing has now been further quotiented by the affine Gaussian
+symmetries.  If `x-X=Lz` and `H=nabla^2 U`, define
+
+\[
+B=L^{-1}H[L,L].
+\]
+
+After allowing center, carrier, covariance and chirp to osculate the flow, the
+first scalar transverse non-affine forcing is exactly
+
+\[
+\boxed{
+\|F_\perp\|_2^2/\|\psi\|_2^2=(3/8)\|\operatorname{Sym}B\|_F^2.
+}
+\]
+
+The kernel `Sym B=0` is not declared free.  Under incompressibility it is the
+quadratic swirl `V(z)=z cross (M z)` with `M` symmetric trace free; it is routed
+to spatial strain/relative-polarization variation.  Common material advection,
+including common velocity-Hessian chirp, preserves the signed triad phase lock
+exactly, so only differential role velocities/sources contribute phase forcing.
+Bulk viscosity is Gaussian tangent as well; viscous boundary flux is not.
+
+The affine Gaussian also carries a physical critical grain without imposing an
+isotropic cell.  With `r_g=(det Sigma_x)^(1/6)`, the certified radius-two
+ellipsoid satisfies
+
+\[
+\boxed{r_g^{-1}\int_{E_2}|u|^2\ge3/10.}
+\]
+
+A fresh family therefore obeys the physical energy budget
+
+\[
+\boxed{\sum_j r_{g,j}\le P\|u(t)\|_2^2/\eta}
+\]
+
+at overlap multiplicity `P`.  Static affine anisotropy is an exact Young
+symmetry and is **not** a Bellman cost.  Reused elongated grains remain a
+spacetime ancestry/dynamic-curvature problem.
 
 The actual Navier--Stokes gap is therefore now the **construction** of the
 transfer roles and their spacetime packetization.  Common parent/child log

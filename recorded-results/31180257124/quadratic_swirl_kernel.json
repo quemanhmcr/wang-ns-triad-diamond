@@ -1,0 +1,19 @@
+{
+  "theorem": {
+    "kernel": "Sym_abc B=0, B_abc=B_acb, B_aac=0",
+    "representation": "B_abc=eps_abd M_dc+eps_acd M_db with M symmetric tracefree",
+    "velocity": "V(z)=z cross (M z)",
+    "reconstruction": "M_dc=(1/3)eps_abd B_abc",
+    "envelope": "V.grad exp(-|z|^2/4)=0",
+    "carrier": "q.V is a quadratic chirp tangent"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_full_symmetry_residual": 8.665194098528724e-16,
+    "worst_divergence_residual": 0.0,
+    "worst_reconstruction_residual": 8.881784197001252e-16,
+    "worst_velocity_residual": 1.067662871904967e-14,
+    "worst_radial_advection_residual": 7.105427357601002e-15,
+    "worst_chirp_residual": 1.4210854715202004e-14
+  }
+}

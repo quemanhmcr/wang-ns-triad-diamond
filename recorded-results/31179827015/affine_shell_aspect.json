@@ -1,0 +1,24 @@
+{
+  "certificate": {
+    "shell_outer_radius": "exp(2/25) N",
+    "profile_distance": "1/100 in L^(3/2)",
+    "p_density_shell_mass_lower": "999/1000",
+    "physical_axis_constant_ball": "[0.66730017820226540934913009848315548742891794587 +/- 6.22e-48]",
+    "physical_axis_clean_lower": "2/3",
+    "radius_two_probability_ball": "[0.73853587005088937779717792402407879809718939081 +/- 3.38e-48]",
+    "local_ellipsoid_mass_coefficient_ball": "[0.31110982572964152962993186574919069458928088668 +/- 5.25e-48]",
+    "local_ellipsoid_clean_lower": "3/10",
+    "aspect_mass_coefficient_ball": "[0.22894284851066637356160844238793540178318138416 +/- 3.57e-48]",
+    "aspect_mass_clean_lower": "1/5",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_uncertainty_residual": 7.540991716823116e-07,
+    "minimum_axis_constant": 0.6673001782022654,
+    "local_mass_coefficient": 0.3111098257296415,
+    "aspect_mass_ratio": 0.23742123234067045,
+    "max_affine_young_symmetry_residual": 2.220446049250313e-16,
+    "extreme_free_young_aspect": 100000000.0
+  }
+}

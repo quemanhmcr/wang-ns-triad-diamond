@@ -117,3 +117,49 @@ and Arb certifies
 
 The non-explicit part remains only Christ's implication from sufficiently small
 Young deficit to one-percent Gaussian proximity.
+
+## Affine covariance is a symmetry, not a defect
+
+The Gaussian supplied by the inverse theorem need not be isotropic.  Write its
+physical `L^2` covariance as `Sigma_x`.  The one-percent shell certificate gives
+
+\[
+\boxed{\lambda_{\min}(\Sigma_x)^{1/2}>2/(3N)}
+\]
+
+and transfers actual mass to the radius-two covariance ellipsoid `E_2`:
+
+\[
+\boxed{
+\int_{E_2}|u|^2\ge \frac3{10}(\det\Sigma_x)^{1/6}.
+}
+\]
+
+Thus with
+
+\[
+r_g=(\det\Sigma_x)^{1/6},
+\qquad
+\mathsf M_{aff}=r_g^{-1}\int_{E_2}|u|^2,
+\]
+
+one has the scale-critical affine grain bound
+
+\[
+\boxed{\mathsf M_{aff}\ge3/10.}
+\]
+
+For fresh affine grains of mass at least `eta` and overlap multiplicity `P`, the
+physical energy inequality gives exactly
+
+\[
+\boxed{
+\sum_j r_{g,j}\le P\|u(t)\|_2^2/\eta.
+}
+\]
+
+This replaces the old heuristic that a long Gaussian automatically creates a
+replication/Bellman cost.  At `p=3/2` arbitrary common affine deformation is an
+exact Young symmetry.  Fresh anisotropic grains are charged by their physical
+geometric radius; reused anisotropic grains must be controlled by spacetime
+ancestry and the affine curvature/polarization dynamics.

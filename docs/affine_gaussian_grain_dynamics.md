@@ -200,7 +200,26 @@ has the striking exact law
 
 Therefore, if three roles have the same Gaussian precision and satisfy
 `kappa_a+kappa_b=kappa_c`, resonance is preserved exactly by the common affine
-Gaussian evolution.  Equal widths also remain equal because all three copies
+Gaussian evolution.  Bulk viscosity is also tangent to the full complex Gaussian manifold.  For
+
+\[
+\psi(y)=C\exp[-\tfrac12y^TGy+i k\cdot y]
+\]
+
+with symmetric complex `G`, direct differentiation gives
+
+\[
+\boxed{
+\Delta\psi/ψ=y^TG^2y-2i k^TGy-|k|^2-\operatorname{tr}G.
+}
+\]
+
+The multiplier has degree at most two, so bulk `nu Delta` changes only Gaussian
+amplitude/center/carrier/covariance/chirp parameters.  It creates no third-Hermite
+transverse forcing.  Viscous **window boundary** flux remains a separate
+localized PDE term.
+
+Equal widths also remain equal because all three copies
 solve the same matrix ODE.
 
 Incompressibility gives

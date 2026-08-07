@@ -1,0 +1,15 @@
+{
+  "theorem": {
+    "material_phase": "D_t(phi1+phi2-phi3)=rho1+rho2-rho3",
+    "gradient": "D_t(k1+k2-k3)=-A^T(k1+k2-k3)+(r1+r2-r3)",
+    "hessian": "D_t Klock=-A^T Klock-Klock A-H_U[klock]+(G1+G2-G3)",
+    "consequence": "common nonlinear advection, including common velocity Hessian chirp, is an exact triad phase gauge"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_gradient_lock_residual": 7.0810995818524236e-15,
+    "worst_hessian_lock_residual": 1.0290994924006174e-14,
+    "worst_common_hessian_source_residual": 0.0,
+    "minimum_differential_source_margin": 0.01232224174619656
+  }
+}

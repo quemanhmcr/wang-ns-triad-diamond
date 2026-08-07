@@ -1,0 +1,16 @@
+{
+  "certificate": {
+    "affine_mass_lower": "M_aff(E2)>=3/10",
+    "axis_lower": "l_i>2/(3N)",
+    "aspect_relation": "A=N lmax <= (9/4)(N r_g)^3",
+    "fresh_energy_budget": "sum r_g <= overlap*E_total/eta",
+    "status": "CERTIFIED_FROM_AFFINE_SHELL_INPUTS"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_geometric_radius_residual": 7.200550940085288e-11,
+    "minimum_affine_mass_coefficient": 0.3111098257296415,
+    "worst_aspect_relation_margin": 0.6300449823740333,
+    "worst_fresh_budget_margin": 1.6273877946827026e-05
+  }
+}

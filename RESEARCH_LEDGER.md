@@ -1714,6 +1714,215 @@ by the moving-window theorem.  What remains is to estimate the actual packet
 forcing `F_i` and the other localized PDE residuals, and to synchronize the
 result across packet ancestry.
 
+#### Affine-covariant residual forcing and critical-grain energy
+
+The one-shot Young profile is affine Gaussian, so the packet forcing must be
+measured in the grain's own physical metric.  Write
+
+\[
+x=X+Lz,
+\qquad
+\Sigma_x=LL^T,
+\]
+
+and for the resolved velocity Hessian `H_ijk=partial_j partial_k U_i(X)` define
+
+\[
+\boxed{
+B_{abc}=(L^{-1})_{ai}H_{ijk}L_{jb}L_{kc},
+\qquad q=L^Tk.
+}
+\]
+
+`B` and `q` are invariant under a common affine change of physical coordinates
+(and transform only by the orthogonal gauge in the non-unique factorization of
+`Sigma_x`).  For the quadratic Taylor remainder, Wick's formula gives the exact
+unprojected Gaussian norm
+
+\[
+\frac{\|R_2\cdot\nabla\psi\|_2^2}{\|\psi\|_2^2}
+=
+\frac14\left(2\|q\cdot B\|_F^2+\operatorname{tr}(q\cdot B)^2\right)
++
+\frac1{16}\left(6\|T\|_F^2+9\|\operatorname{tr}T\|^2\right),
+\]
+
+where `T=Sym B`.  The quadratic `q dot B` term is a chirp/covariance tangent.
+The cubic trace is a center/carrier tangent.  After projecting to the complement
+of the full center--carrier--covariance--chirp Gaussian tangent space, the first
+true scalar shape forcing is exactly third Hermite chaos:
+
+\[
+\boxed{
+\frac{\|F_\perp\|_2^2}{\|\psi\|_2^2}
+=
+\frac38\|\operatorname{Sym}B\|_F^2,
+\qquad
+\frac{\|F_\perp\|_2}{\|\psi\|_2}
+\le\frac{\sqrt6}{4}\|B\|_F.
+}
+\]
+
+Action `31179739773` passed `174` tests and `50,000` affine/Hermite checks.  An
+explicit transformed grain with condition number `1.091e10` retained affine
+invariance to residual `5.608e-16`.  Thus Euclidean aspect is not itself a
+forcing cost.
+
+The kernel `Sym B=0` is also physical rather than missing coercivity.  Under
+differentiated incompressibility it has the exact five-dimensional form
+
+\[
+\boxed{
+B_{abc}=\varepsilon_{abd}M_{dc}+\varepsilon_{acd}M_{db},
+\qquad M=M^T,\quad \operatorname{tr}M=0,
+}
+\]
+
+hence
+
+\[
+\boxed{V(z)=z\times(Mz).}
+\]
+
+It is tangent to normalized Gaussian level spheres (`V dot z=0`) and a carrier
+sees only a quadratic chirp.  Action `31180257124` passed `180` tests plus
+`50,000` swirl checks with representation residual `1.068e-14`.  This mode must
+be routed to vector/helical spatial variation rather than charged as scalar
+envelope forcing.
+
+That vector channel is explicit.  Define the physical strain variation per
+grain coordinate
+
+\[
+C_{ijc}=\frac12(H_{ijk}+H_{jik})L_{kc}.
+\]
+
+Each `C_c` is symmetric trace free.  Therefore the existing Arb-certified
+transfer-relevant tomography applies to each slice.  For `z` standard Gaussian,
+
+\[
+\boxed{
+\mathbb E_z Q_{rel}(C_cz_c)
+=
+\sum_cQ_{rel}(C_c)
+\ge\frac12\|C\|_F^2.
+}
+\]
+
+Action `31181076691` passed `187` tests; its `50,000` Hessian/grain checks had
+worst RMS ratio `0.506683513`.  Tested swirl kernels had vanishing scalar
+third-Hermite signal to `8.639e-16` but positive sampled polarization signal.
+No aspect-independent lower bound comparing this physical `C` channel directly
+to affine-normalized `||B||` is claimed.
+
+The quadratic phase/chirp tangent has an exact triad explanation.  If
+
+\[
+(\partial_t+U\cdot\nabla)\phi_i=\rho_i,
+\]
+
+then
+
+\[
+\boxed{
+(\partial_t+U\cdot\nabla)(\phi_1+\phi_2-\phi_3)
+=\rho_1+\rho_2-\rho_3.
+}
+\]
+
+Carrier resonance and Hessian/chirp lock are consequently preserved by an
+arbitrary **common nonlinear** resolved flow; at exact carrier resonance the
+common velocity-Hessian source cancels from the chirp equation.  For
+role-dependent velocities only the differences `U-U_i` remain.  Action
+`31180506627` passed `182` tests plus `50,000` phase-lock checks, with common
+Hessian-source residual exactly zero in the tested algebra.  Common non-affine
+phase is therefore a gauge, not `F_i`.
+
+Bulk viscosity is tangent as well.  For a complex Gaussian
+
+\[
+\psi(y)=C\exp[-\tfrac12y^TGy+i k\cdot y],
+\]
+
+\[
+\boxed{
+\Delta\psi/\psi
+=y^TG^2y-2i k^TGy-|k|^2-\operatorname{tr}G,
+}
+\]
+
+a polynomial of degree at most two.  Thus bulk viscosity changes Gaussian
+parameters but creates no third-Hermite transverse forcing.  Viscous window
+boundary flux remains an unresolved localized PDE term.
+
+The frozen inverse-Young profile also carries a genuinely affine physical mass.
+For `||f-F||_(3/2)<=1/100` and the certified shell, the `|F|^(3/2)` covariance
+`Gamma_xi` and physical `L^2` covariance obey the exact uncertainty matrix
+
+\[
+\boxed{\Sigma_x\Gamma_\xi=I/3.}
+\]
+
+Action `31179827015` Arb-certified
+
+\[
+\boxed{
+\lambda_{\min}(\Sigma_x)^{1/2}>\frac{2}{3N}
+}
+\]
+
+and, on the radius-two covariance ellipsoid `E_2`, the actual-role mass
+
+\[
+\boxed{
+\int_{E_2}|u|^2
+\ge\frac3{10}(\det\Sigma_x)^{1/6}.
+}
+\]
+
+Define the geometric-mean physical radius and affine critical mass
+
+\[
+\boxed{
+r_g=(\det\Sigma_x)^{1/6},
+\qquad
+\mathsf M_{aff}(E)=r_g^{-1}\int_E|u|^2.
+}
+\]
+
+Then
+
+\[
+\boxed{\mathsf M_{aff}(E_2)\ge3/10.}
+\]
+
+This quantity is exactly invariant under the isotropic Navier--Stokes scaling.
+For a fresh family with `M_aff>=eta` and overlap multiplicity `P`, physical
+energy gives the exact ancestry budget
+
+\[
+\boxed{
+\sum_jr_{g,j}\le\frac{P\|u(t)\|_2^2}{\eta}.
+}
+\]
+
+Moreover if `s=Nr_g` and `A=N lambda_max(Sigma_x)^(1/2)`, the axis lower bound
+gives
+
+\[
+\boxed{A\le\frac94s^3.}
+\]
+
+Thus natural geometric scale implies bounded aspect; an extremely elongated
+**fresh** grain consumes a larger physical radius budget.  Crucially, arbitrary
+common affine anisotropy remains an exact Young symmetry (tested to aspect
+`1e8`), so aspect alone is not a Bellman/replication deficit.  Reused elongated
+grains must be handled by spacetime ancestry and the dynamic curvature/
+polarization ledgers.  Action `31180882083` passed `186` tests and `50,000`
+affine-grain budget checks; the downstream rational provenance was cleaned in
+commit `21d8976` so the `2/3` and `3/10` inputs are taken directly from the Arb
+shell certificate rather than reconstructed from floating approximations.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -2326,8 +2535,9 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   multipliers `m_e>=1-10^-4 => D_phase>=beta_phi/250`;
 - exact objective transverse polarization generator `-sym(A_perp)-nu|k|^2I`,
   exact off-diagonal helical representation of trace-free strain, and exact
-  strain-area commutator law; the repository records only a second-Magnus bound,
-  not a full time-ordered phase theorem;
+  strain-area commutator law; a second-Magnus bound remains useful for an
+  individual spinor, but the transfer-facing common-parent time ordering is
+  closed exactly by the symplectic wedge identity below;
 - Arb-certified full 3D strain tomography at the symmetric extremizer:
   `||D_Pi||_F^2+||D_1||_F^2+||D_2||_F^2 >= (13/20)||S||_F^2`, hence the combined
   scalar-shape/helicity-mixing observable is `>=559/2000 ||S||_F^2`;
@@ -2353,6 +2563,28 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   `E_pol<=3h+(15/2)c kappa M` for `c sigma_0<=1/30`, hence the combined
   localization ledger is `a/M+(b+15c/2)kappa M+3h` with the same square-root
   curvature optimizer; no independent polarization moat scale is introduced;
+- exact affine-Gaussian non-affine forcing decomposition: with
+  `B=L^-1(nabla^2 U)[L,L]`, quadratic wavefront curvature is Gaussian tangent
+  and the first transverse scalar forcing is third Hermite chaos
+  `||F_perp||_2^2/||psi||_2^2=(3/8)||Sym B||_F^2`; bulk viscosity is also
+  tangent to the complex Gaussian manifold;
+- exact incompressible quadratic-swirl kernel `Sym B=0 <=> V(z)=z cross(Mz)`
+  with `M` symmetric trace free; this scalar-forcing kernel is routed to spatial
+  physical-strain / relative-polarization variation, where
+  `E_z Q_rel(S(z)-S(0)) >= (1/2)||C||_F^2` for
+  `C_ijc=sym_ij((nabla^2U)_ijk L_kc)`;
+- exact material triad phase-lock gauge: common nonlinear resolved advection
+  preserves `phi_1+phi_2-phi_3`, carrier resonance and common chirp/Hessian lock;
+  with role-dependent velocities only differential velocities/sources remain;
+- Arb-certified affine shell/aspect bridge and actual ellipsoidal mass:
+  every physical Gaussian standard axis is `>2/(3N)` and the actual role on the
+  radius-two covariance ellipsoid satisfies
+  `integral_E |u|^2 >= (3/10)(det Sigma_x)^(1/6)`;
+- exact affine critical-grain reformulation
+  `M_aff=r_g^-1 integral_E|u|^2>=3/10`, `r_g=(det Sigma_x)^(1/6)`, and fresh
+  energy budget `sum r_g<=P||u(t)||_2^2/eta`; common affine anisotropy is an
+  exact Young symmetry and is explicitly recorded as a countermodel to charging
+  aspect ratio itself as Bellman/replication cost;
 
 ### Computationally supported, not interval-certified
 
@@ -2361,36 +2593,35 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Realize the frozen frequency cells as a full three-dimensional moving
-   packet frame.** Frequency multiplier freezing and crossing-scale selection are
-   now controlled, but the continuum theorem must attach the cells to physical
-   packets/windows while preserving the signed localized SGS measure and keeping
-   partition overlap/cross interactions summable.
-2. **Estimate the genuine localized nonlinear packet forcing.**  The transfer-
-   facing full time-ordered parent observable is now exact, and carrier/frame
-   variation on the low-strain branch is already absorbed into `3h+(15/2)c
-   kappa M`.  The remaining polarization PDE term is the explicit additive
-   forcing residual `R_F(F_1,F_2,F_3)`.  One must derive `F_i` from the actual
-   smooth-SGS packetization (non-affine advection, `R U`, viscous boundary terms,
-   pressure/partition overlap) and prove it is summable or creates fresh/Bellman
-   mass.  A full Magnus theorem for the common parent motion is no longer needed.
-3. **Integrate the adaptive curvature-balanced moat into the nested packet
-   tree.** The old fixed spatial moat schedule is not sufficient.  The continuum
-   construction must choose `M` from the local curvature balance `a/M+b kappa M`,
-   prove compatibility of neighboring adaptive windows, and verify the local
-   pressure-Hessian coefficient.  Excessive curvature already forces critical
-   mass in the band-limited packet model.
-4. **Close the remaining localized transport terms.** Pressure has a combined-
-   work ledger and far multipole bounds; affine advection is cancelled by the
-   deforming window.  The remaining `R U` SGS transport, viscous boundary flux,
-   local pressure-Hessian contribution and partition-overlap terms must be
-   summable or produce Bellman/fresh critical mass.
-5. **Spacetime ancestry and synchronization.** The one-shot Gaussian profile
-   carries certified frozen-time critical mass and coherent non-conformal strain
-   now pays a packet-lifetime cost.  The remaining theorem must register the
-   resulting mass as fresh or reused across successive `N^{-2}` lifetimes and
-   feed all deformation/source errors into the master `zeta_j`/cross-error
-   ledgers.
+1. **Derive the actual smooth-SGS affine packet equations and their differential
+   sources.**  Common affine/non-affine phase transport, bulk Gaussian viscosity,
+   common-parent `SL(2)` motion, scalar third-Hermite forcing and RMS spatial
+   polarization curvature are now separated.  The remaining `F_i` must be
+   derived from role-dependent SGS transport, partition/window errors, pressure
+   localization and differential resolved velocities in the actual packetization.
+2. **Construct affine/ellipsoidal moving windows compatible with the localized
+   SGS identity.**  The earlier scalar `a/M+b kappa M` theorem is an isotropic
+   window result.  The continuum proof must choose windows adapted to `Sigma_x`,
+   control overlap and pressure/SGS boundary terms in that metric, and recover a
+   summable analogue of the curvature balance without inserting a false aspect
+   penalty.
+3. **Integrate affine critical grains into spacetime ancestry.**  A fresh grain
+   now carries theorem-level scale-critical mass `M_aff>=3/10` and obeys the
+   physical budget `sum r_g<=P E/eta`.  Reused elongated grains still require a
+   synchronization theorem across successive lifetimes and a rule for comparing
+   evolving covariance ellipsoids without quotienting away genuine differential
+   curvature/polarization.
+4. **Close the remaining localized transport/source terms.**  Pressure has a
+   combined-work ledger and far multipole bounds; bulk viscosity and common
+   material phase are packet tangents.  Viscous boundary flux, `R U`, local
+   pressure-Hessian contribution, role-dependent phase forcing and partition
+   overlap must be summable or create fresh/Bellman/source events.
+5. **Feed the affine forcing channels into the master no-escape ledger.**  The
+   third-Hermite scalar channel, RMS relative-polarization curvature, affine fresh
+   radius budget and existing objective-strain/source alternatives must be
+   synchronized with the master `zeta_j`/cross-error ledgers.  No continuum
+   theorem currently proves that every efficient PDE block enters one of those
+   branches with uniform constants.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier–Stokes global regularity is made.
 
@@ -2453,6 +2684,12 @@ The most useful recorded runs, in chronological order, are:
 | `31174812731` | preferred forced relative-polarization transport: exact additive nonlinear forcing residual; `171` tests + `50,000` histories |
 
 | `31175180687`--`31175212421` | integrated relative-polarization/localization stack on `e0a7855`: forced relative transport, localized polarization, symplectic quotient, smooth-symbol freezing, curvature balance, objective-strain collision, localized pressure and master all green; `171` tests per workflow, master `20,000` traces with worst margin `0` |
+| `31179739773` | affine-covariant Gaussian forcing / exact third-Hermite transverse residual; `174` tests + `50,000` affine checks |
+| `31179827015` | Arb-certified shell-constrained affine aspect and actual radius-two ellipsoidal mass `>=3/10 r_g`; `178` tests + `50,000` covariance checks |
+| `31180257124` | exact five-dimensional incompressible quadratic swirl kernel; `180` tests + `50,000` checks |
+| `31180506627` | exact common material triad phase/chirp gauge; `182` tests + `50,000` checks |
+| `31180882083` | affine critical-grain energy/radius budget (before provenance-only cleanup); `186` tests + `50,000` checks |
+| `31181076691` | affine spatial polarization-curvature RMS bridge `>=1/2`; `187` tests + `50,000` Hessian/grain checks |
 
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
@@ -2479,7 +2716,10 @@ is `recorded-results/31165838379/`.  The preferred affine-spacetime dynamics art
 symplectic correction `recorded-results/31172607991/`, good-core frame
 regularity artifact `recorded-results/31173321354/`, preferred forced relative-
 polarization artifact `recorded-results/31174812731/`, and localized packet
-certificate `recorded-results/31174612248/`; the two failed
+certificate `recorded-results/31174612248/`.  The preferred affine-residual
+artifacts are `recorded-results/31179739773/`, `recorded-results/31179827015/`,
+`recorded-results/31180257124/`, `recorded-results/31180506627/`,
+`recorded-results/31180882083/`, and `recorded-results/31181076691/`; the two failed
 interval-boundary provenance runs are `recorded-results/31168205564/` and
 `recorded-results/31168303213/`.  Final integration runs are
 `31166152074`, `31166155045`, `31166158218`, `31166160711`, `31166163414`,
@@ -2489,96 +2729,92 @@ Arb-certified in run `31161914134`.
 
 ## 18. Current research frontier
 
-The finite-dimensional architecture has reached the point where every identified escape variable has a ledger:
+The finite-dimensional and affine-packet architecture now distinguishes **true
+physical defects** from symmetry motion much more sharply.  In addition to the
+Bellman/Hodge/erosion/reuse ledgers, the packet dynamics has the gauge hierarchy
 
 \[
 \boxed{
-\text{branching}
-\to \text{Bellman entropy},
+\text{common material phase/chirp},
 \quad
-\text{curved reuse}
-\to \text{Hodge cost},
-}
-\]
-
-\[
-\boxed{
-\text{flat reuse}
-\to \text{spherical/barycentric erosion},
+SO(3)\text{ helical frame},
 \quad
-\text{high resistance}
-\to \text{Poisson Bellman/atomic entropy}.
+SL(2)\text{ common-parent polarization},
+\quad
+\text{affine Gaussian tangent motion},
 }
 \]
 
-The single-edge multiplier, smooth scale-flux observable, cancellation
-polarization and physical-transfer Hodge change of measure are closed in the
-finite packet model.  The common spectral moat is now also extracted from any
-signed-good crossing core rather than assumed.  Conservatively, after the
-four-bin physical crossing selection one may use
+all of which must be quotiented rather than charged.
+
+After those quotients, the non-affine resolved-flow curvature splits physically
+into
 
 \[
 \boxed{
-c_{0,H}^{cross}=\min\{1/20000,(25/424)h_H\}>0.
+\operatorname{Sym}(L^{-1}(\nabla^2U)[L,L])
+\to
+\text{third-Hermite envelope forcing},
 }
 \]
 
-The frozen-frequency bridge has now acquired a genuine packet-lifetime dynamics
-ledger.  The low-cost alternatives can be organized physically as
+and
 
 \[
 \boxed{
-\text{coherent non-conformal planar strain}
-\to \text{multiplier deficit},
+C_{ijc}=\operatorname{sym}_{ij}((\nabla^2U)_{ijk}L_{kc})
+\to
+\text{spatial shape/relative-polarization variation}.
 }
 \]
 
-with the certified costs `>= (1/10)(dT)^2` in the frozen case and
-`>= (1/24)(dT)^2` under five-percent co-rotating variation, or
+The scalar kernel is the exact quadratic swirl `z cross(Mz)` rather than a
+mysterious escape.  The common velocity-Hessian chirp is a material triad phase
+gauge.  Bulk viscosity is Gaussian tangent.
+
+The inverse-Young grain is now also physically registered without an isotropic
+fiction.  With
 
 \[
-\boxed{
-\text{strain dephasing}
-\to Q(A)\ \text{or}\ \nabla^2p\ \text{or}\ \nu\Delta S,
-}
+r_g=(\det\Sigma_x)^{1/6},
+\qquad
+\mathsf M_{aff}=r_g^{-1}\int_{E_2}|u|^2,
 \]
 
-where the Navier--Stokes gradient equation supplies the source identity and the
-band-limited packet model converts each source into critical mass or a summable
-far pressure-Hessian tail.  Spatial localization also has a corrected physical
-law:
+Arb and Hausdorff--Young give
 
 \[
-\boxed{
-E(M)=a/M+b\kappa M,
-\qquad M_*\sim\kappa^{-1/2}.
-}
+\boxed{\mathsf M_{aff}\ge3/10,}
 \]
 
-The old quadratic `M_j` schedule remains valid for the defect-space extraction
-and for the commutator term alone, but a fixed spatial schedule cannot control
-velocity curvature in general.
+while fresh grains satisfy
+
+\[
+\boxed{\sum r_g\le P\|u(t)\|_2^2/\eta.}
+\]
+
+Static affine anisotropy itself is an exact Young symmetry and is **not** a
+replication cost.  This corrects the earlier natural-cell heuristic.
 
 The next mathematically decisive work is therefore:
 
-1. construct the **actual smooth-SGS moving packet equations** and estimate
-   their residual forces.  Scalar plane tilt, helical gauge transport, spin
-   holonomy, common-parent `SL(2)` neutrality, the full transfer-facing
-   time-ordered relative-polarization identity, and low-strain carrier/frame
-   localization are now controlled.  The unresolved object is the concrete
-   forcing `F_i` produced by non-affine advection, SGS transport, viscosity,
-   pressure and partition overlap in the localized PDE packet;
-2. make the **adaptive curvature-balanced windows** compatible with the nested
-   packet ancestry, and prove that local pressure-Hessian, SGS transport `RU`,
-   viscous boundary flux and partition overlap are summable or create a fresh /
-   Bellman event;
-3. synchronize the resulting critical grains over successive `N^{-2}` packet
-   lifetimes and feed objective-strain/curvature events into the master
-   no-escape ledger.
+1. derive the **actual affine smooth-SGS packet equations** and express their
+   role-dependent residuals in the already-identified currencies: third-Hermite
+   forcing, differential phase velocity, relative-polarization curvature,
+   pressure/source terms and partition/window errors;
+2. build **ellipsoidal moving windows** adapted to `Sigma_x`, including pressure,
+   `RU`, viscous boundary and overlap estimates, and find the affine analogue of
+   the curvature-balanced moat without introducing a false aspect-ratio defect;
+3. construct **affine spacetime ancestry**: use the theorem-level fresh radius
+   budget for new grains, while controlling reuse by covariance synchronization,
+   scale/spin holonomy and the existing dynamic strain/polarization ledgers;
+4. feed these affine PDE branches into the master `zeta_j`, `Xi` and
+   fresh/reuse/Bellman bookkeeping with summable errors.
 
-This is now the frontier.  Further single-edge optimization, another abstract
-cycle theorem, or an iterative within-block profile decomposition would not
-address the principal missing PDE mechanism.
+This is now the frontier.  Further single-edge optimization, raw Euclidean
+propagator norms, automatic isotropic subdivision of affine Gaussians, or a full
+Magnus theorem for common parent motion would attack symmetry variables rather
+than the remaining Navier--Stokes mechanism.
 
 ---
 
@@ -2593,13 +2829,14 @@ For a new reader, the recommended order is:
 5. `docs/localized_sgs_pressure_ledger.md` and `docs/annular_pressure_collision.md`;
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
-8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, and `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
-10. `docs/scale_holonomy.md`;
-11. `docs/multiscale_bellman.md`;
-12. `docs/nested_grain_extraction.md`;
-13. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
-14. `docs/atomic_component_entropy.md`;
-15. `docs/multicommodity_hodge_routing.md`;
-16. `docs/resistance_bellman_stopping.md`;
-17. `docs/master_no_escape.md`.
+8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, and `docs/affine_critical_grain.md`;
+10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
+11. `docs/scale_holonomy.md`;
+12. `docs/multiscale_bellman.md`;
+13. `docs/nested_grain_extraction.md`;
+14. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
+15. `docs/atomic_component_entropy.md`;
+16. `docs/multicommodity_hodge_routing.md`;
+17. `docs/resistance_bellman_stopping.md`;
+18. `docs/master_no_escape.md`.

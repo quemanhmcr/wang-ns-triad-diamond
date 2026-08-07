@@ -133,12 +133,34 @@ C_\Omega^{-1/3}(1-\varepsilon_G)^2.
 }
 \]
 
-This is exactly the scale-critical local-energy currency of the packet ledger.
-After inverse Fourier transform the profile is a spatial Gaussian (possibly an
-affine ellipsoid).  A fixed covariance ellipsoid contains a fixed fraction of
-its `L^2` mass.  If that ellipsoid is much larger than the natural `N^{-1}`
-scale, covering it by natural cells creates the replication/fresh alternative;
-if it is scale matched, it is already one critical packet.
+This is a useful frozen-frequency mass bound, but the inverse Young extremizer
+is an **affine** Gaussian and anisotropy by itself is not a transfer defect.  The
+common affine action is an exact Young symmetry, so merely covering a long
+ellipsoid by isotropic `N^{-1}` cells cannot automatically be charged as a
+Bellman/replication loss.
+
+The correct physical grain currency is now the geometric-mean radius
+
+\[
+r_g=(\det\Sigma_x)^{1/6}
+\]
+
+and the affine scale-critical local mass
+
+\[
+\mathsf M_{aff}(E)=r_g^{-1}\int_E|u|^2.
+\]
+
+The shell/aspect certificate and Hausdorff--Young transfer to the actual role
+show, on the radius-two covariance ellipsoid `E_2`,
+
+\[
+\boxed{\mathsf M_{aff}(E_2)\ge3/10.}
+\]
+
+Fresh affine grains therefore pay through the conserved physical energy budget
+`sum r_g`, while reused elongated grains remain an ancestry/dynamics problem.
+See `docs/affine_shell_aspect.md` and `docs/affine_critical_grain.md`.
 
 For the certified radial log shell used by the crossing theorem,
 
@@ -174,8 +196,8 @@ Thus the uncertainty principle gives the desired physical dichotomy:
 \boxed{
 \text{near-maximal transfer}
 \to
-\text{one Gaussian critical-mass grain}
-\quad\text{or its spatial replication cost}.
+\text{one affine critical-mass grain};
+\quad \text{fresh radius is charged by energy, reuse by dynamics/ancestry}.
 }
 \]
 
