@@ -74,3 +74,12 @@ def test_single_coherent_branch_is_not_artificially_split():
     extract_tree(root, max_depth=5, bin_schedule=[9, 16, 25], tail_schedule=[1e-3, 1e-4, 1e-5], bin_width=0.35)
     assert len(root.children) <= 1
     assert verify_nested(root)
+
+
+def test_unequal_widths_are_rejected_in_exact_edge_module():
+    p = Packet("Xw", "X", np.zeros(3), np.zeros(3), 0.02, 1.0)
+    q = Packet("Yw", "Y", np.zeros(3), np.zeros(3), 0.03, 1.0)
+    z = Packet("Zw", "Z", np.zeros(3), np.zeros(3), 0.02, 1.0)
+    import pytest
+    with pytest.raises(ValueError):
+        gaussian_triad_edge(p, q, z)

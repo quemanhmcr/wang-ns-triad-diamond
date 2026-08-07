@@ -26,7 +26,9 @@ class Packet:
 class TriadEdge:
     """A positive scalar Gaussian triad contribution.
 
-    `base_weight` is the coefficient product times the exact width factor.
+    `base_weight` is the coefficient product. The current exact theorem is
+    restricted to equal-width packets; width balancing is handled before this
+    extraction by the preceding packet-inverse module.
     `weight = base_weight * exp(-defect_sq)` is the exact scalar envelope
     contribution in the stated Gaussian model.
     """
@@ -88,16 +90,16 @@ def scalar_width_ratio(sigmas: Sequence[float], dimension: int = 3) -> float:
 def gaussian_triad_edge(a: Packet, b: Packet, c: Packet) -> TriadEdge:
     if (a.side, b.side, c.side) != ("X", "Y", "Z"):
         raise ValueError("edge packets must be ordered X,Y,Z")
-    sigma_ref = math.sqrt((a.sigma * a.sigma + b.sigma * b.sigma + c.sigma * c.sigma) / 3.0)
+    sigma_ref = a.sigma
+    if not (math.isclose(b.sigma, sigma_ref, rel_tol=1e-12, abs_tol=1e-15) and math.isclose(c.sigma, sigma_ref, rel_tol=1e-12, abs_tol=1e-15)):
+        raise ValueError("nested-grain edge theorem is currently restricted to equal-width packets")
     mismatch = a.kappa + b.kappa - c.kappa
     freq_cost = float(mismatch @ mismatch) / (12.0 * sigma_ref * sigma_ref)
     xs = (a.center, b.center, c.center)
     pair = sum(float((xs[i] - xs[j]) @ (xs[i] - xs[j])) for i in range(3) for j in range(i + 1, 3))
     spatial_cost = (sigma_ref * sigma_ref / 3.0) * pair
-    width = scalar_width_ratio([a.sigma, b.sigma, c.sigma])
-    width_cost = -math.log(max(width, 1e-300))
-    defect_sq = max(0.0, freq_cost + spatial_cost + width_cost)
-    base = abs(a.coefficient * b.coefficient * c.coefficient) * width
+    defect_sq = max(0.0, freq_cost + spatial_cost)
+    base = abs(a.coefficient * b.coefficient * c.coefficient)
     return TriadEdge(
         vertices=(a.name, b.name, c.name),
         defect_sq=defect_sq,

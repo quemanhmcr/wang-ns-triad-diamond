@@ -5,9 +5,9 @@ Navier--Stokes regularity proof.
 
 ## 1. Gaussian defect
 
-For three Fourier Gaussian packets with centers `kappa_X,kappa_Y,kappa_Z`,
-physical centers `x_X,x_Y,x_Z`, and comparable widths, the scalar overlap
-factor has the form
+For three **equal-width** Fourier Gaussian packets with centers
+`kappa_X,kappa_Y,kappa_Z` and physical centers `x_X,x_Y,x_Z`, the scalar
+overlap factor has the form
 
 \[
 \exp[-D(e)^2],
@@ -20,18 +20,12 @@ D(e)^2=
 \frac{|\kappa_X+\kappa_Y-\kappa_Z|^2}{12\sigma^2}
 +
 \frac{\sigma^2}{3}\sum_{a<b}|x_a-x_b|^2
--
-\log R_{\rm width}.
+
 \]
 
-The exact width factor is
-
-\[
-R_{\rm width}=(27a_Xa_Ya_Z)^{3/4},\qquad
- a_i=\frac{\sigma_i^2}{\sigma_X^2+\sigma_Y^2+\sigma_Z^2}.
-\]
-
-Thus each atomic edge has
+Width balancing is handled first by the previous Gaussian packet inverse
+module. The present extraction is deliberately restricted to one equal-width
+block, where the displayed exponent is exact. Thus each atomic edge has
 
 \[
 w_e=\beta_e e^{-D(e)^2}
