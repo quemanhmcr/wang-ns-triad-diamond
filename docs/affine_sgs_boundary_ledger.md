@@ -121,7 +121,7 @@ same `a/M` coefficient already used by the filter/window commutator.
 
 This is distinct from **bulk viscosity of an individual Gaussian role**, which is
 already tangent to its Gaussian manifold.
-
+\n\n## SGS stress is a cubic velocity-increment charge\n\nThe `R` term can be returned to a primitive velocity observable.  For every\nnormalized convolution filter `G_l` (`int G_l=1`), let\n\n\[\n\delta_r u(x)=u(x-r)-u(x).\n\]\n\nThen the SGS stress has the exact increment representation\n\n\[\n\boxed{\nR(x)=\int G_l(r)\,\delta_ru\otimes\delta_ru\,dr\n-\left(\int G_l(r)\delta_ru\,dr\right)^{\!\otimes2}.\n}\n\]\n\nThis identity is algebraic and does not require a positive filter.  Put\n`g_1=||G||_1`.  With\n\n\[\nA_2=\int |G_l(r)|\,|\delta_ru|^2dr,\n\]\n\nCauchy gives `|int G_l delta u|^2 <= g_1 A_2`, hence\n\n\[\n|R|_F\le(1+g_1)A_2.\n\]\n\nA second Holder/Jensen step gives\n\n\[\nA_2^{3/2}\le g_1^{1/2}\int |G_l(r)|\,|\delta_ru|^3dr.\n\]\n\nTherefore\n\n\[\n\boxed{\n|R(x)|_F^{3/2}\n\le (1+g_1)^{3/2}g_1^{1/2}\n\int |G_l(r)|\,|\delta_ru(x)|^3dr.\n}\n\]\n\nThus a large `RU` boundary branch forces an **Onsager-type cubic increment\ncharge at the actual SGS filter scale**.  This is a physical velocity observable,\nnot an independent stress-tensor mystery.  The remaining theorem is to convert\na persistent increment charge into fresh/reused affine grains without assuming\na global `L^3` bound.\n
 ## 3. A quadratic partition has no global boundary-count loss
 
 Let nonnegative weights `eta_alpha` satisfy

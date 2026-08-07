@@ -10,6 +10,33 @@ from pathlib import Path
 import numpy as np
 
 
+
+def sgs_increment_identity(weights: np.ndarray, deltas: np.ndarray) -> np.ndarray:
+    """Discrete form of R=<du tensor du>_G-<du>_G tensor <du>_G.
+
+    weights may have either sign but must sum to one.  This is the exact Germano
+    increment identity for a normalized convolution filter.
+    """
+    w=np.asarray(weights,float); d=np.asarray(deltas,float)
+    if d.ndim!=2 or d.shape[0]!=w.size:
+        raise ValueError("deltas must have shape (n,dim)")
+    if abs(float(np.sum(w))-1.0)>1e-10:
+        raise ValueError("filter weights must sum to one")
+    mean=np.einsum('i,ia->a',w,d)
+    second=np.einsum('i,ia,ib->ab',w,d,d)
+    return second-np.outer(mean,mean)
+
+
+def sgs_increment_cubic_upper(g_l1: float, weighted_abs_increment_cubic: float) -> float:
+    """Upper bound for |R|_F^(3/2) from cubic velocity increments.
+
+    |R| <= (1+g1) A2, A2=int |G||du|^2, and
+    A2^(3/2)<=g1^(1/2) int |G||du|^3.
+    """
+    if g_l1 < 1.0-1e-12 or weighted_abs_increment_cubic < 0:
+        raise ValueError("normalized filters have g_l1>=1 and cubic charge is nonnegative")
+    return (1.0+g_l1)**1.5 * math.sqrt(g_l1) * weighted_abs_increment_cubic
+
 def cubic_boundary_pointwise_bound(U: np.ndarray, W: np.ndarray, R: np.ndarray) -> tuple[float,float]:
     """Bound |e W|+|R U| by critical cubic densities.
 
@@ -96,11 +123,13 @@ class BoundaryStress:
     minimum_cubic_margin: float
     worst_partition_residual: float
     minimum_clean_viscous_margin: float
+    worst_increment_stress_ratio: float
+    worst_increment_identity_residual: float
 
 
 def stress(samples:int=50_000,seed:int=20260807)->BoundaryStress:
     rng=np.random.default_rng(seed)
-    wr=wp=0.0; mm=float('inf'); vm=float('inf')
+    wr=wp=wir=wii=0.0; mm=float('inf'); vm=float('inf')
     for _ in range(samples):
         U=rng.normal(size=3); W=rng.normal(size=3); R=rng.normal(size=(3,3))
         lhs,rhs=cubic_boundary_pointwise_bound(U,W,R)
@@ -118,7 +147,21 @@ def stress(samples:int=50_000,seed:int=20260807)->BoundaryStress:
         clean=clean_viscous_boundary_lifetime_bound(c,nu,C,M,E)
         vm=min(vm,clean-exact)
         if exact>clean+2e-12: raise AssertionError("clean viscous boundary bound failed")
-    return BoundaryStress(samples,wr,mm,wp,vm)
+        # Signed normalized discrete filter: verify exact increment identity against
+        # direct covariance of u=u0+delta, then the |R|^(3/2) cubic increment bound.
+        m=int(rng.integers(2,9)); raw=rng.normal(size=m); raw += (1.0-np.sum(raw))/m
+        # Enforce sum exactly in floating arithmetic by correcting one entry.
+        raw[-1] += 1.0-float(np.sum(raw))
+        du=rng.normal(size=(m,3)); u0=rng.normal(size=3); uu=u0+du
+        Umean=np.einsum('i,ia->a',raw,uu); directR=np.einsum('i,ia,ib->ab',raw,uu,uu)-np.outer(Umean,Umean)
+        incR=sgs_increment_identity(raw,du)
+        ii=float(np.linalg.norm(directR-incR)); wii=max(wii,ii)
+        if ii>2e-11*max(1.,np.linalg.norm(directR)): raise AssertionError("SGS increment identity failed")
+        g1=float(np.sum(np.abs(raw))); cubic=float(np.sum(np.abs(raw)*np.linalg.norm(du,axis=1)**3))
+        lhs=float(np.linalg.norm(incR,'fro'))**1.5; rhs=sgs_increment_cubic_upper(g1,cubic)
+        if lhs>rhs+3e-11*max(1.,rhs): raise AssertionError("SGS increment cubic bound failed")
+        if rhs>1e-14: wir=max(wir,lhs/rhs)
+    return BoundaryStress(samples,wr,mm,wp,vm,wir,wii)
 
 
 def main()->None:
@@ -153,6 +196,8 @@ Stress checks: `{out.samples}`
 - minimum cubic margin: `{out.minimum_cubic_margin:.3e}`
 - worst partition cancellation residual: `{out.worst_partition_residual:.3e}`
 - minimum clean viscous-bound margin: `{out.minimum_clean_viscous_margin:.3e}`
+- worst SGS-stress / increment-cubic bound ratio: `{out.worst_increment_stress_ratio:.9f}`
+- worst exact increment-identity residual: `{out.worst_increment_identity_residual:.3e}`
 """
     (args.outdir/'summary.md').write_text(md,encoding='utf-8'); print(md)
 
