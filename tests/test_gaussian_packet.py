@@ -27,3 +27,8 @@ def test_exact_scalar_ratios_are_one_only_at_alignment():
     assert scalar_position_ratio(xs, 1.0) == math.exp(-2.0 / 3.0)
     assert abs(scalar_width_ratio(np.ones(3)) - 1.0) < 1e-15
     assert scalar_width_ratio(np.array([0.5, 1.0, 1.5])) < 1.0
+
+
+def test_sharp_symmetric_young_constant():
+    from src.gaussian_packet import sharp_young_constant
+    assert abs(sharp_young_constant(3) - (math.sqrt(3.0) / 2.0) ** 3) < 1e-15

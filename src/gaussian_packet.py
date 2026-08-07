@@ -113,6 +113,44 @@ def monte_carlo_cap_ratio(sigma: float, power: int = 17, seed: int = 0) -> dict[
     }
 
 
+
+def sample_young_overlap_measure(
+    k1: np.ndarray,
+    k2: np.ndarray,
+    k3: np.ndarray,
+    sigma: float,
+    power: int,
+    seed: int,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Overlap measure for symmetric L^(3/2) Gaussian Young extremizers."""
+    sampler = qmc.Sobol(d=6, scramble=True, seed=seed)
+    u = np.clip(sampler.random_base2(power), 1e-12, 1.0 - 1e-12)
+    normals = ndtri(u).reshape(-1, 2, 3)
+    mean_p = (2.0 * k1 - k2 + k3) / 3.0
+    mean_q = (-k1 + 2.0 * k2 + k3) / 3.0
+    covariance_2 = (sigma * sigma / 3.0) * np.array([[2.0, -1.0], [-1.0, 2.0]])
+    chol = np.linalg.cholesky(covariance_2)
+    correlated = np.einsum("ab,nbc->nac", chol, normals)
+    return mean_p + correlated[:, 0, :], mean_q + correlated[:, 1, :]
+
+
+def young_gaussian_ratio(sigma: float, power: int = 17, seed: int = 0) -> dict[str, float]:
+    k1, k2, k3, signs, j_star = packet_center()
+    p, q = sample_young_overlap_measure(k1, k2, k3, sigma, power, seed)
+    vals = edge_efficiency_batch(p, q, signs) / j_star
+    return {
+        "sigma": float(sigma),
+        "samples": int(len(vals)),
+        "weighted_young_ratio": float(np.mean(vals)),
+        "deficit_over_sigma": float((1.0 - np.mean(vals)) / sigma),
+        "std_ratio": float(np.std(vals)),
+    }
+
+
+def sharp_young_constant(dimension: int = 3) -> float:
+    """Sharp symmetric p=q=r=3/2 trilinear Young constant in R^d."""
+    return float((math.sqrt(3.0) / 2.0) ** dimension)
+
 def optimize_coherence_score() -> dict[str, object]:
     """Optimize the exact scalar coherence factors; maximum should be aligned/equal-width."""
     # Variables: normalized frequency mismatch, two independent spatial offsets,
@@ -152,6 +190,7 @@ def main() -> None:
 
     sigmas = [0.005, 0.01, 0.02, 0.04, 0.08, 0.12]
     cap = [monte_carlo_cap_ratio(s, power=args.power, seed=100 + i) for i, s in enumerate(sigmas)]
+    young = [young_gaussian_ratio(s, power=args.power, seed=300 + i) for i, s in enumerate(sigmas)]
 
     mismatch = []
     for a in [0.0, 0.25, 0.5, 1.0, 2.0]:
@@ -170,6 +209,8 @@ def main() -> None:
         "model": "L2-normalized isotropic Fourier Gaussian packets",
         "dimension": 3,
         "cap_coefficient_stability": cap,
+        "weighted_young_gaussians": young,
+        "sharp_young_constant": sharp_young_constant(),
         "frequency_mismatch_exact": mismatch,
         "spatial_separation_exact": separation,
         "width_balance_exact": widths,
@@ -193,6 +234,9 @@ def main() -> None:
     for row in cap:
         deficit = 1.0 - row["mean_ratio"]
         lines.append(f"| {row['sigma']:.4f} | {row['mean_ratio']:.9f} | {deficit:.9f} | {deficit/row['sigma']:.6f} |")
+    lines += ["", "## Scale-critical weighted Young Gaussian packets", "", f"Sharp scalar constant in R^3: `{result['sharp_young_constant']:.12f}`", "", "| sigma / child frequency | weighted ratio | deficit / sigma |", "|---:|---:|---:|"]
+    for row in young:
+        lines.append(f"| {row['sigma']:.4f} | {row['weighted_young_ratio']:.9f} | {row['deficit_over_sigma']:.6f} |")
     curv = result["single_edge_curvature"]
     lines += [
         "",
