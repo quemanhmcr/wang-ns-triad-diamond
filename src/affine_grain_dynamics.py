@@ -259,7 +259,9 @@ def arb_affine_grain_certificate() -> dict[str, str]:
 
     # 1/2 from Def>=H/2, 1/3 from averaging t^2, 3/5 pointwise H coefficient.
     avg = arb(1) / 2 * aq(POINTWISE_HODGE) / 3
-    if not (avg >= aq(AVERAGE_DEFICIT)):
+    # Again the conservative coefficient is an exact rational identity:
+    # (1/2)*(3/5)*(1/3)=1/10.  Do not ask interval arithmetic to certify equality.
+    if Fraction(1, 2) * POINTWISE_HODGE / 3 != AVERAGE_DEFICIT:
         raise AssertionError(f"average deficit coefficient failed: {avg}")
 
     return {
