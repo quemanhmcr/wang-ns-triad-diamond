@@ -48,10 +48,14 @@ def global_search(seed: int = 20260807) -> dict[str, object]:
     for idx, signs in enumerate(itertools.product((-1, 1), repeat=3)):
         sx, sy, sq = signs
 
+        def unpack(z: np.ndarray) -> tuple[float, float]:
+            y = float(z[0])
+            lam = float(z[1])
+            x = (1.0 - y) + lam * (2.0 * y - 1.0)
+            return x, y
+
         def objective(z: np.ndarray) -> float:
-            x, y = sorted((float(z[0]), float(z[1])))
-            if x + y <= 1.0 or y >= 1.0:
-                return 10.0 + 10.0 * max(0.0, 1.0 - x - y) + 10.0 * max(0.0, y - 0.999999)
+            x, y = unpack(z)
             val = forward_mellin_coefficient(x, y, sx, sy, sq)
             if not math.isfinite(val):
                 return 10.0
@@ -59,7 +63,7 @@ def global_search(seed: int = 20260807) -> dict[str, object]:
 
         res = differential_evolution(
             objective,
-            [(0.50000001, 0.999999), (0.50000001, 0.999999)],
+            [(0.500000001, 0.999999999), (1e-9, 1.0 - 1e-9)],
             seed=seed + idx,
             maxiter=500,
             popsize=24,
@@ -67,7 +71,7 @@ def global_search(seed: int = 20260807) -> dict[str, object]:
             polish=True,
             workers=1,
         )
-        x, y = sorted((float(res.x[0]), float(res.x[1])))
+        x, y = unpack(res.x)
         val = forward_mellin_coefficient(x, y, sx, sy, sq)
         row = {
             "signs": list(signs),
