@@ -197,6 +197,54 @@ def equal_marginal_barycenter_test(pairs: list[tuple[np.ndarray, np.ndarray]], w
     }
 
 
+
+def collision_entropy(weights: np.ndarray) -> float:
+    weights = np.asarray(weights, dtype=float)
+    if np.min(weights) < 0 or float(np.sum(weights)) <= 0:
+        raise ValueError("weights must be nonnegative and nontrivial")
+    weights = weights / np.sum(weights)
+    return -math.log(float(np.sum(weights * weights)))
+
+
+def barycenter_collision_certificate(points: np.ndarray, weights: np.ndarray) -> dict[str, float]:
+    """Exact atomic inequality H_2 >= log(2/(1+|b|))."""
+    points = np.asarray(points, dtype=float)
+    points = np.array([normalize(x) for x in points])
+    weights = np.asarray(weights, dtype=float)
+    weights = weights / np.sum(weights)
+    barycenter = weights @ points
+    bary_norm = float(np.linalg.norm(barycenter))
+    q = float(np.sum(weights * weights))
+    upper_q = 0.5 * (1.0 + bary_norm)
+    return {
+        "barycenter_norm": bary_norm,
+        "collision_probability": q,
+        "collision_upper_bound": upper_q,
+        "entropy": -math.log(q),
+        "entropy_lower_bound": math.log(2.0 / (1.0 + bary_norm)),
+        "margin": upper_q - q,
+    }
+
+
+def balanced_chain_entropy_bound(depth: int, cos_half: float = C_STAR) -> dict[str, float]:
+    """Entropy forced by a depth-L equal-marginal flat chain.
+
+    If the chain survives from level j to depth L, |b_j| <= cos_half^(L-j).
+    Hence H_2(mu_j) >= log(2/(1+cos_half^(L-j))).
+    """
+    if depth < 0 or not 0.0 < cos_half < 1.0:
+        raise ValueError("invalid depth or cosine")
+    terms = [math.log(2.0 / (1.0 + cos_half ** r)) for r in range(1, depth + 1)]
+    total = float(sum(terms))
+    deficit = float(depth * math.log(2.0) - total)
+    return {
+        "depth": depth,
+        "total_entropy_lower_bound": total,
+        "linear_main_term": float(depth * math.log(2.0)),
+        "bounded_deficit": deficit,
+        "per_level_terms": terms,
+    }
+
 def random_unit(rng: np.random.Generator) -> np.ndarray:
     return normalize(rng.normal(size=3))
 
@@ -271,7 +319,13 @@ def main() -> None:
         p = random_unit(rng)
         q = make_companion(p, random_unit(rng))
         pairs.append((p, q))
-    bary = equal_marginal_barycenter_test(pairs, rng.random(len(pairs)))
+    bary_weights = rng.random(len(pairs))
+    bary = equal_marginal_barycenter_test(pairs, bary_weights)
+    atomic_points = np.array([p for pair in pairs for p in pair])
+    atomic_weights = np.repeat(bary_weights / np.sum(bary_weights) / 2.0, 2)
+    collision = barycenter_collision_certificate(atomic_points, atomic_weights)
+    entropy_rows = [balanced_chain_entropy_bound(L) for L in [4, 8, 12, 24, 48]]
+    entropy_constant = sum(math.log(1.0 + C_STAR ** r) for r in range(1, 20000))
 
     result = {
         "constants": {
@@ -293,6 +347,9 @@ def main() -> None:
             "diameter_error": tetra_diameter - TETRAHEDRAL_DIAMETER,
         },
         "barycenter_amplification": bary,
+        "barycenter_collision": collision,
+        "balanced_chain_entropy": entropy_rows,
+        "balanced_entropy_deficit_constant": entropy_constant,
     }
     (args.outdir / "spherical_erosion.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
 
@@ -329,6 +386,17 @@ def main() -> None:
         f"Regular tetrahedron hull distance: `{tetra_hull['distance']:.3e}`",
         f"Regular tetrahedron diameter: `{math.degrees(tetra_diameter):.9f}` deg",
         f"Equal-marginal barycenter amplification error: `{bary['error']:.3e}`",
+        f"Atomic collision inequality margin: `{collision['margin']:.3e}`",
+        f"Asymptotic entropy deficit constant: `{entropy_constant:.9f}`",
+        "",
+        "## Balanced-chain entropy",
+        "",
+        "| depth | entropy lower bound | L log 2 - bound |",
+        "|---:|---:|---:|",
+    ]
+    for row in entropy_rows:
+        lines.append(f"| {row['depth']} | {row['total_entropy_lower_bound']:.9f} | {row['bounded_deficit']:.9f} |")
+    lines += [
         "",
         "The midpoint barrier, lifespan bound, tetrahedral diameter certificate, and barycenter identity are exact finite-dimensional statements. The random probe only tests the implementation.",
     ]

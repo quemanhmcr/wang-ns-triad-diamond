@@ -171,3 +171,82 @@ The finite-dimensional architecture is now
 \]
 
 The remaining PDE bridge is to convert the barrier or balanced-simplex certificates into a lower bound for fresh critical mass in the transfer-weighted Gaussian grain decomposition.
+
+## 7. Balanced flat chains pay collision entropy
+
+The barycenter rigidity has a direct entropy consequence. Let
+
+\[
+\mu=\sum_i w_i\delta_{x_i},
+\qquad
+b=\sum_iw_ix_i,
+\qquad
+Q=\sum_iw_i^2.
+\]
+
+If `w_*` is the largest atomic weight, then
+
+\[
+|b|\ge w_*-(1-w_*)=2w_*-1.
+\]
+
+Hence
+
+\[
+w_*\le\frac{1+|b|}{2},
+\qquad
+Q\le w_*\le\frac{1+|b|}{2}.
+\]
+
+Therefore the collision entropy satisfies the exact bound
+
+\[
+\boxed{
+H_2(\mu)=-\log Q
+\ge
+\log\frac{2}{1+|b|}.
+}
+\]
+
+Now consider a depth-`L` flat chain built from equal-marginal couplings. Since
+
+\[
+b_{j+1}=b_j/\cos(\theta_*/2),
+\]
+
+boundedness of the terminal barycenter gives
+
+\[
+|b_j|\le\cos(\theta_*/2)^{L-j}.
+\]
+
+Thus
+
+\[
+\boxed{
+H_2(\mu_j)
+\ge
+\log\frac{2}{1+\cos(\theta_*/2)^{L-j}}.
+}
+\]
+
+Summing over levels,
+
+\[
+\sum_{j=0}^{L-1}H_2(\mu_j)
+\ge
+L\log2
+-
+\sum_{r=1}^{L}\log(1+c_*^r),
+\qquad c_*=\cos(\theta_*/2).
+\]
+
+The correction is uniformly bounded because
+
+\[
+\sum_{r\ge1}\log(1+c_*^r)<\infty.
+\]
+
+Numerically the limiting correction is about `3.76730`. Consequently the balanced exception does not provide a zero-cost infinite branch: under the equal-marginal hypothesis it pays asymptotically `log 2` of atomic collision entropy per generation.
+
+This is the spherical counterpart of the transfer-weighted Bellman cost. The remaining task is to prove that the PDE grain coupling is sufficiently balanced, or else quantify the imbalance itself as fresh mass.
