@@ -26,6 +26,22 @@ def actual_daughter_lower(curvature_impulse:float)->float:
     return 0.5*first_impulse_lower(curvature_impulse)
 
 
+def h3_critical_second_moment(T2:float,trace2:float,s:float=4.0/3.0)->float:
+    """Critical |G|^(3/2)-measure second moment of P=T:H3.
+
+    Under z=sqrt(s)y, P(z)=s^(3/2)(T:H3(y))+3 sqrt(s)(s-1)t.y.
+    Orthogonality of H3 and H1 gives the exact formula below.
+    """
+    if T2<0 or trace2<0 or s<1: raise ValueError('require nonnegative norms and s>=1')
+    return 6.0*s**3*T2 + 9.0*s*(s-1.0)**2*trace2
+
+
+def h3_critical_to_l2_second_moment_ratio(T2:float,trace2:float,s:float=4.0/3.0)->float:
+    std=6.0*T2
+    if std<=0: return math.inf if trace2>0 else 1.0
+    return h3_critical_second_moment(T2,trace2,s)/std
+
+
 def no_escape_quadratic_cost(curvature_impulse:float)->float:
     """Clean transfer-deficit / pair-rescue threshold 3 I^2 /4096."""
     if curvature_impulse<0: raise ValueError('nonnegative curvature impulse required')
@@ -131,9 +147,10 @@ def stress(samples:int=50_000,seed:int=20260807)->H3NoEscapeStress:
                     sigma=max(float(SMALL_SIGMA),actual)*(1+rng.random()); rescue=0; deficit=0
                 else:
                     # Need sigma>=actual while remaining below 1/80; if actual too large, shrink I for this synthetic branch.
-                    if actual>=float(SMALL_SIGMA):
+                    upper=float(SMALL_SIGMA)*.99
+                    if actual>=upper:
                         I=1e-4; req=first_impulse_lower(I); d1=1.2*req; fb=.1*d1; actual=d1-fb; cost=no_escape_quadratic_cost(I); J=.1*I/T
-                    sigma=float(rng.uniform(max(actual,1e-12),float(SMALL_SIGMA)*.999))
+                    sigma=float(rng.uniform(max(actual,1e-12),upper))
                     d0=sigma*sigma/16
                     if mode==3: # pair rescue
                         rescue=float(rng.uniform(.5,1.0))*d0; deficit=0; mp=min(mp,rescue-cost)
@@ -147,7 +164,7 @@ def main()->None:
     ap=argparse.ArgumentParser(); ap.add_argument('--samples',type=int,default=50_000); ap.add_argument('--outdir',type=Path,default=Path('results-h3-sideband-no-escape'))
     args=ap.parse_args(); args.outdir.mkdir(parents=True,exist_ok=True)
     cert=exact_constant_certificate(); out=stress(args.samples)
-    data={'certificate':cert,'stress':out.__dict__}
+    data={'certificate':cert,'stress':out.__dict__,'H3_measure_change':{'formula':'E_s|P|^2=6 s^3 ||T||^2+9 s(s-1)^2||tr T||^2','s':'4/3','minimum_ratio':'64/27>1'}}
     (args.outdir/'h3_sideband_no_escape.json').write_text(json.dumps(data,indent=2),encoding='utf-8')
     md=f"""# H3 sideband local no-escape theorem
 

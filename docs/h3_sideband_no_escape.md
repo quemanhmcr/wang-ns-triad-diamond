@@ -34,7 +34,19 @@ If subsequent nonlinear sideband feedback has norm at least `delta1/2`, it is al
 \boxed{\delta^2\ge\frac3{128}I_3^2.}
 \]
 
-Let `sigma^2` denote its second moment in the critical `|G|^(3/2)` Gaussian measure.  For an `H3` Gaussian, the variance change from the `L2` measure to the critical Young measure gives `sigma>=delta`.
+Let `sigma^2` denote its second moment in the critical `|G|^(3/2)` Gaussian measure.  This domination is exact.  If `T=Sym B`, `t_c=T_aac` and `s=4/3`, then with `z=sqrt(s)y`,
+
+\[
+(T:H_3)(\sqrt{s}\,y)=s^{3/2}(T:H_3)(y)+3\sqrt{s}(s-1)t\cdot y.
+\]
+
+The `H3` and `H1` chaoses are orthogonal, hence
+
+\[
+\boxed{E_{\gamma_s}|T:H_3|^2=6s^3\|T\|^2+9s(s-1)^2\|t\|^2\ge6\|T\|^2.}
+\]
+
+Therefore `sigma>=delta` exactly.
 
 If
 
