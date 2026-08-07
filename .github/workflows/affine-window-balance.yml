@@ -1,0 +1,20 @@
+name: Affine window balance
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint==0.8.0
+      - run: pytest -q
+      - name: Affine moving-window stress
+        run: python -m src.affine_window_balance --samples 50000 --outdir results-affine-window-balance
+      - run: cat results-affine-window-balance/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: affine-window-balance-results
+          path: results-affine-window-balance/
