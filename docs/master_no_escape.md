@@ -274,12 +274,64 @@ rather than a numerical candidate.
 
 ## 6. Remaining analytic bridge
 
-The finite-dimensional single-edge stability input is now certified.  Moreover,
-the sharp-cutoff single-triad Mellin identity explains the `log(q/p)` progress
-exactly and retains at least `9/10` of the upper forward segment on the certified
-local box.  For the actual Navier--Stokes PDE one still has to globalize this
-identity: prove a transfer-adapted Gaussian atomic extraction with uniform
-synthesis constants, control cancellation among many triads, produce the
-positive normalized `w_e` used above, compare sharp and packet-compatible
-localized fluxes, and keep the errors summable.  Pressure, time synchronization,
-and the critical local-energy charge remain part of that PDE bridge.
+The finite-dimensional single-edge and physical scale-flux inputs are now much
+more complete than in the earlier version of this note:
+
+- the smooth transfer-weighted midgap theorem realizes the progress sum as an
+  exact smooth SGS tail flux on a common spectral moat, so there is no longer a
+  sharp-to-smooth comparison loss;
+- phase/backscatter cancellation has an exact positive polarization deficit;
+- on the signed-good core, actual child-transfer weights and capacity weights
+  differ by less than `53/50` at the certified threshold `eta_0=10^{-4}`;
+- pressure can be absorbed into the combined-work ledger after spatial
+  localization, with the remaining cancellation branch forcing a critical
+  annular charge.
+
+The actual Navier--Stokes gap is therefore now the **construction** of the packet
+core to which these identities apply: transfer-adapted Gaussian/profile
+extraction with uniform synthesis constants, common parent/child log shells,
+summable cross interactions and moving spatial windows. One must then close the
+critical annular-charge / window-leakage alternative, connect companion transfer
+to critical local energy, and synchronize the ledger over packet lifetimes.
+
+## 7. PDE-facing localized pressure alternative
+
+For a smooth physical SGS packet block, spatial localization should use the
+combined work
+
+\[
+G=\Pi+\nabla\cdot(PU).
+\]
+
+The resolved local-energy identity then cancels pressure exactly from the
+window leakage. Along a chain with nonincreasing weights,
+
+\[
+\sum_j a_j W_{j,+}+\sum_j a_jD_j
+\le a_0E_0+\sum_j a_j(L_j)_++\sum_j a_jW_{j,-}.
+\]
+
+If the raw SGS transfer `S>=0` at a packet window is not retained as combined
+work at level `S/2`, pressure cancellation forces
+
+\[
+\int_{\operatorname{supp}\nabla\chi}
+(|U|^3+|P|^{3/2})
+\ge\frac{S}{2\|\nabla\chi\|_\infty}.
+\]
+
+Thus the PDE-facing costly/escape classification acquires a concrete new
+channel:
+
+\[
+\boxed{
+\text{forward physical Hodge/SGS transfer}
+\to
+\text{combined-work depletion}
+\quad\text{or}\quad
+\text{critical annular charge}.
+}
+\]
+
+Closing the latter channel against the packet critical-mass/fresh ledger remains
+conditional; the pressure algebra itself is no longer missing.

@@ -334,6 +334,269 @@ This is a concrete theorem-level positive `c_0` for that normalized reuse block,
 not yet a claim that the same number is the universal master constant across
 all costly branches.
 
+### Smooth log-scale cocycle and physical SGS transfer weights
+
+The sharp all-scale Mellin identity is **not** itself the correct block edge
+functional. There is now a certified countermodel. At
+
+\[
+x=\frac{13}{40},\qquad y=\frac{17}{20},\qquad
+(s_x,s_y,s_q)=(-,+,-),
+\]
+
+the full all-scale Mellin coefficient is Arb-certified to be
+
+\[
+0.157176722626149\ldots>\frac32J_*.
+\]
+
+The extra gain is dominated by transfer across the lower scale segment. Thus
+replacing `mathcal J` by `int Pi_K dK/K` would destroy the equal-parent grain.
+This is a genuine countermodel, not a numerical optimizer artifact.
+
+The correct replacement is a **block-local weak scale potential**. Write
+`t=log K`. For any conservative finite interaction with modal log frequencies
+`ell_i` and rates `dot E_i`, let
+
+\[
+\Pi^0(t)=-\sum_i\dot E_iH(t-\ell_i).
+\]
+
+If `rho_delta` is an even probability kernel on log scale, with CDF
+`Psi_delta`, the graded spectral flux satisfies the exact convolution identity
+
+\[
+\boxed{\Pi^\delta=\rho_\delta*\Pi^0.}
+\]
+
+Hence smoothing only redistributes flux in `log K` and preserves the all-log
+moment:
+
+\[
+\boxed{
+\int\Pi^\delta(t)dt=\sum_i\dot E_i\ell_i.
+}
+\]
+
+More importantly, the weak scale-potential identity
+
+\[
+\boxed{
+\int\Pi^0(t)\Phi'(t)dt=\sum_i\dot E_i\Phi(\ell_i)
+}
+\]
+
+allows one to isolate a generation boundary. For an even compact log-kernel,
+define `Phi' = 2 Psi_delta(t-tau)`. Then `Phi` is exactly flat below
+`tau-delta` and exactly `2(t-tau)` above `tau+delta`.
+
+For a forward core of edges with positive child transfer `T_e`, top-parent and
+child logs `(p_e,q_e)`, define the **transfer-weighted midgap**
+
+\[
+\boxed{
+\tau=\frac{\sum_eT_e(p_e+q_e)/2}{\sum_eT_e}.
+}
+\]
+
+If a common smooth moat separates all parents and children,
+
+\[
+p_e\le\tau-\delta,\qquad q_e\ge\tau+\delta,
+\]
+
+then all centering errors cancel exactly and
+
+\[
+\boxed{
+2\int_\tau^\infty\Pi^\delta_{\rm core}(t)dt
+=\sum_eT_e(q_e-p_e)
+=\sum_eT_e\log\frac{Q_e}{P_e}.
+}
+\]
+
+Thus one **single smooth physical scale cut** reproduces the complete upper
+progress ledger of a packet block exactly. There is no sharp-to-smooth loss.
+
+The common moat itself now has a certified numerical margin. If parent and
+child log shells each have halfwidth `2/25` and the smooth transition halfwidth
+is `1/20`, Arb gives
+
+\[
+\boxed{
+\frac{\gamma_*}{2}-2\frac{2}{25}-\frac1{20}
+>\frac9{250},
+}
+\]
+
+with enclosure `0.0364076427...`.
+
+Cancellation is also no longer an unstructured PDE ambiguity. If `A_e` are
+unsigned transfer capacities, `m_e=J_e/J_*` and `c_e in [-1,1]` is the
+phase/orientation factor, then for
+
+\[
+R=\sum_ew_em_ec_e,\qquad w_e=A_e/\sum A,
+\]
+
+there is the exact polarization identity
+
+\[
+\boxed{
+1-R=\sum_ew_e(1-m_e)+\sum_ew_em_e(1-c_e).
+}
+\]
+
+Near saturation therefore forces both multiplier rigidity and phase/backscatter
+rigidity in the same positive capacity measure. Taking the pointwise good
+threshold `eta_0=10^{-4}`, the good core has capacity mass at least
+`1-10^4(1-R)`. On this core the mixed single-edge theorem gives
+
+\[
+\left|\log(q/p)-\gamma_*\right|\le\frac1{80}.
+\]
+
+Since actual upper progress satisfies `A_e J_* r_e=T_e log(q/p)`, Arb certifies
+that normalized positive child-transfer weights and normalized capacity weights
+have pointwise Radon--Nikodym distortion less than
+
+\[
+\boxed{\frac{53}{50}},
+\]
+
+with enclosure `1.0521543606...`.
+
+Consequently the Hodge branch can now be stated in **physical transfer weights**.
+If `epsilon=1-R`, then either
+
+\[
+\epsilon\ge\frac1{20000},
+\]
+
+or the positive core has at least half the capacity mass and
+
+\[
+\boxed{
+\epsilon\ge\frac{25}{106}\,\mathcal E_H^{\rm phys}.
+}
+\]
+
+Thus a physical-transfer Hodge threshold `E_H^{phys}>=h_H` has the explicit
+finite-packet cost
+
+\[
+\boxed{
+c_{0,H}^{\rm phys}
+=\min\left\{\frac1{20000},\frac{25}{106}h_H\right\}>0.
+}
+\]
+
+Finally this graded spectral flux is a physical coarse-grained quantity. Choose
+a self-adjoint convolution filter `G_t` with
+`|Ghat_t|^2=Psi_delta(t-log|xi|)`. With
+
+\[
+\tau_t(u,u)=\overline{u\otimes u}-\bar u\otimes\bar u,
+\qquad
+\Pi_t^{\rm SGS}(x)=-\nabla\bar u:\tau_t(u,u),
+\]
+
+periodicity or spatial decay gives
+
+\[
+\boxed{
+\int\Pi_t^{\rm SGS}(x)dx=\Pi^\delta(t).
+}
+\]
+
+The Leray projector changes no global work because the filtered velocity is
+divergence free. Pressure is therefore spatial transport, not global
+interscale work; after packet-window localization it reappears only as boundary
+work in the transition moat. The dealiased pseudospectral regression confirms
+these identities to roughly `5e-16` relative error. A naive aliased regression
+failed first, correctly exposing fake numerical energy transfer if Galerkin
+conservation is not respected.
+
+The localized pressure branch can also be made exact. For a smooth moving
+window `chi`, the resolved energy density `e=|U|^2/2` satisfies
+
+\[
+\partial_t e+\nabla\cdot J=-\Pi-\nu|\nabla U|^2,
+\qquad
+J=(e+P)U+RU-\nu\nabla e.
+\]
+
+Define the combined pressure--flux work
+
+\[
+\boxed{G=\Pi+\nabla\cdot(PU).}
+\]
+
+Then pressure cancels **exactly** from the localized leakage ledger:
+
+\[
+\boxed{
+\int\!\!\int\chi G
++\nu\int\!\!\int\chi|\nabla U|^2
+=E_\chi(t_0)-E_\chi(t_1)+\widetilde L_\chi,
+}
+\]
+
+where
+
+\[
+\widetilde L_\chi
+=\int\!\!\int e\,\partial_t\chi
++\int\!\!\int\nabla\chi\cdot
+\left[eU+RU-\nu\nabla e\right].
+\]
+
+For a chain of matching window endpoints and nonincreasing nonnegative weights
+`a_j`, summation by parts gives the depletion estimate
+
+\[
+\boxed{
+\sum_ja_jW_{j,+}+\sum_ja_jD_j
+\le a_0E_0+\sum_ja_j(L_j)_++\sum_ja_jW_{j,-}.
+}
+\]
+
+Thus forward combined work is paid by initial localized energy, positive window
+leakage, or negative combined work/backscatter; pressure cannot reset this
+budget.
+
+There is also an exact single-window pressure-cancellation dichotomy. Let
+
+\[
+S=\int\chi\Pi\ge0,
+\qquad W=\int\chi G.
+\]
+
+Then
+
+\[
+\boxed{
+W\ge\frac S2
+\quad\text{or}\quad
+\left|\int PU\cdot\nabla\chi\right|\ge\frac S2.
+}
+\]
+
+In the second branch, with `A=supp grad chi`, Holder and Young imply
+
+\[
+\boxed{
+\int_A\left(|U|^3+|P|^{3/2}\right)
+\ge\frac{S}{2\|\nabla\chi\|_\infty}.
+}
+\]
+
+The right side is scale critical under Navier--Stokes scaling. Hence pressure
+can cancel a forward SGS transfer only by creating a definite CKN-type critical
+charge in the spatial moat. The pressure problem has therefore been converted
+from an uncontrolled nonlocal sign into a concrete **combined-work or critical
+annular charge** alternative.
+
 ## 5. Gaussian packet inverse mechanism
 
 The critical Fourier norm
@@ -792,7 +1055,29 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   the global outside-neighborhood gap `Def_e>=1/100`;
 - exact sharp-cutoff single-triad Mellin flux identity
   `int Pi_K dK/K = -dot E_k log(p/k)+dot E_q log(q/p)` and the Arb-certified
-  `>=9/10` retention of the upper progress segment on the local stability box.
+  `>=9/10` retention of the upper progress segment on the local stability box;
+- Arb-certified rational countermodel showing the full all-scale Mellin moment
+  exceeds `3J*/2` and therefore is not the correct edge extremal functional;
+- exact graded-filter log convolution and filter-invariant Mellin moment;
+- exact weak scale-potential identity and transfer-weighted common-midgap
+  smooth-tail theorem recovering `sum T_e log(q_e/p_e)` with no smoothing loss;
+- Arb-certified common smooth moat for shell halfwidth `2/25`, filter halfwidth
+  `1/20`, with residual margin `>9/250`;
+- exact flux polarization identity separating multiplier deficit from
+  phase/backscatter deficit;
+- Arb-certified good-core change of measure: at `eta_0=1e-4`, gap deviation
+  `<=1/80` and physical child-transfer/capacity weight condition `<53/50`;
+- physical-transfer Hodge cost
+  `min{1/20000,(25/106) h_H}` on a packet block with the common moat;
+- exact equality between global graded spectral flux and the space-average
+  smooth SGS transfer `-grad ubar : tau(u,u)`; Leray/pressure does no global work.
+- exact localized combined-work identity
+  `G=Pi+div(P U)` in which pressure cancels from the window leakage ledger;
+- exact nonincreasing-weight finite-chain depletion inequality for positive
+  combined work, dissipation, positive leakage and backscatter;
+- exact pressure-cancellation dichotomy: a positive raw SGS event either retains
+  half its size as combined work or forces the scale-critical annular charge
+  `int_A(|U|^3+|P|^(3/2)) >= S/(2||grad chi||_inf)`.
 
 ### Computationally supported, not interval-certified
 
@@ -801,13 +1086,30 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Globalize the exact finite-triad scale-flux bridge.** The sharp-cutoff Mellin identity is exact triad-by-triad and its adverse lower segment is locally controlled.  What remains is to justify the summable packet/triad decomposition of a genuine PDE flux block, control cancellation between many triads, and replace/compare the sharp cutoff with a localization compatible with the grain extraction and local-energy argument.
-2. **Gaussian atomic extraction from an arbitrary near-extremal PDE block.** Need an iterative profile extraction with controlled synthesis constants and transfer-small remainder, without assuming a global `\|\widehat u\|_{3/2}` bound.
-3. **Summable perturbation ledger.** Convert near-extremal PDE errors into the `\zeta_j` and logarithmic cross-error terms required by the master theorem.
-4. **PDE weighting of the certified edge deficit.** The finite-dimensional multiplier gap is now certified.  What remains is to prove that a genuine near-extremal Navier–Stokes scale-flux block produces the normalized transfer-weighted atomic edge measure to which
-   `sum_e w_e Def_e >= (1/2) E_H` applies, with bad-edge removal and localization errors charged to the existing Bellman/cross-error ledgers.
-5. **Critical-mass bridge.** Show that a concentrated companion grain carries enough local `L^2` / local-energy charge to be classified as fresh or reused in the physical packet ledger.
-6. **Time synchronization and pressure/localization.** Lift the static/packet graph architecture to a spacetime argument compatible with suitable weak solutions and local energy estimates.
+1. **Transfer-adapted packet extraction with a common log-scale moat.** The smooth
+   physical flux, cancellation polarization, positive weights and Hodge change
+   of measure are now exact once a finite packet core exists.  What remains is
+   to extract such a core from a genuine near-extremal PDE block with summable
+   synthesis/cross-interaction error and to place its top-parent/child packets
+   in common log shells narrow enough for the certified moat.
+2. **Gaussian atomic extraction from an arbitrary near-extremal PDE block.** Need
+   an iterative profile extraction with controlled synthesis constants and
+   transfer-small remainder, without assuming a global
+   `\|\widehat u\|_{3/2}` bound.  The extraction must preserve the physical
+   SGS transfer measure, not merely ambient norm mass.
+3. **Close the critical annular-charge / leakage branch.** The localized
+   combined-work identity now removes pressure exactly, and pressure cancellation
+   of a raw SGS event forces a definite CKN-critical annular charge. Need to
+   prove that along the extracted packet lineage these annular charges and the
+   remaining `e U`, `R U`, viscous and moving-window leakage are summable, or
+   else force a Bellman/fresh/critical-mass event. Backscatter is already an
+   explicit term in the finite-chain depletion ledger.
+4. **Summable perturbation/time ledger.** Convert near-extremal spacetime errors
+   into the `zeta_j` and logarithmic cross-error terms required by the master
+   theorem, with synchronization over packet lifetimes.
+5. **Critical-mass bridge.** Show that a concentrated companion grain carries
+   enough local `L^2` / local-energy charge to be classified as fresh or reused
+   in the physical packet ledger.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier–Stokes global regularity is made.
 
@@ -834,10 +1136,22 @@ The most useful recorded runs, in chronological order, are:
 | `31157463384` | first Arb-certified full single-edge sign/global/local stability; `76` tests + `200,000` adversarial samples |
 | `31159084424` | exact sharp-cutoff log-scale flux bridge; `84` tests + local retention grid |
 | `31159086953` | updated Arb single-edge certificate including `>=9/10` Mellin-flux retention; `84` tests + `200,000` adversarial samples |
+| `31160779428` | full all-scale Mellin adversarial search exposing a different asymmetric maximizer |
+| `31161316034` | smooth log-scale cocycle / transfer-weighted midgap theorem; `93` tests + `50,000` blocks |
+| `31161626056` | dealiased SGS-to-graded-spectral flux regression; `94` tests + `200` fields |
+| `31161811900` | master regression after physical-transfer Hodge insertion; `94` tests + `20,000` episode traces |
+| `31161914134` | preferred Arb certificate: smooth moat, weight change, and rational full-Mellin countermodel; `94` tests |
+| `31162700474` | localized SGS/pressure-work depletion and critical-annulus trichotomy; `97` tests + `50,000` chain traces |
 
-The current preferred master regression artifact is `recorded-results/31154025683/`.
-The preferred PDE-facing flux artifact is `recorded-results/31159084424/`.
-The preferred single-edge theorem certificate is `recorded-results/31159086953/`.
+The current preferred master regression is run `31161811900` (the earlier
+recorded master artifact `31154025683/` remains the canonical episode-trace
+artifact).  The preferred smooth physical-flux artifacts are
+`recorded-results/31161316034/` and `recorded-results/31161626056/`.  The
+preferred single-edge/physical-weight certificate is
+`recorded-results/31161914134/`.  The localized pressure-work artifact is
+`recorded-results/31162700474/`.  The numerical full-Mellin search is recorded
+in `recorded-results/31160779428/`; its qualitative counterexample is separately
+Arb-certified in run `31161914134`.
 
 ## 18. Current research frontier
 
@@ -863,23 +1177,32 @@ The finite-dimensional architecture has reached the point where every identified
 }
 \]
 
-The finite-dimensional single-edge multiplier gap is now closed with a rigorous
-positive constant.  The next mathematically decisive work should therefore move
-**back toward the PDE**, not add more graph combinatorics.  The two
-highest-priority targets are:
+The single-edge multiplier, smooth scale-flux observable, cancellation
+polarization and physical-transfer Hodge change of measure are now all closed in
+the finite packet model. In particular the curved-reuse entry can be fed by an
+actual smooth SGS transfer measure with the explicit cost
 
-1. globalize the now-exact single-triad sharp-cutoff Mellin flux identity into
-   a packetized Navier--Stokes scale-flux ledger with controlled cancellation,
-   smooth localization, and positive transfer weights `w_e` feeding the
-   certified Hodge block cost `c_{0,H}=h_H/2`;
-2. prove a transfer-adapted Gaussian atomic extraction theorem for genuine
-   near-extremal Navier–Stokes blocks, with summable synthesis/localization
-   errors.
+\[
+\boxed{c_{0,H}^{\rm phys}=\min\{1/20000,(25/106)h_H\}>0.}
+\]
 
-If these PDE modules supply the transfer weights, critical mass, and summable
-error ledgers required by the already-closed finite-dimensional architecture,
-the master inequality would turn the no-escape mechanism into a quantitative
-obstruction to an indefinitely efficient critical cascade.
+The next mathematically decisive work is therefore narrower and more PDE-like:
+
+1. prove a **transfer-adapted packet/profile extraction** from a genuine
+   near-extremal Navier--Stokes block which preserves the SGS transfer measure
+   and produces common parent/child log shells (hence the certified smooth
+   moat) with summable cross interaction;
+2. close the **critical annular-charge / moving-window leakage** alternative.
+   The combined SGS/pressure-work ledger already telescopes and pressure
+   cancellation already forces a scale-critical boundary charge; the missing
+   theorem must show repeated such charges are summable or create a fresh /
+   Bellman / critical-mass event;
+3. connect the resulting positive companion transfer to the critical local
+   `L^2`/energy charge and time-synchronize it over the packet lifetime.
+
+This is now the frontier. More optimization of the single-edge constants or
+more abstract graph combinatorics would not address the principal missing PDE
+mechanism.
 
 ---
 
@@ -889,13 +1212,14 @@ For a new reader, the recommended order is:
 
 1. `RESEARCH_LEDGER.md` — this document;
 2. `docs/single_edge_stability_certificate.md`;
-3. `docs/log_scale_flux_bridge.md`;
-4. `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
-5. `docs/scale_holonomy.md`;
-6. `docs/multiscale_bellman.md`;
-7. `docs/nested_grain_extraction.md`;
-8. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
-9. `docs/atomic_component_entropy.md`;
-10. `docs/multicommodity_hodge_routing.md`;
-11. `docs/resistance_bellman_stopping.md`;
-12. `docs/master_no_escape.md`.
+3. `docs/log_scale_flux_bridge.md` and `docs/smooth_log_flux_cocycle.md`;
+4. `docs/localized_sgs_pressure_ledger.md`;
+5. `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
+6. `docs/scale_holonomy.md`;
+7. `docs/multiscale_bellman.md`;
+8. `docs/nested_grain_extraction.md`;
+9. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
+10. `docs/atomic_component_entropy.md`;
+11. `docs/multicommodity_hodge_routing.md`;
+12. `docs/resistance_bellman_stopping.md`;
+13. `docs/master_no_escape.md`.

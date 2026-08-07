@@ -1,0 +1,269 @@
+theorem-tests	Set up job	﻿2026-08-07T08:28:10.6488099Z Current runner version: '2.336.0'
+theorem-tests	Set up job	2026-08-07T08:28:10.6524294Z ##[group]Runner Image Provisioner
+theorem-tests	Set up job	2026-08-07T08:28:10.6525582Z Hosted Compute Agent
+theorem-tests	Set up job	2026-08-07T08:28:10.6526442Z Version: 20260729.566
+theorem-tests	Set up job	2026-08-07T08:28:10.6527506Z Commit: cf7153fe6e25b664e8693c24944bf2b00355d109
+theorem-tests	Set up job	2026-08-07T08:28:10.6528679Z Build Date: 2026-07-29T19:17:02Z
+theorem-tests	Set up job	2026-08-07T08:28:10.6529838Z Worker ID: {b400298c-fb13-44c4-95b8-691264a235c9}
+theorem-tests	Set up job	2026-08-07T08:28:10.6530984Z Azure Region: eastus2
+theorem-tests	Set up job	2026-08-07T08:28:10.6531860Z ##[endgroup]
+theorem-tests	Set up job	2026-08-07T08:28:10.6534709Z ##[group]Operating System
+theorem-tests	Set up job	2026-08-07T08:28:10.6535756Z Ubuntu
+theorem-tests	Set up job	2026-08-07T08:28:10.6536522Z 24.04.4
+theorem-tests	Set up job	2026-08-07T08:28:10.6537461Z LTS
+theorem-tests	Set up job	2026-08-07T08:28:10.6538256Z ##[endgroup]
+theorem-tests	Set up job	2026-08-07T08:28:10.6539139Z ##[group]Runner Image
+theorem-tests	Set up job	2026-08-07T08:28:10.6540124Z Image: ubuntu-24.04
+theorem-tests	Set up job	2026-08-07T08:28:10.6540932Z Version: 20260804.265.1
+theorem-tests	Set up job	2026-08-07T08:28:10.6542663Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260804.265/images/ubuntu/Ubuntu2404-Readme.md
+theorem-tests	Set up job	2026-08-07T08:28:10.6545725Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260804.265
+theorem-tests	Set up job	2026-08-07T08:28:10.6547331Z ##[endgroup]
+theorem-tests	Set up job	2026-08-07T08:28:10.6548980Z ##[group]GITHUB_TOKEN Permissions
+theorem-tests	Set up job	2026-08-07T08:28:10.6552183Z Contents: read
+theorem-tests	Set up job	2026-08-07T08:28:10.6553115Z Metadata: read
+theorem-tests	Set up job	2026-08-07T08:28:10.6554309Z ##[endgroup]
+theorem-tests	Set up job	2026-08-07T08:28:10.6556940Z Secret source: Actions
+theorem-tests	Set up job	2026-08-07T08:28:10.6559042Z Prepare workflow directory
+theorem-tests	Set up job	2026-08-07T08:28:10.7020391Z Prepare all required actions
+theorem-tests	Set up job	2026-08-07T08:28:10.7089110Z Getting action download info
+theorem-tests	Set up job	2026-08-07T08:28:10.9310741Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+theorem-tests	Set up job	2026-08-07T08:28:11.0759324Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+theorem-tests	Set up job	2026-08-07T08:28:11.2662689Z Complete job name: theorem-tests
+theorem-tests	Run actions/checkout@v4	﻿2026-08-07T08:28:11.3431127Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3440466Z ##[group]Run actions/checkout@v4
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3441179Z with:
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3441660Z   repository: quemanhmcr/wang-ns-triad-diamond
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3445719Z   token: ***
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3446155Z   ssh-strict: true
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3446591Z   ssh-user: git
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3447030Z   persist-credentials: true
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3447512Z   clean: true
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3447955Z   sparse-checkout-cone-mode: true
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3448464Z   fetch-depth: 1
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3448889Z   fetch-tags: false
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3449328Z   show-progress: true
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3449768Z   lfs: false
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3450171Z   submodules: false
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3450660Z   set-safe-directory: true
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3451172Z   allow-unsafe-pr-checkout: false
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.3451903Z ##[endgroup]
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4532591Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4535076Z ##[group]Getting Git version info
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4535996Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4537199Z [command]/usr/bin/git version
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4677328Z git version 2.54.0
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4693829Z ##[endgroup]
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4745574Z Temporarily overriding HOME='/home/runner/work/_temp/3202813e-38ca-419c-985e-263e1704f081' before making global git config changes
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4748274Z Adding repository directory to the temporary git global config as a safe directory
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4753425Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4889258Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4894632Z ##[group]Initializing the repository
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.4903518Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5104721Z hint: Using 'master' as the name for the initial branch. This default branch name
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5106932Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5108893Z hint: to use in all of your new repositories, which will suppress this warning,
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5110435Z hint: call:
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5111233Z hint:
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5112186Z hint: 	git config --global init.defaultBranch <name>
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5113485Z hint:
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5114603Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5116339Z hint: 'development'. The just-created branch can be renamed via this command:
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5117766Z hint:
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5118564Z hint: 	git branch -m <name>
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5119482Z hint:
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5120623Z hint: Disable this message with "git config set advice.defaultBranchName false"
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5122784Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5126705Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5217196Z ##[endgroup]
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5218618Z ##[group]Disabling automatic garbage collection
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5221997Z [command]/usr/bin/git config --local gc.auto 0
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5280993Z ##[endgroup]
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5282197Z ##[group]Setting up auth
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5283643Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.5358133Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.6532861Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.6576947Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.6878807Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.6919078Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.7226019Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.8134424Z ##[endgroup]
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.8144839Z ##[group]Fetching the repository
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:11.8147247Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b98cba21a43870a4fbd3b6e5f33f7a5c155964f6:refs/remotes/origin/main
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.4795718Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.4814936Z  * [new ref]         b98cba21a43870a4fbd3b6e5f33f7a5c155964f6 -> origin/main
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.5261914Z ##[endgroup]
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.5263777Z ##[group]Determining the checkout info
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.5265331Z ##[endgroup]
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.5271649Z [command]/usr/bin/git sparse-checkout disable
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.5336566Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.5376141Z ##[group]Checking out the ref
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.5380859Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.5813710Z Switched to a new branch 'main'
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.5817491Z branch 'main' set up to track 'origin/main'.
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.5827704Z ##[endgroup]
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.6197278Z [command]/usr/bin/git log -1 --format=%H
+theorem-tests	Run actions/checkout@v4	2026-08-07T08:28:12.6234536Z b98cba21a43870a4fbd3b6e5f33f7a5c155964f6
+theorem-tests	Run actions/setup-python@v5	﻿2026-08-07T08:28:12.6768313Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:12.6777249Z ##[group]Run actions/setup-python@v5
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:12.6778799Z with:
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:12.6780067Z   python-version: 3.12
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:12.6780974Z   cache: pip
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:12.6781793Z   check-latest: false
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:12.6791076Z   token: ***
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:12.6791927Z   update-environment: true
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:12.6792921Z   allow-prereleases: false
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:12.6794087Z   freethreaded: false
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:12.6794976Z ##[endgroup]
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:12.8683657Z ##[group]Installed versions
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:13.1741233Z (node:2180) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:13.1742918Z (Use `node --trace-deprecation ...` to show where the warning was created)
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:13.1743977Z Successfully set up CPython (3.12.13)
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:13.1745044Z ##[endgroup]
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:13.2290130Z [command]/opt/hostedtoolcache/Python/3.12.13/x64/bin/pip cache dir
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:13.5247910Z /home/runner/.cache/pip
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:13.6188106Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:13.6286481Z (node:2180) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:13.9870137Z Received 55859847 of 55859847 (100.0%), 159.0 MBs/sec
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:13.9871058Z Cache Size: ~53 MB (55859847 B)
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:13.9985270Z [command]/usr/bin/tar -xf /home/runner/work/_temp/e84747a4-dc7f-48aa-ac49-fb02f97c54be/cache.tzst -P -C /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond --use-compress-program unzstd
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:14.0829037Z Cache restored successfully
+theorem-tests	Run actions/setup-python@v5	2026-08-07T08:28:14.0862365Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b
+theorem-tests	Run pip install -r requirements.txt	﻿2026-08-07T08:28:14.1088438Z ##[group]Run pip install -r requirements.txt
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.1161847Z ^[[36;1mpip install -r requirements.txt^[[0m
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.1318789Z shell: /usr/bin/bash -e {0}
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.1319114Z env:
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.1319416Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.1319893Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.1320344Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.1320815Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.1321214Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.1321627Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.1321960Z ##[endgroup]
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.9544538Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:14.9560990Z   Using cached numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.0769524Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.0784628Z   Using cached scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1161733Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1178020Z   Using cached pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1351027Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1363523Z   Using cached iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1519167Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1531496Z   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1661549Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1674291Z   Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1854244Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1866705Z   Using cached pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1902619Z Using cached numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.1981009Z Using cached scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.3 MB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.2127338Z Using cached pytest-8.4.1-py3-none-any.whl (365 kB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.2139477Z Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.2151043Z Using cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.2162100Z Using cached packaging-26.3-py3-none-any.whl (129 kB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.2174029Z Using cached pygments-2.20.0-py3-none-any.whl (1.2 MB)
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:15.3835550Z Installing collected packages: pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:22.5495026Z
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:22.5508795Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 scipy-1.15.3
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:22.5517245Z
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:22.5517942Z [notice] A new release of pip is available: 26.2 -> 26.2.1
+theorem-tests	Run pip install -r requirements.txt	2026-08-07T08:28:22.5518374Z [notice] To update, run: pip install --upgrade pip
+theorem-tests	Run pytest -q	﻿2026-08-07T08:28:22.6276628Z ##[group]Run pytest -q
+theorem-tests	Run pytest -q	2026-08-07T08:28:22.6276934Z ^[[36;1mpytest -q^[[0m
+theorem-tests	Run pytest -q	2026-08-07T08:28:22.6351364Z shell: /usr/bin/bash -e {0}
+theorem-tests	Run pytest -q	2026-08-07T08:28:22.6351653Z env:
+theorem-tests	Run pytest -q	2026-08-07T08:28:22.6351936Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Run pytest -q	2026-08-07T08:28:22.6352406Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+theorem-tests	Run pytest -q	2026-08-07T08:28:22.6352828Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Run pytest -q	2026-08-07T08:28:22.6353222Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Run pytest -q	2026-08-07T08:28:22.6353819Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Run pytest -q	2026-08-07T08:28:22.6354198Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+theorem-tests	Run pytest -q	2026-08-07T08:28:22.6354535Z ##[endgroup]
+theorem-tests	Run pytest -q	2026-08-07T08:28:24.4509525Z ........................................................................ [ 76%]
+theorem-tests	Run pytest -q	2026-08-07T08:28:24.8109220Z ......................                                                   [100%]
+theorem-tests	Run pytest -q	2026-08-07T08:28:24.8109869Z 94 passed in 1.82s
+theorem-tests	Master episode stress-test	﻿2026-08-07T08:28:24.9012406Z ##[group]Run python - <<'PY'
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9012777Z ^[[36;1mpython - <<'PY'^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9013036Z ^[[36;1mimport json, math, random^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9013772Z ^[[36;1mfrom src.master_no_escape import MasterStep, master_lower_bound, verify_episode_trace^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9014260Z ^[[36;1m^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9014483Z ^[[36;1mrng = random.Random(20260807)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9014767Z ^[[36;1mworst = 1e9^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9014988Z ^[[36;1mchecked = 0^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9015205Z ^[[36;1mfor _ in range(20000):^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9015456Z ^[[36;1m    c0 = 0.04^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9015715Z ^[[36;1m    kappa = rng.uniform(0.12, 0.30)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9016030Z ^[[36;1m    reset = rng.uniform(kappa, 1.4)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9016331Z ^[[36;1m    nepisodes = rng.randint(1, 12)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9016616Z ^[[36;1m    episodes = []^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9016861Z ^[[36;1m    all_steps = []^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9017091Z ^[[36;1m^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9017305Z ^[[36;1m    for e in range(nepisodes):^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9017628Z ^[[36;1m        p = reset^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9017856Z ^[[36;1m        ep = []^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9018125Z ^[[36;1m        for _j in range(rng.randint(0, 20)):^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9018649Z ^[[36;1m            z = rng.uniform(0.0, 0.015)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9018963Z ^[[36;1m            if p - kappa + z < 0:^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9019239Z ^[[36;1m                break^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9019492Z ^[[36;1m            p = p - kappa + z^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9019790Z ^[[36;1m            s = MasterStep(1.0, 0.0, 0.0, True, z)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9020100Z ^[[36;1m            ep.append(s)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9020381Z ^[[36;1m            all_steps.append(s)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9020673Z ^[[36;1m        episodes.append(ep)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9020939Z ^[[36;1m        if e + 1 < nepisodes:^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9021228Z ^[[36;1m            cost = rng.uniform(c0, 0.5)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9021536Z ^[[36;1m            eta = rng.uniform(0.0, 0.002)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9021867Z ^[[36;1m            eff = min(1.0, math.exp(-cost) + eta)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9022244Z ^[[36;1m            all_steps.append(MasterStep(eff, cost, eta, False))^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9022605Z ^[[36;1m^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9022826Z ^[[36;1m    epcheck = verify_episode_trace(^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9023183Z ^[[36;1m        episodes, c0=c0, kappa0=kappa, potential_reset=reset^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9023816Z ^[[36;1m    )^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9024134Z ^[[36;1m    if not epcheck['admissible']:^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9024504Z ^[[36;1m        raise SystemExit('generated inadmissible episode trace')^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9024864Z ^[[36;1m^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9025074Z ^[[36;1m    out = master_lower_bound(^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9025401Z ^[[36;1m        all_steps, c0=c0, kappa0=kappa, potential_reset=reset^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9025733Z ^[[36;1m    )^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9026052Z ^[[36;1m    actual = sum(-math.log(min(1.0, s.efficiency)) for s in all_steps)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9026543Z ^[[36;1m    margin = actual - float(out['log_efficiency_lower_bound'])^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9026920Z ^[[36;1m    worst = min(worst, margin)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9027188Z ^[[36;1m    checked += 1^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9027424Z ^[[36;1m^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9027746Z ^[[36;1mprint(json.dumps({'checked': checked, 'worst_margin': worst}, indent=2))^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9028143Z ^[[36;1mif worst < -1e-10:^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9028397Z ^[[36;1m    raise SystemExit(1)^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9028647Z ^[[36;1mPY^[[0m
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9098104Z shell: /usr/bin/bash -e {0}
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9098379Z env:
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9098665Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9099104Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9099529Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9099908Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9100533Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9100908Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+theorem-tests	Master episode stress-test	2026-08-07T08:28:24.9101237Z ##[endgroup]
+theorem-tests	Master episode stress-test	2026-08-07T08:28:26.4720293Z {
+theorem-tests	Master episode stress-test	2026-08-07T08:28:26.4720783Z   "checked": 20000,
+theorem-tests	Master episode stress-test	2026-08-07T08:28:26.4721129Z   "worst_margin": 0.0
+theorem-tests	Master episode stress-test	2026-08-07T08:28:26.4721436Z }
+theorem-tests	Post Run actions/setup-python@v5	﻿2026-08-07T08:28:26.4907570Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+theorem-tests	Post Run actions/setup-python@v5	2026-08-07T08:28:26.4908775Z Post job cleanup.
+theorem-tests	Post Run actions/setup-python@v5	2026-08-07T08:28:26.6121330Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b, not saving cache.
+theorem-tests	Post Run actions/setup-python@v5	2026-08-07T08:28:26.6122901Z (node:2255) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+theorem-tests	Post Run actions/setup-python@v5	2026-08-07T08:28:26.6123667Z (Use `node --trace-deprecation ...` to show where the warning was created)
+theorem-tests	Post Run actions/checkout@v4	﻿2026-08-07T08:28:26.6278070Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.6279436Z Post job cleanup.
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7152619Z [command]/usr/bin/git version
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7190629Z git version 2.54.0
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7227998Z Temporarily overriding HOME='/home/runner/work/_temp/80915e5a-c8ed-470d-ba8e-ea9c207b11fb' before making global git config changes
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7229296Z Adding repository directory to the temporary git global config as a safe directory
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7234939Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7278792Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7318842Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7588334Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7619282Z http.https://github.com/.extraheader
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7632438Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7685045Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.7977426Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+theorem-tests	Post Run actions/checkout@v4	2026-08-07T08:28:26.8013186Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+theorem-tests	Complete job	﻿2026-08-07T08:28:26.8497851Z Cleaning up orphan processes
+theorem-tests	Complete job	2026-08-07T08:28:26.8825348Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

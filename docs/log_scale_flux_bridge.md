@@ -154,11 +154,27 @@ factor a near-extremal block into
 \text{dimensionless helical progress coefficient}.
 \]
 
-What remains is genuinely PDE-level.  One must justify a summable triadic or
-packet decomposition of a spacetime flux block, control cancellation among many
-triads, pass from the sharp cutoff to a localization compatible with the packet
-extraction/local-energy argument, and show that the resulting positive transfer
-weights are the `w_e` used by Bellman/Hodge.  Sharp spectral filters are useful
-for the exact algebra but have known scale-locality subtleties, so a smooth
-log-band version with a controlled comparison error is likely the correct PDE
-implementation.
+A later calculation showed that the **full all-scale Mellin moment is not the
+right replacement for `mathcal J`**: the rational triad
+`x=13/40`, `y=17/20`, helicities `(-,+,-)` has a full Mellin coefficient
+Arb-certified above `3J*/2`, because lower-scale redistribution dominates.
+Thus the all-scale moment is retained only as a conservation diagnostic.
+
+The correct PDE-facing observable is developed in
+`docs/smooth_log_flux_cocycle.md`. An even graded log filter and a
+transfer-weighted common midgap give the exact identity
+
+\[
+2\int_\tau^\infty\Pi^\delta_{\rm core}(t)dt
+=\sum_eT_e\log(q_e/p_e),
+\]
+
+with **no sharp-to-smooth comparison loss** on a common spectral moat. The
+same module identifies the graded spectral flux with the space-average physical
+SGS transfer and converts near-saturation into positive physical transfer
+weights comparable to the Bellman/Hodge capacity measure.
+
+What remains is therefore genuinely packet/PDE-level: construct the transfer
+core and its common shell/moat from an arbitrary near-extremal block, then
+control spatial-window commutators, pressure boundary work, backscatter and time
+synchronization with summable errors.

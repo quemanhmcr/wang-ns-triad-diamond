@@ -1,0 +1,10 @@
+{
+  "samples": 200,
+  "grid": 12,
+  "worst_sgs_identity_abs_error": 1.2874900798265365e-19,
+  "worst_projection_work_abs_error": 1.4230153513872246e-19,
+  "worst_relative_divergence": 7.734714699535729e-16,
+  "reference_flux_scale": 0.0002626029418080902,
+  "worst_sgs_identity_relative_error": 4.902801434598673e-16,
+  "worst_projection_work_relative_error": 5.418885796135376e-16
+}
