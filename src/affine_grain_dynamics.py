@@ -252,7 +252,9 @@ def arb_affine_grain_certificate() -> dict[str, str]:
         raise AssertionError(f"frozen strain pointwise bound failed: {bracket2}")
 
     # Local-box containment: |u|,|v| <= 2 d t <=2/25.
-    if not (2 * aq(FROZEN_STRAIN_TIME) <= aq(LOCAL_LOG_BOX)):
+    # This is an exact rational boundary identity, not an interval inequality:
+    # 2*(1/25)=2/25.  Arb comparisons deliberately do not certify touching balls.
+    if 2 * FROZEN_STRAIN_TIME != LOCAL_LOG_BOX:
         raise AssertionError("frozen strain episode does not stay in local box")
 
     # 1/2 from Def>=H/2, 1/3 from averaging t^2, 3/5 pointwise H coefficient.
