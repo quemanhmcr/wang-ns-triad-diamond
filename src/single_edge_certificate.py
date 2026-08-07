@@ -18,8 +18,8 @@ GLOBAL_GAP = Fraction(1, 100) # deficit outside local box
 Y_CUTOFF = Fraction(9, 10)    # y >= .9 handled analytically
 
 # A rational bracket for the unique symmetric critical point.
-RSTAR_LO = Fraction(6109041018306, 10_000_000_000_000)
-RSTAR_HI = Fraction(6109041018307, 10_000_000_000_000)
+RSTAR_LO = Fraction(61090410158, 100_000_000_000)
+RSTAR_HI = Fraction(61090410160, 100_000_000_000)
 
 
 def float_envelope(x: float, y: float) -> float:

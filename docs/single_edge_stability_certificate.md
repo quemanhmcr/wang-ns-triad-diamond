@@ -82,7 +82,7 @@ so it has at most one root on \((1/2,1)\).  The Arb certificate verifies a
 sign change on the rational bracket
 
 \[
-0.6109041018306<r_*<0.6109041018307,
+0.61090410158<r_*<0.61090410160,
 \]
 
 hence this root exists and is unique.  Define
