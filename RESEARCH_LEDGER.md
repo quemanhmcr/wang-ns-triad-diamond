@@ -126,24 +126,44 @@ The critical point solves
 giving
 
 \[
-r_*=x_*\approx0.6109041018306255,
+r_*=x_*\approx0.6109041015867660,
 \qquad
-R_*=r_*^{-1}\approx1.63691813,
+R_*=r_*^{-1}\approx1.63691813068957,
 \]
 
 \[
-\gamma_*:=\log R_*\approx0.49281528495,
+\gamma_*:=\log R_*\approx0.492815285342135,
 \qquad
-J_*\approx0.10011017585619.
+J_*\approx0.100110175856189.
 \]
 
-The local common-scale curvature is negative, with numerically evaluated
+The local common-scale curvature is negative,
 
 \[
-J''(r_*)\approx-4.40210979.
+J''(r_*)\approx-4.40210953306117.
 \]
 
-Global uniqueness/maximality over the full sign/domain problem remains computationally supported rather than interval-certified.
+The decimal for `r_*` recorded in the first version of this ledger was stale:
+Action `31156944917` rejected the old bracket by rigorous Arb arithmetic.  The
+corrected value above is consistent with the exact equation and with the
+certified rational bracket
+
+\[
+0.61090410158<r_*<0.61090410160.
+\]
+
+The full sign/domain optimizer is now certified rather than merely numerical.
+For child magnitude one and ordered parents `0<x<=y<1`, exact sign elimination
+gives
+
+\[
+|s_xx-s_yy|\,|s_xx+s_yy+s_z|
+\le (x+y)(1+y-x),
+\]
+
+with equality for the opposite-parent-helicity orbit.  Arb branch-and-bound on
+the resulting two-variable envelope proves that the symmetric critical point is
+the unique global maximum in the normalized forward-triad domain.
 
 ## 4. The cusp: the extremizer is anisotropically rigid
 
@@ -173,6 +193,93 @@ a_-=\frac1{r_*\log(1/r_*)}-2\approx1.322.
 \]
 
 Thus a near-extremizer has thickness `O(ε)` in the parent-scale imbalance direction and `O(√ε)` in smooth tangent directions. This motivates the term **triad grain**: the near-extremal set is an anisotropic thin object rather than a point triad.
+
+
+### Certified mixed single-edge stability
+
+Use the log-scale coordinates already seen by the Hodge module,
+
+\[
+u=|\ell_p-\ell_q|,
+\qquad
+v=\ell_c-\frac{\ell_p+\ell_q}{2}-\gamma_*.
+\]
+
+Action `31157463384` gives an inclusion-arithmetic certificate at 160-bit Arb
+precision.  On the whole near-extremal rectangle
+
+\[
+0\le u\le\frac{2}{25},
+\qquad |v|\le\frac{2}{25},
+\]
+
+the normalized deficit satisfies
+
+\[
+\boxed{
+\operatorname{Def}_e
+:=1-\frac{J_e}{J_*}
+\ge \frac1{50}u+v^2.
+}
+\]
+
+The certified lower bounds used by the proof are
+
+\[
+\partial_u\operatorname{Def}_e>0.0468113935>\frac1{50},
+\qquad
+\partial_v^2\operatorname{Def}_e>6.805681556>2
+\]
+
+on the relevant intervals.  Since `u<=2/25`, the linear cusp dominates
+`u^2/4`; together with the exact residual identity
+
+\[
+r_p^2+r_q^2=\frac{u^2}{2}+2v^2,
+\]
+
+this yields the theorem-level edge-to-Hodge conversion
+
+\[
+\boxed{
+\operatorname{Def}_e\ge\frac12(r_p^2+r_q^2).
+}
+\]
+
+Outside the local rectangle, the same Action certifies the uniform global gap
+
+\[
+\boxed{
+\operatorname{Def}_e\ge\frac1{100}.
+}
+\]
+
+The compact global certificate used `637` gap boxes plus `93` boxes absorbed by
+the local theorem, with maximum subdivision depth `15`.  The accompanying
+`100,000` local plus `100,000` global random stress samples are regression tests
+only and are not part of the proof.
+
+For normalized transfer weights `w_e`, this is already in the form required by
+the Hodge ledger.  If the retained good-edge network has arc conductance `w_e`
+on each of the two parent-to-child arcs of triad `e`, then
+
+\[
+1-R_{\rm block}
+=\sum_e w_e\operatorname{Def}_e
+\ge\frac12\sum_e w_e(r_{e,p}^2+r_{e,q}^2)
+\ge\frac12\mathcal E_H.
+\]
+
+Therefore
+
+\[
+\boxed{-\log R_{\rm block}\ge\frac12\mathcal E_H,}
+\]
+
+and any Hodge-cost branch with `\mathcal E_H\ge h_H>0` now has the certified
+finite-dimensional block cost `c_{0,H}=h_H/2`.  A bad-edge set of total transfer
+weight `\beta` instead pays at least `\beta/100` before any Hodge routing is
+invoked.
 
 ## 5. Gaussian packet inverse mechanism
 
@@ -624,13 +731,16 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 - atomic-to-ancestry collision chain rule and cycle-rank gain after contraction;
 - multicommodity Hodge Rayleigh inequality and gauge synchronization;
 - tree resistance identities and Poisson stopping theorem;
-- barycentric episode-counting master no-escape inequality.
+- barycentric episode-counting master no-escape inequality;
+- exact helicity-sign reduction for the full normalized single-edge envelope;
+- Arb-certified global uniqueness/maximality of the single-edge optimizer;
+- Arb-certified mixed single-edge stability
+  `Def_e >= (1/50)u+v^2`, the local edge-to-Hodge constant `c_stab=1/2`, and
+  the global outside-neighborhood gap `Def_e>=1/100`.
 
 ### Computationally supported, not interval-certified
 
-- global uniqueness/maximality of the full single-edge `\mathcal J` optimizer;
 - numerical reuse-gap constants from nonlinear optimization;
-- candidate local stability constants `A,B` for the full edge multiplier;
 - perturbative robustness tables for near-butterfly / finite-width Gaussian models.
 
 ### Still conditional / PDE bridge
@@ -638,7 +748,8 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 1. **Exact PDE scale-flux connection.** Relate the progress-weighted diagnostic `\mathcal J` to a rigorous Navier–Stokes scale-flux ledger with controlled symmetrization/localization errors.
 2. **Gaussian atomic extraction from an arbitrary near-extremal PDE block.** Need an iterative profile extraction with controlled synthesis constants and transfer-small remainder, without assuming a global `\|\widehat u\|_{3/2}` bound.
 3. **Summable perturbation ledger.** Convert near-extremal PDE errors into the `\zeta_j` and logarithmic cross-error terms required by the master theorem.
-4. **Certified single-edge stability.** Prove a genuine positive constant connecting multiplier deficit to the anisotropic local defect/Hodge energy; current global constants are numerical candidates.
+4. **PDE weighting of the certified edge deficit.** The finite-dimensional multiplier gap is now certified.  What remains is to prove that a genuine near-extremal Navier–Stokes scale-flux block produces the normalized transfer-weighted atomic edge measure to which
+   `sum_e w_e Def_e >= (1/2) E_H` applies, with bad-edge removal and localization errors charged to the existing Bellman/cross-error ledgers.
 5. **Critical-mass bridge.** Show that a concentrated companion grain carries enough local `L^2` / local-energy charge to be classified as fresh or reused in the physical packet ledger.
 6. **Time synchronization and pressure/localization.** Lift the static/packet graph architecture to a spacetime argument compatible with suitable weak solutions and local energy estimates.
 
@@ -664,8 +775,10 @@ The most useful recorded runs, in chronological order, are:
 | `31152386368` | no-log resistance-to-Bellman stopping |
 | `31153769553` | corrected cap-reset master theorem regression run |
 | `31154025683` | barycentric master no-escape theorem; `72` tests + `20,000` episode traces |
+| `31157463384` | Arb-certified full single-edge sign/global/local stability; `76` tests + `200,000` adversarial samples |
 
 The current preferred master regression artifact is `recorded-results/31154025683/`.
+The preferred single-edge theorem certificate is `recorded-results/31157463384/`.
 
 ## 18. Current research frontier
 
@@ -691,12 +804,22 @@ The finite-dimensional architecture has reached the point where every identified
 }
 \]
 
-The next mathematically decisive work should therefore move **back toward the PDE**, not add more graph combinatorics. The two highest-priority targets are:
+The finite-dimensional single-edge multiplier gap is now closed with a rigorous
+positive constant.  The next mathematically decisive work should therefore move
+**back toward the PDE**, not add more graph combinatorics.  The two
+highest-priority targets are:
 
-1. certify the single-edge weighted multiplier stability with a rigorous positive constant;
-2. prove a transfer-adapted Gaussian atomic extraction theorem for genuine near-extremal Navier–Stokes blocks.
+1. identify an exact/symmetrized Navier–Stokes scale-flux ledger whose
+   transfer weights produce the certified edge deficit and hence the Hodge
+   block cost `c_{0,H}=h_H/2`;
+2. prove a transfer-adapted Gaussian atomic extraction theorem for genuine
+   near-extremal Navier–Stokes blocks, with summable synthesis/localization
+   errors.
 
-If these modules supply a uniform `c_0>0` and summable error ledgers, the master inequality above would turn the finite-dimensional no-escape mechanism into a quantitative obstruction to an indefinitely efficient critical cascade.
+If these PDE modules supply the transfer weights, critical mass, and summable
+error ledgers required by the already-closed finite-dimensional architecture,
+the master inequality would turn the no-escape mechanism into a quantitative
+obstruction to an indefinitely efficient critical cascade.
 
 ---
 
@@ -705,12 +828,13 @@ If these modules supply a uniform `c_0>0` and summable error ledgers, the master
 For a new reader, the recommended order is:
 
 1. `RESEARCH_LEDGER.md` — this document;
-2. `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
-3. `docs/scale_holonomy.md`;
-4. `docs/multiscale_bellman.md`;
-5. `docs/nested_grain_extraction.md`;
-6. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
-7. `docs/atomic_component_entropy.md`;
-8. `docs/multicommodity_hodge_routing.md`;
-9. `docs/resistance_bellman_stopping.md`;
-10. `docs/master_no_escape.md`.
+2. `docs/single_edge_stability_certificate.md`;
+3. `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
+4. `docs/scale_holonomy.md`;
+5. `docs/multiscale_bellman.md`;
+6. `docs/nested_grain_extraction.md`;
+7. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
+8. `docs/atomic_component_entropy.md`;
+9. `docs/multicommodity_hodge_routing.md`;
+10. `docs/resistance_bellman_stopping.md`;
+11. `docs/master_no_escape.md`.

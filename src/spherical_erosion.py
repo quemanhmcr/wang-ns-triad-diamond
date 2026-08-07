@@ -9,7 +9,9 @@ from typing import Iterable
 import numpy as np
 from scipy.optimize import minimize
 
-R_STAR = 1.6369181300426772
+from .triad_extremizer import symmetric_rstar
+
+R_STAR = 1.0 / symmetric_rstar()
 C_STAR = R_STAR / 2.0
 THETA_STAR = 2.0 * math.acos(C_STAR)
 KAPPA_STAR = -math.log(C_STAR)

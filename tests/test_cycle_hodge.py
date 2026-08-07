@@ -14,7 +14,7 @@ def test_triad_residual_identity():
 
 
 def test_nonflat_cycle_has_exact_energy():
-    gamma = 0.4928152849469459
+    gamma = 0.4928152853421352
     row = weighted_hodge_energy(nonflat_reuse_motif(), gamma)
     assert row["cycle_rank"] == 1
     assert abs(row["energy"] - gamma * gamma / 5.0) < 1e-10
@@ -24,7 +24,7 @@ def test_nonflat_cycle_has_exact_energy():
 
 
 def test_butterfly_is_scale_flat_despite_cycle():
-    gamma = 0.4928152849469459
+    gamma = 0.4928152853421352
     row = weighted_hodge_energy(flat_butterfly_motif(), gamma)
     assert row["cycle_rank"] == 1
     assert row["energy"] < 1e-20
@@ -35,7 +35,7 @@ def test_butterfly_is_scale_flat_despite_cycle():
 
 
 def test_exact_butterfly_returns_central_direction():
-    geom = optimal_geometry(0.6109041018281888)
+    geom = optimal_geometry(0.6109041015867660)
     row = butterfly_rigidity_certificate(geom["c"])
     assert abs(row["b_dot_c"] - row["required_b_dot_c"]) < 1e-12
     assert abs(row["m_dot_n"] - geom["c"]) < 1e-12

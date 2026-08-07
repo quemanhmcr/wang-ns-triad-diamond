@@ -6,28 +6,23 @@ import math
 from pathlib import Path
 
 import numpy as np
-from scipy.optimize import differential_evolution, minimize_scalar
+from scipy.optimize import differential_evolution
 from scipy.special import ndtri
 from scipy.stats import qmc
 
 from .helical import coupling_magnitude_closed
+from .triad_extremizer import symmetric_jstar, symmetric_rstar
 
 
 def packet_center() -> tuple[np.ndarray, np.ndarray, np.ndarray, tuple[int, int, int], float]:
     """Return the symmetric single-edge optimum normalized by |z|=1."""
-    root = minimize_scalar(
-        lambda x: -math.sqrt(max(0.0, 4.0 * x * x - 1.0)) * math.log(1.0 / x) / (4.0 * math.sqrt(2.0) * x),
-        bounds=(0.5000001, 0.999999),
-        method="bounded",
-        options={"xatol": 1e-14},
-    )
-    x = float(root.x)
+    x = symmetric_rstar()
     h = math.sqrt(x * x - 0.25)
     p = np.array([0.5, h, 0.0])
     q = np.array([0.5, -h, 0.0])
     z = p + q
     signs = (1, -1, -1)
-    return p, q, z, signs, -float(root.fun)
+    return p, q, z, signs, symmetric_jstar(x)
 
 
 def edge_efficiency_batch(p: np.ndarray, q: np.ndarray, signs: tuple[int, int, int]) -> np.ndarray:

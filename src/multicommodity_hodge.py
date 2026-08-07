@@ -9,6 +9,8 @@ from typing import Iterable
 
 import numpy as np
 
+from .triad_extremizer import symmetric_rstar
+
 
 @dataclass(frozen=True)
 class DirectedEdge:
@@ -281,7 +283,7 @@ def main() -> None:
     p.add_argument("--samples",type=int,default=20000)
     p.add_argument("--outdir",type=Path,default=Path("results-multicommodity-hodge"))
     args=p.parse_args(); args.outdir.mkdir(parents=True,exist_ok=True)
-    rstar=0.6109041018281888
+    rstar=symmetric_rstar()
     gamma=math.log(1.0/rstar)
     random_checks=random_rayleigh_checks(args.samples)
     toys=_toy_graphs(gamma)

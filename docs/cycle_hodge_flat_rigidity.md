@@ -51,6 +51,33 @@ The two arc residuals satisfy
 Thus local multiplier stability in the imbalance and mean-shift variables
 controls the global Hodge energy.
 
+
+The single-edge certificate now makes this quantitative.  On
+`|u|<=2/25`, `|v|<=2/25`,
+
+\[
+\operatorname{Def}_e\ge\frac12(r_p^2+r_q^2).
+\]
+
+Hence, if a triad of transfer weight `w_e` gives weight `w_e` to each of its
+two parent-to-child Hodge arcs,
+
+\[
+\sum_e w_e\operatorname{Def}_e
+\ge\frac12\mathcal E_H.
+\]
+
+For the normalized block ratio `R_block=sum_e w_e J_e/J_*`,
+
+\[
+-\log R_{\rm block}\ge1-R_{\rm block}
+\ge\frac12\mathcal E_H.
+\]
+
+Thus a Hodge threshold `E_H>=h_H` supplies the explicit theorem-level block
+cost `c_{0,H}=h_H/2`.  Edges outside the certified local rectangle have
+`Def_e>=1/100` and are charged before the Hodge network is formed.
+
 ## Curved reuse motif
 
 For

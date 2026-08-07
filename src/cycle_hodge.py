@@ -9,6 +9,8 @@ from typing import Sequence
 
 import numpy as np
 
+from .triad_extremizer import symmetric_rstar
+
 
 @dataclass(frozen=True)
 class Triad:
@@ -265,7 +267,7 @@ def main() -> None:
     args = parser.parse_args()
     args.outdir.mkdir(parents=True, exist_ok=True)
 
-    r_star = 0.6109041018281888
+    r_star = symmetric_rstar()
     geom = optimal_geometry(r_star)
     gamma = math.log(1.0 / r_star)
     nonflat = weighted_hodge_energy(nonflat_reuse_motif(), gamma)

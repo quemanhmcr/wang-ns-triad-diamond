@@ -67,7 +67,8 @@ def test_holonomy_soft_threshold_formula():
 
 def test_single_edge_optimum_equation():
     r, _, gamma = single_edge_optimum()
-    assert abs(-math.log(r) - (4.0 * r * r - 1.0)) < 2e-6
+    assert abs(-math.log(r) - (4.0 * r * r - 1.0)) < 2e-15
+    assert abs(r - 0.6109041015867660) < 2e-15
     assert abs(gamma + math.log(r)) < 1e-14
 
 

@@ -252,14 +252,29 @@ For every retained near-extremal interaction edge,
 \mathcal D_e=r_{e,1}^2+r_{e,2}^2.
 \]
 
-Thus for transfer/Hodge conductances \(w_e\),
+Thus for normalized transfer/Hodge conductances \(w_e\),
 
 \[
-\sum_e w_e\operatorname{Def}_e
-\ge\frac12\sum_e w_e\mathcal D_e,
+1-R_{\rm block}
+=\sum_e w_e\operatorname{Def}_e
+\ge\frac12\sum_e w_e\mathcal D_e
+\ge\frac12\mathcal E_H.
 \]
 
-so the local multiplier deficit pays at least one half of the Hodge residual
+Since \(-\log R_{\rm block}\ge1-R_{\rm block}\),
+
+\[
+\boxed{-\log R_{\rm block}\ge\frac12\mathcal E_H.}
+\]
+
+Therefore a Hodge-cost branch with \(\mathcal E_H\ge h_H>0\) has the explicit
+theorem-level block cost
+
+\[
+\boxed{c_{0,H}=h_H/2.}
+\]
+
+Thus the local multiplier deficit pays at least one half of the Hodge residual
 energy on the good-edge network.  Edges outside the local rectangle each have
 a certified \(1/100\) deficit; if a block has small average deficit, their
 total transfer weight is therefore automatically small and they can be removed

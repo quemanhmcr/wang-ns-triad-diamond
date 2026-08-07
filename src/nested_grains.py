@@ -9,6 +9,8 @@ from typing import Iterable, Sequence
 
 import numpy as np
 
+from .triad_extremizer import symmetric_rstar
+
 
 @dataclass(frozen=True)
 class Packet:
@@ -335,7 +337,7 @@ def verify_nested(root: GrainNode) -> bool:
 def make_synthetic_branches(branches: int, sigma: float, separation: float, seed: int = 0) -> tuple[list[Packet], list[Packet], list[Packet]]:
     """Create coherent Gaussian triads whose branches are separated in phase space."""
     rng = np.random.default_rng(seed)
-    rstar = 0.6109041018281888
+    rstar = symmetric_rstar()
     h = math.sqrt(rstar * rstar - 0.25)
     p0 = np.array([0.5, h, 0.0])
     q0 = np.array([0.5, -h, 0.0])

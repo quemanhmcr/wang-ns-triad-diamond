@@ -8,9 +8,10 @@ from pathlib import Path
 from typing import Iterable
 
 import numpy as np
-from scipy.optimize import differential_evolution, linprog, minimize_scalar
+from scipy.optimize import differential_evolution, linprog
 
 from .helical import edge_metrics
+from .triad_extremizer import symmetric_gamma, symmetric_jstar, symmetric_rstar
 
 Array = np.ndarray
 
@@ -180,10 +181,9 @@ def holonomy_convex_cost(gamma: float, a_linear: float, b_quadratic: float) -> f
 
 
 def single_edge_optimum() -> tuple[float, float, float]:
-    fun = lambda r: -math.sqrt(max(0.0, 4.0 * r * r - 1.0)) * math.log(1.0 / r) / (4.0 * math.sqrt(2.0) * r)
-    res = minimize_scalar(fun, bounds=(0.500000001, 0.999999), method="bounded", options={"xatol": 1e-14})
-    r = float(res.x)
-    return r, -float(res.fun), math.log(1.0 / r)
+    """Symmetric edge optimum from the exact critical equation."""
+    r = symmetric_rstar()
+    return r, symmetric_jstar(r), symmetric_gamma(r)
 
 
 def efficiency_xy(x: float, y: float) -> float:

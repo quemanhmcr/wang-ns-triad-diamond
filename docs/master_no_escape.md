@@ -223,10 +223,33 @@ A fresh grain gives a fresh ancestry split; a reused grain returns to 2--5.
 The only branch not immediately paying a cost is therefore the cap-confined,
 synchronized-flat, no-fresh transition treated by the episode erosion above.
 
+The single-edge certificate removes the previous placeholder in branch 4.  If
+the good-edge Hodge threshold is `E_H>=h_H`, then
+
+\[
+-\log R_{block}\ge\frac12E_H\ge\frac{h_H}{2}.
+\]
+
+If instead a set of outside-neighborhood edges has transfer weight at least
+`beta_bad`, it pays at least `beta_bad/100`.  Thus, after fixing the positive
+classification thresholds used by the other branches, one may take
+
+\[
+\boxed{
+c_0=\min\{c_{Bell},c_{anc},c_{res},h_H/2,\beta_{bad}/100,
+h_\beta,c_{fresh},\ldots\}>0.
+}
+\]
+
+This formula does not claim that the threshold choices have been optimized; it
+records that the Hodge/single-edge entry is now a theorem-level positive number
+rather than a numerical candidate.
+
 ## 6. Remaining analytic bridge
 
-The finite-dimensional atomic model is now closed modulo the quantitative
-single-edge stability input.  For the actual Navier--Stokes PDE one still has
-to prove a Gaussian atomic extraction with uniform synthesis constants,
-summable near-extremal errors, and a certified stability constant converting
-Hodge residual energy into an actual transfer deficit.
+The finite-dimensional single-edge stability input is now certified.  For the
+actual Navier--Stokes PDE one still has to prove a transfer-adapted Gaussian
+atomic extraction with uniform synthesis constants, an exact or controlled
+scale-flux weighting that produces the `w_e` used above, and summable
+localization/near-extremal errors.  Pressure, time synchronization, and the
+critical local-energy charge remain part of that PDE bridge.

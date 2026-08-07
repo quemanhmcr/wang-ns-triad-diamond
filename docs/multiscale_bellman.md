@@ -93,9 +93,17 @@ A\gamma_*-A^2/(4B),&2B\gamma_*>A.
 \end{cases}
 \]
 
-This is a soft-thresholding calculation and is exact.  What remains to be
-certified for the Navier--Stokes multiplier is a global/local stability
-pair `(A,B)`.
+This is a soft-thresholding calculation and is exact.  The earlier numerical
+search for `(A,B)` has now been superseded by the Arb-certified single-edge
+theorem in `docs/single_edge_stability_certificate.md`.  In the Hodge
+coordinates `(u,v)` it gives the stronger directly composable statement
+
+\[
+\operatorname{Def}_e\ge\frac1{50}|u|+v^2
+\ge\frac12(r_p^2+r_q^2)
+\]
+
+on the certified local rectangle, with global gap `Def_e>=1/100` outside it.
 
 ## Abstract no-escape corollary
 

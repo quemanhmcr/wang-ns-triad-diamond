@@ -40,8 +40,16 @@ gamma_* <= |r2| + |r3| + (1/2)|r1| + |r4|.
 At least one residual is therefore at least `gamma_*/3.5`. With
 `gamma_* ≈ log(1/0.610904) ≈ 0.493`, this lower bound is about `0.141`.
 
-The next rigorous task is a stability theorem for the single-triad extremizer:
-convert a structural residual of size `delta` into an efficiency deficit
-`J_* - J >= c delta^2` (locally), plus a compactness gap away from the extremal
-manifold. Combining that theorem with the identity above would produce a
-certified positive gap for any reuse motif of this type.
+That stability step is now complete in the finite-dimensional edge model.  The
+Arb certificate proves, in the log-scale Hodge coordinates,
+
+\[
+\operatorname{Def}_e\ge\frac1{50}|u|+v^2
+\ge\frac12(r_p^2+r_q^2)
+\]
+
+inside the near-extremal rectangle and `Def_e>=1/100` outside it.  Therefore
+any Hodge threshold `E_H>=h_H` produces the certified block cost `h_H/2`.
+The remaining task is no longer compactness of the single-edge multiplier but
+the PDE-to-transfer-weight bridge that supplies the edge measure and its
+summable errors.
