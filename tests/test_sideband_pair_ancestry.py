@@ -15,5 +15,5 @@ def test_endpoint_ancestry_equals_edge_class_mass():
 
 
 def test_cross_branch():
-    edges=np.array([[0,1],[0,2],[1,3]]); weights=np.ones(3); anc=np.array([0,1,0,1])
+    edges=np.array([[0,1],[0,3],[2,1],[2,3]]); weights=np.ones(4); anc=np.array([0,1,0,1])
     out=pair_rescue_ancestry_route(weights,edges,anc); assert out['branch']=='cross_Xi'
