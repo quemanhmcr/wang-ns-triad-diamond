@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+from fractions import Fraction
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -83,8 +84,8 @@ def arb_boundary_certificate() -> dict[str,str]:
     ctx.prec=160
     if not ((arb(1)/20).exp() < arb(11)/10):
         raise AssertionError("exp(1/20)<11/10 failed")
-    if not ((arb(3)/2)*(arb(11)/10) == arb(33)/20):
-        raise AssertionError("viscous coefficient arithmetic failed")
+    if Fraction(3,2)*Fraction(11,10) != Fraction(33,20):
+        raise AssertionError("exact rational viscous coefficient arithmetic failed")
     return {"smooth_filter_high_side":"delta<=1/20", "exp_delta_bound":"exp(delta)<11/10", "clean_viscous_coefficient":"33/20", "status":"CERTIFIED"}
 
 
