@@ -1,0 +1,20 @@
+name: Affine curvature connection
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint==0.8.0
+      - run: pytest -q
+      - name: Curvature connection stress
+        run: python -m src.affine_curvature_connection --samples 50000 --outdir results-affine-curvature-connection
+      - run: cat results-affine-curvature-connection/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: affine-curvature-connection-results
+          path: results-affine-curvature-connection/
