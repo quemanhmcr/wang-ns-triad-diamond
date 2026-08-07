@@ -429,3 +429,68 @@ positive; it forces the *physical* transfer weights locating the smooth midgap
 to converge to the same transfer-capacity weights used by the inverse/Bellman
 ledger.  No statistical-mechanics analogy is being inserted—the equivalence is
 forced by the certified multiplier deficit and the actual child-energy flux.
+
+## 10. The graded spectral flux is the space-average of the physical SGS flux
+
+The smooth cocycle is not restricted to Fourier bookkeeping.  Choose a
+self-adjoint convolution filter `G_t` whose Fourier multiplier satisfies
+
+\[
+|\widehat G_t(\xi)|^2
+=\Psi_\delta(t-\log|\xi|).
+\]
+
+Write
+
+\[
+\bar u=G_t*u,
+\qquad
+\tau_t(u,u)=\overline{u\otimes u}-\bar u\otimes\bar u.
+\]
+
+The standard resolved/subfilter transfer density is
+
+\[
+\boxed{
+\Pi_t^{\rm SGS}(x)
+=-\nabla\bar u:\tau_t(u,u).
+}
+\]
+
+For a periodic box or sufficient spatial decay, incompressibility gives
+
+\[
+\boxed{
+\int \Pi_t^{\rm SGS}(x)dx
+=-\frac d{dt_{\rm physical}}\frac12\|\bar u\|_2^2\Big|_{NL}
+=\Pi^\delta(t).
+}
+\]
+
+The first equality follows from the filtered energy equation: the cubic
+resolved transport integrates to zero.  In Fourier variables the resolved
+quadratic energy has weight `|Ghat|^2=Psi_delta`, which is exactly the graded
+spectral energy used above.
+
+The Leray projector does not alter the global nonlinear work because `bar u` is
+divergence free and the projector is self-adjoint.  Equivalently, pressure does
+no global interscale work.  This is the physically important distinction:
+pressure transports energy in space but is not itself the global scale-transfer
+mechanism.
+
+Consequently the transfer-weighted midgap theorem has the physical-space form
+
+\[
+\boxed{
+2\int_\tau^\infty\int \Pi_t^{\rm SGS}(x)\,dx\,dt
+=\sum_{e\in G}T_e\log(q_e/p_e)
+}
+\]
+
+on a forward packet core satisfying the common spectral moat.
+
+After multiplying by a spatial packet window, the pressure term becomes a
+boundary flux through the transition region.  Thus the unresolved pressure
+problem is now localized very specifically: prove that this boundary work is
+summable under the same expanding-moat schedule.  It no longer contaminates the
+global definition of the transfer weights.
