@@ -405,9 +405,10 @@ the defect-space nested-grain theorem and for the commutator alone, but the
 physical moving window must be curvature-adaptive.
 
 These packet-lifetime inequalities are not yet inserted as new universal master
-`c_0` branches.  Doing so requires the full 3D packet-frame realization,
-off-plane tilt control, adaptive-window compatibility, and registration of the
-forced critical mass as fresh or reused.
+`c_0` branches.  The intrinsic Gram identity removes common triad-plane tilt as
+a scalar multiplier defect.  What remains is the full 3D packet-frame
+realization with helical polarization/phase transport, adaptive-window
+compatibility, and registration of the forced critical mass as fresh or reused.
 
 ## 8. PDE-facing localized pressure alternative
 

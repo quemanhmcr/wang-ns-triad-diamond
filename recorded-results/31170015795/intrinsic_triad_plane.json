@@ -1,0 +1,8 @@
+{
+  "samples": 50000,
+  "worst_full3d_intrinsic_coercivity": 0.4359294243485926,
+  "worst_gram_identity_residual": 5.495323605393213e-16,
+  "worst_shape_rate_residual": 0.0,
+  "worst_plane_normal_constraint_residual": 3.6955587428207345e-15,
+  "worst_isotropic_viscosity_intrinsic_residual": 1.021405182655144e-14
+}

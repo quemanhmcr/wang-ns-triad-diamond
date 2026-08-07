@@ -911,6 +911,47 @@ Action `31168393589` certifies at 160-bit Arb precision
 Thus the infinitesimal kernel is exactly the planar-conformal direction; planar
 shear and anisotropic stretching cannot be invisible to an extremal triad.
 
+The fixed orientation of that plane is in fact unnecessary for scalar triad
+geometry.  Put the two parent carriers into the columns of `K in R^{3x2}` and
+set
+
+\[
+G=K^TK.
+\]
+
+For any common three-dimensional carrier law `Kdot=-B K`,
+
+\[
+\boxed{
+\dot G=-K^T(B+B^T)K.
+}
+\]
+
+All three side lengths, and therefore the magnitude of the helical single-edge
+multiplier, are functions of this intrinsic `2x2` Gram matrix.  If `E` is any
+orthonormal frame of the instantaneous (possibly tilting) triad plane, the
+charged driver is simply
+
+\[
+D=\left(E^T\operatorname{sym}(B)E\right)^0.
+\]
+
+Orthogonal invariance gives the same extremal coercivity
+
+\[
+\boxed{
+\frac12\dot u^2+2\dot v^2
+>\frac{43}{100}\|D\|_F^2
+}
+\]
+
+for an arbitrarily oriented and tilting 3D plane.  Action `31170015795` checked
+`50,000` random 3D plane/driver/Gaussian configurations; the exact Gram identity
+is the theorem, while the random run is regression evidence.  Extrinsic common
+plane tilt is therefore a gauge for scalar side-length geometry.  The genuinely
+3D remainder is coherent helical-polarization/phase transport and the spatial
+packet frame.
+
 For a frozen trace-free planar strain with eigenvalues `+/-d`, starting from the
 exact extremal triad, if
 
@@ -1667,6 +1708,7 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   identity `(P kappa)dot=A(P kappa)`, incompressible log-det law, and Kelvin
   polarization/energy identities; exact affine-deforming window cancellation
   with curvature as the first Taylor remainder;
+- exact intrinsic 3D Gram reduction `Gdot=-K^T(B+B^T)K`: scalar triad side-length/multiplier geometry depends only on the evolving `2x2` Gram matrix, so arbitrary common plane tilt is a gauge; the same `43/100` extremal coercivity applies to the trace-free symmetric restriction of the carrier driver on the instantaneous plane;
 - Arb-certified five-percent co-rotating planar strain-coherence theorem:
   if `sup||D(t)-D(0)||<=d/20` and `dT<=1/30`, then the averaged edge deficit is
   `>= (1/24)(dT)^2`; failure forces objective strain variation `>d/20`;
@@ -1693,12 +1735,12 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
    now controlled, but the continuum theorem must attach the cells to physical
    packets/windows while preserving the signed localized SGS measure and keeping
    partition overlap/cross interactions summable.
-2. **Remove the invariant-plane reduction.** The affine and five-percent
-   coherence theorems rigorously charge non-conformal strain on an invariant
-   triad plane.  A genuine 3D grain can tilt out of that plane.  Off-plane strain,
-   plane precession, helical-polarization transport, and their coupling to the
-   local vorticity frame must either be absorbed as gauge motion or charged to a
-   new positive deformation/fresh-mass branch.
+2. **Complete the genuinely three-dimensional polarization/frame dynamics.**
+   The intrinsic Gram theorem removes the fixed-plane assumption for scalar
+   side-length/multiplier geometry: common plane tilt is a gauge.  What remains is
+   coherent transport of the helical polarization/phase, the relation of the
+   in-plane co-rotating strain coherence variable to the evolving 3D frame, and
+   spatial variation of that frame across the packet.
 3. **Integrate the adaptive curvature-balanced moat into the nested packet
    tree.** The old fixed spatial moat schedule is not sufficient.  The continuum
    construction must choose `M` from the local curvature balance `a/M+b kappa M`,
@@ -1764,6 +1806,8 @@ The most useful recorded runs, in chronological order, are:
 
 | `31169598408`--`31169621311` | integrated affine-spacetime bridge on `2b795d2`: affine grain, strain coherence, curvature balance, objective-strain collision, localized pressure, crossing moat, nested grains and master all green; `133` tests per workflow |
 
+| `31170015795` | intrinsic full-3D triad-plane Gram dynamics; `137` tests + `50,000` random plane/driver/Gaussian checks |
+
 The current preferred master regression is run `31169621311` on the integrated
 affine-spacetime bridge commit `2b795d2` (`20,000` episode traces, worst margin
 `0`).  The earlier integrated frequency/pressure bridge run `31166171000`
@@ -1780,7 +1824,7 @@ preferred single-edge/physical-weight certificate is
 `recorded-results/31165654509/`.  The preferred smooth-symbol freezing artifact
 is `recorded-results/31165838379/`.  The preferred affine-spacetime dynamics artifacts are
 `recorded-results/31168393589/`, `recorded-results/31168671304/`,
-`recorded-results/31168888413/`, and `recorded-results/31169128097/`; the two
+`recorded-results/31168888413/`, and `recorded-results/31169128097/`, plus the intrinsic 3D continuation `recorded-results/31170015795/`; the two
 failed interval-boundary provenance runs are `recorded-results/31168205564/`
 and `recorded-results/31168303213/`.  Final integration runs are
 `31166152074`, `31166155045`, `31166158218`, `31166160711`, `31166163414`,
@@ -1862,9 +1906,9 @@ velocity curvature in general.
 
 The next mathematically decisive work is therefore:
 
-1. construct a **full 3D transfer-preserving moving packet frame**, including
-   off-plane tilt/helical-polarization transport, rather than an invariant-plane
-   reduction;
+1. construct a **full 3D transfer-preserving moving packet frame**.  Scalar
+   plane tilt is now intrinsic/gauge; the unresolved 3D content is helical
+   polarization/phase transport and spatial variation of the moving frame;
 2. make the **adaptive curvature-balanced windows** compatible with the nested
    packet ancestry, and prove that local pressure-Hessian, SGS transport `RU`,
    viscous boundary flux and partition overlap are summable or create a fresh /
@@ -1889,7 +1933,7 @@ For a new reader, the recommended order is:
 4. `docs/crossing_moat_extraction.md` and `docs/smooth_sgs_symbol_freezing.md`;
 5. `docs/localized_sgs_pressure_ledger.md` and `docs/annular_pressure_collision.md`;
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
-7. `docs/affine_gaussian_grain_dynamics.md` and `docs/strain_coherence_objective_gradient.md`;
+7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 9. `docs/scale_holonomy.md`;
 10. `docs/multiscale_bellman.md`;
