@@ -1,0 +1,59 @@
+{
+  "samples": 50000,
+  "violations": 0,
+  "min_core_mass_lambda4": 0.9999999999999996,
+  "modes": {
+    "pair-cycle": 17586,
+    "component-entropy": 32414
+  },
+  "equal_examples": [
+    {
+      "groupsize": 1,
+      "groups": 16,
+      "q_atom": 0.0625,
+      "q_ancestry": 0.0625,
+      "hidden": 0.0,
+      "h_atom": 2.772588722239781,
+      "h_ancestry": 2.772588722239781
+    },
+    {
+      "groupsize": 2,
+      "groups": 8,
+      "q_atom": 0.0625,
+      "q_ancestry": 0.125,
+      "hidden": 0.0625,
+      "h_atom": 2.772588722239781,
+      "h_ancestry": 2.0794415416798357
+    },
+    {
+      "groupsize": 4,
+      "groups": 4,
+      "q_atom": 0.0625,
+      "q_ancestry": 0.25,
+      "hidden": 0.1875,
+      "h_atom": 2.772588722239781,
+      "h_ancestry": 1.3862943611198906
+    },
+    {
+      "groupsize": 8,
+      "groups": 2,
+      "q_atom": 0.0625,
+      "q_ancestry": 0.5,
+      "hidden": 0.4375,
+      "h_atom": 2.772588722239781,
+      "h_ancestry": 0.6931471805599453
+    }
+  ],
+  "graph_example_one": {
+    "raw_rank": 0,
+    "contracted_rank": 2,
+    "rank_gain": 2,
+    "attachment_lower_bound": 2
+  },
+  "graph_example_two": {
+    "raw_rank": 0,
+    "contracted_rank": 2,
+    "rank_gain": 2,
+    "attachment_lower_bound": 2
+  }
+}
