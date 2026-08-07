@@ -16,6 +16,9 @@ A_CUSP = Fraction(1, 50)      # linear cusp coefficient
 B_TANGENT = Fraction(1, 1)    # quadratic common-scale coefficient
 GLOBAL_GAP = Fraction(1, 100) # deficit outside local box
 Y_CUTOFF = Fraction(9, 10)    # y >= .9 handled analytically
+SMOOTH_SHELL = Fraction(2, 25)   # log-shell halfwidth for the packet block
+SMOOTH_DELTA = Fraction(1, 20)   # smooth log-filter transition halfwidth
+SMOOTH_MOAT = Fraction(9, 250)   # certified residual common moat (>0.036)
 
 # A rational bracket for the unique symmetric critical point.
 RSTAR_LO = Fraction(61090410158, 100_000_000_000)
@@ -142,6 +145,14 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
     gamma = -rstar.log()
     jstar = ((4 * rstar * rstar - 1).sqrt() * gamma) / (4 * sqrt2 * rstar)
     jstar_lo = jstar.lower()
+
+    # A common smooth midgap moat for log-shell halfwidth 2/25 and
+    # filter halfwidth 1/20.  If parent and child shells each have this
+    # halfwidth, a transfer-weighted midgap can shift by at most one shell
+    # halfwidth, leaving gamma/2 - 2*sigma - delta.
+    smooth_moat_margin = gamma / 2 - 2 * aq(SMOOTH_SHELL) - aq(SMOOTH_DELTA)
+    if not (smooth_moat_margin > aq(SMOOTH_MOAT)):
+        raise AssertionError(f"smooth common-midgap moat failed: {smooth_moat_margin}")
 
     # --- Local certificate in exact log coordinates. ---
     # Direct interval evaluation on the whole rectangle has severe dependency
@@ -356,6 +367,10 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
         "hodge_coefficient_lower_bound": "1/2",
         "mellin_adverse_ratio_upper_bound": str(mellin_adverse_ratio_upper),
         "mellin_flux_retention_lower_bound": "9/10",
+        "smooth_midgap_shell_halfwidth": _qstr(SMOOTH_SHELL),
+        "smooth_midgap_filter_halfwidth": _qstr(SMOOTH_DELTA),
+        "smooth_midgap_moat_lower_bound": _qstr(SMOOTH_MOAT),
+        "smooth_midgap_moat_ball": str(smooth_moat_margin),
         "global_gap": _qstr(GLOBAL_GAP),
         "y_cutoff": _qstr(Y_CUTOFF),
         "corner_upper_ball": str(corner_upper),
@@ -430,6 +445,7 @@ def render_summary(cert: dict[str, Any], stress: dict[str, float] | None = None)
         f"- mixed bound: `Def >= ({cert['mixed_stability']['A']}) |u| + ({cert['mixed_stability']['B']}) v^2`",
         f"- local Hodge conversion: `Def >= {cert['hodge_coefficient_lower_bound']} (r_p^2+r_q^2)`",
         f"- adverse sharp-cutoff Mellin retention: `>= {cert['mellin_flux_retention_lower_bound']}` of the upper progress segment",
+        f"- smooth common-midgap moat: shell `{cert['smooth_midgap_shell_halfwidth']}`, filter `{cert['smooth_midgap_filter_halfwidth']}`, residual `>= {cert['smooth_midgap_moat_lower_bound']}`",
         f"- global exclusion outside the local box: `Def >= {cert['global_gap']}`",
         "",
         "## Certified enclosures",
@@ -442,6 +458,7 @@ def render_summary(cert: dict[str, Any], stress: dict[str, float] | None = None)
         f"- certified lower bound for symmetric second derivative: `{cert['tangent_second_derivative_lower_bound']}`",
         f"- tangent derivative leaf boxes: `{cert['tangent_derivative_boxes']}` (max depth `{cert['tangent_derivative_max_depth']}`)",
         f"- adverse lower/upper Mellin segment ratio upper bound: `{cert['mellin_adverse_ratio_upper_bound']}`",
+        f"- smooth common-midgap moat enclosure: `{cert['smooth_midgap_moat_ball']}`",
         f"- y>=0.9 analytic upper bound: `{cert['corner_upper_ball']}`",
         "",
         "## Global branch-and-bound",

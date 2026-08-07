@@ -206,6 +206,43 @@ def bad_capacity_mass_bound(total_deficit: float, threshold: float) -> float:
     return min(1.0, total_deficit / threshold)
 
 
+
+def near_extremal_gap_radius(defect_threshold: float) -> float:
+    """Gap deviation forced by Def >= |u|/50 + v^2 on a pointwise-good edge.
+
+    For g=log(q/p)=gamma*+v-u/2, Def<=eta implies
+    |g-gamma*| <= sqrt(eta)+25 eta.
+    """
+    if defect_threshold < 0.0:
+        raise ValueError("defect threshold must be nonnegative")
+    return math.sqrt(defect_threshold) + 25.0 * defect_threshold
+
+
+def child_transfer_density_condition_number(defect_threshold: float, gamma: float | None = None) -> float:
+    """Condition number between capacity and positive child-transfer densities.
+
+    On signed-good edges r=m*c>=1-eta, one has m>=1-eta and the local
+    single-edge theorem gives |g-gamma*|<=a. Since upper progress is
+    F=A*J* r=T*g, T/A is trapped between J*(1-eta)/(gamma+a) and
+    J*/(gamma-a). The J* factor cancels in the condition number below.
+    """
+    eta = float(defect_threshold)
+    if not (0.0 <= eta < 1.0):
+        raise ValueError("eta must lie in [0,1)")
+    if gamma is None:
+        gamma = symmetric_gamma(symmetric_rstar())
+    a = near_extremal_gap_radius(eta)
+    if a >= gamma:
+        return math.inf
+    return (gamma + a) / ((1.0 - eta) * (gamma - a))
+
+
+def positive_core_mass_lower_bound(total_deficit: float, eta: float) -> float:
+    """Capacity mass with signed efficiency r>1-eta from Markov's inequality."""
+    if total_deficit < 0.0 or not (0.0 < eta <= 2.0):
+        raise ValueError("invalid deficit/core threshold")
+    return max(0.0, 1.0 - total_deficit / eta)
+
 def buffered_commutator_constant(first_kernel_moment: float, packet_buffer_widths: float) -> float:
     """Dimensionless Lp commutator bound M1/M for a buffer M packet widths."""
     if first_kernel_moment < 0.0 or packet_buffer_widths <= 0.0:

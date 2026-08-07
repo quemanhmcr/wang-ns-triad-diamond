@@ -8,6 +8,9 @@ from src.smooth_flux_cocycle import (
     certify_midgap_block,
     compact_cdf,
     mellin_moment,
+    near_extremal_gap_radius,
+    child_transfer_density_condition_number,
+    positive_core_mass_lower_bound,
     polarization_certificate,
     ramp_potential,
     smooth_tail_flux,
@@ -65,3 +68,12 @@ def test_polarization_identity_and_bad_mass_bound():
     assert abs(cert.exact_residual) < 2e-15
     assert cert.total_deficit + 1e-15 >= cert.multiplier_deficit
     assert abs(bad_capacity_mass_bound(0.02, 0.1) - 0.2) < 1e-15
+
+
+def test_near_extremal_good_core_forces_gap_and_positive_weight_comparability():
+    eta = 1e-4
+    a = near_extremal_gap_radius(eta)
+    assert abs(a - (0.01 + 0.0025)) < 1e-15
+    cond = child_transfer_density_condition_number(eta)
+    assert 1.0 < cond < 1.06
+    assert abs(positive_core_mass_lower_bound(2e-6, eta) - 0.98) < 1e-15
