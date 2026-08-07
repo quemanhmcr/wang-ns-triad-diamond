@@ -1,0 +1,22 @@
+name: strain-coherence
+
+on:
+  workflow_dispatch:
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint==0.8.0
+      - run: pytest -q
+      - name: Arb coherence certificate and variable-strain stress
+        run: python -m src.strain_coherence --samples 20000 --outdir results-strain-coherence
+      - run: cat results-strain-coherence/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: strain-coherence-results
+          path: results-strain-coherence/
