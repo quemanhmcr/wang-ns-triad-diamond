@@ -36,67 +36,87 @@ C_j\ge c_0.
 The only low-cost blocks are synchronized, flat, hemispherical blocks on a
 dominant directional core.
 
-## 2. Cap-or-entropy reset lemma
+## 2. Barycentric entropy-or-reset lemma
 
 Let
 
 \[
 \mu=\sum_iw_i\delta_{x_i},
-\qquad b=\int x\,d\mu(x).
+\qquad b=\int x\,d\mu(x),
 \]
 
-Fix an angular radius `alpha in (0,pi/2)` and a tolerated leakage
-`epsilon_cap in (0,1)`, and put
+and fix `beta in (0,1)`.  The exact barycenter--collision inequality from the
+spherical module is
 
 \[
-\eta_{cap}=\epsilon_{cap}(1-\cos\alpha).
+H_2(\mu)\ge\log\frac{2}{1+|b|}.
 \]
 
-There are two cases.
+Hence there are two cases.
 
-If `|b|<=1-eta_cap`, the exact barycenter--collision inequality gives
+If `|b|<=beta`, the block pays the fixed atomic entropy cost
 
 \[
-\boxed{
-H_2(\mu)\ge
-h_{cap}:=\log\frac{2}{2-\eta_{cap}}>0.
-}
+\boxed{H_2(\mu)\ge h_\beta:=\log\frac{2}{1+\beta}>0.}
 \]
 
-This is a costly entropy block.
-
-If `|b|>1-eta_cap`, set `n=b/|b|`. Since
+If `|b|>beta`, define the barycentric potential
 
 \[
-\int(1-n\cdot x)\,d\mu=1-|b|<\eta_{cap},
+P(\mu):=-\log|b(\mu)|.
 \]
 
-Markov gives
+Then it has the uniform reset bound
 
 \[
-\boxed{
-\mu\{d_{S^2}(x,n)\le\alpha\}
-\ge1-\epsilon_{cap}.
-}
+\boxed{0\le P(\mu)<P_{max}:=-\log\beta.}
 \]
 
-Thus every low-entropy synchronized flat episode has a dominant core of mass
-at least `1-epsilon_cap` inside a fixed cap.  On this core the spherical
-potential
+No mass is discarded and no new cross-error is created by this reset.
+
+For exact equal-marginal flat propagation the spherical midpoint identity gives
 
 \[
-P=\sup_x[-\log(n\cdot x)]
+b_{j+1}=b_j/c_*,
+\qquad c_*=\cos(\theta_*/2),
 \]
 
-starts below the universal reset value
+and therefore
 
 \[
-\boxed{P_{max}=-\log\cos\alpha.}
+P_{j+1}=P_j-\kappa_*,
+\qquad \kappa_*=-\log c_*.
 \]
 
-The leaked mass is assigned to the already-summable cross/remainder budget.
-This reset lemma is what prevents a costly block from recharging the spherical
-potential without bound.
+The nonsymmetric companion identity
+
+\[
+b(\nu)=2c_*b(\lambda)-b(\mu)
+\]
+
+is used as the gate into this episode: if old/companion marginals are not
+synchronized well enough for the barycentric erosion inequality, then either
+the companion barycenter is small (hence it pays collision entropy) or it is
+concentrated and is sent to the fresh/reuse ancestry classification.  Thus the
+only low-cost transition is precisely the synchronized flat transition for
+which the potential erosion below is valid.
+
+A particularly natural threshold is
+
+\[
+\beta=c_*.
+\]
+
+Then
+
+\[
+P_{max}=\kappa_*,
+\qquad
+h_\beta=\log\frac{2}{1+c_*}\approx0.09516.
+\]
+
+In the exact model this means a zero-cost synchronized flat episode contains
+at most one transition before another entropy/fresh/reuse event must occur.
 
 ## 3. Erosion inside one flat episode
 

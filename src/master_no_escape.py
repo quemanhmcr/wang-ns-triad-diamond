@@ -14,6 +14,15 @@ class MasterStep:
     potential_error: float = 0.0
 
 
+
+def barycentric_reset_constants(beta: float) -> dict[str, float]:
+    if not (0.0 < beta < 1.0):
+        raise ValueError("beta must lie in (0,1)")
+    return {
+        "entropy_floor": math.log(2.0 / (1.0 + beta)),
+        "potential_reset": -math.log(beta),
+    }
+
 def cap_or_entropy_constants(alpha: float, epsilon_cap: float) -> dict[str, float]:
     if not (0.0 < alpha < math.pi / 2.0):
         raise ValueError("alpha must lie in (0,pi/2)")

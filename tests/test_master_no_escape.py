@@ -3,6 +3,7 @@ import random
 
 from src.master_no_escape import (
     MasterStep,
+    barycentric_reset_constants,
     cap_or_entropy_constants,
     cross_penalty,
     master_episode_bound,
@@ -77,3 +78,13 @@ def test_random_admissible_episode_trees():
             episodes.append(ep)
         out = verify_episode_trace(episodes, c0=0.05, kappa0=kappa, potential_reset=reset)
         assert out["admissible"]
+
+
+def test_barycentric_reset_at_optimal_half_angle():
+    theta = 1.2241447408978967
+    cstar = math.cos(theta / 2.0)
+    kappa = -math.log(cstar)
+    out = barycentric_reset_constants(cstar)
+    assert abs(out["potential_reset"] - kappa) < 1e-14
+    assert abs(out["entropy_floor"] - math.log(2.0 / (1.0 + cstar))) < 1e-14
+    assert out["entropy_floor"] > 0.09
