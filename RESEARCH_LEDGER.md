@@ -3228,11 +3228,13 @@ The most useful recorded runs, in chronological order, are:
 | `31188755726`--`31188831280` | twelve-workflow actual-packet integration on `88f5173`: smooth-SGS role separation, affine Kelvin PDE, divergence-free packet, Hermite sidebands, base-spinor cross forcing, affine SGS boundary/increments, one-shot profile, symbol freezing, affine window, relative polarization, localized pressure and master all green; `215` tests per workflow, master `20,000` traces with worst margin `0` |
 | `31189036483` | exact affine curvature connection / resolved acceleration-Hessian source split and pressure-third `6-3=3` far locality; `217` tests + `50,000` checks |
 
+| `31189330225`, `31189336088`, `31189342467`, `31189348870`, `31189354561`, `31189360561`, `31189366109`, `31189372330`, `31189378786` | exact-SHA actual-packet validation on `f27ed04`: role separation, affine Kelvin PDE, divergence-free weak packet, Hermite sidebands, base-spinor cross forcing, affine SGS boundary/increments, curvature connection, localized pressure and master all green; `217` tests per workflow, master `20,000` traces with worst margin `0` |
+
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
-The current preferred master regression is run `31183274599` on exact-SHA
-affine validation commit `be4520b` (`195` tests plus `20,000` episode traces,
-worst margin `0`).  The earlier nine-workflow affine master `31182796814`,
+The current preferred master regression is run `31189378786` on exact-SHA
+actual-packet validation commit `f27ed04` (`217` tests plus `20,000` episode
+traces, worst margin `0`).  The earlier nine-workflow affine master `31182796814`,
 eleven-workflow affine
 master `31182017032`, relative-polarization master
 `31175212421`, integrated helical run
