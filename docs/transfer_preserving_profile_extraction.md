@@ -140,6 +140,34 @@ its `L^2` mass.  If that ellipsoid is much larger than the natural `N^{-1}`
 scale, covering it by natural cells creates the replication/fresh alternative;
 if it is scale matched, it is already one critical packet.
 
+For the certified radial log shell used by the crossing theorem,
+
+\[
+\left|\log\frac{|\xi|}{N}\right|\le\frac2{25},
+\]
+
+the full spherical shell has
+
+\[
+|\Omega_N|
+\le
+\frac{4\pi}{3}
+\left(e^{6/25}-e^{-6/25}\right)N^3.
+\]
+
+At the concrete profile distance `epsilon_G=1/100`, the 160-bit Arb certificate
+therefore gives the clean frozen-time mass bound
+
+\[
+\boxed{
+N\|G\|_2^2>\frac34.
+}
+\]
+
+This number is independent of the absolute frequency `N`.  The only
+non-explicit input is how small the weighted Young deficit must be for Christ's
+theorem to guarantee one-percent Gaussian proximity.
+
 Thus the uncertainty principle gives the desired physical dichotomy:
 
 \[

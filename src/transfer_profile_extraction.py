@@ -81,6 +81,37 @@ def finite_energy_shell_lp_upper(critical_l2_mass: float, shell_volume_coefficie
     return shell_volume_coefficient ** (1.0 / 6.0) * math.sqrt(critical_l2_mass)
 
 
+
+
+def arb_narrow_shell_mass_certificate() -> dict[str, str]:
+    """Rigorous critical-mass bridge for the certified log shell |log(|xi|/N)|<=2/25.
+
+    At one-percent Christ profile distance, Holder on the full spherical shell
+    gives a universal lower bound N||G||_2^2 > 3/4 in the unitary Fourier
+    convention.
+    """
+    try:
+        from flint import arb, ctx
+    except ImportError as exc:  # pragma: no cover - exercised in Actions
+        raise RuntimeError("python-flint is required for the rigorous shell-mass certificate") from exc
+    ctx.prec = 160
+    sigma = arb(2) / 25
+    eps = arb(1) / 100
+    pi = arb.pi()
+    c_omega = (4 * pi / 3) * ((3 * sigma).exp() - (-3 * sigma).exp())
+    mass = (1 - eps) ** 2 / c_omega.root(3)
+    if not (mass > arb(3) / 4):
+        raise AssertionError(f"narrow-shell critical mass certificate failed: {mass}")
+    return {
+        "shell_halfwidth": "2/25",
+        "profile_distance": "1/100",
+        "shell_volume_coefficient_ball": str(c_omega),
+        "critical_l2_mass_ball": str(mass),
+        "critical_l2_mass_lower_bound": "3/4",
+        "status": "CERTIFIED",
+    }
+
+
 def stress(samples: int = 100_000, seed: int = 20260807) -> dict[str, float]:
     import numpy as np
 
@@ -117,9 +148,11 @@ def main() -> None:
     ap.add_argument("--outdir", type=Path, default=Path("results-transfer-profile"))
     args = ap.parse_args()
     args.outdir.mkdir(parents=True, exist_ok=True)
+    cert = arb_narrow_shell_mass_certificate()
     result = stress(args.samples)
-    (args.outdir / "transfer_profile_extraction.json").write_text(json.dumps(result, indent=2))
-    md = f"""# One-shot transfer-preserving Gaussian profile algebra\n\n- random parameter checks: `{result['samples']}`\n- exact replacement loss at 1% profile distance: `{result['replacement_loss_at_1_percent']:.9f}`\n- minimum Gaussian-transfer lower bound in stress: `{result['minimum_gaussian_transfer_lower']:.9f}`\n- minimum shell-critical-L2 lower bound in stress: `{result['minimum_critical_l2_mass_lower']:.9e}`\n\nThe existence of the Gaussian approximation is supplied analytically by Christ's\nnear-extremizer theorem for Young convolution.  This workflow verifies only the\nnew deterministic transfer/mass consequences and does not pretend to numerically\ncertify Christ's theorem.\n"""
+    payload = {"certificate": cert, "stress": result}
+    (args.outdir / "transfer_profile_extraction.json").write_text(json.dumps(payload, indent=2))
+    md = f"""# One-shot transfer-preserving Gaussian profile algebra\n\nStatus: **{cert['status']}** for the narrow-shell critical-mass bridge.\n\n- certified shell halfwidth: `{cert['shell_halfwidth']}`\n- certified 1% profile critical-L2 mass: `> {cert['critical_l2_mass_lower_bound']}`\n- shell-volume enclosure: `{cert['shell_volume_coefficient_ball']}`\n- critical-mass enclosure: `{cert['critical_l2_mass_ball']}`\n- random parameter checks: `{result['samples']}`\n- exact replacement loss at 1% profile distance: `{result['replacement_loss_at_1_percent']:.9f}`\n- minimum Gaussian-transfer lower bound in stress: `{result['minimum_gaussian_transfer_lower']:.9f}`\n- minimum shell-critical-L2 lower bound in stress: `{result['minimum_critical_l2_mass_lower']:.9e}`\n\nThe existence of the Gaussian approximation is supplied analytically by Christ's\nnear-extremizer theorem for Young convolution.  This workflow verifies only the\nnew deterministic transfer/mass consequences and does not pretend to numerically\ncertify Christ's theorem.\n"""
     (args.outdir / "summary.md").write_text(md)
     print(md)
 
