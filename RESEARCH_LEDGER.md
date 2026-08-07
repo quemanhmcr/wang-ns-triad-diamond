@@ -1431,10 +1431,12 @@ The most useful recorded runs, in chronological order, are:
 | `31165172325` | one-shot transfer-preserving Gaussian profile algebra; `108` tests + `100,000` parameter checks |
 | `31165654509` | preferred one-shot profile certificate: Arb narrow-shell critical mass `>3/4`; `108` tests + `100,000` checks |
 | `31165838379` | smooth-SGS symbol freezing / summable relative-cell error; `111` tests + `50,000` cell checks |
+| `31166152074`--`31166171000` | final eight-workflow bridge integration on `37e1380`: single-edge, crossing moat, profile mass, symbol freezing, annular pressure, localized pressure, nested grains and master all green; `111` tests per workflow |
 
-The current preferred master regression is run `31161811900` (the earlier
-recorded master artifact `31154025683/` remains the canonical episode-trace
-artifact).  The preferred smooth physical-flux artifacts are
+The current preferred master regression is run `31166171000` on the integrated
+bridge commit `37e1380` (`20,000` episode traces, worst margin `0`).  The earlier
+recorded master artifact `31154025683/` remains the canonical stored
+episode-trace artifact.  The preferred smooth physical-flux artifacts are
 `recorded-results/31161316034/` and `recorded-results/31161626056/`.  The
 preferred single-edge/physical-weight certificate is
 `recorded-results/31161914134/`.  The localized pressure-work artifact is
@@ -1443,7 +1445,9 @@ preferred single-edge/physical-weight certificate is
 `recorded-results/31164771160/`, and the exploratory one-shot transfer-profile artifact is
 `recorded-results/31165172325/`; its preferred Arb narrow-shell continuation is
 `recorded-results/31165654509/`.  The preferred smooth-symbol freezing artifact
-is `recorded-results/31165838379/`.  The numerical full-Mellin search is recorded
+is `recorded-results/31165838379/`.  Final integration runs are
+`31166152074`, `31166155045`, `31166158218`, `31166160711`, `31166163414`,
+`31166165985`, `31166168659`, and `31166171000`.  The numerical full-Mellin search is recorded
 in `recorded-results/31160779428/`; its qualitative counterexample is separately
 Arb-certified in run `31161914134`.
 
