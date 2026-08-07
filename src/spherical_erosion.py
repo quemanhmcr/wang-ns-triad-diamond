@@ -245,6 +245,42 @@ def balanced_chain_entropy_bound(depth: int, cos_half: float = C_STAR) -> dict[s
         "per_level_terms": terms,
     }
 
+
+def companion_entropy_certificate(
+    parent_points: np.ndarray,
+    companion_points: np.ndarray,
+    child_points: np.ndarray,
+    weights: np.ndarray,
+    cos_half: float = C_STAR,
+) -> dict[str, object]:
+    """Exact nonsymmetric barycenter identity plus companion H2 lower bound.
+
+    For an atomic coupling supported on one common parent angle,
+      b_child=(b_parent+b_companion)/(2 cos_half).
+    Hence b_companion=2 cos_half b_child-b_parent.
+    """
+    parent_points = np.array([normalize(x) for x in np.asarray(parent_points, dtype=float)])
+    companion_points = np.array([normalize(x) for x in np.asarray(companion_points, dtype=float)])
+    child_points = np.array([normalize(x) for x in np.asarray(child_points, dtype=float)])
+    weights = np.asarray(weights, dtype=float)
+    weights = weights / np.sum(weights)
+    b_parent = weights @ parent_points
+    b_companion = weights @ companion_points
+    b_child = weights @ child_points
+    predicted = 2.0 * cos_half * b_child - b_parent
+    collision = barycenter_collision_certificate(companion_points, weights)
+    return {
+        "parent_barycenter": b_parent.tolist(),
+        "companion_barycenter": b_companion.tolist(),
+        "child_barycenter": b_child.tolist(),
+        "predicted_companion": predicted.tolist(),
+        "identity_error": float(np.linalg.norm(predicted - b_companion)),
+        "companion_collision_entropy": collision["entropy"],
+        "companion_entropy_lower_bound": collision["entropy_lower_bound"],
+        "companion_balance_defect": float(1.0 - np.linalg.norm(b_companion)),
+        "collision_margin": collision["margin"],
+    }
+
 def random_unit(rng: np.random.Generator) -> np.ndarray:
     return normalize(rng.normal(size=3))
 
@@ -321,6 +357,10 @@ def main() -> None:
         pairs.append((p, q))
     bary_weights = rng.random(len(pairs))
     bary = equal_marginal_barycenter_test(pairs, bary_weights)
+    parent_points = np.array([p for p, _ in pairs])
+    companion_points = np.array([q for _, q in pairs])
+    child_points = np.array([spherical_midpoint(p, q) for p, q in pairs])
+    companion_cert = companion_entropy_certificate(parent_points, companion_points, child_points, bary_weights)
     atomic_points = np.array([p for pair in pairs for p in pair])
     atomic_weights = np.repeat(bary_weights / np.sum(bary_weights) / 2.0, 2)
     collision = barycenter_collision_certificate(atomic_points, atomic_weights)
@@ -348,6 +388,7 @@ def main() -> None:
         },
         "barycenter_amplification": bary,
         "barycenter_collision": collision,
+        "nonsymmetric_companion": companion_cert,
         "balanced_chain_entropy": entropy_rows,
         "balanced_entropy_deficit_constant": entropy_constant,
     }
@@ -387,6 +428,8 @@ def main() -> None:
         f"Regular tetrahedron diameter: `{math.degrees(tetra_diameter):.9f}` deg",
         f"Equal-marginal barycenter amplification error: `{bary['error']:.3e}`",
         f"Atomic collision inequality margin: `{collision['margin']:.3e}`",
+        f"Nonsymmetric companion identity error: `{companion_cert['identity_error']:.3e}`",
+        f"Companion entropy lower bound: `{companion_cert['companion_entropy_lower_bound']:.9f}`",
         f"Asymptotic entropy deficit constant: `{entropy_constant:.9f}`",
         "",
         "## Balanced-chain entropy",

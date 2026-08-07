@@ -250,3 +250,39 @@ The correction is uniformly bounded because
 Numerically the limiting correction is about `3.76730`. Consequently the balanced exception does not provide a zero-cost infinite branch: under the equal-marginal hypothesis it pays asymptotically `log 2` of atomic collision entropy per generation.
 
 This is the spherical counterpart of the transfer-weighted Bellman cost. The remaining task is to prove that the PDE grain coupling is sufficiently balanced, or else quantify the imbalance itself as fresh mass.
+
+## 8. Nonsymmetric companion identity
+
+The equal-marginal assumption is not needed for the local bridge. Let a weighted coupling have old-parent marginal `mu`, companion marginal `nu`, and child marginal `lambda`, all supported on exact angle `theta_*`. Then
+
+\[
+\boxed{
+b(\lambda)=\frac{b(\mu)+b(\nu)}{2c_*},
+\qquad c_*=\cos(\theta_*/2).
+}
+\]
+
+Equivalently,
+
+\[
+\boxed{
+b(\nu)=2c_*b(\lambda)-b(\mu).
+}
+\]
+
+Applying the atomic barycenter--collision inequality to the companion distribution gives
+
+\[
+\boxed{
+H_2(\nu)
+\ge
+\log\frac{2}{1+|2c_*b(\lambda)-b(\mu)|}.
+}
+\]
+
+This produces a local dichotomy without symmetry assumptions:
+
+1. If the vector `2 c_* b(lambda)-b(mu)` has norm substantially below one, the companion population pays definite collision entropy.
+2. If its norm is close to one, the companion mass is nearly concentrated in one direction. That is precisely the structured fresh-packet branch to be handled by the scale/ancestry ledger.
+
+Thus the spherical module now interfaces directly with the previous Bellman cocycle: balanced companions pay entropy; concentrated companions become trackable fresh grains.

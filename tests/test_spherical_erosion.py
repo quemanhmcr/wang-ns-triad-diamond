@@ -104,3 +104,20 @@ def test_balanced_chain_entropy_is_linear_up_to_bounded_loss():
     assert a["total_entropy_lower_bound"] > 0
     assert b["bounded_deficit"] < 3.77
     assert b["total_entropy_lower_bound"] > 48 * math.log(2) - 3.77
+
+
+def test_nonsymmetric_companion_identity_and_entropy():
+    from src.spherical_erosion import companion_entropy_certificate
+    rng = np.random.default_rng(33)
+    parents = []
+    companions = []
+    children = []
+    for _ in range(25):
+        p = normalize(rng.normal(size=3))
+        q = make_companion(p, rng.normal(size=3))
+        parents.append(p)
+        companions.append(q)
+        children.append(spherical_midpoint(p, q))
+    cert = companion_entropy_certificate(np.array(parents), np.array(companions), np.array(children), rng.random(25))
+    assert cert["identity_error"] < 1e-12
+    assert cert["companion_collision_entropy"] >= cert["companion_entropy_lower_bound"] - 1e-12
