@@ -331,7 +331,85 @@ the frozen frequency roles to moving physical packets, propagate the affine
 Gaussian grain through its packet lifetime, control partition overlap and
 non-pressure leakage, and synchronize the moving windows across generations.
 
-## 7. PDE-facing localized pressure alternative
+## 7. PDE-facing spacetime grain dynamics
+
+The frozen-time packet bridge now has a quantitative affine/Kelvin continuation.
+For the trace-free symmetric strain `D` seen by the extremal triad plane,
+Arb certifies the infinitesimal coercivity
+
+\[
+\frac12\dot u^2+2\dot v^2
+\ge\frac{43}{100}\|D\|_F^2.
+\]
+
+A frozen principal strain with eigenvalues `+/-d` and `dT<=1/25` pays
+
+\[
+\boxed{
+\frac1T\int_0^T\operatorname{Def}(t)dt
+\ge\frac1{10}(dT)^2.
+}
+\]
+
+After removing local rigid rotation, the same conclusion is stable under five-
+percent strain variation: if `sup||D(t)-D(0)||<=d/20` and `dT<=1/30`,
+
+\[
+\boxed{
+\frac1T\int_0^T\operatorname{Def}(t)dt
+\ge\frac1{24}(dT)^2.
+}
+\]
+
+Failure of that coherence forces objective strain variation `>d/20`.  The exact
+Navier--Stokes gradient equation routes the variation into
+
+\[
+\mathring S
+=Q(A)-\nabla^2p+\nu\Delta S,
+\qquad
+Q(A)=-S^2-\Omega^2+[S,\Omega].
+\]
+
+For `d=sigma N^2` and a packet lifetime `T=cN^{-2}`, at least one source channel
+then has normalized average size `>=sigma/(60c)`.  In the band-limited packet
+model the quadratic and viscous channels force critical mass by Bernstein; the
+far pressure-Hessian kernel has the stronger locality gain `5-3=2` after 3D
+packing.
+
+The moving window should deform with the affine flow.  Its affine advective
+leakage vanishes exactly; velocity curvature competes with the smooth-filter
+commutator.  The combined spatial error has the exact form
+
+\[
+\boxed{
+E(M)=\frac aM+b\kappa M,
+\qquad
+\kappa=N^{-3}\|\nabla^2u\|_\infty,
+}
+\]
+
+with optimum
+
+\[
+\boxed{
+M_*=\sqrt{a/(b\kappa)},
+\qquad
+E_*=2\sqrt{ab\kappa}.
+}
+\]
+
+This corrects the earlier heuristic that one fixed expanding spatial moat could
+make every localization term summable.  The quadratic schedule remains valid in
+the defect-space nested-grain theorem and for the commutator alone, but the
+physical moving window must be curvature-adaptive.
+
+These packet-lifetime inequalities are not yet inserted as new universal master
+`c_0` branches.  Doing so requires the full 3D packet-frame realization,
+off-plane tilt control, adaptive-window compatibility, and registration of the
+forced critical mass as fresh or reused.
+
+## 8. PDE-facing localized pressure alternative
 
 For a smooth physical SGS packet block, spatial localization should use the
 combined work

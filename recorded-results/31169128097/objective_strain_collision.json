@@ -1,0 +1,10 @@
+{
+  "samples": 50000,
+  "pressure_hessian_kernel_constant": 150.0,
+  "gradient_bernstein_constant_lambda1": 0.10065842420897406,
+  "third_derivative_bernstein_constant_lambda1": 0.07502635967975885,
+  "far_pressure_hessian_coefficient_example": 9.375,
+  "worst_quadratic_identity_residual": 1.1102230246251565e-16,
+  "worst_viscous_identity_residual": 1.1102230246251565e-16,
+  "minimum_pressure_collision_margin": 1.0952821333258392e-07
+}

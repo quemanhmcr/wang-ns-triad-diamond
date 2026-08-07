@@ -311,16 +311,13 @@ Young's inequality gives, for `1<=p<=infinity`,
 }
 \]
 
-If the spatial transition has width `M/K`, the cost is `O(1/M)`.  Hence the
-same schedules already used by nested grain extraction, e.g.
-
-\[
-M_j=(j+3)^2,
-\qquad \sum_jM_j^{-1}<\infty,
-\]
-
-make smooth-filter/spatial-window commutators summable.  This is a genuine PDE
-localization mechanism rather than a decorative analogy.
+If the spatial transition has width `M/K`, the **filter commutator** cost is
+`O(1/M)`.  Thus schedules such as `M_j=(j+3)^2` make this commutator term
+summable.  This statement is deliberately limited to the commutator.  The
+moving-affine Taylor remainder grows instead like `kappa_j M_j`, where
+`kappa_j=N_j^{-3}||nabla^2 U||`; the curvature-balanced moat theorem shows that
+full spatial localization must use an adaptive balance `a/M+b kappa M` rather
+than a universal expanding schedule.
 
 Pressure is absent from the **global** graded spectral transfer because the
 scalar spectral filter preserves divergence-free fields and
@@ -490,10 +487,12 @@ Consequently the transfer-weighted midgap theorem has the physical-space form
 on a forward packet core satisfying the common spectral moat.
 
 After multiplying by a spatial packet window, the pressure term becomes a
-boundary flux through the transition region.  Thus the unresolved pressure
-problem is now localized very specifically: prove that this boundary work is
-summable under the same expanding-moat schedule.  It no longer contaminates the
-global definition of the transfer weights.
+boundary flux through the transition region.  It no longer contaminates the
+global definition of the transfer weights.  The transition width must be chosen
+adaptively: the filter commutator falls like `1/M`, whereas the affine-window
+curvature error grows like `kappa M`.  The curvature-balanced moat module records
+the exact optimum and a countermodel to using one fixed quadratic spatial
+schedule for both terms.
 
 ## 11. Certified change of measure and a physical Hodge constant
 

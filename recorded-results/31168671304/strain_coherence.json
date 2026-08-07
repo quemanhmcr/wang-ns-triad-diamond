@@ -1,0 +1,19 @@
+{
+  "certificate": {
+    "coherence_fraction": "1/20",
+    "strain_time": "1/30",
+    "hodge_bracket_ball": "[0.30018184166647135303892042974521300461699362944 +/- 5.14e-48]",
+    "pointwise_hodge_lower": "1/4",
+    "local_shape_radius_ball": "[0.070000000000000000000000000000000000000000000000 +/- 4.04e-49]",
+    "average_deficit_lower": "1/24",
+    "coherence_failure_action": ">= d/20",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 20000,
+    "worst_coherent_hodge_ratio": 0.7372096986797421,
+    "worst_abs_shape_coordinate": 0.06542469230927389,
+    "worst_material_strain_identity_residual": 8.677392555294226e-16,
+    "worst_corotational_identity_residual": 5.438959822042073e-16
+  }
+}

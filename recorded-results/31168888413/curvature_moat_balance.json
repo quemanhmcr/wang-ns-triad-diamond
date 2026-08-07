@@ -1,0 +1,11 @@
+{
+  "samples": 100000,
+  "worst_optimality_residual": 2.9939826141627537e-16,
+  "worst_mass_identity_residual": 8.291880443375843e-16,
+  "old_schedule_commutator_partial_100k": 0.39492406709822164,
+  "old_schedule_curvature_partial_100k": 10.590166129563368,
+  "balanced_commutator_partial_100k": 1.2524974818273658,
+  "balanced_curvature_partial_100k": 1.2524974818273655,
+  "balanced_tail_upper_after_100k": 0.006324492075732223,
+  "scalar_bernstein_constant_lambda1": 0.08507189549448235
+}

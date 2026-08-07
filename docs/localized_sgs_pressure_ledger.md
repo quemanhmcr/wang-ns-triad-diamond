@@ -247,8 +247,10 @@ transport geometry for a future spacetime grain extraction.
 
 The remaining leakage terms are then the SGS transport `RU`, viscous boundary
 flux, window-transport mismatch, and any pressure-cancellation annular charge.
-The smooth-filter commutator bound from the preceding module is summable for the
-existing expanding-moat schedule.
+The smooth-filter commutator bound from the preceding module is summable for an
+expanding moat, but this does **not** by itself control the moving-window Taylor
+error.  The curvature-balanced moat theorem gives the combined law
+`a/M+b kappa M` and requires an adaptive spatial transition width.
 
 ## 7. Remaining bridge
 

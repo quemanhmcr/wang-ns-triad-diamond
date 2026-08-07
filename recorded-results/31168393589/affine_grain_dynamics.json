@@ -1,0 +1,22 @@
+{
+  "certificate": {
+    "rstar_ball": "[0.6109041016 +/- 2.01e-11]",
+    "strain_coercivity_ball": "[0.4359294243 +/- 9.23e-11]",
+    "strain_coercivity_lower": "43/100",
+    "frozen_strain_time": "1/25",
+    "pointwise_hodge_bracket_ball": "[0.64139394722215711767964014324840433487233120981 +/- 5.72e-48]",
+    "pointwise_hodge_lower": "3/5",
+    "average_deficit_lower": "1/10",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_planar_strain_coercivity": 0.43592942431713777,
+    "worst_frozen_hodge_ratio": 0.782764352291313,
+    "worst_dual_center_relative_residual": 3.009790538909399e-14,
+    "worst_logdet_relative_residual": 2.653433028854124e-14,
+    "worst_kelvin_constraint_residual": 5.329070518200751e-15,
+    "worst_kelvin_energy_relative_residual": 1.2434497875801753e-14,
+    "worst_isotropic_viscosity_shape_residual": 3.443481593039715e-15
+  }
+}
