@@ -7,8 +7,6 @@ on:
         description: "Run reduced search"
         required: false
         default: "false"
-  push:
-    branches: [main]
 
 permissions:
   contents: read
