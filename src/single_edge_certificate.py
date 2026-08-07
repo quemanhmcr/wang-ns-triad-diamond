@@ -19,6 +19,9 @@ Y_CUTOFF = Fraction(9, 10)    # y >= .9 handled analytically
 SMOOTH_SHELL = Fraction(2, 25)   # log-shell halfwidth for the packet block
 SMOOTH_DELTA = Fraction(1, 20)   # smooth log-filter transition halfwidth
 SMOOTH_MOAT = Fraction(9, 250)   # certified residual common moat (>0.036)
+PHYSICAL_GOOD_ETA = Fraction(1, 10_000)
+PHYSICAL_GAP_RADIUS = Fraction(1, 80)   # sqrt(eta)+25 eta exactly at eta=1e-4
+PHYSICAL_WEIGHT_COND = Fraction(53, 50) # child-transfer/capacity condition number
 
 # A rational bracket for the unique symmetric critical point.
 RSTAR_LO = Fraction(61090410158, 100_000_000_000)
@@ -153,6 +156,16 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
     smooth_moat_margin = gamma / 2 - 2 * aq(SMOOTH_SHELL) - aq(SMOOTH_DELTA)
     if not (smooth_moat_margin > aq(SMOOTH_MOAT)):
         raise AssertionError(f"smooth common-midgap moat failed: {smooth_moat_margin}")
+
+    # On signed-good edges r=m*c >= 1-eta, one has Def=1-m<=eta.
+    # The mixed theorem gives u<=50 eta=1/200 and |v|<=sqrt(eta)=1/100,
+    # hence |log(q/p)-gamma*|<=1/80.  Since F=A J* r=T log(q/p),
+    # the child-transfer/capacity density condition number is the expression below.
+    gap_radius = aq(PHYSICAL_GAP_RADIUS)
+    eta_good = aq(PHYSICAL_GOOD_ETA)
+    physical_weight_cond = (gamma + gap_radius) / ((1 - eta_good) * (gamma - gap_radius))
+    if not (physical_weight_cond < aq(PHYSICAL_WEIGHT_COND)):
+        raise AssertionError(f"physical transfer/capacity weight comparison failed: {physical_weight_cond}")
 
     # --- Local certificate in exact log coordinates. ---
     # Direct interval evaluation on the whole rectangle has severe dependency
@@ -371,6 +384,10 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
         "smooth_midgap_filter_halfwidth": _qstr(SMOOTH_DELTA),
         "smooth_midgap_moat_lower_bound": _qstr(SMOOTH_MOAT),
         "smooth_midgap_moat_ball": str(smooth_moat_margin),
+        "physical_good_eta": _qstr(PHYSICAL_GOOD_ETA),
+        "physical_gap_radius": _qstr(PHYSICAL_GAP_RADIUS),
+        "physical_weight_condition_upper": _qstr(PHYSICAL_WEIGHT_COND),
+        "physical_weight_condition_ball": str(physical_weight_cond),
         "global_gap": _qstr(GLOBAL_GAP),
         "y_cutoff": _qstr(Y_CUTOFF),
         "corner_upper_ball": str(corner_upper),
@@ -446,6 +463,7 @@ def render_summary(cert: dict[str, Any], stress: dict[str, float] | None = None)
         f"- local Hodge conversion: `Def >= {cert['hodge_coefficient_lower_bound']} (r_p^2+r_q^2)`",
         f"- adverse sharp-cutoff Mellin retention: `>= {cert['mellin_flux_retention_lower_bound']}` of the upper progress segment",
         f"- smooth common-midgap moat: shell `{cert['smooth_midgap_shell_halfwidth']}`, filter `{cert['smooth_midgap_filter_halfwidth']}`, residual `>= {cert['smooth_midgap_moat_lower_bound']}`",
+        f"- physical good-core threshold: `eta={cert['physical_good_eta']}`, gap radius `<= {cert['physical_gap_radius']}`, transfer/capacity condition `< {cert['physical_weight_condition_upper']}`",
         f"- global exclusion outside the local box: `Def >= {cert['global_gap']}`",
         "",
         "## Certified enclosures",
@@ -459,6 +477,7 @@ def render_summary(cert: dict[str, Any], stress: dict[str, float] | None = None)
         f"- tangent derivative leaf boxes: `{cert['tangent_derivative_boxes']}` (max depth `{cert['tangent_derivative_max_depth']}`)",
         f"- adverse lower/upper Mellin segment ratio upper bound: `{cert['mellin_adverse_ratio_upper_bound']}`",
         f"- smooth common-midgap moat enclosure: `{cert['smooth_midgap_moat_ball']}`",
+        f"- physical transfer/capacity condition enclosure: `{cert['physical_weight_condition_ball']}`",
         f"- y>=0.9 analytic upper bound: `{cert['corner_upper_ball']}`",
         "",
         "## Global branch-and-bound",

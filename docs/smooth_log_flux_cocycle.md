@@ -494,3 +494,86 @@ boundary flux through the transition region.  Thus the unresolved pressure
 problem is now localized very specifically: prove that this boundary work is
 summable under the same expanding-moat schedule.  It no longer contaminates the
 global definition of the transfer weights.
+
+## 11. Certified change of measure and a physical Hodge constant
+
+Fix the concrete signed-good threshold
+
+\[
+\eta_0=10^{-4}.
+\]
+
+On `G_{eta_0}` the previous formula simplifies exactly to
+
+\[
+a_{\eta_0}=\sqrt{10^{-4}}+25\cdot10^{-4}
+=\frac1{80}.
+\]
+
+The Arb certificate now verifies
+
+\[
+\boxed{
+\kappa_{\eta_0}<\frac{53}{50}.
+}
+\]
+
+After normalizing both measures on the good core, if `w_e` is the capacity law
+and `\widetilde w_e` the actual positive child-transfer law, then pointwise
+
+\[
+\boxed{
+\frac{50}{53}\,w_e
+\le \widetilde w_e
+\le \frac{53}{50}\,w_e.
+}
+\]
+
+Therefore every nonnegative quadratic residual, and in particular the Hodge
+energy, changes by at most this factor under the physical change of measure.
+This is the quantitative bridge missing from the older phrase "transfer-weighted
+Hodge": the weights can now be taken to be actual positive child-energy
+transfers on the near-saturated core.
+
+There is also a clean cost-or-physical-Hodge consequence.  Let
+
+\[
+\epsilon=1-R.
+\]
+
+Markov gives capacity mass
+
+\[
+w(G_{\eta_0})\ge1-10^4\epsilon.
+\]
+
+If `epsilon>=1/20000`, the block already pays the explicit cost `1/20000`.
+Otherwise the good core has capacity mass at least `1/2`.  Combining
+
+\[
+\operatorname{Def}_e\ge\frac12\mathcal D_e
+\]
+
+with the change of measure yields
+
+\[
+\epsilon
+\ge \frac12\cdot\frac12\cdot\frac{50}{53}
+\,\mathcal E_H^{\rm phys}
+=\frac{25}{106}\mathcal E_H^{\rm phys}.
+\]
+
+Hence a physical-transfer Hodge branch with threshold `h_H` satisfies the
+explicit finite-packet cost
+
+\[
+\boxed{
+\epsilon\ge
+\min\left\{\frac1{20000},\frac{25}{106}h_H\right\}>0.
+}
+\]
+
+This constant is not a global Navier--Stokes theorem constant: the PDE still has
+to produce the packet core and common spectral/spatial moat.  But once those
+objects are extracted, the Hodge cost is now expressed in the weights of an
+actual smooth SGS energy transfer, not in an auxiliary graph measure.

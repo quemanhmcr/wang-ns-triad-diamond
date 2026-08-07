@@ -223,12 +223,39 @@ A fresh grain gives a fresh ancestry split; a reused grain returns to 2--5.
 The only branch not immediately paying a cost is therefore the cap-confined,
 synchronized-flat, no-fresh transition treated by the episode erosion above.
 
-The single-edge certificate removes the previous placeholder in branch 4.  If
-the good-edge Hodge threshold is `E_H>=h_H`, then
+The single-edge certificate removes the previous placeholder in branch 4.  In
+the abstract capacity weights, if the good-edge Hodge threshold is
+`E_H>=h_H`, then
 
 \[
 -\log R_{block}\ge\frac12E_H\ge\frac{h_H}{2}.
 \]
+
+The smooth-flux cocycle now supplies a PDE-facing version on a packet block.
+For signed efficiency deficit `epsilon=1-R`, take the pointwise-good threshold
+`eta_0=10^{-4}`.  If `epsilon>=1/20000`, the block already pays that fixed
+cost.  Otherwise at least half the capacity mass is on the positive core; Arb
+certifies that normalized physical child-transfer weights and capacity weights
+differ by at most a factor `53/50`.  Therefore
+
+\[
+\boxed{
+epsilon\ge\frac{25}{106}\mathcal E_H^{phys}
+}
+\]
+
+on the low-cost core.  A physical Hodge threshold `E_H^{phys}>=h_H` thus pays
+
+\[
+\boxed{
+c_{0,H}^{phys}=\min\{1/20000,(25/106)h_H\}>0.
+}
+\]
+
+Here `E_H^{phys}` is weighted by actual positive child-energy transfer.  The
+transfer-weighted midgap theorem realizes the associated progress sum as a
+single smooth SGS tail flux whenever the extracted block has the certified
+common spectral moat.
 
 If instead a set of outside-neighborhood edges has transfer weight at least
 `beta_bad`, it pays at least `beta_bad/100`.  Thus, after fixing the positive
