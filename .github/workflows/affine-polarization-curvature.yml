@@ -1,0 +1,20 @@
+name: Affine polarization curvature
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint==0.8.0
+      - run: pytest -q
+      - name: Affine polarization-curvature stress
+        run: python -m src.affine_polarization_curvature --samples 50000 --outdir results-affine-polarization-curvature
+      - run: cat results-affine-polarization-curvature/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: affine-polarization-curvature-results
+          path: results-affine-polarization-curvature/
