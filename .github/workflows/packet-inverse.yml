@@ -1,0 +1,24 @@
+name: packet-inverse
+on:
+  workflow_dispatch:
+    inputs:
+      power:
+        description: "Sobol power"
+        required: false
+        default: "17"
+permissions:
+  contents: read
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - run: python -m src.gaussian_packet --power "${{ inputs.power }}" --outdir results-packet
+      - run: cat results-packet/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with: {name: packet-inverse-results, path: results-packet/}
