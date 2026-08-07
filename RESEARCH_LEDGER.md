@@ -4137,9 +4137,18 @@ The most useful recorded runs, in chronological order, are:
 | `31227535026` | preferred unified source-weighted H1 episode on `2861f9a`: `C_src=132` mild, `1800` extended; SGS source weight -> mass/enstrophy/dissipation, viscous concentration raises dissipation; `264` tests + `50,000` checks |
 | `31227536542` | preferred no-gap affine-aspect theorem on `2861f9a`: transition `567/500`, `Q_pol>=1/4000`, extended H1/full costs, condition-growth/inheritance law, fresh aspect-radius mass; `264` tests + `50,000` checks, Arb-certified |
 
-The current preferred master regression is run `31189378786` on exact-SHA
-actual-packet validation commit `f27ed04` (`217` tests plus `20,000` episode
-traces, worst margin `0`).  The earlier nine-workflow affine master `31182796814`,
+| `31227852933`--`31227894352` | fourteen-workflow source/sideband/ancestry integration on `9c5f465`: H1 source, SGS/viscous collision, Onsager increment, source-weighted episode, sticky aspect, H1/H3, pair ancestry, curvature, affine critical grain, relative polarization, localized pressure and master all green; master `20,000` traces, worst margin `0` |
+
+The current preferred master regression is run `31227894352` on integration
+commit `9c5f465` (`258` tests plus `20,000` episode traces, worst margin `0`).
+The full source/sideband/ancestry integration on that exact SHA is
+`31227852933`, `31227856265`, `31227859724`, `31227862808`, `31227865715`,
+`31227868626`, `31227871490`, `31227874557`, `31227877505`, `31227881162`,
+`31227884346`, `31227887757`, `31227891065`, `31227894352`: physical H1
+source, filtered SGS/viscous collision, Onsager increments, source-weighted
+episode, sticky aspect, H1 bridge/no-escape, H3 no-escape, pair ancestry,
+curvature source, affine critical grain, relative polarization, localized
+pressure and master were all green.  The earlier nine-workflow affine master `31182796814`,
 eleven-workflow affine
 master `31182017032`, relative-polarization master
 `31175212421`, integrated helical run
