@@ -28,6 +28,8 @@ def test_h3_forcing_norm_isometry():
 
 
 def test_arb_sideband_constants():
+    import pytest
+    pytest.importorskip('flint')
     cert=arb_sideband_capacity_certificate()
     assert cert['H3_clean_reverse_constant']=='1/160'
     assert cert['H1_clean_reverse_constant']=='1/16'
