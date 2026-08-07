@@ -2452,11 +2452,14 @@ The most useful recorded runs, in chronological order, are:
 | `31174612248` | Arb-certified localized polarization packet bridge `E_pol<=3h+(15/2)c kappa M`; `170` tests + `50,000` configurations |
 | `31174812731` | preferred forced relative-polarization transport: exact additive nonlinear forcing residual; `171` tests + `50,000` histories |
 
+| `31175180687`--`31175212421` | integrated relative-polarization/localization stack on `e0a7855`: forced relative transport, localized polarization, symplectic quotient, smooth-symbol freezing, curvature balance, objective-strain collision, localized pressure and master all green; `171` tests per workflow, master `20,000` traces with worst margin `0` |
+
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
-The current preferred master regression is run `31171950823` on the integrated
-helical/spacetime bridge commit `6226fd9` (`20,000` episode traces, worst margin
-`0`).  The earlier integrated frequency/pressure bridge run `31166171000`
+The current preferred master regression is run `31175212421` on the integrated
+relative-polarization/localization bridge commit `e0a7855` (`171` tests plus
+`20,000` episode traces, worst margin `0`).  The earlier integrated helical run
+`31171950823` and frequency/pressure bridge run `31166171000`
 remains useful provenance.  The earlier
 recorded master artifact `31154025683/` remains the canonical stored
 episode-trace artifact.  The preferred smooth physical-flux artifacts are
