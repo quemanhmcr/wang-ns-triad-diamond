@@ -64,4 +64,4 @@ def test_polarization_identity_and_bad_mass_bound():
     cert = polarization_certificate(cap, mult, phase)
     assert abs(cert.exact_residual) < 2e-15
     assert cert.total_deficit + 1e-15 >= cert.multiplier_deficit
-    assert bad_capacity_mass_bound(0.02, 0.1) == 0.2
+    assert abs(bad_capacity_mass_bound(0.02, 0.1) - 0.2) < 1e-15
