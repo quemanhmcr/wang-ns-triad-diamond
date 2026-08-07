@@ -12,27 +12,56 @@ jobs:
         with: {python-version: "3.12", cache: pip}
       - run: pip install -r requirements.txt
       - run: pytest -q
-      - name: Master trace stress-test
+      - name: Master episode stress-test
         run: |
           python - <<'PY'
           import json, math, random
-          from src.master_no_escape import MasterStep, verify_trace
-          rng=random.Random(20260807)
-          worst=1e9
-          checked=0
+          from src.master_no_escape import MasterStep, master_lower_bound, verify_episode_trace
+
+          rng = random.Random(20260807)
+          worst = 1e9
+          checked = 0
           for _ in range(20000):
-              c0=0.04; k=0.18; p0=rng.uniform(0,2.0); p=p0; steps=[]
-              for _j in range(rng.randint(1,50)):
-                  z=rng.uniform(0,0.015)
-                  if rng.random()<0.4 and p-k+z>=0:
-                      p=p-k+z
-                      steps.append(MasterStep(1.0,0.0,0.0,True,z))
-                  else:
-                      c=rng.uniform(c0,0.5); eta=rng.uniform(0,0.002)
-                      steps.append(MasterStep(min(1.0,math.exp(-c)+eta),c,eta,False))
-              out=verify_trace(steps,c0=c0,kappa0=k,potential0=p0)
-              worst=min(worst,float(out['master_margin']))
-              checked+=1
-          print(json.dumps({'checked':checked,'worst_margin':worst},indent=2))
-          if worst < -1e-10: raise SystemExit(1)
+              c0 = 0.04
+              kappa = rng.uniform(0.12, 0.30)
+              reset = rng.uniform(kappa, 1.4)
+              nepisodes = rng.randint(1, 12)
+              episodes = []
+              all_steps = []
+
+              for e in range(nepisodes):
+                  p = reset
+                  ep = []
+                  for _j in range(rng.randint(0, 20)):
+                      z = rng.uniform(0.0, 0.015)
+                      if p - kappa + z < 0:
+                          break
+                      p = p - kappa + z
+                      s = MasterStep(1.0, 0.0, 0.0, True, z)
+                      ep.append(s)
+                      all_steps.append(s)
+                  episodes.append(ep)
+                  if e + 1 < nepisodes:
+                      cost = rng.uniform(c0, 0.5)
+                      eta = rng.uniform(0.0, 0.002)
+                      eff = min(1.0, math.exp(-cost) + eta)
+                      all_steps.append(MasterStep(eff, cost, eta, False))
+
+              epcheck = verify_episode_trace(
+                  episodes, c0=c0, kappa0=kappa, potential_reset=reset
+              )
+              if not epcheck['admissible']:
+                  raise SystemExit('generated inadmissible episode trace')
+
+              out = master_lower_bound(
+                  all_steps, c0=c0, kappa0=kappa, potential_reset=reset
+              )
+              actual = sum(-math.log(min(1.0, s.efficiency)) for s in all_steps)
+              margin = actual - float(out['log_efficiency_lower_bound'])
+              worst = min(worst, margin)
+              checked += 1
+
+          print(json.dumps({'checked': checked, 'worst_margin': worst}, indent=2))
+          if worst < -1e-10:
+              raise SystemExit(1)
           PY
