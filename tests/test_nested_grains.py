@@ -9,6 +9,8 @@ from src.nested_grains import (
     build_root,
     extract_tree,
     gaussian_triad_edge,
+    incidence_components,
+    prune_low_weight_edges,
     make_synthetic_branches,
     scalar_width_ratio,
     split_node,
@@ -83,3 +85,22 @@ def test_unequal_widths_are_rejected_in_exact_edge_module():
     import pytest
     with pytest.raises(ValueError):
         gaussian_triad_edge(p, q, z)
+
+
+def test_incidence_fresh_cycle_identity():
+    edges = [
+        TriadEdge(("a", "b", "c"), 0.0, 1.0, 1.0),
+        TriadEdge(("c", "d", "e"), 0.0, 1.0, 1.0),
+        TriadEdge(("e", "a", "f"), 0.0, 1.0, 1.0),
+    ]
+    row = incidence_components(edges)[0]
+    assert row["fresh_units"] + row["cycle_rank"] == 2 * row["triads"]
+    assert abs(row["fresh_fraction"] + row["cycle_fraction"] - 1.0) < 1e-14
+
+
+def test_low_edge_pruning_has_exact_budget():
+    edges = [TriadEdge((f"x{i}", f"y{i}", f"z{i}"), 0.0, 1.0, 10.0 ** (-i)) for i in range(8)]
+    transfer = sum(e.weight for e in edges)
+    active, discarded, threshold = prune_low_weight_edges(edges, transfer, 1e-3)
+    assert discarded <= 1e-3 * transfer + 1e-15
+    assert all(e.weight >= threshold for e in active)

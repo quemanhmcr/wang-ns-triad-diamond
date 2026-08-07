@@ -125,6 +125,61 @@ def _components(vertices: set[str], edges: Sequence[TriadEdge], cutoff_sq: float
     return result
 
 
+
+def prune_low_weight_edges(edges: Sequence[TriadEdge], parent_transfer: float, relative_budget: float) -> tuple[list[TriadEdge], float, float]:
+    """Discard individually tiny edges with an exact total-loss certificate.
+
+    With N edges, the threshold relative_budget * parent_transfer / N makes
+    the total discarded weight at most relative_budget * parent_transfer.
+    """
+    if not edges:
+        return [], 0.0, 0.0
+    threshold = relative_budget * parent_transfer / len(edges)
+    active = [e for e in edges if e.weight >= threshold]
+    discarded = sum(e.weight for e in edges if e.weight < threshold)
+    if discarded > relative_budget * parent_transfer + 1e-12 * max(1.0, parent_transfer):
+        raise AssertionError("low-edge pruning certificate failed")
+    return active, discarded, threshold
+
+
+def incidence_components(edges: Sequence[TriadEdge]) -> list[dict[str, float | int | str]]:
+    """Exact fresh-or-cycle accounting for a 3-uniform interaction graph.
+
+    For each connected incidence component with n packet vertices and m triad
+    vertices, the cycle rank is beta = 3m-(n+m)+1 = 2m-n+1. Hence
+    (n-1)+beta=2m exactly.
+    """
+    vertices = {v for e in edges for v in e.vertices}
+    if not vertices:
+        return []
+    uf = UnionFind(vertices)
+    for e in edges:
+        a, b, c = e.vertices
+        uf.union(a, b)
+        uf.union(b, c)
+    groups: dict[str, list[TriadEdge]] = {}
+    for e in edges:
+        groups.setdefault(uf.find(e.vertices[0]), []).append(e)
+    out: list[dict[str, float | int | str]] = []
+    for group_edges in groups.values():
+        group_vertices = {v for e in group_edges for v in e.vertices}
+        n = len(group_vertices)
+        m = len(group_edges)
+        beta = 2 * m - n + 1
+        if beta < 0 or (n - 1) + beta != 2 * m:
+            raise AssertionError("incidence Euler identity failed")
+        regime = "fresh-rich" if n - 1 >= beta else "cycle-rich"
+        out.append({
+            "vertices": n,
+            "triads": m,
+            "cycle_rank": beta,
+            "fresh_units": n - 1,
+            "regime": regime,
+            "fresh_fraction": (n - 1) / (2 * m),
+            "cycle_fraction": beta / (2 * m),
+        })
+    return sorted(out, key=lambda r: (-int(r["triads"]), -int(r["vertices"])))
+
 def split_node(
     node: GrainNode,
     *,
@@ -330,6 +385,12 @@ def experiment(outdir: Path) -> dict[str, object]:
                 bin_width=0.35,
             )
             levels = level_loss_bounds(root)
+            if root.lower_cut is not None:
+                short_edges = [e for e in root.edges if e.defect_sq < root.lower_cut * root.lower_cut]
+            else:
+                short_edges = list(root.edges)
+            active_edges, low_edge_loss, active_threshold = prune_low_weight_edges(short_edges, root.transfer, 1e-4)
+            incidence = incidence_components(active_edges)
             scenarios.append(
                 {
                     "branches": branches,
@@ -342,6 +403,9 @@ def experiment(outdir: Path) -> dict[str, object]:
                     "total_cross_loss": sum(v["cross_loss"] for v in levels.values()),
                     "total_certified_loss": sum(v["certified_loss"] for v in levels.values()),
                     "levels": levels,
+                    "low_edge_loss": low_edge_loss,
+                    "active_threshold": active_threshold,
+                    "incidence": incidence,
                 }
             )
     result = {
@@ -358,13 +422,14 @@ def experiment(outdir: Path) -> dict[str, object]:
         "",
         "The annular moat and Gaussian tail certificates are exact in the stated finite atomic model.",
         "",
-        "| branches | separation | root children | tree nodes | cross loss | certified bound | nested |",
-        "|---:|---:|---:|---:|---:|---:|:---:|",
+        "| branches | separation | root children | tree nodes | cross loss | certified bound | largest active component | regime | nested |",
+        "|---:|---:|---:|---:|---:|---:|---:|:---|:---:|",
     ]
     for row in scenarios:
+        largest = row["incidence"][0] if row["incidence"] else {"triads": 0, "regime": "none"}
         lines.append(
             f"| {row['branches']} | {row['separation']:.1f} | {row['root_children']} | {row['tree_nodes']} | "
-            f"{row['total_cross_loss']:.3e} | {row['total_certified_loss']:.3e} | {row['nested']} |"
+            f"{row['total_cross_loss']:.3e} | {row['total_certified_loss']:.3e} | {largest['triads']} | {largest['regime']} | {row['nested']} |"
         )
     lines += [
         "",

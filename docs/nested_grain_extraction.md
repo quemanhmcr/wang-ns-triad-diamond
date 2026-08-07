@@ -110,22 +110,48 @@ For example, `M_j=(j+3)^2` and `epsilon_j=2^{-2j-4}` work.
 
 ## 4. Sticky or decoupled
 
-At a node, either the construction returns a single child carrying the
-interaction, in which case the block is sticky at that resolution, or it
-returns several interaction components with a certified summable cross
-error. The transfer-weighted Bellman inequality can then be applied to the
-child masses without an uncontrolled remainder.
+At a node, either the construction returns several interaction components
+with a certified summable cross error, or the active hypergraph remains
+connected. Connectedness alone is **not** called stickiness: a long chain of
+locally compatible triads can percolate through phase space. Such a component
+must pass the fresh-or-cycle test below.
 
 Thus the decomposition supplies exactly the interface needed by the previous
 module:
 
 \[
-\text{one nested child}
+\text{one connected ancestry block}
 \quad\text{or}\quad
 \text{Bellman branching with summable cross error}.
 \]
 
-## 5. Missing PDE bridge
+## 5. Percolation cannot be a neutral escape
+
+Discard atomic edges below `epsilon*T_P/N`; their total transfer is at most
+`epsilon*T_P`. For any connected component of the remaining 3-uniform
+interaction hypergraph, let `n` be the number of packet vertices and `m` the
+number of triad vertices in its bipartite incidence graph. Its cycle rank is
+
+\[
+\beta=3m-(n+m)+1=2m-n+1.
+\]
+
+Hence the exact Euler identity is
+
+\[
+\boxed{(n-1)+\beta=2m.}
+\]
+
+Therefore every large connected block is forced into one of two regimes:
+
+- `n-1 >= m`: it contains at least linearly many fresh packet vertices;
+- `beta >= m`: it contains at least linearly many independent reuse cycles.
+
+There is no third percolating regime. This converts the single-linkage
+chaining problem into precisely the fresh-or-reuse dichotomy needed by the
+multiscale Bellman module.
+
+## 6. Missing PDE bridge
 
 For an arbitrary near-extremal Navier--Stokes block one still has to prove an
 atomic Gaussian extraction with controlled synthesis constants. Young
