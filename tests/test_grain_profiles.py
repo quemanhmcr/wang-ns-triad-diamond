@@ -54,3 +54,11 @@ def test_sharp_shared_component_certificate_near_one():
     assert cert.index == 0
     assert cert.y_mass + 1e-12 >= cert.yz_lower_each
     assert cert.z_mass + 1e-12 >= cert.yz_lower_each
+
+
+def test_generic_rotation_separates_child_frequency():
+    k_small = two_branch_kernel(0.02, 0.04, 0.0)
+    k_large = two_branch_kernel(0.02, 0.24, 0.0)
+    cross_small = max(k_small[i,j,l] for i in range(2) for j in range(2) for l in range(2) if not (i==j==l))
+    cross_large = max(k_large[i,j,l] for i in range(2) for j in range(2) for l in range(2) if not (i==j==l))
+    assert cross_large < cross_small

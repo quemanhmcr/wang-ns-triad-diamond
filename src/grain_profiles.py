@@ -96,9 +96,14 @@ def kernel_transfer(kernel: np.ndarray, x: np.ndarray, y: np.ndarray, z: np.ndar
     return float(np.sum(kernel * weights))
 
 
-def rotation_x(theta: float) -> np.ndarray:
-    c, s = math.cos(theta), math.sin(theta)
-    return np.array([[1.0, 0.0, 0.0], [0.0, c, -s], [0.0, s, c]])
+def generic_rotation(theta: float) -> np.ndarray:
+    """Rodrigues rotation about a fixed generic axis that moves every center."""
+    axis = np.array([1.0, 2.0, 3.0], dtype=float)
+    axis /= np.linalg.norm(axis)
+    x, y, z = axis
+    K = np.array([[0.0, -z, y], [z, 0.0, -x], [-y, x, 0.0]])
+    eye = np.eye(3)
+    return eye + math.sin(theta) * K + (1.0 - math.cos(theta)) * (K @ K)
 
 
 def two_branch_kernel(sigma: float, angle: float, spatial_scaled: float) -> np.ndarray:
@@ -108,7 +113,7 @@ def two_branch_kernel(sigma: float, angle: float, spatial_scaled: float) -> np.n
     spatial_scaled means sigma * physical branch separation.
     """
     p0, q0, z0, signs, j_star = packet_center()
-    rot = rotation_x(angle)
+    rot = generic_rotation(angle)
     ps = [p0, rot @ p0]
     qs = [q0, rot @ q0]
     zs = [z0, rot @ z0]
