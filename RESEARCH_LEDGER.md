@@ -281,6 +281,21 @@ finite-dimensional block cost `c_{0,H}=h_H/2`.  A bad-edge set of total transfer
 weight `\beta` instead pays at least `\beta/100` before any Hodge routing is
 invoked.
 
+For the exact nonflat three-triad reuse motif, unit arc weights have
+`\mathcal E_H=\gamma_*^2/5`.  With equal normalized triad transfer weights
+`w_e=1/3`, the inherited arc weights give
+
+\[
+\boxed{
+-\log R_{\rm block}\ge\frac{\gamma_*^2}{30}
+\approx0.00809556352.
+}
+\]
+
+This is a concrete theorem-level positive `c_0` for that normalized reuse block,
+not yet a claim that the same number is the universal master constant across
+all costly branches.
+
 ## 5. Gaussian packet inverse mechanism
 
 The critical Fourier norm

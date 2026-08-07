@@ -78,6 +78,23 @@ Thus a Hodge threshold `E_H>=h_H` supplies the explicit theorem-level block
 cost `c_{0,H}=h_H/2`.  Edges outside the certified local rectangle have
 `Def_e>=1/100` and are charged before the Hodge network is formed.
 
+
+For the three-triad nonflat reuse motif below, unit arc weights give exactly
+`E_H=gamma_*^2/5`.  If instead the three triads have equal normalized transfer
+weights `w_e=1/3` and each of their two Hodge arcs inherits that weight, linear
+scaling of the quadratic energy gives
+
+\[
+\mathcal E_H=\frac{\gamma_*^2}{15},
+\qquad
+\boxed{-\log R_{\rm block}\ge\frac{\gamma_*^2}{30}}
+\approx0.00809556352.
+\]
+
+This is a concrete certified positive cost for the normalized nonflat reuse
+block; it is not asserted to be the universal master `c_0` across all costly
+branches.
+
 ## Curved reuse motif
 
 For

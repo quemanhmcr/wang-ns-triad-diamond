@@ -23,6 +23,17 @@ def test_nonflat_cycle_has_exact_energy():
     assert not row["flat"]
 
 
+def test_equal_transfer_nonflat_motif_has_certified_positive_block_cost():
+    gamma = 0.4928152853421352
+    # Three triads have normalized transfer weights 1/3; each contributes two
+    # Hodge arcs with the same inherited conductance.
+    row = weighted_hodge_energy(nonflat_reuse_motif(), gamma, weights=[1.0 / 3.0] * 6)
+    assert abs(row["energy"] - gamma * gamma / 15.0) < 1e-11
+    block_log_cost = 0.5 * row["energy"]
+    assert abs(block_log_cost - gamma * gamma / 30.0) < 1e-11
+    assert block_log_cost > 0.008
+
+
 def test_butterfly_is_scale_flat_despite_cycle():
     gamma = 0.4928152853421352
     row = weighted_hodge_energy(flat_butterfly_motif(), gamma)
