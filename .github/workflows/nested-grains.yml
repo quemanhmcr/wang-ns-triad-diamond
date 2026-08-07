@@ -1,0 +1,19 @@
+name: nested-grains
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - run: python -m src.nested_grains --outdir results-nested-grains
+      - run: cat results-nested-grains/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with: {name: nested-grain-results, path: results-nested-grains/}
