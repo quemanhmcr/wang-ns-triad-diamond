@@ -1,0 +1,24 @@
+name: spherical-erosion
+on:
+  workflow_dispatch:
+    inputs:
+      samples:
+        description: "Random barrier samples"
+        required: false
+        default: "50000"
+permissions:
+  contents: read
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - run: python -m src.spherical_erosion --samples "${{ inputs.samples }}" --outdir results-spherical-erosion
+      - run: cat results-spherical-erosion/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with: {name: spherical-erosion-results, path: results-spherical-erosion/}
