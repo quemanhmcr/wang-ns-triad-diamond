@@ -2058,6 +2058,300 @@ packet identity: pressure boundary work, `RU`, viscous boundary flux and
 partition-overlap coefficients must still be inserted for the actual PDE packet
 construction.
 
+#### Actual smooth-SGS affine packet equation: two levels and Hermite forcing
+
+The packet bridge must distinguish two descriptions of the same Navier--Stokes
+nonlinearity.  The near-extremal Young/helical roles are roles of the **full
+velocity** `u`, while `R`, `Pi` and `RU` belong to the coarse-grained resolved
+energy equation.  Mixing these two levels would double count SGS transport.
+
+On the signed-good core the smaller parent, after normalizing the child to
+frequency `N`, satisfies
+
+\[
+|k_{parent}|/N\ge r_*e^{-1/80}>3/5.
+\]
+
+Action `31186597005` Arb-certified the clean `3/5` bound.  Choose a strict
+low-frequency transporter
+
+\[
+V=S_{N/4}u,
+\qquad \operatorname{supp}\widehat V\subset\{|\xi|\le N/4\}.
+\]
+
+Then
+
+\[
+\operatorname{supp}\widehat{V\otimes V}
+\subset\{|\xi|\le N/2\},
+\]
+
+so the low--low product cannot feed a selected near-extremal role.  The role
+nonlinearity therefore splits exactly into **low--high transport plus high--high
+transfer**.  The Kelvin background is thus the actual low-frequency part of the
+same Navier--Stokes velocity, not an externally imposed model flow.
+
+For the affine jet `V=A(x-X)`, `tr A=0`, the divergence-free low--high
+linearization has the exact Fourier equation
+
+\[
+\boxed{
+(\partial_t-(A^T\xi)\cdot\nabla_\xi)\widehat w
+=\left[-A+2\widehat\xi\widehat\xi^TA\right]\widehat w
+-\nu|\xi|^2\widehat w.
+}
+\]
+
+The pressure is determined by transversality,
+
+\[
+i\widehat\pi=-2\frac{\xi\cdot A\widehat w}{|\xi|^2},
+\]
+
+and is exactly the `2 khat khat^T A` correction rather than an independent
+packet source.  Along characteristics this gives
+
+\[
+\boxed{
+\dot k=-A^Tk,
+\qquad
+\dot a=(-A+2\widehat k\widehat k^TA)a-\nu|k|^2a.
+}
+\]
+
+In the objective transverse frame,
+
+\[
+\boxed{
+\dot c=-\operatorname{sym}(E^TAE)c-\nu|k|^2c,
+}
+\]
+
+so the exact PDE low--high linearization, Kelvin carrier law and the previously
+used two-component polarization generator are one transport identity.  Action
+`31187637446` passed `211` tests plus `50,000` checks; the pressure/Kelvin and
+objective-coordinate residuals were `8.702e-15` and `2.920e-14` respectively.
+
+The spectral packet cell has an equally exact transport law.  For affine
+transport, the correct Heisenberg residual of a scalar multiplier is
+
+\[
+\boxed{
+\partial_tm-(A^T\xi)\cdot\nabla_\xi m.
+}
+\]
+
+A cell transported by the dual affine flow makes this zero.  Action
+`31186597005` saw zero algebraic residual in `50,000` random affine tests.  Thus
+common carrier/covariance motion is not spectral leakage.
+
+A spatially localized role must also remain divergence free.  Rather than
+multiplying a helical mode by a window and silently dropping pressure, use the
+weak test packet
+
+\[
+\boxed{
+\Psi_i=M_{i,N}(D)(\chi_{L,M}\phi_i),
+}
+\]
+
+where `M_(i,N)` is the smooth shell-localized Leray/helical/cell multiplier.
+Then `div Psi_i=0` exactly and full Navier--Stokes gives
+
+\[
+\boxed{
+\frac d{dt}\langle u,\Psi_i\rangle
+=\langle u,\partial_t\Psi_i\rangle
++\langle u\otimes u,\nabla\Psi_i\rangle
+-\nu\langle\nabla u,\nabla\Psi_i\rangle.
+}
+\]
+
+Pressure vanishes exactly from this microscopic weak equation.  Since the
+complete shell multiplier is smooth away from `xi=0`, its kernel has finite
+first moment and
+
+\[
+\boxed{
+\|[\chi,M_{i,N}]f\|_2
+\le \frac{m_1(K)}N\|\nabla\chi\|_\infty\|f\|_2
+\le \frac{3m_1(K)C_\chi}{2M}\|f\|_2.
+}
+\]
+
+Action `31188118452` passed `215` tests plus `50,000` checks; the Leray pressure
+residual was `1.791e-15` and the discrete commutator/bound ratio was
+`0.996773131`.  Thus enforcing divergence-free/helical localization only
+renormalizes the existing `1/M` moat coefficient.
+
+The remaining field residual must **not** be inserted wholesale as the spinor
+forcing `F_i`.  In the affine Gaussian/Hermite frame it decomposes as
+
+\[
+\boxed{
+f_i=f_i^{(0)}+f_i^{H_1,pol}+f_i^{tan,\le2}
++f_i^{H_3,env}+f_i^{higher}.
+}
+\]
+
+Only the degree-zero projection `f_i^(0)` enters the forced symplectic spinor
+identity.  The exact Gaussian-chaos identities are
+
+\[
+\boxed{
+\mathbb E[(T:H_3)P_2(Z)]=0\quad(\deg P_2\le2),
+\qquad
+\mathbb E[(T:H_3)^2]=6\|T\|_F^2,
+}
+\]
+
+and, for the spatial polarization sideband,
+
+\[
+\boxed{
+\mathbb E\left[\sum_c C_cZ_c\right]=0,
+\qquad
+\mathbb E\left|\sum_cC_cZ_c\right|^2=\sum_c\|C_c\|_F^2.
+}
+\]
+
+Hence the `Sym B` envelope residual is an orthogonal `H_3` daughter mode, and
+spatial polarization curvature is an `H_1` sideband; both have zero direct
+projection into the base Gaussian spinor.  Scalar degree `<=2` contains the
+center/carrier/covariance/chirp and bulk-viscosity tangent motion.  Action
+`31187104071` passed `206` tests plus `20,000` Gaussian-chaos checks, with
+`H_3`/degree-`<=2` projection `1.889e-14` and `H_1`/base projection
+`4.521e-16`.
+
+The degree-zero forcing produced by the **non-Gaussian parent remainders** is
+already the transfer cross-error.  If actual unit roles `f,g,h` and Gaussian
+roles `F,G,H` are each within `epsilon`, then
+
+\[
+\boxed{
+|T(f,g,H)-T(F,G,H)|
+\le 2\epsilon+3\epsilon^2+\epsilon^3,
+}
+\]
+
+while
+
+\[
+|T(f,g,h)-T(f,g,H)|\le\epsilon.
+\]
+
+Their sum is exactly the old replacement polynomial
+
+\[
+3\epsilon+3\epsilon^2+\epsilon^3.
+\]
+
+At one percent it is `0.020301+0.010000=0.030301`.  Action `31187443147`
+passed `208` tests plus `50,000` complex trilinear checks.  Thus, at the
+**work level**, degree-zero parent/cross forcing belongs to the existing
+`eta_j` / `Xi` ledger rather than a new `L^2` forcing currency.  No bound on the
+entire nonlinear residual norm is inferred from this statement.
+
+The coarse-grained resolved SGS energy remains a separate macroscopic ledger.
+Writing the affine-window transporter as `V_aff` and `W=U-V_aff`, the
+pressure-free combined-work leakage is
+
+\[
+\widetilde L_\chi
+=\int\!\!\int\nabla\chi\cdot(eW+RU-\nu\nabla e).
+\]
+
+The nonviscous boundary terms satisfy pointwise
+
+\[
+\frac12|U|^2|W|+|R|_F|U|
+\le\frac23|U|^3+\frac16|W|^3+\frac23|R|_F^{3/2},
+\]
+
+so a leakage `L_cub` forces the scale-critical annular charge
+
+\[
+\boxed{
+\int_A(|U|^3+|W|^3+|R|_F^{3/2})
+\ge\frac{|L_{cub}|}{\|\nabla\chi\|_\infty}
+\ge\frac{2M}{3NC_\chi}|L_{cub}|.
+}
+\]
+
+The resolved viscous boundary term on a lifetime `T=cN^-2` obeys, for the
+certified smooth support,
+
+\[
+\boxed{
+|L_\nu|
+\le\frac{33}{20}\frac{c\nu C_\chi}{M}
+\sup_t\|U(t)\|_2^2,
+}
+\]
+
+because Arb certifies `exp(1/20)<11/10`.  Thus viscosity at the resolved
+boundary adds to the same `1/M` coefficient; this is distinct from bulk
+Gaussian viscosity, which is tangent microscopically.
+
+The SGS stress itself has the exact increment identity
+
+\[
+\boxed{
+R(x)=\int G_\ell(r)\,\delta_ru\otimes\delta_ru\,dr
+-\left(\int G_\ell(r)\delta_ru\,dr\right)^{\otimes2}.
+}
+\]
+
+For `g_1=||G||_1`,
+
+\[
+\boxed{
+|R(x)|_F^{3/2}
+\le(1+g_1)^{3/2}g_1^{1/2}
+\int|G_\ell(r)|\,|\delta_ru(x)|^3dr.
+}
+\]
+
+Thus a large `RU` branch is an Onsager-type cubic **velocity-increment charge at
+the actual filter scale**, not an independent stress-tensor mystery.  Action
+`31187768828` passed `212` tests plus `50,000` checks; the stress/increment-cubic
+ratio was `0.638619634` and the exact increment-identity residual
+`1.349e-13`.
+
+Finally, for a complete quadratic spatial partition `sum eta_alpha=1`,
+
+\[
+\boxed{
+\sum_\alpha(e\,\partial_t\eta_\alpha+\nabla\eta_\alpha\cdot F)=0.
+}
+\]
+
+There is no global packet-count boundary loss from the partition itself.
+Interfaces become real cross-errors only after selecting a lineage/subfamily.
+The first affine-SGS boundary Action `31186600162` failed solely because an
+exact rational equality `3/2*11/10=33/20` was tested using Arb ball equality;
+this is recorded as certificate-semantics provenance, not a mathematical
+countermodel.  The corrected run `31186719319` and the increment-upgraded run
+`31187768828` are green.
+
+This gives a concrete no-double-counting rule:
+
+\[
+\boxed{
+\begin{array}{c|c}
+\text{microscopic full-velocity role}&
+\text{macroscopic resolved SGS energy}\\ \hline
+\text{Kelvin low--high transport}&\Pi\text{ / combined work}\\
+\text{base-spinor cross work}\to\Xi&RU\text{ boundary transport}\\
+H_1,H_3\text{ sidebands}&\text{pressure annular charge}\\
+\text{Gaussian tangents/gauges}&\text{resolved viscous/window leakage}
+\end{array}
+}
+\]
+
+Pressure, `RU`, viscosity and curvature must never be charged in both columns.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -2729,6 +3023,27 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   `||[chi,G_N*]f||_2 <= (3/2)m_1(G)C_chi M^-1||f||_2`; hence the affine window
   retains the square-root balance `a/M+b kappa_aff M` without an aspect penalty;
 
+- Arb-certified strict low-pass transport separation on the signed-good core:
+  every selected role has frequency `>3N/5`, while a transporter supported in
+  `|xi|<=N/4` has low-low output in `|xi|<=N/2`; exact affine low-high Fourier
+  dynamics is the Kelvin equation and objective 2x2 polarization generator;
+- exact divergence-free weak packet coefficient equation using a shell-localized
+  Leray/helical/cell multiplier; microscopic pressure vanishes and the
+  window/multiplier commutator is `O(1/M)` with the affine shell constant;
+- exact Hermite/helicity forcing split: scalar Gaussian tangent modes have degree
+  `<=2`, the `Sym B` residual is an orthogonal `H_3` sideband with norm square
+  `(3/8)||Sym B||^2`, and spatial polarization curvature is an `H_1` sideband
+  with zero base-Gaussian projection; only degree-zero forcing enters the forced
+  symplectic spinor identity;
+- exact work-level identification of parent/profile degree-zero forcing with the
+  existing trilinear cross-error: `(2 eps+3 eps^2+eps^3)+eps` equals the full
+  one-shot replacement polynomial `3 eps+3 eps^2+eps^3`;
+- exact affine resolved-boundary classification: differential advection plus
+  `RU` forces a cubic critical annular charge, resolved viscous boundary flux is
+  `O(1/M)` over a parabolic lifetime, a complete quadratic spatial partition has
+  exact total boundary cancellation, and `R` has the exact velocity-increment
+  representation with the cubic increment upper bound recorded above;
+
 ### Computationally supported, not interval-certified
 
 - numerical reuse-gap constants from nonlinear optimization;
@@ -2736,35 +3051,32 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Derive the actual smooth-SGS affine packet equations and their differential
-   sources.**  Common affine/non-affine phase transport, bulk Gaussian viscosity,
-   common-parent `SL(2)` motion, scalar third-Hermite forcing and RMS spatial
-   polarization curvature are now separated.  The remaining `F_i` must be
-   derived from role-dependent SGS transport, partition/window errors, pressure
-   localization and differential resolved velocities in the actual packetization.
-2. **Insert the affine moving-window theorem into the full localized SGS/pressure
-   identity.**  Ellipsoidal material transport, the `1/M` filter commutator and
-   the `kappa_aff M` Taylor leakage are now exact.  What remains is to track the
-   actual pressure boundary work, `RU`, viscous boundary flux and partition
-   overlap with the same affine windows and prove their coefficients are
-   summable or force a source/fresh event.
-3. **Integrate affine critical grains into spacetime ancestry.**  A fresh grain
-   now carries theorem-level scale-critical mass `M_aff>=3/10` and obeys the
-   physical budget `sum r_g<=P E/eta`.  Reused elongated grains still require a
-   synchronization theorem across successive lifetimes and a rule for comparing
-   evolving covariance ellipsoids without quotienting away genuine differential
-   curvature/polarization.
-4. **Close the remaining localized transport/source terms.**  Pressure has a
-   combined-work ledger and far multipole bounds; bulk viscosity and common
-   material phase are packet tangents.  Viscous boundary flux, `R U`, local
-   pressure-Hessian contribution, role-dependent phase forcing and partition
-   overlap must be summable or create fresh/Bellman/source events.
-5. **Feed the affine forcing channels into the master no-escape ledger.**  The
-   third-Hermite scalar channel, RMS relative-polarization curvature, affine fresh
-   radius budget and existing objective-strain/source alternatives must be
-   synchronized with the master `zeta_j`/cross-error ledgers.  No continuum
-   theorem currently proves that every efficient PDE block enters one of those
-   branches with uniform constants.
+1. **Control orthogonal sidebands over a packet lifetime.**  Common affine
+   low--high transport and all degree-`<=2` Gaussian tangents are now exact, and
+   `H_1`/`H_3` curvature forcing has zero base-spinor projection.  The missing
+   theorem must show that persistent sideband excitation either creates a
+   trackable daughter/fresh affine grain or pays a transfer/coherence deficit;
+   rapid sideband dephasing should be routed to higher velocity/pressure source
+   derivatives rather than hidden in a norm error.
+2. **Convert persistent cubic SGS increment charge into the ancestry ledger.**
+   Large `RU` leakage now forces a scale-critical cubic velocity-increment charge
+   at the filter scale.  One still needs a transfer-adapted Littlewood--Paley /
+   affine-grain extraction showing that persistent charge yields a fresh/reused
+   critical grain, dissipation event or Bellman cost with uniform constants.
+3. **Control selected-subfamily interfaces through spacetime.**  A complete
+   quadratic partition has zero total boundary flux and degree-zero profile
+   remainders are work-level `Xi` cross-errors.  The continuum construction must
+   propagate a selected lineage while keeping the uncancelled partition/cell
+   interfaces summable relative to its transfer weight.
+4. **Synchronize affine spacetime ancestry.**  Fresh grains obey
+   `M_aff>=3/10` and the radius budget `sum r_g<=P E/eta`; reused grains must be
+   matched across successive `N^-2` lifetimes using evolving covariance,
+   scale/spin holonomy, relative polarization and the one-sided `r_g` dynamics.
+5. **Feed the new PDE branches into the master theorem.**  `Xi`, `H_1/H_3`
+   sidebands, cubic-increment annular events, pressure/source alternatives and
+   affine moat errors must be registered as summable perturbations or positive
+   fresh/reuse/Bellman costs.  No continuum theorem yet proves that every
+   efficient PDE block enters one of those branches with uniform constants.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier–Stokes global regularity is made.
 
@@ -2838,6 +3150,15 @@ The most useful recorded runs, in chronological order, are:
 | `31182742846`, `31182749191`, `31182756039`, `31182762696`, `31182769409`, `31182775605`, `31182783321`, `31182790116`, `31182796814` | final nine-workflow affine-packet integration on `040b5c7`: affine Hermite forcing, material phase, shell/aspect, affine critical grain, affine moving window+commutator, polarization curvature, forced relative polarization, localized pressure and master all green; `195` tests per workflow, master `20,000` traces with worst margin `0` |
 | `31183237575`, `31183245218`, `31183252753`, `31183260464`, `31183267939`, `31183274599` | exact-SHA affine validation on `be4520b`: Hermite/bulk-viscosity gauge, material/differential phase, affine critical grain including `r_g` dynamics, ellipsoidal window+commutator, polarization curvature and master all green; `195` tests per workflow, master `20,000` traces with worst margin `0` |
 
+| `31186597005` | Arb-certified smooth-SGS two-level packet equation: `3/5` role separation, strict `N/4` transporter and zero affine moving-cell Heisenberg residual; `203` tests + `50,000` checks |
+| `31186600162` | first affine-SGS boundary certificate failed only at exact Arb equality semantics for `3/2*11/10=33/20`; no mathematical countermodel |
+| `31186719319` | corrected affine-SGS boundary ledger: critical cubic leakage, `O(1/M)` viscous boundary and exact partition cancellation; `203` tests + `50,000` checks |
+| `31187104071` | Hermite-helicity forcing ledger: exact `H_1/H_3` orthogonality and no direct base-spinor curvature forcing; `206` tests + `20,000` checks |
+| `31187443147` | base-spinor parent-remainder work identified with the existing trilinear cross-error / replacement loss; `208` tests + `50,000` checks |
+| `31187637446` | exact affine low-high Navier--Stokes Fourier equation -> Kelvin carrier/amplitude -> objective 2x2 spinor; `211` tests + `50,000` checks |
+| `31187768828` | preferred affine-SGS boundary continuation including exact SGS velocity-increment identity and cubic increment bound; `212` tests + `50,000` checks |
+| `31188118452` | divergence-free localized weak packet equation; Leray pressure cancellation and shell multiplier/window commutator; `215` tests + `50,000` checks |
+
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
 The current preferred master regression is run `31183274599` on exact-SHA
@@ -2860,7 +3181,7 @@ preferred single-edge/physical-weight certificate is
 `recorded-results/31165654509/`.  The preferred smooth-symbol freezing artifact
 is `recorded-results/31165838379/`.  The preferred affine-spacetime dynamics artifacts are
 `recorded-results/31168393589/`, `recorded-results/31168671304/`,
-`recorded-results/31168888413/`, and `recorded-results/31169128097/`, plus the intrinsic 3D continuation `recorded-results/31170015795/`.  The preferred helical artifacts are
+`recorded-results/31168888413/`, and `recorded-results/31169128097/`, plus the intrinsic 3D continuation `recorded-results/31170015795/`.  The preferred actual-packet PDE artifacts are `recorded-results/31186597005/`, `recorded-results/31187104071/`, `recorded-results/31187443147/`, `recorded-results/31187637446/`, `recorded-results/31187768828/`, and `recorded-results/31188118452/`; the certificate-semantics failure is `recorded-results/31186600162/`.  The preferred helical artifacts are
 `recorded-results/31171018560/`, `recorded-results/31171127537/`,
 `recorded-results/31171360107/`, `recorded-results/31171484247/`, and the
 symplectic correction `recorded-results/31172607991/`, good-core frame
@@ -2880,94 +3201,75 @@ Arb-certified in run `31161914134`.
 
 ## 18. Current research frontier
 
-The finite-dimensional and affine-packet architecture now distinguishes **true
-physical defects** from symmetry motion much more sharply.  In addition to the
-Bellman/Hodge/erosion/reuse ledgers, the packet dynamics has the gauge hierarchy
+The actual smooth-SGS packet equation is no longer a single unidentified
+forcing term.  The physical hierarchy is now
 
 \[
 \boxed{
-\text{common material phase/chirp},
-\quad
-SO(3)\text{ helical frame},
-\quad
-SL(2)\text{ common-parent polarization},
-\quad
-\text{affine Gaussian tangent motion},
-}
-\]
-
-all of which must be quotiented rather than charged.
-
-After those quotients, the non-affine resolved-flow curvature splits physically
-into
-
-\[
-\boxed{
-\operatorname{Sym}(L^{-1}(\nabla^2U)[L,L])
+\text{full Navier--Stokes role}
 \to
-\text{third-Hermite envelope forcing},
+\text{strict low--high Kelvin transport}
++\text{high--high transfer},
 }
 \]
 
-and
+with the role residual split by Hermite/helicity degree:
 
 \[
 \boxed{
-C_{ijc}=\operatorname{sym}_{ij}((\nabla^2U)_{ijk}L_{kc})
-\to
-\text{spatial shape/relative-polarization variation}.
+\underbrace{n=0}_{\text{base spinor / }\Xi},
+\quad
+\underbrace{H_1}_{\text{polarization sideband}},
+\quad
+\underbrace{H_3}_{\text{envelope sideband}},
+\quad
+\underbrace{\deg\le2}_{\text{Gaussian tangent/gauge}}.
 }
 \]
 
-The scalar kernel is the exact quadratic swirl `z cross(Mz)` rather than a
-mysterious escape.  The common velocity-Hessian chirp is a material triad phase
-gauge.  Bulk viscosity is Gaussian tangent.
+Common affine transport is exactly the Kelvin/Craik--Criminale equation;
+pressure is the Leray correction, a dual-flow frequency cell has zero
+Heisenberg residual, and an objective transverse frame gives the existing
+helical spinor generator.  Spatial localization is performed with a
+shell-Leray/helical **divergence-free test packet**, so microscopic pressure
+still vanishes and the localization commutator enters the existing `1/M` moat
+ledger.
 
-The inverse-Young grain is now also physically registered without an isotropic
-fiction.  With
-
-\[
-r_g=(\det\Sigma_x)^{1/6},
-\qquad
-\mathsf M_{aff}=r_g^{-1}\int_{E_2}|u|^2,
-\]
-
-Arb and Hausdorff--Young give
+The macroscopic resolved SGS ledger is distinct:
 
 \[
-\boxed{\mathsf M_{aff}\ge3/10,}
+\boxed{
+\widetilde L_\chi
+=\int\nabla\chi\cdot(e(U-V_{aff})+RU-\nu\nabla e).
+}
 \]
 
-while fresh grains satisfy
+Large differential-advection/`RU` leakage forces a critical annular cubic
+charge; `R` itself is controlled by cubic velocity increments at the filter
+scale.  Resolved viscous boundary transport is `O(1/M)`, pressure cancellation
+has its existing CKN-type annular alternative, and a complete quadratic spatial
+partition cancels boundary flux exactly.  None of these macroscopic quantities
+is to be inserted again as microscopic spinor forcing.
 
-\[
-\boxed{\sum r_g\le P\|u(t)\|_2^2/\eta.}
-\]
+The decisive next work is therefore:
 
-Static affine anisotropy itself is an exact Young symmetry and is **not** a
-replication cost.  This corrects the earlier natural-cell heuristic.  The
-geometric radius is preserved by inviscid incompressible affine strain and is
-monotone under viscosity, making it a natural spacetime ancestry currency.
+1. prove a **sideband coherence / daughter-grain dichotomy** for the `H_1` and
+   `H_3` modes over one `N^-2` lifetime: coherent excitation must create
+   orthogonal packet mass/transfer loss, while dephasing must expose higher
+   pressure/velocity derivative sources;
+2. convert persistent **cubic SGS velocity-increment charge** into a fresh/reused
+   affine grain, dissipation or Bellman event without assuming a global `L^3`
+   bound;
+3. construct the actual transfer-adapted moving partition through successive
+   lifetimes and show that selected-subfamily interfaces remain in the summable
+   `Xi`/cross-error ledger;
+4. synchronize reuse using `r_g`, covariance, scale/spin holonomy and relative
+   polarization, and insert all of the above into the master no-escape theorem.
 
-The next mathematically decisive work is therefore:
-
-1. derive the **actual affine smooth-SGS packet equations** and express their
-   role-dependent residuals in the already-identified currencies: third-Hermite
-   forcing, differential phase velocity, relative-polarization curvature,
-   pressure/source terms and partition/window errors;
-2. insert the now-exact **ellipsoidal moving window and filter commutator** into
-   the localized SGS/pressure identity, deriving pressure, `RU`, viscous boundary
-   and partition-overlap coefficients in the affine metric;
-3. construct **affine spacetime ancestry**: use the theorem-level fresh radius
-   budget for new grains, while controlling reuse by covariance synchronization,
-   scale/spin holonomy and the existing dynamic strain/polarization ledgers;
-4. feed these affine PDE branches into the master `zeta_j`, `Xi` and
-   fresh/reuse/Bellman bookkeeping with summable errors.
-
-This is now the frontier.  Further single-edge optimization, raw Euclidean
-propagator norms, automatic isotropic subdivision of affine Gaussians, or a full
-Magnus theorem for common parent motion would attack symmetry variables rather
-than the remaining Navier--Stokes mechanism.
+Further raw `L^2` estimates on the entire nonlinear residual would now throw
+away the exact Hermite/gauge structure and risk double counting.  Further
+single-edge optimization, full common-parent Magnus control, or automatic
+isotropic subdivision would attack variables already identified as symmetry.
 
 ---
 

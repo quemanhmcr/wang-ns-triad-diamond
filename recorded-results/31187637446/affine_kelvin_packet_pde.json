@@ -1,0 +1,16 @@
+{
+  "stress": {
+    "samples": 50000,
+    "worst_pressure_kelvin_residual": 8.702335715267317e-15,
+    "worst_transversality_rate_residual": 3.056159864571351e-14,
+    "worst_frame_orthogonality_rate_residual": 2.0617812377260196e-15,
+    "worst_frame_transverse_rate_residual": 1.790180836524724e-15,
+    "worst_objective_coordinate_residual": 2.920203141125483e-14
+  },
+  "equations": {
+    "fourier_characteristic": "(partial_t-(A^T xi).grad_xi) w_hat = G_A(xi)w_hat-nu|xi|^2w_hat",
+    "G_A": "-A+2 khat khat^T A",
+    "kelvin_k": "dot k=-A^T k",
+    "objective_spinor": "dot c=-sym(E^T A E)c-nu|k|^2c"
+  }
+}

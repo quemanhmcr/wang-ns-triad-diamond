@@ -1,0 +1,13 @@
+{
+  "stress": {
+    "samples": 50000,
+    "worst_pressure_projection_residual": 1.7912563432823162e-15,
+    "worst_discrete_commutator_ratio": 0.9967731309753902,
+    "worst_weak_identity_residual": 8.881784197001252e-16
+  },
+  "identities": {
+    "weak_packet": "d<u,Psi>/dt=<u,dt Psi>+<u tensor u,grad Psi>-nu<grad u,grad Psi> for div Psi=0",
+    "commutator": "||[chi,M_N]f||_2 <= m1(K)N^-1||grad chi||_inf||f||_2",
+    "affine_shell": "<= (3/2)m1(K)Cchi M^-1||f||_2"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "stress": {
+    "samples": 50000,
+    "worst_base_source_ratio": 0.27783185397962074,
+    "worst_child_mismatch_ratio": 0.40295784758020337,
+    "worst_split_identity_residual": 5.551115123125783e-17
+  },
+  "at_one_percent": {
+    "base_child_parent_remainder_loss": 0.020301000000000003,
+    "child_representation_loss": 0.01,
+    "full_replacement_loss": 0.030301
+  }
+}

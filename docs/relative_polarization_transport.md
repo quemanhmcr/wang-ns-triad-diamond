@@ -103,3 +103,4 @@ chirp/Hessian lock as well.  If the three transport velocities differ, only the
 differences `U-U_i` remain.  Consequently the forced polarization ledger should
 not count common non-affine phase/chirp evolution inside `F_i`; it belongs to the
 osculating packet gauge.  See `docs/material_phase_lock.md`.
+\n\n## Field forcing versus spinor forcing\n\nThe symbols `F_i` in this note now mean the **degree-zero Gaussian/helicity\nprojection** of the full PDE field residual.  They must not be identified with\nthe whole residual norm.  `H_1` spatial-polarization curvature and `H_3`\nenvelope curvature have exactly zero base-Gaussian projection and are routed to\nthe sideband/coherence ledger; degree-`<=2` scalar modes are Gaussian tangent.\nAt the transfer/work level the degree-zero parent-profile remainder is already\nthe trilinear cross-error `Xi`; see `docs/hermite_helicity_forcing_ledger.md` and\n`docs/packet_cross_forcing.md`.\n

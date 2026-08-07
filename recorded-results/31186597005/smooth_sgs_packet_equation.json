@@ -1,0 +1,36 @@
+{
+  "certificate": {
+    "parent_lower_ball": "[0.60331532895106711410048360661166775357615727145 +/- 4.03e-48]",
+    "clean_role_lower": "3/5",
+    "transport_lowpass_cut": "1/4",
+    "low_low_output_upper": "1/2",
+    "spectral_gap": "1/10",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_heisenberg_residual": 0.0,
+    "worst_finite_difference_dt_residual": 5.718428042200685e-08,
+    "minimum_low_low_gap": 0.10120709998613181,
+    "taxonomy_disjoint": true
+  },
+  "micro_sources": [
+    "designated_high_high_triad",
+    "other_high_high_interactions",
+    "cross_low_high_cells",
+    "moving_projector_heisenberg_residual",
+    "nonaffine_third_hermite",
+    "relative_polarization_curvature",
+    "spatial_window_leray_or_multiplier_commutators",
+    "viscous_window_boundary_if_strongly_localized"
+  ],
+  "macro_sources": [
+    "raw_sgs_work_Pi",
+    "combined_pressure_flux_work",
+    "RU_boundary_transport",
+    "resolved_window_transport_mismatch",
+    "resolved_viscous_boundary_flux",
+    "pressure_cancellation_annular_charge",
+    "partition_boundary_flux"
+  ]
+}

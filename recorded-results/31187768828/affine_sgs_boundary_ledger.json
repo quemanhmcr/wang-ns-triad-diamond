@@ -1,0 +1,17 @@
+{
+  "certificate": {
+    "smooth_filter_high_side": "delta<=1/20",
+    "exp_delta_bound": "exp(delta)<11/10",
+    "clean_viscous_coefficient": "33/20",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_cubic_ratio": 0.9999994809462898,
+    "minimum_cubic_margin": 4.865155018407563e-06,
+    "worst_partition_residual": 5.996873571000974e-15,
+    "minimum_clean_viscous_margin": 9.481358040021423e-08,
+    "worst_increment_stress_ratio": 0.6386196337117661,
+    "worst_increment_identity_residual": 1.3493339329486141e-13
+  }
+}
