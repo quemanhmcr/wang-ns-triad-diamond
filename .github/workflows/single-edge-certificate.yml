@@ -1,0 +1,29 @@
+name: single-edge-certificate
+on:
+  workflow_dispatch:
+    inputs:
+      stress_samples:
+        description: "Adversarial random samples (not part of proof)"
+        required: false
+        default: "100000"
+permissions:
+  contents: read
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -r requirements.txt python-flint==0.8.0
+      - run: pytest -q
+      - name: Rigorous Arb certificate and adversarial stress
+        run: python -m src.single_edge_certificate --stress-samples "${{ inputs.stress_samples }}" --outdir results-single-edge-certificate
+      - run: cat results-single-edge-certificate/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: single-edge-certificate-results
+          path: results-single-edge-certificate/
+          if-no-files-found: warn
