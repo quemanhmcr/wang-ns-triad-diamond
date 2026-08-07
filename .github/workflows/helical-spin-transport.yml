@@ -1,0 +1,20 @@
+name: helical-spin-transport
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - name: Helical spin / Berry / strain stress
+        run: python -m src.helical_spin_transport --samples 50000 --outdir results-helical-spin
+      - run: cat results-helical-spin/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: helical-spin-transport-results
+          path: results-helical-spin/
