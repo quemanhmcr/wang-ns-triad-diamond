@@ -1549,6 +1549,171 @@ frame variation is linearly subordinate with a universal dimensionless
 constant.  Constructing that carrier-direction control in a genuine localized
 PDE packet remains part of the continuum bridge.
 
+#### Exact full time-ordered relative polarization and localized packet freezing
+
+The common-parent `SL(2)` quotient can be used directly at the level of the
+nonlinear transfer observable, avoiding a nonphysical matrix distance on the
+propagators.  After factoring scalar amplification/viscous damping, let the
+objective helicity spinors satisfy
+
+\[
+\dot U=-D_1U,\qquad \dot V=-D_2V,\qquad \dot Z=-D_3Z,
+\]
+
+where each `D_i` is trace free.  Since every trace-free `2x2` matrix satisfies
+`D^T J+J D=0`, the parent symplectic wedge obeys the exact arbitrary-time law
+
+\[
+\boxed{
+\frac d{dt}(U^TJV)=U^TJ(D_1-D_2)V.
+}
+\]
+
+No commutativity, frozen strain, or Magnus truncation is needed.  A common
+noncommuting time-ordered `SL(2)` history cancels pointwise.  For the full
+extremal polarization factor
+
+\[
+\mathcal P=(U^TJV)(\lambda^TZ),\qquad \lambda=(1,-1)^T,
+\]
+
+one has
+
+\[
+\boxed{
+\dot{\mathcal P}
+=[U^TJ(D_1-D_2)V](\lambda^TZ)
+-(U^TJV)(\lambda^TD_3Z).
+}
+\]
+
+Consequently
+
+\[
+\boxed{
+|\dot{\mathcal P}|
+\le
+2\sqrt{\|D_1-D_2\|_F^2+\|D_3\|_F^2}
+\,\|U\|\|V\|\|Z\|.
+}
+\]
+
+Action `31174812731` passed `171` tests plus `50,000` arbitrary time-ordered
+histories.  The worst common-history wedge residual was `5.661e-15`.  A useful
+countermodel has a common hyperbolic propagator with `||M-I||≈2.98e3` and
+condition number `≈8.89e6` while the parent wedge remains invariant to numerical
+precision.  Therefore Euclidean propagator distance is explicitly recorded as a
+**wrong defect variable**.
+
+The identity also survives a genuine packet residual.  If
+
+\[
+\dot U=-D_1U+F_1,\quad
+\dot V=-D_2V+F_2,\quad
+\dot Z=-D_3Z+F_3,
+\]
+
+the only new term is
+
+\[
+\boxed{
+\mathcal R_F
+=(F_1^TJV+U^TJF_2)(\lambda^TZ)
++(U^TJV)(\lambda^TF_3),
+}
+\]
+
+with
+
+\[
+|\mathcal R_F|
+\le\sqrt2(
+\|F_1\|\|V\|\|Z\|+
+\|U\|\|F_2\|\|Z\|+
+\|U\|\|V\|\|F_3\|).
+\]
+
+Thus nonlinear packet forcing is an additive PDE ledger term rather than a
+failure of the symplectic cancellation.
+
+The remaining localization of the generators can also be reduced to existing
+currencies.  For a Kelvin direction `a`,
+
+\[
+\dot a=-(I-aa^T)A^Ta,
+\]
+
+and direct algebra gives
+
+\[
+\|f_A(a)-f_B(b)\|
+\le4L\|a-b\|+\|A-B\|_{op},
+\qquad L=\max(\|A\|_{op},\|B\|_{op}).
+\]
+
+If `T=cN^-2`, `||A||<=sigma_0 N^2`, the initial directional cell has diameter
+`h`, and the spatial gradient variation obeys `||A_x-A_0||<=kappa M N^2`, then
+
+\[
+\boxed{
+\delta_{dir}(T)
+\le e^{4c\sigma_0}(h+c\kappa M).
+}
+\]
+
+Using the certified good-core angle moat and direct endpoint comparison of the
+triad-normal frames gives the transfer-generator freezing bound
+
+\[
+\sqrt{
+\|\Delta(D_1-D_2)\|_F^2+
+\|\Delta D_3\|_F^2}
+\le
+\sqrt5(\Delta S_F+16\sigma N^2\delta_{dir}).
+\]
+
+On the low-strain packet branch `c sigma_0<=1/30`, Arb certifies the clean
+integrated polarization remainder
+
+\[
+\boxed{
+E_{pol}\le3h+\frac{15}{2}c\,\kappa M.
+}
+\]
+
+Action `31174612248` passed `170` tests plus `50,000` localized packet
+configurations; the worst Kelvin-Lipschitz ratio was `0.939777827`, the worst
+generator-bound ratio `0.514395148`, and the simplified bound retained positive
+margin.
+
+Therefore helical localization creates **no new spatial scale** on this branch.
+Adding it to the existing commutator/curvature ledger gives
+
+\[
+\boxed{
+E_{loc}(M)
+\le
+\frac aM+\left(b+\frac{15}{2}c\right)\kappa M+3h,
+}
+\]
+
+with optimum
+
+\[
+\boxed{
+M_*=\sqrt{\frac{a}{(b+15c/2)\kappa}},
+\qquad
+E_{loc,*}
+\le3h+2\sqrt{a(b+15c/2)\kappa}.
+}
+\]
+
+The `h` term belongs to the already-summable smooth-symbol cell schedule, and the
+helical spatial term is absorbed into the same adaptive `kappa M` moat required
+by the moving-window theorem.  What remains is to estimate the actual packet
+forcing `F_i` and the other localized PDE residuals, and to synchronize the
+result across packet ancestry.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -2178,6 +2343,17 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   thus the global Chern obstruction does not create a local gauge singularity on
   a near-extremal packet core;
 
+- exact arbitrary-time relative-polarization transport:
+  `d(U^TJV)/dt=U^TJ(D1-D2)V` and the corresponding child-factor identity; a
+  common time-ordered parent `SL(2)` history cancels pointwise, so no full Magnus
+  theorem is needed for the transfer-facing parent observable; exact forced
+  extension with additive `F_1,F_2,F_3` residual and capacity-weighted bound;
+- Arb-certified low-strain localized polarization bridge: Kelvin direction
+  stability plus good-core frame regularity gives
+  `E_pol<=3h+(15/2)c kappa M` for `c sigma_0<=1/30`, hence the combined
+  localization ledger is `a/M+(b+15c/2)kappa M+3h` with the same square-root
+  curvature optimizer; no independent polarization moat scale is introduced;
+
 ### Computationally supported, not interval-certified
 
 - numerical reuse-gap constants from nonlinear optimization;
@@ -2190,15 +2366,14 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
    now controlled, but the continuum theorem must attach the cells to physical
    packets/windows while preserving the signed localized SGS measure and keeping
    partition overlap/cross interactions summable.
-2. **Lift the affine helical transport to a genuine localized nonlinear packet.**
-   The helical line topology, triad-normal `SO(3)` gauge, spin-dihedral reuse
-   connection, objective linear polarization generator, full-strain tomography,
-   and finite-diamond phase-holonomy cost are now explicit.  What remains is to
-   show that spatially localized Navier--Stokes packets inherit these gauges with
-   carrier-direction variation controlled strongly enough to use the certified
-   local `5/2` frame-Lipschitz theorem, together with summable nonlinear
-   cross-helicity forcing; the full time-ordered phase evolution beyond the
-   recorded second-Magnus term is not yet closed.
+2. **Estimate the genuine localized nonlinear packet forcing.**  The transfer-
+   facing full time-ordered parent observable is now exact, and carrier/frame
+   variation on the low-strain branch is already absorbed into `3h+(15/2)c
+   kappa M`.  The remaining polarization PDE term is the explicit additive
+   forcing residual `R_F(F_1,F_2,F_3)`.  One must derive `F_i` from the actual
+   smooth-SGS packetization (non-affine advection, `R U`, viscous boundary terms,
+   pressure/partition overlap) and prove it is summable or creates fresh/Bellman
+   mass.  A full Magnus theorem for the common parent motion is no longer needed.
 3. **Integrate the adaptive curvature-balanced moat into the nested packet
    tree.** The old fixed spatial moat schedule is not sufficient.  The continuum
    construction must choose `M` from the local curvature balance `a/M+b kappa M`,
@@ -2273,6 +2448,10 @@ The most useful recorded runs, in chronological order, are:
 | `31172607991` | extremal helicity tensor / common-parent `SL(2)` neutrality and Arb-certified transfer-relevant strain observable `>=1/2`; `156` tests + `50,000` checks |
 | `31173321354` | Arb-certified good-core parent-angle separation and scale-free triad-normal helical-frame Lipschitz theorem; `158` tests + `50,000` derivative checks |
 
+| `31174454743` | first exact relative-polarization transport / common-time-ordered `SL(2)` countermodel; `164` tests + `50,000` histories |
+| `31174612248` | Arb-certified localized polarization packet bridge `E_pol<=3h+(15/2)c kappa M`; `170` tests + `50,000` configurations |
+| `31174812731` | preferred forced relative-polarization transport: exact additive nonlinear forcing residual; `171` tests + `50,000` histories |
+
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
 The current preferred master regression is run `31171950823` on the integrated
@@ -2294,8 +2473,10 @@ is `recorded-results/31165838379/`.  The preferred affine-spacetime dynamics art
 `recorded-results/31168888413/`, and `recorded-results/31169128097/`, plus the intrinsic 3D continuation `recorded-results/31170015795/`.  The preferred helical artifacts are
 `recorded-results/31171018560/`, `recorded-results/31171127537/`,
 `recorded-results/31171360107/`, `recorded-results/31171484247/`, and the
-symplectic correction `recorded-results/31172607991/` and good-core frame
-regularity artifact `recorded-results/31173321354/`; the two failed
+symplectic correction `recorded-results/31172607991/`, good-core frame
+regularity artifact `recorded-results/31173321354/`, preferred forced relative-
+polarization artifact `recorded-results/31174812731/`, and localized packet
+certificate `recorded-results/31174612248/`; the two failed
 interval-boundary provenance runs are `recorded-results/31168205564/` and
 `recorded-results/31168303213/`.  Final integration runs are
 `31166152074`, `31166155045`, `31166158218`, `31166160711`, `31166163414`,
@@ -2377,14 +2558,13 @@ velocity curvature in general.
 
 The next mathematically decisive work is therefore:
 
-1. construct a **full 3D transfer-preserving moving packet frame**.  Scalar
-   plane tilt, affine helical gauge transport, phase holonomy, the common-parent
-   `SL(2)` neutrality and the transfer-distinguishable strain observable are now
-   controlled, and the signed-good core has a certified local helical-frame
-   Lipschitz constant.  The unresolved content is continuum carrier-direction
-   variation across moving packets, **relative** parent/child polarization
-   forcing after quotienting the common `SL(2)` gauge, and a full time-ordered
-   phase estimate beyond the certified/analytic local pieces;
+1. construct the **actual smooth-SGS moving packet equations** and estimate
+   their residual forces.  Scalar plane tilt, helical gauge transport, spin
+   holonomy, common-parent `SL(2)` neutrality, the full transfer-facing
+   time-ordered relative-polarization identity, and low-strain carrier/frame
+   localization are now controlled.  The unresolved object is the concrete
+   forcing `F_i` produced by non-affine advection, SGS transport, viscosity,
+   pressure and partition overlap in the localized PDE packet;
 2. make the **adaptive curvature-balanced windows** compatible with the nested
    packet ancestry, and prove that local pressure-Hessian, SGS transport `RU`,
    viscous boundary flux and partition overlap are summable or create a fresh /
@@ -2410,7 +2590,7 @@ For a new reader, the recommended order is:
 5. `docs/localized_sgs_pressure_ledger.md` and `docs/annular_pressure_collision.md`;
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
-8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, and `docs/helical_frame_lipschitz.md`;
+8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, and `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
 9. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 10. `docs/scale_holonomy.md`;
 11. `docs/multiscale_bellman.md`;

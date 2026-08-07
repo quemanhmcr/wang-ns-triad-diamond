@@ -90,3 +90,15 @@ second-Magnus estimate, not a claimed full time-ordered-exponential theorem.
 If strain orientation fails the coherence hypothesis, the existing objective-
 strain identity routes that variation into self-stretching/vorticity, pressure
 Hessian, or viscous strain diffusion.
+\n\n## Transfer-facing time ordering is now exact\n\nThe second-Magnus estimate above remains useful for the phase of an individual
+spinor.  It is no longer the relevant unresolved theorem for the extremal parent
+transfer.  The signed parent tensor uses `U^T J V`, and the exact symplectic
+identity gives
+
+\[
+\frac d{dt}(U^TJV)=U^TJ(D_1-D_2)V
+\]
+
+for arbitrary time-dependent noncommuting `D_i`.  Thus common parent time
+ordering cancels exactly in the physical numerator; see
+`docs/relative_polarization_transport.md`.\n

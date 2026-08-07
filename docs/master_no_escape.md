@@ -353,6 +353,29 @@ control the carrier-direction variation itself.  What remains is the localized
 nonlinear packet realization and full time-ordered phase control, not the
 identification of the correct geometric connection.
 
+The transfer-facing time dependence can now be written without a Magnus
+truncation.  After scalar attenuation is factored out,
+
+\[
+\frac d{dt}(U^TJV)=U^TJ(D_1-D_2)V,
+\]
+
+and the child factor adds only `D_child`.  A common arbitrary time-ordered
+`SL(2)` parent history cancels pointwise.  With packet forcing, the additional
+term is explicitly multilinear in `F_1,F_2,F_3` and has a direct capacity norm
+bound.  On a low-strain moving block, Kelvin direction stability plus the
+certified helical frame moat gives
+
+\[
+\boxed{E_{pol}\le3h+\frac{15}{2}c\,\kappa M.}
+\]
+
+Hence the polarization bridge does not introduce a new localization scale: it
+renormalizes the existing curvature coefficient and adds a summable frequency-
+cell `O(h)` term.  The remaining PDE burden is to estimate the actual residual
+forcing `F_i`, not to choose a polarization matrix metric or prove a common-
+parent full Magnus theorem.
+
 The actual Navier--Stokes gap is therefore now the **construction** of the
 transfer roles and their spacetime packetization.  Common parent/child log
 shells are no longer a separate hypothesis: crossing plus the certified

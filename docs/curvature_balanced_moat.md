@@ -175,3 +175,20 @@ Spatial moat widths must now be chosen **adaptively from the local curvature**.
 The remaining continuum work is to build this adaptive choice into the nested
 packet partition without breaking transfer weights, and to distinguish whether
 the forced critical mass is fresh or already belongs to the reused ancestry.
+\n\n## Helical localization renormalizes the same curvature coefficient\n\nThe localized relative-polarization theorem shows that, on the low-strain
+lifetime branch `c sigma_0<=1/30`, carrier-direction and triad-normal frame
+variation contribute
+
+\[
+E_{pol}\le3h+\frac{15}{2}c\,\kappa M.
+\]
+
+Therefore the physical spatial optimizer remains of the same form.  If the
+previous non-helical coefficient is `b`, use
+
+\[
+E_{loc}(M)\le \frac aM+(b+15c/2)\kappa M+3h.
+\]
+
+The optimizer is still square-root in curvature.  No separate polarization moat
+schedule is introduced.\n

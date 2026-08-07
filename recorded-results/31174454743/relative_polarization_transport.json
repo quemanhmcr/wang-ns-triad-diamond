@@ -1,0 +1,15 @@
+{
+  "stress": {
+    "samples": 50000,
+    "worst_wedge_rhs_residual": 9.03186598671161e-09,
+    "worst_polarization_rhs_residual": 1.6930832351598705e-08,
+    "worst_pointwise_bound_margin": 0.18298438929498195,
+    "worst_common_timeordered_wedge_residual": 3.971096242060506e-15
+  },
+  "common_hyperbolic_countermodel": {
+    "a": 8.0,
+    "propagator_distance": 2979.95815471677,
+    "condition_number": 8886110.52202819,
+    "wedge_relative_residual": 1.462386432889185e-10
+  }
+}

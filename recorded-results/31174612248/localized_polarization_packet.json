@@ -1,0 +1,18 @@
+{
+  "certificate": {
+    "exp_bound": "exp(2/15)<6/5",
+    "sqrt5_bound": "sqrt(5)<9/4",
+    "raw_h_coefficient_upper": "72/25",
+    "simplified_h_coefficient": "3",
+    "raw_ckappaM_coefficient_upper": "369/50",
+    "simplified_ckappaM_coefficient": "15/2",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_kelvin_lipschitz_ratio": 0.9397778271140002,
+    "worst_generator_bound_ratio": 0.5143951478607112,
+    "worst_simplified_margin": 4.552027062496932e-07,
+    "worst_optimality_residual": 2.220446049250313e-16
+  }
+}
