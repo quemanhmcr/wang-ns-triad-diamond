@@ -1,75 +1,84 @@
-# H1 source episode: from dephasing to grains, entropy, dissipation, or CKN concentration
+# H1 source episode: source-weighted grains, entropy, and dissipation
 
-The H1 no-escape/source stack gives, on the H1-dominant low-strain mild-aspect branch, one fixed physical source channel satisfying
+The H1 source calculus produces one fixed physical source channel with
 
 \[
 \int_{t_0}^{t_1}\|S_*\|dt\ge\frac{I_1}{132T},
 \qquad T=cN^{-2}.
 \]
 
-Use scaled time `tau=N^2(t-t0)` and normalized source density
+With scaled time `tau=N^2(t-t0)` and normalized source density
 
 \[
-\rho_*(\tau)=N^{-4}\|S_*(t)\|.
+\rho_*(\tau)=N^{-4}\|S_*(t)\|,
 \]
 
-Then
+this is the source-weight budget
 
 \[
 \boxed{
-\int_0^c\rho_*(\tau)d\tau
+\Sigma_*:=\int_0^c\rho_*d\tau
 \ge\frac{I_1}{132c}.
 }
 \]
 
-## 1. Persistence versus temporal concentration
+The crucial point is that the downstream collision estimates have the correct homogeneity to use **source weight**, not time measure. Temporal concentration is therefore not a free SGS/viscous escape.
 
-Set
+## 1. Differentiated SGS source is linear after the Onsager collision
+
+On the scale-matched branch `s=Nr_g<=s_0`, filtered-source collision gives
+
+\[
+Q_{inc}\ge C_0\rho_R^{3/2}.
+\]
+
+The Onsager increment theorem uses
+
+\[
+X=\left[Q_{inc}/(g_1(C_{LP}C_B)^3)\right]^{2/3}.
+\]
+
+Hence the powers cancel exactly:
 
 \[
 \boxed{
-\rho_0=\frac{I_1}{264c^2}.
+\mu_{band}\ge c_\mu\rho_R
+\quad\text{or}\quad
+\mathfrak d_{>N}\ge c_d\rho_R.
 }
 \]
 
-The complement of `E={rho_*>=rho_0}` can carry at most half the required source integral, so
+The coefficients `c_mu,c_d` are explicit functions of the filter, LP/Bernstein constants and the chosen radius cap `s_0`.
+
+This is stronger than a persistence theorem. Partition the **source integral** itself.
+
+- If times with `s>s_0` carry at least `Sigma_*/2`, the episode is a large-radius affine ancestry event, with
+  \[
+  N\int_{E_2}|u|^2\ge\frac3{10}s_0.
+  \]
+- Otherwise scale-matched times carry at least `Sigma_*/2`.
+- On those times, either the mass or enstrophy branch carries at least `Sigma_*/4` of source weight.
+
+Therefore the high-frequency branch pays directly
 
 \[
 \boxed{
-\int_E\rho_*d\tau\ge\frac{I_1}{264c}.
+D_{>N}:=N\int\|\nabla P_{>N}u\|_2^2dt
+\ge\frac{c_d}{4}\Sigma_*.
 }
 \]
 
-Fix any desired scaled-time persistence threshold `m_0>0`.
+No assumption on the temporal measure of the source set appears.
 
-- If `|E|<m_0`, at least half the H1 source is concentrated on a time set of size `<m_0`: this is a genuine temporal-intermittency / CKN-burst branch.
-- If `|E|>=m_0`, source collision is persistent enough to pay a spacetime ledger.
+## 2. The mass branch has a clean packet/ancestry constant
 
-No time-average is used to hide a short violent event.
-
-## 2. Differentiated SGS source
-
-On the persistent set, first split according to the affine scale radius `s=Nr_g`.
-
-If `s>s_0` on at least half the set, the affine critical-grain theorem gives a radius-energy event
+If the mass branch wins, choose `theta=1/4`. At each winning time either
 
 \[
-N\int_{E_2}|u|^2\ge\frac3{10}s_0.
+\mu_{atom}\ge\frac14\mu_{band},
 \]
 
-Otherwise a scale-matched subset of measure at least `m_0/2` remains. There the filtered-SGS source theorem turns `rho_0` into a fixed cubic increment threshold. The Onsager collision theorem then says that at every such time either a low/base dyadic band has critical mass above its explicit threshold or high-frequency normalized enstrophy does.
-
-A second pigeonhole gives a subset of measure at least `m_0/4` carrying one of those alternatives.
-
-For the mass branch choose packet fraction `theta=1/4`. Then exactly
-
-\[
-\boxed{
-\mu_{atom}\ge\frac14\mu_{band}
-}
-\]
-
-or `H_at>=log4`. Applying the existing atomic/component theorem with `alpha=1/2` gives
+or `H_at>=log4`. Applying the exact atomic/component chain rule with `alpha=1/2` yields
 
 \[
 \boxed{H_{anc}\ge\log2}
@@ -81,44 +90,61 @@ or
 \boxed{Q_{anc}-Q_{at}\ge\frac14.}
 \]
 
-Thus spatial fragmentation of the increment reservoir is a uniform Bellman/cycle event.
+Thus a winning low/base reservoir becomes one of:
 
-For the enstrophy branch, if its pointwise threshold is `d_0`, normalized high-frequency dissipation pays
+1. a dominant packet, which is classified as fresh or reused;
+2. a uniform Bellman entropy event;
+3. a uniform same-ancestry cycle event.
+
+Repeated source-weight pigeonholes retain a fixed fraction of `Sigma_*`, so fragmentation cannot be made cheap by shortening its time support.
+
+## 3. Viscous source gets more expensive under temporal concentration
+
+On `s<=s_0`, the viscous source theorem says
+
+\[
+\mathfrak d_V
+\ge b\rho_\nu^2,
+\qquad
+b=\left(\frac{5000}{\nu s_0}\right)^2.
+\]
+
+If the scale-matched branch carries at least `Sigma_*/2`, then Cauchy on the whole scaled interval `[0,c]` gives
+
+\[
+\int\rho_\nu^2d\tau
+\ge\frac{\Sigma_*^2}{4c}.
+\]
+
+Therefore
 
 \[
 \boxed{
-N\int\|\nabla P_{>N}u\|_2^2dt
-\ge\frac{m_0}{4}d_0.
+D_V:=N\int\|\nabla V\|_2^2dt
+\ge
+\left(\frac{5000}{\nu s_0}\right)^2
+\frac{\Sigma_*^2}{4c}.
 }
 \]
 
-## 3. Viscous source
+A shorter, more intermittent viscous source has a larger `L^2_tau` cost, so there is no separate temporal-concentration escape.
 
-The same radius split applies. On the scale-matched subset the viscous source collision forces resolved normalized enstrophy `d_V>=d_{nu,0}`. Hence persistence gives
+## 4. New master-facing source alternative
+
+The H1 dephasing branch is now reduced to
 
 \[
 \boxed{
-N\int\|\nabla V\|_2^2dt
-\ge\frac{m_0}{2}d_{\nu,0}.
+\text{pressure-third}
+\ \lor\
+\text{large affine radius/reuse}
+\ \lor\
+\text{dominant low/base packet}
+\ \lor\
+\text{Bellman entropy/cycles}
+\ \lor\
+\text{positive normalized dissipation}.
 }
 \]
 
-The factor is `1/2`, not `1/4`, because there is no second mass/enstrophy split after the radius branch.
-
-## 4. Master-facing meaning
-
-After this theorem, the H1 dephasing source branch has the following physical exits:
-
-\[
-\boxed{
-\begin{array}{c}
-\text{pressure-third source},\\
-\text{large affine radius / ancestry},\\
-\text{dominant low/base packet},\\
-\text{Bellman entropy or ancestry cycle},\\
-\text{high-frequency / resolved dissipation},\\
-\text{temporal CKN concentration}.
-\end{array}}
-\]
-
-The pressure-third branch retains its separate near/far multipole treatment. The remaining continuum task is no longer to discover a source norm; it is to synchronize the dominant coarse/base packet with the selected spacetime ancestry and to convert the temporal-concentration branch into a CKN-compatible positive cost.
+The pressure-third channel retains its multipole locality theorem. The main unresolved continuum task is now **synchronization**, not source discovery: identify the dominant low/base packet as the same or a new affine ancestry component, and prevent one old coarse reservoir from servicing infinitely many high-frequency generations without paying holonomy/cycle cost.

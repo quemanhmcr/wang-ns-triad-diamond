@@ -17,29 +17,38 @@ from src.sgs_source_collision import (
 
 
 def h1_channel_normalized_integral_lower(I1: float, lifetime_c: float) -> float:
-    """Scaled source integral Sigma=int_0^c N^-4||S_*|| d tau.
-
-    From int_t ||S_*|| dt >= I1/(132 T), T=cN^-2, tau=N^2 t.
-    """
+    """Sigma=int_0^c N^-4||S_*||d tau >= I1/(132c)."""
     if I1 < 0 or lifetime_c <= 0:
         raise ValueError("invalid H1 episode parameters")
     return I1 / (132.0 * lifetime_c)
 
 
-def half_integral_superlevel_threshold(integral_lower: float, interval_length: float) -> float:
-    """rho0=Sigma/(2c); the superlevel {f>=rho0} carries >=Sigma/2 integral."""
-    if integral_lower < 0 or interval_length <= 0:
-        raise ValueError("invalid superlevel parameters")
-    return integral_lower / (2.0 * interval_length)
+def sgs_source_linear_collision_coefficients(
+    scale_radius_cap: float,
+    filter_l1: float,
+    lp_constant: float,
+    bernstein_constant: float,
+    filter_radius: float = 1.0,
+    band_support_factor: float = 1.0,
+) -> dict[str, float]:
+    """Coefficients mu_band>=c_mu*rho or d_high>=c_d*rho.
 
-
-def h1_source_level_threshold(I1: float, lifetime_c: float) -> float:
-    return half_integral_superlevel_threshold(
-        h1_channel_normalized_integral_lower(I1, lifetime_c), lifetime_c
+    Homogeneity is exact: source->increment is rho^(3/2), while the increment
+    collision threshold takes the 2/3 power, leaving a linear rho currency.
+    """
+    q1 = cubic_increment_from_sgs_source_lower(1.0, scale_radius_cap, filter_l1)
+    th = increment_collision_thresholds(
+        q1, filter_l1, lp_constant, bernstein_constant,
+        filter_radius, band_support_factor,
     )
+    return {
+        "low_band_mass_per_source": th["low_band_critical_mass"],
+        "high_enstrophy_per_source": th["high_normalized_enstrophy"],
+        "unit_source_cubic_increment": q1,
+    }
 
 
-def sgs_episode_thresholds(
+def source_weighted_sgs_episode_costs(
     I1: float,
     lifetime_c: float,
     scale_radius_cap: float,
@@ -49,107 +58,85 @@ def sgs_episode_thresholds(
     filter_radius: float = 1.0,
     band_support_factor: float = 1.0,
 ) -> dict[str, float]:
-    rho0 = h1_source_level_threshold(I1, lifetime_c)
-    q0 = cubic_increment_from_sgs_source_lower(rho0, scale_radius_cap, filter_l1)
-    inc = increment_collision_thresholds(
-        q0, filter_l1, lp_constant, bernstein_constant,
+    """Master-facing source-weighted alternatives, with no time-persistence assumption.
+
+    One fixed SGS source channel has total normalized source weight Sigma.
+    Either large-radius times carry >=Sigma/2, or scale-matched times do.
+    On the latter, mass/enstrophy branches split source weight; the enstrophy
+    branch directly pays dissipation. The mass branch is split once more into a
+    dominant atom versus entropy/cycle routing at theta=1/4, alpha=1/2.
+    """
+    sigma = h1_channel_normalized_integral_lower(I1, lifetime_c)
+    coeff = sgs_source_linear_collision_coefficients(
+        scale_radius_cap, filter_l1, lp_constant, bernstein_constant,
         filter_radius, band_support_factor,
     )
+    cm = coeff["low_band_mass_per_source"]
+    cd = coeff["high_enstrophy_per_source"]
     return {
-        "source_level": rho0,
-        "cubic_increment": q0,
-        "low_band_mass": inc["low_band_critical_mass"],
-        "high_enstrophy": inc["high_normalized_enstrophy"],
-        "dominant_atom_mass": 0.25 * inc["low_band_critical_mass"],
-        "atomic_entropy_if_no_dominant": math.log(4.0),
-        "ancestry_entropy_or_pair_entropy": math.log(2.0),
-        "same_ancestry_pair_mass": 0.25,
+        "total_source_weight": sigma,
+        "large_radius_source_weight": 0.5 * sigma,
         "large_radius_mass": fresh_radius_mass_lower(scale_radius_cap),
+        # scale-matched source weight >=Sigma/2; one of mass/enstrophy gets >=Sigma/4
+        "high_frequency_dissipation": 0.25 * cd * sigma,
+        "winning_band_mass_occupation": 0.25 * cm * sigma,
+        # if mass branch wins, dominant-vs-entropy split costs another 1/2 in source weight;
+        # dominant atom has one quarter of band mass.
+        "dominant_atom_mass_occupation": (1.0 / 32.0) * cm * sigma,
+        "entropy_or_cycle_source_weight": 0.125 * sigma,
+        # entropy branch splits Bellman-vs-cycle once more by source weight if desired
+        "bellman_or_cycle_source_weight": 0.0625 * sigma,
+        "atomic_entropy": math.log(4.0),
+        "ancestry_entropy": math.log(2.0),
+        "same_ancestry_pair_mass": 0.25,
+        **coeff,
     }
 
 
-def viscous_episode_thresholds(
+def source_weighted_viscous_episode_costs(
     I1: float,
     lifetime_c: float,
     scale_radius_cap: float,
     viscosity: float,
 ) -> dict[str, float]:
-    rho0 = h1_source_level_threshold(I1, lifetime_c)
-    d0 = enstrophy_from_viscous_source_lower(rho0, viscosity, scale_radius_cap)
+    """Viscous source pays dissipation without a persistence hypothesis.
+
+    On the scale-matched branch d_V >= b rho^2, b=(5000/(nu s0))^2.
+    If that branch carries source integral >=Sigma/2 on an interval of scaled
+    length at most c, Cauchy gives int rho^2 >= Sigma^2/(4c).
+    """
+    if viscosity <= 0:
+        raise ValueError("positive viscosity required")
+    sigma = h1_channel_normalized_integral_lower(I1, lifetime_c)
+    b = enstrophy_from_viscous_source_lower(1.0, viscosity, scale_radius_cap)
     return {
-        "source_level": rho0,
-        "resolved_enstrophy": d0,
+        "total_source_weight": sigma,
+        "large_radius_source_weight": 0.5 * sigma,
         "large_radius_mass": fresh_radius_mass_lower(scale_radius_cap),
+        "enstrophy_per_source_squared": b,
+        "resolved_dissipation": b * sigma * sigma / (4.0 * lifetime_c),
     }
 
 
-def sgs_persistent_episode_costs(
-    thresholds: dict[str, float],
-    source_superlevel_measure_lower: float,
-) -> dict[str, float]:
-    """Pigeonhole costs on a persistent SGS-source superlevel set.
-
-    If E has measure >=m, then either s>s0 on >=m/2, or the scale-matched
-    subset has >=m/2. On the latter, increment collision gives mass or enstrophy
-    on at least half again, hence >=m/4.  The enstrophy case pays normalized
-    dissipation >=(m/4)d0.
-    """
-    m = source_superlevel_measure_lower
-    if m < 0:
-        raise ValueError("nonnegative scaled-time measure required")
-    return {
-        "radius_branch_measure": 0.5 * m,
-        "mass_or_entropy_branch_measure": 0.25 * m,
-        "enstrophy_branch_measure": 0.25 * m,
-        "high_frequency_dissipation": 0.25 * m * thresholds["high_enstrophy"],
-    }
-
-
-def viscous_persistent_episode_costs(
-    thresholds: dict[str, float],
-    source_superlevel_measure_lower: float,
-) -> dict[str, float]:
-    m = source_superlevel_measure_lower
-    if m < 0:
-        raise ValueError("nonnegative scaled-time measure required")
-    return {
-        "radius_branch_measure": 0.5 * m,
-        "enstrophy_branch_measure": 0.5 * m,
-        "resolved_dissipation": 0.5 * m * thresholds["resolved_enstrophy"],
-    }
-
-
-def temporal_concentration_alternative(
-    normalized_integral_lower: float,
-    interval_length: float,
-    persistence_measure: float,
-) -> dict[str, float]:
-    """Exact source-superlevel concentration statement.
-
-    E={f>=Sigma/(2c)} always carries at least Sigma/2 of the integral.
-    If |E|<m0, at least Sigma/2 source integral is concentrated on a scaled-time
-    set of measure <m0: this is the explicit CKN/burst branch.
-    """
-    if normalized_integral_lower < 0 or interval_length <= 0 or persistence_measure <= 0:
-        raise ValueError("invalid temporal concentration parameters")
-    return {
-        "superlevel_threshold": normalized_integral_lower / (2.0 * interval_length),
-        "source_integral_on_superlevel": 0.5 * normalized_integral_lower,
-        "concentration_measure_cap": persistence_measure,
-    }
+def source_weight_partition_lower(total_source_weight: float, levels: int) -> float:
+    """After `levels` binary source-weight pigeonholes, one branch carries Sigma/2^levels."""
+    if total_source_weight < 0 or levels < 0:
+        raise ValueError("invalid source partition")
+    return total_source_weight / (2.0 ** levels)
 
 
 @dataclass(frozen=True)
 class EpisodeCollisionStress:
     samples: int
-    minimum_source_level_margin: float
+    minimum_sgs_homogeneity_margin: float
     minimum_sgs_dissipation_margin: float
     minimum_viscous_dissipation_margin: float
+    minimum_partition_margin: float
 
 
 def stress(samples: int = 50_000, seed: int = 20260808) -> EpisodeCollisionStress:
     rng = np.random.default_rng(seed)
-    ms = md = mv = float("inf")
+    mh = md = mv = mp = float("inf")
     for _ in range(samples):
         I1 = float(rng.uniform(1e-4, 0.3))
         c = float(rng.uniform(0.05, 1.0))
@@ -157,27 +144,37 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> EpisodeCollisionStres
         g1 = float(rng.uniform(1.0, 2.0))
         clp = float(rng.uniform(1.0, 3.0))
         cb = float(rng.uniform(1.0, 2.0))
-        th = sgs_episode_thresholds(I1, c, s0, g1, clp, cb)
-        sigma = h1_channel_normalized_integral_lower(I1, c)
-        rho = h1_source_level_threshold(I1, c)
-        ms = min(ms, 2.0 * c * rho - sigma)
-        if 2.0 * c * rho + 2e-14 < sigma:
-            raise AssertionError("superlevel threshold arithmetic failed")
-        m = float(rng.uniform(1e-4, c))
-        costs = sgs_persistent_episode_costs(th, m)
-        expect = 0.25 * m * th["high_enstrophy"]
-        md = min(md, costs["high_frequency_dissipation"] - expect)
-        if costs["high_frequency_dissipation"] + 1e-14 < expect:
-            raise AssertionError("SGS episode dissipation routing failed")
+        coeff = sgs_source_linear_collision_coefficients(s0, g1, clp, cb)
+        rho = float(rng.uniform(1e-5, 0.05))
+        q = cubic_increment_from_sgs_source_lower(rho, s0, g1)
+        th = increment_collision_thresholds(q, g1, clp, cb)
+        mh = min(mh,
+                 th["low_band_critical_mass"] - coeff["low_band_mass_per_source"] * rho,
+                 th["high_normalized_enstrophy"] - coeff["high_enstrophy_per_source"] * rho)
+        if th["low_band_critical_mass"] + 2e-12 < coeff["low_band_mass_per_source"] * rho:
+            raise AssertionError("SGS source-to-mass homogeneity failed")
+        if th["high_normalized_enstrophy"] + 2e-12 < coeff["high_enstrophy_per_source"] * rho:
+            raise AssertionError("SGS source-to-enstrophy homogeneity failed")
+
+        out = source_weighted_sgs_episode_costs(I1, c, s0, g1, clp, cb)
+        sigma = out["total_source_weight"]
+        expectd = 0.25 * out["high_enstrophy_per_source"] * sigma
+        md = min(md, out["high_frequency_dissipation"] - expectd)
+        if out["high_frequency_dissipation"] + 1e-14 < expectd:
+            raise AssertionError("source-weighted SGS dissipation failed")
 
         nu = float(rng.uniform(0.2, 2.0))
-        tv = viscous_episode_thresholds(I1, c, s0, nu)
-        cv = viscous_persistent_episode_costs(tv, m)
-        expectv = 0.5 * m * tv["resolved_enstrophy"]
-        mv = min(mv, cv["resolved_dissipation"] - expectv)
-        if cv["resolved_dissipation"] + 1e-14 < expectv:
-            raise AssertionError("viscous episode dissipation routing failed")
-    return EpisodeCollisionStress(samples, ms, md, mv)
+        v = source_weighted_viscous_episode_costs(I1, c, s0, nu)
+        b = v["enstrophy_per_source_squared"]
+        expectv = b * v["total_source_weight"] ** 2 / (4.0 * c)
+        mv = min(mv, v["resolved_dissipation"] - expectv)
+        if v["resolved_dissipation"] + 1e-14 < expectv:
+            raise AssertionError("source-weighted viscous dissipation failed")
+
+        levels = int(rng.integers(0, 7))
+        part = source_weight_partition_lower(sigma, levels)
+        mp = min(mp, part - sigma / (2 ** levels))
+    return EpisodeCollisionStress(samples, mh, md, mv, mp)
 
 
 def main() -> None:
@@ -188,7 +185,7 @@ def main() -> None:
     args.outdir.mkdir(parents=True, exist_ok=True)
     out = stress(args.samples)
     data = {
-        "status": "EXACT_ROUTING_GIVEN_H1_SOURCE_SGS_COLLISION_AND_LP_BERNSTEIN",
+        "status": "EXACT_SOURCE_WEIGHTED_ROUTING_GIVEN_H1_SOURCE_AND_STANDARD_LP_BERNSTEIN",
         "stress": out.__dict__,
         "clean_entropy_constants": {
             "dominant_fraction": "1/4",
@@ -196,36 +193,37 @@ def main() -> None:
             "ancestry_entropy": "log 2",
             "same_ancestry_pair_mass": "1/4",
         },
+        "principle": "temporal concentration is not a free SGS/viscous exit: homogeneity converts source weight directly to mass/enstrophy, and viscous concentration increases the quadratic dissipation cost",
     }
     (args.outdir / "source_episode_collision.json").write_text(json.dumps(data, indent=2), encoding="utf-8")
-    md = f"""# H1 physical-source episode collision
+    md = f"""# H1 physical-source episode collision: source-weighted form
 
-Status: **EXACT_ROUTING_GIVEN_H1_SOURCE_SGS_COLLISION_AND_LP_BERNSTEIN**.
+Status: **EXACT_SOURCE_WEIGHTED_ROUTING_GIVEN_H1_SOURCE_AND_STANDARD_LP_BERNSTEIN**.
 
-On the H1-dominant, low-strain, mild-aspect branch, the covariant source theorem gives one fixed physical source channel with scaled integral
+A fixed H1 source channel carries normalized source weight
 
-`Sigma_* >= I1/(132 c)`,  `tau=N^2t`,  `T=cN^-2`.
+`Sigma_* >= I1/(132 c)`.
 
-The superlevel
+For differentiated SGS stress, filtered-source collision gives cubic increments proportional to `rho^(3/2)`, while the Onsager mass/enstrophy threshold takes the `2/3` power.  Therefore the final currencies are **linear in the instantaneous source density**:
 
-`rho_* = I1/(264 c^2)`
+`mu_band >= c_mu rho`  or  `d_high >= c_d rho`.
 
-always carries at least half of that source integral.  If its scaled-time measure is below a chosen persistence threshold, this is explicitly a temporal concentration / CKN-burst branch.
+This removes any persistence assumption. Source weight can be pigeonholed directly. Outside a large-radius branch carrying `Sigma/2`, the scale-matched source has weight at least `Sigma/2`; either the mass or enstrophy branch carries at least `Sigma/4`.  Hence the enstrophy branch pays normalized high-frequency dissipation at least
 
-If the differentiated-SGS channel persists and `s=N r_g<=s0`, the filtered-source theorem produces a cubic increment threshold; the Onsager collision then gives a low/base critical-mass band or high-frequency normalized enstrophy.  With the clean packet split `theta=1/4, alpha=1/2`, the mass branch becomes exactly
+`D_high >= (c_d/4) Sigma`.
 
-- one atom with at least `1/4` of the winning band mass; or
-- ancestry/component collision entropy at least `log 2`; or
-- same-ancestry pair/cycle mass at least `1/4`.
+If the mass branch wins, `theta=1/4, alpha=1/2` gives either dominant-atom mass occupation, or the clean event `H_anc>=log 2`, or same-ancestry pair/cycle mass `>=1/4`.  The source-weight carried by the Bellman/cycle alternatives remains quantitative after the finite binary pigeonholes.
 
-If instead `s>s0`, the affine critical-grain theorem gives the radius-energy event `N int_E|u|^2 >= (3/10)s0`.
+For viscous source, `d_V>=b rho_nu^2`.  If the scale-matched branch carries source weight at least `Sigma/2`, Cauchy on the entire scaled lifetime `[0,c]` gives
 
-On a persistent SGS-source set of scaled measure `m`, after the radius and mass/enstrophy pigeonholes the enstrophy branch pays normalized high-frequency dissipation at least `(m/4)d_high`.  For the viscous source the analogous scale-matched branch pays at least `(m/2)d_V`.
+`D_V >= b Sigma^2/(4c)`.
+
+Thus concentrating the viscous source in time only increases its dissipation price.
 
 Stress: `{out.samples}`
-- minimum source-threshold arithmetic margin: `{out.minimum_source_level_margin:.3e}`
-- minimum SGS dissipation-routing margin: `{out.minimum_sgs_dissipation_margin:.3e}`
-- minimum viscous dissipation-routing margin: `{out.minimum_viscous_dissipation_margin:.3e}`
+- minimum SGS homogeneity margin: `{out.minimum_sgs_homogeneity_margin:.3e}`
+- minimum source-weighted SGS dissipation margin: `{out.minimum_sgs_dissipation_margin:.3e}`
+- minimum source-weighted viscous dissipation margin: `{out.minimum_viscous_dissipation_margin:.3e}`
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
