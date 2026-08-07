@@ -1,0 +1,23 @@
+name: atomic-component
+on:
+  workflow_dispatch:
+    inputs:
+      samples:
+        required: false
+        default: '50000'
+permissions:
+  contents: read
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12', cache: pip}
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - run: python -m src.atomic_component_entropy --samples "${{ inputs.samples }}" --outdir results-atomic-component
+      - run: cat results-atomic-component/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with: {name: atomic-component-results, path: results-atomic-component/}
