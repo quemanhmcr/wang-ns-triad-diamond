@@ -1,0 +1,22 @@
+name: intrinsic-triad-plane
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - name: Full-3D intrinsic plane stress
+        run: python -m src.intrinsic_triad_plane --samples 50000 --outdir results-intrinsic-plane
+      - run: cat results-intrinsic-plane/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: intrinsic-triad-plane-results
+          path: results-intrinsic-plane/
