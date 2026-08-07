@@ -125,6 +125,30 @@ def ancestry_cycle_gain(triads, ancestry_labels, fresh_token='FRESH'):
                 rank_gain=contracted-raw,attachment_lower_bound=attachment_gain)
 
 
+
+def pair_biased_multiplicity_certificate(weights, labels, lam=2.0):
+    """Exact entropy-to-reused-multiplicity certificate.
+
+    Under alpha_A proportional to W_A^2, E_alpha q_A = exp(-(H_at-H_anc)).
+    Hence alpha{q_A <= lam exp(-d)} >= 1-1/lam; and since q_A >= 1/k_A,
+    those ancestry classes contain k_A >= exp(d)/lam distinct atoms.
+    """
+    if lam <= 1: raise ValueError('lam must exceed 1')
+    d=collision_chain(weights,labels)
+    masses=d['masses']; q=d['q_cond']; qanc=d['q_ancestry']; gap=d['hidden_entropy']
+    alpha={a:(W*W/qanc) for a,W in masses.items()}
+    threshold=lam*math.exp(-gap)
+    good=[a for a in alpha if q[a] <= threshold + 1e-15]
+    good_mass=sum(alpha[a] for a in good)
+    # actual atom multiplicities
+    counts=defaultdict(int)
+    for a in labels: counts[a]+=1
+    min_actual=min((counts[a] for a in good), default=math.inf)
+    return dict(hidden_entropy=gap,pair_biased_good_mass=good_mass,
+                theorem_good_mass=1.0-1.0/lam,
+                multiplicity_lower_bound=math.exp(gap)/lam,
+                minimum_actual_multiplicity=min_actual,good_labels=good)
+
 def random_trial(rng, n=24, k=6):
     w=rng.dirichlet(np.full(n,0.45))
     labels=rng.integers(0,k,size=n).tolist()

@@ -39,3 +39,13 @@ def test_single_old_group_exact_gain_on_tree_chain():
     d=ancestry_cycle_gain(triads,lab)
     assert d['rank_gain']==2
     assert d['attachment_lower_bound']==2
+
+
+def test_pair_biased_multiplicity_certificate():
+    rng=np.random.default_rng(9)
+    for _ in range(500):
+        n=int(rng.integers(5,40)); w=rng.dirichlet(np.ones(n)*.5); lab=rng.integers(0,6,size=n).tolist()
+        c=pair_biased_multiplicity_certificate(w,lab,lam=2.0)
+        assert c['pair_biased_good_mass'] >= .5-1e-12
+        if c['good_labels']:
+            assert c['minimum_actual_multiplicity'] + 1e-12 >= c['multiplicity_lower_bound']
