@@ -1,0 +1,20 @@
+name: Quadratic swirl kernel
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint==0.8.0
+      - run: pytest -q
+      - name: Quadratic swirl stress
+        run: python -m src.quadratic_swirl_kernel --samples 50000 --outdir results-quadratic-swirl-kernel
+      - run: cat results-quadratic-swirl-kernel/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: quadratic-swirl-kernel-results
+          path: results-quadratic-swirl-kernel/
