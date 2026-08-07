@@ -252,10 +252,19 @@ c_{0,H}^{phys}=\min\{1/20000,(25/106)h_H\}>0.
 }
 \]
 
-Here `E_H^{phys}` is weighted by actual positive child-energy transfer.  The
-transfer-weighted midgap theorem realizes the associated progress sum as a
-single smooth SGS tail flux whenever the extracted block has the certified
-common spectral moat.
+Here `E_H^{phys}` is weighted by actual positive child-energy transfer.  A
+common spectral moat no longer has to be assumed for a signed-good crossing
+core.  The four-bin crossing theorem extracts a subcore carrying at least one
+quarter of the transfer-weighted Hodge numerator and Arb certifies its shell
+halfwidth `<2/25` with smooth moat margin `>1/25`.  If the PDE-facing argument
+insists on using one such physical smooth-cut subcore, the conservative branch
+constant is
+
+\[
+\boxed{
+c_{0,H}^{cross}=\min\{1/20000,(25/424)h_H\}>0.
+}
+\]
 
 If instead a set of outside-neighborhood edges has transfer weight at least
 `beta_bad`, it pays at least `beta_bad/100`.  Thus, after fixing the positive
@@ -287,12 +296,40 @@ more complete than in the earlier version of this note:
   localization, with the remaining cancellation branch forcing a critical
   annular charge.
 
-The actual Navier--Stokes gap is therefore now the **construction** of the packet
-core to which these identities apply: transfer-adapted Gaussian/profile
-extraction with uniform synthesis constants, common parent/child log shells,
-summable cross interactions and moving spatial windows. One must then close the
-critical annular-charge / window-leakage alternative, connect companion transfer
-to critical local energy, and synchronize the ledger over packet lifetimes.
+The actual Navier--Stokes gap is therefore now the **construction** of the
+transfer roles and their spacetime packetization.  Common parent/child log
+shells are no longer a separate hypothesis: crossing plus the certified
+single-edge gap produces them by four-bin extraction.  Nor is a full iterative
+within-block profile decomposition required: on an efficient frozen block,
+Christ's inverse Young theorem gives one Gaussian profile and the exact
+trilinear replacement loss is `3 eps_G+3 eps_G^2+eps_G^3`.  Frequency-block
+support then gives the critical-mass bound
+
+\[
+N\|G\|_2^2\ge C_\Omega^{-1/3}(1-\epsilon_G)^2.
+\]
+
+The frequency multiplier part of that realization is now explicit.  On the
+certified compact crossing shells, freeze the normalized smooth SGS symbol on
+relative cells of diameter `h`.  If `L_M` is its dimensionless Lipschitz
+constant, sharp Young gives
+
+\[
+|T_M-T_{M_h}|\le A_3L_Mh\prod_{j=1}^3\|f_j\|_{3/2}.
+\]
+
+Choosing the relative cell sizes so that `sum_j L_{M,j}h_j<infinity` puts this
+loss directly into the summable cross-error ledger.  Moreover at one-percent
+Christ profile distance, the certified `2/25` shell gives
+
+\[
+\boxed{N\|G\|_2^2>3/4.}
+\]
+
+What remains is therefore spatial/time rather than multiplier-theoretic: attach
+the frozen frequency roles to moving physical packets, propagate the affine
+Gaussian grain through its packet lifetime, control partition overlap and
+non-pressure leakage, and synchronize the moving windows across generations.
 
 ## 7. PDE-facing localized pressure alternative
 
@@ -333,5 +370,22 @@ channel:
 }
 \]
 
-Closing the latter channel against the packet critical-mass/fresh ledger remains
-conditional; the pressure algebra itself is no longer missing.
+The pressure channel has a further packet-level closure.  Since
+`int U dot grad chi=0`, the constant pressure mode cancels.  The far pressure
+kernel is therefore a dipole difference with `|grad K|=O(|x-y|^{-4})`.
+Three-dimensional packet packing grows as `2^{3n}`, leaving the summable spare
+power `4-3=1`.  The local pressure source is controlled by
+Calderon--Zygmund and band-limited Bernstein, so a definite local cancellation
+forces definite critical `L^2` mass.  In the stated packet model this yields
+
+\[
+W_{cancel}\ge\rho
+\Longrightarrow
+\mu_{fresh}\ge
+\min\left\{(\rho/(2C_{near}))^{2/3},\rho/(2C_{far})\right\}>0.
+\]
+
+The remaining conditional step is to construct the actual PDE packet frame so
+that its near/far pressure split, packing constants and cross errors satisfy
+these hypotheses, and then to register the resulting mass in the spacetime
+fresh/reuse ancestry ledger.

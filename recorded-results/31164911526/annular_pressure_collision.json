@@ -1,0 +1,9 @@
+{
+  "samples": 50000,
+  "kernel_component_constant": 10.0,
+  "far_kernel_constant": 400.0,
+  "far_coefficient": 120.0,
+  "fresh_mass_threshold": 0.0008333333333333334,
+  "worst_explicit_far_over_analytic": 0.03832932456856252,
+  "minimum_collision_margin": 0.10985622282865491
+}

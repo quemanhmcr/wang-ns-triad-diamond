@@ -1,0 +1,8 @@
+{
+  "samples": 50000,
+  "worst_pointwise_lipschitz_ratio": 0.8531789955261737,
+  "largest_random_normalized_transfer_bound": 0.6042240321903232,
+  "young_constant_A3": 0.6495190528383289,
+  "quadratic_schedule_sum_upper": 0.4444444444444444,
+  "unit_lipschitz_infinite_transfer_error_upper": 0.2886751345948128
+}

@@ -187,7 +187,51 @@ the spatial moat. That is a physical alternative which can be handed to the
 fresh/leakage/profile ledger instead of being treated as an uncontrolled sign
 error.
 
-## 5. Moving windows and transport geometry
+## 5. Multipole collision upgrade
+
+The annular charge alternative can be sharpened before any spacetime counting.
+Because `div U=0`,
+
+\[
+\int U\cdot\nabla\chi=0,
+\]
+
+so a constant pressure performs no window-boundary work.  For the Newtonian
+pressure kernel this permits the far-field subtraction
+`K_ij(x-y)-K_ij(x_0-y)`.  The explicit kernel satisfies
+
+\[
+\sum_{ij}|\nabla K_{ij}(z)|\,|u_i u_j|
+\le 10|z|^{-4}|u|^2.
+\]
+
+Thus remote packet shells carry a `2^{-4n}` pressure weight while their
+three-dimensional packing grows only as `2^{3n}`.  The spare `2^{-n}` is
+summable.  In particular, under a packet packing bound, absence of a fresh
+packet of critical mass `mu_*` gives `W_far<=C_far mu_*`.
+
+For the local pressure source, Calderon--Zygmund plus a frequency-localized
+Bernstein estimate gives
+
+\[
+r^{-1}\|V\|_2^2
+\ge C_B^{-2}
+\left(\frac{\rho}{(r\|\nabla\chi\|_\infty)C_R}\right)^{2/3}
+\]
+
+when normalized local pressure work is at least `rho`.  Consequently, in the
+finite packet model,
+
+\[
+W_{cancel}\le C_{near}\mu_*^{3/2}+C_{far}\mu_*
+\]
+
+and pressure cancellation at least `rho` forces a positive fresh critical-mass
+threshold.  The continuum kernel decay is exact; the remaining PDE task is to
+construct a transfer-adapted packet frame satisfying the stated packing and
+near/far decomposition with summable errors.
+
+## 6. Moving windows and transport geometry
 
 The term
 
@@ -206,7 +250,7 @@ flux, window-transport mismatch, and any pressure-cancellation annular charge.
 The smooth-filter commutator bound from the preceding module is summable for the
 existing expanding-moat schedule.
 
-## 6. Remaining bridge
+## 7. Remaining bridge
 
 To turn the exact ledger into a PDE closure one still needs to prove that a
 near-extremal packet lineage admits moving windows for which the positive

@@ -1,0 +1,6 @@
+{
+  "samples": 100000,
+  "minimum_gaussian_transfer_lower": 0.8873795857828817,
+  "minimum_critical_l2_mass_lower": 0.2554986052181368,
+  "replacement_loss_at_1_percent": 0.030301
+}

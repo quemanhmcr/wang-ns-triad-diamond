@@ -1,0 +1,16 @@
+{
+  "certificate": {
+    "shell_halfwidth": "2/25",
+    "profile_distance": "1/100",
+    "shell_volume_coefficient_ball": "[2.0299769094616733239937309204376705091348152030 +/- 2.17e-47]",
+    "critical_l2_mass_ball": "[0.77405773809433069521088197496855790587530641708 +/- 5.75e-48]",
+    "critical_l2_mass_lower_bound": "3/4",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 100000,
+    "minimum_gaussian_transfer_lower": 0.8873795857828817,
+    "minimum_critical_l2_mass_lower": 0.2554986052181368,
+    "replacement_loss_at_1_percent": 0.030301
+  }
+}

@@ -73,3 +73,47 @@ Michael Christ's inverse theorem then makes the magnitudes close in
 dimensionless helical transfer multiplier, local cusp stability further forces
 that Gaussian cloud into an anisotropic tube around the maximizing triad
 manifold.
+
+
+## One-shot transfer consequence for efficient blocks
+
+A full iterative profile decomposition inside one low-cost block is unnecessary.
+If Christ supplies Gaussian profiles `F,G,H` with each `L^{3/2}` distance at
+most `epsilon_G`, weighted Young and trilinearity give
+
+\[
+\frac{|T_m(f,g,h)-T_m(F,G,H)|}{m_*A_3}
+\le 3\epsilon_G+3\epsilon_G^2+\epsilon_G^3.
+\]
+
+For a frequency role supported in `Omega_N`, `|Omega_N|<=C_Omega N^3`, finite
+energy already implies Fourier `L^{3/2}` and the Gaussian profile carries
+
+\[
+N\|G\|_2^2\ge C_\Omega^{-1/3}(1-\epsilon_G)^2.
+\]
+
+Thus the external inverse Young theorem, plus the repository's exact weighted
+multiplier/phase stability, gives one transfer-preserving critical-mass profile
+on every sufficiently efficient frozen block.  The remaining issue is its
+spacetime packet realization, not an infinite within-block extraction.
+
+
+For the certified radial log shell `|log(|xi|/N)|<=2/25`, Action
+`31165654509` makes the preceding mass bridge quantitative.  At
+`epsilon_G=1/100`,
+
+\[
+|\Omega_N|/N^3
+\le \frac{4\pi}{3}(e^{6/25}-e^{-6/25})
+=2.0299769094\ldots
+\]
+
+and Arb certifies
+
+\[
+\boxed{N\|G\|_2^2>3/4.}
+\]
+
+The non-explicit part remains only Christ's implication from sufficiently small
+Young deficit to one-percent Gaussian proximity.

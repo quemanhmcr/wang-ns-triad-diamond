@@ -597,6 +597,265 @@ charge in the spatial moat. The pressure problem has therefore been converted
 from an uncontrolled nonlocal sign into a concrete **combined-work or critical
 annular charge** alternative.
 
+### Crossing extraction, one-shot profiles, and pressure multipoles
+
+The PDE-facing bridge has now been reduced further in three directions.
+
+First, a **common spectral moat is forced by crossing geometry**; it is not an
+extra Gaussian hypothesis.  On the signed-good core at `eta_0=10^{-4}`, the
+single-edge theorem gives
+
+\[
+u\le \frac1{200},\qquad
+\left|g-\gamma_*\right|\le\frac1{80}.
+\]
+
+If a positive child-transfer edge crosses one physical reference cut `tau_0`,
+then its parent/child midgap lies in an interval of length
+`gamma_*+1/80`.  Splitting this interval into four equal bins gives one bin
+carrying at least one quarter of the positive transfer, and (independently) one
+bin carrying at least one quarter of the transfer-weighted Hodge numerator.  In
+that bin both parents and the child lie in common shells of halfwidth
+
+\[
+\boxed{
+\sigma_{cross}
+=\frac{\gamma_*}{8}+\frac{5}{8}\frac1{80}+\frac1{200}.
+}
+\]
+
+Action `31164771160` certifies at 160-bit Arb precision
+
+\[
+\sigma_{cross}=0.07441441067\ldots<\frac2{25},
+\]
+
+and, with the existing smooth transition halfwidth `1/20`,
+
+\[
+\boxed{
+\frac{\gamma_*}{2}-2\sigma_{cross}-\frac1{20}
+>\frac1{25}.
+}
+\]
+
+Thus an arbitrary crossing good core contains a one-quarter subcore on which
+the exact smooth-midgap SGS identity applies.  A conservative PDE-facing Hodge
+coefficient after this scale extraction is therefore
+
+\[
+\boxed{
+\frac{25}{424},
+\qquad
+c_{0,H}^{cross}
+=\min\left\{\frac1{20000},\frac{25}{424}h_H\right\}>0.
+}
+\]
+
+Second, the **within-block Gaussian extraction need only be one-shot**.  A
+frequency-localized finite-energy block automatically lies in Fourier
+`L^{3/2}` because, when `|Omega_N|<=C_Omega N^3`,
+
+\[
+\|f\|_{3/2}
+\le C_\Omega^{1/6}N^{1/2}\|f\|_2.
+\]
+
+Weighted near equality implies ordinary Young near equality, so Michael
+Christ's near-extremizer theorem supplies one affine Gaussian extremizing triple
+at any prescribed small `L^{3/2}` distance `epsilon_G`, once the block deficit
+is sufficiently small.  The new deterministic reduction is exact: replacing
+three unit inputs by profiles at distance `epsilon_G` changes normalized
+weighted transfer by at most
+
+\[
+\boxed{
+3\epsilon_G+3\epsilon_G^2+\epsilon_G^3.
+}
+\]
+
+Moreover, because the original role is supported in the finite frequency block,
+the Gaussian profile has at least `1-epsilon_G` of its `L^{3/2}` norm there and
+therefore carries critical energy
+
+\[
+\boxed{
+N\|G\|_2^2
+\ge C_\Omega^{-1/3}(1-\epsilon_G)^2.
+}
+\]
+
+So no global `||uhat||_{3/2}` hypothesis and no infinite list of profiles inside
+one efficient block are required.  Christ's inverse modulus is an external
+analytic theorem and is not assigned a fake numerical constant by the
+repository.
+
+Third, pressure cancellation now has a **multipole collision mechanism**.  The
+Newtonian pressure kernel is
+
+\[
+K_{ij}(z)=\frac1{4\pi}
+\left(3\frac{z_i z_j}{|z|^5}-\frac{\delta_{ij}}{|z|^3}\right).
+\]
+
+Since `div U=0`,
+
+\[
+\int U\cdot\nabla\chi=0,
+\]
+
+so a constant pressure mode performs no boundary work.  For a far source one
+may subtract `K_ij(x_0-y)` and use
+
+\[
+\sum_{ij}|\nabla K_{ij}(z)|\,|u_i u_j|
+\le 10|z|^{-4}|u|^2.
+\]
+
+The far pressure therefore enters through a dipole moment
+
+\[
+\boxed{
+\mathfrak P_{far}
+=\sum_{n\ge n_0}2^{-4n}\sum_a\mu_{n,a}.
+}
+\]
+
+Three-dimensional packet packing grows only as `2^{3n}`.  Hence, if every
+packet has critical mass at most `mu_*`, the far pressure tail is bounded by a
+constant times
+
+\[
+\mu_*\sum_{n\ge n_0}2^{-n},
+\]
+
+which is summable.  The spare exponent is exactly `4-3=1`; without the constant
+pressure cancellation there would be no spare power.
+
+For the local pressure source, Calderon--Zygmund plus band-limited Bernstein
+gives the critical-mass implication
+
+\[
+\boxed{
+r^{-1}\|V\|_2^2
+\ge
+\frac1{C_B^2}
+\left(\frac{\rho}{(r\|\nabla\chi\|_\infty)C_R}\right)^{2/3}
+}
+\]
+
+when normalized local pressure work is at least `rho`.  In the abstract finite
+packet model, if absence of a fresh packet implies
+
+\[
+W_{cancel}\le C_{near}\mu_*^{3/2}+C_{far}\mu_*,
+\]
+
+then cancellation at least `rho` forces
+
+\[
+\boxed{
+\mu_{fresh}
+\ge
+\min\left\{
+\left(\frac{\rho}{2C_{near}}\right)^{2/3},
+\frac{\rho}{2C_{far}}
+\right\}>0.
+}
+\]
+
+Action `31164911526` stress-tested this packet collision theorem on `50,000`
+adversarial shell configurations after the exact kernel estimate; the numerical
+threshold printed by that run belongs only to its chosen test constants, not to
+a universal PDE theorem.
+
+### Certified narrow-shell mass and smooth-SGS symbol freezing
+
+The crossing shell also makes the frozen-time critical-mass bridge quantitative.
+For the certified radial log shell
+
+\[
+\left|\log\frac{|\xi|}{N}\right|\le\frac2{25},
+\]
+
+the full spherical shell obeys
+
+\[
+|\Omega_N|
+\le
+\frac{4\pi}{3}
+\left(e^{6/25}-e^{-6/25}\right)N^3.
+\]
+
+If Christ's theorem has supplied a Gaussian profile at `L^{3/2}` distance
+`epsilon_G=1/100`, then at least `99/100` of the profile's normalized
+`L^{3/2}` mass remains in this shell.  Action `31165654509` certifies at
+160-bit Arb precision
+
+\[
+C_\Omega
+=2.0299769094616733\ldots
+\]
+
+and consequently
+
+\[
+\boxed{
+N\|G\|_2^2
+\ge
+0.7740577380943306\ldots
+>\frac34.
+}
+\]
+
+This constant is scale invariant.  The statement is conditional only on the
+external inverse-Young conclusion `epsilon_G<=1/100`; the shell-volume and
+critical-mass implication themselves are interval-certified.
+
+The frequency-multiplier part of the smooth-SGS packetization can also be made
+summable without invoking a black-box decomposition theorem.  On the certified
+compact crossing shells, after factoring the dimensional power of `N`, the
+smooth filter/Leray/helical SGS symbol is a smooth scale-covariant function of
+dimensionless frequencies.  Let `L_M` be its Lipschitz constant on that compact
+set.  Freeze the normalized symbol on relative frequency cells of diameter
+`h`.  Then
+
+\[
+\|M-M_h\|_\infty\le L_Mh.
+\]
+
+Sharp Young at the critical exponents gives the exact deterministic estimate
+
+\[
+\boxed{
+|T_M(f,g,h)-T_{M_h}(f,g,h)|
+\le
+A_3L_Mh
+\|f\|_{3/2}\|g\|_{3/2}\|h\|_{3/2},
+\qquad
+A_3=\left(\frac{\sqrt3}{2}\right)^3.
+}
+\]
+
+Thus frozen frequency cells provide the finite/countable interaction edges and
+the multiplier-freezing loss enters directly into the existing summable error
+ledger.  For a uniform scale-covariant `L_M`, a schedule
+
+\[
+h_j=(j+3)^{-2}
+\]
+
+is summable; more generally choose `h_j` so that
+`A_3 L_{M,j}h_j<=epsilon_j` with `sum epsilon_j<infinity`.
+Action `31165838379` passed the full test suite plus `50,000` compact-cell
+stress checks.  The random checks are regression evidence only; the theorem is
+the sup-symbol bound followed by sharp Young.
+
+This removes the **frequency multiplier freezing** part of the PDE
+construction.  What remains is spatial/time packet coherence: localized
+partition synthesis, moving windows, overlap/leakage, and preservation of the
+frozen interaction ledger through a packet lifetime.
+
 ## 5. Gaussian packet inverse mechanism
 
 The critical Fourier norm
@@ -1078,6 +1337,27 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 - exact pressure-cancellation dichotomy: a positive raw SGS event either retains
   half its size as combined work or forces the scale-critical annular charge
   `int_A(|U|^3+|P|^(3/2)) >= S/(2||grad chi||_inf)`.
+- Arb-certified four-bin crossing extraction: every signed-good positive-transfer
+  core crossing one reference cut has a transfer subcore and a Hodge-numerator
+  subcore of fraction at least `1/4`, shell halfwidth `<2/25`, and smooth moat
+  margin `>1/25`; conservative physical Hodge coefficient `25/424`;
+- exact one-shot profile replacement bound
+  `3 eps_G+3 eps_G^2+eps_G^3` and exact finite-shell bridge
+  `N||G||_2^2 >= C_Omega^(-1/3)(1-eps_G)^2`; Gaussian existence here uses
+  Christ's published inverse Young theorem rather than a repository numerical
+  certificate;
+- exact pressure-kernel constant-mode cancellation and dipole decay
+  `|grad K(z)|=O(|z|^-4)`, giving the three-dimensional `4-3=1` summable far
+  shell gain; exact local pressure-to-critical-mass Bernstein/CZ reduction and
+  the resulting positive fresh-mass threshold inside the stated packet model.
+- Arb-certified narrow-shell critical-mass bridge: on the log shell
+  `|log(|xi|/N)|<=2/25`, a Gaussian profile at `1%` `L^{3/2}` distance carries
+  `N||G||_2^2 > 3/4` (certified enclosure `0.7740577380...`); the existence of
+  that `1%` profile still uses Christ's external inverse-Young modulus;
+- exact smooth-symbol freezing estimate
+  `|T_M-T_Mh| <= A_3 L_M h prod ||f_j||_(3/2)` on each certified compact SGS
+  crossing block, so relative frequency-cell errors can be chosen summable
+  across generations without a packet-count loss.
 
 ### Computationally supported, not interval-certified
 
@@ -1086,30 +1366,34 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Transfer-adapted packet extraction with a common log-scale moat.** The smooth
-   physical flux, cancellation polarization, positive weights and Hodge change
-   of measure are now exact once a finite packet core exists.  What remains is
-   to extract such a core from a genuine near-extremal PDE block with summable
-   synthesis/cross-interaction error and to place its top-parent/child packets
-   in common log shells narrow enough for the certified moat.
-2. **Gaussian atomic extraction from an arbitrary near-extremal PDE block.** Need
-   an iterative profile extraction with controlled synthesis constants and
-   transfer-small remainder, without assuming a global
-   `\|\widehat u\|_{3/2}` bound.  The extraction must preserve the physical
-   SGS transfer measure, not merely ambient norm mass.
-3. **Close the critical annular-charge / leakage branch.** The localized
-   combined-work identity now removes pressure exactly, and pressure cancellation
-   of a raw SGS event forces a definite CKN-critical annular charge. Need to
-   prove that along the extracted packet lineage these annular charges and the
-   remaining `e U`, `R U`, viscous and moving-window leakage are summable, or
-   else force a Bellman/fresh/critical-mass event. Backscatter is already an
-   explicit term in the finite-chain depletion ledger.
-4. **Summable perturbation/time ledger.** Convert near-extremal spacetime errors
-   into the `zeta_j` and logarithmic cross-error terms required by the master
-   theorem, with synchronization over packet lifetimes.
-5. **Critical-mass bridge.** Show that a concentrated companion grain carries
-   enough local `L^2` / local-energy charge to be classified as fresh or reused
-   in the physical packet ledger.
+1. **Spatially realize the three frozen transfer roles of a genuine smooth-SGS
+   block.** The common log-scale moat is extracted by the four-bin crossing
+   theorem, and the frequency multiplier can now be frozen on relative cells
+   with exact error `A_3 L_M h` and a summable cell schedule.  What remains is
+   to attach those frequency cells to physical moving packets/windows so that
+   overlap, partition-of-unity and cross-interaction errors are summable and the
+   signed cell ledger remains the actual localized SGS transfer measure.
+2. **Make the one-shot Christ profile spacetime-coherent.** On a frozen
+   frequency block, finite energy already gives Fourier `L^{3/2}`, Christ gives
+   one Gaussian near extremizer, the trilinear replacement error is explicit,
+   and at `1%` profile distance the certified crossing shell gives the strong
+   scale-invariant charge `N||G||_2^2>3/4`.  What remains is to track the affine
+   Gaussian grain through a packet lifetime and insert it into the nested
+   ancestry tree with controlled time-dependent cutoffs.
+3. **Close the remaining spatial leakage after the pressure multipole split.**
+   Constant pressure has been removed, the far pressure tail has the summable
+   `4-3` multipole gain, and local pressure cancellation forces critical mass in
+   the packet model.  A continuum extraction must still verify the packet
+   packing/near-far hypotheses and control `e U`, `R U`, viscous flux and
+   moving-window mismatch, or turn their failure into Bellman/fresh mass.
+4. **Summable perturbation/time synchronization.** Convert the resulting
+   profile, commutator and moving-window errors into the `zeta_j` and logarithmic
+   cross-error ledgers required by the master theorem over successive packet
+   lifetimes.
+5. **Register critical mass in the ancestry ledger.** Frozen-time shell
+   localization and Bernstein now provide quantitative critical `L^2` mass;
+   the remaining task is the spacetime fresh-versus-reused classification and
+   its compatibility with local energy inequalities.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier–Stokes global regularity is made.
 
@@ -1142,6 +1426,11 @@ The most useful recorded runs, in chronological order, are:
 | `31161811900` | master regression after physical-transfer Hodge insertion; `94` tests + `20,000` episode traces |
 | `31161914134` | preferred Arb certificate: smooth moat, weight change, and rational full-Mellin countermodel; `94` tests |
 | `31162700474` | localized SGS/pressure-work depletion and critical-annulus trichotomy; `97` tests + `50,000` chain traces |
+| `31164771160` | Arb-certified four-bin crossing-to-common-moat extraction; `99` tests + `50,000` crossing blocks |
+| `31164911526` | pressure multipole `4-3` packet collision theorem; `104` tests + `50,000` shell configurations |
+| `31165172325` | one-shot transfer-preserving Gaussian profile algebra; `108` tests + `100,000` parameter checks |
+| `31165654509` | preferred one-shot profile certificate: Arb narrow-shell critical mass `>3/4`; `108` tests + `100,000` checks |
+| `31165838379` | smooth-SGS symbol freezing / summable relative-cell error; `111` tests + `50,000` cell checks |
 
 The current preferred master regression is run `31161811900` (the earlier
 recorded master artifact `31154025683/` remains the canonical episode-trace
@@ -1149,7 +1438,12 @@ artifact).  The preferred smooth physical-flux artifacts are
 `recorded-results/31161316034/` and `recorded-results/31161626056/`.  The
 preferred single-edge/physical-weight certificate is
 `recorded-results/31161914134/`.  The localized pressure-work artifact is
-`recorded-results/31162700474/`.  The numerical full-Mellin search is recorded
+`recorded-results/31162700474/`; its new multipole/fresh-mass continuation is
+`recorded-results/31164911526/`.  The crossing-scale extraction certificate is
+`recorded-results/31164771160/`, and the exploratory one-shot transfer-profile artifact is
+`recorded-results/31165172325/`; its preferred Arb narrow-shell continuation is
+`recorded-results/31165654509/`.  The preferred smooth-symbol freezing artifact
+is `recorded-results/31165838379/`.  The numerical full-Mellin search is recorded
 in `recorded-results/31160779428/`; its qualitative counterexample is separately
 Arb-certified in run `31161914134`.
 
@@ -1178,31 +1472,45 @@ The finite-dimensional architecture has reached the point where every identified
 \]
 
 The single-edge multiplier, smooth scale-flux observable, cancellation
-polarization and physical-transfer Hodge change of measure are now all closed in
-the finite packet model. In particular the curved-reuse entry can be fed by an
-actual smooth SGS transfer measure with the explicit cost
+polarization and physical-transfer Hodge change of measure are closed in the
+finite packet model.  The common spectral moat is now also extracted from any
+signed-good crossing core rather than assumed.  Conservatively, after the
+four-bin physical crossing selection one may use
 
 \[
-\boxed{c_{0,H}^{\rm phys}=\min\{1/20000,(25/106)h_H\}>0.}
+\boxed{
+c_{0,H}^{cross}=\min\{1/20000,(25/424)h_H\}>0.
+}
 \]
 
-The next mathematically decisive work is therefore narrower and more PDE-like:
+Three other former frontier items have partially collapsed.  Efficient frozen
+blocks require only **one** Christ Gaussian profile, with explicit transfer
+remainder `3 eps + 3 eps^2 + eps^3`; at one-percent profile distance the
+certified crossing shell already gives `N||G||_2^2>3/4`.  The smooth SGS
+frequency multiplier can be frozen on relative cells with deterministic error
+`A_3L_Mh`, hence a summable frequency-edge realization.  Pressure cancellation,
+meanwhile, has a true three-dimensional multipole mechanism: constant pressure
+does no work, far sources gain `|x-y|^{-4}`, and the spare `4-3` exponent makes
+diffuse remote packet pressure summable unless fresh critical mass/replication
+appears.
 
-1. prove a **transfer-adapted packet/profile extraction** from a genuine
-   near-extremal Navier--Stokes block which preserves the SGS transfer measure
-   and produces common parent/child log shells (hence the certified smooth
-   moat) with summable cross interaction;
-2. close the **critical annular-charge / moving-window leakage** alternative.
-   The combined SGS/pressure-work ledger already telescopes and pressure
-   cancellation already forces a scale-critical boundary charge; the missing
-   theorem must show repeated such charges are summable or create a fresh /
-   Bellman / critical-mass event;
-3. connect the resulting positive companion transfer to the critical local
-   `L^2`/energy charge and time-synchronize it over the packet lifetime.
+The next mathematically decisive work is therefore now very specific:
 
-This is now the frontier. More optimization of the single-edge constants or
-more abstract graph combinatorics would not address the principal missing PDE
-mechanism.
+1. construct a **spatially localized, transfer-preserving realization of one
+   smooth SGS crossing block**.  The frequency multiplier freezing is now
+   summable; the missing theorem must attach the frozen frequency cells to
+   moving physical packets while controlling partition overlap and preserving
+   the signed SGS edge measure;
+2. propagate the resulting one-shot affine Gaussian grain through its
+   `N^{-2}` packet lifetime with moving windows, and prove that the remaining
+   non-pressure leakage is summable or produces a fresh/Bellman event;
+3. synchronize those spacetime grains across generations and insert the
+   critical `L^2` mass supplied by the profile/pressure branches into the
+   ancestry ledger.
+
+This is now the frontier.  Further single-edge optimization, another abstract
+cycle theorem, or an iterative within-block profile decomposition would not
+address the principal missing PDE mechanism.
 
 ---
 
@@ -1213,13 +1521,14 @@ For a new reader, the recommended order is:
 1. `RESEARCH_LEDGER.md` — this document;
 2. `docs/single_edge_stability_certificate.md`;
 3. `docs/log_scale_flux_bridge.md` and `docs/smooth_log_flux_cocycle.md`;
-4. `docs/localized_sgs_pressure_ledger.md`;
-5. `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
-6. `docs/scale_holonomy.md`;
-7. `docs/multiscale_bellman.md`;
-8. `docs/nested_grain_extraction.md`;
-9. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
-10. `docs/atomic_component_entropy.md`;
-11. `docs/multicommodity_hodge_routing.md`;
-12. `docs/resistance_bellman_stopping.md`;
-13. `docs/master_no_escape.md`.
+4. `docs/crossing_moat_extraction.md` and `docs/smooth_sgs_symbol_freezing.md`;
+5. `docs/localized_sgs_pressure_ledger.md` and `docs/annular_pressure_collision.md`;
+6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
+7. `docs/scale_holonomy.md`;
+8. `docs/multiscale_bellman.md`;
+9. `docs/nested_grain_extraction.md`;
+10. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
+11. `docs/atomic_component_entropy.md`;
+12. `docs/multicommodity_hodge_routing.md`;
+13. `docs/resistance_bellman_stopping.md`;
+14. `docs/master_no_escape.md`.

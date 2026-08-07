@@ -577,3 +577,23 @@ This constant is not a global Navier--Stokes theorem constant: the PDE still has
 to produce the packet core and common spectral/spatial moat.  But once those
 objects are extracted, the Hodge cost is now expressed in the weights of an
 actual smooth SGS energy transfer, not in an auxiliary graph measure.
+
+
+## Frequency-cell realization of the smooth physical flux
+
+On the certified crossing shells, the normalized smooth SGS/Leray/helical
+trilinear symbol is a smooth scale-covariant function of dimensionless
+frequencies.  If `L_M` is its Lipschitz constant and the domain is partitioned
+into relative cells of diameter `h`, freezing the symbol on each cell gives
+
+\[
+\boxed{
+|T_M-T_{M_h}|
+\le A_3L_Mh\prod_j\|f_j\|_{3/2}.
+}
+\]
+
+Thus a summable relative-cell schedule produces a finite/countable frequency
+edge ledger with summable multiplier error.  See
+`docs/smooth_sgs_symbol_freezing.md`.  The remaining packetization problem is
+spatial and temporal, not the smooth spectral multiplier itself.

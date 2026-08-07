@@ -1,0 +1,21 @@
+{
+  "certificate": {
+    "rstar_ball": "[0.6109041016 +/- 2.01e-11]",
+    "gamma_ball": "[0.4928152853 +/- 5.33e-11]",
+    "shell_halfwidth_ball": "[0.07441441067 +/- 4.95e-12]",
+    "shell_target": "2/25",
+    "smooth_delta": "1/20",
+    "moat_margin_ball": "[0.0475788213 +/- 4.65e-11]",
+    "moat_lower_bound": "1/25",
+    "transfer_fraction": "1/4",
+    "hodge_numerator_fraction": "1/4",
+    "crossing_physical_hodge_coefficient": "25/424",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_transfer_fraction": 0.25287274204884974,
+    "worst_hodge_numerator_fraction": 0.25344191465771815,
+    "minimum_shell_slack": 0.000473400700431309
+  }
+}
