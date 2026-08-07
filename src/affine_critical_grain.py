@@ -23,6 +23,32 @@ def affine_critical_mass(local_energy: float, r_g: float) -> float:
     return local_energy/r_g
 
 
+def physical_covariance_rhs(Sigma: np.ndarray, A: np.ndarray, nu: float) -> np.ndarray:
+    """Exact physical L2-covariance ODE inherited from the Gaussian packet."""
+    Sigma=np.asarray(Sigma,float); A=np.asarray(A,float)
+    if nu<0: raise ValueError("nu must be nonnegative")
+    return A@Sigma+Sigma@A.T+nu*np.eye(3)
+
+
+def log_geometric_radius_rate(Sigma: np.ndarray, A: np.ndarray, nu: float) -> float:
+    """d/dt log r_g for r_g=(det Sigma)^(1/6)."""
+    Sigma=np.asarray(Sigma,float); A=np.asarray(A,float)
+    Sd=physical_covariance_rhs(Sigma,A,nu)
+    return float(np.trace(np.linalg.solve(Sigma,Sd)))/6.0
+
+
+def incompressible_log_radius_rate(Sigma: np.ndarray, nu: float) -> float:
+    Sigma=np.asarray(Sigma,float)
+    if nu<0: raise ValueError("nu must be nonnegative")
+    return nu*float(np.trace(np.linalg.inv(Sigma)))/6.0
+
+
+def viscous_radius_sq_rate_lower(nu: float) -> float:
+    """For incompressible affine Gaussian dynamics, d(r_g^2)/dt >= nu."""
+    if nu<0: raise ValueError("nu must be nonnegative")
+    return nu
+
+
 def fresh_radius_budget(energies: np.ndarray, radii: np.ndarray, eta: float, overlap: float=1.0) -> tuple[float,float]:
     """Return sum radii and the energy-conservation upper bound.
 

@@ -78,3 +78,51 @@ Thus there is a physically correct anisotropy dichotomy:
 No Young or Bellman defect is assigned merely because the Gaussian is
 anisotropic.  Reused elongated grains must instead be handled by the ancestry
 and dynamic curvature/polarization ledgers.
+
+
+## Geometric radius is the dynamically natural affine scale
+
+The same `r_g` is distinguished by the exact Gaussian evolution.  Since the
+physical `L^2` covariance is `Sigma_x=P/2`, the affine Gaussian ODE gives
+
+\[
+\boxed{
+\dot\Sigma_x=A\Sigma_x+\Sigma_xA^T+\nu I.
+}
+\]
+
+Hence
+
+\[
+\frac d{dt}\log\det\Sigma_x
+=2\operatorname{tr}A+\nu\operatorname{tr}\Sigma_x^{-1}.
+\]
+
+For incompressible flow, `tr A=0`, so
+
+\[
+\boxed{
+\frac d{dt}\log r_g
+=\frac{\nu}{6}\operatorname{tr}\Sigma_x^{-1}\ge0.
+}
+\]
+
+Thus inviscid affine strain may change aspect arbitrarily but preserves the
+geometric radius exactly.  Viscosity increases it.  By AM--GM,
+
+\[
+\operatorname{tr}\Sigma_x^{-1}
+\ge 3(\det\Sigma_x)^{-1/3}=3r_g^{-2},
+\]
+
+and therefore
+
+\[
+\boxed{
+\frac d{dt}r_g^2\ge\nu.
+}
+\]
+
+This makes `r_g` particularly suitable for spacetime ancestry: shear cannot
+manufacture or erase the fresh-radius currency in the affine inviscid model,
+while viscosity has a one-sided monotone effect.
