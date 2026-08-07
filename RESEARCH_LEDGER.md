@@ -1762,8 +1762,12 @@ The most useful recorded runs, in chronological order, are:
 | `31168888413` | curvature-balanced moving moat and fixed-schedule countermodel; `127` tests + `100,000` balance checks |
 | `31169128097` | objective-strain NS source collision and pressure-Hessian `5-3=2` locality; `133` tests + `50,000` packet checks |
 
-The current preferred master regression is run `31166171000` on the integrated
-bridge commit `37e1380` (`20,000` episode traces, worst margin `0`).  The earlier
+| `31169598408`--`31169621311` | integrated affine-spacetime bridge on `2b795d2`: affine grain, strain coherence, curvature balance, objective-strain collision, localized pressure, crossing moat, nested grains and master all green; `133` tests per workflow |
+
+The current preferred master regression is run `31169621311` on the integrated
+affine-spacetime bridge commit `2b795d2` (`20,000` episode traces, worst margin
+`0`).  The earlier integrated frequency/pressure bridge run `31166171000`
+remains useful provenance.  The earlier
 recorded master artifact `31154025683/` remains the canonical stored
 episode-trace artifact.  The preferred smooth physical-flux artifacts are
 `recorded-results/31161316034/` and `recorded-results/31161626056/`.  The
@@ -1774,7 +1778,11 @@ preferred single-edge/physical-weight certificate is
 `recorded-results/31164771160/`, and the exploratory one-shot transfer-profile artifact is
 `recorded-results/31165172325/`; its preferred Arb narrow-shell continuation is
 `recorded-results/31165654509/`.  The preferred smooth-symbol freezing artifact
-is `recorded-results/31165838379/`.  Final integration runs are
+is `recorded-results/31165838379/`.  The preferred affine-spacetime dynamics artifacts are
+`recorded-results/31168393589/`, `recorded-results/31168671304/`,
+`recorded-results/31168888413/`, and `recorded-results/31169128097/`; the two
+failed interval-boundary provenance runs are `recorded-results/31168205564/`
+and `recorded-results/31168303213/`.  Final integration runs are
 `31166152074`, `31166155045`, `31166158218`, `31166160711`, `31166163414`,
 `31166165985`, `31166168659`, and `31166171000`.  The numerical full-Mellin search is recorded
 in `recorded-results/31160779428/`; its qualitative counterexample is separately
