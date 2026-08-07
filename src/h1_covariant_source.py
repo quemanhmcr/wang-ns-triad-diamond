@@ -142,11 +142,11 @@ def arb_source_constants_certificate() -> dict[str, str]:
         raise AssertionError(f"source coefficient not below 2: {src}")
     if not (conn < arb(54)):
         raise AssertionError(f"connection coefficient not below 54: {conn}")
-    # Arithmetic of dephasing split.
-    if not (arb(54) * arb(1) / 1188 == arb(1) / 22):
-        # Avoid relying on interval equality; check strict enclosure around exact rational via arithmetic below.
-        pass
-    if not (arb(54) / 2376 < arb(1) / 44):
+    # Exact threshold arithmetic belongs to rationals, not Arb touching-ball comparisons.
+    from fractions import Fraction
+    if Fraction(54, 1188) != Fraction(1, 22):
+        raise AssertionError("dephasing coupling split arithmetic failed")
+    if Fraction(108, 2376) != Fraction(1, 22):
         raise AssertionError("H1-dominant strain threshold arithmetic failed")
     return {
         "mild_aspect_kappa": "21/20",
