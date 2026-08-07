@@ -11,6 +11,7 @@ from src.source_episode_collision import (
 
 def test_h1_scaled_source_weight():
     assert abs(h1_channel_normalized_integral_lower(0.2, 0.5) - 0.2 / 66.0) < 1e-14
+    assert abs(h1_channel_normalized_integral_lower(0.2, 0.5, 1800) - 0.2 / 900.0) < 1e-14
 
 
 def test_sgs_linear_coefficients_positive():
@@ -34,3 +35,11 @@ def test_viscous_no_persistence_cost():
 
 def test_binary_source_weight_partition():
     assert abs(source_weight_partition_lower(1.0, 4) - 1.0 / 16.0) < 1e-14
+
+
+def test_extended_source_divisor_routes_positive_costs():
+    out = source_weighted_sgs_episode_costs(0.1, 0.5, 2.0, 1.0, 1.0, 1.0, source_divisor=1800)
+    assert out["total_source_weight"] > 0
+    assert out["high_frequency_dissipation"] > 0
+    v = source_weighted_viscous_episode_costs(0.1, 0.5, 2.0, 1.0, source_divisor=1800)
+    assert v["resolved_dissipation"] > 0

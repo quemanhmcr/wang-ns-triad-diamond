@@ -85,7 +85,7 @@ def extended_h1_no_escape_constants() -> dict[str, float]:
         "full_curvature_pair_or_deficit": 1.0 / 115_200_000.0,
         "source_integral": 1.0 / 600.0,
         "strain_curvature_integral": 1.0 / 16000.0,
-        "h1_dominant_strain_action": 1.0 / 32000.0,
+        "h1_dominant_gradient_action": 1.0 / 32000.0,
         "one_physical_source": 1.0 / 1800.0,
     }
 
@@ -137,7 +137,7 @@ def arb_extended_certificate() -> dict[str, str]:
         "source_coefficient_upper": "11/5",
         "connection_coefficient_upper": "60",
         "extended_source_or_AB": "int||S||>=I1/(600T) or int||A||||B||>=I1/(16000T)",
-        "h1_dominant_strain_action_threshold": "1/32000",
+        "h1_dominant_gradient_action_threshold": "1/32000",
         "one_physical_source_threshold": "I1/(1800T)",
         "status": "CERTIFIED",
     }
@@ -248,7 +248,7 @@ so the affine critical mass gives
 
 `N int_E|u|^2 > (1/5) cond(L)^(1/3)`.
 
-The extended dephasing source calculus also remains quantitative: `J1>=I1/(132T)` forces `int||S_source||>=I1/(600T)` or `int||A||||B||>=I1/(16000T)`; on the H1-dominant branch, strain action below `1/32000` makes one of pressure-third / differentiated-SGS / viscous-fourth sources at least `I1/(1800T)`.
+The extended dephasing source calculus also remains quantitative: `J1>=I1/(132T)` forces `int||S_source||>=I1/(600T)` or `int||A||||B||>=I1/(16000T)`; on the H1-dominant branch, base velocity-gradient/frame action below `1/32000` makes one of pressure-third / differentiated-SGS / viscous-fourth sources at least `I1/(1800T)`.
 
 Stress: `{out.samples}`
 - minimum condition-growth margin: `{out.minimum_condition_rate_margin:.3e}`

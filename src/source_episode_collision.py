@@ -16,11 +16,17 @@ from src.sgs_source_collision import (
 )
 
 
-def h1_channel_normalized_integral_lower(I1: float, lifetime_c: float) -> float:
-    """Sigma=int_0^c N^-4||S_*||d tau >= I1/(132c)."""
-    if I1 < 0 or lifetime_c <= 0:
+def h1_channel_normalized_integral_lower(
+    I1: float, lifetime_c: float, source_divisor: float = 132.0
+) -> float:
+    """Sigma=int_0^c N^-4||S_*||d tau >= I1/(source_divisor*c).
+
+    source_divisor=132 is the original 21/20 mild-aspect source theorem;
+    source_divisor=1800 is the certified extended 567/500 transition strip.
+    """
+    if I1 < 0 or lifetime_c <= 0 or source_divisor <= 0:
         raise ValueError("invalid H1 episode parameters")
-    return I1 / (132.0 * lifetime_c)
+    return I1 / (source_divisor * lifetime_c)
 
 
 def sgs_source_linear_collision_coefficients(
@@ -30,6 +36,7 @@ def sgs_source_linear_collision_coefficients(
     bernstein_constant: float,
     filter_radius: float = 1.0,
     band_support_factor: float = 1.0,
+    source_divisor: float = 132.0,
 ) -> dict[str, float]:
     """Coefficients mu_band>=c_mu*rho or d_high>=c_d*rho.
 
@@ -66,7 +73,7 @@ def source_weighted_sgs_episode_costs(
     branch directly pays dissipation. The mass branch is split once more into a
     dominant atom versus entropy/cycle routing at theta=1/4, alpha=1/2.
     """
-    sigma = h1_channel_normalized_integral_lower(I1, lifetime_c)
+    sigma = h1_channel_normalized_integral_lower(I1, lifetime_c, source_divisor)
     coeff = sgs_source_linear_collision_coefficients(
         scale_radius_cap, filter_l1, lp_constant, bernstein_constant,
         filter_radius, band_support_factor,
@@ -98,6 +105,7 @@ def source_weighted_viscous_episode_costs(
     lifetime_c: float,
     scale_radius_cap: float,
     viscosity: float,
+    source_divisor: float = 132.0,
 ) -> dict[str, float]:
     """Viscous source pays dissipation without a persistence hypothesis.
 
@@ -107,7 +115,7 @@ def source_weighted_viscous_episode_costs(
     """
     if viscosity <= 0:
         raise ValueError("positive viscosity required")
-    sigma = h1_channel_normalized_integral_lower(I1, lifetime_c)
+    sigma = h1_channel_normalized_integral_lower(I1, lifetime_c, source_divisor)
     b = enstrophy_from_viscous_source_lower(1.0, viscosity, scale_radius_cap)
     return {
         "total_source_weight": sigma,
@@ -156,7 +164,8 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> EpisodeCollisionStres
         if th["high_normalized_enstrophy"] + 2e-12 < coeff["high_enstrophy_per_source"] * rho:
             raise AssertionError("SGS source-to-enstrophy homogeneity failed")
 
-        out = source_weighted_sgs_episode_costs(I1, c, s0, g1, clp, cb)
+        divisor = 132.0 if rng.random() < 0.5 else 1800.0
+        out = source_weighted_sgs_episode_costs(I1, c, s0, g1, clp, cb, source_divisor=divisor)
         sigma = out["total_source_weight"]
         expectd = 0.25 * out["high_enstrophy_per_source"] * sigma
         md = min(md, out["high_frequency_dissipation"] - expectd)
@@ -164,7 +173,7 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> EpisodeCollisionStres
             raise AssertionError("source-weighted SGS dissipation failed")
 
         nu = float(rng.uniform(0.2, 2.0))
-        v = source_weighted_viscous_episode_costs(I1, c, s0, nu)
+        v = source_weighted_viscous_episode_costs(I1, c, s0, nu, source_divisor=divisor)
         b = v["enstrophy_per_source_squared"]
         expectv = b * v["total_source_weight"] ** 2 / (4.0 * c)
         relv = (v["resolved_dissipation"] - expectv) / max(1.0, abs(expectv))
@@ -203,7 +212,7 @@ Status: **EXACT_SOURCE_WEIGHTED_ROUTING_GIVEN_H1_SOURCE_AND_STANDARD_LP_BERNSTEI
 
 A fixed H1 source channel carries normalized source weight
 
-`Sigma_* >= I1/(132 c)`.
+`Sigma_* >= I1/(C_src c)`, with `C_src=132` on the original mild strip and `C_src=1800` on the certified extended strip `cond(L)<=567/500`.
 
 For differentiated SGS stress, filtered-source collision gives cubic increments proportional to `rho^(3/2)`, while the Onsager mass/enstrophy threshold takes the `2/3` power.  Therefore the final currencies are **linear in the instantaneous source density**:
 

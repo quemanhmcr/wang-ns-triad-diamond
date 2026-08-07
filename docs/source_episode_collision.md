@@ -18,9 +18,11 @@ this is the source-weight budget
 \[
 \boxed{
 \Sigma_*:=\int_0^c\rho_*d\tau
-\ge\frac{I_1}{132c}.
+\ge\frac{I_1}{C_{src}c}.
 }
 \]
+
+Here `C_src=132` on the original `cond(L)<=21/20` physical H1 source theorem, while the no-gap transition-strip theorem uses the weaker but still explicit `C_src=1800` on `cond(L)<=567/500`.
 
 The crucial point is that the downstream collision estimates have the correct homogeneity to use **source weight**, not time measure. Temporal concentration is therefore not a free SGS/viscous escape.
 

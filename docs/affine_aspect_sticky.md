@@ -201,7 +201,7 @@ or
 }
 \]
 
-On the H1-dominant full-curvature branch, strain action below `1/32000` excludes the second alternative, so one of pressure-third, differentiated SGS, or viscous-fourth source channels has
+On the H1-dominant full-curvature branch, base velocity-gradient/frame action below `1/32000` excludes the second alternative, so one of pressure-third, differentiated SGS, or viscous-fourth source channels has
 
 \[
 \boxed{
