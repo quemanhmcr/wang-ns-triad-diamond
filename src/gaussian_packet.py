@@ -228,7 +228,7 @@ def main() -> None:
         "",
         "## Helical coefficient stability over narrow caps",
         "",
-        "| sigma / child frequency | mean J/J* | deficit | deficit / sigma^2 |",
+        "| sigma / child frequency | mean J/J* | deficit | deficit / sigma |",
         "|---:|---:|---:|---:|",
     ]
     for row in cap:

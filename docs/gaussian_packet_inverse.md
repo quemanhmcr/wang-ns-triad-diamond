@@ -53,3 +53,20 @@ width \(\sigma\) must lose \(\Theta(\sigma)\), exactly as observed by the Action
 experiment. Near-extremal packet clouds must consequently be much thinner in
 the scale-imbalance direction than in tangent directions; this is the proposed
 "triad grain" structure.
+
+For the scale-critical \(L^{3/2}\) Gaussian Young overlap measure, the covariance
+is half that of the L2 model. If \(\theta_*\) is the angle between the optimal
+parents and \(L_*=\log(1/r_*)\), the leading expected cusp loss is
+
+\[
+1-\mathbb E[J/J_*]
+\sim C_{\rm cusp}\,\sigma,
+\qquad
+C_{\rm cusp}
+=
+\frac{1}{r_*L_*}
+\sqrt{\frac{2+\cos\theta_*}{3\pi}}.
+\]
+
+Numerically this predicts approximately \(1.65\), while the Actions experiment
+at widths 0.005 and 0.01 observed approximately 1.67 and 1.68.
