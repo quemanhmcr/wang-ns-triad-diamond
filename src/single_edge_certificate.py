@@ -261,6 +261,20 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
     if not (c_hodge >= arb("1/2")):
         raise AssertionError(f"unexpected Hodge coefficient: {c_hodge}")
 
+    # --- Exact sharp-cutoff Mellin-flux bridge on the same local box. ---
+    # For the adverse maximizing orbit (+,-,-), after factoring out the common
+    # triad phase/amplitude factor, the upper forward segment is
+    #   (x+y) log(1/y),
+    # while the lower cutoff segment is -(1-y) log(y/x).
+    # Monotone endpoint bounds give a rigorous uniform leakage ratio < 1/10.
+    exp_minus_v0 = (-aq(V0)).exp()
+    y_lower = rlo * exp_minus_v0
+    sum_lower = 2 * rlo * exp_minus_v0
+    progress_lower = -rhi.log() - aq(V0) - aq(U0) / 2
+    mellin_adverse_ratio_upper = aq(U0) * (1 - y_lower) / (sum_lower * progress_lower)
+    if not (mellin_adverse_ratio_upper < arb("1/10")):
+        raise AssertionError(f"Mellin lower-segment leakage too large: {mellin_adverse_ratio_upper}")
+
     # --- Global exclusion outside the local rectangle. ---
     # Exact sign reduction leaves the envelope.  For y>=0.9,
     # J <= log(1/y)/sqrt(2) <= log(10/9)/sqrt(2).
@@ -340,6 +354,8 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
         "tangent_derivative_boxes": tangent_boxes,
         "tangent_derivative_max_depth": tangent_max_depth,
         "hodge_coefficient_lower_bound": "1/2",
+        "mellin_adverse_ratio_upper_bound": str(mellin_adverse_ratio_upper),
+        "mellin_flux_retention_lower_bound": "9/10",
         "global_gap": _qstr(GLOBAL_GAP),
         "y_cutoff": _qstr(Y_CUTOFF),
         "corner_upper_ball": str(corner_upper),
@@ -413,6 +429,7 @@ def render_summary(cert: dict[str, Any], stress: dict[str, float] | None = None)
         f"- local mean-scale radius: `{cert['local_box']['v_abs_max']}`",
         f"- mixed bound: `Def >= ({cert['mixed_stability']['A']}) |u| + ({cert['mixed_stability']['B']}) v^2`",
         f"- local Hodge conversion: `Def >= {cert['hodge_coefficient_lower_bound']} (r_p^2+r_q^2)`",
+        f"- adverse sharp-cutoff Mellin retention: `>= {cert['mellin_flux_retention_lower_bound']}` of the upper progress segment",
         f"- global exclusion outside the local box: `Def >= {cert['global_gap']}`",
         "",
         "## Certified enclosures",
@@ -424,6 +441,7 @@ def render_summary(cert: dict[str, Any], stress: dict[str, float] | None = None)
         f"- local derivative leaf boxes: `{cert['local_derivative_boxes']}` (max depth `{cert['local_derivative_max_depth']}`)",
         f"- certified lower bound for symmetric second derivative: `{cert['tangent_second_derivative_lower_bound']}`",
         f"- tangent derivative leaf boxes: `{cert['tangent_derivative_boxes']}` (max depth `{cert['tangent_derivative_max_depth']}`)",
+        f"- adverse lower/upper Mellin segment ratio upper bound: `{cert['mellin_adverse_ratio_upper_bound']}`",
         f"- y>=0.9 analytic upper bound: `{cert['corner_upper_ball']}`",
         "",
         "## Global branch-and-bound",
