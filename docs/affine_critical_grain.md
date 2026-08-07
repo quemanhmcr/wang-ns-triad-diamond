@@ -23,7 +23,7 @@ Under the isotropic Navier--Stokes scaling `u_lambda(x,t)=lambda u(lambda x,
 lambda^2t)`, both the energy in the scaled ellipsoid and `r_g` scale by
 `lambda^{-1}`.  Hence `M_aff` is exactly scale critical.
 
-The certified shell/aspect theorem gives, on the radius-two covariance
+Using the clean constants certified by `affine_shell_aspect` Action `31179827015`, on the radius-two covariance
 ellipsoid of the one-percent Gaussian profile,
 
 \[

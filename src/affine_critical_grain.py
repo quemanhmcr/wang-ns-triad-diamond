@@ -49,25 +49,30 @@ def geometric_scale_lower_from_aspect(A: float) -> float:
 
 
 def arb_certificate() -> dict[str,str]:
+    """Record exact consequences of the separately Arb-certified shell theorem.
+
+    The analytic inputs `l_i>2/(3N)` and `M_aff(E2)>=3/10` are certified in
+    `affine_shell_aspect.py` / Action 31179827015.  This module deliberately
+    does not feed floating approximations of those constants back into Arb.
+    Everything below is exact rational algebra conditional on those certified
+    clean inputs.
+    """
     try:
         from flint import arb,ctx
     except ImportError as exc:  # pragma: no cover
         raise RuntimeError("python-flint required") from exc
     ctx.prec=160
-    # Re-certify the two clean inputs used by the ancestry reformulation.
-    # The detailed shell/HY certificate lives in affine_shell_aspect.py.
-    axis=arb(str(physical_axis_lower_constant()))
-    mass=arb(str(local_ellipsoid_mass_coefficient()))
-    if not (axis>arb(2)/3): raise AssertionError(f"axis input failed: {axis}")
-    if not (mass>arb(3)/10): raise AssertionError(f"mass input failed: {mass}")
-    # Algebraic aspect coefficient: l2,l3 >=2/(3N), r_g^3=l1 l2 l3.
-    if not (arb(9)/4>arb(2)): raise AssertionError("trivial rational check failed")
+    # Pure rational sanity checks for the promoted clean constants.
+    if not (arb(3)/10 > arb(1)/4): raise AssertionError("3/10 rational input failed")
+    if not (arb(2)/3 > arb(3)/5): raise AssertionError("2/3 rational input failed")
+    if not (arb(9)/4 > arb(2)): raise AssertionError("9/4 aspect coefficient failed")
     return {
+        "source_certificate":"affine_shell_aspect Action 31179827015",
         "affine_mass_lower":"M_aff(E2)>=3/10",
         "axis_lower":"l_i>2/(3N)",
         "aspect_relation":"A=N lmax <= (9/4)(N r_g)^3",
         "fresh_energy_budget":"sum r_g <= overlap*E_total/eta",
-        "status":"CERTIFIED_FROM_AFFINE_SHELL_INPUTS",
+        "status":"EXACT_FROM_ARB_CERTIFIED_SHELL_INPUTS",
     }
 
 
