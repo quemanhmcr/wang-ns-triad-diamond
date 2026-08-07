@@ -2836,12 +2836,14 @@ The most useful recorded runs, in chronological order, are:
 | `31181950880`--`31182017032` | eleven-workflow affine-residual integration on `1816ee2`: affine forcing, shell/aspect, swirl, material phase, affine critical grain, polarization curvature, forced relative polarization, localized polarization, objective-strain source, localized pressure and master all green; `189` tests per workflow, master `20,000` traces with worst margin `0` |
 | `31182421821` | ellipsoidal moving-window material/gradient curvature balance; `194` tests + `50,000` checks |
 | `31182742846`, `31182749191`, `31182756039`, `31182762696`, `31182769409`, `31182775605`, `31182783321`, `31182790116`, `31182796814` | final nine-workflow affine-packet integration on `040b5c7`: affine Hermite forcing, material phase, shell/aspect, affine critical grain, affine moving window+commutator, polarization curvature, forced relative polarization, localized pressure and master all green; `195` tests per workflow, master `20,000` traces with worst margin `0` |
+| `31183237575`, `31183245218`, `31183252753`, `31183260464`, `31183267939`, `31183274599` | exact-SHA affine validation on `be4520b`: Hermite/bulk-viscosity gauge, material/differential phase, affine critical grain including `r_g` dynamics, ellipsoidal window+commutator, polarization curvature and master all green; `195` tests per workflow, master `20,000` traces with worst margin `0` |
 
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
-The current preferred master regression is run `31182796814` on the final
-nine-workflow affine-packet integration commit `040b5c7` (`195` tests plus
-`20,000` episode traces, worst margin `0`).  The earlier eleven-workflow affine
+The current preferred master regression is run `31183274599` on exact-SHA
+affine validation commit `be4520b` (`195` tests plus `20,000` episode traces,
+worst margin `0`).  The earlier nine-workflow affine master `31182796814`,
+eleven-workflow affine
 master `31182017032`, relative-polarization master
 `31175212421`, integrated helical run
 `31171950823` and frequency/pressure bridge run `31166171000`
