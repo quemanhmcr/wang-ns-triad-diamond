@@ -138,6 +138,34 @@ def refine_masses(parent: Array, conditional: Array) -> Array:
     return (parent[:, None] * conditional).reshape(-1)
 
 
+
+def balanced_split_cost(theta: float, active_sides: int = 1) -> float:
+    """Collision-entropy cost of a comparable fresh binary split."""
+    if not (0.0 < theta <= 0.5):
+        raise ValueError("theta must lie in (0,1/2]")
+    if active_sides not in (1, 2, 3):
+        raise ValueError("active_sides must be 1,2,or 3")
+    collision = theta * theta + (1.0 - theta) ** 2
+    return (active_sides / 3.0) * (-math.log(collision))
+
+
+def fresh_or_reuse_efficiency_bound(
+    fresh_events: int,
+    reuse_events: int,
+    theta: float,
+    active_sides: int,
+    reuse_factor: float,
+    cross_error_correction: float = 0.0,
+) -> float:
+    """Abstract product bound for a fresh-or-reuse cascade."""
+    if fresh_events < 0 or reuse_events < 0:
+        raise ValueError("event counts must be nonnegative")
+    if not (0.0 < reuse_factor <= 1.0):
+        raise ValueError("reuse_factor must lie in (0,1]")
+    cost = fresh_events * balanced_split_cost(theta, active_sides)
+    cost += reuse_events * (-math.log(reuse_factor))
+    return math.exp(-cost + cross_error_correction)
+
 def holonomy_convex_cost(gamma: float, a_linear: float, b_quadratic: float) -> float:
     """Exact minimum of A|s| + B t^2 subject to s+t=gamma.
 

@@ -69,3 +69,12 @@ def test_single_edge_optimum_equation():
     r, _, gamma = single_edge_optimum()
     assert abs(-math.log(r) - (4.0 * r * r - 1.0)) < 2e-6
     assert abs(gamma + math.log(r)) < 1e-14
+
+
+def test_fresh_or_reuse_closure_numbers():
+    from src.multiscale_bellman import balanced_split_cost, fresh_or_reuse_efficiency_bound
+    h = balanced_split_cost(0.5, active_sides=1)
+    assert abs(h - math.log(2.0) / 3.0) < 1e-14
+    bound = fresh_or_reuse_efficiency_bound(3, 4, 0.5, 1, 0.9)
+    expected = math.exp(-3 * math.log(2.0) / 3.0) * 0.9**4
+    assert abs(bound - expected) < 1e-14

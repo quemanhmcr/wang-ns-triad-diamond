@@ -110,3 +110,41 @@ up to the summable cross-error correction.  Therefore an infinite cascade
 with uniformly nonvanishing efficiency would have to make *both* defects
 go to zero.  The grain inverse theorem and scale holonomy are designed to
 show those two requirements are incompatible.
+
+## Fresh-or-reuse closure theorem (conditional module)
+
+A near-extremal helical triad requires a companion grain with comparable
+critical mass.  Along a distinguished cascade lineage, that companion is
+one of two types.
+
+1. **Fresh:** it belongs to a new ancestry component.  If at least `q` of
+   the three Bellman sides split with proportions in `[theta,1-theta]`,
+   then the block collision cost is at least
+
+   \[
+   h_{\rm fresh}(\theta,q)=
+   \frac q3\left[-\log(\theta^2+(1-\theta)^2)\right].
+   \]
+
+2. **Reused:** it belongs to the existing ancestry graph.  This creates a
+   scale-holonomy motif.  If the reuse gap is `rho_*<1`, the block cost is
+   at least
+
+   \[
+   h_{\rm reuse}=-\log\rho_*.
+   \]
+
+Therefore, if every one of `L` blocks is fresh or reused, then up to
+summable cross errors
+
+\[
+\operatorname{Eff}_L\le
+\exp\left[-N_Fh_{\rm fresh}-N_Rh_{\rm reuse}\right]
+\le
+\exp[-L\min(h_{\rm fresh},h_{\rm reuse})].
+\]
+
+This is an abstract closure statement.  Turning it into a Navier--Stokes
+theorem requires proving that the transfer-adapted grain extraction really
+assigns every near-extremal block to one of these two cases with uniform
+constants.
