@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Iterable
 
 import numpy as np
-from scipy.optimize import differential_evolution, minimize_scalar
+from scipy.optimize import differential_evolution, linprog, minimize_scalar
 
 from .helical import edge_metrics
 
@@ -200,62 +200,131 @@ def efficiency_xy(x: float, y: float) -> float:
     return edge_metrics(p, q, z, 1, -1, -1).efficiency
 
 
+def efficiency_xy_batch(x: Array, y: Array) -> Array:
+    """Closed vectorized version of efficiency_xy for child magnitude one."""
+    x = np.asarray(x, float)
+    y = np.asarray(y, float)
+    valid = (x > 0) & (y > 0) & (x + y > 1.0) & (np.abs(x - y) < 1.0)
+    out = np.zeros(np.broadcast(x, y).shape, dtype=float)
+    xb, yb = np.broadcast_arrays(x, y)
+    heron = (xb + yb + 1.0) * (-xb + yb + 1.0) * (xb - yb + 1.0) * (xb + yb - 1.0)
+    area = 0.25 * np.sqrt(np.maximum(0.0, heron))
+    progress = np.maximum(0.0, np.log(1.0 / np.maximum(xb, yb)))
+    g = area * np.abs(xb - yb - 1.0) / (2.0 * math.sqrt(2.0) * xb * yb)
+    raw = (xb + yb) * g
+    out[valid] = (progress * raw)[valid]
+    return out
+
+
 def search_local_stability(
     box: tuple[float, float] = (0.54, 0.72),
     seed: int = 17,
 ) -> dict[str, float]:
-    """Numerically search conservative A,B in d >= A|u|+Bv^2.
+    """Cutting-plane search for numerical A,B in d >= A|u|+Bv^2.
 
-    This is experimental, not an interval-arithmetic certificate.
+    Every discovered violating point is inserted into a two-variable linear
+    program. The final pair is still numerical rather than interval-certified.
     """
+    from scipy.stats import qmc
+
     rstar, jstar, gamma = single_edge_optimum()
+    sampler = qmc.Sobol(d=2, scramble=True, seed=seed)
+    pts = sampler.random_base2(16)
+    lo, hi = box
+    pts = lo + (hi - lo) * pts
+    # Add boundaries, diagonal, and the exact extremizer neighbourhood.
+    grid = np.linspace(lo, hi, 181)
+    extra = np.vstack([
+        np.column_stack([grid, np.full_like(grid, lo)]),
+        np.column_stack([grid, np.full_like(grid, hi)]),
+        np.column_stack([np.full_like(grid, lo), grid]),
+        np.column_stack([np.full_like(grid, hi), grid]),
+        np.column_stack([grid, grid]),
+        np.array([[rstar, rstar], [rstar * (1 + 1e-5), rstar * (1 - 1e-5)]]),
+    ])
+    pts = np.vstack([pts, extra])
 
-    # Optimize A and B with a small safety objective: maximize A+0.08B
-    # subject to sampled/differential-evolution minimum margin >= 0.
-    candidates: list[tuple[float, float, float]] = []
-    for a in np.linspace(0.04, 0.30, 14):
-        for b in np.linspace(0.5, 8.0, 16):
-            def margin(v: Array) -> float:
-                x, y = float(v[0]), float(v[1])
-                j = efficiency_xy(x, y)
-                deficit = 1.0 - j / jstar
-                u = math.log(x / y)
-                w = -0.5 * (math.log(x) + math.log(y)) - gamma
-                return deficit - a * abs(u) - b * w * w
+    def features(points: Array) -> tuple[Array, Array, Array]:
+        x, y = points[:, 0], points[:, 1]
+        deficit = 1.0 - efficiency_xy_batch(x, y) / jstar
+        u = np.abs(np.log(x / y))
+        v2 = (-0.5 * (np.log(x) + np.log(y)) - gamma) ** 2
+        return deficit, u, v2
 
-            res = differential_evolution(
-                margin,
+    def solve_lp(points: Array) -> tuple[float, float]:
+        deficit, u, v2 = features(points)
+        # A*u+B*v2 <= deficit. A small safety subtraction prevents accepting
+        # a pair that only works at floating-point equality on the sample set.
+        rhs = np.maximum(0.0, deficit - 2e-7)
+        res = linprog(
+            c=np.array([-1.0, -0.06]),
+            A_ub=np.column_stack([u, v2]),
+            b_ub=rhs,
+            bounds=[(0.0, 1.0), (0.0, 20.0)],
+            method="highs",
+        )
+        if not res.success:
+            raise RuntimeError(res.message)
+        return float(res.x[0]), float(res.x[1])
+
+    history: list[dict[str, float]] = []
+    a = b = 0.0
+    final = None
+    for iteration in range(20):
+        a, b = solve_lp(pts)
+
+        def margin(v: Array) -> float:
+            x, y = float(v[0]), float(v[1])
+            deficit = 1.0 - efficiency_xy(x, y) / jstar
+            u = abs(math.log(x / y))
+            w2 = (-0.5 * (math.log(x) + math.log(y)) - gamma) ** 2
+            return deficit - a * u - b * w2
+
+        final = differential_evolution(
+            margin,
+            bounds=[box, box],
+            seed=seed + iteration,
+            maxiter=700,
+            popsize=24,
+            polish=True,
+            tol=1e-12,
+            workers=1,
+        )
+        history.append({
+            "iteration": iteration,
+            "A": a,
+            "B": b,
+            "margin": float(final.fun),
+            "x": float(final.x[0]),
+            "y": float(final.x[1]),
+        })
+        if final.fun >= -5e-7:
+            # Shrink slightly and verify once more to leave a numerical buffer.
+            a *= 0.995
+            b *= 0.995
+            final = differential_evolution(
+                lambda v: (1.0 - efficiency_xy(float(v[0]), float(v[1])) / jstar)
+                - a * abs(math.log(float(v[0]) / float(v[1])))
+                - b * (-0.5 * (math.log(float(v[0])) + math.log(float(v[1]))) - gamma) ** 2,
                 bounds=[box, box],
-                seed=seed,
-                maxiter=120,
-                popsize=10,
+                seed=seed + 100,
+                maxiter=1000,
+                popsize=28,
                 polish=True,
-                tol=1e-9,
+                tol=1e-13,
             )
-            m = float(res.fun)
-            if m >= -2e-6:
-                candidates.append((a + 0.08 * b, a, b))
-    if not candidates:
-        return {"A": 0.0, "B": 0.0, "minimum_margin": -1.0, "rstar": rstar, "jstar": jstar, "gamma": gamma}
-    _, a, b = max(candidates)
+            break
+        pts = np.vstack([pts, np.asarray(final.x, float)[None, :]])
 
-    def final_margin(v: Array) -> float:
-        x, y = map(float, v)
-        deficit = 1.0 - efficiency_xy(x, y) / jstar
-        u = math.log(x / y)
-        w = -0.5 * (math.log(x) + math.log(y)) - gamma
-        return deficit - a * abs(u) - b * w * w
-
-    final = differential_evolution(
-        final_margin,
-        bounds=[box, box],
-        seed=seed + 1,
-        maxiter=500,
-        popsize=20,
-        polish=True,
-        tol=1e-11,
-    )
-    cost = holonomy_convex_cost(gamma, a, b)
+    assert final is not None
+    if final.fun < -2e-6:
+        # Do not report an invalid candidate. Exact Bellman results remain usable.
+        a = b = 0.0
+        cost = 0.0
+        reuse = 1.0
+    else:
+        cost = holonomy_convex_cost(gamma, a, b) if a > 0 and b > 0 else 0.0
+        reuse = math.exp(-cost)
     return {
         "A": float(a),
         "B": float(b),
@@ -266,9 +335,10 @@ def search_local_stability(
         "jstar": jstar,
         "gamma": gamma,
         "holonomy_cost": float(cost),
-        "reuse_factor_candidate": float(math.exp(-cost)),
+        "reuse_factor_candidate": float(reuse),
+        "cutting_plane_iterations": len(history),
+        "history": history,
     }
-
 
 def random_step_checks(samples: int, seed: int = 0) -> dict[str, float]:
     rng = np.random.default_rng(seed)

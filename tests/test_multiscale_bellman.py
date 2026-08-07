@@ -78,3 +78,12 @@ def test_fresh_or_reuse_closure_numbers():
     bound = fresh_or_reuse_efficiency_bound(3, 4, 0.5, 1, 0.9)
     expected = math.exp(-3 * math.log(2.0) / 3.0) * 0.9**4
     assert abs(bound - expected) < 1e-14
+
+
+def test_closed_batch_efficiency_matches_vector_formula():
+    from src.multiscale_bellman import efficiency_xy, efficiency_xy_batch
+    xs = np.array([0.57, 0.61, 0.69])
+    ys = np.array([0.63, 0.60, 0.66])
+    batch = efficiency_xy_batch(xs, ys)
+    direct = np.array([efficiency_xy(float(x), float(y)) for x, y in zip(xs, ys)])
+    assert np.allclose(batch, direct, atol=2e-12, rtol=2e-12)
