@@ -1913,6 +1913,28 @@ gives
 \boxed{A\le\frac94s^3.}
 \]
 
+The same radius is dynamically natural.  Since `Sigma_x=P/2`, the exact affine
+Gaussian covariance equation is
+
+\[
+\dot\Sigma_x=A\Sigma_x+\Sigma_xA^T+\nu I.
+\]
+
+For incompressible `tr A=0`,
+
+\[
+\boxed{
+\frac d{dt}\log r_g
+=\frac\nu6\operatorname{tr}\Sigma_x^{-1}\ge0,
+\qquad
+\frac d{dt}r_g^2\ge\nu.
+}
+\]
+
+Thus inviscid affine strain changes aspect but preserves geometric radius
+exactly; viscosity increases it.  This prevents shear from manufacturing or
+erasing the fresh-radius currency inside the affine packet model.
+
 Thus natural geometric scale implies bounded aspect; an extremely elongated
 **fresh** grain consumes a larger physical radius budget.  Crucially, arbitrary
 common affine anisotropy remains an exact Young symmetry (tested to aspect
@@ -2582,9 +2604,11 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   `integral_E |u|^2 >= (3/10)(det Sigma_x)^(1/6)`;
 - exact affine critical-grain reformulation
   `M_aff=r_g^-1 integral_E|u|^2>=3/10`, `r_g=(det Sigma_x)^(1/6)`, and fresh
-  energy budget `sum r_g<=P||u(t)||_2^2/eta`; common affine anisotropy is an
-  exact Young symmetry and is explicitly recorded as a countermodel to charging
-  aspect ratio itself as Bellman/replication cost;
+  energy budget `sum r_g<=P||u(t)||_2^2/eta`; under incompressible affine
+  Gaussian dynamics `d log r_g/dt=(nu/6)tr Sigma_x^-1` and
+  `d(r_g^2)/dt>=nu`, so inviscid strain preserves this radius exactly; common
+  affine anisotropy is an exact Young symmetry and is explicitly recorded as a
+  countermodel to charging aspect ratio itself as Bellman/replication cost;
 
 ### Computationally supported, not interval-certified
 
@@ -2794,7 +2818,9 @@ while fresh grains satisfy
 \]
 
 Static affine anisotropy itself is an exact Young symmetry and is **not** a
-replication cost.  This corrects the earlier natural-cell heuristic.
+replication cost.  This corrects the earlier natural-cell heuristic.  The
+geometric radius is preserved by inviscid incompressible affine strain and is
+monotone under viscosity, making it a natural spacetime ancestry currency.
 
 The next mathematically decisive work is therefore:
 

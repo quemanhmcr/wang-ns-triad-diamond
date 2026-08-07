@@ -412,7 +412,9 @@ A fresh family therefore obeys the physical energy budget
 \boxed{\sum_j r_{g,j}\le P\|u(t)\|_2^2/\eta}
 \]
 
-at overlap multiplicity `P`.  Static affine anisotropy is an exact Young
+at overlap multiplicity `P`.  In the affine incompressible Gaussian model,
+`r_g` is exactly preserved by inviscid strain and satisfies
+`d(r_g^2)/dt>=nu` with viscosity.  Static affine anisotropy is an exact Young
 symmetry and is **not** a Bellman cost.  Reused elongated grains remain a
 spacetime ancestry/dynamic-curvature problem.
 
