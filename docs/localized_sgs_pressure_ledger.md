@@ -259,3 +259,27 @@ near-extremal packet lineage admits moving windows for which the positive
 leakage and pressure-cancellation annular charges are summable or force a
 Bellman/fresh critical-mass event. The identity itself has no pressure tail or
 packet-count loss.
+
+
+## Affine-window compatibility
+
+For the affine Gaussian grain window
+
+\[
+\chi_{L,M}(x)=\chi_0(L^{-1}(x-X)/M),
+\]
+
+the shell/aspect theorem gives the clean physical gradient bound
+
+\[
+\boxed{
+N^{-1}\|\nabla\chi_{L,M}\|_\infty
+\le 3C_\chi/(2M).
+}
+\]
+
+Therefore every pressure-boundary estimate in this note that depends linearly
+on `||grad chi||_inf` can be transplanted to the affine window without an aspect
+penalty.  This observation does not by itself close the local pressure-Hessian,
+`RU`, viscous-boundary or packet-overlap coefficients; it only removes the
+geometric obstruction from the window shape.

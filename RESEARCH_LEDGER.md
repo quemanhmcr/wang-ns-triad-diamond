@@ -1945,6 +1945,119 @@ affine-grain budget checks; the downstream rational provenance was cleaned in
 commit `21d8976` so the `2/3` and `3/10` inputs are taken directly from the Arb
 shell certificate rather than reconstructed from floating approximations.
 
+#### Ellipsoidal moving windows: affine curvature balance
+
+The affine grain can now carry its own moving physical window.  Let
+
+\[
+\chi_{L,M}(x,t)
+=\chi_0\!\left(\frac{L(t)^{-1}(x-X(t))}{M}\right),
+\]
+
+and transport
+
+\[
+\dot X=U(X),
+\qquad
+\dot L=A(X)L,
+\qquad A=\nabla U.
+\]
+
+With `z=L^{-1}(x-X)`, direct differentiation gives the exact identity
+
+\[
+\boxed{
+(\partial_t+U\cdot\nabla)z
+=L^{-1}\big(U(X+Lz)-U(X)-A(X)Lz\big).
+}
+\]
+
+Thus translation and the full affine velocity jet cancel from the material
+window derivative.  If
+
+\[
+\kappa_{aff}
+:=\sup\|L^{-1}(\nabla^2U)[L,L]\|
+\]
+
+on the transition region, `|grad chi_0|<=C_chi`, and the base transition is in
+`|z/M|<=R_chi`, Taylor's integral remainder gives
+
+\[
+\boxed{
+|(\partial_t+U\cdot\nabla)\chi_{L,M}|
+\le
+\frac{C_\chi R_\chi^2}{2}\,\kappa_{aff}M.
+}
+\]
+
+The opposite localization cost remains `1/M`.  From the Arb-certified shell
+axis lower bound `l_min>2/(3N)`,
+
+\[
+\boxed{
+N^{-1}\|\nabla_x\chi_{L,M}\|_\infty
+\le\frac{3C_\chi}{2M}.
+}
+\]
+
+For a physical coarse-graining kernel `G_N=N^3G(N\cdot)`, there is also an exact
+L2 commutator theorem.  Writing
+
+\[
+[\chi,G_N*]f(x)
+=\int G_N(y)(\chi(x)-\chi(x-y))f(x-y)\,dy
+\]
+
+and using the mean-value theorem plus Young gives
+
+\[
+\boxed{
+\|[\chi,G_N*]f\|_2
+\le
+\frac{m_1(G)}{N}\|\nabla\chi\|_\infty\|f\|_2,
+\qquad
+m_1(G)=\int |y||G(y)|\,dy.
+}
+\]
+
+Therefore on the certified affine grain
+
+\[
+\boxed{
+\|[\chi_{L,M},G_N*]f\|_2
+\le
+\frac{3m_1(G)C_\chi}{2M}\|f\|_2.
+}
+\]
+
+The geometric window ledger consequently has the same exact balance form
+
+\[
+\boxed{
+E_{aff}(M)
+\le
+\frac aM+b\kappa_{aff}M,
+\qquad
+M_*=\sqrt{\frac{a}{b\kappa_{aff}}},
+\qquad
+E_{aff,*}=2\sqrt{ab\kappa_{aff}}.
+}
+\]
+
+Action `31182421821` (before the final commutator unit-test addition) passed
+`194` tests and `50,000` ellipsoidal-window checks.  It saw worst Taylor
+leakage/bound ratio `0.992529785`, shell-gradient ratio `0.999859538`, affine
+curvature invariance residual `1.933e-08`, and an extreme transformed condition
+number `1.444e9`.  The final Actions rerun records the commutator addition as
+well.
+
+This closes the **geometry and generic filter-commutator scaling** of an affine
+moving moat.  It does not yet provide the complete localized SGS/pressure
+packet identity: pressure boundary work, `RU`, viscous boundary flux and
+partition-overlap coefficients must still be inserted for the actual PDE packet
+construction.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -2609,6 +2722,12 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   `d(r_g^2)/dt>=nu`, so inviscid strain preserves this radius exactly; common
   affine anisotropy is an exact Young symmetry and is explicitly recorded as a
   countermodel to charging aspect ratio itself as Bellman/replication cost;
+- exact ellipsoidal moving-window geometry
+  `D_t z=L^-1[U(X+Lz)-U(X)-A(X)Lz]`; shell-axis regularity gives
+  `N^-1||grad chi_(L,M)||<=3 C_chi/(2M)`, Taylor leakage is
+  `<= (C_chi R_chi^2/2) kappa_aff M`, and the physical filter commutator obeys
+  `||[chi,G_N*]f||_2 <= (3/2)m_1(G)C_chi M^-1||f||_2`; hence the affine window
+  retains the square-root balance `a/M+b kappa_aff M` without an aspect penalty;
 
 ### Computationally supported, not interval-certified
 
@@ -2623,12 +2742,12 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
    polarization curvature are now separated.  The remaining `F_i` must be
    derived from role-dependent SGS transport, partition/window errors, pressure
    localization and differential resolved velocities in the actual packetization.
-2. **Construct affine/ellipsoidal moving windows compatible with the localized
-   SGS identity.**  The earlier scalar `a/M+b kappa M` theorem is an isotropic
-   window result.  The continuum proof must choose windows adapted to `Sigma_x`,
-   control overlap and pressure/SGS boundary terms in that metric, and recover a
-   summable analogue of the curvature balance without inserting a false aspect
-   penalty.
+2. **Insert the affine moving-window theorem into the full localized SGS/pressure
+   identity.**  Ellipsoidal material transport, the `1/M` filter commutator and
+   the `kappa_aff M` Taylor leakage are now exact.  What remains is to track the
+   actual pressure boundary work, `RU`, viscous boundary flux and partition
+   overlap with the same affine windows and prove their coefficients are
+   summable or force a source/fresh event.
 3. **Integrate affine critical grains into spacetime ancestry.**  A fresh grain
    now carries theorem-level scale-critical mass `M_aff>=3/10` and obeys the
    physical budget `sum r_g<=P E/eta`.  Reused elongated grains still require a
@@ -2714,12 +2833,15 @@ The most useful recorded runs, in chronological order, are:
 | `31180506627` | exact common material triad phase/chirp gauge; `182` tests + `50,000` checks |
 | `31180882083` | affine critical-grain energy/radius budget (before provenance-only cleanup); `186` tests + `50,000` checks |
 | `31181076691` | affine spatial polarization-curvature RMS bridge `>=1/2`; `187` tests + `50,000` Hessian/grain checks |
+| `31181950880`--`31182017032` | eleven-workflow affine-residual integration on `1816ee2`: affine forcing, shell/aspect, swirl, material phase, affine critical grain, polarization curvature, forced relative polarization, localized polarization, objective-strain source, localized pressure and master all green; `189` tests per workflow, master `20,000` traces with worst margin `0` |
+| `31182421821` | ellipsoidal moving-window material/gradient curvature balance; `194` tests + `50,000` checks |
 
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
-The current preferred master regression is run `31175212421` on the integrated
-relative-polarization/localization bridge commit `e0a7855` (`171` tests plus
-`20,000` episode traces, worst margin `0`).  The earlier integrated helical run
+The current preferred master regression is run `31182017032` on the eleven-workflow
+affine-residual integration commit `1816ee2` (`189` tests plus `20,000` episode
+traces, worst margin `0`).  The earlier relative-polarization master
+`31175212421`, integrated helical run
 `31171950823` and frequency/pressure bridge run `31166171000`
 remains useful provenance.  The earlier
 recorded master artifact `31154025683/` remains the canonical stored
@@ -2743,7 +2865,8 @@ polarization artifact `recorded-results/31174812731/`, and localized packet
 certificate `recorded-results/31174612248/`.  The preferred affine-residual
 artifacts are `recorded-results/31179739773/`, `recorded-results/31179827015/`,
 `recorded-results/31180257124/`, `recorded-results/31180506627/`,
-`recorded-results/31180882083/`, and `recorded-results/31181076691/`; the two failed
+`recorded-results/31180882083/`, `recorded-results/31181076691/`, and
+`recorded-results/31182421821/`; the two failed
 interval-boundary provenance runs are `recorded-results/31168205564/` and
 `recorded-results/31168303213/`.  Final integration runs are
 `31166152074`, `31166155045`, `31166158218`, `31166160711`, `31166163414`,
@@ -2828,9 +2951,9 @@ The next mathematically decisive work is therefore:
    role-dependent residuals in the already-identified currencies: third-Hermite
    forcing, differential phase velocity, relative-polarization curvature,
    pressure/source terms and partition/window errors;
-2. build **ellipsoidal moving windows** adapted to `Sigma_x`, including pressure,
-   `RU`, viscous boundary and overlap estimates, and find the affine analogue of
-   the curvature-balanced moat without introducing a false aspect-ratio defect;
+2. insert the now-exact **ellipsoidal moving window and filter commutator** into
+   the localized SGS/pressure identity, deriving pressure, `RU`, viscous boundary
+   and partition-overlap coefficients in the affine metric;
 3. construct **affine spacetime ancestry**: use the theorem-level fresh radius
    budget for new grains, while controlling reuse by covariance synchronization,
    scale/spin holonomy and the existing dynamic strain/polarization ledgers;
@@ -2856,7 +2979,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, and `docs/affine_critical_grain.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, and `docs/affine_window_balance.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

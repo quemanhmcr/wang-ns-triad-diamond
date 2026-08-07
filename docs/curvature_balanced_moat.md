@@ -192,3 +192,30 @@ E_{loc}(M)\le \frac aM+(b+15c/2)\kappa M+3h.
 
 The optimizer is still square-root in curvature.  No separate polarization moat
 schedule is introduced.\n
+
+## Affine ellipsoidal successor
+
+The isotropic calculation has an affine version.  For a grain frame `L` and
+`z=L^{-1}(x-X)`, transporting `Xdot=U(X)`, `Ldot=A(X)L` gives
+
+\[
+D_t z=L^{-1}[U(X+Lz)-U(X)-A(X)Lz].
+\]
+
+Thus the relevant curvature is the grain-normalized tensor
+
+\[
+\kappa_{aff}=\sup\|L^{-1}(\nabla^2U)[L,L]\|.
+\]
+
+The shell certificate controls the smallest physical grain axis, so an
+ellipsoidal window `chi_0(z/M)` still has normalized physical gradient `O(1/M)`.
+For a convolution filter the commutator bound is exactly
+
+\[
+\|[\chi,G_N*]f\|_2
+\le \frac{3m_1(G)C_\chi}{2M}\|f\|_2.
+\]
+
+The material Taylor remainder is `O(kappa_aff M)`.  Hence the same square-root
+balance survives in affine coordinates.  See `docs/affine_window_balance.md`.

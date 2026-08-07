@@ -1,0 +1,19 @@
+{
+  "theorem": {
+    "material_coordinate": "D_t z=L^-1[U(X+Lz)-U(X)-A(X)Lz]",
+    "curvature": "kappa_aff=sup ||L^-1(nabla^2U)[L,L]||",
+    "window_leakage": "|D_t chi(z/M)| <= (Cgrad Rchi^2/2) kappa_aff M",
+    "shell_gradient": "N^-1||grad_x chi|| <= (3/2) Cgrad/M",
+    "balance": "a/M+b kappa_aff M, M*=sqrt(a/(b kappa_aff))"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_material_identity_residual": 1.582121668135696e-11,
+    "worst_taylor_leakage_ratio": 0.9925297850695481,
+    "worst_shell_gradient_ratio": 0.9998595384393044,
+    "worst_affine_curvature_residual": 1.933085884770812e-08,
+    "worst_optimizer_residual": 4.440892098500626e-16,
+    "extreme_condition_number": 1444444444.4444444,
+    "extreme_leakage_ratio": 0.09341098478183876
+  }
+}

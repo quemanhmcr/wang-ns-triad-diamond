@@ -418,6 +418,29 @@ at overlap multiplicity `P`.  In the affine incompressible Gaussian model,
 symmetry and is **not** a Bellman cost.  Reused elongated grains remain a
 spacetime ancestry/dynamic-curvature problem.
 
+The spatial window can be made affine as well.  For
+`chi_(L,M)(x)=chi_0(L^-1(x-X)/M)` transported by `Xdot=U(X)`, `Ldot=A(X)L`,
+
+\[
+D_t[L^{-1}(x-X)]
+=L^{-1}[U(X+Lz)-U(X)-A(X)Lz].
+\]
+
+Hence affine motion cancels exactly, while the material remainder is
+`O(kappa_aff M)` with `kappa_aff=||L^-1(nabla^2U)[L,L]||`.  The shell lower axis
+gives `N^-1||grad chi||<=3C_chi/(2M)`, and the physical convolution commutator
+satisfies
+
+\[
+\|[\chi,G_N*]f\|_2
+\le (3/2)m_1(G)C_\chi M^{-1}\|f\|_2.
+\]
+
+Thus the ellipsoidal geometry preserves the same `1/M` versus
+`kappa_aff M` balance without an aspect penalty.  The remaining PDE work is to
+insert pressure, `RU`, viscous boundary and partition-overlap terms into this
+affine window rather than to invent a new localization scale.
+
 The actual Navier--Stokes gap is therefore now the **construction** of the
 transfer roles and their spacetime packetization.  Common parent/child log
 shells are no longer a separate hypothesis: crossing plus the certified
