@@ -144,35 +144,73 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
     jstar_lo = jstar.lower()
 
     # --- Local certificate in exact log coordinates. ---
-    u = interval(Fraction(0), U0)
-    v = interval(-V0, V0)
-    R = rstar * (-v).exp()
-    halfu = u / 2
-    c = halfu.cosh()
-    sh = halfu.sinh()
-    S = 2 * R * c
-    delta = 2 * R * sh
-    L = gamma + v - u / 2
+    # Direct interval evaluation on the whole rectangle has severe dependency
+    # wrapping, so certify the derivative by adaptive dyadic subdivision.
+    @dataclass(frozen=True)
+    class LocalBox:
+        u0: Fraction
+        u1: Fraction
+        v0: Fraction
+        v1: Fraction
+        depth: int = 0
 
-    if not (L.lower() > zero and (S * S - 1).lower() > zero and (1 - delta).lower() > zero):
-        raise AssertionError("local box left the nondegenerate forward-triad domain")
+        def split(self):
+            wu = (self.u1 - self.u0) / U0
+            wv = (self.v1 - self.v0) / (2 * V0)
+            if wu >= wv:
+                m = (self.u0 + self.u1) / 2
+                return (LocalBox(self.u0, m, self.v0, self.v1, self.depth + 1),
+                        LocalBox(m, self.u1, self.v0, self.v1, self.depth + 1))
+            m = (self.v0 + self.v1) / 2
+            return (LocalBox(self.u0, self.u1, self.v0, m, self.depth + 1),
+                    LocalBox(self.u0, self.u1, m, self.v1, self.depth + 1))
 
-    Hsqrt = (((1 + delta) ** 3) * (1 - delta)).sqrt()
-    J = L * c * (4 * R * R * c * c - 1).sqrt() * Hsqrt / (4 * sqrt2 * R)
+    def transverse_derivative(box: LocalBox):
+        u = interval(box.u0, box.u1)
+        v = interval(box.v0, box.v1)
+        R = rstar * (-v).exp()
+        halfu = u / 2
+        c = halfu.cosh()
+        sh = halfu.sinh()
+        S = 2 * R * c
+        delta = 2 * R * sh
+        L = gamma + v - u / 2
+        if not (L.lower() > zero and (S * S - 1).lower() > zero and (1 - delta).lower() > zero):
+            raise AssertionError(f"local subbox left forward-triad domain: {box}")
+        Hsqrt = (((1 + delta) ** 3) * (1 - delta)).sqrt()
+        J = L * c * (4 * R * R * c * c - 1).sqrt() * Hsqrt / (4 * sqrt2 * R)
+        g = (
+            -1 / (2 * L)
+            + halfu.tanh() / 2
+            + S * delta / (2 * (S * S - 1))
+            + S * (1 - 2 * delta) / (2 * (1 - delta * delta))
+        )
+        return -(J / jstar) * g
 
-    # g = d/du log J at fixed mean-scale residual v.
-    g = (
-        -1 / (2 * L)
-        + halfu.tanh() / 2
-        + S * delta / (2 * (S * S - 1))
-        + S * (1 - 2 * delta) / (2 * (1 - delta * delta))
-    )
-    du_def = -(J / jstar) * g
-    if not (du_def.lower() > aq(A_CUSP)):
-        raise AssertionError(f"transverse derivative certificate failed: {du_def}")
+    local_queue: deque[LocalBox] = deque([LocalBox(Fraction(0), U0, -V0, V0, 0)])
+    local_boxes = 0
+    local_max_depth = 0
+    worst_du_lower = None
+    while local_queue:
+        box = local_queue.pop()
+        du = transverse_derivative(box)
+        if du.lower() > aq(A_CUSP):
+            local_boxes += 1
+            local_max_depth = max(local_max_depth, box.depth)
+            if worst_du_lower is None or du.lower() < worst_du_lower:
+                worst_du_lower = du.lower()
+            continue
+        if box.depth >= 16:
+            raise AssertionError(f"transverse derivative subdivision failed: box={box}, du={du}")
+        b0, b1 = box.split()
+        local_queue.append(b0)
+        local_queue.append(b1)
+
+    assert worst_du_lower is not None
 
     # Along u=0, D(v)=1-J(0,v)/J*, D(0)=D'(0)=0 by the defining root equation.
     # Here q=sqrt(4-R^{-2}); differentiating twice gives the exact expression below.
+    v = interval(-V0, V0)
     Rt = rstar * (-v).exp()
     aa = 1 / (Rt * Rt)
     q = (4 - aa).sqrt()
@@ -264,7 +302,9 @@ def _run_arb_certificate(max_depth: int = 28) -> dict[str, Any]:
         "jstar_ball": str(jstar),
         "local_box": {"u_max": _qstr(U0), "v_abs_max": _qstr(V0)},
         "mixed_stability": {"A": _qstr(A_CUSP), "B": _qstr(B_TANGENT)},
-        "transverse_derivative_ball": str(du_def),
+        "transverse_derivative_lower_bound": str(worst_du_lower),
+        "local_derivative_boxes": local_boxes,
+        "local_derivative_max_depth": local_max_depth,
         "tangent_second_derivative_ball": str(d2_def),
         "hodge_coefficient_lower_bound": "1/2",
         "global_gap": _qstr(GLOBAL_GAP),
@@ -347,7 +387,8 @@ def render_summary(cert: dict[str, Any], stress: dict[str, float] | None = None)
         f"- r*: `{cert['rstar_ball']}`",
         f"- gamma*: `{cert['gamma_ball']}`",
         f"- J*: `{cert['jstar_ball']}`",
-        f"- inf local transverse derivative enclosure: `{cert['transverse_derivative_ball']}`",
+        f"- certified lower bound for local transverse derivative: `{cert['transverse_derivative_lower_bound']}`",
+        f"- local derivative leaf boxes: `{cert['local_derivative_boxes']}` (max depth `{cert['local_derivative_max_depth']}`)",
         f"- inf symmetric second-derivative enclosure: `{cert['tangent_second_derivative_ball']}`",
         f"- y>=0.9 analytic upper bound: `{cert['corner_upper_ball']}`",
         "",
