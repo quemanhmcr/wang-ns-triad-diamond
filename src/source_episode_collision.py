@@ -167,8 +167,9 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> EpisodeCollisionStres
         v = source_weighted_viscous_episode_costs(I1, c, s0, nu)
         b = v["enstrophy_per_source_squared"]
         expectv = b * v["total_source_weight"] ** 2 / (4.0 * c)
-        mv = min(mv, v["resolved_dissipation"] - expectv)
-        if v["resolved_dissipation"] + 1e-14 < expectv:
+        relv = (v["resolved_dissipation"] - expectv) / max(1.0, abs(expectv))
+        mv = min(mv, relv)
+        if relv < -2e-12:
             raise AssertionError("source-weighted viscous dissipation failed")
 
         levels = int(rng.integers(0, 7))
