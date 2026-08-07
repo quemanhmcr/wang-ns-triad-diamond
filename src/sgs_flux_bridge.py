@@ -35,6 +35,13 @@ def divergence_free_random_field(n: int, seed: int) -> np.ndarray:
     rng = np.random.default_rng(seed)
     raw = rng.normal(size=(3, n, n, n))
     uhat = np.fft.fftn(raw, axes=(1, 2, 3))
+    # Strict band-limit before forming quadratic products.  With coordinate
+    # modes <=(n-1)//6, all cubic contractions used by the energy identity
+    # remain below Nyquist, so the pseudospectral regression has no aliasing.
+    kx, ky, kz, _ = wavevectors(n)
+    kmax = max(1, (n - 1) // 6)
+    mask = (np.abs(kx) <= kmax) & (np.abs(ky) <= kmax) & (np.abs(kz) <= kmax)
+    uhat *= mask[None, ...]
     uhat = project_div_free_hat(uhat)
     return np.fft.ifftn(uhat, axes=(1, 2, 3)).real
 
@@ -113,7 +120,7 @@ def stress(samples: int = 200, n: int = 12, seed: int = 20260807) -> dict[str, f
     scale = 0.0
     for i in range(samples):
         u = divergence_free_random_field(n, seed + i)
-        cutoff = 2.5 + 2.0 * ((i * 0.61803398875) % 1.0)
+        cutoff = 0.9 + 1.8 * ((i * 0.61803398875) % 1.0)
         row = sgs_flux_identity(u, cutoff)
         worst_sgs = max(worst_sgs, abs(row["sgs_vs_resolved_error"]))
         worst_proj = max(worst_proj, abs(row["projection_work_error"]))
