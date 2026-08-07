@@ -1,0 +1,17 @@
+{
+  "certificate": {
+    "holonomy_threshold": "1/5",
+    "good_multiplier_floor": "1-1/10000",
+    "phase_deficit_per_edge_weight_floor_ball": "[0.00499845852429300024714190369837822860206254401 +/- 5.81e-48]",
+    "clean_lower_bound": "1/250",
+    "statement": "if each diamond edge has capacity weight >= beta, phase deficit >= beta/250",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_edge_normal_reconstruction": 1.8212098495951068e-12,
+    "worst_modal_cancellation_residual": 3.552713678800501e-15,
+    "worst_rotation_holonomy_residual": 1.930011706008372e-12,
+    "minimum_sharp_cost_margin": 0.004077097150907649
+  }
+}

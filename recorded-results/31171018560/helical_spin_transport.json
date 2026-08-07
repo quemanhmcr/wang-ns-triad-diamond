@@ -1,0 +1,17 @@
+{
+  "samples": 50000,
+  "worst_eigenvector_residual": 9.004535005135059e-16,
+  "worst_rotation_covariance_residual": 9.574667897782795e-16,
+  "worst_transition_residual": 9.813077866773594e-16,
+  "worst_coupling_real_fraction": 2.71377706355108e-12,
+  "worst_coupling_magnitude_residual": 4.0314973581701e-15,
+  "worst_berry_connection_residual": 3.703871986893148e-09,
+  "worst_helicity_matrix_residual": 1.4154400739174818e-15,
+  "berry_curvature": "F_s=-s sin(theta) dtheta wedge dphi",
+  "chern_numbers": {
+    "s=+1": -2,
+    "s=-1": 2
+  },
+  "single_triad_phase_statement": "triad-normal coupling is purely imaginary, so its phase is locally constant away from zeros",
+  "frozen_pure_strain_conversion": "u_+=cosh(dt), u_-=-sinh(dt)"
+}

@@ -1,0 +1,11 @@
+{
+  "samples": 50000,
+  "worst_objective_generator_residual": 4.440892098500626e-16,
+  "worst_circular_generator_residual": 0.0,
+  "worst_commutator_residual": 5.0242958677880805e-15,
+  "worst_frozen_propagator_residual": 4.699798436761765e-15,
+  "coherence_second_magnus_at_repo_threshold": 5.6944444444444445e-05,
+  "objective_frame_law": "G_obj=-sym(A_perp)-nu|k|^2 I",
+  "commutator_law": "[D1,D2]=2(delta1 beta2-beta1 delta2) J",
+  "interpretation": "first order is helicity mixing; second-order noncommutativity is local geometric phase"
+}

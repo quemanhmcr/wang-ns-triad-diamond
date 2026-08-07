@@ -266,6 +266,26 @@ c_{0,H}^{cross}=\min\{1/20000,(25/424)h_H\}>0.
 }
 \]
 
+A second physical reuse obstruction is available in **helical phase**.  For a
+four-edge reuse diamond let `H_phi` be the gauge-invariant signed phase holonomy
+after the six modal phases cancel.  The sharp inequality
+
+\[
+\sum_{i=1}^4(1-\cos\delta_i)
+\ge4\left(1-\cos\frac{|H_\phi|}{4}\right)
+\]
+
+feeds directly into the existing polarization deficit.  At `eta_0=10^-4`, if
+`|H_phi|>=1/5` and every diamond edge has capacity weight at least `beta_phi`,
+Arb certifies the finite-packet cost
+
+\[
+\boxed{c_{0,\phi}=\beta_\phi/250.}
+\]
+
+This branch is conditional only on the PDE packet extraction actually producing
+such a weighted diamond; the phase identity and coefficient are theorem-level.
+
 If instead a set of outside-neighborhood edges has transfer weight at least
 `beta_bad`, it pays at least `beta_bad/100`.  Thus, after fixing the positive
 classification thresholds used by the other branches, one may take
@@ -273,7 +293,7 @@ classification thresholds used by the other branches, one may take
 \[
 \boxed{
 c_0=\min\{c_{Bell},c_{anc},c_{res},h_H/2,\beta_{bad}/100,
-h_\beta,c_{fresh},\ldots\}>0.
+\beta_\phi/250,h_\beta,c_{fresh},\ldots\}>0.
 }
 \]
 
@@ -295,6 +315,18 @@ more complete than in the earlier version of this note:
 - pressure can be absorbed into the combined-work ledger after spatial
   localization, with the remaining cancellation branch forcing a critical
   annular charge.
+
+The affine three-dimensional polarization side is also no longer featureless.
+A triad-normal helical gauge is exactly `SO(3)` covariant, its Waleffe coupling
+phase is constant away from zeros, and reuse between different triad planes is
+measured by the spin-one dihedral transition `exp(-is psi)`.  Diamond reuse has
+an exact gauge-invariant phase holonomy and the positive cost above.  In an
+objective transverse frame, first-order trace-free strain is an opposite-
+helicity mixer rather than a Berry-phase drift; scalar shape deformation plus
+both parent helicity mixers observe the full symmetric trace-free strain with
+certified constant `13/20`.  What remains is the localized nonlinear packet
+realization and full time-ordered phase control, not the identification of the
+correct geometric connection.
 
 The actual Navier--Stokes gap is therefore now the **construction** of the
 transfer roles and their spacetime packetization.  Common parent/child log

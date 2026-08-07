@@ -1,0 +1,20 @@
+{
+  "certificate": {
+    "rstar_ball": "[0.6109041016 +/- 2.01e-11]",
+    "cos2_half_angle_ball": "[0.6698752416 +/- 5.99e-11]",
+    "certified_observability_lower": "13/20",
+    "dangerous_offplane_shear_ratio_ball": "[0.6602495167 +/- 6.80e-11]",
+    "ad_first_minor_ball": "[0.969231873 +/- 3.10e-10]",
+    "ad_determinant_ball": "[0.779955369 +/- 5.28e-10]",
+    "b_margin_ball": "[1.584569609 +/- 3.20e-10]",
+    "x_margin_ball": "[0.020499033 +/- 5.36e-10]",
+    "y_margin_ball": "[1.379500967 +/- 5.36e-10]",
+    "combined_shape_helicity_lower": "559/2000",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 100000,
+    "worst_ratio": 0.6628255482382308,
+    "worst_combined_margin": 0.0055149857424391935
+  }
+}

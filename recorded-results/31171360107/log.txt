@@ -1,0 +1,272 @@
+certify	Set up job	﻿2026-08-07T10:45:39.1293230Z Current runner version: '2.336.0'
+certify	Set up job	2026-08-07T10:45:39.1330938Z ##[group]Runner Image Provisioner
+certify	Set up job	2026-08-07T10:45:39.1331870Z Hosted Compute Agent
+certify	Set up job	2026-08-07T10:45:39.1332500Z Version: 20260707.563
+certify	Set up job	2026-08-07T10:45:39.1333266Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+certify	Set up job	2026-08-07T10:45:39.1334086Z Build Date: 2026-07-07T19:33:50Z
+certify	Set up job	2026-08-07T10:45:39.1334849Z Worker ID: {84efb164-f806-4a9a-8bf5-54eb2f7128e0}
+certify	Set up job	2026-08-07T10:45:39.1335635Z Azure Region: northcentralus
+certify	Set up job	2026-08-07T10:45:39.1336576Z ##[endgroup]
+certify	Set up job	2026-08-07T10:45:39.1338409Z ##[group]Operating System
+certify	Set up job	2026-08-07T10:45:39.1339143Z Ubuntu
+certify	Set up job	2026-08-07T10:45:39.1339695Z 24.04.4
+certify	Set up job	2026-08-07T10:45:39.1340315Z LTS
+certify	Set up job	2026-08-07T10:45:39.1340873Z ##[endgroup]
+certify	Set up job	2026-08-07T10:45:39.1341496Z ##[group]Runner Image
+certify	Set up job	2026-08-07T10:45:39.1342144Z Image: ubuntu-24.04
+certify	Set up job	2026-08-07T10:45:39.1342839Z Version: 20260720.247.2
+certify	Set up job	2026-08-07T10:45:39.1344013Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+certify	Set up job	2026-08-07T10:45:39.1345733Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+certify	Set up job	2026-08-07T10:45:39.1347134Z ##[endgroup]
+certify	Set up job	2026-08-07T10:45:39.1348329Z ##[group]GITHUB_TOKEN Permissions
+certify	Set up job	2026-08-07T10:45:39.1350723Z Contents: read
+certify	Set up job	2026-08-07T10:45:39.1351383Z Metadata: read
+certify	Set up job	2026-08-07T10:45:39.1352060Z Packages: read
+certify	Set up job	2026-08-07T10:45:39.1352710Z ##[endgroup]
+certify	Set up job	2026-08-07T10:45:39.1355036Z Secret source: Actions
+certify	Set up job	2026-08-07T10:45:39.1356541Z Prepare workflow directory
+certify	Set up job	2026-08-07T10:45:39.1706695Z Prepare all required actions
+certify	Set up job	2026-08-07T10:45:39.1754211Z Getting action download info
+certify	Set up job	2026-08-07T10:45:39.4181271Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+certify	Set up job	2026-08-07T10:45:39.7614264Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+certify	Set up job	2026-08-07T10:45:39.8440181Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+certify	Set up job	2026-08-07T10:45:40.0656109Z Complete job name: certify
+certify	Run actions/checkout@v4	﻿2026-08-07T10:45:40.1405853Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1415118Z ##[group]Run actions/checkout@v4
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1415842Z with:
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1416582Z   repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1420618Z   token: ***
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1421052Z   ssh-strict: true
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1421482Z   ssh-user: git
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1421924Z   persist-credentials: true
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1422406Z   clean: true
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1422840Z   sparse-checkout-cone-mode: true
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1423361Z   fetch-depth: 1
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1423783Z   fetch-tags: false
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1424213Z   show-progress: true
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1424684Z   lfs: false
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1425086Z   submodules: false
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1425557Z   set-safe-directory: true
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1426041Z   allow-unsafe-pr-checkout: false
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.1426905Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2436096Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2439056Z ##[group]Getting Git version info
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2440384Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2442158Z [command]/usr/bin/git version
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2474114Z git version 2.54.0
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2494540Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2510734Z Temporarily overriding HOME='/home/runner/work/_temp/53c6cb4a-c208-442b-82b6-3d7410e6539d' before making global git config changes
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2512950Z Adding repository directory to the temporary git global config as a safe directory
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2517129Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2570621Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2575733Z ##[group]Initializing the repository
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2581600Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2690856Z hint: Using 'master' as the name for the initial branch. This default branch name
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2692235Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2693841Z hint: to use in all of your new repositories, which will suppress this warning,
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2695277Z hint: call:
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2696367Z hint:
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2697459Z hint: 	git config --global init.defaultBranch <name>
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2698708Z hint:
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2699821Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2701637Z hint: 'development'. The just-created branch can be renamed via this command:
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2703048Z hint:
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2703866Z hint: 	git branch -m <name>
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2704772Z hint:
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2706013Z hint: Disable this message with "git config set advice.defaultBranchName false"
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2708483Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2712061Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2789656Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2791038Z ##[group]Disabling automatic garbage collection
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2793613Z [command]/usr/bin/git config --local gc.auto 0
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2829180Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2829932Z ##[group]Setting up auth
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2837488Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.2885637Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.3272690Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.3313271Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.3569048Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.3608254Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.3852038Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.3893620Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.3894512Z ##[group]Fetching the repository
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.3903661Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b81a4b8a14bbd64161dc686287dbf20a42368191:refs/remotes/origin/main
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8065144Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8067640Z  * [new ref]         b81a4b8a14bbd64161dc686287dbf20a42368191 -> origin/main
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8099648Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8101242Z ##[group]Determining the checkout info
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8103039Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8108240Z [command]/usr/bin/git sparse-checkout disable
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8159610Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8193687Z ##[group]Checking out the ref
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8197720Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8393460Z Switched to a new branch 'main'
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8395308Z branch 'main' set up to track 'origin/main'.
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8403782Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8457759Z [command]/usr/bin/git log -1 --format=%H
+certify	Run actions/checkout@v4	2026-08-07T10:45:40.8486390Z b81a4b8a14bbd64161dc686287dbf20a42368191
+certify	Run actions/setup-python@v5	﻿2026-08-07T10:45:40.8857078Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/setup-python@v5	2026-08-07T10:45:40.8862709Z ##[group]Run actions/setup-python@v5
+certify	Run actions/setup-python@v5	2026-08-07T10:45:40.8863801Z with:
+certify	Run actions/setup-python@v5	2026-08-07T10:45:40.8864591Z   python-version: 3.11
+certify	Run actions/setup-python@v5	2026-08-07T10:45:40.8865519Z   check-latest: false
+certify	Run actions/setup-python@v5	2026-08-07T10:45:40.8875392Z   token: ***
+certify	Run actions/setup-python@v5	2026-08-07T10:45:40.8876450Z   update-environment: true
+certify	Run actions/setup-python@v5	2026-08-07T10:45:40.8877483Z   allow-prereleases: false
+certify	Run actions/setup-python@v5	2026-08-07T10:45:40.8878465Z   freethreaded: false
+certify	Run actions/setup-python@v5	2026-08-07T10:45:40.8879340Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-07T10:45:41.0279713Z ##[group]Installed versions
+certify	Run actions/setup-python@v5	2026-08-07T10:45:41.0372928Z (node:2371) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/setup-python@v5	2026-08-07T10:45:41.0374418Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/setup-python@v5	2026-08-07T10:45:41.0375427Z Successfully set up CPython (3.11.15)
+certify	Run actions/setup-python@v5	2026-08-07T10:45:41.0376653Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint==0.8.0	﻿2026-08-07T10:45:41.0663287Z ##[group]Run pip install -r requirements.txt python-flint==0.8.0
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.0664287Z ^[[36;1mpip install -r requirements.txt python-flint==0.8.0^[[0m
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.0752151Z shell: /usr/bin/bash -e {0}
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.0752991Z env:
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.0753730Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.0754657Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.0755509Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.0756297Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.0757137Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.0757791Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.0758619Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.9084392Z Collecting python-flint==0.8.0
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:41.9582257Z   Downloading python_flint-0.8.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (49 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.1567514Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.1605552Z   Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.2652836Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.2691683Z   Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.3005292Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.3040649Z   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.3160829Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.3199951Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.3331231Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.3363835Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.3467110Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.3499427Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.3649689Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.3682896Z   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.3783703Z Downloading python_flint-0.8.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (9.7 MB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.4428519Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.7/9.7 MB 164.8 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.4470013Z Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.5064131Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 294.4 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.5134033Z Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.6294416Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 330.1 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.6332144Z Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.6396985Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.6449087Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.6502933Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.6567719Z Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.6635805Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 226.4 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:42.7869945Z Installing collected packages: python-flint, pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:49.5562618Z
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:49.5574636Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 python-flint-0.8.0 scipy-1.15.3
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:49.5583407Z
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:49.5583933Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+certify	Run pip install -r requirements.txt python-flint==0.8.0	2026-08-07T10:45:49.5585155Z [notice] To update, run: pip install --upgrade pip
+certify	Run pytest -q	﻿2026-08-07T10:45:49.6287252Z ##[group]Run pytest -q
+certify	Run pytest -q	2026-08-07T10:45:49.6287599Z ^[[36;1mpytest -q^[[0m
+certify	Run pytest -q	2026-08-07T10:45:49.6338951Z shell: /usr/bin/bash -e {0}
+certify	Run pytest -q	2026-08-07T10:45:49.6339229Z env:
+certify	Run pytest -q	2026-08-07T10:45:49.6339508Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-07T10:45:49.6339951Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run pytest -q	2026-08-07T10:45:49.6340371Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-07T10:45:49.6340746Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-07T10:45:49.6341176Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-07T10:45:49.6341556Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run pytest -q	2026-08-07T10:45:49.6341894Z ##[endgroup]
+certify	Run pytest -q	2026-08-07T10:45:52.9788597Z ........................................................................ [ 48%]
+certify	Run pytest -q	2026-08-07T10:45:53.5039192Z ........................................................................ [ 96%]
+certify	Run pytest -q	2026-08-07T10:45:53.5824176Z .....                                                                    [100%]
+certify	Run pytest -q	2026-08-07T10:45:53.5824898Z 149 passed in 3.41s
+certify	Arb full-strain certificate and stress	﻿2026-08-07T10:45:53.6747066Z ##[group]Run python -m src.full_strain_observability --samples 100000 --outdir results-full-strain
+certify	Arb full-strain certificate and stress	2026-08-07T10:45:53.6747810Z ^[[36;1mpython -m src.full_strain_observability --samples 100000 --outdir results-full-strain^[[0m
+certify	Arb full-strain certificate and stress	2026-08-07T10:45:53.6796852Z shell: /usr/bin/bash -e {0}
+certify	Arb full-strain certificate and stress	2026-08-07T10:45:53.6797139Z env:
+certify	Arb full-strain certificate and stress	2026-08-07T10:45:53.6797409Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Arb full-strain certificate and stress	2026-08-07T10:45:53.6797878Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Arb full-strain certificate and stress	2026-08-07T10:45:53.6798299Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Arb full-strain certificate and stress	2026-08-07T10:45:53.6798672Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Arb full-strain certificate and stress	2026-08-07T10:45:53.6799043Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Arb full-strain certificate and stress	2026-08-07T10:45:53.6799411Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Arb full-strain certificate and stress	2026-08-07T10:45:53.6799730Z ##[endgroup]
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6205233Z # Full 3D strain observability from shape + helicity
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6206039Z
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6206479Z Status: **CERTIFIED**.
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6206691Z
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6206973Z - certified triad/polarization tomography: `Q >= 13/20 ||S||_F^2`
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6207688Z - dangerous off-plane shear generalized ratio: `[0.6602495167 +/- 6.80e-11]`
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6208270Z - combined physical observable:
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6209085Z   `H_shape + (43/50)(|zeta_1|^2+|zeta_2|^2) >= 559/2000 ||S||_F^2`
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6209584Z - random trace-free strains: `100000`
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6210010Z - worst observed Q/||S||^2: `0.662825548`
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6210461Z - minimum combined-observable margin: `5.515e-03`
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6210794Z
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6211108Z Thus an extremal three-dimensional triad cannot hide a large incompressible
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6211876Z symmetric strain from both its scalar side-length geometry and the opposite-
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6212581Z helicity conversion of its two parent polarizations.
+certify	Arb full-strain certificate and stress	2026-08-07T10:46:06.6212954Z
+certify	Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"	﻿2026-08-07T10:46:06.6433710Z ##[group]Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"
+certify	Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-07T10:46:06.6434246Z ^[[36;1mcat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"^[[0m
+certify	Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-07T10:46:06.6483117Z shell: /usr/bin/bash -e {0}
+certify	Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-07T10:46:06.6483373Z env:
+certify	Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-07T10:46:06.6483645Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-07T10:46:06.6484104Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-07T10:46:06.6484524Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-07T10:46:06.6484906Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-07T10:46:06.6485287Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-07T10:46:06.6485658Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run cat results-full-strain/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-07T10:46:06.6485977Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	﻿2026-08-07T10:46:06.6644061Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6645289Z ##[group]Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6645562Z with:
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6645786Z   name: full-strain-observability-results
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6646099Z   path: results-full-strain/
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6646677Z   if-no-files-found: warn
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6646914Z   compression-level: 6
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6647134Z   overwrite: false
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6647355Z   include-hidden-files: false
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6647587Z env:
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6647833Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6648254Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6648669Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6649079Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6649448Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6649813Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.6650136Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.8355082Z (node:2425) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.8356483Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.8438953Z With the provided path, there will be 2 files uploaded
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.8466899Z Artifact name is valid!
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:06.8467418Z Root directory input is valid!
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:07.0261141Z Beginning upload of artifact content to blob storage
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:07.0474233Z (node:2425) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:07.1525319Z Uploaded bytes 1096
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:07.1871254Z Finished uploading artifact content to blob storage!
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:07.1872340Z SHA256 digest of uploaded artifact zip is 2cb6ac4278c1fe1f6a97bb8a5e262ad8278df8badc0a268c52288c7a7c3eb07c
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:07.1873794Z Finalizing artifact upload
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:07.3651042Z Artifact full-strain-observability-results.zip successfully finalized. Artifact ID 8991093425
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:07.3653279Z Artifact full-strain-observability-results has been successfully uploaded! Final size is 1096 bytes. Artifact ID is 8991093425
+certify	Run actions/upload-artifact@v4	2026-08-07T10:46:07.3677533Z Artifact download URL: https://github.com/quemanhmcr/wang-ns-triad-diamond/actions/runs/31171360107/artifacts/8991093425
+certify	Post Run actions/setup-python@v5	﻿2026-08-07T10:46:07.3878843Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/setup-python@v5	2026-08-07T10:46:07.3880029Z Post job cleanup.
+certify	Post Run actions/setup-python@v5	2026-08-07T10:46:07.5109104Z (node:2437) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Post Run actions/setup-python@v5	2026-08-07T10:46:07.5109924Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Post Run actions/checkout@v4	﻿2026-08-07T10:46:07.5309587Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.5310795Z Post job cleanup.
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.6209354Z [command]/usr/bin/git version
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.6255379Z git version 2.54.0
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.6292546Z Temporarily overriding HOME='/home/runner/work/_temp/24c93e3e-c244-4fd0-866b-ad603d75dbe2' before making global git config changes
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.6293995Z Adding repository directory to the temporary git global config as a safe directory
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.6301459Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.6347216Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.6387327Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.6697616Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.6733409Z http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.6743899Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.6780270Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.7058639Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Post Run actions/checkout@v4	2026-08-07T10:46:07.7101432Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Complete job	﻿2026-08-07T10:46:07.7520355Z Cleaning up orphan processes
+certify	Complete job	2026-08-07T10:46:07.7799775Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

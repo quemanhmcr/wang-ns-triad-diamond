@@ -1122,6 +1122,253 @@ source-collision formulas on `50,000` packet configurations.  The local
 pressure-Hessian coefficient remains a hypothesis of the continuum packet
 realization.
 
+### Helical spin connection, phase holonomy, and 3D strain tomography
+
+The genuinely three-dimensional polarization remainder can now be separated into
+**gauge transport**, **helicity conversion**, and **reuse holonomy**.  These are
+not the same phenomenon.
+
+For the standard local spherical helical gauge
+
+\[
+h_s=(e_\theta+i s e_\phi)/\sqrt2,
+\qquad i k\times h_s=s|k|h_s,
+\]
+
+the Berry connection and curvature are exactly
+
+\[
+\mathcal A_s=i h_s^*dh_s=s\cos\theta\,d\phi,
+\qquad
+\mathcal F_s=-s\sin\theta\,d\theta\wedge d\phi,
+\]
+
+so the helicity line bundle has Chern number
+
+\[
+\boxed{c_1=-2s.}
+\]
+
+Thus no globally smooth phase convention exists.  It would nevertheless be
+incorrect to charge the Berry phase of one rotating triad as a cascade defect.
+A nondegenerate triad supplies its own physical gauge.  If `n` is its oriented
+normal, set
+
+\[
+\boxed{
+h_s(k;n)=\frac{n\times\widehat k+i s n}{\sqrt2}.
+}
+\]
+
+This gauge is exactly `SO(3)` covariant:
+
+\[
+h_s(Rk;Rn)=Rh_s(k;n).
+\]
+
+In the reality-compatible forward-triad convention, the Waleffe coupling in
+this gauge is purely imaginary.  Hence away from a coupling zero its phase is
+locally constant (`+/- pi/2`).  Action `31171018560` passed the full test suite
+plus `50,000` random three-dimensional rotation/transition/coupling checks.
+This is a theorem-level **countermodel to a naive single-triad Berry tax**:
+rigid rotation may accumulate chart-dependent Berry phase, but it is an exact
+symmetry and does not itself reduce transfer.
+
+The geometric phase becomes physical when one Fourier mode is reused by two
+triads with different planes.  If their normals differ by signed dihedral angle
+`psi` about the common carrier `k`, then
+
+\[
+\boxed{
+h_s(k;n_2)=e^{-is\psi}h_s(k;n_1).
+}
+\]
+
+This spin-one transition function is the local incidence connection of the
+reuse network.
+
+For the four-edge reuse diamond
+
+\[
+a+b=m,\qquad m+c=d,
+\]
+\[
+b+c=n,\qquad a+n=d,
+\]
+
+write the forward phase residual of an edge `x+y=z` as
+
+\[
+\delta_e
+=\arg g_e-\theta_x-\theta_y+\theta_z-\tau_e,
+\]
+
+where `tau_e` is the sign-dependent forward target.  All six modal phases cancel
+exactly:
+
+\[
+\boxed{
+\delta_{abm}+\delta_{mcd}-\delta_{bcn}-\delta_{and}
+\equiv H_\phi\pmod{2\pi}.
+}
+\]
+
+The same `H_phi` is reconstructed from the four constant triad-normal coupling
+phases plus six spin-weighted dihedral transition phases.  It is invariant under
+an arbitrary rigid rotation of the whole diamond.
+
+There is a sharp four-edge phase-lock inequality.  For principal
+`|H_phi|<=pi`,
+
+\[
+\boxed{
+\sum_{i=1}^4(1-\cos\delta_i)
+\ge
+4\left(1-\cos\frac{|H_\phi|}{4}\right).
+}
+\]
+
+The equal lift `(H/4,H/4,-H/4,-H/4)` is the sharp minimizer.  Combining this with
+the existing positive polarization identity, if each diamond edge has capacity
+weight at least `beta_phi`, each multiplier satisfies `m_e>=1-10^-4`, and
+
+\[
+|H_\phi|\ge\frac15,
+\]
+
+then Arb certifies
+
+\[
+4(1-10^{-4})\left(1-\cos\frac1{20}\right)
+=0.0049984585\ldots>\frac1{250},
+\]
+
+hence the finite-packet phase branch pays
+
+\[
+\boxed{
+D_{phase}\ge\frac{\beta_\phi}{250}.
+}
+\]
+
+Action `31171127537` certified this coefficient and stress-tested `50,000`
+nondegenerate diamonds.  A later implementation exposes the same holonomy as an
+explicit sum of the six spin-dihedral transitions; that identity is rerun in the
+final integration below.
+
+The local Kelvin polarization dynamics has a complementary structure.  Let `E`
+be a transverse frame of `k^perp`.  Its spin about `k` is free.  Choosing
+
+\[
+E^T\dot E=-\operatorname{skew}(E^T\nabla u\,E)
+\]
+
+removes rigid transverse rotation.  In this **objective polarization frame** the
+linear generator is exactly
+
+\[
+\boxed{
+-\operatorname{sym}(E^T\nabla u\,E)-\nu|k|^2I.
+}
+\]
+
+For trace-free transverse strain
+
+\[
+D=\begin{pmatrix}\delta&\beta\\ \beta&-\delta\end{pmatrix},
+\]
+
+the circular/helical representation is
+
+\[
+\boxed{
+D_{hel}=
+\begin{pmatrix}
+0&\delta-i\beta\\
+\delta+i\beta&0
+\end{pmatrix}.
+}
+\]
+
+Thus first-order nonconformal strain is **opposite-helicity conversion**, not an
+unavoidable diagonal Berry-phase drift.  Frozen `D=diag(d,-d)` sends a pure
+positive-helicity amplitude to
+
+\[
+u_+(t)=\cosh(dt),\qquad u_-(t)=-\sinh(dt).
+\]
+
+Time-varying strain orientations generate local geometric phase through
+noncommutativity:
+
+\[
+\boxed{
+[D_1,D_2]
+=2(\delta_1\beta_2-\beta_1\delta_2)
+\begin{pmatrix}0&1\\-1&0\end{pmatrix}.
+}
+\]
+
+Under the five-percent coherence hypothesis, the second Magnus generator obeys
+
+\[
+\|\Omega_2\|_{op}
+\le(\varepsilon+\varepsilon^2/2)(dT)^2.
+\]
+
+At `epsilon=1/20`, `dT=1/30` this is below `10^-4`.  This statement is
+**deliberately only a second-Magnus bound**; no full time-ordered exponential
+estimate is claimed.  If strain orientation ceases to be coherent, the existing
+objective-strain/source collision theorem already charges that variation.
+Action `31171484247` passed `50,000` objective-frame/commutator checks.
+
+Finally, scalar triad deformation and helicity conversion together observe the
+**entire three-dimensional incompressible symmetric strain**.  At the symmetric
+extremizer let `Pi` be the triad plane, `k_1,k_2` the two parent directions, and
+
+\[
+D_\Pi=(S|_\Pi)^0,
+\qquad
+D_i=(S|_{k_i^\perp})^0.
+\]
+
+Arb interval arithmetic on the certified `r_*` bracket proves
+
+\[
+\boxed{
+\|D_\Pi\|_F^2+\|D_1\|_F^2+\|D_2\|_F^2
+\ge\frac{13}{20}\|S\|_F^2.
+}
+\]
+
+The actual dangerous eigenmode is an off-plane shear with generalized ratio
+
+\[
+0.6602495167\ldots>\frac{13}{20}.
+\]
+
+Since the scalar shape-speed theorem gives
+
+\[
+\frac12\dot u^2+2\dot v^2
+\ge\frac{43}{100}\|D_\Pi\|_F^2
+\]
+
+and each helical mixer satisfies `|zeta_i|^2=||D_i||_F^2/2`, one obtains
+
+\[
+\boxed{
+\left(\frac12\dot u^2+2\dot v^2\right)
++\frac{43}{50}(|\zeta_1|^2+|\zeta_2|^2)
+\ge\frac{559}{2000}\|S\|_F^2.
+}
+\]
+
+Action `31171360107` Arb-certified the `13/20` tomography constant and checked
+`100,000` random symmetric trace-free strains.  Therefore a large local strain
+cannot hide simultaneously from the extremal side-length geometry and from
+opposite-helicity conversion of both parents.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -1723,6 +1970,23 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   strain source collision in the stated packet model; far pressure Hessian has
   kernel order five, so 3D packet packing leaves the summable exponent `5-3=2`.
 
+- exact spin-one helical bundle formulas `A_s=s cos(theta)dphi`,
+  `F_s=-s sin(theta)dtheta wedge dphi`, and Chern number `-2s`; exact
+  `SO(3)`-covariant triad-normal gauge and spin-dihedral transition
+  `h_s(k;n2)=exp(-is psi)h_s(k;n1)`; single-triad normal-gauge coupling is
+  quadrature, so rigid rotation is not a phase deficit;
+- exact diamond modal-phase cancellation identity and sharp four-edge phase
+  holonomy cost `sum(1-cos delta_i)>=4(1-cos(|H_phi|/4))`; Arb-certified clean
+  finite-packet branch `|H_phi|>=1/5`, edge weights `>=beta_phi`, good
+  multipliers `m_e>=1-10^-4 => D_phase>=beta_phi/250`;
+- exact objective transverse polarization generator `-sym(A_perp)-nu|k|^2I`,
+  exact off-diagonal helical representation of trace-free strain, and exact
+  strain-area commutator law; the repository records only a second-Magnus bound,
+  not a full time-ordered phase theorem;
+- Arb-certified full 3D strain tomography at the symmetric extremizer:
+  `||D_Pi||_F^2+||D_1||_F^2+||D_2||_F^2 >= (13/20)||S||_F^2`, hence the combined
+  scalar-shape/helicity-mixing observable is `>=559/2000 ||S||_F^2`;
+
 ### Computationally supported, not interval-certified
 
 - numerical reuse-gap constants from nonlinear optimization;
@@ -1735,12 +1999,14 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
    now controlled, but the continuum theorem must attach the cells to physical
    packets/windows while preserving the signed localized SGS measure and keeping
    partition overlap/cross interactions summable.
-2. **Complete the genuinely three-dimensional polarization/frame dynamics.**
-   The intrinsic Gram theorem removes the fixed-plane assumption for scalar
-   side-length/multiplier geometry: common plane tilt is a gauge.  What remains is
-   coherent transport of the helical polarization/phase, the relation of the
-   in-plane co-rotating strain coherence variable to the evolving 3D frame, and
-   spatial variation of that frame across the packet.
+2. **Lift the affine helical transport to a genuine localized nonlinear packet.**
+   The helical line topology, triad-normal `SO(3)` gauge, spin-dihedral reuse
+   connection, objective linear polarization generator, full-strain tomography,
+   and finite-diamond phase-holonomy cost are now explicit.  What remains is to
+   show that spatially localized Navier--Stokes packets inherit these gauges with
+   summable frame variation and nonlinear cross-helicity forcing; the full
+   time-ordered phase evolution beyond the recorded second-Magnus term is not yet
+   closed.
 3. **Integrate the adaptive curvature-balanced moat into the nested packet
    tree.** The old fixed spatial moat schedule is not sufficient.  The continuum
    construction must choose `M` from the local curvature balance `a/M+b kappa M`,
@@ -1807,6 +2073,11 @@ The most useful recorded runs, in chronological order, are:
 | `31169598408`--`31169621311` | integrated affine-spacetime bridge on `2b795d2`: affine grain, strain coherence, curvature balance, objective-strain collision, localized pressure, crossing moat, nested grains and master all green; `133` tests per workflow |
 
 | `31170015795` | intrinsic full-3D triad-plane Gram dynamics; `137` tests + `50,000` random plane/driver/Gaussian checks |
+
+| `31171018560` | helical spin/Berry transport: triad-normal `SO(3)` gauge, Chern charge `-2s`, spin-dihedral transition, and strain/helicity mixing; `144` tests + `50,000` checks |
+| `31171127537` | Arb-certified diamond phase holonomy branch `D_phase>=beta_phi/250`; `148` tests + `50,000` diamonds |
+| `31171360107` | Arb-certified full 3D strain observability `>=13/20` and combined shape/helicity constant `559/2000`; `149` tests + `100,000` strains |
+| `31171484247` | objective helical polarization / strain-area commutator; `152` tests + `50,000` checks |
 
 The current preferred master regression is run `31169621311` on the integrated
 affine-spacetime bridge commit `2b795d2` (`20,000` episode traces, worst margin
@@ -1907,8 +2178,11 @@ velocity curvature in general.
 The next mathematically decisive work is therefore:
 
 1. construct a **full 3D transfer-preserving moving packet frame**.  Scalar
-   plane tilt is now intrinsic/gauge; the unresolved 3D content is helical
-   polarization/phase transport and spatial variation of the moving frame;
+   plane tilt, affine helical gauge transport, full-strain observability and
+   finite-diamond phase holonomy are now controlled.  The unresolved content is
+   continuum spatial variation of those local gauges, nonlinear forcing between
+   the two helicity channels, and a full time-ordered phase estimate beyond the
+   certified/analytic local pieces;
 2. make the **adaptive curvature-balanced windows** compatible with the nested
    packet ancestry, and prove that local pressure-Hessian, SGS transport `RU`,
    viscous boundary flux and partition overlap are summable or create a fresh /
@@ -1934,12 +2208,13 @@ For a new reader, the recommended order is:
 5. `docs/localized_sgs_pressure_ledger.md` and `docs/annular_pressure_collision.md`;
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
-8. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
-9. `docs/scale_holonomy.md`;
-10. `docs/multiscale_bellman.md`;
-11. `docs/nested_grain_extraction.md`;
-12. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
-13. `docs/atomic_component_entropy.md`;
-14. `docs/multicommodity_hodge_routing.md`;
-15. `docs/resistance_bellman_stopping.md`;
-16. `docs/master_no_escape.md`.
+8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, and `docs/objective_helical_polarization.md`;
+9. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
+10. `docs/scale_holonomy.md`;
+11. `docs/multiscale_bellman.md`;
+12. `docs/nested_grain_extraction.md`;
+13. `docs/cycle_hodge_flat_rigidity.md` and `docs/spherical_flat_erosion.md`;
+14. `docs/atomic_component_entropy.md`;
+15. `docs/multicommodity_hodge_routing.md`;
+16. `docs/resistance_bellman_stopping.md`;
+17. `docs/master_no_escape.md`.
