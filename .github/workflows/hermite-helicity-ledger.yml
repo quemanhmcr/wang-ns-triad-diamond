@@ -1,0 +1,20 @@
+name: Hermite helicity forcing ledger
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint==0.8.0
+      - run: pytest -q
+      - name: Hermite helicity stress
+        run: python -m src.hermite_helicity_ledger --samples 20000 --outdir results-hermite-helicity-ledger
+      - run: cat results-hermite-helicity-ledger/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hermite-helicity-ledger-results
+          path: results-hermite-helicity-ledger/
