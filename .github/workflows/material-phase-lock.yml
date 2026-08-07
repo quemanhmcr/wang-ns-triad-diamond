@@ -1,0 +1,20 @@
+name: Material phase lock
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint==0.8.0
+      - run: pytest -q
+      - name: Material phase-lock stress
+        run: python -m src.material_phase_lock --samples 50000 --outdir results-material-phase-lock
+      - run: cat results-material-phase-lock/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: material-phase-lock-results
+          path: results-material-phase-lock/
