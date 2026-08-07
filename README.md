@@ -13,6 +13,12 @@ for helical Navier–Stokes triads. It asks whether all four forward-transfer ed
 
 This repository does **not** claim to solve Navier–Stokes. It is a falsifiable computational probe of one proposed rigidity mechanism.
 
+## Current research state
+
+The programme has grown beyond the original four-edge diamond probe into a finite-dimensional no-escape architecture involving Gaussian triad grains, transfer-weighted Bellman entropy, scale/Hodge holonomy, spherical flat-network erosion, ancestry-cycle routing, and a no-log resistance stopping theorem.
+
+**Start here:** [`RESEARCH_LEDGER.md`](RESEARCH_LEDGER.md) records the current mathematical state, theorem-vs-numerical status, key formulas, reproducible run IDs, countermodels that changed the strategy, and the remaining PDE bridge.
+
 ## Reproduce
 
 ```bash
