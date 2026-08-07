@@ -1,0 +1,43 @@
+{
+  "gamma": 0.4928152849469459,
+  "random_checks": {
+    "checked": 30000,
+    "worst_margin": -4.547473508864641e-13
+  },
+  "toy": {
+    "synchronized": {
+      "hodge_energy": 2.5268200870360534e-30,
+      "weighted_circulation_sq": 5.4081269221545845e-31,
+      "weighted_cycle_resistance": 3.315000000000001,
+      "rayleigh_bound": 1.6314108362457263e-31,
+      "margin": 2.3636790034114807e-30,
+      "pair_resistance_budget": 3.315000000000001,
+      "pair_mass": 0.635,
+      "shift_variance": 3.0814879110195774e-33,
+      "pair_shift_sq": 6.162975822039155e-33,
+      "synchronization_bound": 4.1882042942622596e-30,
+      "sync_margin": 4.18512280635124e-30,
+      "integer_mismatch_probability_bound": 2.5375939221017346e-32
+    },
+    "mismatched": {
+      "hodge_energy": 0.10119454378222476,
+      "weighted_circulation_sq": 0.11050444181018909,
+      "weighted_cycle_resistance": 3.315000000000001,
+      "rayleigh_bound": 0.03333467324590922,
+      "margin": 0.06785987053631554,
+      "pair_resistance_budget": 3.315000000000001,
+      "pair_mass": 0.635,
+      "shift_variance": 0.055252220905094726,
+      "pair_shift_sq": 0.11050444181018945,
+      "synchronization_bound": 0.1677299563190376,
+      "sync_margin": 0.11247773541394286,
+      "integer_mismatch_probability_bound": 0.45499999999999996
+    }
+  },
+  "tree_identity": {
+    "direct": 1.466,
+    "formula": 1.466,
+    "margin": 0.0,
+    "max_edge_contribution": 0.75
+  }
+}
