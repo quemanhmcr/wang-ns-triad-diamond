@@ -70,13 +70,25 @@ def arb_isotropic_hook_certificate()->dict[str,str]:
     return {
         'rstar_ball':str(r),'C_ball':str(C),'isotropic_Qpol_lower':'1/10',
         'aspect_threshold':'21/20','mild_raw_square_ball':str(mild2),
-        'mild_Qpol_lower':'1/25','spinor_H1_energy_lower':'1/50','status':'CERTIFIED'
+        'mild_Qpol_lower':'1/25','relative_coordinate_H1_energy_lower':'1/50','physical_three_role_H1_energy_lower':'1/100','status':'CERTIFIED'
     }
 
 
 def mild_aspect_lower(condL:float)->float:
     if condL<1 or condL>21/20+1e-12: raise ValueError('mild-aspect branch requires 1<=cond(L)<=21/20')
     return max(0.,1/math.sqrt(10)-math.sqrt(5)*(condL-1))**2
+
+
+def actual_role_sideband_energy_from_qpol(qpol:float)->float:
+    """Lower bound for the sum of the three physical role-sideband energies.
+
+    For unit role spinors, ||D u||^2=(1/2)||D||_F^2.  Hence
+      sum_i ||F_i||^2 = (1/2)(||D1||^2+||D2||^2+||D3||^2)
+        >= (1/4)(||D1-D2||^2+||D3||^2) = Q_pol/4.
+    This is the quantity that can be fed into the odd-Hermite role theorem.
+    """
+    if qpol<0: raise ValueError('nonnegative qpol required')
+    return .25*qpol
 
 
 def spinor_action_energy_from_qpol(qpol:float)->float:
@@ -160,11 +172,13 @@ Hence on the mild-aspect branch `cond(L)<=21/20`, Arb certifies the clean bound
 
 `Q_pol(L) >= (1/25)||B_hook||^2`.
 
-Every real symmetric trace-free 2x2 generator satisfies `D^2=(||D||_F^2/2)I`.  Thus for arbitrary unit helicity spinors the combined relative-parent/child H1 sideband forcing energy is exactly half of `Q_pol`, giving
+Every real symmetric trace-free 2x2 generator satisfies `D^2=(||D||_F^2/2)I`.  Thus the auxiliary relative-parent/child forcing coordinate has energy `Q_pol/2 >= (1/50)||B_hook||^2`.
 
-`E ||F_H1^rel||^2 >= (1/50)||B_hook||^2`.
+For the **three physical role sidebands** needed by the odd-Hermite transfer theorem, parallelogram gives the robust lower bound
 
-This is a transfer-facing **relative-parent/child polarization** statement; no `D_Pi` scalar-shape term is used.  It is intentionally only a mild-aspect theorem.  Grains with larger condition number are not charged by aspect: they remain in the affine fresh/reuse ancestry branch.
+`sum_i ||F_i^H1||^2 >= Q_pol/4 >= (1/100)||B_hook||^2`.
+
+The distinction matters because the relative-coordinate evolution is non-unitary and does not itself represent one physical Young role.  No `D_Pi` scalar-shape term is used.  The theorem is intentionally only mild-aspect; larger condition number remains in affine fresh/reuse ancestry.
 
 Stress: `{out.samples}`
 - worst isotropic `Q_pol/||B||^2`: `{out.worst_isotropic_ratio:.9f}`

@@ -78,13 +78,38 @@ Finally, any real symmetric trace-free `2x2` generator satisfies
 D^2=\frac12\|D\|_F^2I.
 \]
 
-Therefore its action on **every** unit complex helicity spinor has the same norm.  The combined relative-parent/child `H1` sideband forcing obeys
+Therefore its action on every unit complex helicity spinor has fixed norm.  In
+the **auxiliary relative-parent/child coordinate** this gives
+
+\[
+\|F_{rel}\|^2=\frac12Q_{pol}
+\ge\frac1{50}\|B^H\|_F^2.
+\]
+
+However, the odd-Hermite Young theorem acts on the three physical roles
+separately.  Their sideband forcing energies satisfy
+
+\[
+\begin{aligned}
+\sum_{i=1}^3\|F_i^{H1}\|^2
+&=\frac12(\|D_1\|_F^2+\|D_2\|_F^2+\|D_3\|_F^2)\\
+&\ge\frac14(\|D_1-D_2\|_F^2+\|D_3\|_F^2)
+=\frac14Q_{pol},
+\end{aligned}
+\]
+
+by the parallelogram inequality.  Thus the role-level statement needed by the
+transfer theorem is
 
 \[
 \boxed{
-\mathbb E\|F_{H1}^{rel}\|^2
-\ge\frac1{50}\|B^H\|_F^2.
+\sum_i\|F_i^{H1}\|^2
+\ge\frac1{100}\|B^H\|_F^2.
 }
 \]
+
+The distinction is essential: the relative coordinate is transfer-facing
+algebraically, but its homogeneous `SL(2)` evolution is not unitary and it is
+not itself one Young role.
 
 This theorem does not price high aspect.  If `cond(L)>21/20`, the grain stays in the affine fresh/reuse/ancestry branch.  That separation is essential because common affine anisotropy remains an exact Young symmetry.
