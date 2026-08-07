@@ -29,9 +29,13 @@ def test_equal_transfer_nonflat_motif_has_certified_positive_block_cost():
     # Hodge arcs with the same inherited conductance.
     row = weighted_hodge_energy(nonflat_reuse_motif(), gamma, weights=[1.0 / 3.0] * 6)
     assert abs(row["energy"] - gamma * gamma / 15.0) < 1e-11
-    block_log_cost = 0.5 * row["energy"]
-    assert abs(block_log_cost - gamma * gamma / 30.0) < 1e-11
-    assert block_log_cost > 0.008
+    good_branch_log_cost = 0.5 * row["energy"]
+    assert abs(good_branch_log_cost - gamma * gamma / 30.0) < 1e-11
+    assert good_branch_log_cost > 0.008
+    # If any equal-weight triad is outside the local box, global Def>=1/100
+    # on weight 1/3 gives 1/300.  This closes the local/global dichotomy.
+    unconditional_cost = min(good_branch_log_cost, 1.0 / 300.0)
+    assert abs(unconditional_cost - 1.0 / 300.0) < 1e-15
 
 
 def test_butterfly_is_scale_flat_despite_cycle():

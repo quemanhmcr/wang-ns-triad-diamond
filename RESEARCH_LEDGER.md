@@ -311,12 +311,22 @@ invoked.
 
 For the exact nonflat three-triad reuse motif, unit arc weights have
 `\mathcal E_H=\gamma_*^2/5`.  With equal normalized triad transfer weights
-`w_e=1/3`, the inherited arc weights give
+`w_e=1/3`, there is now a completely closed local/global dichotomy.  If all
+three triads are in the local rectangle, the inherited arc weights give
+
+\[
+-\log R_{\rm block}\ge\frac{\gamma_*^2}{30}
+\approx0.00809556352.
+\]
+
+If any one triad is outside, its weight `1/3` and the global gap give
+`-\log R_{\rm block}\ge1/300`.  Hence the unconditional motif cost is
 
 \[
 \boxed{
--\log R_{\rm block}\ge\frac{\gamma_*^2}{30}
-\approx0.00809556352.
+c_{0,\rm motif}
+\ge\min\!\left\{\frac{\gamma_*^2}{30},\frac1{300}\right\}
+=\frac1{300}>0.
 }
 \]
 

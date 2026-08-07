@@ -80,20 +80,36 @@ cost `c_{0,H}=h_H/2`.  Edges outside the certified local rectangle have
 
 
 For the three-triad nonflat reuse motif below, unit arc weights give exactly
-`E_H=gamma_*^2/5`.  If instead the three triads have equal normalized transfer
-weights `w_e=1/3` and each of their two Hodge arcs inherits that weight, linear
-scaling of the quadratic energy gives
+`E_H=gamma_*^2/5`.  If the three triads have equal normalized transfer weights
+`w_e=1/3` and **all three lie in the certified local rectangle**, each of their
+two Hodge arcs inherits weight `1/3`, so linear scaling gives
 
 \[
-\mathcal E_H=\frac{\gamma_*^2}{15},
+\mathcal E_H\ge\frac{\gamma_*^2}{15},
 \qquad
-\boxed{-\log R_{\rm block}\ge\frac{\gamma_*^2}{30}}
+-\log R_{\rm block}\ge\frac{\gamma_*^2}{30}
 \approx0.00809556352.
 \]
 
-This is a concrete certified positive cost for the normalized nonflat reuse
-block; it is not asserted to be the universal master `c_0` across all costly
-branches.
+If at least one of the three triads is outside the local rectangle, its weight
+`1/3` and the global edge gap `Def_e>=1/100` instead give
+
+\[
+-\log R_{\rm block}\ge\frac1{300}.
+\]
+
+Therefore the equal-transfer nonflat motif has the unconditional certified cost
+
+\[
+\boxed{
+c_{0,\rm motif}
+\ge\min\!\left\{\frac{\gamma_*^2}{30},\frac1{300}\right\}
+=\frac1{300}>0.
+}
+\]
+
+This is a concrete theorem-level positive cost for that normalized motif; it is
+not asserted to be the universal master `c_0` across all costly branches.
 
 ## Curved reuse motif
 
