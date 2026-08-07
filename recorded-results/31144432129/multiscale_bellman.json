@@ -1,0 +1,65 @@
+{
+  "local_stability_experimental": {
+    "A": 0.40174208790717614,
+    "B": 0.08465662743499987,
+    "minimum_margin": -1.0441170922337532e-15,
+    "argmin_x": 0.6109041025712121,
+    "argmin_y": 0.6109041025712512,
+    "rstar": 0.6109041018281888,
+    "jstar": 0.10011017585618869,
+    "gamma": 0.4928152849469459,
+    "holonomy_cost": 0.020560293099423806,
+    "reuse_factor_candidate": 0.979649628581386,
+    "cutting_plane_iterations": 1,
+    "history": [
+      {
+        "iteration": 0,
+        "A": 0.40376089236902124,
+        "B": 0.08508203762311545,
+        "margin": -7.776007776953109e-09,
+        "x": 0.6108390627451556,
+        "y": 0.610949452527251
+      }
+    ]
+  },
+  "random_checks": {
+    "samples": 20000,
+    "max_bound_violation": -0.00012186490075438705,
+    "max_log_violation": -0.0002600755374934094
+  },
+  "cascades": [
+    {
+      "depth": 12,
+      "branches": 2,
+      "reuse_factor": 1.0,
+      "product_exact": 0.0002441406250000003,
+      "predicted_product": 0.00024414062500000016,
+      "entropy_cost": 8.317766166719343,
+      "reuse_cost": 0.0,
+      "final_components": 4096,
+      "final_component_score": 0.0002441406250000001
+    },
+    {
+      "depth": 12,
+      "branches": 1,
+      "reuse_factor": 0.9116174203759786,
+      "product_exact": 0.32942108088146144,
+      "predicted_product": 0.32942108088146144,
+      "entropy_cost": 0.0,
+      "reuse_cost": 1.1104184654677258,
+      "final_components": 1,
+      "final_component_score": 1.0
+    },
+    {
+      "depth": 12,
+      "branches": 2,
+      "reuse_factor": 0.9116174203759786,
+      "product_exact": 8.042506857457574e-05,
+      "predicted_product": 8.04250685745756e-05,
+      "entropy_cost": 8.317766166719343,
+      "reuse_cost": 1.110418465467725,
+      "final_components": 4096,
+      "final_component_score": 0.0002441406250000001
+    }
+  ]
+}
