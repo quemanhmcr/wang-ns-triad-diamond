@@ -83,3 +83,38 @@ If discarded cross-component interactions have total magnitude at most `eta M_* 
 At tolerance `eta`, repeatedly extract an interaction component carrying transfer at least `eta`. The dominant-component certificate makes every extracted profile consume a definite amount `c(eta)` of `L^{3/2}` p-mass. Therefore only finitely many profiles can be extracted. The remainder is small in the nonlinear transfer norm, which is the property needed by the cascade argument; smallness in a stronger ambient norm is unnecessary.
 
 The continuum theorem still requires a wave-packet or wavelet discretization with summable cross-interaction errors. Existing Banach-space profile decompositions provide a compactness framework, but the interaction-component selection above is tailored to the Navier--Stokes trilinear form.
+
+## Interaction entropy and multiscale stickiness
+
+Define the collision (Renyi-2) entropy of the component p-masses by
+
+\[
+H_2(X)=-\log\sum_CX_C^2.
+\]
+
+The Bellman inequality can be written
+
+\[
+S(X,Y,Z)
+\le
+\exp\left[-\frac{H_2(X)+H_2(Y)+H_2(Z)}{3}\right].
+\]
+
+Thus if normalized transfer is at least `1-epsilon` (after adding the discarded-edge error), then
+
+\[
+\frac{H_2(X)+H_2(Y)+H_2(Z)}{3}
+\le -\log(1-\epsilon).
+\]
+
+For `m` equal independent components, every entropy equals `log m` and the transfer factor is exactly `1/m`.
+
+If a phase-space partition is refined, a component mass `w` splits into children `w_j`, and
+
+\[
+\sum_jw_j^2\le w^2.
+\]
+
+Therefore `H_2` is monotone nondecreasing under refinement. If near-extremal transfer persists through a nested family of phase-space partitions, the entropy estimate forces one nested component to retain almost all p-mass at every resolution. This is a finite-resolution stickiness theorem derived from convexity, rather than assumed as a geometric ansatz.
+
+To use this in the PDE, active hyperedges must be chosen nested: every fine active triad projects to an active coarse triad. Cross-edge errors must be summable over resolutions. Gaussian resonance estimates provide the model decay; a rigorous wave-packet construction remains to be supplied.
