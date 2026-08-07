@@ -339,9 +339,19 @@ observable obeys the sharper physically aligned theorem
 Thus absolute helicity conversion is not promoted by itself to a phase cost;
 relative parent polarization, child polarization, capacity normalization and
 scalar shape are the variables the nonlinear transfer actually distinguishes.
-What remains is the localized nonlinear packet realization and full
-time-ordered phase control, not the identification of the correct geometric
-connection.
+Moreover, on the signed-good core Arb gives `sin(theta)>9/10`, and the
+triad-normal gauge satisfies the scale-free local estimate
+
+\[
+\|\dot h_s\|\le\frac52
+(\|\dot{\widehat k}\|+\|\dot{\widehat p}\|)
+\]
+
+for a parent role.  Hence the global Chern topology does not introduce a local
+chart singularity inside an efficient packet; the remaining PDE burden is to
+control the carrier-direction variation itself.  What remains is the localized
+nonlinear packet realization and full time-ordered phase control, not the
+identification of the correct geometric connection.
 
 The actual Navier--Stokes gap is therefore now the **construction** of the
 transfer roles and their spacetime packetization.  Common parent/child log

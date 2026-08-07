@@ -1467,6 +1467,88 @@ residual `7.553e-14`, and the worst sampled transfer-relevant ratio was
 this `1/2` theorem uses variables that respect the exact common-parent
 symplectic neutrality of the extremal nonlinear interaction.
 
+#### Good-core helical gauge regularity: the Chern obstruction is not local
+
+The nonzero Chern number of the helicity line bundle is a genuine global
+obstruction, but the signed-good extremal core stays uniformly away from the
+collinear set where the triad-normal gauge can become singular.  At
+`eta_0=10^-4`, the single-edge mixed theorem gives
+
+\[
+0\le u\le\frac1{200},
+\qquad |v|\le\frac1{100}.
+\]
+
+With child length normalized to one,
+
+\[
+x=r_*e^{-v-u/2},
+\qquad
+y=r_*e^{-v+u/2},
+\]
+
+and the parent angle satisfies the exact identity
+
+\[
+\boxed{
+\cos\theta
+=\frac{e^{2v}}{2r_*^2}-\cosh u.
+}
+\]
+
+Monotonicity in `u,v,r_*` plus the certified `r_*` bracket gives by Arb
+
+\[
+\boxed{
+\frac14<\cos\theta<\frac25,
+\qquad
+\sin\theta>\frac9{10}.
+}
+\]
+
+If `a,b` are the unit parent directions and
+
+\[
+n=\frac{a\times b}{|a\times b|},
+\]
+
+then for every differentiable variation through the good core
+
+\[
+\boxed{
+\|\dot n\|
+\le\frac{10}{9}(\|\dot a\|+\|\dot b\|).
+}
+\]
+
+For the triad-normal helical gauge
+
+\[
+h_s(a;n)=\frac{n\times a+i s n}{\sqrt2},
+\]
+
+one obtains the clean scale-free bound
+
+\[
+\boxed{
+\|\dot h_s\|
+\le\frac52(\|\dot a\|+\|\dot b\|)
+}
+\]
+
+for either parent; the child obeys the same `5/2` constant on the sum of the
+three carrier-direction rates.  Action `31173321354` Arb-certified the angle
+margin and passed `158` tests plus `50,000` derivative checks.  The worst
+normal-bound ratio was `0.962540964`, the worst helical-bound ratio
+`0.427795976`, and the minimum sampled parent sine `0.930294406`.
+
+Therefore global helicity topology does not force a local chart defect on an
+efficient packet block.  Once carrier-direction variation is controlled by the
+frequency-cell, affine-transport and curvature ledgers, triad-normal helical
+frame variation is linearly subordinate with a universal dimensionless
+constant.  Constructing that carrier-direction control in a genuine localized
+PDE packet remains part of the continuum bridge.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -2090,6 +2172,11 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   `M_1^-1 M_2`; Arb-certified transfer-distinguishable strain observable
   `||D_Pi||^2+||D_1-D_2||^2+||D_child||^2 >= (1/2)||S||^2`.  The `13/20`
   result is absolute tomography, not by itself a transfer-deficit theorem;
+- Arb-certified signed-good angular separation
+  `1/4<cos(theta)<2/5`, `sin(theta)>9/10`, exact triad-normal derivative bound
+  `||dn||<=(10/9)(||da||+||db||)`, and helical-frame Lipschitz bound `5/2`;
+  thus the global Chern obstruction does not create a local gauge singularity on
+  a near-extremal packet core;
 
 ### Computationally supported, not interval-certified
 
@@ -2108,9 +2195,10 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
    connection, objective linear polarization generator, full-strain tomography,
    and finite-diamond phase-holonomy cost are now explicit.  What remains is to
    show that spatially localized Navier--Stokes packets inherit these gauges with
-   summable frame variation and nonlinear cross-helicity forcing; the full
-   time-ordered phase evolution beyond the recorded second-Magnus term is not yet
-   closed.
+   carrier-direction variation controlled strongly enough to use the certified
+   local `5/2` frame-Lipschitz theorem, together with summable nonlinear
+   cross-helicity forcing; the full time-ordered phase evolution beyond the
+   recorded second-Magnus term is not yet closed.
 3. **Integrate the adaptive curvature-balanced moat into the nested packet
    tree.** The old fixed spatial moat schedule is not sufficient.  The continuum
    construction must choose `M` from the local curvature balance `a/M+b kappa M`,
@@ -2183,6 +2271,7 @@ The most useful recorded runs, in chronological order, are:
 | `31171360107` | Arb-certified full 3D strain observability `>=13/20` and combined shape/helicity constant `559/2000`; `149` tests + `100,000` strains |
 | `31171484247` | objective helical polarization / strain-area commutator; `152` tests + `50,000` checks |
 | `31172607991` | extremal helicity tensor / common-parent `SL(2)` neutrality and Arb-certified transfer-relevant strain observable `>=1/2`; `156` tests + `50,000` checks |
+| `31173321354` | Arb-certified good-core parent-angle separation and scale-free triad-normal helical-frame Lipschitz theorem; `158` tests + `50,000` derivative checks |
 
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
@@ -2205,7 +2294,8 @@ is `recorded-results/31165838379/`.  The preferred affine-spacetime dynamics art
 `recorded-results/31168888413/`, and `recorded-results/31169128097/`, plus the intrinsic 3D continuation `recorded-results/31170015795/`.  The preferred helical artifacts are
 `recorded-results/31171018560/`, `recorded-results/31171127537/`,
 `recorded-results/31171360107/`, `recorded-results/31171484247/`, and the
-symplectic correction `recorded-results/31172607991/`; the two failed
+symplectic correction `recorded-results/31172607991/` and good-core frame
+regularity artifact `recorded-results/31173321354/`; the two failed
 interval-boundary provenance runs are `recorded-results/31168205564/` and
 `recorded-results/31168303213/`.  Final integration runs are
 `31166152074`, `31166155045`, `31166158218`, `31166160711`, `31166163414`,
@@ -2290,10 +2380,11 @@ The next mathematically decisive work is therefore:
 1. construct a **full 3D transfer-preserving moving packet frame**.  Scalar
    plane tilt, affine helical gauge transport, phase holonomy, the common-parent
    `SL(2)` neutrality and the transfer-distinguishable strain observable are now
-   controlled.  The unresolved content is continuum spatial variation of those
-   local gauges, **relative** parent/child polarization forcing after quotienting
-   the common `SL(2)` gauge, and a full time-ordered phase estimate beyond the
-   certified/analytic local pieces;
+   controlled, and the signed-good core has a certified local helical-frame
+   Lipschitz constant.  The unresolved content is continuum carrier-direction
+   variation across moving packets, **relative** parent/child polarization
+   forcing after quotienting the common `SL(2)` gauge, and a full time-ordered
+   phase estimate beyond the certified/analytic local pieces;
 2. make the **adaptive curvature-balanced windows** compatible with the nested
    packet ancestry, and prove that local pressure-Hessian, SGS transport `RU`,
    viscous boundary flux and partition overlap are summable or create a fresh /
@@ -2319,7 +2410,7 @@ For a new reader, the recommended order is:
 5. `docs/localized_sgs_pressure_ledger.md` and `docs/annular_pressure_collision.md`;
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
-8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, and `docs/extremal_helicity_symplectic.md`;
+8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, and `docs/helical_frame_lipschitz.md`;
 9. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 10. `docs/scale_holonomy.md`;
 11. `docs/multiscale_bellman.md`;

@@ -1,0 +1,20 @@
+{
+  "certificate": {
+    "cos_theta_lower_ball": "[0.3132091462001192638245507190220754669144464213 +/- 5.47e-47]",
+    "cos_theta_upper_ball": "[0.36681523838434772935375321279943536527980383312 +/- 8.14e-48]",
+    "cos_theta_clean_bounds": "1/4 < cos(theta) < 2/5",
+    "sin_theta_lower_ball_from_clean_bound": "[0.91651513899116800131760943874560169779689131535 +/- 3.92e-48]",
+    "sin_theta_clean_lower": "9/10",
+    "normal_derivative_constant": "10/9",
+    "parent_helical_lipschitz_constant": "5/2",
+    "child_helical_lipschitz_constant": "5/2 on the sum of the three direction rates",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_normal_bound_ratio": 0.9625409637255284,
+    "worst_parent_helical_bound_ratio": 0.4277959762495838,
+    "worst_derivative_finite_difference_residual": 1.7569133471002333e-07,
+    "minimum_parent_sine": 0.9302944055961085
+  }
+}
