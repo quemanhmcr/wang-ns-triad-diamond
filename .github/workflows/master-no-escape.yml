@@ -1,0 +1,38 @@
+name: master-no-escape
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  theorem-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - name: Master trace stress-test
+        run: |
+          python - <<'PY'
+          import json, math, random
+          from src.master_no_escape import MasterStep, verify_trace
+          rng=random.Random(20260807)
+          worst=1e9
+          checked=0
+          for _ in range(20000):
+              c0=0.04; k=0.18; p0=rng.uniform(0,2.0); p=p0; steps=[]
+              for _j in range(rng.randint(1,50)):
+                  z=rng.uniform(0,0.015)
+                  if rng.random()<0.4 and p-k+z>=0:
+                      p=p-k+z
+                      steps.append(MasterStep(1.0,0.0,0.0,True,z))
+                  else:
+                      c=rng.uniform(c0,0.5); eta=rng.uniform(0,0.002)
+                      steps.append(MasterStep(min(1.0,math.exp(-c)+eta),c,eta,False))
+              out=verify_trace(steps,c0=c0,kappa0=k,potential0=p0)
+              worst=min(worst,float(out['master_margin']))
+              checked+=1
+          print(json.dumps({'checked':checked,'worst_margin':worst},indent=2))
+          if worst < -1e-10: raise SystemExit(1)
+          PY
