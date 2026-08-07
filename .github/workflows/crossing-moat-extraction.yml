@@ -1,0 +1,18 @@
+name: crossing-moat-extraction
+on:
+  workflow_dispatch:
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install -r requirements.txt python-flint==0.8.0
+      - run: pytest -q
+      - name: Arb certificate and adversarial crossing stress
+        run: python -m src.crossing_moat_extraction --samples 50000 --outdir results-crossing-moat
+      - uses: actions/upload-artifact@v4
+        with:
+          name: crossing-moat-extraction-results
+          path: results-crossing-moat/
