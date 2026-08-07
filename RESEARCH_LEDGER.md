@@ -2411,6 +2411,310 @@ summable powers in the far field.  Action `31189036483` passed `217` tests plus
 was `1.361e-13`, while the resolved-source split and `6-3=3` homogeneity
 residuals were zero in the stress suite.
 
+#### Covariant Hermite sideband no-escape and daughter ancestry
+
+The orthogonal `H_1/H_3` channels can now be controlled without introducing a
+raw residual norm or assuming an almost-constant complex phase.  The first
+ingredient is a Banach-space interval-variation theorem.  For every absolutely
+continuous forcing `f:[0,T]->X`,
+
+\[
+\boxed{
+\int_0^T\|f\|dt
+\le
+\left\|\int_0^T fdt\right\|
++\frac T2\int_0^T\|\dot f\|dt.
+}
+\]
+
+Thus, if `A=int ||f||`, either the first Duhamel impulse has norm at least
+`A/2`, or the total variation is at least `A/T`.  There is no phase-lock
+hypothesis in this statement.
+
+For the affine curvature connection
+
+\[
+\dot B+2A_{aff}B=S,
+\qquad
+S=L^{-1}\nabla^2(D_t^V V)[L,L],
+\]
+
+pull back the output index by `Pdot=2 A_aff P`.  Then
+
+\[
+\boxed{\widetilde B=PB,\qquad \dot{\widetilde B}=PS.}
+\]
+
+Common affine curvature transport has therefore disappeared before coherence is
+measured.  The `H_3` envelope forcing in this interaction frame satisfies
+
+\[
+\boxed{
+\frac{\|f_3\|_2^2}{\|g\|_2^2}
+=\frac38\|\operatorname{Sym}\widetilde B\|_F^2,
+}
+\]
+
+and its dephasing derivative is sourced by `Sym(P S)`, hence ultimately by the
+already identified acceleration-Hessian channels.  Action `31192448279` passed
+`228` tests; the exact pullback and pulled-H3-source residuals were
+`3.252e-15` and `3.860e-15`.
+
+A coherent daughter is also visible in the **critical Young norm**.  Let
+`g(z)=exp(-|z|^2/4)`.  The `L^2` Gaussian is standard normal whereas the
+`|g|^(3/2)` measure has variance `4/3`.  Standard Gaussian
+hypercontractivity, Paley--Zygmund, and interval-certified arithmetic give the
+clean implications
+
+\[
+\boxed{
+\frac{\|H_3\text{-daughter}\|_{3/2}}{\|g\|_{3/2}}
+>\frac1{160}
+\frac{\|H_3\text{-daughter}\|_2}{\|g\|_2},
+}
+\]
+
+and, for a two-component `H_1` polarization sideband,
+
+\[
+\boxed{
+\frac{\|(Cz)g\|_{3/2}}{\|g\|_{3/2}}>\frac1{16}\|C\|_F.
+}
+\]
+
+The workflow certifies only the arithmetic constants; Gaussian
+hypercontractivity is the analytic theorem used as input.
+
+There is an exact **odd-Hermite triad selection rule**.  For a centered resonant
+affine Gaussian triad, simultaneous inversion of all centered frequency
+deviations preserves the Gaussian trilinear weight.  Hence
+
+\[
+\boxed{
+T(P_{n_1}G_1,P_{n_2}G_2,P_{n_3}G_3)=0
+\quad\text{if }n_1+n_2+n_3\text{ is odd}.
+}
+\]
+
+In particular
+
+\[
+\boxed{T(H_1,G,G)=T(H_3,G,G)=0.}
+\]
+
+A single odd daughter cannot rescue the base Gaussian transfer at first order.
+If the three roles have base critical norms `b_i` and odd-sideband norms
+`rho_i`, every rescue term contains at least two odd factors and sharp Young
+gives
+
+\[
+\boxed{
+|T_{rescue}|
+\le A_3(\rho_1\rho_2b_3+\rho_1\rho_3b_2
++\rho_2\rho_3b_1+\rho_1\rho_2\rho_3).
+}
+\]
+
+For one odd degree-`<=3` perturbation `(1+P)G`, put
+
+\[
+\sigma^2=\mathbb E_{|G|^{3/2}}|P|^2.
+\]
+
+Degree-three hypercontractivity gives `E|P|^4<=729 sigma^4`.  If
+`sigma<=1/80`, parity and uniform convexity imply
+
+\[
+\boxed{
+\frac{\|(1+P)G\|_{3/2}^{3/2}}{\|G\|_{3/2}^{3/2}}
+\ge1+\frac3{16}\sigma^2,
+\qquad
+\operatorname{Def}_{transfer}\ge\frac1{16}\sigma^2.
+}
+\]
+
+Action `31192451039` passed `227` tests (`1` optional Arb test skipped in the
+non-Arb workflow) plus `50,000` parity/rescue checks; the worst `H_1` and `H_3`
+parity residuals were `1.019e-15` and `4.527e-14`.
+
+The affine-normalized differentiated-incompressible curvature itself has no
+unclassified static sector.  For
+
+\[
+B_{abc}=B_{acb},\qquad B_{aac}=0,
+\]
+
+let `T=Sym B`, `t_c=T_aac`, and define
+
+\[
+\boxed{
+B^E_{abc}=T_{abc}
+-\frac12(\delta_{ab}t_c+\delta_{ac}t_b)
++\delta_{bc}t_a.
+}
+\]
+
+Then `B=B^E+B^H` orthogonally, `Sym B^H=0`, and `B^H` remains divergence
+free.  The hook sector is exactly the five-dimensional swirl representation
+
+\[
+\boxed{
+B^H_{abc}=\varepsilon_{abd}M_{dc}+\varepsilon_{acd}M_{db},
+\qquad M=M^T,\quad\operatorname{tr}M=0.
+}
+\]
+
+The exact norm identities are
+
+\[
+\|B^E\|^2=\|T\|^2+3\|t\|^2,
+\qquad
+\|t\|^2\le\frac53\|T\|^2,
+\]
+
+\[
+\|B^H\|^2=6\|M\|^2,
+\qquad
+\|C^H\|^2=\frac14\|B^H\|^2,
+\]
+
+where `C^H` is the intrinsic grain-coordinate `H_1` strain sideband.  Hence
+
+\[
+\boxed{
+\|\operatorname{Sym}B\|_F^2+\|C^H\|_F^2
+\ge\frac16\|B\|_F^2.
+}
+\]
+
+Representation-theoretically, the fifteen-dimensional curvature space splits
+as
+
+\[
+\boxed{15=(7\oplus3)_{envelope}\oplus5_{swirl}.}
+\]
+
+Action `31192445017` passed `227` tests (`1` optional Arb skip) plus `50,000`
+checks; all tensor identities were at `1e-14` or better.  This `1/6`
+observability is intrinsic to the affine grain.  It does **not** remove the
+existing aspect-sensitive caveat when comparing the hook norm to physical
+Euclidean relative-helicity curvature.
+
+These ingredients close a local `H_3` no-escape theorem.  Define
+
+\[
+I_3=\int_0^T\|\operatorname{Sym}\widetilde B(t)\|_Fdt,
+\qquad
+J_3=\int_0^T\|\operatorname{Sym}\widetilde S(t)\|_Fdt.
+\]
+
+Then either
+
+\[
+\boxed{J_3\ge I_3/T,}
+\]
+
+or the first-Duhamel `H_3` impulse has
+
+\[
+\boxed{\delta_1^2\ge\frac3{32}I_3^2.}
+\]
+
+If nonlinear sideband feedback is at least `delta_1/2`, this is already a
+high--high sideband-interaction branch.  Otherwise the surviving projected
+`H_3` daughter obeys
+
+\[
+\boxed{\delta^2\ge\frac3{128}I_3^2.}
+\]
+
+The change from the `L^2` Gaussian to the critical Young Gaussian only increases
+the `H_3` second moment.  For variance `s=4/3`,
+
+\[
+\boxed{
+\mathbb E_{\gamma_s}|T:H_3|^2
+=6s^3\|T\|^2+9s(s-1)^2\|t\|^2
+\ge6\|T\|^2.
+}
+\]
+
+Thus its critical second-moment parameter satisfies `sigma>=delta`.  If
+`sigma>=1/80`, there is a definite daughter-capacity event.  Otherwise the
+single-role transfer cost is at least `sigma^2/16`; splitting it against
+possible pair-sideband rescue gives the clean constant
+
+\[
+\boxed{c_{H3}=\frac3{4096}.}
+\]
+
+Every `H_3` curvature impulse therefore has one of the five exits
+
+\[
+\boxed{
+\begin{array}{ll}
+J_3\ge I_3/T,&\text{acceleration-Hessian dephasing source},\\
+\|R_{Duhamel}\|\ge\delta_1/2,&\text{nonlinear sideband feedback},\\
+\sigma\ge1/80,&\text{definite daughter capacity},\\
+\operatorname{Def}_{transfer}\ge(3/4096)I_3^2,&\text{base-edge cost},\\
+R_{pair}\ge(3/4096)I_3^2,&\text{pair-sideband rescue}.
+\end{array}}
+\]
+
+Action `31193125969` passed `229` tests (`1` optional Arb skip) and `50,000`
+five-branch checks; the minimum transfer-cost and pair-cost margins were
+`3.321e-11` and `4.293e-11`.  The preceding run `31192748440` failed only
+because its synthetic small-sideband sampler called `uniform(low,high)` in the
+narrow case `low>0.999/80`; it is implementation provenance, not a theorem
+countermodel.
+
+Finally, pair rescue itself now enters the existing ancestry machinery without
+assuming spatial disjointness of Hermite modes.  Odd parity implies every
+nonzero rescue triad contains exactly **two odd daughter endpoints** and one
+even/base role, so rescue projects canonically to an ordinary weighted graph.
+Split its mass as
+
+\[
+W=W_{cross}+W_{same}
+\]
+
+according to the ancestry labels of the two odd endpoints.  A large cross
+fraction is an existing `Xi` interaction.  On same-ancestry edges define
+
+\[
+w_v=\frac{d_v}{2W_{same}}.
+\]
+
+For an ancestry class `A`, `W_A=sum_(v in A)w_v` equals exactly the fraction of
+same-edge rescue mass lying in `A`.  Hence
+
+\[
+\boxed{
+Q_{anc}-Q_{at}
+=\sum_A\sum_{u\ne v\in A}w_uw_v.
+}
+\]
+
+For any `h>0`, `0<alpha<1`, the same-edge graph has the exact routing:
+
+- `H_at<h` -> one odd daughter has endpoint weight `>exp(-h)`, a dominant-reuse
+  branch;
+- `H_at>=h` and `H_anc>=alpha h` -> component/Bellman collision entropy;
+- `H_at>=h` and `H_anc<alpha h` -> distinct same-ancestry endpoint-pair mass
+  at least
+  \[
+  \boxed{e^{-\alpha h}-e^{-h}},
+  \]
+  which enters the existing ancestry-cycle contraction theorem.
+
+Together with the cross branch, quadratic sideband rescue is therefore routed
+into `Xi`, dominant reuse, Bellman entropy, or ancestry cycles.  Action
+`31193531201` passed `231` tests (`1` optional Arb skip) plus `50,000` weighted
+graph checks; the class-mass and collision-chain identities were accurate to
+`5.551e-16` and `9.992e-16`.  The preceding run `31193443926` failed because a
+test fixture contained only one cross edge out of three while incorrectly
+expecting a majority-cross branch; the theorem routed it correctly to Bellman.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -3109,6 +3413,30 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
   `-nabla^3 P-nabla^2 div R+nu nabla^2 Delta V`; pressure-third far-field
   homogeneity leaves the 3D packing exponent `6-3=3`;
 
+- exact Banach interval-variation / first-Duhamel sideband theorem
+  `int||f|| <= ||int f||+(T/2)int||f_dot||`; after pulling back the affine
+  curvature connection, `H_3` dephasing is sourced by the acceleration-Hessian
+  term rather than common affine motion; Gaussian hypercontractivity plus
+  certified arithmetic gives critical Young footprints `>1/160` for `H_3` and
+  `>1/16` for a two-component `H_1` sideband;
+- exact odd-Hermite Gaussian-triad parity rule: a nonzero centered resonant
+  interaction has even total Hermite parity, so one `H_1` or `H_3` daughter has
+  zero first-order base-triad matrix element; rescue starts quadratically, and
+  for one odd degree-`<=3` sideband with `sigma<=1/80`, the normalized transfer
+  deficit is `>=sigma^2/16` unless another odd sideband participates;
+- exact differentiated-incompressible curvature irreducible split
+  `15=(7+3)_envelope+5_swirl`, with orthogonal reconstruction `B=B_E+B_H` and
+  intrinsic observability `||Sym B||^2+||C_hook||^2 >= (1/6)||B||^2`;
+- exact local `H_3` no-escape theorem: for
+  `I_3=int||Sym B_tilde||` either source variation is `>=I_3/T`, nonlinear
+  sideband feedback is large, daughter capacity reaches `1/80`, or transfer
+  deficit / pair-sideband rescue is at least `(3/4096) I_3^2`;
+- exact odd-sideband pair-rescue ancestry graph: cross-ancestry rescue enters
+  `Xi`; same-ancestry endpoint weights obey the atomic/component collision chain
+  rule and route into dominant reuse, Bellman component entropy, or quantitative
+  same-ancestry pair/cycle mass without assuming spatially disjoint Hermite
+  packets;
+
 ### Computationally supported, not interval-certified
 
 - numerical reuse-gap constants from nonlinear optimization;
@@ -3116,33 +3444,35 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Control orthogonal sidebands over a packet lifetime.**  Common affine
-   low--high transport and all degree-`<=2` Gaussian tangents are now exact, and
-   `H_1`/`H_3` curvature forcing has zero base-spinor projection.  The missing
-   theorem must show that persistent sideband excitation either creates a
-   trackable daughter/fresh affine grain or pays a transfer/coherence deficit;
-   rapid sideband dephasing is now routed by the exact curvature connection to
-   pressure-third, differentiated-SGS or viscous-fourth-derivative sources rather
-   than hidden in a norm error.
+1. **Close the physical `H_1` / swirl sideband branch.**  The intrinsic affine
+   curvature split is now coercive and the `H_3` branch has a quantitative
+   no-escape theorem.  What remains is to propagate the five-dimensional hook
+   sector through the actual three-role relative-helicity dynamics with a
+   transfer-facing spacetime theorem.  The old caveat remains essential:
+   physical Euclidean polarization curvature can deteriorate with affine aspect,
+   so no false aspect-uniform coercivity may be inserted.
 2. **Convert persistent cubic SGS increment charge into the ancestry ledger.**
-   Large `RU` leakage now forces a scale-critical cubic velocity-increment charge
-   at the filter scale.  One still needs a transfer-adapted Littlewood--Paley /
+   Large `RU` leakage forces a scale-critical cubic velocity-increment charge at
+   the filter scale.  One still needs a transfer-adapted Littlewood--Paley /
    affine-grain extraction showing that persistent charge yields a fresh/reused
    critical grain, dissipation event or Bellman cost with uniform constants.
 3. **Control selected-subfamily interfaces through spacetime.**  A complete
-   quadratic partition has zero total boundary flux and degree-zero profile
-   remainders are work-level `Xi` cross-errors.  The continuum construction must
-   propagate a selected lineage while keeping the uncancelled partition/cell
-   interfaces summable relative to its transfer weight.
+   quadratic partition has zero total boundary flux, degree-zero profile
+   remainders are work-level `Xi`, and pair-Hermite rescue now has its own
+   ancestry graph.  The continuum construction must propagate a selected
+   lineage while keeping uncancelled spatial/frequency interfaces summable
+   relative to transfer weight.
 4. **Synchronize affine spacetime ancestry.**  Fresh grains obey
-   `M_aff>=3/10` and the radius budget `sum r_g<=P E/eta`; reused grains must be
-   matched across successive `N^-2` lifetimes using evolving covariance,
-   scale/spin holonomy, relative polarization and the one-sided `r_g` dynamics.
-5. **Feed the new PDE branches into the master theorem.**  `Xi`, `H_1/H_3`
-   sidebands, cubic-increment annular events, pressure/source alternatives and
-   affine moat errors must be registered as summable perturbations or positive
-   fresh/reuse/Bellman costs.  No continuum theorem yet proves that every
-   efficient PDE block enters one of those branches with uniform constants.
+   `M_aff>=3/10` and the radius budget `sum r_g<=P E/eta`; dominant reused
+   sideband daughters and cycle attachments must be synchronized across
+   successive `N^-2` lifetimes using covariance, scale/spin holonomy, relative
+   polarization and the one-sided `r_g` dynamics.
+5. **Feed the sideband/source branches into the master theorem.**  The local
+   `H_3` constant `3/4096`, pair-rescue ancestry routing, `Xi`, cubic-increment
+   annular events, pressure/source alternatives and affine moat errors must be
+   registered as summable perturbations or positive fresh/reuse/Bellman costs.
+   No continuum theorem yet proves a uniform lower threshold for the relevant
+   `I_3`/`H_1` impulses on every efficient PDE block.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier–Stokes global regularity is made.
 
@@ -3229,6 +3559,13 @@ The most useful recorded runs, in chronological order, are:
 | `31189036483` | exact affine curvature connection / resolved acceleration-Hessian source split and pressure-third `6-3=3` far locality; `217` tests + `50,000` checks |
 
 | `31189330225`, `31189336088`, `31189342467`, `31189348870`, `31189354561`, `31189360561`, `31189366109`, `31189372330`, `31189378786` | exact-SHA actual-packet validation on `f27ed04`: role separation, affine Kelvin PDE, divergence-free weak packet, Hermite sidebands, base-spinor cross forcing, affine SGS boundary/increments, curvature connection, localized pressure and master all green; `217` tests per workflow, master `20,000` traces with worst margin `0` |
+| `31192445017` | exact divergence-free curvature irreducible split `15=(7+3)+5` and intrinsic `H3/H1` observability `>=1/6`; `227` tests + `1` optional skip + `50,000` checks |
+| `31192448279` | covariant first-Duhamel sideband coherence and critical Young footprint (`H3 >1/160`, two-component `H1 >1/16`); `228` tests + `20,000` checks |
+| `31192451039` | odd-Hermite triad selection, quadratic rescue, and small-sideband transfer deficit `>=sigma^2/16`; `227` tests + `1` optional skip + `50,000` checks |
+| `31192748440` | H3 no-escape stress failed because the synthetic sampler called `uniform(low,high)` with `low>high` in a narrow threshold interval; implementation failure, no theorem countermodel |
+| `31193125969` | preferred local H3 no-escape theorem with clean cost `3 I_3^2/4096`; `229` tests + `1` optional skip + `50,000` five-branch checks |
+| `31193443926` | pair-ancestry workflow failed because its hand-written test graph had cross fraction `1/3` while expecting the majority-cross branch; fixture failure, theorem routing was correct |
+| `31193531201` | preferred odd-sideband pair-rescue ancestry graph: `Xi` / dominant reuse / Bellman entropy / same-ancestry cycles; `231` tests + `1` optional skip + `50,000` graphs |
 
 | `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
 
@@ -3272,75 +3609,69 @@ Arb-certified in run `31161914134`.
 
 ## 18. Current research frontier
 
-The actual smooth-SGS packet equation is no longer a single unidentified
-forcing term.  The physical hierarchy is now
+The scalar `H_3` daughter channel is no longer an unidentified sideband escape.
+In the affine curvature interaction frame the programme now has
 
 \[
 \boxed{
-\text{full Navier--Stokes role}
+H_3\text{ curvature impulse}
 \to
-\text{strict low--high Kelvin transport}
-+\text{high--high transfer},
-}
+\begin{cases}
+\text{acceleration-Hessian source},\\
+\text{nonlinear sideband feedback},\\
+\text{definite daughter capacity},\\
+\text{transfer deficit }\ge(3/4096)I_3^2,\\
+\text{pair-sideband rescue }\ge(3/4096)I_3^2.
+\end{cases}}
 \]
 
-with the role residual split by Hermite/helicity degree:
+Odd-Hermite parity then prevents the last branch from remaining a new error
+currency: rescue edges contain exactly two odd daughter endpoints and form an
+ordinary weighted ancestry graph.  They route into cross-component `Xi`, a
+dominant reused daughter, Bellman component entropy, or same-ancestry cycle
+attachments.  This routing uses transfer-weighted endpoint laws and does not
+assume spatial disjointness of Hermite modes.
+
+The affine-normalized non-affine curvature also has a complete intrinsic static
+split
+
+\[
+\boxed{15=(7\oplus3)_{H_3/envelope}\oplus5_{H_1/swirl}},
+\]
+
+with
 
 \[
 \boxed{
-\underbrace{n=0}_{\text{base spinor / }\Xi},
-\quad
-\underbrace{H_1}_{\text{polarization sideband}},
-\quad
-\underbrace{H_3}_{\text{envelope sideband}},
-\quad
-\underbrace{\deg\le2}_{\text{Gaussian tangent/gauge}}.
+\|\operatorname{Sym}B\|^2+\|C_{hook}\|^2\ge\frac16\|B\|^2.
 }
 \]
 
-Common affine transport is exactly the Kelvin/Craik--Criminale equation;
-pressure is the Leray correction, a dual-flow frequency cell has zero
-Heisenberg residual, and an objective transverse frame gives the existing
-helical spinor generator.  Spatial localization is performed with a
-shell-Leray/helical **divergence-free test packet**, so microscopic pressure
-still vanishes and the localization commutator enters the existing `1/M` moat
-ledger.
-
-The macroscopic resolved SGS ledger is distinct:
-
-\[
-\boxed{
-\widetilde L_\chi
-=\int\nabla\chi\cdot(e(U-V_{aff})+RU-\nu\nabla e).
-}
-\]
-
-Large differential-advection/`RU` leakage forces a critical annular cubic
-charge; `R` itself is controlled by cubic velocity increments at the filter
-scale.  Resolved viscous boundary transport is `O(1/M)`, pressure cancellation
-has its existing CKN-type annular alternative, and a complete quadratic spatial
-partition cancels boundary flux exactly.  None of these macroscopic quantities
-is to be inserted again as microscopic spinor forcing.
+Thus there is no third hidden curvature sector.  The remaining difficulty is
+not to discover another norm, but to connect the **intrinsic hook/H1 sector** to
+the actual physical three-role relative-helicity transfer through spacetime.
+The aspect-sensitive caveat remains: static affine anisotropy is an exact Young
+symmetry and physical Euclidean polarization curvature need not be uniformly
+comparable to `||B||`.
 
 The decisive next work is therefore:
 
-1. prove a **sideband coherence / daughter-grain dichotomy** for the `H_1` and
-   `H_3` modes over one `N^-2` lifetime: coherent excitation must create
-   orthogonal packet mass/transfer loss, while dephasing must expose higher
-   pressure/velocity derivative sources;
-2. convert persistent **cubic SGS velocity-increment charge** into a fresh/reused
-   affine grain, dissipation or Bellman event without assuming a global `L^3`
-   bound;
-3. construct the actual transfer-adapted moving partition through successive
-   lifetimes and show that selected-subfamily interfaces remain in the summable
-   `Xi`/cross-error ledger;
-4. synchronize reuse using `r_g`, covariance, scale/spin holonomy and relative
-   polarization, and insert all of the above into the master no-escape theorem.
+1. prove a **physical H1/swirl no-escape theorem** in the transfer-facing
+   three-role polarization system, respecting the common-parent `SL(2)` gauge
+   and without an aspect penalty;
+2. convert persistent **cubic SGS velocity-increment charge** into a
+   fresh/reused affine grain, dissipation event, or Bellman/CKN cost without a
+   global `L^3` assumption;
+3. synchronize the newly identified **dominant reused daughters and
+   same-ancestry pair cycles** through successive packet lifetimes using `r_g`,
+   covariance, scale/spin holonomy and relative polarization;
+4. propagate selected moving partitions so remaining interface terms enter
+   summable `Xi`, then insert the quantitative `H3` and future `H1` branches into
+   the master `zeta_j`/Bellman episode ledger.
 
-Further raw `L^2` estimates on the entire nonlinear residual would now throw
-away the exact Hermite/gauge structure and risk double counting.  Further
-single-edge optimization, full common-parent Magnus control, or automatic
-isotropic subdivision would attack variables already identified as symmetry.
+Further raw `L^2` residual estimates, single-edge optimization, common-parent
+Magnus control, or aspect-ratio penalties would discard structure already
+identified as gauge or symmetry.
 
 ---
 
@@ -3356,7 +3687,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, and `docs/affine_window_balance.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, and `docs/sideband_pair_ancestry.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

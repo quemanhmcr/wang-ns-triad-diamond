@@ -613,4 +613,90 @@ The remaining conditional step is to construct the actual PDE packet frame so
 that its near/far pressure split, packing constants and cross errors satisfy
 these hypotheses, and then to register the resulting mass in the spacetime
 fresh/reuse ancestry ledger.
-\n\n## Actual packet forcing split\n\nThe PDE bridge now uses a strict two-level bookkeeping rule.  A selected\nfull-velocity role lies above `3N/5`; a strict transporter below `N/4` cannot\nproduce it by a low--low interaction.  The affine low--high equation is exactly\nthe Kelvin equation, and a shell-localized divergence-free weak packet removes\nmicroscopic pressure while paying only the existing `O(1/M)` commutator.\n\nAfter quotienting common affine/Gaussian/helical motion, the field residual is\nresolved by Hermite degree.  Only the degree-zero projection is the `F_i` of the\nforced symplectic identity.  Parent/profile degree-zero remainder work is the\nexisting trilinear cross-error `Xi`; `H_1` polarization and `H_3` envelope\ncurvature are orthogonal sidebands.  Their raw curvature has an affine\nconnection\n\n\[\n\dot B+2A_{aff}B=L^{-1}\operatorname{Hess}(D_t^V V)[L,L],\n\]\n\nso sideband dephasing is sourced by pressure-third, differentiated-SGS or\nviscous-fourth-derivative channels rather than a new abstract phase error.\n\nAt the macroscopic resolved-energy level, differential advection plus `RU`\nforces a critical cubic annular charge; `R` is itself bounded by cubic velocity\nincrements at the filter scale, resolved viscous boundary transport is `O(1/M)`,\nand a complete quadratic spatial partition cancels globally.  These terms are\nnot inserted again into microscopic spinor forcing.\n\nWhat remains conditional for the master theorem is now the **spacetime\nregistration**: coherent `H_1/H_3` sidebands must create a daughter/fresh event\nor transfer loss; persistent cubic increment charge must enter fresh/reuse,\ndissipation or Bellman bookkeeping; and selected-subfamily interfaces must stay\nsummable in `Xi`.\n
+## Actual packet forcing split
+
+The PDE bridge now uses a strict two-level bookkeeping rule.  A selected
+full-velocity role lies above `3N/5`; a strict transporter below `N/4` cannot
+produce it by a low--low interaction.  The affine low--high equation is exactly
+the Kelvin equation, and a shell-localized divergence-free weak packet removes
+microscopic pressure while paying only the existing `O(1/M)` commutator.
+
+After quotienting common affine/Gaussian/helical motion, the field residual is
+resolved by Hermite degree.  Only the degree-zero projection is the `F_i` of the
+forced symplectic identity.  Parent/profile degree-zero remainder work is the
+existing trilinear cross-error `Xi`; `H_1` polarization and `H_3` envelope
+curvature are orthogonal sidebands.  Their raw curvature has an affine
+connection
+
+\[
+\dot B+2A_{aff}B=L^{-1}\operatorname{Hess}(D_t^V V)[L,L],
+\]
+
+so sideband dephasing is sourced by pressure-third, differentiated-SGS or
+viscous-fourth-derivative channels rather than a new abstract phase error.
+
+At the macroscopic resolved-energy level, differential advection plus `RU`
+forces a critical cubic annular charge; `R` is itself bounded by cubic velocity
+increments at the filter scale, resolved viscous boundary transport is `O(1/M)`,
+and a complete quadratic spatial partition cancels globally.  These terms are
+not inserted again into microscopic spinor forcing.
+
+What remains conditional for the master theorem is now the **spacetime
+registration**: the `H_3` sideband has a local no-escape theorem and pair-rescue
+ancestry routing, while the physical `H_1/swirl` branch remains open; persistent
+cubic increment charge must enter fresh/reuse, dissipation or Bellman
+bookkeeping; and selected-subfamily interfaces must stay summable in `Xi`.
+
+
+## Hermite sideband no-escape insertion
+
+The actual packet equation now supplies a transfer-facing local alternative for
+the scalar `H3` curvature channel.  In the affine interaction frame define
+
+\[
+I_3=\int_0^T\|\operatorname{Sym}\widetilde B\|dt.
+\]
+
+The local theorem says that a block with non-negligible `I_3` must enter one of
+five branches:
+
+\[
+\boxed{
+\text{source/dephasing},\quad
+\text{nonlinear sideband feedback},\quad
+\text{large daughter},\quad
+\operatorname{Def}\ge {3\over4096}I_3^2,\quad
+R_{pair}\ge {3\over4096}I_3^2.
+}
+\]
+
+The pair branch is not left as a perturbation.  Hermite parity makes pair rescue
+an ordinary weighted graph on odd daughter atoms.  A transfer-weighted ancestry
+split routes it into
+
+\[
+\boxed{
+\Xi,\quad
+\text{dominant reused daughter},\quad
+\text{component Bellman entropy},\quad
+\text{same-ancestry cycle attachments}.
+}
+\]
+
+Thus, once a PDE block supplies a uniform lower threshold `I_3>=iota_3`, the
+base-edge branch has the explicit local cost
+
+\[
+\boxed{c_{H3}(\iota_3)={3\over4096}\iota_3^2.}
+\]
+
+The other branches already have named destinations in the master architecture;
+what is not yet proved is a continuum statement guaranteeing a uniform
+`iota_3` or pricing the physical `H1/swirl` alternative on every efficient
+block.  In particular the intrinsic affine curvature bound
+
+\[
+\|\operatorname{Sym}B\|^2+\|C_{hook}\|^2\ge {1\over6}\|B\|^2
+\]
+
+must not be converted into an aspect-independent Euclidean polarization cost.

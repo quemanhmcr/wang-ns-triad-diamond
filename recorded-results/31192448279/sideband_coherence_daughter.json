@@ -1,0 +1,25 @@
+{
+  "certificate": {
+    "H3_exact_arithmetic_ball": "[0.0064920786604386607590310960650919172908023856083 +/- 7.87e-50]",
+    "H3_clean_reverse_constant": "1/160",
+    "H1_two_component_arithmetic_ball": "[0.06445452092402939447305430381621875774010609041 +/- 3.12e-48]",
+    "H1_clean_reverse_constant": "1/16",
+    "small_sideband_threshold": "1/80",
+    "hypercontractive_H3_fourth_factor": "729",
+    "status": "CERTIFIED_ARITHMETIC_GIVEN_GAUSSIAN_HYPERCONTRACTIVITY"
+  },
+  "stress": {
+    "samples": 20000,
+    "worst_variation_negative_margin": 0.0,
+    "worst_curvature_pullback_residual": 3.2520712690846545e-15,
+    "worst_h3_source_derivative_residual": 3.859647191119855e-15,
+    "minimum_dichotomy_margin": 2.9567836736508504
+  },
+  "theorems": {
+    "variation": "int||f|| <= ||int f|| + (T/2) int||f_dot||",
+    "dichotomy": "daughter >= A/2 or variation >= A/T",
+    "curvature_interaction": "B_tilde=P B, Pdot=2 A_aff P => dot B_tilde=P S",
+    "H3_L2_forcing": "||F_H3||_2/||g||_2=sqrt(3/8)||Sym B_tilde||_F",
+    "H3_Young_footprint": "||F_H3||_(3/2)/||g||_(3/2) >= (1/160)||F_H3||_2/||g||_2"
+  }
+}

@@ -1,0 +1,224 @@
+verify	Set up job	﻿2026-08-07T15:28:14.4904850Z Current runner version: '2.336.0'
+verify	Set up job	2026-08-07T15:28:14.4930185Z ##[group]Runner Image Provisioner
+verify	Set up job	2026-08-07T15:28:14.4931201Z Hosted Compute Agent
+verify	Set up job	2026-08-07T15:28:14.4931797Z Version: 20260707.563
+verify	Set up job	2026-08-07T15:28:14.4932391Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+verify	Set up job	2026-08-07T15:28:14.4933165Z Build Date: 2026-07-07T19:33:50Z
+verify	Set up job	2026-08-07T15:28:14.4933823Z Worker ID: {b98fc129-37cc-4d10-90a9-3d7a4a936bdd}
+verify	Set up job	2026-08-07T15:28:14.4934922Z Azure Region: westus2
+verify	Set up job	2026-08-07T15:28:14.4935568Z ##[endgroup]
+verify	Set up job	2026-08-07T15:28:14.4937057Z ##[group]Operating System
+verify	Set up job	2026-08-07T15:28:14.4937770Z Ubuntu
+verify	Set up job	2026-08-07T15:28:14.4938287Z 24.04.4
+verify	Set up job	2026-08-07T15:28:14.4938759Z LTS
+verify	Set up job	2026-08-07T15:28:14.4939344Z ##[endgroup]
+verify	Set up job	2026-08-07T15:28:14.4939921Z ##[group]Runner Image
+verify	Set up job	2026-08-07T15:28:14.4940561Z Image: ubuntu-24.04
+verify	Set up job	2026-08-07T15:28:14.4941131Z Version: 20260720.247.2
+verify	Set up job	2026-08-07T15:28:14.4942184Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+verify	Set up job	2026-08-07T15:28:14.4944111Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+verify	Set up job	2026-08-07T15:28:14.4945083Z ##[endgroup]
+verify	Set up job	2026-08-07T15:28:14.4946367Z ##[group]GITHUB_TOKEN Permissions
+verify	Set up job	2026-08-07T15:28:14.4948462Z Contents: read
+verify	Set up job	2026-08-07T15:28:14.4949181Z Metadata: read
+verify	Set up job	2026-08-07T15:28:14.4949741Z Packages: read
+verify	Set up job	2026-08-07T15:28:14.4950308Z ##[endgroup]
+verify	Set up job	2026-08-07T15:28:14.4952311Z Secret source: Actions
+verify	Set up job	2026-08-07T15:28:14.4953474Z Prepare workflow directory
+verify	Set up job	2026-08-07T15:28:14.5277746Z Prepare all required actions
+verify	Set up job	2026-08-07T15:28:14.5331523Z Getting action download info
+verify	Set up job	2026-08-07T15:28:14.9211892Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+verify	Set up job	2026-08-07T15:28:15.2131470Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+verify	Set up job	2026-08-07T15:28:15.2956683Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+verify	Set up job	2026-08-07T15:28:15.5115623Z Complete job name: verify
+verify	Run actions/checkout@v4	﻿2026-08-07T15:28:15.5901174Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5910621Z ##[group]Run actions/checkout@v4
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5911437Z with:
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5911970Z   repository: quemanhmcr/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5916116Z   token: ***
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5916602Z   ssh-strict: true
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5917064Z   ssh-user: git
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5917536Z   persist-credentials: true
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5918056Z   clean: true
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5918524Z   sparse-checkout-cone-mode: true
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5919070Z   fetch-depth: 1
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5919526Z   fetch-tags: false
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5919989Z   show-progress: true
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5920477Z   lfs: false
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5920920Z   submodules: false
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5921436Z   set-safe-directory: true
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5921970Z   allow-unsafe-pr-checkout: false
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.5922826Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.6895840Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.6898643Z ##[group]Getting Git version info
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.6900144Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.6902240Z [command]/usr/bin/git version
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.6981281Z git version 2.54.0
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7040968Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7061058Z Temporarily overriding HOME='/home/runner/work/_temp/1cbf4c6d-20c8-487e-9312-e9d516babd64' before making global git config changes
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7063199Z Adding repository directory to the temporary git global config as a safe directory
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7067343Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7121552Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7125649Z ##[group]Initializing the repository
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7131690Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7261433Z hint: Using 'master' as the name for the initial branch. This default branch name
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7263488Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7265772Z hint: to use in all of your new repositories, which will suppress this warning,
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7266676Z hint: call:
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7267128Z hint:
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7267698Z hint: 	git config --global init.defaultBranch <name>
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7268398Z hint:
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7269072Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7271047Z hint: 'development'. The just-created branch can be renamed via this command:
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7272702Z hint:
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7273635Z hint: 	git branch -m <name>
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7274934Z hint:
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7276264Z hint: Disable this message with "git config set advice.defaultBranchName false"
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7278742Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7287426Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7336519Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7338289Z ##[group]Disabling automatic garbage collection
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7340763Z [command]/usr/bin/git config --local gc.auto 0
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7375877Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7377179Z ##[group]Setting up auth
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7382631Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7431467Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7825027Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.7860023Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.8078957Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.8114905Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.8335354Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.8374203Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.8375118Z ##[group]Fetching the repository
+verify	Run actions/checkout@v4	2026-08-07T15:28:15.8383648Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +43f62b4000b5507393ce7942362a5a90b7c08545:refs/remotes/origin/main
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.2598844Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.2601851Z  * [new ref]         43f62b4000b5507393ce7942362a5a90b7c08545 -> origin/main
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.2642346Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.2644511Z ##[group]Determining the checkout info
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.2646806Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.2650187Z [command]/usr/bin/git sparse-checkout disable
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.2700888Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.2732163Z ##[group]Checking out the ref
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.2736043Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.3033815Z Switched to a new branch 'main'
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.3036041Z branch 'main' set up to track 'origin/main'.
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.3045584Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.3094995Z [command]/usr/bin/git log -1 --format=%H
+verify	Run actions/checkout@v4	2026-08-07T15:28:16.3121163Z 43f62b4000b5507393ce7942362a5a90b7c08545
+verify	Run actions/setup-python@v5	﻿2026-08-07T15:28:16.3505730Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.3511659Z ##[group]Run actions/setup-python@v5
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.3512868Z with:
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.3513761Z   python-version: 3.11
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.3514976Z   check-latest: false
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.3524977Z   token: ***
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.3526122Z   update-environment: true
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.3527255Z   allow-prereleases: false
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.3528353Z   freethreaded: false
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.3529337Z ##[endgroup]
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.4882441Z ##[group]Installed versions
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.4983553Z (node:2259) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.4988795Z (Use `node --trace-deprecation ...` to show where the warning was created)
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.4992148Z Successfully set up CPython (3.11.15)
+verify	Run actions/setup-python@v5	2026-08-07T15:28:16.4995812Z ##[endgroup]
+verify	Run pip install -r requirements.txt	﻿2026-08-07T15:28:16.5308960Z ##[group]Run pip install -r requirements.txt
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:16.5310971Z ^[[36;1mpip install -r requirements.txt^[[0m
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:16.5422188Z shell: /usr/bin/bash -e {0}
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:16.5423300Z env:
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:16.5424662Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:16.5426504Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:16.5428311Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:16.5429927Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:16.5431562Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:16.5433255Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:16.5434876Z ##[endgroup]
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.0988583Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.1628504Z   Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.3052505Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.3123468Z   Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.3597858Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.3666824Z   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.3839941Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.3906638Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.4092479Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.4157259Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.4322422Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.4392417Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.4601385Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.4666089Z   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.4777062Z Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.7777360Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 59.9 MB/s  0:00:00
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.7909311Z Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.9839495Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 196.4 MB/s  0:00:00
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:19.9914916Z Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:20.0013772Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:20.0102208Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:20.0201117Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:20.0293608Z Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:20.0421434Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 95.0 MB/s  0:00:00
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:20.1829012Z Installing collected packages: pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:26.3401299Z
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:26.3411816Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 scipy-1.15.3
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:26.3434523Z
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:26.3435112Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+verify	Run pip install -r requirements.txt	2026-08-07T15:28:26.3435635Z [notice] To update, run: pip install --upgrade pip
+verify	Run pytest -q	﻿2026-08-07T15:28:26.4065497Z ##[group]Run pytest -q
+verify	Run pytest -q	2026-08-07T15:28:26.4065806Z ^[[36;1mpytest -q^[[0m
+verify	Run pytest -q	2026-08-07T15:28:26.4109622Z shell: /usr/bin/bash -e {0}
+verify	Run pytest -q	2026-08-07T15:28:26.4109870Z env:
+verify	Run pytest -q	2026-08-07T15:28:26.4110124Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pytest -q	2026-08-07T15:28:26.4110554Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+verify	Run pytest -q	2026-08-07T15:28:26.4110972Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pytest -q	2026-08-07T15:28:26.4111343Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pytest -q	2026-08-07T15:28:26.4111708Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pytest -q	2026-08-07T15:28:26.4112076Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+verify	Run pytest -q	2026-08-07T15:28:26.4112385Z ##[endgroup]
+verify	Run pytest -q	2026-08-07T15:28:29.9339890Z ........................................................................ [ 31%]
+verify	Run pytest -q	2026-08-07T15:28:30.3032575Z ........................................................................ [ 62%]
+verify	Run pytest -q	2026-08-07T15:28:30.8333834Z ................................................s....................... [ 94%]
+verify	Run pytest -q	2026-08-07T15:28:30.9187150Z .............                                                            [100%]
+verify	Run pytest -q	2026-08-07T15:28:30.9187961Z 228 passed, 1 skipped in 3.81s
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	﻿2026-08-07T15:28:30.9916225Z ##[group]Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:30.9917004Z ^[[36;1mpython -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape^[[0m
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:30.9960404Z shell: /usr/bin/bash -e {0}
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:30.9960648Z env:
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:30.9960911Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:30.9961348Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:30.9961772Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:30.9962147Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:30.9962523Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:30.9962912Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:30.9963233Z ##[endgroup]
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.3991303Z Traceback (most recent call last):
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.3999671Z   File "<frozen runpy>", line 198, in _run_module_as_main
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4000452Z   File "<frozen runpy>", line 88, in _run_code
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4001532Z   File "/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/src/h3_sideband_no_escape.py", line 183, in <module>
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4002290Z     if __name__=='__main__': main()
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4002576Z                              ^^^^^^
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4003232Z   File "/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/src/h3_sideband_no_escape.py", line 149, in main
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4004226Z     cert=exact_constant_certificate(); out=stress(args.samples)
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4004735Z                                            ^^^^^^^^^^^^^^^^^^^^
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4005718Z   File "/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/src/h3_sideband_no_escape.py", line 136, in stress
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4015188Z     sigma=float(rng.uniform(max(actual,1e-12),float(SMALL_SIGMA)*.999))
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4015833Z                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4016670Z   File "numpy/random/_generator.pyx", line 1100, in numpy.random._generator.Generator.uniform
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4017588Z   File "numpy/random/_common.pyx", line 637, in numpy.random._common.cont
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4018484Z   File "numpy/random/_common.pyx", line 435, in numpy.random._common.check_constraint
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4019147Z ValueError: high - low < 0
+verify	Run python -m src.h3_sideband_no_escape --samples 50000 --outdir results-h3-sideband-no-escape	2026-08-07T15:28:31.4153362Z ##[error]Process completed with exit code 1.
+verify	Post Run actions/checkout@v4	﻿2026-08-07T15:28:31.4296692Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.4297947Z Post job cleanup.
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5147850Z [command]/usr/bin/git version
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5188930Z git version 2.54.0
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5228511Z Temporarily overriding HOME='/home/runner/work/_temp/fd66cc3b-c2fa-4774-9917-07b99892fe20' before making global git config changes
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5229900Z Adding repository directory to the temporary git global config as a safe directory
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5235634Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5274526Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5310739Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5553850Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5585491Z http.https://github.com/.extraheader
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5605551Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5644693Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5897431Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+verify	Post Run actions/checkout@v4	2026-08-07T15:28:31.5935634Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+verify	Complete job	﻿2026-08-07T15:28:31.6386865Z Cleaning up orphan processes
+verify	Complete job	2026-08-07T15:28:31.6679807Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

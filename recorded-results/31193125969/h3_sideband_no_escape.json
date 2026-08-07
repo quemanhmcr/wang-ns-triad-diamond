@@ -1,0 +1,28 @@
+{
+  "certificate": {
+    "first_duhamel_square": "3 I^2/32",
+    "post_feedback_daughter_square": "3 I^2/128",
+    "single_role_deficit_before_rescue_split": "3 I^2/2048",
+    "pair_rescue_or_net_deficit": "3 I^2/4096",
+    "large_daughter_sigma": "1/80",
+    "status": "EXACT_GIVEN_COHERENCE_AND_ODD_SIDEBAND_THEOREMS"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_transfer_cost_margin": 3.321247153141273e-11,
+    "minimum_pair_cost_margin": 4.293291480192786e-11,
+    "minimum_first_impulse_margin": 2.4356077115904545e-08,
+    "branch_counts": {
+      "dephasing_source": 9898,
+      "nonlinear_sideband_feedback": 10072,
+      "large_daughter_capacity": 9997,
+      "pair_sideband_rescue": 10003,
+      "transfer_deficit": 10030
+    }
+  },
+  "H3_measure_change": {
+    "formula": "E_s|P|^2=6 s^3 ||T||^2+9 s(s-1)^2||tr T||^2",
+    "s": "4/3",
+    "minimum_ratio": "64/27>1"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "stress": {
+    "samples": 50000,
+    "worst_envelope_sym_residual": 1.4376117210095692e-15,
+    "worst_hook_sym_residual": 1.0987141981161068e-15,
+    "worst_hook_divergence_residual": 1.2458433890707478e-15,
+    "worst_orthogonality_residual": 7.087904999276117e-15,
+    "worst_envelope_norm_identity_residual": 2.1316282072803006e-14,
+    "worst_hook_M_reconstruction_residual": 1.4697356992414397e-15,
+    "worst_hook_norm_identity_residual": 2.1316282072803006e-14,
+    "worst_H1_norm_identity_residual": 5.329070518200751e-15,
+    "minimum_combined_observability_margin": 0.47894397342413864,
+    "maximum_trace_ratio": 1.435223790874468
+  },
+  "identities": {
+    "envelope": "B_E=T-1/2(delta_ab t_c+delta_ac t_b)+delta_bc t_a",
+    "orthogonal_split": "B=B_E+B_H, <B_E,B_H>=0",
+    "envelope_norm": "||B_E||^2=||T||^2+3||t||^2",
+    "sharp_trace": "||t||^2<=(5/3)||T||^2",
+    "hook": "B_H=eps_abd M_dc+eps_acd M_db, M symmetric tracefree",
+    "hook_norm": "||B_H||^2=6||M||^2",
+    "hook_H1": "||C_hook||^2=(1/4)||B_H||^2",
+    "combined": "||Sym B||^2+||C_hook||^2 >= (1/6)||B||^2"
+  }
+}

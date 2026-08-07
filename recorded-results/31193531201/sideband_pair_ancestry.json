@@ -1,0 +1,21 @@
+{
+  "stress": {
+    "samples": 50000,
+    "worst_class_mass_identity_residual": 5.551115123125783e-16,
+    "worst_chain_identity_residual": 9.992007221626409e-16,
+    "minimum_branch_margin": 1.3878865221306214e-05,
+    "branch_counts": {
+      "cross_Xi": 34486,
+      "ancestry_Bellman_entropy": 5679,
+      "same_ancestry_pair_cycle": 9802,
+      "dominant_reused_daughter": 33
+    }
+  },
+  "theorems": {
+    "parity_graph": "nonzero odd-sideband rescue edges contain exactly two odd vertices and one even/base role",
+    "same_endpoint_law": "w_v=d_v/(2W_same)",
+    "ancestry_edge_mass": "W_A equals same-edge pair-rescue mass fraction in ancestry A",
+    "chain": "Q_anc-Q_at=sum_A sum_{u!=v in A} w_u w_v",
+    "route": "cross Xi / dominant reused daughter / ancestry Bellman entropy / same-ancestry pair-cycle mass"
+  }
+}
