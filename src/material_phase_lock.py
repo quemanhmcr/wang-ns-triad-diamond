@@ -38,6 +38,22 @@ def phase_lock_source(rho1: float, rho2: float, rho3: float) -> float:
     return float(rho1 + rho2 - rho3)
 
 
+def differential_velocity_phase_source(
+    Uref: np.ndarray, U1: np.ndarray, U2: np.ndarray, U3: np.ndarray,
+    k1: np.ndarray, k2: np.ndarray, k3: np.ndarray,
+    rho1: float=0.0, rho2: float=0.0, rho3: float=0.0,
+) -> float:
+    """Phase-lock source when the three roles use different transport velocities.
+
+    If (dt+Ui.grad)phi_i=rho_i, rewriting all three equations with the common
+    material derivative dt+Uref.grad leaves only the differential velocities.
+    """
+    Ur=np.asarray(Uref,float)
+    return float(rho1+rho2-rho3 + (Ur-np.asarray(U1,float))@np.asarray(k1,float)
+                 +(Ur-np.asarray(U2,float))@np.asarray(k2,float)
+                 -(Ur-np.asarray(U3,float))@np.asarray(k3,float))
+
+
 def gradient_lock_source(r1: np.ndarray, r2: np.ndarray, r3: np.ndarray) -> np.ndarray:
     return np.asarray(r1, float) + np.asarray(r2, float) - np.asarray(r3, float)
 

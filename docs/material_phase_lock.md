@@ -63,3 +63,27 @@ the common curvature is compatible with triad phase lock.
 The PDE-facing phase residual must therefore be built from **differential**
 resolved velocities, SGS forcing, packet partitions and other role-dependent
 sources.  Common non-affine advection should not be charged twice.
+
+
+## Role-dependent transport: only velocity differences remain
+
+If instead each role obeys
+
+\[
+(\partial_t+U_i\cdot\nabla)\phi_i=\rho_i,
+\]
+
+choose any common reference velocity `U`.  Rewriting all three equations with
+`partial_t+U dot grad` gives
+
+\[
+\boxed{
+(\partial_t+U\cdot\nabla)\Phi
+=\rho_1+\rho_2-\rho_3
++(U-U_1)\cdot k_1+(U-U_2)\cdot k_2-(U-U_3)\cdot k_3.
+}
+\]
+
+Therefore a common resolved velocity cancels exactly.  Phase forcing is built
+from **differential** transport velocities and explicit role sources, which is
+precisely the form expected from SGS, partition and packet-overlap errors.

@@ -1,6 +1,6 @@
 import numpy as np
 
-from src.material_phase_lock import hessian_phase_rhs, kelvin_rhs
+from src.material_phase_lock import differential_velocity_phase_source, hessian_phase_rhs, kelvin_rhs
 
 
 def test_common_kelvin_resonance_is_exact():
@@ -17,3 +17,11 @@ def test_common_hessian_chirp_cancels_at_resonance():
     K2=rng.normal(size=(3,3));K2=.5*(K2+K2.T);K3=K1+K2
     lock=hessian_phase_rhs(K1,k1,A,H)+hessian_phase_rhs(K2,k2,A,H)-hessian_phase_rhs(K3,k3,A,H)
     assert np.linalg.norm(lock)<1e-11
+
+
+def test_common_velocity_drops_out_of_phase_source():
+    U=np.array([.4,-.2,.1]); k1=np.array([1.,.3,-.2]); k2=np.array([-.4,.6,.1]); k3=k1+k2
+    assert abs(differential_velocity_phase_source(U,U,U,U,k1,k2,k3))<1e-14
+    d=np.array([.03,-.01,.02])
+    src=differential_velocity_phase_source(U,U+d,U,U,k1,k2,k3)
+    assert abs(src + d@k1)<1e-14

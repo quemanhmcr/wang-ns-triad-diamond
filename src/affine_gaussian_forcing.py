@@ -79,6 +79,16 @@ def osculating_transverse_bound(B: np.ndarray) -> float:
     return math.sqrt(6.0) / 4.0 * float(np.linalg.norm(B))
 
 
+def gaussian_laplacian_multiplier(G: np.ndarray, k: np.ndarray, y: np.ndarray) -> complex:
+    """Exact multiplier (Delta psi)/psi for a complex/chirped Gaussian.
+
+    psi(y)=exp(-1/2 y^T G y + i k.y), with symmetric complex G.  The result is
+    a polynomial of degree at most two, hence tangent to the Gaussian manifold.
+    """
+    G=np.asarray(G,complex); k=np.asarray(k,float); y=np.asarray(y,float)
+    return complex(y @ (G @ G) @ y - 2j*(k @ G @ y) - np.dot(k,k) - np.trace(G))
+
+
 def third_hermite_value(T: np.ndarray, z: np.ndarray) -> float:
     T = np.asarray(T, float)
     z = np.asarray(z, float)

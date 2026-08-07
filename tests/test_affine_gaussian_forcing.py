@@ -3,6 +3,7 @@ import numpy as np
 
 from src.affine_gaussian_forcing import (
     full_quadratic_advection_residual_sq,
+    gaussian_laplacian_multiplier,
     normalized_carrier,
     osculating_transverse_bound,
     osculating_transverse_residual_sq,
@@ -44,3 +45,15 @@ def test_affine_coordinate_covariance_exact():
     Hp=transform_hessian(S,H); Lp=S@L; kp=np.linalg.solve(S.T,k)
     assert np.linalg.norm(whitened_velocity_hessian(Lp,Hp)-B) < 1e-11
     assert np.linalg.norm(normalized_carrier(Lp,kp)-q) < 1e-12
+
+
+def test_bulk_viscosity_is_gaussian_tangent_polynomial():
+    G=np.array([[1.2+.1j,.05,0.],[.05,.8-.03j,.02j],[0.,.02j,1.1]],dtype=complex)
+    G=.5*(G+G.T)
+    k=np.array([1.1,-.4,.3]); y=np.array([.2,-.7,.5])
+    # Finite-difference Laplacian check on psi itself.
+    def psi(x): return np.exp(-.5*x@(G@x)+1j*k@x)
+    h=2e-4
+    lap=sum((psi(y+h*np.eye(3)[j])-2*psi(y)+psi(y-h*np.eye(3)[j]))/h**2 for j in range(3))
+    exact=gaussian_laplacian_multiplier(G,k,y)*psi(y)
+    assert abs(lap-exact)<2e-7

@@ -94,3 +94,29 @@ A large Euclidean condition number of `L` is likewise not itself a cost.  If
 physical coordinates, velocity and the grain are transformed together, `B`
 and `q` are unchanged.  The dynamic question is whether the physical velocity
 Hessian is small in the grain's own metric.
+
+
+## Bulk viscosity is tangent, not transverse forcing
+
+The same quotient applies to the viscous bulk term.  For a complex/chirped
+Gaussian
+
+\[
+\psi(y)=C\exp[-\tfrac12y^TGy+i k\cdot y],
+\]
+
+with symmetric complex `G`, direct differentiation gives
+
+\[
+\boxed{
+\frac{\Delta\psi}{\psi}
+=y^TG^2y-2i k^TGy-|k|^2-\operatorname{tr}G.
+}
+\]
+
+The multiplier has degree at most two.  Thus bulk `nu Delta` changes only the
+amplitude, center/carrier and covariance/chirp parameters of the Gaussian
+manifold; it creates no third-Hermite transverse forcing.  This is the local
+packet form of the previously derived exact viscous covariance ODE.  Viscous
+**window boundary flux** remains a separate localization term and is not removed
+by this observation.
