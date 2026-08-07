@@ -7,6 +7,8 @@ from src.relative_polarization_transport import (
     parent_wedge,
     pointwise_capacity_bound,
     polarization_numerator,
+    polarization_forcing_bound,
+    polarization_forcing_residual,
     polarization_rhs,
     sl2_symmetric_step,
     tracefree_symmetric,
@@ -67,3 +69,15 @@ def test_hyperbolic_distance_is_not_a_defect():
 def test_child_factor_is_signed_helicity_linear_form():
     Z = np.array([3+2j, 1-4j])
     assert child_factor(Z) == (2+6j)
+
+
+def test_nonlinear_forcing_residual_bound():
+    rng=np.random.default_rng(19)
+    for _ in range(100):
+        U=rng.normal(size=2)+1j*rng.normal(size=2)
+        V=rng.normal(size=2)+1j*rng.normal(size=2)
+        Z=rng.normal(size=2)+1j*rng.normal(size=2)
+        F1=rng.normal(size=2)+1j*rng.normal(size=2)
+        F2=rng.normal(size=2)+1j*rng.normal(size=2)
+        F3=rng.normal(size=2)+1j*rng.normal(size=2)
+        assert abs(polarization_forcing_residual(U,V,Z,F1,F2,F3)) <= polarization_forcing_bound(U,V,Z,F1,F2,F3)+1e-12

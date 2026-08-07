@@ -61,6 +61,21 @@ def pointwise_capacity_bound(U: np.ndarray, V: np.ndarray, Z: np.ndarray, D1: np
     return 2.0 * math.sqrt(max(0.0, q)) * amp
 
 
+def polarization_forcing_residual(U: np.ndarray, V: np.ndarray, Z: np.ndarray, F1: np.ndarray, F2: np.ndarray, F3: np.ndarray) -> complex:
+    """Exact additive residual for Udot=-D1 U+F1 etc."""
+    U=np.asarray(U,complex); V=np.asarray(V,complex); Z=np.asarray(Z,complex)
+    F1=np.asarray(F1,complex); F2=np.asarray(F2,complex); F3=np.asarray(F3,complex)
+    W=parent_wedge(U,V); L=child_factor(Z)
+    return complex((F1.T@J2@V + U.T@J2@F2)*L + W*(LAMBDA_CHILD.T@F3))
+
+
+def polarization_forcing_bound(U: np.ndarray, V: np.ndarray, Z: np.ndarray, F1: np.ndarray, F2: np.ndarray, F3: np.ndarray) -> float:
+    """sqrt(2)[|F1||V||Z|+|U||F2||Z|+|U||V||F3|]."""
+    u=float(np.linalg.norm(U)); v=float(np.linalg.norm(V)); z=float(np.linalg.norm(Z))
+    f1=float(np.linalg.norm(F1)); f2=float(np.linalg.norm(F2)); f3=float(np.linalg.norm(F3))
+    return math.sqrt(2.0)*(f1*v*z + u*f2*z + u*v*f3)
+
+
 def evolve_piecewise(U: np.ndarray, V: np.ndarray, Z: np.ndarray, rows: list[tuple[float, np.ndarray, np.ndarray, np.ndarray]]) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     U = np.asarray(U, complex).copy(); V = np.asarray(V, complex).copy(); Z = np.asarray(Z, complex).copy()
     for dt, D1, D2, D3 in rows:
@@ -93,12 +108,14 @@ class TransportStress:
     worst_polarization_rhs_residual: float
     worst_pointwise_bound_margin: float
     worst_common_timeordered_wedge_residual: float
+    worst_forcing_bound_margin: float
 
 
 def stress(samples: int = 50_000, seed: int = 20260807) -> TransportStress:
     rng = np.random.default_rng(seed)
     ww = wp = wc = 0.0
     margin = float("inf")
+    fmargin = float("inf")
     eps = 2e-7
     for _ in range(samples):
         U = rng.normal(size=2) + 1j * rng.normal(size=2)
@@ -126,6 +143,15 @@ def stress(samples: int = 50_000, seed: int = 20260807) -> TransportStress:
         if abs(anap) > bnd + 2e-10:
             raise AssertionError("pointwise capacity bound violated")
 
+        F1=rng.normal(size=2)+1j*rng.normal(size=2)
+        F2=rng.normal(size=2)+1j*rng.normal(size=2)
+        F3=rng.normal(size=2)+1j*rng.normal(size=2)
+        fres=polarization_forcing_residual(U,V,Z,F1,F2,F3)
+        fbnd=polarization_forcing_bound(U,V,Z,F1,F2,F3)
+        fmargin=min(fmargin,fbnd-abs(fres))
+        if abs(fres)>fbnd+2e-10:
+            raise AssertionError("forcing residual bound violated")
+
         # Arbitrary noncommuting common time-ordered SL(2) history is neutral.
         rows = []
         for _j in range(4):
@@ -133,7 +159,7 @@ def stress(samples: int = 50_000, seed: int = 20260807) -> TransportStress:
             rows.append((float(rng.uniform(0.01, 0.15)), D, D, np.zeros((2, 2))))
         U1, V1, _ = evolve_piecewise(U, V, Z, rows)
         wc = max(wc, abs(parent_wedge(U1, V1) - parent_wedge(U, V)) / max(1.0, abs(parent_wedge(U, V))))
-    return TransportStress(samples, ww, wp, margin, wc)
+    return TransportStress(samples, ww, wp, margin, wc, fmargin)
 
 
 def main() -> None:
@@ -158,6 +184,7 @@ The identities are exact; random checks validate the implementation.
 - worst polarization RHS residual: `{out.worst_polarization_rhs_residual:.3e}`
 - minimum pointwise bound margin: `{out.worst_pointwise_bound_margin:.3e}`
 - worst arbitrary common time-ordered wedge residual: `{out.worst_common_timeordered_wedge_residual:.3e}`
+- minimum nonlinear-forcing bound margin: `{out.worst_forcing_bound_margin:.3e}`
 - hyperbolic common-gauge countermodel: `||M-I||={cm['propagator_distance']:.3e}`, `cond(M)={cm['condition_number']:.3e}`, wedge residual `{cm['wedge_relative_residual']:.3e}`
 
 Thus the full time-ordered parent observable does not require a Magnus expansion:
