@@ -10,7 +10,7 @@ from typing import Mapping, Sequence
 import numpy as np
 
 from src.helical import edge_metrics, helical_basis
-from src.helical_spin_transport import forward_normal_coupling, helical_with_normal, rotation_matrix, triad_normal
+from src.helical_spin_transport import forward_normal_coupling, helical_with_normal, normal_transition_phase, rotation_matrix, triad_normal
 
 Array = np.ndarray
 
@@ -74,6 +74,34 @@ def diamond_holonomy_from_edges(edges: Mapping[str, Mapping[str, float]]) -> tup
         - edges["bc_n"]["target_phase"] - edges["an_d"]["target_phase"]
     )
     return geom, target, wrap_angle(geom - target)
+
+
+def diamond_incidence_spin_holonomy(a: Array, b: Array, c: Array, signs: Sequence[int]) -> tuple[float, float]:
+    """Reconstruct geometric coupling holonomy from constant edge phases + spin dihedrals.
+
+    Each physical mode occurs in two incident triads.  The difference of their
+    triad-normal gauge phases is exactly the spin-1 transition phase
+    -s*psi.  The returned pair is (direct geometric holonomy, spin reconstruction).
+    """
+    sa, sb, sc, sm, sn, sd = (int(x) for x in signs)
+    a = np.asarray(a, float); b = np.asarray(b, float); c = np.asarray(c, float)
+    m, n, d = a + b, b + c, a + b + c
+    e = diamond_edge_data(a, b, c, signs)
+    n1 = triad_normal(a, b)
+    n2 = triad_normal(m, c)
+    n3 = triad_normal(b, c)
+    n4 = triad_normal(a, n)
+    gamma = e["ab_m"]["normal_phase"] + e["mc_d"]["normal_phase"] - e["bc_n"]["normal_phase"] - e["an_d"]["normal_phase"]
+    spin = (
+        normal_transition_phase(a, sa, n4, n1)
+        + normal_transition_phase(b, sb, n3, n1)
+        + normal_transition_phase(c, sc, n3, n2)
+        + normal_transition_phase(m, sm, n1, n2)
+        + normal_transition_phase(n, sn, n4, n3)
+        + normal_transition_phase(d, sd, n2, n4)
+    )
+    direct, _, _ = diamond_holonomy_from_edges(e)
+    return direct, wrap_angle(gamma + spin)
 
 
 def diamond_phase_residuals(
@@ -151,6 +179,7 @@ class HolonomyStress:
     samples: int
     worst_edge_normal_reconstruction: float
     worst_modal_cancellation_residual: float
+    worst_spin_dihedral_reconstruction: float
     worst_rotation_holonomy_residual: float
     minimum_sharp_cost_margin: float
 
@@ -172,7 +201,7 @@ def _good_random_diamond(rng: np.random.Generator) -> tuple[Array, Array, Array]
 
 def stress(samples: int = 50_000, seed: int = 20260807) -> HolonomyStress:
     rng = np.random.default_rng(seed)
-    worst_recon = worst_cancel = worst_rot = 0.0
+    worst_recon = worst_cancel = worst_spin = worst_rot = 0.0
     min_margin = float("inf")
     accepted = 0
     while accepted < samples:
@@ -188,6 +217,8 @@ def stress(samples: int = 50_000, seed: int = 20260807) -> HolonomyStress:
         for e in edges.values():
             worst_recon = max(worst_recon, abs(wrap_angle(e["global_phase"] - e["reconstructed_phase"])))
         geom, target, H = diamond_holonomy_from_edges(edges)
+        direct_spin, reconstructed_spin = diamond_incidence_spin_holonomy(a, b, c, signs)
+        worst_spin = max(worst_spin, abs(wrap_angle(direct_spin - reconstructed_spin)))
 
         phases = {name: float(rng.uniform(-math.pi, math.pi)) for name in ("a", "b", "c", "m", "n", "d")}
         residuals = diamond_phase_residuals(a, b, c, signs, phases)
@@ -210,7 +241,7 @@ def stress(samples: int = 50_000, seed: int = 20260807) -> HolonomyStress:
         if margin < -2e-11:
             raise AssertionError(f"sharp four-phase cost violated: {margin}")
 
-    return HolonomyStress(accepted, worst_recon, worst_cancel, worst_rot, min_margin)
+    return HolonomyStress(accepted, worst_recon, worst_cancel, worst_spin, worst_rot, min_margin)
 
 
 def main() -> None:
@@ -235,6 +266,7 @@ Status: **{cert['status']}** for the clean finite-packet phase branch.
 - random nondegenerate diamonds: `{out.samples}`
 - worst triad-normal/global coupling reconstruction residual: `{out.worst_edge_normal_reconstruction:.3e}`
 - worst modal-phase cancellation residual: `{out.worst_modal_cancellation_residual:.3e}`
+- worst explicit spin-dihedral reconstruction residual: `{out.worst_spin_dihedral_reconstruction:.3e}`
 - worst rigid-rotation holonomy residual: `{out.worst_rotation_holonomy_residual:.3e}`
 - minimum numerical sharp-cost margin: `{out.minimum_sharp_cost_margin:.3e}`
 

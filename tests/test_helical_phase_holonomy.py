@@ -4,6 +4,7 @@ import numpy as np
 from src.helical_phase_holonomy import (
     diamond_edge_data,
     diamond_holonomy_from_edges,
+    diamond_incidence_spin_holonomy,
     diamond_phase_residuals,
     residual_holonomy,
     sharp_four_phase_cost,
@@ -46,3 +47,9 @@ def test_weighted_phase_cost_lower():
     H = 0.5
     floor = 0.03
     assert math.isclose(weighted_phase_cost_lower(H, floor), floor * sharp_four_phase_cost(H))
+
+
+def test_incidence_spin_dihedrals_reconstruct_geometric_holonomy():
+    a, b, c, signs = fixture()
+    direct, spin = diamond_incidence_spin_holonomy(a, b, c, signs)
+    assert abs(wrap_angle(direct - spin)) < 3e-12
