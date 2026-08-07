@@ -83,18 +83,26 @@ def clean_combined_observability(B:np.ndarray)->float:
     return float(np.sum(T*T)+np.sum(C*C)-np.sum(B*B)/6.0)
 
 
+_DIVFREE_COORDS=[(a,b,c) for a in range(3) for b in range(3) for c in range(b,3)]
+
+def _full_curvature_from_coords(x:np.ndarray)->np.ndarray:
+    B=np.zeros((3,3,3))
+    for val,(a,b,c) in zip(x,_DIVFREE_COORDS):
+        B[a,b,c]=B[a,c,b]=val
+    return B
+
+def _build_divfree_nullspace()->np.ndarray:
+    n=len(_DIVFREE_COORDS); C=np.zeros((3,n)); eye=np.eye(n)
+    for j in range(n): C[:,j]=divergence_trace(_full_curvature_from_coords(eye[j]))
+    _,_,vh=np.linalg.svd(C)
+    return vh[3:].T
+
+_DIVFREE_NULLSPACE=_build_divfree_nullspace()
+
 def random_divfree_curvature(rng:np.random.Generator)->np.ndarray:
-    """Generate jk-symmetric B with divergence trace zero by nullspace coordinates."""
-    coords=[(a,b,c) for a in range(3) for b in range(3) for c in range(b,3)]
-    n=len(coords)
-    def full(x):
-        B=np.zeros((3,3,3))
-        for val,(a,b,c) in zip(x,coords): B[a,b,c]=B[a,c,b]=val
-        return B
-    C=np.zeros((3,n))
-    for j in range(n): C[:,j]=divergence_trace(full(np.eye(n)[j]))
-    _,_,vh=np.linalg.svd(C); x=vh[3:].T@rng.normal(size=n-3)
-    return full(x)
+    """Generate jk-symmetric B with divergence trace zero by cached nullspace coordinates."""
+    x=_DIVFREE_NULLSPACE@rng.normal(size=_DIVFREE_NULLSPACE.shape[1])
+    return _full_curvature_from_coords(x)
 
 
 @dataclass(frozen=True)
