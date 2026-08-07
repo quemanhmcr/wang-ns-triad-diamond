@@ -188,15 +188,14 @@ def stress(samples: int = 50_000, seed: int = 20260807) -> H1SourceStress:
     wh = wg = 0.0
     wmargin = float("inf")
     rmargin = float("inf")
-    eps = 1e-7
     for _ in range(samples):
         B = random_divfree_curvature(rng)
         Bdot = random_divfree_curvature(rng)
         Bh = hook_component(B)
         Bhd = hook_rate(Bdot)
-        # Fixed linear projector: finite difference must match exactly to first order.
-        fd = (hook_component(B + eps * Bdot) - Bh) / eps
-        wh = max(wh, float(np.linalg.norm(fd - Bhd)))
+        # Exact linearity of the fixed hook projector.
+        proj_res = hook_component(B + Bdot) - Bh - Bhd
+        wh = max(wh, float(np.linalg.norm(proj_res)))
         A = rng.normal(size=(3, 3)); A -= np.trace(A) / 3 * np.eye(3)
         sigma = float(np.linalg.norm(A, 2))
         if sigma > 0:
@@ -207,10 +206,11 @@ def stress(samples: int = 50_000, seed: int = 20260807) -> H1SourceStress:
         c = int(rng.integers(0, 3))
         G = physical_hook_matrix(Bh[:, :, c], L)
         Gd = physical_hook_matrix_rate(A, L, Bh[:, :, c], Bhd[:, :, c])
-        # Direct finite-difference with Ldot=A L and Bh(t)=Bh+eps Bhd.
-        L1 = L + eps * (A @ L)
-        G1 = physical_hook_matrix(Bh[:, :, c] + eps * Bhd[:, :, c], L1)
-        wg = max(wg, float(np.linalg.norm((G1 - G) / eps - Gd)))
+        # Independent exact product-rule expansion of d(L Bh L^-1)/dt.
+        Li = np.linalg.inv(L)
+        direct = (A @ L) @ Bh[:, :, c] @ Li + L @ Bhd[:, :, c] @ Li \
+            - L @ Bh[:, :, c] @ Li @ (A @ L) @ Li
+        wg = max(wg, float(np.linalg.norm(direct - Gd)))
         # Create a compatible curvature source S = Bdot + 2 A_aff B.
         Aa = np.linalg.inv(L) @ A @ L
         S = Bdot + 2 * np.einsum('ad,dbc->abc', Aa, B)
@@ -238,7 +238,7 @@ def stress(samples: int = 50_000, seed: int = 20260807) -> H1SourceStress:
             out = dephasing_source_route(I1, T, J, src, ab)
             margin = src - out['source_threshold'] if out['branch'] == 'curvature_source' else ab - out['strain_curvature_threshold']
             rmargin = min(rmargin, float(margin))
-    if wh > 5e-8 or wg > 2e-5:
+    if wh > 5e-11 or wg > 5e-11:
         raise AssertionError("H1 source exact-identity regression failed")
     return H1SourceStress(samples, wh, wg, wmargin, rmargin)
 
@@ -273,8 +273,8 @@ On the H1-dominant full-curvature branch `I1>=I_B/2`, if `||A||_infty T<1/2376`,
 This source theorem does not charge base strain: if the `1/2376` action threshold is crossed, it is handed to the existing objective-strain/source branch.  Pressure-third far-field locality retains the previous `6-3=3` summable exponent.
 
 Stress: `{out.samples}`
-- worst hook-projector derivative residual: `{out.worst_hook_rate_projection_residual:.3e}`
-- worst physical-hook matrix derivative residual: `{out.worst_physical_matrix_rate_residual:.3e}`
+- worst exact hook-projector linearity residual: `{out.worst_hook_rate_projection_residual:.3e}`
+- worst exact physical-hook product-rule residual: `{out.worst_physical_matrix_rate_residual:.3e}`
 - minimum clean-density margin: `{out.worst_clean_density_margin:.3e}`
 - minimum routing margin: `{out.minimum_route_margin:.3e}`
 """
