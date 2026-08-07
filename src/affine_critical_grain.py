@@ -109,11 +109,13 @@ class GrainStress:
     minimum_affine_mass_coefficient:float
     worst_aspect_relation_margin:float
     worst_fresh_budget_margin:float
+    worst_incompressible_radius_rate_residual:float
+    minimum_viscous_radius_sq_margin:float
 
 
 def stress(samples:int=50_000,seed:int=20260807)->GrainStress:
     rng=np.random.default_rng(seed)
-    wr=0.0; wa=float("inf"); wb=float("inf")
+    wr=0.0; wa=float("inf"); wb=float("inf"); wdyn=0.0; mdyn=float("inf")
     coeff=local_ellipsoid_mass_coefficient()
     for _ in range(samples):
         N=10**float(rng.uniform(-2,5))
@@ -133,7 +135,18 @@ def stress(samples:int=50_000,seed:int=20260807)->GrainStress:
         sr,bound=fresh_radius_budget(energies,radii,eta,overlap)
         bm=bound-sr; wb=min(wb,bm)
         if bm<-1e-10: raise AssertionError("fresh affine radius budget failed")
-    return GrainStress(samples,wr,coeff,wa,wb)
+
+        # Dynamic radius: random SPD covariance and trace-free affine strain.
+        Qd,_=np.linalg.qr(rng.normal(size=(3,3))); sd=np.exp(rng.uniform(-5,5,size=3)); Sig=Qd@np.diag(sd)@Qd.T
+        Ad=rng.normal(size=(3,3)); Ad-=np.trace(Ad)/3.0*np.eye(3); nu=float(rng.uniform(0,2))
+        rgd=geometric_radius(Sig)
+        rate=log_geometric_radius_rate(Sig,Ad,nu)
+        exact=incompressible_log_radius_rate(Sig,nu)
+        wdyn=max(wdyn,abs(rate-exact))
+        sqrate=2.0*rgd*rgd*exact
+        mdyn=min(mdyn,sqrate-nu)
+        if sqrate+2e-10<nu: raise AssertionError("viscous geometric-radius lower rate failed")
+    return GrainStress(samples,wr,coeff,wa,wb,wdyn,mdyn)
 
 
 def main()->None:
@@ -169,6 +182,8 @@ penalty is required.
 - local affine-mass coefficient: `{out.minimum_affine_mass_coefficient:.9f}`
 - minimum aspect-relation margin: `{out.worst_aspect_relation_margin:.3e}`
 - minimum fresh-budget margin: `{out.worst_fresh_budget_margin:.3e}`
+- worst incompressible geometric-radius rate residual: `{out.worst_incompressible_radius_rate_residual:.3e}`
+- minimum viscous `d(r_g^2)/dt-nu` margin: `{out.minimum_viscous_radius_sq_margin:.3e}`
 """
     (args.outdir/"summary.md").write_text(md);print(md)
 
