@@ -1,0 +1,19 @@
+name: Affine aspect sticky ancestry
+on:
+  workflow_dispatch:
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.affine_aspect_sticky --samples 50000 --outdir results-affine-aspect-sticky
+      - run: cat results-affine-aspect-sticky/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: affine-aspect-sticky-results
+          path: results-affine-aspect-sticky/
