@@ -35,7 +35,13 @@ D_{hel}=\begin{pmatrix}0&\delta-i\beta\\\delta+i\beta&0\end{pmatrix}.
 \]
 
 Thus first-order nonconformal strain is a **helicity conversion** operator; it
-is not an unavoidable diagonal Berry-phase drift.
+is not an unavoidable diagonal Berry-phase drift.  This local conversion must
+also not be charged automatically as a transfer deficit: at equal-parent
+geometry the signed nonlinear parent tensor is symplectic, so a common
+`SL(2)` deformation of both parent spinors preserves the unnormalized parent
+wedge exactly.  The transfer-distinguishable variables are relative parent
+polarization, the child polarization factor, capacity normalization, and scalar
+shape; see `docs/extremal_helicity_symplectic.md`.
 
 A local geometric phase appears when strain orientations at different times do
 not commute.  For two trace-free strains,
@@ -52,7 +58,10 @@ The coefficient is the signed area spanned by the two anisotropy vectors
 `(delta,beta)`.  It is an antisymmetric real rotation, hence an opposite phase
 for the two circular polarizations.  This is the local strain analogue of a
 geometric phase: **first order mixes helicity; second-order noncommutativity
-rotates phase**.
+rotates phase**.  A common time-ordered determinant-one map on both parents is
+again symplectically neutral in the unnormalized parent wedge; only relative
+incidence transport can turn this individual-spinor phase into a parent-sector
+transfer obstruction.
 
 Under the repository five-percent coherence hypothesis
 

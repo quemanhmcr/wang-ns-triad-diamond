@@ -1365,9 +1365,107 @@ and each helical mixer satisfies `|zeta_i|^2=||D_i||_F^2/2`, one obtains
 \]
 
 Action `31171360107` Arb-certified the `13/20` tomography constant and checked
-`100,000` random symmetric trace-free strains.  Therefore a large local strain
-cannot hide simultaneously from the extremal side-length geometry and from
-opposite-helicity conversion of both parents.
+`100,000` random symmetric trace-free strains.  This is an **absolute tomography
+statement**: it says the strain is visible if one records the three individual
+mixers.  It must not by itself be read as a normalized transfer deficit.
+
+The signed complex extremal tensor reveals an additional symmetry.  On every
+isosceles forward triad `|x|=|y|=r`, `|x+y|=1`, the child-energy helicity tensor
+factorizes exactly as
+
+\[
+\boxed{
+\mathcal C_{s_1s_2s_3}
+=-i C(r)s_3\varepsilon_{s_1s_2},
+\qquad C(r)=\frac{\Delta(r,r,1)}{\sqrt2 r},
+}
+\]
+
+with
+
+\[
+J=(\varepsilon_{ij})=
+\begin{pmatrix}0&1\\-1&0\end{pmatrix}.
+\]
+
+Thus the parent helicity sector is the symplectic wedge `U^T J V`.  Since
+
+\[
+M^TJM=(\det M)J,
+\]
+
+there is an exact common-parent gauge:
+
+\[
+\boxed{
+(MU)^TJ(MV)=U^TJV,
+\qquad M\in SL(2).
+}
+\]
+
+A common determinant-one helicity deformation can therefore mix the two parent
+helicities without changing the **unnormalized nonlinear parent numerator**.
+This is a theorem-level countermodel to charging absolute helicity conversion as
+an independent phase cost.  Capacity normalization can still register the
+associated amplitude deformation; the statement here concerns the exact signed
+nonlinear numerator.
+
+If the two parents see different determinant-one maps, then exactly
+
+\[
+\boxed{
+(M_1U)^TJ(M_2V)
+=U^TJ(M_1^{-1}M_2)V.
+}
+\]
+
+Hence the transfer-distinguishable parent variable is the **relative**
+polarization deformation.  The child helicity factor remains separate.
+
+This quotient by the common `SL(2)` gauge leads to a sharper physically aligned
+strain observable.  At the symmetric extremizer define
+
+\[
+Q_{rel}
+=\|D_\Pi\|_F^2
++\|D_1-D_2\|_F^2
++\|D_3\|_F^2,
+\]
+
+where `D_3` is the trace-free strain on the child polarization plane.  In
+child-aligned coordinates
+
+\[
+S=\begin{pmatrix}a&b&x\\b&d&y\\x&y&-a-d\end{pmatrix},
+\qquad C=\cos^2(\theta_*/2)=\frac1{4r_*^2},
+\]
+
+direct algebra gives the exact positive remainder
+
+\[
+\boxed{
+Q_{rel}-\frac12\|S\|_F^2
+=\frac32d^2
++(1+8C-8C^2)b^2
++(7-8C)x^2+y^2.
+}
+\]
+
+Action `31172607991` Arb-certified the two nontrivial coefficients on the
+certified `r_*` bracket, hence
+
+\[
+\boxed{
+Q_{rel}\ge\frac12\|S\|_F^2.
+}
+\]
+
+The workflow passed `156` tests and `50,000` tensor/`SL(2)`/strain checks.  The
+worst tensor-factorization residual was `5.551e-16`, common-`SL(2)` invariance
+residual `7.553e-14`, and the worst sampled transfer-relevant ratio was
+`0.510336893`.  The earlier `13/20` theorem remains useful absolute tomography;
+this `1/2` theorem uses variables that respect the exact common-parent
+symplectic neutrality of the extremal nonlinear interaction.
 
 #### Spatial moat width must balance curvature
 
@@ -1986,6 +2084,12 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 - Arb-certified full 3D strain tomography at the symmetric extremizer:
   `||D_Pi||_F^2+||D_1||_F^2+||D_2||_F^2 >= (13/20)||S||_F^2`, hence the combined
   scalar-shape/helicity-mixing observable is `>=559/2000 ||S||_F^2`;
+- exact isosceles extremal helicity-tensor factorization
+  `C_(s1,s2,s3)=-i C(r) s3 epsilon_(s1,s2)`, common-parent symplectic identity
+  `(M U)^T J(M V)=U^TJV` for `M in SL(2)`, and relative formula through
+  `M_1^-1 M_2`; Arb-certified transfer-distinguishable strain observable
+  `||D_Pi||^2+||D_1-D_2||^2+||D_child||^2 >= (1/2)||S||^2`.  The `13/20`
+  result is absolute tomography, not by itself a transfer-deficit theorem;
 
 ### Computationally supported, not interval-certified
 
@@ -2078,9 +2182,12 @@ The most useful recorded runs, in chronological order, are:
 | `31171127537` | Arb-certified diamond phase holonomy branch `D_phase>=beta_phi/250`; `148` tests + `50,000` diamonds |
 | `31171360107` | Arb-certified full 3D strain observability `>=13/20` and combined shape/helicity constant `559/2000`; `149` tests + `100,000` strains |
 | `31171484247` | objective helical polarization / strain-area commutator; `152` tests + `50,000` checks |
+| `31172607991` | extremal helicity tensor / common-parent `SL(2)` neutrality and Arb-certified transfer-relevant strain observable `>=1/2`; `156` tests + `50,000` checks |
 
-The current preferred master regression is run `31169621311` on the integrated
-affine-spacetime bridge commit `2b795d2` (`20,000` episode traces, worst margin
+| `31171921187`--`31171950823` | integrated helical/spacetime stack on `6226fd9`: spin transport, explicit spin-dihedral phase holonomy, full-strain tomography, objective polarization, intrinsic 3D plane, affine grain, strain coherence and master all green; `153` tests per workflow, master `20,000` traces with worst margin `0` |
+
+The current preferred master regression is run `31171950823` on the integrated
+helical/spacetime bridge commit `6226fd9` (`20,000` episode traces, worst margin
 `0`).  The earlier integrated frequency/pressure bridge run `31166171000`
 remains useful provenance.  The earlier
 recorded master artifact `31154025683/` remains the canonical stored
@@ -2095,9 +2202,12 @@ preferred single-edge/physical-weight certificate is
 `recorded-results/31165654509/`.  The preferred smooth-symbol freezing artifact
 is `recorded-results/31165838379/`.  The preferred affine-spacetime dynamics artifacts are
 `recorded-results/31168393589/`, `recorded-results/31168671304/`,
-`recorded-results/31168888413/`, and `recorded-results/31169128097/`, plus the intrinsic 3D continuation `recorded-results/31170015795/`; the two
-failed interval-boundary provenance runs are `recorded-results/31168205564/`
-and `recorded-results/31168303213/`.  Final integration runs are
+`recorded-results/31168888413/`, and `recorded-results/31169128097/`, plus the intrinsic 3D continuation `recorded-results/31170015795/`.  The preferred helical artifacts are
+`recorded-results/31171018560/`, `recorded-results/31171127537/`,
+`recorded-results/31171360107/`, `recorded-results/31171484247/`, and the
+symplectic correction `recorded-results/31172607991/`; the two failed
+interval-boundary provenance runs are `recorded-results/31168205564/` and
+`recorded-results/31168303213/`.  Final integration runs are
 `31166152074`, `31166155045`, `31166158218`, `31166160711`, `31166163414`,
 `31166165985`, `31166168659`, and `31166171000`.  The numerical full-Mellin search is recorded
 in `recorded-results/31160779428/`; its qualitative counterexample is separately
@@ -2178,10 +2288,11 @@ velocity curvature in general.
 The next mathematically decisive work is therefore:
 
 1. construct a **full 3D transfer-preserving moving packet frame**.  Scalar
-   plane tilt, affine helical gauge transport, full-strain observability and
-   finite-diamond phase holonomy are now controlled.  The unresolved content is
-   continuum spatial variation of those local gauges, nonlinear forcing between
-   the two helicity channels, and a full time-ordered phase estimate beyond the
+   plane tilt, affine helical gauge transport, phase holonomy, the common-parent
+   `SL(2)` neutrality and the transfer-distinguishable strain observable are now
+   controlled.  The unresolved content is continuum spatial variation of those
+   local gauges, **relative** parent/child polarization forcing after quotienting
+   the common `SL(2)` gauge, and a full time-ordered phase estimate beyond the
    certified/analytic local pieces;
 2. make the **adaptive curvature-balanced windows** compatible with the nested
    packet ancestry, and prove that local pressure-Hessian, SGS transport `RU`,
@@ -2208,7 +2319,7 @@ For a new reader, the recommended order is:
 5. `docs/localized_sgs_pressure_ledger.md` and `docs/annular_pressure_collision.md`;
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
-8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, and `docs/objective_helical_polarization.md`;
+8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, and `docs/extremal_helicity_symplectic.md`;
 9. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 10. `docs/scale_holonomy.md`;
 11. `docs/multiscale_bellman.md`;

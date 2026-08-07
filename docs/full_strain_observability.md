@@ -68,8 +68,14 @@ Therefore
 }
 \]
 
-This is a physical tomography theorem for the local strain: a large
+This is an **absolute physical tomography** theorem for the local strain: a large
 incompressible symmetric strain cannot simultaneously hide from the triad's
-side-length geometry and from the helicity conversion of both parents.  Rigid
-rotation is absent because it belongs to the antisymmetric velocity gradient,
-while isotropic dilation is absent because `tr S=0`.
+side-length geometry and from the two absolute parent helicity mixers.  It is
+not, by itself, a normalized-transfer deficit theorem.  The signed isosceles
+helicity tensor has an exact common-parent `SL(2)` symmetry, so a common
+determinant-one deformation can preserve the unnormalized nonlinear parent
+wedge even while both parents mix helicity strongly.  The transfer-relevant
+quotient is developed in `docs/extremal_helicity_symplectic.md`, where relative
+parent mixing, child mixing and scalar shape obey a separate `1/2` coercivity
+theorem.  Rigid rotation is absent because it belongs to the antisymmetric
+velocity gradient, while isotropic dilation is absent because `tr S=0`.

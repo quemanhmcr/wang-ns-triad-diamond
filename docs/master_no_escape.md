@@ -322,11 +322,26 @@ phase is constant away from zeros, and reuse between different triad planes is
 measured by the spin-one dihedral transition `exp(-is psi)`.  Diamond reuse has
 an exact gauge-invariant phase holonomy and the positive cost above.  In an
 objective transverse frame, first-order trace-free strain is an opposite-
-helicity mixer rather than a Berry-phase drift; scalar shape deformation plus
-both parent helicity mixers observe the full symmetric trace-free strain with
-certified constant `13/20`.  What remains is the localized nonlinear packet
-realization and full time-ordered phase control, not the identification of the
-correct geometric connection.
+helicity mixer rather than a Berry-phase drift.  The absolute mixers give an
+Arb-certified `13/20` tomography statement, but the signed extremal tensor shows
+that a common determinant-one deformation of both parent helicity spinors
+preserves their **unnormalized symplectic nonlinear wedge** exactly.  After
+quotienting this common `SL(2)` gauge, the transfer-distinguishable strain
+observable obeys the sharper physically aligned theorem
+
+\[
+\boxed{
+\|D_\Pi\|_F^2+\|D_1-D_2\|_F^2+\|D_{child}\|_F^2
+\ge\frac12\|S\|_F^2.
+}
+\]
+
+Thus absolute helicity conversion is not promoted by itself to a phase cost;
+relative parent polarization, child polarization, capacity normalization and
+scalar shape are the variables the nonlinear transfer actually distinguishes.
+What remains is the localized nonlinear packet realization and full
+time-ordered phase control, not the identification of the correct geometric
+connection.
 
 The actual Navier--Stokes gap is therefore now the **construction** of the
 transfer roles and their spacetime packetization.  Common parent/child log

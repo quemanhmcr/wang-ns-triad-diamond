@@ -1,0 +1,19 @@
+{
+  "certificate": {
+    "rstar_ball": "[0.6109041016 +/- 2.01e-11]",
+    "cos2_half_angle_ball": "[0.6698752416 +/- 5.99e-11]",
+    "relative_observability_lower": "1/2",
+    "remainder_identity": "(3/2)d^2+(1+8C-8C^2)b^2+(7-8C)x^2+y^2",
+    "b_coefficient_ball": "[2.769139218 +/- 6.39e-10]",
+    "x_coefficient_ball": "[1.640998067 +/- 2.80e-10]",
+    "equality_mode": "S=diag(a,0,-a) in child-aligned coordinates",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_tensor_factorization_residual": 5.551115123125783e-16,
+    "worst_common_sl2_invariance_residual": 7.553091820984945e-14,
+    "worst_relative_matrix_residual": 3.477702718741679e-14,
+    "worst_transfer_observability_ratio": 0.5103368927523465
+  }
+}
