@@ -32,3 +32,13 @@ def test_simultaneous_witness_small_path():
         q,c=component_collision(4,edges,mask,p)
         if q<=cert['qbound']+1e-12 and c<=cert['cbound']+1e-12: found=True
     assert found
+
+def test_quantile_constants_are_positive():
+    for delta in [0.05,0.1,0.25,0.5]:
+        F=delta*(1-math.exp(-1))
+        h=-math.log(1-F/2)
+        K=2*(2-F)/F
+        eps=0.02
+        L0=2*K/eps
+        hedge=-math.log(1-eps/(2*K))
+        assert 0<F<1 and h>0 and K>0 and L0>0 and hedge>0

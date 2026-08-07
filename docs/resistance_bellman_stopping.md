@@ -86,3 +86,89 @@ so both the Bellman entropy gain and the simultaneous-cut constant are universal
 \]
 
 The low-median branch is sent to the multicommodity Hodge/synchronization module.
+
+## Quantile no-escape corollary
+
+Fix `delta in (0,1)` and choose a resistance quantile `Lambda_delta` with
+
+\[
+\mathbb P(R\le\Lambda_\delta)\ge1-\delta,
+\qquad
+\mathbb P(R\ge\Lambda_\delta)\ge\delta.
+\]
+
+Then
+
+\[
+F_{\Lambda_\delta}\ge F_\delta:=\delta(1-e^{-1}).
+\]
+
+Hence the stopping partition may be chosen with
+
+\[
+H_2(\text{components})\ge h_\delta:=-\log(1-F_\delta/2)
+\]
+
+and
+
+\[
+C_{\rm cross}\le K_\delta\rho_{\Lambda_\delta},
+\qquad
+K_\delta:=\frac{2(2-F_\delta)}{F_\delta}.
+\]
+
+Fix a desired cross-error `epsilon` and put
+
+\[
+\Lambda_0=\frac{2K_\delta}{\epsilon}.
+\]
+
+If `Lambda_delta > Lambda_0`, then either
+
+\[
+\rho_{\Lambda_\delta}\le\epsilon/K_\delta,
+\]
+
+which gives the Bellman partition with cross error at most `epsilon`, or
+
+\[
+\rho_{\Lambda_\delta}>\epsilon/K_\delta.
+\]
+
+In the latter case
+
+\[
+H_2(c)\ge
+-\log\!\left(1-\frac{\epsilon}{K_\delta}+\frac1{\Lambda_\delta}\right)
+\ge
+-\log\!\left(1-\frac{\epsilon}{2K_\delta}\right)>0.
+\]
+
+Thus high resistance gives Bellman component entropy or conductance atomic entropy.
+
+If instead `Lambda_delta <= Lambda_0`, at least `1-delta` of pair mass has resistance at most `Lambda_0`. Applying the multicommodity Hodge inequality only to this core gives, in the integer flat-gauge model,
+
+\[
+\mathbb P(d_I\ne d_J)
+\le
+\delta+\frac{\mathcal E_H\Lambda_0}{\gamma_*^2}.
+\]
+
+Consequently one integer gauge class has mass at least
+
+\[
+1-\delta-\frac{\mathcal E_H\Lambda_0}{\gamma_*^2}.
+\]
+
+This produces the finite-dimensional congestion trichotomy
+
+\[
+\boxed{
+\text{Hodge cost}
+\quad\text{or}\quad
+\text{gauge synchronization}
+\quad\text{or}\quad
+\text{Bellman/atomic entropy}.}
+\]
+
+No logarithm of the number of packets occurs.
