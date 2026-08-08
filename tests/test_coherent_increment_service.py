@@ -28,20 +28,20 @@ def test_local_cell_increment_capacity():
 def test_clean_interface_route():
     Y=1.0; d=.1
     assert low_square_service_lower(Y,d)>=.5
-    r=coherent_service_route(Y,d,.1,.08,.2,[.25],['A'])
+    r=coherent_service_route(Y,d,.1,.08,.2,[.55],['A'])
     assert r['branch']=='selected_interface_Xi'
 
 
 def test_clean_dominant_new_cluster_mass():
     Y=1.; d=.1
-    r=coherent_service_route(Y,d,.1,.05,.05,[.4,.05,.05],['A','B','C'])
+    r=coherent_service_route(Y,d,.1,.05,.05,[.6,.05,.05],['A','B','C'])
     assert r['branch']=='dominant_new_coherent_cluster'
     assert r['coherent_critical_mass_lower']>=1/32
 
 
 def test_entropy_or_cycle_constants():
     Y=1.; d=.1
-    w=[.08]*8
+    w=[.10]*8
     r=coherent_service_route(Y,d,.05,.02,.02,w,list(range(8)))
     assert r['branch']=='new_service_Bellman_entropy'
     assert r['H_ancestry']>=math.log(2)-1e-12
