@@ -4516,9 +4516,12 @@ The most useful recorded runs, in chronological order, are:
 | `31229543390` | whole-old-reservoir-pool erosion on `8c50370`: under frame budget `P`, old-pool service decays `<2^-q`; uniform service forces relinking, then exact incidence Euler routes connected relinking to fresh-rich or cycle-rich; `274` tests + `7` optional skips + `50,000` pool checks + `5,000` incidence checks |
 | `31229863366` | preferred affine coherent-state Bessel/Riesz certificate on `84ae98c`: exact intrinsic overlap, 4-separated Bessel `25/4`, 5-separated Gram spectrum `[47/50,53/50]`, synthesis budget `P=50/47`; `286` tests + `50,000` affine checks + finite Gram probes |
 | `31230201131` | exact affine coherent Moyal ledger on `975f680`: positive continuous phase-space cell energy with `P=1` by Plancherel/Fubini; `282` tests + `8` optional skips + `5,000` discrete Moyal regressions |
+| `31230314319`--`31230338382` | twelve-workflow coherent-reservoir integration on `7b350ef`: physical scale progress, Moyal `P=1`, coherent Riesz `P=50/47`, whole-old-pool erosion, nested fresh/cycle graph, ancestor and pressure synchronization, band-limited source sampling, Onsager/source episodes, sticky aspect and master all green; master `20,000` traces, worst margin `0` |
 
-The current preferred master regression is run `31227894352` on integration
-commit `9c5f465` (`258` tests plus `20,000` episode traces, worst margin `0`).
+The current preferred master regression is run `31230338382` on coherent-reservoir
+integration commit `7b350ef` (`282` tests, `8` optional skips, plus `20,000`
+episode traces, worst margin `0`).  The twelve-workflow coherent-reservoir stack
+`31230314319`--`31230338382` was green on that exact SHA.
 The full source/sideband/ancestry integration on that exact SHA is
 `31227852933`, `31227856265`, `31227859724`, `31227862808`, `31227865715`,
 `31227868626`, `31227871490`, `31227874557`, `31227877505`, `31227881162`,
