@@ -1,0 +1,21 @@
+{
+  "certificate": {
+    "status": "EXACT_COHERENT_AFFINE_PROJECTION_AND_DEFORMATION_DISSIPATION_COLLISION__AVERAGED_TRANSPORTER_SOURCE_CALCULUS_REMAINS",
+    "affine_projection": "vbar=E_gamma W, Abar=E_gamma grad W=E_gamma[W tensor z]; R=W-vbar-Abar z has Hermite degrees >=2",
+    "ou_gap": "E|R|^2 <= (1/2) E|grad R|^2=(1/2) K_coh^2",
+    "weighted_moment": "E|z|^2|R|^2 <= 7 K_coh^2 in d=3",
+    "gaussian_core_forcing": "||R_nonaff psi||/||psi|| <= [1+|q|/sqrt2+sqrt7/2] K_coh",
+    "radius_aspect_carrier": "|q|<=aspect^(2/3)(N r_g)(|k|/N)",
+    "dissipation_collision": "I_K^2 <= C_coh c D_V with C_coh=0.275568824559 on aspect<=567/500 and r_g>=2/(3N)",
+    "master_route": "large coherent deformation action is critical D_V; small action makes the full Gaussian-core nonaffine low-high forcing perturbative without resolving separate high Hermite currencies",
+    "continuum_status": "to replace the center transporter globally, derive the resolved Navier-Stokes source/corotational calculus for the coherent averaged affine jet Abar and register its time variation once"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_spectral_gap_margin": 0.0,
+    "minimum_position_weight_margin": -1.7763568394002505e-15,
+    "minimum_dissipation_margin": 9.354647544090877e-08,
+    "minimum_axis_margin": 6.501594983499004e-07,
+    "maximum_clean_collision_constant": 0.27556882455865317
+  }
+}

@@ -5424,6 +5424,7 @@ The most useful recorded runs, in chronological order, are:
 | `31262755985` | physical-energy causal bridge on `84c8652`: exact flat scalar countermodel to raw `dGamma=dT` (`Gamma([0,1/2])=1/2`, `T([0,1/2])=1/4`), exact adjoint-response physical-work split, low-strain energy gate `E1<=e^(2K)(E0+W_HH^++W_R^+)` and clean route `K<=1/30`, `E0,W_R^+<E1/5 => W_HH^+>=8E1/15`; causal layers are weighted by actual `dT_HH=2[Re<c,F_HH,alpha>]_+dt`, while Duhamel supplies same-time parent-pair support; asynchronous synchronization is measure-agnostic; `387` tests + `50,000` states, projection residual `1.066e-14` |
 | `31263195439` | recursive coherent witness extraction on `079f2f4`: exact quadratic source disintegration `N(w1,w2)=sum_CD N(A_Cw1,A_Dw2)` and exact actual-work atoms `W_CDE=2 Re<A_Ew3,N(A_Cw1,A_Dw2)>`, with `sum W_CDE` equal to selected HH work; positive/negative Hahn split gives physical binary parent-pair/child event measure, atomic positive mass dominates aggregate positive work, and selected positive cross-cell atoms are excised once into `Xi`; combined with the energy gate, generated mass is `>=8E1/15` before `Xi` and `>=(1-rho)8E1/15` after relative excision; `392` tests + `20,000` POVM/bilinear states, work residual `3.678e-15` |
 | `31263818795` | resolved-role Egorov/countermodel on `ba3d345`: exact affine-subtracted identity `(dot Q+[V.grad,Q])f=int K_N(y)[V(x)-V(x-y)-Ay].grad f(x-y)dy`, curvature-only integral-Taylor bound with no higher derivative tower, and explicit strict-lowpass divergence-free shear `V_2=a[sin(rx_1)-sin(2rx_1)/2]`, `r=N/8`, with `grad V(0)=Hess V(0)=0` but `d_1^3V_2(0)=3ar^3`, ruling out center-Hessian-only closure; natural replacement is affine-invariant coherent deformation variance `K_coh^2=Var_gamma[L^-1 grad V(X+Lz)L]`, controlled by coherent curvature energy through Gaussian Poincare; `398` tests + `50,000` states, commutator residual `5.848e-16` |
+| `31264233454` | coherent affine projection on `f8164ce`: choose the whole-eddy Gaussian regression `vbar=E_gamma W`, `Abar=E_gamma grad W`; the residual has Hermite degree `>=2`, so OU gap gives `E|R|^2<=K_coh^2/2` and creation/annihilation gives `E|z|^2|R|^2<=7K_coh^2`; full scalar-advection plus vector-amplitude Gaussian-core residual is `<= [1+|q|/sqrt2+sqrt7/2]K_coh`; radius/aspect bounds `q`, and `I_K^2<=0.275568824559 c D_V` on the transition strip, collapsing all higher spatial Hermite deformation into perturbative forcing or critical dissipation rather than new currencies; `403` tests + `50,000` states |
 
 | `31249662333`, `31249664073`, `31249665749`, `31249667523`, `31249669387`, `31249671051`, `31249672640`, `31249674254`, `31249675942` | nine-workflow adjoint-causal integration on `f1f0e62`: coherent transfer cells, coherent increment service, service-or-flat rigidity, physical flat episode, causal binary ancestry, transfer-weighted Shannon reuse, Renyi causal reuse, adjoint Kelvin--Duhamel and master all green; adjoint workflow `339` tests + `50,000` checks, master `20,000` traces with worst margin `0` |
 
@@ -5959,16 +5960,57 @@ not at one privileged point.  Preferred certificate: `31263818795` on
 `ba3d345` (`398` tests + `50,000` states; exact commutator residual
 `5.848e-16`).
 
-The decisive next bridge is now **coherent-curvature-spectrum no escape**.  The
-pointwise differentiated-incompressible curvature still obeys the exact
-`15=(7+3)_{H3}+5_{H1}` irreducible split, and averaging preserves its quadratic
-observability.  What is not yet proved is that the existing time-dependent H1/H3
-sideband/source theorems consume the *full coherent/cellwise curvature energy*,
-including spatial higher-Hermite variation invisible to center sampling, without
-creating a new currency.  One must either extend H1/H3 no-escape to this coherent
-curvature measure or prove the higher coherent Hermite sector is itself
-multiplicatively transfer-costly/flat-absorbable.  Until that collision is
-proved, the continuum bridge remains open.  No global-regularity claim is made.
+The **full coherent spatial deformation spectrum now collapses to one physical
+observable** if the common affine gauge is chosen by Gaussian regression over the
+whole eddy.  In intrinsic coordinates `W=L^-1V(X+Lz)`, set
+
+\[
+\bar v=\mathbb E_\gamma W,
+\qquad
+\bar A=\mathbb E_\gamma\nabla_zW,
+\qquad
+R=W-\bar v-\bar A z.
+\]
+
+Gaussian integration by parts makes this the orthogonal projection onto Hermite
+degrees `0+1`; hence `R` has degrees `>=2` and
+
+\[
+\boxed{\mathbb E|R|^2\le\tfrac12\mathcal K_C^2},
+\qquad
+\boxed{\mathbb E|z|^2|R|^2\le7\mathcal K_C^2}.
+\]
+
+For the Gaussian core `psi=g exp(iq.z)`, scalar residual advection together with
+vector rapid-distortion mismatch obeys
+
+\[
+\boxed{
+\|F_{nonaff}\|_2/\|\psi\|_2
+\le(1+|q|/\sqrt2+\sqrt7/2)\mathcal K_C.}
+\]
+
+On the scale-matched transition-aspect branch `q` is uniformly bounded by radius
+and aspect.  Large accumulated coherent deformation is already critical
+dissipation:
+
+\[
+\boxed{I_K^2\le0.275568824559\,cD_V.}
+\]
+
+Thus higher spatial Hermite degrees do **not** require new master currencies just
+to control the moving Gaussian core: small `I_K` is perturbative, large `I_K`
+routes to critical `D_V`.  Preferred certificate: `31264233454` on `f8164ce`
+(`403` tests + `50,000` states).
+
+The decisive next bridge is now the **resolved source calculus of the coherent
+averaged affine jet** `bar A(t)`.  If this whole-eddy regression replaces the
+point-sampled center jet as the common Kelvin gauge, its moving Gaussian average
+must satisfy an exact corotational Navier--Stokes source identity.  The extra
+Reynolds/deformation terms created by the moving average must be shown to route
+once into `K_coh^2`/critical dissipation, while averaged pressure, SGS and viscous
+sources must retain the existing filtered collisions.  This source calculus is
+not yet promoted here.  No global-regularity claim is made.
 
 ---
 
@@ -5984,7 +6026,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

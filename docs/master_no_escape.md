@@ -1720,9 +1720,37 @@ by Gaussian Poincare.  Preferred certificate: `31263818795` on `ba3d345`
 (`398` tests plus `50,000` Egorov/curvature states; commutator residual
 `5.848e-16`).
 
-Thus the remaining continuum gap is now the **coherent-curvature-spectrum
-collision**: extend the existing H1/H3/source no-escape architecture from the
-osculating center curvature to this full coherent/cellwise curvature energy, or
-show that the higher coherent Hermite part is itself transfer-costly or uniformly
-absorbable on a Kelvin-flat step.  That collision is not yet proved.  This is not
-a Navier--Stokes global-regularity proof.
+The whole higher-Hermite spectrum can in fact be controlled without creating new
+currencies by choosing the affine gauge from the coherent eddy itself.  With
+`W=L^-1V(X+Lz)`, `vbar=E W`, `Abar=E grad W`, the residual
+`R=W-vbar-Abar z` has Gaussian Hermite degree at least two.  Ornstein--Uhlenbeck
+and creation/annihilation estimates give
+
+\[
+E|R|^2\le\tfrac12K_{coh}^2,
+\qquad E|z|^2|R|^2\le7K_{coh}^2,
+\]
+
+so the complete Gaussian-core non-affine low--high forcing obeys
+
+\[
+\|F_{nonaff}\|_2/\|\psi\|_2
+\le(1+|q|/\sqrt2+\sqrt7/2)K_{coh}.
+\]
+
+Radius/aspect controls `q` on the scale-matched branch, while
+
+\[
+I_K^2\le0.275568824559\,cD_V
+\]
+
+on `cond(L)<=567/500`.  Hence full coherent deformation is perturbative when
+small and critical-dissipative when large; it does not require `H4/H5/...`
+master currencies.  Preferred certificate: `31264233454` on `f8164ce` (`403`
+tests plus `50,000` states).
+
+The remaining continuum gap is therefore the **source calculus for the coherent
+averaged affine jet** `Abar(t)`.  Its exact moving-average/corotational resolved
+Navier--Stokes identity must be derived, and the averaging-induced Reynolds terms
+must be routed into `K_coh^2`/`D_V` without duplicating pressure/SGS/viscous
+sources.  This is not a Navier--Stokes global-regularity proof.
