@@ -1,0 +1,25 @@
+name: Asynchronous Duhamel synchronization
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/asynchronous_duhamel_sync.py'
+      - 'tests/test_asynchronous_duhamel_sync.py'
+      - 'docs/asynchronous_duhamel_sync.md'
+      - '.github/workflows/asynchronous-duhamel-sync.yml'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.asynchronous_duhamel_sync --samples 50000 --outdir results-asynchronous-duhamel-sync
+      - run: cat results-asynchronous-duhamel-sync/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: asynchronous-duhamel-sync-results
+          path: results-asynchronous-duhamel-sync/
