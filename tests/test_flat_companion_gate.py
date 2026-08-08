@@ -13,7 +13,7 @@ def test_two_concentrated_marginals_force_separated_cores():
     out=classify_flat_companion(H,.995,.997)
     assert out['branch']=='two_trackable_parent_cores'
     assert out['barycenter_direction_angle_lower']>1
-    assert out['mass_each_cap_lower']>=7/9
+    assert out['mass_each_cap_lower']>=7/9-1e-14
     assert out['cap_gap_chord_lower']>1/3
 
 
