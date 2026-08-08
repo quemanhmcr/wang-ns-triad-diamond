@@ -1778,9 +1778,28 @@ increase the global supremum.  Preferred certificate: `31264579580` on
 `31264531046` failed only on exact floating fixture equality before theorem
 stress and is recorded separately.
 
-Thus the remaining continuum gap is now the **recursive assembly/extraction
-bridge**: show that the actual efficient smooth-SGS block selector, one-shot
-near-Gaussian role, coherent averaged Kelvin transport, physical-energy causal
-gate and exact binary coherent work all use the same physical transfer law and
-that every replacement/representative/cross-cell discrepancy is charged once to
-the already summable `Xi`.  This is not a Navier--Stokes global-regularity proof.
+The coherent service-or-flat gate now removes frozen Gaussian-profile persistence
+from that assembly.  Define
+
+\[
+\mathfrak F_{coh}
+=\sqrt{E_H^{phys}}+(dT)_{nonconf}+C(q_{max})I_K.
+\]
+
+For the clean default radius/aspect/shell branch,
+`qmax=4.71207563594`, `C(qmax)=5.65481629117`; at `tau=1/100`,
+`I_K<5.89468014821e-4` makes the complete non-affine Gaussian-core connection
+piece `<tau/3`, while the existing Hodge and common-strain gates supply the other
+two thirds.  Larger `I_K` is critical `D_V`.  The theorem reports all simultaneous
+physical root candidates and delegates the primary choice to the first-causal
+compiler.  Preferred certificate: `31264981294` on `184c64e` (`414` tests plus
+`50,000` branch states).
+
+Thus the remaining continuum gap is no longer packet persistence.  It is the
+**eventwise Gaussian marking/registration bridge**: attach a near-Gaussian affine
+mark to each efficient physical-transfer event and register that mark with the
+same material coherent role used by the exact binary work law, without making an
+arbitrary Gaussian representative change look like physical covariance/relink
+work.  Common affine changes must remain gauge; only actual material/covariance
+changes or the already summable representation `Xi` may be charged.  This is not
+a Navier--Stokes global-regularity proof.
