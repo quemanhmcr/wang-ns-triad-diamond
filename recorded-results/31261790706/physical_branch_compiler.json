@@ -1,0 +1,35 @@
+{
+  "certificate": {
+    "status": "EXACT_CAUSAL_QUOTIENT_AND_TRANSFER_MEASURE_PARTITION__PDE_KERNEL_BRIDGE_CONDITIONAL",
+    "transfer_partition": "dT = dT_Xi + sum_r dT_r with nonnegative pieces and exact total mass",
+    "stopping_rule": "fixed transfer loss first; otherwise first physical causal root; no hit => certified Kelvin-flat erosion",
+    "duplicate_rule": "theorem manifestations sharing one causal root are quotiented before charging",
+    "tie_rule": "independent exact first-time ties split positive transfer measure by normalized stopping weights, not theorem-name priority",
+    "boundary_rule": "t=0 is absorbing and cannot be renamed fresh interior ancestry",
+    "master_rule": "critical mass/source/dissipation remain recursive; only a scale-independent threshold in a globally bounded resource enters N_A",
+    "duhamel_warning": "dGamma is a conditional positive amplitude-generation kernel, not automatically the physical child-transfer law",
+    "continuum_status": "does not prove every recursive Navier-Stokes block supplies the required causal witnesses or the Duhamel-to-physical transfer-kernel identification"
+  },
+  "double_charge_matrix": {
+    "H1/H3 dephasing | causing pressure/SGS/viscous source": "downstream_do_not_charge_separately",
+    "high resolved strain | forced D_V lower bound": "downstream_do_not_charge_separately",
+    "physical covariance deformation | strain/source that causes it": "downstream_do_not_charge_separately",
+    "representative covariance change | physical covariance deformation": "coexist_choose_one_primary_other_diagnostic",
+    "coherent relinking in retained graph | omitted cross-cell Xi": "mutually_exclusive",
+    "new coherent Moyal mass | fresh affine-radius certificate": "downstream_do_not_charge_separately",
+    "pair rescue | reuse-cycle/Renyi currency": "downstream_do_not_charge_separately",
+    "transfer deficit | backscatter/cancellation manifestation": "downstream_do_not_charge_separately",
+    "physical cross-cell transfer | symbol-freezing approximation": "independent_resources_may_cocharge",
+    "Duhamel classified residual | underlying source/interface term": "downstream_do_not_charge_separately",
+    "initial-boundary termination | fresh interior packet": "mutually_exclusive"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_mass_margin": 1.999733711954832e-12,
+    "maximum_mass_residual": 1.4210854715202004e-14,
+    "tie_samples": 12048,
+    "flat_samples": 7271,
+    "transfer_stop_samples": 9903,
+    "boundary_samples": 2622
+  }
+}

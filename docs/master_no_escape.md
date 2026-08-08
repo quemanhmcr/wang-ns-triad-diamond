@@ -1542,3 +1542,84 @@ green.  The preferred master run is `31258603563` with `20,000` episode traces
 and worst margin `0`.  The coherent localization run `31258595663` had exact
 trilinear reconstruction residual `5.288e-14`; the defect-moat run `31258597148`
 had minimum cross-bound margin `6.917e-4` over `50,000` weighted triad graphs.
+
+## Single-charge causal quotient and physical branch compiler
+
+The remaining branch audit now has a theorem-level **single-charge algebra on the
+positive physical transfer measure**.  The key correction is that raw theorem
+predicates are not assumed mutually exclusive.  They are first quotiented by
+physical causal provenance: source-caused H1/H3 dephasing is one source event;
+high strain and its forced `D_V` lower bound are one critical-dissipation event;
+pair rescue delegates to its reuse/cycle endpoint; a Duhamel `R_class` term
+delegates to the source/interface term it contains; and the initial surface is an
+absorbing boundary rather than a fresh interior grain.
+
+The exact coherent synthesis and transfer-defect moat give first
+
+\[
+\boxed{d\mathcal T=d\mathcal T_\Xi+d\mathcal T^{ret}.}
+\]
+
+A fixed multiplicative transfer loss is an absorbing gate on
+`dT^ret`.  Otherwise let `tau_r` be the first hitting time of the certified
+physical causal root `r`.  The first root owns the retained charge.  If truly
+independent roots tie exactly, no lexicographic theorem priority is imposed:
+with positive stopping weights `a_r`, use
+
+\[
+\boxed{\lambda_r={a_r\over\sum_s a_s},\qquad
+ d\mathcal T_r=\lambda_r d\mathcal T^{ret}.}
+\]
+
+Duplicate manifestations of the same root are combined before this
+normalization.  Consequently
+
+\[
+\boxed{
+d\mathcal T
+=d\mathcal T_\Xi
++d\mathcal T_{mult}
++d\mathcal T_{flat}
++d\mathcal T_{sticky}
++d\mathcal T_{reuse}
++d\mathcal T_{side}
++d\mathcal T_{src}
++d\mathcal T_{diss}
++d\mathcal T_{reset}
++d\mathcal T_0
+}
+\]
+
+with nonnegative pieces and exact total mass.  Away from exact independent tie
+sets this is a disjoint stopping partition; on a tie set it is an exact
+Radon--Nikodym partition rather than duplicated measure.
+
+The master projection is deliberately asymmetric.  Transfer/Renyi/direct
+sideband endpoints enter `N_T`; Kelvin-flat steps enter `N_F`; a reset enters
+`N_A` only with a scale-independent threshold in the same genuinely globally
+bounded resource; source, coherent new mass and `D_V` remain **recursive
+scale-critical currencies**; `t=0` terminates ancestry; and the selected
+cross/representation measure enters `Xi` once.  Thus the compiler cannot be used
+to smuggle critical `N E` or `D_V` into the finite reset count.
+
+The compiler also exposes one precise remaining measure bridge.  The adjoint
+Kelvin--Duhamel law
+
+\[
+d\Gamma=[\Re(e^{-i\vartheta}dI_{HH})]_+
+\]
+
+is positive but measures aligned **amplitude generation**, not automatically the
+same physical child-energy transfer law.  It should therefore be used as a
+conditional parent-pair kernel after a generated node, not added to `dT` as a
+second copy of the same conserved measure.  Before the transfer-weighted
+Shannon/Renyi/Hodge telescope can be invoked on that generated layer, the actual
+PDE extraction must identify this kernel with the same physical transfer law on
+the canonical material labels, or route their discrepancy once to an existing
+transfer/`Xi` branch.
+
+Preferred compiler certificate: `31261790706` on `f8cf98d` (`380` tests plus
+`50,000` synthetic causal block states; maximum transfer-mass residual
+`1.421e-14`).  This is an exact finite causal-quotient/measure-partition theorem,
+**conditional on the continuum block witnesses and Duhamel-to-physical
+transfer-kernel bridge**.  It is not a Navier--Stokes global-regularity proof.
