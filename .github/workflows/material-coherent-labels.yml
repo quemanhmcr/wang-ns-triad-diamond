@@ -1,0 +1,25 @@
+name: Material coherent labels
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/material_coherent_labels.py'
+      - 'tests/test_material_coherent_labels.py'
+      - 'docs/material_coherent_labels.md'
+      - '.github/workflows/material-coherent-labels.yml'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels
+      - run: cat results-material-coherent-labels/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: material-coherent-labels-results
+          path: results-material-coherent-labels/
