@@ -1,0 +1,17 @@
+{
+  "certificate": {
+    "window_moyal": "||V_g f-V_h f||_2=||f||_2 ||g-h||_2",
+    "gaussian_fidelity": "<g_Sigma,g_Theta>=2^(3/2)(det Sigma det Theta)^(1/4)/det(Sigma+Theta)^(1/2)",
+    "eigenvalue_form": "overlap=product_i cosh(a_i/2)^(-1/2), exp(a_i)=generalized covariance eigenvalues",
+    "clean_distance": "||g_Sigma-g_Theta||_2 <= ||a||_2/(2 sqrt(2))",
+    "cell_tv": "sum_C |E_Sigma(C)-E_Theta(C)| <= d_log ||f||_2^2/sqrt(2)",
+    "status": "EXACT_GAUSSIAN_FIDELITY_AND_MOYAL_WINDOW_STABILITY"
+  },
+  "stress": {
+    "samples": 50000,
+    "maximum_distance_ratio": 0.9993208174553244,
+    "worst_overlap_formula_residual": 1.4377388168895777e-14,
+    "worst_window_moyal_relative_residual": 7.042124953001599e-16,
+    "maximum_energy_tv_ratio": 0.47350258395747064
+  }
+}

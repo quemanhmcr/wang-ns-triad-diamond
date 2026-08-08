@@ -979,11 +979,113 @@ Thus coherent phase-space cells have positive energies summing exactly to the
 physical band energy: `P=1`.  The Riesz constant `50/47` is only needed when the
 analysis cells are replaced by an actual separated synthesis family.
 
-The unresolved master step is now **nonlinear transfer-to-coherent-cell
-assignment with covariance-cell / selected-interface synchronization**.
-Recursive packet extraction must show that the low/base service selected by the
-Navier--Stokes transfer can be assigned to these positive cell energies, and
-charge every close-cell merge, covariance-cell change or newly selected
-reservoir to `Xi`, fresh radius, Bellman/cycle structure, source action or
-dissipation.  A uniform physical block threshold and full recursive realization
-remain continuum tasks.
+## Coherent nonlinear work, increment edges and stopping epochs
+
+The transfer-to-coherent-cell step is now exact at the physical-work level.  For
+a normalized coherent window,
+
+\[
+\boxed{
+\mathcal W_C
+=2\Re\int_C\mathcal V_gf\,\overline{\mathcal V_gF}\,d\mu,
+\qquad
+\sum_C\mathcal W_C=2\Re\langle f,F\rangle.
+}
+\]
+
+Thus a Leray-projected nonlinear band forcing has a canonical coherent-cell work
+law.  Material affine cells use `zeta=(L^-1X/2,L^Tk)` and therefore acquire no
+common-affine interface forcing.  For a piecewise selected material family,
+
+\[
+\boxed{P_+\le E_{final}+P_-+R_{switch}},
+\]
+
+so at least one of terminal coherent energy, physical backflow/cancellation or
+relinking symmetric-difference mass is `>=P_+/3`.
+
+The actual SGS increment gives an even more transfer-facing positive edge law.
+With
+
+\[
+Y={(Q/g_1)^{2/3}\over(C_{LP}C_B)^2},
+\]
+
+if `d_high<Y/4` then
+
+\[
+S_{low}(r)=\sum_{j\le0}M_j\|\delta_ru_j\|_2^2\ge Y/2
+\]
+
+for one physical filter displacement `r`.  Moyal decomposes this exactly into
+
+\[
+\boxed{
+s_{j,C}=M_j\int_C|\mathcal V_{g_j}\delta_ru_j|^2d\mu,
+}
+\]
+
+and translation covariance gives
+
+\[
+\boxed{s_{j,C}\le2M_j\{E_j(C)+E_j(C-r)\}.}
+\]
+
+Once old-pool capacity is `<=Y/8`, either
+
+\[
+\boxed{\Xi_{cell}\ge Y/8},
+\]
+
+or a new coherent cluster has critical mass `>=Y/32`, or fragmentation pays
+`log 2` ancestry entropy / `1/4` same-ancestry cycle mass.  This is a genuine
+old/interface/new service graph, not a relabeling of aggregate band mass.
+
+Changing only the Gaussian covariance representative is also controlled.  If
+`d_log` is the affine-invariant SPD log-covariance distance, Gaussian fidelity
+and window-slot Moyal give
+
+\[
+\boxed{
+\int\big||\mathcal V_{g_\Sigma}f|^2-|\mathcal V_{g_\Theta}f|^2\big|d\mu
+\le {d_{log}\over\sqrt2}\|f\|_2^2.
+}
+\]
+
+Hence small covariance-cell updates enter `Xi_cov`; they are not fresh energy.
+
+The old-pool ratio
+
+\[
+r=231525/512000<1/2
+\]
+
+now becomes a stopping theorem.  If a sticky epoch has `Y>=Y_0`, it must incur a
+named cost by the first `q_*` with `C_0r^{q_*}<=Y_0/8`.  Relinking can restart the
+clock only by paying its own interface/fresh/cycle currency.
+
+On the differentiated-SGS H1 branch no persistence hypothesis is needed.  The
+source law `Q>=c_Q rho_R^(3/2)` followed by the coherent `2/3` collision gives
+`Y>=c_Y rho_R`.  For source weight `Sigma_R`, the scale-matched alternatives
+include
+
+\[
+\boxed{D_{high}\ge c_Y\Sigma_R/16},
+\qquad
+\boxed{\int\Xi_{cell}\ge c_Y\Sigma_R/32},
+\]
+
+or
+
+\[
+\boxed{\int\mu_{coh,new}\ge c_Y\Sigma_R/128}
+\]
+
+with the same entropy/cycle alternatives.
+
+The unresolved master step is now **uniform service-or-flat rigidity plus
+summable selected-interface telescoping**.  Every efficient PDE block must either
+carry a uniform coherent service/source threshold, or be forced into the
+Hodge-flat/scale-holonomy sticky geometry.  The resulting stopping epochs must
+then be telescoped while the total spatial/frequency/coherent/covariance `Xi`
+remains summable and no physical source or dissipation event is charged twice.

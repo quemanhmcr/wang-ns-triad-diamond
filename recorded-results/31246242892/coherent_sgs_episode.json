@@ -1,0 +1,20 @@
+{
+  "status": "SOURCE_WEIGHTED_COHERENT_ROUTING_NO_PERSISTENCE",
+  "stress": {
+    "samples": 50000,
+    "worst_relative_homogeneity_residual": 8.93843319581064e-16,
+    "minimum_partition_margin": 0.0,
+    "minimum_peak_occupation_margin": -3.469446951953614e-18
+  },
+  "theorem": {
+    "homogeneity": "rho_R -> Q>=c_Q rho_R^(3/2) -> Y_coh>=c_Y rho_R",
+    "scale_matched_y_weight": "int Y >= c_Y Sigma_R/2",
+    "dissipation": "D_high >= c_Y Sigma_R/16",
+    "low_service": "int S_low >= c_Y Sigma_R/8",
+    "old_target": "c C_old <= c_Y Sigma_R/32",
+    "Xi": "int Xi_cell >= c_Y Sigma_R/32",
+    "new_service": "int S_new >= c_Y Sigma_R/16",
+    "new_mass_occupation": "int mu_new >= c_Y Sigma_R/128",
+    "peak_new_mass": "sup mu_new >= c_Y Sigma_R/(128c)"
+  }
+}

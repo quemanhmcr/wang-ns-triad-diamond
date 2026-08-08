@@ -1,0 +1,353 @@
+verify	Set up job	﻿2026-08-08T07:16:54.7261721Z Current runner version: '2.336.0'
+verify	Set up job	2026-08-08T07:16:54.7288132Z ##[group]Runner Image Provisioner
+verify	Set up job	2026-08-08T07:16:54.7289157Z Hosted Compute Agent
+verify	Set up job	2026-08-08T07:16:54.7289766Z Version: 20260707.563
+verify	Set up job	2026-08-08T07:16:54.7290389Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+verify	Set up job	2026-08-08T07:16:54.7291204Z Build Date: 2026-07-07T19:33:50Z
+verify	Set up job	2026-08-08T07:16:54.7291903Z Worker ID: {2ffea7b3-4c10-4646-8c6a-a795774cea72}
+verify	Set up job	2026-08-08T07:16:54.7292652Z Azure Region: westus
+verify	Set up job	2026-08-08T07:16:54.7293235Z ##[endgroup]
+verify	Set up job	2026-08-08T07:16:54.7295106Z ##[group]Operating System
+verify	Set up job	2026-08-08T07:16:54.7295850Z Ubuntu
+verify	Set up job	2026-08-08T07:16:54.7296373Z 24.04.4
+verify	Set up job	2026-08-08T07:16:54.7296862Z LTS
+verify	Set up job	2026-08-08T07:16:54.7297427Z ##[endgroup]
+verify	Set up job	2026-08-08T07:16:54.7298003Z ##[group]Runner Image
+verify	Set up job	2026-08-08T07:16:54.7298611Z Image: ubuntu-24.04
+verify	Set up job	2026-08-08T07:16:54.7299180Z Version: 20260720.247.2
+verify	Set up job	2026-08-08T07:16:54.7300238Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+verify	Set up job	2026-08-08T07:16:54.7301992Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+verify	Set up job	2026-08-08T07:16:54.7302924Z ##[endgroup]
+verify	Set up job	2026-08-08T07:16:54.7304419Z ##[group]GITHUB_TOKEN Permissions
+verify	Set up job	2026-08-08T07:16:54.7306549Z Contents: read
+verify	Set up job	2026-08-08T07:16:54.7307351Z Metadata: read
+verify	Set up job	2026-08-08T07:16:54.7307920Z Packages: read
+verify	Set up job	2026-08-08T07:16:54.7308499Z ##[endgroup]
+verify	Set up job	2026-08-08T07:16:54.7310609Z Secret source: Actions
+verify	Set up job	2026-08-08T07:16:54.7311776Z Prepare workflow directory
+verify	Set up job	2026-08-08T07:16:54.7652174Z Prepare all required actions
+verify	Set up job	2026-08-08T07:16:54.7703369Z Getting action download info
+verify	Set up job	2026-08-08T07:16:55.1234234Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+verify	Set up job	2026-08-08T07:16:55.5770492Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+verify	Set up job	2026-08-08T07:16:55.6558047Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+verify	Set up job	2026-08-08T07:16:55.8677175Z Complete job name: verify
+verify	Run actions/checkout@v4	﻿2026-08-08T07:16:55.9440603Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9449760Z ##[group]Run actions/checkout@v4
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9450533Z with:
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9451031Z   repository: quemanhmcr/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9455052Z   token: ***
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9455484Z   ssh-strict: true
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9455915Z   ssh-user: git
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9456351Z   persist-credentials: true
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9456831Z   clean: true
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9457271Z   sparse-checkout-cone-mode: true
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9457782Z   fetch-depth: 1
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9458198Z   fetch-tags: false
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9458628Z   show-progress: true
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9459082Z   lfs: false
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9459484Z   submodules: false
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9459947Z   set-safe-directory: true
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9460433Z   allow-unsafe-pr-checkout: false
+verify	Run actions/checkout@v4	2026-08-08T07:16:55.9461197Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0462406Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0465490Z ##[group]Getting Git version info
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0466863Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0468703Z [command]/usr/bin/git version
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0543846Z git version 2.54.0
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0575873Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0589491Z Temporarily overriding HOME='/home/runner/work/_temp/edce719a-38c0-45c5-b0be-8ce196551e62' before making global git config changes
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0591915Z Adding repository directory to the temporary git global config as a safe directory
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0596684Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0657551Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0677592Z ##[group]Initializing the repository
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0679085Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0811744Z hint: Using 'master' as the name for the initial branch. This default branch name
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0813813Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0816698Z hint: to use in all of your new repositories, which will suppress this warning,
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0818198Z hint: call:
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0819130Z hint:
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0820084Z hint: 	git config --global init.defaultBranch <name>
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0821178Z hint:
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0822126Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0823946Z hint: 'development'. The just-created branch can be renamed via this command:
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0825335Z hint:
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0826063Z hint: 	git branch -m <name>
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0826847Z hint:
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0827862Z hint: Disable this message with "git config set advice.defaultBranchName false"
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0829868Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0836837Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0889292Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0890494Z ##[group]Disabling automatic garbage collection
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0898684Z [command]/usr/bin/git config --local gc.auto 0
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0935246Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0936771Z ##[group]Setting up auth
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0944019Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.0984036Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.1442612Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.1478556Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.1707568Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.1744605Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.1971767Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.2011129Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.2012350Z ##[group]Fetching the repository
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.2022019Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +715dd89322b515fe93b7c25b6c4107fe668a380d:refs/remotes/origin/main
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8401856Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8404517Z  * [new ref]         715dd89322b515fe93b7c25b6c4107fe668a380d -> origin/main
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8443061Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8445617Z ##[group]Determining the checkout info
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8448219Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8453676Z [command]/usr/bin/git sparse-checkout disable
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8506455Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8540286Z ##[group]Checking out the ref
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8544841Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8959474Z Switched to a new branch 'main'
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8961633Z branch 'main' set up to track 'origin/main'.
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.8971236Z ##[endgroup]
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.9036066Z [command]/usr/bin/git log -1 --format=%H
+verify	Run actions/checkout@v4	2026-08-08T07:16:56.9063769Z 715dd89322b515fe93b7c25b6c4107fe668a380d
+verify	Run actions/setup-python@v5	﻿2026-08-08T07:16:56.9436697Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Run actions/setup-python@v5	2026-08-08T07:16:56.9442267Z ##[group]Run actions/setup-python@v5
+verify	Run actions/setup-python@v5	2026-08-08T07:16:56.9443645Z with:
+verify	Run actions/setup-python@v5	2026-08-08T07:16:56.9444465Z   python-version: 3.11
+verify	Run actions/setup-python@v5	2026-08-08T07:16:56.9445387Z   check-latest: false
+verify	Run actions/setup-python@v5	2026-08-08T07:16:56.9455501Z   token: ***
+verify	Run actions/setup-python@v5	2026-08-08T07:16:56.9456384Z   update-environment: true
+verify	Run actions/setup-python@v5	2026-08-08T07:16:56.9457395Z   allow-prereleases: false
+verify	Run actions/setup-python@v5	2026-08-08T07:16:56.9458389Z   freethreaded: false
+verify	Run actions/setup-python@v5	2026-08-08T07:16:56.9459254Z ##[endgroup]
+verify	Run actions/setup-python@v5	2026-08-08T07:16:57.0843309Z ##[group]Installed versions
+verify	Run actions/setup-python@v5	2026-08-08T07:16:57.0950386Z (node:2402) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+verify	Run actions/setup-python@v5	2026-08-08T07:16:57.0953874Z (Use `node --trace-deprecation ...` to show where the warning was created)
+verify	Run actions/setup-python@v5	2026-08-08T07:16:57.1061735Z Successfully set up CPython (3.11.15)
+verify	Run actions/setup-python@v5	2026-08-08T07:16:57.1065074Z ##[endgroup]
+verify	Run pip install -r requirements.txt	﻿2026-08-08T07:16:57.1210711Z ##[group]Run pip install -r requirements.txt
+verify	Run pip install -r requirements.txt	2026-08-08T07:16:57.1212256Z ^[[36;1mpip install -r requirements.txt^[[0m
+verify	Run pip install -r requirements.txt	2026-08-08T07:16:57.1421526Z shell: /usr/bin/bash -e {0}
+verify	Run pip install -r requirements.txt	2026-08-08T07:16:57.1422674Z env:
+verify	Run pip install -r requirements.txt	2026-08-08T07:16:57.1424059Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pip install -r requirements.txt	2026-08-08T07:16:57.1425826Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+verify	Run pip install -r requirements.txt	2026-08-08T07:16:57.1427541Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pip install -r requirements.txt	2026-08-08T07:16:57.1429065Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pip install -r requirements.txt	2026-08-08T07:16:57.1430588Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pip install -r requirements.txt	2026-08-08T07:16:57.1432172Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+verify	Run pip install -r requirements.txt	2026-08-08T07:16:57.1433694Z ##[endgroup]
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.1866578Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.2646092Z   Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.4235947Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.4378762Z   Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.4857119Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.4984679Z   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.5188407Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.5310551Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.5526556Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.5645206Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.5836903Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.5961223Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.6204801Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.6326531Z   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:01.6498308Z Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:02.1934172Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 32.6 MB/s  0:00:00
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:02.2061665Z Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:02.4771750Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 139.7 MB/s  0:00:00
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:02.4892885Z Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:02.5043938Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:02.5182978Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:02.5321857Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:02.5470445Z Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:02.5544925Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 196.7 MB/s  0:00:00
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:02.7010032Z Installing collected packages: pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:09.0138305Z
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:09.0149649Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 scipy-1.15.3
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:09.0158608Z
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:09.0159193Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+verify	Run pip install -r requirements.txt	2026-08-08T07:17:09.0160434Z [notice] To update, run: pip install --upgrade pip
+verify	Run pytest -q	﻿2026-08-08T07:17:09.0877379Z ##[group]Run pytest -q
+verify	Run pytest -q	2026-08-08T07:17:09.0877681Z ^[[36;1mpytest -q^[[0m
+verify	Run pytest -q	2026-08-08T07:17:09.0924305Z shell: /usr/bin/bash -e {0}
+verify	Run pytest -q	2026-08-08T07:17:09.0924565Z env:
+verify	Run pytest -q	2026-08-08T07:17:09.0924835Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pytest -q	2026-08-08T07:17:09.0925276Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+verify	Run pytest -q	2026-08-08T07:17:09.0925756Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pytest -q	2026-08-08T07:17:09.0926133Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pytest -q	2026-08-08T07:17:09.0926513Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+verify	Run pytest -q	2026-08-08T07:17:09.0926898Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+verify	Run pytest -q	2026-08-08T07:17:09.0927220Z ##[endgroup]
+verify	Run pytest -q	2026-08-08T07:17:13.0130729Z ......s...s............................................s................ [ 23%]
+verify	Run pytest -q	2026-08-08T07:17:13.4431461Z .....FFF...........................................s.s..s............... [ 47%]
+verify	Run pytest -q	2026-08-08T07:17:13.6735727Z ........................................................................ [ 71%]
+verify	Run pytest -q	2026-08-08T07:17:14.0929594Z ....................................s...s............................... [ 95%]
+verify	Run pytest -q	2026-08-08T07:17:14.1097991Z .............                                                            [100%]
+verify	Run pytest -q	2026-08-08T07:17:14.1098835Z =================================== FAILURES ===================================
+verify	Run pytest -q	2026-08-08T07:17:14.1099795Z __________________________ test_clean_interface_route __________________________
+verify	Run pytest -q	2026-08-08T07:17:14.1100456Z
+verify	Run pytest -q	2026-08-08T07:17:14.1100781Z     def test_clean_interface_route():
+verify	Run pytest -q	2026-08-08T07:17:14.1101335Z         Y=1.0; d=.1
+verify	Run pytest -q	2026-08-08T07:17:14.1101843Z         assert low_square_service_lower(Y,d)>=.5
+verify	Run pytest -q	2026-08-08T07:17:14.1102519Z >       r=coherent_service_route(Y,d,.1,.08,.2,[.25],['A'])
+verify	Run pytest -q	2026-08-08T07:17:14.1103169Z           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verify	Run pytest -q	2026-08-08T07:17:14.1104043Z
+verify	Run pytest -q	2026-08-08T07:17:14.1120745Z tests/test_coherent_increment_service.py:31:
+verify	Run pytest -q	2026-08-08T07:17:14.1121605Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+verify	Run pytest -q	2026-08-08T07:17:14.1124509Z
+verify	Run pytest -q	2026-08-08T07:17:14.1125106Z square_threshold = 1.0, high_normalized_enstrophy = 0.1, old_pool_capacity = 0.1
+verify	Run pytest -q	2026-08-08T07:17:14.1126009Z old_old_service = 0.08, cross_interface_service = 0.2
+verify	Run pytest -q	2026-08-08T07:17:14.1126725Z new_new_edge_services = [0.25], ancestry_labels = ['A']
+verify	Run pytest -q	2026-08-08T07:17:14.1127407Z dominant_fraction = 0.25, ancestry_alpha = 0.5
+verify	Run pytest -q	2026-08-08T07:17:14.1127899Z
+verify	Run pytest -q	2026-08-08T07:17:14.1128205Z     def coherent_service_route(
+verify	Run pytest -q	2026-08-08T07:17:14.1128852Z         square_threshold: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1129464Z         high_normalized_enstrophy: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1142497Z         old_pool_capacity: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1143112Z         old_old_service: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1143947Z         cross_interface_service: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1144575Z         new_new_edge_services: Sequence[float],
+verify	Run pytest -q	2026-08-08T07:17:14.1145256Z         ancestry_labels: Sequence[object] | None = None,
+verify	Run pytest -q	2026-08-08T07:17:14.1146277Z         dominant_fraction: float = 0.25,
+verify	Run pytest -q	2026-08-08T07:17:14.1146863Z         ancestry_alpha: float = 0.5,
+verify	Run pytest -q	2026-08-08T07:17:14.1147453Z     ) -> dict[str,float|str]:
+verify	Run pytest -q	2026-08-08T07:17:14.1148110Z         """Route an actual low-band coherent increment service measure.
+verify	Run pytest -q	2026-08-08T07:17:14.1148795Z
+verify	Run pytest -q	2026-08-08T07:17:14.1149389Z         If d_high>=Y/4, dissipation wins.  Otherwise S_low>=Y/2.  Once old-pool
+verify	Run pytest -q	2026-08-08T07:17:14.1150312Z         capacity is <=Y/8, old-old service is too small.  Then either cross-interface
+verify	Run pytest -q	2026-08-08T07:17:14.1151247Z         service is >=Y/8 (Xi) or new-new service is >=Y/4.  The latter either has a
+verify	Run pytest -q	2026-08-08T07:17:14.1152179Z         dominant service edge, forcing coherent critical mass >=Y/32 at theta=1/4,
+verify	Run pytest -q	2026-08-08T07:17:14.1153093Z         or pays log2 ancestry entropy / 1/4 hidden same-ancestry pair mass.
+verify	Run pytest -q	2026-08-08T07:17:14.1154037Z         """
+verify	Run pytest -q	2026-08-08T07:17:14.1155185Z         vals=[square_threshold,high_normalized_enstrophy,old_pool_capacity,old_old_service,cross_interface_service]
+verify	Run pytest -q	2026-08-08T07:17:14.1156689Z         if min(vals)<0: raise ValueError('nonnegative inputs required')
+verify	Run pytest -q	2026-08-08T07:17:14.1157439Z         w=np.asarray(new_new_edge_services,float)
+verify	Run pytest -q	2026-08-08T07:17:14.1158222Z         if np.any(w<0): raise ValueError('nonnegative new-edge services required')
+verify	Run pytest -q	2026-08-08T07:17:14.1159270Z         if not (0<dominant_fraction<1 and 0<ancestry_alpha<1): raise ValueError('bad routing thresholds')
+verify	Run pytest -q	2026-08-08T07:17:14.1160168Z         Y=float(square_threshold)
+verify	Run pytest -q	2026-08-08T07:17:14.1160739Z         if high_normalized_enstrophy >= Y/4.0:
+verify	Run pytest -q	2026-08-08T07:17:14.1161927Z             return {'branch':'high_frequency_dissipation','threshold':Y/4.0,'branch_value':high_normalized_enstrophy,'margin':high_normalized_enstrophy-Y/4.0}
+verify	Run pytest -q	2026-08-08T07:17:14.1163221Z         slow=low_square_service_lower(Y,high_normalized_enstrophy)
+verify	Run pytest -q	2026-08-08T07:17:14.1164263Z         total=old_old_service+cross_interface_service+float(w.sum())
+verify	Run pytest -q	2026-08-08T07:17:14.1164986Z         if total+1e-12*max(1.0,Y)<slow:
+verify	Run pytest -q	2026-08-08T07:17:14.1165798Z >           raise ValueError('cell service weights do not realize the forced low-band service')
+verify	Run pytest -q	2026-08-08T07:17:14.1166834Z E           ValueError: cell service weights do not realize the forced low-band service
+verify	Run pytest -q	2026-08-08T07:17:14.1167505Z
+verify	Run pytest -q	2026-08-08T07:17:14.1167856Z src/coherent_increment_service.py:96: ValueError
+verify	Run pytest -q	2026-08-08T07:17:14.1168624Z _____________________ test_clean_dominant_new_cluster_mass _____________________
+verify	Run pytest -q	2026-08-08T07:17:14.1169242Z
+verify	Run pytest -q	2026-08-08T07:17:14.1169577Z     def test_clean_dominant_new_cluster_mass():
+verify	Run pytest -q	2026-08-08T07:17:14.1170162Z         Y=1.; d=.1
+verify	Run pytest -q	2026-08-08T07:17:14.1170758Z >       r=coherent_service_route(Y,d,.1,.05,.05,[.4,.05,.05],['A','B','C'])
+verify	Run pytest -q	2026-08-08T07:17:14.1171504Z           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verify	Run pytest -q	2026-08-08T07:17:14.1171996Z
+verify	Run pytest -q	2026-08-08T07:17:14.1172330Z tests/test_coherent_increment_service.py:37:
+verify	Run pytest -q	2026-08-08T07:17:14.1173030Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+verify	Run pytest -q	2026-08-08T07:17:14.1173767Z
+verify	Run pytest -q	2026-08-08T07:17:14.1174256Z square_threshold = 1.0, high_normalized_enstrophy = 0.1, old_pool_capacity = 0.1
+verify	Run pytest -q	2026-08-08T07:17:14.1175449Z old_old_service = 0.05, cross_interface_service = 0.05
+verify	Run pytest -q	2026-08-08T07:17:14.1176327Z new_new_edge_services = [0.4, 0.05, 0.05], ancestry_labels = ['A', 'B', 'C']
+verify	Run pytest -q	2026-08-08T07:17:14.1177109Z dominant_fraction = 0.25, ancestry_alpha = 0.5
+verify	Run pytest -q	2026-08-08T07:17:14.1177581Z
+verify	Run pytest -q	2026-08-08T07:17:14.1177971Z     def coherent_service_route(
+verify	Run pytest -q	2026-08-08T07:17:14.1178582Z         square_threshold: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1179180Z         high_normalized_enstrophy: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1179760Z         old_pool_capacity: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1180300Z         old_old_service: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1180834Z         cross_interface_service: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1181435Z         new_new_edge_services: Sequence[float],
+verify	Run pytest -q	2026-08-08T07:17:14.1182091Z         ancestry_labels: Sequence[object] | None = None,
+verify	Run pytest -q	2026-08-08T07:17:14.1182989Z         dominant_fraction: float = 0.25,
+verify	Run pytest -q	2026-08-08T07:17:14.1183792Z         ancestry_alpha: float = 0.5,
+verify	Run pytest -q	2026-08-08T07:17:14.1184356Z     ) -> dict[str,float|str]:
+verify	Run pytest -q	2026-08-08T07:17:14.1184998Z         """Route an actual low-band coherent increment service measure.
+verify	Run pytest -q	2026-08-08T07:17:14.1185667Z
+verify	Run pytest -q	2026-08-08T07:17:14.1186246Z         If d_high>=Y/4, dissipation wins.  Otherwise S_low>=Y/2.  Once old-pool
+verify	Run pytest -q	2026-08-08T07:17:14.1187243Z         capacity is <=Y/8, old-old service is too small.  Then either cross-interface
+verify	Run pytest -q	2026-08-08T07:17:14.1188159Z         service is >=Y/8 (Xi) or new-new service is >=Y/4.  The latter either has a
+verify	Run pytest -q	2026-08-08T07:17:14.1189069Z         dominant service edge, forcing coherent critical mass >=Y/32 at theta=1/4,
+verify	Run pytest -q	2026-08-08T07:17:14.1189985Z         or pays log2 ancestry entropy / 1/4 hidden same-ancestry pair mass.
+verify	Run pytest -q	2026-08-08T07:17:14.1190691Z         """
+verify	Run pytest -q	2026-08-08T07:17:14.1191523Z         vals=[square_threshold,high_normalized_enstrophy,old_pool_capacity,old_old_service,cross_interface_service]
+verify	Run pytest -q	2026-08-08T07:17:14.1192842Z         if min(vals)<0: raise ValueError('nonnegative inputs required')
+verify	Run pytest -q	2026-08-08T07:17:14.1193778Z         w=np.asarray(new_new_edge_services,float)
+verify	Run pytest -q	2026-08-08T07:17:14.1194564Z         if np.any(w<0): raise ValueError('nonnegative new-edge services required')
+verify	Run pytest -q	2026-08-08T07:17:14.1195599Z         if not (0<dominant_fraction<1 and 0<ancestry_alpha<1): raise ValueError('bad routing thresholds')
+verify	Run pytest -q	2026-08-08T07:17:14.1196470Z         Y=float(square_threshold)
+verify	Run pytest -q	2026-08-08T07:17:14.1197037Z         if high_normalized_enstrophy >= Y/4.0:
+verify	Run pytest -q	2026-08-08T07:17:14.1198228Z             return {'branch':'high_frequency_dissipation','threshold':Y/4.0,'branch_value':high_normalized_enstrophy,'margin':high_normalized_enstrophy-Y/4.0}
+verify	Run pytest -q	2026-08-08T07:17:14.1199520Z         slow=low_square_service_lower(Y,high_normalized_enstrophy)
+verify	Run pytest -q	2026-08-08T07:17:14.1200316Z         total=old_old_service+cross_interface_service+float(w.sum())
+verify	Run pytest -q	2026-08-08T07:17:14.1201038Z         if total+1e-12*max(1.0,Y)<slow:
+verify	Run pytest -q	2026-08-08T07:17:14.1201855Z >           raise ValueError('cell service weights do not realize the forced low-band service')
+verify	Run pytest -q	2026-08-08T07:17:14.1202892Z E           ValueError: cell service weights do not realize the forced low-band service
+verify	Run pytest -q	2026-08-08T07:17:14.1203749Z
+verify	Run pytest -q	2026-08-08T07:17:14.1204105Z src/coherent_increment_service.py:96: ValueError
+verify	Run pytest -q	2026-08-08T07:17:14.1204867Z _______________________ test_entropy_or_cycle_constants ________________________
+verify	Run pytest -q	2026-08-08T07:17:14.1205467Z
+verify	Run pytest -q	2026-08-08T07:17:14.1205786Z     def test_entropy_or_cycle_constants():
+verify	Run pytest -q	2026-08-08T07:17:14.1206347Z         Y=1.; d=.1
+verify	Run pytest -q	2026-08-08T07:17:14.1206811Z         w=[.08]*8
+verify	Run pytest -q	2026-08-08T07:17:14.1207368Z >       r=coherent_service_route(Y,d,.05,.02,.02,w,list(range(8)))
+verify	Run pytest -q	2026-08-08T07:17:14.1208057Z           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+verify	Run pytest -q	2026-08-08T07:17:14.1208545Z
+verify	Run pytest -q	2026-08-08T07:17:14.1208877Z tests/test_coherent_increment_service.py:45:
+verify	Run pytest -q	2026-08-08T07:17:14.1209570Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+verify	Run pytest -q	2026-08-08T07:17:14.1210101Z
+verify	Run pytest -q	2026-08-08T07:17:14.1210483Z square_threshold = 1.0, high_normalized_enstrophy = 0.1
+verify	Run pytest -q	2026-08-08T07:17:14.1211305Z old_pool_capacity = 0.05, old_old_service = 0.02, cross_interface_service = 0.02
+verify	Run pytest -q	2026-08-08T07:17:14.1212150Z new_new_edge_services = [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, ...]
+verify	Run pytest -q	2026-08-08T07:17:14.1212925Z ancestry_labels = [0, 1, 2, 3, 4, 5, ...], dominant_fraction = 0.25
+verify	Run pytest -q	2026-08-08T07:17:14.1213803Z ancestry_alpha = 0.5
+verify	Run pytest -q	2026-08-08T07:17:14.1214168Z
+verify	Run pytest -q	2026-08-08T07:17:14.1214471Z     def coherent_service_route(
+verify	Run pytest -q	2026-08-08T07:17:14.1215005Z         square_threshold: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1215554Z         high_normalized_enstrophy: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1216129Z         old_pool_capacity: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1216656Z         old_old_service: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1217187Z         cross_interface_service: float,
+verify	Run pytest -q	2026-08-08T07:17:14.1218015Z         new_new_edge_services: Sequence[float],
+verify	Run pytest -q	2026-08-08T07:17:14.1218676Z         ancestry_labels: Sequence[object] | None = None,
+verify	Run pytest -q	2026-08-08T07:17:14.1219317Z         dominant_fraction: float = 0.25,
+verify	Run pytest -q	2026-08-08T07:17:14.1219892Z         ancestry_alpha: float = 0.5,
+verify	Run pytest -q	2026-08-08T07:17:14.1220440Z     ) -> dict[str,float|str]:
+verify	Run pytest -q	2026-08-08T07:17:14.1221076Z         """Route an actual low-band coherent increment service measure.
+verify	Run pytest -q	2026-08-08T07:17:14.1221747Z
+verify	Run pytest -q	2026-08-08T07:17:14.1222328Z         If d_high>=Y/4, dissipation wins.  Otherwise S_low>=Y/2.  Once old-pool
+verify	Run pytest -q	2026-08-08T07:17:14.1223232Z         capacity is <=Y/8, old-old service is too small.  Then either cross-interface
+verify	Run pytest -q	2026-08-08T07:17:14.1224469Z         service is >=Y/8 (Xi) or new-new service is >=Y/4.  The latter either has a
+verify	Run pytest -q	2026-08-08T07:17:14.1225440Z         dominant service edge, forcing coherent critical mass >=Y/32 at theta=1/4,
+verify	Run pytest -q	2026-08-08T07:17:14.1226353Z         or pays log2 ancestry entropy / 1/4 hidden same-ancestry pair mass.
+verify	Run pytest -q	2026-08-08T07:17:14.1227269Z         """
+verify	Run pytest -q	2026-08-08T07:17:14.1228106Z         vals=[square_threshold,high_normalized_enstrophy,old_pool_capacity,old_old_service,cross_interface_service]
+verify	Run pytest -q	2026-08-08T07:17:14.1229186Z         if min(vals)<0: raise ValueError('nonnegative inputs required')
+verify	Run pytest -q	2026-08-08T07:17:14.1229925Z         w=np.asarray(new_new_edge_services,float)
+verify	Run pytest -q	2026-08-08T07:17:14.1230702Z         if np.any(w<0): raise ValueError('nonnegative new-edge services required')
+verify	Run pytest -q	2026-08-08T07:17:14.1231738Z         if not (0<dominant_fraction<1 and 0<ancestry_alpha<1): raise ValueError('bad routing thresholds')
+verify	Run pytest -q	2026-08-08T07:17:14.1232618Z         Y=float(square_threshold)
+verify	Run pytest -q	2026-08-08T07:17:14.1233186Z         if high_normalized_enstrophy >= Y/4.0:
+verify	Run pytest -q	2026-08-08T07:17:14.1234585Z             return {'branch':'high_frequency_dissipation','threshold':Y/4.0,'branch_value':high_normalized_enstrophy,'margin':high_normalized_enstrophy-Y/4.0}
+verify	Run pytest -q	2026-08-08T07:17:14.1235865Z         slow=low_square_service_lower(Y,high_normalized_enstrophy)
+verify	Run pytest -q	2026-08-08T07:17:14.1236691Z         total=old_old_service+cross_interface_service+float(w.sum())
+verify	Run pytest -q	2026-08-08T07:17:14.1237387Z         if total+1e-12*max(1.0,Y)<slow:
+verify	Run pytest -q	2026-08-08T07:17:14.1238190Z >           raise ValueError('cell service weights do not realize the forced low-band service')
+verify	Run pytest -q	2026-08-08T07:17:14.1239218Z E           ValueError: cell service weights do not realize the forced low-band service
+verify	Run pytest -q	2026-08-08T07:17:14.1239876Z
+verify	Run pytest -q	2026-08-08T07:17:14.1240223Z src/coherent_increment_service.py:96: ValueError
+verify	Run pytest -q	2026-08-08T07:17:14.2082456Z =========================== short test summary info ============================
+verify	Run pytest -q	2026-08-08T07:17:14.2084851Z FAILED tests/test_coherent_increment_service.py::test_clean_interface_route - ValueError: cell service weights do not realize the forced low-band service
+verify	Run pytest -q	2026-08-08T07:17:14.2086890Z FAILED tests/test_coherent_increment_service.py::test_clean_dominant_new_cluster_mass - ValueError: cell service weights do not realize the forced low-band service
+verify	Run pytest -q	2026-08-08T07:17:14.2088225Z FAILED tests/test_coherent_increment_service.py::test_entropy_or_cycle_constants - ValueError: cell service weights do not realize the forced low-band service
+verify	Run pytest -q	2026-08-08T07:17:14.2088967Z 3 failed, 290 passed, 8 skipped in 4.21s
+verify	Run pytest -q	2026-08-08T07:17:14.2986944Z ##[error]Process completed with exit code 1.
+verify	Post Run actions/checkout@v4	﻿2026-08-08T07:17:14.3145319Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.3146596Z Post job cleanup.
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.3996617Z [command]/usr/bin/git version
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4042349Z git version 2.54.0
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4085632Z Temporarily overriding HOME='/home/runner/work/_temp/d8da1363-f7b6-4c01-93ce-68c98d8b550c' before making global git config changes
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4087470Z Adding repository directory to the temporary git global config as a safe directory
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4091494Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4132914Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4174701Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4435176Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4467752Z http.https://github.com/.extraheader
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4480390Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4536360Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4833314Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+verify	Post Run actions/checkout@v4	2026-08-08T07:17:14.4879169Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+verify	Complete job	﻿2026-08-08T07:17:14.5277514Z Cleaning up orphan processes
+verify	Complete job	2026-08-08T07:17:14.5568034Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

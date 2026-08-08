@@ -3606,6 +3606,311 @@ low/base **service selected by the nonlinear Navier--Stokes block** can be
 assigned to these positive coherent cells through recursive generations, with
 cell changes and rejected interfaces entered into `Xi`/fresh/relink bookkeeping.
 
+#### Coherent nonlinear work and material phase-space cells
+
+The nonlinear transfer-to-cell assignment is now exact at the work level.  For a
+normalized coherent window `g`, polarized Moyal gives
+
+\[
+\boxed{
+\int \mathcal V_g f(z)\overline{\mathcal V_gF(z)}\,d\mu(z)
+=\langle f,F\rangle.
+}
+\]
+
+For any measurable phase-space partition `C_alpha`, define
+
+\[
+\boxed{
+\mathcal W_\alpha
+=2\Re\int_{C_\alpha}\mathcal V_gf\,
+\overline{\mathcal V_gF}\,d\mu.
+}
+\]
+
+Then
+
+\[
+\boxed{\sum_\alpha\mathcal W_\alpha=2\Re\langle f,F\rangle.}
+\]
+
+Thus a Leray-projected nonlinear band forcing, source term, or other physical
+work term has a canonical coherent-cell decomposition without choosing
+redundant synthesis coefficients.  Positive cells are actual positive service;
+negative cells are actual backflow/cancellation.
+
+Common affine transport is again a gauge, not an interface.  Under
+
+\[
+L\mapsto ML,\qquad X\mapsto MX,\qquad k\mapsto M^{-T}k,
+\]
+
+the intrinsic coherent coordinate
+
+\[
+\boxed{\zeta=(L^{-1}X/2,L^Tk)}
+\]
+
+is unchanged and the phase-space Jacobian is one.  Therefore material coherent
+cells create no common-affine Heisenberg/interface forcing.
+
+If a piecewise material selected cell family is changed, positivity of the Moyal
+cell energies gives
+
+\[
+|E(S_+)-E(S_-)|\le E(S_+\triangle S_-).
+\]
+
+Integrating the exact cellwise work balance yields
+
+\[
+\boxed{
+P_+\le E_{final}+P_-+R_{switch},
+}
+\]
+
+where `P_+` and `P_-` are integrated positive/negative coherent work and
+`R_switch` is the symmetric-difference Moyal mass of selection changes.  Hence
+one of terminal coherent energy, physical backflow/cancellation, or relinking
+mass is at least `P_+/3`.
+
+Preferred Action `31245848657` passed `293` tests (`8` optional skips) plus
+`20,000` work/affine/relink checks; polarized-Moyal and cell-work residuals were
+`3.265e-16` and `6.209e-16`.  The first rerun on the same code SHA failed only
+because new coherent-increment unit fixtures elsewhere in the full pytest suite
+did not satisfy their own service hypothesis; this is test-fixture provenance,
+not a work-cell countermodel.
+
+#### Actual SGS increments generate coherent service edges
+
+The low/base reservoir selected by the Onsager collision can now be assigned to
+phase space using the **increment itself**, rather than aggregate band mass.
+Let
+
+\[
+Q=\int |G_N(r)|\|\delta_ru\|_3^3dr,
+\qquad
+Y={ (Q/g_1)^{2/3}\over(C_{LP}C_B)^2}.
+\]
+
+Some filter displacement `r` satisfies the corresponding `L^3` square lower
+bound.  Standard LP/Bernstein and the existing high-frequency enstrophy currency
+give
+
+\[
+\boxed{
+S_{low}(r):=\sum_{j\le0}M_j\|\delta_ru_j\|_2^2
+\ge Y-2d_{high}.
+}
+\]
+
+In particular, if `d_high<Y/4`, then
+
+\[
+\boxed{S_{low}(r)\ge Y/2.}
+\]
+
+For every low band and coherent cell define the positive service edge weight
+
+\[
+\boxed{
+s_{j,C}(r)
+=M_j\int_C|\mathcal V_{g_j}\delta_ru_j|^2d\mu.
+}
+\]
+
+Moyal gives `sum_(j,C) s_(j,C)=S_low`.  Translation covariance is exact:
+
+\[
+\boxed{
+\mathcal V_g(\delta_ru)(X,k)
+=e^{-ik\cdot r}\mathcal V_gu(X-r,k)-\mathcal V_gu(X,k).
+}
+\]
+
+Hence
+
+\[
+\boxed{
+s_{j,C}(r)
+\le2M_j\{E_j(C)+E_j(C-r)\}.
+}
+\]
+
+Each service atom is therefore a physical coherent edge joining neighborhoods
+separated by the actual SGS displacement `r`.
+
+Classify these edges relative to the transported old pool.  Once whole-old-pool
+erosion gives `C_old<=Y/8`, the clean routes are
+
+\[
+\boxed{d_{high}\ge Y/4}
+\]
+
+or
+
+\[
+\boxed{\Xi_{cell}\ge Y/8}
+\]
+
+or at least `Y/4` new--new coherent service remains.  With the quarter-dominance
+threshold, the last branch gives
+
+\[
+\boxed{\mu_{coh,new}\ge Y/32}
+\]
+
+for one actual coherent cluster, or else the existing collision chain yields
+
+\[
+\boxed{H_{ancestry}\ge\log2}
+\qquad\text{or}\qquad
+\boxed{Q_{ancestry}-Q_{atomic}\ge1/4.}
+\]
+
+Action `31245850938` passed `293` tests (`8` optional skips) plus `50,000`
+routing checks.  The worst STFT translation-covariance residual was `6.829e-14`;
+the largest sampled local increment-capacity ratio was `0.855742519<1`.  Runs
+`31245808950` and `31245810803` failed only because three hand-written fixtures
+supplied less total cell service than their theorem hypothesis
+`S_low>=Y-2d_high`; the router correctly rejected them.
+
+#### Covariance-cell changes have a deterministic `Xi` bound
+
+Changing the Gaussian analysis covariance is also controlled explicitly.  For
+centered normalized Gaussian windows with physical covariances `Sigma,Theta`,
+
+\[
+\boxed{
+\langle g_\Sigma,g_\Theta\rangle
+=2^{3/2}{(\det\Sigma\det\Theta)^{1/4}\over
+\det(\Sigma+\Theta)^{1/2}}.
+}
+\]
+
+If `exp(a_i)` are the generalized covariance eigenvalues, this equals
+`prod_i cosh(a_i/2)^(-1/2)`.  The inequality `log cosh x<=x^2/2` gives
+
+\[
+\boxed{
+\|g_\Sigma-g_\Theta\|_2
+\le {1\over2\sqrt2}
+\|\log(\Sigma^{-1/2}\Theta\Sigma^{-1/2})\|_F.
+}
+\]
+
+Moyal in the **window slot** is exact:
+
+\[
+\|\mathcal V_{g_\Sigma}f-\mathcal V_{g_\Theta}f\|_2
+=\|f\|_2\|g_\Sigma-g_\Theta\|_2.
+\]
+
+Therefore the total variation of the positive coherent energy law obeys
+
+\[
+\boxed{
+\int\left||\mathcal V_{g_\Sigma}f|^2-|\mathcal V_{g_\Theta}f|^2\right|d\mu
+\le {1\over\sqrt2}d_{log}(\Sigma,\Theta)\|f\|_2^2.
+}
+\]
+
+The same bound holds after any common phase-space partition.  Small changes of
+the covariance representative therefore enter a deterministic
+`Xi_cov`; large covariance jumps remain a genuine covariance/strain/source or
+fresh-relink event rather than being hidden as representation gauge.
+
+Preferred Action `31246026975` passed `297` tests (`8` optional skips) plus
+`50,000` noncommuting-SPD/window checks.  The overlap formula residual was
+`1.438e-14`, the clean distance ratio reached `0.999320817`, and the window-Moyal
+residual was `7.042e-16`.  Run `31245962226` failed only because its scalar sanity
+fixture used an impossible Gaussian overlap `>1`; the matrix formula itself was
+correct.
+
+#### Coherent service stopping and source-weighted SGS ancestry
+
+The preceding cell theorem and the old-pool half-life give a genuine stopping
+statement.  Let
+
+\[
+r={231525\over512000}<\frac12,
+\qquad
+C_{old}(q)\le C_0r^q.
+\]
+
+If every block in one sticky ancestry epoch has `Y>=Y_0`, then a block which
+avoids dissipation, interface, fresh-coherent, entropy and cycle exits requires
+`C_old(q)>Y_0/8`.  Hence the cost-free epoch ends by the first `q_*` satisfying
+
+\[
+\boxed{C_0r^{q_*}\le Y_0/8.}
+\]
+
+A relink may restart the clock, but the relink itself is already a charged exit.
+Action `31246194276` passed `301` tests (`8` optional skips) plus `50,000`
+stopping checks; the largest sampled cost-free epoch length was `15`.
+
+For the differentiated-SGS H1 source, even the pointwise threshold assumption is
+unnecessary.  If
+
+\[
+\rho_R(\tau)=N^{-4}\|S_R(\tau)\|,
+\qquad
+\Sigma_R=\int\rho_Rd\tau,
+\]
+
+then the already-certified source collision gives
+`Q_inc>=c_Q rho_R^(3/2)`.  The coherent increment threshold takes the `2/3`
+power, so
+
+\[
+\boxed{Y_{coh}(\tau)\ge c_Y\rho_R(\tau)}
+\]
+
+with an explicit `c_Y`.  After the existing large-radius/scale-matched split,
+one has
+
+\[
+\boxed{D_{high}\ge c_Y\Sigma_R/16}
+\]
+
+or
+
+\[
+\boxed{\int S_{low}d\tau\ge c_Y\Sigma_R/8.}
+\]
+
+If the old material pool has integrated capacity
+
+\[
+cC_{old}\le c_Y\Sigma_R/32,
+\]
+
+then either
+
+\[
+\boxed{\int\Xi_{cell}d\tau\ge c_Y\Sigma_R/32}
+\]
+
+or
+
+\[
+\boxed{\int S_{new-new}d\tau\ge c_Y\Sigma_R/16.}
+\]
+
+A quarter-dominant new service edge gives
+
+\[
+\boxed{\int\mu_{coh,new}d\tau\ge c_Y\Sigma_R/128,}
+\qquad
+\boxed{\sup_\tau\mu_{coh,new}\ge c_Y\Sigma_R/(128c),}
+\]
+
+while fragmentation pays `log 2` ancestry entropy or `1/4` same-ancestry
+pair/cycle mass.  Thus temporal concentration is not a coherent-cell escape.
+Action `31246242892` passed `303` tests (`8` optional skips) plus `50,000`
+source-weight checks; the source-homogeneity residual was `8.938e-16`.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -4376,30 +4681,30 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Assign nonlinear transfer service to coherent phase-space cells.**  The
-   continuous coherent analysis ledger has exact positive budget `P=1`, while a
-   5-separated equal-covariance synthesis family has `P=50/47`; whole old pools
-   then erode geometrically.  What remains is to prove that the low/base service
-   selected by a genuine nonlinear transfer block is captured by these coherent
-   cell energies with only summable `Xi` when close cells are merged or the
-   covariance cell changes.
-2. **Synchronize selected interfaces and covariance cells through spacetime.**
-   A fixed material reservoir/pair cannot service infinitely many generations,
-   and finite-atomic relinking is fresh-rich or cycle-rich.  What remains is to
-   prove that changing the selected coherent cell or ancestry component in the
-   PDE packetization carries summable physical transfer-weighted interface loss,
-   rather than simply renaming the reservoir.
-3. **Feed a uniform physical block threshold into the master episode theorem.**
-   Local curvature, H1/H3 sideband, source, SGS, pressure, aspect, source
-   replication and old-pool reuse now all have named currencies.  A continuum
-   theorem must still prove that every efficient PDE block triggers one with a
-   uniform threshold or enters the flat/reuse lineage, then telescope the block
-   costs without duplicate charging.
-4. **Make the transfer-adapted coherent-cell realization fully iterative.**
-   One-shot Gaussian near-extremizer extraction, exact Moyal cell energy and
-   separated coherent Riesz synthesis are individually available, but the
-   nonlinear transfer weights have not yet been identified through every
-   recursive nested-grain generation with a uniform cell/interface error budget.
+1. **Prove a uniform physical service-or-flat threshold.**  Nonlinear band work,
+   SGS increment service and H1 SGS source weight now reach positive coherent
+   cells with explicit alternatives.  What remains is to show that every
+   efficient Navier--Stokes block either carries a uniform positive coherent
+   service/source threshold, or necessarily enters the already-certified
+   Hodge-flat / scale-holonomy / low-curvature reuse branch.
+2. **Make the coherent-cell/nested-grain recursion fully continuum-compatible.**
+   Common affine motion is exact gauge, covariance-window changes have a
+   deterministic `Xi_cov`, and old/new increment edges expose actual selected
+   interfaces.  A full iterative extraction must keep the sum of all remaining
+   transfer-selected spatial/frequency/coherent interfaces `Xi` summable while
+   synchronizing ancestry labels through covariance-cell and component changes.
+3. **Telescope the stopping epochs through the master theorem.**  A sticky old
+   pool has finite coherent-service lifetime, and SGS source weight already has
+   a no-persistence coherent routing.  The final continuum step is to combine
+   these stopping epochs with the flat/Hodge/source alternatives using physical
+   transfer weights, without charging the same source, relink or dissipation
+   event twice.
+4. **Keep discrete synthesis subordinate to the positive analysis ledger.**  The
+   Moyal cell law assigns physical energy/work without coefficient gauge and the
+   5-separated Riesz theorem supplies discrete representatives when needed.  A
+   recursive Gaussian synthesis must be shown to preserve the transfer-selected
+   coefficient budget across covariance cells; otherwise the rejected part must
+   be entered explicitly in `Xi`/fresh/cycle bookkeeping.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier--Stokes global regularity is made.
 
@@ -4517,6 +4822,14 @@ The most useful recorded runs, in chronological order, are:
 | `31229863366` | preferred affine coherent-state Bessel/Riesz certificate on `84ae98c`: exact intrinsic overlap, 4-separated Bessel `25/4`, 5-separated Gram spectrum `[47/50,53/50]`, synthesis budget `P=50/47`; `286` tests + `50,000` affine checks + finite Gram probes |
 | `31230201131` | exact affine coherent Moyal ledger on `975f680`: positive continuous phase-space cell energy with `P=1` by Plancherel/Fubini; `282` tests + `8` optional skips + `5,000` discrete Moyal regressions |
 | `31230314319`--`31230338382` | twelve-workflow coherent-reservoir integration on `7b350ef`: physical scale progress, Moyal `P=1`, coherent Riesz `P=50/47`, whole-old-pool erosion, nested fresh/cycle graph, ancestor and pressure synchronization, band-limited source sampling, Onsager/source episodes, sticky aspect and master all green; master `20,000` traces, worst margin `0` |
+| `31245808950`, `31245810803` | first coherent-work/increment reruns failed because three new increment-service fixtures supplied less total cell service than the theorem hypothesis `S_low>=Y-2d_high`; fixture failures, no mathematical countermodel |
+| `31245848657` | exact polarized-Moyal coherent nonlinear-work cells and finite-time selected-cell no-escape; `293` tests + `8` optional skips + `20,000` checks |
+| `31245850938` | actual SGS increment -> coherent phase-space service edges; clean `Y/4`, `Y/8`, `Y/32`, `log 2`, `1/4` routes; `293` tests + `8` optional skips + `50,000` checks |
+| `31245962226` | first covariance-interface run failed because the scalar Gaussian-overlap fixture used a value greater than one; test normalization failure, matrix theorem unchanged |
+| `31246026975` | preferred coherent covariance-interface theorem: exact Gaussian fidelity, log-covariance window bound and Moyal energy-TV `Xi_cov`; `297` tests + `8` optional skips + `50,000` SPD/window checks |
+| `31246194276` | coherent-service stopping theorem: old-pool ratio `231525/512000<1/2` gives finite cost-free sticky epochs under a uniform service threshold; `301` tests + `8` optional skips + `50,000` checks |
+| `31246242892` | source-weighted differentiated-SGS -> coherent ancestry with no persistence assumption; exact `3/2` to `2/3` linear homogeneity and coherent `Xi`/new-mass routing; `303` tests + `8` optional skips + `50,000` checks |
+| `31246291317`--`31246322667` | fifteen-workflow coherent-service integration on `a40e2c1`: smooth physical flux, H1 source, SGS/Onsager/source episodes, Moyal work, coherent increment/covariance/stopping/source-weight, old-pool erosion, nested grains, band-limited sampling and master all green; master worst margin `0` |
 
 The current preferred master regression is run `31230338382` on coherent-reservoir
 integration commit `7b350ef` (`282` tests, `8` optional skips, plus `20,000`
@@ -4697,24 +5010,31 @@ partition carries positive cell masses with total exactly `||u||_2^2`.  Thus the
 analytic energy ledger is `P=1`; the Riesz theorem is needed only when an actual
 discrete Gaussian synthesis is chosen.
 
-The decisive next theorem is therefore **nonlinear transfer-to-coherent-cell
-assignment with covariance-cell/interface synchronization**.  The program must
-show that a genuine transfer-selected PDE block can be recursively represented
-by positive coherent cell service (and, when necessary, separated synthesis
-representatives), while every operation that changes the winning cell, merges a
-close phase-space cluster, or introduces new synthesis atoms pays one of
+Nonlinear transfer-to-coherent-cell assignment is now theorem-level at the
+physical-work and SGS-service levels.  Polarized Moyal decomposes actual band
+work exactly; SGS increments generate positive coherent edges between `C` and
+`C-r`; small covariance-window changes have a deterministic `Xi_cov`; and a
+sticky old-pool coherent epoch has finite length.  On the differentiated-SGS H1
+branch the `rho^(3/2)` source law followed by the `2/3` coherent collision is
+linear in source weight, so temporal concentration is not an escape.
 
-1. summable transfer-level interface error `Xi`;
-2. fresh affine radius/energy;
-3. component Bellman entropy or ancestry-cycle rank;
-4. high-strain/source action; or
-5. high-frequency/viscous dissipation.
+The decisive next theorem is now **uniform service-or-flat rigidity**.  A genuine
+efficient PDE block must be shown to satisfy one of two alternatives:
 
-After that, the remaining central issue is a uniform physical block threshold
-and its telescoping through the master episode theorem.  Arbitrary redundant
-Gaussian coefficients, raw aspect penalties, sub-bandwidth source counting, or
-free relabeling of coherent cells are not admissible substitutes for this
-iterative physical packet construction.
+1. it carries a uniform transfer-weighted coherent service/source amount, in
+   which case the stopping/`Xi`/fresh/entropy/cycle/dissipation machinery above
+   fires quantitatively; or
+2. its curvature/source/coherent-service amount is small enough that the block
+   is forced into the already-certified Hodge-flat, scale-holonomy and sticky
+   reuse geometry.
+
+The remaining recursive task is then to telescope those coherent stopping epochs
+through the master theorem while keeping the **total selected-interface `Xi`**
+summable across spatial windows, frozen frequency cells, coherent old/new edges
+and covariance representative changes.  Arbitrary redundant Gaussian
+coefficients, raw aspect penalties, sub-bandwidth source counting, free
+coherent-cell relabeling, or a new time-persistence hypothesis are not admissible
+substitutes for this physical dichotomy.
 
 ---
 
@@ -4730,7 +5050,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, and `docs/affine_coherent_moyal.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, and `docs/coherent_sgs_episode.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;
