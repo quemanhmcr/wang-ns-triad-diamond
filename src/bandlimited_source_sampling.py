@@ -163,6 +163,18 @@ def pressure_source_samples_from_mass_and_increments(
     )
 
 
+def resolvable_cluster_count_upper(total_p_charge: float, source_threshold: float, p: float) -> float:
+    """Maximal separated source-cluster count from an ell^p sampling budget.
+
+    If every selected source center has rho>=rho0 and sum rho^p<=Qp, then
+    number of resolvable clusters is at most Qp/rho0^p.  A maximal separated
+    subfamily covers all remaining centers by one resolution-scale neighborhood.
+    """
+    if total_p_charge < 0 or source_threshold <= 0 or p <= 0:
+        raise ValueError("invalid cluster-count data")
+    return total_p_charge / (source_threshold**p)
+
+
 def exact_scaling_certificate() -> dict[str, str]:
     sgs = sgs_sampling_scaling_exponent()
     visc = viscous_sampling_scaling_exponent()

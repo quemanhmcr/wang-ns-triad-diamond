@@ -5,6 +5,7 @@ from src.bandlimited_source_sampling import (
     germano_l32_power_upper,
     pressure_l32_power_upper,
     pressure_source_samples_from_mass_and_increments,
+    resolvable_cluster_count_upper,
     sgs_sampling_scaling_exponent,
     sgs_source_sample_sum_from_increments,
     viscous_sampling_scaling_exponent,
@@ -37,3 +38,7 @@ def test_pressure_routes_to_mass_and_increment():
 def test_certificate():
     c = exact_scaling_certificate()
     assert c["SGS_pressure_sampling_exponent"] == "0"
+
+
+def test_resolvable_cluster_count():
+    assert resolvable_cluster_count_upper(8.0, 2.0, 1.5) == pytest.approx(8.0 / (2.0**1.5))

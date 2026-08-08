@@ -141,6 +141,25 @@ Apply the same `p=3/2` sampling estimate to `nabla^3P`:
 
 Thus the **near pressure-third source** is no longer an independent continuum gap for separated source grains: it is paid by resolved low-pass critical mass or by the same SGS increment charge.  The previously proved `6-3=3` multipole estimate continues to handle the far pressure tail.
 
-## 4. Scope
+## 4. Threshold source families have finitely many resolvable clusters
+
+For any source family at one scale, choose a maximal `delta/N`-separated subfamily.  It is automatically a covering family: every discarded center lies within one resolution cell of a selected center.  If the selected source values all satisfy `rho_a>=rho_0`, then the preceding sampling bounds give
+
+\[
+\boxed{
+\#\mathcal C_R
+\le {Q_R\over\rho_0^{3/2}},
+\qquad
+\#\mathcal C_\nu
+\le {Q_\nu\over\rho_0^2},
+}
+\]
+
+with `Q_R,Q_nu` equal to the corresponding right-hand-side charges including the fixed sampling constants.  Pressure-third has the same `3/2` counting law with `Q_P` routed to low-pass critical mass plus increment charge.
+
+Thus replication below the physical bandwidth resolution is merged rather than counted repeatedly, while genuinely separated source clusters consume an additive global charge.
+
+
+## 5. Scope
 
 This theorem is a same-generation sampling/packing result.  It does not identify which low-pass packet becomes the persistent ancestor; that is handled by `ancestor_reservoir_sync.md`.  It also assumes a transfer-adapted family of source centers with physical separation comparable to `N^-1`; failure of that separation is a clustering/overlap branch and must be merged before applying the sampling inequality.
