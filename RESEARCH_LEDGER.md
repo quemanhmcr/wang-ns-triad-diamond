@@ -3550,6 +3550,62 @@ phase-space clusters and covariance-cell changes must be registered as
 relinking/interface structure rather than silently re-expanded with new
 coefficients.
 
+#### Exact coherent Moyal reservoir-energy ledger
+
+The frame-budget problem has an even more canonical analysis-side formulation.
+For any `L^2`-normalized affine Gaussian window `g_L`, define the coherent/STFT
+transform
+
+\[
+\mathcal V_L f(X,k)
+=
+\int f(x)\overline{g_L(x-X)}e^{-ik\cdot x}\,dx.
+\]
+
+Plancherel in `k`, followed by Fubini and translation invariance in `X`, gives the
+exact Moyal identity
+
+\[
+\boxed{
+\int_{\mathbb R^6}|\mathcal V_Lf(X,k)|^2
+\frac{dX\,dk}{(2\pi)^3}
+=
+\|f\|_2^2.
+}
+\]
+
+Thus any measurable coherent phase-space partition has positive cell energies
+
+\[
+E_C=\int_C|\mathcal V_Lf|^2d\mu,
+\qquad
+\boxed{E_C\ge0,\quad\sum_CE_C=\|f\|_2^2.}
+\]
+
+At the continuous analysis level the reservoir frame constant is therefore
+exactly
+
+\[
+\boxed{P=1.}
+\]
+
+This avoids coefficient cancellation entirely: close coherent probes are merged
+inside phase-space cells rather than counted as independent synthesis atoms.  For
+an orthogonal dyadic old-band decomposition, Moyal supplies the whole-old-pool
+energy budget directly; a smooth LP partition pays only its standard fixed
+square-function overlap constant.  The 5-separated Riesz theorem remains the
+complementary discrete synthesis realization.
+
+Action `31230201131` on `975f680` passed `282` tests (`8` optional skips) plus
+`5,000` periodic discrete-Moyal regressions.  The worst relative Moyal and cell
+partition residuals were `6.061e-16` and `5.787e-16`.  The continuum identity is
+exact by Plancherel/Fubini, not a numerical approximation.
+
+The remaining bridge is now specifically transfer-facing: prove that the
+low/base **service selected by the nonlinear Navier--Stokes block** can be
+assigned to these positive coherent cells through recursive generations, with
+cell changes and rejected interfaces entered into `Xi`/fresh/relink bookkeeping.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -4320,12 +4376,13 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Construct an iterative separated coherent reservoir realization.**  Inside
-   one equal-covariance cell, 5-separated affine Gaussian synthesis packets have
-   the explicit Riesz budget `P=50/47`, and the whole old pool then erodes
-   geometrically.  The genuine transfer-selected extraction must be reduced to
-   such coherent cells while routing close phase-space clusters, covariance-cell
-   changes and rejected coefficients into `Xi`, fresh radius or relinking.
+1. **Assign nonlinear transfer service to coherent phase-space cells.**  The
+   continuous coherent analysis ledger has exact positive budget `P=1`, while a
+   5-separated equal-covariance synthesis family has `P=50/47`; whole old pools
+   then erode geometrically.  What remains is to prove that the low/base service
+   selected by a genuine nonlinear transfer block is captured by these coherent
+   cell energies with only summable `Xi` when close cells are merged or the
+   covariance cell changes.
 2. **Synchronize selected interfaces and covariance cells through spacetime.**
    A fixed material reservoir/pair cannot service infinitely many generations,
    and finite-atomic relinking is fresh-rich or cycle-rich.  What remains is to
@@ -4338,11 +4395,11 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
    theorem must still prove that every efficient PDE block triggers one with a
    uniform threshold or enters the flat/reuse lineage, then telescope the block
    costs without duplicate charging.
-4. **Make the transfer-adapted packet coefficient budget fully iterative.**
-   One-shot Gaussian near-extremizer extraction and separated coherent Riesz
-   control are individually available, but their coefficients have not yet been
-   identified through every recursive nested-grain generation with a uniform
-   synthesis/error budget.
+4. **Make the transfer-adapted coherent-cell realization fully iterative.**
+   One-shot Gaussian near-extremizer extraction, exact Moyal cell energy and
+   separated coherent Riesz synthesis are individually available, but the
+   nonlinear transfer weights have not yet been identified through every
+   recursive nested-grain generation with a uniform cell/interface error budget.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier--Stokes global regularity is made.
 
@@ -4458,6 +4515,7 @@ The most useful recorded runs, in chronological order, are:
 | `31229118774` | pressure-reservoir synchronization on `6e21fe6`: one fixed low-low pressure pair has service ratio `194481/655360<1/3`; `270` tests + `7` optional skips + `50,000` checks |
 | `31229543390` | whole-old-reservoir-pool erosion on `8c50370`: under frame budget `P`, old-pool service decays `<2^-q`; uniform service forces relinking, then exact incidence Euler routes connected relinking to fresh-rich or cycle-rich; `274` tests + `7` optional skips + `50,000` pool checks + `5,000` incidence checks |
 | `31229863366` | preferred affine coherent-state Bessel/Riesz certificate on `84ae98c`: exact intrinsic overlap, 4-separated Bessel `25/4`, 5-separated Gram spectrum `[47/50,53/50]`, synthesis budget `P=50/47`; `286` tests + `50,000` affine checks + finite Gram probes |
+| `31230201131` | exact affine coherent Moyal ledger on `975f680`: positive continuous phase-space cell energy with `P=1` by Plancherel/Fubini; `282` tests + `8` optional skips + `5,000` discrete Moyal regressions |
 
 The current preferred master regression is run `31227894352` on integration
 commit `9c5f465` (`258` tests plus `20,000` episode traces, worst margin `0`).
@@ -4630,10 +4688,17 @@ has
 \boxed{\sum|c_a|^2\le(50/47)\|\sum c_ag_a\|_2^2}.
 \]
 
-The decisive next theorem is therefore **iterative separated-coherent reduction
-with covariance-cell/interface synchronization**.  The program must show that a
-genuine transfer-selected PDE block can be recursively represented by such
-coherent cells, while every operation that changes the winning cell, merges a
+At the analysis level even the discrete Riesz budget can be bypassed: the affine
+coherent transform has the exact Moyal identity, so any measurable phase-space
+partition carries positive cell masses with total exactly `||u||_2^2`.  Thus the
+analytic energy ledger is `P=1`; the Riesz theorem is needed only when an actual
+discrete Gaussian synthesis is chosen.
+
+The decisive next theorem is therefore **nonlinear transfer-to-coherent-cell
+assignment with covariance-cell/interface synchronization**.  The program must
+show that a genuine transfer-selected PDE block can be recursively represented
+by positive coherent cell service (and, when necessary, separated synthesis
+representatives), while every operation that changes the winning cell, merges a
 close phase-space cluster, or introduces new synthesis atoms pays one of
 
 1. summable transfer-level interface error `Xi`;
@@ -4662,7 +4727,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, and `docs/affine_coherent_bessel.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, and `docs/affine_coherent_moyal.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

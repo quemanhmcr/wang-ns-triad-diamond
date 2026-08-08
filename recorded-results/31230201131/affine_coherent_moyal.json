@@ -1,0 +1,15 @@
+{
+  "certificate": {
+    "continuum_identity": "integral |V_g f|^2 dX dk/(2pi)^3 = ||g||_2^2 ||f||_2^2",
+    "normalized_window_budget": "P=1",
+    "proof": "Plancherel in k followed by Fubini/translation invariance in X",
+    "phase_cell_budget": "for any measurable partition, sum_C E_C=||f||_2^2",
+    "status": "EXACT_BY_PLANCHEREL_FUBINI"
+  },
+  "stress": {
+    "samples": 5000,
+    "worst_relative_discrete_moyal_residual": 6.061305122069574e-16,
+    "worst_cell_partition_residual": 5.78659686141962e-16,
+    "minimum_old_pool_half_life_margin": 0.0
+  }
+}

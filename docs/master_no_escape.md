@@ -965,10 +965,25 @@ a 5-separated family has the Arb-certified Riesz bound
 }
 \]
 
-The unresolved master step is now **iterative separated-coherent reduction with
-covariance-cell / selected-interface synchronization**.  Recursive packet
-extraction must retain this coefficient budget inside cells and charge every
-close-cluster merge, covariance-cell change or newly selected reservoir to
-`Xi`, fresh radius, Bellman/cycle structure, source action or dissipation.  A
-uniform physical block threshold and full recursive synthesis theorem remain
-continuum tasks.
+There is also an exact analysis-side formulation with no discrete frame loss.
+For a normalized affine Gaussian window,
+
+\[
+\boxed{
+\int|\mathcal V_Lu(X,k)|^2\frac{dXdk}{(2\pi)^3}
+=\|u\|_2^2.
+}
+\]
+
+Thus coherent phase-space cells have positive energies summing exactly to the
+physical band energy: `P=1`.  The Riesz constant `50/47` is only needed when the
+analysis cells are replaced by an actual separated synthesis family.
+
+The unresolved master step is now **nonlinear transfer-to-coherent-cell
+assignment with covariance-cell / selected-interface synchronization**.
+Recursive packet extraction must show that the low/base service selected by the
+Navier--Stokes transfer can be assigned to these positive cell energies, and
+charge every close-cell merge, covariance-cell change or newly selected
+reservoir to `Xi`, fresh radius, Bellman/cycle structure, source action or
+dissipation.  A uniform physical block threshold and full recursive realization
+remain continuum tasks.
