@@ -1,0 +1,836 @@
+integrate	Set up job	﻿2026-08-08T23:54:54.6558248Z Current runner version: '2.336.0'
+integrate	Set up job	2026-08-08T23:54:54.6584312Z ##[group]Runner Image Provisioner
+integrate	Set up job	2026-08-08T23:54:54.6585666Z Hosted Compute Agent
+integrate	Set up job	2026-08-08T23:54:54.6586757Z Version: 20260707.563
+integrate	Set up job	2026-08-08T23:54:54.6587710Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+integrate	Set up job	2026-08-08T23:54:54.6588758Z Build Date: 2026-07-07T19:33:50Z
+integrate	Set up job	2026-08-08T23:54:54.6589441Z Worker ID: {cce429f5-8508-4ac5-a5f3-21b49d3a4edb}
+integrate	Set up job	2026-08-08T23:54:54.6590277Z Azure Region: eastus
+integrate	Set up job	2026-08-08T23:54:54.6590915Z ##[endgroup]
+integrate	Set up job	2026-08-08T23:54:54.6592421Z ##[group]Operating System
+integrate	Set up job	2026-08-08T23:54:54.6593134Z Ubuntu
+integrate	Set up job	2026-08-08T23:54:54.6593668Z 24.04.4
+integrate	Set up job	2026-08-08T23:54:54.6594139Z LTS
+integrate	Set up job	2026-08-08T23:54:54.6594763Z ##[endgroup]
+integrate	Set up job	2026-08-08T23:54:54.6595285Z ##[group]Runner Image
+integrate	Set up job	2026-08-08T23:54:54.6596252Z Image: ubuntu-24.04
+integrate	Set up job	2026-08-08T23:54:54.6597235Z Version: 20260720.247.2
+integrate	Set up job	2026-08-08T23:54:54.6598291Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+integrate	Set up job	2026-08-08T23:54:54.6600100Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+integrate	Set up job	2026-08-08T23:54:54.6601068Z ##[endgroup]
+integrate	Set up job	2026-08-08T23:54:54.6602113Z ##[group]GITHUB_TOKEN Permissions
+integrate	Set up job	2026-08-08T23:54:54.6604493Z Contents: read
+integrate	Set up job	2026-08-08T23:54:54.6605118Z Metadata: read
+integrate	Set up job	2026-08-08T23:54:54.6605667Z ##[endgroup]
+integrate	Set up job	2026-08-08T23:54:54.6608541Z Secret source: Actions
+integrate	Set up job	2026-08-08T23:54:54.6609940Z Prepare workflow directory
+integrate	Set up job	2026-08-08T23:54:54.6932418Z Prepare all required actions
+integrate	Set up job	2026-08-08T23:54:54.6980451Z Getting action download info
+integrate	Set up job	2026-08-08T23:54:54.9073362Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+integrate	Set up job	2026-08-08T23:54:55.1430972Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+integrate	Set up job	2026-08-08T23:54:55.2226195Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+integrate	Set up job	2026-08-08T23:54:55.4401114Z Complete job name: integrate
+integrate	Run actions/checkout@v4	﻿2026-08-08T23:54:55.5220438Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5229066Z ##[group]Run actions/checkout@v4
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5229802Z with:
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5230283Z   repository: quemanhmcr/wang-ns-triad-diamond
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5234152Z   token: ***
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5234570Z   ssh-strict: true
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5234988Z   ssh-user: git
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5235417Z   persist-credentials: true
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5235893Z   clean: true
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5236329Z   sparse-checkout-cone-mode: true
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5237020Z   fetch-depth: 1
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5237437Z   fetch-tags: false
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5237865Z   show-progress: true
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5238295Z   lfs: false
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5238711Z   submodules: false
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5239184Z   set-safe-directory: true
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5239677Z   allow-unsafe-pr-checkout: false
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.5240522Z ##[endgroup]
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6313401Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6316197Z ##[group]Getting Git version info
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6317890Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6332253Z [command]/usr/bin/git version
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6460811Z git version 2.54.0
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6486117Z ##[endgroup]
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6502722Z Temporarily overriding HOME='/home/runner/work/_temp/c352dd9e-38b8-49c0-a77f-d89d177defad' before making global git config changes
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6505602Z Adding repository directory to the temporary git global config as a safe directory
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6510749Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6574117Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6580903Z ##[group]Initializing the repository
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6588593Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6713605Z hint: Using 'master' as the name for the initial branch. This default branch name
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6722133Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6724454Z hint: to use in all of your new repositories, which will suppress this warning,
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6726192Z hint: call:
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6727488Z hint:
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6728696Z hint: 	git config --global init.defaultBranch <name>
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6730071Z hint:
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6731355Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6733415Z hint: 'development'. The just-created branch can be renamed via this command:
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6735242Z hint:
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6736262Z hint: 	git branch -m <name>
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6738146Z hint:
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6739564Z hint: Disable this message with "git config set advice.defaultBranchName false"
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6742147Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6746870Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6798391Z ##[endgroup]
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6799993Z ##[group]Disabling automatic garbage collection
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6802777Z [command]/usr/bin/git config --local gc.auto 0
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6844075Z ##[endgroup]
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6845501Z ##[group]Setting up auth
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6889918Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.6905966Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.7343245Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.7382947Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.7626348Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.7663353Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.7886378Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.7925831Z ##[endgroup]
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.7927444Z ##[group]Fetching the repository
+integrate	Run actions/checkout@v4	2026-08-08T23:54:55.7937843Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4108125d957f986c2f73c486ef220b98dcf96818:refs/remotes/origin/research/physical-energy-causal-bridge
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.1322070Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.1324654Z  * [new ref]         4108125d957f986c2f73c486ef220b98dcf96818 -> origin/research/physical-energy-causal-bridge
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.1361805Z ##[endgroup]
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.1363494Z ##[group]Determining the checkout info
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.1365480Z ##[endgroup]
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.1372355Z [command]/usr/bin/git sparse-checkout disable
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.1423737Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.1459347Z ##[group]Checking out the ref
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.1464204Z [command]/usr/bin/git checkout --progress --force -B research/physical-energy-causal-bridge refs/remotes/origin/research/physical-energy-causal-bridge
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.2042433Z Switched to a new branch 'research/physical-energy-causal-bridge'
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.2045407Z branch 'research/physical-energy-causal-bridge' set up to track 'origin/research/physical-energy-causal-bridge'.
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.2052034Z ##[endgroup]
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.2099780Z [command]/usr/bin/git log -1 --format=%H
+integrate	Run actions/checkout@v4	2026-08-08T23:54:56.2125841Z 4108125d957f986c2f73c486ef220b98dcf96818
+integrate	Run actions/setup-python@v5	﻿2026-08-08T23:54:56.2565107Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.2570290Z ##[group]Run actions/setup-python@v5
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.2571462Z with:
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.2572382Z   python-version: 3.11
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.2573423Z   check-latest: false
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.2582595Z   token: ***
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.2583595Z   update-environment: true
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.2584718Z   allow-prereleases: false
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.2585819Z   freethreaded: false
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.2586957Z ##[endgroup]
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.3902461Z ##[group]Installed versions
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.4002939Z (node:2311) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.4006808Z (Use `node --trace-deprecation ...` to show where the warning was created)
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.4009937Z Successfully set up CPython (3.11.15)
+integrate	Run actions/setup-python@v5	2026-08-08T23:54:56.4012778Z ##[endgroup]
+integrate	Run pip install -r requirements.txt python-flint	﻿2026-08-08T23:54:56.4231797Z ##[group]Run pip install -r requirements.txt python-flint
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:56.4233535Z ^[[36;1mpip install -r requirements.txt python-flint^[[0m
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:56.4401414Z shell: /usr/bin/bash -e {0}
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:56.4402588Z env:
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:56.4403666Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:56.4405361Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:56.4407496Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:56.4409054Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:56.4410591Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:56.4412153Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:56.4413474Z ##[endgroup]
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.2821393Z Collecting python-flint
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.3367287Z   Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.5262345Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.5319410Z   Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.6545065Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.6664875Z   Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.7018934Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.7058152Z   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.7201986Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.7243067Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.7409619Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.7475286Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.7606922Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.7643809Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.7809326Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.7845927Z   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.7933615Z Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.9036188Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 157.2 MB/s  0:00:00
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:54:59.9426427Z Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:00.2276188Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 132.5 MB/s  0:00:00
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:00.2313106Z Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:00.2389049Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:00.2485428Z Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.1 MB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:00.3111868Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 163.6 MB/s  0:00:00
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:00.3166232Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:00.3229627Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:00.3290070Z Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:00.3362441Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 194.7 MB/s  0:00:00
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:00.5015241Z Installing collected packages: python-flint, pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:06.8628132Z
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:06.8640086Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 python-flint-0.9.0 scipy-1.15.3
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:06.8648743Z
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:06.8649219Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+integrate	Run pip install -r requirements.txt python-flint	2026-08-08T23:55:06.8650374Z [notice] To update, run: pip install --upgrade pip
+integrate	Full theorem suite	﻿2026-08-08T23:55:06.9275209Z ##[group]Run pytest -q
+integrate	Full theorem suite	2026-08-08T23:55:06.9275501Z ^[[36;1mpytest -q^[[0m
+integrate	Full theorem suite	2026-08-08T23:55:06.9321651Z shell: /usr/bin/bash -e {0}
+integrate	Full theorem suite	2026-08-08T23:55:06.9321904Z env:
+integrate	Full theorem suite	2026-08-08T23:55:06.9322164Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Full theorem suite	2026-08-08T23:55:06.9322597Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Full theorem suite	2026-08-08T23:55:06.9323052Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Full theorem suite	2026-08-08T23:55:06.9323426Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Full theorem suite	2026-08-08T23:55:06.9323799Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Full theorem suite	2026-08-08T23:55:06.9324181Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Full theorem suite	2026-08-08T23:55:06.9324515Z ##[endgroup]
+integrate	Full theorem suite	2026-08-08T23:55:10.5548049Z ........................................................................ [ 16%]
+integrate	Full theorem suite	2026-08-08T23:55:10.6949941Z ........................................................................ [ 32%]
+integrate	Full theorem suite	2026-08-08T23:55:11.0336069Z ........................................................................ [ 48%]
+integrate	Full theorem suite	2026-08-08T23:55:11.2655307Z ........................................................................ [ 64%]
+integrate	Full theorem suite	2026-08-08T23:55:11.3313092Z ........................................................................ [ 80%]
+integrate	Full theorem suite	2026-08-08T23:55:11.7323465Z ........................................................................ [ 97%]
+integrate	Full theorem suite	2026-08-08T23:55:11.8343049Z .............                                                            [100%]
+integrate	Full theorem suite	2026-08-08T23:55:11.8343960Z 445 passed in 4.38s
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	﻿2026-08-08T23:55:11.9406964Z ##[group]Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:11.9408007Z ^[[36;1mpython -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy^[[0m
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:11.9452205Z shell: /usr/bin/bash -e {0}
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:11.9452448Z env:
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:11.9452711Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:11.9453157Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:11.9453582Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:11.9453959Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:11.9454326Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:11.9454865Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:11.9455177Z ##[endgroup]
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3104241Z # Physical-energy causal bridge
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3105014Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3105566Z Status: **EXACT_PHYSICAL_ENERGY_CAUSAL_GATE_AND_MEASURE_AGNOSTIC_SYNC__CONTINUUM_EXTRACTION_CONDITIONAL**.
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3106206Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3107725Z Raw adjoint amplitude generation and physical child-energy transfer are not the same measure: the exact flat scalar model `c'=1`, `c(0)=0`, `G=R=0` has normalized `dGamma=dt` but normalized `dT=2t dt`; at half-time their cumulative masses are `1/2` and `1/4`.
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3109130Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3109425Z The correct exact algebra is the adjoint-response projection identity
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3109867Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3110096Z `2 Re<c,F> = 2/||psi||^2 Re(conj(<psi,c>) <psi,F>) + 2 Re<c_perp,F>`.
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3110494Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3111032Z More importantly, the selected-child energy balance itself supplies the physical causal law.  On `K=int||S||<=1/30`,
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3111743Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3111877Z `E1 <= exp(2K)(E0+W_HH^+ + W_R^+)`.
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3112135Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3112626Z Using `exp(-2K)>=1-2K>=14/15`, if inherited energy and classified residual positive work are each below `E1/5`, then
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3113252Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3113371Z `W_HH^+ >= 8 E1/15`.
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3113552Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3114330Z Thus the generated branch carries a definite amount of **actual positive high-high child-energy work**.  Decompose `F_HH` into same-time parent-pair atoms and use
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3115241Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3115371Z `dT_HH=2[Re<c,F_HH,alpha>]_+ dt`
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3115560Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3117025Z as the causal probability law.  The asynchronous half-slab/parabolic synchronization argument depends only on positivity and event support, so it applies to this physical transfer law directly.  Shannon/Renyi therefore receive the same physical weights used by Hodge/flat transfer bookkeeping, without identifying raw `dGamma` with `dT`.
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3118404Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3119107Z The adjoint Duhamel theorem remains useful to quotient common Kelvin transport and diagnose amplitude inheritance/residuals, but raw `dGamma` is no longer a required master-facing transfer kernel.
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3119930Z
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3120086Z Stress: `50000` synthetic algebra/synchronization states
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3120491Z - worst adjoint-projection work residual: `1.066e-14`
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3120889Z - minimum physical-HH generation margin: `1.381e-03`
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3121296Z - minimum physical-transfer half-slab margin: `8.067e-06`
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3121717Z - exact flat countermodel CDF gap at half-time: `0.250000`
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3122630Z - branches: `{'high_strain_critical_dissipation': 12497, 'classified_residual_physical_work': 12538, 'physical_high_high_transfer_generation': 12402, 'material_energy_inheritance': 12563}`
+integrate	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy	2026-08-08T23:55:16.3123399Z
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	﻿2026-08-08T23:55:16.3282587Z ##[group]Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:55:16.3283507Z ^[[36;1mpython -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness^[[0m
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:55:16.3328646Z shell: /usr/bin/bash -e {0}
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:55:16.3328891Z env:
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:55:16.3329151Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:55:16.3329590Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:55:16.3330018Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:55:16.3330389Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:55:16.3330761Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:55:16.3331136Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:55:16.3331604Z ##[endgroup]
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9582109Z # Recursive coherent witness extraction
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9582645Z
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9583214Z Status: **EXACT_BINARY_COHERENT_WORK_ATOMIZATION_GIVEN_SELECTED_PDE_ROLES__OUTER_ROLE_EXTRACTION_CONDITIONAL**.
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9583906Z
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9584991Z Once the exact selected divergence-free parent/child roles exist, no packet synthesis is needed to create binary causal events.  For any coherent localization partitions with `sum_C A_C=I`, bilinearity gives
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9586193Z
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9586351Z `N(w1,w2)=sum_(C,D) N(A_C w1,A_D w2)`
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9587052Z
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9587286Z and the actual child-energy work decomposes exactly as
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9587644Z
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9587794Z `W_CDE=2 Re <A_E w3,N(A_C w1,A_D w2)>`,
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9588219Z `sum_CDE W_CDE=2 Re <w3,N(w1,w2)>`.
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9588480Z
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9590097Z Taking positive and negative parts is a Hahn decomposition of **actual quadratic work**: `P-N=W` and `P>=[W]_+`.  Each positive atom already carries exactly two parent coherent labels and one child label at one physical time.  Thus binary causality is a disintegration of the Navier--Stokes quadratic work, not a graph ansatz.
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9591811Z
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9593689Z Combining with the physical-energy causal gate, the generated low-strain branch has atomic positive mass at least `8E1/15` before selected cross-cell excision.  If the physical defect moat removes a relative positive-work fraction `rho`, retained binary generation is at least `(1-rho)8E1/15`.  Omitted positive atoms enter `Xi` once; negative atoms remain physical backscatter/cancellation.
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9595699Z
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9597386Z The labels are the existing intrinsic-zeta material coherent addresses.  No assertion is made that an individual `A_C w` has compact Fourier support; scale/helical representative information is still supplied by the outer selected role and the already summable symbol/covariance representation ledgers.
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9599030Z
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9599289Z Stress: `20000` finite Parseval/POVM bilinear-work states
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9599891Z - worst quadratic-source partition residual: `2.758e-15`
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9600427Z - worst work reconstruction residual: `3.678e-15`
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9600957Z - minimum atomic-positive dominance margin: `0.000e+00`
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9601483Z - worst binary probability residual: `5.551e-16`
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9601998Z - worst Xi positive-mass partition residual: `5.684e-14`
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9602559Z - minimum retained-generation formula margin: `0.000e+00`
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9602925Z
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9604367Z The remaining continuum bridge is now outside this binary atomization: prove that every recursively selected efficient smooth-SGS block supplies the outer Fourier/helical roles and classified non-affine residual work required by service-or-flat, with the same physical transfer normalization.
+integrate	Run python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness	2026-08-08T23:56:08.9606000Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	﻿2026-08-08T23:56:08.9779324Z ##[group]Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:08.9780091Z ^[[36;1mpython -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat^[[0m
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:08.9823463Z shell: /usr/bin/bash -e {0}
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:08.9823709Z env:
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:08.9823970Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:08.9824405Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:08.9824834Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:08.9825204Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:08.9825582Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:08.9825950Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:08.9826261Z ##[endgroup]
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1103955Z # Coherent service-or-flat assembly gate
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1104601Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1105296Z Status: **EXACT_COHERENT_SERVICE_OR_FLAT_ASSEMBLY_GATE__EVENTWISE_PROFILE_MARKING_CONTINUUM_SELECTION_REMAINS**.
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1106171Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1109226Z The master-facing assembly no longer needs a frozen Christ Gaussian to persist through a packet lifetime.  On each near-extremal physical-transfer event, use the certified Gaussian only as an analysis/shape mark; move the analysis eddy by the whole-eddy coherent affine regression.  The exact resolved-role theorems then identify three gauge-quotiented flatness observables:
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1111993Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1112159Z `F_coh = sqrt(E_H^phys) + (dT)_nonconf + C(qmax) I_K`.
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1112416Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1112817Z For the default scale-matched branch `s=N r_g<=4`, transition aspect `kappa<=567/500`, and outer carrier `|k|/N<=exp(2/25)`,
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1113331Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1113438Z `qmax=4.71207563594`,
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1113668Z `C(qmax)=5.65481629117`.
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1113828Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1114235Z At `tau=1/100`, the conservative existing transfer gate makes the Hodge and nonconformal-strain pieces each `<tau/3`.  Choose
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1114756Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1114859Z `I_K < tau/[3 C(qmax)] = 0.000589468014821`.
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1115070Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1115672Z Then the **entire** spatial non-affine Gaussian-core connection action is `<tau/3`, so `F_coh<=tau`.  No H1/H3 profile-persistence hypothesis is needed for this assembly statement.
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1116389Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1117984Z If `I_K` crosses that threshold, coherent deformation forces positive critical `D_V`; if strain is large, use the existing high-strain `D_V`; if averaged objective strain variation is large, use the coherent averaged pressure/SGS/viscous source calculus; if `N r_g>4`, route to sticky large-radius ancestry; high aspect, phase holonomy and direct transfer loss keep their existing destinations.
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1119512Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1119621Z Thus the coherent gate is
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1119778Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1120116Z `transfer/source/high-strain/aspect/radius/phase/coherent-D_V  OR  coherent-Kelvin-flat`.
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1120538Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1121377Z The original H1/H3 theorems are not discarded: they remain sharper transfer-facing diagnostics for low Hermite curvature.  They are simply no longer a logical persistence assumption needed to keep one frozen Gaussian packet alive.
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1122239Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1122331Z Stress: `50000` branch states
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1122590Z - minimum Hodge flat margin: `3.333e-03`
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1122879Z - minimum strain flat margin: `1.667e-04`
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1123168Z - minimum nonaffine flat margin: `1.673e-04`
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1123522Z - minimum sampled coherent-deformation `D_V` lower: `6.559e-07`
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1123996Z - branches: `{'coherent_kelvin_extremal_flat': 6260, 'named_physical_causes': 43740}`
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1124322Z
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1127627Z The remaining continuum bridge is now specifically **eventwise Gaussian marking and selected-role registration**: prove measurably that every efficient recursive physical-transfer event receives a near-Gaussian affine mark and that changing marks between common causal slices is only common affine gauge, existing covariance/symbol `Xi`, or a genuine material relink/strain/radius event.  No global-regularity claim is made.
+integrate	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat	2026-08-08T23:56:10.1129160Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	﻿2026-08-08T23:56:10.1290377Z ##[group]Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.1291195Z ^[[36;1mpython -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young^[[0m
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.1335179Z shell: /usr/bin/bash -e {0}
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.1335431Z env:
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.1335694Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.1336295Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.1336999Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.1337392Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.1337782Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.1338163Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.1338477Z ##[endgroup]
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7416258Z # Complex Young parent marking after physical symbol freezing
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7417642Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7418536Z Status: **EXACT_WEIGHTED_TO_COMPLEX_YOUNG_PARENT_REDUCTION__CHRIST_MODULUS_EXTERNAL**.
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7419701Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7421094Z On one selected scalar/helical frozen-symbol parent cell triple, normalize the three `L^(3/2)` role norms to one.  If the physical weighted transfer obeys
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7422428Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7422802Z `|T_m| >= R m_* A3`
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7423253Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7423507Z and the already existing symbol-freezing ledger gives
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7423863Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7424022Z `|T_m-m0 T_1| <= xi m_* A3`, `|m0|<=m_*`,
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7424296Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7424421Z then exactly
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7424593Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7424754Z `|T_1(f,g,h)|/A3 >= R-xi`,
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7424970Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7425088Z and hence
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7425240Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7425365Z `||f*g||_3/A3 >= R-xi`.
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7425560Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7426676Z Here `A3=0.649519052838`.  Thus the **actual complex-valued parent pair** `(f,g)` is an ordinary Young near-extremizer once the physical block deficit plus normalized symbol-freezing error is small.
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7427721Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7428590Z Michael Christ's Theorem 1.1 is stated for complex-valued functions.  Therefore, for every target `epsilon>0`, the external theorem supplies a modulus `delta_Christ(epsilon)>0` such that
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7429606Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7429793Z `weighted_deficit + xi <= delta_Christ(epsilon)`
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7430112Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7430861Z implies that the two complex parent roles are `epsilon`-close in `L^(3/2)` to an extremizing complex Gaussian pair.  No numerical value for that modulus is invented here.
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7431768Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7433124Z This closes the parent **phase lift in principle** on frozen selected cells: modulation/phase is part of the complex extremizing pair.  Magnitude proximity alone would not suffice (`G e^(i x^2)` has exactly Gaussian magnitude but nonlinear phase), so the complex reduction is essential.
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7434611Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7435079Z The symbol-freezing discrepancy remains the same summable `Xi`; it is not paid again as a phase defect.
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7435665Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7435823Z Stress: `50000` algebra/modulus states
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7436326Z - minimum weighted-to-complex efficiency margin: `0.000e+00`
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7437083Z - minimum convolution-pair margin: `0.000e+00`
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7437597Z - minimum admissible Christ-modulus margin: `6.156e-09`
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7437950Z
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7439641Z The remaining PDE issue is not an abstract phase theorem.  It is to ensure the recursive physical selector exposes the scalar/helical frozen cell triple with the required weighted efficiency and then registers its complex Gaussian parent marks with the same material coherent labels used by causal transfer.  No global-regularity claim is made.
+integrate	Run python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young	2026-08-08T23:56:10.7441892Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	﻿2026-08-08T23:56:10.7590293Z ##[group]Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:10.7591129Z ^[[36;1mpython -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian^[[0m
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:10.7634963Z shell: /usr/bin/bash -e {0}
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:10.7635204Z env:
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:10.7635618Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:10.7636054Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:10.7636730Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:10.7637120Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:10.7637491Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:10.7637865Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:10.7638177Z ##[endgroup]
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1451167Z # Dual-Gaussian root registration: Christ proximity gives actual analysis energy
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1452141Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1452567Z Status: **EXACT_DUAL_GAUSSIAN_ANALYSIS_ROOT_QUANTUM__TRANSFER_CELL_ALIGNMENT_REMAINS**.
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1453106Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1454983Z A phase-aligned complex Gaussian near-profile should not be inserted into the velocity as a fictitious synthesis component.  Use it only to design a dual Gaussian **analysis probe**.  Christ supplies the magnitude Gaussian; the present theorem is conditional on the separate phase/polarization control being strong enough to lift that mark to complex `L^(3/2)` proximity.
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1457182Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1458342Z Let `||f||_(3/2)=||G||_(3/2)=1`, `||f-G||_(3/2)<=eps`.  The exact L3-dual Gaussian is `h_G=|G|^(-1/2)G`, with `||h_G||_3=1` and `<G,h_G>=1`.  Quantize the profile covariance to a representative within log-SPD radius `delta`, and use the corresponding L3-normalized dual `h_rep`.  If `delta<=0.4`, exact Gaussian integration gives
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1459584Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1459703Z `<G,h_rep> >= 0.97266240464`.
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1459882Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1460141Z Therefore `|<f,h_rep>| >= <G,h_rep>-eps`.  After L2-normalizing `phi=h_rep/||h_rep||_2`,
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1460535Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1460651Z `||h_rep||_2^2 = 3 sqrt(pi)/(2 r_g,rep)`.
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1460864Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1461217Z The shell lower axis and covariance quantization give the scale-independent actual coefficient bound
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1461703Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1461808Z `N |<f,phi>|^2 >= 0.207034423405`
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1461993Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1463244Z at `eps=1/100`, `delta=0.4`.  In particular it is **strictly larger than 1/5 for the normalized role**.  For the actual physical role `f=a f_hat`, the bound is multiplied by `a^2=||f||_(3/2)^2`.  Therefore this theorem alone does **not** provide the absolute root quantum required by causal/Renyi when parent amplitudes are allowed to shrink.
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1464589Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1466252Z After restoring the physical amplitude this is a coefficient of the actual selected role.  If that role is obtained by an exact self-adjoint outer Fourier/helical projector `Q`, use the probe `Q phi`; then `<u,Q phi>=<Qu,phi>` exactly and `||Q phi||_2<=1`, so normalization cannot reduce the coefficient.  For divergence-free roles, Leray projection is likewise coefficient-preserving.  No L2 closeness of the Christ remainder is asserted or needed.
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1467886Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1471565Z Variable root scale also does not destroy the energy count.  Put `log N` in bins of width `2/25` and color the bins modulo `4`.  Because the outer role shell halfwidth is `2/25`, two distinct bins of one color have disjoint physical Fourier support, so their exact outer role projectors are orthogonal.  Within one scale bin use its reference `N_b`; the rescaled covariances `N_b^2 Sigma` lie in a fixed compact subset of six-dimensional `Sym(3)`.  A crude Frobenius net, chosen fine enough to guarantee affine-invariant log-SPD radius `delta=0.4`, uses at most `49876112440099344` bins.  For each fixed scale/covariance representative, unit cells in that representative dual-probe phase coordinate may be colored with `5^6=15625` colors so cells of one color are 4-separated.  This auxiliary coloring is only an analysis-budget device; it is not identified with the canonical material label.  Inside one scale bin/covariance/color the exact affine coherent Bessel theorem gives analysis budget `25/4`; orthogonality across same-color scale bins prevents any factor growing with causal depth.  Thus all registered roots have one finite effective budget
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1479396Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1479517Z `P_eff <= 1.94828564219e+22`.
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1479682Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1480311Z This constant is intentionally huge but **scale independent**.  In the causal root estimate it enters only through `log P_eff`, so it changes the finite depth offset and not the linear reuse slope `log(48/25)`.
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1481023Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1482032Z The theorem therefore closes a subtle **shape-to-analysis** gap once complex Gaussian proximity is available: it produces a scale-critical coefficient **relative to the parent `L^(3/2)` amplitude** in the actual `L2` energy analysis, via duality, without pretending `L^(3/2)` closeness implies `L2` closeness.
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1483087Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1483214Z Stress: `50000` covariance/pairing/Leray states
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1483532Z - minimum Gaussian pairing margin: `7.007e-04`
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1483902Z - minimum root-mass margin above the default endpoint: `9.590e-05`
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1484298Z - minimum covariance-cover radius margin: `-1.110e-16`
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1484629Z - worst Leray coefficient residual: `1.387e-14`
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1484832Z
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1487444Z Two registration issues remain.  First, the current inverse-Young ledger directly supplies Gaussian proximity for magnitudes; the separate phase/polarization theorems must be assembled into the complex phase-aligned proximity assumed here.  Second,  A causal parent slot already has a transfer-selected material coherent label.  The dual probe above is centered at the Christ Gaussian mark.  The final assembly must prove that a fixed transfer-weighted fraction of roots are aligned with that mark (or else the misaligned physical work is already cross/relink/backscatter/service currency).  Measurable selection of a Christ mark is not the hard part; this **transfer-cell alignment** is.  No global-regularity claim is made.
+integrate	Run python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian	2026-08-08T23:56:16.1489900Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	﻿2026-08-08T23:56:16.1629374Z ##[group]Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:16.1630221Z ^[[36;1mpython -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor^[[0m
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:16.1675398Z shell: /usr/bin/bash -e {0}
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:16.1675812Z env:
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:16.1676256Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:16.1677321Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:16.1678158Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:16.1678599Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:16.1678980Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:16.1679373Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:16.1679682Z ##[endgroup]
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6437066Z # Bargmann root-cell registration: a large Gaussian coefficient forces actual Moyal cell energy
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6437889Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6438344Z Status: **EXACT_BARGMANN_LOCAL_MOYAL_ROOT_CELL_QUANTUM__SELECTED_OUTER_ROLE_PARTITION_ASSUMED**.
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6438935Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6440208Z The remaining registration does not require the nonlinear work atom to sit in the same coherent cell as the Christ mark.  A causal parent needs a physical **identity anchor** with a global energy budget.  The Gaussian coherent transform supplies one.
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6441663Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6442311Z For normalized coherent states with overlap `|<g_z,g_w>|=exp(-|z-w|^2/2)`, Weyl translation to a mark `z0` writes the coefficient function as
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6443086Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6443213Z `c(z)=exp(-|z|^2/2) F(z)`,
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6443711Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6444074Z where `F` is Bargmann holomorphic on `C^3`.  Mean-value/subharmonicity gives for every `R`
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6444596Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6444743Z `E(B_R(z0)) >= exp(-R^2) R^6/3! |c(z0)|^2`.
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6445035Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6445192Z The optimum is `R=sqrt(3)`, with fraction
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6445465Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6445585Z `9/(2e^3) = 0.224041807655`.
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6445793Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6446702Z The radius-`sqrt3` ball intersects at most `15625` unit cells of the fixed six-dimensional intrinsic grid.  Therefore one actual canonical coherent cell has
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6447535Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6447664Z `N E_C >= 2.96859945386e-06`
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6447874Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6449710Z when the dual-Gaussian parent coefficient uses the default one-percent/`delta=0.4` quantum.  The number is small and scale independent, but it is **not an absolute physical root quantum**.  For an actual parent `f=a f_hat`, it becomes `a^2` times this number.  Hence causal reuse needs either a separate lower bound on parent amplitude or the amplitude-imbalance/service routing developed next.
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6451684Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6454060Z Choose the maximum-Moyal-energy canonical cell in that finite neighborhood, with deterministic tie breaking, and call it the parent energy anchor.  Push the positive physical parent-slot law to these anchors.  Total positive transfer mass is unchanged.  If several slots choose the same anchor they are physically merged/reused; if they choose distinct anchors, each distinct root has a positive Moyal energy quantum proportional to that parent's squared `L^(3/2)` amplitude.
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6456697Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6457992Z There is no need to claim that the nonlinear work itself is localized in the anchor cell.  Work weights come from the exact physical child-transfer measure; the anchor answers a different physical question: **which material coherent reservoir carries this parent role?**
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6459459Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6461812Z The global root budget is also depth independent.  Inside one exact outer frequency/helicity subrole and one covariance representative, Moyal cell energies sum with `P=1`.  The selected relative frequency roles within a scale bin are disjoint; same-color logarithmic scale bins are orthogonal; only four scale colors and the finite covariance representatives multiply the energy budget.  Thus the effective cell budget is `199504449760397376` with no packet-count or causal-depth factor.
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6464715Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6464901Z Stress: `50000` radius/pushforward/anchor states
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6465377Z - minimum optimal-radius margin: `3.503e-10`
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6465885Z - canonical root-cell critical mass: `2.96859945386e-06`
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6466419Z - worst positive pushforward mass residual: `7.105e-15`
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6466945Z
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6470178Z Combined with complex Young parent marking and dual-Gaussian analysis, this replaces the old transfer-cell-alignment demand by a simpler physical registration: each selected parent role carries its own nearby energetic material cell, and the causal law is pushed to that cell.  The remaining continuum step has an amplitude component that cannot be skipped: derive a physical lower/weighted alternative for parent `L^(3/2)` amplitudes from the generated HH work and old-reservoir service ledger.  After that, verify the exact outer-role partition and install this energy-anchor rule as the canonical material label.  No global-regularity claim is made.
+integrate	Run python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor	2026-08-08T23:56:20.6473611Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	﻿2026-08-08T23:56:20.6646247Z ##[group]Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:20.6648136Z ^[[36;1mpython -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice^[[0m
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:20.6713299Z shell: /usr/bin/bash -e {0}
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:20.6713931Z env:
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:20.6714372Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:20.6715124Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:20.6715877Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:20.6716825Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:20.6717527Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:20.6718227Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:20.6718813Z ##[endgroup]
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7747075Z # Common-slice coefficient registration by first causal stop
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7747857Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7748285Z Status: **EXACT_FIRST_STOP_COMMON_SLICE_COEFFICIENT_REGISTRATION_ON_SELECTED_ROLE_MODEL**.
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7748849Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7749768Z The asynchronous cone already gives `alpha<=10/39`.  With the common reference slice `s=a-(2/5)T_min`, every event lies inside its parent natural adjoint window with clean leftover margin
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7750815Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7750948Z `1-2/5-10/39 = 0.34358974359 = 67/195`.
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7751213Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7751893Z For one eventwise parent coefficient, integrate the **same** adjoint Kelvin interaction picture from the common slice `s` to the event time `t`:
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7752766Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7752899Z `z(t)=z(s)+I_HH[s,t]+I_R[s,t]`.
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7753147Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7753302Z Let `A=|z(t)|`.  The exact triangle gate says
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7753607Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7753726Z - `|z(s)|>=A/4`, or
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7754040Z - `|I_R|>=A/4`, or
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7754338Z - `|I_HH|>=A/2`.
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7754516Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7755556Z Therefore coefficient persistence is not an assumption.  If no classified residual/source, HH-generation, or genuine material-relink stop occurs before the common slice, the event coefficient is **registered** with
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7756933Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7757057Z `|z(s)|>=A/4`.
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7757224Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7757447Z Two continuing parents consequently retain at least
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7757771Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7757884Z `(1/4)^2 = 1/16`
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7758049Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7758758Z of their event coefficient product on the synchronized slice.  This is exactly the registration factor used by the amplitude--entropy productivity theorem.
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7759609Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7761963Z If the factor fails, the parent is not allowed to continue as an uncharged root.  Its first obstruction is itself the earlier causal event: HH generation is re-entered through the physical-energy causal gate, `R_class` delegates to its existing source/interface owner, and a genuine material-cell switch is relink/fresh ancestry.  Small frequency/covariance representative changes remain the already-summable representation `Xi` and are not the physical cause of coefficient loss.
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7764511Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7764704Z Stress: `50000` exact complex adjoint decompositions
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7765161Z - common-window margin: `0.34358974359`
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7765607Z - minimum continuing coefficient margin: `1.052e-03`
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7766126Z - minimum continuing pair-product margin: `1.544e-05`
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7766795Z - worst exact adjoint identity residual: `4.019e-14`
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7767601Z - branches: `{'classified_residual_stop': 16730, 'hh_generation_stop': 16648, 'registered_material_inheritance': 16622}`
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7768271Z
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7770161Z This closes common-slice **coefficient registration at the selected-role model level**.  It does not yet construct the selected moving role for every continuum smooth-SGS block; that outer-role extraction remains the PDE bridge.  Physical causal probabilities remain the actual positive child-energy work law, not raw Duhamel amplitude weights.  No global-regularity claim is made.
+integrate	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice	2026-08-08T23:56:22.7772761Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	﻿2026-08-08T23:56:22.7919048Z ##[group]Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:22.7919922Z ^[[36;1mpython -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy^[[0m
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:22.7963391Z shell: /usr/bin/bash -e {0}
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:22.7963632Z env:
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:22.7963888Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:22.7964326Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:22.7964759Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:22.7965131Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:22.7965495Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:22.7965910Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:22.7966224Z ##[endgroup]
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4475611Z # Amplitude-entropy causal reuse: remove the false uniform root-mass hypothesis
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4476861Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4477735Z Status: **EXACT_AMPLITUDE_ENTROPY_REUSE_TELESCOPE__SELECTED_ROLE_PRODUCTIVITY_REGISTERED__OUTER_ROLE_EXTRACTION_REMAINS**.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4478838Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4479204Z The critical amplitude of a selected coherent coefficient is
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4479761Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4479954Z `alpha=sqrt(N)|<u,phi>|`.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4480264Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4481974Z On a continuing Duhamel-generated node, sharp Young applied to the exact symmetrized high-high source, the natural `N^-2` lifetime, the Gaussian probe norm, and the bounded backward adjoint give a scale-independent productivity law
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4483826Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4483965Z `alpha_p1 alpha_p2 >= Lambda alpha_c`.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4484231Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4485391Z For the displayed default `c=1, nu=1`, including the conservative `1/4` first-stop registration factor on each parent, the current clean constants give `Lambda=0.000597111612285`.  The number is deliberately not optimized; only positivity and scale independence matter to the telescope.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4486426Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4487021Z Give each physical child event its two structural parent slots with the existing free `1/2` baseline.  Taking logs gives
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4487472Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4487641Z `E log alpha_parent >= (1/2) log Lambda + (1/2) E log alpha_child`,
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4487890Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4487980Z hence after depth `L`
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4488106Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4488248Z `ell_root >= (1-2^-L)log Lambda + 2^-L log alpha_terminal`.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4488473Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4489086Z This is the key point: **arbitrary amplitude imbalance is harmless at the multiplicative level**.  One parent may be exponentially smaller than the other; their log average still sees the exact product.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4489781Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4490001Z Bargmann submean plus the canonical Moyal partition gives, for a root anchor cell,
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4490333Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4490450Z `N_r E_r >= beta alpha_r^2`, `beta=1.43386756899e-05`.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4490656Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4490888Z If `w_r` is the physical transfer-weighted root law, the log-sum inequality gives exactly
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4491222Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4491342Z `H(w_root)+2 E_w log alpha_r <= log sum_r alpha_r^2`.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4491549Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4491715Z Using the common-slice energy budget and `N_root<=N_base(25/24)^L`,
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4491979Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4492141Z `H(w_root) <= log[P E_global N_base (25/24)^L / beta] - 2 ell_root`.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4492382Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4492486Z Therefore the exact Shannon telescope
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4492658Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4492750Z `sum R_j=L log2-H(w_root)`
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4492888Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4492962Z obeys
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4493057Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4493321Z `sum R_j >= L log(48/25) - log(P E_global N_base/beta) + 2(1-2^-L)log Lambda + 2^(1-L)log alpha_terminal`.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4494081Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4494531Z The last two amplitude terms are only a finite-depth offset: the coefficient of `L` is still `log(48/25)`.  No assumption `N E_root>=eta` for every root is used.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4495068Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4495934Z Moreover `H2(root)<=H1(root)`, so the exact Renyi action `sum log(1+theta_j)=L log2+log Q_root` has the **same lower bound**.  Once that lower exceeds `L log(4/3)`, some layer has `theta_j>1/3` and the existing parent-slot pair / component-entropy / same-ancestry-cycle routing applies unchanged.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4497096Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4497358Z Stress: `20000` random layered causal DAGs with parent amplitude ratios as large as `7.922e+14`
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4497838Z - worst one-layer log-product violation: `1.776e-15`
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4498166Z - minimum log-sum entropy margin: `-3.553e-15`
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4498495Z - minimum exact Shannon-minus-lower margin: `1.958e-01`
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4498851Z - minimum exact Renyi-minus-lower margin: `1.958e-01`
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4499266Z - branches: `{'depth_not_yet_forced': 19999, 'amplitude_entropy_reuse_forced': 1}`
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4499571Z
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4501855Z This theorem changes the frontier.  The old causal root-count argument needed an absolute critical mass per root; that is incompatible with the homogeneity of Young.  The correct physical invariant is the **multiplicative critical coefficient**.  The companion common-slice first-stop theorem now supplies the conservative `1/4` coefficient and `1/16` parent-product registration on the selected-role model.  The remaining continuum step is therefore the outer moving Fourier/helical role extraction itself: construct that exact selected coefficient equation on every recursively chosen efficient SGS block with the already-classified non-affine/source/Xi terms.  No global-regularity claim is made.
+integrate	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy	2026-08-08T23:56:49.4504223Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	﻿2026-08-08T23:56:49.4667387Z ##[group]Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:56:49.4668170Z ^[[36;1mpython -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse^[[0m
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:56:49.4711628Z shell: /usr/bin/bash -e {0}
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:56:49.4711870Z env:
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:56:49.4712123Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:56:49.4712553Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:56:49.4712965Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:56:49.4713329Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:56:49.4713691Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:56:49.4714075Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:56:49.4714392Z ##[endgroup]
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2340245Z # Transfer-weighted causal reuse information
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2342007Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2342664Z Status: **EXACT_TRANSFER_WEIGHTED_CAUSAL_REUSE_INFORMATION**.
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2343125Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2344393Z Let `w_(j+1)` be the normalized physical causal-transfer law on child packets of one synchronized layer.  Give each of its two parent-role slots weight `w/2`, and push this joint `(child,role)` law through the physical parent-label map to obtain `w_j`.
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2345904Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2346028Z Define
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2346184Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2346850Z `R_j = H(child,role | parent) = H(w_(j+1)) + log 2 - H(w_j) >=0`.
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2347278Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2347862Z The `log 2` is the exact cost-free two-parent-role baseline.  `R_j`, not `log 2`, measures transfer-weighted causal merging/reuse.
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2348572Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2348819Z For a one-terminal ancestry the identities telescope exactly:
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2349191Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2349333Z `sum_j R_j = L log 2 - H(w_0)`.
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2349867Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2350408Z Since `H(w_0)<=log n_0` and the coherent root-energy / signed-good scale theorem gives `n_0<=(P E_global N_base/eta)(25/24)^L`,
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2351135Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2351322Z `sum_j R_j >= L log(48/25)-log(P E_global N_base/eta)`.
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2351649Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2351800Z Therefore the same clean depth condition
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2352084Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2352228Z `L log(36/25)>log(P E_global N_base/eta)`
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2352504Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2352733Z forces at least one physical-transfer-weighted layer with
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2353099Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2353211Z `R_j > log(4/3)`.
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2353392Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2355134Z This removes the main caveat of the raw cycle-count theorem: the forced reuse signal can be measured with the causal transfer law itself.  What remains is a local conversion of this conditional reuse information into the existing collision-pair / Hodge-resistance / component-entropy currencies; one must not charge the baseline two parent roles as branching loss.
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2357284Z
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2357416Z Stress: `50000`
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2357789Z - worst information-telescope residual: `5.329e-15`
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2358365Z - minimum sampled conditional reuse information: `0.000e+00`
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2358873Z - minimum rich-depth margin: `3.555e-05`
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2359567Z - branches: `{'transfer_weighted_reuse_information_rich': 35957, 'causal_depth_not_yet_forced': 14043}`
+integrate	Run python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse	2026-08-08T23:57:18.2360140Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	﻿2026-08-08T23:57:18.2545051Z ##[group]Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:18.2546320Z ^[[36;1mpython -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse^[[0m
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:18.2609141Z shell: /usr/bin/bash -e {0}
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:18.2609392Z env:
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:18.2609662Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:18.2610120Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:18.2610546Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:18.2610919Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:18.2611289Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:18.2611661Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:18.2611977Z ##[endgroup]
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1813160Z # Renyi causal reuse: weighted binary ancestry reaches existing Bellman/cycle currencies
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1817230Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1817525Z Status: **EXACT_RENYI_CAUSAL_REUSE_TO_EXISTING_CURRENCIES**.
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1817986Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1818928Z For a causal child law `w`, duplicating each event into its two parent-role slots gives collision probability `Q_slot=Q_child/2`.  Pushforward through the physical parent label map has
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1820060Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1820215Z `Q_parent = Q_child/2 + R_hidden`,
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1820510Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1821020Z where `R_hidden` is exactly the weighted hidden pair mass of distinct causal slots sharing a parent.  Define
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1821606Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1821716Z `theta = 2 R_hidden / Q_child`.
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1821912Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1821995Z Then
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1822113Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1822219Z `Q_parent=(Q_child/2)(1+theta)`.
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1822415Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1822540Z Across a one-terminal depth-`L` ancestry,
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1822773Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1822895Z `sum_j log(1+theta_j)=L log2+log Q_root`.
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1823114Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1823365Z Using `Q_root>=1/n_0` and the coherent root-energy / signed-good scale bound gives
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1823733Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1823919Z `sum_j log(1+theta_j) >= L log(48/25)-log(P E_global N_base/eta)`.
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1824215Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1824541Z Therefore the clean depth condition `L log(36/25)>log(P E_global N_base/eta)` forces some layer with
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1825231Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1825327Z `theta_j>1/3`.
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1825459Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1825634Z At that layer there is a uniform existing-currency route:
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1825915Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1826280Z - if `H2_child<log2`, then `Q_child>1/2` and `R_hidden>1/12`: a physical transfer-weighted parent-slot reuse pair;
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1827839Z - if `H2_child>=log2`, apply the existing atomic-to-ancestry collision chain.  Either ancestry/component collision entropy is at least `(1/2)log2`, or child same-ancestry hidden pair mass exceeds `1/sqrt(2)-1/2>1/5`.
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1828639Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1829757Z Thus the baseline two parent roles remain free, but any sufficiently deep causal ancestry must eventually pay a **transfer-weighted** Bellman/component entropy or pair/cycle currency.  The remaining PDE issue is constructing the synchronized causal layers and registering these parent labels with the same coherent/nested ancestry used by the master.
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1830972Z
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1831047Z Stress: `50000`
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1831272Z - worst layer recurrence residual: `2.220e-16`
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1831576Z - worst action telescope residual: `3.553e-15`
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1831869Z - minimum rich-depth action margin: `3.051e-04`
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1832541Z - branches: `{'child_component_Bellman_entropy': 22118, 'weighted_parent_slot_reuse_pair': 8704, 'child_same_ancestry_pair_cycle': 16772, 'not_renyi_reuse_rich': 2406}`
+integrate	Run python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse	2026-08-08T23:57:54.1833110Z
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	﻿2026-08-08T23:57:54.2000515Z ##[group]Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:54.2001319Z ^[[36;1mpython -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler^[[0m
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:54.2044840Z shell: /usr/bin/bash -e {0}
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:54.2045081Z env:
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:54.2045338Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:54.2045778Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:54.2046192Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:54.2046730Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:54.2047120Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:54.2047500Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:54.2047810Z ##[endgroup]
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0364073Z # Single-charge physical branch compiler
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0364474Z
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0364894Z Status: **EXACT_CAUSAL_QUOTIENT_AND_TRANSFER_MEASURE_PARTITION__PHYSICAL_ENERGY_CAUSAL_BRIDGE_PREFERRED**.
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0365430Z
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0368115Z The compiler first removes the selected physical cross-cell/interface transfer measure into `Xi`.  On the retained positive child-transfer measure, a definite transfer loss is an absorbing gate.  Otherwise theorem manifestations are quotiented by their physical causal root and the first causal root is charged.  If independent roots hit at the same first time, their positive stopping weights partition the transfer measure; no lexicographic theorem priority is used.  If there is no hit, the block is admissible only with a certified Kelvin-flat continuation.
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0370599Z
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0372214Z Raw `dGamma` from the adjoint Kelvin--Duhamel gate is kept as an amplitude-generation diagnostic, not forced to equal energy transfer.  The preferred master-facing bridge uses Duhamel only for same-time quadratic parent-pair support and uses the actual positive high--high child-energy work as the causal weights; the half-slab/parabolic synchronization geometry is measure agnostic.
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0373619Z
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0374425Z Critical `N E`, resolved-source service and `D_V` remain recursive/scale-critical currencies.  They are never promoted to the finite additive reset count without an independent scale-independent threshold in a genuinely globally bounded resource.
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0375619Z
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0375739Z Stress: `50000` synthetic causal block states
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0376049Z - maximum transfer-mass residual: `1.421e-14`
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0376366Z - exact/quantized first-time tie samples: `12048`
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0376963Z - Kelvin-flat samples: `7271`
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0377246Z - transfer-stop samples: `9903`
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0377517Z - initial-boundary samples: `2622`
+integrate	Run python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler	2026-08-08T23:57:56.0377685Z
+integrate	Master episode stress	﻿2026-08-08T23:57:56.0539176Z ##[group]Run python - <<'PY'
+integrate	Master episode stress	2026-08-08T23:57:56.0539519Z ^[[36;1mpython - <<'PY'^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0539752Z ^[[36;1mimport json, math, random^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0540195Z ^[[36;1mfrom src.master_no_escape import MasterStep, master_lower_bound, verify_episode_trace^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0540644Z ^[[36;1mrng = random.Random(20260809)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0540897Z ^[[36;1mworst = 1e9^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0541100Z ^[[36;1mchecked = 0^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0541319Z ^[[36;1mfor _ in range(20000):^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0541549Z ^[[36;1m    c0 = 0.04^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0541778Z ^[[36;1m    kappa = rng.uniform(0.12, 0.30)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0542066Z ^[[36;1m    reset = rng.uniform(kappa, 1.4)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0542331Z ^[[36;1m    episodes = []^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0542550Z ^[[36;1m    all_steps = []^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0542798Z ^[[36;1m    for e in range(rng.randint(1, 12)):^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0543071Z ^[[36;1m        p = reset^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0543281Z ^[[36;1m        ep = []^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0543547Z ^[[36;1m        for _j in range(rng.randint(0, 20)):^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0543843Z ^[[36;1m            z = rng.uniform(0.0, 0.015)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0544120Z ^[[36;1m            if p - kappa + z < 0:^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0544376Z ^[[36;1m                break^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0544611Z ^[[36;1m            p = p - kappa + z^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0544895Z ^[[36;1m            s = MasterStep(1.0, 0.0, 0.0, True, z)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0545194Z ^[[36;1m            ep.append(s)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0545444Z ^[[36;1m            all_steps.append(s)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0545705Z ^[[36;1m        episodes.append(ep)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0545966Z ^[[36;1m        if e + 1 < len(episodes):^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0546226Z ^[[36;1m            pass^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0546742Z ^[[36;1m    # Rebuild separators after episode count is known.^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0547072Z ^[[36;1m    all_steps = []^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0547317Z ^[[36;1m    for e, ep in enumerate(episodes):^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0547605Z ^[[36;1m        all_steps.extend(ep)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0547864Z ^[[36;1m        if e + 1 < len(episodes):^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0548136Z ^[[36;1m            cost = rng.uniform(c0, 0.5)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0548423Z ^[[36;1m            eta = rng.uniform(0.0, 0.002)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0548723Z ^[[36;1m            eff = min(1.0, math.exp(-cost) + eta)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0549076Z ^[[36;1m            all_steps.append(MasterStep(eff, cost, eta, False))^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0549583Z ^[[36;1m    epcheck = verify_episode_trace(episodes, c0=c0, kappa0=kappa, potential_reset=reset)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0550036Z ^[[36;1m    if not epcheck['admissible']:^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0550381Z ^[[36;1m        raise SystemExit('generated inadmissible episode trace')^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0550895Z ^[[36;1m    out = master_lower_bound(all_steps, c0=c0, kappa0=kappa, potential_reset=reset)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0551413Z ^[[36;1m    actual = sum(-math.log(min(1.0, s.efficiency)) for s in all_steps)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0551868Z ^[[36;1m    margin = actual - float(out['log_efficiency_lower_bound'])^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0552219Z ^[[36;1m    worst = min(worst, margin)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0552472Z ^[[36;1m    checked += 1^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0552754Z ^[[36;1mresult = {'checked': checked, 'worst_margin': worst}^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0553096Z ^[[36;1mprint(json.dumps(result, indent=2))^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0553540Z ^[[36;1mif worst < -1e-10:^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0553771Z ^[[36;1m    raise SystemExit(1)^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0553999Z ^[[36;1mPY^[[0m
+integrate	Master episode stress	2026-08-08T23:57:56.0597503Z shell: /usr/bin/bash -e {0}
+integrate	Master episode stress	2026-08-08T23:57:56.0597744Z env:
+integrate	Master episode stress	2026-08-08T23:57:56.0598006Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Master episode stress	2026-08-08T23:57:56.0598445Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Master episode stress	2026-08-08T23:57:56.0598868Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Master episode stress	2026-08-08T23:57:56.0599307Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Master episode stress	2026-08-08T23:57:56.0599896Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Master episode stress	2026-08-08T23:57:56.0600286Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Master episode stress	2026-08-08T23:57:56.0600604Z ##[endgroup]
+integrate	Master episode stress	2026-08-08T23:57:57.3265632Z {
+integrate	Master episode stress	2026-08-08T23:57:57.3266007Z   "checked": 20000,
+integrate	Master episode stress	2026-08-08T23:57:57.3266329Z   "worst_margin": 0.0
+integrate	Master episode stress	2026-08-08T23:57:57.3266852Z }
+integrate	Integration summary	﻿2026-08-08T23:57:57.3370944Z ##[group]Run for f in results-integration/*/summary.md; do
+integrate	Integration summary	2026-08-08T23:57:57.3371692Z ^[[36;1mfor f in results-integration/*/summary.md; do^[[0m
+integrate	Integration summary	2026-08-08T23:57:57.3372237Z ^[[36;1m  echo >> "$GITHUB_STEP_SUMMARY"^[[0m
+integrate	Integration summary	2026-08-08T23:57:57.3372724Z ^[[36;1m  cat "$f" >> "$GITHUB_STEP_SUMMARY"^[[0m
+integrate	Integration summary	2026-08-08T23:57:57.3373186Z ^[[36;1mdone^[[0m
+integrate	Integration summary	2026-08-08T23:57:57.3436701Z shell: /usr/bin/bash -e {0}
+integrate	Integration summary	2026-08-08T23:57:57.3437125Z env:
+integrate	Integration summary	2026-08-08T23:57:57.3437583Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Integration summary	2026-08-08T23:57:57.3438338Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Integration summary	2026-08-08T23:57:57.3439086Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Integration summary	2026-08-08T23:57:57.3439776Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Integration summary	2026-08-08T23:57:57.3440461Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Integration summary	2026-08-08T23:57:57.3441150Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Integration summary	2026-08-08T23:57:57.3441624Z ##[endgroup]
+integrate	Run actions/upload-artifact@v4	﻿2026-08-08T23:57:57.3781254Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3793077Z ##[group]Run actions/upload-artifact@v4
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3793421Z with:
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3793688Z   name: physical-energy-causal-integration-results
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3794032Z   path: results-integration/
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3794281Z   if-no-files-found: warn
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3794509Z   compression-level: 6
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3794723Z   overwrite: false
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3794927Z   include-hidden-files: false
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3795153Z env:
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3795393Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3795817Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3796263Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3796918Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3797293Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3797662Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.3797971Z ##[endgroup]
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.5358041Z (node:2478) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.5359347Z (Use `node --trace-deprecation ...` to show where the warning was created)
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.5499525Z With the provided path, there will be 22 files uploaded
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.5517411Z Artifact name is valid!
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.5518155Z Root directory input is valid!
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.6869350Z Beginning upload of artifact content to blob storage
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.7345934Z (node:2478) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.7575026Z Uploaded bytes 29144
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.7720193Z Finished uploading artifact content to blob storage!
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.7721229Z SHA256 digest of uploaded artifact zip is 124527a3a94503a0569c7b9e09e919c31b25ea32670dc18958d22868099759b4
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.7723440Z Finalizing artifact upload
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.9138835Z Artifact physical-energy-causal-integration-results.zip successfully finalized. Artifact ID 9029557092
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.9140523Z Artifact physical-energy-causal-integration-results has been successfully uploaded! Final size is 29144 bytes. Artifact ID is 9029557092
+integrate	Run actions/upload-artifact@v4	2026-08-08T23:57:57.9148922Z Artifact download URL: https://github.com/quemanhmcr/wang-ns-triad-diamond/actions/runs/31285033969/artifacts/9029557092
+integrate	Post Run actions/setup-python@v5	﻿2026-08-08T23:57:57.9347401Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+integrate	Post Run actions/setup-python@v5	2026-08-08T23:57:57.9348659Z Post job cleanup.
+integrate	Post Run actions/setup-python@v5	2026-08-08T23:57:58.0505002Z (node:2490) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+integrate	Post Run actions/setup-python@v5	2026-08-08T23:57:58.0505918Z (Use `node --trace-deprecation ...` to show where the warning was created)
+integrate	Post Run actions/checkout@v4	﻿2026-08-08T23:57:58.0697606Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.0699747Z Post job cleanup.
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.1576876Z [command]/usr/bin/git version
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.1618296Z git version 2.54.0
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.1656180Z Temporarily overriding HOME='/home/runner/work/_temp/64233109-7168-4c2a-8e14-1f9f56899ce7' before making global git config changes
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.1657957Z Adding repository directory to the temporary git global config as a safe directory
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.1661803Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.1700032Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.1737492Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.1988761Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.2017402Z http.https://github.com/.extraheader
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.2029507Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.2066955Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.2397292Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+integrate	Post Run actions/checkout@v4	2026-08-08T23:57:58.2464998Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+integrate	Complete job	﻿2026-08-08T23:57:58.2798205Z Cleaning up orphan processes
+integrate	Complete job	2026-08-08T23:57:58.3078878Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

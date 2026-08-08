@@ -1955,6 +1955,7 @@ ownership remains solely with the single-charge compiler.
 Preferred selected-role certificate: `31284828229` and `31284828236` on
 `e7181bd` (`445` tests, `50,000` exact adjoint decompositions, `20,000`
 amplitude-entropy causal DAGs; tested parent amplitude ratios up to `7.922e14`).
+Full-chain preferred integration: `31285033969` on `4108125` (`445` tests; all physical-energy/coherent/Young/registration/Shannon/Renyi/compiler stresses green; master `20,000` traces, worst margin `0`).
 The older `N E_root>=eta` root-count theorem remains a useful special case but is
 no longer the preferred causal closure.
 
