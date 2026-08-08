@@ -1,0 +1,30 @@
+name: Dual Gaussian root registration
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/dual_gaussian_root_registration.py'
+      - 'tests/test_dual_gaussian_root_registration.py'
+      - 'docs/dual_gaussian_root_registration.md'
+      - '.github/workflows/dual-gaussian-root-registration.yml'
+      - 'docs/transfer_preserving_profile_extraction.md'
+      - 'docs/affine_coherent_bessel.md'
+      - 'docs/divfree_coherent_parseval.md'
+      - 'RESEARCH_LEDGER.md'
+      - 'docs/master_no_escape.md'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-dual-gaussian-root-registration
+      - run: cat results-dual-gaussian-root-registration/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dual-gaussian-root-registration-results
+          path: results-dual-gaussian-root-registration/
