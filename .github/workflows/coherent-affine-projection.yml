@@ -1,0 +1,28 @@
+name: Coherent affine projection
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/coherent_affine_projection.py'
+      - 'tests/test_coherent_affine_projection.py'
+      - 'docs/coherent_affine_projection.md'
+      - '.github/workflows/coherent-affine-projection.yml'
+      - 'docs/resolved_role_egorov.md'
+      - 'RESEARCH_LEDGER.md'
+      - 'docs/master_no_escape.md'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.coherent_affine_projection --samples 50000 --outdir results-coherent-affine-projection
+      - run: cat results-coherent-affine-projection/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coherent-affine-projection-results
+          path: results-coherent-affine-projection/

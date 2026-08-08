@@ -287,7 +287,13 @@ There are two honest possibilities:
    on the strict-lowpass near-extremal branch and can be absorbed into flat
    erosion or multiplicative loss.
 
-## 7. Scope
+## 7. Coherent affine projection collapses the whole spectrum
+
+The companion theorem `coherent_affine_projection.md` implements the natural repair suggested above.  Instead of Taylor-expanding around a privileged center jet, it projects the resolved velocity onto constant+linear Hermite modes of the entire coherent Gaussian eddy.  The residual has Hermite degree at least two, so the Ornstein--Uhlenbeck spectral gap and Gaussian creation/annihilation calculus control **all** higher spatial deformation by `K_coh`.  On the scale-matched transition-aspect branch the associated Gaussian-core forcing is `O(K_coh)`, while a large integrated `K_coh` forces critical normalized dissipation `D_V`.
+
+This means the full coherent curvature spectrum need not become a list of new currencies merely to control the moving outer role.  The remaining issue moves to the time evolution/source calculus of the coherent averaged affine jet.
+
+## 8. Scope
 
 This note proves the exact affine-subtracted Egorov identity and gives a precise
 Navier--Stokes-compatible countermodel to center-Hessian-only closure.  It also
