@@ -1,0 +1,25 @@
+{
+  "certificate": {
+    "status": "EXACT_FIRST_STOP_COMMON_SLICE_COEFFICIENT_REGISTRATION_ON_SELECTED_ROLE_MODEL",
+    "geometry": "alpha<=10/39 and offset=2/5 leave natural-window margin 0.34358974359=67/195",
+    "identity": "z_event=z_slice+I_HH+I_R under the same adjoint Kelvin interaction picture",
+    "continuing": "if |I_R|<A/4 and |I_HH|<A/2 and no material relink occurs, then |z_slice|>=A/4",
+    "pair": "two continuing parents retain at least 1/16 of their event coefficient product on the common slice",
+    "first_stop": "failure to register returns the complete set of earlier HH-generation, classified-residual/source, and material-relink obstructions; no primary is selected here",
+    "single_charge": "simultaneous registration obstructions are delegated as a set to the physical branch compiler, which alone owns tie partitioning",
+    "weights": "this registration theorem does not replace physical energy weights; expanded HH nodes are still weighted by actual positive child-energy work",
+    "continuum_status": "exact after the selected moving parent-role coefficient equation exists; constructing that equation for every recursive continuum SGS block remains the outer-role extraction bridge"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_natural_window_margin": 0.3435897435897436,
+    "minimum_continuing_fraction_margin": 0.0010523355593557585,
+    "minimum_pair_product_margin": 1.544144282419378e-05,
+    "worst_adjoint_identity_residual": 4.0194366942304644e-14,
+    "branch_counts": {
+      "classified_residual_stop": 16730,
+      "hh_generation_stop": 16648,
+      "registered_material_inheritance": 16622
+    }
+  }
+}

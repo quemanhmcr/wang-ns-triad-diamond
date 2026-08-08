@@ -1203,6 +1203,8 @@ L\log(36/25)>\log(5E_{global}N_{base})
 }
 \]
 
+This root-count statement remains valid **when an absolute per-root critical-mass floor is supplied independently**.  It is not inferred from Young shape rigidity alone.  The preferred amplitude--entropy theorem below removes this extra hypothesis and retains the same linear reuse slope.
+
 Thus a sufficiently deep causally complete flat ancestry must contain a
 reuse-rich layer.  This is a finite synchronized theorem only: raw cycle rank is
 not yet a transfer-weighted cost, and a full PDE Duhamel extraction is not yet a
@@ -1795,11 +1797,194 @@ physical root candidates and delegates the primary choice to the first-causal
 compiler.  Preferred certificate: `31264981294` on `184c64e` (`414` tests plus
 `50,000` branch states).
 
-Thus the remaining continuum gap is no longer packet persistence.  It is the
-**eventwise Gaussian marking/registration bridge**: attach a near-Gaussian affine
-mark to each efficient physical-transfer event and register that mark with the
-same material coherent role used by the exact binary work law, without making an
-arbitrary Gaussian representative change look like physical covariance/relink
-work.  Common affine changes must remain gauge; only actual material/covariance
-changes or the already summable representation `Xi` may be charged.  This is not
-a Navier--Stokes global-regularity proof.
+## Homogeneity-corrected amplitude--entropy causal reuse
+
+The remaining causal root budget must respect the separate homogeneity of the
+quadratic/Young interaction.  Shape near-extremality alone cannot imply an
+absolute `N E_root>=eta`: multiplying one role by a small scalar preserves its
+normalized Young efficiency while shrinking its energy.
+
+The preferred invariant is the scale-critical selected coefficient
+
+\[
+\boxed{\alpha=\sqrt N\,|\langle u,\phi\rangle|.}
+\]
+
+After one selected frozen scalar/helical cell has been exposed, the physical
+weighted form and the already single-charged symbol error give
+
+\[
+|T_1(f,g,h)|/A_3\ge R-\xi.
+\]
+
+Thus Christ's external complex-valued Young stability marks the **actual complex
+parent pair** once `(1-R)+xi` is below its non-explicit modulus.  The dual
+Gaussian is used only as an analysis probe; for a unit `L^(3/2)` role the clean
+shell/covariance theorem gives a fixed scale-critical coefficient, while for an
+actual role this coefficient scales with its true `L^(3/2)` amplitude.  Bargmann
+submean then moves that coefficient into an actual canonical Moyal energy cell,
+not a fictitious synthesis component.
+
+On every continuing generated node, the exact symmetrized high--high source, one
+factor of frequency from the derivative, the natural `cN^-2` lifetime, and the
+`N^(1/2)` norm of the L2-normalized Gaussian probe cancel to give
+
+\[
+\boxed{\alpha_{p_1}\alpha_{p_2}\ge\Lambda\alpha_c}
+\]
+
+with one scale-independent `Lambda>0`; the displayed conservative default is
+
+\[
+\Lambda=5.97111612285\times10^{-4}.
+\]
+
+This is an **amplitude productivity law**, not a replacement of the physical
+causal measure by Duhamel weights.  The layer probability law remains the actual
+positive child-energy work.  Duhamel is used only for same-time support and the
+coefficient identity.
+
+Give the two structural parent slots their exact free `1/2` baseline.  With
+
+\[
+\ell_j=\mathbb E_{w_j}\log\alpha,
+\]
+
+one obtains
+
+\[
+\ell_j\ge\frac12\log\Lambda+\frac12\ell_{j+1},
+\qquad
+\ell_0\ge(1-2^{-L})\log\Lambda+2^{-L}\log\alpha_L.
+\]
+
+The Moyal anchor obeys
+
+\[
+\boxed{N_rE_r\ge\beta\alpha_r^2},
+\qquad
+\beta=1.43386756899\times10^{-5}.
+\]
+
+For the physical transfer-weighted root law `w_0`, log-sum gives exactly
+
+\[
+\boxed{
+H(w_0)+2\mathbb E_{w_0}\log\alpha_r
+\le\log\sum_r\alpha_r^2.
+}
+\]
+
+Using `N_r<=N_base(25/24)^L` and the common-slice energy/frame budget,
+
+\[
+H(w_0)
+\le
+\log\frac{P E_{global}N_{base}(25/24)^L}{\beta}
+-2\ell_0.
+\]
+
+Therefore the exact Shannon telescope satisfies
+
+\[
+\boxed{
+\sum_j\mathcal R_j
+\ge
+L\log\frac{48}{25}
+-\log\frac{P E_{global}N_{base}}{\beta}
++2(1-2^{-L})\log\Lambda
++2^{1-L}\log\alpha_L.
+}
+\]
+
+The amplitude terms change only a finite-depth logarithmic offset.  The linear
+coefficient remains `log(48/25)`.  Arbitrarily unbalanced parent amplitudes are
+therefore not a new currency: the product is the physical invariant and the log
+is its additive coordinate.
+
+Since `H_2(w_0)<=H(w_0)`, the exact Renyi action
+
+\[
+\sum_j\log(1+\theta_j)=L\log2+\log Q_0
+\]
+
+has the **same lower bound**.  Whenever it exceeds `L log(4/3)`, one layer has
+`theta_j>1/3`, and the already certified parent-slot pair / component entropy /
+same-ancestry-cycle route applies unchanged.
+
+## Common-slice coefficient registration by first physical stop
+
+The asynchronous cone gives `alpha_span<=10/39`.  The common slice
+`s=a-(2/5)T_min` therefore lies inside every parent natural adjoint interval with
+margin
+
+\[
+\boxed{1-2/5-10/39=67/195.}
+\]
+
+For an eventwise parent coefficient in the **same** Kelvin interaction picture,
+
+\[
+\boxed{z(t)=z(s)+I_{HH}[s,t]+I_R[s,t].}
+\]
+
+The exact triangle gate says
+
+\[
+|z(s)|\ge|z(t)|/4
+\quad\lor\quad
+|I_R|\ge|z(t)|/4
+\quad\lor\quad
+|I_{HH}|\ge|z(t)|/2.
+\]
+
+Consequently coefficient persistence is not assumed.  If no earlier classified
+residual/source, HH-generation, or genuine material-relink obstruction fires,
+then
+
+\[
+\boxed{|z(s)|\ge|z(t)|/4},
+\]
+
+and two continuing parents retain at least `1/16` of their event product.  If the
+factor fails, the first obstruction is itself the causal stop and is delegated
+to its existing owner.  Simultaneous obstructions are returned as a set; this
+registration theorem never chooses a primary by theorem-name order, so exact tie
+ownership remains solely with the single-charge compiler.
+
+Preferred selected-role certificate: `31284828229` and `31284828236` on
+`e7181bd` (`445` tests, `50,000` exact adjoint decompositions, `20,000`
+amplitude-entropy causal DAGs; tested parent amplitude ratios up to `7.922e14`).
+The older `N E_root>=eta` root-count theorem remains a useful special case but is
+no longer the preferred causal closure.
+
+## Remaining continuum bridge: outer moving-role extraction
+
+The Gaussian marking, amplitude homogeneity, common-slice time interface and
+weighted root entropy are no longer the unresolved pieces.  The remaining PDE
+bridge is the **outer selected-role construction itself**.
+
+For every recursively chosen efficient smooth-SGS block one must construct exact
+moving divergence-free Fourier/helical roles
+
+\[
+w_i=Q_i(t,D)u
+\]
+
+such that their exact Navier--Stokes equation has, under one common physical
+normalization:
+
+1. strict-lowpass Kelvin/coherent-averaged low--high transport in the gauge;
+2. one designated same-time high--high quadratic source;
+3. every moving-projector/non-affine/source term primary-routed once to the
+   existing coherent-deformation, pressure/SGS/viscous, relink or representation
+   `Xi` ledgers;
+4. actual positive child-energy work as the causal measure passed to
+   Hodge/Shannon/Renyi; and
+5. on every continuing event, the complex-Young/dual/Bargmann coefficient mark
+   and first-stop common-slice registration used above.
+
+This statement still has to be proved for the **continuum recursive selector**;
+the existing exact identities prove its pieces but not yet their universal
+assembly on every efficient block.  Therefore there is still no Navier--Stokes
+global-regularity proof.

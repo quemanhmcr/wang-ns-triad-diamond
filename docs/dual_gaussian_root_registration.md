@@ -334,3 +334,13 @@ A measurable Christ selector by itself would not prove this.  The remaining issu
 is physical **transfer-cell alignment**, not selection theory.
 
 No global regularity claim is made.
+
+## Superseding amplitude-entropy use
+
+The normalized dual coefficient is **not** promoted to an absolute root mass.
+The physical role carries the factor `||f||_(3/2)^2`, exactly as required by
+homogeneity.  The preferred downstream theorem keeps that amplitude explicitly:
+`alpha=sqrt(N)|<u,phi>|` enters the multiplicative parent-product law and then the
+root entropy estimate.  Thus no separate parent-amplitude floor is required.
+The remaining continuum issue is the outer selected-role construction, not a
+new Gaussian-registration mass hypothesis.

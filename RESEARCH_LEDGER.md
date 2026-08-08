@@ -5428,6 +5428,10 @@ The most useful recorded runs, in chronological order, are:
 | `31264531046` | first coherent-averaged-strain-source run on `3d508a3` failed in pytest before theorem stress because a fixture compared `190*0.01=1.9000000000000001` to literal `1.9` with exact `==`; fixture/floating semantics only, no theorem formula or constant changed |
 | `31264579580` | coherent averaged resolved-strain source on `d4841d4`: exact moving-average identity for `Xdot=barV`, `Ldot=barA L`; exact `dot barA=-barA^2-<a^2>-<HessP>-<grad div R_sgs>+nu<Delta A>-<r.grad A>` and corotational strain version; Gaussian IBP gives `<r.grad A>=<(z.R)(A-barA)>`, so new averaging terms are `<=kappa^2 K_coh^2` and `<=sqrt7 kappa K_coh^2`; normalized Reynolds source weight `<=1.18115356379 D_V`, local quadratic+averaging weight `<=2.0383176489 D_V`, while averaged pressure/SGS/viscous terms inherit existing filtered routes; `408` tests + `50,000` states, identity residual `9.172e-16` |
 | `31264981294` | coherent service-or-flat assembly gate on `184c64e`: whole-eddy flatness `F_coh=sqrt(E_H^phys)+(dT)_nonconf+C(qmax)I_K`; for default `Nr_g<=4`, `condL<=567/500`, shell carrier `|k|/N<=e^(2/25)`, `qmax=4.71207563594`, `C=5.65481629117`, so `I_K<5.89468014821e-4` makes full non-affine Gaussian-core connection action `<tau/3` at `tau=1/100`, while larger `I_K` forces critical `D_V`; no frozen Christ-profile persistence is required; the gate returns all threshold-crossing physical roots and delegates primary selection to the first-causal compiler rather than using lexicographic order; `414` tests + `50,000` branch states |
+| `31266108674` | complex Young parent marking on `e29ba49`: after one selected frozen scalar/helical cell has weighted efficiency `R` and normalized symbol-freezing error `xi`, exact algebra gives `|T_1(f,g,h)|/A_3>=R-xi` and hence `||f*g||_3/A_3>=R-xi`; Christ's external complex-valued Young stability may therefore mark the actual parent pair by complex Gaussian extremizers once `(1-R)+xi<=delta_Christ(eps)`, with no numerical modulus invented and the same symbol discrepancy charged only once as `Xi`; `425` tests + `50,000` algebra/modulus states |
+| `31266550206` | corrected dual-Gaussian analysis registration on `7a7306b`: for a unit-`L^(3/2)` near-Gaussian role, covariance quantization `d_log<=0.4` and shell uncertainty give normalized `N|<f,phi>|^2>=0.207...>1/5`, Leray/outer orthogonal projection preserves the coefficient, and scale coloring plus finite covariance bins gives a depth-independent analysis budget; crucial homogeneity correction: for the actual role the quantum is multiplied by `||f||_(3/2)^2`, so no absolute root mass follows from shape alone; `433` tests + `50,000` states |
+| `31266550193` | Bargmann/Moyal root-cell registration on `7a7306b`: a large Gaussian coherent coefficient forces positive Moyal energy in a radius-`sqrt3` intrinsic ball; deterministic maximum-energy cell anchoring preserves the physical parent-slot pushforward and merges reused slots naturally; the normalized cell quantum scales by the squared parent `L^(3/2)` amplitude in the physical role, rather than supplying a false absolute mass floor; `433` tests + `50,000` states |
+| `31284828229`, `31284828236` | preferred amplitude-entropy and common-slice registration on `e7181bd`: exact asynchronous margin `67/195`; first-stop adjoint registration gives `|z(s)|>=|z(t)|/4` whenever no earlier HH-generation/classified-residual/material-relink obstruction fires, so two continuing parents retain at least `1/16` of event coefficient product; the scale-critical law `alpha_p1 alpha_p2>=Lambda alpha_c` with `alpha=sqrt(N)|<u,phi>|` implies a transfer-weighted log-amplitude recursion, while Bargmann/Moyal gives `N E_anchor>=beta alpha^2`; log-sum then bounds root entropy and yields the same linear Shannon/Renyi reuse slope `log(48/25)` **without** assuming `N E_root>=eta` for every root; displayed defaults `Lambda=5.97111612285e-4`, `beta=1.43386756899e-5`; `445` tests, `50,000` exact adjoint decompositions and `20,000` adversarial causal DAGs with amplitude ratios up to `7.922e14`; simultaneous registration obstructions are returned as a set and delegated to the single-charge compiler |
 
 | `31249662333`, `31249664073`, `31249665749`, `31249667523`, `31249669387`, `31249671051`, `31249672640`, `31249674254`, `31249675942` | nine-workflow adjoint-causal integration on `f1f0e62`: coherent transfer cells, coherent increment service, service-or-flat rigidity, physical flat episode, causal binary ancestry, transfer-weighted Shannon reuse, Renyi causal reuse, adjoint Kelvin--Duhamel and master all green; adjoint workflow `339` tests + `50,000` checks, master `20,000` traces with worst margin `0` |
 
@@ -6098,16 +6102,126 @@ decision.  Existing H1/H3 theorems remain sharper optional diagnostics, but are
 no longer a profile-persistence hypothesis required by the assembly.  Preferred
 certificate: `31264981294` on `184c64e` (`414` tests + `50,000` branch states).
 
-The decisive remaining continuum bridge is now more specific: **eventwise
-near-Gaussian marking and registration with the actual transfer-selected
-coherent role**.  Christ's inverse theorem may supply a Gaussian affine mark at
-each efficient physical-transfer event; the mark need not persist through a
-slab.  What must still be proved is that one can choose/register these eventwise
-marks so that common affine motion is gauge, representation covariance/symbol
-changes enter the already summable `Xi`, and any genuine change of material
-center/carrier/covariance is detected by existing relink/strain/radius currencies
-rather than by an arbitrary choice of Gaussian representative.  No global
-regularity claim is made.
+The registration frontier has now changed in a structurally important way.
+Young near-extremality is separately homogeneous in the parent roles, so it is
+**incorrect to infer an absolute root critical-mass floor from shape rigidity
+alone**.  The old causal root-count theorem remains valid as a special case when
+`N E_root>=eta` is supplied independently, but it is no longer required by the
+preferred weighted causal master.
+
+On one selected frozen scalar/helical interaction cell, the physical weighted
+form and the existing symbol-freezing error satisfy
+
+\[
+|T_1(f,g,h)|/A_3\ge R-\xi,
+\]
+
+so Christ's external **complex-valued** Young stability may mark the actual
+complex parent pair once the physical deficit plus the single symbol `Xi` lies
+below its non-explicit modulus.  The dual-Gaussian theorem then gives a
+scale-critical selected coefficient relative to the true parent amplitude, and
+Bargmann submean registers that coefficient in a nearby actual Moyal energy cell.
+No `L^(3/2)`-to-`L^2` closeness or fictitious Gaussian synthesis is used.
+
+The correct causal invariant is the scale-critical coefficient
+
+\[
+\alpha=\sqrt N\,|\langle u,\phi\rangle|.
+\]
+
+For every **continuing generated** node, the exact symmetrized high--high source,
+one derivative, the `cN^{-2}` lifetime and the Gaussian probe norm give a
+scale-independent productivity law
+
+\[
+\boxed{\alpha_{p_1}\alpha_{p_2}\ge\Lambda\alpha_c},
+\]
+
+with displayed conservative default `Lambda=5.97111612285e-4`.  Giving the two
+structural parent slots their free `1/2` baseline yields
+
+\[
+\ell_j:=\mathbb E_{w_j}\log\alpha
+\ge\frac12\log\Lambda+\frac12\ell_{j+1},
+\]
+
+hence
+
+\[
+\ell_0\ge(1-2^{-L})\log\Lambda+2^{-L}\log\alpha_L.
+\]
+
+Bargmann/Moyal gives
+
+\[
+N_rE_r\ge\beta\alpha_r^2,
+\qquad \beta=1.43386756899\times10^{-5},
+\]
+
+and the exact log-sum inequality gives
+
+\[
+H(w_0)+2\mathbb E_{w_0}\log\alpha_r
+\le\log\sum_r\alpha_r^2.
+\]
+
+Therefore the Shannon reuse telescope obeys
+
+\[
+\boxed{
+\sum_j\mathcal R_j
+\ge
+L\log\frac{48}{25}
+-\log\frac{P E_{global}N_{base}}{\beta}
++2(1-2^{-L})\log\Lambda
++2^{1-L}\log\alpha_L.
+}
+\]
+
+Since `H_2<=H_1`, the **same lower bound** applies to the exact Renyi action
+`sum log(1+theta_j)`.  Thus arbitrary parent-amplitude imbalance changes only a
+finite-depth logarithmic offset; it does not change the linear reuse slope and
+requires no new `small parent`/`large reservoir` currency.
+
+Common-slice coefficient registration is also theorem-level on the selected-role
+model.  The asynchronous cone leaves the exact margin `67/195`.  Integrating the
+same adjoint interaction picture from the common slice to an event gives
+
+\[
+z(t)=z(s)+I_{HH}+I_R.
+\]
+
+If no earlier classified residual/source, HH-generation or genuine material
+relink obstruction fires, the triangle gate forces
+
+\[
+|z(s)|\ge|z(t)|/4,
+\]
+
+so two continuing parents keep at least `1/16` of their event coefficient
+product.  Simultaneous obstructions are returned as a set and never ordered
+lexicographically; the single-charge compiler alone owns exact-tie partitioning.
+Preferred certificate: `31284828229`/`31284828236` on `e7181bd` (`445` tests,
+`50,000` exact adjoint decompositions and `20,000` adversarial causal DAGs).
+
+The **decisive remaining continuum bridge is now the outer moving-role extraction
+itself**.  For every recursively selected efficient smooth-SGS block one must
+construct exact divergence-free moving Fourier/helical roles `w_i=Q_i(t,D)u`
+whose equation has, with one common physical normalization:
+
+1. the strict-lowpass Kelvin/coherent-averaged transporter as gauge;
+2. the designated same-time high--high quadratic source;
+3. every Heisenberg/non-affine/source remainder primary-routed once to the
+   already proved `K_coh`, pressure/SGS/viscous, relink or representation `Xi`
+   ledgers;
+4. the actual positive child-energy work as the causal weights; and
+5. the complex-Young/dual/Bargmann coefficient mark plus first-stop common-slice
+   registration above on every continuing event.
+
+No packet-persistence, absolute per-root mass floor, raw `dGamma=dT` identity, or
+new amplitude currency remains as a legitimate assumption.  This outer-role PDE
+extraction has **not** yet been proved for every continuum recursive block, so
+there is still no Navier--Stokes global-regularity conclusion.
 
 ---
 
@@ -6123,7 +6237,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/complex_young_parent_marking.md`, `docs/dual_gaussian_root_registration.md`, `docs/bargmann_root_cell_registration.md`, `docs/amplitude_entropy_causal_reuse.md`, `docs/common_slice_coefficient_registration.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

@@ -1,0 +1,28 @@
+{
+  "certificate": {
+    "status": "EXACT_AMPLITUDE_ENTROPY_REUSE_TELESCOPE__SELECTED_ROLE_PRODUCTIVITY_REGISTERED__OUTER_ROLE_EXTRACTION_REMAINS",
+    "productivity": "on every continuing generated node alpha_p1 alpha_p2 >= Lambda alpha_child; Lambda is scale independent",
+    "log_recursion": "E log alpha_parent >= (1/2)log Lambda+(1/2)E log alpha_child",
+    "depth_solution": "ell_root >= (1-2^-L)log Lambda+2^-L log alpha_terminal",
+    "anchor": "Bargmann/Moyal gives N E_anchor >= beta alpha^2 with beta=1.43386756899e-05",
+    "entropy": "H(root)+2 E_root log alpha <= log(sum alpha^2) <= log(P E_global N_max/beta)",
+    "shannon": "sum R_j=L log2-H(root) gets the same linear log(48/25) slope without a per-root mass floor",
+    "renyi": "H2(root)<=H1(root), so the Renyi action has the same lower bound; if it exceeds L log(4/3), some theta_j>1/3",
+    "amplitude_imbalance": "arbitrarily unbalanced parent amplitudes are absorbed by the log-product recursion; no small/large-parent threshold or new currency is needed",
+    "duhamel_role": "adjoint Duhamel is used only to certify scale-critical coefficient productivity/support, never as the physical causal probability weights",
+    "physical_weights": "Shannon/Renyi layer weights remain the actual positive child-energy work law",
+    "continuum_status": "the companion common-slice first-stop theorem supplies the 1/4 coefficient and 1/16 product registration on the selected-role model; the remaining continuum bridge is construction of that exact moving outer role equation on every recursive SGS block"
+  },
+  "stress": {
+    "samples": 20000,
+    "worst_layer_log_margin": 1.7763568394002505e-15,
+    "minimum_logsum_margin": -3.552713678800501e-15,
+    "minimum_shannon_lower_margin": 0.19576905828612123,
+    "minimum_renyi_lower_margin": 0.19576905828612123,
+    "maximum_amplitude_ratio": 792188764425101.9,
+    "branch_counts": {
+      "depth_not_yet_forced": 19999,
+      "amplitude_entropy_reuse_forced": 1
+    }
+  }
+}

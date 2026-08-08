@@ -229,3 +229,18 @@ Young/dual/Bargmann anchor construction measurably at the common causal slice,
 and use that anchor as the canonical material label throughout the compiler.
 
 No global-regularity claim is made.
+
+## Superseding amplitude-entropy use
+
+The canonical cell quantum here is used in the homogeneous form
+
+\[
+N E_C\ge\beta\alpha^2,
+\qquad \alpha=\sqrt N|\langle u,\phi\rangle|,
+\]
+
+rather than as an absolute root mass.  Combined with the transfer-weighted
+log-amplitude recursion, this is exactly what is needed for the root
+energy--entropy inequality.  The amplitude imbalance mentioned above is
+therefore closed by `amplitude_entropy_causal_reuse.md`; no new service currency
+or amplitude floor is introduced.

@@ -1,0 +1,382 @@
+certify	Set up job	﻿2026-08-08T23:49:16.1902303Z Current runner version: '2.336.0'
+certify	Set up job	2026-08-08T23:49:16.1927354Z ##[group]Runner Image Provisioner
+certify	Set up job	2026-08-08T23:49:16.1928446Z Hosted Compute Agent
+certify	Set up job	2026-08-08T23:49:16.1929054Z Version: 20260707.563
+certify	Set up job	2026-08-08T23:49:16.1929654Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+certify	Set up job	2026-08-08T23:49:16.1930318Z Build Date: 2026-07-07T19:33:50Z
+certify	Set up job	2026-08-08T23:49:16.1930935Z Worker ID: {cfe5a0f8-4353-4490-bbdd-6d6ccd1268b2}
+certify	Set up job	2026-08-08T23:49:16.1931585Z Azure Region: westus3
+certify	Set up job	2026-08-08T23:49:16.1932098Z ##[endgroup]
+certify	Set up job	2026-08-08T23:49:16.1933488Z ##[group]Operating System
+certify	Set up job	2026-08-08T23:49:16.1934076Z Ubuntu
+certify	Set up job	2026-08-08T23:49:16.1934612Z 24.04.4
+certify	Set up job	2026-08-08T23:49:16.1935077Z LTS
+certify	Set up job	2026-08-08T23:49:16.1935551Z ##[endgroup]
+certify	Set up job	2026-08-08T23:49:16.1936052Z ##[group]Runner Image
+certify	Set up job	2026-08-08T23:49:16.1936620Z Image: ubuntu-24.04
+certify	Set up job	2026-08-08T23:49:16.1937149Z Version: 20260720.247.2
+certify	Set up job	2026-08-08T23:49:16.1938265Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+certify	Set up job	2026-08-08T23:49:16.1939858Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+certify	Set up job	2026-08-08T23:49:16.1940716Z ##[endgroup]
+certify	Set up job	2026-08-08T23:49:16.1941819Z ##[group]GITHUB_TOKEN Permissions
+certify	Set up job	2026-08-08T23:49:16.1943709Z Contents: read
+certify	Set up job	2026-08-08T23:49:16.1944296Z Metadata: read
+certify	Set up job	2026-08-08T23:49:16.1944824Z Packages: read
+certify	Set up job	2026-08-08T23:49:16.1945294Z ##[endgroup]
+certify	Set up job	2026-08-08T23:49:16.1947739Z Secret source: Actions
+certify	Set up job	2026-08-08T23:49:16.1948824Z Prepare workflow directory
+certify	Set up job	2026-08-08T23:49:16.2274297Z Prepare all required actions
+certify	Set up job	2026-08-08T23:49:16.2322736Z Getting action download info
+certify	Set up job	2026-08-08T23:49:16.5167682Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+certify	Set up job	2026-08-08T23:49:17.2231001Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+certify	Set up job	2026-08-08T23:49:17.2875925Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+certify	Set up job	2026-08-08T23:49:17.4710246Z Complete job name: certify
+certify	Run actions/checkout@v4	﻿2026-08-08T23:49:17.5510930Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5519640Z ##[group]Run actions/checkout@v4
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5520303Z with:
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5520746Z   repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5524143Z   token: ***
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5524519Z   ssh-strict: true
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5524898Z   ssh-user: git
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5525278Z   persist-credentials: true
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5525705Z   clean: true
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5526083Z   sparse-checkout-cone-mode: true
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5526532Z   fetch-depth: 1
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5526902Z   fetch-tags: false
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5527279Z   show-progress: true
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5527673Z   lfs: false
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5528158Z   submodules: false
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5528593Z   set-safe-directory: true
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5529042Z   allow-unsafe-pr-checkout: false
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.5529692Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6509836Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6512695Z ##[group]Getting Git version info
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6513589Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6514723Z [command]/usr/bin/git version
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6586226Z git version 2.54.0
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6609894Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6626353Z Temporarily overriding HOME='/home/runner/work/_temp/77739271-5b77-4f33-a8d6-ce70cdb204c0' before making global git config changes
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6628539Z Adding repository directory to the temporary git global config as a safe directory
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6633706Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6686138Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6691034Z ##[group]Initializing the repository
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6697974Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6802697Z hint: Using 'master' as the name for the initial branch. This default branch name
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6805405Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6806703Z hint: to use in all of your new repositories, which will suppress this warning,
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6807394Z hint: call:
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6807776Z hint:
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6808472Z hint: 	git config --global init.defaultBranch <name>
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6809025Z hint:
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6809544Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6810393Z hint: 'development'. The just-created branch can be renamed via this command:
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6811117Z hint:
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6811497Z hint: 	git branch -m <name>
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6811933Z hint:
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6812507Z hint: Disable this message with "git config set advice.defaultBranchName false"
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6813614Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6827079Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6869302Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6870554Z ##[group]Disabling automatic garbage collection
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6872832Z [command]/usr/bin/git config --local gc.auto 0
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6900168Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6901321Z ##[group]Setting up auth
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6907136Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.6939132Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.7285760Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.7326781Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.7524934Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.7553928Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.7730959Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.7760964Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.7761785Z ##[group]Fetching the repository
+certify	Run actions/checkout@v4	2026-08-08T23:49:17.7770746Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +e7181bd5edccc5f0453d6afb1949984772367c84:refs/remotes/origin/research/physical-energy-causal-bridge
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8040031Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8044232Z  * [new ref]         e7181bd5edccc5f0453d6afb1949984772367c84 -> origin/research/physical-energy-causal-bridge
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8069653Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8071383Z ##[group]Determining the checkout info
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8072950Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8077768Z [command]/usr/bin/git sparse-checkout disable
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8116005Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8140448Z ##[group]Checking out the ref
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8145418Z [command]/usr/bin/git checkout --progress --force -B research/physical-energy-causal-bridge refs/remotes/origin/research/physical-energy-causal-bridge
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8558775Z Switched to a new branch 'research/physical-energy-causal-bridge'
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8566708Z branch 'research/physical-energy-causal-bridge' set up to track 'origin/research/physical-energy-causal-bridge'.
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8571414Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8604191Z [command]/usr/bin/git log -1 --format=%H
+certify	Run actions/checkout@v4	2026-08-08T23:49:18.8625935Z e7181bd5edccc5f0453d6afb1949984772367c84
+certify	Run actions/setup-python@v5	﻿2026-08-08T23:49:18.8996065Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/setup-python@v5	2026-08-08T23:49:18.9001547Z ##[group]Run actions/setup-python@v5
+certify	Run actions/setup-python@v5	2026-08-08T23:49:18.9002611Z with:
+certify	Run actions/setup-python@v5	2026-08-08T23:49:18.9003422Z   python-version: 3.11
+certify	Run actions/setup-python@v5	2026-08-08T23:49:18.9004348Z   check-latest: false
+certify	Run actions/setup-python@v5	2026-08-08T23:49:18.9012782Z   token: ***
+certify	Run actions/setup-python@v5	2026-08-08T23:49:18.9013675Z   update-environment: true
+certify	Run actions/setup-python@v5	2026-08-08T23:49:18.9014680Z   allow-prereleases: false
+certify	Run actions/setup-python@v5	2026-08-08T23:49:18.9015659Z   freethreaded: false
+certify	Run actions/setup-python@v5	2026-08-08T23:49:18.9016552Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-08T23:49:19.0327254Z ##[group]Installed versions
+certify	Run actions/setup-python@v5	2026-08-08T23:49:19.0412694Z (node:2895) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/setup-python@v5	2026-08-08T23:49:19.0416536Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/setup-python@v5	2026-08-08T23:49:19.0419385Z Successfully set up CPython (3.11.15)
+certify	Run actions/setup-python@v5	2026-08-08T23:49:19.0422041Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint	﻿2026-08-08T23:49:19.0604839Z ##[group]Run pip install -r requirements.txt python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.0606590Z ^[[36;1mpip install -r requirements.txt python-flint^[[0m
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.0654612Z shell: /usr/bin/bash -e {0}
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.0656185Z env:
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.0657473Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.0659440Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.0661203Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.0662675Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.0664256Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.0668027Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.0670236Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.8895776Z Collecting python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:19.9729057Z   Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.1864833Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.1979431Z   Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.3317314Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.3427989Z   Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.3834693Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.3946828Z   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.4143927Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.4253480Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.4461910Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.4565058Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.4751809Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.4853888Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.5073976Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.5177004Z   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.5339816Z Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.6557599Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 159.1 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.6690774Z Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.7763754Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 355.7 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.7876972Z Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.8014782Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.8142398Z Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.1 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.8558560Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 250.3 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.8665563Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.8789931Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.8916464Z Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:20.8976526Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 252.7 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:21.0242970Z Installing collected packages: python-flint, pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:26.9738876Z
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:26.9753211Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 python-flint-0.9.0 scipy-1.15.3
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:26.9764569Z
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:26.9764992Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T23:49:26.9766114Z [notice] To update, run: pip install --upgrade pip
+certify	Run pytest -q	﻿2026-08-08T23:49:27.0568960Z ##[group]Run pytest -q
+certify	Run pytest -q	2026-08-08T23:49:27.0569306Z ^[[36;1mpytest -q^[[0m
+certify	Run pytest -q	2026-08-08T23:49:27.0598127Z shell: /usr/bin/bash -e {0}
+certify	Run pytest -q	2026-08-08T23:49:27.0598411Z env:
+certify	Run pytest -q	2026-08-08T23:49:27.0598730Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T23:49:27.0599154Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run pytest -q	2026-08-08T23:49:27.0599595Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T23:49:27.0600097Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T23:49:27.0600534Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T23:49:27.0600909Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run pytest -q	2026-08-08T23:49:27.0601237Z ##[endgroup]
+certify	Run pytest -q	2026-08-08T23:49:30.8772943Z ........................................................................ [ 16%]
+certify	Run pytest -q	2026-08-08T23:49:30.9957420Z ........................................................................ [ 32%]
+certify	Run pytest -q	2026-08-08T23:49:31.2871235Z ........................................................................ [ 48%]
+certify	Run pytest -q	2026-08-08T23:49:31.4865823Z ........................................................................ [ 64%]
+certify	Run pytest -q	2026-08-08T23:49:31.5430017Z ........................................................................ [ 80%]
+certify	Run pytest -q	2026-08-08T23:49:31.8803763Z ........................................................................ [ 97%]
+certify	Run pytest -q	2026-08-08T23:49:32.0285464Z .............                                                            [100%]
+certify	Run pytest -q	2026-08-08T23:49:32.0286327Z 445 passed in 4.32s
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	﻿2026-08-08T23:49:32.1533977Z ##[group]Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:32.1534904Z ^[[36;1mpython -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration^[[0m
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:32.1561771Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:32.1562055Z env:
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:32.1562324Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:32.1562740Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:32.1563147Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:32.1563511Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:32.1564033Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:32.1564400Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:32.1564711Z ##[endgroup]
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2623577Z # Common-slice coefficient registration by first causal stop
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2624246Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2624697Z Status: **EXACT_FIRST_STOP_COMMON_SLICE_COEFFICIENT_REGISTRATION_ON_SELECTED_ROLE_MODEL**.
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2625306Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2626267Z The asynchronous cone already gives `alpha<=10/39`.  With the common reference slice `s=a-(2/5)T_min`, every event lies inside its parent natural adjoint window with clean leftover margin
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2627320Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2627497Z `1-2/5-10/39 = 0.34358974359 = 67/195`.
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2627791Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2628918Z For one eventwise parent coefficient, integrate the **same** adjoint Kelvin interaction picture from the common slice `s` to the event time `t`:
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2629971Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2630145Z `z(t)=z(s)+I_HH[s,t]+I_R[s,t]`.
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2630458Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2630686Z Let `A=|z(t)|`.  The exact triangle gate says
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2631092Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2631257Z - `|z(s)|>=A/4`, or
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2631703Z - `|I_R|>=A/4`, or
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2632092Z - `|I_HH|>=A/2`.
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2632314Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2633655Z Therefore coefficient persistence is not an assumption.  If no classified residual/source, HH-generation, or genuine material-relink stop occurs before the common slice, the event coefficient is **registered** with
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2635293Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2635451Z `|z(s)|>=A/4`.
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2635703Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2635967Z Two continuing parents consequently retain at least
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2636433Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2636587Z `(1/4)^2 = 1/16`
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2636800Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2637783Z of their event coefficient product on the synchronized slice.  This is exactly the registration factor used by the amplitude--entropy productivity theorem.
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2639167Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2642374Z If the factor fails, the parent is not allowed to continue as an uncharged root.  Its first obstruction is itself the earlier causal event: HH generation is re-entered through the physical-energy causal gate, `R_class` delegates to its existing source/interface owner, and a genuine material-cell switch is relink/fresh ancestry.  Small frequency/covariance representative changes remain the already-summable representation `Xi` and are not the physical cause of coefficient loss.
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2645866Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2646164Z Stress: `50000` exact complex adjoint decompositions
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2646862Z - common-window margin: `0.34358974359`
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2647513Z - minimum continuing coefficient margin: `1.052e-03`
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2648316Z - minimum continuing pair-product margin: `1.544e-05`
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2649039Z - worst exact adjoint identity residual: `4.019e-14`
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2650139Z - branches: `{'classified_residual_stop': 16730, 'hh_generation_stop': 16648, 'registered_material_inheritance': 16622}`
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2650977Z
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2653387Z This closes common-slice **coefficient registration at the selected-role model level**.  It does not yet construct the selected moving role for every continuum smooth-SGS block; that outer-role extraction remains the PDE bridge.  Physical causal probabilities remain the actual positive child-energy work law, not raw Duhamel amplitude weights.  No global-regularity claim is made.
+certify	Run python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration	2026-08-08T23:49:34.2657044Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	﻿2026-08-08T23:49:34.2816379Z ##[group]Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:34.2817831Z ^[[36;1mpython -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse^[[0m
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:34.2860867Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:34.2861474Z env:
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:34.2861930Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:34.2862624Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:34.2863337Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:34.2863972Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:34.2864593Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:34.2865223Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:34.2865761Z ##[endgroup]
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0542807Z # Amplitude-entropy causal reuse: remove the false uniform root-mass hypothesis
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0543811Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0544699Z Status: **EXACT_AMPLITUDE_ENTROPY_REUSE_TELESCOPE__SELECTED_ROLE_PRODUCTIVITY_REGISTERED__OUTER_ROLE_EXTRACTION_REMAINS**.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0545542Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0545848Z The critical amplitude of a selected coherent coefficient is
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0546472Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0546836Z `alpha=sqrt(N)|<u,phi>|`.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0547100Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0548904Z On a continuing Duhamel-generated node, sharp Young applied to the exact symmetrized high-high source, the natural `N^-2` lifetime, the Gaussian probe norm, and the bounded backward adjoint give a scale-independent productivity law
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0550483Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0550666Z `alpha_p1 alpha_p2 >= Lambda alpha_c`.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0551005Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0552585Z For the displayed default `c=1, nu=1`, including the conservative `1/4` first-stop registration factor on each parent, the current clean constants give `Lambda=0.000597111612285`.  The number is deliberately not optimized; only positivity and scale independence matter to the telescope.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0554559Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0555173Z Give each physical child event its two structural parent slots with the existing free `1/2` baseline.  Taking logs gives
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0555999Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0556288Z `E log alpha_parent >= (1/2) log Lambda + (1/2) E log alpha_child`,
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0556754Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0556924Z hence after depth `L`
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0557165Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0557776Z `ell_root >= (1-2^-L)log Lambda + 2^-L log alpha_terminal`.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0558567Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0559951Z This is the key point: **arbitrary amplitude imbalance is harmless at the multiplicative level**.  One parent may be exponentially smaller than the other; their log average still sees the exact product.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0561247Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0561671Z Bargmann submean plus the canonical Moyal partition gives, for a root anchor cell,
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0562268Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0562526Z `N_r E_r >= beta alpha_r^2`, `beta=1.43386756899e-05`.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0562974Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0563425Z If `w_r` is the physical transfer-weighted root law, the log-sum inequality gives exactly
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0563816Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0563979Z `H(w_root)+2 E_w log alpha_r <= log sum_r alpha_r^2`.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0564235Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0564437Z Using the common-slice energy budget and `N_root<=N_base(25/24)^L`,
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0564745Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0564957Z `H(w_root) <= log[P E_global N_base (25/24)^L / beta] - 2 ell_root`.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0565248Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0565377Z Therefore the exact Shannon telescope
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0565588Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0565697Z `sum R_j=L log2-H(w_root)`
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0565876Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0565963Z obeys
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0566088Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0566383Z `sum R_j >= L log(48/25) - log(P E_global N_base/beta) + 2(1-2^-L)log Lambda + 2^(1-L)log alpha_terminal`.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0567119Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0567644Z The last two amplitude terms are only a finite-depth offset: the coefficient of `L` is still `log(48/25)`.  No assumption `N E_root>=eta` for every root is used.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0568554Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0569551Z Moreover `H2(root)<=H1(root)`, so the exact Renyi action `sum log(1+theta_j)=L log2+log Q_root` has the **same lower bound**.  Once that lower exceeds `L log(4/3)`, some layer has `theta_j>1/3` and the existing parent-slot pair / component-entropy / same-ancestry-cycle routing applies unchanged.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0570774Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0571082Z Stress: `20000` random layered causal DAGs with parent amplitude ratios as large as `7.922e+14`
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0571645Z - worst one-layer log-product violation: `1.776e-15`
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0572033Z - minimum log-sum entropy margin: `-3.553e-15`
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0572466Z - minimum exact Shannon-minus-lower margin: `1.958e-01`
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0573011Z - minimum exact Renyi-minus-lower margin: `1.958e-01`
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0573696Z - branches: `{'depth_not_yet_forced': 19999, 'amplitude_entropy_reuse_forced': 1}`
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0574045Z
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0577852Z This theorem changes the frontier.  The old causal root-count argument needed an absolute critical mass per root; that is incompatible with the homogeneity of Young.  The correct physical invariant is the **multiplicative critical coefficient**.  The companion common-slice first-stop theorem now supplies the conservative `1/4` coefficient and `1/16` parent-product registration on the selected-role model.  The remaining continuum step is therefore the outer moving Fourier/helical role extraction itself: construct that exact selected coefficient equation on every recursively chosen efficient SGS block with the already-classified non-affine/source/Xi terms.  No global-regularity claim is made.
+certify	Run python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse	2026-08-08T23:49:57.0581395Z
+certify	Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"	﻿2026-08-08T23:49:57.0746553Z ##[group]Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"
+certify	Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0747269Z ^[[36;1mcat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"^[[0m
+certify	Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0773695Z shell: /usr/bin/bash -e {0}
+certify	Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0773964Z env:
+certify	Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0774228Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0774655Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0775058Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0775422Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0775801Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0776163Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0776467Z ##[endgroup]
+certify	Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"	﻿2026-08-08T23:49:57.0871849Z ##[group]Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"
+certify	Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0872508Z ^[[36;1mcat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"^[[0m
+certify	Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0897324Z shell: /usr/bin/bash -e {0}
+certify	Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0897579Z env:
+certify	Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0897843Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0898417Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0898843Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0899214Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0899580Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0899948Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T23:49:57.0900259Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	﻿2026-08-08T23:49:57.1099460Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1100635Z ##[group]Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1100902Z with:
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1101148Z   name: common-slice-coefficient-registration-results
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1101678Z   path: results-common-slice-coefficient-registration/
+certify	Run actions/upload-artifact@v4	results-amplitude-entropy-causal-reuse/
+certify	Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1102277Z   if-no-files-found: warn
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1102507Z   compression-level: 6
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1102717Z   overwrite: false
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1102932Z   include-hidden-files: false
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1103159Z env:
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1103406Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1103815Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1104289Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1104712Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1105071Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1105435Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.1105753Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.2755718Z (node:2962) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.2756688Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.2989539Z Multiple search paths detected. Calculating the least common ancestor of all paths
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.2991614Z The least common ancestor is /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond. This will be the root directory of the artifact
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.2992889Z With the provided path, there will be 4 files uploaded
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.2993807Z Artifact name is valid!
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.2994235Z Root directory input is valid!
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.5656587Z Beginning upload of artifact content to blob storage
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.5878333Z (node:2962) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.8308489Z Uploaded bytes 5991
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.8965456Z Finished uploading artifact content to blob storage!
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.8966634Z SHA256 digest of uploaded artifact zip is f887af302152f9a5e9433827cc6d5e25308641b8e40b10a5a0eb2cc3c4481bf7
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:57.8968472Z Finalizing artifact upload
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:58.0890332Z Artifact common-slice-coefficient-registration-results.zip successfully finalized. Artifact ID 9029478284
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:58.0891257Z Artifact common-slice-coefficient-registration-results has been successfully uploaded! Final size is 5991 bytes. Artifact ID is 9029478284
+certify	Run actions/upload-artifact@v4	2026-08-08T23:49:58.0896970Z Artifact download URL: https://github.com/quemanhmcr/wang-ns-triad-diamond/actions/runs/31284828229/artifacts/9029478284
+certify	Post Run actions/setup-python@v5	﻿2026-08-08T23:49:58.1045388Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/setup-python@v5	2026-08-08T23:49:58.1046552Z Post job cleanup.
+certify	Post Run actions/setup-python@v5	2026-08-08T23:49:58.2254122Z (node:2975) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Post Run actions/setup-python@v5	2026-08-08T23:49:58.2254908Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Post Run actions/checkout@v4	﻿2026-08-08T23:49:58.2378633Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.2379822Z Post job cleanup.
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3269141Z [command]/usr/bin/git version
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3290992Z git version 2.54.0
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3330416Z Temporarily overriding HOME='/home/runner/work/_temp/04b9d5c0-5077-4971-bd9c-5616f25cc7c9' before making global git config changes
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3334737Z Adding repository directory to the temporary git global config as a safe directory
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3337275Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3376416Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3411565Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3622745Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3650187Z http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3667628Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3699729Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3905007Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Post Run actions/checkout@v4	2026-08-08T23:49:58.3937144Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Complete job	﻿2026-08-08T23:49:58.4317030Z Cleaning up orphan processes
+certify	Complete job	2026-08-08T23:49:58.4619458Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -149,3 +149,25 @@ Thus sufficiently deep binary causality has a transfer-weighted finite alternati
 No cost is assigned to the mere existence of the two parent roles.  Only collision amplification above the exact `1/2` baseline is reuse.
 
 The remaining continuum bridge is now sharply localized: build the exact recursive selected packet/coherent coefficient equation and its designated high--high source on canonical material labels.  The physical-energy causal bridge supplies the layer weights directly from actual positive child work, while Duhamel supplies the same-time quadratic parent support; therefore no raw `dGamma=dT` identification is required.  All rejected cross/interface work is still charged once to `Xi`.
+
+## Preferred root closure no longer needs uniform root mass
+
+The local collision recurrence and the `theta>1/3` routing above are unchanged.
+Only the global lower bound for the root law is improved.  The
+amplitude--entropy theorem gives a Shannon root-entropy upper directly from the
+multiplicative selected coefficient and the Moyal energy budget, without
+assuming `N E_root>=eta` for every root.  Since
+
+\[
+H_2(w_0)\le H(w_0),
+\]
+
+the exact Renyi action
+
+\[
+\sum_j\log(1+\theta_j)=L\log2-H_2(w_0)
+\]
+
+inherits the same lower bound as Shannon.  Therefore arbitrary parent-amplitude
+imbalance does not alter the linear reuse slope and does not create a new
+currency.  The old mass-floor statement remains a valid special case.
