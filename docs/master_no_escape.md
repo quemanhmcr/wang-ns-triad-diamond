@@ -1277,6 +1277,42 @@ Thus the finite synchronized causal layer is already expressed in component
 entropy / hidden pair-cycle currencies; raw cycle count is no longer the
 weighted bottleneck.
 
+## Adjoint Kelvin--Duhamel causal insertion
+
+For one selected packet coefficient in the interaction picture of the same
+low-frequency affine/Kelvin transport, choose the backward adjoint dual
+`dot psi=-G^* psi`.  Then exactly
+
+\[
+\boxed{\frac d{dt}\langle\psi,c\rangle
+=\langle\psi,F_{HH}+R_{class}\rangle,}
+\qquad
+\boxed{z_1=z_0+I_{HH}+I_R}.
+\]
+
+With `A=|z_1|`, one has the one-step causal gate
+
+\[
+\boxed{|z_0|\ge A/4}
+\quad\text{or}\quad
+\boxed{|I_R|\ge A/4}
+\quad\text{or}\quad
+\boxed{|I_{HH}|\ge A/2}.
+\]
+
+The first branch is material inheritance, the second already belongs to the
+classified interface/source ledger, and only the third is new high--high causal
+generation.  A single phase aligned with `I_HH` turns its quadratic parent-pair
+Duhamel atoms into a positive generation law with total positive mass at least
+`|I_HH|`; the exact two-parent role baseline remains free.  Common affine strain,
+Leray pressure and bulk viscosity are therefore not charged as new generation.
+
+Signed-good geometry gives `64/25<T_parent/T_child<25/9`.  A half-child slab
+carrying at least half the positive generation mass has parent **natural**
+backward windows with common overlap longer than `103/50 T_child`.  This does not
+assert coherent parent persistence on that full overlap; persistence/slab
+matching is precisely the remaining asynchronous PDE interface problem.
+
 The unresolved master step is now **actual Duhamel-to-causal-layer
 synchronization and single-ledger telescoping**.  The asynchronous Navier--Stokes
 packet extraction must produce coherent causal layers with the same material

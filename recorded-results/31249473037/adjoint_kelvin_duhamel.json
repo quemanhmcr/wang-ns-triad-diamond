@@ -1,0 +1,30 @@
+{
+  "certificate": {
+    "signed_good_frequency": "3/5 < N_parent/N_child < 5/8",
+    "natural_lifetime_ratio": "64/25 < T_parent/T_child < 25/9",
+    "half_child_slab_parent_window_overlap": ">103/50 T_child",
+    "scope": "natural parabolic windows only; actual packet persistence is not claimed",
+    "status": "CERTIFIED_ADJOINT_DUHAMEL_AND_CAUSAL_TIME_GEOMETRY"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_instantaneous_pairing_residual": 3.331575632636317e-14,
+    "worst_piecewise_duhamel_residual": 1.4607206041764796e-15,
+    "minimum_generation_margin": 0.40553851381374173,
+    "minimum_positive_mass_margin": -3.552713678800501e-15,
+    "minimum_half_slab_margin": 3.517862285917772e-06,
+    "branch_counts": {
+      "material_inheritance": 5001,
+      "classified_residual": 1,
+      "high_high_generation": 1
+    }
+  },
+  "routing": {
+    "terminal": "|z1|=A",
+    "inherit": "|z0|>=A/4",
+    "classified_residual": "|IR|>=A/4",
+    "generate": "|IHH|>=A/2",
+    "positive_generation": "phase-align total IHH; positive aligned atoms sum >=|IHH|",
+    "important_scope": "positive Duhamel generation weights are amplitude-generation weights, not automatically physical child-energy transfer weights"
+  }
+}

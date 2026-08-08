@@ -5256,13 +5256,14 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Build a synchronized causal layering from the actual Duhamel/packet PDE.**
-   The finite causal theorem proves that a complete binary ancestry cannot stay
-   fresh indefinitely, but a genuine Navier--Stokes extraction is asynchronous
-   in space, time and frequency.  One must construct causal layers whose active
-   triads retain the signed-good physical transfer weight, while charging every
-   layer mismatch / skipped interaction to the existing selected-interface
-   `Xi` ledger.
+1. **Concatenate the one-step adjoint Duhamel gate into synchronized causal layers.**
+   The certified gate already separates inherited material amplitude, classified
+   residual/interface currency, and genuine high--high generation without
+   double-counting common Kelvin transport.  What remains is asynchronous packet
+   persistence and slab matching: construct causal layers whose active triads
+   retain the signed-good physical transfer weight, while charging every layer
+   mismatch / skipped interaction exactly once to the selected-interface `Xi`
+   ledger.
 2. **Identify the causal parent labels with the master coherent/nested labels.**
    The Shannon and Renyi causal theorems now force transfer-weighted reuse
    information and route a Renyi-rich layer to component entropy or hidden
@@ -5420,6 +5421,10 @@ The most useful recorded runs, in chronological order, are:
 | `31247674599` | preferred synchronized causal binary ancestry: signed-good `3/5<parent/child<5/8`, exact cycle/product/reuse-action identities and quarter-reuse stopping; `326` tests + `50,000` layered graphs, Arb-certified |
 | `31248342830` | transfer-weighted Shannon causal reuse information: exact `H(child,role|parent)` telescope and `log(4/3)` rich-layer threshold; `334` tests + `50,000` causal laws |
 | `31248345125` | preferred Renyi causal reuse: exact binary-slot collision baseline, deep-layer `theta>1/3`, then ancestry entropy `>=0.5 log2`, same-ancestry pair `>1/5`, or parent-slot hidden pair `>1/12`; `334` tests + `50,000` causal laws |
+
+
+| `31248783086`, `31248923266` | first two adjoint Kelvin--Duhamel workflow attempts failed only because the test fixture wrote `2+j` instead of the complex literal `2+1j`; `338` other tests passed, so these are implementation provenance, not mathematical countermodels |
+| `31249473037` | preferred adjoint Kelvin--Duhamel causal gate on `3272ee4`: exact adjoint pairing removes common Kelvin/bulk-viscous transport from the source ledger; inherit/residual/high--high alternative `A/4,A/4,A/2`; positive aligned parent-pair generation; natural parent-window overlap `>103/50 T_child`; full pytest + `50,000` instantaneous/phase checks + `5,000` exact block-exponential histories, Duhamel residual `1.461e-15` |
 
 The current preferred master regression is run `31230338382` on coherent-reservoir
 integration commit `7b350ef` (`282` tests, `8` optional skips, plus `20,000`
@@ -5641,15 +5646,53 @@ the Renyi collision telescope gives a layer which already routes into existing
 component-entropy / hidden-pair currencies.  The exact `1/2` two-parent-role
 baseline remains free throughout.
 
-The decisive next bridge is therefore **actual Duhamel-to-causal-layer
-synchronization**.  A genuine asynchronous Navier--Stokes packet extraction must
-be organized into coherent causal layers which preserve the signed-good physical
-transfer weights and parent labels.  The parent label in the causal pushforward
-must coincide with the material coherent/nested ancestry label seen by
-Hodge/resistance/spin holonomy; every skipped interaction, time-slab mismatch,
-covariance-cell switch or relabeling is charged exactly once to the global `Xi`
-ledger.  Backward ancestries reaching `t=0` must terminate against the smooth
-initial coherent/Fourier tail rather than being counted as interior fresh grains.
+The one-step **adjoint Kelvin--Duhamel causal gate is now theorem-level**.  For a
+selected divergence-free packet coefficient `c` and the backward dual solving
+`dot psi=-G^* psi`, where `G` contains the same common affine/Kelvin transport
+and bulk viscosity already quotiented in the packet equation,
+
+\[
+\boxed{\frac d{dt}\langle\psi,c\rangle
+=\langle\psi,F_{HH}+R_{class}\rangle.}
+\]
+
+Hence on one child slab
+
+\[
+\boxed{z_1=z_0+I_{HH}+I_R.}
+\]
+
+Choosing the terminal dual along the terminal coefficient, `A=|z_1|`, gives the
+clean causal alternative
+
+\[
+\boxed{|z_0|\ge A/4}
+\quad\text{or}\quad
+\boxed{|I_R|\ge A/4}
+\quad\text{or}\quad
+\boxed{|I_{HH}|\ge A/2}.
+\]
+
+Thus common affine strain, pressure already removed by Leray, and bulk viscosity
+are not charged again as new generation.  On the generated branch a single phase
+aligned with `I_HH` makes the positive quadratic parent-pair masses dominate
+`|I_HH|`, so no pointwise persistence hypothesis is needed merely to define a
+positive one-step causal-generation law.  Signed-good scale geometry also gives
+`64/25<T_parent/T_child<25/9`; a half-child slab carrying half the generation
+mass has parent **natural** backward windows with common overlap longer than
+`103/50 T_child`.  This is only geometric window synchronization, not a claim
+that the extracted parent packets remain coherent on that whole interval.
+
+The decisive next bridge is therefore **asynchronous Duhamel-slab synchronization
+and material label registration**.  A genuine Navier--Stokes extraction must
+concatenate these certified one-step gates into coherent causal layers while
+preserving signed-good physical transfer weights.  The parent label in the
+causal pushforward must coincide with the material coherent/nested ancestry label
+seen by Hodge/resistance/spin holonomy; every skipped interaction, time-slab
+mismatch, covariance-cell switch or relabeling is charged exactly once to the
+global `Xi` ledger.  Backward ancestries reaching `t=0` must terminate against
+the smooth initial coherent/Fourier tail rather than being counted as interior
+fresh grains.
 
 After that synchronization theorem, the remaining global step is to telescope
 the physical `kappa_0>0.17` flat episodes, coherent stopping epochs,
@@ -5673,7 +5716,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, and `docs/renyi_causal_reuse.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, and `docs/adjoint_kelvin_duhamel.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;
