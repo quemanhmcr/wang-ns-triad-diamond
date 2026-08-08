@@ -247,21 +247,12 @@ coherent deformation variance; if accumulated strongly it pays dissipation, and
 if accumulated weakly it cannot strongly move the Gaussian core away from its
 best coherent affine transport.
 
-## 7. New remaining bridge
+## 7. Averaged source calculus
 
-Using `Abar` as the common affine gauge is more natural than returning to the
-center jet, but it changes the source question.  The existing resolved objective
-strain identity was derived for
+The companion theorem `coherent_averaged_strain_source.md` derives the exact resolved Navier--Stokes evolution of this coherent affine regression.  Moving the Gaussian analysis measure by `Xdot=bar V`, `Ldot=bar A L` introduces two Reynolds terms, `-E[(A-barA)^2]` and `-E[r.grad A]`; Gaussian integration by parts and affine-regression orthogonality bound both by fixed multiples of `K_coh^2`.  Their integrated normalized source weight is therefore linear in critical `D_V`.  Averaged pressure/SGS/viscous sources inherit the existing filtered collisions without a new averaging factor.
 
-\[
-A(X)=\nabla V(X).
-\]
+Thus the coherent averaged transporter does not reopen the source ledger.
 
-The next theorem should derive the **resolved Navier--Stokes evolution of the
-coherent averaged affine jet** `Abar(t)`, including the motion of the Gaussian
-analysis measure, and show that its corotational variation routes once into the
-same filtered pressure, SGS, viscous, coherent service and critical-dissipation
-currencies.
+## 8. Remaining scope
 
-That averaged-transporter source calculus is not asserted here.  No global
-regularity claim is made.
+The remaining bridge is the recursive assembly/extraction theorem placing every efficient smooth-SGS block into this averaged transporter/profile/causal-work architecture with the original physical transfer normalization.  No global regularity claim is made.

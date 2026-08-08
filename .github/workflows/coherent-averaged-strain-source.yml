@@ -1,0 +1,29 @@
+name: Coherent averaged strain source
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/coherent_averaged_strain_source.py'
+      - 'tests/test_coherent_averaged_strain_source.py'
+      - 'docs/coherent_averaged_strain_source.md'
+      - '.github/workflows/coherent-averaged-strain-source.yml'
+      - 'docs/coherent_affine_projection.md'
+      - 'docs/resolved_objective_strain_collision.md'
+      - 'RESEARCH_LEDGER.md'
+      - 'docs/master_no_escape.md'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source
+      - run: cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coherent-averaged-strain-source-results
+          path: results-coherent-averaged-strain-source/
