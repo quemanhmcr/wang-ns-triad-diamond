@@ -8,7 +8,7 @@ from src.coherent_covariance_interface import (
 
 def test_scalar_covariance_overlap():
     S=np.eye(3); T=4*np.eye(3)
-    expected=(2*np.sqrt(2)/(5**0.5))**3
+    expected=(2/(5**0.5))**3
     assert abs(gaussian_covariance_overlap(S,T)-expected)<1e-13
 
 
