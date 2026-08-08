@@ -308,8 +308,8 @@ def theorem_certificate() -> dict[str, object]:
         "phase_space_coloring": "within each covariance representative, unit cells in that dual-probe phase coordinate split into 5^6 colors; one color is 4-separated for the Bessel budget only",
         "bessel": f"each equal-covariance/color family has analysis Bessel budget 25/4; total finite effective budget P_eff={P:.12g}",
         "causal_effect": "the huge P_eff changes only the finite logarithmic root offset; the L log(48/25) reuse slope is unchanged",
-        "important_scope": "this is an actual analysis coefficient of u, not a Gaussian synthesis coefficient and not an L2-closeness claim; it assumes a complex phase-aligned Gaussian L3/2 mark, stronger than magnitude-only Christ proximity",
-        "continuum_status": "remaining registration has two parts: lift magnitude near-extremality plus phase/polarization control to a complex Gaussian mark, then align that mark with the actual transfer-selected material root cell or route the misaligned work to existing physical currencies",
+        "important_scope": "this is an actual analysis coefficient of u, not a Gaussian synthesis coefficient and not an L2-closeness claim; the complex Gaussian input is supplied on frozen selected cells by the companion complex-Young reduction using the same symbol Xi",
+        "continuum_status": "remaining registration is transfer-cell/material-label alignment: associate the complex Gaussian parent mark with the actual transfer-selected causal root cell or route misaligned work to existing physical currencies",
     }
 
 

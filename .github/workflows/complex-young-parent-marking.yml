@@ -1,0 +1,30 @@
+name: Complex Young parent marking
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/complex_young_parent_marking.py'
+      - 'tests/test_complex_young_parent_marking.py'
+      - 'docs/complex_young_parent_marking.md'
+      - '.github/workflows/complex-young-parent-marking.yml'
+      - 'docs/smooth_sgs_symbol_freezing.md'
+      - 'docs/transfer_preserving_profile_extraction.md'
+      - 'docs/dual_gaussian_root_registration.md'
+      - 'RESEARCH_LEDGER.md'
+      - 'docs/master_no_escape.md'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.complex_young_parent_marking --samples 50000 --outdir results-complex-young-parent-marking
+      - run: cat results-complex-young-parent-marking/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: complex-young-parent-marking-results
+          path: results-complex-young-parent-marking/

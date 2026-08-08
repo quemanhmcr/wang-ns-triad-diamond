@@ -19,7 +19,7 @@ Assume first that the magnitude inverse-Young mark and the separate phase/polari
 \|f-G\|_{3/2}\le\varepsilon.
 \]
 
-This complex proximity is an explicit hypothesis of the present theorem.  The repository currently obtains the magnitude Gaussian directly from Christ and controls phase/polarization in separate modules; their quantitative lift to this complex norm statement remains part of the final registration bridge.
+This complex proximity is the input to the duality calculation.  The companion `complex_young_parent_marking.md` shows how the existing physical symbol-freezing `Xi` reduces one efficient frozen scalar/helical parent cell to ordinary **complex** Young near-extremality; Christ's complex-valued stability theorem then supplies exactly this input, with its external modulus left symbolic.
 
 For a complex Gaussian profile define
 
@@ -275,9 +275,9 @@ by physical energy.  Christ's Gaussian only determines which dual probe to test.
 This distinction is exactly what avoids the old arbitrary redundant-Gaussian
 coefficient problem.
 
-## 8. What remains: phase lift and transfer-cell alignment
+## 8. What remains: transfer-cell alignment
 
-The theorem gives an actual energy quantum once a **complex phase-aligned** Gaussian event mark is supplied.  The current inverse-Young theorem directly marks the magnitudes, so the first remaining step is to combine the existing phase/polarization rigidity with that magnitude mark quantitatively.  After that, a causal parent slot still comes from an **actual positive transfer-selected coherent work atom**.
+The theorem gives an actual energy quantum once a complex Gaussian parent mark is supplied.  The companion complex-Young reduction obtains that mark from a frozen efficient physical cell using the same symbol `Xi` and Christ's complex-valued theorem.  A causal parent slot, however, still comes from an **actual positive transfer-selected coherent work atom**.
 
 The final registration theorem must therefore show one of:
 
