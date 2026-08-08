@@ -1,0 +1,36 @@
+name: Common slice coefficient registration
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/common_slice_coefficient_registration.py'
+      - 'tests/test_common_slice_coefficient_registration.py'
+      - 'docs/common_slice_coefficient_registration.md'
+      - '.github/workflows/common-slice-coefficient-registration.yml'
+      - 'src/amplitude_entropy_causal_reuse.py'
+      - 'tests/test_amplitude_entropy_causal_reuse.py'
+      - 'docs/amplitude_entropy_causal_reuse.md'
+      - 'docs/asynchronous_duhamel_sync.md'
+      - 'docs/adjoint_kelvin_duhamel.md'
+      - 'RESEARCH_LEDGER.md'
+      - 'docs/master_no_escape.md'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration
+      - run: python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse
+      - run: cat results-common-slice-coefficient-registration/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - run: cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: common-slice-coefficient-registration-results
+          path: |
+            results-common-slice-coefficient-registration/
+            results-amplitude-entropy-causal-reuse/

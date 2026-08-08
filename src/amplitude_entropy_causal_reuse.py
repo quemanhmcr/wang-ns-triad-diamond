@@ -9,6 +9,7 @@ from typing import Sequence
 
 import numpy as np
 
+from src.common_slice_coefficient_registration import CONTINUING_COEFFICIENT_FRACTION
 from src.bargmann_root_cell_registration import (
     optimal_bargmann_fraction,
     optimal_bargmann_radius,
@@ -23,7 +24,7 @@ SHELL_LOG_HALFWIDTH = 2.0 / 25.0
 SHELL_LOWER_AXIS = 2.0 / 3.0
 LOW_STRAIN_ACTION = 1.0 / 30.0
 DEFAULT_LOG_COV_RADIUS = 0.4
-DEFAULT_REGISTRATION_FRACTION = 1.0 / 4.0
+DEFAULT_REGISTRATION_FRACTION = CONTINUING_COEFFICIENT_FRACTION
 DEFAULT_DUHAMEL_GENERATED_FRACTION = 1.0 / 2.0
 DEFAULT_SYMMETRIZED_SOURCE_FACTOR = 2.0
 ROOT_SCALE_DILATION = 25.0 / 24.0
