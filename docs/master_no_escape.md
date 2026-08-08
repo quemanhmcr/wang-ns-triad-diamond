@@ -1531,3 +1531,14 @@ retained low-defect component percolates instead of splitting, the exact
 incidence law `(n-1)+beta=2m` routes it to fresh-rich or cycle-rich ancestry.
 Preferred certificate: `31252438256` on `f7d1d37` (`362` tests, `9` optional
 skips, `50,000` weighted triad graphs).
+
+
+## Canonical cross-cell integration regression
+
+On integration SHA `3d1381f`, coherent localization operators, the physical
+transfer defect moat, canonical material labels, Renyi causal reuse, the physical
+multi-currency telescope, smooth symbol freezing and the master theorem were all
+green.  The preferred master run is `31258603563` with `20,000` episode traces
+and worst margin `0`.  The coherent localization run `31258595663` had exact
+trilinear reconstruction residual `5.288e-14`; the defect-moat run `31258597148`
+had minimum cross-bound margin `6.917e-4` over `50,000` weighted triad graphs.

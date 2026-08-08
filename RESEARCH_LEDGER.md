@@ -5419,13 +5419,16 @@ The most useful recorded runs, in chronological order, are:
 | `31251421182` | preferred resolved objective-strain collision on `01a0915`: exact filtered corotational source identity for `A=grad V`; clean order-two constant `<1/380`, `||V||_3^2<mu_V/15`, pressure Hessian `rho_P<=mu_V/5700+||R||_(3/2)/380`, and viscous constant `<1/1500`; `362` tests + `50,000` checks, identity residual `6.874e-16` |
 | `31251605854` | divergence-free coherent Parseval frame on `cfe34a5`: Leray-projected coherent probes preserve Moyal coefficients exactly on `L^2_sigma` and cancel pressure globally, removing compact moving-window/pressure-boundary interfaces from the canonical global ancestry route; `356` tests + `9` optional skips + `20,000` checks |
 | `31252438256` | physical transfer-weighted defect moat on `f7d1d37`: on the `eta_0=10^-4` signed-good core, `E_phys[D]<=(106/25) epsilon`; deleting the least-transfer bin in `[R/2,R]` gives `eta_cross<=1/M+2 Dbar/R`; the schedule `M_j=M_0(j+2)^2`, `R_j=R_0(j+2)^2` makes the actual omitted cross-cell physical-transfer `Xi` summable with no packet-count or Gaussian-synthesis tail; `362` tests + `9` optional skips + `50,000` weighted triad graphs |
+| `31258595663`, `31258597148`, `31258598281`, `31258599570`, `31258600704`, `31258601942`, `31258603563` | seven-workflow canonical cross-cell integration on `3d1381f`: exact coherent localization, physical transfer defect moat, canonical material labels, Renyi causal reuse, physical multi-currency master, smooth symbol freezing and master all green; master `20,000` traces, worst margin `0`; localization trilinear reconstruction residual `5.288e-14`; defect-moat minimum cross margin `6.917e-4` |
 
 | `31249662333`, `31249664073`, `31249665749`, `31249667523`, `31249669387`, `31249671051`, `31249672640`, `31249674254`, `31249675942` | nine-workflow adjoint-causal integration on `f1f0e62`: coherent transfer cells, coherent increment service, service-or-flat rigidity, physical flat episode, causal binary ancestry, transfer-weighted Shannon reuse, Renyi causal reuse, adjoint Kelvin--Duhamel and master all green; adjoint workflow `339` tests + `50,000` checks, master `20,000` traces with worst margin `0` |
 
-The current preferred master regression is run `31249675942` on adjoint-causal
-integration commit `f1f0e62` (`339` tests plus `20,000` episode traces, worst
-margin `0`).  The twelve-workflow coherent-reservoir stack
-`31230314319`--`31230338382` was green on that exact SHA.
+The current preferred master regression is run `31258603563` on canonical
+cross-cell integration commit `3d1381f` (`362` tests, `9` optional skips, plus
+`20,000` episode traces, worst margin `0`).  The accompanying six workflows
+`31258595663`, `31258597148`, `31258598281`, `31258599570`, `31258600704`, and
+`31258601942` were all green on the same SHA.  The earlier twelve-workflow
+coherent-reservoir stack `31230314319`--`31230338382` remains green provenance.
 The full source/sideband/ancestry integration on that exact SHA is
 `31227852933`, `31227856265`, `31227859724`, `31227862808`, `31227865715`,
 `31227868626`, `31227871490`, `31227874557`, `31227877505`, `31227881162`,
