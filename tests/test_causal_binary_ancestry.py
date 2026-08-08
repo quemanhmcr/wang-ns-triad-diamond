@@ -15,7 +15,7 @@ def test_full_binary_tree_has_zero_reuse_and_cycle_rank():
 def test_layer_reuse_cycle_identity():
     n=[4,3,2,1]
     beta,s=causal_cycle_identity(n)
-    assert beta==s==2
+    assert beta==s==3
     assert abs(binary_reuse_action(n)-(3*math.log(2)-math.log(4)))<1e-14
 
 
