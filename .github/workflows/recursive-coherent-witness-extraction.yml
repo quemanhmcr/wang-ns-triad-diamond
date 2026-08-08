@@ -1,0 +1,28 @@
+name: Recursive coherent witness extraction
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/recursive_coherent_witness_extraction.py'
+      - 'tests/test_recursive_coherent_witness_extraction.py'
+      - 'docs/recursive_coherent_witness_extraction.md'
+      - '.github/workflows/recursive-coherent-witness-extraction.yml'
+      - 'docs/physical_energy_causal_bridge.md'
+      - 'RESEARCH_LEDGER.md'
+      - 'docs/master_no_escape.md'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-recursive-coherent-witness-extraction
+      - run: cat results-recursive-coherent-witness-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: recursive-coherent-witness-extraction-results
+          path: results-recursive-coherent-witness-extraction/

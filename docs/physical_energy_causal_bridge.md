@@ -273,7 +273,19 @@ are already `dT_HH`.  Duhamel remains useful as an exact interaction-picture
 identity and amplitude diagnostic, but **master readiness must not require raw
 `dGamma` to equal physical transfer**.
 
-## 9. Scope
+## 9. Exact binary coherent atomization
+
+The companion theorem `recursive_coherent_witness_extraction.md` removes a further packetization step.  Once the outer selected parent/child roles exist, the positive coherent resolution `sum_C A_C=I` and bilinearity of the quadratic source give exact work atoms
+
+\[
+W_{CDE}=2\Re\langle A_Ew_3,\mathcal N(A_Cw_1,A_Dw_2)\rangle,
+\]
+
+with `sum W_CDE` equal to the actual selected high--high child work.  Their positive parts therefore give a binary parent-pair/child material law directly, while negative parts are physical backscatter.  This means Duhamel is not needed even to *invent* a packet graph: quadratic Navier--Stokes work itself already supplies the binary event support after coherent disintegration.
+
+The coherent pieces are not treated as compact Fourier projections; the outer selected Fourier/helical role continues to carry the interscale geometry, with representative errors in the existing symbol/covariance `Xi`.
+
+## 10. Scope
 
 This theorem closes a structural measure mismatch at the exact selected
 packet/coefficient level.  It does **not** prove that every efficient continuum
