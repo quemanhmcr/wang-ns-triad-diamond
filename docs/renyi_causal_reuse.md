@@ -148,4 +148,4 @@ Thus sufficiently deep binary causality has a transfer-weighted finite alternati
 
 No cost is assigned to the mere existence of the two parent roles.  Only collision amplification above the exact `1/2` baseline is reuse.
 
-The remaining continuum bridge is now sharply localized: build synchronized causal layers from the true Navier--Stokes Duhamel/packet extraction and ensure the parent/ancestry labels used here are the same transfer-selected coherent labels used by the Hodge/resistance/master ledger, with all asynchronous cuts charged once to `Xi`.
+The remaining continuum bridge is now sharply localized: build the exact recursive selected packet/coherent coefficient equation and its designated high--high source on canonical material labels.  The physical-energy causal bridge supplies the layer weights directly from actual positive child work, while Duhamel supplies the same-time quadratic parent support; therefore no raw `dGamma=dT` identification is required.  All rejected cross/interface work is still charged once to `Xi`.

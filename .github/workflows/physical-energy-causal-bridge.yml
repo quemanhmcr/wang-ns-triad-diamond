@@ -1,0 +1,31 @@
+name: Physical energy causal bridge
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/physical_energy_causal_bridge.py'
+      - 'tests/test_physical_energy_causal_bridge.py'
+      - 'src/physical_branch_compiler.py'
+      - 'tests/test_physical_branch_compiler.py'
+      - 'docs/physical_energy_causal_bridge.md'
+      - 'docs/physical_branch_compiler.md'
+      - 'docs/asynchronous_duhamel_sync.md'
+      - '.github/workflows/physical-energy-causal-bridge.yml'
+      - 'RESEARCH_LEDGER.md'
+      - 'docs/master_no_escape.md'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge
+      - run: cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: physical-energy-causal-bridge-results
+          path: results-physical-energy-causal-bridge/

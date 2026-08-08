@@ -107,7 +107,7 @@ obey
 
 After normalization they define a positive causal-generation probability law on **same-time quadratic parent pairs**.  No pointwise source persistence is required.
 
-This law measures amplitude generation.  It is not silently identified with physical positive child-energy transfer.  On the near-extremal phase-locked core the existing helical/physical-weight bridge is the appropriate conversion step; outside that core the discrepancy remains a transfer/cross-error branch.
+This law measures amplitude generation.  It is not silently identified with physical positive child-energy transfer.  In fact the stronger equality is false even for the scalar flat model `G=R=0`, `c(0)=0`, `c_dot=1`: normalized `dGamma=dt`, while normalized child-energy work is `2t dt`.  The preferred master-facing continuation is therefore the physical-energy causal bridge: keep the Duhamel atoms for same-time parent-pair **support**, but weight the causal layer by actual positive work `2[Re<c,F_HH,alpha>]_+dt`.  The half-slab/parabolic synchronization geometry is unchanged because it depends only on positivity and event support.
 
 ## 4. One-step parabolic time geometry
 

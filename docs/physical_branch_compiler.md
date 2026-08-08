@@ -212,52 +212,62 @@ The pieces are mutually singular away from exact independent tie sets.  On a tie
 set they are an exact Radon--Nikodym partition rather than duplicated measures.
 This is the precise sense in which the compiler is **single charge**.
 
-## 6. The Duhamel measure is a causal kernel, not another copy of `dT`
+## 6. Duhamel gives causal support; physical energy work gives the weights
 
-For a generated adjoint node, the existing theorem gives
-
-\[
- d\Gamma_c(t,\alpha)
- =\big[\Re(e^{-i\vartheta_c}dI_{HH,\alpha})\big]_+.
-\]
-
-This is positive and its total dominates the generated amplitude.  But the
-adjoint theorem explicitly warns that `dGamma` is an **amplitude-generation
-measure**, not automatically the positive physical child-energy transfer law.
-
-Therefore the compiler does **not** write
+The stronger proposed bridge
 
 \[
-d\mathcal T+d\Gamma
-\]
-
-as if the two objects were one physical measure.  Instead, after a generated
-node, normalized `dGamma` is a **conditional parent-pair kernel** for the next
-causal layer.  Common Kelvin transport is already in the propagator and the
-canonical material label
-
-\[
-\zeta=(L^{-1}X/2,L^Tk)
-\]
-
-is used on both sides.
-
-To feed this generated layer into the transfer-weighted Shannon/Renyi master
-currency, one still needs the continuum bridge
-
-\[
-\boxed{
 K_\Gamma(\text{parent pair}\mid\text{child})
-\equiv
-K_{\rm phys}(\text{parent pair}\mid\text{child})
-}
+=K_{\rm phys}(\text{parent pair}\mid\text{child})
 \]
 
-on the same selected material law, up to a discrepancy already routed once to a
-multiplicative/cross branch.
+is false under the current hypotheses.  Even the scalar flat equation
 
-That identification is **not proved by this note**.  This is an important reason
-not to claim a universal one-measure closure prematurely.
+\[
+G=R=0,\qquad c(0)=0,\qquad \dot c=1\quad(0<t<1)
+\]
+
+has normalized adjoint amplitude law `dGamma=dt` but normalized physical child-energy transfer `dT=2t dt`; their half-time masses are `1/2` and `1/4`.  Energy is the quadratic lift of amplitude, not the same measure.
+
+The correct bridge uses the exact selected-child energy equation.  For
+
+\[
+\dot c=Gc+F_{HH}+R_{class},
+\qquad G=-S_\perp-\nu|k|^2I,
+\]
+
+let `E_i=||c(t_i)||^2`, `K=int||S_perp||`, and let `W_R^+` and `W_HH^+` be the integrated positive physical works.  Then
+
+\[
+\boxed{E_1\le e^{2K}(E_0+W_{HH}^++W_R^+)}.
+\]
+
+On `K<=1/30`, if neither material inherited energy nor classified residual work reaches `E_1/5`,
+
+\[
+\boxed{W_{HH}^+\ge8E_1/15}.
+\]
+
+Decompose the designated high--high source into same-time quadratic parent-pair atoms and define
+
+\[
+\boxed{d\mathcal T_{HH}(t,\alpha)
+=2[\Re\langle c(t),F_{HH,\alpha}(t)\rangle]_+dt}.
+\]
+
+This is actual positive child-energy transfer.  The Duhamel source atoms expose the same parent-pair/time support, but their raw amplitude weights are not used by the master.  The asynchronous half-slab and parabolic-cone argument depends only on positivity and event support, so it applies directly to `dT_HH`.  Shannon/Renyi therefore receives the same physical transfer law used by Hodge/flat bookkeeping **by construction**, not by a false kernel equality.
+
+At the algebraic level the relation between response and energy is
+
+\[
+2\Re\langle c,F\rangle
+=\frac{2}{\|\psi\|^2}\Re\left(\overline{\langle\psi,c\rangle}\,\langle\psi,F\rangle\right)
++2\Re\langle c_\perp,F\rangle.
+\]
+
+Thus raw `dGamma` is a linear response measure; its physically relevant energy lift is state dependent, and the orthogonal child term is actual cross/profile work.  See `docs/physical_energy_causal_bridge.md`.
+
+The remaining continuum issue is no longer Duhamel-to-physical **weight identification**.  It is the construction of the exact recursive selected coefficient equation, its designated `F_HH`, classified residual work and canonical material labels on every efficient Navier--Stokes block.
 
 ## 7. Compiler-to-master projection
 
@@ -356,11 +366,10 @@ projection is unique except that scale-critical source/mass/dissipation branches
 remain marked `recurse`; they cannot be silently inserted into the finite reset
 count.
 
-The theorem also identifies the remaining causal-measure bridge precisely:
-normalized adjoint `dGamma` may be used as a conditional ancestry kernel, but the
-actual PDE extraction must still identify that kernel with the same physical
-transfer-weighted parent law used by Shannon/Renyi/Hodge, or route their
-discrepancy once.
+The theorem now uses the physical-energy causal bridge: raw adjoint `dGamma` is
+not required to equal the energy-transfer law.  Duhamel identifies quadratic
+parent-pair support; actual positive `dT_HH` weights the synchronized ancestry.
+The remaining PDE burden is to construct these exact witnesses recursively.
 
 This is a compiler theorem for an **actual physical block state once its PDE
 witnesses exist**.  It is not a proof that every continuum Navier--Stokes block

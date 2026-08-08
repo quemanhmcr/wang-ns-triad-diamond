@@ -162,6 +162,30 @@ class DuhamelTransferKernelCertificate:
         )
 
 
+@dataclass(frozen=True)
+class PhysicalEnergyCausalBridgeCertificate:
+    """Preferred master-facing bridge after the raw dGamma=dT countermodel.
+
+    Duhamel supplies the same-time quadratic parent-pair support.  The selected
+    child energy balance supplies the positive physical HH work weights.
+    """
+
+    same_material_labels: bool
+    exact_selected_coefficient_equation: bool
+    positive_physical_hh_work_law: bool
+    measure_agnostic_synchronization: bool
+    residual_work_delegates_to_existing_ledger: bool
+
+    def master_ready(self) -> bool:
+        return (
+            self.same_material_labels
+            and self.exact_selected_coefficient_equation
+            and self.positive_physical_hh_work_law
+            and self.measure_agnostic_synchronization
+            and self.residual_work_delegates_to_existing_ledger
+        )
+
+
 class UnresolvedCompilerBridge(RuntimeError):
     pass
 
@@ -285,9 +309,23 @@ def master_disposition(
 
 
 def require_duhamel_transfer_kernel(cert: DuhamelTransferKernelCertificate) -> None:
+    """Legacy stronger bridge.
+
+    Raw dGamma and physical energy transfer are generally different measures, so
+    this equality certificate is no longer required by the preferred compiler
+    route.  The function is retained only to make the stronger assertion explicit
+    when a caller actually has such a special-case identification.
+    """
     if not cert.master_ready():
         raise UnresolvedCompilerBridge(
-            "the positive adjoint Duhamel generation kernel has not been identified with the physical transfer law on the same material labels"
+            "raw adjoint dGamma has not been identified with physical transfer; use the preferred physical-energy causal bridge instead of assuming equality"
+        )
+
+
+def require_physical_energy_causal_bridge(cert: PhysicalEnergyCausalBridgeCertificate) -> None:
+    if not cert.master_ready():
+        raise UnresolvedCompilerBridge(
+            "physical-energy causal recursion is not ready: require the exact selected coefficient equation, physical HH work weights, canonical labels, measure-agnostic synchronization, and residual delegation"
         )
 
 
@@ -377,15 +415,16 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> CompilerStress:
 
 def theorem_certificate() -> dict[str, object]:
     return {
-        "status": "EXACT_CAUSAL_QUOTIENT_AND_TRANSFER_MEASURE_PARTITION__PDE_KERNEL_BRIDGE_CONDITIONAL",
+        "status": "EXACT_CAUSAL_QUOTIENT_AND_TRANSFER_MEASURE_PARTITION__PHYSICAL_ENERGY_CAUSAL_BRIDGE_PREFERRED",
         "transfer_partition": "dT = dT_Xi + sum_r dT_r with nonnegative pieces and exact total mass",
         "stopping_rule": "fixed transfer loss first; otherwise first physical causal root; no hit => certified Kelvin-flat erosion",
         "duplicate_rule": "theorem manifestations sharing one causal root are quotiented before charging",
         "tie_rule": "independent exact first-time ties split positive transfer measure by normalized stopping weights, not theorem-name priority",
         "boundary_rule": "t=0 is absorbing and cannot be renamed fresh interior ancestry",
         "master_rule": "critical mass/source/dissipation remain recursive; only a scale-independent threshold in a globally bounded resource enters N_A",
-        "duhamel_warning": "dGamma is a conditional positive amplitude-generation kernel, not automatically the physical child-transfer law",
-        "continuum_status": "does not prove every recursive Navier-Stokes block supplies the required causal witnesses or the Duhamel-to-physical transfer-kernel identification",
+        "duhamel_warning": "raw dGamma is an amplitude-generation law and is not generally equal to physical energy transfer; the preferred route uses Duhamel for parent-pair support and actual positive HH child work for weights",
+        "energy_bridge": "on K<=1/30, E0<E1/5 and classified residual positive work <E1/5 force actual positive HH work >=8E1/15; synchronization is measure agnostic",
+        "continuum_status": "does not prove every recursive Navier-Stokes block supplies the exact selected coefficient/witness extraction required by the physical-energy causal gate",
     }
 
 
@@ -403,7 +442,7 @@ def main() -> None:
         "stress": asdict(out),
     }
     (args.outdir / "physical_branch_compiler.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    md = f"""# Single-charge physical branch compiler\n\nStatus: **{cert['status']}**.\n\nThe compiler first removes the selected physical cross-cell/interface transfer measure into `Xi`.  On the retained positive child-transfer measure, a definite transfer loss is an absorbing gate.  Otherwise theorem manifestations are quotiented by their physical causal root and the first causal root is charged.  If independent roots hit at the same first time, their positive stopping weights partition the transfer measure; no lexicographic theorem priority is used.  If there is no hit, the block is admissible only with a certified Kelvin-flat continuation.\n\nCrucially, `dGamma` from the adjoint Kelvin--Duhamel gate is kept as a conditional positive amplitude-generation kernel.  The compiler refuses to mark the causal recursion master-ready unless that kernel is identified with the same physical transfer law and material labels.\n\nCritical `N E`, resolved-source service and `D_V` remain recursive/scale-critical currencies.  They are never promoted to the finite additive reset count without an independent scale-independent threshold in a genuinely globally bounded resource.\n\nStress: `{out.samples}` synthetic causal block states\n- maximum transfer-mass residual: `{out.maximum_mass_residual:.3e}`\n- exact/quantized first-time tie samples: `{out.tie_samples}`\n- Kelvin-flat samples: `{out.flat_samples}`\n- transfer-stop samples: `{out.transfer_stop_samples}`\n- initial-boundary samples: `{out.boundary_samples}`\n"""
+    md = f"""# Single-charge physical branch compiler\n\nStatus: **{cert['status']}**.\n\nThe compiler first removes the selected physical cross-cell/interface transfer measure into `Xi`.  On the retained positive child-transfer measure, a definite transfer loss is an absorbing gate.  Otherwise theorem manifestations are quotiented by their physical causal root and the first causal root is charged.  If independent roots hit at the same first time, their positive stopping weights partition the transfer measure; no lexicographic theorem priority is used.  If there is no hit, the block is admissible only with a certified Kelvin-flat continuation.\n\nRaw `dGamma` from the adjoint Kelvin--Duhamel gate is kept as an amplitude-generation diagnostic, not forced to equal energy transfer.  The preferred master-facing bridge uses Duhamel only for same-time quadratic parent-pair support and uses the actual positive high--high child-energy work as the causal weights; the half-slab/parabolic synchronization geometry is measure agnostic.\n\nCritical `N E`, resolved-source service and `D_V` remain recursive/scale-critical currencies.  They are never promoted to the finite additive reset count without an independent scale-independent threshold in a genuinely globally bounded resource.\n\nStress: `{out.samples}` synthetic causal block states\n- maximum transfer-mass residual: `{out.maximum_mass_residual:.3e}`\n- exact/quantized first-time tie samples: `{out.tie_samples}`\n- Kelvin-flat samples: `{out.flat_samples}`\n- transfer-stop samples: `{out.transfer_stop_samples}`\n- initial-boundary samples: `{out.boundary_samples}`\n"""
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
 

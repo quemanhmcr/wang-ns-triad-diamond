@@ -10,12 +10,14 @@ from src.physical_branch_compiler import (
     MasterDisposition,
     PhysicalCause,
     PhysicalCurrency,
+    PhysicalEnergyCausalBridgeCertificate,
     UniformResourceCertificate,
     UnresolvedCompilerBridge,
     compile_transfer_measure,
     forbidden_double_charge_matrix,
     master_disposition,
     require_duhamel_transfer_kernel,
+    require_physical_energy_causal_bridge,
 )
 
 
@@ -126,3 +128,11 @@ def test_forbidden_double_charge_matrix_contains_required_physical_pairs():
     assert matrix["coherent relinking in retained graph | omitted cross-cell Xi"] == DoubleChargeRelation.MUTUALLY_EXCLUSIVE.value
     assert matrix["physical cross-cell transfer | symbol-freezing approximation"] == DoubleChargeRelation.INDEPENDENT_COCHARGE.value
     assert matrix["initial-boundary termination | fresh interior packet"] == DoubleChargeRelation.MUTUALLY_EXCLUSIVE.value
+
+
+def test_preferred_physical_energy_causal_bridge_does_not_require_raw_duhamel_kernel_equality():
+    bad = PhysicalEnergyCausalBridgeCertificate(True, True, False, True, True)
+    with pytest.raises(UnresolvedCompilerBridge):
+        require_physical_energy_causal_bridge(bad)
+    good = PhysicalEnergyCausalBridgeCertificate(True, True, True, True, True)
+    require_physical_energy_causal_bridge(good)

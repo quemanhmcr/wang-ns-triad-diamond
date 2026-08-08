@@ -28,6 +28,14 @@ The generated branch of the adjoint theorem carries a positive aligned parent-pa
 
 Only this first factor \(1/2\) is lost. Later layers use their complete generated Duhamel measure.
 
+The geometry in this paragraph is in fact **measure agnostic**.  The heavy-half step uses only positivity and event support.  After the physical-energy causal bridge, the preferred master-facing choice is to place the actual positive high--high child-work measure
+
+\[
+ d\mathcal T_{HH}=2[\Re\langle c,F_{HH,\alpha}\rangle]_+dt
+\]
+
+on these same quadratic event times and choose its heavier half.  The bound `alpha_1<=25/128`, the recurrence below and the common-slice geometry are unchanged.  Raw adjoint `dGamma` remains an amplitude/support diagnostic and need not be identified with `dT_HH`.
+
 ## 2. A common reference slice without persistence
 
 Suppose one generated layer has event support
