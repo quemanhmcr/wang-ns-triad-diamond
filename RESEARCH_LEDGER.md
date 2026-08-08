@@ -5426,9 +5426,11 @@ The most useful recorded runs, in chronological order, are:
 | `31248783086`, `31248923266` | first two adjoint Kelvin--Duhamel workflow attempts failed only because the test fixture wrote `2+j` instead of the complex literal `2+1j`; `338` other tests passed, so these are implementation provenance, not mathematical countermodels |
 | `31249473037` | preferred adjoint Kelvin--Duhamel causal gate on `3272ee4`: exact adjoint pairing removes common Kelvin/bulk-viscous transport from the source ledger; inherit/residual/high--high alternative `A/4,A/4,A/2`; positive aligned parent-pair generation; natural parent-window overlap `>103/50 T_child`; full pytest + `50,000` instantaneous/phase checks + `5,000` exact block-exponential histories, Duhamel residual `1.461e-15` |
 
-The current preferred master regression is run `31230338382` on coherent-reservoir
-integration commit `7b350ef` (`282` tests, `8` optional skips, plus `20,000`
-episode traces, worst margin `0`).  The twelve-workflow coherent-reservoir stack
+| `31249662333`, `31249664073`, `31249665749`, `31249667523`, `31249669387`, `31249671051`, `31249672640`, `31249674254`, `31249675942` | nine-workflow adjoint-causal integration on `f1f0e62`: coherent transfer cells, coherent increment service, service-or-flat rigidity, physical flat episode, causal binary ancestry, transfer-weighted Shannon reuse, Renyi causal reuse, adjoint Kelvin--Duhamel and master all green; adjoint workflow `339` tests + `50,000` checks, master `20,000` traces with worst margin `0` |
+
+The current preferred master regression is run `31249675942` on adjoint-causal
+integration commit `f1f0e62` (`339` tests plus `20,000` episode traces, worst
+margin `0`).  The twelve-workflow coherent-reservoir stack
 `31230314319`--`31230338382` was green on that exact SHA.
 The full source/sideband/ancestry integration on that exact SHA is
 `31227852933`, `31227856265`, `31227859724`, `31227862808`, `31227865715`,

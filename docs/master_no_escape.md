@@ -1321,3 +1321,13 @@ skipped interaction or relabeling is charged once to `Xi`.  An ancestry reaching
 `t=0` must terminate against the smooth initial tail.  These events must then be
 telescoped with the physical `kappa_0>0.17` flat erosion and coherent/source
 stopping costs without double charging.
+
+
+## Adjoint-causal integration regression
+
+On integration SHA `f1f0e62`, coherent transfer cells, coherent increment service,
+service-or-flat rigidity, the physical flat episode, causal binary ancestry,
+transfer-weighted Shannon and Renyi reuse, the adjoint Kelvin--Duhamel gate and
+the master theorem were all green.  The preferred master run is `31249675942`
+with `20,000` episode traces and worst margin `0`; the integrated adjoint run
+`31249674254` had `339` tests plus `50,000` causal/Duhamel checks.
