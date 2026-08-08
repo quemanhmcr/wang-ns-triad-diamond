@@ -1,0 +1,19 @@
+name: Physical flat episode
+on:
+  workflow_dispatch:
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.physical_flat_episode --samples 50000 --outdir results-physical-flat-episode
+      - run: cat results-physical-flat-episode/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: physical-flat-episode-results
+          path: results-physical-flat-episode/
