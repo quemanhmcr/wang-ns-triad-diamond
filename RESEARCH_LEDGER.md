@@ -5422,6 +5422,7 @@ The most useful recorded runs, in chronological order, are:
 | `31258595663`, `31258597148`, `31258598281`, `31258599570`, `31258600704`, `31258601942`, `31258603563` | seven-workflow canonical cross-cell integration on `3d1381f`: exact coherent localization, physical transfer defect moat, canonical material labels, Renyi causal reuse, physical multi-currency master, smooth symbol freezing and master all green; master `20,000` traces, worst margin `0`; localization trilinear reconstruction residual `5.288e-14`; defect-moat minimum cross margin `6.917e-4` |
 | `31261790706` | single-charge physical branch compiler on `f8cf98d`: exact positive-transfer partition `dT=dT_Xi+sum_r dT_r`, theorem manifestations quotiented by physical causal root, first-causal stopping on the retained measure, symmetric Radon--Nikodym splitting of exact independent ties, absorbing `t=0` boundary, and master projection which refuses critical `N E`/`D_V` as finite additive resets; `dGamma` remains a conditional amplitude-generation kernel until the PDE transfer-law identification is proved; `380` tests + `50,000` causal block states, maximum mass residual `1.421e-14` |
 | `31262755985` | physical-energy causal bridge on `84c8652`: exact flat scalar countermodel to raw `dGamma=dT` (`Gamma([0,1/2])=1/2`, `T([0,1/2])=1/4`), exact adjoint-response physical-work split, low-strain energy gate `E1<=e^(2K)(E0+W_HH^++W_R^+)` and clean route `K<=1/30`, `E0,W_R^+<E1/5 => W_HH^+>=8E1/15`; causal layers are weighted by actual `dT_HH=2[Re<c,F_HH,alpha>]_+dt`, while Duhamel supplies same-time parent-pair support; asynchronous synchronization is measure-agnostic; `387` tests + `50,000` states, projection residual `1.066e-14` |
+| `31263195439` | recursive coherent witness extraction on `079f2f4`: exact quadratic source disintegration `N(w1,w2)=sum_CD N(A_Cw1,A_Dw2)` and exact actual-work atoms `W_CDE=2 Re<A_Ew3,N(A_Cw1,A_Dw2)>`, with `sum W_CDE` equal to selected HH work; positive/negative Hahn split gives physical binary parent-pair/child event measure, atomic positive mass dominates aggregate positive work, and selected positive cross-cell atoms are excised once into `Xi`; combined with the energy gate, generated mass is `>=8E1/15` before `Xi` and `>=(1-rho)8E1/15` after relative excision; `392` tests + `20,000` POVM/bilinear states, work residual `3.678e-15` |
 
 | `31249662333`, `31249664073`, `31249665749`, `31249667523`, `31249669387`, `31249671051`, `31249672640`, `31249674254`, `31249675942` | nine-workflow adjoint-causal integration on `f1f0e62`: coherent transfer cells, coherent increment service, service-or-flat rigidity, physical flat episode, causal binary ancestry, transfer-weighted Shannon reuse, Renyi causal reuse, adjoint Kelvin--Duhamel and master all green; adjoint workflow `339` tests + `50,000` checks, master `20,000` traces with worst margin `0` |
 
@@ -5894,21 +5895,44 @@ used by Hodge/flat bookkeeping **by construction**.  Preferred certificate:
 `31262755985` on `84c8652` (`387` tests + `50,000` states; projection residual
 `1.066e-14`, exact half-time CDF gap `1/4`).
 
-The decisive next bridge is therefore now **actual recursive PDE witness
-extraction**.  Every efficient Navier--Stokes block must construct the exact
-selected moving coefficient equation, designated high--high source, classified
-residual physical work and canonical material labels needed by the energy gate
-and the single-charge compiler.  Once those witnesses exist, high strain routes
-to critical dissipation, inherited energy remains sticky, residual work delegates
-to its existing source/interface root, and the remaining generated branch already
-comes with actual physical transfer weights for causal reuse.  The global coherent
-representation, material labeling, asynchronous causal slices, cross-cell `Xi`
-summability and no-double-charge projection are theorem-level; the continuum
-recursive extraction is not yet closed.  No new finite-dimensional escape
-mechanism is currently identified.  Fresh-packet energy alone, raw cycle rank
-without causal transfer labels, arbitrary redundant Gaussian coefficients, aspect
-penalties, sub-bandwidth source counting or a new persistence hypothesis are not
-admissible shortcuts.
+The **binary coherent witness extraction is now theorem-level once the outer
+selected PDE roles exist**.  For positive coherent localization operators
+`sum_C A_C=I`, bilinearity gives
+
+\[
+\mathcal N(w_1,w_2)=\sum_{C,D}\mathcal N(A_Cw_1,A_Dw_2)
+\]
+
+and the exact child-work atoms
+
+\[
+\boxed{W_{CDE}=2\Re\langle A_Ew_3,\mathcal N(A_Cw_1,A_Dw_2)\rangle}
+\]
+
+satisf `sum W_CDE=2 Re<w3,N(w1,w2)>`.  Their positive/negative Hahn split is
+physical transfer/backscatter, not an arbitrary packet graph; each positive atom
+already has exactly two parent material labels and one child label at one physical
+time.  Atomic positive mass dominates the positive part of aggregate HH work, so
+the physical-energy gate yields at least `8E1/15` positive binary mass before
+cross-cell excision.  If the physical defect moat removes relative positive mass
+`rho`, the retained generated law still has at least `(1-rho)8E1/15`.  Coherent
+pieces are **not** treated as compact Fourier projections: the outer role carries
+scale/helicity and representative errors remain in the existing symbol/covariance
+`Xi`.  Preferred certificate: `31263195439` on `079f2f4` (`392` tests + `20,000`
+states; work reconstruction residual `3.678e-15`).
+
+The decisive next bridge is therefore narrower: **outer moving
+Fourier/helical-role extraction under the resolved low--high flow**.  Every
+efficient recursive smooth-SGS block must supply the role equation with the
+strict `N/4` resolved transporter and the same physical transfer normalization.
+Common affine/Kelvin motion is already exact gauge; what remains is to prove that
+the full non-affine Heisenberg/Egorov remainder of the moving role is exhausted,
+without duplication, by the existing material relink, summable symbol/covariance
+`Xi`, H1/H3 sideband/source and high-strain currencies.  In particular higher
+non-affine spatial transport must not be silently renamed H1/H3 unless that
+reduction is actually proved.  Once the outer roles are supplied, binary causal
+witnesses, physical weights, synchronization, reuse and the single-charge master
+are already available.  No global-regularity claim is made.
 
 ---
 
@@ -5924,7 +5948,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

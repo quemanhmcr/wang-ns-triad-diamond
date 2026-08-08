@@ -1655,9 +1655,36 @@ orthogonal child-profile cross work.
 
 Preferred physical-energy bridge certificate: `31262755985` on `84c8652`
 (`387` tests plus `50,000` algebra/synchronization states; projection identity
-residual `1.066e-14`).  Preferred compiler certificate remains rooted in the
-single-charge partition, now with this physical-energy bridge as its master-facing
-causal route.  The remaining gap is the **actual recursive continuum witness
-extraction** supplying the exact selected coefficient equation, `F_HH`, residual
-work routing and canonical material labels on every efficient block.  This is not
-a Navier--Stokes global-regularity proof.
+residual `1.066e-14`).
+
+The binary parent-pair witness itself no longer requires a synthesized Gaussian
+packet.  Given the exact outer selected roles and coherent partitions
+`sum_C A_C=I`,
+
+\[
+\mathcal N(w_1,w_2)=\sum_{C,D}\mathcal N(A_Cw_1,A_Dw_2)
+\]
+
+and
+
+\[
+\boxed{W_{CDE}=2\Re\langle A_Ew_3,\mathcal N(A_Cw_1,A_Dw_2)\rangle}
+\]
+
+reconstruct the actual selected HH work exactly.  Positive atoms are therefore an
+actual binary causal work measure; negative atoms are backscatter.  Combining
+with `W_HH^+>=8E1/15`, the generated branch has at least `8E1/15` atomic positive
+mass before cross-cell `Xi`, and at least `(1-rho)8E1/15` after a relative physical
+moat excision `rho`.  No continuous-to-discrete reconstruction term appears.
+Preferred certificate: `31263195439` on `079f2f4` (`392` tests plus `20,000`
+finite POVM/bilinear-work states; work residual `3.678e-15`).
+
+This does not promote an individual `A_Cw` to a compact Fourier packet.  The
+outer Fourier/helical role still carries the scale geometry; coherent cells carry
+material ancestry.  The remaining continuum gap is consequently the **outer
+moving-role/Egorov bridge**: every efficient recursive smooth-SGS block must
+supply the strict resolved low--high transporter and show that its non-affine
+moving-role residual is routed once into material relink, summable
+symbol/covariance `Xi`, H1/H3 source/sideband or high-strain currencies.  Higher
+non-affine transport is not assumed away.  This is not a Navier--Stokes
+global-regularity proof.
