@@ -4299,6 +4299,193 @@ summable interfaces, remains an open continuum bridge.  Raw cycle rank alone is
 also not automatically physical flux weight; a reuse-rich layer must still be
 routed through the transfer-weighted Hodge/Bellman/resistance machinery.
 
+#### Transfer-weighted causal reuse information
+
+The raw cycle-count caveat can itself be reduced to a physical transfer law.
+Let `w_(j+1)` be the normalized causal-transfer distribution on child packets of
+one synchronized layer.  Duplicate each event into the two structural parent
+roles with joint probability
+
+\[
+\boxed{p(c,s)=w(c)/2,\qquad s=1,2,}
+\]
+
+and push this law through the physical parent-packet / coherent-cell label map.
+The two-role `log 2` increase is exact baseline causality and is **not** charged.
+The actual transfer-weighted reuse information is
+
+\[
+\boxed{
+\mathcal R_j
+=H(C,S\mid P)
+=H(w_{j+1})+\log2-H(w_j)\ge0.
+}
+\]
+
+For a one-terminal depth-`L` ancestry this telescopes exactly:
+
+\[
+\boxed{
+\sum_j\mathcal R_j
+=L\log2-H(w_0).
+}
+\]
+
+Since `H(w_0)<=log n_0`, the same Moyal root-energy and signed-good scale bound
+gives
+
+\[
+\boxed{
+\sum_j\mathcal R_j
+\ge
+L\log\frac{48}{25}
+-\log\frac{P E_{global}N_{base}}{\eta}.
+}
+\]
+
+Therefore
+
+\[
+L\log\frac{36}{25}
+>
+\log\frac{P E_{global}N_{base}}{\eta}
+\]
+
+forces one layer with
+
+\[
+\boxed{\mathcal R_j>\log(4/3).}
+\]
+
+This is already weighted by the physical causal transfer law, so a reuse signal
+cannot be hidden entirely in negligible combinatorial edges.  Action
+`31248342830` passed `334` tests plus `50,000` layered laws; the information
+telescope residual was `2.887e-15`.
+
+#### Rényi causal reuse reaches existing Bellman/cycle currencies
+
+The collision version closes the finite weighted-routing gap.  If
+
+\[
+Q_{child}=\sum_cw_c^2,
+\]
+
+the two parent-role slots have the exact cost-free collision baseline
+
+\[
+Q_{slot}=Q_{child}/2.
+\]
+
+After pushforward through physical parent labels,
+
+\[
+\boxed{
+Q_{parent}
+=Q_{child}/2+R_{hidden},
+}
+\]
+
+where `R_hidden` is the transfer-weighted hidden pair mass of distinct causal
+slots sharing the same parent.  Put
+
+\[
+\boxed{
+\theta_j={2R_{hidden,j}\over Q_{child,j}}.
+}
+\]
+
+Then
+
+\[
+\boxed{
+Q_j=\frac12Q_{j+1}(1+\theta_j)
+}
+\]
+
+and, because the terminal law is one atom,
+
+\[
+\boxed{
+\sum_j\log(1+\theta_j)
+=L\log2+\log Q_0.
+}
+\]
+
+The root support/energy bound again yields
+
+\[
+\boxed{
+\sum_j\log(1+\theta_j)
+\ge
+L\log\frac{48}{25}
+-\log\frac{P E_{global}N_{base}}{\eta}.
+}
+\]
+
+Thus the clean causal-depth condition forces a layer with
+
+\[
+\boxed{\theta_j>1/3.}
+\]
+
+At such a layer there is an **existing-currency** alternative.  If
+
+\[
+H_{2,child}<\log2,
+\]
+
+then `Q_child>1/2` and
+
+\[
+\boxed{R_{hidden}>1/12.}
+\]
+
+If instead
+
+\[
+H_{2,child}\ge\log2,
+\]
+
+apply the already-certified atomic-to-ancestry collision chain.  Either
+
+\[
+\boxed{H_{2,ancestry}\ge\tfrac12\log2}
+\]
+
+or
+
+\[
+\boxed{
+R_{same\ ancestry}
+\ge2^{-1/2}-1/2>1/5.
+}
+\]
+
+Hence a sufficiently deep synchronized causal ancestry has the clean physical
+transfer-weighted route
+
+\[
+\boxed{
+\text{component/Bellman entropy}
+\ \lor\
+\text{same-ancestry pair/cycle}>1/5
+\ \lor\
+\text{parent-slot reuse pair}>1/12.
+}
+\]
+
+No cost is assigned to the mere existence of the two parent roles; only
+collision amplification above the exact factor `1/2` is reuse.  Preferred
+Action `31248345125` passed `334` tests plus `50,000` causal laws; the layer
+recurrence residual was `1.110e-16` and the multiplicative-action telescope
+residual `2.665e-15`.
+
+**Remaining scope:** the finite weighted causal algebra is now closed.  The open
+bridge is constructing the synchronized causal layers from the actual
+asynchronous Navier--Stokes Duhamel/packet extraction and making the parent /
+ancestry labels used above coincide with the coherent/nested labels used by the
+master, with all layer cuts paid once through `Xi`.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -5076,13 +5263,13 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
    triads retain the signed-good physical transfer weight, while charging every
    layer mismatch / skipped interaction to the existing selected-interface
    `Xi` ledger.
-2. **Convert a reuse-rich causal layer into transfer-weighted cycle cost or
-   synchronized flat reuse.**  The count theorem gives `rho_j>=1/4` and exact
-   cycle-rank units, but raw topology is not flux.  Either the identified parent
-   slots carry a definite fraction of physical transfer, so multicommodity
-   Hodge/resistance/phase holonomy applies, or the weights are sufficiently
-   fragmented to pay the existing Bellman/component entropy.  This weighted
-   reuse bridge is now the sharp finite-to-PDE bottleneck.
+2. **Identify the causal parent labels with the master coherent/nested labels.**
+   The Shannon and Renyi causal theorems now force transfer-weighted reuse
+   information and route a Renyi-rich layer to component entropy or hidden
+   pair/cycle mass.  What remains is geometric/PDE registration: the parent label
+   in the Duhamel causal map must be the same material coherent/nested ancestry
+   object used by Hodge, resistance, spin holonomy and old-pool synchronization;
+   any relabeling or asynchronous mismatch belongs to `Xi`.
 3. **Telescope the physical flat episodes and costly causal resets.**  A
    `1%` Kelvin-flat synchronized step has barycentric erosion rate `>0.17`, and
    failure of parent synchronization pays entropy or exposes a separated
@@ -5231,6 +5418,8 @@ The most useful recorded runs, in chronological order, are:
 | `31247418331`--`31247440588` | twelve-workflow service/flat/master integration on `b48e9ac`: service-or-flat, physical flat episode, flat companion, smooth physical flux, H1 source, coherent work/increment/source, old-pool erosion, nested grains, spherical erosion and master all green |
 | `31247611869` | first causal-binary run failed because fixture `[4,3,2,1]` expected cycle rank `2`; exact reuse savings are `(2,1,0)` and rank `3`; fixture error only |
 | `31247674599` | preferred synchronized causal binary ancestry: signed-good `3/5<parent/child<5/8`, exact cycle/product/reuse-action identities and quarter-reuse stopping; `326` tests + `50,000` layered graphs, Arb-certified |
+| `31248342830` | transfer-weighted Shannon causal reuse information: exact `H(child,role|parent)` telescope and `log(4/3)` rich-layer threshold; `334` tests + `50,000` causal laws |
+| `31248345125` | preferred Renyi causal reuse: exact binary-slot collision baseline, deep-layer `theta>1/3`, then ancestry entropy `>=0.5 log2`, same-ancestry pair `>1/5`, or parent-slot hidden pair `>1/12`; `334` tests + `50,000` causal laws |
 
 The current preferred master regression is run `31230338382` on coherent-reservoir
 integration commit `7b350ef` (`282` tests, `8` optional skips, plus `20,000`
@@ -5446,23 +5635,29 @@ energy-only loophole at finite synchronized level: fresh companions cannot be
 inserted forever without either exponentially expanding their causal ancestry or
 merging it into reuse cycles.
 
-The decisive next bridge is therefore **transfer-weighted causal
-synchronization**.  A genuine asynchronous Navier--Stokes Duhamel/packet
-extraction must be organized into such causal layers with summable selected
-interfaces.  At a reuse-rich layer, either a definite physical transfer fraction
-participates in the reuse cycles, allowing multicommodity Hodge/resistance/spin
-holonomy to charge it, or the transfer is fragmented enough to pay
-Bellman/component entropy.  Backward ancestries reaching `t=0` must be terminated
-against the smooth initial coherent/Fourier tail rather than counted as interior
-fresh grains.
+The transfer-weighted causal algebra is now theorem-level at synchronized
+finite depth.  Shannon reuse information removes the negligible-edge caveat, and
+the Renyi collision telescope gives a layer which already routes into existing
+component-entropy / hidden-pair currencies.  The exact `1/2` two-parent-role
+baseline remains free throughout.
 
-After this weighted causal bridge, the remaining global step is to telescope the
-physical `kappa_0>0.17` flat episodes, coherent stopping epochs, causal
-reuse/cycle events and source/dissipation costs while keeping the **single total
-`Xi` ledger** summable.  Raw cycle rank without transfer weight, fresh-packet
-energy alone, arbitrary redundant Gaussian coefficients, aspect penalties,
-sub-bandwidth source counting or a new persistence hypothesis are not admissible
-shortcuts.
+The decisive next bridge is therefore **actual Duhamel-to-causal-layer
+synchronization**.  A genuine asynchronous Navier--Stokes packet extraction must
+be organized into coherent causal layers which preserve the signed-good physical
+transfer weights and parent labels.  The parent label in the causal pushforward
+must coincide with the material coherent/nested ancestry label seen by
+Hodge/resistance/spin holonomy; every skipped interaction, time-slab mismatch,
+covariance-cell switch or relabeling is charged exactly once to the global `Xi`
+ledger.  Backward ancestries reaching `t=0` must terminate against the smooth
+initial coherent/Fourier tail rather than being counted as interior fresh grains.
+
+After that synchronization theorem, the remaining global step is to telescope
+the physical `kappa_0>0.17` flat episodes, coherent stopping epochs,
+transfer-weighted causal entropy/pair events and source/dissipation costs while
+keeping the **single total `Xi` ledger** summable.  Fresh-packet energy alone,
+raw cycle rank without causal transfer labels, arbitrary redundant Gaussian
+coefficients, aspect penalties, sub-bandwidth source counting or a new
+persistence hypothesis are not admissible shortcuts.
 
 ---
 
@@ -5478,7 +5673,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, and `docs/causal_binary_ancestry.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, and `docs/renyi_causal_reuse.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

@@ -1208,12 +1208,80 @@ reuse-rich layer.  This is a finite synchronized theorem only: raw cycle rank is
 not yet a transfer-weighted cost, and a full PDE Duhamel extraction is not yet a
 synchronized layer graph.
 
-The unresolved master step is now **transfer-weighted causal synchronization and
-single-ledger telescoping**.  The asynchronous Navier--Stokes packet extraction
-must be organized into causal layers with summable `Xi`.  At a reuse-rich layer,
-either a definite physical transfer fraction enters the cycle network and can be
-charged by multicommodity Hodge/resistance/phase holonomy, or transfer
-fragmentation pays Bellman/component entropy.  An ancestry reaching `t=0` must
-terminate against the smooth initial tail.  These events must then be telescoped
-with the physical `kappa_0>0.17` flat erosion and coherent/source stopping costs
-without double charging.
+## Transfer-weighted causal reuse
+
+The count-level reuse theorem has a physical transfer-weighted refinement.  For
+child causal-transfer law `w`, duplicate each event into the two parent-role
+slots with weight `w/2` and push forward through the physical parent label.
+Shannon reuse information is
+
+\[
+\boxed{
+\mathcal R_j
+=H(child,role\mid parent)
+=H(w_{j+1})+\log2-H(w_j).
+}
+\]
+
+The `log 2` role entropy is baseline causality, not a defect.  For a one-terminal
+ancestry,
+
+\[
+\boxed{
+\sum_j\mathcal R_j=L\log2-H(w_0).
+}
+\]
+
+The root coherent-energy bound implies the same `L log(48/25)` lower growth, so
+sufficient causal depth forces one layer with `R_j>log(4/3)`.
+
+The Renyi version reaches the existing master currencies directly.  If
+`Q_child=sum w^2`, the two slots have `Q_slot=Q_child/2`, and parent pushforward
+satisfies
+
+\[
+\boxed{
+Q_{parent}=Q_{child}/2+R_{hidden}
+=\frac12Q_{child}(1+\theta).
+}
+\]
+
+Across depth `L`,
+
+\[
+\boxed{
+\sum_j\log(1+\theta_j)=L\log2+\log Q_0.
+}
+\]
+
+The same causal-depth threshold forces `theta_j>1/3` at one layer.  If
+`H2_child<log2`, then
+
+\[
+\boxed{R_{hidden}>1/12.}
+\]
+
+Otherwise the atomic-to-ancestry collision theorem gives
+
+\[
+\boxed{H_{2,ancestry}\ge\tfrac12\log2}
+\]
+
+or
+
+\[
+\boxed{R_{same\ ancestry}>1/5.}
+\]
+
+Thus the finite synchronized causal layer is already expressed in component
+entropy / hidden pair-cycle currencies; raw cycle count is no longer the
+weighted bottleneck.
+
+The unresolved master step is now **actual Duhamel-to-causal-layer
+synchronization and single-ledger telescoping**.  The asynchronous Navier--Stokes
+packet extraction must produce coherent causal layers with the same material
+parent/ancestry labels used by Hodge, resistance and holonomy, while every
+skipped interaction or relabeling is charged once to `Xi`.  An ancestry reaching
+`t=0` must terminate against the smooth initial tail.  These events must then be
+telescoped with the physical `kappa_0>0.17` flat erosion and coherent/source
+stopping costs without double charging.
