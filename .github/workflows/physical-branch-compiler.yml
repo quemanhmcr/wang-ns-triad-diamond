@@ -1,0 +1,27 @@
+name: Physical branch compiler
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/physical_branch_compiler.py'
+      - 'tests/test_physical_branch_compiler.py'
+      - 'docs/physical_branch_compiler.md'
+      - '.github/workflows/physical-branch-compiler.yml'
+      - 'RESEARCH_LEDGER.md'
+      - 'docs/master_no_escape.md'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.physical_branch_compiler --samples 50000 --outdir results-physical-branch-compiler
+      - run: cat results-physical-branch-compiler/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: physical-branch-compiler-results
+          path: results-physical-branch-compiler/
