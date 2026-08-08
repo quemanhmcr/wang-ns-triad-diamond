@@ -1,0 +1,30 @@
+name: Coherent service or flat
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/coherent_service_or_flat.py'
+      - 'tests/test_coherent_service_or_flat.py'
+      - 'docs/coherent_service_or_flat.md'
+      - '.github/workflows/coherent-service-or-flat.yml'
+      - 'docs/coherent_affine_projection.md'
+      - 'docs/coherent_averaged_strain_source.md'
+      - 'docs/physical_flat_episode.md'
+      - 'RESEARCH_LEDGER.md'
+      - 'docs/master_no_escape.md'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat
+      - run: cat results-coherent-service-or-flat/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coherent-service-or-flat-results
+          path: results-coherent-service-or-flat/
