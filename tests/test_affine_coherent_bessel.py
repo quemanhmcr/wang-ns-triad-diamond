@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 from src.affine_coherent_bessel import (
     arb_clean_bessel_certificate, coherent_overlap_magnitude, gram_matrix,
-    intrinsic_phase_point, overlap_from_intrinsic_points,
+    intrinsic_phase_point, overlap_from_intrinsic_points, synthesis_coefficient_energy_upper,
 )
 
 def test_overlap_intrinsic_formula():
@@ -22,3 +22,7 @@ def test_simple_gram_positive_and_bounded():
 
 def test_arb_optional():
     pytest.importorskip('flint');c=arb_clean_bessel_certificate();assert c['clean_Bessel_constant']=='25/4'
+
+
+def test_clean_synthesis_budget():
+    assert synthesis_coefficient_energy_upper(47.0) == pytest.approx(50.0)

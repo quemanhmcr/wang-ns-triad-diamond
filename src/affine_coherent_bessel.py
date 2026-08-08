@@ -10,6 +10,8 @@ import numpy as np
 
 CLEAN_SEPARATION = 4.0
 CLEAN_BESSEL = 25.0 / 4.0
+RIESZ_SEPARATION = 5.0
+RIESZ_OFFDIAGONAL = 3.0 / 50.0
 
 
 def intrinsic_phase_point(X: np.ndarray, k: np.ndarray, L: np.ndarray) -> np.ndarray:
@@ -44,6 +46,16 @@ def gram_row_sum_bound(delta:float=CLEAN_SEPARATION,dimension:int=6,terms:int=50
     return 1.0+sum(shell_packing_count_upper(n,dimension)*math.exp(-0.5*(n*delta)**2) for n in range(1,terms))
 
 
+def gram_offdiagonal_row_bound(delta:float=RIESZ_SEPARATION,dimension:int=6,terms:int=50)->float:
+    return gram_row_sum_bound(delta,dimension,terms)-1.0
+
+
+def synthesis_coefficient_energy_upper(field_energy:float)->float:
+    """For a 5-separated equal-covariance coherent synthesis: sum|c|^2 <=50/47 ||f||^2."""
+    if field_energy<0: raise ValueError('nonnegative energy required')
+    return (50.0/47.0)*field_energy
+
+
 def arb_clean_bessel_certificate()->dict[str,str]:
     """Certify the infinite 6D packing row sum is <25/4 at delta=4.
 
@@ -60,13 +72,24 @@ def arb_clean_bessel_certificate()->dict[str,str]:
     if not(r2<arb(1)/1000): raise AssertionError(f'tail ratio failed {r2}')
     upper=arb(1)+t1+t2/(1-r2)
     if not(upper<arb(25)/4): raise AssertionError(f'Bessel row bound failed {upper}')
+    # At delta=5, certify the off-diagonal Gram row is <3/50.
+    u1=arb(5)**6*(-arb(25)/2).exp()
+    u2=arb(7)**6*(-arb(50)).exp()
+    rr=(arb(9)/7)**6*(-arb(125)/2).exp()  # t3/t2, tail ratio decreases thereafter
+    if not(rr<arb(1)/1000000): raise AssertionError(f'Riesz tail ratio failed {rr}')
+    off=u1+u2/(1-rr)
+    if not(off<arb(3)/50): raise AssertionError(f'Riesz off-diagonal bound failed {off}')
     return {
         'intrinsic_phase_coordinate':'zeta=(L^-1 X/2,L^T k)',
         'overlap':'|<g_a,g_b>|=exp(-|zeta_a-zeta_b|^2/2)',
         'separation':'delta>=4',
         'packing_row_sum_ball':str(upper),
         'clean_Bessel_constant':'25/4',
-        'status':'CERTIFIED_GIVEN_EQUAL_COVARIANCE_AND_4_SEPARATION',
+        'Riesz_separation':'delta>=5',
+        'Riesz_offdiagonal_ball':str(off),
+        'Riesz_Gram_spectrum':'[47/50,53/50]',
+        'synthesis_coefficient_budget':'sum |c_a|^2 <= (50/47)||sum c_a g_a||_2^2',
+        'status':'CERTIFIED_EQUAL_COVARIANCE_COHERENT_BESSEL_RIESZ',
     }
 
 
@@ -102,10 +125,12 @@ class CoherentBesselStress:
     maximum_gram_operator_norm:float
     maximum_gram_row_sum:float
     minimum_separation_margin:float
+    minimum_Riesz_eigenvalue:float
+    maximum_Riesz_eigenvalue:float
 
 
 def stress(samples:int=50_000,seed:int=20260808)->CoherentBesselStress:
-    rng=np.random.default_rng(seed); wa=wo=0.; mg=mr=0.; ms=float('inf')
+    rng=np.random.default_rng(seed); wa=wo=0.; mg=mr=0.; ms=float('inf'); rlo=float('inf'); rhi=0.
     # 50k arbitrary affine/pair identity checks.
     for _ in range(samples):
         L=rng.normal(size=(3,3))
@@ -126,8 +151,13 @@ def stress(samples:int=50_000,seed:int=20260808)->CoherentBesselStress:
         G=gram_matrix(Z); rows=float(np.max(np.sum(np.abs(G),axis=1)))
         op=float(np.linalg.eigvalsh(G)[-1]); mr=max(mr,rows);mg=max(mg,op)
         if op>CLEAN_BESSEL+2e-10 or rows>CLEAN_BESSEL+2e-10: raise AssertionError('finite Gram exceeded clean Schur bound')
+    # Riesz probes at separation 5.
+    for _ in range(1500):
+        n=int(rng.integers(2,28)); Z=random_separated_points(rng,n,RIESZ_SEPARATION)
+        ev=np.linalg.eigvalsh(gram_matrix(Z)); rlo=min(rlo,float(ev[0]));rhi=max(rhi,float(ev[-1]))
+        if ev[0]<47/50-2e-10 or ev[-1]>53/50+2e-10: raise AssertionError('finite Gram violated clean Riesz spectrum')
     if wa>2e-11 or wo>2e-13: raise AssertionError('coherent affine identity failed')
-    return CoherentBesselStress(samples,wa,wo,mg,mr,ms)
+    return CoherentBesselStress(samples,wa,wo,mg,mr,ms,rlo,rhi)
 
 
 def main()->None:
@@ -148,7 +178,7 @@ If the intrinsic phase points are `4`-separated in R^6, disjoint-ball packing gi
 
 `sum_a |<f,g_a>|^2 <= (25/4)||f||_2^2`.
 
-This supplies an explicit Bessel/frame budget for coherent analysis packets inside one equal-covariance phase-space cell. It does not yet identify arbitrary transfer-extraction coefficients with these analysis coefficients, nor handle changes of covariance cell; those are the remaining iterative-packet/interface bridge.
+At separation `5`, Arb further certifies the off-diagonal Gram row `<3/50`, hence the Gram spectrum lies in `[47/50,53/50]`. Therefore arbitrary synthesis coefficients in that separated equal-covariance family satisfy `sum|c_a|^2 <= (50/47)||sum c_a g_a||_2^2`. This directly supplies the Bessel/frame coefficient budget needed by old-pool erosion inside one covariance cell. Changes of covariance cell and transfer extraction before the separated coherent synthesis remain iterative-interface issues.
 
 Stress: `{out.samples}` affine/pair checks plus 1500 finite Gram probes
 - worst affine-coordinate invariance residual: `{out.worst_affine_invariance_residual:.3e}`
@@ -156,6 +186,8 @@ Stress: `{out.samples}` affine/pair checks plus 1500 finite Gram probes
 - maximum sampled Gram operator norm: `{out.maximum_gram_operator_norm:.9f}`
 - maximum sampled absolute row sum: `{out.maximum_gram_row_sum:.9f}`
 - minimum separation margin: `{out.minimum_separation_margin:.3e}`
+- minimum sampled 5-separated Gram eigenvalue: `{out.minimum_Riesz_eigenvalue:.9f}`
+- maximum sampled 5-separated Gram eigenvalue: `{out.maximum_Riesz_eigenvalue:.9f}`
 """
     (args.outdir/'summary.md').write_text(md);print(md)
 if __name__=='__main__':main()
