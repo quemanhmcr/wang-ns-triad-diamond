@@ -1307,20 +1307,29 @@ Duhamel atoms into a positive generation law with total positive mass at least
 `|I_HH|`; the exact two-parent role baseline remains free.  Common affine strain,
 Leray pressure and bulk viscosity are therefore not charged as new generation.
 
-Signed-good geometry gives `64/25<T_parent/T_child<25/9`.  A half-child slab
-carrying at least half the positive generation mass has parent **natural**
-backward windows with common overlap longer than `103/50 T_child`.  This does not
-assert coherent parent persistence on that full overlap; persistence/slab
-matching is precisely the remaining asynchronous PDE interface problem.
+Signed-good geometry gives `64/25<T_parent/T_child<25/9`.  The companion
+asynchronous theorem upgrades this natural-window overlap to an actual causal
+**time-layer geometry** without assuming packet persistence.  After the first
+half-slab, `alpha_1<=25/128`; recursively
 
-The unresolved master step is now **actual Duhamel-to-causal-layer
-synchronization and single-ledger telescoping**.  The asynchronous Navier--Stokes
-packet extraction must produce coherent causal layers with the same material
-parent/ancestry labels used by Hodge, resistance and holonomy, while every
-skipped interaction or relabeling is charged once to `Xi`.  An ancestry reaching
-`t=0` must terminate against the smooth initial tail.  These events must then be
-telescoped with the physical `kappa_0>0.17` flat erosion and coherent/source
-stopping costs without double charging.
+\[
+\boxed{\alpha_{j+1}\le(25/64)(\alpha_j+2/5)},
+\qquad \boxed{\alpha_j\le3/8}.
+\]
+
+Every generated layer therefore has a common reference slice with margin `9/40`.
+The cumulative backward displacement is at least
+`(10/39)T_0[(64/25)^L-1]`, so finite-time ancestries either stop or hit `t=0`
+after finite depth.  The initial surface is an explicit boundary root, not an
+interior fresh-grain event.
+
+The unresolved master step is now **canonical material-label registration and
+single-ledger telescoping**.  Exact common Kelvin transport is free; coherent-cell
+switches and covariance-window changes already have one-boundary Moyal/`Xi_cov`
+charges.  These labels must be chosen identically for Duhamel, Shannon/Renyi,
+Hodge/resistance and holonomy, and all remaining frequency/profile/covariance
+representation errors must be summed once in `Xi` before telescoping flat erosion,
+coherent/source stopping and causal reuse costs.
 
 
 ## Adjoint-causal integration regression
@@ -1331,3 +1340,12 @@ transfer-weighted Shannon and Renyi reuse, the adjoint Kelvin--Duhamel gate and
 the master theorem were all green.  The preferred master run is `31249675942`
 with `20,000` episode traces and worst margin `0`; the integrated adjoint run
 `31249674254` had `339` tests plus `50,000` causal/Duhamel checks.
+
+## Asynchronous Duhamel synchronization regression
+
+The certified parabolic recursion uses only the signed-good scale window and the
+one-step adjoint Duhamel gate.  It does not run a frozen packet backwards.  A
+common slice exists for every generated layer, with invariant normalized span
+`<=3/8`, margin `9/40`, and fixed point `10/39`.  Initial-boundary termination is
+finite by the geometric lifetime growth.  Preferred theorem artifact:
+`31250408864` on `b9c17dc` (`347` tests plus `50,000` synchronization checks).

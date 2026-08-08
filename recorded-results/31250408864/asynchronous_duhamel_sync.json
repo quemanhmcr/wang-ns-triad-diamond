@@ -1,0 +1,24 @@
+{
+  "certificate": {
+    "status": "EXACT_PARABOLIC_ASYNC_SYNCHRONIZATION_GIVEN_ONE_STEP_ADJOINT_GATE",
+    "scale_window": "3/5 < N_parent/N_child < 5/8",
+    "lifetime_window": "64/25 < T_parent/T_child < 25/9",
+    "initial_parent_span": "alpha_1 <= 25/128",
+    "recurrence": "alpha_next <= (25/64)(alpha+2/5)",
+    "invariant_cone": "alpha <= 3/8",
+    "common_slice_margin": "1-3/8-2/5 = 9/40",
+    "fixed_point": "10/39",
+    "backward_displacement": "Delta t_L >= (10/39)T_0[(64/25)^L-1]",
+    "registration": "common Kelvin transport free; Xi_boundary=E_switch+d_log E/sqrt(2)",
+    "initial_boundary": "truncate exact adjoint Duhamel gate at t=0; do not count as interior fresh grain"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_cone_ratio": 0.6837606837604469,
+    "minimum_cone_margin": 0.11858974358983243,
+    "minimum_common_slice_margin": 0.001535901810534839,
+    "minimum_half_mass_margin": 4.9539428277789455e-05,
+    "minimum_initial_boundary_margin": 9.843698438427584e-06,
+    "minimum_registration_margin": 1.8880738481691361e-07
+  }
+}
