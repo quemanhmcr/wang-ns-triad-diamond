@@ -1,0 +1,25 @@
+name: Physical multi-currency master
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/physical_multicurrency_master.py'
+      - 'tests/test_physical_multicurrency_master.py'
+      - 'docs/physical_multicurrency_master.md'
+      - '.github/workflows/physical-multicurrency-master.yml'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.physical_multicurrency_master --samples 50000 --outdir results-physical-multicurrency-master
+      - run: cat results-physical-multicurrency-master/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: physical-multicurrency-master-results
+          path: results-physical-multicurrency-master/
