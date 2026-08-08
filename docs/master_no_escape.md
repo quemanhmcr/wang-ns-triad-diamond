@@ -1749,8 +1749,38 @@ small and critical-dissipative when large; it does not require `H4/H5/...`
 master currencies.  Preferred certificate: `31264233454` on `f8164ce` (`403`
 tests plus `50,000` states).
 
-The remaining continuum gap is therefore the **source calculus for the coherent
-averaged affine jet** `Abar(t)`.  Its exact moving-average/corotational resolved
-Navier--Stokes identity must be derived, and the averaging-induced Reynolds terms
-must be routed into `K_coh^2`/`D_V` without duplicating pressure/SGS/viscous
-sources.  This is not a Navier--Stokes global-regularity proof.
+The coherent averaged affine jet now has an exact source calculus.  With
+`Xdot=barV`, `Ldot=barA L` and `r=V-barV-barA(x-X)`,
+
+\[
+\dot{\bar A}
+=-\bar A^2-\langle(A-\bar A)^2\rangle
+-\langle\nabla^2P\rangle
+-\langle\nabla\nabla\cdot R_{SGS}\rangle
++\nu\langle\Delta A\rangle
+-\langle r\cdot\nabla A\rangle.
+\]
+
+Gaussian regression/IBP gives
+
+\[
+\langle r\cdot\nabla A\rangle
+=\langle(z\cdot R)(A-\bar A)\rangle,
+\]
+
+and therefore the two averaging corrections are bounded by
+`kappa^2 K_coh^2` and `sqrt(7) kappa K_coh^2`.  Their normalized integrated
+source weight is `<=1.18115356379 D_V`; with the averaged quadratic local source
+the coefficient is `2.0383176489`.  Averaged filtered pressure/SGS/viscosity
+inherit the existing clean collisions because probability averaging does not
+increase the global supremum.  Preferred certificate: `31264579580` on
+`d4841d4` (`408` tests + `50,000` states; identity residual `9.172e-16`).  Run
+`31264531046` failed only on exact floating fixture equality before theorem
+stress and is recorded separately.
+
+Thus the remaining continuum gap is now the **recursive assembly/extraction
+bridge**: show that the actual efficient smooth-SGS block selector, one-shot
+near-Gaussian role, coherent averaged Kelvin transport, physical-energy causal
+gate and exact binary coherent work all use the same physical transfer law and
+that every replacement/representative/cross-cell discrepancy is charged once to
+the already summable `Xi`.  This is not a Navier--Stokes global-regularity proof.

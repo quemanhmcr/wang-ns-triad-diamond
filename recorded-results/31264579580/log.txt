@@ -1,0 +1,308 @@
+certify	Set up job	﻿2026-08-08T15:29:30.1762820Z Current runner version: '2.336.0'
+certify	Set up job	2026-08-08T15:29:30.1799279Z ##[group]Runner Image Provisioner
+certify	Set up job	2026-08-08T15:29:30.1800568Z Hosted Compute Agent
+certify	Set up job	2026-08-08T15:29:30.1801638Z Version: 20260707.563
+certify	Set up job	2026-08-08T15:29:30.1802688Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+certify	Set up job	2026-08-08T15:29:30.1803837Z Build Date: 2026-07-07T19:33:50Z
+certify	Set up job	2026-08-08T15:29:30.1805023Z Worker ID: {b7216307-d1ce-414e-a2f1-e3bc5410d570}
+certify	Set up job	2026-08-08T15:29:30.1806214Z Azure Region: eastus
+certify	Set up job	2026-08-08T15:29:30.1807185Z ##[endgroup]
+certify	Set up job	2026-08-08T15:29:30.1810207Z ##[group]Operating System
+certify	Set up job	2026-08-08T15:29:30.1811169Z Ubuntu
+certify	Set up job	2026-08-08T15:29:30.1812128Z 24.04.4
+certify	Set up job	2026-08-08T15:29:30.1812973Z LTS
+certify	Set up job	2026-08-08T15:29:30.1813865Z ##[endgroup]
+certify	Set up job	2026-08-08T15:29:30.1814751Z ##[group]Runner Image
+certify	Set up job	2026-08-08T15:29:30.1815818Z Image: ubuntu-24.04
+certify	Set up job	2026-08-08T15:29:30.1816728Z Version: 20260720.247.2
+certify	Set up job	2026-08-08T15:29:30.1818768Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+certify	Set up job	2026-08-08T15:29:30.1821797Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+certify	Set up job	2026-08-08T15:29:30.1823490Z ##[endgroup]
+certify	Set up job	2026-08-08T15:29:30.1825407Z ##[group]GITHUB_TOKEN Permissions
+certify	Set up job	2026-08-08T15:29:30.1828779Z Contents: read
+certify	Set up job	2026-08-08T15:29:30.1829858Z Metadata: read
+certify	Set up job	2026-08-08T15:29:30.1830783Z Packages: read
+certify	Set up job	2026-08-08T15:29:30.1831705Z ##[endgroup]
+certify	Set up job	2026-08-08T15:29:30.1834615Z Secret source: Actions
+certify	Set up job	2026-08-08T15:29:30.1836901Z Prepare workflow directory
+certify	Set up job	2026-08-08T15:29:30.2315003Z Prepare all required actions
+certify	Set up job	2026-08-08T15:29:30.2387345Z Getting action download info
+certify	Set up job	2026-08-08T15:29:30.4035025Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+certify	Set up job	2026-08-08T15:29:30.6181988Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+certify	Set up job	2026-08-08T15:29:30.6990883Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+certify	Set up job	2026-08-08T15:29:30.9680929Z Complete job name: certify
+certify	Run actions/checkout@v4	﻿2026-08-08T15:29:31.0475194Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0483767Z ##[group]Run actions/checkout@v4
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0484564Z with:
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0485053Z   repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0489302Z   token: ***
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0489761Z   ssh-strict: true
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0490195Z   ssh-user: git
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0490628Z   persist-credentials: true
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0491107Z   clean: true
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0491536Z   sparse-checkout-cone-mode: true
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0492044Z   fetch-depth: 1
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0492454Z   fetch-tags: false
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0492884Z   show-progress: true
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0493354Z   lfs: false
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0493780Z   submodules: false
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0494261Z   set-safe-directory: true
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0494759Z   allow-unsafe-pr-checkout: false
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.0495563Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1521294Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1524376Z ##[group]Getting Git version info
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1525945Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1528466Z [command]/usr/bin/git version
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1627289Z git version 2.54.0
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1661366Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1698789Z Temporarily overriding HOME='/home/runner/work/_temp/035065ad-62d3-487a-ae3c-e6da24dab5f7' before making global git config changes
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1710740Z Adding repository directory to the temporary git global config as a safe directory
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1713290Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1785520Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1787906Z ##[group]Initializing the repository
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1795548Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1882552Z hint: Using 'master' as the name for the initial branch. This default branch name
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1884507Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1886178Z hint: to use in all of your new repositories, which will suppress this warning,
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1887628Z hint: call:
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1888773Z hint:
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1890792Z hint: 	git config --global init.defaultBranch <name>
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1892781Z hint:
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1894584Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1896321Z hint: 'development'. The just-created branch can be renamed via this command:
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1897747Z hint:
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1898854Z hint: 	git branch -m <name>
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1899843Z hint:
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1901103Z hint: Disable this message with "git config set advice.defaultBranchName false"
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1903327Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1907029Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1987676Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1989916Z ##[group]Disabling automatic garbage collection
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.1991637Z [command]/usr/bin/git config --local gc.auto 0
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.2036599Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.2038467Z ##[group]Setting up auth
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.2047806Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.2101971Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.2480963Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.2532004Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.2777212Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.2816444Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.3043342Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.3083502Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.3084409Z ##[group]Fetching the repository
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.3094441Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d4841d4a58d3728ae62ea2eedb17f1f88a724c1a:refs/remotes/origin/research/physical-energy-causal-bridge
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6294286Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6296695Z  * [new ref]         d4841d4a58d3728ae62ea2eedb17f1f88a724c1a -> origin/research/physical-energy-causal-bridge
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6327904Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6329369Z ##[group]Determining the checkout info
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6331316Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6336892Z [command]/usr/bin/git sparse-checkout disable
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6385473Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6420120Z ##[group]Checking out the ref
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6426258Z [command]/usr/bin/git checkout --progress --force -B research/physical-energy-causal-bridge refs/remotes/origin/research/physical-energy-causal-bridge
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6970406Z Switched to a new branch 'research/physical-energy-causal-bridge'
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6975207Z branch 'research/physical-energy-causal-bridge' set up to track 'origin/research/physical-energy-causal-bridge'.
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.6982732Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.7028562Z [command]/usr/bin/git log -1 --format=%H
+certify	Run actions/checkout@v4	2026-08-08T15:29:31.7054939Z d4841d4a58d3728ae62ea2eedb17f1f88a724c1a
+certify	Run actions/setup-python@v5	﻿2026-08-08T15:29:31.7431611Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.7437439Z ##[group]Run actions/setup-python@v5
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.7438703Z with:
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.7439479Z   python-version: 3.11
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.7440398Z   check-latest: false
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.7451266Z   token: ***
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.7452145Z   update-environment: true
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.7453151Z   allow-prereleases: false
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.7454138Z   freethreaded: false
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.7455015Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.8837411Z ##[group]Installed versions
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.8940451Z (node:2235) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.8949539Z Successfully set up CPython (3.11.15)
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.8954755Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/setup-python@v5	2026-08-08T15:29:31.8958433Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint	﻿2026-08-08T15:29:31.9189986Z ##[group]Run pip install -r requirements.txt python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:31.9192574Z ^[[36;1mpip install -r requirements.txt python-flint^[[0m
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:31.9274188Z shell: /usr/bin/bash -e {0}
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:31.9275814Z env:
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:31.9277472Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:31.9280529Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:31.9283384Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:31.9285964Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:31.9288882Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:31.9291115Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:31.9293143Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:32.7422367Z Collecting python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:32.7940317Z   Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:32.9885446Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:32.9927692Z   Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.1182258Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.1224142Z   Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.1570113Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.1609507Z   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.1743226Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.1783559Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.1936421Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.1976845Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.2094912Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.2126875Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.2295495Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.2327821Z   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.2443170Z Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.3664630Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 140.9 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.3707871Z Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.5609099Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 199.6 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.5653306Z Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.5776645Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.5843238Z Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.1 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.6291061Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 233.4 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.6334481Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.6396433Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.6455701Z Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.6529417Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 200.9 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:33.7705252Z Installing collected packages: python-flint, pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:40.3003124Z 
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:40.3014214Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 python-flint-0.9.0 scipy-1.15.3
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:40.3022312Z 
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:40.3022693Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T15:29:40.3023660Z [notice] To update, run: pip install --upgrade pip
+certify	Run pytest -q	﻿2026-08-08T15:29:40.3634593Z ##[group]Run pytest -q
+certify	Run pytest -q	2026-08-08T15:29:40.3634921Z ^[[36;1mpytest -q^[[0m
+certify	Run pytest -q	2026-08-08T15:29:40.3680190Z shell: /usr/bin/bash -e {0}
+certify	Run pytest -q	2026-08-08T15:29:40.3680474Z env:
+certify	Run pytest -q	2026-08-08T15:29:40.3680748Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T15:29:40.3681189Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run pytest -q	2026-08-08T15:29:40.3681642Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T15:29:40.3682045Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T15:29:40.3682430Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T15:29:40.3682814Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run pytest -q	2026-08-08T15:29:40.3683143Z ##[endgroup]
+certify	Run pytest -q	2026-08-08T15:29:43.8868799Z ........................................................................ [ 17%]
+certify	Run pytest -q	2026-08-08T15:29:44.0752374Z ........................................................................ [ 35%]
+certify	Run pytest -q	2026-08-08T15:29:44.4125155Z ........................................................................ [ 52%]
+certify	Run pytest -q	2026-08-08T15:29:44.6400488Z ........................................................................ [ 70%]
+certify	Run pytest -q	2026-08-08T15:29:44.7408423Z ........................................................................ [ 88%]
+certify	Run pytest -q	2026-08-08T15:29:45.1907027Z ................................................                         [100%]
+certify	Run pytest -q	2026-08-08T15:29:45.1907905Z 408 passed in 4.45s
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	﻿2026-08-08T15:29:45.2769033Z ##[group]Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:45.2770028Z ^[[36;1mpython -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source^[[0m
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:45.2814408Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:45.2814673Z env:
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:45.2814942Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:45.2815403Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:45.2815863Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:45.2816268Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:45.2816684Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:45.2817102Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:45.2817652Z ##[endgroup]
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0534753Z # Coherent averaged resolved-strain source calculus
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0535638Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0536495Z Status: **EXACT_COHERENT_AVERAGED_RESOLVED_STRAIN_SOURCE_IDENTITY__REYNOLDS_CORRECTIONS_ROUTE_TO_CRITICAL_DISSIPATION**.
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0537419Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0537799Z Let the Gaussian analysis eddy move by its own affine regression,
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0538675Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0539058Z `Xdot=bar V`, `Ldot=bar A L`, `bar V=<V>_gamma`, `bar A=<grad V>_gamma`.
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0539663Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0540086Z For any field `f`, fixed intrinsic `z` gives the exact moving-average identity
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0540700Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0540893Z `d<f>/dt = <D_t^V f-r.grad f>`,
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0541298Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0541785Z where `r=V-bar V-bar A(x-X)`.  Applying this to the resolved gradient equation yields
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0542459Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0542909Z `dot bar A = -bar A^2 - <a^2> - <Hess P> - <grad div R_sgs> + nu <Delta A> - <r.grad A>`,
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0543594Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0544095Z with `a=A-bar A`.  The corresponding corotational symmetric-strain identity is exact.
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0544808Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0546549Z The two terms created only by coherent averaging are not new currencies.  In intrinsic variables `R=L^-1 r`, the affine projection gives `E[R tensor z]=0`, while both `V` and the affine regression are divergence free.  Gaussian integration by parts therefore gives
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0547904Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0548030Z `<r.grad A> = <(z.R)(A-bar A)>`.
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0548481Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0548604Z With `K_coh^2=E||L^-1(A-bar A)L||^2`,
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0548818Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0548926Z `||<a^2>|| <= kappa^2 K_coh^2`,
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0549224Z `||<r.grad A>|| <= sqrt(7) kappa K_coh^2`.
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0549446Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0549868Z Since `int N^-2 K_coh^2 dt <= C_var D_V`, the integrated normalized source weight of both Reynolds corrections is at most
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0550415Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0550525Z `Sigma_Reynolds <= 1.18115356379 D_V`
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0550743Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0551311Z on `kappa<=567/500`.  The averaged quadratic `bar A` source is also linearly bounded by `D_V`; together the local quadratic+averaging contribution is at most
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0552007Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0552111Z `Sigma_local <= 2.0383176489 D_V`.
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0552310Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0552910Z Thus changing from the point-sampled affine jet to the coherent whole-eddy jet does not open a new source ledger.  Its only new terms are critical dissipation.
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0553635Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0555361Z The remaining filtered sources do not worsen under averaging: `||<Hess P>||<=||Hess P||_infty`, and similarly for differentiated SGS and viscosity.  Therefore the existing resolved pressure/mass-or-SGS, SGS/coherent-service and viscous-`D_V` collision thresholds apply unchanged.  These sources are not charged once before averaging and again after averaging; the average is the source used by this transporter.
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0557380Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0557508Z Stress: `50000` source/reynolds/collision states
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0557865Z - worst corotational identity residual: `9.172e-16`
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0558354Z - minimum Reynolds bound margin: `1.789e-07`
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0558659Z - minimum scaled-weight margin: `2.261e-07`
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0558972Z - minimum quadratic-weight margin: `2.633e-07`
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0559302Z - clean Reynolds source coefficient: `1.18115356379`
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0559643Z - clean total local coefficient: `2.0383176489`
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0559850Z 
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0561552Z This closes the averaged-jet source calculus at the exact Gaussian-analysis level.  The remaining continuum step is no longer a missing source formula: it is the **assembly theorem** showing that every recursively selected efficient smooth-SGS block may use this coherent averaged transporter, one-shot near-Gaussian profile, physical-energy causal gate and exact coherent binary work measure with the same selected transfer normalization and only the already summable `Xi`.  No global-regularity claim is made.
+certify	Run python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-strain-source	2026-08-08T15:29:50.0563519Z 
+certify	Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"	﻿2026-08-08T15:29:50.0720973Z ##[group]Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"
+certify	Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T15:29:50.0721690Z ^[[36;1mcat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"^[[0m
+certify	Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T15:29:50.0766058Z shell: /usr/bin/bash -e {0}
+certify	Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T15:29:50.0766311Z env:
+certify	Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T15:29:50.0766573Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T15:29:50.0767032Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T15:29:50.0767472Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T15:29:50.0767854Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T15:29:50.0768581Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T15:29:50.0768982Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run cat results-coherent-averaged-strain-source/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T15:29:50.0769306Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	﻿2026-08-08T15:29:50.0919770Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0921082Z ##[group]Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0921345Z with:
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0921575Z   name: coherent-averaged-strain-source-results
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0921921Z   path: results-coherent-averaged-strain-source/
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0922230Z   if-no-files-found: warn
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0922459Z   compression-level: 6
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0922671Z   overwrite: false
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0922877Z   include-hidden-files: false
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0923112Z env:
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0923348Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0923765Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0924220Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0924595Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0924969Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0925346Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.0925661Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.2580774Z (node:2292) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.2582277Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.2709588Z With the provided path, there will be 2 files uploaded
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.2711019Z Artifact name is valid!
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.2711782Z Root directory input is valid!
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.4012055Z Beginning upload of artifact content to blob storage
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.4229829Z (node:2292) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.4627933Z Uploaded bytes 2807
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.4807171Z Finished uploading artifact content to blob storage!
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.4808843Z SHA256 digest of uploaded artifact zip is 7e63e261c42091788f77c9c4bd0b92f19cd7abbf04149e1417996515c830770b
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.4811334Z Finalizing artifact upload
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.6258791Z Artifact coherent-averaged-strain-source-results.zip successfully finalized. Artifact ID 9023759320
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.6260968Z Artifact coherent-averaged-strain-source-results has been successfully uploaded! Final size is 2807 bytes. Artifact ID is 9023759320
+certify	Run actions/upload-artifact@v4	2026-08-08T15:29:50.6267849Z Artifact download URL: https://github.com/quemanhmcr/wang-ns-triad-diamond/actions/runs/31264579580/artifacts/9023759320
+certify	Post Run actions/setup-python@v5	﻿2026-08-08T15:29:50.6481482Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/setup-python@v5	2026-08-08T15:29:50.6482798Z Post job cleanup.
+certify	Post Run actions/setup-python@v5	2026-08-08T15:29:50.7694547Z (node:2306) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Post Run actions/setup-python@v5	2026-08-08T15:29:50.7696131Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Post Run actions/checkout@v4	﻿2026-08-08T15:29:50.7889564Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.7891827Z Post job cleanup.
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.8826915Z [command]/usr/bin/git version
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.8871580Z git version 2.54.0
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.8947547Z Temporarily overriding HOME='/home/runner/work/_temp/0ace6ddb-2310-4930-8fe9-b1d46e59f9fd' before making global git config changes
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.8949528Z Adding repository directory to the temporary git global config as a safe directory
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.8953517Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.9008082Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.9060786Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.9379873Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.9416897Z http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.9434516Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.9478331Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.9736564Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Post Run actions/checkout@v4	2026-08-08T15:29:50.9775904Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Complete job	﻿2026-08-08T15:29:51.0157907Z Cleaning up orphan processes
+certify	Complete job	2026-08-08T15:29:51.0447385Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
