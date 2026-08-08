@@ -5418,6 +5418,7 @@ The most useful recorded runs, in chronological order, are:
 | `31251337503` | first resolved-objective-strain stress run failed because the diagnostic tried to saturate a deliberately weaker clean inverse bound (`1/380`) instead of the sharper analytic coefficient; theorem constants had already passed Arb, so this is diagnostic-direction provenance, not a countermodel |
 | `31251421182` | preferred resolved objective-strain collision on `01a0915`: exact filtered corotational source identity for `A=grad V`; clean order-two constant `<1/380`, `||V||_3^2<mu_V/15`, pressure Hessian `rho_P<=mu_V/5700+||R||_(3/2)/380`, and viscous constant `<1/1500`; `362` tests + `50,000` checks, identity residual `6.874e-16` |
 | `31251605854` | divergence-free coherent Parseval frame on `cfe34a5`: Leray-projected coherent probes preserve Moyal coefficients exactly on `L^2_sigma` and cancel pressure globally, removing compact moving-window/pressure-boundary interfaces from the canonical global ancestry route; `356` tests + `9` optional skips + `20,000` checks |
+| `31252438256` | physical transfer-weighted defect moat on `f7d1d37`: on the `eta_0=10^-4` signed-good core, `E_phys[D]<=(106/25) epsilon`; deleting the least-transfer bin in `[R/2,R]` gives `eta_cross<=1/M+2 Dbar/R`; the schedule `M_j=M_0(j+2)^2`, `R_j=R_0(j+2)^2` makes the actual omitted cross-cell physical-transfer `Xi` summable with no packet-count or Gaussian-synthesis tail; `362` tests + `9` optional skips + `50,000` weighted triad graphs |
 
 | `31249662333`, `31249664073`, `31249665749`, `31249667523`, `31249669387`, `31249671051`, `31249672640`, `31249674254`, `31249675942` | nine-workflow adjoint-causal integration on `f1f0e62`: coherent transfer cells, coherent increment service, service-or-flat rigidity, physical flat episode, causal binary ancestry, transfer-weighted Shannon reuse, Renyi causal reuse, adjoint Kelvin--Duhamel and master all green; adjoint workflow `339` tests + `50,000` checks, master `20,000` traces with worst margin `0` |
 
@@ -5810,23 +5811,48 @@ master `Xi`**; Leray/helical distortion is already the summable frequency-symbol
 representation error.  Compact windows remain available for genuinely local CKN
 diagnostics.
 
-The decisive next bridge is now **branch-by-branch critical-currency routing plus
-the remaining coherent cross/profile `Xi`**.  Every service-or-flat exit must be
-assigned exactly once to a multiplicative transfer cost, a sticky critical
-ancestry/action currency, or a genuinely uniform globally bounded resource.  For
-the global master, spatial compact-window interfaces have been removed by the
-divergence-free coherent Parseval frame; the remaining analytic interface is the
-actual selected cross/profile-defect interaction (and any synthesis approximation),
-which must be summable in the same physical transfer law.
-After that PDE audit, no new finite-dimensional escape mechanism is currently
-identified.  The continuum task is then to apply the certified multi-currency
-telescope to the actual recursive Navier--Stokes extraction, with physical
-`kappa_0>0.17` flat erosion, coherent stopping, transfer-weighted causal
-entropy/pair events and source/dissipation budgets, while the one total `Xi`
-remains bounded.  Fresh-packet energy alone, raw cycle rank without causal
-transfer labels, arbitrary redundant Gaussian coefficients, aspect penalties,
-sub-bandwidth source counting or a new persistence hypothesis are not admissible
-shortcuts.
+The canonical **physical cross-cell `Xi` summability mechanism is now theorem-level**.
+The positive coherent localization operators reconstruct each role and the
+trilinear work exactly, so there is no continuous-to-discrete synthesis error.
+On the signed-good physical-transfer core the single-edge defect moment obeys
+
+\[
+\boxed{\mathbb E_{phys}\mathcal D\le(106/25)\,\epsilon.}
+\]
+
+A moat placed in the scalar transfer defect, rather than in a coordinate grid,
+gives at depth `j`
+
+\[
+\boxed{\eta_{cross,j}\le M_j^{-1}+2\overline{\mathcal D}/R_j.}
+\]
+
+With `M_j=M_0(j+2)^2` and `R_j=R_0(j+2)^2`,
+
+\[
+\boxed{\sum_j\eta_{cross,j}\le\frac{13}{20}
+\left(M_0^{-1}+2\overline{\mathcal D}/R_0\right).}
+\]
+
+Thus the actual omitted cross-component **physical child-transfer mass** is
+summable and tunably small, with no packet-count factor or Gaussian-synthesis
+tail.  If the low-defect interaction hypergraph remains connected, the exact
+`(n-1)+beta=2m` incidence identity routes it to fresh-rich or cycle-rich ancestry
+instead of creating an interface escape.
+
+The decisive next bridge is therefore **branch-by-branch critical-currency
+routing in the actual recursive PDE extraction**.  Every service-or-flat exit
+must be assigned exactly once to a multiplicative transfer cost, a sticky
+critical ancestry/action currency, or a genuinely uniform globally bounded
+resource.  The global coherent representation, material labeling, asynchronous
+causal slices, and cross-cell `Xi` summability now have theorem-level mechanisms;
+the remaining task is to verify that every efficient Navier--Stokes block reaches
+one of those certified branches with the same physical transfer law and then
+apply the multi-currency telescope without double charging.  No new
+finite-dimensional escape mechanism is currently identified.  Fresh-packet
+energy alone, raw cycle rank without causal transfer labels, arbitrary redundant
+Gaussian coefficients, aspect penalties, sub-bandwidth source counting or a new
+persistence hypothesis are not admissible shortcuts.
 
 ---
 
@@ -5842,7 +5868,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, and `docs/divfree_coherent_parseval.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, and `docs/physical_transfer_defect_moat.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

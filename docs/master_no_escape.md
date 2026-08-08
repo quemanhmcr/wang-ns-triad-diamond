@@ -1469,3 +1469,65 @@ boundary work remain relevant to optional local/CKN diagnostics, but they are
 absent from the global master `Xi`.  Leray/helical variation across a narrow
 frequency cell is already contained in the summable symbol-freezing ledger.
 Preferred certificate: `31251605854`.
+
+
+## Physical transfer defect moat closes the canonical cross-cell `Xi`
+
+The divergence-free coherent localization operators give an exact positive
+resolution of the identity.  Hence for every continuous trilinear work form,
+
+\[
+\boxed{
+T(f,g,h)=\sum_{C,D,E}T(A_Cf,A_Dg,A_Eh),
+}
+\]
+
+with no continuous-to-discrete reconstruction error.  The only global coherent
+interface is therefore the **actual physical transfer** carried by cell triples
+omitted when the ancestry components are separated.
+
+On the `eta_0=10^{-4}` signed-good core, the physical child-transfer law and the
+capacity law differ by at most `53/50`.  Combining this with the certified
+single-edge stability defect gives
+
+\[
+\boxed{
+\mathbb E_{phys}\mathcal D\le\frac{106}{25}\,\epsilon.
+}
+\]
+
+At recursive depth `j`, put a moat directly in the scalar transfer defect:
+choose `R_j>0`, divide `[R_j/2,R_j]` into `M_j` bins, delete the least-transfer
+bin, and connect all active triad vertices using edges below its lower boundary.
+Every cross-component edge is then in that moat or has
+`mathcal D>=R_j/2`, so
+
+\[
+\boxed{
+\eta_{cross,j}
+\le \frac1{M_j}+\frac{2\overline{\mathcal D}}{R_j}.
+}
+\]
+
+For
+
+\[
+M_j=M_0(j+2)^2,
+\qquad
+R_j=R_0(j+2)^2,
+\]
+
+\[
+\boxed{
+\sum_j\eta_{cross,j}
+\le\frac{13}{20}
+\left(\frac1{M_0}+\frac{2\overline{\mathcal D}}{R_0}\right).
+}
+\]
+
+On the low-cost branch this makes the logarithmic cross penalty `Xi` summable and
+tunably small, with no packet-count factor and no Gaussian synthesis tail.  If a
+retained low-defect component percolates instead of splitting, the exact
+incidence law `(n-1)+beta=2m` routes it to fresh-rich or cycle-rich ancestry.
+Preferred certificate: `31252438256` on `f7d1d37` (`362` tests, `9` optional
+skips, `50,000` weighted triad graphs).

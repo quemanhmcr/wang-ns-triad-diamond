@@ -1,0 +1,282 @@
+certify	Set up job	﻿2026-08-08T10:16:48.3629893Z Current runner version: '2.336.0'
+certify	Set up job	2026-08-08T10:16:48.3651189Z ##[group]Runner Image Provisioner
+certify	Set up job	2026-08-08T10:16:48.3651936Z Hosted Compute Agent
+certify	Set up job	2026-08-08T10:16:48.3652635Z Version: 20260707.563
+certify	Set up job	2026-08-08T10:16:48.3653214Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+certify	Set up job	2026-08-08T10:16:48.3653854Z Build Date: 2026-07-07T19:33:50Z
+certify	Set up job	2026-08-08T10:16:48.3654470Z Worker ID: {82c81f68-7b57-4311-9b38-71f1ac08872d}
+certify	Set up job	2026-08-08T10:16:48.3655052Z Azure Region: westcentralus
+certify	Set up job	2026-08-08T10:16:48.3655557Z ##[endgroup]
+certify	Set up job	2026-08-08T10:16:48.3656802Z ##[group]Operating System
+certify	Set up job	2026-08-08T10:16:48.3657340Z Ubuntu
+certify	Set up job	2026-08-08T10:16:48.3657834Z 24.04.4
+certify	Set up job	2026-08-08T10:16:48.3658245Z LTS
+certify	Set up job	2026-08-08T10:16:48.3658644Z ##[endgroup]
+certify	Set up job	2026-08-08T10:16:48.3659147Z ##[group]Runner Image
+certify	Set up job	2026-08-08T10:16:48.3659635Z Image: ubuntu-24.04
+certify	Set up job	2026-08-08T10:16:48.3660138Z Version: 20260720.247.2
+certify	Set up job	2026-08-08T10:16:48.3660989Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+certify	Set up job	2026-08-08T10:16:48.3662376Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+certify	Set up job	2026-08-08T10:16:48.3663192Z ##[endgroup]
+certify	Set up job	2026-08-08T10:16:48.3664151Z ##[group]GITHUB_TOKEN Permissions
+certify	Set up job	2026-08-08T10:16:48.3665653Z Contents: read
+certify	Set up job	2026-08-08T10:16:48.3666354Z Metadata: read
+certify	Set up job	2026-08-08T10:16:48.3666860Z Packages: read
+certify	Set up job	2026-08-08T10:16:48.3667334Z ##[endgroup]
+certify	Set up job	2026-08-08T10:16:48.3669014Z Secret source: Actions
+certify	Set up job	2026-08-08T10:16:48.3669832Z Prepare workflow directory
+certify	Set up job	2026-08-08T10:16:48.3928359Z Prepare all required actions
+certify	Set up job	2026-08-08T10:16:48.3974453Z Getting action download info
+certify	Set up job	2026-08-08T10:16:48.6784439Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+certify	Set up job	2026-08-08T10:16:49.3112687Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+certify	Set up job	2026-08-08T10:16:49.4534009Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+certify	Set up job	2026-08-08T10:16:49.6736079Z Complete job name: certify
+certify	Run actions/checkout@v4	﻿2026-08-08T10:16:49.7345179Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7352459Z ##[group]Run actions/checkout@v4
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7353054Z with:
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7353459Z   repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7356747Z   token: ***
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7357126Z   ssh-strict: true
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7357502Z   ssh-user: git
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7357875Z   persist-credentials: true
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7358273Z   clean: true
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7358642Z   sparse-checkout-cone-mode: true
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7359062Z   fetch-depth: 1
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7359422Z   fetch-tags: false
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7359804Z   show-progress: true
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7360195Z   lfs: false
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7360539Z   submodules: false
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7360957Z   set-safe-directory: true
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7361368Z   allow-unsafe-pr-checkout: false
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.7361956Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8197105Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8198717Z ##[group]Getting Git version info
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8199398Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8200307Z [command]/usr/bin/git version
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8200723Z git version 2.54.0
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8208055Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8221074Z Temporarily overriding HOME='/home/runner/work/_temp/601f7d57-b866-4df2-aa2a-06603278acbc' before making global git config changes
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8222587Z Adding repository directory to the temporary git global config as a safe directory
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8225230Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8256592Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8259315Z ##[group]Initializing the repository
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8263522Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8330622Z hint: Using 'master' as the name for the initial branch. This default branch name
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8331575Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8332982Z hint: to use in all of your new repositories, which will suppress this warning,
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8333676Z hint: call:
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8334028Z hint:
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8334484Z hint: 	git config --global init.defaultBranch <name>
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8334998Z hint:
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8335473Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8336421Z hint: 'development'. The just-created branch can be renamed via this command:
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8337197Z hint:
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8337765Z hint: 	git branch -m <name>
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8338287Z hint:
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8338802Z hint: Disable this message with "git config set advice.defaultBranchName false"
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8339742Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8341285Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8369623Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8370803Z ##[group]Disabling automatic garbage collection
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8373547Z [command]/usr/bin/git config --local gc.auto 0
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8397964Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8398580Z ##[group]Setting up auth
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8404183Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8431871Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8696125Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8728876Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8937453Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.8968400Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.9158510Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.9191163Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.9198423Z ##[group]Fetching the repository
+certify	Run actions/checkout@v4	2026-08-08T10:16:49.9200482Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +f7d1d378bbb7427404ccdb83e2012a9a23f0d308:refs/remotes/origin/main
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.7727469Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.7729416Z  * [new ref]         f7d1d378bbb7427404ccdb83e2012a9a23f0d308 -> origin/main
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.7749104Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.7750169Z ##[group]Determining the checkout info
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.7751565Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.7755578Z [command]/usr/bin/git sparse-checkout disable
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.7791776Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.7819771Z ##[group]Checking out the ref
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.7823422Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.8214082Z Switched to a new branch 'main'
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.8215947Z branch 'main' set up to track 'origin/main'.
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.8223154Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.8256627Z [command]/usr/bin/git log -1 --format=%H
+certify	Run actions/checkout@v4	2026-08-08T10:16:50.8278781Z f7d1d378bbb7427404ccdb83e2012a9a23f0d308
+certify	Run actions/setup-python@v5	﻿2026-08-08T10:16:50.8577921Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/setup-python@v5	2026-08-08T10:16:50.8582506Z ##[group]Run actions/setup-python@v5
+certify	Run actions/setup-python@v5	2026-08-08T10:16:50.8583413Z with:
+certify	Run actions/setup-python@v5	2026-08-08T10:16:50.8584254Z   python-version: 3.11
+certify	Run actions/setup-python@v5	2026-08-08T10:16:50.8585311Z   check-latest: false
+certify	Run actions/setup-python@v5	2026-08-08T10:16:50.8595468Z   token: ***
+certify	Run actions/setup-python@v5	2026-08-08T10:16:50.8596416Z   update-environment: true
+certify	Run actions/setup-python@v5	2026-08-08T10:16:50.8597263Z   allow-prereleases: false
+certify	Run actions/setup-python@v5	2026-08-08T10:16:50.8598077Z   freethreaded: false
+certify	Run actions/setup-python@v5	2026-08-08T10:16:50.8598813Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-08T10:16:50.9633785Z ##[group]Installed versions
+certify	Run actions/setup-python@v5	2026-08-08T10:16:51.0014261Z (node:2144) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/setup-python@v5	2026-08-08T10:16:51.0017657Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/setup-python@v5	2026-08-08T10:16:51.0019696Z Successfully set up CPython (3.11.15)
+certify	Run actions/setup-python@v5	2026-08-08T10:16:51.0021298Z ##[endgroup]
+certify	Run pip install -r requirements.txt	﻿2026-08-08T10:16:51.0180893Z ##[group]Run pip install -r requirements.txt
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:51.0182064Z ^[[36;1mpip install -r requirements.txt^[[0m
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:51.0327935Z shell: /usr/bin/bash -e {0}
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:51.0328920Z env:
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:51.0329768Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:51.0331179Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:51.0332584Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:51.0333858Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:51.0335138Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:51.0336675Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:51.0337769Z ##[endgroup]
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:54.7007772Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:54.8013946Z   Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:54.9410816Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:54.9613472Z   Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.0071762Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.0260759Z   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.0541136Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.0751331Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.1077109Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.1262463Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.1525462Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.1713608Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.2002407Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.2191972Z   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.2421458Z Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.5718161Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 57.0 MB/s  0:00:00
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.5927671Z Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.9225528Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 114.1 MB/s  0:00:00
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.9415068Z Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.9640274Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:55.9845446Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:56.0051756Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:56.0259017Z Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:56.0344864Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 140.1 MB/s  0:00:00
+certify	Run pip install -r requirements.txt	2026-08-08T10:16:56.1878722Z Installing collected packages: pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+certify	Run pip install -r requirements.txt	2026-08-08T10:17:01.2024762Z 
+certify	Run pip install -r requirements.txt	2026-08-08T10:17:01.2033544Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 scipy-1.15.3
+certify	Run pip install -r requirements.txt	2026-08-08T10:17:01.2040391Z 
+certify	Run pip install -r requirements.txt	2026-08-08T10:17:01.2040747Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+certify	Run pip install -r requirements.txt	2026-08-08T10:17:01.2041562Z [notice] To update, run: pip install --upgrade pip
+certify	Run pytest -q	﻿2026-08-08T10:17:01.3544621Z ##[group]Run pytest -q
+certify	Run pytest -q	2026-08-08T10:17:01.3544883Z ^[[36;1mpytest -q^[[0m
+certify	Run pytest -q	2026-08-08T10:17:01.3584921Z shell: /usr/bin/bash -e {0}
+certify	Run pytest -q	2026-08-08T10:17:01.3585133Z env:
+certify	Run pytest -q	2026-08-08T10:17:01.3585346Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T10:17:01.3585689Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run pytest -q	2026-08-08T10:17:01.3586218Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T10:17:01.3586509Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T10:17:01.3586800Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T10:17:01.3587085Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run pytest -q	2026-08-08T10:17:01.3587333Z ##[endgroup]
+certify	Run pytest -q	2026-08-08T10:17:04.3223992Z ...........s...s............................................s........... [ 19%]
+certify	Run pytest -q	2026-08-08T10:17:04.4450013Z ........................................................................ [ 38%]
+certify	Run pytest -q	2026-08-08T10:17:04.6561147Z ...............s.s..s................................................... [ 58%]
+certify	Run pytest -q	2026-08-08T10:17:04.8032273Z ........................................................................ [ 77%]
+certify	Run pytest -q	2026-08-08T10:17:05.1032198Z .......................s......s...s..................................... [ 97%]
+certify	Run pytest -q	2026-08-08T10:17:05.1813776Z ...........                                                              [100%]
+certify	Run pytest -q	2026-08-08T10:17:05.1814495Z 362 passed, 9 skipped in 3.36s
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	﻿2026-08-08T10:17:05.2637298Z ##[group]Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:05.2637991Z ^[[36;1mpython -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat^[[0m
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:05.2677134Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:05.2677351Z env:
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:05.2677612Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:05.2678048Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:05.2678391Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:05.2678681Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:05.2678963Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:05.2679338Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:05.2679585Z ##[endgroup]
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8771774Z # Physical transfer-weighted defect moat
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8775392Z 
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8775687Z Status: **EXACT_TRANSFER_WEIGHTED_DEFECT_MOAT_GIVEN_PHYSICAL_GOOD_CORE**.
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8776362Z 
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8777623Z On the `eta_0=10^-4` signed-good core, capacity and actual positive child-transfer laws have density ratio at most `53/50`.  If the block deficit is `epsilon<1/20000`, capacity good-core mass is at least `1/2`, while single-edge stability gives `sum w_e D_e<=2 epsilon`. Hence the normalized **physical** good-core law satisfies
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8779275Z 
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8779361Z `E_phys[D] <= (106/25) epsilon`.
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8779513Z 
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8780256Z At one recursive coherent-cell depth choose a scalar defect radius `R`, split `[R/2,R]` into `M` bins, and delete the bin with least physical transfer.  Connect packet/coherent vertices using all edges below the lower moat boundary. Every cross-component edge is then either in the chosen moat or has `D>=R/2`. Therefore
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8781066Z 
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8781161Z `eta_cross <= 1/M + 2 E_phys[D]/R`.
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8781301Z 
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8781455Z Choose `M_j=M0(j+2)^2` and `R_j=R0(j+2)^2`. Since `sum_(j>=0)(j+2)^-2<13/20`,
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8781663Z 
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8781766Z `sum_j eta_cross,j <= (13/20)[1/M0+2 Dbar/R0]`.
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8781915Z 
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8782298Z On the low-cost extraction branch `C_j<=Ccap`, `xi_j=log(1+eta_j exp(C_j))<=exp(Ccap)eta_j`, so this gives a summable and tunably small physical-transfer `Xi`.
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8782705Z 
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8783434Z No phase-space packet count or Gaussian synthesis tail is used. If the low-defect hypergraph remains connected instead of splitting, that is not an interface failure: each retained connected component obeys the exact incidence identity `(n-1)+beta=2m` and therefore routes to fresh-rich or cycle-rich ancestry.
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8784199Z 
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8784294Z Stress: `50000` random weighted triad graphs
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8784547Z - minimum cross-bound margin: `6.917e-04`
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8784785Z - minimum Markov-tail margin: `7.618e-05`
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8785018Z - minimum moat-pigeonhole margin: `3.769e-04`
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8785255Z - minimum square-schedule margin: `7.061e-05`
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8785473Z - incidence checks: `5817`
+certify	Run python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat	2026-08-08T10:17:33.8785596Z 
+certify	Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"	﻿2026-08-08T10:17:33.8937322Z ##[group]Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"
+certify	Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T10:17:33.8937850Z ^[[36;1mcat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"^[[0m
+certify	Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T10:17:33.8976243Z shell: /usr/bin/bash -e {0}
+certify	Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T10:17:33.8976449Z env:
+certify	Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T10:17:33.8976667Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T10:17:33.8977005Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T10:17:33.8977330Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T10:17:33.8977622Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T10:17:33.8977904Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T10:17:33.8978194Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T10:17:33.8978443Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	﻿2026-08-08T10:17:33.9100265Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9101210Z ##[group]Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9101425Z with:
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9101618Z   name: physical-transfer-defect-moat-results
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9101897Z   path: results-physical-transfer-defect-moat/
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9102138Z   if-no-files-found: warn
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9102325Z   compression-level: 6
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9102499Z   overwrite: false
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9102672Z   include-hidden-files: false
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9102857Z env:
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9103054Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9103378Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9103726Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9104014Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9104294Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9104715Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:33.9104964Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.0373964Z (node:2210) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.0374682Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.0420852Z With the provided path, there will be 2 files uploaded
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.0436283Z Artifact name is valid!
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.0439512Z Root directory input is valid!
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.3067729Z Beginning upload of artifact content to blob storage
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.3217201Z (node:2210) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.5266314Z Uploaded bytes 1795
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.5830305Z Finished uploading artifact content to blob storage!
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.5831097Z SHA256 digest of uploaded artifact zip is 83f90b66ee06cc08099e4c746edeacb5a7cbffed86942f29cb395c8a3a4973d9
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.5832500Z Finalizing artifact upload
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.7828130Z Artifact physical-transfer-defect-moat-results.zip successfully finalized. Artifact ID 9020413585
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.7828979Z Artifact physical-transfer-defect-moat-results has been successfully uploaded! Final size is 1795 bytes. Artifact ID is 9020413585
+certify	Run actions/upload-artifact@v4	2026-08-08T10:17:34.7835019Z Artifact download URL: https://github.com/quemanhmcr/wang-ns-triad-diamond/actions/runs/31252438256/artifacts/9020413585
+certify	Post Run actions/setup-python@v5	﻿2026-08-08T10:17:34.7997336Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/setup-python@v5	2026-08-08T10:17:34.7998264Z Post job cleanup.
+certify	Post Run actions/setup-python@v5	2026-08-08T10:17:34.8956365Z (node:2222) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Post Run actions/setup-python@v5	2026-08-08T10:17:34.8957302Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Post Run actions/checkout@v4	﻿2026-08-08T10:17:34.9090540Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:34.9091466Z Post job cleanup.
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:34.9783168Z [command]/usr/bin/git version
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:34.9820058Z git version 2.54.0
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:34.9881988Z Temporarily overriding HOME='/home/runner/work/_temp/55a29c9c-adb0-40af-991f-3c29ddeed4c7' before making global git config changes
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:34.9882993Z Adding repository directory to the temporary git global config as a safe directory
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:34.9886896Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:34.9919417Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:34.9948807Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:35.0166450Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:35.0187750Z http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:35.0196266Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:35.0223438Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:35.0460923Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Post Run actions/checkout@v4	2026-08-08T10:17:35.0494596Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Complete job	﻿2026-08-08T10:17:35.0817193Z Cleaning up orphan processes
+certify	Complete job	2026-08-08T10:17:35.1060956Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
