@@ -1,0 +1,24 @@
+{
+  "certificate": {
+    "intrinsic_phase_coordinate": "zeta=(L^-1 X/2,L^T k)",
+    "overlap": "|<g_a,g_b>|=exp(-|zeta_a-zeta_b|^2/2)",
+    "separation": "delta>=4",
+    "packing_row_sum_ball": "[6.2416035624666738942695857985679198104558909601 +/- 4.01e-47]",
+    "clean_Bessel_constant": "25/4",
+    "Riesz_separation": "delta>=5",
+    "Riesz_offdiagonal_ball": "[0.058228955813729256955999890622421734488509730272 +/- 5.66e-49]",
+    "Riesz_Gram_spectrum": "[47/50,53/50]",
+    "synthesis_coefficient_budget": "sum |c_a|^2 <= (50/47)||sum c_a g_a||_2^2",
+    "status": "CERTIFIED_EQUAL_COVARIANCE_COHERENT_BESSEL_RIESZ"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_affine_invariance_residual": 6.3611510391744846e-12,
+    "worst_overlap_coordinate_residual": 8.326672684688674e-16,
+    "maximum_gram_operator_norm": 1.000094489755034,
+    "maximum_gram_row_sum": 1.0000944897550341,
+    "minimum_separation_margin": 0.3051176851925863,
+    "minimum_Riesz_eigenvalue": 0.9999991719528993,
+    "maximum_Riesz_eigenvalue": 1.0000008280471009
+  }
+}

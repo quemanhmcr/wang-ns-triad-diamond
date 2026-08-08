@@ -1,0 +1,17 @@
+{
+  "certificate": {
+    "old_pool_ratio": "9261/20480",
+    "clean_old_pool_ratio": "<1/2",
+    "frame_input": "sum packet energies <= P ||u||_2^2",
+    "relink_graph_identity": "(n-1)+beta=2m; hence fresh_units>=m or cycle_rank>=m",
+    "status": "EXACT_GIVEN_BESSEL_FRAME_BUDGET_AND_EXISTING_INCIDENCE_THEOREM"
+  },
+  "stress": {
+    "samples": 50000,
+    "maximum_generation_ratio": 0.45219726562500007,
+    "minimum_half_life_margin": 0.0,
+    "minimum_total_budget_margin": 1.8432407021020085e-08,
+    "minimum_forced_new_service_margin": 0.0,
+    "incidence_checks": 5000
+  }
+}

@@ -3407,6 +3407,149 @@ low-strain material-reuse branch.  Action `31229118774` on `6e21fe6` passed
 `270` tests (`7` optional skips) plus `50,000` checks; the maximum sampled pair
 ratio was `0.288962935`.
 
+#### Whole-old-pool erosion and forced relinking
+
+The single-reservoir half-life extends to an **entire old reservoir pool** once
+its packet family has a Bessel/frame energy budget.  Suppose at generation zero
+all old atoms satisfy `M_(a,0)<=alpha N_0` and, at every later service time,
+
+\[
+\boxed{
+\sum_aE_{a,q}\le P E_{global}.
+}
+\]
+
+No orthogonality is assumed; `P` is an explicit frame constant.  Low-strain
+material transport and signed-good progress give
+
+\[
+M_{a,q}\le(21/20)^qM_{a,0},
+\qquad
+N_q\ge(8/5)^qN_0.
+\]
+
+Since low-band increment service is `M^3E/N^2`, summing over all old atoms yields
+
+\[
+\boxed{
+\mathsf C_{old}(q)
+\le
+\alpha^3N_0P E_{global}
+\left({231525\over512000}\right)^q
+<2^{-q}\alpha^3N_0P E_{global}.
+}
+\]
+
+Hence
+
+\[
+\boxed{
+\sum_{q\ge0}\mathsf C_{old}(q)
+<2\alpha^3N_0P E_{global}.
+}
+\]
+
+The energy distribution may be changed adversarially among old atoms at every
+generation; only the total frame budget is used.  Thus a uniform positive service
+threshold eventually forces **newly relinked spectral capacity**.
+
+Once non-negligible relinking events are represented by the existing active
+quadratic triad graph, the exact incidence Euler law for a connected component
+with `m` triads, `n` packet vertices and cycle rank `beta` is
+
+\[
+\boxed{(n-1)+\beta=2m.}
+\]
+
+Therefore
+
+\[
+\boxed{n-1\ge m\quad\text{or}\quad\beta\ge m.}
+\]
+
+Relinking is fresh-rich or cycle-rich; there is no neutral third regime in the
+finite atomic model.  Action `31229543390` on `8c50370` passed `274` tests
+(`7` optional skips) plus `50,000` pool checks and `5,000` incidence checks.  Its
+status is exact given the frame budget and the existing incidence theorem.
+
+#### Affine coherent-state Riesz budget inside one covariance cell
+
+The frame-budget input above is itself theorem-level for separated coherent
+Gaussian synthesis packets in one covariance cell.  For normalized packets
+
+\[
+g_{X,k,L}(x)
+=C_L e^{-|L^{-1}(x-X)|^2/4}e^{ik\cdot x},
+\]
+
+direct Gaussian integration gives
+
+\[
+\boxed{
+|\langle g_{X,k,L},g_{Y,\ell,L}\rangle|
+=
+\exp\!\left[
+-\frac18|L^{-1}(X-Y)|^2
+-\frac12|L^T(k-\ell)|^2
+\right].
+}
+\]
+
+Define the affine-invariant coherent coordinate
+
+\[
+\boxed{
+\zeta=(L^{-1}X/2,L^Tk)\in\mathbb R^6.
+}
+\]
+
+Then the overlap is exactly `exp(-|zeta_a-zeta_b|^2/2)`.  For a `4`-separated
+family, six-dimensional packing plus Schur gives the Arb-certified Bessel bound
+
+\[
+\sum_a|\langle f,g_a\rangle|^2
+\le\frac{25}{4}\|f\|_2^2.
+\]
+
+More importantly, at separation `5`, Arb certifies
+
+\[
+\boxed{
+\sup_a\sum_{b\ne a}|G_{ab}|<\frac3{50},
+}
+\]
+
+hence
+
+\[
+\boxed{
+\frac{47}{50}I\le G\le\frac{53}{50}I.
+}
+\]
+
+Therefore **arbitrary synthesis coefficients** in this separated equal-covariance
+family obey
+
+\[
+\boxed{
+\sum_a|c_a|^2
+\le\frac{50}{47}
+\left\|\sum_ac_ag_a\right\|_2^2.
+}
+\]
+
+Thus the old-pool erosion theorem has the explicit coefficient budget
+`P=50/47` inside one 5-separated covariance cell.  Action `31229863366` on
+`84ae98c` passed `286` tests plus `50,000` affine/pair checks and `3,000` finite
+Gram probes.  Arb certified the `[47/50,53/50]` spectrum; sampled 5-separated
+Gram eigenvalues lay between `0.999999172` and `1.000000828`.
+
+This does not yet prove that an arbitrary transfer-selected decomposition can be
+reduced to such separated coherent synthesis cells with summable loss.  Close
+phase-space clusters and covariance-cell changes must be registered as
+relinking/interface structure rather than silently re-expanded with new
+coefficients.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -4177,30 +4320,29 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Synchronize reservoir relinking with the transfer-selected ancestry graph.**
-   A fixed material low-band reservoir now has a spectral half-life, a fixed
-   pressure pair has a one-third-life, and fragmentation has Bellman/cycle
-   currencies.  What remains is to show that the packet decomposition of a
-   genuine PDE block cannot repeatedly relabel newly selected low/base atoms or
-   pressure pairs without entering the existing `Xi`, fresh-radius, or
-   component-entropy ledger.
-2. **Control selected-subfamily interfaces through spacetime.**  Complete
-   partitions cancel globally, degree-zero profile remainders are work-level
-   `Xi`, and moving affine frequency cells have zero common Heisenberg forcing.
-   The selected lineage must keep the uncancelled spatial/frequency interfaces
-   summable relative to physical transfer weight when the chosen ancestry
-   subfamily changes.
+1. **Construct an iterative separated coherent reservoir realization.**  Inside
+   one equal-covariance cell, 5-separated affine Gaussian synthesis packets have
+   the explicit Riesz budget `P=50/47`, and the whole old pool then erodes
+   geometrically.  The genuine transfer-selected extraction must be reduced to
+   such coherent cells while routing close phase-space clusters, covariance-cell
+   changes and rejected coefficients into `Xi`, fresh radius or relinking.
+2. **Synchronize selected interfaces and covariance cells through spacetime.**
+   A fixed material reservoir/pair cannot service infinitely many generations,
+   and finite-atomic relinking is fresh-rich or cycle-rich.  What remains is to
+   prove that changing the selected coherent cell or ancestry component in the
+   PDE packetization carries summable physical transfer-weighted interface loss,
+   rather than simply renaming the reservoir.
 3. **Feed a uniform physical block threshold into the master episode theorem.**
-   Local curvature, H1/H3 sideband, source, SGS, pressure, aspect and reservoir
-   reuse now all have named positive currencies.  A continuum theorem must still
-   prove that every efficient PDE block either triggers one with a uniform
-   transfer-weighted threshold or enters the flat/reuse lineage, and then
-   telescope the resulting block costs without duplicate charging.
-4. **Make the transfer-adapted packet realization fully iterative.**  One-shot
-   Gaussian near-extremizer extraction, smooth-symbol freezing, defect-space
-   nested grains and the band-limited sampling estimates are individually
-   controlled.  A full iterative extraction must keep the coefficient budget,
-   source-center clustering and ancestry labels compatible across generations.
+   Local curvature, H1/H3 sideband, source, SGS, pressure, aspect, source
+   replication and old-pool reuse now all have named currencies.  A continuum
+   theorem must still prove that every efficient PDE block triggers one with a
+   uniform threshold or enters the flat/reuse lineage, then telescope the block
+   costs without duplicate charging.
+4. **Make the transfer-adapted packet coefficient budget fully iterative.**
+   One-shot Gaussian near-extremizer extraction and separated coherent Riesz
+   control are individually available, but their coefficients have not yet been
+   identified through every recursive nested-grain generation with a uniform
+   synthesis/error budget.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier--Stokes global regularity is made.
 
@@ -4314,6 +4456,8 @@ The most useful recorded runs, in chronological order, are:
 | `31228679822` | Arb-certified ancestor-reservoir synchronization on `d3f8a51`: signed-good progress `>8/5`, low-strain Kelvin growth `<21/20`, critical-mass and physical-energy service half-life, exact material covector `q=L^T k`; `268` tests + `50,000` checks |
 | `31228947363` | preferred band-limited H1 source sampling on `c4c87f6`: separated SGS/pressure `ell^(3/2)` and viscous `ell^2` source charges, resolvable cluster counting; `267` tests + `7` optional skips + `50,000` checks |
 | `31229118774` | pressure-reservoir synchronization on `6e21fe6`: one fixed low-low pressure pair has service ratio `194481/655360<1/3`; `270` tests + `7` optional skips + `50,000` checks |
+| `31229543390` | whole-old-reservoir-pool erosion on `8c50370`: under frame budget `P`, old-pool service decays `<2^-q`; uniform service forces relinking, then exact incidence Euler routes connected relinking to fresh-rich or cycle-rich; `274` tests + `7` optional skips + `50,000` pool checks + `5,000` incidence checks |
+| `31229863366` | preferred affine coherent-state Bessel/Riesz certificate on `84ae98c`: exact intrinsic overlap, 4-separated Bessel `25/4`, 5-separated Gram spectrum `[47/50,53/50]`, synthesis budget `P=50/47`; `286` tests + `50,000` affine checks + finite Gram probes |
 
 The current preferred master regression is run `31227894352` on integration
 commit `9c5f465` (`258` tests plus `20,000` episode traces, worst margin `0`).
@@ -4463,23 +4607,46 @@ replication at one generation is also band-limited: a maximal `N^-1`-separated
 source family has additive `ell^(3/2)` SGS/pressure charge or `ell^2` viscous
 charge, while sub-resolution multiplicity is merged into one source cluster.
 
-The decisive next theorem is now **reservoir relinking / selected-interface
-synchronization**.  The analytic currencies no longer allow one fixed old field
-to service infinitely many generations.  What remains is to prove that a genuine
-iterative packet extraction cannot evade this by repeatedly changing which
-low/base atom or pressure pair is called the ancestor without paying one of
+Whole-old-pool relabeling is now finite-atomic theorem-level.  Given a frame
+budget `P`, the entire material old pool has service capacity `<2^{-q}` up to its
+explicit generation-zero coefficient, so a uniform service threshold forces new
+spectral capacity after finitely many generations.  Active relinking triads then
+obey `(n-1)+beta=2m`, hence every connected relinking component is fresh-rich or
+cycle-rich.
 
-1. transfer-level cross error `Xi` at a selected interface;
+For equal-covariance coherent Gaussian pools, the required coefficient budget is
+also explicit rather than assumed.  The affine phase coordinate
+
+\[
+\zeta=(L^{-1}X/2,L^Tk)
+\]
+
+has overlap kernel `exp(-|Delta zeta|^2/2)`, and a 5-separated synthesis family
+has
+
+\[
+\boxed{47I/50\le G\le53I/50},
+\qquad
+\boxed{\sum|c_a|^2\le(50/47)\|\sum c_ag_a\|_2^2}.
+\]
+
+The decisive next theorem is therefore **iterative separated-coherent reduction
+with covariance-cell/interface synchronization**.  The program must show that a
+genuine transfer-selected PDE block can be recursively represented by such
+coherent cells, while every operation that changes the winning cell, merges a
+close phase-space cluster, or introduces new synthesis atoms pays one of
+
+1. summable transfer-level interface error `Xi`;
 2. fresh affine radius/energy;
 3. component Bellman entropy or ancestry-cycle rank;
 4. high-strain/source action; or
-5. high-frequency / viscous dissipation.
+5. high-frequency/viscous dissipation.
 
-After that, the central continuum issue is a uniform physical block threshold and
-its telescoping through the master episode theorem.  Further raw
-high-derivative residual bounds, aspect penalties, global `L^3` assumptions,
-sub-bandwidth source counting, or treating short source bursts as a free escape
-would discard structure already exposed by the filtered Navier--Stokes physics.
+After that, the remaining central issue is a uniform physical block threshold
+and its telescoping through the master episode theorem.  Arbitrary redundant
+Gaussian coefficients, raw aspect penalties, sub-bandwidth source counting, or
+free relabeling of coherent cells are not admissible substitutes for this
+iterative physical packet construction.
 
 ---
 
@@ -4495,7 +4662,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, and `docs/pressure_reservoir_sync.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, and `docs/affine_coherent_bessel.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

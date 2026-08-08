@@ -922,9 +922,53 @@ energy-capacity coefficient.
 A maximal separated source subfamily also provides the resolvable-cluster count;
 sub-bandwidth multiplicity is merged rather than charged repeatedly.
 
-The unresolved master step is now **reservoir relinking / selected-interface
-synchronization**: when iterative packet extraction changes the winning
-low/base atom, pressure pair, or ancestry component, the change must enter `Xi`,
-fresh radius, Bellman/cycle entropy, source action or dissipation with summable
-physical transfer weights.  A uniform physical block threshold and full
-iterative packet realization remain continuum tasks.
+The whole-old-pool continuation sharpens this further.  If the old reservoir
+family has a frame budget `sum E_a<=P E_global`, then its total low-band service
+obeys
+
+\[
+\boxed{
+C_{old}(q)
+\le
+\alpha^3N_0P E_{global}
+(231525/512000)^q
+<2^{-q}C_{old}(0).
+}
+\]
+
+Thus a uniform service threshold forces newly relinked spectral capacity after
+finitely many generations.  In the active finite quadratic graph, relinking
+components satisfy
+
+\[
+\boxed{(n-1)+\beta=2m},
+\]
+
+so they are fresh-rich or cycle-rich.
+
+For equal-covariance affine Gaussian synthesis packets, the frame budget itself
+is explicit.  With
+
+\[
+\zeta=(L^{-1}X/2,L^Tk),
+\qquad
+|\langle g_a,g_b\rangle|=e^{-|\zeta_a-\zeta_b|^2/2},
+\]
+
+a 5-separated family has the Arb-certified Riesz bound
+
+\[
+\boxed{
+47I/50\le G\le53I/50,
+\qquad
+\sum|c_a|^2\le(50/47)\|\sum c_ag_a\|_2^2.
+}
+\]
+
+The unresolved master step is now **iterative separated-coherent reduction with
+covariance-cell / selected-interface synchronization**.  Recursive packet
+extraction must retain this coefficient budget inside cells and charge every
+close-cluster merge, covariance-cell change or newly selected reservoir to
+`Xi`, fresh radius, Bellman/cycle structure, source action or dissipation.  A
+uniform physical block threshold and full recursive synthesis theorem remain
+continuum tasks.
