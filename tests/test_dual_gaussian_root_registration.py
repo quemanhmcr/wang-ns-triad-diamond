@@ -13,6 +13,8 @@ from src.dual_gaussian_root_registration import (
     normalized_covariance_eigenvalue_bounds,
     phase_space_color_count,
     representative_radius_ratio_lower,
+    same_color_scale_shells_are_disjoint,
+    scale_bin_shell_union,
 )
 
 
@@ -46,3 +48,10 @@ def test_frobenius_covariance_net_implies_affine_log_radius_pointwise():
     d = 0.4
     eps = frobenius_radius_for_affine_log_radius(d, m)
     assert math.isclose(affine_log_distance_upper_from_frobenius(eps, m), d)
+
+
+def test_four_scale_colors_make_outer_shell_projectors_disjoint():
+    assert same_color_scale_shells_are_disjoint()
+    lo0, hi0 = scale_bin_shell_union(0)
+    lo4, hi4 = scale_bin_shell_union(4)
+    assert hi0 < lo4

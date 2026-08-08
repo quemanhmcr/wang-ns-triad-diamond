@@ -167,13 +167,53 @@ If `u` is divergence free,
 }
 \]
 
-Thus the root quantum survives the canonical Leray-projected coherent analysis.
+If the selected parent is the range of an exact self-adjoint outer Fourier/helical projector `Q`, use `Q phi_D` as the probe.  Then `<u,Q phi_D>=<Qu,phi_D>` and `||Q phi_D||_2<=1`, so after normalization the lower coefficient cannot decrease.  Thus neither unrelated Fourier components nor pressure can cancel the registered root quantum.
 The vector family has no worse Gaussian Gram majorant because
 `|e_a^*e_b|<=1`.
 
-## 5. Covariance bins are finite on the clean branch
+## 5. Scale colors and covariance bins give a uniform global budget
 
-On
+The root scales in one depth layer need not be identical, so it would be wrong
+to apply an equal-physical-covariance Bessel theorem to all roots at once.
+Instead use the **outer role projector** which already carries the physical
+frequency shell.
+
+Put `log N` into bins of width
+
+\[
+h=2/25.
+\]
+
+A role at scale `N` is supported in the shell
+
+\[
+[e^{-2/25}N,e^{2/25}N].
+\]
+
+The union over one scale bin `b` is therefore
+
+\[
+[e^{bh-2/25},e^{(b+1)h+2/25}].
+\]
+
+Color scale-bin indices modulo `4`.  Since
+
+\[
+(4-1)h>2(2/25),
+\]
+
+distinct bins of one color have **disjoint physical frequency supports**.  Their
+exact outer Fourier/helical projectors are orthogonal.  Consequently a Bessel
+sum over all bins of one color does not acquire a factor equal to the number of
+causal scales.
+
+Inside one scale bin take the reference
+
+\[
+N_b=e^{(b+1/2)h}.
+\]
+
+Then `N/N_b in [e^{-h/2},e^{h/2}]`.  On
 
 \[
 2/3<Nr_g\le4,
@@ -181,79 +221,82 @@ On
 \operatorname{cond}L\le567/500,
 \]
 
-the eigenvalues of the normalized physical covariance `N^2 Sigma` lie in the
-fixed interval
+the eigenvalues of the **bin-rescaled** physical covariance `N_b^2 Sigma` lie in
+one fixed interval
 
 \[
-4/9
+e^{-h}\frac49
 <\lambda
 \le
-(567/500)^{4/3}16.
+e^h(567/500)^{4/3}16.
 \]
 
-Thus the normalized SPD matrices lie in a fixed compact subset of the six-dimensional Euclidean space `Sym(3)`.  To control the **affine-invariant** log-SPD metric rather than a commuting log-Euclidean surrogate, let `m=4/9` be the eigenvalue lower bound.  If
+Thus these matrices lie in a fixed compact subset of six-dimensional `Sym(3)`.
+To control the affine-invariant log-SPD metric, let `m` be the lower eigenvalue
+bound.  If
 
 \[
 \|A-B\|_F\le\epsilon<m,
 \]
 
-then for `E=A^{-1/2}(B-A)A^{-1/2}`,
+then
 
 \[
-\|E\|_F\le\epsilon/m,
-\qquad
-\|\log(I+E)\|_F
-\le\frac{\epsilon/m}{1-\epsilon/m}.
+\|\log(A^{-1/2}BA^{-1/2})\|_F
+\le
+\frac{\epsilon/m}{1-\epsilon/m}.
 \]
 
-Therefore choosing
+Choosing
 
 \[
 \epsilon=\frac{m\delta}{1+\delta}
 \]
 
-guarantees affine-invariant log distance at most `delta`.  A volumetric Frobenius net at this `epsilon` has a finite, scale-independent number of bins.  The numerical cover is intentionally crude; only finiteness independent of `N` and causal depth matters.
+therefore gives affine-log radius at most `delta`.  A volumetric Frobenius net at
+`delta=0.4` has a finite, scale-independent number of covariance representatives.
 
-Within one covariance bin every root uses the same representative dual covariance.
+## 6. Phase-space coloring and Bessel
 
-## 6. Canonical phase-space coloring gives an analysis Bessel budget
-
-For each fixed covariance representative, use the intrinsic phase coordinate of the **dual probe family** and take unit cells in that coordinate.  Color their integer addresses by residues modulo `5` in each coordinate.  There are
+For each fixed scale bin and covariance representative, use the intrinsic phase
+coordinate of the **dual probe family** and take unit cells.  Color their integer
+addresses modulo `5` in each coordinate.  There are
 
 \[
 5^6
 \]
 
-colors, and two distinct cells of one color are at least `4` apart even after
-choosing arbitrary points inside the cells.
+colors, and one color is `4`-separated.
 
-For each fixed covariance bin and color, the exact affine coherent theorem gives
+Within one scale bin/covariance/color the exact affine coherent theorem gives
 
 \[
-\boxed{
-\sum_a|\langle u,g_a
-angle|^2
-\le\frac{25}{4}\|u\|_2^2.
-}
+\sum_a|\langle v,g_a\rangle|^2
+\le\frac{25}{4}\|v\|_2^2.
 \]
 
-Therefore all registered root probes together have one finite effective analysis
-budget
+Apply this with `v=Q_bu`, where `Q_b` is the exact outer role projector for the
+scale bin (and helicity sector, if one is used).  Across scale bins of one color,
+the `Q_b` ranges are orthogonal.  Summing first over those bins and then over the
+four scale colors gives one **depth-independent** effective analysis budget
 
 \[
 P_{eff}
 \le
-(\#\text{covariance bins})\,5^6\,\frac{25}{4}.
+4\,(\#\text{covariance bins})\,5^6\,\frac{25}{4}.
 \]
 
-The constant is large but scale independent.  In the causal theorem it appears
-only inside
+The probe may carry a fixed unit polarization depending on the selected frozen
+scalar/helical role; this does not worsen the scalar Gaussian Gram majorant.
+
+The constant is huge but scale independent.  In the causal root estimate it
+appears only inside
 
 \[
 \log(P_{eff}E_{global}N_{base}/\eta),
 \]
 
-so it changes the finite depth offset but not the positive linear reuse slope.
+so it changes the finite depth offset, not the positive linear reuse slope.
 
 ## 7. Why this is not Gaussian synthesis
 
