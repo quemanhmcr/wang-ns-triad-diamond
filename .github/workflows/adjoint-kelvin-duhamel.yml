@@ -1,0 +1,19 @@
+name: Adjoint Kelvin Duhamel
+on:
+  workflow_dispatch:
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.adjoint_kelvin_duhamel --samples 50000 --outdir results-adjoint-kelvin-duhamel
+      - run: cat results-adjoint-kelvin-duhamel/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: adjoint-kelvin-duhamel-results
+          path: results-adjoint-kelvin-duhamel/
