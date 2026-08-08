@@ -1,0 +1,19 @@
+name: Affine coherent Moyal ledger
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - run: python -m src.affine_coherent_moyal --samples 5000 --outdir results-affine-coherent-moyal
+      - run: cat results-affine-coherent-moyal/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: affine-coherent-moyal-results
+          path: results-affine-coherent-moyal/
