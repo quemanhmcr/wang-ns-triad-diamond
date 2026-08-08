@@ -1,0 +1,25 @@
+name: Divergence-free coherent Parseval
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/divfree_coherent_parseval.py'
+      - 'tests/test_divfree_coherent_parseval.py'
+      - 'docs/divfree_coherent_parseval.md'
+      - '.github/workflows/divfree-coherent-parseval.yml'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - run: python -m src.divfree_coherent_parseval --samples 20000 --outdir results-divfree-coherent-parseval
+      - run: cat results-divfree-coherent-parseval/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: divfree-coherent-parseval-results
+          path: results-divfree-coherent-parseval/
