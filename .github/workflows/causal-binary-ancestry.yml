@@ -1,0 +1,19 @@
+name: Causal binary ancestry
+on:
+  workflow_dispatch:
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.causal_binary_ancestry --samples 50000 --outdir results-causal-binary-ancestry
+      - run: cat results-causal-binary-ancestry/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: causal-binary-ancestry-results
+          path: results-causal-binary-ancestry/
