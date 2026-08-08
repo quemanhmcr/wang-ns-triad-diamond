@@ -7,7 +7,7 @@ from src.adjoint_kelvin_duhamel import (
 
 
 def test_adjoint_pairing_cancels_any_linear_generator():
-    G=np.array([[1.,2.],[-3.,.5]],complex); c=np.array([1+2j,-.5j]); psi=np.array([.3-.1j,2+j]); F=np.array([.2j,-1.])
+    G=np.array([[1.,2.],[-3.,.5]],complex); c=np.array([1+2j,-.5j]); psi=np.array([.3-.1j,2+1j]); F=np.array([.2j,-1.])
     assert abs(adjoint_pairing_derivative_residual(G,c,psi,F))<1e-13
 
 
