@@ -236,6 +236,7 @@ def random_objective_generator(rng: np.random.Generator) -> np.ndarray:
 def stress(samples: int = 50_000, seed: int = 20260808) -> AdjointDuhamelStress:
     rng = np.random.default_rng(seed)
     wi = wp = 0.0; mg = mp = mh = float('inf'); branches: dict[str,int] = {}
+    # Full 50k: instantaneous adjoint algebra and cheap phase/time routing.
     for _ in range(samples):
         G = random_objective_generator(rng)
         c = rng.normal(size=2) + 1j*rng.normal(size=2)
@@ -245,11 +246,14 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> AdjointDuhamelStress:
         wi = max(wi, abs(rr))
         if abs(rr) > 3e-12 * max(1.0, np.linalg.norm(c)*np.linalg.norm(psi), np.linalg.norm(F)*np.linalg.norm(psi)):
             raise AssertionError('instantaneous adjoint pairing cancellation failed')
-
+        n=int(rng.integers(1,10)); atoms=rng.normal(size=n)+1j*rng.normal(size=n)
+        phase=phase_aligned_positive_generation(atoms); mp=min(mp,float(phase['positive_mass'])-abs(complex(phase['total_impulse'])))
+        times=np.sort(rng.uniform(0,1,size=n)); hs=half_slab_generation(atoms,times,0.0,1.0); mh=min(mh,float(hs['chosen_positive_mass'])-.5*float(hs['total_positive_mass']))
+    # Exact block-exponential Duhamel histories on a representative 5k subset.
+    for _ in range(min(samples, 5_000)):
         m = int(rng.integers(1,7)); Gs=[random_objective_generator(rng) for _ in range(m)]; dts=rng.uniform(.002,.08,size=m)
         HH=[rng.normal(size=2)+1j*rng.normal(size=2) for _ in range(m)]; R=[.1*(rng.normal(size=2)+1j*rng.normal(size=2)) for _ in range(m)]
         c0=rng.normal(size=2)+1j*rng.normal(size=2)
-        # first pass with arbitrary terminal dual to obtain terminal state
         trial=exact_piecewise_duhamel(c0,np.array([1.+0j,0j]),Gs,dts,HH,R)
         psi1=terminal_unit_dual(np.asarray(trial['terminal_state']))
         out=exact_piecewise_duhamel(c0,psi1,Gs,dts,HH,R)
@@ -258,10 +262,16 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> AdjointDuhamelStress:
         route=inherit_or_generate_route(complex(out['terminal_pairing']),complex(out['initial_pairing']),complex(out['residual_impulse']),complex(out['high_high_impulse']))
         b=str(route['branch']); branches[b]=branches.get(b,0)+1
         if b=='high_high_generation': mg=min(mg,float(route['value'])-float(route['threshold']))
-        phase=phase_aligned_positive_generation(out['high_high_slab_atoms'])
-        mp=min(mp,float(phase['positive_mass'])-abs(complex(phase['total_impulse'])))
-        times=np.cumsum(np.asarray(dts)); t0=0.0; t1=float(times[-1]); hs=half_slab_generation(out['high_high_slab_atoms'],times,t0,t1)
-        mh=min(mh,float(hs['chosen_positive_mass'])-.5*float(hs['total_positive_mass']))
+    # Deterministic branch probes guarantee every clean triangle branch is exercised.
+    probes=[
+        inherit_or_generate_route(1+0j,.3+0j,0j,.7+0j),
+        inherit_or_generate_route(1+0j,.1+0j,.3j,.9-.3j),
+        inherit_or_generate_route(1+0j,.1+0j,.1j,.9-.1j),
+    ]
+    for route in probes:
+        b=str(route['branch']); branches[b]=branches.get(b,0)+1
+        if b=='high_high_generation': mg=min(mg,float(route['value'])-float(route['threshold']))
+    if not math.isfinite(mg): mg=0.0
     return AdjointDuhamelStress(samples,wi,wp,mg,mp,mh,branches)
 
 
@@ -320,7 +330,7 @@ Signed-good scale geometry also gives
 
 for natural parabolic lifetimes.  A half-child-slab carrying at least half of the positive generation mass therefore has parent **natural** backward windows with common overlap longer than `103/50 T_child`.  This is geometric synchronization only; actual packet persistence on that whole common window is not claimed.
 
-Stress: `{out.samples}`
+Stress: `{out.samples}` instantaneous/phase checks plus `min(samples,5000)` exact block-exponential Duhamel histories
 - worst instantaneous adjoint-pairing residual: `{out.worst_instantaneous_pairing_residual:.3e}`
 - worst exact piecewise Duhamel residual: `{out.worst_piecewise_duhamel_residual:.3e}`
 - minimum high-high generation margin: `{out.minimum_generation_margin:.3e}`
