@@ -6,7 +6,8 @@ from src.dual_gaussian_root_registration import (
     affine_log_distance_upper_from_frobenius,
     covariance_cover_number_upper,
     dual_gaussian_pairing_lower,
-    dual_probe_critical_mass_lower,
+    actual_dual_probe_critical_mass_lower,
+    normalized_dual_probe_critical_mass_lower,
     dual_probe_l2_norm_sq,
     effective_root_frame_budget,
     frobenius_radius_for_affine_log_radius,
@@ -23,7 +24,7 @@ def test_exact_dual_pairing_is_one_without_covariance_quantization():
 
 
 def test_default_quantized_dual_probe_beats_clean_one_fifth_root_mass():
-    eta = dual_probe_critical_mass_lower(0.01, 0.4)
+    eta = normalized_dual_probe_critical_mass_lower(0.01, 0.4)
     assert eta > 0.2
 
 
@@ -55,3 +56,9 @@ def test_four_scale_colors_make_outer_shell_projectors_disjoint():
     lo0, hi0 = scale_bin_shell_union(0)
     lo4, hi4 = scale_bin_shell_union(4)
     assert hi0 < lo4
+
+
+def test_physical_dual_quantum_scales_quadratically_with_parent_amplitude():
+    eta = normalized_dual_probe_critical_mass_lower()
+    assert math.isclose(actual_dual_probe_critical_mass_lower(3.0), 9.0 * eta)
+    assert actual_dual_probe_critical_mass_lower(0.0) == 0.0

@@ -11,7 +11,8 @@ import numpy as np
 from src.dual_gaussian_root_registration import (
     SCALE_COLORS,
     covariance_cover_number_upper,
-    dual_probe_critical_mass_lower,
+    actual_dual_probe_critical_mass_lower,
+    normalized_dual_probe_critical_mass_lower,
     same_color_scale_shells_are_disjoint,
 )
 
@@ -74,8 +75,22 @@ def canonical_cell_critical_mass_lower(
     return frac * eta / cells
 
 
+def normalized_canonical_cell_quantum() -> float:
+    """Canonical-cell quantum for a unit-L^(3/2) normalized parent role."""
+    return canonical_cell_critical_mass_lower(normalized_dual_probe_critical_mass_lower())
+
+
+def actual_canonical_cell_quantum(role_l32_norm: float) -> float:
+    """Physical N E_C quantum after restoring parent L^(3/2) amplitude."""
+    a = float(role_l32_norm)
+    if a < 0 or not math.isfinite(a):
+        raise ValueError("finite nonnegative physical role norm required")
+    return a * a * normalized_canonical_cell_quantum()
+
+
 def default_canonical_cell_quantum() -> float:
-    return canonical_cell_critical_mass_lower(dual_probe_critical_mass_lower())
+    """Deprecated unit-normalized alias; not an absolute physical quantum."""
+    return normalized_canonical_cell_quantum()
 
 
 def canonical_cell_frame_budget() -> int:
@@ -96,14 +111,12 @@ def canonical_cell_frame_budget() -> int:
 def registered_material_root_count_upper(
     global_energy: float,
     root_scale_upper: float,
-    cell_quantum: float | None = None,
+    minimum_role_l32_norm: float,
 ) -> float:
-    """Bound distinct canonical energy-anchor root cells on a common root slice."""
-    if global_energy < 0 or root_scale_upper <= 0:
-        raise ValueError("valid energy/root scale required")
-    eta = default_canonical_cell_quantum() if cell_quantum is None else float(cell_quantum)
-    if eta <= 0:
-        raise ValueError("positive cell quantum required")
+    """Bound distinct energetic root cells after an explicit amplitude floor."""
+    if global_energy < 0 or root_scale_upper <= 0 or minimum_role_l32_norm <= 0:
+        raise ValueError("valid energy/root scale and positive role-amplitude lower required")
+    eta = actual_canonical_cell_quantum(minimum_role_l32_norm)
     return canonical_cell_frame_budget() * global_energy * root_scale_upper / eta
 
 
@@ -111,13 +124,15 @@ def renyi_reuse_action_lower_from_material_cells(
     depth: int,
     global_energy: float,
     base_scale: float,
-    cell_quantum: float | None = None,
+    minimum_role_l32_norm: float,
 ) -> float:
-    """Existing binary root action after replacing packet roots by energetic cells."""
-    if depth < 0 or global_energy <= 0 or base_scale <= 0:
-        raise ValueError("valid depth/energy/base scale required")
+    """Binary root action conditional on a physical parent-amplitude floor."""
+    if depth < 0 or global_energy <= 0 or base_scale <= 0 or minimum_role_l32_norm <= 0:
+        raise ValueError("valid depth/energy/base scale/amplitude floor required")
     root_scale_upper = base_scale * (25.0 / 24.0) ** depth
-    n0 = registered_material_root_count_upper(global_energy, root_scale_upper, cell_quantum)
+    n0 = registered_material_root_count_upper(
+        global_energy, root_scale_upper, minimum_role_l32_norm
+    )
     return depth * math.log(2.0) - math.log(max(n0, 1.0))
 
 
@@ -172,7 +187,7 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> BargmannRootCellStres
     wp = 0.0
     Ropt = optimal_bargmann_radius()
     fopt = optimal_bargmann_fraction()
-    eta = default_canonical_cell_quantum()
+    eta = normalized_canonical_cell_quantum()
     if eta <= 0:
         raise AssertionError("canonical coherent cell quantum is not positive")
     for _ in range(samples):
@@ -209,7 +224,7 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> BargmannRootCellStres
 
 
 def theorem_certificate() -> dict[str, object]:
-    eta_probe = dual_probe_critical_mass_lower()
+    eta_probe = normalized_dual_probe_critical_mass_lower()
     R = optimal_bargmann_radius()
     frac = optimal_bargmann_fraction()
     cells = unit_grid_cells_intersecting_ball_upper(R)
@@ -218,13 +233,14 @@ def theorem_certificate() -> dict[str, object]:
     return {
         "status": "EXACT_BARGMANN_LOCAL_MOYAL_ROOT_CELL_QUANTUM__SELECTED_OUTER_ROLE_PARTITION_ASSUMED",
         "local_submean": f"E(B_R)>=exp(-R^2)R^6/3! |<f,g_z0>|^2; optimum R=sqrt3 gives fraction {frac:.12g}",
-        "canonical_cell": f"B_sqrt3 intersects at most {cells} unit six-dimensional material cells, so one carries N E_C>={eta_cell:.12g}",
+        "normalized_canonical_cell": f"for a unit-L^(3/2) parent, B_sqrt3 intersects at most {cells} unit six-dimensional material cells, so one carries N E_C>={eta_cell:.12g}",
+        "physical_scaling": "for an actual parent role the cell quantum is eta_cell_norm * ||f||_(3/2)^2; no absolute root mass follows from shape alone",
         "parent_label": "choose the maximum-energy canonical cell near the complex Gaussian mark; exact ties use a fixed lexicographic rule",
         "causal_pushforward": "positive parent-slot weights may be pushed to these energy anchors without changing total physical causal mass; collisions only increase reuse",
         "energy_budget": f"Moyal P=1 inside each exact outer role/covariance frame; 4 scale colors times finite covariance bins give uniform cell budget {budget}",
         "no_work_alignment_needed": "the anchor labels physical parent identity through actual energy; it is not asserted that nonlinear work is spatially localized in the same cell",
         "important_scope": "the outer frozen Fourier/helical roles must form the exact disjoint/orthogonal selected partition used in the global energy budget",
-        "continuum_status": "with the companion complex-Young and dual-probe theorems, remaining assembly is to make this parent energy-anchor map on every recursive selected physical event and use it consistently as the canonical material label",
+        "continuum_status": "the energy-anchor map is exact after parent amplitude is specified; remaining assembly must derive amplitude granularity from generated physical work/old-reservoir service and then use the anchor consistently as the canonical material label",
     }
 
 
@@ -239,7 +255,7 @@ def main() -> None:
     (args.outdir / "bargmann_root_cell_registration.json").write_text(
         json.dumps({"certificate": cert, "stress": asdict(out)}, indent=2), encoding="utf-8"
     )
-    md = f"""# Bargmann root-cell registration: a large Gaussian coefficient forces actual Moyal cell energy\n\nStatus: **{cert['status']}**.\n\nThe remaining registration does not require the nonlinear work atom to sit in the same coherent cell as the Christ mark.  A causal parent needs a physical **identity anchor** with a global energy budget.  The Gaussian coherent transform supplies one.\n\nFor normalized coherent states with overlap `|<g_z,g_w>|=exp(-|z-w|^2/2)`, Weyl translation to a mark `z0` writes the coefficient function as\n\n`c(z)=exp(-|z|^2/2) F(z)`,\n\nwhere `F` is Bargmann holomorphic on `C^3`.  Mean-value/subharmonicity gives for every `R`\n\n`E(B_R(z0)) >= exp(-R^2) R^6/3! |c(z0)|^2`.\n\nThe optimum is `R=sqrt(3)`, with fraction\n\n`9/(2e^3) = {optimal_bargmann_fraction():.12g}`.\n\nThe radius-`sqrt3` ball intersects at most `{out.canonical_ball_cells}` unit cells of the fixed six-dimensional intrinsic grid.  Therefore one actual canonical coherent cell has\n\n`N E_C >= {out.minimum_cell_quantum:.12g}`\n\nwhen the dual-Gaussian parent coefficient uses the default one-percent/`delta=0.4` quantum.  The number is small but **strictly scale independent**; causal reuse only needs a fixed positive root quantum.\n\nChoose the maximum-Moyal-energy canonical cell in that finite neighborhood, with deterministic tie breaking, and call it the parent energy anchor.  Push the positive physical parent-slot law to these anchors.  Total positive transfer mass is unchanged.  If several slots choose the same anchor they are physically merged/reused; if they choose distinct anchors, each distinct root has a positive Moyal energy quantum.\n\nThere is no need to claim that the nonlinear work itself is localized in the anchor cell.  Work weights come from the exact physical child-transfer measure; the anchor answers a different physical question: **which material coherent reservoir carries this parent role?**\n\nThe global root budget is also depth independent.  Inside one exact outer frequency/helicity subrole and one covariance representative, Moyal cell energies sum with `P=1`.  The selected relative frequency roles within a scale bin are disjoint; same-color logarithmic scale bins are orthogonal; only four scale colors and the finite covariance representatives multiply the energy budget.  Thus the effective cell budget is `{out.cell_frame_budget}` with no packet-count or causal-depth factor.\n\nStress: `{out.samples}` radius/pushforward/anchor states\n- minimum optimal-radius margin: `{out.minimum_optimality_margin:.3e}`\n- canonical root-cell critical mass: `{out.minimum_cell_quantum:.12g}`\n- worst positive pushforward mass residual: `{out.worst_pushforward_mass_residual:.3e}`\n\nCombined with complex Young parent marking and dual-Gaussian analysis, this replaces the old transfer-cell-alignment demand by a simpler physical registration: each selected parent role carries its own nearby energetic material cell, and the causal law is pushed to that cell.  The remaining continuum step is to verify that the recursive physical selector really is an exact disjoint/orthogonal outer role partition and to install this energy-anchor rule as the one canonical material label used by Duhamel/Renyi/Hodge/service bookkeeping.  No global-regularity claim is made.\n"""
+    md = f"""# Bargmann root-cell registration: a large Gaussian coefficient forces actual Moyal cell energy\n\nStatus: **{cert['status']}**.\n\nThe remaining registration does not require the nonlinear work atom to sit in the same coherent cell as the Christ mark.  A causal parent needs a physical **identity anchor** with a global energy budget.  The Gaussian coherent transform supplies one.\n\nFor normalized coherent states with overlap `|<g_z,g_w>|=exp(-|z-w|^2/2)`, Weyl translation to a mark `z0` writes the coefficient function as\n\n`c(z)=exp(-|z|^2/2) F(z)`,\n\nwhere `F` is Bargmann holomorphic on `C^3`.  Mean-value/subharmonicity gives for every `R`\n\n`E(B_R(z0)) >= exp(-R^2) R^6/3! |c(z0)|^2`.\n\nThe optimum is `R=sqrt(3)`, with fraction\n\n`9/(2e^3) = {optimal_bargmann_fraction():.12g}`.\n\nThe radius-`sqrt3` ball intersects at most `{out.canonical_ball_cells}` unit cells of the fixed six-dimensional intrinsic grid.  Therefore one actual canonical coherent cell has\n\n`N E_C >= {out.minimum_cell_quantum:.12g}`\n\nwhen the dual-Gaussian parent coefficient uses the default one-percent/`delta=0.4` quantum.  The number is small and scale independent, but it is **not an absolute physical root quantum**.  For an actual parent `f=a f_hat`, it becomes `a^2` times this number.  Hence causal reuse needs either a separate lower bound on parent amplitude or the amplitude-imbalance/service routing developed next.\n\nChoose the maximum-Moyal-energy canonical cell in that finite neighborhood, with deterministic tie breaking, and call it the parent energy anchor.  Push the positive physical parent-slot law to these anchors.  Total positive transfer mass is unchanged.  If several slots choose the same anchor they are physically merged/reused; if they choose distinct anchors, each distinct root has a positive Moyal energy quantum proportional to that parent's squared `L^(3/2)` amplitude.\n\nThere is no need to claim that the nonlinear work itself is localized in the anchor cell.  Work weights come from the exact physical child-transfer measure; the anchor answers a different physical question: **which material coherent reservoir carries this parent role?**\n\nThe global root budget is also depth independent.  Inside one exact outer frequency/helicity subrole and one covariance representative, Moyal cell energies sum with `P=1`.  The selected relative frequency roles within a scale bin are disjoint; same-color logarithmic scale bins are orthogonal; only four scale colors and the finite covariance representatives multiply the energy budget.  Thus the effective cell budget is `{out.cell_frame_budget}` with no packet-count or causal-depth factor.\n\nStress: `{out.samples}` radius/pushforward/anchor states\n- minimum optimal-radius margin: `{out.minimum_optimality_margin:.3e}`\n- canonical root-cell critical mass: `{out.minimum_cell_quantum:.12g}`\n- worst positive pushforward mass residual: `{out.worst_pushforward_mass_residual:.3e}`\n\nCombined with complex Young parent marking and dual-Gaussian analysis, this replaces the old transfer-cell-alignment demand by a simpler physical registration: each selected parent role carries its own nearby energetic material cell, and the causal law is pushed to that cell.  The remaining continuum step has an amplitude component that cannot be skipped: derive a physical lower/weighted alternative for parent `L^(3/2)` amplitudes from the generated HH work and old-reservoir service ledger.  After that, verify the exact outer-role partition and install this energy-anchor rule as the canonical material label.  No global-regularity claim is made.\n"""
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
 

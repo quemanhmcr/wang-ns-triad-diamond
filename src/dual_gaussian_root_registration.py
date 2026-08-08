@@ -55,6 +55,36 @@ def dual_probe_l2_norm_sq(profile_radius_rep: float) -> float:
     return 3.0 * math.sqrt(math.pi) / (2.0 * profile_radius_rep)
 
 
+def actual_dual_probe_critical_mass_lower(
+    role_l32_norm: float,
+    profile_error: float = DEFAULT_PROFILE_ERROR,
+    log_cov_radius: float = DEFAULT_LOG_COV_RADIUS,
+    scale_radius_lower: float = SHELL_LOWER_AXIS,
+) -> float:
+    """Actual N|<f,phi>|^2 lower for an unnormalized physical role.
+
+    Young efficiency is homogeneous.  Writing f=a f_hat with
+    ||f_hat||_(3/2)=1, the normalized dual-probe theorem gives eta_hat,
+    while the physical coefficient is multiplied by a.  Hence the physical
+    critical mass is eta_hat * ||f||_(3/2)^2.
+    """
+    a = float(role_l32_norm)
+    if a < 0 or not math.isfinite(a):
+        raise ValueError("finite nonnegative physical L3/2 role norm required")
+    return a * a * normalized_dual_probe_critical_mass_lower(
+        profile_error, log_cov_radius, scale_radius_lower
+    )
+
+
+def dual_probe_critical_mass_lower(*args, **kwargs) -> float:
+    """Deprecated explicit-normalization alias.
+
+    This returns the unit-L^(3/2) normalized quantum only.  Physical code must
+    call actual_dual_probe_critical_mass_lower(role_l32_norm,...).
+    """
+    return normalized_dual_probe_critical_mass_lower(*args, **kwargs)
+
+
 def representative_radius_ratio_lower(log_cov_radius: float) -> float:
     """If d_log(Sigma_rep,Sigma)<=delta in 3D, r_rep/r >=e^(-sqrt3 delta/6)."""
     if log_cov_radius < 0:
@@ -62,7 +92,7 @@ def representative_radius_ratio_lower(log_cov_radius: float) -> float:
     return math.exp(-math.sqrt(3.0) * log_cov_radius / 6.0)
 
 
-def dual_probe_critical_mass_lower(
+def normalized_dual_probe_critical_mass_lower(
     profile_error: float = DEFAULT_PROFILE_ERROR,
     log_cov_radius: float = DEFAULT_LOG_COV_RADIUS,
     scale_radius_lower: float = SHELL_LOWER_AXIS,
@@ -217,17 +247,23 @@ def effective_root_frame_budget(
 def registered_root_count_upper(
     global_energy: float,
     root_scale_upper: float,
+    minimum_role_l32_norm: float,
     profile_error: float = DEFAULT_PROFILE_ERROR,
     log_cov_radius: float = DEFAULT_LOG_COV_RADIUS,
     radius_cap: float = DEFAULT_RADIUS_CAP,
     aspect_cap: float = EXTENDED_ASPECT,
 ) -> float:
-    """Count distinct registered root cells using only actual analysis coefficients."""
-    if global_energy < 0 or root_scale_upper <= 0:
-        raise ValueError("valid global energy/root scale required")
-    eta = dual_probe_critical_mass_lower(profile_error, log_cov_radius)
+    """Count registered roots only after a physical amplitude lower is supplied.
+
+    No absolute root count follows from normalized Young shape alone.
+    """
+    if global_energy < 0 or root_scale_upper <= 0 or minimum_role_l32_norm <= 0:
+        raise ValueError("valid energy/root scale and positive physical role norm lower required")
+    eta = actual_dual_probe_critical_mass_lower(
+        minimum_role_l32_norm, profile_error, log_cov_radius
+    )
     if eta <= 0:
-        raise ValueError("dual-probe mass lower is not positive")
+        raise ValueError("actual dual-probe mass lower is not positive")
     P = effective_root_frame_budget(log_cov_radius, radius_cap, aspect_cap)
     return P * global_energy * root_scale_upper / eta
 
@@ -236,22 +272,19 @@ def renyi_action_lower_with_registered_roots(
     depth: int,
     global_energy: float,
     base_scale: float,
+    minimum_role_l32_norm: float,
     profile_error: float = DEFAULT_PROFILE_ERROR,
     log_cov_radius: float = DEFAULT_LOG_COV_RADIUS,
     radius_cap: float = DEFAULT_RADIUS_CAP,
     aspect_cap: float = EXTENDED_ASPECT,
 ) -> float:
-    """Existing binary/Renyi root action with the dual-probe root budget inserted."""
-    if depth < 0 or global_energy <= 0 or base_scale <= 0:
-        raise ValueError("valid depth/energy/base scale required")
+    """Existing root action with an explicit physical parent-amplitude floor."""
+    if depth < 0 or global_energy <= 0 or base_scale <= 0 or minimum_role_l32_norm <= 0:
+        raise ValueError("valid depth/energy/base scale/amplitude floor required")
     root_scale_upper = base_scale * (25.0 / 24.0) ** depth
     n0 = registered_root_count_upper(
-        global_energy,
-        root_scale_upper,
-        profile_error,
-        log_cov_radius,
-        radius_cap,
-        aspect_cap,
+        global_energy, root_scale_upper, minimum_role_l32_norm,
+        profile_error, log_cov_radius, radius_cap, aspect_cap,
     )
     return depth * math.log(2.0) - math.log(max(n0, 1.0))
 
@@ -283,7 +316,7 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> DualGaussianRootStres
     wp = 0.0
     d = DEFAULT_LOG_COV_RADIUS
     lower = dual_gaussian_pairing_lower(d)
-    eta = dual_probe_critical_mass_lower()
+    eta = normalized_dual_probe_critical_mass_lower()
     if eta <= 0.2:
         raise AssertionError("default dual-probe root mass does not beat 1/5")
     for _ in range(samples):
@@ -297,7 +330,7 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> DualGaussianRootStres
 
         eps = float(rng.uniform(0.0, DEFAULT_PROFILE_ERROR))
         dd = float(rng.uniform(0.0, DEFAULT_LOG_COV_RADIUS))
-        mass = dual_probe_critical_mass_lower(eps, dd)
+        mass = normalized_dual_probe_critical_mass_lower(eps, dd)
         # The default endpoint is the weakest over the sampled rectangle.
         mm = min(mm, mass - eta)
         if mass + 2e-14 < eta:
@@ -346,20 +379,21 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> DualGaussianRootStres
 
 
 def theorem_certificate() -> dict[str, object]:
-    eta = dual_probe_critical_mass_lower()
+    eta = normalized_dual_probe_critical_mass_lower()
     bins = covariance_cover_number_upper()
     P = effective_root_frame_budget()
     return {
         "status": "EXACT_DUAL_GAUSSIAN_ANALYSIS_ROOT_QUANTUM__TRANSFER_CELL_ALIGNMENT_REMAINS",
         "duality": "||f-G||_(3/2)<=eps and L3-normalized Gaussian dual h imply |<f,h>|>=<G,h>-eps",
         "covariance_pairing": f"d_log<=0.4 gives Gaussian primal-dual pairing >={dual_gaussian_pairing_lower(0.4):.12g}",
-        "root_quantum": f"with eps=1/100 and N r_g>2/3, quantized dual probe gives N|<f,phi>|^2>={eta:.12g}>1/5",
+        "normalized_root_quantum": f"for ||f||_(3/2)=1, eps=1/100 and N r_g>2/3, quantized dual probe gives N|<f,phi>|^2>={eta:.12g}>1/5",
+        "physical_scaling": "for an actual role, the lower bound is eta_norm * ||f||_(3/2)^2; shape near-extremality alone gives no absolute energy quantum",
         "leray": "for divergence-free u, replacing a vector Gaussian probe by its Leray projection preserves the coefficient exactly",
         "covariance_cover": f"inside one log-scale bin, transition-aspect 2/3<Nr_g<=4 covariances rescaled by the bin reference need at most {bins} affine-log-SPD bins of radius 0.4",
         "scale_coloring": "log-scale bins of width 2/25 split into 4 colors; same-color outer shell projectors are frequency-disjoint and hence orthogonal",
         "phase_space_coloring": "within each scale/covariance representative, unit cells in that dual-probe phase coordinate split into 5^6 colors; one color is 4-separated for the Bessel budget only",
         "bessel": f"within one scale bin/covariance/color the equal-covariance analysis budget is 25/4; orthogonality across same-color scale bins makes the total uniform P_eff={P:.12g}",
-        "causal_effect": "the huge P_eff changes only the finite logarithmic root offset; the L log(48/25) reuse slope is unchanged",
+        "causal_effect": "P_eff changes only the finite logarithmic root offset **once a physical role-amplitude floor is separately supplied**; no amplitude floor follows from Young shape alone",
         "important_scope": "this is an actual analysis coefficient of the selected orthogonal Fourier/helical role; project the dual probe by the same outer role projector so no other field component can cancel it. It is not a synthesis coefficient or an L2-closeness claim",
         "continuum_status": "remaining registration is transfer-cell/material-label alignment: associate the complex Gaussian parent mark with the actual transfer-selected causal root cell or route misaligned work to existing physical currencies",
     }
@@ -376,8 +410,8 @@ def main() -> None:
     (args.outdir / "dual_gaussian_root_registration.json").write_text(
         json.dumps({"certificate": cert, "stress": asdict(out)}, indent=2), encoding="utf-8"
     )
-    eta = dual_probe_critical_mass_lower()
-    md = f"""# Dual-Gaussian root registration: Christ proximity gives actual analysis energy\n\nStatus: **{cert['status']}**.\n\nA phase-aligned complex Gaussian near-profile should not be inserted into the velocity as a fictitious synthesis component.  Use it only to design a dual Gaussian **analysis probe**.  Christ supplies the magnitude Gaussian; the present theorem is conditional on the separate phase/polarization control being strong enough to lift that mark to complex `L^(3/2)` proximity.\n\nLet `||f||_(3/2)=||G||_(3/2)=1`, `||f-G||_(3/2)<=eps`.  The exact L3-dual Gaussian is `h_G=|G|^(-1/2)G`, with `||h_G||_3=1` and `<G,h_G>=1`.  Quantize the profile covariance to a representative within log-SPD radius `delta`, and use the corresponding L3-normalized dual `h_rep`.  If `delta<=0.4`, exact Gaussian integration gives\n\n`<G,h_rep> >= {dual_gaussian_pairing_lower(0.4):.12g}`.\n\nTherefore `|<f,h_rep>| >= <G,h_rep>-eps`.  After L2-normalizing `phi=h_rep/||h_rep||_2`,\n\n`||h_rep||_2^2 = 3 sqrt(pi)/(2 r_g,rep)`.\n\nThe shell lower axis and covariance quantization give the scale-independent actual coefficient bound\n\n`N |<f,phi>|^2 >= {eta:.12g}`\n\nat `eps=1/100`, `delta=0.4`.  In particular it is **strictly larger than 1/5**, the clean critical root quantum used by the causal/Renyi modules.\n\nThis is a coefficient of the actual selected role.  If that role is obtained by an exact self-adjoint outer Fourier/helical projector `Q`, use the probe `Q phi`; then `<u,Q phi>=<Qu,phi>` exactly and `||Q phi||_2<=1`, so normalization cannot reduce the coefficient.  For divergence-free roles, Leray projection is likewise coefficient-preserving.  No L2 closeness of the Christ remainder is asserted or needed.\n\nVariable root scale also does not destroy the energy count.  Put `log N` in bins of width `2/25` and color the bins modulo `4`.  Because the outer role shell halfwidth is `2/25`, two distinct bins of one color have disjoint physical Fourier support, so their exact outer role projectors are orthogonal.  Within one scale bin use its reference `N_b`; the rescaled covariances `N_b^2 Sigma` lie in a fixed compact subset of six-dimensional `Sym(3)`.  A crude Frobenius net, chosen fine enough to guarantee affine-invariant log-SPD radius `delta=0.4`, uses at most `{out.covariance_bins}` bins.  For each fixed scale/covariance representative, unit cells in that representative dual-probe phase coordinate may be colored with `5^6={ROOT_GRID_COLORS}` colors so cells of one color are 4-separated.  This auxiliary coloring is only an analysis-budget device; it is not identified with the canonical material label.  Inside one scale bin/covariance/color the exact affine coherent Bessel theorem gives analysis budget `25/4`; orthogonality across same-color scale bins prevents any factor growing with causal depth.  Thus all registered roots have one finite effective budget\n\n`P_eff <= {out.effective_frame_budget:.12g}`.\n\nThis constant is intentionally huge but **scale independent**.  In the causal root estimate it enters only through `log P_eff`, so it changes the finite depth offset and not the linear reuse slope `log(48/25)`.\n\nThe theorem therefore closes a subtle gap **once complex phase-aligned `L^(3/2)` Gaussian proximity is available**: such profile information produces a scale-critical quantum in the actual `L2` energy analysis, via duality, without pretending `L^(3/2)` closeness implies `L2` closeness.\n\nStress: `{out.samples}` covariance/pairing/Leray states\n- minimum Gaussian pairing margin: `{out.minimum_pairing_margin:.3e}`\n- minimum root-mass margin above the default endpoint: `{out.minimum_root_mass_margin_over_one_fifth:.3e}`\n- minimum covariance-cover radius margin: `{out.minimum_cover_margin:.3e}`\n- worst Leray coefficient residual: `{out.worst_projection_pairing_residual:.3e}`\n\nTwo registration issues remain.  First, the current inverse-Young ledger directly supplies Gaussian proximity for magnitudes; the separate phase/polarization theorems must be assembled into the complex phase-aligned proximity assumed here.  Second,  A causal parent slot already has a transfer-selected material coherent label.  The dual probe above is centered at the Christ Gaussian mark.  The final assembly must prove that a fixed transfer-weighted fraction of roots are aligned with that mark (or else the misaligned physical work is already cross/relink/backscatter/service currency).  Measurable selection of a Christ mark is not the hard part; this **transfer-cell alignment** is.  No global-regularity claim is made.\n"""
+    eta = normalized_dual_probe_critical_mass_lower()
+    md = f"""# Dual-Gaussian root registration: Christ proximity gives actual analysis energy\n\nStatus: **{cert['status']}**.\n\nA phase-aligned complex Gaussian near-profile should not be inserted into the velocity as a fictitious synthesis component.  Use it only to design a dual Gaussian **analysis probe**.  Christ supplies the magnitude Gaussian; the present theorem is conditional on the separate phase/polarization control being strong enough to lift that mark to complex `L^(3/2)` proximity.\n\nLet `||f||_(3/2)=||G||_(3/2)=1`, `||f-G||_(3/2)<=eps`.  The exact L3-dual Gaussian is `h_G=|G|^(-1/2)G`, with `||h_G||_3=1` and `<G,h_G>=1`.  Quantize the profile covariance to a representative within log-SPD radius `delta`, and use the corresponding L3-normalized dual `h_rep`.  If `delta<=0.4`, exact Gaussian integration gives\n\n`<G,h_rep> >= {dual_gaussian_pairing_lower(0.4):.12g}`.\n\nTherefore `|<f,h_rep>| >= <G,h_rep>-eps`.  After L2-normalizing `phi=h_rep/||h_rep||_2`,\n\n`||h_rep||_2^2 = 3 sqrt(pi)/(2 r_g,rep)`.\n\nThe shell lower axis and covariance quantization give the scale-independent actual coefficient bound\n\n`N |<f,phi>|^2 >= {eta:.12g}`\n\nat `eps=1/100`, `delta=0.4`.  In particular it is **strictly larger than 1/5 for the normalized role**.  For the actual physical role `f=a f_hat`, the bound is multiplied by `a^2=||f||_(3/2)^2`.  Therefore this theorem alone does **not** provide the absolute root quantum required by causal/Renyi when parent amplitudes are allowed to shrink.\n\nAfter restoring the physical amplitude this is a coefficient of the actual selected role.  If that role is obtained by an exact self-adjoint outer Fourier/helical projector `Q`, use the probe `Q phi`; then `<u,Q phi>=<Qu,phi>` exactly and `||Q phi||_2<=1`, so normalization cannot reduce the coefficient.  For divergence-free roles, Leray projection is likewise coefficient-preserving.  No L2 closeness of the Christ remainder is asserted or needed.\n\nVariable root scale also does not destroy the energy count.  Put `log N` in bins of width `2/25` and color the bins modulo `4`.  Because the outer role shell halfwidth is `2/25`, two distinct bins of one color have disjoint physical Fourier support, so their exact outer role projectors are orthogonal.  Within one scale bin use its reference `N_b`; the rescaled covariances `N_b^2 Sigma` lie in a fixed compact subset of six-dimensional `Sym(3)`.  A crude Frobenius net, chosen fine enough to guarantee affine-invariant log-SPD radius `delta=0.4`, uses at most `{out.covariance_bins}` bins.  For each fixed scale/covariance representative, unit cells in that representative dual-probe phase coordinate may be colored with `5^6={ROOT_GRID_COLORS}` colors so cells of one color are 4-separated.  This auxiliary coloring is only an analysis-budget device; it is not identified with the canonical material label.  Inside one scale bin/covariance/color the exact affine coherent Bessel theorem gives analysis budget `25/4`; orthogonality across same-color scale bins prevents any factor growing with causal depth.  Thus all registered roots have one finite effective budget\n\n`P_eff <= {out.effective_frame_budget:.12g}`.\n\nThis constant is intentionally huge but **scale independent**.  In the causal root estimate it enters only through `log P_eff`, so it changes the finite depth offset and not the linear reuse slope `log(48/25)`.\n\nThe theorem therefore closes a subtle **shape-to-analysis** gap once complex Gaussian proximity is available: it produces a scale-critical coefficient **relative to the parent `L^(3/2)` amplitude** in the actual `L2` energy analysis, via duality, without pretending `L^(3/2)` closeness implies `L2` closeness.\n\nStress: `{out.samples}` covariance/pairing/Leray states\n- minimum Gaussian pairing margin: `{out.minimum_pairing_margin:.3e}`\n- minimum root-mass margin above the default endpoint: `{out.minimum_root_mass_margin_over_one_fifth:.3e}`\n- minimum covariance-cover radius margin: `{out.minimum_cover_margin:.3e}`\n- worst Leray coefficient residual: `{out.worst_projection_pairing_residual:.3e}`\n\nTwo registration issues remain.  First, the current inverse-Young ledger directly supplies Gaussian proximity for magnitudes; the separate phase/polarization theorems must be assembled into the complex phase-aligned proximity assumed here.  Second,  A causal parent slot already has a transfer-selected material coherent label.  The dual probe above is centered at the Christ Gaussian mark.  The final assembly must prove that a fixed transfer-weighted fraction of roots are aligned with that mark (or else the misaligned physical work is already cross/relink/backscatter/service currency).  Measurable selection of a Christ mark is not the hard part; this **transfer-cell alignment** is.  No global-regularity claim is made.\n"""
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
 
