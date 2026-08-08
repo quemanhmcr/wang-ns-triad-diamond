@@ -1,0 +1,29 @@
+name: Bargmann root cell registration
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/bargmann_root_cell_registration.py'
+      - 'tests/test_bargmann_root_cell_registration.py'
+      - 'docs/bargmann_root_cell_registration.md'
+      - '.github/workflows/bargmann-root-cell-registration.yml'
+      - 'docs/dual_gaussian_root_registration.md'
+      - 'docs/coherent_localization_operators.md'
+      - 'RESEARCH_LEDGER.md'
+      - 'docs/master_no_escape.md'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-bargmann-root-cell-registration
+      - run: cat results-bargmann-root-cell-registration/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bargmann-root-cell-registration-results
+          path: results-bargmann-root-cell-registration/
