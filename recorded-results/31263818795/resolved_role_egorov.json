@@ -1,0 +1,37 @@
+{
+  "certificate": {
+    "status": "EXACT_AFFINE_SUBTRACTED_EGOROV_IDENTITY_AND_CENTER_JET_COUNTERMODEL__COHERENT_VARIANCE_REDESIGN",
+    "egorov_identity": "(dot Q+[V.grad,Q])f = int K_N(y)[V(x)-V(x-y)-A y].grad f(x-y)dy",
+    "curvature_bound": "|V(x)-V(x-y)-A y| <= H(|x-X||y|+|y|^2/2)",
+    "l2_bound": "||R_Eg f||/||f|| <= (H/N)[k0 Mx+m1 Mxg+(3/2)m2 Mg] including affine-amplitude mismatch",
+    "center_countermodel": "V=(0,a[sin(rx1)-sin(2rx1)/2],0), r=N/8: A(0)=H(0)=0 but d1^3 V2(0)=3ar^3",
+    "false_bridge": "full non-affine moving-role residual cannot be bounded solely by the center Hessian B(X)",
+    "coherent_repair": "use the affine-invariant coherent gradient variance Var_gamma[L^-1 grad V(X+Lz)L]",
+    "gaussian_poincare": "coherent gradient variance <= E_gamma ||L^-1 Hess V(X+Lz)[L,L]||^2",
+    "physical_interpretation": "measures resolved deformation variation across the coherent eddy; common affine deformation has zero variance",
+    "continuum_status": "must still collide the coherent/cellwise curvature variance with the existing H1/H3/source/transfer currencies or prove it is uniformly absorbable on the flat branch"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_exact_commutator_relative_residual": 5.848049472386818e-16,
+    "minimum_taylor_bound_margin": 0.0971510026294767,
+    "minimum_gaussian_poincare_margin": 0.0,
+    "worst_affine_invariant_gradient_residual": 8.905355999116165e-15,
+    "countermodel_third_derivative": 0.005859375
+  },
+  "countermodel": {
+    "V_center": 0.0,
+    "gradient_center": 0.0,
+    "hessian_center": 0.0,
+    "third_derivative_center": 0.005859375,
+    "first_mode_over_N": 0.125,
+    "second_mode_over_N": 0.25,
+    "lowpass_cut_over_N": 0.25,
+    "cubic_taylor_coefficient": 0.0009765625
+  },
+  "gaussian_moments_q1": {
+    "Mx": 1.7320508075688772,
+    "Mg": 1.3228756555322954,
+    "Mxg": 2.598076211353316
+  }
+}

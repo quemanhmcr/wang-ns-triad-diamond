@@ -1681,10 +1681,48 @@ finite POVM/bilinear-work states; work residual `3.678e-15`).
 
 This does not promote an individual `A_Cw` to a compact Fourier packet.  The
 outer Fourier/helical role still carries the scale geometry; coherent cells carry
-material ancestry.  The remaining continuum gap is consequently the **outer
-moving-role/Egorov bridge**: every efficient recursive smooth-SGS block must
-supply the strict resolved low--high transporter and show that its non-affine
-moving-role residual is routed once into material relink, summable
-symbol/covariance `Xi`, H1/H3 source/sideband or high-strain currencies.  Higher
-non-affine transport is not assumed away.  This is not a Navier--Stokes
-global-regularity proof.
+material ancestry.
+
+The outer moving-role commutator now has an exact affine-subtracted Egorov form:
+
+\[
+(\partial_tQ+[V\cdot\nabla,Q])f
+=\int K_N(y)[V(x)-V(x-y)-Ay]\cdot\nabla f(x-y)dy,
+\qquad A=\nabla V(X).
+\]
+
+Hence common affine transport is exactly removed and the remainder is controlled
+by resolved velocity curvature over the coherent region.  But the point-sampled
+center Hessian cannot close this estimate.  The strict-lowpass divergence-free
+shear
+
+\[
+V_2=a[\sin(rx_1)-\tfrac12\sin(2rx_1)],\qquad r=N/8,
+\]
+
+has `grad V(0)=Hess V(0)=0` while `d_1^3V_2(0)=3ar^3`.  The correct replacement
+observable is therefore
+
+\[
+\mathcal K_C^2
+=\operatorname{Var}_\gamma[L^{-1}\nabla V(X+Lz)L],
+\]
+
+which is common-affine invariant, vanishes for affine flow, and obeys
+
+\[
+\mathcal K_C^2
+\le\mathbb E_\gamma
+\|L^{-1}(\nabla^2V)(X+Lz)[L,L]\|_F^2
+\]
+
+by Gaussian Poincare.  Preferred certificate: `31263818795` on `ba3d345`
+(`398` tests plus `50,000` Egorov/curvature states; commutator residual
+`5.848e-16`).
+
+Thus the remaining continuum gap is now the **coherent-curvature-spectrum
+collision**: extend the existing H1/H3/source no-escape architecture from the
+osculating center curvature to this full coherent/cellwise curvature energy, or
+show that the higher coherent Hermite part is itself transfer-costly or uniformly
+absorbable on a Kelvin-flat step.  That collision is not yet proved.  This is not
+a Navier--Stokes global-regularity proof.
