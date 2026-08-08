@@ -1,0 +1,25 @@
+name: Physical transfer defect moat
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/physical_transfer_defect_moat.py'
+      - 'tests/test_physical_transfer_defect_moat.py'
+      - 'docs/physical_transfer_defect_moat.md'
+      - '.github/workflows/physical-transfer-defect-moat.yml'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - run: python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat
+      - run: cat results-physical-transfer-defect-moat/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: physical-transfer-defect-moat-results
+          path: results-physical-transfer-defect-moat/
