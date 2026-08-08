@@ -1,0 +1,25 @@
+name: Coherent localization operators
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/coherent_localization_operators.py'
+      - 'tests/test_coherent_localization_operators.py'
+      - 'docs/coherent_localization_operators.md'
+      - '.github/workflows/coherent-localization-operators.yml'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - run: python -m src.coherent_localization_operators --samples 20000 --outdir results-coherent-localization-operators
+      - run: cat results-coherent-localization-operators/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coherent-localization-operators-results
+          path: results-coherent-localization-operators/
