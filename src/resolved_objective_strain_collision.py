@@ -163,24 +163,28 @@ def stress(samples:int=50_000,seed:int=20260808)->ResolvedStrainStress:
         mq=min(mq,upperq-rho)
         if upperq<rho: raise AssertionError('quadratic clean collision direction failed')
 
-        rr=1.01*sgs_gradient_stress_lower(rho)
+        # Saturate the sharper analytic coefficient, then verify the clean lower is weaker.
+        rr=1.01*rho/c2
         uppers=c2*rr
-        ms=min(ms,uppers-rho)
-        if uppers<rho: raise AssertionError('SGS-gradient clean collision failed')
+        ms=min(ms,rr-sgs_gradient_stress_lower(rho),uppers-rho)
+        if rr+1e-14<sgs_gradient_stress_lower(rho) or uppers<rho:
+            raise AssertionError('SGS-gradient clean collision failed')
 
         routes=pressure_hessian_clean_routes(rho)
-        # At 1.01 times either clean threshold, the sharp analytic bound can cover >rho/2.
-        term_mu=c2*cb2*(1.01*routes['resolved_critical_mass'])
-        term_r=c2*(1.01*routes['stress_l32'])
-        mp=min(mp,term_mu-rho/2,term_r-rho/2)
-        if term_mu<rho/2 or term_r<rho/2:
+        mu_sharp=1.01*(rho/2)/(c2*cb2)
+        r_sharp=1.01*(rho/2)/c2
+        term_mu=c2*cb2*mu_sharp
+        term_r=c2*r_sharp
+        mp=min(mp,mu_sharp-routes['resolved_critical_mass'],r_sharp-routes['stress_l32'],term_mu-rho/2,term_r-rho/2)
+        if mu_sharp+1e-14<routes['resolved_critical_mass'] or r_sharp+1e-14<routes['stress_l32'] or term_mu<rho/2 or term_r<rho/2:
             raise AssertionError('pressure clean split threshold too optimistic')
 
         if nu>1e-12:
-            dv=1.01*viscous_source_enstrophy_lower(rho,nu)
+            dv=1.01*(rho/(nu*c31))**2
             upperv=nu*c31*math.sqrt(dv)
-            mv=min(mv,upperv-rho)
-            if upperv<rho: raise AssertionError('viscous clean collision failed')
+            mv=min(mv,dv-viscous_source_enstrophy_lower(rho,nu),upperv-rho)
+            if dv+1e-14<viscous_source_enstrophy_lower(rho,nu) or upperv<rho:
+                raise AssertionError('viscous clean collision failed')
     return ResolvedStrainStress(samples,wi,mq,ms,mp,mv)
 
 
