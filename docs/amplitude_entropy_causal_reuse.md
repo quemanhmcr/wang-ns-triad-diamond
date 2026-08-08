@@ -273,3 +273,16 @@ The remaining continuum task is only the registration step stated above: turn
 the eventwise coefficient into the coefficient on the synchronized common slice,
 or stop at the first physical cause preventing that registration.  No global
 regularity conclusion is asserted.
+
+## 8. Companion registration theorem closes the selected-role time interface
+
+`common_slice_coefficient_registration.md` now proves the registration premise
+used above at the selected-role model level.  The asynchronous cone keeps every
+parent event inside its natural adjoint interval, and the exact first-stop gate
+returns either an earlier physical obstruction or at least `1/4` of the event
+coefficient on the common slice.  Hence the `1/16` product factor in `Lambda` is
+no longer a persistence hypothesis.
+
+The remaining bridge is outside this telescope: construct the exact moving outer
+Fourier/helical selected-role equation for every recursively selected efficient
+smooth-SGS block.  No global-regularity conclusion is asserted.

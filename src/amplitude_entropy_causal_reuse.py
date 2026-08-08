@@ -376,7 +376,7 @@ def stress(samples: int = 20_000, seed: int = 20260809) -> AmplitudeEntropyStres
 def theorem_certificate() -> dict[str, object]:
     beta = anchor_coefficient_energy_fraction()
     return {
-        "status": "EXACT_AMPLITUDE_ENTROPY_REUSE_TELESCOPE__COMMON_SLICE_PRODUCTIVITY_REGISTRATION_REMAINS_PDE_BRIDGE",
+        "status": "EXACT_AMPLITUDE_ENTROPY_REUSE_TELESCOPE__SELECTED_ROLE_PRODUCTIVITY_REGISTERED__OUTER_ROLE_EXTRACTION_REMAINS",
         "productivity": "on every continuing generated node alpha_p1 alpha_p2 >= Lambda alpha_child; Lambda is scale independent",
         "log_recursion": "E log alpha_parent >= (1/2)log Lambda+(1/2)E log alpha_child",
         "depth_solution": "ell_root >= (1-2^-L)log Lambda+2^-L log alpha_terminal",
@@ -387,7 +387,7 @@ def theorem_certificate() -> dict[str, object]:
         "amplitude_imbalance": "arbitrarily unbalanced parent amplitudes are absorbed by the log-product recursion; no small/large-parent threshold or new currency is needed",
         "duhamel_role": "adjoint Duhamel is used only to certify scale-critical coefficient productivity/support, never as the physical causal probability weights",
         "physical_weights": "Shannon/Renyi layer weights remain the actual positive child-energy work law",
-        "continuum_status": "the remaining PDE bridge is common-slice coefficient registration: if an eventwise parent coefficient cannot retain the adjoint inherit fraction to the synchronized slice, the first failure must stop earlier as HH generation, classified residual/source, or genuine material relink",
+        "continuum_status": "the companion common-slice first-stop theorem supplies the 1/4 coefficient and 1/16 product registration on the selected-role model; the remaining continuum bridge is construction of that exact moving outer role equation on every recursive SGS block",
     }
 
 
@@ -458,7 +458,7 @@ Stress: `{out.samples}` random layered causal DAGs with parent amplitude ratios 
 - minimum exact Renyi-minus-lower margin: `{out.minimum_renyi_lower_margin:.3e}`
 - branches: `{out.branch_counts}`
 
-This theorem changes the frontier.  The old causal root-count argument needed an absolute critical mass per root; that is incompatible with the homogeneity of Young.  The correct physical invariant is the **multiplicative critical coefficient**.  The remaining continuum step is now narrower: register the eventwise parent coefficient to the synchronized common slice.  The adjoint first-stop theorem gives the intended mechanism—either at least the inherited fraction survives, or an earlier HH-generation / classified-residual / material-relink event becomes the causal stop.  This module does not yet assert that full PDE registration theorem, and it makes no global-regularity claim.
+This theorem changes the frontier.  The old causal root-count argument needed an absolute critical mass per root; that is incompatible with the homogeneity of Young.  The correct physical invariant is the **multiplicative critical coefficient**.  The companion common-slice first-stop theorem now supplies the conservative `1/4` coefficient and `1/16` parent-product registration on the selected-role model.  The remaining continuum step is therefore the outer moving Fourier/helical role extraction itself: construct that exact selected coefficient equation on every recursively chosen efficient SGS block with the already-classified non-affine/source/Xi terms.  No global-regularity claim is made.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
