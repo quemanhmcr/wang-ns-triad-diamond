@@ -1083,9 +1083,137 @@ or
 
 with the same entropy/cycle alternatives.
 
-The unresolved master step is now **uniform service-or-flat rigidity plus
-summable selected-interface telescoping**.  Every efficient PDE block must either
-carry a uniform coherent service/source threshold, or be forced into the
-Hodge-flat/scale-holonomy sticky geometry.  The resulting stopping epochs must
-then be telescoped while the total spatial/frequency/coherent/covariance `Xi`
-remains summable and no physical source or dissipation event is charged twice.
+## Uniform physical flat gate and explicit spherical erosion
+
+For `0<tau<=1/10`, define
+
+\[
+\boxed{\delta_\tau=\tau^2/1\,036\,800\,000.}
+\]
+
+On the signed-good, transition-aspect, low-strain physical packet branch, if
+transfer/pair costs, H1/H3 source impulses and objective-strain variation all
+stay below their certified `tau` thresholds, then
+
+\[
+\boxed{\sqrt{E_H^{phys}}\le\tau/3},
+\qquad
+\boxed{(dT)_{nonconf}\le\tau/3},
+\qquad
+\boxed{I_B\le\tau/3}.
+\]
+
+Thus
+
+\[
+\boxed{\mathfrak F_K\le\tau.}
+\]
+
+At `tau=1/100`, the common transfer/pair gate is
+`1/10,368,000,000,000`.
+
+Signed-good triad geometry also replaces the abstract spherical perturbation.
+For physical Hodge energy `H` and parent barycenter mismatch `Delta_b`,
+
+\[
+\boxed{
+\left|b_c-b_1/c_*\right|
+\le2\sqrt H+H/2+(5/8)\Delta_b.
+}
+\]
+
+Hence on the concentrated branch
+
+\[
+\boxed{
+\zeta\le4\sqrt H+H+(5/4)\Delta_b.
+}
+\]
+
+If a `1%` Kelvin-flat block has `Delta_b<=1/100`, Arb gives the uniform physical
+master erosion
+
+\[
+\boxed{\kappa_0>17/100.}
+\]
+
+Equal parent marginals are not required.  For a `1%` flat block, either one
+parent barycenter is at most `0.99`, giving collision entropy
+
+\[
+\boxed{H_2>1/200},
+\]
+
+or both parent marginals contain directional cores of mass at least `7/9` whose
+barycenter directions differ by more than one radian and whose `3/10`-chord caps
+have gap `>1/3`.  Relative to a distinguished old lineage the second core is a
+trackable companion that must be fresh or reused.
+
+## Causal completion: binary branching forces sticky reuse
+
+Fresh companion energy by itself is not a uniform cost.  Instead use quadratic
+causality.  In a synchronized layered backward ancestry with one terminal packet,
+let `n_j` be the number of distinct packet ancestors and put
+
+\[
+r_j=2n_{j+1}-n_j,
+\qquad
+\rho_j=r_j/(2n_{j+1}).
+\]
+
+The connected 3-uniform incidence graph satisfies exactly
+
+\[
+\boxed{\beta_{cycle}=\sum_j r_j},
+\]
+
+and
+
+\[
+\boxed{
+{n_0\over2^L}=\prod_j(1-\rho_j),
+\qquad
+\sum_j-\log(1-\rho_j)=L\log2-\log n_0.
+}
+\]
+
+Arb strengthens the signed-good scale window to
+
+\[
+\boxed{3/5<N_{parent}/N_{child}<5/8.}
+\]
+
+With a coherent root budget `P E_global` and root critical mass `NE>=eta`,
+
+\[
+\boxed{
+\mathcal A_{reuse}
+\ge L\log(48/25)
+-\log(P E_{global}N_{base}/\eta).
+}
+\]
+
+For Moyal `P=1` and clean `eta=1/5`,
+
+\[
+\boxed{
+L\log(36/25)>\log(5E_{global}N_{base})
+\Longrightarrow
+\max_j\rho_j\ge1/4.
+}
+\]
+
+Thus a sufficiently deep causally complete flat ancestry must contain a
+reuse-rich layer.  This is a finite synchronized theorem only: raw cycle rank is
+not yet a transfer-weighted cost, and a full PDE Duhamel extraction is not yet a
+synchronized layer graph.
+
+The unresolved master step is now **transfer-weighted causal synchronization and
+single-ledger telescoping**.  The asynchronous Navier--Stokes packet extraction
+must be organized into causal layers with summable `Xi`.  At a reuse-rich layer,
+either a definite physical transfer fraction enters the cycle network and can be
+charged by multicommodity Hodge/resistance/phase holonomy, or transfer
+fragmentation pays Bellman/component entropy.  An ancestry reaching `t=0` must
+terminate against the smooth initial tail.  These events must then be telescoped
+with the physical `kappa_0>0.17` flat erosion and coherent/source stopping costs
+without double charging.

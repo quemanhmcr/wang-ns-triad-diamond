@@ -1,0 +1,44 @@
+{
+  "certificate": {
+    "tau": "1/100",
+    "uniform_transfer_pair_threshold": "tau^2/1036800000",
+    "tau_1_100_threshold": "1/10368000000000",
+    "hodge_flat": "sqrt(E_H^phys)<=tau/3",
+    "affine_nonconformal_strain_flat": "dT<=tau/3",
+    "full_curvature_flat": "I_B<=tau/3",
+    "H3_source_impulse": "T J3 < tau/(6 sqrt6)",
+    "H1_source_impulse": "T J1 < tau/792",
+    "objective_variation_action": "T int||Ddot_obj|| < tau/60",
+    "status": "CERTIFIED_ASSEMBLY_GIVEN_EXISTING_PACKET_THEOREMS"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_flat_margin": 0.004367646758307257,
+    "maximum_flat_ratio": 0.5632353241692744,
+    "branch_counts": {
+      "kelvin_extremal_flat": 4529,
+      "pair_rescue_ancestry": 4537,
+      "inherited_high_aspect": 4563,
+      "H1_physical_source": 4494,
+      "physical_transfer_cost": 4512,
+      "objective_strain_source_action": 4552,
+      "fresh_high_aspect": 4548,
+      "H3_physical_source": 4569,
+      "sideband_transfer_cost": 4551,
+      "nonlinear_sideband_feedback": 4532,
+      "high_strain_lifetime": 4613
+    }
+  },
+  "tau_1_100": {
+    "flatness_target": 0.01,
+    "block_transfer_deficit": 9.645061728395063e-14,
+    "sideband_transfer_deficit": 9.645061728395063e-14,
+    "pair_rescue": 9.645061728395063e-14,
+    "h3_source_impulse": 0.0006804138174397717,
+    "h1_source_impulse": 1.2626262626262626e-05,
+    "objective_strain_variation_action": 0.00016666666666666666,
+    "aspect_threshold": 1.134,
+    "low_strain_action": 0.03333333333333333,
+    "phase_holonomy": 0.2
+  }
+}

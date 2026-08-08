@@ -1,0 +1,25 @@
+{
+  "certificate": {
+    "signed_good_parent_child_ratio": "3/5 < N_parent/N_child < 5/8",
+    "forward_scale_progress": "8/5 < N_child/N_parent < 5/3",
+    "root_scale_relative_to_distinguished_base": "N_root,max < (25/24)^L N_base",
+    "cycle_identity": "beta=sum_j(2 n_(j+1)-n_j)",
+    "product_identity": "n_0/2^L=product_j(1-rho_j)",
+    "reuse_action": "sum -log(1-rho_j) >= L log(48/25)-log(P E N0/eta)",
+    "quarter_reuse_depth": "L log(36/25)>log(P E N0/eta) forces some rho_j>=1/4",
+    "clean_root_mass": "eta=1/5 for separated selected affine grains",
+    "status": "CERTIFIED_GIVEN_SYNCHRONIZED_CAUSAL_LAYERING_AND_COHERENT_ROOT_BUDGET"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_cycle_identity_residual": 0,
+    "worst_product_residual": 1.1102230246251565e-16,
+    "minimum_action_margin": -5.329070518200751e-15,
+    "minimum_quarter_stop_margin": 0.0,
+    "branch_counts": {
+      "reuse_rich_layer": 34099,
+      "root_energy_exceeded": 14555,
+      "shallow_binary_tree": 1346
+    }
+  }
+}

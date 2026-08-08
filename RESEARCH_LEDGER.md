@@ -3911,6 +3911,394 @@ pair/cycle mass.  Thus temporal concentration is not a coherent-cell escape.
 Action `31246242892` passed `303` tests (`8` optional skips) plus `50,000`
 source-weight checks; the source-homogeneity residual was `8.938e-16`.
 
+#### Uniform service/action-or-Kelvin-flat rigidity
+
+There is now a single positive packet-level gate joining the physical currency
+ledgers to a gauge-quotiented flatness statement.  For
+
+\[
+0<\tau\le1/10
+\]
+
+define
+
+\[
+\boxed{
+\delta_\tau={\tau^2\over1\,036\,800\,000}.
+}
+\]
+
+The denominator is `36*28,800,000`; the limiting branch is the extended-aspect
+physical H1 pair/deficit theorem, not H3 or Hodge.
+
+On the signed-good physical low-cost core, inside
+`cond(L)<=567/500`, on the low-strain packet branch, and outside the already
+named nonlinear-feedback / large-daughter exits, suppose
+
+\[
+\operatorname{Def}_{block},\quad
+\operatorname{Def}_{sideband},\quad
+R_{pair}<\delta_\tau,
+\]
+
+\[
+TJ_3<\frac{\tau}{6\sqrt6},
+\qquad
+TJ_1<\frac{\tau}{792},
+\]
+
+and
+
+\[
+T\int\|\dot D_{obj}\|dt<\frac{\tau}{60}.
+\]
+
+Then the three independent rigidity sectors satisfy
+
+\[
+\boxed{\sqrt{E_H^{phys}}\le\tau/3},
+\]
+
+\[
+\boxed{(dT)_{nonconf}\le\tau/3},
+\]
+
+and
+
+\[
+\boxed{I_B\le\tau/3}.
+\]
+
+Thus the gauge-quotiented Kelvin connection flatness
+
+\[
+\boxed{
+\mathfrak F_K
+=\sqrt{E_H^{phys}}+(dT)_{nonconf}+I_B
+\le\tau.
+}
+\]
+
+Common translation, rigid rotation, common affine/Kelvin transport,
+common-parent `SL(2)` polarization motion and material coherent-cell transport
+are not charged.
+
+The full-curvature step uses the irreducible channel dichotomy rather than
+adding H1 and H3 constants: if full curvature is non-flat, either
+`I_3>=I_B/(2 sqrt(6))` or `I_1>=I_B/2`.  The H1 alternative fixes the clean
+constant above.
+
+Contrapositively, failure of `tau`-flatness forces a uniformly positive named
+branch: transfer/pair cost, H1/H3 source, objective-strain source action,
+high-strain lifetime, fresh/inherited high aspect, nonlinear daughter/feedback,
+or helical phase holonomy.  Source branches feed the already-certified coherent
+SGS/pressure/viscous ancestry or dissipation ledgers.
+
+At the concrete target
+
+\[
+\boxed{\tau=1/100},
+\]
+
+the common transfer/pair threshold is
+
+\[
+\boxed{
+\delta_{1/100}=1/10\,368\,000\,000\,000.
+}
+\]
+
+Preferred Action `31246845056` passed `316` tests plus `50,000` branch checks;
+the maximum sampled `F_K/tau` was `0.563215647` and every named branch was hit.
+The small constant is deliberately conservative; the theorem's role is a
+uniform positive gate, not optimization of the final exponent.
+
+#### Physical flat episode: the master perturbation is explicit
+
+The spherical master previously allowed an abstract near-flat perturbation
+`zeta_j`.  Signed-good physical triad geometry now computes it.
+
+With
+
+\[
+x=r_*e^{-v-u/2},\qquad y=r_*e^{-v+u/2}
+\]
+
+and `c_e=cos(theta_e/2)`, the law of cosines gives exactly
+
+\[
+\boxed{
+c_e^2=c_*^2e^{2v}-\sinh^2(u/2),
+\qquad c_*=(2r_*)^{-1}.
+}
+\]
+
+On `|u|,|v|<=2/25`, Arb certifies
+
+\[
+\boxed{|c_e-c_*|\le\frac65|v|+\frac15u^2.}
+\]
+
+For unit parent directions `p,q`, exact unequal-parent geometry gives
+
+\[
+\tan\angle(n_c,m)
+=\tan(\theta_e/2)|\tanh(u/2)|,
+\]
+
+where `m=(p+q)/|p+q|`.  The local half-angle is above `3/4`, hence
+
+\[
+\boxed{\|n_c-m\|\le|u|/2.}
+\]
+
+For normalized positive physical transfer weights let
+
+\[
+H=E_H^{phys}=\mathbb E(2v^2+u^2/2),
+\qquad
+\Delta_b=|b_2-b_1|.
+\]
+
+Then
+
+\[
+\boxed{
+\left|b_c-\frac{b_1}{c_*}\right|
+\le
+2\sqrt H+\frac12H+\frac58\Delta_b.
+}
+\]
+
+On the concentrated branch `|b_1|>=c_*`, the barycentric potential
+`P=-log|b|` obeys
+
+\[
+P_c\le P_1-\kappa_*-\log(1-e),
+\]
+
+with the displayed right-hand error `e`.  For `e<=1/2` the master perturbation
+may be taken as
+
+\[
+\boxed{
+\zeta
+\le4\sqrt{E_H^{phys}}+E_H^{phys}+\frac54\Delta_b.
+}
+\]
+
+At `tau=1/100`, if parent marginals are synchronized at `Delta_b<=tau`, the
+service-or-flat theorem gives `sqrt(H)<=tau/3`, and therefore
+
+\[
+\boxed{
+\zeta\le\frac{31}{12}\tau+\frac{\tau^2}{9}.
+}
+\]
+
+Arb then certifies the **physical flat erosion rate**
+
+\[
+\boxed{
+\kappa_0:=\kappa_*-\zeta>17/100.
+}
+\]
+
+Action `31247033855` passed `319` tests plus `50,000` physical-coupling checks;
+the worst actual barycenter-error / clean-bound ratio was `0.956538235`, and the
+clean `kappa_0>0.17` margin was `4.487e-03`.
+
+#### Equal parent marginals are not required: entropy or companion cores
+
+The synchronized-marginal assumption itself is no longer a mandatory input.
+On a `tau=1/100` Kelvin-flat block,
+
+\[
+H=E_H^{phys}\le\tau^2/9,
+\]
+
+and, without assuming `b_1=b_2`, the same triad geometry gives
+
+\[
+\boxed{
+\left|b_c-\frac{b_1+b_2}{2c_*}\right|
+\le2\sqrt H+\frac12H.
+}
+\]
+
+Choose
+
+\[
+\boxed{\beta=99/100.}
+\]
+
+If either parent barycenter has norm at most `beta`, the atomic
+barycenter--collision theorem gives
+
+\[
+H_2\ge\log\frac{200}{199}.
+\]
+
+Arb certifies the clean floor
+
+\[
+\boxed{H_2>1/200.}
+\]
+
+If both barycenter norms exceed `0.99`, physical `|b_c|<=1` forces their
+barycenter directions to be separated by more than one radian.  Since a unit-
+direction law satisfies
+
+\[
+\mathbb E|X-\widehat b|^2=2(1-|b|),
+\]
+
+Markov at chord radius `3/10` puts at least `7/9` of each parent transfer mass in
+one directional cap.  The two caps have chord gap greater than `1/3`.
+Consequently
+
+\[
+\boxed{
+\text{1\% Kelvin-flat}
+\Longrightarrow
+H_2\ge1/200
+\quad\lor\quad
+\text{two separated parent cores, each mass }\ge7/9.
+}
+\]
+
+Relative to a distinguished old lineage the second core is a **trackable
+companion**, which must be classified by ancestry rather than silently replaced
+by an equal-marginal symmetry assumption.
+
+Preferred Action `31247281011` passed `322` tests plus `50,000` checks.  The
+entropy, one-radian angle and `1/3` cap-gap clean constants had margins
+`1.461e-05`, `1.754e-01` and `1.756e-01`.  Run `31247206213` failed only because
+`7/9` was compared to its slightly lower floating representation with exact
+`>=`; no theorem constant failed.
+
+#### Causal binary ancestry: fresh companions force sticky reuse
+
+A fresh companion at every generation is **not** ruled out by energy alone:
+critical packet costs `~1/N_q` are summable.  The missing physical input is
+quadratic causality.  A genuinely new comparable-frequency companion must
+itself have parents in the preceding causal layer unless it is imported from an
+already-existing reservoir.
+
+The following finite theorem is now exact under a synchronized causal layering.
+On the signed-good core, Arb certifies the two-sided scale window
+
+\[
+\boxed{
+\frac35<\frac{N_{parent}}{N_{child}}<\frac58,
+}
+\]
+
+hence
+
+\[
+\boxed{
+\frac85<\frac{N_{child}}{N_{parent}}<\frac53.
+}
+\]
+
+Let `n_j` be the number of distinct packet ancestors at level `j`, with one
+terminal packet `n_L=1`, and every child at level `j+1` generated by one active
+triad with two parent incidences at level `j`.  Define
+
+\[
+\boxed{r_j=2n_{j+1}-n_j\ge0},
+\qquad
+\boxed{\rho_j={r_j\over2n_{j+1}}}.
+\]
+
+For the connected layered 3-uniform incidence graph the cycle rank satisfies the
+exact identity
+
+\[
+\boxed{\beta_{cycle}=\sum_{j=0}^{L-1}r_j.}
+\]
+
+Moreover binary branching has the exact multiplicative reuse law
+
+\[
+\boxed{
+{n_0\over2^L}
+=\prod_{j=0}^{L-1}(1-\rho_j),
+}
+\]
+
+so
+
+\[
+\boxed{
+\mathcal A_{reuse}
+:=\sum_j-\log(1-\rho_j)
+=L\log2-\log n_0.
+}
+\]
+
+Thus each parent-slot identification is simultaneously a binary-branch saving
+and a cycle-rank unit.
+
+Let `N_base` be the distinguished lineage scale at the root generation.  The
+signed-good forward/backward windows imply every depth-`L` root ancestor has
+
+\[
+N_{root}<\left(\frac{25}{24}\right)^L N_{base}.
+\]
+
+If distinct coherent root cells obey a positive energy/frame budget `P E_global`
+and every selected affine grain has critical mass `N E>=eta`, then
+
+\[
+\boxed{
+n_0\le{P E_{global}N_{base}\over\eta}
+\left(\frac{25}{24}\right)^L.
+}
+\]
+
+Hence
+
+\[
+\boxed{
+\mathcal A_{reuse}
+\ge
+L\log\frac{48}{25}
+-\log\frac{P E_{global}N_{base}}{\eta}.
+}
+\]
+
+For Moyal energy `P=1` and the clean affine-grain mass `eta=1/5`, if every layer
+had `rho_j<1/4`, then `A_reuse<L log(4/3)`.  Therefore
+
+\[
+\boxed{
+L\log\frac{36}{25}>\log(5E_{global}N_{base})
+\Longrightarrow
+\max_j\rho_j\ge1/4.
+}
+\]
+
+A sufficiently deep causally complete ancestry must therefore contain a
+**reuse-rich layer** in which at least one quarter of formal binary parent slots
+are identified with already-used parents.  This is the causal sticky mechanism
+that energy alone was missing: binary parent creation outruns the allowable
+signed-good scale dilation.
+
+Preferred Action `31247674599` passed `326` tests plus `50,000` layered graphs;
+cycle identity residual was exactly `0`, binary-product residual `1.110e-16` and
+reuse-action telescope residual `5.329e-15`.  Run `31247611869` failed only
+because a hand-written reuse-count fixture expected cycle rank `2` for the count
+vector `[4,3,2,1]`; the exact value is `3`.
+
+**Scope:** this causal theorem is deliberately conditional on a synchronized
+layered Duhamel/packet ancestry with a coherent root-cell budget.  Constructing
+that layering for a genuine asynchronous Navier--Stokes packet extraction, with
+summable interfaces, remains an open continuum bridge.  Raw cycle rank alone is
+also not automatically physical flux weight; a reuse-rich layer must still be
+routed through the transfer-weighted Hodge/Bellman/resistance machinery.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -4681,30 +5069,36 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Prove a uniform physical service-or-flat threshold.**  Nonlinear band work,
-   SGS increment service and H1 SGS source weight now reach positive coherent
-   cells with explicit alternatives.  What remains is to show that every
-   efficient Navier--Stokes block either carries a uniform positive coherent
-   service/source threshold, or necessarily enters the already-certified
-   Hodge-flat / scale-holonomy / low-curvature reuse branch.
-2. **Make the coherent-cell/nested-grain recursion fully continuum-compatible.**
-   Common affine motion is exact gauge, covariance-window changes have a
-   deterministic `Xi_cov`, and old/new increment edges expose actual selected
-   interfaces.  A full iterative extraction must keep the sum of all remaining
-   transfer-selected spatial/frequency/coherent interfaces `Xi` summable while
-   synchronizing ancestry labels through covariance-cell and component changes.
-3. **Telescope the stopping epochs through the master theorem.**  A sticky old
-   pool has finite coherent-service lifetime, and SGS source weight already has
-   a no-persistence coherent routing.  The final continuum step is to combine
-   these stopping epochs with the flat/Hodge/source alternatives using physical
-   transfer weights, without charging the same source, relink or dissipation
-   event twice.
-4. **Keep discrete synthesis subordinate to the positive analysis ledger.**  The
-   Moyal cell law assigns physical energy/work without coefficient gauge and the
-   5-separated Riesz theorem supplies discrete representatives when needed.  A
-   recursive Gaussian synthesis must be shown to preserve the transfer-selected
-   coefficient budget across covariance cells; otherwise the rejected part must
-   be entered explicitly in `Xi`/fresh/cycle bookkeeping.
+1. **Build a synchronized causal layering from the actual Duhamel/packet PDE.**
+   The finite causal theorem proves that a complete binary ancestry cannot stay
+   fresh indefinitely, but a genuine Navier--Stokes extraction is asynchronous
+   in space, time and frequency.  One must construct causal layers whose active
+   triads retain the signed-good physical transfer weight, while charging every
+   layer mismatch / skipped interaction to the existing selected-interface
+   `Xi` ledger.
+2. **Convert a reuse-rich causal layer into transfer-weighted cycle cost or
+   synchronized flat reuse.**  The count theorem gives `rho_j>=1/4` and exact
+   cycle-rank units, but raw topology is not flux.  Either the identified parent
+   slots carry a definite fraction of physical transfer, so multicommodity
+   Hodge/resistance/phase holonomy applies, or the weights are sufficiently
+   fragmented to pay the existing Bellman/component entropy.  This weighted
+   reuse bridge is now the sharp finite-to-PDE bottleneck.
+3. **Telescope the physical flat episodes and costly causal resets.**  A
+   `1%` Kelvin-flat synchronized step has barycentric erosion rate `>0.17`, and
+   failure of parent synchronization pays entropy or exposes a separated
+   companion core.  The continuum master must concatenate these steps with
+   coherent service stopping, causal reuse-rich layers and source/dissipation
+   events without double charging.
+4. **Keep the total selected-interface error summable.**  Spatial windows,
+   frozen frequency cells, coherent old/new edges, covariance representative
+   changes, asynchronous causal-layer cuts and recursive synthesis rejection all
+   contribute to one physical `Xi` budget.  Complete partitions/common affine
+   motion remain free; only the selected subfamily interfaces may be charged.
+5. **Register the causal boundary at the initial data.**  A backwards ancestry
+   that reaches `t=0` should terminate in the smooth initial Fourier/coherent
+   tail rather than be called a new interior grain.  Its contribution must be
+   entered once as an initial-boundary currency compatible with the same scale
+   and Moyal normalization.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier--Stokes global regularity is made.
 
@@ -4830,6 +5224,13 @@ The most useful recorded runs, in chronological order, are:
 | `31246194276` | coherent-service stopping theorem: old-pool ratio `231525/512000<1/2` gives finite cost-free sticky epochs under a uniform service threshold; `301` tests + `8` optional skips + `50,000` checks |
 | `31246242892` | source-weighted differentiated-SGS -> coherent ancestry with no persistence assumption; exact `3/2` to `2/3` linear homogeneity and coherent `Xi`/new-mass routing; `303` tests + `8` optional skips + `50,000` checks |
 | `31246291317`--`31246322667` | fifteen-workflow coherent-service integration on `a40e2c1`: smooth physical flux, H1 source, SGS/Onsager/source episodes, Moyal work, coherent increment/covariance/stopping/source-weight, old-pool erosion, nested grains, band-limited sampling and master all green; master worst margin `0` |
+| `31246845056` | preferred uniform service/action-or-Kelvin-flat packet assembly: `delta_tau=tau^2/1,036,800,000`, `F_K<=tau`; `316` tests + `50,000` branch checks, Arb-certified |
+| `31247033855` | preferred physical flat-episode perturbation: signed-good barycenter error and clean master erosion `kappa_0>0.17` at `tau=1/100`; `319` tests + `50,000` checks |
+| `31247206213` | first flat-companion run failed only at exact floating comparison of `7/9`; fixture semantics, no theorem countermodel |
+| `31247281011` | preferred flat companion gate: `H_2>1/200` or two directional parent cores of mass `>=7/9`, angle `>1` rad and chord gap `>1/3`; `322` tests + `50,000` checks, Arb-certified |
+| `31247418331`--`31247440588` | twelve-workflow service/flat/master integration on `b48e9ac`: service-or-flat, physical flat episode, flat companion, smooth physical flux, H1 source, coherent work/increment/source, old-pool erosion, nested grains, spherical erosion and master all green |
+| `31247611869` | first causal-binary run failed because fixture `[4,3,2,1]` expected cycle rank `2`; exact reuse savings are `(2,1,0)` and rank `3`; fixture error only |
+| `31247674599` | preferred synchronized causal binary ancestry: signed-good `3/5<parent/child<5/8`, exact cycle/product/reuse-action identities and quarter-reuse stopping; `326` tests + `50,000` layered graphs, Arb-certified |
 
 The current preferred master regression is run `31230338382` on coherent-reservoir
 integration commit `7b350ef` (`282` tests, `8` optional skips, plus `20,000`
@@ -5018,23 +5419,50 @@ sticky old-pool coherent epoch has finite length.  On the differentiated-SGS H1
 branch the `rho^(3/2)` source law followed by the `2/3` coherent collision is
 linear in source weight, so temporal concentration is not an escape.
 
-The decisive next theorem is now **uniform service-or-flat rigidity**.  A genuine
-efficient PDE block must be shown to satisfy one of two alternatives:
+Uniform service-or-flat rigidity is now theorem-level in the physical packet
+model.  At `tau=1/100`, absence of every named positive branch forces
+`F_K<=1/100`; a synchronized flat step has an explicit barycentric erosion rate
+`kappa_0>0.17`.  Equal parent marginals are no longer assumed: a flat block pays
+collision entropy `>1/200` or exposes two separated parent cores, each carrying
+at least `7/9` of its marginal transfer mass.
 
-1. it carries a uniform transfer-weighted coherent service/source amount, in
-   which case the stopping/`Xi`/fresh/entropy/cycle/dissipation machinery above
-   fires quantitatively; or
-2. its curvature/source/coherent-service amount is small enough that the block
-   is forced into the already-certified Hodge-flat, scale-holonomy and sticky
-   reuse geometry.
+The new decisive mechanism is **causal binary ancestry versus sticky reuse**.
+Under a synchronized causal completion, signed-good parents satisfy
 
-The remaining recursive task is then to telescope those coherent stopping epochs
-through the master theorem while keeping the **total selected-interface `Xi`**
-summable across spatial windows, frozen frequency cells, coherent old/new edges
-and covariance representative changes.  Arbitrary redundant Gaussian
-coefficients, raw aspect penalties, sub-bandwidth source counting, free
-coherent-cell relabeling, or a new time-persistence hypothesis are not admissible
-substitutes for this physical dichotomy.
+\[
+3/5<N_{parent}/N_{child}<5/8,
+\]
+
+and the exact layered law
+
+\[
+{n_0\over2^L}=\prod_j(1-\rho_j)
+\]
+
+shows that binary fresh-parent creation outruns the allowable scale dilation.
+Finite coherent root energy forces a reuse-rich layer `rho_j>=1/4` once the
+causal depth passes the explicit `log(36/25)` threshold.  This resolves the old
+energy-only loophole at finite synchronized level: fresh companions cannot be
+inserted forever without either exponentially expanding their causal ancestry or
+merging it into reuse cycles.
+
+The decisive next bridge is therefore **transfer-weighted causal
+synchronization**.  A genuine asynchronous Navier--Stokes Duhamel/packet
+extraction must be organized into such causal layers with summable selected
+interfaces.  At a reuse-rich layer, either a definite physical transfer fraction
+participates in the reuse cycles, allowing multicommodity Hodge/resistance/spin
+holonomy to charge it, or the transfer is fragmented enough to pay
+Bellman/component entropy.  Backward ancestries reaching `t=0` must be terminated
+against the smooth initial coherent/Fourier tail rather than counted as interior
+fresh grains.
+
+After this weighted causal bridge, the remaining global step is to telescope the
+physical `kappa_0>0.17` flat episodes, coherent stopping epochs, causal
+reuse/cycle events and source/dissipation costs while keeping the **single total
+`Xi` ledger** summable.  Raw cycle rank without transfer weight, fresh-packet
+energy alone, arbitrary redundant Gaussian coefficients, aspect penalties,
+sub-bandwidth source counting or a new persistence hypothesis are not admissible
+shortcuts.
 
 ---
 
@@ -5050,7 +5478,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, and `docs/coherent_sgs_episode.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, and `docs/causal_binary_ancestry.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

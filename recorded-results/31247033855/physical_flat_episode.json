@@ -1,0 +1,21 @@
+{
+  "certificate": {
+    "cstar_lower": "4/5",
+    "local_half_cosine_lower": "3/4",
+    "half_cosine_error": "|c_e-c_*| <= (6/5)|v|+(1/5)u^2",
+    "child_midpoint_error": "||n_child-m_e|| <= |u|/2",
+    "barycenter_step_error": "e <=2 sqrt(E_H)+(1/2)E_H+(5/8)Delta_b",
+    "clean_zeta": "zeta <=4 sqrt(E_H)+E_H+(5/4)Delta_b",
+    "tau": "1/100",
+    "tau_marginal_mismatch": "Delta_b<=tau",
+    "zeta_tau": "<=31 tau/12+tau^2/9",
+    "master_erosion_rate": "kappa0>17/100",
+    "status": "CERTIFIED_PHYSICAL_BARYCENTRIC_PERTURBATION"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_barycenter_error_ratio": 0.9565382346924671,
+    "worst_potential_margin": 0.09737410386066044,
+    "minimum_tau_kappa_margin": 0.004487450773365653
+  }
+}
