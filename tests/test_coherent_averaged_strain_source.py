@@ -61,7 +61,7 @@ def test_scaled_averaging_sources_route_linearly_to_critical_DV():
 
 def test_filtered_pressure_sgs_viscous_routes_are_inherited_without_new_average_factor():
     out = inherited_filtered_source_routes(0.01, 0.5)
-    assert out["pressure"]["resolved_critical_mass"] == 28.5
-    assert out["pressure"]["stress_l32"] == 1.9
-    assert out["sgs_stress_l32"] == 3.8
+    assert math.isclose(out["pressure"]["resolved_critical_mass"], 28.5)
+    assert math.isclose(out["pressure"]["stress_l32"], 1.9)
+    assert math.isclose(out["sgs_stress_l32"], 3.8)
     assert out["viscous_DV"] > 0
