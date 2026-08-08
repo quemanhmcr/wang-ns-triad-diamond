@@ -1,0 +1,17 @@
+{
+  "certificate": {
+    "status": "EXACT_DIVERGENCE_FREE_COHERENT_PARSEVAL_FRAME",
+    "abstract_frame": "if {phi_z} is Parseval on H and P is orthogonal, {P phi_z} is Parseval on ran(P)",
+    "coefficient": "Pu=u => <u,P phi_z>=<u,phi_z>",
+    "moyal": "sum_a int |<u,P(g_z e_a)>|^2 dmu=||u||_2^2 for div-free u",
+    "pressure": "<P(g_z e_a),grad p>=0 exactly",
+    "master_consequence": "canonical coherent ancestry does not require a compact spatial cutoff for pressure cancellation"
+  },
+  "stress": {
+    "samples": 20000,
+    "worst_projected_coefficient_residual": 1.2080532582046505e-14,
+    "worst_parseval_residual": 3.200577282163125e-15,
+    "worst_pressure_residual": 6.804363002006077e-15,
+    "worst_projector_idempotence": 2.756468095828696e-15
+  }
+}

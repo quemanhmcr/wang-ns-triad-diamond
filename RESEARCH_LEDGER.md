@@ -5256,24 +5256,24 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Register synchronized generated layers with one material coherent label law.**
-   Parabolic adjoint synchronization now supplies common physical slices without
-   a packet-persistence hypothesis.  The causal pushforward must use the same
-   material coherent/nested parent label as Shannon/Renyi reuse, Hodge/resistance,
-   spin holonomy and old-pool synchronization.  Representation changes may enter
-   only through the already named covariance/cell/profile `Xi` currencies.
-2. **Telescope the physical flat episodes and costly causal resets.**  A
-   `1%` Kelvin-flat synchronized step has barycentric erosion rate `>0.17`, and
-   failure of parent synchronization pays entropy or exposes a separated
-   companion core.  The continuum master must concatenate these steps with
-   coherent service stopping, causal reuse-rich layers and source/dissipation
-   events without double charging.
-3. **Keep the total selected-interface error summable.**  Spatial windows,
-   frozen frequency cells, coherent old/new edges, covariance representative
-   changes, asynchronous causal-layer cuts and recursive synthesis rejection all
-   contribute to one physical `Xi` budget.  Complete partitions/common affine
-   motion remain free; only the selected subfamily interfaces may be charged.
-
+1. **Classify every physical service-or-flat exit into one master currency.**
+   The multi-currency telescope distinguishes multiplicative transfer costs from
+   globally bounded additive resources.  The remaining PDE audit must assign each
+   source/fresh/dissipation/initial-boundary exit exactly once.  Critical `N E` or
+   normalized `D_V` branches must remain in sticky/causal routing unless a genuinely
+   scale-independent global resource threshold is separately proved; no raw source
+   norm may be counted as a finite resource without its collision theorem.
+2. **Finish the one global selected-interface `Xi` ledger.**  Time-slab synchronization
+   costs zero, nested material-label refinement costs zero, and frequency/covariance
+   representative schedules are summable.  The canonical global route now uses
+   Leray-projected coherent Parseval probes, so compact moving-window commutators and
+   localized pressure boundary work are absent from this master ledger.  What remains
+   is actual selected cross interaction/profile-defect rejection and any continuous-to-
+   discrete synthesis approximation, each charged once.
+3. **Run the iterative PDE extraction through the full physical depth.**  Every
+   efficient Navier--Stokes block must enter the certified service-or-flat gate with
+   the same physical transfer law and the same canonical material labels, so the
+   multi-currency master telescope applies to the actual recursive extraction.
 No statement in this repository currently closes these PDE gaps, and no claim of Navier--Stokes global regularity is made.
 
 ## 17. Reproducible provenance
@@ -5412,6 +5412,12 @@ The most useful recorded runs, in chronological order, are:
 | `31248783086`, `31248923266` | first two adjoint Kelvin--Duhamel workflow attempts failed only because the test fixture wrote `2+j` instead of the complex literal `2+1j`; `338` other tests passed, so these are implementation provenance, not mathematical countermodels |
 | `31249473037` | preferred adjoint Kelvin--Duhamel causal gate on `3272ee4`: exact adjoint pairing removes common Kelvin/bulk-viscous transport from the source ledger; inherit/residual/high--high alternative `A/4,A/4,A/2`; positive aligned parent-pair generation; natural parent-window overlap `>103/50 T_child`; full pytest + `50,000` instantaneous/phase checks + `5,000` exact block-exponential histories, Duhamel residual `1.461e-15` |
 | `31250408864` | preferred asynchronous Duhamel synchronization cone on `b9c17dc`: first parent-event span `<=25/128`, recurrence `alpha_next<=(25/64)(alpha+2/5)`, invariant cone `alpha<=3/8`, common-slice margin `9/40`, fixed point `10/39`, finite initial-boundary depth and single-boundary coherent registration rule; `347` tests + `50,000` checks |
+| `31250736899` | canonical material coherent labels on `f7be08c`: intrinsic `zeta=(L^-1 X/2,L^T k)` is common-affine invariant; nested dyadic refinement has zero Moyal switch cost; geometric frequency/covariance schedules give summable representation `Xi`; `352` tests + `50,000` checks, affine residual `1.877e-15` |
+| `31250867463` | physical multi-currency master on `75d0f09`: conditional single-charge algebra `N_A<=sum B_r/b_r` for **uniform globally bounded** resource classes; flat erosion gives `N_T>=[kappa0 L-Pmax-Z]/[kappa0+Pmax]-N_A`; such true resource resets alter only the finite offset, not `c_eff`; `355` tests + `50,000` episodes; critical `N E`/`D_V` applicability is explicitly corrected by `31251119223` |
+| `31251119223` | high-strain lifetime collision on `3d41d55`: Arb-certified `K>1/30 => D_V>32 pi^2/(75c)` for `V=S_(N/4)u`; also records the geometric-scale countermodel showing critical `N E` and `D_V` costs are `O(1/N)` physically and cannot be treated as uniform finite-count resources; `359` tests + `50,000` checks |
+| `31251337503` | first resolved-objective-strain stress run failed because the diagnostic tried to saturate a deliberately weaker clean inverse bound (`1/380`) instead of the sharper analytic coefficient; theorem constants had already passed Arb, so this is diagnostic-direction provenance, not a countermodel |
+| `31251421182` | preferred resolved objective-strain collision on `01a0915`: exact filtered corotational source identity for `A=grad V`; clean order-two constant `<1/380`, `||V||_3^2<mu_V/15`, pressure Hessian `rho_P<=mu_V/5700+||R||_(3/2)/380`, and viscous constant `<1/1500`; `362` tests + `50,000` checks, identity residual `6.874e-16` |
+| `31251605854` | divergence-free coherent Parseval frame on `cfe34a5`: Leray-projected coherent probes preserve Moyal coefficients exactly on `L^2_sigma` and cancel pressure globally, removing compact moving-window/pressure-boundary interfaces from the canonical global ancestry route; `356` tests + `9` optional skips + `20,000` checks |
 
 | `31249662333`, `31249664073`, `31249665749`, `31249667523`, `31249669387`, `31249671051`, `31249672640`, `31249674254`, `31249675942` | nine-workflow adjoint-causal integration on `f1f0e62`: coherent transfer cells, coherent increment service, service-or-flat rigidity, physical flat episode, causal binary ancestry, transfer-weighted Shannon reuse, Renyi causal reuse, adjoint Kelvin--Duhamel and master all green; adjoint workflow `339` tests + `50,000` checks, master `20,000` traces with worst margin `0` |
 
@@ -5696,19 +5702,127 @@ earlier.  At the initial surface the exact adjoint gate is truncated; this is an
 initial-boundary root, not a fresh interior grain.  For `u_0 in Hdot^m`, band-`M`
 roots satisfy `#R_M<=eta^-1 M^(1-2m)||u_0||_Hdot^m^2`.
 
-The decisive next bridge is therefore **canonical material-label registration and
-single-ledger telescoping**.  Exact Kelvin/affine transport is free; a coherent
-cell switch pays symmetric-difference Moyal energy once and a covariance-window
-change pays `d_log E/sqrt(2)` once.  The Duhamel, Shannon/Renyi,
-Hodge/resistance and holonomy modules must use the same material label, while all
-frequency/profile/covariance representation errors are summed once in global `Xi`.
-After that registration/telescoping theorem, the remaining global step is to telescope
-the physical `kappa_0>0.17` flat episodes, coherent stopping epochs,
-transfer-weighted causal entropy/pair events and source/dissipation costs while
-keeping the **single total `Xi` ledger** summable.  Fresh-packet energy alone,
-raw cycle rank without causal transfer labels, arbitrary redundant Gaussian
-coefficients, aspect penalties, sub-bandwidth source counting or a new
-persistence hypothesis are not admissible shortcuts.
+Canonical material-label registration is now theorem-level at representation
+level.  Use one nested dyadic address of the intrinsic coherent coordinate `zeta`
+for Duhamel, Shannon/Renyi, Hodge/resistance, holonomy and old-pool ancestry.
+Common Kelvin transport and nested refinement have zero charge.  With
+`h_j=h_0 2^-j` and `delta_j=delta_0 2^-j`,
+
+\[
+\boxed{\Xi_{sym}\le2A_3L_*B_*h_0},
+\qquad
+\boxed{\Xi_{cov}\le\sqrt2\,\delta_0E_{global}}.
+\]
+
+Actual material cell switching remains a physical Moyal relink/backflow/fresh
+event; it is not hidden as representation error.
+
+The **physical multi-currency master telescope is also theorem-level**.  If
+additive resource class `r` has total budget `B_r` and every primary-charged reset
+uses at least `b_r`, then `N_A<=sum_r B_r/b_r`.  Flat erosion and
+`L=N_F+N_T+N_A` give
+
+\[
+\boxed{
+N_T\ge
+\frac{\kappa_0L-P_{max}-Z}{\kappa_0+P_{max}}
+-\sum_r\frac{B_r}{b_r}.
+}
+\]
+
+Hence
+
+\[
+\boxed{
+-\log\prod_{j<L}R_j
+\ge c_{eff}L-O(1)-\Xi,
+\qquad
+c_{eff}=\frac{c_0\kappa_0}{\kappa_0+P_{max}}>0.
+}
+\]
+
+Only reset classes with a proved **scale-independent threshold in a globally
+bounded resource** change merely the finite offset.  Critical packet mass `N E`
+and normalized dissipation `D_V` do not qualify from energy alone: their physical
+costs scale like `1/N` and are summable along one geometric cascade.  They remain
+sticky/causal ancestry currencies rather than automatic finite-count resets.
+
+The high-strain branch is now quantitatively identified rather than left as raw
+action.  For `V=S_(N/4)u`,
+
+\[
+\boxed{
+K:=\int\|S\|_{op}dt>1/30
+\Longrightarrow
+D_V:=N\int\|\nabla V\|_2^2dt>\frac{32\pi^2}{75c}.
+}
+\]
+
+This is a critical dissipation currency, not a uniform global reset count.
+
+The objective-strain source branch has also been corrected to the **resolved
+Kelvin transporter**.  With `A=grad V`,
+
+\[
+\boxed{
+\mathring S_V
+=-S^2-\Omega^2+[S,\Omega]
+-\nabla^2P-\operatorname{sym}\nabla\nabla\cdot R+\nu\Delta S.
+}
+\]
+
+Because `V` is supported in `B_(N/4)` and `P,R` in `B_(N/2)`, Arb gives the
+clean filtered pressure route
+
+\[
+\boxed{
+\rho_P\le\frac{\mu_V}{5700}+\frac{\|R\|_{3/2}}{380}.
+}
+\]
+
+Thus pressure-Hessian strain dephasing forces `mu_V>=2850 rho_P` or
+`||R||_(3/2)>=190 rho_P`; the latter returns to Germano/Onsager coherent service.
+The old unspecified raw-pressure near coefficient is not needed for the actual
+resolved packet transporter.
+
+Finally, the canonical global coherent ancestry no longer requires a compact
+physical window.  For divergence-free `u`, self-adjoint Leray projection gives
+
+\[
+\boxed{
+\langle u,\mathbb P(g_ze_a)\rangle=\langle u,g_ze_a\rangle,
+}
+\]
+
+so projected coherent probes remain a Parseval/Moyal frame on `L^2_sigma`, while
+
+\[
+\boxed{\langle\mathbb P(g_ze_a),\nabla p\rangle=0}
+\]
+
+exactly.  Hence compact moving-window commutators, curvature-balanced cutoff
+errors and localized pressure boundary work are not part of the **canonical global
+master `Xi`**; Leray/helical distortion is already the summable frequency-symbol
+representation error.  Compact windows remain available for genuinely local CKN
+diagnostics.
+
+The decisive next bridge is now **branch-by-branch critical-currency routing plus
+the remaining coherent cross/profile `Xi`**.  Every service-or-flat exit must be
+assigned exactly once to a multiplicative transfer cost, a sticky critical
+ancestry/action currency, or a genuinely uniform globally bounded resource.  For
+the global master, spatial compact-window interfaces have been removed by the
+divergence-free coherent Parseval frame; the remaining analytic interface is the
+actual selected cross/profile-defect interaction (and any synthesis approximation),
+which must be summable in the same physical transfer law.
+After that PDE audit, no new finite-dimensional escape mechanism is currently
+identified.  The continuum task is then to apply the certified multi-currency
+telescope to the actual recursive Navier--Stokes extraction, with physical
+`kappa_0>0.17` flat erosion, coherent stopping, transfer-weighted causal
+entropy/pair events and source/dissipation budgets, while the one total `Xi`
+remains bounded.  Fresh-packet energy alone, raw cycle rank without causal
+transfer labels, arbitrary redundant Gaussian coefficients, aspect penalties,
+sub-bandwidth source counting or a new persistence hypothesis are not admissible
+shortcuts.
 
 ---
 
@@ -5724,7 +5838,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, and `docs/asynchronous_duhamel_sync.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, and `docs/divfree_coherent_parseval.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

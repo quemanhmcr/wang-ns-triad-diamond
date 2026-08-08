@@ -131,7 +131,7 @@ Then
 
 Common translation, rigid rotation, common affine/Kelvin transport, common-parent `SL(2)` polarization transport and material coherent-cell motion are not charged in this quantity.
 
-Contrapositively, failure of `tau`-flatness forces a uniformly positive named branch: physical transfer/pair cost, H1/H3 source, objective-strain variation, high-strain lifetime, fresh/inherited high aspect, nonlinear daughter/feedback, or phase holonomy.  The source branches already route to coherent SGS/pressure/viscous service, dissipation or ancestry.
+Contrapositively, failure of `tau`-flatness forces a uniformly positive named branch: physical transfer/pair cost, H1/H3 source, objective-strain variation, high-strain lifetime, fresh/inherited high aspect, nonlinear daughter/feedback, or phase holonomy.  The objective-strain branch must use the **resolved transporter** source identity in `resolved_objective_strain_collision.md`; its filtered pressure Hessian routes to coherent mass or SGS service.  The high-strain branch routes to the critical normalized dissipation in `high_strain_dissipation_collision.md`, but that critical currency is not a scale-independent global reset count.
 
 For `tau=1/100`, the clean common transfer/pair threshold is
 

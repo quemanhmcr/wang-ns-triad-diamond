@@ -1,0 +1,21 @@
+{
+  "certificate": {
+    "status": "EXACT_CANONICAL_MATERIAL_LABELS_AND_SUMMABLE_REPRESENTATION_XI",
+    "label": "dyadic address of intrinsic zeta=(L^-1 X/2,L^T k)",
+    "common_transport": "exactly label preserving",
+    "nested_refinement": "zero Moyal switch charge",
+    "frequency_schedule": "h_j=h_0 2^-j, sum h_j<=2h_0",
+    "frequency_xi": "Xi_sym<=2 A_3 L_* B_* h_0",
+    "covariance_schedule": "delta_j=delta_0 2^-j, sum delta_j<=2delta_0",
+    "covariance_xi": "Xi_cov<=sqrt(2) delta_0 E_global",
+    "physical_switch": "not representation error; remains Moyal relink/backflow/fresh currency"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_affine_zeta_residual": 1.8769419421689984e-15,
+    "maximum_nested_address_failure": 0.0,
+    "worst_refinement_energy_residual": 0.0,
+    "minimum_frequency_schedule_margin": 1.7887980593295216e-16,
+    "minimum_covariance_schedule_margin": 2.9542476321156586e-16
+  }
+}

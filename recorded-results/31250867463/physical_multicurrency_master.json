@@ -1,0 +1,18 @@
+{
+  "certificate": {
+    "status": "EXACT_MULTICURRENCY_EPISODE_TELESCOPE",
+    "single_charge_rule": "each additive reset selects exactly one primary globally bounded resource",
+    "additive_reset_bound": "N_A <= sum_r B_r/b_r",
+    "transfer_count": "N_T >= [kappa0 L-Pmax-Z]/[kappa0+Pmax]-N_A",
+    "efficiency": "-log prod R_j >= c0 N_T-Xi",
+    "rate": "c_eff=c0 kappa0/(kappa0+Pmax)",
+    "physics": "finite energy/dissipation/initial-boundary budgets affect only the finite offset, not the linear depth rate"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_transfer_count_margin": 0.0,
+    "minimum_log_efficiency_margin": 0.0,
+    "minimum_resource_count_margin": 0.00014136746680515344,
+    "minimum_asymptotic_rate": 2.8616179204635805e-08
+  }
+}

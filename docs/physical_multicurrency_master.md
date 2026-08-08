@@ -18,7 +18,7 @@ N_A\le \sum_r\frac{B_r}{b_r}.
 }
 \]
 
-Examples of the intended additive side are the already derived fresh-energy/radius budgets, high-frequency or viscous dissipation budgets, and initial-boundary coherent/Fourier budgets. A Bellman/Hodge/Rényi event which already produces multiplicative transfer loss belongs to the transfer-cost class instead; it must not also be counted here.
+This algebra applies only when `b_r` is a **scale-independent lower amount in the same globally bounded resource**. The critical packet currencies `N E` and `D_V=N int||grad V||_2^2 dt` do not qualify merely from the energy inequality: along `N_j=N_0 q^j`, their physical energy/dissipation costs scale like `1/N_j` and are summable even for infinitely many events. The high-strain dissipation theorem records this countermodel explicitly. Initial-boundary Sobolev/Fourier tails or any future resource with a proved uniform global threshold may qualify. A Bellman/Hodge/Rényi event which already produces multiplicative transfer loss belongs to the transfer-cost class instead; it must not also be counted here.
 
 ## 2. Flat erosion with two kinds of reset
 
@@ -121,7 +121,7 @@ This is the central point: **finite energy/dissipation resources alter only the 
 
 The theorem separates three fundamentally different mechanisms rather than forcing them into one artificial norm:
 
-1. irreversible or finite-capacity physics — energy, enstrophy/dissipation, initial data — gives additive resource budgets;
+1. a **genuinely uniform globally bounded resource** gives an additive reset budget; critical energy/enstrophy by themselves do not, because their physical cost decays like `1/N` along a geometric scale chain;
 2. loss of near-extremal transfer coherence — Bellman/Hodge/Rényi/sideband deficits — gives multiplicative transfer cost;
 3. an almost ideal Kelvin-flat block gives neither immediately, but consumes barycentric geometric potential at rate \(\kappa_0\).
 
@@ -132,7 +132,7 @@ This mirrors the actual Navier--Stokes structure: conservation supplies finite r
 This is an exact master algebra once every physical reset has been assigned to one of the two costly classes and the additive classes have proven global budgets. It does **not** silently assert that every PDE source currency already has a global budget. The remaining continuum audit is concrete:
 
 - list each physical branch from service-or-flat rigidity;
-- classify it either as a multiplicative transfer cost or as one already-proved globally bounded additive resource;
+- classify it either as a multiplicative transfer cost, a critical ancestry/action currency which still needs sticky causal routing, or an already-proved uniformly bounded additive resource;
 - ensure every event is primary-charged exactly once;
 - insert the now-summable representation/interface \(\Xi\) schedule.
 

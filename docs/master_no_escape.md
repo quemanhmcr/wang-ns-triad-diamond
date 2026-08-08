@@ -1349,3 +1349,117 @@ common slice exists for every generated layer, with invariant normalized span
 `<=3/8`, margin `9/40`, and fixed point `10/39`.  Initial-boundary termination is
 finite by the geometric lifetime growth.  Preferred theorem artifact:
 `31250408864` on `b9c17dc` (`347` tests plus `50,000` synchronization checks).
+
+## Canonical material labels and multi-currency physical telescope
+
+After asynchronous synchronization, use one nested dyadic address of the
+intrinsic coherent coordinate `zeta=(L^-1 X/2,L^T k)` for the Duhamel causal
+pushforward, Shannon/Renyi reuse and Hodge/resistance/holonomy ancestry.  Common
+Kelvin transport preserves the address exactly and nested Moyal refinement has
+zero switch cost.  With geometric representative schedules,
+
+\[
+\boxed{\Xi_{sym}\le2A_3L_*B_*h_0},
+\qquad
+\boxed{\Xi_{cov}\le\sqrt2\,\delta_0E_{global}}.
+\]
+
+Thus representation-level label registration is summable and tunably small;
+actual material cell switches remain physical relink/backflow/fresh events.
+Preferred certificate: `31250736899` (`352` tests + `50,000` checks).
+
+The master can also admit globally finite additive physical-resource resets.
+If every such reset is assigned one primary class `r`, consumes at least `b_r`,
+and the total resource is at most `B_r`, then
+
+\[
+N_A\le\sum_r B_r/b_r.
+\]
+
+Together with flat erosion,
+
+\[
+\boxed{
+N_T\ge
+\frac{\kappa_0L-P_{max}-Z}{\kappa_0+P_{max}}
+-\sum_r\frac{B_r}{b_r}.
+}
+\]
+
+Hence any reset class with a proved **scale-independent threshold in a globally
+bounded resource** modifies only the finite offset; the asymptotic coefficient
+remains `c_eff=c0 kappa0/(kappa0+Pmax)`.  Critical fresh mass `N E` and normalized
+dissipation `D_V` do not qualify from the energy inequality alone, because their
+physical costs decay like `1/N` along geometric scale chains.  Preferred algebra
+certificate: `31250867463` (`355` tests + `50,000` synthetic episodes); the
+high-strain correction is `31251119223`.
+
+The remaining PDE audit is branch-by-branch: every service-or-flat exit must be
+primary-charged exactly once as either multiplicative transfer cost or an
+already-proved globally bounded additive resource, while the remaining selected
+spatial/profile interfaces are combined into the one total `Xi` ledger.
+
+
+## High strain and resolved objective-strain correction
+
+The high-strain exit is a definite critical dissipation event for the strict
+transporter:
+
+\[
+\boxed{
+\int_0^{cN^{-2}}\|S\|_{op}dt>1/30
+\Longrightarrow
+N\int\|\nabla V\|_2^2dt>\frac{32\pi^2}{75c}.
+}
+\]
+
+This does **not** provide a uniform global reset count: on `N_j=N_0q^j`, a
+constant normalized dissipation `D_V` costs only `nu D_V/N_j` in the physical
+energy inequality, and the geometric sum is finite.  The same scale-discount
+obstruction holds for fresh critical mass `N_j E_j=mu`.  Preferred certificate:
+`31251119223`.
+
+The objective-strain variation in the affine packet must use the resolved field
+`V`, whose exact corotational source is
+
+\[
+\mathring S_V
+=-S^2-\Omega^2+[S,\Omega]
+-\nabla^2P-\operatorname{sym}\nabla\nabla\!\cdot R+\nu\Delta S.
+\]
+
+The filtered support gives
+
+\[
+\boxed{
+\rho_P\le\mu_V/5700+\|R\|_{3/2}/380,
+}
+\]
+
+so pressure-Hessian dephasing routes to resolved coherent mass or SGS
+increment/service.  Preferred certificate: `31251421182`; the earlier
+`31251337503` failure was a stress-diagnostic direction error, not a theorem
+counterexample.
+
+## Global divergence-free coherent frame removes the compact-window interface
+
+For divergence-free `u`,
+
+\[
+\langle u,\mathbb P(g_ze_a)\rangle=\langle u,g_ze_a\rangle.
+\]
+
+Consequently the Leray-projected coherent probes form the same continuous
+Parseval/Moyal analysis frame on `L^2_sigma`, while
+
+\[
+\langle\mathbb P(g_ze_a),\nabla p\rangle=0
+\]
+
+exactly.  The canonical global coherent ancestry therefore needs no compact
+moving spatial cutoff merely to define packet coefficients or cancel pressure.
+The compact-window commutator, curvature-balanced moat and localized pressure
+boundary work remain relevant to optional local/CKN diagnostics, but they are
+absent from the global master `Xi`.  Leray/helical variation across a narrow
+frequency cell is already contained in the summable symbol-freezing ledger.
+Preferred certificate: `31251605854`.
