@@ -162,9 +162,9 @@ N\int\|\nabla P_{>N}u\|_2^2dt
 }
 \]
 
-If a large integrated increment charge is carried by a much shorter time set instead, that is explicitly a temporal concentration / CKN-burst branch. The theorem does not hide such concentration inside an averaged norm.
+The later source-weighted theorem sharpens this spacetime interpretation.  For differentiated SGS source, the source-to-increment power `3/2` and the increment-to-mass/enstrophy power `2/3` cancel, so the final currency is linear in instantaneous source density.  No persistence or temporal-superlevel assumption is required.  For the viscous source, Cauchy shows that concentrating source weight in time only increases the quadratic dissipation price.
 
-This is the desired physical routing:
+Thus the preferred physical routing is
 
 \[
 \boxed{
@@ -174,8 +174,6 @@ This is the desired physical routing:
 \ \lor\
 \text{Bellman/cycle entropy}
 \ \lor\
-\text{high-frequency dissipation}
-\ \lor\
-\text{temporal concentration}.
+\text{high-frequency dissipation}.
 }
 \]

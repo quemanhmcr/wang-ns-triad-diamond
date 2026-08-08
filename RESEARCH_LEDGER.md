@@ -3231,6 +3231,182 @@ machinery.  Preferred Action `31227536542` passed `264` tests plus `50,000`
 checks; viscosity's sampled contribution to anisotropy growth was always
 negative.
 
+#### Ancestor-reservoir synchronization: spectral half-life
+
+The low/base reservoir produced by the Onsager collision can no longer be reused
+indefinitely at no price.  On the signed-good core,
+
+\[
+\boxed{
+{N_{q+1}\over N_q}
+>e^{\gamma_*-1/80}>\frac85.
+}
+\]
+
+For one materially reused reservoir covector under the same affine/Kelvin flow,
+
+\[
+\dot k=-A^Tk,
+\qquad
+{d\over dt}\log|k|\le\|\operatorname{sym}A\|_{op}.
+\]
+
+Thus on the existing low-strain branch `int||sym A||dt<=1/30`, Arb certifies
+
+\[
+\boxed{{M_{q+1}\over M_q}<e^{1/30}<\frac{21}{20}.}
+\]
+
+The low-band contribution to the LP increment square is proportional to
+`(M/N)^2 mu_M`.  Therefore its coefficient per unit critical mass contracts by
+
+\[
+\boxed{
+\left({21/20\over8/5}\right)^2
+={441\over1024}<\frac12.
+}
+\]
+
+Since `mu_M=M E_M`, the coefficient per unit physical energy contracts by
+
+\[
+\boxed{
+\left({21\over20}\right)^3\left({5\over8}\right)^2
+={231525\over512000}<\frac12.
+}
+\]
+
+Even if the same old reservoir is adversarially allowed the entire conserved
+energy at every future service time, its service capacity is geometrically
+summable and totals less than twice its generation-zero energy-capacity
+coefficient.  Material reuse is not merely a label: for `Ldot=A L` and
+`kdot=-A^T k`,
+
+\[
+\boxed{q=L^Tk=\text{constant}.}
+\]
+
+A new carrier/band not obtainable from the transported material state is a
+relinking/source event, not free reuse.  Action `31228679822` on `d3f8a51`
+passed `268` tests plus `50,000` checks; the worst Kelvin-covector residual was
+`1.490e-15`, and the largest sampled critical-mass / physical-energy service
+ratios were `0.425474357` and `0.444631270`.
+
+#### Band-limited source sampling and resolvable source clusters
+
+Let a same-scale source family have centers separated by `delta/N`.  For a fixed
+band limit, the standard Plancherel--Polya theorem gives
+
+\[
+\sum_a|f(x_a)|^p
+\le C_{PP}N^3\|f\|_p^p.
+\]
+
+Combining this with the affine factor
+`||L^-1||||L||^2<=kappa^2 r_g` makes the Navier--Stokes powers cancel exactly.
+For differentiated SGS source,
+
+\[
+\boxed{
+\sum_a\rho_{R,a}^{3/2}
+\le
+C_{PP}(\kappa_0^2s_0C_{D3})^{3/2}
+\|R\|_{3/2}^{3/2}
+\lesssim Q_{inc}.
+}
+\]
+
+The exponent identity is
+
+\[
+-5\cdot\frac32+3+3\cdot\frac32=0.
+\]
+
+For viscous-fourth source,
+
+\[
+\boxed{
+\sum_a\rho_{\nu,a}^2
+\le
+C_{PP,2}(\kappa_0^2s_0\nu C_{41})^2
+\mathfrak d_V,
+}
+\]
+
+with the exact scaling identity `-10+3+6+1=0`.  Hence separated source
+replication pays additive increment charge or dissipation.
+
+A maximal `delta/N`-separated subfamily covers every remaining source center by
+one bandwidth-resolution cluster.  If all selected centers have `rho>=rho_0`,
+then
+
+\[
+\boxed{
+\#\mathcal C_R\le Q_R/\rho_0^{3/2},
+\qquad
+\#\mathcal C_\nu\le Q_\nu/\rho_0^2.
+}
+\]
+
+Sub-resolution multiplicity is therefore merged rather than counted as many
+independent source events.  Preferred Action `31228947363` on `c4c87f6` passed
+`267` tests (`7` optional skips) plus `50,000` checks; the scaling residual was
+`6.262e-16`.  The theorem status is exact scaling/routing given the standard
+Plancherel--Polya, Bernstein and Riesz analytic inputs.
+
+#### Pressure-third near field and quadratic reservoir synchronization
+
+For the strict filtered pressure,
+
+\[
+\boxed{
+-\Delta P=\partial_i\partial_j(V_iV_j+R_{ij}),
+}
+\]
+
+so `P` remains band limited.  Riesz boundedness plus low-pass Bernstein gives
+
+\[
+\boxed{
+\|P\|_{3/2}^{3/2}
+\le
+\sqrt2 C_R^{3/2}
+\left[C_B^3\mu_V^{3/2}+\|R\|_{3/2}^{3/2}\right].
+}
+\]
+
+The preceding sampling theorem therefore routes separated pressure-third source
+clusters to a resolved low-frequency mass reservoir or to the same cubic
+increment charge.  The SGS part already enters the Onsager ledger.
+
+For one fixed low-low material reservoir pair `(a,b)`, the pre-`3/2` normalized
+pressure service coefficient per unit `sqrt(E_aE_b)` is
+
+\[
+\mathcal P_{ab}(N)
+\sim
+{M_{max}^3\sqrt{M_aM_b}\over N^3}.
+\]
+
+On a low-strain signed-good lineage it contracts by
+
+\[
+\boxed{
+\left({21\over20}\right)^4
+\left({5\over8}\right)^3
+={194481\over655360}
+<\frac13.
+}
+\]
+
+Thus one old pressure pair has total future service less than `3/2` times its
+initial pair energy-capacity coefficient, even when both endpoints are allowed
+the full global energy cap at every time.  Persistent pressure service must
+relink to new pairs, fragment into a pair-entropy/cycle problem, or leave the
+low-strain material-reuse branch.  Action `31229118774` on `6e21fe6` passed
+`270` tests (`7` optional skips) plus `50,000` checks; the maximum sampled pair
+ratio was `0.288962935`.
+
 #### Spatial moat width must balance curvature
 
 The earlier commutator estimate `O(1/M)` remains correct, and the quadratic
@@ -4001,33 +4177,30 @@ This theorem is the current **finite-dimensional no-escape closure**. It is cond
 
 ### Still conditional / PDE bridge
 
-1. **Synchronize the winning low/base increment reservoir through spacetime.**
-   Cubic SGS increments now force a dominant coarse/base band, Bellman/cycle
-   entropy, or high-frequency dissipation.  Because the strict transporter is at
-   `N/4`, the winning low/base packet is naturally an ancestor reservoir, not
-   automatically the selected high-frequency daughter.  One must prove that
-   repeated servicing of many generations by the same reservoir creates
-   covariance/scale/spin holonomy, ancestry cycles, or a fresh-radius event.
-2. **Close the pressure-third near-field registration.**  Far pressure-third
-   already has the summable `6-3=3` exponent.  The near physical packet
-   coefficient must be inserted into the same adaptive affine frame and routed
-   to fresh/reused critical mass without double counting the pressure already
-   removed from microscopic Leray packet equations.
-3. **Control replication of source events.**  Several separated H1 source grains
-   could in principle sample the same band-limited stress or dissipation
-   reservoir.  A Plancherel--Polya / band-limited sampling or bounded-overlap
-   theorem is needed to convert many separated source events into additive
-   `L^(3/2)` stress charge, energy-radius cost, or dissipation.
-4. **Control selected-subfamily interfaces through spacetime.**  Complete
+1. **Synchronize reservoir relinking with the transfer-selected ancestry graph.**
+   A fixed material low-band reservoir now has a spectral half-life, a fixed
+   pressure pair has a one-third-life, and fragmentation has Bellman/cycle
+   currencies.  What remains is to show that the packet decomposition of a
+   genuine PDE block cannot repeatedly relabel newly selected low/base atoms or
+   pressure pairs without entering the existing `Xi`, fresh-radius, or
+   component-entropy ledger.
+2. **Control selected-subfamily interfaces through spacetime.**  Complete
    partitions cancel globally, degree-zero profile remainders are work-level
-   `Xi`, and pair-Hermite rescue has an exact ancestry graph.  The selected
-   lineage must keep uncancelled spatial/frequency interfaces summable relative
-   to transfer weight.
-5. **Feed a uniform physical block threshold into the master episode theorem.**
-   The local curvature/source/SGS/aspect exits now have named positive currencies,
-   but a continuum theorem must still prove that every efficient PDE block either
-   has a uniform curvature/source threshold or enters the flat/reuse lineage,
-   and then telescope those block costs without duplicate charging.
+   `Xi`, and moving affine frequency cells have zero common Heisenberg forcing.
+   The selected lineage must keep the uncancelled spatial/frequency interfaces
+   summable relative to physical transfer weight when the chosen ancestry
+   subfamily changes.
+3. **Feed a uniform physical block threshold into the master episode theorem.**
+   Local curvature, H1/H3 sideband, source, SGS, pressure, aspect and reservoir
+   reuse now all have named positive currencies.  A continuum theorem must still
+   prove that every efficient PDE block either triggers one with a uniform
+   transfer-weighted threshold or enters the flat/reuse lineage, and then
+   telescope the resulting block costs without duplicate charging.
+4. **Make the transfer-adapted packet realization fully iterative.**  One-shot
+   Gaussian near-extremizer extraction, smooth-symbol freezing, defect-space
+   nested grains and the band-limited sampling estimates are individually
+   controlled.  A full iterative extraction must keep the coefficient budget,
+   source-center clustering and ancestry labels compatible across generations.
 
 No statement in this repository currently closes these PDE gaps, and no claim of Navier--Stokes global regularity is made.
 
@@ -4138,6 +4311,9 @@ The most useful recorded runs, in chronological order, are:
 | `31227536542` | preferred no-gap affine-aspect theorem on `2861f9a`: transition `567/500`, `Q_pol>=1/4000`, extended H1/full costs, condition-growth/inheritance law, fresh aspect-radius mass; `264` tests + `50,000` checks, Arb-certified |
 
 | `31227852933`--`31227894352` | fourteen-workflow source/sideband/ancestry integration on `9c5f465`: H1 source, SGS/viscous collision, Onsager increment, source-weighted episode, sticky aspect, H1/H3, pair ancestry, curvature, affine critical grain, relative polarization, localized pressure and master all green; master `20,000` traces, worst margin `0` |
+| `31228679822` | Arb-certified ancestor-reservoir synchronization on `d3f8a51`: signed-good progress `>8/5`, low-strain Kelvin growth `<21/20`, critical-mass and physical-energy service half-life, exact material covector `q=L^T k`; `268` tests + `50,000` checks |
+| `31228947363` | preferred band-limited H1 source sampling on `c4c87f6`: separated SGS/pressure `ell^(3/2)` and viscous `ell^2` source charges, resolvable cluster counting; `267` tests + `7` optional skips + `50,000` checks |
+| `31229118774` | pressure-reservoir synchronization on `6e21fe6`: one fixed low-low pressure pair has service ratio `194481/655360<1/3`; `270` tests + `7` optional skips + `50,000` checks |
 
 The current preferred master regression is run `31227894352` on integration
 commit `9c5f465` (`258` tests plus `20,000` episode traces, worst margin `0`).
@@ -4279,24 +4455,31 @@ Because the SGS source-to-increment power is `3/2` and this collision takes the
 density.  Source weight, rather than the duration of a superlevel set, can be
 pigeonholed; temporal concentration is therefore not a free SGS/viscous exit.
 
-The decisive next theorem is now **ancestor-reservoir synchronization**.  The
-winning low/base band produced by the increment collision lives naturally near
-the coarse transporter scale.  If the same reservoir repeatedly services
-successive high-frequency near-extremal blocks, the programme must prove that it
-is either:
+Ancestor-reservoir synchronization is now theorem-level.  On low-strain material
+reuse, one low-band reservoir has a service half-life `<1/2` per generation and
+one fixed low-low pressure pair has a one-third-life `<1/3`.  The phase-space
+label cannot be reset freely because `q=L^T k` is a material invariant.  Spatial
+replication at one generation is also band-limited: a maximal `N^-1`-separated
+source family has additive `ell^(3/2)` SGS/pressure charge or `ell^2` viscous
+charge, while sub-resolution multiplicity is merged into one source cluster.
 
-1. a fresh affine reservoir and pays the `r_g` energy budget;
-2. a reused reservoir whose covariance/scale/spin history creates holonomy or
-   relative-polarization cost;
-3. fragmented across many packets and therefore pays `log 2` Bellman entropy or
-   `1/4` same-ancestry cycle mass; or
-4. accompanied by additive high-frequency dissipation.
+The decisive next theorem is now **reservoir relinking / selected-interface
+synchronization**.  The analytic currencies no longer allow one fixed old field
+to service infinitely many generations.  What remains is to prove that a genuine
+iterative packet extraction cannot evade this by repeatedly changing which
+low/base atom or pressure pair is called the ancestor without paying one of
 
-After that, the remaining analytic work is pressure-third near-field
-registration, source-event sampling/packing, and selected-interface `Xi`
-summability.  Further raw high-derivative residual bounds, aspect penalties,
-global `L^3` assumptions, or treating short source bursts as a free escape would
-throw away structure already exposed by the filtered Navier--Stokes physics.
+1. transfer-level cross error `Xi` at a selected interface;
+2. fresh affine radius/energy;
+3. component Bellman entropy or ancestry-cycle rank;
+4. high-strain/source action; or
+5. high-frequency / viscous dissipation.
+
+After that, the central continuum issue is a uniform physical block threshold and
+its telescoping through the master episode theorem.  Further raw
+high-derivative residual bounds, aspect penalties, global `L^3` assumptions,
+sub-bandwidth source counting, or treating short source bursts as a free escape
+would discard structure already exposed by the filtered Navier--Stokes physics.
 
 ---
 
@@ -4312,7 +4495,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, and `docs/affine_aspect_sticky.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, and `docs/pressure_reservoir_sync.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

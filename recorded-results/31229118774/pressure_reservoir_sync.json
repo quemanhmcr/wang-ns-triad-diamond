@@ -1,0 +1,14 @@
+{
+  "certificate": {
+    "pair_service_ratio": "194481/655360",
+    "clean_pair_service_ratio": "<1/3",
+    "total_future_pair_capacity": "<3/2 times generation-0 pair energy-capacity coefficient",
+    "status": "EXACT_GIVEN_SIGNED_GOOD_PROGRESS_AND_LOW_STRAIN_KELVIN_GROWTH"
+  },
+  "stress": {
+    "samples": 50000,
+    "maximum_pair_ratio": 0.2889629350379978,
+    "minimum_one_third_margin": 0.04437039829533551,
+    "minimum_amortized_margin": 0.0
+  }
+}
