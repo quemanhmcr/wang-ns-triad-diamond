@@ -91,38 +91,53 @@ At the proposed cone boundary,
 <\frac38.
 \]
 
-Therefore
-
-\[
-\boxed{\alpha_j\le3/8}
-\]
-
-is invariant. The common-slice margin is exactly
-
-\[
-\boxed{
-1-\frac38-\frac25=\frac9{40},
-}
-\]
-
-and the affine recurrence has fixed point
-
-\[
-\boxed{\alpha_*=\frac{10}{39}}.
-\]
+The loose cone `alpha<=3/8` is invariant.  But after the first half-slab one gets a sharper statement.  Since\n\[\n\frac{25}{128}<\frac{10}{39}\n\]\nand `10/39` is the affine-recurrence fixed point, induction gives\n\[\n\boxed{\alpha_j\le\frac{10}{39}\qquad(j\ge1).}\n\]\nHence the common-slice margin is actually\n\[\n\boxed{\n1-\frac25-\frac{10}{39}=\frac{67}{195}.\n}\n\]
 
 This is a **parabolic synchronization cone** for the causal Duhamel measure. It replaces the unproved requirement that every selected parent packet persist coherently through a common natural window.
 
-## 3. The initial surface is reached after finite causal depth
+## 3. The initial surface is reached after finite causal depth — corrected asynchronous geometry
 
-Every backward generation enlarges its natural lifetime by at least \(64/25\), while every common-slice step moves backward by \(2/5\) of the current minimum lifetime. Starting from \(T_0\), after \(L\) interior steps the backward displacement is at least
+A subtle point matters here.  The next generated support is contained in the
+previous common Duhamel interval,
+
+\[
+H_{j+1}\subset[s_j,b_j],
+\]
+
+but its left endpoint need not equal \(s_j\).  Thus one must compare successive
+**reference slices**, not simply add \(2T_j/5\) per generation.
+
+Write
+
+\[
+s_j=a_j-\frac25T_j,
+\qquad
+b_j=a_j+\alpha_jT_j.
+\]
+
+The worst case for backward progress is \(a_{j+1}=b_j\).  Since
+\(T_{j+1}\ge(64/25)T_j\) and \(\alpha_j\le10/39\),
 
 \[
 \begin{aligned}
-\Delta t_L
-&\ge \frac25T_0\sum_{j=0}^{L-1}\left(\frac{64}{25}\right)^j\\
+s_j-s_{j+1}
+&\ge
+\frac25\frac{64}{25}T_j
+-\left(\frac25+\frac{10}{39}\right)T_j\\
+&=\boxed{\frac{1792}{4875}T_j}.
+\end{aligned}
+\]
+
+Therefore after \(L\) interior synchronization steps,
+
+\[
+\begin{aligned}
+\Delta s_L
+&\ge
+\frac{1792}{4875}T_0
+\sum_{j=0}^{L-1}\left(\frac{64}{25}\right)^j\\
 &=\boxed{
-\frac{10}{39}T_0
+\frac{1792}{7605}T_0
 \left[
 \left(\frac{64}{25}\right)^L-1
 \right].
@@ -130,9 +145,16 @@ Every backward generation enlarges its natural lifetime by at least \(64/25\), w
 \end{aligned}
 \]
 
-Thus an ancestry starting at any finite physical time cannot have infinite interior causal depth. It either stops earlier through inheritance/residual/reuse, or its next common slice crosses \(t=0\).
+This corrects the earlier, overly strong coefficient \(10/39\) in the cumulative
+backward-displacement formula.  The synchronization recurrence and common-slice
+construction are unchanged.  Crucially, the corrected coefficient is still
+strictly positive, so an ancestry starting at finite physical time cannot have
+infinite interior causal depth.  It either stops earlier through
+inheritance/residual/reuse, or its next common slice crosses \(t=0\).
 
-At that point the adjoint identity is simply integrated on the truncated interval \([0,t]\). There is no missing negative-time packet and no interior fresh-grain charge. The node is an **initial-boundary root**.
+At that point the adjoint identity is simply integrated on the truncated interval
+\([0,t]\).  There is no missing negative-time packet and no interior fresh-grain
+charge. The node is an **initial-boundary root**.
 
 For an initial dyadic band \(M\),
 
@@ -152,7 +174,8 @@ If every selected initial root has critical mass \(ME_a\ge\eta\), then
 }
 \]
 
-For smooth initial data this is an arbitrarily strong high-frequency boundary budget. This boundary currency is distinct from fresh interior grain energy.
+This is a boundary-band estimate, not by itself a scale-independent global reset
+count.
 
 ## 4. Material labels at the common slice
 

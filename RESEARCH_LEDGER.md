@@ -5411,7 +5411,7 @@ The most useful recorded runs, in chronological order, are:
 
 | `31248783086`, `31248923266` | first two adjoint Kelvin--Duhamel workflow attempts failed only because the test fixture wrote `2+j` instead of the complex literal `2+1j`; `338` other tests passed, so these are implementation provenance, not mathematical countermodels |
 | `31249473037` | preferred adjoint Kelvin--Duhamel causal gate on `3272ee4`: exact adjoint pairing removes common Kelvin/bulk-viscous transport from the source ledger; inherit/residual/high--high alternative `A/4,A/4,A/2`; positive aligned parent-pair generation; natural parent-window overlap `>103/50 T_child`; full pytest + `50,000` instantaneous/phase checks + `5,000` exact block-exponential histories, Duhamel residual `1.461e-15` |
-| `31250408864` | preferred asynchronous Duhamel synchronization cone on `b9c17dc`: first parent-event span `<=25/128`, recurrence `alpha_next<=(25/64)(alpha+2/5)`, invariant cone `alpha<=3/8`, common-slice margin `9/40`, fixed point `10/39`, finite initial-boundary depth and single-boundary coherent registration rule; `347` tests + `50,000` checks |
+| `31250408864` | preferred asynchronous Duhamel synchronization cone on `b9c17dc`: first parent-event span `<=25/128`, recurrence `alpha_next<=(25/64)(alpha+2/5)`, invariant cone `alpha<=3/8`, original loose common-slice certificate; recurrence/fixed point valid, but its cumulative `10/39` backward-horizon coefficient is superseded by the corrected asynchronous geometry and single-boundary coherent registration rule; `347` tests + `50,000` checks |
 | `31250736899` | canonical material coherent labels on `f7be08c`: intrinsic `zeta=(L^-1 X/2,L^T k)` is common-affine invariant; nested dyadic refinement has zero Moyal switch cost; geometric frequency/covariance schedules give summable representation `Xi`; `352` tests + `50,000` checks, affine residual `1.877e-15` |
 | `31250867463` | physical multi-currency master on `75d0f09`: conditional single-charge algebra `N_A<=sum B_r/b_r` for **uniform globally bounded** resource classes; flat erosion gives `N_T>=[kappa0 L-Pmax-Z]/[kappa0+Pmax]-N_A`; such true resource resets alter only the finite offset, not `c_eff`; `355` tests + `50,000` episodes; critical `N E`/`D_V` applicability is explicitly corrected by `31251119223` |
 | `31251119223` | high-strain lifetime collision on `3d41d55`: Arb-certified `K>1/30 => D_V>32 pi^2/(75c)` for `V=S_(N/4)u`; also records the geometric-scale countermodel showing critical `N E` and `D_V` costs are `O(1/N)` physically and cannot be treated as uniform finite-count resources; `359` tests + `50,000` checks |
@@ -5685,16 +5685,20 @@ Choosing the common slice `s_j=a_j-(2/5)T_j^min` gives
 \[
 \boxed{\alpha_{j+1}\le\frac{25}{64}(\alpha_j+2/5)},
 \qquad
-\boxed{\alpha_j\le3/8}.
+\boxed{\alpha_j\le10/39\quad(j\ge1)}.
 \]
 
-The common-window margin is `9/40` and the recurrence has fixed point `10/39`.
+The sharp common-window margin is `67/195`; `10/39` is the recurrence fixed point.
 Only generated nodes continue; inherited and classified-residual nodes stop in
 their existing ledgers.  Thus no frozen-packet persistence hypothesis is required
-to put generated events on common physical slices.  Moreover
+to put generated events on common physical slices.  Because the next generated
+support may begin anywhere inside the previous common interval, the corrected
+reference-slice progress is
 
 \[
-\boxed{\Delta t_L\ge\frac{10}{39}T_0[(64/25)^L-1]},
+\boxed{s_j-s_{j+1}\ge\frac{1792}{4875}T_j},
+\qquad
+\boxed{\Delta s_L\ge\frac{1792}{7605}T_0[(64/25)^L-1]}.
 \]
 
 so finite-time interior ancestry reaches `t=0` after finite depth unless it stops

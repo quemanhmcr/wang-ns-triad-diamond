@@ -1314,14 +1314,21 @@ half-slab, `alpha_1<=25/128`; recursively
 
 \[
 \boxed{\alpha_{j+1}\le(25/64)(\alpha_j+2/5)},
-\qquad \boxed{\alpha_j\le3/8}.
+\qquad \boxed{\alpha_j\le10/39\quad(j\ge1)}.
 \]
 
-Every generated layer therefore has a common reference slice with margin `9/40`.
-The cumulative backward displacement is at least
-`(10/39)T_0[(64/25)^L-1]`, so finite-time ancestries either stop or hit `t=0`
-after finite depth.  The initial surface is an explicit boundary root, not an
-interior fresh-grain event.
+Every generated layer therefore has a common reference slice with sharp margin
+`67/195`.  Allowing the next generated support to begin anywhere in the previous
+common interval gives the corrected progress
+
+\[
+\boxed{s_j-s_{j+1}\ge(1792/4875)T_j},
+\qquad
+\boxed{\Delta s_L\ge(1792/7605)T_0[(64/25)^L-1]}.
+\]
+
+Thus finite-time ancestries either stop or hit `t=0` after finite depth.  The
+initial surface is an explicit boundary root, not an interior fresh-grain event.
 
 The unresolved master step is now **canonical material-label registration and
 single-ledger telescoping**.  Exact common Kelvin transport is free; coherent-cell
@@ -1345,8 +1352,7 @@ with `20,000` episode traces and worst margin `0`; the integrated adjoint run
 
 The certified parabolic recursion uses only the signed-good scale window and the
 one-step adjoint Duhamel gate.  It does not run a frozen packet backwards.  A
-common slice exists for every generated layer, with invariant normalized span
-`<=3/8`, margin `9/40`, and fixed point `10/39`.  Initial-boundary termination is
+common slice exists for every generated layer, with sharp normalized span `<=10/39`, margin `67/195`, and fixed point `10/39`.  Initial-boundary termination is
 finite by the geometric lifetime growth.  Preferred theorem artifact:
 `31250408864` on `b9c17dc` (`347` tests plus `50,000` synchronization checks).
 

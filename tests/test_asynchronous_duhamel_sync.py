@@ -5,10 +5,13 @@ import pytest
 
 from src.asynchronous_duhamel_sync import (
     BACKWARD_FRACTION,
+    BACKWARD_SUM_COEFF,
     COMMON_SLICE_MARGIN,
     INITIAL_HALF_SPAN,
+    MIN_REFERENCE_BACKSTEP,
     LIFETIME_GROWTH_MIN,
     SYNC_CONE,
+    SHARP_SYNC_BOUND,
     SYNC_FIXED_POINT,
     choose_heavy_half,
     common_reference_slice,
@@ -23,8 +26,11 @@ from src.asynchronous_duhamel_sync import (
 def test_exact_parabolic_constants():
     assert initial_parent_span_ratio() == Fraction(25, 128)
     assert INITIAL_HALF_SPAN < SYNC_CONE
-    assert COMMON_SLICE_MARGIN == Fraction(9, 40)
     assert SYNC_FIXED_POINT == Fraction(10, 39)
+    assert SHARP_SYNC_BOUND == Fraction(10, 39)
+    assert COMMON_SLICE_MARGIN == Fraction(67, 195)
+    assert MIN_REFERENCE_BACKSTEP == Fraction(1792, 4875)
+    assert BACKWARD_SUM_COEFF == Fraction(1792, 7605)
     assert Fraction(25, 64) * (SYNC_CONE + BACKWARD_FRACTION) == Fraction(155, 512)
     assert Fraction(155, 512) < SYNC_CONE
 
@@ -36,7 +42,7 @@ def test_sync_fixed_point():
 def test_common_reference_slice_is_inside_every_natural_window():
     Tmin = 7.0
     a = 4.0
-    b = a + float(SYNC_CONE) * Tmin
+    b = a + float(SHARP_SYNC_BOUND) * Tmin
     s = common_reference_slice(a, b, Tmin)
     assert b - s < Tmin
     assert math.isclose(Tmin - (b - s), float(COMMON_SLICE_MARGIN) * Tmin, rel_tol=0, abs_tol=1e-14)
@@ -45,7 +51,7 @@ def test_common_reference_slice_is_inside_every_natural_window():
 def test_backward_displacement_closed_form():
     T0 = 0.3
     L = 6
-    brute = sum(float(BACKWARD_FRACTION) * T0 * float(LIFETIME_GROWTH_MIN) ** j for j in range(L))
+    brute = sum(float(MIN_REFERENCE_BACKSTEP) * T0 * float(LIFETIME_GROWTH_MIN) ** j for j in range(L))
     assert math.isclose(minimum_backward_displacement(T0, L), brute, rel_tol=0, abs_tol=1e-13)
 
 
