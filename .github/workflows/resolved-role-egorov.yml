@@ -1,0 +1,27 @@
+name: Resolved role Egorov
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/resolved_role_egorov.py'
+      - 'tests/test_resolved_role_egorov.py'
+      - 'docs/resolved_role_egorov.md'
+      - '.github/workflows/resolved-role-egorov.yml'
+      - 'RESEARCH_LEDGER.md'
+      - 'docs/master_no_escape.md'
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.resolved_role_egorov --samples 50000 --outdir results-resolved-role-egorov
+      - run: cat results-resolved-role-egorov/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resolved-role-egorov-results
+          path: results-resolved-role-egorov/
