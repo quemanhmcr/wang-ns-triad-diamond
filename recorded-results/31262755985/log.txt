@@ -1,0 +1,292 @@
+certify	Set up job	﻿2026-08-08T14:45:58.6194128Z Current runner version: '2.336.0'
+certify	Set up job	2026-08-08T14:45:58.6218965Z ##[group]Runner Image Provisioner
+certify	Set up job	2026-08-08T14:45:58.6219890Z Hosted Compute Agent
+certify	Set up job	2026-08-08T14:45:58.6220552Z Version: 20260707.563
+certify	Set up job	2026-08-08T14:45:58.6221176Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+certify	Set up job	2026-08-08T14:45:58.6221880Z Build Date: 2026-07-07T19:33:50Z
+certify	Set up job	2026-08-08T14:45:58.6222652Z Worker ID: {6f070182-4203-4bcb-b83b-9f941cd9090a}
+certify	Set up job	2026-08-08T14:45:58.6223472Z Azure Region: westus
+certify	Set up job	2026-08-08T14:45:58.6224065Z ##[endgroup]
+certify	Set up job	2026-08-08T14:45:58.6225745Z ##[group]Operating System
+certify	Set up job	2026-08-08T14:45:58.6226386Z Ubuntu
+certify	Set up job	2026-08-08T14:45:58.6227005Z 24.04.4
+certify	Set up job	2026-08-08T14:45:58.6227500Z LTS
+certify	Set up job	2026-08-08T14:45:58.6227975Z ##[endgroup]
+certify	Set up job	2026-08-08T14:45:58.6228569Z ##[group]Runner Image
+certify	Set up job	2026-08-08T14:45:58.6229152Z Image: ubuntu-24.04
+certify	Set up job	2026-08-08T14:45:58.6229762Z Version: 20260720.247.2
+certify	Set up job	2026-08-08T14:45:58.6230818Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+certify	Set up job	2026-08-08T14:45:58.6232540Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+certify	Set up job	2026-08-08T14:45:58.6233469Z ##[endgroup]
+certify	Set up job	2026-08-08T14:45:58.6234947Z ##[group]GITHUB_TOKEN Permissions
+certify	Set up job	2026-08-08T14:45:58.6236823Z Contents: read
+certify	Set up job	2026-08-08T14:45:58.6237501Z Metadata: read
+certify	Set up job	2026-08-08T14:45:58.6238058Z Packages: read
+certify	Set up job	2026-08-08T14:45:58.6238588Z ##[endgroup]
+certify	Set up job	2026-08-08T14:45:58.6240705Z Secret source: Actions
+certify	Set up job	2026-08-08T14:45:58.6241787Z Prepare workflow directory
+certify	Set up job	2026-08-08T14:45:58.6590615Z Prepare all required actions
+certify	Set up job	2026-08-08T14:45:58.6663878Z Getting action download info
+certify	Set up job	2026-08-08T14:45:58.9989673Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+certify	Set up job	2026-08-08T14:45:59.4044807Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+certify	Set up job	2026-08-08T14:45:59.5253017Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+certify	Set up job	2026-08-08T14:45:59.7371609Z Complete job name: certify
+certify	Run actions/checkout@v4	﻿2026-08-08T14:45:59.8130166Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8139000Z ##[group]Run actions/checkout@v4
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8139746Z with:
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8140223Z   repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8144488Z   token: ***
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8144915Z   ssh-strict: true
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8145335Z   ssh-user: git
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8145768Z   persist-credentials: true
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8146245Z   clean: true
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8146666Z   sparse-checkout-cone-mode: true
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8147179Z   fetch-depth: 1
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8147604Z   fetch-tags: false
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8148033Z   show-progress: true
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8148481Z   lfs: false
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8148875Z   submodules: false
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8149329Z   set-safe-directory: true
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8149813Z   allow-unsafe-pr-checkout: false
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.8150701Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9195750Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9198311Z ##[group]Getting Git version info
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9199659Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9201488Z [command]/usr/bin/git version
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9202319Z git version 2.54.0
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9222393Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9237285Z Temporarily overriding HOME='/home/runner/work/_temp/94c3548f-d820-4d9a-bd6f-e867e3d4a82d' before making global git config changes
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9239649Z Adding repository directory to the temporary git global config as a safe directory
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9242573Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9289953Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9293951Z ##[group]Initializing the repository
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9299583Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9408687Z hint: Using 'master' as the name for the initial branch. This default branch name
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9410120Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9413034Z hint: to use in all of your new repositories, which will suppress this warning,
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9417390Z hint: call:
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9419322Z hint:
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9420239Z hint: 	git config --global init.defaultBranch <name>
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9421266Z hint:
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9422224Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9423711Z hint: 'development'. The just-created branch can be renamed via this command:
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9425165Z hint:
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9425838Z hint: 	git branch -m <name>
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9426647Z hint:
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9427664Z hint: Disable this message with "git config set advice.defaultBranchName false"
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9431104Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9433062Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9483217Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9485098Z ##[group]Disabling automatic garbage collection
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9486896Z [command]/usr/bin/git config --local gc.auto 0
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9521798Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9522538Z ##[group]Setting up auth
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9530295Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9566685Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9948452Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Run actions/checkout@v4	2026-08-08T14:45:59.9980307Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.0226538Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.0263258Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.0487480Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.0526905Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.0528117Z ##[group]Fetching the repository
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.0537508Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +84c8652b27d7f89d7838ac544093c17a20bf8ad4:refs/remotes/origin/research/physical-energy-causal-bridge
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.7928729Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.7931396Z  * [new ref]         84c8652b27d7f89d7838ac544093c17a20bf8ad4 -> origin/research/physical-energy-causal-bridge
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.7965576Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.7967041Z ##[group]Determining the checkout info
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.7968805Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.7973888Z [command]/usr/bin/git sparse-checkout disable
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.8025197Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.8057621Z ##[group]Checking out the ref
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.8062446Z [command]/usr/bin/git checkout --progress --force -B research/physical-energy-causal-bridge refs/remotes/origin/research/physical-energy-causal-bridge
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.8577276Z Switched to a new branch 'research/physical-energy-causal-bridge'
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.8582092Z branch 'research/physical-energy-causal-bridge' set up to track 'origin/research/physical-energy-causal-bridge'.
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.8590511Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.8632477Z [command]/usr/bin/git log -1 --format=%H
+certify	Run actions/checkout@v4	2026-08-08T14:46:00.8659556Z 84c8652b27d7f89d7838ac544093c17a20bf8ad4
+certify	Run actions/setup-python@v5	﻿2026-08-08T14:46:00.9042261Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/setup-python@v5	2026-08-08T14:46:00.9048360Z ##[group]Run actions/setup-python@v5
+certify	Run actions/setup-python@v5	2026-08-08T14:46:00.9049489Z with:
+certify	Run actions/setup-python@v5	2026-08-08T14:46:00.9050286Z   python-version: 3.11
+certify	Run actions/setup-python@v5	2026-08-08T14:46:00.9051222Z   check-latest: false
+certify	Run actions/setup-python@v5	2026-08-08T14:46:00.9062411Z   token: ***
+certify	Run actions/setup-python@v5	2026-08-08T14:46:00.9063329Z   update-environment: true
+certify	Run actions/setup-python@v5	2026-08-08T14:46:00.9064493Z   allow-prereleases: false
+certify	Run actions/setup-python@v5	2026-08-08T14:46:00.9065497Z   freethreaded: false
+certify	Run actions/setup-python@v5	2026-08-08T14:46:00.9066377Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-08T14:46:01.0499346Z ##[group]Installed versions
+certify	Run actions/setup-python@v5	2026-08-08T14:46:01.0618945Z (node:2248) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/setup-python@v5	2026-08-08T14:46:01.0623353Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/setup-python@v5	2026-08-08T14:46:01.0626281Z Successfully set up CPython (3.11.15)
+certify	Run actions/setup-python@v5	2026-08-08T14:46:01.0628887Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint	﻿2026-08-08T14:46:01.0846367Z ##[group]Run pip install -r requirements.txt python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:01.0848134Z ^[[36;1mpip install -r requirements.txt python-flint^[[0m
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:01.0918652Z shell: /usr/bin/bash -e {0}
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:01.0920318Z env:
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:01.0921889Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:01.0924724Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:01.0927184Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:01.0930381Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:01.0933093Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:01.0935773Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:01.0937906Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.0655804Z Collecting python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.2300716Z   Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.4276674Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.4706178Z   Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.6271610Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.6700115Z   Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.7143227Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.7564115Z   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.7699812Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.8126285Z   Downloading iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.8269376Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.8683712Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.8792522Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.9208974Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.9373990Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:04.9801496Z   Downloading pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:05.0291503Z Downloading numpy-2.2.6-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:05.5243414Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 40.0 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:05.5686475Z Downloading scipy-1.15.3-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:05.7645165Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 194.0 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:05.8062024Z Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:05.8505591Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:05.8949652Z Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.1 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:05.9369020Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 257.9 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:05.9789198Z Downloading iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:06.0225417Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:06.0669335Z Downloading pygments-2.20.0-py3-none-any.whl (1.2 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:06.0742818Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 187.3 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:06.2462264Z Installing collected packages: python-flint, pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:12.7219565Z 
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:12.7231735Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 python-flint-0.9.0 scipy-1.15.3
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:12.7240844Z 
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:12.7241337Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+certify	Run pip install -r requirements.txt python-flint	2026-08-08T14:46:12.7242547Z [notice] To update, run: pip install --upgrade pip
+certify	Run pytest -q	﻿2026-08-08T14:46:12.7918986Z ##[group]Run pytest -q
+certify	Run pytest -q	2026-08-08T14:46:12.7919321Z ^[[36;1mpytest -q^[[0m
+certify	Run pytest -q	2026-08-08T14:46:12.7966975Z shell: /usr/bin/bash -e {0}
+certify	Run pytest -q	2026-08-08T14:46:12.7967327Z env:
+certify	Run pytest -q	2026-08-08T14:46:12.7967700Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T14:46:12.7968333Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run pytest -q	2026-08-08T14:46:12.7968989Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T14:46:12.7969546Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T14:46:12.7970096Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run pytest -q	2026-08-08T14:46:12.7970652Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run pytest -q	2026-08-08T14:46:12.7971120Z ##[endgroup]
+certify	Run pytest -q	2026-08-08T14:46:16.3847522Z ........................................................................ [ 18%]
+certify	Run pytest -q	2026-08-08T14:46:16.5744733Z ........................................................................ [ 37%]
+certify	Run pytest -q	2026-08-08T14:46:16.8898354Z ........................................................................ [ 55%]
+certify	Run pytest -q	2026-08-08T14:46:17.1059335Z ........................................................................ [ 74%]
+certify	Run pytest -q	2026-08-08T14:46:17.5235576Z ........................................................................ [ 93%]
+certify	Run pytest -q	2026-08-08T14:46:17.6390670Z ...........................                                              [100%]
+certify	Run pytest -q	2026-08-08T14:46:17.6391561Z 387 passed in 4.31s
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	﻿2026-08-08T14:46:17.7226529Z ##[group]Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:17.7227551Z ^[[36;1mpython -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge^[[0m
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:17.7273367Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:17.7273661Z env:
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:17.7273966Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:17.7274758Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:17.7275270Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:17.7275722Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:17.7276181Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:17.7276644Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:17.7277225Z ##[endgroup]
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2202729Z # Physical-energy causal bridge
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2203702Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2205278Z Status: **EXACT_PHYSICAL_ENERGY_CAUSAL_GATE_AND_MEASURE_AGNOSTIC_SYNC__CONTINUUM_EXTRACTION_CONDITIONAL**.
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2206719Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2209217Z Raw adjoint amplitude generation and physical child-energy transfer are not the same measure: the exact flat scalar model `c'=1`, `c(0)=0`, `G=R=0` has normalized `dGamma=dt` but normalized `dT=2t dt`; at half-time their cumulative masses are `1/2` and `1/4`.
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2211036Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2211413Z The correct exact algebra is the adjoint-response projection identity
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2211986Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2212285Z `2 Re<c,F> = 2/||psi||^2 Re(conj(<psi,c>) <psi,F>) + 2 Re<c_perp,F>`.
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2212769Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2213337Z More importantly, the selected-child energy balance itself supplies the physical causal law.  On `K=int||S||<=1/30`,
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2214090Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2214394Z `E1 <= exp(2K)(E0+W_HH^+ + W_R^+)`.
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2214677Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2215200Z Using `exp(-2K)>=1-2K>=14/15`, if inherited energy and classified residual positive work are each below `E1/5`, then
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2215873Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2216005Z `W_HH^+ >= 8 E1/15`.
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2216203Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2217046Z Thus the generated branch carries a definite amount of **actual positive high-high child-energy work**.  Decompose `F_HH` into same-time parent-pair atoms and use
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2218028Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2218181Z `dT_HH=2[Re<c,F_HH,alpha>]_+ dt`
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2218438Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2220301Z as the causal probability law.  The asynchronous half-slab/parabolic synchronization argument depends only on positivity and event support, so it applies to this physical transfer law directly.  Shannon/Renyi therefore receive the same physical weights used by Hodge/flat transfer bookkeeping, without identifying raw `dGamma` with `dT`.
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2222316Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2223341Z The adjoint Duhamel theorem remains useful to quotient common Kelvin transport and diagnose amplitude inheritance/residuals, but raw `dGamma` is no longer a required master-facing transfer kernel.
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2224371Z 
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2224538Z Stress: `50000` synthetic algebra/synchronization states
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2224978Z - worst adjoint-projection work residual: `1.066e-14`
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2225423Z - minimum physical-HH generation margin: `1.381e-03`
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2225869Z - minimum physical-transfer half-slab margin: `8.067e-06`
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2226329Z - exact flat countermodel CDF gap at half-time: `0.250000`
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2227333Z - branches: `{'high_strain_critical_dissipation': 12497, 'classified_residual_physical_work': 12538, 'physical_high_high_transfer_generation': 12402, 'material_energy_inheritance': 12563}`
+certify	Run python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge	2026-08-08T14:46:22.2228178Z 
+certify	Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"	﻿2026-08-08T14:46:22.2386425Z ##[group]Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"
+certify	Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T14:46:22.2387161Z ^[[36;1mcat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"^[[0m
+certify	Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T14:46:22.2433122Z shell: /usr/bin/bash -e {0}
+certify	Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T14:46:22.2433380Z env:
+certify	Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T14:46:22.2433652Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T14:46:22.2434111Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T14:46:22.2434948Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T14:46:22.2435360Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T14:46:22.2435754Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T14:46:22.2436154Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run cat results-physical-energy-causal-bridge/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-08T14:46:22.2436490Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	﻿2026-08-08T14:46:22.2589352Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2590800Z ##[group]Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2591067Z with:
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2591299Z   name: physical-energy-causal-bridge-results
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2591639Z   path: results-physical-energy-causal-bridge/
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2591942Z   if-no-files-found: warn
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2592173Z   compression-level: 6
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2592384Z   overwrite: false
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2592598Z   include-hidden-files: false
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2592821Z env:
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2593060Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2593484Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2593935Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2594572Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2594967Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.15/x64
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2595365Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.15/x64/lib
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.2595686Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.4203889Z (node:2301) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.4205047Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.4345437Z With the provided path, there will be 2 files uploaded
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.4346759Z Artifact name is valid!
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.4347440Z Root directory input is valid!
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.7603428Z Beginning upload of artifact content to blob storage
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:22.7806186Z (node:2301) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:23.0726496Z Uploaded bytes 2465
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:23.1527831Z Finished uploading artifact content to blob storage!
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:23.1529607Z SHA256 digest of uploaded artifact zip is d23b83ec3d8e53ada63b4130fe206d1b8c2edb30e5fa5b249eb2e5dcfd705f3b
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:23.1531336Z Finalizing artifact upload
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:23.3720869Z Artifact physical-energy-causal-bridge-results.zip successfully finalized. Artifact ID 9023253896
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:23.3723668Z Artifact physical-energy-causal-bridge-results has been successfully uploaded! Final size is 2465 bytes. Artifact ID is 9023253896
+certify	Run actions/upload-artifact@v4	2026-08-08T14:46:23.3729067Z Artifact download URL: https://github.com/quemanhmcr/wang-ns-triad-diamond/actions/runs/31262755985/artifacts/9023253896
+certify	Post Run actions/setup-python@v5	﻿2026-08-08T14:46:23.3911457Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/setup-python@v5	2026-08-08T14:46:23.3912832Z Post job cleanup.
+certify	Post Run actions/setup-python@v5	2026-08-08T14:46:23.5088335Z (node:2313) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Post Run actions/setup-python@v5	2026-08-08T14:46:23.5089502Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Post Run actions/checkout@v4	﻿2026-08-08T14:46:23.5296883Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.5299096Z Post job cleanup.
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6202987Z [command]/usr/bin/git version
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6278983Z git version 2.54.0
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6317535Z Temporarily overriding HOME='/home/runner/work/_temp/e0ff4182-a939-4e13-a042-93fee4278794' before making global git config changes
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6319170Z Adding repository directory to the temporary git global config as a safe directory
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6323423Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6363238Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6407088Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6656980Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6689539Z http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6701353Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6736806Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.6996227Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Post Run actions/checkout@v4	2026-08-08T14:46:23.7045976Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Complete job	﻿2026-08-08T14:46:23.7422033Z Cleaning up orphan processes
+certify	Complete job	2026-08-08T14:46:23.7711632Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

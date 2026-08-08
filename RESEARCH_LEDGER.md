@@ -5421,6 +5421,7 @@ The most useful recorded runs, in chronological order, are:
 | `31252438256` | physical transfer-weighted defect moat on `f7d1d37`: on the `eta_0=10^-4` signed-good core, `E_phys[D]<=(106/25) epsilon`; deleting the least-transfer bin in `[R/2,R]` gives `eta_cross<=1/M+2 Dbar/R`; the schedule `M_j=M_0(j+2)^2`, `R_j=R_0(j+2)^2` makes the actual omitted cross-cell physical-transfer `Xi` summable with no packet-count or Gaussian-synthesis tail; `362` tests + `9` optional skips + `50,000` weighted triad graphs |
 | `31258595663`, `31258597148`, `31258598281`, `31258599570`, `31258600704`, `31258601942`, `31258603563` | seven-workflow canonical cross-cell integration on `3d1381f`: exact coherent localization, physical transfer defect moat, canonical material labels, Renyi causal reuse, physical multi-currency master, smooth symbol freezing and master all green; master `20,000` traces, worst margin `0`; localization trilinear reconstruction residual `5.288e-14`; defect-moat minimum cross margin `6.917e-4` |
 | `31261790706` | single-charge physical branch compiler on `f8cf98d`: exact positive-transfer partition `dT=dT_Xi+sum_r dT_r`, theorem manifestations quotiented by physical causal root, first-causal stopping on the retained measure, symmetric Radon--Nikodym splitting of exact independent ties, absorbing `t=0` boundary, and master projection which refuses critical `N E`/`D_V` as finite additive resets; `dGamma` remains a conditional amplitude-generation kernel until the PDE transfer-law identification is proved; `380` tests + `50,000` causal block states, maximum mass residual `1.421e-14` |
+| `31262755985` | physical-energy causal bridge on `84c8652`: exact flat scalar countermodel to raw `dGamma=dT` (`Gamma([0,1/2])=1/2`, `T([0,1/2])=1/4`), exact adjoint-response physical-work split, low-strain energy gate `E1<=e^(2K)(E0+W_HH^++W_R^+)` and clean route `K<=1/30`, `E0,W_R^+<E1/5 => W_HH^+>=8E1/15`; causal layers are weighted by actual `dT_HH=2[Re<c,F_HH,alpha>]_+dt`, while Duhamel supplies same-time parent-pair support; asynchronous synchronization is measure-agnostic; `387` tests + `50,000` states, projection residual `1.066e-14` |
 
 | `31249662333`, `31249664073`, `31249665749`, `31249667523`, `31249669387`, `31249671051`, `31249672640`, `31249674254`, `31249675942` | nine-workflow adjoint-causal integration on `f1f0e62`: coherent transfer cells, coherent increment service, service-or-flat rigidity, physical flat episode, causal binary ancestry, transfer-weighted Shannon reuse, Renyi causal reuse, adjoint Kelvin--Duhamel and master all green; adjoint workflow `339` tests + `50,000` checks, master `20,000` traces with worst margin `0` |
 
@@ -5858,32 +5859,56 @@ Radon--Nikodym weights.  Hence `dT=dT_Xi+sum_r dT_r` exactly, with no duplicated
 physical transfer mass.  Critical source/mass/dissipation destinations remain
 marked **recurse**, not finite resets.
 
-A genuine remaining measure bridge is exposed rather than hidden: the adjoint
-positive `dGamma=[Re(e^{-i theta}dI_HH)]_+` is an amplitude-generation law.  It is
-used as a conditional parent-pair kernel after a generated node, but it is not
-automatically identified with the physical positive child-transfer law used by
-Shannon/Renyi/Hodge.  The compiler therefore refuses master-ready status until
-the recursive PDE extraction proves that kernel identification on the same
-material labels, or routes the discrepancy once to an existing transfer/`Xi`
-branch.  Preferred certificate: `31261790706` on `f8cf98d` (`380` tests +
-`50,000` causal block states; maximum transfer-mass residual `1.421e-14`).
+The proposed raw Duhamel-to-energy kernel identification has now been **ruled out
+as unnecessarily strong**.  Even in the perfectly flat scalar coefficient model
+`G=R=0`, `c(0)=0`, `c_dot=1`, normalized adjoint amplitude generation is
+`dGamma=dt` while normalized physical child-energy transfer is `dT=2t dt`.  The
+correct exact relation is an energy lift: for any adjoint response `psi`,
 
-The decisive next bridge is therefore now **actual recursive PDE witness extraction
-plus Duhamel-to-physical transfer-kernel identification**.  Every efficient
-Navier--Stokes block must supply the compiler with either the fixed transfer-loss
-gate, a first causal root, or the certified Kelvin-flat continuation; every
-scale-critical source/mass/dissipation output must then remain in causal recursion
-until it reaches transfer/reuse/boundary/`Xi` or a genuinely uniform global
-resource.  On generated nodes the normalized adjoint parent-pair kernel must be
-identified with the same physical transfer-weighted material law used by
-Shannon/Renyi/Hodge, up to one already-charged discrepancy.  The global coherent
+\[
+2\Re\langle c,F\rangle
+=\frac{2}{\|\psi\|^2}\Re\left(\overline{\langle\psi,c\rangle}\,\langle\psi,F\rangle\right)
++2\Re\langle c_\perp,F\rangle.
+\]
+
+More importantly, the selected-child energy balance directly supplies the
+master-facing causal weights.  On the low-strain branch,
+
+\[
+E_1\le e^{2K}(E_0+W_{HH}^++W_R^+).
+\]
+
+Since `K<=1/30` implies `e^-2K>=14/15`, if material inherited energy and
+classified residual positive work are each below `E1/5`, then
+
+\[
+\boxed{W_{HH}^+\ge8E_1/15}.
+\]
+
+The exact quadratic source atoms therefore carry the positive physical causal
+measure `dT_HH=2[Re<c,F_HH,alpha>]_+dt`.  Duhamel is kept for the same-time
+parent-pair support/interaction picture, but its raw amplitude weights are not
+used by the master.  The half-slab and parabolic synchronization proof is
+measure-agnostic, so Shannon/Renyi now receives the same physical transfer law
+used by Hodge/flat bookkeeping **by construction**.  Preferred certificate:
+`31262755985` on `84c8652` (`387` tests + `50,000` states; projection residual
+`1.066e-14`, exact half-time CDF gap `1/4`).
+
+The decisive next bridge is therefore now **actual recursive PDE witness
+extraction**.  Every efficient Navier--Stokes block must construct the exact
+selected moving coefficient equation, designated high--high source, classified
+residual physical work and canonical material labels needed by the energy gate
+and the single-charge compiler.  Once those witnesses exist, high strain routes
+to critical dissipation, inherited energy remains sticky, residual work delegates
+to its existing source/interface root, and the remaining generated branch already
+comes with actual physical transfer weights for causal reuse.  The global coherent
 representation, material labeling, asynchronous causal slices, cross-cell `Xi`
-summability and the no-double-charge projection now have theorem-level
-mechanisms, but the continuum extraction/kernel bridge is not closed.  No new
-finite-dimensional escape mechanism is currently identified.  Fresh-packet
-energy alone, raw cycle rank without causal transfer labels, arbitrary redundant
-Gaussian coefficients, aspect penalties, sub-bandwidth source counting or a new
-persistence hypothesis are not admissible shortcuts.
+summability and no-double-charge projection are theorem-level; the continuum
+recursive extraction is not yet closed.  No new finite-dimensional escape
+mechanism is currently identified.  Fresh-packet energy alone, raw cycle rank
+without causal transfer labels, arbitrary redundant Gaussian coefficients, aspect
+penalties, sub-bandwidth source counting or a new persistence hypothesis are not
+admissible shortcuts.
 
 ---
 
@@ -5899,7 +5924,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

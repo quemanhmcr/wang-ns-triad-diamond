@@ -1602,24 +1602,62 @@ scale-critical currencies**; `t=0` terminates ancestry; and the selected
 cross/representation measure enters `Xi` once.  Thus the compiler cannot be used
 to smuggle critical `N E` or `D_V` into the finite reset count.
 
-The compiler also exposes one precise remaining measure bridge.  The adjoint
-Kelvin--Duhamel law
+The stronger proposed identity between the adjoint Duhamel probability law and
+physical child-energy transfer is false and is no longer required.  In the exact
+flat scalar model `G=R=0`, `c(0)=0`, `c_dot=1`, normalized `dGamma=dt`, while
+normalized physical transfer is `dT=2t dt`; the half-time masses are `1/2` and
+`1/4`.  This is the unavoidable linear-amplitude versus quadratic-energy
+difference.
+
+The correct bridge is the selected-child energy balance.  For
 
 \[
-d\Gamma=[\Re(e^{-i\vartheta}dI_{HH})]_+
+\dot c=Gc+F_{HH}+R_{class},\qquad G=-S_\perp-\nu|k|^2I,
 \]
 
-is positive but measures aligned **amplitude generation**, not automatically the
-same physical child-energy transfer law.  It should therefore be used as a
-conditional parent-pair kernel after a generated node, not added to `dT` as a
-second copy of the same conserved measure.  Before the transfer-weighted
-Shannon/Renyi/Hodge telescope can be invoked on that generated layer, the actual
-PDE extraction must identify this kernel with the same physical transfer law on
-the canonical material labels, or route their discrepancy once to an existing
-transfer/`Xi` branch.
+let `E_i=||c(t_i)||^2`, `K=int||S_perp||`, and let `W_HH^+`, `W_R^+` be
+positive physical works.  Then
 
-Preferred compiler certificate: `31261790706` on `f8cf98d` (`380` tests plus
-`50,000` synthetic causal block states; maximum transfer-mass residual
-`1.421e-14`).  This is an exact finite causal-quotient/measure-partition theorem,
-**conditional on the continuum block witnesses and Duhamel-to-physical
-transfer-kernel bridge**.  It is not a Navier--Stokes global-regularity proof.
+\[
+\boxed{E_1\le e^{2K}(E_0+W_{HH}^++W_R^+)}.
+\]
+
+On `K<=1/30`, if `E0<E1/5` and `W_R^+<E1/5`,
+
+\[
+\boxed{W_{HH}^+\ge8E_1/15}.
+\]
+
+Therefore the master-facing causal law is taken directly to be
+
+\[
+\boxed{d\mathcal T_{HH}(t,\alpha)
+=2[\Re\langle c(t),F_{HH,\alpha}(t)\rangle]_+dt}.
+\]
+
+These atoms have exactly the same same-time parent-pair support exposed by the
+Duhamel source.  The asynchronous half-slab/parabolic synchronization proof uses
+only positivity and support, so it applies to `dT_HH` without modification.
+Shannon/Renyi hence receives actual physical child-transfer weights directly.
+Raw `dGamma` remains an amplitude/interaction-picture diagnostic; it is not a
+second conserved measure and does not need to equal `dT`.
+
+At the response level the exact identity is
+
+\[
+2\Re\langle c,F\rangle
+=\frac{2}{\|\psi\|^2}\Re\left(\overline{\langle\psi,c\rangle}\,\langle\psi,F\rangle\right)
++2\Re\langle c_\perp,F\rangle,
+\]
+
+which makes explicit the state-dependent quadratic energy lift and the genuine
+orthogonal child-profile cross work.
+
+Preferred physical-energy bridge certificate: `31262755985` on `84c8652`
+(`387` tests plus `50,000` algebra/synchronization states; projection identity
+residual `1.066e-14`).  Preferred compiler certificate remains rooted in the
+single-charge partition, now with this physical-energy bridge as its master-facing
+causal route.  The remaining gap is the **actual recursive continuum witness
+extraction** supplying the exact selected coefficient equation, `F_HH`, residual
+work routing and canonical material labels on every efficient block.  This is not
+a Navier--Stokes global-regularity proof.
