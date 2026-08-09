@@ -2108,7 +2108,19 @@ Critical dissipation is therefore no longer an anonymous recursive scalar.  Its 
 
 Dedicated run `31293279918` on `0cd4d89` passed `506` tests and `50,000` edge states, with worst affine endpoint residual `2.681e-15`, zero orientation failures and zero affine membership failures.  The artifact is stored at `recorded-results/31293279918/`.
 
-What is **not** yet proved is quantitative material routing/renewed-slab attachment.  OO heat service requires a history/capacity theorem valid for this heat normalization and may not borrow the signed-good half-life through a high-strain slab.  ON is a genuine interface edge mark but still needs actual relink/interface work attachment.  NN service cannot be renamed a transfer parent or assigned a packet mass floor.  Fixed-shell/material-chart commutators must remain explicit.
+The apparent OO-history conflict is now resolved by first-hit causality.  At the first high-strain contact the whole prior history still satisfies `K(t)<=1/30`, so a reused material frequency grows by at most `exp(1/30)`.  For a deterministic band, the heat service on `T(N)=cN^-2` is bounded by `cM^2E/N`.  Applying this bound shellwise before material ownership, and then using OO only as a positive submeasure, avoids any old/new field decomposition.  On a supplied signed-good material epoch,
+
+`rho_OO <= (5/8)exp(1/15)=0.668086941092 < 441/640 < 7/10`,
+
+so
+
+`C_OO(q)<=C_OO(0)(441/640)^q`,
+
+`sum_q C_OO(q)<=(640/199)C_OO(0)`.
+
+Since every first high-strain contact has `S_heat>=S_*(c)`, once `C_OO(q)<=(1-f)S_*` the exact ownership partition forces `S_ON+S_NN>=fS_*`.  This is a material-capacity theorem, not a `D_V` reset count.  Dedicated run `31298235481` on `a0cf825` passed `513` tests plus `50,000` new states; full integration `31298235456` on the same SHA passed the complete causal stack and master `20,000` traces with worst margin `0`.  The dedicated artifact is stored at `recorded-results/31298235481/`.
+
+Quantitative OO heat capacity is therefore supplied on any already-provided signed-good material epoch, but **universal renewed-slab attachment is not**.  The PDE must still show that every critical-dissipation re-entry either enters such a material epoch or hits an earlier named cause.  ON is a genuine same-time interface edge mark but still needs attachment to actual temporal relink/interface work.  NN service cannot be renamed a transfer parent or assigned a packet mass floor.  Fixed-shell/material-chart commutators must remain explicit.
 
 The decisive remaining continuum bridge is still **universal physical slab renewal/exhaustion**.  Every recursive source/SGS, critical-dissipation, material/new-ancestry and earlier-HH route must either enter a renewed smooth carrier slab satisfying the already proved scale/moat/service/natural-lifetime hypotheses, or hit an already named first-stop cause.  No synthetic packet selector, cutoff-interface charge, or common-unit tie clock is allowed to stand in for that PDE coverage theorem.
 
