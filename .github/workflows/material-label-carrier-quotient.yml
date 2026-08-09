@@ -1,0 +1,46 @@
+name: Material label carrier quotient
+
+on:
+  push:
+    paths:
+      - 'src/material_label_carrier_quotient.py'
+      - 'tests/test_material_label_carrier_quotient.py'
+      - 'docs/material_label_carrier_quotient.md'
+      - '.github/workflows/material-label-carrier-quotient.yml'
+      - 'src/common_slice_coefficient_registration.py'
+      - 'src/smooth_material_carrier_relay.py'
+      - 'src/material_coherent_labels.py'
+      - 'src/heat_edge_material_ownership.py'
+      - 'src/coherent_transfer_cells.py'
+      - 'src/event_anchored_role_registration.py'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - run: python -m src.material_label_carrier_quotient --samples 50000 --outdir results-material-label-carrier-quotient
+      - run: python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice
+      - run: python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership
+      - run: python -m src.coherent_transfer_cells --samples 50000 --outdir results-coherent-transfer-cells
+      - run: cat results-material-label-carrier-quotient/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: material-label-carrier-quotient-results
+          path: |
+            results-material-label-carrier-quotient/
+            results-common-slice/
+            results-heat-edge-material-ownership/
+            results-coherent-transfer-cells/
