@@ -1,0 +1,35 @@
+name: Event anchored role registration
+on:
+  push:
+    paths:
+      - 'src/event_anchored_role_registration.py'
+      - 'tests/test_event_anchored_role_registration.py'
+      - 'docs/event_anchored_role_registration.md'
+      - '.github/workflows/event-anchored-role-registration.yml'
+      - 'src/outer_moving_role_extraction.py'
+      - 'src/nonaffine_role_interface_work.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12', cache: pip}
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.event_anchored_role_registration --samples 50000 --outdir results-event-anchored-role-registration
+      - run: python -m src.nonaffine_role_interface_work --samples 50000 --outdir results-nonaffine-role-interface-work
+      - run: python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction
+      - run: cat results-event-anchored-role-registration/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - run: cat results-nonaffine-role-interface-work/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: event-anchored-role-registration-results
+          path: |
+            results-event-anchored-role-registration/
+            results-nonaffine-role-interface-work/
+            results-outer-moving-role-extraction/
