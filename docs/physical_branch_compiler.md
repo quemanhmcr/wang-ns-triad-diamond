@@ -157,60 +157,57 @@ A retained low-cost block with neither a first causal defect nor certified
 Kelvin flatness is **uncompiled**.  It is a continuum-bridge gap, not a new
 currency.
 
-## 5. Exact ties: partition the measure, do not invent a theorem priority
+## 5. Exact ties: keep the joint physical stop; RN splitting is optional
 
-There is no Navier--Stokes conservation law saying two independent causal clocks
-cannot hit at exactly the same time.  A literal one-block/one-label theorem would
-therefore require an arbitrary tie breaker unless an additional transversality
-theorem were proved.
+There is no Navier--Stokes law saying independent physical causal clocks cannot
+hit at exactly the same time.  The preferred master no longer tries to assign
+artificial percentages to such an event.
 
-The natural symmetric replacement is measure-theoretic.  On the exact first-time
-tie set let `a_r>=0` be the positive stopping weights supplied by the physical
-observables.  Put
+Let
 
 \[
-\lambda_r={a_r\over\sum_s a_s}.
+J(\omega)=\{r:\tau_r(\omega)=\tau_*(\omega)\}
 \]
 
-Then
+be the complete set of first physical causes.  The **whole** event transfer mass
+is retained and `J` is stored as set-valued provenance.  Its master disposition
+is single-valued:
+
+1. if `t=0` is in the joint stop, the initial boundary is absorbing;
+2. if any joint cause already certifies a fixed multiplicative
+   transfer/reuse/sideband cost, the state is terminal transfer-cost;
+3. otherwise a genuinely globally bounded resource with a scale-independent
+   threshold may terminate as the existing additive reset;
+4. otherwise source/SGS, critical dissipation, material/new ancestry and an
+   earlier high--high regeneration all remain **recursive critical**.
+
+The fourth rule is the important one.  A source/strain/relink/HH-generation tie
+needs no fractional ownership because every listed cause has the same coarse
+master fate: recurse.  Changing arbitrary positive tie weights cannot change
+that fate.
+
+Thus the preferred single-charge statement is literally
 
 \[
-\boxed{
- d\mathcal T_{r,B}=\lambda_r\,d\mathcal T_B^{\rm ret},
- \qquad
- \sum_r d\mathcal T_{r,B}=d\mathcal T_B^{\rm ret}.
-}
+\boxed{d\mathcal T_J\text{ remains }d\mathcal T_J,}
 \]
 
-Duplicate theorem manifestations of the **same** causal root are summed before
-this normalization; they cannot create a second branch.  Independent roots may
-split a tie measure, but the total conserved transfer mass is still charged
-exactly once.
+with one master disposition and the full joint cause set attached as provenance.
+No physical work is duplicated and no quantity with unrelated units is divided
+by another one merely to break a tie.
 
-Thus the canonical statement is stronger and more physical than a lexicographic
-case list:
+The earlier symmetric Radon--Nikodym rule remains a valid **optional fine
+subledger** when one independently has positive stopping densities `a_r` against
+the same physical transfer law.  On such a tie set one may still put
 
 \[
-\boxed{
- d\mathcal T_B
- =d\mathcal T_{\Xi,B}
- +d\mathcal T_{{\rm mult},B}
- +d\mathcal T_{{\rm flat},B}
- +d\mathcal T_{{\rm sticky},B}
- +d\mathcal T_{{\rm reuse},B}
- +d\mathcal T_{{\rm side},B}
- +d\mathcal T_{{\rm src},B}
- +d\mathcal T_{{\rm diss},B}
- +d\mathcal T_{{\rm reset},B}
- +d\mathcal T_{0,B},
-}
+\lambda_r={a_r\over\sum_s a_s},
+\qquad
+ d\mathcal T_{r,B}=\lambda_r d\mathcal T_{J,B},
 \]
 
-with every term nonnegative and the total mass exact.
-
-The pieces are mutually singular away from exact independent tie sets.  On a tie
-set they are an exact Radon--Nikodym partition rather than duplicated measures.
-This is the precise sense in which the compiler is **single charge**.
+and obtain an exact nonnegative fine-currency partition.  This refinement is no
+longer a hypothesis of the no-escape master.
 
 ## 6. Duhamel gives causal support; physical energy work gives the weights
 
@@ -349,28 +346,41 @@ primary telescope.
 
 ## 10. The theorem actually proved here
 
-**Causal-quotient transfer-measure partition theorem.**  Suppose an extracted
-retained efficient block supplies:
+There are now two compatible levels.
 
-1. the positive physical child-transfer law and the certified cross-cell `Xi`
-   excision;
-2. the fixed transfer-loss gate;
-3. measurable causal-root stopping witnesses, with duplicate theorem
-   manifestations identified by physical provenance;
-4. a Kelvin-flat certificate when no stopping witness occurs;
-5. positive stopping weights on exact independent tie sets.
+**Fine causal-quotient transfer partition.**  If an extracted retained block
+supplies positive common-unit physical stopping densities on an exact tie set,
+the older Radon--Nikodym formulas define an exact nonnegative fine-currency
+partition.  This remains useful diagnostics, but it is optional.
 
-Then the formulas above define a nonnegative, exhaustive, exactly mass-preserving
-single-charge partition of the block's physical transfer measure.  The master
-projection is unique except that scale-critical source/mass/dissipation branches
-remain marked `recurse`; they cannot be silently inserted into the finite reset
-count.
+**Preferred joint-stop master projection.**  For the master it is enough that the
+recursive block supplies:
 
-The theorem now uses the physical-energy causal bridge: raw adjoint `dGamma` is
-not required to equal the energy-transfer law.  Duhamel identifies quadratic
-parent-pair support; actual positive `dT_HH` weights the synchronized ancestry.
-The remaining PDE burden is to construct these exact witnesses recursively.
+1. the positive physical child-transfer law and one cross-cell `Xi` excision;
+2. the fixed transfer-loss stage-zero gate;
+3. a measurable **set of physical causes which hit first**, with duplicate
+   theorem manifestations quotiented by physical provenance;
+4. registered generated continuation or a Kelvin-flat certificate on the no-hit
+   set.
 
-This is a compiler theorem for an **actual physical block state once its PDE
-witnesses exist**.  It is not a proof that every continuum Navier--Stokes block
-already supplies those witnesses.  No global-regularity claim follows.
+Exact simultaneous causes are then retained unsplit and projected by the
+terminal semantics of section 5.  No common-unit tie weight is required.
+Critical source/mass/dissipation branches remain `recurse`; `NE` and `D_V` are
+never promoted to finite global resets from energy alone.
+
+The preferred ancestry also no longer identifies a Duhamel parent-pair law with
+physical energy work.  The physical pair-product theorem applies sharp Young to
+the actual positive pair-work density and uses KL positivity under `dT` itself.
+If the registered survivor set has fraction `q`, conditioning changes its
+productivity only by the exact factor `q`.
+
+Outer moving roles, hard-event/smooth-envelope registration, nonaffine interface
+provenance, common-slice registration and the measure-level survival algebra are
+now separate exact companion theorems.  The remaining continuum burden is
+sharper: **construct the measurable first-hit cause set from the actual
+smooth-SGS observables on every recursive Navier--Stokes block, and show that its
+no-hit set is precisely the registered generated survivor or certified
+Kelvin-flat continuation.**
+
+No global-regularity claim follows from the current finite/executable theorem
+stack.

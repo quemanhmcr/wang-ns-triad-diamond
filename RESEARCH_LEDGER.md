@@ -5433,15 +5433,27 @@ The most useful recorded runs, in chronological order, are:
 | `31266550193` | Bargmann/Moyal root-cell registration on `7a7306b`: a large Gaussian coherent coefficient forces positive Moyal energy in a radius-`sqrt3` intrinsic ball; deterministic maximum-energy cell anchoring preserves the physical parent-slot pushforward and merges reused slots naturally; the normalized cell quantum scales by the squared parent `L^(3/2)` amplitude in the physical role, rather than supplying a false absolute mass floor; `433` tests + `50,000` states |
 | `31284828229`, `31284828236` | preferred amplitude-entropy and common-slice registration on `e7181bd`: exact asynchronous margin `67/195`; first-stop adjoint registration gives `|z(s)|>=|z(t)|/4` whenever no earlier HH-generation/classified-residual/material-relink obstruction fires, so two continuing parents retain at least `1/16` of event coefficient product; the scale-critical law `alpha_p1 alpha_p2>=Lambda alpha_c` with `alpha=sqrt(N)|<u,phi>|` implies a transfer-weighted log-amplitude recursion, while Bargmann/Moyal gives `N E_anchor>=beta alpha^2`; log-sum then bounds root entropy and yields the same linear Shannon/Renyi reuse slope `log(48/25)` **without** assuming `N E_root>=eta` for every root; displayed defaults `Lambda=5.97111612285e-4`, `beta=1.43386756899e-5`; `445` tests, `50,000` exact adjoint decompositions and `20,000` adversarial causal DAGs with amplitude ratios up to `7.922e14`; simultaneous registration obstructions are returned as a set and delegated to the single-charge compiler |
 | `31285033969` | full physical-energy causal integration on `4108125`: `445` tests plus physical-energy bridge `50k`, recursive coherent work `20k`, service/flat `50k`, complex Young `50k`, dual Gaussian `50k`, Bargmann anchor `50k`, common-slice registration `50k`, amplitude-entropy `20k`, Shannon `50k`, Renyi `50k`, branch compiler `50k`, and master `20,000` traces with worst margin `0`; all modules share actual positive child-energy causal weights and the final conditional status is outer moving-role PDE extraction |
+| `31285849905` | exact outer moving-role extraction on `40dcf9d`: for `V=S_(N/4)u`, `h=u-V` and scalar Fourier role `w=Q(t,D)u`, `(dt+L_V-nu Delta)w=Q B(V,V)-Q B(h,h)+(dtQ+[L_V,Q])u`; dual-affine transport and `K<=1/30` keep the selected role above `N/2`, so `Q B(V,V)=0` throughout the slab; `449` tests + `50,000` algebra/support/Egorov states, outer identity residual `5.245e-15` |
+| `31286032592` | nonaffine role-interface work on `744463a`: the Heisenberg interface splits as `L_na=K+S`, `K*=-K`, `S*=S`; skew pair work is antisymmetric conservative role flux with zero total, while symmetric interface work is exactly the off-diagonal part of the same resolved strain work; no third source currency and no representation `Xi`; `453` tests + `50,000` complex Hilbert-space partitions |
+| `31286361090` | event-anchored hard role / smooth PDE envelope on `1827645`: exact hard Fourier/helical projectors carry physical transfer/Young/Moyal identity, a smooth scalar envelope `Q` satisfies `QP=P`, `(11/20)e^(-1/30)>1/2` preserves low-low exclusion, and `<Pu,phi>=<Qu,Pphi>` exactly; `457` tests + `50,000` states, hard-partition residual `7.573e-16`, coefficient residual `1.472e-16` |
+| `31286887248` | physical pair-weighted productivity on `082bbdb`: sharp Young is applied to the **actual positive pair-work density** and KL positivity under normalized `dT` gives `E_dT log(alpha_p1 alpha_p2)>=E_dT log alpha_c+log Lambda_j`; no Duhamel-to-physical pair identification; polynomial pair-cell refinement contributes only a finite geometrically discounted offset; dedicated theorem green |
+| `31287088171` | first expanded physical-weighted integration on `47eef1c`: `462` tests and the new outer-role/interface/event-role/physical-pair stack all green before amplitude entropy, Shannon/Renyi, compiler and master; physical-pair KL/productivity margins positive and master `20,000` traces retain worst margin `0` |
+| `31287463160` | generated physical first-stop/survival constructor on `6152c5d`: exact `Xi + currencies + HH-regeneration + survivors` mass algebra on actual positive HH work, common-slice/Young failures cannot disappear, and survivor fraction `q` gives the exact conditioned productivity factor `Lambda_surv=q Lambda`; `468` tests + `50,000` physical-work measures, mass residual `4.341e-16` |
+| `31287703290` | joint causal-stop projection on `424dfb5`: exact simultaneous first causes are kept as one **unsplit** physical stop; boundary / fixed transfer / true global reset / recurse terminal semantics are invariant under arbitrary positive dummy tie weights, so RN tie splitting is no longer a master hypothesis; `474` tests + `50,000` joint stops, zero weight-invariance failures |
+| `31287976953`, `31287976935` | unsplit-master candidate on `0634866` failed in pytest only because a new fixture hard-coded the nonexistent key `recurse_critical` instead of the canonical enum value `sticky_or_scale_critical_recurse`; `475` other tests passed and theorem stress had not started; fixture/wiring provenance only, no theorem formula or constant changed |
+| `31288015383` | corrected preferred unsplit generated master on `7e8a99e`: fixture key changed only to `MasterDisposition.RECURSE_CRITICAL.value`; `476` tests + `50,000` recursive physical measures + `50,000` physical-productivity states + `50,000` branch-compiler states all green; minimum positive survivor productivity `3.294e-08` |
+| `31288063518` | preferred full physical-energy causal integration on `7e8a99e`: `476` tests; physical energy `50k`, coherent witness `20k`, service/flat `50k`, complex Young `50k`, dual/Bargmann/common-slice `50k` each, outer role/interface/event role/physical pair/recursive witness/joint stop `50k` each, amplitude entropy `20k`, Shannon/Renyi/compiler `50k` each and master `20,000`; physical-pair KL margin `1.161e-4`, log-product margin `1.665`, joint tie-weight invariance failures `0`, master worst margin `0`; artifact stored under `recorded-results/31288063518/` |
 
 | `31249662333`, `31249664073`, `31249665749`, `31249667523`, `31249669387`, `31249671051`, `31249672640`, `31249674254`, `31249675942` | nine-workflow adjoint-causal integration on `f1f0e62`: coherent transfer cells, coherent increment service, service-or-flat rigidity, physical flat episode, causal binary ancestry, transfer-weighted Shannon reuse, Renyi causal reuse, adjoint Kelvin--Duhamel and master all green; adjoint workflow `339` tests + `50,000` checks, master `20,000` traces with worst margin `0` |
 
-The current preferred master regression is run `31258603563` on canonical
-cross-cell integration commit `3d1381f` (`362` tests, `9` optional skips, plus
-`20,000` episode traces, worst margin `0`).  The accompanying six workflows
-`31258595663`, `31258597148`, `31258598281`, `31258599570`, `31258600704`, and
-`31258601942` were all green on the same SHA.  The earlier twelve-workflow
-coherent-reservoir stack `31230314319`--`31230338382` remains green provenance.
+The current preferred integrated master regression is run `31288063518` on
+`7e8a99e` (`476` tests; the physical-energy/coherent/outer-role/physical-pair/
+recursive-witness/joint-stop/Shannon/Renyi/compiler stack is green; master
+`20,000` traces, worst margin `0`).  Its artifact is stored under
+`recorded-results/31288063518/`.  The canonical cross-cell regression
+`31258603563` and accompanying six workflows remain green historical provenance,
+as does the earlier twelve-workflow coherent-reservoir stack
+`31230314319`--`31230338382`.
 The full source/sideband/ancestry integration on that exact SHA is
 `31227852933`, `31227856265`, `31227859724`, `31227862808`, `31227865715`,
 `31227868626`, `31227871490`, `31227874557`, `31227877505`, `31227881162`,
@@ -6103,70 +6115,78 @@ decision.  Existing H1/H3 theorems remain sharper optional diagnostics, but are
 no longer a profile-persistence hypothesis required by the assembly.  Preferred
 certificate: `31264981294` on `184c64e` (`414` tests + `50,000` branch states).
 
-The registration frontier has now changed in a structurally important way.
-Young near-extremality is separately homogeneous in the parent roles, so it is
-**incorrect to infer an absolute root critical-mass floor from shape rigidity
-alone**.  The old causal root-count theorem remains valid as a special case when
-`N E_root>=eta` is supplied independently, but it is no longer required by the
-preferred weighted causal master.
+The preferred causal frontier has now changed again.  Young near-extremality is
+separately homogeneous in the parent roles, so an absolute root critical-mass
+floor is still **not** inferred from shape.  But the stronger pointwise
+Duhamel-parent product law is no longer needed either.
 
-On one selected frozen scalar/helical interaction cell, the physical weighted
-form and the existing symbol-freezing error satisfy
+At a physical transfer event use an exact hard Fourier/helical role `P` and a
+smooth PDE envelope `Q` with
 
 \[
-|T_1(f,g,h)|/A_3\ge R-\xi,
+\boxed{QP=P.}
 \]
 
-so Christ's external **complex-valued** Young stability may mark the actual
-complex parent pair once the physical deficit plus the single symbol `Xi` lies
-below its non-explicit modulus.  The dual-Gaussian theorem then gives a
-scale-critical selected coefficient relative to the true parent amplitude, and
-Bargmann submean registers that coefficient in a nearby actual Moyal energy cell.
-No `L^(3/2)`-to-`L^2` closeness or fictitious Gaussian synthesis is used.
-
-The correct causal invariant is the scale-critical coefficient
+The event role carries actual transfer, Young and Moyal identity; the envelope
+only carries the PDE between causal slices.  On the low-strain branch its radial
+lower edge remains
 
 \[
-\alpha=\sqrt N\,|\langle u,\phi\rangle|.
+\frac{11}{20}e^{-1/30}N>\frac12N,
 \]
 
-For every **continuing generated** node, the exact symmetrized high--high source,
-one derivative, the `cN^{-2}` lifetime and the Gaussian probe norm give a
-scale-independent productivity law
+so the exact outer moving-role equation is
 
 \[
-\boxed{\alpha_{p_1}\alpha_{p_2}\ge\Lambda\alpha_c},
+\boxed{
+(\partial_t+\mathcal L_V-\nu\Delta)Qu
+=-Q\mathbb P\nabla\!\cdot(h\otimes h)+R_Q,
+}
+\qquad h=u-S_{N/4}u.
 \]
 
-with displayed conservative default `Lambda=5.97111612285e-4`.  Giving the two
-structural parent slots their free `1/2` baseline yields
+There is no low--low forcing throughout the slab.  The nonaffine Heisenberg term
+`R_Q` has exact energy provenance: its skew-adjoint part is antisymmetric
+conservative role transfer, while its self-adjoint part is the off-diagonal
+piece of the same physical strain work.  It is neither a new generation source
+nor representation `Xi`.
+
+For the generated positive physical HH work itself, let `M_j` be the retained
+hard pair-cell count at depth `j`.  Sharp Young applied to the actual positive
+pair-work density and KL positivity under normalized `dT` give the preferred
+productivity law directly in the physical measure:
 
 \[
-\ell_j:=\mathbb E_{w_j}\log\alpha
-\ge\frac12\log\Lambda+\frac12\ell_{j+1},
+\boxed{
+\mathbb E_{d\mathcal T_j}
+\log(\alpha_{p_1}\alpha_{p_2})
+\ge
+\mathbb E_{d\mathcal T_j}\log\alpha_c
++\log\Lambda_j.
+}
 \]
 
-hence
+No Duhamel parent-pair reweighting occurs.  If `M_j<=M_0(j+3)^p`, then
+`Lambda_j` loses only the factor `M_j^{-1}`, and the binary recursion sees it
+with geometric weights.  Hence
 
 \[
-\ell_0\ge(1-2^{-L})\log\Lambda+2^{-L}\log\alpha_L.
+\boxed{
+\ell_0
+\ge
+\sum_{j=0}^{L-1}2^{-(j+1)}\log\Lambda_j
++2^{-L}\log\alpha_L.
+}
 \]
 
-Bargmann/Moyal gives
+The Bargmann/Moyal anchor still gives
 
 \[
 N_rE_r\ge\beta\alpha_r^2,
 \qquad \beta=1.43386756899\times10^{-5},
 \]
 
-and the exact log-sum inequality gives
-
-\[
-H(w_0)+2\mathbb E_{w_0}\log\alpha_r
-\le\log\sum_r\alpha_r^2.
-\]
-
-Therefore the Shannon reuse telescope obeys
+so the Shannon/Renyi reuse lower bound becomes
 
 \[
 \boxed{
@@ -6174,55 +6194,65 @@ Therefore the Shannon reuse telescope obeys
 \ge
 L\log\frac{48}{25}
 -\log\frac{P E_{global}N_{base}}{\beta}
-+2(1-2^{-L})\log\Lambda
++\sum_{j=0}^{L-1}2^{-j}\log\Lambda_j
 +2^{1-L}\log\alpha_L.
 }
 \]
 
-Since `H_2<=H_1`, the **same lower bound** applies to the exact Renyi action
-`sum log(1+theta_j)`.  Thus arbitrary parent-amplitude imbalance changes only a
-finite-depth logarithmic offset; it does not change the linear reuse slope and
-requires no new `small parent`/`large reservoir` currency.
+Polynomial symbol-cell refinement therefore changes only a finite offset, not
+the linear `log(48/25)` reuse slope.
 
-Common-slice coefficient registration is also theorem-level on the selected-role
-model.  The asynchronous cone leaves the exact margin `67/195`.  Integrating the
-same adjoint interaction picture from the common slice to an event gives
-
-\[
-z(t)=z(s)+I_{HH}+I_R.
-\]
-
-If no earlier classified residual/source, HH-generation or genuine material
-relink obstruction fires, the triangle gate forces
+The recursive generated branch is now also measure-level single-charge.  After
+one support-level `Xi` excision, every physical HH event either has a first
+physical stop, an earlier HH-regeneration stop, or survives Young/phase and
+common-slice registration.  If the survivor set carries fraction `q_j` of the
+retained generated physical work, the same KL proof restricted to that set gives
+exactly
 
 \[
-|z(s)|\ge|z(t)|/4,
+\boxed{\Lambda_{j,\mathrm{surv}}=q_j\Lambda_j.}
 \]
 
-so two continuing parents keep at least `1/16` of their event coefficient
-product.  Simultaneous obstructions are returned as a set and never ordered
-lexicographically; the single-charge compiler alone owns exact-tie partitioning.
-Preferred certificate: `31284828229`/`31284828236` on `e7181bd` (`445` tests,
-`50,000` exact adjoint decompositions and `20,000` adversarial causal DAGs).
+Thus `q_j>=1/2` costs at most `log 2` at that layer; over a continuing ancestry
 
-The **decisive remaining continuum bridge is now the outer moving-role extraction
-itself**.  For every recursively selected efficient smooth-SGS block one must
-construct exact divergence-free moving Fourier/helical roles `w_i=Q_i(t,D)u`
-whose equation has, with one common physical normalization:
+\[
+\sum_{j\ge0}2^{-j}\log q_j\ge-2\log2
+\]
 
-1. the strict-lowpass Kelvin/coherent-averaged transporter as gauge;
-2. the designated same-time high--high quadratic source;
-3. every Heisenberg/non-affine/source remainder primary-routed once to the
-   already proved `K_coh`, pressure/SGS/viscous, relink or representation `Xi`
-   ledgers;
-4. the actual positive child-energy work as the causal weights; and
-5. the complex-Young/dual/Bargmann coefficient mark plus first-stop common-slice
-   registration above on every continuing event.
+whenever every `q_j>=1/2`.  If some `q_j<1/2`, a majority of that layer's actual
+HH work has already hit a named causal stop or earlier regeneration and is not a
+free continuing branch.
 
-No packet-persistence, absolute per-root mass floor, raw `dGamma=dT` identity, or
-new amplitude currency remains as a legitimate assumption.  This outer-role PDE
-extraction has **not** yet been proved for every continuum recursive block, so
-there is still no Navier--Stokes global-regularity conclusion.
+Exact simultaneous first causes no longer create a common-unit weighting
+problem.  The preferred master keeps the full physical event mass **unsplit**
+and retains the entire joint cause set as provenance.  `t=0` is absorbing; any
+already-certified fixed transfer/reuse/sideband cost is terminal; otherwise a
+true globally bounded uniform resource may terminate; all remaining
+source/critical-dissipation/material-new-ancestry/HH-regeneration combinations
+stay in one recursive-critical state.  Therefore arbitrary tie weights cannot
+change the master.  The older Radon--Nikodym split remains optional fine
+bookkeeping only.
+
+Preferred integrated certificate: `31288063518` on `7e8a99e` (`476` tests plus
+the full physical-energy/coherent/outer-role/physical-pair/recursive-witness/
+joint-stop/Shannon/Renyi/compiler stack; master `20,000` traces, worst margin
+`0`).  The stored artifact is `recorded-results/31288063518/`.
+
+The **decisive remaining continuum bridge is now only first-hit cause-set
+extraction**.  For every recursively selected efficient smooth-SGS block one
+must construct, measurably from the actual Navier--Stokes observables, the finite
+set of physical causes which hit first and prove that the no-hit set is exactly
+one of:
+
+1. the registered generated survivor set feeding the physical `dT` productivity
+   and causal ancestry; or
+2. the certified Kelvin-flat continuation.
+
+Outer moving roles, event-role registration, nonaffine-interface provenance,
+physical pair weights, common-slice survival algebra and exact-tie master
+projection are no longer the unresolved bridges.  The first-hit extraction
+statement itself has **not** yet been proved for every continuum recursive
+block.  Consequently there is still no Navier--Stokes global-regularity proof.
 
 ---
 
@@ -6238,7 +6268,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/complex_young_parent_marking.md`, `docs/dual_gaussian_root_registration.md`, `docs/bargmann_root_cell_registration.md`, `docs/amplitude_entropy_causal_reuse.md`, `docs/common_slice_coefficient_registration.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/complex_young_parent_marking.md`, `docs/dual_gaussian_root_registration.md`, `docs/bargmann_root_cell_registration.md`, `docs/amplitude_entropy_causal_reuse.md`, `docs/common_slice_coefficient_registration.md`, `docs/outer_moving_role_extraction.md`, `docs/nonaffine_role_interface_work.md`, `docs/event_anchored_role_registration.md`, `docs/physical_pair_weighted_productivity.md`, `docs/recursive_physical_witness_constructor.md`, `docs/joint_causal_stop_projection.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

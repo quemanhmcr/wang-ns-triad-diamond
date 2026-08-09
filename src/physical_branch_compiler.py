@@ -415,16 +415,17 @@ def stress(samples: int = 50_000, seed: int = 20260808) -> CompilerStress:
 
 def theorem_certificate() -> dict[str, object]:
     return {
-        "status": "EXACT_CAUSAL_QUOTIENT_AND_TRANSFER_MEASURE_PARTITION__PHYSICAL_ENERGY_CAUSAL_BRIDGE_PREFERRED",
-        "transfer_partition": "dT = dT_Xi + sum_r dT_r with nonnegative pieces and exact total mass",
-        "stopping_rule": "fixed transfer loss first; otherwise first physical causal root; no hit => certified Kelvin-flat erosion",
-        "duplicate_rule": "theorem manifestations sharing one causal root are quotiented before charging",
-        "tie_rule": "independent exact first-time ties split positive transfer measure by normalized stopping weights, not theorem-name priority",
+        "status": "EXACT_CAUSAL_QUOTIENT__JOINT_STOP_MASTER_PREFERRED__FINE_RN_PARTITION_OPTIONAL",
+        "transfer_partition": "dT=dT_Xi+dT_ret exactly; the legacy fine compiler can further partition dT_ret by physical RN stopping weights when such common-unit weights are independently available",
+        "stopping_rule": "fixed transfer loss is a stage-zero terminal gate; otherwise use the first physical cause set; no hit => registered generated continuation or certified Kelvin-flat erosion",
+        "duplicate_rule": "theorem manifestations sharing one physical causal root are quotiented before any ledger projection",
+        "tie_rule": "preferred master keeps an exact simultaneous first hit as one unsplit joint physical stop; no common-unit tie weights are required; RN splitting is optional fine-subledger metadata only",
         "boundary_rule": "t=0 is absorbing and cannot be renamed fresh interior ancestry",
-        "master_rule": "critical mass/source/dissipation remain recursive; only a scale-independent threshold in a globally bounded resource enters N_A",
-        "duhamel_warning": "raw dGamma is an amplitude-generation law and is not generally equal to physical energy transfer; the preferred route uses Duhamel for parent-pair support and actual positive HH child work for weights",
-        "energy_bridge": "on K<=1/30, E0<E1/5 and classified residual positive work <E1/5 force actual positive HH work >=8E1/15; synchronization is measure agnostic",
-        "continuum_status": "does not prove every recursive Navier-Stokes block supplies the exact selected coefficient/witness extraction required by the physical-energy causal gate",
+        "master_rule": "a joint stop is terminal if it already contains a fixed transfer certificate, otherwise a valid genuinely global reset may terminate it, otherwise source/dissipation/relink/HH-regeneration remain one recursive-critical state",
+        "duhamel_warning": "raw dGamma is neither the child-energy law nor the preferred parent-pair law; physical pair productivity is derived directly under dT by sharp Young plus KL positivity",
+        "energy_bridge": "on K<=1/30, E0<E1/5 and classified residual positive work<E1/5 force actual positive HH work>=8E1/15; all causal entropy weights remain physical child-energy work",
+        "survival_rule": "if registered continuation retains fraction q of generated dT, its physical logarithmic productivity is exactly q times the unconditioned Lambda; q>=1/2 costs at most log2 at that layer",
+        "continuum_status": "outer moving roles, event-role registration, interface provenance, physical pair weighting, survival algebra and exact-tie master projection are supplied; the remaining PDE bridge is measurable first-hit cause-set extraction on every recursive smooth-SGS block",
     }
 
 
