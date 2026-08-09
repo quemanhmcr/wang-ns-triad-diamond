@@ -1,0 +1,24 @@
+{
+  "certificate": {
+    "status": "EXACT_NN_CRITICAL_HEAT_LAW_TO_SMOOTH_SHELL_CARRIER_SEEDS__NO_CELL_MASS_FLOOR__TEMPORAL_RENEWAL_REMAINS",
+    "input_law": "on every sufficiently old supplied epoch, the existing positive NN-intersect-critical heat sublaw has mass at least (1/4)e^(-1/32)=0.242308308619 of S_heat",
+    "selection": "normalize that physical heat sublaw itself; no shell argmax, coherent-cell maximizer or uniform atom mass is introduced",
+    "scale": "for A=3M/4, the hard shell {M/2<|xi|<=M} becomes {2A/3<|xi|<=4A/3}",
+    "critical_coefficient": "G gives M||P_j u||^2>=mu_*; hence A||P_j u||^2>=(3/4)mu_*=8pi^2/(25c^2)=3.15827340835 at c=1",
+    "smooth_envelope": "choose scalar Q_A=1 on the hard shell with support lower >=3A/5 and upper <=3A/2; the hard shell [0.666666666667,1.33333333333]A lies strictly inside this plateau envelope",
+    "dual_probe": "with psi=P_j u/||P_j u||, <Q_A u,psi>=||P_j u|| exactly; the smooth carrier seed inherits the whole-shell critical coefficient without choosing a packet",
+    "low_low": "if the renewed A-scale strain action stays <=1/30, the envelope lower edge remains (3/5)e^(-1/30)A>A/2; dimensionless gap=0.0803296602892",
+    "lifetime": "M<=N/4 implies A<=3N/16 and T_A/T_N=(N/A)^2>=256/9",
+    "material_provenance": "each seed retains the NN coherent heat-edge mark that selected its shell-time atom, but the theorem does not claim the whole u-shell is new material; V-shell heat provenance and u-shell critical energy remain distinct exact marks",
+    "scope": "this supplies a positive law of lower-scale smooth Fourier carrier seeds with critical coefficients and support moat; it does not yet extend a seed through a full A-natural slab, identify its whole energy as NN material, or prove universal slab renewal"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_renewal_critical_mass_margin": 6.821107933069337e-07,
+    "minimum_natural_lifetime_ratio": 28.444444444444443,
+    "minimum_low_low_gap": 0.08032972139030714,
+    "worst_shell_probe_registration_residual": 6.635975102089989e-16,
+    "worst_probability_residual": 6.661338147750939e-16,
+    "minimum_heat_mass_conservation_margin": -8.526512829121202e-14
+  }
+}
