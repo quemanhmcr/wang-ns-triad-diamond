@@ -1,0 +1,39 @@
+{
+  "certificate": {
+    "status": "EXACT_MATERIAL_LABEL_SIDECAR_QUOTIENT__PURE_LABEL_AND_SELECTED_FAMILY_SWITCH_ADD_NO_SECOND_CARRIER_IMPULSE__ROLE_CHANGE_REMAINS_INTERFACE",
+    "coefficient_identity": "for the same smooth role Q and same registered analysis probe psi, z_event=z_slice+I_HH+I_interface contains no old-pool membership indicator or selected-family characteristic function",
+    "no_double_count": "material-address/membership motion may be physically caused by nonaffine dynamics, but that dynamics is already represented by I_interface; crossing a material bookkeeping boundary does not add a second independent coefficient impulse",
+    "service_reclassification": "holding the positive renewed service weights fixed, rereading OO/ON/NN with updated intrinsic endpoint memberships preserves the total service exactly",
+    "selected_family": "a selected coherent-family change keeps its exact symmetric-difference Moyal energy R_switch and |Delta E_selected|<=R_switch; this charge remains ancestry/service currency even when the same smooth carrier is reused",
+    "carrier_quotient": "with same Q and psi, pure material sidecars do not join the carrier-stop set; carrier continuation is still decided only by the existing interface |I|>=|z|/4 and HH |I_HH|>=|z|/2 faces",
+    "joint_events": "sidecar material events and carrier stops may occur simultaneously and are returned together without lexicographic primary selection, while sidecar events are separately marked so they do not kill the reusable carrier",
+    "nonquotient": "if Q or psi changes, no transparency is claimed: delegate to event-role/nonaffine-interface/relink registration and preserve any Moyal symmetric-difference charge",
+    "master": "the quotient removes only an unnecessary carrier reconstruction; it does not erase material ancestry, R_switch, entropy/cycle accounting, or promote relink to a free/reset resource",
+    "legacy_refinement": {
+      "legacy_branch": "material_relink_stop",
+      "refined_branch": "carrier_continues_with_material_sidecars",
+      "old_theorem_status": "retained_as_conservative_superset",
+      "refined_subtype": "same_Q_same_psi_material_sidecar_only"
+    },
+    "scope": "this justifies the three-monitor shortest critical-shell corridor and eventwise rereading of material ownership after service; source/pressure routing and final continuum master assembly remain open"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_continuing_quarter_margin": 0.0008095677279705032,
+    "worst_same_role_duhamel_residual": 8.5639008844333e-14,
+    "worst_service_reclassification_residual": 1.1013412404281553e-13,
+    "minimum_switch_jump_margin": -1.4210854715202004e-14,
+    "label_transparency_failures": 0,
+    "switch_charge_losses": 0,
+    "role_delegate_failures": 0,
+    "maximum_carrier_stop_count": 2,
+    "maximum_joint_physical_event_count": 4,
+    "branch_counts": {
+      "carrier_continues": 2595,
+      "carrier_first_stop": 7571,
+      "carrier_first_stop_with_material_sidecars": 22406,
+      "carrier_continues_with_material_sidecars": 7595,
+      "delegate_role_or_probe_change": 9833
+    }
+  }
+}

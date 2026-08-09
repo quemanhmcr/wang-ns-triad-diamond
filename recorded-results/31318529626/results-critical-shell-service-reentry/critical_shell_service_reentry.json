@@ -1,0 +1,34 @@
+{
+  "certificate": {
+    "status": "EXACT_CRITICAL_SHELL_MASS_TO_OWN_SCALE_SERVICE_REENTRY__GENERIC_DV_AND_FRESH_CLUSTER_SUPPLIERS__MATERIALITY_DEFERRED",
+    "local_input": "one actual shell-time event with M||P_Mu(t)||_2^2>=mu0>0; no packet, material label or probability law is part of the core theorem",
+    "registration": "A=3M/4 and Q_A=1 on {M/2<|xi|<=M} give A|z(t)|^2>=(3/4)mu0 exactly with the shell's normalized state as terminal analysis probe",
+    "first_stop": "before materiality is assigned, use only renewed strain, classified role-interface coefficient impulse and HH-regeneration coefficient impulse; the observed monitor horizon must cover the claimed natural/boundary interval",
+    "survivor": "a full no-hit corridor keeps A|z(s)|^2>=(3/64)mu0 on every prefix; the registered analysis-dual cost J gives A||Q_Au(s)||^2>=(3mu0)/(64J^2)",
+    "service": "the Arb-certified radius-3 annular heat truncation gives some actual |r|<=3/A with A||delta_r Q_Au||^2 >= (q_b 3mu0)/(64J^2), and normalized full-slab service at least c times this threshold",
+    "material_order": "material OO/ON/NN is read only after the renewed positive service law exists; pure shell criticality carries no synthetic old/new label",
+    "high_strain_specialization": "mu0=32pi^2/(75c^2) gives terminal mass=3.15827340835, quarter-survivor mass=0.197392088022, and exactly the previously certified high-strain carrier/service constants",
+    "dissipation_supplier": "any certified resolved D_V>=D0>0 supplies mu0=D0/c on at least D_V-D0/2>=D_V/2 actual dissipation mass; normalized restriction weights remain diagnostic, never HH causal probabilities",
+    "fresh_service_supplier": "the existing dominant fresh service branch gives M(E_C+E_C-r)>=theta Y/8; because each cell energy is <=whole-shell energy, it supplies M E_shell>=theta Y/16=Y/64 at theta=1/4",
+    "scale_scope": "this theorem is shell-local and proves own-scale service re-entry; supplier-specific signed-good progress relative to a previous block scale is a separate geometric statement and is not fabricated here",
+    "scope": "this unifies high-strain critical shells, generic resolved-dissipation critical shells and dominant fresh coherent clusters at the carrier/service level; source/pressure routing, pure material-label transparency, and final continuum master assembly remain separate tasks"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_high_strain_specialization_margin": 0.0,
+    "minimum_dissipation_retained_fraction": 0.5001351890271398,
+    "minimum_fresh_shell_mass_margin": 0.0,
+    "minimum_survivor_mass_margin": 1.794996159924285e-05,
+    "minimum_service_threshold": 1.0409785925576445e-16,
+    "worst_duhamel_residual": 4.884981308350689e-15,
+    "order_invariance_failures": 0,
+    "unit_invariance_failures": 0,
+    "horizon_guard_failures": 0,
+    "maximum_joint_cause_count": 2,
+    "branch_counts": {
+      "named_recursive_first_stop": 33444,
+      "initial_boundary_root": 8148,
+      "full_natural_own_scale_service": 8408
+    }
+  }
+}

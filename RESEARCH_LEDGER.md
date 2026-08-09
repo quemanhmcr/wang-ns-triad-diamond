@@ -6556,7 +6556,61 @@ and continues to belong to ancestry/service routing; paying that sidecar charge 
 
 The older common-slice theorem remains a correct conservative superset; only its same-`Q`, same-`psi` material-sidecar subtype is refined.  Dedicated run `31306299773` on exact `35846d9` passed the complete pytest dependency stack and `50,000` quotient states: minimum transparent quarter-coefficient margin `8.096e-04`, worst same-role Duhamel residual `8.564e-14`, worst service reclassification residual `1.101e-13`, selected-family switch-jump margin `-1.421e-14` at floating precision, zero label-transparency/switch-charge/role-delegate failures, and maximum carrier-stop count exactly `2`.  Full physical-energy integration `31306305152` on the same SHA also passed.  Stored artifact: `recorded-results/31306299773/`.  Status: `EXACT_MATERIAL_LABEL_SIDECAR_QUOTIENT__PURE_LABEL_AND_SELECTED_FAMILY_SWITCH_ADD_NO_SECOND_CARRIER_IMPULSE__ROLE_CHANGE_REMAINS_INTERFACE`.
 
-This removes another observer-imposed obstruction from the shortest continuum architecture.  The decisive frontier is now narrower: **assemble the already-certified objective-source/SGS/pressure reservoir suppliers into the generic critical-shell/service recursion without inventing packet synchronization, and then close the continuum master**.  In particular, resolved quadratic and viscous source channels already feed `D_V` and therefore the generic critical-shell theorem; differentiated SGS already feeds the coherent-service graph; pressure must retain its honest split between SGS stress and resolved low-frequency reservoir occupation, with fixed-pair geometric erosion/entropy/relink rather than being mislabeled as resolved `D_V`.  No Navier--Stokes global-regularity proof is claimed.
+This removes another observer-imposed obstruction from the shortest continuum architecture.  The next source audit shows that the remaining coherent objective-source branch is itself an **owner compiler**, not a missing packet theorem.
+
+For the exact coherent corotational strain equation, group source action only by its physical owner:
+
+`local_DV + pressure + SGS + viscosity`.
+
+If `A_obj` is the objective-variation action on scaled lifetime `c`, the positive owner weights satisfy
+
+`Sigma_local + Sigma_P + Sigma_R + Sigma_nu >= A_obj/c`,
+
+so at least one owner carries `A_obj/(4c)`; exact ties remain one joint owner set.  No scalarized source clock or theorem-name priority is introduced.
+
+The local coherent quadratic/Reynolds terms already obey `Sigma_local<=C_local D_V`, while the filtered viscous source satisfies `rho_nu<=nu sqrt(d_V)/1500`.  Thus
+
+`D_V >= Sigma_local/C_local`
+
+or, on the viscous owner,
+
+`D_V >= (1500 Sigma_nu/nu)^2/c`.
+
+Both feed the generic critical-shell theorem as scale-critical recursion, never as additive resets.
+
+The differentiated SGS owner simplifies further.  The resolved source collision, Germano inequality and coherent square-service threshold have powers
+
+`rho_R -> ||R||_(3/2) -> Q^(3/2) -> Y^(2/3)`,
+
+so the exponents cancel exactly and give the direct linear law
+
+`Y >= C_Y rho_R`,
+
+`C_Y = 380/[g1(1+g1)(C_LP C_B)^2]`.
+
+Hence integrated objective-SGS source creates integrated coherent square service with **no persistence hypothesis and no affine-radius packet**.  Its existing positive service law routes to high-frequency dissipation, old-pool capacity, selected-interface `Xi`, a dominant fresh critical shell, ancestry entropy, or same-ancestry cycle.  The dominant quarter-service edge supplies pair critical-mass occupation `>=Y/32`, whole-shell occupation `>=Y/64`, hence a pointwise shell event `>=Y/(64c)` which enters the generic shell re-entry theorem.  High-frequency dissipation is deliberately kept under its own owner and is not renamed resolved `D_V`.
+
+Pressure also retains its native two-way structure.  From
+
+`rho_P <= mu_V/5700 + ||R||_(3/2)/380`,
+
+an integrated pressure owner `Sigma_P` gives
+
+`int mu_V >= 2850 Sigma_P`
+
+or
+
+`int ||R||_(3/2) >= 190 Sigma_P`.
+
+The stress alternative is exactly an effective SGS source weight `Sigma_P/2` and enters the same direct coherent-service route.  The low-pass mass alternative is **not** promoted to a generic critical shell: it remains pressure-reservoir occupation.  On a supplied signed-good low-strain lineage, every fixed materially reused low-low reservoir pair contracts its pressure-service coefficient by
+
+`(21/20)^4(5/8)^3 = 194481/655360 < 1/3`,
+
+so its total future fixed-pair capacity is `<3/2` of generation zero; persistence must relink pairs, fragment into component entropy/cycle, leave low strain, or use the SGS part.
+
+The first theorem SHA `7f1ff35` already passed all `560` tests and the new `50,000`-state compiler stress, but its dedicated workflow then failed in a **dependency-only fixture** because the subsequent resolved-objective source certificate requires `python-flint` and the new workflow had installed only `requirements.txt`.  No theorem formula or test failed.  Commit `8015fb8` added only `python-flint` to that workflow.  Corrected dedicated run `31318529626` on exact `8015fb8` then passed the full theorem suite and all dependency certificates: worst SGS closed-form homogeneity residual `1.207e-15`, minimum owner-pigeonhole margin `2.066e-03`, pressure split identity margin `-1.110e-16`, local-`D_V` identity margin `-1.110e-16`, viscous Cauchy identity margin `0`, and maximum sampled joint owner count `4`.  Full physical-energy integration `31318546158` on the same SHA passed the complete causal stack and master episode stress.  Stored artifact: `recorded-results/31318529626/`.  Status: `EXACT_COHERENT_OBJECTIVE_SOURCE_OWNER_COMPILER__LOCAL_DV_AND_VISCOSITY_TO_CRITICAL_SHELL__SGS_TO_COHERENT_SERVICE__PRESSURE_TO_SGS_OR_RESERVOIR__NO_PACKET_SYNCHRONIZATION`.
+
+Thus the **coherent objective-source assembly seam is closed without introducing a source packet**.  The remaining continuum frontier is narrower and more physical.  Generic resolved `D_V` and dominant fresh coherent mass already re-enter through the critical-shell service theorem; pure material sidecars no longer kill an unchanged carrier.  Two scale-sensitive owners still require honest recursive geometry rather than relabeling: (i) SGS high-frequency enstrophy/dissipation, which is not resolved `D_V`, and (ii) resolved low-frequency pressure-reservoir occupation, whose fixed-pair erosion theorem is conditional on the supplied signed-good low-strain lineage.  A promising next native bridge for (i) is the exact high-tail energy balance: large high-frequency viscous loss must come from inherited high-tail energy or actual positive nonlinear regeneration work; the inherited tail has summable `N/M` shell weights and therefore can force a genuine critical shell.  This last statement is a research direction, not yet theorem-level.  Final continuum master topology and supplier-specific signed-good scale geometry remain open.  No Navier--Stokes global-regularity proof is claimed.
 
 ---
 
@@ -6572,7 +6626,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/complex_young_parent_marking.md`, `docs/dual_gaussian_root_registration.md`, `docs/bargmann_root_cell_registration.md`, `docs/amplitude_entropy_causal_reuse.md`, `docs/common_slice_coefficient_registration.md`, `docs/outer_moving_role_extraction.md`, `docs/nonaffine_role_interface_work.md`, `docs/event_anchored_role_registration.md`, `docs/physical_pair_weighted_productivity.md`, `docs/recursive_physical_witness_constructor.md`, `docs/joint_causal_stop_projection.md`, `docs/smooth_sgs_first_hit_extraction.md`, `docs/smooth_material_carrier_relay.md`, `docs/resolved_cutoff_repartition_relay.md`, `docs/high_strain_resolved_ancestor.md`, `docs/high_strain_heat_increment_service.md`, `docs/heat_edge_material_ownership.md`, `docs/first_hit_heat_reservoir_erosion.md`, `docs/old_incident_heat_erosion.md`, `docs/nn_critical_heat_carrier_seed.md`, `docs/nn_seed_temporal_first_stop.md`, `docs/critical_annular_carrier_service_reentry.md`, `docs/high_strain_critical_carrier_reentry.md`, `docs/critical_shell_service_reentry.md`, `docs/material_label_carrier_quotient.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/complex_young_parent_marking.md`, `docs/dual_gaussian_root_registration.md`, `docs/bargmann_root_cell_registration.md`, `docs/amplitude_entropy_causal_reuse.md`, `docs/common_slice_coefficient_registration.md`, `docs/outer_moving_role_extraction.md`, `docs/nonaffine_role_interface_work.md`, `docs/event_anchored_role_registration.md`, `docs/physical_pair_weighted_productivity.md`, `docs/recursive_physical_witness_constructor.md`, `docs/joint_causal_stop_projection.md`, `docs/smooth_sgs_first_hit_extraction.md`, `docs/smooth_material_carrier_relay.md`, `docs/resolved_cutoff_repartition_relay.md`, `docs/high_strain_resolved_ancestor.md`, `docs/high_strain_heat_increment_service.md`, `docs/heat_edge_material_ownership.md`, `docs/first_hit_heat_reservoir_erosion.md`, `docs/old_incident_heat_erosion.md`, `docs/nn_critical_heat_carrier_seed.md`, `docs/nn_seed_temporal_first_stop.md`, `docs/critical_annular_carrier_service_reentry.md`, `docs/high_strain_critical_carrier_reentry.md`, `docs/critical_shell_service_reentry.md`, `docs/material_label_carrier_quotient.md`, `docs/objective_source_routing_compiler.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;
