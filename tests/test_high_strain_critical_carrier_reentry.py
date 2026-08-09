@@ -1,0 +1,114 @@
+import math
+
+import numpy as np
+
+from src.high_strain_critical_carrier_reentry import (
+    CriticalDissipationAtom,
+    critical_seed_backward_first_hit,
+    critical_seed_natural_outcome,
+    pushforward_critical_dissipation_law,
+    theorem_certificate,
+)
+from src.high_strain_resolved_ancestor import high_strain_ancestor_mass_threshold
+from src.nn_critical_heat_carrier_seed import renewal_carrier_critical_mass_lower
+
+
+def test_actual_critical_dissipation_law_pushes_to_carrier_seeds_without_nn():
+    c = 1.0
+    N = 64.0
+    mu = high_strain_ancestor_mass_threshold(c)
+    atoms = (
+        CriticalDissipationAtom(2.0, N, N / 4, 1.2 * mu / (N / 4), 0.1),
+        CriticalDissipationAtom(3.0, N, N / 8, 2.0 * mu / (N / 8), 0.2),
+    )
+    seeds = pushforward_critical_dissipation_law(atoms, scaled_lifetime=c)
+    assert math.isclose(sum(x.normalized_dissipation_weight for x in seeds), 1.0)
+    assert all(x.renewal_critical_mass >= renewal_carrier_critical_mass_lower(c) for x in seeds)
+    assert all(x.natural_lifetime_ratio >= 256 / 9 for x in seeds)
+
+
+def test_generic_corridor_has_three_native_monitors_and_no_material_monitor():
+    amp = 2.0
+    ell = np.linspace(0.0, 1.0, 5)
+    hit = critical_seed_backward_first_hit(
+        ell,
+        terminal_amplitude=amp,
+        strain_action=np.linspace(0.0, 1 / 60, 5),
+        residual_impulse_abs=np.linspace(0.0, 0.1 * amp, 5),
+        hh_impulse_abs=np.linspace(0.0, 0.2 * amp, 5),
+    )
+    assert hit["first_elapsed"] is None
+    assert set(hit["individual_debuts"]) == {
+        "high_strain_critical_dissipation",
+        "classified_role_interface_impulse",
+        "hh_regeneration_impulse",
+    }
+
+
+def test_full_generic_critical_corridor_creates_own_scale_service_without_nn():
+    c = 1.0
+    A = 3.0
+    T = c / A**2
+    amp = math.sqrt(renewal_carrier_critical_mass_lower(c) / A)
+    ell = np.linspace(0.0, T, 5)
+    hit = critical_seed_backward_first_hit(
+        ell,
+        terminal_amplitude=amp,
+        strain_action=np.linspace(0.0, 1 / 60, 5),
+        residual_impulse_abs=np.linspace(0.0, 0.1 * amp, 5),
+        hh_impulse_abs=np.linspace(0.0, 0.2 * amp, 5),
+    )
+    ir = 0.1 * amp
+    ih = 0.2j * amp
+    out = critical_seed_natural_outcome(
+        event_time=2.0 * T,
+        renewal_frequency=A,
+        scaled_lifetime=c,
+        viscosity=1.0,
+        terminal_coefficient=amp,
+        endpoint_coefficient=amp - ir - ih,
+        hh_impulse=ih,
+        residual_interface_impulse=ir,
+        first_hit=hit,
+    )
+    assert out["classification"] == "full_natural_own_scale_service"
+    assert out["uniform_square_service_lower"] > 0
+    assert out["integrated_bounded_heat_service_lower"] > 0
+    assert out["nn_seed_required"] is False
+    assert out["materiality_assigned"] == "only_after_service_via_exact_Moyal_OO_ON_NN"
+
+
+def test_high_strain_or_hh_hit_stays_named_recursive_not_service():
+    c = 1.0
+    A = 2.0
+    T = c / A**2
+    amp = math.sqrt(1.1 * renewal_carrier_critical_mass_lower(c) / A)
+    ell = np.linspace(0.0, T, 5)
+    hit = critical_seed_backward_first_hit(
+        ell,
+        terminal_amplitude=amp,
+        strain_action=np.linspace(0.0, 1 / 20, 5),
+        residual_impulse_abs=np.zeros(5),
+        hh_impulse_abs=np.zeros(5),
+    )
+    out = critical_seed_natural_outcome(
+        event_time=2 * T,
+        renewal_frequency=A,
+        scaled_lifetime=c,
+        viscosity=1.0,
+        terminal_coefficient=amp,
+        endpoint_coefficient=amp,
+        hh_impulse=0j,
+        residual_interface_impulse=0j,
+        first_hit=hit,
+    )
+    assert out["classification"] == "named_recursive_first_stop"
+    assert "high_strain_critical_dissipation" in out["joint_causes"]
+
+
+def test_certificate_explicitly_bypasses_nn_only_for_renewal_entrance():
+    cert = theorem_certificate()
+    assert "NN_NOT_REQUIRED_FOR_RENEWAL_ENTRANCE" in cert["status"]
+    assert "no longer requires" in cert["architectural_shortcut"]
+    assert "remain valid refinements" in cert["architectural_shortcut"]
+    assert "universal source/SGS" in cert["scope"]
