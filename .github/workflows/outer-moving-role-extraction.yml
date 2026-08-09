@@ -1,0 +1,29 @@
+name: Outer moving role extraction
+on:
+  push:
+    paths:
+      - 'src/outer_moving_role_extraction.py'
+      - 'tests/test_outer_moving_role_extraction.py'
+      - 'docs/outer_moving_role_extraction.md'
+      - '.github/workflows/outer-moving-role-extraction.yml'
+      - 'src/smooth_sgs_packet_equation.py'
+      - 'src/resolved_role_egorov.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12', cache: pip}
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction
+      - run: cat results-outer-moving-role-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: outer-moving-role-extraction-results
+          path: results-outer-moving-role-extraction/
