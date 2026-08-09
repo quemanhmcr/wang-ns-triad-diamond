@@ -154,14 +154,22 @@ The stress alternative is precisely an effective objective-SGS source weight `Si
 
 The resolved-mass alternative is intentionally **not** fed to the generic critical-shell theorem.  `mu_V=N||V||_2^2` is low-pass mass occupation and may sit arbitrarily far below the current block scale.  Calling it a critical shell would be a false geometric assertion.
 
-Instead it remains the pressure-reservoir owner.  On a supplied signed-good low-strain lineage, every fixed materially reused low-low pair has pressure-service coefficient contraction
+Instead it remains the objective pressure-Hessian reservoir owner.  The derivative order matters.  For one low--low pair `(a,b)`, the normalized Hessian source has, up to the fixed Riesz/Bernstein constant, coefficient
 
 \[
-\left(\frac{21}{20}\right)^4\left(\frac58\right)^3
-=\frac{194481}{655360}<\frac13,
+\frac{M_{max}^4\sqrt{M_aM_b}}{N^4}\sqrt{E_aE_b}.
 \]
 
-so its total future capacity is less than `3/2` times its generation-zero coefficient.  Persistent pressure service must therefore relink to new reservoir pairs, fragment into atomic/component entropy or cycle structure, leave the low-strain reuse regime, or use the SGS part.
+On a supplied signed-good low-strain lineage, reservoir frequencies grow by `<21/20` while the block scale grows by `>8/5`, so every fixed materially reused pair contracts by
+
+\[
+\left(\frac{21}{20}\right)^5\left(\frac58\right)^4
+=\frac{4084101}{20971520}<\frac15.
+\]
+
+Therefore its total future objective-Hessian capacity is `<5/4` times generation zero.  Persistent pressure-Hessian service must relink to new reservoir pairs, fragment into atomic/component entropy or cycle structure, leave the low-strain reuse regime, or use the SGS part.
+
+This must not be confused with the separate H1 **pressure-third** source, whose coefficient is `M_max^3 sqrt(M_aM_b)/N^3`, contracts by `<1/3`, and has total fixed-pair capacity `<3/2`.  The two sources share material-pair provenance but not derivative order.
 
 The material-label sidecar quotient is compatible with this statement: a selected reservoir family may change and pay its Moyal/ancestry charge without automatically destroying an unchanged smooth carrier.  A genuine role/probe change still delegates to the physical interface theorem.
 

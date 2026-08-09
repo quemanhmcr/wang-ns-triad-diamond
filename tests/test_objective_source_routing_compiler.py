@@ -69,8 +69,8 @@ def test_pressure_mass_is_not_silently_promoted_to_shell():
     assert out["stress_l32_occupation_lower"] / 380.0 == pytest.approx(sigma / 2.0)
     assert out["effective_sgs_source_weight_if_stress_branch"] == pytest.approx(sigma / 2.0)
     assert out["resolved_mass_is_generic_critical_shell"] == "NO"
-    assert out["fixed_pair_service_ratio_upper"] < 1.0 / 3.0
-    assert out["fixed_pair_total_future_multiplier_upper"] < 1.5
+    assert out["fixed_pair_service_ratio_upper"] < 1.0 / 5.0
+    assert out["fixed_pair_total_future_multiplier_upper"] < 1.25
 
 
 def test_integrated_sgs_high_frequency_owner_is_not_DV():

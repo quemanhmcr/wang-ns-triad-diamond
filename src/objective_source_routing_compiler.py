@@ -29,7 +29,7 @@ from src.critical_shell_service_reentry import (
     critical_shell_bounded_service_lower,
     dissipation_supplier_shell_mass_threshold,
 )
-from src.pressure_reservoir_sync import pair_energy_service_ratio_upper
+from src.pressure_reservoir_sync import pressure_hessian_pair_energy_service_ratio_upper
 from src.resolved_objective_strain_collision import sgs_gradient_stress_lower
 
 STATUS = (
@@ -422,15 +422,16 @@ def pressure_source_alternatives(
     The stress branch is exactly an effective objective-SGS source weight Sigma_P/2.
     The low-pass mass branch is deliberately NOT converted into a critical shell.
     It remains a pressure-reservoir occupation; on a supplied signed-good low-strain
-    lineage each fixed material pair has service ratio <1/3 and total future capacity
-    <3/2 of its generation-zero coefficient, so persistence requires pair relink,
+    lineage each fixed material pair has the **objective-Hessian** service ratio
+    `<1/5` and total future capacity `<5/4` of its generation-zero coefficient.
+    This is distinct from the H1 pressure-third one-third-life. Persistence requires pair relink,
     component entropy/cycle, leaving low strain, or the SGS branch.
     """
     sigma = float(source_weight)
     c = float(scaled_lifetime)
     if sigma <= 0 or c <= 0 or not math.isfinite(sigma + c):
         raise ValueError("positive finite pressure source weight/lifetime required")
-    ratio = float(pair_energy_service_ratio_upper())
+    ratio = float(pressure_hessian_pair_energy_service_ratio_upper())
     effective_sgs = sigma / 2.0
     stress_service = objective_sgs_integrated_square_service_lower(
         effective_sgs, filter_l1, lp_constant, bernstein_constant
@@ -507,9 +508,9 @@ def compile_objective_source_owners(
 
 
 def theorem_certificate() -> dict[str, object]:
-    ratio = pair_energy_service_ratio_upper()
-    if not ratio < 1 / 3:
-        raise AssertionError("pressure fixed-pair service ratio lost its one-third life")
+    ratio = pressure_hessian_pair_energy_service_ratio_upper()
+    if not ratio < 1 / 5:
+        raise AssertionError("objective pressure-Hessian fixed-pair service ratio lost its one-fifth life")
     return {
         "status": STATUS,
         "owner_split": "local_DV / pressure / SGS / viscosity; all threshold ties retained jointly",
@@ -519,7 +520,8 @@ def theorem_certificate() -> dict[str, object]:
         "sgs_clean_route": "D_high>=Y/4 OR oldcap>Y/8 OR Xi>=Y/8 OR fresh shell/entropy/cycle",
         "sgs_high_frequency_owner": "smooth-LP D_high enters the orthogonal hard-tail energy theorem only through a certified D_tail>=c_LP D_high comparison, then routes to inherited critical shell OR actual positive HH/resolved-interface regeneration; never resolved D_V",
         "pressure_owner": "int mu_V>=2850 Sigma_P OR effective SGS weight>=Sigma_P/2",
-        "pressure_pair_ratio": f"{ratio.numerator}/{ratio.denominator}<1/3",
+        "pressure_hessian_pair_ratio": f"{ratio.numerator}/{ratio.denominator}<1/5",
+        "pressure_hessian_total_future_pair_capacity": "<5/4 generation-0 pair capacity on supplied signed-good low-strain lineage",
         "forbidden_identifications": (
             "pressure low-pass mass is not generic critical-shell mass; high-frequency SGS dissipation is not resolved D_V"
         ),
@@ -645,7 +647,7 @@ integrates to the honest alternative
 
 `int mu_V >= 2850 Sigma_P`  OR  `int ||R||_(3/2) >= 190 Sigma_P`.
 
-The stress alternative is exactly an effective SGS source weight `Sigma_P/2` and enters the same coherent-service route.  The resolved low-pass mass alternative is **not** promoted to a generic critical shell.  It remains pressure-reservoir occupation.  On a supplied signed-good low-strain lineage, each fixed materially reused low-low pair has pressure-service ratio `{pair_energy_service_ratio_upper().numerator}/{pair_energy_service_ratio_upper().denominator}<1/3`, so persistent pressure service must relink pairs, fragment into component entropy/cycle, leave low strain, or use the SGS branch.
+The stress alternative is exactly an effective SGS source weight `Sigma_P/2` and enters the same coherent-service route.  The resolved low-pass mass alternative is **not** promoted to a generic critical shell.  It remains objective pressure-Hessian reservoir occupation.  On a supplied signed-good low-strain lineage, one fixed materially reused low-low pair has the derivative-correct coefficient ratio `{pressure_hessian_pair_energy_service_ratio_upper().numerator}/{pressure_hessian_pair_energy_service_ratio_upper().denominator}<1/5`, hence total future fixed-pair capacity `<5/4` of generation zero.  Persistent pressure-Hessian service must relink pairs, fragment into component entropy/cycle, leave low strain, or use the SGS branch.  The separate H1 pressure-third source retains its own `<1/3` theorem.
 
 Stress: `{out.samples}` source-owner states
 - worst SGS closed-form relative residual: `{out.worst_sgs_closed_form_relative_residual:.3e}`
