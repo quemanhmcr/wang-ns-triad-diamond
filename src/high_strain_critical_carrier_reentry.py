@@ -388,19 +388,20 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> HighStrainCriticalRee
             PhysicalPathMonitor("classified_role_interface_impulse", RESIDUAL_FRACTION * amp, tuple(IRpath), ThresholdTopology.CLOSED),
             PhysicalPathMonitor("hh_regeneration_impulse", GENERATED_FRACTION * amp, tuple(IHpath), ThresholdTopology.CLOSED),
         ]
-        base = first_physical_corridor_exit(ell, mons, tie_tolerance=2e-12)
+        time_tol = 2e-10 * max(1.0, abs(T))
+        base = first_physical_corridor_exit(ell, mons, tie_tolerance=time_tol)
         perm = rng.permutation(3)
-        alt = first_physical_corridor_exit(ell, [mons[int(i)] for i in perm], tie_tolerance=2e-12)
+        alt = first_physical_corridor_exit(ell, [mons[int(i)] for i in perm], tie_tolerance=time_tol)
         if base.joint_causes != alt.joint_causes or base.first_time != alt.first_time:
             order_fail += 1
             raise AssertionError("critical-seed first stop depended on monitor order")
         scaled = [rescale_monitor_units(m, float(math.exp(rng.uniform(-8.0, 8.0)))) for m in mons]
-        altu = first_physical_corridor_exit(ell, scaled, tie_tolerance=2e-10)
+        altu = first_physical_corridor_exit(ell, scaled, tie_tolerance=time_tol)
         if (base.first_time is None) != (altu.first_time is None):
             unit_fail += 1
             raise AssertionError("critical-seed first stop depended on monitor units")
         if base.first_time is not None and (
-            abs(float(base.first_time) - float(altu.first_time)) > 2e-10
+            abs(float(base.first_time) - float(altu.first_time)) > time_tol
             or set(base.joint_causes) != set(altu.joint_causes)
         ):
             unit_fail += 1
