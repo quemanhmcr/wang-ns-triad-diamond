@@ -112,4 +112,5 @@ def test_certificate_keeps_interface_and_hh_impulses_out_of_physical_work_law():
     cert = theorem_certificate()
     assert "not promoted to physical work" in cert["interface_scope"]
     assert "physical-energy causal gate" in cert["hh_scope"]
-    assert "material/efficiency" in cert["scope"]
+    assert "NN material witness" in cert["scope"]
+    assert "efficiency/service renewal" in cert["scope"]
