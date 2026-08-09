@@ -146,7 +146,7 @@ def test_exact_quarter_pair_boundary_keeps_dominance_and_entropy_joint():
         sigma,
         1.0,
         4.0,
-        sgs_positive_source_weight=0.0,
+        sgs_positive_source_weight=0.5,
         pair_positive_weights=weights,
         pair_shell_indices=[(0, 1), (2, 3), (4, 5), (6, 7)],
         pair_frequencies=[(1.0, 0.5)] * 4,
@@ -169,7 +169,7 @@ def test_five_way_diffuse_pair_law_has_more_than_log4_entropy():
         1.0,
         4.0,
         sgs_positive_source_weight=0.0,
-        pair_positive_weights=[0.1] * 5,
+        pair_positive_weights=[0.2] * 5,
         pair_shell_indices=[(i, i) for i in range(5)],
         pair_frequencies=[(1.0, 1.0)] * 5,
     )
