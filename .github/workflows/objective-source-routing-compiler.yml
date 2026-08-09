@@ -1,0 +1,56 @@
+name: Objective source routing compiler
+
+on:
+  push:
+    paths:
+      - 'src/objective_source_routing_compiler.py'
+      - 'tests/test_objective_source_routing_compiler.py'
+      - 'docs/objective_source_routing_compiler.md'
+      - '.github/workflows/objective-source-routing-compiler.yml'
+      - 'src/coherent_averaged_strain_source.py'
+      - 'src/resolved_objective_strain_collision.py'
+      - 'src/coherent_increment_service.py'
+      - 'src/critical_shell_service_reentry.py'
+      - 'src/pressure_reservoir_sync.py'
+      - 'src/material_label_carrier_quotient.py'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: pytest -q
+      - name: Objective source compiler stress
+        run: python -m src.objective_source_routing_compiler --samples 50000 --outdir results-objective-source-routing-compiler
+      - name: Resolved objective source dependency
+        run: python -m src.resolved_objective_strain_collision --samples 50000 --outdir results-resolved-objective-strain
+      - name: Coherent averaged source dependency
+        run: python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-source
+      - name: Critical shell dependency
+        run: python -m src.critical_shell_service_reentry --samples 50000 --outdir results-critical-shell-service-reentry
+      - name: Pressure reservoir dependency
+        run: python -m src.pressure_reservoir_sync --samples 50000 --outdir results-pressure-reservoir-sync
+      - name: Material sidecar quotient dependency
+        run: python -m src.material_label_carrier_quotient --samples 50000 --outdir results-material-label-carrier-quotient
+      - run: cat results-objective-source-routing-compiler/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: objective-source-routing-compiler-results
+          path: |
+            results-objective-source-routing-compiler/
+            results-resolved-objective-strain/
+            results-coherent-averaged-source/
+            results-critical-shell-service-reentry/
+            results-pressure-reservoir-sync/
+            results-material-label-carrier-quotient/
