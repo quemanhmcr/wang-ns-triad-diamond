@@ -241,7 +241,13 @@ If the scaled source horizon has length `c`, at some actual time
 \left(\frac N{M_{max}}\right)^4R_{ab}.
 \]
 
-At least one of the two hard shells has critical mass at least this geometric mean.  Uniformly over diagonal/off-diagonal pairs,
+At least one of the two hard shells of the resolved transporter has critical mass at least this geometric mean.  This is not yet an identification with the full-velocity shell.  The canonical scalar low-pass satisfies `|S_(N/4)(xi)|<=1` and commutes with the hard shell projector, so exactly
+
+\[
+M\|P_MV\|_2^2\le M\|P_Mu\|_2^2.
+\]
+
+Therefore the same numerical lower is inherited by the corresponding hard shell of `u`, with no inverse low-pass estimate.  Uniformly over diagonal/off-diagonal pairs,
 
 \[
 \boxed{

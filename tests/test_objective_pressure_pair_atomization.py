@@ -16,6 +16,7 @@ from src.objective_pressure_pair_atomization import (
     scalarized_pressure_split,
     scalarized_unordered_pair_atoms,
     theorem_certificate,
+    u_shell_mass_lower_from_resolved_shell_mass,
     unordered_pair_capacity_upper,
     unordered_pair_matrices,
 )
@@ -81,6 +82,10 @@ def test_source_unit_scale_cannot_change_dimensionless_pair_dominance():
         pair_frequencies=[(1.0, 1.0)] * 5,
     )
     assert out["joint_pair_routes"] == ("diffuse_pair_source_entropy",)
+
+
+def test_resolved_shell_lower_passes_to_u_only_by_contraction():
+    assert u_shell_mass_lower_from_resolved_shell_mass(2.75) == pytest.approx(2.75)
 
 
 def test_actual_pair_weight_exposes_peak_hard_shell_mass():
@@ -183,3 +188,4 @@ def test_certificate_removes_aggregate_muV_from_canonical_pressure_route():
     assert "80 Sigma_P/c" in cert["dominant_pair"]
     assert "not the canonical pressure renewal route" in cert["coarse_muV"]
     assert "not causal" in cert["positive_source_cover"]
+    assert "|S_(N/4)|<=1" in cert["dominant_pair"]

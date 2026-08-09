@@ -181,6 +181,22 @@ def canonical_all_pair_absolute_capacity_upper(
     return N * E / 2560.0
 
 
+def u_shell_mass_lower_from_resolved_shell_mass(resolved_shell_mass_lower: float) -> float:
+    """Pass a strict-lowpass hard-shell lower from V to the same shell of u.
+
+    The canonical transporter has scalar multiplier `|S_(N/4)(xi)|<=1` and
+    commutes with the hard shell projector.  Hence
+
+      M||P_M V||_2^2 <= M||P_M u||_2^2.
+
+    No inverse low-pass estimate and no equality of the two shells is asserted.
+    """
+    mu = float(resolved_shell_mass_lower)
+    if mu < 0 or not math.isfinite(mu):
+        raise ValueError("finite nonnegative resolved-shell mass lower required")
+    return mu
+
+
 def dominant_pair_peak_shell_mass_lower(
     integrated_positive_pair_source: float,
     scaled_lifetime: float,
@@ -196,8 +212,11 @@ def dominant_pair_peak_shell_mass_lower(
 
       sqrt(mu_a mu_b) >= [5/kappa] (N/Mmax)^4 R_ab/c.
 
-    At that time at least one actual hard shell has critical mass at least this
-    geometric mean.  No coherent piece is assigned Fourier support.
+    At that time at least one actual hard shell of the resolved transporter has
+    critical mass at least this geometric mean.  Since the strict low-pass is an
+    L2 contraction commuting with the hard shell projector, the same numerical
+    lower holds for that shell of `u`, which is the input required by the generic
+    critical-shell theorem.  No inverse low-pass estimate is used.
     """
     R = float(integrated_positive_pair_source)
     c = float(scaled_lifetime)
@@ -341,13 +360,17 @@ def objective_pressure_pair_route(
             lower = dominant_pair_peak_shell_mass_lower(
                 float(w[i]), c, fa, fb, N, diagonal=(a == b)
             )
+            u_lower = u_shell_mass_lower_from_resolved_shell_mass(lower)
             dominant_witnesses.append({
                 "pair_index": i,
                 "shell_pair": (a, b),
                 "pair_source_weight": float(w[i]),
                 "normalized_pair_mass": float(p[i]),
                 "max_pair_frequency_ratio": max(fa, fb) / N,
-                "critical_shell_mass_lower": lower,
+                "resolved_V_shell_mass_lower": lower,
+                "u_shell_mass_lower": u_lower,
+                "critical_shell_mass_lower": u_lower,
+                "lowpass_bridge": "M||P_M V||_2^2<=M||P_M u||_2^2",
                 "child_scale_at_most": max(fa, fb),
                 "parent_to_child_natural_lifetime_ratio_at_least": (N / max(fa, fb)) ** 2,
             })
@@ -393,7 +416,7 @@ def theorem_certificate() -> dict[str, object]:
         "ordered_pair_sharp_clean": f"{sharp.numerator}/{sharp.denominator}<1/5",
         "unordered_pair_clean": "|p_ab|<=(kappa_ab/5)(Mmax/N)^4 sqrt(mu_a mu_b), kappa=1 diagonal, 2 off-diagonal",
         "source_half_split": "SGS positive pressure source >=Sigma_P/2 OR resolved positive pair source >=Sigma_P/2; ties joint",
-        "dominant_pair": "theta=1/4 gives an actual child shell mu>=5 Sigma_P/(16c)(N/Mmax)^4 >=80 Sigma_P/c because Mmax<=N/4",
+        "dominant_pair": "theta=1/4 first gives a resolved V-shell mass >=5 Sigma_P/(16c)(N/Mmax)^4; |S_(N/4)|<=1 transfers the same lower to the u shell, hence >=80 Sigma_P/c because Mmax<=N/4",
         "absolute_pair_sum": "for canonical M_j=(N/4)2^-j, sum unordered pair capacities <=N||V||_2^2/2560; mu_V appears only as an absolute-convergence budget",
         "diffuse_pair": "if every unordered pair has source mass <=1/4, H2(pair source)>=log 4; this certifies source fragmentation only, not a causal probability or terminal transfer cost",
         "material_sidecar": f"material reuse is optional after the hard event; a fixed objective-Hessian material pair contracts by {reuse.numerator}/{reuse.denominator}<1/5 per signed-good low-strain generation",
@@ -470,12 +493,12 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectivePressurePair
         sigma = available * float(rng.uniform(0.35, 1.0))
         c = float(math.exp(rng.uniform(-2.0, 1.0)))
         indices = tuple((j, j) if rng.random() < 0.35 else (j, j + 1) for j in range(k))
-        pfreqs = []
-        for a, b in indices:
-            # Physical labels here are arbitrary; only frequencies/support matter.
-            ra = 4.0 * 2.0 ** int(rng.integers(0, 8))
-            rb = 4.0 * 2.0 ** int(rng.integers(0, 8))
-            pfreqs.append((N / ra, N / rb))
+        labels = sorted({x for pair in indices for x in pair})
+        shell_freq = {
+            label: N / (4.0 * 2.0 ** int(rng.integers(0, 8)))
+            for label in labels
+        }
+        pfreqs = [(shell_freq[a], shell_freq[b]) for a, b in indices]
         route = objective_pressure_pair_route(
             sigma, c, N,
             sgs_positive_source_weight=sgs,
