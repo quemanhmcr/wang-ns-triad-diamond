@@ -154,14 +154,15 @@ first joint stop** before successful registration.  Its productivity remains
 
 The old remaining task was phrased as “construct common-unit RN stopping
 densities on positive-measure exact tie sets.”  That task is no longer required
-for the master.
+for the master.  The companion smooth-SGS first-hit theorem now also supplies
+measurable local first-cause sets once a physical block has been supplied.
 
-The continuum question is now cleaner:
+The continuum question has moved to **recursive hard-event re-entry**.  A parent
+which survives backward registration is known to have a large adjoint coefficient
+on the common slice, but it is not yet automatically a new hard transfer event.
+One must prove that this coefficient exposes a measurable hard event core at the
+parent scale, or that failure of such a core is already carried by a named
+collar/interface/source/relink stop.  No fresh packet may be chosen by fiat.
 
-> For every recursively selected smooth-SGS block, construct the measurable
-> first-hit **set of physical causes** from the actual Navier--Stokes observables,
-> and show that the no-hit set is precisely the registered survivor set used by
-> physical pair productivity / Kelvin-flat continuation.
-
-This is a stopping-time / witness-extraction problem, not a measure-conversion
-problem.  No global-regularity claim is made.
+This is a PDE re-entry problem, not a tie-weight or measure-conversion problem.
+No global-regularity claim is made.

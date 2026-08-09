@@ -2045,13 +2045,62 @@ productivity, recursive witness, joint stop, Shannon/Renyi and compiler stress;
 master `20,000` traces with worst margin `0`).  Stored artifact:
 `recorded-results/31288063518/`.
 
-## Remaining continuum bridge: measurable first-hit cause-set extraction
+## Local first-hit extraction is exact; remaining bridge is hard-event re-entry
 
-The missing continuum statement is no longer outer-role extraction, packet
-persistence, Duhamel-to-physical pair weighting, or exact-tie weighting.  For
-every recursively selected efficient smooth-SGS block one must still construct
-**measurably from the actual Navier--Stokes observables** the finite set of
-physical causes which hit first, and prove that the no-hit set is exactly one of
+The continuum first-hit problem has now simplified to the physical structure of
+the smooth-SGS block itself.  The key point is that the relevant quantities do
+**not** form one artificial vector clock.  They appear in a causal filtration:
+event/support facts first, then continuous/absolutely-continuous slab observables,
+then the actual positive HH work measure, then backward common-slice registration,
+and only afterwards Shannon/Renyi ancestry information.
+
+For every already-selected smooth-SGS block and every native-unit continuous
+physical observable `f_r`, define its certified closed hit or open-superlevel
+debut `tau_r`.  These times are Borel on path space; for example
+
+\[
+
+\{\tau_r^{cl}\le q\}=\{\sup_{[a,q]}f_r\ge\theta_r\}.
+
+\]
+
+For the finite physical family,
+
+\[
+\tau=\min_r\tau_r,\qquad J=\{r:\tau_r=\tau\}
+\]
+
+is therefore a measurable first-hit time with an unsplit finite joint cause set.
+No heterogeneous source/strain/Moyal/phase quantities are normalized against one
+another.  Independent strictly increasing changes of units leave all stopping
+sets unchanged.
+
+Material relink is also defined without selector chatter.  Anchor the material
+cell in intrinsic `zeta=(L^{-1}X/2,L^T k)` and put
+
+\[
+E_C(t)=\|1_C V_{g(t)}u(t)\|_2^2.
+\]
+
+On a pre-singular smooth interval,
+
+\[
+|E_C'(t)|\le 2\sqrt{E_C}
+igl(\|g\|_2\|u_t\|_2+\|g_t\|_2\|u\|_2igr),
+\]
+
+so the actual Moyal content is absolutely continuous.  Dyadic representation
+boundaries carry zero Moyal energy/work.  A change of the name of an optimizing
+cell is therefore not a physical relink.  Likewise helical phase is monitored by
+the branch-free circle distance `acos(Re h)` rather than a chosen `arg` branch.
+
+For generated events, `z(t)=z(s)+I_HH+I_R` has AC backward impulses.  If no
+residual/source, earlier HH regeneration, material relink or `t=0` boundary stop
+hits, the exact triangle gate gives `|z(s)|>=|z(t)|/4`; hence the no-hit generated
+event is exactly a registered generated survivor.  At whole-block level, absence
+of the already-certified service exits leaves exactly the existing Kelvin-flat
+alternative.  Thus, once a block is supplied, local no-hit behavior is exhausted
+by
 
 \[
 \boxed{
@@ -2061,12 +2110,33 @@ physical causes which hit first, and prove that the no-hit set is exactly one of
 }
 \]
 
-All threshold crossings must use the already proved physical observables and
-provenance; no theorem-name priority is permitted.  On the generated survivor,
-physical `dT` productivity and common-slice ancestry apply.  On the flat
-survivor, the `kappa_0>0.17` erosion theorem applies.  Every other event must
-enter an already named first-stop cause.
+Dedicated run `31290886164` on `ed7773d` passed `484` tests plus `50,000`
+first-exit/Moyal/phase/registration regressions: zero ordering failures, zero
+independent-unit-rescaling failures, minimum Moyal-rate margin `4.039e-09`, and
+zero phase branch-cut gap.  Full causal integration `31290886140` on the same SHA
+passed `484` tests and the entire pre-existing causal stack with master
+`20,000`-trace worst margin `0`.  Recorded artifacts are
+`recorded-results/31290886164/` and `recorded-results/31290886140/`.
 
-This **first-hit extraction theorem for the continuum recursive selector has not
-yet been proved**.  Therefore the present master stack is still conditional and
-does not prove global regularity of 3D Navier--Stokes.
+The **remaining continuum bridge is now recursive hard-event re-entry**.  A
+parent that survives common-slice registration is known to have a large adjoint
+coefficient, but the current theorem does not yet turn that coefficient into a
+new hard physical transfer role.  The next theorem must derive, from the PDE
+itself, the dichotomy
+
+\[
+\boxed{
+\text{registered adjoint parent exposes a hard event core}
+\quad\lor\quad
+\text{its collar/interface failure is an already named physical stop}.
+}
+\]
+
+A promising physically intrinsic formulation is a **hard-core / collar
+dichotomy** inside the transported smooth envelope `Q`: if the hard core retains
+the registered coefficient with the permitted fixed/summable loss, it seeds the
+next event role; if not, the missing mass/work must live in the envelope collar,
+where moving-projector/nonaffine/relink/source provenance must pay.  This must be
+proved rather than achieved by selecting a fresh maximizing packet or cell.
+Until recursive re-entry is closed for every recursive route, the master remains
+conditional and there is no global-regularity proof for 3D Navier--Stokes.

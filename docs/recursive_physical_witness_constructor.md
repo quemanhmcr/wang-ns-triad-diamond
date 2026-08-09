@@ -124,18 +124,14 @@ All terms are nonnegative.  There is no theorem-name overlap.  `HH,recur` is not
 a currency and never enters a reset count; it is simply an earlier quadratic
 physical event.
 
-## 6. What remains genuinely continuum
+## 6. Local first hit is now supplied; hard-event re-entry remains
 
-The measure algebra above is exact once the eventwise first-hit cause set exists.  The remaining local PDE bridge is therefore narrower than outer-role extraction, Duhamel synchronization, pair reweighting, or tie splitting:
+The companion `smooth_sgs_first_hit_extraction` theorem now proves the missing local path-space statement for every **already supplied** smooth-SGS block.  The physical service/work/state observables are continuous or absolutely continuous, their native-unit threshold debuts are Borel, and exact simultaneous hits remain an unsplit measurable cause set.  The no-hit set is exhausted locally by the registered generated survivor and the existing Kelvin-flat continuation.
 
-> construct measurably, from the actual smooth-SGS observables, the finite set of physical causes which hit first, and show that the no-hit set is exactly the registered survivor set used by physical productivity / Kelvin-flat continuation.
+The construction deliberately does not scalarize heterogeneous observables.  Independent strictly increasing changes of units leave each stopping set unchanged.  Material coherence is monitored by the absolutely-continuous Moyal energy of an anchored intrinsic-zeta cell rather than by a chattering best-cell label, and helical phase uses branch-free circle holonomy.
 
-Many individual ingredients already come with physical measures:
+The continuum frontier has therefore moved one level deeper.  A surviving parent at the common slice is currently certified as a **large adjoint coefficient**, not automatically as a new hard physical event role.  Recursive continuation must prove a physical dichotomy:
 
-- transfer deficit is itself transfer-weighted;
-- classified source/SGS uses physical source work;
-- material switching has Moyal symmetric-difference energy;
-- nonaffine skew work is an antisymmetric physical role flux;
-- symmetric interface work is physical strain provenance.
+> the registered adjoint parent exposes a measurable hard event core at the next parent scale with only the already allowed fixed/summable loss, **or** the missing core lies in a collar/interface/source/relink event which is already a named first stop.
 
-A common-unit simultaneous-cause measure is no longer required.  What is still missing is the continuum first-hitting construction itself: continuity/measurability of the physical clocks and their exact attachment to every recursive selected block.  This is the next frontier.  It is not a Navier--Stokes global-regularity proof.
+Simply projecting onto a newly chosen packet or maximizing over cells would reintroduce observer-dependent structure and is not an acceptable re-entry theorem.  A common-unit tie measure is still unnecessary.  This remaining hard-event re-entry problem is not a Navier--Stokes global-regularity proof.

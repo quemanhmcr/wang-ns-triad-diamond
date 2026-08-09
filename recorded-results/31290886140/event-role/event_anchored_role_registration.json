@@ -1,0 +1,33 @@
+{
+  "certificate": {
+    "status": "EXACT_EVENT_ANCHORED_HARD_ROLE_TO_SMOOTH_PDE_ENVELOPE_REGISTRATION",
+    "hard_roles": "use deterministic disjoint Borel frequency cells and pointwise orthogonal fiber/helical projectors only at the physical event; these are exact self-adjoint orthogonal roles and introduce no synthesis error",
+    "symbol_freezing": "the smooth SGS symbol may be frozen on the same hard product cells; the Lipschitz error is a property of the physical multiplier, not a cutoff smoothing error",
+    "envelope": "for a selected hard role P choose a scalar smooth PDE envelope Q with QP=P, inner radial lower 3/5 and envelope lower 11/20",
+    "buffer": "on K<=1/30 the envelope lower edge stays (11/20)e^(-1/30)>1/2, so low-low V tensor V remains excluded while the hard event cell sits in a 1/20 radial plateau",
+    "coefficient": "<P u,phi>=<Q u,P phi> exactly; terminal hard-cell/helical marking is therefore an exact coefficient of the smooth moving PDE role",
+    "lp": "frequency-cell indicators and pointwise orthogonal helical projectors are contractions in every vector L^p; projecting the dual Gaussian probe cannot worsen its L3 or L2 norm constants",
+    "high_high": "the complete h-h quadratic source disintegrates exactly over the hard parent roles; selection/designation happens at actual work level, so no L2 remainder for 'other HH interactions' is needed",
+    "polarization": "helicity is an eventwise terminal fiber mark; between event and common slice the adjoint Kelvin fiber dynamics transports the probe, so a helical projector is not assumed to persist",
+    "single_charge": "hard roles carry physical transfer/energy identity; the overlapping smooth envelope carries only the PDE between slices and never defines a second transfer measure",
+    "continuum_status": "frequency-role/transfer-cell registration is exact at the event and coefficient levels; remaining quantitative closure is the already isolated nonaffine envelope-interface first-stop, to be consumed by coherent K_coh/strain/D_V or physical relink/transfer loss"
+  },
+  "arb": {
+    "hard_inner_lower": "3/5",
+    "smooth_envelope_lower": "11/20",
+    "anchor_radial_buffer": "1/20",
+    "low_strain_action": "1/30",
+    "transported_envelope_lower": "[0.53196885526510324612253521013789477337913691161899089 +/- 5.71e-54]",
+    "low_low_output_upper": "1/2",
+    "status": "CERTIFIED_HARD_CORE_SMOOTH_ENVELOPE_BUFFER"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_partition_residual": 7.572846783437964e-16,
+    "worst_registration_residual": 1.47189705474637e-16,
+    "worst_l3_contraction_margin": 0.09593005911082253,
+    "worst_l2_contraction_margin": 0.15478144943142347,
+    "worst_bilinear_partition_residual": 1.0135110292350239e-16,
+    "minimum_envelope_gap": 0.031986547855090475
+  }
+}

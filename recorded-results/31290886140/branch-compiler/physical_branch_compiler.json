@@ -1,0 +1,37 @@
+{
+  "certificate": {
+    "status": "EXACT_CAUSAL_QUOTIENT__JOINT_STOP_MASTER_PREFERRED__FINE_RN_PARTITION_OPTIONAL",
+    "transfer_partition": "dT=dT_Xi+dT_ret exactly; the legacy fine compiler can further partition dT_ret by physical RN stopping weights when such common-unit weights are independently available",
+    "stopping_rule": "fixed transfer loss is a stage-zero terminal gate; otherwise use the first physical cause set; no hit => registered generated continuation or certified Kelvin-flat erosion",
+    "duplicate_rule": "theorem manifestations sharing one physical causal root are quotiented before any ledger projection",
+    "tie_rule": "preferred master keeps an exact simultaneous first hit as one unsplit joint physical stop; no common-unit tie weights are required; RN splitting is optional fine-subledger metadata only",
+    "boundary_rule": "t=0 is absorbing and cannot be renamed fresh interior ancestry",
+    "master_rule": "a joint stop is terminal if it already contains a fixed transfer certificate, otherwise a valid genuinely global reset may terminate it, otherwise source/dissipation/relink/HH-regeneration remain one recursive-critical state",
+    "duhamel_warning": "raw dGamma is neither the child-energy law nor the preferred parent-pair law; physical pair productivity is derived directly under dT by sharp Young plus KL positivity",
+    "energy_bridge": "on K<=1/30, E0<E1/5 and classified residual positive work<E1/5 force actual positive HH work>=8E1/15; all causal entropy weights remain physical child-energy work",
+    "survival_rule": "if registered continuation retains fraction q of generated dT, its physical logarithmic productivity is exactly q times the unconditioned Lambda; q>=1/2 costs at most log2 at that layer",
+    "continuum_status": "outer moving roles, event-role registration, interface provenance, physical pair weighting, survival algebra and exact-tie master projection are supplied; the remaining PDE bridge is measurable first-hit cause-set extraction on every recursive smooth-SGS block"
+  },
+  "double_charge_matrix": {
+    "H1/H3 dephasing | causing pressure/SGS/viscous source": "downstream_do_not_charge_separately",
+    "high resolved strain | forced D_V lower bound": "downstream_do_not_charge_separately",
+    "physical covariance deformation | strain/source that causes it": "downstream_do_not_charge_separately",
+    "representative covariance change | physical covariance deformation": "coexist_choose_one_primary_other_diagnostic",
+    "coherent relinking in retained graph | omitted cross-cell Xi": "mutually_exclusive",
+    "new coherent Moyal mass | fresh affine-radius certificate": "downstream_do_not_charge_separately",
+    "pair rescue | reuse-cycle/Renyi currency": "downstream_do_not_charge_separately",
+    "transfer deficit | backscatter/cancellation manifestation": "downstream_do_not_charge_separately",
+    "physical cross-cell transfer | symbol-freezing approximation": "independent_resources_may_cocharge",
+    "Duhamel classified residual | underlying source/interface term": "downstream_do_not_charge_separately",
+    "initial-boundary termination | fresh interior packet": "mutually_exclusive"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_mass_margin": 1.999733711954832e-12,
+    "maximum_mass_residual": 1.4210854715202004e-14,
+    "tie_samples": 12048,
+    "flat_samples": 7271,
+    "transfer_stop_samples": 9903,
+    "boundary_samples": 2622
+  }
+}

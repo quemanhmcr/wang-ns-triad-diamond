@@ -1,0 +1,22 @@
+{
+  "certificate": {
+    "status": "EXACT_BARGMANN_LOCAL_MOYAL_ROOT_CELL_QUANTUM__EVENT_OUTER_ROLE_PARTITION_REGISTERED",
+    "local_submean": "E(B_R)>=exp(-R^2)R^6/3! |<f,g_z0>|^2; optimum R=sqrt3 gives fraction 0.224041807655",
+    "normalized_canonical_cell": "for a unit-L^(3/2) parent, B_sqrt3 intersects at most 15625 unit six-dimensional material cells, so one carries N E_C>=2.96859945386e-06",
+    "physical_scaling": "for an actual parent role the cell quantum is eta_cell_norm * ||f||_(3/2)^2; no absolute root mass follows from shape alone",
+    "parent_label": "choose the maximum-energy canonical cell near the complex Gaussian mark; exact ties use a fixed lexicographic rule",
+    "causal_pushforward": "positive parent-slot weights may be pushed to these energy anchors without changing total physical causal mass; collisions only increase reuse",
+    "energy_budget": "Moyal P=1 inside each exact outer role/covariance frame; 4 scale colors times finite covariance bins give uniform cell budget 199504449760397376",
+    "no_work_alignment_needed": "the anchor labels physical parent identity through actual energy; it is not asserted that nonlinear work is spatially localized in the same cell",
+    "important_scope": "the outer frozen Fourier/helical roles must form the exact disjoint/orthogonal selected partition used in the global energy budget",
+    "continuum_status": "the energy-anchor map is exact on the event-anchored hard outer role; physical pair-work/KL supplies the required transfer-weighted amplitude granularity, and the remaining task is only recursive first-stop assembly with the canonical material label"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_optimality_margin": 3.5033198564349277e-10,
+    "minimum_cell_quantum": 2.9685994538580413e-06,
+    "worst_pushforward_mass_residual": 7.105427357601002e-15,
+    "canonical_ball_cells": 15625,
+    "cell_frame_budget": 199504449760397376
+  }
+}

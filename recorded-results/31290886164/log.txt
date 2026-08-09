@@ -1,0 +1,417 @@
+certify	Set up job	﻿2026-08-09T02:42:21.5205838Z Current runner version: '2.336.0'
+certify	Set up job	2026-08-09T02:42:21.5228686Z ##[group]Runner Image Provisioner
+certify	Set up job	2026-08-09T02:42:21.5229652Z Hosted Compute Agent
+certify	Set up job	2026-08-09T02:42:21.5230293Z Version: 20260707.563
+certify	Set up job	2026-08-09T02:42:21.5230883Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+certify	Set up job	2026-08-09T02:42:21.5231581Z Build Date: 2026-07-07T19:33:50Z
+certify	Set up job	2026-08-09T02:42:21.5232228Z Worker ID: {3a7dc9a6-e69f-4cfc-8070-dcdb71818f05}
+certify	Set up job	2026-08-09T02:42:21.5233064Z Azure Region: westcentralus
+certify	Set up job	2026-08-09T02:42:21.5233621Z ##[endgroup]
+certify	Set up job	2026-08-09T02:42:21.5234919Z ##[group]Operating System
+certify	Set up job	2026-08-09T02:42:21.5235519Z Ubuntu
+certify	Set up job	2026-08-09T02:42:21.5236030Z 24.04.4
+certify	Set up job	2026-08-09T02:42:21.5236519Z LTS
+certify	Set up job	2026-08-09T02:42:21.5236989Z ##[endgroup]
+certify	Set up job	2026-08-09T02:42:21.5237520Z ##[group]Runner Image
+certify	Set up job	2026-08-09T02:42:21.5238054Z Image: ubuntu-24.04
+certify	Set up job	2026-08-09T02:42:21.5238573Z Version: 20260720.247.2
+certify	Set up job	2026-08-09T02:42:21.5239565Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+certify	Set up job	2026-08-09T02:42:21.5241242Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+certify	Set up job	2026-08-09T02:42:21.5242118Z ##[endgroup]
+certify	Set up job	2026-08-09T02:42:21.5243424Z ##[group]GITHUB_TOKEN Permissions
+certify	Set up job	2026-08-09T02:42:21.5245387Z Contents: read
+certify	Set up job	2026-08-09T02:42:21.5245894Z Metadata: read
+certify	Set up job	2026-08-09T02:42:21.5246885Z ##[endgroup]
+certify	Set up job	2026-08-09T02:42:21.5248903Z Secret source: Actions
+certify	Set up job	2026-08-09T02:42:21.5249876Z Prepare workflow directory
+certify	Set up job	2026-08-09T02:42:21.5609702Z Prepare all required actions
+certify	Set up job	2026-08-09T02:42:21.5656538Z Getting action download info
+certify	Set up job	2026-08-09T02:42:21.8464979Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+certify	Set up job	2026-08-09T02:42:22.5009275Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+certify	Set up job	2026-08-09T02:42:22.5994547Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+certify	Set up job	2026-08-09T02:42:22.8164284Z Complete job name: certify
+certify	Run actions/checkout@v4	﻿2026-08-09T02:42:22.8858146Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8866731Z ##[group]Run actions/checkout@v4
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8867546Z with:
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8868101Z   repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8872286Z   token: ***
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8873039Z   ssh-strict: true
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8873633Z   ssh-user: git
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8874187Z   persist-credentials: true
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8874766Z   clean: true
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8875351Z   sparse-checkout-cone-mode: true
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8875959Z   fetch-depth: 1
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8876471Z   fetch-tags: false
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8877043Z   show-progress: true
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8877573Z   lfs: false
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8878102Z   submodules: false
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8878769Z   set-safe-directory: true
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8879365Z   allow-unsafe-pr-checkout: false
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.8880150Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.9863690Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.9866138Z ##[group]Getting Git version info
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.9867146Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.9868819Z [command]/usr/bin/git version
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.9925735Z git version 2.54.0
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.9945682Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.9959050Z Temporarily overriding HOME='/home/runner/work/_temp/b844b38e-ea42-4214-8929-69ecc7a99a0b' before making global git config changes
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.9961844Z Adding repository directory to the temporary git global config as a safe directory
+certify	Run actions/checkout@v4	2026-08-09T02:42:22.9964766Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0011696Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0015798Z ##[group]Initializing the repository
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0021272Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0104356Z hint: Using 'master' as the name for the initial branch. This default branch name
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0106109Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0107367Z hint: to use in all of your new repositories, which will suppress this warning,
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0108215Z hint: call:
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0108743Z hint:
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0109381Z hint: 	git config --global init.defaultBranch <name>
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0110076Z hint:
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0110778Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0111849Z hint: 'development'. The just-created branch can be renamed via this command:
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0112916Z hint:
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0113699Z hint: 	git branch -m <name>
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0114269Z hint:
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0115008Z hint: Disable this message with "git config set advice.defaultBranchName false"
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0119454Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0128476Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0168777Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0169897Z ##[group]Disabling automatic garbage collection
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0173406Z [command]/usr/bin/git config --local gc.auto 0
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0204901Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0206073Z ##[group]Setting up auth
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0211990Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0245534Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0587026Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0621047Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0808079Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.0836923Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.1014787Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.1045249Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.1046410Z ##[group]Fetching the repository
+certify	Run actions/checkout@v4	2026-08-09T02:42:23.1054138Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ed7773d5dbdb0c607c9c875d32450fd05ba0585f:refs/remotes/origin/research/smooth-sgs-first-hit-extraction
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.0984421Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.0989605Z  * [new ref]         ed7773d5dbdb0c607c9c875d32450fd05ba0585f -> origin/research/smooth-sgs-first-hit-extraction
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1020787Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1023353Z ##[group]Determining the checkout info
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1025699Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1029513Z [command]/usr/bin/git sparse-checkout disable
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1071568Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1099002Z ##[group]Checking out the ref
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1103145Z [command]/usr/bin/git checkout --progress --force -B research/smooth-sgs-first-hit-extraction refs/remotes/origin/research/smooth-sgs-first-hit-extraction
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1583121Z Switched to a new branch 'research/smooth-sgs-first-hit-extraction'
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1587347Z branch 'research/smooth-sgs-first-hit-extraction' set up to track 'origin/research/smooth-sgs-first-hit-extraction'.
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1593393Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1624544Z [command]/usr/bin/git log -1 --format=%H
+certify	Run actions/checkout@v4	2026-08-09T02:42:24.1645008Z ed7773d5dbdb0c607c9c875d32450fd05ba0585f
+certify	Run actions/setup-python@v5	﻿2026-08-09T02:42:24.1993188Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.1998828Z ##[group]Run actions/setup-python@v5
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.2000063Z with:
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.2000994Z   python-version: 3.12
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.2002093Z   cache: pip
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.2003135Z   check-latest: false
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.2011702Z   token: ***
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.2012673Z   update-environment: true
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.2013844Z   allow-prereleases: false
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.2014937Z   freethreaded: false
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.2015898Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.3320469Z ##[group]Installed versions
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.3416476Z (node:2393) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.3420139Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.3421850Z Successfully set up CPython (3.12.13)
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.3424375Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.4582625Z [command]/opt/hostedtoolcache/Python/3.12.13/x64/bin/pip cache dir
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.7503741Z /home/runner/.cache/pip
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.9855475Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b
+certify	Run actions/setup-python@v5	2026-08-09T02:42:24.9958371Z (node:2393) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/setup-python@v5	2026-08-09T02:42:26.2165262Z Received 51665543 of 55859847 (92.5%), 49.2 MBs/sec
+certify	Run actions/setup-python@v5	2026-08-09T02:42:26.2421359Z Received 55859847 of 55859847 (100.0%), 51.8 MBs/sec
+certify	Run actions/setup-python@v5	2026-08-09T02:42:26.2423008Z Cache Size: ~53 MB (55859847 B)
+certify	Run actions/setup-python@v5	2026-08-09T02:42:26.2458815Z [command]/usr/bin/tar -xf /home/runner/work/_temp/f5ac8a24-0d15-4c4f-b5ee-fe12c20d3b6a/cache.tzst -P -C /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond --use-compress-program unzstd
+certify	Run actions/setup-python@v5	2026-08-09T02:42:26.3037062Z Cache restored successfully
+certify	Run actions/setup-python@v5	2026-08-09T02:42:26.3064060Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b
+certify	Run pip install -r requirements.txt python-flint	﻿2026-08-09T02:42:26.3202076Z ##[group]Run pip install -r requirements.txt python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:26.3203110Z ^[[36;1mpip install -r requirements.txt python-flint^[[0m
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:26.3240411Z shell: /usr/bin/bash -e {0}
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:26.3240907Z env:
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:26.3241272Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:26.3241878Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:26.3242376Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:26.3243114Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:26.3243619Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:26.3244156Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:26.3244605Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:26.9913698Z Collecting python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.1083802Z   Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.2925199Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.2936855Z   Using cached numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.4074534Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.4085166Z   Using cached scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.4512700Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.4524372Z   Using cached pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.4778677Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.4789413Z   Using cached iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.5053147Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.5063205Z   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.5301881Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.5313560Z   Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.5599696Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.5610586Z   Using cached pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.5644250Z Using cached numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.5712531Z Using cached scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.3 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.5851140Z Using cached pytest-8.4.1-py3-none-any.whl (365 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.5863287Z Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.6101237Z Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.1 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.8786254Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 45.1 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.8813934Z Using cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.8815060Z Using cached packaging-26.3-py3-none-any.whl (129 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:27.8824909Z Using cached pygments-2.20.0-py3-none-any.whl (1.2 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:28.0005614Z Installing collected packages: python-flint, pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:34.0962513Z
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:34.0976229Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 python-flint-0.9.0 scipy-1.15.3
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:34.0984123Z
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:34.0984617Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T02:42:34.0985216Z [notice] To update, run: pip install --upgrade pip
+certify	Run pytest -q	﻿2026-08-09T02:42:34.1637992Z ##[group]Run pytest -q
+certify	Run pytest -q	2026-08-09T02:42:34.1638365Z ^[[36;1mpytest -q^[[0m
+certify	Run pytest -q	2026-08-09T02:42:34.1666796Z shell: /usr/bin/bash -e {0}
+certify	Run pytest -q	2026-08-09T02:42:34.1667223Z env:
+certify	Run pytest -q	2026-08-09T02:42:34.1667618Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T02:42:34.1668161Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run pytest -q	2026-08-09T02:42:34.1668680Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T02:42:34.1669141Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T02:42:34.1669632Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T02:42:34.1670133Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run pytest -q	2026-08-09T02:42:34.1670550Z ##[endgroup]
+certify	Run pytest -q	2026-08-09T02:42:38.1036062Z ........................................................................ [ 14%]
+certify	Run pytest -q	2026-08-09T02:42:38.2056164Z ........................................................................ [ 29%]
+certify	Run pytest -q	2026-08-09T02:42:38.4671559Z ........................................................................ [ 44%]
+certify	Run pytest -q	2026-08-09T02:42:38.5918537Z ........................................................................ [ 59%]
+certify	Run pytest -q	2026-08-09T02:42:38.7093868Z ........................................................................ [ 74%]
+certify	Run pytest -q	2026-08-09T02:42:38.8084260Z ........................................................................ [ 89%]
+certify	Run pytest -q	2026-08-09T02:42:39.1379066Z ....................................................                     [100%]
+certify	Run pytest -q	2026-08-09T02:42:39.1379808Z 484 passed in 4.64s
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	﻿2026-08-09T02:42:39.2344331Z ##[group]Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:39.2345253Z ^[[36;1mpython -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction^[[0m
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:39.2374098Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:39.2374447Z env:
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:39.2374909Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:39.2375439Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:39.2376038Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:39.2376488Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:39.2376919Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:39.2377414Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:39.2377822Z ##[endgroup]
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8570410Z # Smooth-SGS first-hit extraction from physical observables
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8571513Z
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8572335Z Status: **EXACT_SMOOTH_SGS_MEASURABLE_FIRST_EXIT_AND_LOCAL_NO_HIT_EXHAUSTION__RECURSIVE_REENTRY_REMAINS**.
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8573493Z
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8576499Z The extraction is a **causal filtration**, not one artificial vector clock.  Event/support facts are resolved first; smooth resolved/coherent dynamics then generate continuous or absolutely-continuous physical observables; actual positive HH work creates the child transfer measure; common-slice registration is a backward adjoint problem; Shannon/Renyi information is only formed after the parent law exists.
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8578404Z
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8580915Z For a finite continuous family `f_r(t)` in their own physical units, define each certified superlevel hit/debut separately and set `tau=min_r tau_r`.  Closed-threshold hitting times are Borel because `{tau_r<=q}={sup_[a,q] f_r>=theta_r}`; strict state exits are Borel by the analogous rational-time open-superlevel formula.  The simultaneous first-cause set `J={r:tau_r=tau}` is therefore measurable and finite.  No theorem-name order and no normalization of strain, source work, Moyal relink energy, or phase is needed.  Independent monotone changes of units leave every stopping set unchanged.
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8583714Z
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8584393Z Material coherence is anchored rather than re-selected.  In intrinsic `zeta=(L^-1 X/2,L^T k)`, common affine transport fixes a cell exactly.  With `F(t)=V_{g(t)}u(t)`,
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8585203Z
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8585484Z `E_C(t)=||1_C F(t)||_2^2`,
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8585781Z
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8586055Z `|E_C'(t)| <= 2 sqrt(E_C) [ ||g||_2 ||u_t||_2 + ||g_t||_2 ||u||_2 ]`.
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8586405Z
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8587771Z Thus the physical Moyal content of the transported cell is AC.  Dyadic cell boundaries have zero Moyal energy/work because these measures have phase-space densities, so a representation boundary cannot create relink mass.  A genuine new material address/relink is an event of the physical cell measure, not an `argmax` label chatter.
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8590093Z
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8590764Z Helical phase is treated similarly: use the branch-free circle distance `acos(Re h)` for unit holonomy `h`, rather than a chosen principal-angle branch.
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8591533Z
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8593474Z For generated events, the backward impulses in `z(t)=z(s)+I_HH+I_R` are AC in the endpoint.  If no residual/source, HH-regeneration, material-relink, or initial-boundary obstruction hits, the existing exact triangle gate gives `|z(s)|>=|z(t)|/4`; hence the no-hit event is precisely a registered generated survivor.  At block level, absence of the already-certified service exits leaves the existing coherent Kelvin-flat alternative.
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8595998Z
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8596388Z Stress: `50000` physical-path/Moyal/phase/registration regressions
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8597017Z - monitor-order failures: `0`
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8597545Z - independent-unit-rescaling failures: `0`
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8598423Z - largest exact joint cause set sampled: `2`
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8598960Z - minimum Moyal rate inequality margin: `4.039e-09`
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8599511Z - worst phase branch-cut gap: `0.000e+00`
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8600060Z - minimum registered quarter-factor margin: `0.000e+00`
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8600438Z
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8602215Z This closes the **local measurable first-hit extraction once a smooth-SGS block has been recursively selected**.  It does not yet prove universal recursive re-entry: after a source, critical dissipation, material/new-ancestry, or HH-regeneration stop, one must still show that the next continuum selector again supplies a block satisfying the hypotheses.  No global-regularity claim is made.
+certify	Run python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction	2026-08-09T02:42:51.8604361Z
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	﻿2026-08-09T02:42:51.8766742Z ##[group]Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:51.8767619Z ^[[36;1mpython -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection^[[0m
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:51.8796427Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:51.8796799Z env:
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:51.8797180Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:51.8797749Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:51.8798258Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:51.8798708Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:51.8799155Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:51.8799596Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:51.8800017Z ##[endgroup]
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4248955Z # Joint causal stop projection: exact ties need no artificial fractions
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4411485Z
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4412028Z Status: **EXACT_JOINT_CAUSAL_STOP_MASTER_PROJECTION__NO_RN_TIE_SPLIT_REQUIRED**.
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4412412Z
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4413486Z At an exact first-time tie, keep the physical event/block intact and retain the whole set of simultaneous certified causes.  Do **not** normalize source magnitude, strain, Moyal relink energy, or any other heterogeneous threshold into fictitious ownership fractions.
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4414525Z
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4416107Z The master needs only one terminal/recursive disposition.  Its logic is physical: `t=0` is absorbing; any already-certified fixed multiplicative transfer/reuse/sideband cost is terminal; otherwise a valid genuinely globally bounded resource may terminate as a reset; otherwise source, critical dissipation, material/new ancestry and earlier HH regeneration are all recursive.  In the last case their exact simultaneous proportions are irrelevant because every route stays inside the same causal recursion class.
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4417875Z
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4418683Z Thus exact tie provenance is set-valued while the master disposition is single-valued.  The full transfer mass is charged once and is never fractionally split.  Arbitrary positive legacy tie weights may vary by many orders of magnitude without changing the result.
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4419581Z
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4419772Z Stress: `50000` random exact joint stops
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4420287Z - tie-weight invariance failures: `0`
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4420653Z - terminal transfer samples: `38901`
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4421082Z - valid reset samples: `12645`
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4421455Z - recursive joint samples: `11099`
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4421823Z - absorbing boundary samples: `12628`
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4422249Z - largest joint cause set sampled: `6`
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4422487Z
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4423962Z This supersedes Radon--Nikodym splitting as a **required** continuum bridge for the no-escape master.  Fine RN splitting remains legal when a genuinely physical common-unit subledger exists, but the PDE proof no longer has to manufacture one.  The remaining continuum question is only whether every recursive smooth-SGS block supplies its measurable first-hit **cause set**; exact tie weights are not part of that question.  No global-regularity claim is made.
+certify	Run python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection	2026-08-09T02:42:56.4425638Z
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	﻿2026-08-09T02:42:56.4455873Z ##[group]Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:42:56.4456879Z ^[[36;1mpython -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor^[[0m
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:42:56.4487766Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:42:56.4488199Z env:
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:42:56.4488586Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:42:56.4489176Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:42:56.4489892Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:42:56.4490359Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:42:56.4490851Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:42:56.4491345Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:42:56.4491831Z ##[endgroup]
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7384286Z # Recursive generated physical-work first-stop constructor
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7384956Z
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7385721Z Status: **EXACT_GENERATED_PHYSICAL_FIRST_STOP_SURVIVAL__JOINT_MASTER_UNSPLIT__FIRST_HIT_EXTRACTION_REMAINS**.
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7386424Z
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7387796Z The constructor acts on the retained **actual positive high--high child-energy work measure** after the physical-energy gate.  It never invents a packet probability.  The preferred master path keeps every exact simultaneous first hit as one unsplit joint physical stop; legacy RN splitting is optional fine bookkeeping only.
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7389099Z
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7390147Z `Xi` is excised once before causal routing.  The joint-stop theorem projects the entire stopped event mass to one coarse master fate by terminal semantics; source/strain/relink/HH-regeneration ties simply remain recursive.  Arbitrary dummy tie weights cannot alter the preferred master.  At `t=0` the initial boundary is absorbing.
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7391169Z
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7391922Z Let `q` be the fraction of retained generated physical work which survives every earlier causal stop and both complex-Young/phase and common-slice registration.  Restricting the physical KL productivity theorem to that survivor law gives exactly
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7392725Z
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7393330Z `Lambda_survivor = q Lambda_full`.
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7393745Z
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7394597Z Thus if `q>=1/2`, the entire survival conditioning costs at most `log 2` in the logarithmic amplitude offset.  If `q<1/2`, a majority of the current physical HH work has already left free continuation through an existing cause or an earlier HH-generation recursion.  There is no fourth free branch.
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7395488Z
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7395656Z Stress: `50000` random physical-work measures
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7396114Z - worst total-mass reconstruction residual: `4.506e-16`
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7396546Z - minimum positive survivor productivity: `3.294e-08`
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7396962Z - maximum exact-tie event fraction: `1.000`
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7397416Z - majority-continuation samples: `3659`
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7397795Z - majority-stopped/regenerated samples: `46341`
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7398214Z - zero-survivor samples: `12632`
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7398438Z
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7399666Z This closes the **measure-level survival/first-stop algebra** of the generated branch without requiring exact-tie fractions.  The remaining local continuum bridge is now only to construct the measurable first-hit **cause set** from actual smooth-SGS observables and verify that its no-hit set is the registered survivor set.  No common-unit RN assembly is required, and no Navier--Stokes global-regularity conclusion is claimed.
+certify	Run python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor	2026-08-09T02:43:21.7401197Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	﻿2026-08-09T02:43:21.7602093Z ##[group]Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:21.7603338Z ^[[36;1mpython -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat^[[0m
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:21.7631909Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:21.7632595Z env:
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:21.7633367Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:21.7634021Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:21.7634623Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:21.7635045Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:21.7635517Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:21.7635974Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:21.7636430Z ##[endgroup]
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9466116Z # Coherent service-or-flat assembly gate
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9467085Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9469560Z Status: **EXACT_COHERENT_SERVICE_OR_FLAT_ASSEMBLY_GATE__EVENT_ROLE_REGISTRATION_SUPPLIED**.
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9470195Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9471783Z The master-facing assembly no longer needs a frozen Christ Gaussian to persist through a packet lifetime.  On each near-extremal physical-transfer event, use the certified Gaussian only as an analysis/shape mark; move the analysis eddy by the whole-eddy coherent affine regression.  The exact resolved-role theorems then identify three gauge-quotiented flatness observables:
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9473799Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9474033Z `F_coh = sqrt(E_H^phys) + (dT)_nonconf + C(qmax) I_K`.
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9474306Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9474662Z For the default scale-matched branch `s=N r_g<=4`, transition aspect `kappa<=567/500`, and outer carrier `|k|/N<=exp(2/25)`,
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9475125Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9475265Z `qmax=4.71207563594`,
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9475647Z `C(qmax)=5.65481629117`.
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9475819Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9476209Z At `tau=1/100`, the conservative existing transfer gate makes the Hodge and nonconformal-strain pieces each `<tau/3`.  Choose
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9476710Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9476843Z `I_K < tau/[3 C(qmax)] = 0.000589468014821`.
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9477077Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9477588Z Then the **entire** spatial non-affine Gaussian-core connection action is `<tau/3`, so `F_coh<=tau`.  No H1/H3 profile-persistence hypothesis is needed for this assembly statement.
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9478198Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9479499Z If `I_K` crosses that threshold, coherent deformation forces positive critical `D_V`; if strain is large, use the existing high-strain `D_V`; if averaged objective strain variation is large, use the coherent averaged pressure/SGS/viscous source calculus; if `N r_g>4`, route to sticky large-radius ancestry; high aspect, phase holonomy and direct transfer loss keep their existing destinations.
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9480658Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9480812Z Thus the coherent gate is
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9481025Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9481293Z `transfer/source/high-strain/aspect/radius/phase/coherent-D_V  OR  coherent-Kelvin-flat`.
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9481723Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9482421Z The original H1/H3 theorems are not discarded: they remain sharper transfer-facing diagnostics for low Hermite curvature.  They are simply no longer a logical persistence assumption needed to keep one frozen Gaussian packet alive.
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9483384Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9483547Z Stress: `50000` branch states
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9483937Z - minimum Hodge flat margin: `3.333e-03`
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9484302Z - minimum strain flat margin: `1.667e-04`
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9484653Z - minimum nonaffine flat margin: `1.673e-04`
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9485147Z - minimum sampled coherent-deformation `D_V` lower: `6.559e-07`
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9485899Z - branches: `{'coherent_kelvin_extremal_flat': 6260, 'named_physical_causes': 43740}`
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9486241Z
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9487549Z The remaining continuum bridge is now specifically **eventwise Gaussian marking and selected-role registration**: prove measurably that every efficient recursive physical-transfer event receives a near-Gaussian affine mark and that changing marks between common causal slices is only common affine gauge, existing covariance/symbol `Xi`, or a genuine material relink/strain/radius event.  No global-regularity claim is made.
+certify	Run python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat	2026-08-09T02:43:22.9489015Z
+certify	Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"	﻿2026-08-09T02:43:22.9656943Z ##[group]Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"
+certify	Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T02:43:22.9657690Z ^[[36;1mcat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"^[[0m
+certify	Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T02:43:22.9685716Z shell: /usr/bin/bash -e {0}
+certify	Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T02:43:22.9686086Z env:
+certify	Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T02:43:22.9686522Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T02:43:22.9687031Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T02:43:22.9687540Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T02:43:22.9688024Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T02:43:22.9688480Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T02:43:22.9688991Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T02:43:22.9689375Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	﻿2026-08-09T02:43:22.9828709Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9829964Z ##[group]Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9830340Z with:
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9830661Z   name: smooth-sgs-first-hit-extraction-results
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9831514Z   path: results-smooth-sgs-first-hit-extraction/
+certify	Run actions/upload-artifact@v4	results-joint-causal-stop-projection/
+certify	Run actions/upload-artifact@v4	results-recursive-physical-witness-constructor/
+certify	Run actions/upload-artifact@v4	results-coherent-service-or-flat/
+certify	Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9832334Z   if-no-files-found: warn
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9832666Z   compression-level: 6
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9833172Z   overwrite: false
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9833473Z   include-hidden-files: false
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9833799Z env:
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9834139Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9834717Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9835202Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9835691Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9836135Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9836577Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:22.9836965Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.1409888Z (node:2494) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.1411149Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.1534912Z Multiple search paths detected. Calculating the least common ancestor of all paths
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.1537171Z The least common ancestor is /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond. This will be the root directory of the artifact
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.1538015Z With the provided path, there will be 8 files uploaded
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.1538835Z Artifact name is valid!
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.1539380Z Root directory input is valid!
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.4206957Z Beginning upload of artifact content to blob storage
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.4483242Z (node:2494) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.6564377Z Uploaded bytes 11501
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.7150858Z Finished uploading artifact content to blob storage!
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.7151945Z SHA256 digest of uploaded artifact zip is 14de49147af5499f5738dfe5af9722b57963a08ae53f9fb774c9cd0e843dd314
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.7153324Z Finalizing artifact upload
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.9075794Z Artifact smooth-sgs-first-hit-extraction-results.zip successfully finalized. Artifact ID 9031330402
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.9077599Z Artifact smooth-sgs-first-hit-extraction-results has been successfully uploaded! Final size is 11501 bytes. Artifact ID is 9031330402
+certify	Run actions/upload-artifact@v4	2026-08-09T02:43:23.9083674Z Artifact download URL: https://github.com/quemanhmcr/wang-ns-triad-diamond/actions/runs/31290886164/artifacts/9031330402
+certify	Post Run actions/setup-python@v5	﻿2026-08-09T02:43:23.9237088Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/setup-python@v5	2026-08-09T02:43:23.9238260Z Post job cleanup.
+certify	Post Run actions/setup-python@v5	2026-08-09T02:43:24.0424024Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b, not saving cache.
+certify	Post Run actions/setup-python@v5	2026-08-09T02:43:24.0425990Z (node:2506) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Post Run actions/setup-python@v5	2026-08-09T02:43:24.0427033Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Post Run actions/checkout@v4	﻿2026-08-09T02:43:24.0536957Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.0538193Z Post job cleanup.
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1303331Z [command]/usr/bin/git version
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1338852Z git version 2.54.0
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1372387Z Temporarily overriding HOME='/home/runner/work/_temp/72dcfa2b-aee3-4824-a8d0-2d629f84e9e8' before making global git config changes
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1373967Z Adding repository directory to the temporary git global config as a safe directory
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1379113Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1414811Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1445989Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1658717Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1681857Z http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1692412Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1722003Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1926038Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Post Run actions/checkout@v4	2026-08-09T02:43:24.1957139Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Complete job	﻿2026-08-09T02:43:24.2302229Z Cleaning up orphan processes
+certify	Complete job	2026-08-09T02:43:24.2531997Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
