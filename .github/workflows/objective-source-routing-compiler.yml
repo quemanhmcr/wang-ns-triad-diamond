@@ -29,7 +29,7 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-      - run: pip install -r requirements.txt
+      - run: pip install -r requirements.txt python-flint
       - run: pytest -q
       - name: Objective source compiler stress
         run: python -m src.objective_source_routing_compiler --samples 50000 --outdir results-objective-source-routing-compiler
