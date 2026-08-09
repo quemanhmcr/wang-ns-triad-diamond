@@ -383,7 +383,7 @@ def theorem_certificate() -> dict[str, object]:
     bins = covariance_cover_number_upper()
     P = effective_root_frame_budget()
     return {
-        "status": "EXACT_DUAL_GAUSSIAN_ANALYSIS_ROOT_QUANTUM__TRANSFER_CELL_ALIGNMENT_REMAINS",
+        "status": "EXACT_DUAL_GAUSSIAN_ANALYSIS_ROOT_QUANTUM__EVENT_TRANSFER_ROLE_REGISTERED",
         "duality": "||f-G||_(3/2)<=eps and L3-normalized Gaussian dual h imply |<f,h>|>=<G,h>-eps",
         "covariance_pairing": f"d_log<=0.4 gives Gaussian primal-dual pairing >={dual_gaussian_pairing_lower(0.4):.12g}",
         "normalized_root_quantum": f"for ||f||_(3/2)=1, eps=1/100 and N r_g>2/3, quantized dual probe gives N|<f,phi>|^2>={eta:.12g}>1/5",
@@ -393,9 +393,9 @@ def theorem_certificate() -> dict[str, object]:
         "scale_coloring": "log-scale bins of width 2/25 split into 4 colors; same-color outer shell projectors are frequency-disjoint and hence orthogonal",
         "phase_space_coloring": "within each scale/covariance representative, unit cells in that dual-probe phase coordinate split into 5^6 colors; one color is 4-separated for the Bessel budget only",
         "bessel": f"within one scale bin/covariance/color the equal-covariance analysis budget is 25/4; orthogonality across same-color scale bins makes the total uniform P_eff={P:.12g}",
-        "causal_effect": "P_eff changes only the finite logarithmic root offset **once a physical role-amplitude floor is separately supplied**; no amplitude floor follows from Young shape alone",
+        "causal_effect": "P_eff enters only the finite logarithmic root offset; physical pair-work/KL controls the transfer-weighted amplitude product without imposing an absolute per-root amplitude floor",
         "important_scope": "this is an actual analysis coefficient of the selected orthogonal Fourier/helical role; project the dual probe by the same outer role projector so no other field component can cancel it. It is not a synthesis coefficient or an L2-closeness claim",
-        "continuum_status": "remaining registration is transfer-cell/material-label alignment: associate the complex Gaussian parent mark with the actual transfer-selected causal root cell or route misaligned work to existing physical currencies",
+        "continuum_status": "hard event transfer roles are now registered exactly to the smooth PDE envelope; remaining use is conditional only on the complex-Young/phase-good event, while failed events route to existing transfer/backscatter/relink causes",
     }
 
 

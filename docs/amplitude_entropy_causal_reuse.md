@@ -286,3 +286,11 @@ no longer a persistence hypothesis.
 The remaining bridge is outside this telescope: construct the exact moving outer
 Fourier/helical selected-role equation for every recursively selected efficient
 smooth-SGS block.  No global-regularity conclusion is asserted.
+
+## Physical-weighted productivity update
+
+The pointwise Duhamel-product discussion above is retained as provenance but is stronger than the causal telescope needs.  The preferred input is now `physical_pair_weighted_productivity.md`, which proves directly under actual positive child-energy work
+
+`E_dT log(alpha_p1 alpha_p2) >= E_dT log(alpha_child) + log Lambda_j`.
+
+For `M_j` retained hard pair cells, `Lambda_j=Lambda_1/M_j`; polynomial symbol refinement contributes only the finite geometrically discounted offset `sum 2^(-j-1) log M_j`.  The exact depth formula is `ell_0 >= sum_j 2^(-j-1) log Lambda_j + 2^(-L) log alpha_L`, and the Shannon/Renyi lower therefore receives `sum_j 2^(-j) log Lambda_j`.  Thus no Duhamel-to-physical parent-pair identification is part of the preferred theorem.  Outer roles and event registration are supplied by their companion exact theorems.

@@ -19,6 +19,7 @@ from src.dual_gaussian_root_registration import dual_probe_critical_mass_lower
 from src.smooth_symbol_freezing import sharp_young_constant_3d
 from src.weighted_causal_reuse import entropy, layered_reuse_information, parent_pushforward, random_layered_maps
 from src.renyi_causal_reuse import layered_collision_reuse
+from src.physical_pair_weighted_productivity import physical_log_productivity_constant, variable_productivity_root_log_lower
 
 SHELL_LOG_HALFWIDTH = 2.0 / 25.0
 SHELL_LOWER_AXIS = 2.0 / 3.0
@@ -113,13 +114,12 @@ def registered_coefficient_productivity_lower(
     log_cov_radius: float = DEFAULT_LOG_COV_RADIUS,
     registration_fraction: float = DEFAULT_REGISTRATION_FRACTION,
 ) -> float:
-    """Lambda in alpha_p1 alpha_p2 >= Lambda alpha_c on a continuing layer.
+    """Legacy pointwise Duhamel productivity candidate.
 
-    The dual-Gaussian theorem gives, for each parent role amplitude a_i,
-      alpha_i(event)^2 >= eta_dual a_i^2.
-    If first-stop registration reaches the common slice without an earlier
-    generation/residual/relink stop, keep at least q of each parent coefficient.
-    Hence the product gains q^2 eta_dual times the L^(3/2)-productivity bound.
+    This stronger pointwise statement remains a useful diagnostic special case,
+    but it is no longer the preferred causal premise.  The master-facing theorem
+    uses physical_pair_weighted_productivity, which proves the required
+    transfer-weighted logarithmic product lower directly under dT.
     """
     q = float(registration_fraction)
     if not (0 < q <= 1):
@@ -148,7 +148,7 @@ def expected_log_amplitude(weights: Sequence[float], amplitudes: Sequence[float]
 
 
 def one_layer_log_product_lower(child_log_amplitude: float, productivity: float) -> float:
-    """Equal two-slot baseline turns alpha1 alpha2>=Lambda alpha_c into a log recursion."""
+    """Two-slot baseline turns the physical-weighted log-product lower into one log recursion."""
     if productivity <= 0:
         raise ValueError("positive productivity required")
     return 0.5 * math.log(productivity) + 0.5 * float(child_log_amplitude)
@@ -161,6 +161,20 @@ def root_expected_log_lower(depth: int, productivity: float, terminal_amplitude:
         return math.log(terminal_amplitude)
     q = 2.0 ** (-depth)
     return (1.0 - q) * math.log(productivity) + q * math.log(terminal_amplitude)
+
+
+def root_expected_log_lower_variable(productivities: Sequence[float], terminal_amplitude: float) -> float:
+    """Physical-weighted log recursion for layer-dependent Lambda_j.
+
+    If ell_j >= .5 log Lambda_j + .5 ell_(j+1), then
+      ell_0 >= sum_j 2^(-j-1) log Lambda_j + 2^(-L) log alpha_L.
+    """
+    if terminal_amplitude <= 0:
+        raise ValueError("positive terminal amplitude required")
+    lam = np.asarray(productivities, float)
+    if lam.ndim != 1 or np.any(lam <= 0):
+        raise ValueError("positive one-dimensional productivities required")
+    return variable_productivity_root_log_lower(lam, math.log(terminal_amplitude))
 
 
 def entropy_energy_amplitude_upper(
@@ -375,19 +389,21 @@ def stress(samples: int = 20_000, seed: int = 20260809) -> AmplitudeEntropyStres
 
 def theorem_certificate() -> dict[str, object]:
     beta = anchor_coefficient_energy_fraction()
+    lam = physical_log_productivity_constant(1)
     return {
-        "status": "EXACT_AMPLITUDE_ENTROPY_REUSE_TELESCOPE__SELECTED_ROLE_PRODUCTIVITY_REGISTERED__OUTER_ROLE_EXTRACTION_REMAINS",
-        "productivity": "on every continuing generated node alpha_p1 alpha_p2 >= Lambda alpha_child; Lambda is scale independent",
-        "log_recursion": "E log alpha_parent >= (1/2)log Lambda+(1/2)E log alpha_child",
-        "depth_solution": "ell_root >= (1-2^-L)log Lambda+2^-L log alpha_terminal",
+        "status": "EXACT_AMPLITUDE_ENTROPY_REUSE_TELESCOPE__PHYSICAL_TRANSFER_WEIGHTED_PRODUCTIVITY_SUPPLIED",
+        "productivity": "preferred premise is E_dT log(alpha_p1 alpha_p2)>=E_dT log(alpha_child)+log Lambda_j under actual positive child-energy work; no pointwise pair law is required",
+        "default_productivity": f"physical pair-work/KL theorem gives Lambda_1={lam:.12g} at one retained pair cell; Lambda_j may vary with finite cell refinement",
+        "log_recursion": "ell_parent >= (1/2)log Lambda_j+(1/2)ell_child under the same physical transfer law",
+        "depth_solution": "variable Lambda_j enter with geometric weights 2^(-j-1); polynomial pair-cell refinement therefore changes only a finite offset",
         "anchor": f"Bargmann/Moyal gives N E_anchor >= beta alpha^2 with beta={beta:.12g}",
         "entropy": "H(root)+2 E_root log alpha <= log(sum alpha^2) <= log(P E_global N_max/beta)",
-        "shannon": "sum R_j=L log2-H(root) gets the same linear log(48/25) slope without a per-root mass floor",
-        "renyi": "H2(root)<=H1(root), so the Renyi action has the same lower bound; if it exceeds L log(4/3), some theta_j>1/3",
-        "amplitude_imbalance": "arbitrarily unbalanced parent amplitudes are absorbed by the log-product recursion; no small/large-parent threshold or new currency is needed",
-        "duhamel_role": "adjoint Duhamel is used only to certify scale-critical coefficient productivity/support, never as the physical causal probability weights",
-        "physical_weights": "Shannon/Renyi layer weights remain the actual positive child-energy work law",
-        "continuum_status": "the companion common-slice first-stop theorem supplies the 1/4 coefficient and 1/16 product registration on the selected-role model; the remaining continuum bridge is construction of that exact moving outer role equation on every recursive SGS block",
+        "shannon": "sum R_j=L log2-H(root) retains the linear log(48/25) slope without a per-root mass floor",
+        "renyi": "H2(root)<=H1(root), so the Renyi action has the same lower bound and routes a rich layer to existing pair/entropy/cycle currencies",
+        "amplitude_imbalance": "arbitrarily unbalanced parent amplitudes are absorbed by transfer-weighted logarithmic productivity; no small/large-parent currency is introduced",
+        "duhamel_role": "Duhamel remains an exact support/adjoint identity only; parent productivity is derived directly from physical work by sharp Young plus KL positivity",
+        "physical_weights": "all layer expectations are under actual positive child-energy work dT",
+        "continuum_status": "outer moving roles and hard-event/smooth-envelope registration are supplied by companion theorems; the remaining continuum task is the recursive first-stop assembly that retains physical Young-good cells and routes every failed phase/registration/source event once to an existing cause",
     }
 
 
@@ -401,7 +417,7 @@ def main() -> None:
     cert = theorem_certificate()
     payload = {"certificate": cert, "stress": asdict(out)}
     (args.outdir / "amplitude_entropy_causal_reuse.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    lam = registered_coefficient_productivity_lower(1.0, 1.0)
+    lam = physical_log_productivity_constant(1)
     beta = anchor_coefficient_energy_fraction()
     md = f"""# Amplitude-entropy causal reuse: remove the false uniform root-mass hypothesis
 
@@ -411,19 +427,21 @@ The critical amplitude of a selected coherent coefficient is
 
 `alpha=sqrt(N)|<u,phi>|`.
 
-On a continuing Duhamel-generated node, sharp Young applied to the exact symmetrized high-high source, the natural `N^-2` lifetime, the Gaussian probe norm, and the bounded backward adjoint give a scale-independent productivity law
+The preferred productivity premise is now derived directly under the actual positive child-energy work.  Sharp Young bounds each physical pair-work density, and KL positivity against normalized time x hard-pair-cell reference gives
 
-`alpha_p1 alpha_p2 >= Lambda alpha_c`.
+`E_dT log(alpha_p1 alpha_p2) >= E_dT log(alpha_child) + log Lambda_j`.
 
-For the displayed default `c=1, nu=1`, including the conservative `1/4` first-stop registration factor on each parent, the current clean constants give `Lambda={lam:.12g}`.  The number is deliberately not optimized; only positivity and scale independence matter to the telescope.
+For one retained pair cell at the displayed default `c=1`, including dual-Gaussian marking and the conservative `1/4` common-slice factor on each parent, the physical-work theorem gives `Lambda_1={lam:.12g}`.  For `M_j` hard pair cells, `Lambda_j=Lambda_1/M_j`.  Polynomial refinement has a finite geometrically discounted `sum 2^(-j) log M_j`, so it changes only the offset.
 
-Give each physical child event its two structural parent slots with the existing free `1/2` baseline.  Taking logs gives
+Give each physical child event its two structural parent slots with the existing free `1/2` baseline.  The transfer-weighted logarithmic inequality gives
 
-`E log alpha_parent >= (1/2) log Lambda + (1/2) E log alpha_child`,
+`E log alpha_parent >= (1/2) log Lambda_j + (1/2) E log alpha_child`,
 
 hence after depth `L`
 
-`ell_root >= (1-2^-L)log Lambda + 2^-L log alpha_terminal`.
+`ell_root >= sum_(j=0)^(L-1) 2^(-j-1) log Lambda_j + 2^-L log alpha_terminal`.
+
+When all `Lambda_j=Lambda`, this reduces to the older constant-productivity formula `(1-2^-L)log Lambda + 2^-L log alpha_terminal`.
 
 This is the key point: **arbitrary amplitude imbalance is harmless at the multiplicative level**.  One parent may be exponentially smaller than the other; their log average still sees the exact product.
 
@@ -445,9 +463,9 @@ Therefore the exact Shannon telescope
 
 obeys
 
-`sum R_j >= L log(48/25) - log(P E_global N_base/beta) + 2(1-2^-L)log Lambda + 2^(1-L)log alpha_terminal`.
+`sum R_j >= L log(48/25) - log(P E_global N_base/beta) + sum_(j=0)^(L-1) 2^(-j) log Lambda_j + 2^(1-L)log alpha_terminal`.
 
-The last two amplitude terms are only a finite-depth offset: the coefficient of `L` is still `log(48/25)`.  No assumption `N E_root>=eta` for every root is used.
+The physical pair theorem gives `Lambda_j=Lambda_1/M_j`; polynomial `M_j` makes the weighted logarithmic sum a finite offset.  Hence the coefficient of `L` is still `log(48/25)`.  No assumption `N E_root>=eta` for every root is used.
 
 Moreover `H2(root)<=H1(root)`, so the exact Renyi action `sum log(1+theta_j)=L log2+log Q_root` has the **same lower bound**.  Once that lower exceeds `L log(4/3)`, some layer has `theta_j>1/3` and the existing parent-slot pair / component-entropy / same-ancestry-cycle routing applies unchanged.
 
@@ -458,7 +476,7 @@ Stress: `{out.samples}` random layered causal DAGs with parent amplitude ratios 
 - minimum exact Renyi-minus-lower margin: `{out.minimum_renyi_lower_margin:.3e}`
 - branches: `{out.branch_counts}`
 
-This theorem changes the frontier.  The old causal root-count argument needed an absolute critical mass per root; that is incompatible with the homogeneity of Young.  The correct physical invariant is the **multiplicative critical coefficient**.  The companion common-slice first-stop theorem now supplies the conservative `1/4` coefficient and `1/16` parent-product registration on the selected-role model.  The remaining continuum step is therefore the outer moving Fourier/helical role extraction itself: construct that exact selected coefficient equation on every recursively chosen efficient SGS block with the already-classified non-affine/source/Xi terms.  No global-regularity claim is made.
+This theorem changes the frontier.  The old causal root-count argument needed an absolute critical mass per root; that is incompatible with Young homogeneity.  The correct observable is the **physical-transfer-weighted logarithm of the multiplicative critical coefficient**.  The physical pair-work/KL theorem supplies it directly under `dT`, common-slice first stopping registers continuing parents, and the outer-role/event-registration theorems now supply the exact PDE carrier.  What remains is the continuum first-stop constructor that applies these alternatives measurably on every recursive physical-transfer block and routes every failed event once.  No global-regularity claim is made.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)

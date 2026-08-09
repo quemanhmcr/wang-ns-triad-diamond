@@ -344,3 +344,7 @@ homogeneity.  The preferred downstream theorem keeps that amplitude explicitly:
 root entropy estimate.  Thus no separate parent-amplitude floor is required.
 The remaining continuum issue is the outer selected-role construction, not a
 new Gaussian-registration mass hypothesis.
+
+## Event-role registration update
+
+The transfer-cell alignment caveat in the historical discussion above is now closed by `event_anchored_role_registration.md`: the physical event uses an exact hard Fourier/helical projector `P`, the smooth moving PDE uses an envelope `Q` with `QP=P`, and `<Pu,phi>=<Qu,Pphi>` exactly.  Thus the dual Gaussian coefficient is attached to the actual event transfer role without a second transfer measure.  The only admissibility condition left is that the retained event lies on the complex-Young/phase-good branch; failures stop earlier as existing transfer/backscatter/relink causes.

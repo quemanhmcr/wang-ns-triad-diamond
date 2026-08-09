@@ -243,3 +243,7 @@ The remaining PDE bridge is now the measurable **eventwise Gaussian marking and
 selected-role registration theorem** for every efficient recursive physical
 transfer block, with the existing one global `Xi` ledger.  No global-regularity
 claim is made.
+
+## Event-role registration update
+
+The historical eventwise-profile selection caveat is now supplied by the hard-core/smooth-envelope theorem.  The Gaussian is an analysis mark of an exact hard physical transfer role, not a persistent synthesis packet.  The remaining continuum task is to invoke this gate inside one measurable first-stop constructor on every recursive physical-transfer block; the gate itself introduces no new selection hypothesis.

@@ -244,3 +244,7 @@ log-amplitude recursion, this is exactly what is needed for the root
 energy--entropy inequality.  The amplitude imbalance mentioned above is
 therefore closed by `amplitude_entropy_causal_reuse.md`; no new service currency
 or amplitude floor is introduced.
+
+## Outer-role update
+
+The selected outer-role partition assumed in the historical statement is now supplied by `event_anchored_role_registration.md`.  The physical pair-work theorem `physical_pair_weighted_productivity.md` also removes the need for an absolute parent-amplitude floor: it controls the transfer-weighted logarithmic parent product directly under `dT`.  The Bargmann cell remains only the positive energy identity anchor.

@@ -10,6 +10,10 @@ on:
       - 'src/dual_gaussian_root_registration.py'
       - 'src/bargmann_root_cell_registration.py'
       - 'src/common_slice_coefficient_registration.py'
+      - 'src/outer_moving_role_extraction.py'
+      - 'src/nonaffine_role_interface_work.py'
+      - 'src/event_anchored_role_registration.py'
+      - 'src/physical_pair_weighted_productivity.py'
       - 'src/amplitude_entropy_causal_reuse.py'
       - 'src/weighted_causal_reuse.py'
       - 'src/renyi_causal_reuse.py'
@@ -39,6 +43,10 @@ jobs:
       - run: python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian
       - run: python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor
       - run: python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice
+      - run: python -m src.outer_moving_role_extraction --samples 50000 --outdir results-integration/outer-role
+      - run: python -m src.nonaffine_role_interface_work --samples 50000 --outdir results-integration/nonaffine-interface
+      - run: python -m src.event_anchored_role_registration --samples 50000 --outdir results-integration/event-role
+      - run: python -m src.physical_pair_weighted_productivity --samples 50000 --outdir results-integration/physical-pair-productivity
       - run: python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy
       - run: python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse
       - run: python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse

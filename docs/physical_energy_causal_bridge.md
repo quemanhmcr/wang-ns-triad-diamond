@@ -295,3 +295,7 @@ summable rejected work.  That recursive PDE witness extraction remains the main
 continuum bridge.
 
 No global-regularity claim is made.
+
+## Physical pair-productivity update
+
+The remaining pair-weight issue is now removed without identifying `dGamma` with `dT`.  `physical_pair_weighted_productivity.md` applies sharp Young directly to each actual positive work density and uses KL positivity after normalizing `dT`; this yields the transfer-weighted logarithmic parent-product lower required by amplitude entropy.  Thus Duhamel remains a support/adjoint identity only, while both causal weights and parent-product averaging are physical energy work.

@@ -231,7 +231,7 @@ def theorem_certificate() -> dict[str, object]:
     eta_cell = canonical_cell_critical_mass_lower(eta_probe, R)
     budget = canonical_cell_frame_budget()
     return {
-        "status": "EXACT_BARGMANN_LOCAL_MOYAL_ROOT_CELL_QUANTUM__SELECTED_OUTER_ROLE_PARTITION_ASSUMED",
+        "status": "EXACT_BARGMANN_LOCAL_MOYAL_ROOT_CELL_QUANTUM__EVENT_OUTER_ROLE_PARTITION_REGISTERED",
         "local_submean": f"E(B_R)>=exp(-R^2)R^6/3! |<f,g_z0>|^2; optimum R=sqrt3 gives fraction {frac:.12g}",
         "normalized_canonical_cell": f"for a unit-L^(3/2) parent, B_sqrt3 intersects at most {cells} unit six-dimensional material cells, so one carries N E_C>={eta_cell:.12g}",
         "physical_scaling": "for an actual parent role the cell quantum is eta_cell_norm * ||f||_(3/2)^2; no absolute root mass follows from shape alone",
@@ -240,7 +240,7 @@ def theorem_certificate() -> dict[str, object]:
         "energy_budget": f"Moyal P=1 inside each exact outer role/covariance frame; 4 scale colors times finite covariance bins give uniform cell budget {budget}",
         "no_work_alignment_needed": "the anchor labels physical parent identity through actual energy; it is not asserted that nonlinear work is spatially localized in the same cell",
         "important_scope": "the outer frozen Fourier/helical roles must form the exact disjoint/orthogonal selected partition used in the global energy budget",
-        "continuum_status": "the energy-anchor map is exact after parent amplitude is specified; remaining assembly must derive amplitude granularity from generated physical work/old-reservoir service and then use the anchor consistently as the canonical material label",
+        "continuum_status": "the energy-anchor map is exact on the event-anchored hard outer role; physical pair-work/KL supplies the required transfer-weighted amplitude granularity, and the remaining task is only recursive first-stop assembly with the canonical material label",
     }
 
 

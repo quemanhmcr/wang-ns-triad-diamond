@@ -257,3 +257,7 @@ ledgers already describe its physical meanings.
 
 This note does not yet prove that final work-routing lemma, and therefore it does
 not prove Navier--Stokes global regularity.
+
+## Interface-provenance update
+
+The work-routing item left open in the original scope is now closed algebraically by `nonaffine_role_interface_work.md`.  The skew-adjoint part of the nonaffine interface is an antisymmetric conservative role flux, and the self-adjoint part is exactly off-diagonal physical strain work.  `event_anchored_role_registration.md` also supplies the exact hard physical role inside the smooth PDE envelope.  The remaining task is therefore the recursive first-stop assembly, not construction of `Q` or invention of another interface currency.

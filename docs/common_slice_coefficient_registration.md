@@ -122,3 +122,7 @@ first time.  The registration theorem therefore returns the complete triggered
 set `{HH generation, classified residual/source, material relink}` and does **not**
 choose a primary by theorem name.  Primary ownership or a Radon--Nikodym split on
 an exact tie belongs only to the single-charge physical branch compiler.
+
+## Outer-role update
+
+The moving selected role equation assumed in the original scope is now supplied by `outer_moving_role_extraction.md` together with exact hard-event/smooth-envelope registration.  Common-slice failure is therefore interpreted only as the already listed first physical stops.  On the continuing subset, `physical_pair_weighted_productivity.md` uses the registered `1/4` factors under the actual physical transfer law.

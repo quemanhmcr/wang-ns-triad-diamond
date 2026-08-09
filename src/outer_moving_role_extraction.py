@@ -168,7 +168,7 @@ def selected_outer_role_sources() -> tuple[str, ...]:
 def theorem_certificate() -> dict[str, object]:
     gap = persistent_low_low_gap()
     return {
-        "status": "EXACT_OUTER_MOVING_ROLE_IDENTITY_AND_PERSISTENT_LOWLOW_EXCLUSION__NONAFFINE_INTERFACE_WORK_ROUTING_REMAINS",
+        "status": "EXACT_OUTER_MOVING_ROLE_IDENTITY_AND_PERSISTENT_LOWLOW_EXCLUSION__INTERFACE_PROVENANCE_SUPPLIED",
         "identity": "(dt+L_V-nuDelta)(Q u)=Q B(V,V)-Q B(h,h)+(dtQ+[L_V,Q])u, with h=u-V and [Q,Delta]=0 for scalar Fourier roles",
         "support": f"on K<=1/30 an anchor |xi|>=3N/5 stays above (3/5)e^(-1/30)N>N/2; clean dimensionless gap {gap:.12g}",
         "low_low": "supp Vhat subset B_(N/4) implies supp B(V,V) subset B_(N/2), hence Q B(V,V)=0 for the entire low-strain role interval",
@@ -178,7 +178,7 @@ def theorem_certificate() -> dict[str, object]:
         "pressure": "Leray is applied before role extraction; no pressure forcing is introduced",
         "viscosity": "scalar Fourier Q commutes exactly with Delta; viscosity remains in the propagator and creates no role-interface source",
         "normalization": "Q is anchored to the already selected frozen physical transfer cell at the event time, so evolving the role does not alter that event's physical transfer normalization",
-        "continuum_status": "the outer moving-role PDE and its low-low exclusion are now exact; the remaining bridge is a work-level theorem routing the nonaffine Heisenberg interface once to coherent deformation/critical D_V or to physical role-relink/transfer loss, without a new currency",
+        "continuum_status": "the outer moving-role PDE and persistent low-low exclusion are exact; the companion interface theorem splits nonaffine work into conservative role flux plus existing strain provenance, leaving only recursive first-stop assembly",
     }
 
 

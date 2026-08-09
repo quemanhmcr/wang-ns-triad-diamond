@@ -219,7 +219,7 @@ def theorem_certificate() -> dict[str, object]:
     th = coherent_flat_thresholds(0.01)
     dmin = coherent_deformation_dissipation_threshold(0.01, 1.0)
     return {
-        "status": "EXACT_COHERENT_SERVICE_OR_FLAT_ASSEMBLY_GATE__EVENTWISE_PROFILE_MARKING_CONTINUUM_SELECTION_REMAINS",
+        "status": "EXACT_COHERENT_SERVICE_OR_FLAT_ASSEMBLY_GATE__EVENT_ROLE_REGISTRATION_SUPPLIED",
         "flatness": "sqrt(E_H_phys)+(dT)_nonconf+C(qmax) I_K <= tau",
         "nonaffine_coefficient": f"C(qmax)=1+qmax/sqrt2+sqrt7/2; default qmax={th['intrinsic_carrier_upper']:.12g}",
         "deformation_threshold": f"I_K<tau/(3C(qmax)); at tau=1/100 default threshold={th['coherent_deformation_action']:.12g}",
@@ -228,7 +228,7 @@ def theorem_certificate() -> dict[str, object]:
         "profile_rule": "Christ Gaussian is an eventwise analysis mark; no frozen-profile persistence is an input to the coherent gate",
         "single_charge_rule": "the gate returns all threshold-crossing physical roots; it never picks a primary by theorem-name order, and delegates primary selection to the first-causal compiler",
         "H1H3_status": "existing H1/H3 theorems remain sharper optional diagnostics, not required to control the full non-affine moving Gaussian core",
-        "continuum_status": "still requires a measurable eventwise near-Gaussian marking/outer-role selection theorem proving these observables are attached to every efficient recursive physical-transfer event with one Xi ledger",
+        "continuum_status": "event-anchored hard roles and smooth PDE envelopes are supplied by companion theorems; remaining continuum work is the single recursive first-stop constructor which applies this gate and the physical pair-productivity route without duplicate charging",
     }
 
 

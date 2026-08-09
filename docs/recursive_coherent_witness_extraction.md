@@ -240,3 +240,7 @@ Fourier/helical roles and prove that their exact moving equation has:
 
 This note does not assert that this final outer-role extraction has already been
 proved for every continuum block, and it makes no global-regularity claim.
+
+## Outer-role update
+
+The outer-role condition in the historical scope is now supplied by `outer_moving_role_extraction.md` and `event_anchored_role_registration.md`.  The nonaffine Heisenberg interface has exact provenance by `nonaffine_role_interface_work.md`: skew work is conservative role flux and symmetric work is off-diagonal strain.  Binary coherent atomization therefore no longer waits on outer-role extraction; it waits only on the recursive first-stop assembly which decides which already-named cause owns each retained physical event.

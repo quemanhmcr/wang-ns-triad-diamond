@@ -304,7 +304,7 @@ def stress(samples: int = 20_000, seed: int = 20260808) -> RecursiveWitnessStres
 
 def theorem_certificate() -> dict[str, object]:
     return {
-        "status": "EXACT_BINARY_COHERENT_WORK_ATOMIZATION_GIVEN_SELECTED_PDE_ROLES__OUTER_ROLE_EXTRACTION_CONDITIONAL",
+        "status": "EXACT_BINARY_COHERENT_WORK_ATOMIZATION__EVENT_OUTER_ROLES_SUPPLIED",
         "parent_source": "N(w1,w2)=sum_CD N(A_C w1,A_D w2) exactly",
         "work_atoms": "W_CDE=2 Re <A_E w3,N(A_C w1,A_D w2)>",
         "work_identity": "sum_CDE W_CDE=2 Re <w3,N(w1,w2)>",
@@ -314,7 +314,7 @@ def theorem_certificate() -> dict[str, object]:
         "energy_bridge": "W_HH^+>=8E1/15 implies atomic positive mass at least 8E1/15 before Xi; after relative Xi rho retain >=(1-rho)8E1/15",
         "label_rule": "use the canonical intrinsic-zeta dyadic addresses; no new packet label is introduced",
         "important_scope": "A_C pieces need not be Fourier compact; scale/helical representative errors remain in the existing symbol/covariance Xi ledgers",
-        "continuum_status": "still requires the outer transfer-selected Fourier/helical role extraction and its non-affine residual work to satisfy the service-or-flat hypotheses on every recursive block",
+        "continuum_status": "outer transfer roles and nonaffine interface provenance are supplied by companion theorems; remaining task is recursive first-stop assembly on the retained physical transfer measure",
     }
 
 

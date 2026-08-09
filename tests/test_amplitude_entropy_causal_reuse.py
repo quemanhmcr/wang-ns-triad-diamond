@@ -9,6 +9,7 @@ from src.amplitude_entropy_causal_reuse import (
     l2_normalized_dual_l32_scaled_upper,
     one_layer_log_product_lower,
     registered_coefficient_productivity_lower,
+    root_expected_log_lower_variable,
     reuse_information_lower_without_mass_floor,
     root_expected_log_lower,
 )
@@ -64,3 +65,11 @@ def test_closed_form_matches_entropy_route_before_zero_truncation():
     closed = closed_form_reuse_lower(L, N0, E, P, lam, terminal, beta)
     if out["feasible"] and float(out["root_entropy_upper"]) > 0:
         assert math.isclose(float(out["shannon_reuse_lower"]), closed, rel_tol=1e-13, abs_tol=1e-13)
+
+
+def test_variable_physical_productivity_has_exact_binary_discount():
+    lam = [0.2, 0.1, 0.04]
+    terminal = 0.7
+    got = root_expected_log_lower_variable(lam, terminal)
+    want = sum((2.0 ** (-(j + 1))) * math.log(x) for j, x in enumerate(lam)) + (2.0 ** (-len(lam))) * math.log(terminal)
+    assert math.isclose(got, want, rel_tol=1e-13, abs_tol=1e-13)
