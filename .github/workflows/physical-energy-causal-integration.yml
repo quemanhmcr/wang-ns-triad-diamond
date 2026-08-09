@@ -14,6 +14,8 @@ on:
       - 'src/nonaffine_role_interface_work.py'
       - 'src/event_anchored_role_registration.py'
       - 'src/physical_pair_weighted_productivity.py'
+      - 'src/recursive_physical_witness_constructor.py'
+      - 'src/joint_causal_stop_projection.py'
       - 'src/amplitude_entropy_causal_reuse.py'
       - 'src/weighted_causal_reuse.py'
       - 'src/renyi_causal_reuse.py'
@@ -47,6 +49,8 @@ jobs:
       - run: python -m src.nonaffine_role_interface_work --samples 50000 --outdir results-integration/nonaffine-interface
       - run: python -m src.event_anchored_role_registration --samples 50000 --outdir results-integration/event-role
       - run: python -m src.physical_pair_weighted_productivity --samples 50000 --outdir results-integration/physical-pair-productivity
+      - run: python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-integration/recursive-witness
+      - run: python -m src.joint_causal_stop_projection --samples 50000 --outdir results-integration/joint-stop
       - run: python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy
       - run: python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse
       - run: python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse

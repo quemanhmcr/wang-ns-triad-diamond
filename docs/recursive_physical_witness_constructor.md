@@ -59,14 +59,9 @@ Away from exact ties, the event belongs to the unique first destination.
 Duplicate theorem manifestations of one physical cause are identified before
 charging.
 
-If genuinely independent roots tie on positive `dT` measure, the constructor
-uses the same rule as the single-charge compiler: the supplied stopping weights
-must already be Radon--Nikodym densities against **this same physical transfer
-law**.  Only then may they be normalized on the tie set.
+If genuinely independent roots tie, the **preferred master path does not split the event at all**.  It keeps the full joint cause set and applies the joint-stop terminal semantics: boundary, fixed transfer cost, valid uniform reset, or recurse.  Source/strain/relink/HH-regeneration ties are all recursive, so their relative fractions are irrelevant.
 
-This requirement is deliberate.  A pressure-source threshold and a dissipation
-threshold have different native units; dividing their raw threshold excesses by
-their sum would be artificial mathematics, not a Navier--Stokes law.
+The older Radon--Nikodym split remains available only as an optional fine-currency subledger when genuine common-unit physical weights happen to exist.  It is not a PDE hypothesis of the preferred master.
 
 At `t=0` the initial boundary is absorbing even if another formal causal clock
 ties there.
@@ -131,13 +126,9 @@ physical event.
 
 ## 6. What remains genuinely continuum
 
-The measure algebra above is exact once the eventwise first-stop measures exist.
-The remaining local PDE bridge is therefore narrower than “outer role
-extraction” or “Duhamel synchronization”:
+The measure algebra above is exact once the eventwise first-hit cause set exists.  The remaining local PDE bridge is therefore narrower than outer-role extraction, Duhamel synchronization, pair reweighting, or tie splitting:
 
-> construct, measurably on the actual positive transfer space, the Radon--Nikodym
-> stopping densities of every physical cause used on positive-measure exact tie
-> sets.
+> construct measurably, from the actual smooth-SGS observables, the finite set of physical causes which hit first, and show that the no-hit set is exactly the registered survivor set used by physical productivity / Kelvin-flat continuation.
 
 Many individual ingredients already come with physical measures:
 
@@ -147,8 +138,4 @@ Many individual ingredients already come with physical measures:
 - nonaffine skew work is an antisymmetric physical role flux;
 - symmetric interface work is physical strain provenance.
 
-But a universal theorem placing all such simultaneous cause measures on one
-`dT` event space has not yet been proved.  The constructor refuses to hide this
-by lexicographic priority or by normalizing quantities with unrelated units.
-
-This is the next frontier.  It is not a Navier--Stokes global-regularity proof.
+A common-unit simultaneous-cause measure is no longer required.  What is still missing is the continuum first-hitting construction itself: continuity/measurability of the physical clocks and their exact attachment to every recursive selected block.  This is the next frontier.  It is not a Navier--Stokes global-regularity proof.

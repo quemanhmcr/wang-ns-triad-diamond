@@ -6,6 +6,7 @@ from src.recursive_physical_witness_constructor import (
     GeneratedPairEvent,
     RegenerationHit,
     compile_generated_pair_measure,
+    compile_generated_pair_master_measure,
 )
 
 
@@ -59,3 +60,24 @@ def test_half_survivor_costs_half_productivity_factor():
     assert math.isclose(out.continuation_fraction,0.5)
     assert out.majority_continues
     assert math.isclose(out.conditioned_productivity,0.5*physical_log_productivity_constant(1))
+
+
+def test_preferred_joint_master_ignores_exact_tie_weights():
+    a=GeneratedPairEvent(1.0,0,True,False,
+        physical_hits=(CauseHit(0.3,PhysicalCause.RESOLVED_SOURCE,1e-30,"source"),),
+        regeneration_hits=(RegenerationHit(0.3,1e30,"regen"),))
+    b=GeneratedPairEvent(1.0,0,True,False,
+        physical_hits=(CauseHit(0.3,PhysicalCause.RESOLVED_SOURCE,1e30,"source"),),
+        regeneration_hits=(RegenerationHit(0.3,1e-30,"regen"),))
+    oa=compile_generated_pair_master_measure(events=(a,),pair_cells_upper=1)
+    ob=compile_generated_pair_master_measure(events=(b,),pair_cells_upper=1)
+    assert oa.master_mass==ob.master_mass
+    assert oa.continuation_mass==ob.continuation_mass==0.0
+
+
+def test_preferred_joint_master_does_not_validate_dummy_weights():
+    # Weight is legacy fine-subledger metadata and is ignored by preferred joint master.
+    event=GeneratedPairEvent(1.0,0,True,False,
+        physical_hits=(CauseHit(0.2,PhysicalCause.RESOLVED_SOURCE,float("nan"),"source"),))
+    out=compile_generated_pair_master_measure(events=(event,),pair_cells_upper=1)
+    assert out.master_mass["recurse_critical"]==1.0
