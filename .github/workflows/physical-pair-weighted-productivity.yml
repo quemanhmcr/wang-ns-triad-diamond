@@ -1,0 +1,36 @@
+name: Physical pair weighted productivity
+on:
+  push:
+    paths:
+      - 'src/physical_pair_weighted_productivity.py'
+      - 'tests/test_physical_pair_weighted_productivity.py'
+      - 'docs/physical_pair_weighted_productivity.md'
+      - '.github/workflows/physical-pair-weighted-productivity.yml'
+      - 'src/event_anchored_role_registration.py'
+      - 'src/amplitude_entropy_causal_reuse.py'
+      - 'src/physical_energy_causal_bridge.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12', cache: pip}
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.physical_pair_weighted_productivity --samples 50000 --outdir results-physical-pair-weighted-productivity
+      - run: python -m src.event_anchored_role_registration --samples 20000 --outdir results-event-anchored-role-registration
+      - run: python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-amplitude-entropy-causal-reuse
+      - run: cat results-physical-pair-weighted-productivity/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - run: cat results-amplitude-entropy-causal-reuse/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: physical-pair-weighted-productivity-results
+          path: |
+            results-physical-pair-weighted-productivity/
+            results-event-anchored-role-registration/
+            results-amplitude-entropy-causal-reuse/
