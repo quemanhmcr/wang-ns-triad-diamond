@@ -1,0 +1,21 @@
+{
+  "certificate": {
+    "order2_l32_linf_ball": "[0.0025915485922126955874118557541736274707454052955750636 +/- 2.85e-56]",
+    "order2_clean": "1/380",
+    "resolved_l3_squared_mass_ball": "[0.06413912192652109715015546272279418506478648270716327 +/- 5.37e-54]",
+    "resolved_l3_squared_mass_clean": "1/15",
+    "third_from_gradient_ball": "[0.00066462418355064336718486392512283595944688463727603361 +/- 7.05e-57]",
+    "third_from_gradient_clean": "1/1500",
+    "quadratic_clean": "rho_Q<=d_V/(96 pi^2)",
+    "pressure_clean": "rho_P<=mu_V/5700+||R||_(3/2)/380",
+    "status": "ARB_CERTIFIED_RESOLVED_OBJECTIVE_STRAIN_COLLISION"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_corotational_identity_residual": 6.874426008326554e-16,
+    "minimum_quadratic_margin": 1.0016037109384171e-10,
+    "minimum_sgs_margin": 1.0016037109384171e-10,
+    "minimum_pressure_route_margin": 5.0080185546920854e-11,
+    "minimum_viscous_margin": 9.268093972378535e-13
+  }
+}

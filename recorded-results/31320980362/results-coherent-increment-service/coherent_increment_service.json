@@ -1,0 +1,27 @@
+{
+  "certificate": {
+    "filter_pigeonhole": "some r has ||delta_r u||_3^2 >= (Q/g1)^(2/3)",
+    "actual_low_service": "S_low(r)=sum_{j<=0} M_j ||delta_r u_j||_2^2 >= Y-2 d_high",
+    "coherent_edge_measure": "s_jC=M_j int_C |V_g delta_r u_j|^2, sum s_jC=S_low",
+    "translation_covariance": "V_g(delta_r u)(X,k)=e^{-ik.r}V_g u(X-r,k)-V_g u(X,k)",
+    "local_energy_capacity": "s_jC <= 2 M_j[E_j(C)+E_j(C-r)]",
+    "clean_route": "d_high>=Y/4 OR oldcap>Y/8 OR Xi>=Y/8 OR fresh coherent mass>=Y/32 OR log2 entropy OR 1/4 cycle mass",
+    "canonical_lp_registration": "fix one smooth square-normalized LP analysis-synthesis frame u_j=phi_j(D)u, sum_j|phi_j|^2=1, u=sum_j phi_j(D)u_j, with high-band support |xi|>=M_j/2; the existing L3 square-function/Bernstein constants remain C_LP,C_B, while the L2 tail comparison is D_tail>=D_high/4",
+    "observer_pde_separation": "d_high is the smooth-LP service observable; D_tail=N int||grad P_>N u||_2^2 dt is the orthogonal PDE dissipation currency; they meet only through the registered one-quarter comparison",
+    "status": "EXACT_MOYAL_CELL_ROUTING_GIVEN_STANDARD_LP_BERNSTEIN"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_translation_covariance_residual": 6.828729036934843e-14,
+    "worst_local_capacity_ratio": 0.8557425187000918,
+    "minimum_route_margin": 0.0,
+    "branch_counts": {
+      "high_frequency_dissipation": 12535,
+      "new_service_Bellman_entropy": 8327,
+      "dominant_new_coherent_cluster": 12093,
+      "selected_interface_Xi": 7056,
+      "old_pool_not_yet_eroded": 9483,
+      "new_service_same_ancestry_cycle": 506
+    }
+  }
+}
