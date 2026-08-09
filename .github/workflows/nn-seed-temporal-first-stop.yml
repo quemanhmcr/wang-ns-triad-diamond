@@ -1,0 +1,47 @@
+name: NN seed temporal first stop
+
+on:
+  push:
+    paths:
+      - 'src/nn_seed_temporal_first_stop.py'
+      - 'tests/test_nn_seed_temporal_first_stop.py'
+      - 'docs/nn_seed_temporal_first_stop.md'
+      - '.github/workflows/nn-seed-temporal-first-stop.yml'
+      - 'src/nn_critical_heat_carrier_seed.py'
+      - 'src/outer_moving_role_extraction.py'
+      - 'src/nonaffine_role_interface_work.py'
+      - 'src/common_slice_coefficient_registration.py'
+      - 'src/smooth_sgs_first_hit_extraction.py'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.nn_seed_temporal_first_stop --samples 50000 --outdir results-nn-seed-temporal-first-stop
+      - run: python -m src.nn_critical_heat_carrier_seed --samples 50000 --outdir results-nn-critical-heat-carrier-seed
+      - run: python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction
+      - run: python -m src.nonaffine_role_interface_work --samples 50000 --outdir results-nonaffine-role-interface-work
+      - run: python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction
+      - run: cat results-nn-seed-temporal-first-stop/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nn-seed-temporal-first-stop-results
+          path: |
+            results-nn-seed-temporal-first-stop/
+            results-nn-critical-heat-carrier-seed/
+            results-outer-moving-role-extraction/
+            results-nonaffine-role-interface-work/
+            results-smooth-sgs-first-hit-extraction/
