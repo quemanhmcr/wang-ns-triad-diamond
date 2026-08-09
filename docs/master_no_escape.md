@@ -2176,6 +2176,32 @@ Child-scale heat ownership, old-incident erosion and `NN intersect critical` rem
 
 Accordingly **critical high-strain dissipation is no longer part of the universal-renewal gap**: it already enters an existing recursive stop, the absorbing boundary, or a renewed coherent-service episode without making `D_V` a reset.
 
-The remaining master-facing continuum problem is narrower.  A natural next theorem is the parameterized version: any certified `D_V>=D_0>0` should feed the same dyadic critical-shell/own-scale-service mechanism with `mu_0=D_0/c`; this is not yet certified.  Existing source-episode theorems already provide integrated SGS dissipation/service/mass alternatives and a viscous `D_V` lower without persistence, so source/SGS increasingly looks like a finite routing/continuation assembly.  Genuine temporal material relink remains recursive as well: same-time ON service is already interface/old-incident physics, whereas an actual selected-set switch carries exact Moyal symmetric-difference energy and still must be connected to a certified service/cost/ancestry continuation without turning arbitrary relink energy into work or whole-shell critical mass.
+The remaining master-facing continuum problem is narrower again because the carrier theorem is now **generic in the critical shell mass**, not specific to high strain.  At any actual shell-time event with
 
-Until source/SGS and genuine-relink renewal/exhaustion are assembled into the continuum master, the master remains conditional and there is no global-regularity proof for 3D Navier--Stokes.
+`M||P_Mu(t)||_2^2>=mu_0>0`,
+
+set `A=3M/4`.  Exact whole-shell registration gives `A|z(t)|^2>=(3/4)mu_0`.  Before materiality is assigned there are only three native first stops: renewed strain, classified role-interface coefficient impulse and HH-regeneration coefficient impulse.  The new interface also certifies the observed backward horizon, so a shorter monitor path cannot masquerade as a full-natural corridor or `t=0` root.  On a full no-hit corridor,
+
+`A|z(s)|^2 >= 3mu_0/64`,
+
+`A||Q_Au(s)||_2^2 >= 3mu_0/(64J^2)`,
+
+and the existing radius-three annular heat theorem gives actual bounded own-scale service
+
+`A||delta_r Q_Au||_2^2 >= q_b 3mu_0/(64J^2)`,  `|r|<=3/A`.
+
+Material OO/ON/NN is assigned only afterwards from the renewed positive service law.
+
+Any certified resolved `D_V>=D_0>0` is now a supplier: `mu_0=D_0/c` makes the low-mass dissipation at most `D_0/2`, so at least half the actual `D_V` lies on qualifying shells.  These normalized dissipation weights remain diagnostic and never replace positive HH causal probabilities.  The existing dominant fresh coherent-service branch is another supplier: `M(E_C+E_{C-r})>=theta Y/8` implies `M E_shell>=theta Y/16`, hence `Y/64` at `theta=1/4`.  This uses only whole-shell domination of each cell and creates no cell mass floor.
+
+The specialization `mu_0=32pi^2/(75c^2)` reproduces the high-strain terminal, survivor, carrier and service constants exactly.  Dedicated run `31304867746` and full integration `31304886428` on exact `ccdf9f3` certified the generic theorem: `555` tests, `50,000` stress states, minimum `D_0` retained fraction `0.500135189`, exact zero specialization/fresh-identity margins, worst survivor Duhamel residual `4.885e-15`, and zero order/unit/horizon failures.  The earlier `ac1b162` failure was fixture-only: one scope test expected `pressure/source` instead of the certificate's `source/pressure`.
+
+Thus high strain, any unit-matched resolved-dissipation source, and dominant fresh coherent mass all enter the same local recursion
+
+`critical shell -> named stop / t=0 / own-scale coherent service`.
+
+The theorem is shell-local and does not invent signed-good scale progress relative to the supplier block.  Pressure mass occupation and unrelated high-frequency enstrophy remain on their existing reservoir/service/entropy routes rather than being relabeled `D_V`.
+
+One remaining conceptual seam now looks partly like a quotient problem rather than a new PDE estimate.  The smooth carrier state and exact coefficient identity contain no old-pool membership variable.  Therefore a **pure intrinsic material-label change**, with `Q_A` and the analysis probe fixed, should not by itself kill the carrier; material ownership can be reread from subsequent actual service.  A true role/probe change remains physical interface/relink currency, and ancestry charges are not erased.  This material-label/physical-role distinction is the next theorem target, not yet canonical.
+
+Until the remaining source/pressure/reservoir routing and this relink quotient are assembled into the continuum master, the master remains conditional and there is no global-regularity proof for 3D Navier--Stokes.

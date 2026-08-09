@@ -1,0 +1,34 @@
+{
+  "certificate": {
+    "status": "EXACT_FULL_NATURAL_CRITICAL_CARRIER_TO_BOUNDED_ANNULAR_SERVICE_THRESHOLD__MATERIALITY_REREAD_FROM_SERVICE__UNIVERSAL_RENEWAL_REMAINS",
+    "prefix_persistence": "on a full no-hit natural corridor every prefix has |I_interface|<|z(t)|/4 and |I_HH|<|z(t)|/2, hence |z(s)|>|z(t)|/4",
+    "analysis_probe_growth": "for the registered affine/Kelvin/viscous analysis dual, ||psi(s)||<=J||psi(t)|| with J=exp(K+nu*c*R^2)=11.4552291637, R=(3/2)exp(1/30)=1.55084267027",
+    "uniform_carrier_mass": "A||Q_Au(s)||_2^2 >= pi^2/[50 c^2 J^2]=0.00150425747254 for every prefix s",
+    "annular_support": "0.580329660289 A <= |xi| <= 1.55084267027 A throughout the affine-dual low-strain corridor",
+    "full_heat": "E_HA||delta_r w||_2^2 >= q||w||_2^2 with q=0.309953702966",
+    "bounded_heat": "radius beta=3 retains more than half the heat lower; some actual |r_s|<=3/A has A||delta_r w(s)||_2^2>=Y0=0.000233125086914",
+    "clean_bounded_fraction": 0.15497685148314766,
+    "integrated_service": "A^3 int_(full natural slab) E_(|r|<=3/A)||delta_r w||_2^2 dt >= cY0=0.000233125086914",
+    "material_reentry": "apply Moyal only after the bounded service exists, then assign OO/ON/NN by the two intrinsic endpoints of this renewed service law; the old NN seed witness is provenance, not whole-carrier ownership",
+    "stopping_interface": "Y0 is exactly a scale-independent bounded-displacement square-service threshold consumable by the existing old-pool geometric stopping theorem on any supplied sticky signed-good continuation",
+    "no_efficiency_overclaim": "this proves coherent service entrance, not near-extremal HH transfer efficiency of the whole renewed carrier",
+    "scope": "the high-strain survivor no longer needs a whole-carrier NN attachment theorem; universal source/relink slab renewal and supply of the next signed-good recursive continuation remain separate continuum tasks",
+    "arb": {
+      "transported_lower_ratio": "[0.58032966028920354122458386560497611641360390358435369 +/- 5.54e-54]",
+      "full_heat_fraction_lower": "[0.30995370296629533275190094839824718488099402465510695 +/- 3.97e-54]",
+      "gaussian_tail_probability_radius_3": "[0.02929088653488823210691774571191602221467112714280756 +/- 2.47e-54]",
+      "truncated_fraction_lower": "[0.1927901568267424043242299655505830960223095160838767 +/- 2.25e-53]",
+      "clean_truncated_fraction": "[0.15497685148314766637595047419912359244049701232755347 +/- 6.28e-54]",
+      "status": "ARB_CERTIFIED_RADIUS_3_RETAINS_MORE_THAN_HALF_ANNULAR_HEAT_SERVICE"
+    }
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_prefix_quarter_margin": 1.3903314791560229e-05,
+    "minimum_carrier_mass_margin": 0.0,
+    "minimum_spectral_heat_margin": 0.005526883850904274,
+    "minimum_truncated_heat_margin": 0.037813370867915475,
+    "worst_material_partition_residual": 1.1368683772161603e-13,
+    "maximum_forced_generation": 13
+  }
+}
