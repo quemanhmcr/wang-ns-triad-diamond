@@ -165,9 +165,11 @@ def test_certificate_records_two_forbidden_identifications():
 def test_high_frequency_owner_uses_tail_energy_not_resolved_DV():
     D = 0.4
     nu = 1.0
-    threshold = nu * D / 4.0
+    c_lp = 0.25
+    threshold = nu * c_lp * D
     out = objective_sgs_high_frequency_physical_reentry(
         D,
+        c_lp,
         nu,
         inherited_scaled_tail_energy=threshold,
         positive_scaled_tail_work=threshold,
@@ -177,4 +179,5 @@ def test_high_frequency_owner_uses_tail_energy_not_resolved_DV():
         "positive_nonlinear_regeneration",
     }
     assert out["resolved_DV_supplier"] is False
+    assert out["physical_tail_dissipation_lower"] == pytest.approx(c_lp * D)
     assert out["clean_thresholds"]["inherited_critical_shell_mass"] == pytest.approx(threshold)

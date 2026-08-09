@@ -185,24 +185,24 @@ The remaining continuum work is the final master assembly/topology that composes
 
 No 3D Navier--Stokes global-regularity conclusion is asserted.
 
-## High-frequency SGS service is now handed to tail energy, not to `D_V`
+## High-frequency SGS service is handed to physical tail energy, not to `D_V`
 
-The `D_high` exit of coherent increment service has its own native re-entry theorem.  It remains the hard-tail normalized-enstrophy currency
-
-\[
-D_>^{LP}=\int\sum_{j\ge1}2^j\mu_j\,d\tau,
-\]
-
-not resolved low-pass `D_V`.  The hard-tail Navier--Stokes energy law gives
+The `D_high` exit of coherent increment service remains a standard smooth-LP normalized-enstrophy observable.  It is **not** identified with an orthogonal hard tail.  The companion theorem requires the chosen LP partition to supply a fixed certified comparison
 
 \[
-N\|P_{>N}u(s)\|_2^2+NW_>^+\ge\frac\nu2D_>^{LP}.
+D_{tail}:=N\int\|\nabla P_{>N}u\|_2^2dt\ge c_{LP}D_{high}.
 \]
 
-Hence either inherited high-tail energy or actual positive nonlinear regeneration work carries `nu D_high/4`.  The inherited owner exposes a genuine hard shell with the same critical-mass lower.  The regeneration owner disintegrates into actual positive high-shell work and, because low--low is support-excluded on those shells, into HH or resolved cross/interface work.
+For hard orthogonal dyadic annuli the spectral lower is exactly `c_LP=1/4`; a smooth LP implementation carries its own fixed constant.  The hard-tail Navier--Stokes energy law then gives
 
-Thus the compiler's high-frequency branch now has a physical owner interface:
+\[
+N\|P_{>N}u(s)\|_2^2+NW_>^+\ge2\nu D_{tail}.
+\]
 
-`SGS source -> coherent service -> D_high -> inherited critical shell OR positive HH/interface regeneration`.
+Hence either inherited high-tail energy or actual positive nonlinear regeneration work carries at least `nu D_tail`, and therefore at least `nu c_LP D_high`.  The inherited owner exposes a genuine hard shell with the same critical-mass lower.  The regeneration owner disintegrates into actual positive high-shell work and, because low--low is support-excluded on those shells, into HH or resolved cross/interface work.
+
+Thus the compiler's high-frequency branch now has the explicit physical owner interface
+
+`SGS source -> coherent service -> smooth-LP D_high -> physical D_tail -> inherited critical shell OR positive HH/interface regeneration`.
 
 This still creates no finite reset and does not make a large HH work atom satisfy the generated-energy productivity gate automatically.

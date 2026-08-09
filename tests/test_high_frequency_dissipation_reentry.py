@@ -10,6 +10,8 @@ from src.high_frequency_dissipation_reentry import (
     high_tail_clean_reentry_thresholds,
     high_tail_scaled_gradient_bounds,
     inherited_branch_clean_shell_mass_lower,
+    lp_high_clean_reentry_thresholds,
+    physical_tail_dissipation_lower_from_lp,
     inherited_tail_shell_witness,
     integrated_high_lp_currency,
     positive_shell_work_disintegration,
@@ -35,10 +37,10 @@ def test_hard_annulus_gradient_bridge_constants():
 
 
 def test_energy_gate_keeps_exact_tie_joint():
-    D = 0.8
+    D_tail = 0.8
     nu = 1.3
-    threshold = nu * D / 4.0
-    out = classify_high_tail_energy_owners(D, nu, threshold, threshold)
+    threshold = nu * D_tail
+    out = classify_high_tail_energy_owners(D_tail, nu, threshold, threshold)
     assert set(out["joint_owners"]) == {
         "inherited_tail_energy",
         "positive_nonlinear_regeneration",
@@ -54,14 +56,25 @@ def test_inherited_tail_energy_exposes_real_high_shell():
     assert out["shell_to_block_frequency_ratio"] >= 2.0
 
 
-def test_clean_inherited_shell_threshold_is_nu_D_over_four():
-    D = 0.6
+def test_clean_physical_tail_threshold_is_nu_Dtail():
+    D_tail = 0.6
     nu = 0.9
-    assert inherited_branch_clean_shell_mass_lower(D, nu) == pytest.approx(nu * D / 4.0)
-    th = high_tail_clean_reentry_thresholds(D, nu)
-    assert th["inherited_critical_shell_mass"] == pytest.approx(nu * D / 4.0)
-    assert th["HH_or_interface_work_if_regeneration"] == pytest.approx(nu * D / 4.0)
+    assert inherited_branch_clean_shell_mass_lower(D_tail, nu) == pytest.approx(nu * D_tail)
+    th = high_tail_clean_reentry_thresholds(D_tail, nu)
+    assert th["inherited_critical_shell_mass"] == pytest.approx(nu * D_tail)
+    assert th["HH_or_interface_work_if_regeneration"] == pytest.approx(nu * D_tail)
     assert th["master_semantics"] == "RECURSE_CRITICAL"
+
+
+def test_lp_supplier_constant_is_explicit_and_hard_annulus_gives_quarter():
+    D_lp = 0.6
+    c_lp = 0.25
+    nu = 0.9
+    D_tail = physical_tail_dissipation_lower_from_lp(D_lp, c_lp)
+    assert D_tail == pytest.approx(D_lp / 4.0)
+    th = lp_high_clean_reentry_thresholds(D_lp, c_lp, nu)
+    assert th["physical_tail_dissipation_lower"] == pytest.approx(D_lp / 4.0)
+    assert th["inherited_critical_shell_mass"] == pytest.approx(nu * D_lp / 4.0)
 
 
 def test_positive_tail_work_becomes_own_scale_shell_work():
@@ -87,6 +100,7 @@ def test_low_low_free_regeneration_split_keeps_joint_tie():
 def test_certificate_forbids_two_false_shortcuts():
     cert = theorem_certificate()
     assert cert["status"] == STATUS
-    assert "not resolved D_V" in cert["native_currency"]
+    assert "neither smooth-LP d_high nor resolved low-pass D_V" in cert["native_currency"]
+    assert "D_tail>=c_LP D_high" in cert["lp_supplier"]
     assert "no critical-shell floor" in cert["anti_relabel"]
     assert "not automatically" in cert["no_false_productivity"]

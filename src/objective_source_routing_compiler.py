@@ -20,7 +20,8 @@ from src.coherent_increment_service import cubic_to_square_threshold
 from src.high_frequency_dissipation_reentry import (
     STATUS as HIGH_FREQUENCY_REENTRY_STATUS,
     classify_high_tail_energy_owners,
-    high_tail_clean_reentry_thresholds,
+    lp_high_clean_reentry_thresholds,
+    physical_tail_dissipation_lower_from_lp,
 )
 
 from src.critical_shell_service_reentry import (
@@ -361,19 +362,23 @@ def objective_sgs_aggregate_route(
 
 def objective_sgs_high_frequency_physical_reentry(
     high_frequency_dissipation: float,
+    lp_to_physical_tail_lower: float,
     viscosity: float,
     inherited_scaled_tail_energy: float,
     positive_scaled_tail_work: float,
 ) -> dict[str, object]:
     """Route the SGS high-frequency service exit through its native tail-energy law.
 
-    `D_high` remains high-frequency normalized enstrophy.  The companion theorem
-    uses hard-tail Navier--Stokes energy to force inherited critical shell energy
-    or actual positive nonlinear regeneration work; it never relabels the input
+    `D_high` remains the smooth-LP high-frequency normalized enstrophy.  It
+    reaches the orthogonal hard-tail energy theorem only through the supplied
+    certified comparison `D_tail>=c_LP D_high`; neither currency is relabeled
     resolved `D_V`.
     """
+    D_tail_lower = physical_tail_dissipation_lower_from_lp(
+        high_frequency_dissipation, lp_to_physical_tail_lower
+    )
     gate = classify_high_tail_energy_owners(
-        high_frequency_dissipation,
+        D_tail_lower,
         viscosity,
         inherited_scaled_tail_energy,
         positive_scaled_tail_work,
@@ -381,9 +386,10 @@ def objective_sgs_high_frequency_physical_reentry(
     return {
         "owner": "sgs_high_frequency_dissipation",
         "energy_gate": gate,
-        "clean_thresholds": high_tail_clean_reentry_thresholds(
-            high_frequency_dissipation, viscosity
+        "clean_thresholds": lp_high_clean_reentry_thresholds(
+            high_frequency_dissipation, lp_to_physical_tail_lower, viscosity
         ),
+        "physical_tail_dissipation_lower": D_tail_lower,
         "next_theorem_status": HIGH_FREQUENCY_REENTRY_STATUS,
         "resolved_DV_supplier": False,
         "master_semantics": "RECURSE_CRITICAL",
@@ -503,7 +509,7 @@ def theorem_certificate() -> dict[str, object]:
         "viscous_owner": "int rho_nu>=Sigma -> D_V>=(1500 Sigma/nu)^2/c -> generic critical-shell reentry",
         "sgs_owner": "rho_R -> ||R||_(3/2) -> Q^(3/2) -> Y^(2/3), giving exact linear C_Y rho_R",
         "sgs_clean_route": "D_high>=Y/4 OR oldcap>Y/8 OR Xi>=Y/8 OR fresh shell/entropy/cycle",
-        "sgs_high_frequency_owner": "D_high is handed to the hard-tail energy theorem: inherited critical shell OR actual positive HH/resolved-interface regeneration; never resolved D_V",
+        "sgs_high_frequency_owner": "smooth-LP D_high enters the orthogonal hard-tail energy theorem only through a certified D_tail>=c_LP D_high comparison, then routes to inherited critical shell OR actual positive HH/resolved-interface regeneration; never resolved D_V",
         "pressure_owner": "int mu_V>=2850 Sigma_P OR effective SGS weight>=Sigma_P/2",
         "pressure_pair_ratio": f"{ratio.numerator}/{ratio.denominator}<1/3",
         "forbidden_identifications": (

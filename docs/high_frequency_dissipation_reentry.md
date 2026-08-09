@@ -1,54 +1,72 @@
-# High-frequency service dissipation: energy forces inheritance or regeneration
+# High-frequency service dissipation: physical tail energy forces inheritance or regeneration
 
-## The false shortcut
+## Keep the LP observable and the PDE currency distinct
 
-The high-frequency exit in coherent increment service is a normalized enstrophy law, not resolved low-pass dissipation.  On hard dyadic annuli
-
-\[
-M_j=2^jN,\qquad M_j/2<|\xi|\le M_j,\qquad j\ge1,
-\]
-
-set
+The high-frequency exit in coherent increment service is a **standard Littlewood--Paley normalized-enstrophy observable**.  Write it schematically as
 
 \[
-\mu_j=M_j\|P_ju\|_2^2,
-\qquad
-D_>^{LP}=\int\sum_{j\ge1}2^j\mu_j\,d\tau,
-\qquad \tau=N^2t.
+D_{high}=\int\sum_{j\ge1}2^j\mu_j\,d\tau,
+\qquad \mu_j=M_j\|u_j\|_2^2,
+\qquad M_j=2^jN.
 \]
 
-There is **no** direct implication `D_high -> critical shell mass`.  At one arbitrarily high level `j`, choose
+This is not resolved low-pass `D_V`.  It is also not literally the orthogonal hard-tail gradient unless a particular LP partition has been fixed and its comparison constants have been certified.
+
+That distinction matters.  There is no direct implication `D_high -> critical shell mass`: if all high currency sits at level `j` and
 
 \[
-\mu_j=2^{-j}D.
+\mu_j=2^{-j}D,
 \]
 
-Then `2^j mu_j=D` while `mu_j->0`.  Any proof which silently calls `D_high` resolved `D_V`, or extracts a uniform shell mass directly from it, is imposing a false geometry.
+then `2^j mu_j=D` while `mu_j->0` as `j->infinity`.  High normalized enstrophy by itself contains frequency leverage, not a scale-independent mass floor.
 
-## The physical identity that fixes the problem
+The theorem therefore uses the actual PDE currency
+
+\[
+\boxed{
+D_{tail}:=N\int_s^t\|\nabla P_{>N}u\|_2^2\,dt.
+}
+\]
+
+A smooth LP high observable may enter only through an explicit, fixed comparison
+
+\[
+\boxed{
+D_{tail}\ge c_{LP}D_{high},
+}
+\]
+
+where `c_LP>0` belongs to the chosen partition.  No hidden equality is assumed.
+
+For the auxiliary **hard orthogonal annuli**
+
+\[
+M_j/2<|\xi|\le M_j,
+\qquad M_j=2^jN,
+\]
+
+put `mu_j=M_j||P_j u||_2^2` and
+
+\[
+D_>^{hard}=\int\sum_{j\ge1}2^j\mu_j\,d\tau.
+\]
+
+Plancherel gives the exact spectral comparison
+
+\[
+\boxed{
+\frac14D_>^{hard}\le D_{tail}\le D_>^{hard}.
+}
+\]
+
+Thus the hard-annulus supplier has the clean explicit constant `c_LP=1/4`.  A smooth LP implementation supplies its own certified constant.
+
+## The physical identity
 
 Let
 
 \[
 w=P_{>N}u.
-\]
-
-On the `j`th hard annulus,
-
-\[
-(M_j/2)^2\|P_ju\|_2^2
-\le \|\nabla P_ju\|_2^2
-\le M_j^2\|P_ju\|_2^2.
-\]
-
-Since `M_j/N=2^j` and `d tau=N^2dt`, summing gives
-
-\[
-\boxed{
-\frac14D_>^{LP}
-\le N\int\|\nabla w\|_2^2dt
-\le D_>^{LP}.
-}
 \]
 
 The hard Fourier projection is orthogonal and commutes with viscosity and Leray projection.  Its exact energy identity is
@@ -60,38 +78,48 @@ The hard Fourier projection is orthogonal and commutes with viscosity and Leray 
 \int_s^t2\Re\langle w,F_>\rangle dt,
 \]
 
-with
+where
 
 \[
 F_>=-P_{>N}\mathbb P\nabla\cdot(u\otimes u).
 \]
 
-Define actual positive nonlinear work
+Define the actual positive nonlinear tail work
 
 \[
 W_>^+=\int_s^t2[\Re\langle w,F_>\rangle]_+dt.
 \]
 
-Dropping the nonnegative terminal energy gives
+Discarding the nonnegative terminal energy gives
 
 \[
 \boxed{
 N\|w(s)\|_2^2+NW_>^+
-\ge \frac\nu2D_>^{LP}.
+\ge2\nu D_{tail}.
 }
 \]
 
-Thus at least one of two **physical owners** carries
+Therefore at least one of two physical owners carries
 
 \[
-\boxed{\frac\nu4D_>^{LP}}.
+\boxed{
+\nu D_{tail}.
+}
+\]
+
+If the entrance came from a smooth LP high-frequency exit, this is at least
+
+\[
+\boxed{
+\nu c_{LP}D_{high}.
+}
 \]
 
 Exact equality keeps both owners jointly.
 
-## Owner 1: inherited tail energy is a real critical shell
+## Owner 1: inherited tail energy exposes a real critical shell
 
-At the initial slice,
+At the initial slice, using the hard orthogonal annuli,
 
 \[
 N\|w(s)\|_2^2
@@ -101,25 +129,26 @@ N\|w(s)\|_2^2
 \sum_{j\ge1}2^{-j}\mu_j(s).
 \]
 
-The dyadic weights sum to one.  Therefore
+The weights sum to one, so
 
 \[
 \sup_j\mu_j(s)\ge N\|w(s)\|_2^2.
 \]
 
-On the inherited owner branch there is an actual shell with
+On the inherited owner branch there is therefore an actual high shell `M_j>=2N` with
 
 \[
 \boxed{
-M_j\|P_ju(s)\|_2^2\ge\frac\nu4D_>^{LP}.
+M_j\|P_ju(s)\|_2^2\ge\nu D_{tail}
+\ge\nu c_{LP}D_{high}.
 }
 \]
 
-This is precisely the deterministic input of the generic critical-shell theorem.  No causal probability and no packet label is introduced.  The generic theorem retains its observed-history guard and may return a named strain/interface/HH stop, `t=0`, or own-scale service.
+This is exactly the deterministic input of the generic critical-shell theorem.  No causal probability, packet persistence or synthetic material label is introduced.  The generic shell theorem still enforces its observed-history guard and may return strain/interface/HH first stop, `t=0`, or own-scale service.
 
 ## Owner 2: actual nonlinear regeneration work
 
-Write `w=sum_j w_j` with `w_j=P_ju`.  Orthogonality gives the signed work as the sum of shell signed works, hence
+Decompose the hard tail orthogonally as `w=sum_j w_j`, `w_j=P_j u`.  Signed tail work is the sum of signed shell works, hence positivity gives
 
 \[
 W_>^+\le\sum_jW_j^+,
@@ -127,7 +156,7 @@ W_>^+\le\sum_jW_j^+,
 W_j^+=\int2[\Re\langle w_j,F_j\rangle]_+dt.
 \]
 
-Because every high shell has `M_j/N=2^j>=2`,
+Every hard high shell has `M_j/N=2^j>=2`.  Therefore
 
 \[
 \boxed{
@@ -137,24 +166,24 @@ Because every high shell has `M_j/N=2^j>=2`,
 }
 \]
 
-So the regeneration owner supplies an actual positive **own-scale shell-work law** of total mass at least
+On the regeneration owner branch this produces an actual positive **own-scale shell-work law** with total mass at least
 
 \[
-\frac\nu2D_>^{LP}.
+\boxed{2\nu D_{tail}}.
 \]
 
-This remains work, not amplitude.
-
-For each shell choose the resolved field `V=S_(M_j/4)u` and `h=u-V`.  The low-low source is support-excluded:
+For each shell choose the resolved field `V=S_(M_j/4)u` and `h=u-V`.  The low--low source is excluded by support:
 
 \[
 P_j\mathbb P\nabla\cdot(V\otimes V)=0,
 \]
 
-because `V tensor V` lies at frequencies at most `M_j/2` while the hard annulus is strictly above `M_j/2`.  Therefore the exact shell work is the sum of
+because `V tensor V` lies at frequencies at most `M_j/2`, while the hard annulus is strictly above `M_j/2`.
 
-- high-high work from `h tensor h`;
-- mixed resolved/high cross work, equivalently the physical transport/interface/strain owner in the outer-role formulation.
+Thus the signed shell nonlinear work is exactly the sum of
+
+- high--high work from `h tensor h`;
+- mixed resolved/high cross work, i.e. the resolved transport/interface/strain owner in the outer-role formulation.
 
 For signed densities `r=r_HH+r_I`,
 
@@ -162,21 +191,26 @@ For signed densities `r=r_HH+r_I`,
 [r]_+\le[r_{HH}]_++[r_I]_+.
 \]
 
-After summing shell-time atoms, at least one of HH or resolved-interface positive work carries
-
-\[
-\boxed{\frac\nu4D_>^{LP}}.
-\]
-
-This is a physical work statement.  A large interface branch is not made free.  A large HH branch is not automatically declared to satisfy the generated-energy condition `W_HH>=8E_1/15`; it must pass the existing physical energy gate before KL productivity is used.
-
-## Master-facing route
-
-The high-frequency coherent-service exit now reads
+After summing shell-time atoms, at least one of the two physical work owners carries
 
 \[
 \boxed{
-D_{high}
+u D_{tail}}
+\]
+
+and therefore at least `nu c_LP D_high` for an LP-supplied exit.
+
+This is a work statement, not an amplitude statement.  A large interface branch remains physical interface/strain provenance.  A large HH branch is **not** automatically the generated-energy condition `W_HH>=8E_1/15`; its child-energy gate must still be supplied before the current KL productivity theorem is invoked.
+
+## Master-facing route
+
+The coherent-service high-frequency exit is now factored without a unit fiction:
+
+\[
+\boxed{
+D_{high}^{LP}
+\xrightarrow{\;D_{tail}\ge c_{LP}D_{high}\;}
+D_{tail}^{physical}
 \longrightarrow
 \text{inherited critical shell}
 \quad\text{or}\quad
@@ -184,8 +218,8 @@ D_{high}
 }
 \]
 
-No branch is converted to a globally bounded reset.  No high enstrophy is relabeled resolved `D_V`.  No frozen packet is introduced.
+No branch becomes an additive reset.  No high-frequency enstrophy is relabeled resolved `D_V`.  No smooth LP partition is silently identified with a hard orthogonal projector.  No frozen packet is introduced.
 
-The remaining issue is not the unit mismatch of `D_high`; it is continuation of the actual regeneration owner through its own energy/interface first-stop logic, together with the separate low-frequency pressure-reservoir lineage.
+The remaining high-frequency question is continuation of the actual regeneration owner through its own work/energy/interface first-stop logic.  The low-frequency pressure-reservoir lineage is separate.
 
 No 3D Navier--Stokes global-regularity conclusion is asserted.

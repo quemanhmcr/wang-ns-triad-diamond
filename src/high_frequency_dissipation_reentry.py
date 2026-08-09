@@ -26,7 +26,7 @@ def dyadic_high_ratios(count: int) -> np.ndarray:
 
 
 def integrated_high_lp_currency(shell_mass_integrals: Sequence[float]) -> float:
-    """D_>^LP=sum_j 2^j int mu_j d tau, mu_j=M_j||P_j u||_2^2.
+    """D_>^hard=sum_j 2^j int mu_j d tau, mu_j=M_j||P_j u||_2^2.
 
     Here tau=N^2 t and M_j=2^j N.  This is the native high-frequency
     normalized-enstrophy currency used by the coherent increment service route.
@@ -60,10 +60,33 @@ def high_tail_scaled_gradient_bounds(shell_mass_integrals: Sequence[float]) -> t
 
     in scaled time.  After integration,
 
-      D_>^LP/4 <= N int||grad P_>N u||_2^2 dt <= D_>^LP.
+      D_>^hard/4 <= N int||grad P_>N u||_2^2 dt <= D_>^hard.
     """
     D = integrated_high_lp_currency(shell_mass_integrals)
     return D / 4.0, D
+
+
+def physical_tail_dissipation_lower_from_lp(
+    lp_high_currency: float,
+    lp_to_physical_tail_lower: float,
+) -> float:
+    """Certified supplier from a chosen smooth LP high currency to physical tail dissipation.
+
+    The coherent-increment `d_high` comes from a standard smooth LP partition.
+    Its comparison with the orthogonal hard-tail gradient is partition-dependent:
+
+      N int||grad P_>N u||_2^2 dt >= c_LP D_high.
+
+    This function keeps `c_LP` explicit.  For the hard annuli used in this module,
+    the spectral lower is exactly `c_LP=1/4`.  A smooth LP implementation must
+    supply its own certified fixed comparison constant rather than being silently
+    identified with the hard tail.
+    """
+    D = float(lp_high_currency)
+    c = float(lp_to_physical_tail_lower)
+    if D <= 0 or c <= 0 or not math.isfinite(D + c):
+        raise ValueError("positive finite LP currency and comparison lower required")
+    return c * D
 
 
 def direct_high_enstrophy_shell_counterexample(level: int, high_currency: float) -> dict[str, float]:
@@ -85,50 +108,54 @@ def direct_high_enstrophy_shell_counterexample(level: int, high_currency: float)
     }
 
 
-def high_tail_energy_owner_threshold(high_currency: float, viscosity: float) -> float:
-    """Clean half-pigeonhole threshold nu D_high/4.
+def high_tail_energy_owner_threshold(physical_tail_dissipation: float, viscosity: float) -> float:
+    """Clean half-pigeonhole threshold `nu D_tail`.
 
-    Hard-tail energy gives
+    The native physical currency is
 
-      N E_>(s) + N W_>^+ >= 2 nu N int||grad w||^2 dt
-                              >= (nu/2) D_>^LP.
+      D_tail = N int ||grad P_>N u||_2^2 dt.
+
+    Exact hard-tail energy gives
+
+      N E_>(s) + N W_>^+ >= 2 nu D_tail.
 
     Hence inherited scaled tail energy or positive scaled nonlinear tail work is
-    at least nu D_>^LP/4.  Exact ties are retained jointly.
+    at least `nu D_tail`.  Exact ties are retained jointly.
     """
-    D = float(high_currency)
+    D = float(physical_tail_dissipation)
     nu = float(viscosity)
     if D <= 0 or nu <= 0 or not math.isfinite(D + nu):
-        raise ValueError("positive finite high currency and viscosity required")
-    return nu * D / 4.0
+        raise ValueError("positive finite physical tail dissipation and viscosity required")
+    return nu * D
 
 
 def classify_high_tail_energy_owners(
-    high_currency: float,
+    physical_tail_dissipation_lower: float,
     viscosity: float,
     inherited_scaled_tail_energy: float,
     positive_scaled_tail_work: float,
 ) -> dict[str, object]:
     """Classify the two native owners forced by the exact hard-tail energy law.
 
-    Inputs are `N||P_>N u(s)||_2^2` and `N W_>^+`, with
+    The first input is any certified lower bound for the **physical** currency
+    `D_tail=N int||grad P_>N u||_2^2 dt`.  Inputs two and three are
+    `N||P_>N u(s)||_2^2` and `N W_>^+`, with
 
       W_>^+=int 2[Re<P_>N u,-P_>N P div(u tensor u)>]_+ dt.
 
-    The function checks only the exact consequence needed by the theorem.  It
-    does not infer work from a coefficient impulse and it does not call D_high
-    resolved D_V.
+    No smooth LP scalar is identified with the hard tail: an LP supplier must
+    first pass through `physical_tail_dissipation_lower_from_lp`.
     """
-    D = float(high_currency)
+    D = float(physical_tail_dissipation_lower)
     nu = float(viscosity)
     E = float(inherited_scaled_tail_energy)
     W = float(positive_scaled_tail_work)
     if min(D, nu) <= 0 or min(E, W) < 0 or not all(math.isfinite(x) for x in (D, nu, E, W)):
-        raise ValueError("valid positive high-tail data required")
-    required_total = nu * D / 2.0
+        raise ValueError("valid positive physical-tail data required")
+    required_total = 2.0 * nu * D
     tol = 4e-13 * max(1.0, required_total, E + W)
     if E + W + tol < required_total:
-        raise ValueError("data violate the hard-tail energy lower required by the theorem")
+        raise ValueError("data violate the physical hard-tail energy lower required by the theorem")
     threshold = high_tail_energy_owner_threshold(D, nu)
     owners: list[str] = []
     if E + tol >= threshold:
@@ -172,13 +199,25 @@ def inherited_tail_shell_witness(shell_critical_masses: Sequence[float]) -> dict
     }
 
 
-def inherited_branch_clean_shell_mass_lower(high_currency: float, viscosity: float) -> float:
-    """If inherited tail owns the energy gate, some high shell has mu>=nu D/4."""
-    return high_tail_energy_owner_threshold(high_currency, viscosity)
+def inherited_branch_clean_shell_mass_lower(physical_tail_dissipation_lower: float, viscosity: float) -> float:
+    """If inherited tail owns the gate, some high shell has `mu>=nu D_tail`."""
+    return high_tail_energy_owner_threshold(physical_tail_dissipation_lower, viscosity)
+
+
+def lp_inherited_branch_clean_shell_mass_lower(
+    lp_high_currency: float,
+    lp_to_physical_tail_lower: float,
+    viscosity: float,
+) -> float:
+    """Smooth-LP supplier: `mu>=nu c_LP D_high` on the inherited owner branch."""
+    D_tail = physical_tail_dissipation_lower_from_lp(
+        lp_high_currency, lp_to_physical_tail_lower
+    )
+    return inherited_branch_clean_shell_mass_lower(D_tail, viscosity)
 
 
 def inherited_branch_full_survivor_service_lower(
-    high_currency: float,
+    physical_tail_dissipation_lower: float,
     viscosity: float,
     scaled_lifetime: float,
 ) -> float:
@@ -188,7 +227,7 @@ def inherited_branch_full_survivor_service_lower(
     generic critical-shell theorem still enforces its own observed-history guard
     and may instead hit strain/interface/HH or t=0.
     """
-    mu0 = inherited_branch_clean_shell_mass_lower(high_currency, viscosity)
+    mu0 = inherited_branch_clean_shell_mass_lower(physical_tail_dissipation_lower, viscosity)
     return critical_shell_bounded_service_lower(mu0, scaled_lifetime, viscosity)
 
 
@@ -271,13 +310,13 @@ def classify_regeneration_work_owners(
     }
 
 
-def high_tail_clean_reentry_thresholds(high_currency: float, viscosity: float) -> dict[str, float | str]:
-    """Clean constants for the complete high-tail dichotomy."""
-    D = float(high_currency)
+def high_tail_clean_reentry_thresholds(physical_tail_dissipation_lower: float, viscosity: float) -> dict[str, float | str]:
+    """Clean constants from a physical tail-dissipation lower bound."""
+    D = float(physical_tail_dissipation_lower)
     nu = float(viscosity)
     owner = high_tail_energy_owner_threshold(D, nu)
     return {
-        "high_currency": D,
+        "physical_tail_dissipation_lower": D,
         "energy_or_tail_work_owner": owner,
         "inherited_critical_shell_mass": owner,
         "positive_tail_work_scaled": owner,
@@ -287,19 +326,37 @@ def high_tail_clean_reentry_thresholds(high_currency: float, viscosity: float) -
     }
 
 
+def lp_high_clean_reentry_thresholds(
+    lp_high_currency: float,
+    lp_to_physical_tail_lower: float,
+    viscosity: float,
+) -> dict[str, float | str]:
+    """Clean source-facing thresholds with the LP/hard-tail comparison explicit."""
+    D_tail = physical_tail_dissipation_lower_from_lp(
+        lp_high_currency, lp_to_physical_tail_lower
+    )
+    out = high_tail_clean_reentry_thresholds(D_tail, viscosity)
+    return {
+        "lp_high_currency": float(lp_high_currency),
+        "lp_to_physical_tail_lower": float(lp_to_physical_tail_lower),
+        **out,
+    }
+
+
 def theorem_certificate() -> dict[str, object]:
     counter = direct_high_enstrophy_shell_counterexample(40, 1.0)
     if counter["critical_shell_mass"] >= 1e-10:
         raise AssertionError("counterexample did not expose absence of a direct high-enstrophy mass floor")
     return {
         "status": STATUS,
-        "native_currency": "D_>^LP=int sum_(j>=1) 2^j mu_j d tau on hard annuli M_j=2^j N; it is high-frequency normalized enstrophy, not resolved D_V",
-        "spectral_bridge": "D_>^LP/4 <= N int ||grad P_>N u||_2^2 dt <= D_>^LP",
-        "energy_gate": "N||P_>N u(s)||_2^2 + N W_>^+ >= (nu/2)D_>^LP, so inherited tail energy or actual positive nonlinear tail work is >=nu D_>^LP/4",
-        "inherited_branch": "N||P_>N u||^2=sum 2^-j mu_j with sum 2^-j=1; therefore some M_j>=2N has mu_j>=nu D_>^LP/4 and enters the existing generic critical-shell theorem",
+        "native_currency": "D_tail=N int||grad P_>N u||_2^2 dt is the physical orthogonal-tail dissipation currency; it is neither smooth-LP d_high nor resolved low-pass D_V",
+        "lp_supplier": "a smooth LP d_high may enter only through an explicit certified comparison D_tail>=c_LP D_high; for hard annuli M_j/2<|xi|<=M_j the exact lower is c_LP=1/4",
+        "spectral_bridge": "for hard annular D_>^hard=sum 2^j int mu_j d tau, D_>^hard/4 <= D_tail <= D_>^hard",
+        "energy_gate": "N||P_>N u(s)||_2^2 + N W_>^+ >= 2 nu D_tail, so inherited tail energy or actual positive nonlinear tail work is >=nu D_tail",
+        "inherited_branch": "N||P_>N u||^2=sum 2^-j mu_j with sum 2^-j=1; therefore some M_j>=2N has mu_j>=nu D_tail (or >=nu c_LP D_high for an LP supplier) and enters the generic critical-shell theorem",
         "regeneration_branch": "positive tail work disintegrates into hard-shell positive work; own-scale shell work is at least twice N W_>^+; low-low is support-excluded at every shell, so positive shell work is covered by HH plus resolved-cross/interface positive work",
         "no_false_productivity": "the HH regeneration owner is actual positive work but is not automatically the generated-energy branch W_HH>=8E1/15; its own physical energy gate is still required before KL productivity",
-        "anti_relabel": "D_high alone has no critical-shell floor: at level j choose mu_j=2^-j D_high; also no high-frequency owner is renamed resolved low-pass D_V",
+        "anti_relabel": "D_high alone has no critical-shell floor: at level j choose mu_j=2^-j D_high; smooth LP d_high is not identified with the hard tail without c_LP; no high-frequency owner is renamed resolved low-pass D_V",
         "master_rule": "both inherited shell and physical regeneration/interface are recursive scale-sensitive owners; no additive reset is created",
     }
 
@@ -343,8 +400,11 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> HighFrequencyReentryS
         q = float(rng.uniform(0.0, 1.0))
         E = q * total
         W = (1.0 - q) * total
-        gate = classify_high_tail_energy_owners(D, nu, E, W)
+        gate = classify_high_tail_energy_owners(G, nu, E, W)
         threshold = float(gate["owner_threshold"])
+        hard_supplier = physical_tail_dissipation_lower_from_lp(D, 0.25)
+        if hard_supplier > G + 3e-12 * max(1.0, D):
+            raise AssertionError("hard-annulus LP supplier exceeded physical tail dissipation")
         me = min(me, max(E, W) - threshold)
         max_e = max(max_e, len(tuple(gate["joint_owners"])))
         if max(E, W) + 3e-12 * max(1.0, threshold) < threshold:
@@ -410,29 +470,31 @@ def main() -> None:
 
 Status: **{cert['status']}**.
 
-The high-frequency branch of coherent increment service is kept in its native units.  On hard dyadic annuli
+The physical theorem is formulated first in the PDE's own currency
 
-`M_j=2^j N`, `M_j/2<|xi|<=M_j`, `j>=1`,
+`D_tail=N int ||grad P_>N u||_2^2 dt`.
 
-write `mu_j=M_j||P_j u||_2^2` and
+This orthogonal hard-tail dissipation is **not** resolved low-pass `D_V`, and it is not silently identified with the smooth LP `d_high` used by coherent increment service.  A chosen smooth LP partition supplies the theorem only through a certified fixed comparison
 
-`D_>^LP=int sum_j 2^j mu_j d tau`, `tau=N^2 t`.
+`D_tail >= c_LP D_high`.
 
-This is **not** resolved low-pass `D_V`.  Indeed `D_high` alone cannot force a critical shell: placing all currency at level `j` with `mu_j=2^-j D_high` keeps `2^j mu_j=D_high` while `mu_j->0`.
+For the hard annuli `M_j=2^jN`, `M_j/2<|xi|<=M_j`, the exact spectral comparison is `c_LP=1/4`.  Writing `mu_j=M_j||P_j u||_2^2`, the hard annular currency is `D_>^hard=int sum_j2^j mu_j d tau`.
 
-The missing physics is viscosity plus the exact hard-tail energy law.  For `w=P_>N u`, hard-annulus support gives
+Indeed `D_high` alone cannot force a critical shell: placing all currency at level `j` with `mu_j=2^-j D_high` keeps `2^j mu_j=D_high` while `mu_j->0`.
 
-`D_>^LP/4 <= N int ||grad w||_2^2 dt <= D_>^LP`.
+The hard-annulus comparison gives
 
-With actual positive nonlinear tail work
+`D_>^hard/4 <= D_tail <= D_>^hard`.
+
+The missing physics is then viscosity plus the exact hard-tail energy law.  With `w=P_>N u` and actual positive nonlinear tail work
 
 `W_>^+=int 2[Re<w,-P_>N P div(u tensor u)>]_+ dt`,
 
 the Navier--Stokes energy identity gives
 
-`N||w(s)||_2^2 + N W_>^+ >= 2 nu N int||grad w||_2^2 dt >= (nu/2)D_>^LP`.
+`N||w(s)||_2^2 + N W_>^+ >= 2 nu D_tail`.
 
-Therefore at least one native owner carries `nu D_>^LP/4` (exact ties remain joint):
+Therefore at least one native owner carries `nu D_tail`.  With an LP supplier this is at least `nu c_LP D_high`; for the hard-annulus lower it is `nu D_>^hard/4` (exact ties remain joint):
 
 1. **Inherited tail energy.**  Since
 
@@ -440,7 +502,9 @@ Therefore at least one native owner carries `nu D_>^LP/4` (exact ties remain joi
 
    and `sum_j2^-j=1`, some actual high shell `M_j>=2N` obeys
 
-   `M_j||P_j u(s)||_2^2 >= nu D_>^LP/4`.
+   `M_j||P_j u(s)||_2^2 >= nu D_tail`,
+
+   hence at least `nu c_LP D_high` for an LP supplier.
 
    This is a genuine critical-shell seed and enters the existing generic shell first-stop/service theorem.  That theorem's observed-history guard is unchanged: the present theorem does not manufacture a full natural survivor.
 
@@ -452,7 +516,7 @@ Therefore at least one native owner carries `nu D_>^LP/4` (exact ties remain joi
 
    `W_shell^+ <= W_HH^+ + W_interface^+`.
 
-   On the clean regeneration branch the aggregate own-scale shell work is at least `nu D_>^LP/2`, so HH or resolved-interface positive work carries at least `nu D_>^LP/4`.
+   On the clean regeneration branch the aggregate own-scale shell work is at least `2 nu D_tail`, so HH or resolved-interface positive work carries at least `nu D_tail` (at least `nu c_LP D_high` for the LP supplier).
 
 The last HH statement is **not** the generated-energy gate.  Actual positive HH work still must pass its own energy comparison before the physical KL productivity theorem may be invoked.  Likewise interface work remains interface/strain provenance rather than being declared free.
 
