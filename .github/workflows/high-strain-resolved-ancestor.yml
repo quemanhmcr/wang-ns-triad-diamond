@@ -1,0 +1,34 @@
+name: High strain resolved ancestor
+on:
+  push:
+    paths:
+      - 'src/high_strain_resolved_ancestor.py'
+      - 'tests/test_high_strain_resolved_ancestor.py'
+      - 'docs/high_strain_resolved_ancestor.md'
+      - '.github/workflows/high-strain-resolved-ancestor.yml'
+      - 'src/high_strain_dissipation_collision.py'
+      - 'src/ancestor_reservoir_sync.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12', cache: pip}
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor
+      - run: python -m src.high_strain_dissipation_collision --samples 50000 --outdir results-high-strain-dissipation-collision
+      - run: python -m src.ancestor_reservoir_sync --samples 50000 --outdir results-ancestor-reservoir-sync
+      - run: cat results-high-strain-resolved-ancestor/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: high-strain-resolved-ancestor-results
+          path: |
+            results-high-strain-resolved-ancestor/
+            results-high-strain-dissipation-collision/
+            results-ancestor-reservoir-sync/
