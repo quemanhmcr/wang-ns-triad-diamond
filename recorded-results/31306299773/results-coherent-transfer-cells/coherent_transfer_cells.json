@@ -1,0 +1,18 @@
+{
+  "certificate": {
+    "polarized_moyal": "int V_g f conjugate(V_g F) dmu = <f,F> for ||g||_2=1",
+    "cell_work": "W_C=2 Re int_C V_g f conjugate(V_g F), sum_C W_C=2 Re<f,F>",
+    "material_affine_cells": "zeta=(L^-1 X/2,L^T k) invariant under L->ML,X->MX,k->M^-T k",
+    "switch_cost": "|E(S_new)-E(S_old)| <= E(S_new symmetric_difference S_old)",
+    "finite_time_no_escape": "P_plus <= E_final + P_minus + R_switch; hence one branch >=P_plus/3",
+    "status": "EXACT_BY_POLARIZED_MOYAL_AND_POSITIVE_CELL_ENERGY"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_cross_moyal_relative_residual": 3.4255199857768137e-16,
+    "worst_cell_work_relative_residual": 6.208732556570825e-16,
+    "worst_affine_phase_residual": 9.414074358487843e-15,
+    "worst_switch_ratio": 0.9937635869014424,
+    "minimum_no_escape_margin": 0.007264841578420778
+  }
+}
