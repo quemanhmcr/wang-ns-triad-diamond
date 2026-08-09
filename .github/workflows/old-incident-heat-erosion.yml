@@ -1,0 +1,44 @@
+name: Old incident heat erosion
+
+on:
+  push:
+    paths:
+      - 'src/old_incident_heat_erosion.py'
+      - 'tests/test_old_incident_heat_erosion.py'
+      - 'docs/old_incident_heat_erosion.md'
+      - '.github/workflows/old-incident-heat-erosion.yml'
+      - 'src/first_hit_heat_reservoir_erosion.py'
+      - 'src/high_strain_heat_increment_service.py'
+      - 'src/heat_edge_material_ownership.py'
+      - 'src/high_strain_resolved_ancestor.py'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.old_incident_heat_erosion --samples 50000 --outdir results-old-incident-heat-erosion
+      - run: python -m src.first_hit_heat_reservoir_erosion --samples 50000 --outdir results-first-hit-heat-reservoir-erosion
+      - run: python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service
+      - run: python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership
+      - run: cat results-old-incident-heat-erosion/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: old-incident-heat-erosion-results
+          path: |
+            results-old-incident-heat-erosion/
+            results-first-hit-heat-reservoir-erosion/
+            results-high-strain-heat-increment-service/
+            results-heat-edge-material-ownership/
