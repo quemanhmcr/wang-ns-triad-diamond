@@ -4,6 +4,7 @@ import argparse
 import json
 import math
 from dataclasses import asdict, dataclass
+from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
@@ -113,9 +114,9 @@ def arb_scale_renewal_certificate() -> dict[str, str]:
     lower = (arb(11) / 20) * (-arb(1) / 15).exp() / (arb(5) / 8)
     if not (lower > arb(1) / 2):
         raise AssertionError(f"renewed parent low-low gap failed: {lower}")
-    tmin = 1 / (arb(5) / 8) ** 2
-    tmax = 1 / (arb(3) / 5) ** 2
-    if not (tmin == arb(64) / 25 and tmax == arb(25) / 9):
+    tmin = Fraction(1, 1) / Fraction(5, 8) ** 2
+    tmax = Fraction(1, 1) / Fraction(3, 5) ** 2
+    if tmin != Fraction(64, 25) or tmax != Fraction(25, 9):
         raise AssertionError("parent lifetime window changed")
     return {
         "renewed_relative_lower": str(lower),
