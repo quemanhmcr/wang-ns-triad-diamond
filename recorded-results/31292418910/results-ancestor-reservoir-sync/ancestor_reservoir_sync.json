@@ -1,0 +1,22 @@
+{
+  "certificate": {
+    "signed_good_progress_ball": "[1.6165840070599411867940731364794505050049713760 +/- 1.47e-47]",
+    "clean_generation_progress": ">8/5",
+    "low_strain_growth_ball": "[1.0338951135135741156450305382746413717159924617 +/- 5.39e-48]",
+    "clean_reservoir_growth": "<21/20",
+    "critical_mass_service_ratio": "441/1024",
+    "critical_mass_service_clean": "<1/2",
+    "physical_energy_service_ratio": "9261/20480",
+    "physical_energy_service_clean": "<1/2",
+    "total_one_reservoir_budget": "<2 times its generation-0 energy-capacity coefficient",
+    "status": "CERTIFIED"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_kelvin_covector_residual": 1.5982970556924734e-15,
+    "minimum_frequency_growth_margin": 8.730714622373625e-07,
+    "maximum_critical_service_ratio": 0.4254743565264464,
+    "maximum_energy_service_ratio": 0.44463127018088594,
+    "minimum_amortized_margin": 0.0
+  }
+}

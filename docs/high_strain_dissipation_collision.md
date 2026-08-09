@@ -123,8 +123,10 @@ The physical multi-currency telescope is exact **only for resources whose event 
 
 Thus:
 
-- `high_strain_lifetime` now routes to a positive critical-dissipation currency;
+- `high_strain_lifetime` routes to positive critical resolved dissipation;
 - it cannot be declared a finite-count additive reset merely from the energy inequality;
-- repeated high-strain or fresh critical events must still be controlled by causal branching/reuse, entropy/Hodge, or a weighted scale-sensitive master ledger.
+- the companion resolved-ancestor theorem disintegrates at least half of the actual `D_V` law onto lower-frequency shell-time atoms with fixed critical mass;
+- the companion heat-increment theorem converts the same law, up to the support factor `e^(-1/32)`, into positive coherent spatial increment edges while retaining at least `e^(-1/32)/2` of the critical-ancestor mark;
+- material ownership and renewed-slab attachment of those dissipation-seeded edges remain a continuum problem.
 
-This correction prevents a false closure by global energy/dissipation counting.
+So the high-strain event is no longer an anonymous scalar recursion label, but it is still **not** a globally finite reset.  This prevents both false global counting and the equally false step of naming a shell/coherent edge as a selected transfer parent before the PDE supplies material renewal.

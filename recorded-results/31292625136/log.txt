@@ -1,0 +1,420 @@
+certify	Set up job	﻿2026-08-09T03:32:08.8373895Z Current runner version: '2.336.0'
+certify	Set up job	2026-08-09T03:32:08.8392294Z ##[group]Runner Image Provisioner
+certify	Set up job	2026-08-09T03:32:08.8393116Z Hosted Compute Agent
+certify	Set up job	2026-08-09T03:32:08.8393626Z Version: 20260707.563
+certify	Set up job	2026-08-09T03:32:08.8394122Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+certify	Set up job	2026-08-09T03:32:08.8394729Z Build Date: 2026-07-07T19:33:50Z
+certify	Set up job	2026-08-09T03:32:08.8395269Z Worker ID: {00e9e669-c855-4620-86ab-7bf10adab02d}
+certify	Set up job	2026-08-09T03:32:08.8395871Z Azure Region: centralus
+certify	Set up job	2026-08-09T03:32:08.8396381Z ##[endgroup]
+certify	Set up job	2026-08-09T03:32:08.8397467Z ##[group]Operating System
+certify	Set up job	2026-08-09T03:32:08.8397969Z Ubuntu
+certify	Set up job	2026-08-09T03:32:08.8398400Z 24.04.4
+certify	Set up job	2026-08-09T03:32:08.8398812Z LTS
+certify	Set up job	2026-08-09T03:32:08.8399241Z ##[endgroup]
+certify	Set up job	2026-08-09T03:32:08.8399701Z ##[group]Runner Image
+certify	Set up job	2026-08-09T03:32:08.8400173Z Image: ubuntu-24.04
+certify	Set up job	2026-08-09T03:32:08.8400653Z Version: 20260720.247.2
+certify	Set up job	2026-08-09T03:32:08.8401608Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+certify	Set up job	2026-08-09T03:32:08.8403024Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+certify	Set up job	2026-08-09T03:32:08.8403777Z ##[endgroup]
+certify	Set up job	2026-08-09T03:32:08.8404691Z ##[group]GITHUB_TOKEN Permissions
+certify	Set up job	2026-08-09T03:32:08.8406368Z Contents: read
+certify	Set up job	2026-08-09T03:32:08.8406889Z Metadata: read
+certify	Set up job	2026-08-09T03:32:08.8407332Z ##[endgroup]
+certify	Set up job	2026-08-09T03:32:08.8409175Z Secret source: Actions
+certify	Set up job	2026-08-09T03:32:08.8410029Z Prepare workflow directory
+certify	Set up job	2026-08-09T03:32:08.8680006Z Prepare all required actions
+certify	Set up job	2026-08-09T03:32:08.8719668Z Getting action download info
+certify	Set up job	2026-08-09T03:32:09.0895586Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+certify	Set up job	2026-08-09T03:32:09.5684156Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+certify	Set up job	2026-08-09T03:32:09.6325548Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+certify	Set up job	2026-08-09T03:32:09.7920403Z Complete job name: certify
+certify	Run actions/checkout@v4	﻿2026-08-09T03:32:09.8479950Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8487181Z ##[group]Run actions/checkout@v4
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8487834Z with:
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8488284Z   repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8491632Z   token: ***
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8492087Z   ssh-strict: true
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8492520Z   ssh-user: git
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8492952Z   persist-credentials: true
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8493405Z   clean: true
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8493836Z   sparse-checkout-cone-mode: true
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8494335Z   fetch-depth: 1
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8494729Z   fetch-tags: false
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8495168Z   show-progress: true
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8495584Z   lfs: false
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8496002Z   submodules: false
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8496521Z   set-safe-directory: true
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8496961Z   allow-unsafe-pr-checkout: false
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.8497593Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9340702Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9342650Z ##[group]Getting Git version info
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9343619Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9345169Z [command]/usr/bin/git version
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9380265Z git version 2.54.0
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9402371Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9407442Z Temporarily overriding HOME='/home/runner/work/_temp/611cbe06-2afc-47c6-b95e-b0ee673bbf6a' before making global git config changes
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9409157Z Adding repository directory to the temporary git global config as a safe directory
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9412582Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9439067Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9441850Z ##[group]Initializing the repository
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9446695Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9517766Z hint: Using 'master' as the name for the initial branch. This default branch name
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9518962Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9520183Z hint: to use in all of your new repositories, which will suppress this warning,
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9521337Z hint: call:
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9521914Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9522547Z hint: 	git config --global init.defaultBranch <name>
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9523205Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9523732Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9524511Z hint: 'development'. The just-created branch can be renamed via this command:
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9525438Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9525880Z hint: 	git branch -m <name>
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9526321Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9526880Z hint: Disable this message with "git config set advice.defaultBranchName false"
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9527875Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9530162Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9553849Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9554866Z ##[group]Disabling automatic garbage collection
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9556827Z [command]/usr/bin/git config --local gc.auto 0
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9580831Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9582191Z ##[group]Setting up auth
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9586660Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Run actions/checkout@v4	2026-08-09T03:32:09.9611309Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.0146274Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.0170340Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.0324779Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.0349974Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.0534666Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.0560110Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.0561114Z ##[group]Fetching the repository
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.0568228Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +a08471be94c1f271c42ed06ef172e0b128cddc89:refs/remotes/origin/research/high-strain-resolved-ancestor
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8070479Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8093299Z  * [new ref]         a08471be94c1f271c42ed06ef172e0b128cddc89 -> origin/research/high-strain-resolved-ancestor
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8097557Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8098574Z ##[group]Determining the checkout info
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8099397Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8100097Z [command]/usr/bin/git sparse-checkout disable
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8138932Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8167216Z ##[group]Checking out the ref
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8169886Z [command]/usr/bin/git checkout --progress --force -B research/high-strain-resolved-ancestor refs/remotes/origin/research/high-strain-resolved-ancestor
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8616527Z Switched to a new branch 'research/high-strain-resolved-ancestor'
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8619650Z branch 'research/high-strain-resolved-ancestor' set up to track 'origin/research/high-strain-resolved-ancestor'.
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8623556Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8649808Z [command]/usr/bin/git log -1 --format=%H
+certify	Run actions/checkout@v4	2026-08-09T03:32:10.8668212Z a08471be94c1f271c42ed06ef172e0b128cddc89
+certify	Run actions/setup-python@v5	﻿2026-08-09T03:32:10.8921605Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/setup-python@v5	2026-08-09T03:32:10.8924884Z ##[group]Run actions/setup-python@v5
+certify	Run actions/setup-python@v5	2026-08-09T03:32:10.8925514Z with:
+certify	Run actions/setup-python@v5	2026-08-09T03:32:10.8925998Z   python-version: 3.12
+certify	Run actions/setup-python@v5	2026-08-09T03:32:10.8926491Z   cache: pip
+certify	Run actions/setup-python@v5	2026-08-09T03:32:10.8926911Z   check-latest: false
+certify	Run actions/setup-python@v5	2026-08-09T03:32:10.8931323Z   token: ***
+certify	Run actions/setup-python@v5	2026-08-09T03:32:10.8931826Z   update-environment: true
+certify	Run actions/setup-python@v5	2026-08-09T03:32:10.8932356Z   allow-prereleases: false
+certify	Run actions/setup-python@v5	2026-08-09T03:32:10.8932899Z   freethreaded: false
+certify	Run actions/setup-python@v5	2026-08-09T03:32:10.8933365Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-09T03:32:11.0043015Z ##[group]Installed versions
+certify	Run actions/setup-python@v5	2026-08-09T03:32:11.0617803Z (node:2020) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/setup-python@v5	2026-08-09T03:32:11.0620252Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/setup-python@v5	2026-08-09T03:32:11.0621913Z Successfully set up CPython (3.12.13)
+certify	Run actions/setup-python@v5	2026-08-09T03:32:11.0623640Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-09T03:32:11.1840507Z [command]/opt/hostedtoolcache/Python/3.12.13/x64/bin/pip cache dir
+certify	Run actions/setup-python@v5	2026-08-09T03:32:13.1817622Z /home/runner/.cache/pip
+certify	Run actions/setup-python@v5	2026-08-09T03:32:13.3287383Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b
+certify	Run actions/setup-python@v5	2026-08-09T03:32:13.3383213Z (node:2020) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/setup-python@v5	2026-08-09T03:32:14.1986789Z Received 55859847 of 55859847 (100.0%), 72.7 MBs/sec
+certify	Run actions/setup-python@v5	2026-08-09T03:32:14.1987504Z Cache Size: ~53 MB (55859847 B)
+certify	Run actions/setup-python@v5	2026-08-09T03:32:14.2095674Z [command]/usr/bin/tar -xf /home/runner/work/_temp/c2f0ea4f-7abd-4c4a-8cb4-6c3696ad17b1/cache.tzst -P -C /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond --use-compress-program unzstd
+certify	Run actions/setup-python@v5	2026-08-09T03:32:14.2648741Z Cache restored successfully
+certify	Run actions/setup-python@v5	2026-08-09T03:32:14.2672651Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b
+certify	Run pip install -r requirements.txt python-flint	﻿2026-08-09T03:32:14.2794405Z ##[group]Run pip install -r requirements.txt python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:14.2794928Z ^[[36;1mpip install -r requirements.txt python-flint^[[0m
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:14.2826167Z shell: /usr/bin/bash -e {0}
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:14.2826627Z env:
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:14.2826978Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:14.2827430Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:14.2827897Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:14.2828317Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:14.2828727Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:14.2829124Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:14.2829470Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:15.7477819Z Collecting python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:15.8437254Z   Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:15.9986238Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:15.9996596Z   Using cached numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.0942248Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.0949794Z   Using cached scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.1324544Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.1334284Z   Using cached pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.1550862Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.1560574Z   Using cached iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.1775369Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.1784313Z   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.1980242Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.1989633Z   Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.2232707Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.2242036Z   Using cached pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.2270631Z Using cached numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.2334611Z Using cached scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.3 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.2463570Z Using cached pytest-8.4.1-py3-none-any.whl (365 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.2474390Z Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.2647216Z Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.1 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.5084829Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 48.5 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.5093688Z Using cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.5102628Z Using cached packaging-26.3-py3-none-any.whl (129 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.5111795Z Using cached pygments-2.20.0-py3-none-any.whl (1.2 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:16.6780813Z Installing collected packages: python-flint, pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:21.9013447Z
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:21.9026451Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 python-flint-0.9.0 scipy-1.15.3
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:21.9033398Z
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:21.9034520Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:32:21.9035080Z [notice] To update, run: pip install --upgrade pip
+certify	Run pytest -q	﻿2026-08-09T03:32:21.9625354Z ##[group]Run pytest -q
+certify	Run pytest -q	2026-08-09T03:32:21.9625687Z ^[[36;1mpytest -q^[[0m
+certify	Run pytest -q	2026-08-09T03:32:21.9652675Z shell: /usr/bin/bash -e {0}
+certify	Run pytest -q	2026-08-09T03:32:21.9652990Z env:
+certify	Run pytest -q	2026-08-09T03:32:21.9653321Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:32:21.9653807Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run pytest -q	2026-08-09T03:32:21.9654247Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:32:21.9654678Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:32:21.9655056Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:32:21.9655449Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run pytest -q	2026-08-09T03:32:21.9655812Z ##[endgroup]
+certify	Run pytest -q	2026-08-09T03:32:25.5923738Z ........................................................................ [ 14%]
+certify	Run pytest -q	2026-08-09T03:32:25.6831493Z ........................................................................ [ 28%]
+certify	Run pytest -q	2026-08-09T03:32:25.9095098Z ........................................................................ [ 43%]
+certify	Run pytest -q	2026-08-09T03:32:25.9585475Z ........................................................................ [ 57%]
+certify	Run pytest -q	2026-08-09T03:32:26.1192451Z ........................................................................ [ 71%]
+certify	Run pytest -q	2026-08-09T03:32:26.1929508Z ........................................................................ [ 86%]
+certify	Run pytest -q	2026-08-09T03:32:26.4867412Z .....................................................................    [100%]
+certify	Run pytest -q	2026-08-09T03:32:26.4869151Z 501 passed in 4.06s
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	﻿2026-08-09T03:32:26.5767943Z ##[group]Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:26.5768806Z ^[[36;1mpython -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service^[[0m
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:26.5794328Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:26.5794653Z env:
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:26.5794978Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:26.5795417Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:26.5795854Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:26.5796291Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:26.5796672Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:26.5797072Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:26.5797432Z ##[endgroup]
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9476198Z # High strain becomes heat-increment coherent service
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9477051Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9477605Z Status: **EXACT_HIGH_STRAIN_TO_HEAT_INCREMENT_COHERENT_SERVICE__CRITICAL_RESOLVED_ANCESTOR_FRACTION_RETAINED__OLD_POOL_ROUTING_REMAINS**.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9478334Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9479080Z Use no arbitrary spatial packet.  Let `H_N` be the three-dimensional Navier--Stokes heat kernel at the block's intrinsic parabolic time `theta_N=1/(2N^2)`.  Equivalently `r` is centered Gaussian with covariance `N^-2 I`, so
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9479820Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9480003Z `E exp(-i xi.r)=exp(-|xi|^2/(2N^2))`.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9480224Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9480533Z Plancherel gives the exact heat-defect identity
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9480845Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9481258Z `E_H ||delta_r V||_2^2 = int 2(1-exp(-|xi|^2/(2N^2))) |Vhat(xi)|^2 dxi`.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9481666Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9482177Z Because the strict transporter has `supp Vhat subset B_(N/4)`, put `x=|xi|^2/(2N^2)<=1/32`.  The elementary integral identity `1-e^(-x)=int_0^x e^(-s)ds` gives
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9482912Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9483116Z `e^(-1/32) x <= 1-e^(-x) <= x`.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9483322Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9483531Z Hence pointwise on the full resolved support
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9483850Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9484083Z `e^(-1/32)||grad V||_2^2 <= N^2 E_H||delta_r V||_2^2 <= ||grad V||_2^2`.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9484455Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9484730Z After integrating a child lifetime, the positive heat-increment service
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9485305Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9485478Z `S_heat=N^3 int dt E_H||delta_r V||_2^2`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9485767Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9485954Z satisfies
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9486108Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9486294Z `e^(-1/32) D_V <= S_heat <= D_V`.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9486574Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9487683Z Thus the existing high-strain gate `D_V>=32 pi^2/(75c)` immediately forces a fixed positive **physical-space increment service**.  The Gaussian is not a replacement causal law: it is the heat semigroup already intrinsic to the viscous PDE, used only to expose where resolved gradient activity lives.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9489042Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9490209Z The preceding resolved-ancestor theorem says at least half the actual `D_V` law lies on shell-time atoms with critical mass `mu_j>=32pi^2/(75c^2)`.  Since the heat multiplier is pointwise between `e^(-1/32)` and `1` times the gradient multiplier, the same good shell-time set carries at least
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9491534Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9491708Z `(1/2)e^(-1/32) = 0.484616617238`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9492016Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9492676Z of the **entire heat-increment service law**.  The frequency ancestor and spatial service are therefore simultaneous physical marks, not two unrelated pigeonholes.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9493414Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9494268Z For each good shell, each heat displacement `r`, and any normalized affine coherent window, Moyal gives an exact positive phase-space disintegration of `||delta_r P_jV||_2^2`.  Translation covariance
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9495472Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9495782Z `V_g(delta_r f)(X,k)=e^(-ik.r)V_gf(X-r,k)-V_gf(X,k)`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9496125Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9496926Z shows that every cell atom is a real coherent edge between neighborhoods separated by the actual Brownian/heat displacement.  No coherent cell is selected by argmax and no global shell mass is divided among a guessed packet count.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9497902Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9498213Z Stress: `50000` spectral heat-defect/ancestor states and representative coherent identities
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9498984Z - minimum spectral lower margin: `2.167e-08`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9499467Z - minimum spectral upper margin: `2.977e-12`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9500055Z - minimum retained-fraction margin above `e^(-1/32)/2`: `6.353e-06`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9500621Z - worst relative discrete Moyal residual: `6.278e-16`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9501370Z - worst relative coherent increment-covariance residual: `8.016e-15`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9501817Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9504102Z This supplies the missing **spatial/coherent entrance** for the high-strain resolved-ancestor law.  What remains is material routing of these positive coherent edges: old--old service must enter the existing reservoir half-life, old--new edges must be physical relink/interface, and genuinely new--new edges must create coherent ancestry/service.  That routing must be proved for this dissipation-seeded measure rather than assumed from the SGS source theorem.  `D_V` remains an `O(1/N)` physical cost, not an additive reset.  No global-regularity claim is made.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:32:30.9506485Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	﻿2026-08-09T03:32:30.9821855Z ##[group]Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:30.9822589Z ^[[36;1mpython -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor^[[0m
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:30.9850473Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:30.9850830Z env:
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:30.9851409Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:30.9851896Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:30.9852371Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:30.9852744Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:30.9853113Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:30.9853501Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:30.9853841Z ##[endgroup]
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2946659Z # High strain is a dissipation-weighted resolved-ancestor event
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2947507Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2948008Z Status: **EXACT_HIGH_STRAIN_DISSIPATION_WEIGHTED_RESOLVED_ANCESTOR__HALF_DV_ON_CRITICAL_LOW_SHELLS__MATERIAL_RENEWAL_REMAINS**.
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2948740Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2949576Z The normalized dissipation `D_V=N int ||grad V||_2^2 dt` should not be treated as an abstract reset currency.  The strict transporter itself reveals where that dissipation lives.  Decompose its Fourier ball into deterministic dyadic annuli
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2950358Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2950539Z `A_j={M_j/2<|xi|<=M_j},  M_j=(N/4)2^(-j)`.
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2950796Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2951745Z They satisfy `sum_j M_j=N/2`.  Put `E_j(t)=||P_j u(t)||_2^2` and the actual critical shell mass `mu_j(t)=M_j E_j(t)`.  Since the standard low-pass multiplier is an L2 contraction and `|xi|<=M_j` on `A_j`,
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2952281Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2952427Z `N ||grad P_j V||_2^2 <= N M_j mu_j(t)`.
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2952600Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2952950Z On a natural lifetime `T=cN^-2`, the part of the **actual resolved dissipation measure** lying where `mu_j(t)<mu_*` is therefore at most
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2953381Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2953564Z `N T mu_* sum_j M_j = c mu_*/2`.
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2953754Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2954082Z The high-strain collision gives
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2954286Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2954420Z `K>=1/30 => D_V>=D_* = 32 pi^2/(75 c)`.
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2954630Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2954892Z Choose `mu_*=D_*/c=32 pi^2/(75 c^2)`.  Then the low-mass part is at most `D_*/2`, so for every `D_V>=D_*`,
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2955175Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2955336Z `D_V({mu_j>=mu_*}) >= D_V-D_*/2 >= D_V/2`.
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2955564Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2956334Z Thus at least **half of the actual normalized dissipation law** already carries a simultaneous low-frequency ancestor with fixed critical mass.  No shell is selected by argmax, and there is no logarithmic loss from the infinitely many low shells.  The law is the physical density `N|xi|^2|Vhat|^2 dt dxi` disintegrated by dyadic frequency.
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2957185Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2957950Z Every such ancestor has `M_j<=N/4`; its parabolic natural lifetime is therefore at least `16` child lifetimes.  This is a much stronger scale separation than the signed-good HH parent ratio, but it is a different physical object: a resolved reservoir/ancestor state, not yet a transfer-generated hard parent.
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2958692Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2958881Z Stress: `50000` random shell/time dissipation laws
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2959251Z - minimum low-mass dissipation upper margin: `2.542e-01`
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2959590Z - minimum half-law margin: `2.721e-01`
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2960055Z - minimum sampled clean critical-mass threshold: `7.714e-02`
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2960469Z - minimum ancestor/child lifetime ratio: `16.000`
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2960821Z - maximum retained dissipation fraction: `1.000000`
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2961119Z
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2962523Z This does **not** promote `D_V` to a globally finite reset: its physical viscous cost is still `nu D_V/N` and remains summable on geometric high-frequency chains.  What changes is its recursive meaning.  A high-strain stop is now accompanied, on at least half of its own physical dissipation law, by a critical resolved-shell ancestor at a genuinely lower scale.  The remaining bridge is to attach these dissipation-seeded shell ancestors to the existing material/coherent reservoir/reuse or renewed-slab machinery without inventing a packet selector.  No global-regularity claim is made.
+certify	Run python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor	2026-08-09T03:32:36.2964067Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	﻿2026-08-09T03:32:36.3118781Z ##[group]Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:36.3119484Z ^[[36;1mpython -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service^[[0m
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:36.3144692Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:36.3145042Z env:
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:36.3145343Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:36.3145740Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:36.3146225Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:36.3146599Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:36.3147014Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:36.3147384Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:36.3147694Z ##[endgroup]
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8784823Z # Coherent increment service: SGS charge becomes phase-space edges
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8786033Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8786425Z Status: **EXACT_MOYAL_CELL_ROUTING_GIVEN_STANDARD_LP_BERNSTEIN**.
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8786988Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8787445Z Let `Q` be the cubic increment charge and `g1=||G||_1`.  Some filter displacement `r` satisfies
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8788237Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8788436Z `||delta_r u||_3^2 >= (Q/g1)^(2/3)`.
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8788814Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8789147Z With `Y=(Q/g1)^(2/3)/(C_LP C_B)^2`, standard LP/Bernstein gives
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8789604Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8789958Z `S_low(r)=sum_(j<=0) M_j ||delta_r u_j||_2^2 >= Y-2 d_high`.
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8790441Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8791436Z For any normalized coherent window and phase-space partition,
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8791989Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8792186Z `s_(j,C)=M_j int_C |V_g delta_r u_j|^2 dmu`
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8792643Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8793262Z is a positive **actual increment-service measure** and sums exactly to `S_low`. Translation covariance gives
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8794124Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8794427Z `V_g(delta_r u)(X,k)=exp(-ik.r)V_g u(X-r,k)-V_g u(X,k)`,
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8794851Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8795147Z hence
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8795396Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8795622Z `s_(j,C) <= 2 M_j[E_j(C)+E_j(C-r)]`.
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8796005Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8797418Z On `d_high<Y/4`, `S_low>=Y/2`.  Once whole-old-pool erosion gives `old_capacity<=Y/8`, either selected old/new interface service is at least `Y/8`, or new/new coherent service is at least `Y/4`.  With the clean quarter-dominance threshold, the latter yields
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8799401Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8799855Z - a dominant new coherent cluster with critical Moyal mass at least `Y/32`; or
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8800448Z - ancestry Bellman entropy at least `log 2`; or
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8800974Z - same-ancestry hidden pair/cycle mass at least `1/4`.
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8801400Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8802334Z Thus the old low-band reservoir selected by the Onsager collision is no longer merely an aggregate global mass: the **actual increment itself** generates nearby coherent-cell edges, and after old-pool erosion those edges must cross an interface or create new coherent ancestry.
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8803401Z
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8803582Z Stress: `50000`
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8803983Z - worst STFT translation-covariance residual: `6.829e-14`
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8804472Z - worst local increment-capacity ratio: `0.855742519`
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8804951Z - minimum routing margin: `0.000e+00`
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8805940Z - branches: `{'high_frequency_dissipation': 12535, 'new_service_Bellman_entropy': 8327, 'dominant_new_coherent_cluster': 12093, 'selected_interface_Xi': 7056, 'old_pool_not_yet_eroded': 9483, 'new_service_same_ancestry_cycle': 506}`
+certify	Run python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service	2026-08-09T03:32:41.8806813Z
+certify	Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"	﻿2026-08-09T03:32:41.9132450Z ##[group]Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"
+certify	Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:32:41.9133124Z ^[[36;1mcat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"^[[0m
+certify	Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:32:41.9158155Z shell: /usr/bin/bash -e {0}
+certify	Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:32:41.9158514Z env:
+certify	Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:32:41.9158812Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:32:41.9159230Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:32:41.9159702Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:32:41.9160100Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:32:41.9160499Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:32:41.9160878Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:32:41.9161368Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	﻿2026-08-09T03:32:41.9279673Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9280690Z ##[group]Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9281170Z with:
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9281543Z   name: high-strain-heat-increment-service-results
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9282190Z   path: results-high-strain-heat-increment-service/
+certify	Run actions/upload-artifact@v4	results-high-strain-resolved-ancestor/
+certify	Run actions/upload-artifact@v4	results-coherent-increment-service/
+certify	Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9282757Z   if-no-files-found: warn
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9283040Z   compression-level: 6
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9283319Z   overwrite: false
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9283583Z   include-hidden-files: false
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9283920Z env:
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9284209Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9284733Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9285246Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9285645Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9286029Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9286607Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:41.9286977Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.0666346Z (node:2117) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.0667404Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.0744800Z Multiple search paths detected. Calculating the least common ancestor of all paths
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.0746853Z The least common ancestor is /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond. This will be the root directory of the artifact
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.0747790Z With the provided path, there will be 6 files uploaded
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.0752134Z Artifact name is valid!
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.0752589Z Root directory input is valid!
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.2753723Z Beginning upload of artifact content to blob storage
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.2968960Z (node:2117) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.4346228Z Uploaded bytes 8167
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.4745525Z Finished uploading artifact content to blob storage!
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.4746898Z SHA256 digest of uploaded artifact zip is 70b55bb02a2b8f9176783f1de8966e9c0f33f620d9be96cd9c9a324af0199d4f
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.4748150Z Finalizing artifact upload
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.6495227Z Artifact high-strain-heat-increment-service-results.zip successfully finalized. Artifact ID 9031887597
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.6496790Z Artifact high-strain-heat-increment-service-results has been successfully uploaded! Final size is 8167 bytes. Artifact ID is 9031887597
+certify	Run actions/upload-artifact@v4	2026-08-09T03:32:42.6498653Z Artifact download URL: https://github.com/quemanhmcr/wang-ns-triad-diamond/actions/runs/31292625136/artifacts/9031887597
+certify	Post Run actions/setup-python@v5	﻿2026-08-09T03:32:42.6623067Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/setup-python@v5	2026-08-09T03:32:42.6624130Z Post job cleanup.
+certify	Post Run actions/setup-python@v5	2026-08-09T03:32:42.7672245Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b, not saving cache.
+certify	Post Run actions/setup-python@v5	2026-08-09T03:32:42.7673833Z (node:2130) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Post Run actions/setup-python@v5	2026-08-09T03:32:42.7674696Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Post Run actions/checkout@v4	﻿2026-08-09T03:32:42.7768132Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.7769156Z Post job cleanup.
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.8455300Z [command]/usr/bin/git version
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.8486116Z git version 2.54.0
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.8515762Z Temporarily overriding HOME='/home/runner/work/_temp/4c835660-de82-44e6-bd12-77edb7a25387' before making global git config changes
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.8516982Z Adding repository directory to the temporary git global config as a safe directory
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.8520913Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.8550185Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.8576987Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.8762754Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.8778495Z http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.8787075Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.8812732Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.9002044Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Post Run actions/checkout@v4	2026-08-09T03:32:42.9022570Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Complete job	﻿2026-08-09T03:32:42.9338353Z Cleaning up orphan processes
+certify	Complete job	2026-08-09T03:32:42.9539393Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

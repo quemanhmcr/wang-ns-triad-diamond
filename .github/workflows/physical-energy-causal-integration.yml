@@ -6,6 +6,8 @@ on:
       - 'src/physical_energy_causal_bridge.py'
       - 'src/recursive_coherent_witness_extraction.py'
       - 'src/coherent_service_or_flat.py'
+      - 'src/high_strain_resolved_ancestor.py'
+      - 'src/high_strain_heat_increment_service.py'
       - 'src/complex_young_parent_marking.py'
       - 'src/dual_gaussian_root_registration.py'
       - 'src/bargmann_root_cell_registration.py'
@@ -44,6 +46,8 @@ jobs:
       - run: python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy
       - run: python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness
       - run: python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat
+      - run: python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-integration/high-strain-resolved-ancestor
+      - run: python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-integration/high-strain-heat-service
       - run: python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young
       - run: python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian
       - run: python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor

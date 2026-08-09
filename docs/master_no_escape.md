@@ -2088,6 +2088,24 @@ so `S_(N_p/4)u` still has low-low output below the relayed carrier.  The parabol
 
 Dedicated relay run `31291697710` passed `489` tests and `50,000` carrier/affine/Hahn/event states; worst two-step intrinsic-zeta residual was `2.707e-15`.  Corrected cutoff run `31291932513` passed `492` tests and `50,000` arbitrary bilinear/cutoff/scale states; worst old/new cutoff identity residual was `1.099e-14`, worst residual against full `-Q B(u,u)` was `8.563e-15`, and the minimum renewed low-low gap was `3.242566e-01`.  Stored artifacts are `recorded-results/31291697710/` and `recorded-results/31291932513/`.  Precursor run `31291900197` was fixture-only: all `492` tests passed and the certificate stopped because Arb object equality was used for exact rational lifetime endpoints; `4fcdc8c` changed only that check to `Fraction`.
 
-The **generated-survivor re-entry algebra and support geometry are therefore supplied**.  The decisive remaining continuum bridge is now **universal physical slab renewal/exhaustion**.  Every recursive source/SGS, critical-dissipation, material/new-ancestry and earlier-HH route must either enter a renewed smooth carrier slab satisfying the already proved scale/moat/service/natural-lifetime hypotheses, or hit an already named first-stop cause.  No synthetic packet selector, cutoff-interface charge, or common-unit tie clock is allowed to stand in for that PDE coverage theorem.
+The **generated-survivor re-entry algebra and support geometry are therefore supplied**.
+
+The critical-dissipation route is now physically seeded as well, without promoting `D_V` to a reset.  Write the resolved ball as dyadic annuli with upper radii `M_j=(N/4)2^{-j}` and `mu_j(t)=M_j||P_j u(t)||_2^2`.  Since `sum_j M_j=N/2`, shell-time atoms with `mu_j<mu_*` carry at most `c mu_*/2` of normalized resolved dissipation on a lifetime `cN^-2`.  At high strain `D_V>=D_*=32pi^2/(75c)`; choosing `mu_*=D_*/c` gives
+
+`D_V(mu_j>=mu_*) >= D_V/2`.
+
+Thus at least half of the **actual dissipation law** already carries a lower-frequency critical ancestor, with `M_j<=N/4` and natural lifetime at least `16` child lifetimes.  No shell argmax or packet count appears.
+
+The same law has a spatially coherent form from the PDE's own heat geometry.  If `H_N` is the heat kernel at time `1/(2N^2)`, then on `supp Vhat subset B_(N/4)`,
+
+`e^(-1/32)||grad V||_2^2 <= N^2 int H_N(r)||delta_rV||_2^2dr <= ||grad V||_2^2`.
+
+Hence `S_heat=N^3 int dt int H_N||delta_rV||_2^2dr` lies between `e^(-1/32)D_V` and `D_V`, and at least `e^(-1/32)/2>0.48` of the entire heat-service law retains the same critical shell-time mark.  Moyal then disintegrates that positive law into coherent spatial edges exactly, with the existing translation covariance.
+
+Dedicated `31292418910` passed `496` tests plus `50,000` resolved-shell laws; dedicated `31292625136` passed `501` tests plus `50,000` heat-defect/ancestor laws, with relative Moyal residual `6.278e-16` and increment-covariance residual `8.016e-15`.  Artifacts are stored under `recorded-results/31292418910/` and `recorded-results/31292625136/`.
+
+Critical dissipation is therefore no longer an anonymous recursive scalar.  What is **not** yet proved is material ownership/renewed-slab attachment: a global shell must not be divided by a guessed packet count, and a coherent heat edge must not be renamed a transfer parent by fiat.  A dissipation-seeded edge must attach to a transported material reservoir/carrier with explicit commutator/interface control, or failure of that attachment must itself be a named source/relink event.
+
+The decisive remaining continuum bridge is still **universal physical slab renewal/exhaustion**.  Every recursive source/SGS, critical-dissipation, material/new-ancestry and earlier-HH route must either enter a renewed smooth carrier slab satisfying the already proved scale/moat/service/natural-lifetime hypotheses, or hit an already named first-stop cause.  No synthetic packet selector, cutoff-interface charge, or common-unit tie clock is allowed to stand in for that PDE coverage theorem.
 
 Until this universal renewal is proved for every recursive route, the master remains conditional and there is no global-regularity proof for 3D Navier--Stokes.

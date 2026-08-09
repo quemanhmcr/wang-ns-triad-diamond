@@ -1,0 +1,14 @@
+{
+  "certificate": {
+    "unitary_fourier_C": "1/(8 sqrt(6) pi)",
+    "C_squared": "1/(384 pi^2)",
+    "high_strain": "K>1/30 => D_V>32 pi^2/(75 c)",
+    "status": "ARB_CERTIFIED_HIGH_STRAIN_TO_CRITICAL_DISSIPATION"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_collision_margin": 3.884021562143569e-06,
+    "minimum_geometric_sum_margin": -5.684341886080802e-14,
+    "maximum_finite_chain_fraction": 1.0000000000000002
+  }
+}
