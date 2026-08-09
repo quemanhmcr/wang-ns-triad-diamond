@@ -8,6 +8,7 @@ from src.objective_pressure_pair_atomization import (
     STATUS,
     canonical_all_pair_absolute_capacity_upper,
     clean_dominant_pair_shell_mass_lower,
+    clean_entropy_shell_tradeoff_lower,
     dominant_pair_peak_shell_mass_lower,
     frobenius_dual,
     objective_pressure_pair_route,
@@ -97,6 +98,15 @@ def test_actual_pair_weight_exposes_peak_hard_shell_mass():
     assert lower == pytest.approx((5 / 2) * (N / M) ** 4 * R / c)
 
 
+def test_native_entropy_shell_tradeoff_has_no_intrinsic_quarter_threshold():
+    sigma = 0.7
+    c = 0.4
+    h2 = math.log(5.0)
+    lower = clean_entropy_shell_tradeoff_lower(sigma, c, h2)
+    assert lower == pytest.approx(320.0 * math.exp(-h2) * sigma / c)
+    assert clean_entropy_shell_tradeoff_lower(1.0, 1.0, math.log(4.0)) == pytest.approx(80.0)
+
+
 def test_clean_quarter_dominant_pair_gives_80_sigma_over_c():
     assert clean_dominant_pair_shell_mass_lower(1.0, 1.0) == pytest.approx(80.0)
     assert clean_dominant_pair_shell_mass_lower(0.7, 0.4) == pytest.approx(80.0 * 0.7 / 0.4)
@@ -161,6 +171,8 @@ def test_exact_quarter_pair_boundary_keeps_dominance_and_entropy_joint():
         "diffuse_pair_source_entropy",
     }
     assert out["pair_source_entropy_lower"] == pytest.approx(math.log(4.0))
+    assert out["entropy_shell_tradeoff_lower"] == pytest.approx(80.0)
+    assert out["max_pair_u_shell_mass_lower"] >= out["entropy_shell_tradeoff_lower"]
     for wit in out["dominant_pair_witnesses"]:
         assert wit["critical_shell_mass_lower"] == pytest.approx(80.0)
         assert wit["parent_to_child_natural_lifetime_ratio_at_least"] >= 16.0
@@ -179,6 +191,7 @@ def test_five_way_diffuse_pair_law_has_more_than_log4_entropy():
         pair_frequencies=[(1.0, 1.0)] * 5,
     )
     assert out["joint_pair_routes"] == ("diffuse_pair_source_entropy",)
+    assert out["max_pair_u_shell_mass_lower"] >= out["entropy_shell_tradeoff_lower"]
     assert out["pair_source_entropy_is_causal_probability"] is False
 
 
@@ -189,3 +202,4 @@ def test_certificate_removes_aggregate_muV_from_canonical_pressure_route():
     assert "not the canonical pressure renewal route" in cert["coarse_muV"]
     assert "not causal" in cert["positive_source_cover"]
     assert "|S_(N/4)|<=1" in cert["dominant_pair"]
+    assert "mu_child exp(H2_pair)>=320 Sigma_P/c" in cert["entropy_shell_tradeoff"]

@@ -15,8 +15,9 @@ from src.resolved_objective_strain_collision import arb_clean_constants
 
 STATUS = (
     "EXACT_OBJECTIVE_PRESSURE_HESSIAN_DUAL_PAIR_ATOMIZATION__"
-    "DOMINANT_HARD_PAIR_TO_CRITICAL_SHELL__DIFFUSE_PAIR_SOURCE_ENTROPY_CERTIFIED__"
-    "AGGREGATE_MU_V_NOT_CANONICAL__MASTER_ENTROPY_CONVERSION_REMAINS"
+    "ENTROPY_SHELL_TRADEOFF__DOMINANT_HARD_PAIR_TO_CRITICAL_SHELL__"
+    "DIFFUSE_PAIR_SOURCE_ENTROPY_CERTIFIED__AGGREGATE_MU_V_NOT_CANONICAL__"
+    "MASTER_ENTROPY_CONVERSION_REMAINS"
 )
 
 DEFAULT_PAIR_DOMINANCE = Fraction(1, 4)
@@ -256,6 +257,33 @@ def clean_dominant_pair_shell_mass_lower(
     return (5.0 * theta / 4.0) * sigma / c * r ** (-4)
 
 
+def clean_entropy_shell_tradeoff_lower(
+    pressure_source_weight: float,
+    scaled_lifetime: float,
+    pair_source_entropy: float,
+    *,
+    max_pair_frequency_ratio: float = 0.25,
+) -> float:
+    """Continuous pressure law coupling pair fragmentation to shell mass.
+
+    On the resolved-pair owner, `R_pair>=Sigma_P/2`.  For normalized pair law
+    `q`, `q_max>=sum q^2=exp(-H2)`.  The worst off-diagonal pair capacity gives
+
+      mu_child >= (5/4)(N/Mmax)^4 exp(-H2) Sigma_P/c.
+
+    At `Mmax/N<=1/4` this is `320 exp(-H2) Sigma_P/c`.  Thus the quarter
+    dominance/entropy split is only the corollary obtained by cutting at
+    `H2=log 4`; the native law itself has no arbitrary threshold.
+    """
+    sigma = float(pressure_source_weight)
+    c = float(scaled_lifetime)
+    h2 = float(pair_source_entropy)
+    r = float(max_pair_frequency_ratio)
+    if sigma <= 0 or c <= 0 or h2 < 0 or not (0 < r <= 0.25) or not all(math.isfinite(x) for x in (sigma, c, h2, r)):
+        raise ValueError("valid source/lifetime/entropy/support ratio required")
+    return (5.0 / 4.0) * r ** (-4) * math.exp(-h2) * sigma / c
+
+
 def pair_collision_entropy(pair_positive_weights: Sequence[float]) -> dict[str, float]:
     w = np.asarray(tuple(float(x) for x in pair_positive_weights), dtype=float)
     if w.ndim != 1 or len(w) == 0 or np.any(~np.isfinite(w)) or np.any(w < 0) or float(w.sum()) <= 0:
@@ -347,8 +375,27 @@ def objective_pressure_pair_route(
 
     p = w / pair_total
     pmax = float(np.max(p)) if len(p) else 0.0
+    imax = int(np.argmax(p)) if len(p) else -1
     dominant = tuple(int(i) for i, x in enumerate(p) if x >= theta)
     entropy = pair_collision_entropy(w) if len(w) else None
+    if entropy is None or imax < 0:
+        raise AssertionError("resolved pair owner lost its positive pair law")
+    h2 = float(entropy["H2_pair_source"])
+    tradeoff_lower = clean_entropy_shell_tradeoff_lower(sigma, c, h2)
+    amax, bmax = pairs[imax]
+    famax, fbmax = freqs[imax]
+    max_pair_resolved_lower = dominant_pair_peak_shell_mass_lower(
+        float(w[imax]), c, famax, fbmax, N, diagonal=(amax == bmax)
+    )
+    max_pair_u_lower = u_shell_mass_lower_from_resolved_shell_mass(max_pair_resolved_lower)
+    trade_tol = 8e-13 * max(1.0, tradeoff_lower, max_pair_u_lower)
+    if max_pair_u_lower + trade_tol < tradeoff_lower:
+        raise AssertionError("pressure entropy-shell tradeoff failed")
+    out["pair_source_entropy"] = entropy
+    out["entropy_shell_tradeoff_lower"] = tradeoff_lower
+    out["max_pair_u_shell_mass_lower"] = max_pair_u_lower
+    out["max_pair_witness_index"] = imax
+    out["entropy_shell_tradeoff"] = "mu_child exp(H2_pair)>=320 Sigma_P/c"
     diffuse = pmax <= theta
     pair_routes: list[str] = []
     dominant_witnesses: list[dict[str, object]] = []
@@ -381,7 +428,6 @@ def objective_pressure_pair_route(
         if float(entropy["H2_pair_source"]) + 2e-13 < h0:
             raise AssertionError("diffuse pressure pair source entropy failed")
         pair_routes.append("diffuse_pair_source_entropy")
-        out["pair_source_entropy"] = entropy
         out["pair_source_entropy_lower"] = h0
     if not pair_routes:
         raise AssertionError("pair law produced neither dominance nor diffuse entropy")
@@ -408,6 +454,9 @@ def theorem_certificate() -> dict[str, object]:
     clean80 = clean_dominant_pair_shell_mass_lower(1.0, 1.0)
     if abs(clean80 - 80.0) > 1e-12:
         raise AssertionError("canonical dominant pair shell lower lost 80 Sigma/c")
+    trade_log4 = clean_entropy_shell_tradeoff_lower(1.0, 1.0, math.log(4.0))
+    if abs(trade_log4 - 80.0) > 2e-12:
+        raise AssertionError("entropy-shell tradeoff no longer meets the quarter corollary at 80 Sigma/c")
     return {
         "status": STATUS,
         "exact_dual": "Z=H/||H||_F (Z=0 at H=0), rho_P=Z:H=sum unordered resolved pair scalars + SGS scalar",
@@ -416,6 +465,7 @@ def theorem_certificate() -> dict[str, object]:
         "ordered_pair_sharp_clean": f"{sharp.numerator}/{sharp.denominator}<1/5",
         "unordered_pair_clean": "|p_ab|<=(kappa_ab/5)(Mmax/N)^4 sqrt(mu_a mu_b), kappa=1 diagonal, 2 off-diagonal",
         "source_half_split": "SGS positive pressure source >=Sigma_P/2 OR resolved positive pair source >=Sigma_P/2; ties joint",
+        "entropy_shell_tradeoff": "on the resolved pair owner, qmax>=exp(-H2) and the worst off-diagonal Mmax<=N/4 capacity give mu_child exp(H2_pair)>=320 Sigma_P/c; no dominance threshold is intrinsic",
         "dominant_pair": "theta=1/4 first gives a resolved V-shell mass >=5 Sigma_P/(16c)(N/Mmax)^4; |S_(N/4)|<=1 transfers the same lower to the u shell, hence >=80 Sigma_P/c because Mmax<=N/4",
         "absolute_pair_sum": "for canonical M_j=(N/4)2^-j, sum unordered pair capacities <=N||V||_2^2/2560; mu_V appears only as an absolute-convergence budget",
         "diffuse_pair": "if every unordered pair has source mass <=1/4, H2(pair source)>=log 4; this certifies source fragmentation only, not a causal probability or terminal transfer cost",
@@ -434,6 +484,7 @@ class ObjectivePressurePairStress:
     minimum_owner_half_margin: float
     minimum_dominant_shell_margin_over_clean: float
     minimum_diffuse_entropy_margin: float
+    minimum_entropy_shell_tradeoff_margin: float
     maximum_joint_primary_owner_count: int
     maximum_joint_pair_route_count: int
 
@@ -441,7 +492,7 @@ class ObjectivePressurePairStress:
 def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectivePressurePairStress:
     rng = np.random.default_rng(seed)
     wr = wu = 0.0
-    mc = mcap = mo = md = me = float("inf")
+    mc = mcap = mo = md = me = mt = float("inf")
     max_primary = max_pair = 0
     for _ in range(samples):
         # Exact matrix dual/source atomization.
@@ -514,6 +565,11 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectivePressurePair
         if "joint_pair_routes" in route:
             pair_routes = tuple(route["joint_pair_routes"])
             max_pair = max(max_pair, len(pair_routes))
+            trade = float(route["entropy_shell_tradeoff_lower"])
+            actual_trade = float(route["max_pair_u_shell_mass_lower"])
+            mt = min(mt, actual_trade - trade)
+            if actual_trade + 4e-12 * max(1.0, trade) < trade:
+                raise AssertionError("pressure entropy-shell tradeoff stress failed")
             if "dominant_hard_pair_to_critical_shell" in pair_routes:
                 clean_lower = float(route["clean_dominant_shell_mass_lower"])
                 for wit in route["dominant_pair_witnesses"]:
@@ -532,7 +588,8 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectivePressurePair
     # rather than infinity for an unvisited diagnostic margin.
     if not math.isfinite(md): md = 0.0
     if not math.isfinite(me): me = 0.0
-    return ObjectivePressurePairStress(samples, wr, mc, wu, mcap, mo, md, me, max_primary, max_pair)
+    if not math.isfinite(mt): mt = 0.0
+    return ObjectivePressurePairStress(samples, wr, mc, wu, mcap, mo, md, me, mt, max_primary, max_pair)
 
 
 def main() -> None:
@@ -577,7 +634,11 @@ For integrated pressure source weight `Sigma_P`, exact positivity gives the join
 
 `SGS-positive source >=Sigma_P/2`  OR  `resolved positive pair source >=Sigma_P/2`.
 
-The SGS branch still yields `int||R||_(3/2)>=190 Sigma_P` and enters the existing coherent-service compiler.  On the resolved branch normalize the actual unordered pair source law.  With `theta=1/4`:
+The SGS branch still yields `int||R||_(3/2)>=190 Sigma_P` and enters the existing coherent-service compiler.  On the resolved branch normalize the actual unordered pair source law.  Its native statement is the threshold-free tradeoff
+
+`mu_child exp(H2_pair) >= 320 Sigma_P/c`.
+
+Indeed `q_max>=sum q^2=exp(-H2_pair)`, and the maximal actual pair therefore exposes the stated hard `u`-shell lower after the strict-lowpass contraction.  The familiar `theta=1/4` split is only a corollary:
 
 - if a pair is theta-dominant, its integrated capacity forces at some time an actual hard child shell with
 
@@ -600,6 +661,7 @@ Stress: `{out.samples}` pressure tensor/pair/source states
 - minimum primary owner half-split margin: `{out.minimum_owner_half_margin:.3e}`
 - minimum dominant-shell margin over clean lower: `{out.minimum_dominant_shell_margin_over_clean:.3e}`
 - minimum diffuse-entropy margin: `{out.minimum_diffuse_entropy_margin:.3e}`
+- minimum entropy-shell tradeoff margin: `{out.minimum_entropy_shell_tradeoff_margin:.3e}`
 - maximum joint primary owner count: `{out.maximum_joint_primary_owner_count}`
 - maximum joint pair-route count: `{out.maximum_joint_pair_route_count}`
 

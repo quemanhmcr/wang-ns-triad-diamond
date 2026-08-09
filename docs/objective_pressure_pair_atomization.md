@@ -209,7 +209,7 @@ The SGS owner satisfies
 
 and is exactly the effective objective-SGS source weight `Sigma_P/2` already routed to coherent square service.
 
-## 6. Dominant pair gives a genuine critical shell
+## 6. The native law is an entropy--shell tradeoff
 
 Normalize the positive pair law by
 
@@ -217,7 +217,25 @@ Normalize the positive pair law by
 q_{ab}=R_{ab}/R_{pair}.
 \]
 
-Take the physical dominance threshold `theta=1/4`.  If an unordered pair has `q_ab>=theta`, then on the pair owner branch
+No dominance threshold is intrinsic.  Collision entropy satisfies
+
+\[
+q_{max}\ge\sum_{a\le b}q_{ab}^2=e^{-H_2(q)}.
+\]
+
+Because `R_pair>=Sigma_P/2`, the maximal actual unordered pair carries at least `e^{-H_2}Sigma_P/2`.  Applying the worst off-diagonal capacity and `M_max<=N/4`, then passing the resolved shell to the same `u` shell by strict-lowpass contraction, gives the continuous law
+
+\[
+\boxed{
+\mu_{child}e^{H_2(q)}\ge320\,\Sigma_P/c.
+}
+\]
+
+This is the native pressure statement: concentration of the pair law and critical shell mass are conjugate.
+
+### Quarter split as a corollary
+
+Take `theta=1/4` only when the master wants a fixed dichotomy.  If an unordered pair has `q_ab>=theta`, then on the pair owner branch
 
 \[
 R_{ab}\ge \frac{\theta}{2}\Sigma_P.
@@ -268,7 +286,7 @@ Since every resolved pair has `M_max<=N/4`, the canonical quarter threshold give
 
 This is an actual hard-shell event and enters the generic critical-shell first-stop/service theorem.  The child frequency is at most `N/4`, so its natural lifetime is at least `16` times the parent block lifetime scale.
 
-## 7. Diffuse pair law is source entropy, not causal probability
+## 7. The diffuse corollary is source entropy, not causal probability
 
 If no unordered pair exceeds one quarter, then
 
@@ -287,7 +305,7 @@ Therefore
 
 This is the collision entropy of the **actual positive pressure source law**.  It is already a quantitative fragmentation certificate.  If ancestry labels are later attached, the exact atomic-to-component chain rule may further split it into component entropy or same-ancestry pair mass; however the weighted cycle/master conversion is a separate theorem interface.  Therefore this result does **not** by itself declare a terminal `TRANSFER_COST`, and it must not be relabeled a Shannon/Renyi child-energy causal law.
 
-At exact `q_max=1/4`, both the dominant-pair shell route and the entropy route are valid and are kept jointly.
+At exact `q_max=1/4`, both the dominant-pair shell route and the entropy route are valid and are kept jointly.  Both are merely faces of the continuous identity `mu_child e^(H2_pair)>=320 Sigma_P/c`.
 
 ## 8. Material reuse is a sidecar refinement
 
@@ -315,11 +333,17 @@ The canonical pressure route becomes
 }
 \]
 
-and on the resolved law
+and on the resolved law the threshold-free state relation is
+
+\[
+\boxed{\mu_{child}e^{H_2^{source}}\ge320\,\Sigma_P/c.}
+\]
+
+If a fixed quarter cut is useful, this becomes
 
 \[
 \boxed{
-\text{dominant unordered pair}\to\text{critical shell},
+\text{dominant unordered pair}\to\mu_{child}\ge80\Sigma_P/c,
 \qquad
 \text{diffuse pairs}\to H_2^{source}\ge\log4
 \quad\text{(source fragmentation)}.
