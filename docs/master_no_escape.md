@@ -2120,7 +2120,17 @@ so
 
 Since every first high-strain contact has `S_heat>=S_*(c)`, once `C_OO(q)<=(1-f)S_*` the exact ownership partition forces `S_ON+S_NN>=fS_*`.  This is a material-capacity theorem, not a `D_V` reset count.  Dedicated run `31298235481` on `a0cf825` passed `513` tests plus `50,000` new states; full integration `31298235456` on the same SHA passed the complete causal stack and master `20,000` traces with worst margin `0`.  The dedicated artifact is stored at `recorded-results/31298235481/`.
 
-Quantitative OO heat capacity is therefore supplied on any already-provided signed-good material epoch, but **universal renewed-slab attachment is not**.  The PDE must still show that every critical-dissipation re-entry either enters such a material epoch or hits an earlier named cause.  ON is a genuine same-time interface edge mark but still needs attachment to actual temporal relink/interface work.  NN service cannot be renamed a transfer parent or assigned a packet mass floor.  Fixed-shell/material-chart commutators must remain explicit.
+The heat law has one more exact structure which removes ON as a separate persistent regime.  Since `delta_r P_j=P_j delta_r`, every coherent heat edge retains the deterministic Fourier shell in which the heat law was disintegrated before Moyal.  Capacity routing therefore uses the canonical old pool with its exact orthogonal-band event mark.  If either endpoint is old, that shell belongs to the current old-frequency envelope, so pointwise `old-incident=OO+ON` and
+
+`S_OO+S_ON <= S_old-shell <= cM_old^2PE_global/N`.
+
+Hence all old-incident heat service contracts by the same `<441/640` factor.  Let `g=e^(-1/32)/2`.  Once old-incident capacity falls below `(g/2)S_*`, NN carries at least `(1-g/2)S_heat`, while the critical shell-time set carries at least `gS_heat`.  Inclusion--exclusion on the same positive heat measure gives
+
+`S_(NN intersect critical) >= (g/2)S_heat = (1/4)e^(-1/32)S_heat`.
+
+Dedicated run `31299237508` on `8a98d43` passed `521` tests plus `50,000` new states; full integration `31299237482` passed the complete stack and master `20,000` traces with worst margin `0`.  Stored artifact: `recorded-results/31299237508/`.
+
+Quantitative old-incident heat capacity is therefore supplied on any already-provided signed-good band-addressed material epoch, and neither OO nor ON can be an indefinitely reusable third regime.  What remains is **universal renewed-slab attachment**: the PDE must show that every critical-dissipation re-entry either enters such an epoch or hits an earlier named cause, and then convert the resulting positive NN-critical coherent heat sublaw into a renewed smooth material carrier/epoch or an existing source/relink/interface stop.  NN cannot be renamed a selected transfer parent or assigned a packet mass floor.  Fixed-shell/material-chart commutators across renewal must remain explicit.
 
 The decisive remaining continuum bridge is still **universal physical slab renewal/exhaustion**.  Every recursive source/SGS, critical-dissipation, material/new-ancestry and earlier-HH route must either enter a renewed smooth carrier slab satisfying the already proved scale/moat/service/natural-lifetime hypotheses, or hit an already named first-stop cause.  No synthetic packet selector, cutoff-interface charge, or common-unit tie clock is allowed to stand in for that PDE coverage theorem.
 
