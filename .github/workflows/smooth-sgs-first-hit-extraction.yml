@@ -1,0 +1,38 @@
+name: Smooth SGS first-hit extraction
+on:
+  push:
+    paths:
+      - 'src/smooth_sgs_first_hit_extraction.py'
+      - 'tests/test_smooth_sgs_first_hit_extraction.py'
+      - 'docs/smooth_sgs_first_hit_extraction.md'
+      - '.github/workflows/smooth-sgs-first-hit-extraction.yml'
+      - 'src/common_slice_coefficient_registration.py'
+      - 'src/coherent_service_or_flat.py'
+      - 'src/physical_energy_causal_bridge.py'
+      - 'src/material_coherent_labels.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12', cache: pip}
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction
+      - run: python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-causal-stop-projection
+      - run: python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor
+      - run: python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat
+      - run: cat results-smooth-sgs-first-hit-extraction/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: smooth-sgs-first-hit-extraction-results
+          path: |
+            results-smooth-sgs-first-hit-extraction/
+            results-joint-causal-stop-projection/
+            results-recursive-physical-witness-constructor/
+            results-coherent-service-or-flat/
