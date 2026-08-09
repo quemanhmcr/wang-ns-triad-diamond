@@ -1,6 +1,6 @@
 import math
 
-from src.physical_branch_compiler import CauseHit, PhysicalCause, PhysicalCurrency
+from src.physical_branch_compiler import CauseHit, MasterDisposition, PhysicalCause, PhysicalCurrency
 from src.physical_pair_weighted_productivity import physical_log_productivity_constant
 from src.recursive_physical_witness_constructor import (
     GeneratedPairEvent,
@@ -80,4 +80,4 @@ def test_preferred_joint_master_does_not_validate_dummy_weights():
     event=GeneratedPairEvent(1.0,0,True,False,
         physical_hits=(CauseHit(0.2,PhysicalCause.RESOLVED_SOURCE,float("nan"),"source"),))
     out=compile_generated_pair_master_measure(events=(event,),pair_cells_upper=1)
-    assert out.master_mass["recurse_critical"]==1.0
+    assert out.master_mass[MasterDisposition.RECURSE_CRITICAL.value]==1.0
