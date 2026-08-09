@@ -1,0 +1,30 @@
+{
+  "certificate": {
+    "status": "EXACT_NN_SEED_BACKWARD_NATURAL_FIRST_STOP_CORRIDOR__ONE_QUARTER_CRITICAL_SURVIVOR_OR_NAMED_STOP__MATERIAL_ATTACHMENT_REMAINS",
+    "interval": "for a seed at time t and scale A, inspect the backward natural interval [max(0,t-cA^-2),t] using elapsed time ell=t-s",
+    "first_hit": "native-unit AC monitors are K_A, |I_role-interface|, |I_HH| and minus the minimum distance of the two NN endpoint witnesses to the old-material boundary; exact ties remain an unsplit cause set",
+    "outer_role": "while K_A<1/30, the dual-transported smooth Q_A carrier stays strictly above the A/2 low-low output; the exact outer equation has only HH source plus classified nonaffine role-interface residual",
+    "duhamel": "z(t)=z(s)+I_HH[s,t]+I_interface[s,t]; if neither impulse hits A_z/2 or A_z/4 and no material/strain stop occurs, |z(s)|>=|z(t)|/4",
+    "critical_survival": "the seed starts with A|z(t)|^2>=3.15827340835; a full no-hit natural interval retains A|z(s)|^2>=0.197392088022=pi^2/(50c^2) at c=1",
+    "material": "the two NN heat-edge endpoint witnesses remain outside the old pool until their continuous boundary distance first reaches zero; this preserves witness provenance only and never declares the whole Q_Au carrier NN material",
+    "boundary": "if the requested backward natural interval reaches t=0 first, the initial boundary is absorbing rather than a free survivor",
+    "interface_scope": "a large role-interface coefficient impulse delegates to the existing skew-transfer/symmetric-strain provenance theorem; it is not promoted to physical work or a new currency",
+    "hh_scope": "a large HH coefficient impulse is earlier HH regeneration and must pass through the existing physical-energy causal gate before any work-based probability is formed",
+    "scope": "this closes temporal coefficient survival-or-first-stop for the high-strain carrier seed itself; attaching the surviving coefficient energy to its NN material witness and proving full efficiency/service renewal, plus universal source/relink re-entry, remain open"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_clean_critical_mass_margin": 0.020489615878146836,
+    "minimum_survivor_coefficient_margin": 0.006388875085989009,
+    "minimum_low_low_gap": 0.08032966028920352,
+    "worst_duhamel_residual": 5.183683495748049e-15,
+    "order_invariance_failures": 0,
+    "unit_rescaling_failures": 0,
+    "maximum_joint_cause_count": 1,
+    "branch_counts": {
+      "named_physical_first_stop": 40039,
+      "full_natural_corridor_survivor": 9961,
+      "initial_boundary_root": 1
+    }
+  }
+}

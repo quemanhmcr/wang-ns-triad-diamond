@@ -2150,8 +2150,32 @@ Thus a branch either reaches a named strain/interface/HH/material-boundary first
 
 This is a critical **smooth-carrier** survivor with an NN endpoint witness, not a theorem that the whole carrier energy is NN material.  Large interface or HH coefficient impulses are not reinterpreted as work.  Dedicated run `31301650158` and full integration `31301745046` on exact SHA `a2f2a3b` both passed the `534`-test theorem suite; the dedicated `50,000`-corridor stress had worst Duhamel residual `5.184e-15` and zero monitor-order/unit failures.  The artifact is stored under `recorded-results/31301650158/`.
 
-What remains of the high-strain route is therefore narrower: **material/efficiency attachment of a full-natural-corridor survivor**.  One must couple its surviving critical coefficient to its retained NN witness strongly enough to initiate the canonical material-service epoch, or show that failure is already one of the named physical causes.  The whole `u` shell is not declared NN material.
+The apparent remaining material-attachment problem is in fact unnecessary.  A full no-hit critical annular carrier creates **its own service at the renewed scale**.  Every prefix still has `|z(s)|>|z(t)|/4`; the registered affine/Kelvin/viscous analysis dual obeys the existing scale-independent natural-window bound
 
-The decisive remaining continuum bridge is still **universal physical slab renewal/exhaustion**.  Every recursive source/SGS, critical-dissipation, material/new-ancestry and earlier-HH route must either enter a renewed smooth carrier slab satisfying the already proved scale/moat/service/natural-lifetime hypotheses, or hit an already named first-stop cause.  No synthetic packet selector, cutoff-interface charge, or common-unit tie clock is allowed to stand in for that PDE coverage theorem.
+`||psi(s)||<=J||psi(t)||`,  `J=exp(1/30+nu c[(3/2)exp(1/30)]^2)`,
 
-Until this universal renewal is proved for every recursive route, the master remains conditional and there is no global-regularity proof for 3D Navier--Stokes.
+so throughout the full slab
+
+`A||Q_Au(s)||_2^2 >= pi^2/(50c^2J^2)`.
+
+Because the carrier stays in the transported annulus above `(3/5)exp(-1/30)A`, its intrinsic `A`-scale heat defect is uniformly positive.  The Gaussian heat displacement is unbounded, so it is not fed directly into the reservoir theorem.  Using `||delta_r w||_2^2<=4||w||_2^2`, Arb certifies that restricting to `|r|<=3/A` still retains more than half of the annular heat lower.  Hence at every slab time some actual bounded displacement satisfies
+
+`A||delta_r Q_Au||_2^2 >= Y_0(c,nu)>0`,  `|r|<=3/A`,
+
+and the whole natural slab carries normalized bounded heat service at least `cY_0`.  For the default certificate `c=nu=1`, `Y_0=2.33125086914e-4`.  `Y_0` is scale-independent in `A` for fixed block parameters, not a globally uniform reset resource.
+
+Only after this renewed positive service exists is materiality read by exact Moyal from its actual two endpoints.  Therefore the old NN witness is not promoted to whole-carrier ownership, and service is not promoted to near-extremal HH efficiency.  Dedicated run `31303081994` and full integration `31303081937` on `f0ac683` certified this annular-service re-entry; the dedicated radius-3 truncation margin was `3.781e-02` and the worst renewed OO/ON/NN residual `1.137e-13`.
+
+This also reveals a shorter high-strain route.  The positive resolved-dissipation restriction `D_V|_G` already carries at least half of `D_V` on shell-time marks with `M||P_Mu||_2^2>=mu_*`.  Normalize those weights only as a **diagnostic dissipation sampling law**, never as causal HH probabilities, and put `A=3M/4`.  Each atom is immediately a smooth critical whole-shell carrier seed.  Before renewed service exists, inspect only the three native first stops: strain, classified interface coefficient impulse, and HH-regeneration coefficient impulse.  A hit keeps its named recursive owner, `t=0` absorbs, and a full no-hit corridor feeds the annular-service theorem above.  Material OO/ON/NN is assigned only afterwards from that new service law.
+
+Thus the shortest high-strain recursion is now
+
+`high strain -> D_V|_G -> critical smooth carrier -> named stop / t=0 / own-scale service`.
+
+Child-scale heat ownership, old-incident erosion and `NN intersect critical` remain valid material-capacity refinements but are no longer prerequisites for renewal entrance.  The corrected dedicated run `31303385148` and full integration `31303385157` on exact `7ef566a` passed `547` tests and the full causal stack; the first `51840e6` run was fixture-only because a unit-rescaling stress used an absolute rather than corridor-scale timestamp tolerance.  On the corrected SHA the worst Duhamel residual was `4.974e-14`, monitor-order/unit failures were zero, physical log-product margin remained `1.665`, and master `20,000` traces had worst margin `0`.
+
+Accordingly **critical high-strain dissipation is no longer part of the universal-renewal gap**: it already enters an existing recursive stop, the absorbing boundary, or a renewed coherent-service episode without making `D_V` a reset.
+
+The remaining master-facing continuum problem is narrower.  A natural next theorem is the parameterized version: any certified `D_V>=D_0>0` should feed the same dyadic critical-shell/own-scale-service mechanism with `mu_0=D_0/c`; this is not yet certified.  Existing source-episode theorems already provide integrated SGS dissipation/service/mass alternatives and a viscous `D_V` lower without persistence, so source/SGS increasingly looks like a finite routing/continuation assembly.  Genuine temporal material relink remains recursive as well: same-time ON service is already interface/old-incident physics, whereas an actual selected-set switch carries exact Moyal symmetric-difference energy and still must be connected to a certified service/cost/ancestry continuation without turning arbitrary relink energy into work or whole-shell critical mass.
+
+Until source/SGS and genuine-relink renewal/exhaustion are assembled into the continuum master, the master remains conditional and there is no global-regularity proof for 3D Navier--Stokes.

@@ -1,0 +1,16 @@
+{
+  "certificate": {
+    "old_pool_ratio": "9261/20480",
+    "half_life": "9261/20480<1/2",
+    "stopping_condition": "C_old(q)<=Y0/8",
+    "epoch_statement": "a cost-free old-pool coherent-service epoch has length < first q with C0 r^q<=Y0/8",
+    "post_stop": "d_high>=Y0/4 OR Xi_cell>=Y0/8 OR new coherent mass>=Y0/32 OR log2 entropy OR 1/4 cycle mass",
+    "status": "EXACT_GEOMETRIC_STOPPING_GIVEN_UNIFORM_COHERENT_SERVICE_THRESHOLD"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_forced_margin": 3.7338681238910376e-08,
+    "minimum_previous_margin": 0.0,
+    "maximum_cost_free_blocks": 15
+  }
+}
