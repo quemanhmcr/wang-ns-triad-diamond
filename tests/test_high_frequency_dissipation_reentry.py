@@ -103,7 +103,8 @@ def test_certificate_forbids_two_false_shortcuts():
     cert = theorem_certificate()
     assert cert["status"] == STATUS
     assert "neither smooth-LP d_high nor resolved low-pass D_V" in cert["native_currency"]
-    assert "D_tail>=c_LP D_high" in cert["lp_supplier"]
+    assert "D_tail>=(a^2/B)D_high" in cert["lp_supplier"]
+    assert "c_LP=1/4" in cert["lp_supplier"]
     assert "no critical-shell floor" in cert["anti_relabel"]
     assert "not automatically" in cert["no_false_productivity"]
 
