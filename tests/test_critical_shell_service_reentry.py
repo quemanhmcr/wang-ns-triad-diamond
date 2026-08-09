@@ -177,4 +177,4 @@ def test_certificate_keeps_DV_sampling_noncausal_and_scale_progress_supplier_spe
     assert "diagnostic" in cert["dissipation_supplier"]
     assert "never HH causal probabilities" in cert["dissipation_supplier"]
     assert "supplier-specific signed-good progress" in cert["scale_scope"]
-    assert "pressure/source routing" in cert["scope"]
+    assert "source/pressure routing" in cert["scope"]
