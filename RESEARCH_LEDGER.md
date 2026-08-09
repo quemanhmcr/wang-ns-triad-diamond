@@ -6458,3 +6458,17 @@ For a new reader, the recommended order is:
 16. `docs/multicommodity_hodge_routing.md`;
 17. `docs/resistance_bellman_stopping.md`;
 18. `docs/master_no_escape.md`.
+
+---
+
+## 2026-08-09 — Gaussian–Cauchy–Fisher normal-action checkpoint (analytic, not integrated into the master theorem)
+
+A separate analytic route has been recorded in `docs/gaussian_cauchy_fisher_normal_action.md`.  It does **not** alter any certified theorem status above and does **not** claim Navier--Stokes regularity.  Its purpose is to preserve a new physically natural quotient geometry for future work.
+
+The main exact structures are: Gaussian affine projection with residual `N`; the scale-critical decomposition `Phi_a=|S_a|^2+|omega_a|^2/2+E|N_a|^2/(2a)` and sink `(partial_a-Delta)Phi_a=-E|N_a|^2/(2a^2)`; the identity that Gaussian vorticity area flux `W_C^T cof(C) W_C` is exactly the skew-affine part of the Gaussian reservoir; stochastic Cauchy vorticity as a martingale; pathwise monotonicity of the natural 2-form/area precision `cof(G^{-1})`; closure of the apparent palinstrophy producer by the conditional future-variance reservoir; and the affine-quotiented ancestry normal form
+
+`dZ=-N_hat(Z) ds + sqrt(2 nu) K dB`.
+
+In that normal form, all affine strain cancels.  Girsanov identifies the same Gaussian non-affinity residual with the path-space relative-entropy rate away from affine-Gaussian dynamics.  A synchronous coupling gives an affine-invariant rung-0 epsilon-stability estimate with no Gronwall factor in the strain.  Relative Jacobian deformation satisfies exactly `H'=-(grad N_hat)H`, so failure of affine Cauchy cancellation begins only at the next rung `grad N_hat`, which is already the rung charged by the Gaussian/Hermite/Hodge hierarchy.
+
+The new frontier is therefore not another vortex-stretching inequality.  It is a covariance-adapted concentration theorem: convert the globally finite spacetime--log-scale non-affinity/next-rung sink into control of the pathwise rung-1 deformation action along a single backward stochastic ancestry.  A natural target is an epsilon-regularity/stability lemma based on a Carleson, stopping-time, or path-capacity estimate in the Malliavin covariance geometry.  Until that bridge is supplied, this remains an exploratory analytic checkpoint rather than part of the master no-escape proof.
