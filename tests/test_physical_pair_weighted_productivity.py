@@ -3,6 +3,7 @@ import math
 import numpy as np
 
 from src.physical_pair_weighted_productivity import (
+    conditioned_physical_log_productivity_constant,
     generated_energy_sup_factor,
     physical_log_productivity_constant,
     tempered_pair_cell_penalty_upper,
@@ -37,3 +38,9 @@ def test_variable_productivity_recursion_matches_closed_form():
     weights=2.0**(-(np.arange(len(lam))+1.0))
     want=float(np.sum(weights*np.log(lam))+(2.0**(-len(lam)))*ellT)
     assert math.isclose(got,want,rel_tol=1e-13,abs_tol=1e-13)
+
+
+def test_conditioning_on_half_physical_work_costs_exactly_one_half_factor():
+    full=physical_log_productivity_constant(9)
+    half=conditioned_physical_log_productivity_constant(0.5,9)
+    assert math.isclose(half,0.5*full,rel_tol=1e-14,abs_tol=1e-14)

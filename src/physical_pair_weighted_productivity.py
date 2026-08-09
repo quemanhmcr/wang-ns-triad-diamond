@@ -167,6 +167,28 @@ def transfer_weighted_log_product_lower(
     }
 
 
+def conditioned_physical_log_productivity_constant(
+    retained_fraction: float,
+    pair_cells: int,
+    scaled_lifetime: float = DEFAULT_SCALED_LIFETIME,
+    shell_radius: float = DEFAULT_SHELL_RADIUS,
+    child_wave_ratio: float = DEFAULT_SHELL_RADIUS,
+) -> float:
+    """Lambda for the physical-work law conditioned on a retained good subset.
+
+    If C carries fraction q=W_C/W of the generated positive physical work, KL
+    is applied to dT|C/W_C while the child-energy supremum is still controlled
+    by the full W.  The lower bound therefore gains exactly log q, i.e.
+    Lambda_C=q Lambda_full.
+    """
+    q = float(retained_fraction)
+    if not (0.0 < q <= 1.0):
+        raise ValueError("retained physical-work fraction must lie in (0,1]")
+    return q * physical_log_productivity_constant(
+        pair_cells, scaled_lifetime, shell_radius, child_wave_ratio
+    )
+
+
 def tempered_pair_cell_penalty_upper(pair_prefactor: float, cell_power: float) -> float:
     """Bound sum 2^(-j-1) log M_j for M_j<=M0 (j+3)^p.
 
@@ -204,6 +226,7 @@ def theorem_certificate() -> dict[str, object]:
         "shell": "finite selected Fourier shell gives a_c(t)<=C_Omega sqrt(N E(t)) by Holder; no adjoint Gaussian persistence is used",
         "registered_law": "after dual-Gaussian event marking and 1/4 common-slice registration per parent, E_dT log(alpha_p1 alpha_p2)>=log(alpha_c)+log Lambda_M",
         "default_one_pair_constant": f"for c=1 and default shell constants, Lambda_(M=1)={lam1:.12g}; for M cells Lambda_M=Lambda_1/M",
+        "conditioning": "if a first-stop/Young-good survivor set carries fraction q of physical HH work, conditioning costs exactly log q: Lambda_survivor=q Lambda_full; q>=1/2 loses at most log2",
         "refinement": "if M_j<=M0(j+3)^p, the binary recursion pays at most log M0+p log 6 in its entire geometrically discounted cell-count offset",
         "causal_weights": "all expectations are under actual positive physical child-energy work dT; Duhamel is not used to select or reweight parent pairs",
         "continuum_status": "the remaining PDE assembly is to verify the sharp-Young work-density premise on the retained signed-good hard event cells and apply the existing first-stop rules to any event that fails complex Young/common-slice registration; no dGamma-to-dT pair bridge remains",

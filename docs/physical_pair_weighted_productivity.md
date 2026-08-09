@@ -240,7 +240,23 @@ where
 The expectation is still taken with respect to **actual positive child-energy
 work**.  Duhamel has not selected, reweighted, or changed a parent pair.
 
-## 5. Fine symbol cells do not damage the asymptotic reuse slope
+## 5. Conditioning on the first-stop survivor set
+
+Let `C` be the set of physical pair events which survive all earlier causal stops and the complex-Young/common-slice registration gates, and write
+
+\[
+q={\mathcal T(C)\over W}.
+\]
+
+Apply the same KL proof to the normalized restricted law `dT|C/(qW)`.  The child shell-energy upper still uses the full generated work `W`, while the retained density numerator is `qW`.  Therefore the only change is
+
+\[
+\boxed{\Lambda_{C,M}=q\,\Lambda_M.}
+\]
+
+No new entropy inequality is needed.  In particular, if `q>=1/2`, survival conditioning loses at most `log 2` in the logarithmic productivity offset.  If `q<1/2`, more than half the physical work has already hit an earlier named causal stop and must be routed there rather than treated as a free continuing packet.
+
+## 6. Fine symbol cells do not damage the asymptotic reuse slope
 
 The smooth-symbol theorem may refine pair cells with
 
@@ -286,7 +302,7 @@ slope.
 This geometric discount is the key reason one does not need a uniform
 pointwise parent-product constant on every arbitrarily fine frequency cell.
 
-## 6. What this removes
+## 7. What this removes
 
 The previous architecture used Duhamel to prove a product bound and physical work
 to define causal weights.  That left a hidden question: is the Duhamel-important
