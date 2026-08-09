@@ -82,7 +82,8 @@ def test_source_unit_scale_cannot_change_dimensionless_pair_dominance():
         pair_shell_indices=[(i, i) for i in range(5)],
         pair_frequencies=[(1.0, 1.0)] * 5,
     )
-    assert out["joint_pair_routes"] == ("diffuse_pair_source_entropy",)
+    assert out["pair_owner_route"] == "critical_shell_via_entropy_tradeoff"
+    assert out["quarter_cut_corollaries"] == ("diffuse_pair_source_entropy",)
 
 
 def test_resolved_shell_lower_passes_to_u_only_by_contraction():
@@ -166,7 +167,8 @@ def test_exact_quarter_pair_boundary_keeps_dominance_and_entropy_joint():
         pair_shell_indices=[(0, 1), (2, 3), (4, 5), (6, 7)],
         pair_frequencies=[(1.0, 0.5)] * 4,
     )
-    assert set(out["joint_pair_routes"]) == {
+    assert out["pair_owner_route"] == "critical_shell_via_entropy_tradeoff"
+    assert set(out["quarter_cut_corollaries"]) == {
         "dominant_hard_pair_to_critical_shell",
         "diffuse_pair_source_entropy",
     }
@@ -190,7 +192,8 @@ def test_five_way_diffuse_pair_law_has_more_than_log4_entropy():
         pair_shell_indices=[(i, i) for i in range(5)],
         pair_frequencies=[(1.0, 1.0)] * 5,
     )
-    assert out["joint_pair_routes"] == ("diffuse_pair_source_entropy",)
+    assert out["pair_owner_route"] == "critical_shell_via_entropy_tradeoff"
+    assert out["quarter_cut_corollaries"] == ("diffuse_pair_source_entropy",)
     assert out["max_pair_u_shell_mass_lower"] >= out["entropy_shell_tradeoff_lower"]
     assert out["pair_source_entropy_is_causal_probability"] is False
 
@@ -203,3 +206,4 @@ def test_certificate_removes_aggregate_muV_from_canonical_pressure_route():
     assert "not causal" in cert["positive_source_cover"]
     assert "|S_(N/4)|<=1" in cert["dominant_pair"]
     assert "mu_child exp(H2_pair)>=320 Sigma_P/c" in cert["entropy_shell_tradeoff"]
+    assert "always enters generic critical-shell reentry" in cert["entropy_shell_tradeoff"]

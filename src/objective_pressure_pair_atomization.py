@@ -15,9 +15,8 @@ from src.resolved_objective_strain_collision import arb_clean_constants
 
 STATUS = (
     "EXACT_OBJECTIVE_PRESSURE_HESSIAN_DUAL_PAIR_ATOMIZATION__"
-    "ENTROPY_SHELL_TRADEOFF__DOMINANT_HARD_PAIR_TO_CRITICAL_SHELL__"
-    "DIFFUSE_PAIR_SOURCE_ENTROPY_CERTIFIED__AGGREGATE_MU_V_NOT_CANONICAL__"
-    "MASTER_ENTROPY_CONVERSION_REMAINS"
+    "PAIR_OWNER_ALWAYS_TO_CRITICAL_SHELL_WITH_ENTROPY_TRADEOFF__"
+    "QUARTER_SPLIT_ONLY_A_COROLLARY__AGGREGATE_MU_V_NOT_CANONICAL"
 )
 
 DEFAULT_PAIR_DOMINANCE = Fraction(1, 4)
@@ -315,10 +314,10 @@ def objective_pressure_pair_route(
       rho_P <= [r_R]_+ + sum_{a<=b}[p_ab]_+.
 
     After integration one of SGS or resolved-pair positive source carries at least
-    Sigma_P/2; exact ties remain joint.  On the pair branch, an unordered atom of
-    normalized mass >=theta gives an actual critical shell, while a diffuse law
-    has source/service collision entropy H2>=-log(theta).  This entropy is not a
-    causal HH probability.
+    Sigma_P/2; exact ties remain joint.  Every positive resolved pair law has a
+    largest physical unordered atom and therefore an actual critical shell via
+    `mu_child exp(H2_pair)>=320 Sigma_P/c`.  A quarter dominance/diffuse split is
+    only an optional corollary of this single route, not a second master fate.
     """
     sigma = float(pressure_source_weight)
     c = float(scaled_lifetime)
@@ -366,7 +365,7 @@ def objective_pressure_pair_route(
         "pair_positive_source_total": pair_total,
         "pair_source_entropy_is_causal_probability": False,
         "aggregate_muV_is_canonical_route": False,
-        "master_semantics": "RECURSE_CRITICAL_SOURCE; diffuse H2 is a source-fragmentation certificate until an independent ancestry/master conversion is supplied",
+        "master_semantics": "RECURSE_CRITICAL; every resolved pair owner enters the generic shell theorem, with H2 controlling seed strength rather than defining another fate",
         "status": STATUS,
     }
 
@@ -396,6 +395,9 @@ def objective_pressure_pair_route(
     out["max_pair_u_shell_mass_lower"] = max_pair_u_lower
     out["max_pair_witness_index"] = imax
     out["entropy_shell_tradeoff"] = "mu_child exp(H2_pair)>=320 Sigma_P/c"
+    out["pair_owner_route"] = "critical_shell_via_entropy_tradeoff"
+    out["critical_shell_mass_lower"] = tradeoff_lower
+    out["critical_shell_supplier_is_unconditional_on_quarter_cut"] = True
     diffuse = pmax <= theta
     pair_routes: list[str] = []
     dominant_witnesses: list[dict[str, object]] = []
@@ -430,8 +432,8 @@ def objective_pressure_pair_route(
         pair_routes.append("diffuse_pair_source_entropy")
         out["pair_source_entropy_lower"] = h0
     if not pair_routes:
-        raise AssertionError("pair law produced neither dominance nor diffuse entropy")
-    out["joint_pair_routes"] = tuple(pair_routes)
+        raise AssertionError("pair law lost both quarter-cut corollaries")
+    out["quarter_cut_corollaries"] = tuple(pair_routes)
     out["dominant_pair_witnesses"] = tuple(dominant_witnesses)
     out["clean_dominant_shell_mass_lower"] = clean_dominant_pair_shell_mass_lower(
         sigma, c, dominant_fraction=theta, max_pair_frequency_ratio=0.25
@@ -465,10 +467,10 @@ def theorem_certificate() -> dict[str, object]:
         "ordered_pair_sharp_clean": f"{sharp.numerator}/{sharp.denominator}<1/5",
         "unordered_pair_clean": "|p_ab|<=(kappa_ab/5)(Mmax/N)^4 sqrt(mu_a mu_b), kappa=1 diagonal, 2 off-diagonal",
         "source_half_split": "SGS positive pressure source >=Sigma_P/2 OR resolved positive pair source >=Sigma_P/2; ties joint",
-        "entropy_shell_tradeoff": "on the resolved pair owner, qmax>=exp(-H2) and the worst off-diagonal Mmax<=N/4 capacity give mu_child exp(H2_pair)>=320 Sigma_P/c; no dominance threshold is intrinsic",
+        "entropy_shell_tradeoff": "on every resolved pair owner, the countable positive law has an attained qmax>=exp(-H2); worst off-diagonal Mmax<=N/4 capacity gives mu_child exp(H2_pair)>=320 Sigma_P/c, so the pair owner always enters generic critical-shell reentry",
         "dominant_pair": "theta=1/4 first gives a resolved V-shell mass >=5 Sigma_P/(16c)(N/Mmax)^4; |S_(N/4)|<=1 transfers the same lower to the u shell, hence >=80 Sigma_P/c because Mmax<=N/4",
         "absolute_pair_sum": "for canonical M_j=(N/4)2^-j, sum unordered pair capacities <=N||V||_2^2/2560; mu_V appears only as an absolute-convergence budget",
-        "diffuse_pair": "if every unordered pair has source mass <=1/4, H2(pair source)>=log 4; this certifies source fragmentation only, not a causal probability or terminal transfer cost",
+        "quarter_corollary": "theta=1/4 is optional: qmax>=1/4 gives mu_child>=80 Sigma_P/c; qmax<=1/4 gives H2>=log4; equality gives both, but both are faces of the same unconditional shell route",
         "material_sidecar": f"material reuse is optional after the hard event; a fixed objective-Hessian material pair contracts by {reuse.numerator}/{reuse.denominator}<1/5 per signed-good low-strain generation",
         "coarse_muV": "rho_P<=mu_V/5700+||R||_(3/2)/380 remains a valid coarse diagnostic but is not the canonical pressure renewal route",
     }
@@ -486,14 +488,14 @@ class ObjectivePressurePairStress:
     minimum_diffuse_entropy_margin: float
     minimum_entropy_shell_tradeoff_margin: float
     maximum_joint_primary_owner_count: int
-    maximum_joint_pair_route_count: int
+    maximum_quarter_corollary_count: int
 
 
 def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectivePressurePairStress:
     rng = np.random.default_rng(seed)
     wr = wu = 0.0
     mc = mcap = mo = md = me = mt = float("inf")
-    max_primary = max_pair = 0
+    max_primary = max_corollary = 0
     for _ in range(samples):
         # Exact matrix dual/source atomization.
         n = int(rng.integers(1, 7))
@@ -562,9 +564,11 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectivePressurePair
         max_primary = max(max_primary, len(tuple(route["joint_primary_owners"])))
         if max(sgs, pair_total) + 3e-12 * max(1.0, threshold) < threshold:
             raise AssertionError("pressure owner half split failed")
-        if "joint_pair_routes" in route:
-            pair_routes = tuple(route["joint_pair_routes"])
-            max_pair = max(max_pair, len(pair_routes))
+        if "quarter_cut_corollaries" in route:
+            pair_routes = tuple(route["quarter_cut_corollaries"])
+            max_corollary = max(max_corollary, len(pair_routes))
+            if route["pair_owner_route"] != "critical_shell_via_entropy_tradeoff":
+                raise AssertionError("resolved pressure pair owner lost unconditional critical-shell route")
             trade = float(route["entropy_shell_tradeoff_lower"])
             actual_trade = float(route["max_pair_u_shell_mass_lower"])
             mt = min(mt, actual_trade - trade)
@@ -589,7 +593,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectivePressurePair
     if not math.isfinite(md): md = 0.0
     if not math.isfinite(me): me = 0.0
     if not math.isfinite(mt): mt = 0.0
-    return ObjectivePressurePairStress(samples, wr, mc, wu, mcap, mo, md, me, mt, max_primary, max_pair)
+    return ObjectivePressurePairStress(samples, wr, mc, wu, mcap, mo, md, me, mt, max_primary, max_corollary)
 
 
 def main() -> None:
@@ -638,16 +642,16 @@ The SGS branch still yields `int||R||_(3/2)>=190 Sigma_P` and enters the existin
 
 `mu_child exp(H2_pair) >= 320 Sigma_P/c`.
 
-Indeed `q_max>=sum q^2=exp(-H2_pair)`, and the maximal actual pair therefore exposes the stated hard `u`-shell lower after the strict-lowpass contraction.  The familiar `theta=1/4` split is only a corollary:
+Indeed a countable positive pair law has an attained maximal atom, `q_max>=sum q^2=exp(-H2_pair)`, and that actual pair exposes the stated hard `u`-shell lower after the strict-lowpass contraction.  Therefore **every resolved pressure-pair owner already enters the generic critical-shell theorem**.  The familiar `theta=1/4` split is only a diagnostic corollary:
 
 - if a pair is theta-dominant, its integrated capacity forces at some time an actual hard child shell with
 
   `mu_child >= [5 Sigma_P/(16c)](N/Mmax)^4 >= 80 Sigma_P/c`,
 
   because every resolved pair has `Mmax<=N/4`; this is a genuine input to the generic critical-shell theorem;
-- if no pair exceeds one quarter, the actual source law has `H2_pair>=log 4`.  This is a quantitative source-fragmentation certificate; ancestry/component conversion is a separate bridge, so it is not declared a terminal transfer cost or a causal HH probability.
+- if no pair exceeds one quarter, the actual source law has `H2_pair>=log 4`.  This quantifies why the unconditional shell seed is weaker, but it does not create another master fate and is not a causal HH probability.
 
-At exact quarter mass, dominance and entropy remain a joint pair route rather than a lexicographic tie-break.
+At exact quarter mass both corollaries hold.  They are not competing routes: the physical resolved-pair owner has already been sent once to the same critical-shell recursion.
 
 Material/coherent labels are deliberately absent from the scale proof.  They may be attached after the hard event as sidecars; on a supplied signed-good low-strain material lineage the previously certified fixed objective-Hessian pair contraction `<1/5` remains an optional reuse refinement.
 
@@ -663,7 +667,7 @@ Stress: `{out.samples}` pressure tensor/pair/source states
 - minimum diffuse-entropy margin: `{out.minimum_diffuse_entropy_margin:.3e}`
 - minimum entropy-shell tradeoff margin: `{out.minimum_entropy_shell_tradeoff_margin:.3e}`
 - maximum joint primary owner count: `{out.maximum_joint_primary_owner_count}`
-- maximum joint pair-route count: `{out.maximum_joint_pair_route_count}`
+- maximum simultaneous quarter-cut corollaries: `{out.maximum_quarter_corollary_count}`
 
 No packet synchronization, no coherent-frequency support fiction, no aggregate pressure-mass reset, and no Navier--Stokes global-regularity conclusion are asserted.
 """

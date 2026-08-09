@@ -231,9 +231,9 @@ Because `R_pair>=Sigma_P/2`, the maximal actual unordered pair carries at least 
 }
 \]
 
-This is the native pressure statement: concentration of the pair law and critical shell mass are conjugate.
+This is the native pressure statement: concentration of the pair law and critical shell mass are conjugate.  For a countable probability law the supremum atom is attained (otherwise infinitely many atoms would stay above half the positive supremum and the total mass would diverge).  Hence the displayed lower belongs to an **actual pair**, not merely to a supremum.  Since it is positive for every finite `H2`, every resolved pressure-pair owner already supplies a genuine critical shell.
 
-### Quarter split as a corollary
+### Quarter split as a diagnostic corollary
 
 Take `theta=1/4` only when the master wants a fixed dichotomy.  If an unordered pair has `q_ab>=theta`, then on the pair owner branch
 
@@ -303,9 +303,9 @@ Therefore
 \boxed{H_2(q)\ge\log4.}
 \]
 
-This is the collision entropy of the **actual positive pressure source law**.  It is already a quantitative fragmentation certificate.  If ancestry labels are later attached, the exact atomic-to-component chain rule may further split it into component entropy or same-ancestry pair mass; however the weighted cycle/master conversion is a separate theorem interface.  Therefore this result does **not** by itself declare a terminal `TRANSFER_COST`, and it must not be relabeled a Shannon/Renyi child-energy causal law.
+This is the collision entropy of the **actual positive pressure source law**.  It measures the weakening of the unconditional shell seed through the exact conjugate relation above.  It is not a new causal fate, not a terminal `TRANSFER_COST`, and not a Shannon/Renyi child-energy law.  If ancestry labels are later attached, the exact atomic-to-component chain rule may still use it as extra provenance, but pressure renewal does not need that conversion.
 
-At exact `q_max=1/4`, both the dominant-pair shell route and the entropy route are valid and are kept jointly.  Both are merely faces of the continuous identity `mu_child e^(H2_pair)>=320 Sigma_P/c`.
+At exact `q_max=1/4`, both quarter-cut corollaries hold.  Both are merely faces of the continuous identity `mu_child e^(H2_pair)>=320 Sigma_P/c`; the pair owner itself has already been routed once to the critical shell.
 
 ## 8. Material reuse is a sidecar refinement
 
@@ -339,7 +339,7 @@ and on the resolved law the threshold-free state relation is
 \boxed{\mu_{child}e^{H_2^{source}}\ge320\,\Sigma_P/c.}
 \]
 
-If a fixed quarter cut is useful, this becomes
+Every resolved pair owner therefore re-enters the critical-shell corridor.  If a fixed quarter cut is useful only for diagnostics, the same law implies
 
 \[
 \boxed{
