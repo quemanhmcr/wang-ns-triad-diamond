@@ -2,7 +2,7 @@ import math
 import numpy as np
 from src.coherent_increment_service import (
     coherent_service_route, cubic_to_square_threshold, discrete_cell_increment_energies,
-    low_square_service_lower, periodic_increment_covariance_residual,
+    exact_certificate, low_square_service_lower, periodic_increment_covariance_residual,
 )
 
 
@@ -45,3 +45,11 @@ def test_entropy_or_cycle_constants():
     r=coherent_service_route(Y,d,.05,.02,.02,w,list(range(8)))
     assert r['branch']=='new_service_Bellman_entropy'
     assert r['H_ancestry']>=math.log(2)-1e-12
+
+
+def test_canonical_lp_registration_keeps_observable_and_pde_tail_distinct():
+    cert=exact_certificate()
+    assert 'square-normalized' in cert['canonical_lp_registration']
+    assert 'D_tail>=D_high/4' in cert['canonical_lp_registration']
+    assert 'smooth-LP service observable' in cert['observer_pde_separation']
+    assert 'orthogonal PDE dissipation currency' in cert['observer_pde_separation']

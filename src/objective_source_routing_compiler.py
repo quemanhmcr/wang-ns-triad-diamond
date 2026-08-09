@@ -19,6 +19,7 @@ from src.coherent_averaged_strain_source import (
 from src.coherent_increment_service import cubic_to_square_threshold
 from src.high_frequency_dissipation_reentry import (
     STATUS as HIGH_FREQUENCY_REENTRY_STATUS,
+    canonical_square_lp_tail_comparison_constant,
     classify_high_tail_energy_owners,
     lp_high_clean_reentry_thresholds,
     physical_tail_dissipation_lower_from_lp,
@@ -362,20 +363,26 @@ def objective_sgs_aggregate_route(
 
 def objective_sgs_high_frequency_physical_reentry(
     high_frequency_dissipation: float,
-    lp_to_physical_tail_lower: float,
     viscosity: float,
     inherited_scaled_tail_energy: float,
     positive_scaled_tail_work: float,
+    *,
+    lp_to_physical_tail_lower: float | None = None,
 ) -> dict[str, object]:
     """Route the SGS high-frequency service exit through its native tail-energy law.
 
     `D_high` remains the smooth-LP high-frequency normalized enstrophy.  It
-    reaches the orthogonal hard-tail energy theorem only through the supplied
-    certified comparison `D_tail>=c_LP D_high`; neither currency is relabeled
-    resolved `D_V`.
+    reaches the orthogonal hard-tail energy theorem only through a certified
+    comparison `D_tail>=c_LP D_high`.  If no constant is supplied, use the
+    canonical square-normalized smooth dyadic choice `c_LP=1/4`.
     """
+    c_lp = (
+        canonical_square_lp_tail_comparison_constant()
+        if lp_to_physical_tail_lower is None
+        else float(lp_to_physical_tail_lower)
+    )
     D_tail_lower = physical_tail_dissipation_lower_from_lp(
-        high_frequency_dissipation, lp_to_physical_tail_lower
+        high_frequency_dissipation, c_lp
     )
     gate = classify_high_tail_energy_owners(
         D_tail_lower,
@@ -387,8 +394,9 @@ def objective_sgs_high_frequency_physical_reentry(
         "owner": "sgs_high_frequency_dissipation",
         "energy_gate": gate,
         "clean_thresholds": lp_high_clean_reentry_thresholds(
-            high_frequency_dissipation, lp_to_physical_tail_lower, viscosity
+            high_frequency_dissipation, c_lp, viscosity
         ),
+        "lp_to_physical_tail_lower": c_lp,
         "physical_tail_dissipation_lower": D_tail_lower,
         "next_theorem_status": HIGH_FREQUENCY_REENTRY_STATUS,
         "resolved_DV_supplier": False,

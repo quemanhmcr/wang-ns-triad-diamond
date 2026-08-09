@@ -15,7 +15,28 @@ There is a filter displacement `r` for which
 \|\delta_r u\|_3^2\ge (Q/g_1)^{2/3}.
 \]
 
-For a dyadic decomposition `u=sum_j u_j`, `M_j=2^jN`, standard `L^3` square-function and Bernstein give
+For the master-facing construction, fix one smooth square-normalized Littlewood--Paley **analysis--synthesis frame** once and for all.  Put
+
+\[
+u_j=\phi_j(D)u,
+\qquad
+\sum_j|\phi_j(\xi)|^2=1,
+\qquad
+u=\sum_j\phi_j(D)u_j,
+\]
+
+away from zero, with the high analysis shell `j` supported above `|xi|=M_j/2`.  Such a frame is obtained directly from any smooth dyadic annular cover: choose smooth covering bumps `q_j`, then set `phi_j=q_j/(sum_k |q_k|^2)^(1/2)` on the covered frequency region.  This preserves the annular supports and gives the quadratic partition exactly.  The last identity is then the exact Calderón reconstruction and avoids the false requirement `u=sum_j u_j` for overlapping smooth analysis bands.  This does not remove the ordinary finite `L^3` square-function/Bernstein constants `C_LP,C_B` used below.  It does, however, identify the exact `L^2` comparison needed by the later physical tail-energy theorem:
+
+\[
+\boxed{
+D_{tail}:=N\int\|\nabla P_{>N}u\|_2^2dt
+\ge \frac14D_{high}^{LP}.
+}
+\]
+
+Indeed `|xi|>=M_j/2` implies `M_j^2<=4|xi|^2`, and square normalization gives `sum_j||phi_j(D)u||_2^2` with no overlap loss in `L^2`.  Thus the LP observable and the orthogonal PDE tail remain distinct objects, but their comparison constant is fixed by the same canonical decomposition rather than by a second observer choice.
+
+For these analysis pieces `u_j=phi_j(D)u`, `M_j=2^jN`, standard `L^3` square-function and Bernstein give
 
 \[
 \|\delta_ru\|_3^2

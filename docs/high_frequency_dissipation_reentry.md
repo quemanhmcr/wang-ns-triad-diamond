@@ -32,11 +32,17 @@ A smooth LP high observable may enter only through an explicit, fixed comparison
 
 \[
 \boxed{
-D_{tail}\ge c_{LP}D_{high},
+D_{tail}\ge c_{LP}D_{high}.
 }
 \]
 
-where `c_LP>0` belongs to the chosen partition.  No hidden equality is assumed.
+For high multipliers with `supp phi_j subset {|xi|>=a M_j}` and `sum_j|phi_j|^2<=B`, Plancherel gives the exact formula
+
+\[
+\boxed{c_{LP}=a^2/B.}
+\]
+
+The canonical smooth analysis--synthesis frame registered in coherent increment service has `a=1/2` and `B=1`, hence `c_LP=1/4`.  No hidden equality between the LP observable and the hard tail is assumed.
 
 For the auxiliary **hard orthogonal annuli**
 
@@ -59,7 +65,7 @@ Plancherel gives the exact spectral comparison
 }
 \]
 
-Thus the hard-annulus supplier has the clean explicit constant `c_LP=1/4`.  A smooth LP implementation supplies its own certified constant.
+Thus the auxiliary hard-annulus supplier has the same clean constant `1/4`.  The canonical smooth square-LP frame already supplies `c_LP=1/4`; only an alternative LP frame needs a different certified constant.
 
 ## The physical identity
 

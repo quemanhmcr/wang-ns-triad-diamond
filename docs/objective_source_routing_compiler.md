@@ -187,13 +187,13 @@ No 3D Navier--Stokes global-regularity conclusion is asserted.
 
 ## High-frequency SGS service is handed to physical tail energy, not to `D_V`
 
-The `D_high` exit of coherent increment service remains a standard smooth-LP normalized-enstrophy observable.  It is **not** identified with an orthogonal hard tail.  The companion theorem requires the chosen LP partition to supply a fixed certified comparison
+The `D_high` exit of coherent increment service remains a smooth-LP normalized-enstrophy observable.  It is **not** identified with an orthogonal hard tail.  We fix the same square-normalized smooth LP analysis--synthesis frame used by coherent service; its lower high-band support is `M_j/2` and its `L^2` square-Bessel constant is one.  Hence the companion theorem has the canonical certified comparison
 
 \[
 D_{tail}:=N\int\|\nabla P_{>N}u\|_2^2dt\ge c_{LP}D_{high}.
 \]
 
-For hard orthogonal dyadic annuli the spectral lower is exactly `c_LP=1/4`; a smooth LP implementation carries its own fixed constant.  The hard-tail Navier--Stokes energy law then gives
+Thus `c_LP=1/4` already for the canonical smooth LP frame; hard orthogonal dyadic annuli independently exhibit the same one-quarter spectral lower.  Alternative LP frames must carry their own fixed comparison constant.  The hard-tail Navier--Stokes energy law then gives
 
 \[
 N\|P_{>N}u(s)\|_2^2+NW_>^+\ge2\nu D_{tail}.

@@ -134,6 +134,8 @@ def exact_certificate() -> dict[str,str]:
         'translation_covariance':'V_g(delta_r u)(X,k)=e^{-ik.r}V_g u(X-r,k)-V_g u(X,k)',
         'local_energy_capacity':'s_jC <= 2 M_j[E_j(C)+E_j(C-r)]',
         'clean_route':'d_high>=Y/4 OR oldcap>Y/8 OR Xi>=Y/8 OR fresh coherent mass>=Y/32 OR log2 entropy OR 1/4 cycle mass',
+        'canonical_lp_registration':'fix one smooth square-normalized LP analysis-synthesis frame u_j=phi_j(D)u, sum_j|phi_j|^2=1, u=sum_j phi_j(D)u_j, with high-band support |xi|>=M_j/2; the existing L3 square-function/Bernstein constants remain C_LP,C_B, while the L2 tail comparison is D_tail>=D_high/4',
+        'observer_pde_separation':'d_high is the smooth-LP service observable; D_tail=N int||grad P_>N u||_2^2 dt is the orthogonal PDE dissipation currency; they meet only through the registered one-quarter comparison',
         'status':'EXACT_MOYAL_CELL_ROUTING_GIVEN_STANDARD_LP_BERNSTEIN',
     }
 
@@ -192,6 +194,10 @@ Status: **{cert['status']}**.
 Let `Q` be the cubic increment charge and `g1=||G||_1`.  Some filter displacement `r` satisfies
 
 `||delta_r u||_3^2 >= (Q/g1)^(2/3)`.
+
+Fix one smooth square-normalized LP analysis--synthesis frame `u_j=phi_j(D)u`, `sum|phi_j|^2=1`, `u=sum phi_j(D)u_j`, with the high band `j` supported above `M_j/2`.  Its ordinary `L^3` square-function/Bernstein constants remain the supplied `C_LP,C_B`.  In `L^2`, the same frame gives the exact downstream comparison
+
+`D_tail=N int||grad P_>N u||_2^2 dt >= D_high/4`.
 
 With `Y=(Q/g1)^(2/3)/(C_LP C_B)^2`, standard LP/Bernstein gives
 

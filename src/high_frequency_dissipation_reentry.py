@@ -12,8 +12,8 @@ import numpy as np
 from src.critical_shell_service_reentry import critical_shell_bounded_service_lower
 
 STATUS = (
-    "EXACT_HIGH_FREQUENCY_SERVICE_DISSIPATION_TO_INHERITED_CRITICAL_SHELL_OR_PHYSICAL_REGENERATION__"
-    "NO_RESOLVED_DV_RELABEL"
+    "EXACT_SQUARE_LP_HIGH_SERVICE_TO_PHYSICAL_TAIL_ENERGY__"
+    "INHERITED_CRITICAL_SHELL_OR_PHYSICAL_REGENERATION__NO_RESOLVED_DV_RELABEL"
 )
 
 
@@ -25,11 +25,12 @@ def dyadic_high_ratios(count: int) -> np.ndarray:
     return 2.0 ** np.arange(1, n + 1, dtype=float)
 
 
-def integrated_high_lp_currency(shell_mass_integrals: Sequence[float]) -> float:
+def integrated_hard_annular_currency(shell_mass_integrals: Sequence[float]) -> float:
     """D_>^hard=sum_j 2^j int mu_j d tau, mu_j=M_j||P_j u||_2^2.
 
-    Here tau=N^2 t and M_j=2^j N.  This is the native high-frequency
-    normalized-enstrophy currency used by the coherent increment service route.
+    Here tau=N^2 t and M_j=2^j N.  This is an auxiliary **hard-annular**
+    comparison currency.  The coherent increment theorem uses smooth LP bands;
+    the two are not identified.
     """
     a = np.asarray(tuple(float(x) for x in shell_mass_integrals), dtype=float)
     if a.ndim != 1 or len(a) == 0 or np.any(~np.isfinite(a)) or np.any(a < 0):
@@ -62,8 +63,39 @@ def high_tail_scaled_gradient_bounds(shell_mass_integrals: Sequence[float]) -> t
 
       D_>^hard/4 <= N int||grad P_>N u||_2^2 dt <= D_>^hard.
     """
-    D = integrated_high_lp_currency(shell_mass_integrals)
+    D = integrated_hard_annular_currency(shell_mass_integrals)
     return D / 4.0, D
+
+
+def lp_tail_comparison_constant(
+    lower_support_fraction: float = 0.5,
+    square_bessel_upper: float = 1.0,
+) -> float:
+    """Exact LP-to-hard-tail constant from support plus the L2 square/Bessel law.
+
+    Suppose the same smooth high LP multipliers used upstream obey
+
+      supp phi_j subset {|xi|>=a M_j},   sum_(j>=1)|phi_j(xi)|^2 <= B,
+
+    with `a>=1/2`, `M_j=2^jN`.  Then every high multiplier lies in `|xi|>=N` and
+
+      sum_j (M_j^2/N)||phi_j(D)u||_2^2
+      <= (B/a^2) N^-1 ||grad P_>N u||_2^2.
+
+    Thus the physical hard-tail dissipation dominates the LP high currency by
+    `c_LP=a^2/B`.  A square-normalized smooth dyadic partition has `B=1`; with
+    the standard lower annular support `a=1/2`, the canonical constant is 1/4.
+    """
+    a = float(lower_support_fraction)
+    B = float(square_bessel_upper)
+    if a < 0.5 or B <= 0 or not math.isfinite(a + B):
+        raise ValueError("require finite lower support fraction >=1/2 and positive square-Bessel upper")
+    return a * a / B
+
+
+def canonical_square_lp_tail_comparison_constant() -> float:
+    """Canonical smooth square-LP choice: lower annular support 1/2, Bessel upper 1."""
+    return lp_tail_comparison_constant(0.5, 1.0)
 
 
 def physical_tail_dissipation_lower_from_lp(
@@ -77,10 +109,10 @@ def physical_tail_dissipation_lower_from_lp(
 
       N int||grad P_>N u||_2^2 dt >= c_LP D_high.
 
-    This function keeps `c_LP` explicit.  For the hard annuli used in this module,
-    the spectral lower is exactly `c_LP=1/4`.  A smooth LP implementation must
-    supply its own certified fixed comparison constant rather than being silently
-    identified with the hard tail.
+    This function keeps `c_LP` explicit.  The canonical smooth square-normalized
+    LP analysis frame registered by coherent increment service has lower support
+    fraction 1/2 and L2 square-Bessel constant 1, hence `c_LP=1/4`.  Other LP
+    frames may enter only with their own certified comparison constant.
     """
     D = float(lp_high_currency)
     c = float(lp_to_physical_tail_lower)
@@ -347,10 +379,13 @@ def theorem_certificate() -> dict[str, object]:
     counter = direct_high_enstrophy_shell_counterexample(40, 1.0)
     if counter["critical_shell_mass"] >= 1e-10:
         raise AssertionError("counterexample did not expose absence of a direct high-enstrophy mass floor")
+    c_lp = canonical_square_lp_tail_comparison_constant()
+    if abs(c_lp - 0.25) > 1e-15:
+        raise AssertionError("canonical square-LP tail comparison lost its one-quarter constant")
     return {
         "status": STATUS,
         "native_currency": "D_tail=N int||grad P_>N u||_2^2 dt is the physical orthogonal-tail dissipation currency; it is neither smooth-LP d_high nor resolved low-pass D_V",
-        "lp_supplier": "a smooth LP d_high may enter only through an explicit certified comparison D_tail>=c_LP D_high; for hard annuli M_j/2<|xi|<=M_j the exact lower is c_LP=1/4",
+        "lp_supplier": "if high LP multipliers satisfy supp phi_j subset {|xi|>=a M_j}, a>=1/2, and sum|phi_j|^2<=B, then D_tail>=(a^2/B)D_high; the canonical square-normalized smooth dyadic choice a=1/2,B=1 gives c_LP=1/4 exactly",
         "spectral_bridge": "for hard annular D_>^hard=sum 2^j int mu_j d tau, D_>^hard/4 <= D_tail <= D_>^hard",
         "energy_gate": "N||P_>N u(s)||_2^2 + N W_>^+ >= 2 nu D_tail, so inherited tail energy or actual positive nonlinear tail work is >=nu D_tail",
         "inherited_branch": "N||P_>N u||^2=sum 2^-j mu_j with sum 2^-j=1; therefore some M_j>=2N has mu_j>=nu D_tail (or >=nu c_LP D_high for an LP supplier) and enters the generic critical-shell theorem",
@@ -382,7 +417,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> HighFrequencyReentryS
         n = int(rng.integers(1, 18))
         U = np.exp(rng.uniform(-12.0, 3.0, size=n))
         ratios = dyadic_high_ratios(n)
-        D = integrated_high_lp_currency(U)
+        D = integrated_hard_annular_currency(U)
 
         # Exact shell spectral radii r_j=|xi|/M_j in (1/2,1] give the true
         # scaled gradient integral G=sum 2^j r_j^2 int mu_j d tau.
@@ -474,11 +509,11 @@ The physical theorem is formulated first in the PDE's own currency
 
 `D_tail=N int ||grad P_>N u||_2^2 dt`.
 
-This orthogonal hard-tail dissipation is **not** resolved low-pass `D_V`, and it is not silently identified with the smooth LP `d_high` used by coherent increment service.  A chosen smooth LP partition supplies the theorem only through a certified fixed comparison
+This orthogonal hard-tail dissipation is **not** resolved low-pass `D_V`, and it is not silently identified with the smooth LP `d_high` used by coherent increment service.  For high LP analysis multipliers supported above `a M_j` with square-Bessel upper `B`, Plancherel gives
 
-`D_tail >= c_LP D_high`.
+`D_tail >= c_LP D_high`,  `c_LP=a^2/B`.
 
-For the hard annuli `M_j=2^jN`, `M_j/2<|xi|<=M_j`, the exact spectral comparison is `c_LP=1/4`.  Writing `mu_j=M_j||P_j u||_2^2`, the hard annular currency is `D_>^hard=int sum_j2^j mu_j d tau`.
+The canonical smooth square-normalized analysis--synthesis frame registered upstream has `a=1/2`, `B=1`, hence `c_LP=1/4`.  Independently, for the auxiliary hard annuli `M_j=2^jN`, `M_j/2<|xi|<=M_j`, the same one-quarter spectral lower holds.  Writing `mu_j=M_j||P_j u||_2^2`, the hard annular currency is `D_>^hard=int sum_j2^j mu_j d tau`.
 
 Indeed `D_high` alone cannot force a critical shell: placing all currency at level `j` with `mu_j=2^-j D_high` keeps `2^j mu_j=D_high` while `mu_j->0`.
 
@@ -522,7 +557,7 @@ The last HH statement is **not** the generated-energy gate.  Actual positive HH 
 
 Thus the anonymous high-frequency enstrophy exit has been replaced by native physical owners:
 
-`D_high -> inherited critical shell OR actual positive HH/interface regeneration`.
+`smooth-LP D_high -> physical D_tail -> inherited critical shell OR actual positive HH/interface regeneration`.
 
 No `D_high -> D_V` relabel, no packet persistence, no additive reset.
 

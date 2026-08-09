@@ -4,6 +4,7 @@ import pytest
 
 from src.high_frequency_dissipation_reentry import (
     STATUS,
+    canonical_square_lp_tail_comparison_constant,
     classify_high_tail_energy_owners,
     classify_regeneration_work_owners,
     direct_high_enstrophy_shell_counterexample,
@@ -13,7 +14,8 @@ from src.high_frequency_dissipation_reentry import (
     lp_high_clean_reentry_thresholds,
     physical_tail_dissipation_lower_from_lp,
     inherited_tail_shell_witness,
-    integrated_high_lp_currency,
+    integrated_hard_annular_currency,
+    lp_tail_comparison_constant,
     positive_shell_work_disintegration,
     scaled_tail_energy_from_shell_masses,
     theorem_certificate,
@@ -30,7 +32,7 @@ def test_high_enstrophy_alone_has_no_uniform_shell_floor():
 
 def test_hard_annulus_gradient_bridge_constants():
     U = [0.7, 0.2, 0.05]
-    D = integrated_high_lp_currency(U)
+    D = integrated_hard_annular_currency(U)
     lo, hi = high_tail_scaled_gradient_bounds(U)
     assert lo == pytest.approx(D / 4.0)
     assert hi == pytest.approx(D)
@@ -104,3 +106,9 @@ def test_certificate_forbids_two_false_shortcuts():
     assert "D_tail>=c_LP D_high" in cert["lp_supplier"]
     assert "no critical-shell floor" in cert["anti_relabel"]
     assert "not automatically" in cert["no_false_productivity"]
+
+
+def test_square_lp_tail_comparison_formula_and_canonical_quarter():
+    assert lp_tail_comparison_constant(0.5,1.0) == pytest.approx(0.25)
+    assert lp_tail_comparison_constant(0.75,1.5) == pytest.approx(0.75**2/1.5)
+    assert canonical_square_lp_tail_comparison_constant() == pytest.approx(0.25)
