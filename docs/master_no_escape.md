@@ -2138,7 +2138,19 @@ Take a scalar smooth envelope `Q_A=1` on the whole hard shell with lower support
 
 The NN mark belongs to the `P_jV` heat edge and the critical coefficient to the simultaneous `P_ju` shell.  They remain distinct exact provenance marks; no inverse low-pass estimate or full-shell NN assertion is inserted.  Dedicated run `31300227437` on `2f64de3` passed `528` tests plus `50,000` seed states; full integration `31300227438` passed the complete stack and master `20,000` traces with worst margin `0`.  Stored artifact: `recorded-results/31300227437/`.
 
-Quantitative old-incident heat capacity and eventwise carrier-seed extraction are therefore supplied on any already-provided signed-good band-addressed material epoch.  Neither OO nor ON can be an indefinitely reusable third regime, and the NN-critical remainder already generates a positive law of lower-scale smooth Fourier carrier seeds without a packet/cell floor.  What remains is **universal renewed-slab attachment**: extend almost every such seed through a full renewed natural slab while retaining the appropriate material provenance, or hit an existing strain/source/relink/HH-generation/initial-boundary first stop.  The whole `u` shell is not declared NN material.  Fixed-shell/material-chart/role commutators across the temporal extension must remain explicit.
+Quantitative old-incident heat capacity and eventwise carrier-seed extraction are therefore supplied on any already-provided signed-good band-addressed material epoch.  Neither OO nor ON can be an indefinitely reusable third regime, and the NN-critical remainder already generates a positive law of lower-scale smooth Fourier carrier seeds without a packet/cell floor.
+
+The temporal extension of each such seed is now also exact.  On the backward natural interval `[max(0,t-cA^-2),t]`, monitor renewed strain, classified role-interface coefficient impulse, HH coefficient impulse, and the intrinsic boundary distance of the two retained NN heat-edge endpoints in their native units.  Until a first hit, low--low remains excluded and
+
+`z(t)=z(s)+I_HH[s,t]+I_interface[s,t]`.
+
+Thus a branch either reaches a named strain/interface/HH/material-boundary first stop, reaches the absorbing initial boundary, or survives the full natural interval with
+
+`|z(s)|>=|z(t)|/4`,  hence  `A|z(s)|^2>=pi^2/(50c^2)`.
+
+This is a critical **smooth-carrier** survivor with an NN endpoint witness, not a theorem that the whole carrier energy is NN material.  Large interface or HH coefficient impulses are not reinterpreted as work.  Dedicated run `31301650158` and full integration `31301745046` on exact SHA `a2f2a3b` both passed the `534`-test theorem suite; the dedicated `50,000`-corridor stress had worst Duhamel residual `5.184e-15` and zero monitor-order/unit failures.  The artifact is stored under `recorded-results/31301650158/`.
+
+What remains of the high-strain route is therefore narrower: **material/efficiency attachment of a full-natural-corridor survivor**.  One must couple its surviving critical coefficient to its retained NN witness strongly enough to initiate the canonical material-service epoch, or show that failure is already one of the named physical causes.  The whole `u` shell is not declared NN material.
 
 The decisive remaining continuum bridge is still **universal physical slab renewal/exhaustion**.  Every recursive source/SGS, critical-dissipation, material/new-ancestry and earlier-HH route must either enter a renewed smooth carrier slab satisfying the already proved scale/moat/service/natural-lifetime hypotheses, or hit an already named first-stop cause.  No synthetic packet selector, cutoff-interface charge, or common-unit tie clock is allowed to stand in for that PDE coverage theorem.
 
