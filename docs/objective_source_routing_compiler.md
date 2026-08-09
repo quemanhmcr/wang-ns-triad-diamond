@@ -184,3 +184,25 @@ This theorem is an assembly theorem for source ownership.  It deliberately does 
 The remaining continuum work is the final master assembly/topology that composes these native owners with physical positive HH causality, common-slice propagation, service/flat erosion and the existing entropy/Hodge machinery without double charging.
 
 No 3D Navier--Stokes global-regularity conclusion is asserted.
+
+## High-frequency SGS service is now handed to tail energy, not to `D_V`
+
+The `D_high` exit of coherent increment service has its own native re-entry theorem.  It remains the hard-tail normalized-enstrophy currency
+
+\[
+D_>^{LP}=\int\sum_{j\ge1}2^j\mu_j\,d\tau,
+\]
+
+not resolved low-pass `D_V`.  The hard-tail Navier--Stokes energy law gives
+
+\[
+N\|P_{>N}u(s)\|_2^2+NW_>^+\ge\frac\nu2D_>^{LP}.
+\]
+
+Hence either inherited high-tail energy or actual positive nonlinear regeneration work carries `nu D_high/4`.  The inherited owner exposes a genuine hard shell with the same critical-mass lower.  The regeneration owner disintegrates into actual positive high-shell work and, because low--low is support-excluded on those shells, into HH or resolved cross/interface work.
+
+Thus the compiler's high-frequency branch now has a physical owner interface:
+
+`SGS source -> coherent service -> D_high -> inherited critical shell OR positive HH/interface regeneration`.
+
+This still creates no finite reset and does not make a large HH work atom satisfy the generated-energy productivity gate automatically.

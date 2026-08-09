@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'src/objective_source_routing_compiler.py'
+      - 'src/high_frequency_dissipation_reentry.py'
       - 'tests/test_objective_source_routing_compiler.py'
       - 'docs/objective_source_routing_compiler.md'
       - '.github/workflows/objective-source-routing-compiler.yml'
@@ -37,6 +38,8 @@ jobs:
         run: python -m src.resolved_objective_strain_collision --samples 50000 --outdir results-resolved-objective-strain
       - name: Coherent averaged source dependency
         run: python -m src.coherent_averaged_strain_source --samples 50000 --outdir results-coherent-averaged-source
+      - name: High-frequency dissipation reentry dependency
+        run: python -m src.high_frequency_dissipation_reentry --samples 50000 --outdir results-high-frequency-dissipation-reentry
       - name: Critical shell dependency
         run: python -m src.critical_shell_service_reentry --samples 50000 --outdir results-critical-shell-service-reentry
       - name: Pressure reservoir dependency
@@ -49,6 +52,7 @@ jobs:
           name: objective-source-routing-compiler-results
           path: |
             results-objective-source-routing-compiler/
+            results-high-frequency-dissipation-reentry/
             results-resolved-objective-strain/
             results-coherent-averaged-source/
             results-critical-shell-service-reentry/

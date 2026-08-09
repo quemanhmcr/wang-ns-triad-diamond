@@ -12,6 +12,7 @@ from src.objective_source_routing_compiler import (
     objective_owner_weight_threshold,
     objective_sgs_aggregate_route,
     objective_sgs_episode_thresholds,
+    objective_sgs_high_frequency_physical_reentry,
     objective_sgs_square_service_per_source,
     pressure_source_alternatives,
     theorem_certificate,
@@ -159,3 +160,21 @@ def test_certificate_records_two_forbidden_identifications():
     text = cert["forbidden_identifications"]
     assert "pressure low-pass mass is not generic critical-shell mass" in text
     assert "high-frequency SGS dissipation is not resolved D_V" in text
+
+
+def test_high_frequency_owner_uses_tail_energy_not_resolved_DV():
+    D = 0.4
+    nu = 1.0
+    threshold = nu * D / 4.0
+    out = objective_sgs_high_frequency_physical_reentry(
+        D,
+        nu,
+        inherited_scaled_tail_energy=threshold,
+        positive_scaled_tail_work=threshold,
+    )
+    assert set(out["energy_gate"]["joint_owners"]) == {
+        "inherited_tail_energy",
+        "positive_nonlinear_regeneration",
+    }
+    assert out["resolved_DV_supplier"] is False
+    assert out["clean_thresholds"]["inherited_critical_shell_mass"] == pytest.approx(threshold)

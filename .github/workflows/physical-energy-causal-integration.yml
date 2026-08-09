@@ -18,6 +18,7 @@ on:
       - 'src/critical_shell_service_reentry.py'
       - 'src/material_label_carrier_quotient.py'
       - 'src/objective_source_routing_compiler.py'
+      - 'src/high_frequency_dissipation_reentry.py'
       - 'src/complex_young_parent_marking.py'
       - 'src/dual_gaussian_root_registration.py'
       - 'src/bargmann_root_cell_registration.py'
@@ -68,6 +69,7 @@ jobs:
       - run: python -m src.critical_shell_service_reentry --samples 50000 --outdir results-integration/critical-shell-service-reentry
       - run: python -m src.material_label_carrier_quotient --samples 50000 --outdir results-integration/material-label-carrier-quotient
       - run: python -m src.objective_source_routing_compiler --samples 50000 --outdir results-integration/objective-source-routing-compiler
+      - run: python -m src.high_frequency_dissipation_reentry --samples 50000 --outdir results-integration/high-frequency-dissipation-reentry
       - run: python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young
       - run: python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian
       - run: python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor
