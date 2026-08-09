@@ -1,0 +1,421 @@
+certify	Set up job	﻿2026-08-09T03:50:48.9262313Z Current runner version: '2.336.0'
+certify	Set up job	2026-08-09T03:50:48.9288209Z ##[group]Runner Image Provisioner
+certify	Set up job	2026-08-09T03:50:48.9289202Z Hosted Compute Agent
+certify	Set up job	2026-08-09T03:50:48.9290092Z Version: 20260707.563
+certify	Set up job	2026-08-09T03:50:48.9290734Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+certify	Set up job	2026-08-09T03:50:48.9291513Z Build Date: 2026-07-07T19:33:50Z
+certify	Set up job	2026-08-09T03:50:48.9292231Z Worker ID: {14cc41d2-9fe5-4b90-bbc0-ca078ecd5107}
+certify	Set up job	2026-08-09T03:50:48.9292929Z Azure Region: westus2
+certify	Set up job	2026-08-09T03:50:48.9293609Z ##[endgroup]
+certify	Set up job	2026-08-09T03:50:48.9295081Z ##[group]Operating System
+certify	Set up job	2026-08-09T03:50:48.9295786Z Ubuntu
+certify	Set up job	2026-08-09T03:50:48.9296318Z 24.04.4
+certify	Set up job	2026-08-09T03:50:48.9296813Z LTS
+certify	Set up job	2026-08-09T03:50:48.9297402Z ##[endgroup]
+certify	Set up job	2026-08-09T03:50:48.9297940Z ##[group]Runner Image
+certify	Set up job	2026-08-09T03:50:48.9298509Z Image: ubuntu-24.04
+certify	Set up job	2026-08-09T03:50:48.9299122Z Version: 20260720.247.2
+certify	Set up job	2026-08-09T03:50:48.9300674Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+certify	Set up job	2026-08-09T03:50:48.9302617Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+certify	Set up job	2026-08-09T03:50:48.9303537Z ##[endgroup]
+certify	Set up job	2026-08-09T03:50:48.9304638Z ##[group]GITHUB_TOKEN Permissions
+certify	Set up job	2026-08-09T03:50:48.9306504Z Contents: read
+certify	Set up job	2026-08-09T03:50:48.9307247Z Metadata: read
+certify	Set up job	2026-08-09T03:50:48.9307784Z ##[endgroup]
+certify	Set up job	2026-08-09T03:50:48.9310622Z Secret source: Actions
+certify	Set up job	2026-08-09T03:50:48.9311731Z Prepare workflow directory
+certify	Set up job	2026-08-09T03:50:48.9658381Z Prepare all required actions
+certify	Set up job	2026-08-09T03:50:48.9710201Z Getting action download info
+certify	Set up job	2026-08-09T03:50:49.3206971Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+certify	Set up job	2026-08-09T03:50:49.6739551Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+certify	Set up job	2026-08-09T03:50:49.7533068Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+certify	Set up job	2026-08-09T03:50:49.9687357Z Complete job name: certify
+certify	Run actions/checkout@v4	﻿2026-08-09T03:50:50.0465211Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0474100Z ##[group]Run actions/checkout@v4
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0474879Z with:
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0475356Z   repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0479251Z   token: ***
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0479674Z   ssh-strict: true
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0480373Z   ssh-user: git
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0480808Z   persist-credentials: true
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0481274Z   clean: true
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0481697Z   sparse-checkout-cone-mode: true
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0482200Z   fetch-depth: 1
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0482611Z   fetch-tags: false
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0483047Z   show-progress: true
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0483483Z   lfs: false
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0483899Z   submodules: false
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0484361Z   set-safe-directory: true
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0484852Z   allow-unsafe-pr-checkout: false
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.0485631Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1502237Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1504330Z ##[group]Getting Git version info
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1505245Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1506366Z [command]/usr/bin/git version
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1616164Z git version 2.54.0
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1652918Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1662659Z Temporarily overriding HOME='/home/runner/work/_temp/cecd3fc7-442d-4dea-b96c-651f62cb4960' before making global git config changes
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1665049Z Adding repository directory to the temporary git global config as a safe directory
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1667728Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1730650Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1736257Z ##[group]Initializing the repository
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1741891Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1873603Z hint: Using 'master' as the name for the initial branch. This default branch name
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1875503Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1877267Z hint: to use in all of your new repositories, which will suppress this warning,
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1878995Z hint: call:
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1880151Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1881262Z hint: 	git config --global init.defaultBranch <name>
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1882818Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1884098Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1885844Z hint: 'development'. The just-created branch can be renamed via this command:
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1887301Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1888235Z hint: 	git branch -m <name>
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1889252Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1890763Z hint: Disable this message with "git config set advice.defaultBranchName false"
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1893907Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1897780Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1944001Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1945316Z ##[group]Disabling automatic garbage collection
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1948942Z [command]/usr/bin/git config --local gc.auto 0
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1982586Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1983929Z ##[group]Setting up auth
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.1990112Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.2029052Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.2454828Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.2492907Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.2723538Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.2764379Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.2998096Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.3037349Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.3038468Z ##[group]Fetching the repository
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.3048517Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +0cd4d89af6210cc09c39d77fc819f326196524a3:refs/remotes/origin/research/heat-edge-material-ownership
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.8645886Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.8648747Z  * [new ref]         0cd4d89af6210cc09c39d77fc819f326196524a3 -> origin/research/heat-edge-material-ownership
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.8680916Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.8682109Z ##[group]Determining the checkout info
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.8683615Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.8691311Z [command]/usr/bin/git sparse-checkout disable
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.8744626Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.8781629Z ##[group]Checking out the ref
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.8787232Z [command]/usr/bin/git checkout --progress --force -B research/heat-edge-material-ownership refs/remotes/origin/research/heat-edge-material-ownership
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.9511494Z Switched to a new branch 'research/heat-edge-material-ownership'
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.9514792Z branch 'research/heat-edge-material-ownership' set up to track 'origin/research/heat-edge-material-ownership'.
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.9522407Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.9569188Z [command]/usr/bin/git log -1 --format=%H
+certify	Run actions/checkout@v4	2026-08-09T03:50:50.9596571Z 0cd4d89af6210cc09c39d77fc819f326196524a3
+certify	Run actions/setup-python@v5	﻿2026-08-09T03:50:50.9980915Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/setup-python@v5	2026-08-09T03:50:50.9987708Z ##[group]Run actions/setup-python@v5
+certify	Run actions/setup-python@v5	2026-08-09T03:50:50.9988852Z with:
+certify	Run actions/setup-python@v5	2026-08-09T03:50:50.9989641Z   python-version: 3.12
+certify	Run actions/setup-python@v5	2026-08-09T03:50:50.9990983Z   cache: pip
+certify	Run actions/setup-python@v5	2026-08-09T03:50:50.9991844Z   check-latest: false
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.0002496Z   token: ***
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.0003414Z   update-environment: true
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.0004422Z   allow-prereleases: false
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.0005408Z   freethreaded: false
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.0006283Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.1486112Z ##[group]Installed versions
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.1588742Z (node:2228) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.1592437Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.1594990Z Successfully set up CPython (3.12.13)
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.1597709Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.3418534Z [command]/opt/hostedtoolcache/Python/3.12.13/x64/bin/pip cache dir
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.7152844Z /home/runner/.cache/pip
+certify	Run actions/setup-python@v5	2026-08-09T03:50:51.9998228Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b
+certify	Run actions/setup-python@v5	2026-08-09T03:50:52.0138699Z (node:2228) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/setup-python@v5	2026-08-09T03:50:53.2990621Z Received 4194304 of 55859847 (7.5%), 4.0 MBs/sec
+certify	Run actions/setup-python@v5	2026-08-09T03:50:54.0794995Z Received 55859847 of 55859847 (100.0%), 29.9 MBs/sec
+certify	Run actions/setup-python@v5	2026-08-09T03:50:54.0796025Z Cache Size: ~53 MB (55859847 B)
+certify	Run actions/setup-python@v5	2026-08-09T03:50:54.0863399Z [command]/usr/bin/tar -xf /home/runner/work/_temp/7883f81f-7696-401b-b3c7-24d2c211dc45/cache.tzst -P -C /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond --use-compress-program unzstd
+certify	Run actions/setup-python@v5	2026-08-09T03:50:54.1798516Z Cache restored successfully
+certify	Run actions/setup-python@v5	2026-08-09T03:50:54.1844400Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b
+certify	Run pip install -r requirements.txt python-flint	﻿2026-08-09T03:50:54.2030681Z ##[group]Run pip install -r requirements.txt python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:54.2031246Z ^[[36;1mpip install -r requirements.txt python-flint^[[0m
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:54.2083316Z shell: /usr/bin/bash -e {0}
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:54.2083643Z env:
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:54.2083930Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:54.2084402Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:54.2084848Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:54.2085275Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:54.2085657Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:54.2086046Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:54.2086372Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.1178322Z Collecting python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.1871095Z   Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.3947581Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.3962318Z   Using cached numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.5253504Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.5267444Z   Using cached scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.5651897Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.5665913Z   Using cached pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.5815584Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.5829342Z   Using cached iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.6020327Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.6033239Z   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.6164323Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.6176507Z   Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.6373709Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.6385811Z   Using cached pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.6425347Z Using cached numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.6498604Z Using cached scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.3 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.6645750Z Using cached pytest-8.4.1-py3-none-any.whl (365 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.6659247Z Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.6748604Z Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.1 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.9632095Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 39.0 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.9645162Z Using cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.9656526Z Using cached packaging-26.3-py3-none-any.whl (129 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:55.9668903Z Using cached pygments-2.20.0-py3-none-any.whl (1.2 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:50:56.0908580Z Installing collected packages: python-flint, pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:51:03.5492373Z
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:51:03.5508892Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 python-flint-0.9.0 scipy-1.15.3
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:51:03.5518039Z
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:51:03.5518399Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:51:03.5519370Z [notice] To update, run: pip install --upgrade pip
+certify	Run pytest -q	﻿2026-08-09T03:51:03.6154811Z ##[group]Run pytest -q
+certify	Run pytest -q	2026-08-09T03:51:03.6155117Z ^[[36;1mpytest -q^[[0m
+certify	Run pytest -q	2026-08-09T03:51:03.6201310Z shell: /usr/bin/bash -e {0}
+certify	Run pytest -q	2026-08-09T03:51:03.6201564Z env:
+certify	Run pytest -q	2026-08-09T03:51:03.6201833Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:51:03.6202286Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run pytest -q	2026-08-09T03:51:03.6202745Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:51:03.6203144Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:51:03.6203529Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:51:03.6203925Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run pytest -q	2026-08-09T03:51:03.6204245Z ##[endgroup]
+certify	Run pytest -q	2026-08-09T03:51:08.0554341Z ........................................................................ [ 14%]
+certify	Run pytest -q	2026-08-09T03:51:08.2154461Z ........................................................................ [ 28%]
+certify	Run pytest -q	2026-08-09T03:51:08.5843737Z ........................................................................ [ 42%]
+certify	Run pytest -q	2026-08-09T03:51:08.6651050Z ........................................................................ [ 56%]
+certify	Run pytest -q	2026-08-09T03:51:08.9203160Z ........................................................................ [ 71%]
+certify	Run pytest -q	2026-08-09T03:51:09.0323805Z ........................................................................ [ 85%]
+certify	Run pytest -q	2026-08-09T03:51:09.3382305Z ........................................................................ [ 99%]
+certify	Run pytest -q	2026-08-09T03:51:09.4452991Z ..                                                                       [100%]
+certify	Run pytest -q	2026-08-09T03:51:09.4453847Z 506 passed in 5.27s
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	﻿2026-08-09T03:51:09.5453100Z ##[group]Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:09.5454005Z ^[[36;1mpython -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership^[[0m
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:09.5499532Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:09.5500074Z env:
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:09.5500359Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:09.5500815Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:09.5501246Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:09.5501640Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:09.5502046Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:09.5502432Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:09.5502755Z ##[endgroup]
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2851093Z # Material ownership of positive heat-increment edges
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2851736Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2852299Z Status: **EXACT_POSITIVE_HEAT_EDGE_MATERIAL_OWNERSHIP_PARTITION__AFFINE_ENDPOINT_LABELS_INVARIANT__CAPACITY_ROUTING_REMAINS**.
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2852987Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2853813Z The high-strain heat theorem already supplies a positive coherent edge measure.  Material ownership should be assigned to that **measure**, not to a decomposition of the velocity field.
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2854757Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2855323Z For one coherent heat edge, translation covariance identifies its endpoints as `(X,k)` and `(X-r,k)`.  In the intrinsic material coordinate
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2856014Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2856141Z `zeta=(L^-1 X/2,L^T k)`,
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2856346Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2856875Z let `O` be the fixed transported old material pool and put `chi_i=1_O(zeta_i)`.  Pointwise on every nonnegative edge weight `s`,
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2857493Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2857603Z `s_OO=chi_0 chi_1 s`,
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2857782Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2857917Z `s_ON=[chi_0(1-chi_1)+(1-chi_0)chi_1]s`,
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2858155Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2858274Z `s_NN=(1-chi_0)(1-chi_1)s`,
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2858463Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2858577Z and exactly
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2858721Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2858824Z `s_OO+s_ON+s_NN=s`.
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2858988Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2860472Z There is no quadratic cross term because no identity `V=V_old+V_new` is used.  The partition is performed **after** the Moyal/heat edge density has become positive.  It is also unoriented: swapping the two physical endpoints leaves OO, interface and NN weights unchanged.
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2861783Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2861921Z Under common affine/Kelvin transport
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2862162Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2862287Z `L->ML,  X->MX,  r->Mr,  k->M^-T k`,
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2862516Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2862681Z both endpoint labels are individually invariant:
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2862949Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2863046Z `zeta(ML,MX,M^-T k)=zeta(L,X,k)`,
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2863233Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2863341Z `zeta(ML,M(X-r),M^-T k)=zeta(L,X-r,k)`.
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2863530Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2864661Z Thus common affine motion cannot convert an old--old edge into an interface or new--new edge.  A change of endpoint membership along a continuous nonaffine material evolution must meet the boundary of the old material set.  Half-open dyadic conventions merely assign that null boundary and cannot manufacture service mass.
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2865887Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2866070Z The exact coherent increment identity also yields, class by class,
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2866365Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2866473Z `|e^(-ik.r)A_1-A_0|^2 <= 2(|A_0|^2+|A_1|^2)`.
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2866946Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2867793Z Hence each ownership class is locally supported by the Moyal energy of its own two endpoints.  This is the correct starting point for old-pool capacity; the theorem does **not** import the signed-good low-strain half-life through a high-strain slab.
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2868928Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2869036Z Stress: `50000` material-edge states
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2869354Z - worst affine two-endpoint residual: `2.681e-15`
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2869751Z - worst positive-measure partition residual: `1.705e-13`
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2870362Z - minimum ownership-specific endpoint-capacity margin: `0.000e+00`
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2870765Z - orientation failures: `0`
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2871051Z - affine membership-invariance failures: `0`
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2871265Z
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2872934Z This closes **material ownership classification** of the high-strain heat-edge seed.  The remaining high-strain problem is quantitative routing: bound repeated OO heat service using the physically valid history of the transported old pool; route ON service as actual material-interface/relink provenance; and show what NN service creates without postulating a packet mass floor.  Universal slab renewal remains open, and no global-regularity claim is made.
+certify	Run python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership	2026-08-09T03:51:33.2874604Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	﻿2026-08-09T03:51:33.3031698Z ##[group]Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:33.3032654Z ^[[36;1mpython -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service^[[0m
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:33.3078923Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:33.3079178Z env:
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:33.3079446Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:33.3080183Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:33.3080633Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:33.3081030Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:33.3081430Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:33.3081817Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:33.3082138Z ##[endgroup]
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7382159Z # High strain becomes heat-increment coherent service
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7384307Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7385496Z Status: **EXACT_HIGH_STRAIN_TO_HEAT_INCREMENT_COHERENT_SERVICE__CRITICAL_RESOLVED_ANCESTOR_FRACTION_RETAINED__OLD_POOL_ROUTING_REMAINS**.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7386553Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7388001Z Use no arbitrary spatial packet.  Let `H_N` be the three-dimensional Navier--Stokes heat kernel at the block's intrinsic parabolic time `theta_N=1/(2N^2)`.  Equivalently `r` is centered Gaussian with covariance `N^-2 I`, so
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7389597Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7390366Z `E exp(-i xi.r)=exp(-|xi|^2/(2N^2))`.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7390761Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7391043Z Plancherel gives the exact heat-defect identity
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7391544Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7391893Z `E_H ||delta_r V||_2^2 = int 2(1-exp(-|xi|^2/(2N^2))) |Vhat(xi)|^2 dxi`.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7392307Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7392838Z Because the strict transporter has `supp Vhat subset B_(N/4)`, put `x=|xi|^2/(2N^2)<=1/32`.  The elementary integral identity `1-e^(-x)=int_0^x e^(-s)ds` gives
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7393421Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7393517Z `e^(-1/32) x <= 1-e^(-x) <= x`.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7393677Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7393803Z Hence pointwise on the full resolved support
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7394020Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7394183Z `e^(-1/32)||grad V||_2^2 <= N^2 E_H||delta_r V||_2^2 <= ||grad V||_2^2`.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7394453Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7394662Z After integrating a child lifetime, the positive heat-increment service
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7394981Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7395092Z `S_heat=N^3 int dt E_H||delta_r V||_2^2`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7395283Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7395374Z satisfies
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7395744Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7395850Z `e^(-1/32) D_V <= S_heat <= D_V`.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7396027Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7397054Z Thus the existing high-strain gate `D_V>=32 pi^2/(75c)` immediately forces a fixed positive **physical-space increment service**.  The Gaussian is not a replacement causal law: it is the heat semigroup already intrinsic to the viscous PDE, used only to expose where resolved gradient activity lives.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7398210Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7399175Z The preceding resolved-ancestor theorem says at least half the actual `D_V` law lies on shell-time atoms with critical mass `mu_j>=32pi^2/(75c^2)`.  Since the heat multiplier is pointwise between `e^(-1/32)` and `1` times the gradient multiplier, the same good shell-time set carries at least
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7400522Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7400623Z `(1/2)e^(-1/32) = 0.484616617238`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7400805Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7401361Z of the **entire heat-increment service law**.  The frequency ancestor and spatial service are therefore simultaneous physical marks, not two unrelated pigeonholes.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7402032Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7402702Z For each good shell, each heat displacement `r`, and any normalized affine coherent window, Moyal gives an exact positive phase-space disintegration of `||delta_r P_jV||_2^2`.  Translation covariance
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7403703Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7403861Z `V_g(delta_r f)(X,k)=e^(-ik.r)V_gf(X-r,k)-V_gf(X,k)`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7404079Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7404798Z shows that every cell atom is a real coherent edge between neighborhoods separated by the actual Brownian/heat displacement.  No coherent cell is selected by argmax and no global shell mass is divided among a guessed packet count.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7405600Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7405860Z Stress: `50000` spectral heat-defect/ancestor states and representative coherent identities
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7406346Z - minimum spectral lower margin: `2.167e-08`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7406659Z - minimum spectral upper margin: `2.977e-12`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7407032Z - minimum retained-fraction margin above `e^(-1/32)/2`: `6.353e-06`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7407429Z - worst relative discrete Moyal residual: `6.278e-16`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7407821Z - worst relative coherent increment-covariance residual: `8.016e-15`
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7408096Z
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7410195Z This supplies the missing **spatial/coherent entrance** for the high-strain resolved-ancestor law.  What remains is material routing of these positive coherent edges: old--old service must enter the existing reservoir half-life, old--new edges must be physical relink/interface, and genuinely new--new edges must create coherent ancestry/service.  That routing must be proved for this dissipation-seeded measure rather than assumed from the SGS source theorem.  `D_V` remains an `O(1/N)` physical cost, not an additive reset.  No global-regularity claim is made.
+certify	Run python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service	2026-08-09T03:51:40.7412131Z
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	﻿2026-08-09T03:51:40.7733798Z ##[group]Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:40.7734640Z ^[[36;1mpython -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels^[[0m
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:40.7778519Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:40.7778767Z env:
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:40.7779038Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:40.7779476Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:40.7780169Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:40.7780558Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:40.7780948Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:40.7781329Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:40.7781651Z ##[endgroup]
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1453972Z # Canonical material coherent labels and summable representation Xi
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1454554Z
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1454856Z Status: **EXACT_CANONICAL_MATERIAL_LABELS_AND_SUMMABLE_REPRESENTATION_XI**.
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1455599Z
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1456973Z Use the intrinsic material coordinate `zeta=(L^-1 X/2,L^T k)` and a nested dyadic grid. Common affine/Kelvin transport leaves `zeta` and hence every cell address exactly unchanged. Refining a selected cell into its dyadic children is a partition identity, so Moyal energy is additive and refinement itself carries **zero** switch/relink charge.
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1458408Z
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1458866Z At causal depth `j`, choose normalized frequency-cell diameter `h_j=h_0 2^-j`. Smooth SGS symbol freezing then has total representation error
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1459418Z
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1459522Z `Xi_sym <= 2 A_3 L_* B_* h_0`.
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1459690Z
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1460539Z Choose covariance representative mesh `delta_j=delta_0 2^-j`. The exact coherent covariance-interface theorem gives
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1461054Z
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1461160Z `Xi_cov <= sqrt(2) delta_0 E_global`.
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1461366Z
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1462877Z Thus the causal Duhamel pushforward, Shannon/Renyi reuse and Hodge/resistance/holonomy graph may use the **same material dyadic cell address by construction**. Frequency/covariance representatives are auxiliary and have a summable, tunably small error. A genuine physical change of selected material cell is not hidden in this representation theorem; it remains the existing Moyal switch/fresh/relink/backflow currency.
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1464467Z
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1464605Z Stress: `50000` affine/nested-grid/schedule checks
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1464944Z - worst affine zeta residual: `1.877e-15`
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1465270Z - maximum nested-address failure: `0.000e+00`
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1465610Z - worst refinement-energy residual: `0.000e+00`
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1466017Z - minimum frequency schedule margin: `1.789e-16`
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1486093Z - minimum covariance schedule margin: `2.954e-16`
+certify	Run python -m src.material_coherent_labels --samples 50000 --outdir results-material-coherent-labels	2026-08-09T03:51:52.1486538Z
+certify	Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"	﻿2026-08-09T03:51:52.1653039Z ##[group]Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"
+certify	Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:51:52.1653737Z ^[[36;1mcat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"^[[0m
+certify	Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:51:52.1697870Z shell: /usr/bin/bash -e {0}
+certify	Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:51:52.1698123Z env:
+certify	Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:51:52.1698393Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:51:52.1698852Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:51:52.1699290Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:51:52.1699674Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:51:52.1700378Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:51:52.1700786Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run cat results-heat-edge-material-ownership/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:51:52.1701126Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	﻿2026-08-09T03:51:52.1853452Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1854761Z ##[group]Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1855031Z with:
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1855261Z   name: heat-edge-material-ownership-results
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1855897Z   path: results-heat-edge-material-ownership/
+certify	Run actions/upload-artifact@v4	results-high-strain-heat-increment-service/
+certify	Run actions/upload-artifact@v4	results-material-coherent-labels/
+certify	Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1856515Z   if-no-files-found: warn
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1856752Z   compression-level: 6
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1856975Z   overwrite: false
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1857189Z   include-hidden-files: false
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1857424Z env:
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1857680Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1858109Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1858766Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1859148Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1859542Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1860262Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.1860616Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.3540982Z (node:2361) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.3541764Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.3638093Z Multiple search paths detected. Calculating the least common ancestor of all paths
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.3642803Z The least common ancestor is /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond. This will be the root directory of the artifact
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.3644199Z With the provided path, there will be 6 files uploaded
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.3648656Z Artifact name is valid!
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.3649610Z Root directory input is valid!
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.7075487Z Beginning upload of artifact content to blob storage
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:52.7354835Z (node:2361) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:53.0222535Z Uploaded bytes 7885
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:53.1014388Z Finished uploading artifact content to blob storage!
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:53.1015885Z SHA256 digest of uploaded artifact zip is 27382558be7ac3ae67067e1c294585ab693643d0fc27a06d6c082f69c6d8a197
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:53.1017377Z Finalizing artifact upload
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:53.3215832Z Artifact heat-edge-material-ownership-results.zip successfully finalized. Artifact ID 9032125952
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:53.3217673Z Artifact heat-edge-material-ownership-results has been successfully uploaded! Final size is 7885 bytes. Artifact ID is 9032125952
+certify	Run actions/upload-artifact@v4	2026-08-09T03:51:53.3225462Z Artifact download URL: https://github.com/quemanhmcr/wang-ns-triad-diamond/actions/runs/31293279918/artifacts/9032125952
+certify	Post Run actions/setup-python@v5	﻿2026-08-09T03:51:53.3392584Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/setup-python@v5	2026-08-09T03:51:53.3393875Z Post job cleanup.
+certify	Post Run actions/setup-python@v5	2026-08-09T03:51:53.4583068Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b, not saving cache.
+certify	Post Run actions/setup-python@v5	2026-08-09T03:51:53.4584935Z (node:2373) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Post Run actions/setup-python@v5	2026-08-09T03:51:53.4585805Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Post Run actions/checkout@v4	﻿2026-08-09T03:51:53.4715245Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.4716525Z Post job cleanup.
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.5581782Z [command]/usr/bin/git version
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.5628200Z git version 2.54.0
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.5675202Z Temporarily overriding HOME='/home/runner/work/_temp/404e3c4a-3b0c-47f5-9382-e0267cde973f' before making global git config changes
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.5676544Z Adding repository directory to the temporary git global config as a safe directory
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.5682517Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.5732511Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.5772784Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.6033778Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.6063578Z http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.6075872Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.6112160Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.6380860Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Post Run actions/checkout@v4	2026-08-09T03:51:53.6422542Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Complete job	﻿2026-08-09T03:51:53.6823238Z Cleaning up orphan processes
+certify	Complete job	2026-08-09T03:51:53.7257689Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
