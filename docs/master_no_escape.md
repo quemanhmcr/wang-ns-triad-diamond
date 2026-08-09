@@ -2045,98 +2045,49 @@ productivity, recursive witness, joint stop, Shannon/Renyi and compiler stress;
 master `20,000` traces with worst margin `0`).  Stored artifact:
 `recorded-results/31288063518/`.
 
-## Local first-hit extraction is exact; remaining bridge is hard-event re-entry
+## Local first hit and generated-survivor relay are exact; remaining bridge is universal slab renewal
 
-The continuum first-hit problem has now simplified to the physical structure of
-the smooth-SGS block itself.  The key point is that the relevant quantities do
-**not** form one artificial vector clock.  They appear in a causal filtration:
-event/support facts first, then continuous/absolutely-continuous slab observables,
-then the actual positive HH work measure, then backward common-slice registration,
-and only afterwards Shannon/Renyi ancestry information.
+The continuum first-hit problem is now expressed directly by the smooth-SGS physics rather than an artificial vector clock.  Event/support facts appear first, then continuous/absolutely-continuous slab observables, then actual positive HH work, backward common-slice registration, and only afterwards ancestry information.  Native-unit threshold debuts are Borel; exact ties remain an unsplit finite cause set.  Material-cell Moyal content is absolutely continuous and helical phase is monitored branch-free, so optimizer chatter and angle branches create no physical stops.
 
-For every already-selected smooth-SGS block and every native-unit continuous
-physical observable `f_r`, define its certified closed hit or open-superlevel
-debut `tau_r`.  These times are Borel on path space; for example
+On a generated no-hit event the exact adjoint identity gives `|z(s)|>=|z(t)|/4`.  The key further simplification is that this coefficient already belongs to the **same smooth material carrier** `w=Q u`:
 
 \[
-
-\{\tau_r^{cl}\le q\}=\{\sup_{[a,q]}f_r\ge\theta_r\}.
-
+\|w(s)\|_2^2\ge \frac{|z(s)|^2}{\|\psi(s)\|_2^2}.
 \]
 
-For the finite physical family,
+There is therefore no reason to manufacture a fresh hard packet at the common slice.  Re-anchoring the coherent chart is composition of common affine/Kelvin transport and leaves intrinsic `zeta=(L^{-1}X/2,L^T k)` exactly invariant.  It creates zero relink mass and zero new `Xi`.
 
-\[
-\tau=\min_r\tau_r,\qquad J=\{r:\tau_r=\tau\}
-\]
-
-is therefore a measurable first-hit time with an unsplit finite joint cause set.
-No heterogeneous source/strain/Moyal/phase quantities are normalized against one
-another.  Independent strictly increasing changes of units leave all stopping
-sets unchanged.
-
-Material relink is also defined without selector chatter.  Anchor the material
-cell in intrinsic `zeta=(L^{-1}X/2,L^T k)` and put
-
-\[
-E_C(t)=\|1_C V_{g(t)}u(t)\|_2^2.
-\]
-
-On a pre-singular smooth interval,
-
-\[
-|E_C'(t)|\le 2\sqrt{E_C}
-igl(\|g\|_2\|u_t\|_2+\|g_t\|_2\|u\|_2igr),
-\]
-
-so the actual Moyal content is absolutely continuous.  Dyadic representation
-boundaries carry zero Moyal energy/work.  A change of the name of an optimizing
-cell is therefore not a physical relink.  Likewise helical phase is monitored by
-the branch-free circle distance `acos(Re h)` rather than a chosen `arg` branch.
-
-For generated events, `z(t)=z(s)+I_HH+I_R` has AC backward impulses.  If no
-residual/source, earlier HH regeneration, material relink or `t=0` boundary stop
-hits, the exact triangle gate gives `|z(s)|>=|z(t)|/4`; hence the no-hit generated
-event is exactly a registered generated survivor.  At whole-block level, absence
-of the already-certified service exits leaves exactly the existing Kelvin-flat
-alternative.  Thus, once a block is supplied, local no-hit behavior is exhausted
-by
+The smooth carrier also does not become a replacement causal law.  If `r` is the signed physical HH work density and `0<=q<=1` is its scalar Fourier envelope, then
 
 \[
 \boxed{
-\text{registered generated survivor}
-\quad\lor\quad
-\text{certified Kelvin-flat continuation}.
+\left[\int q^2r\right]_+
+\le\int q^2[r]_+
+\le\int[r]_+.
 }
 \]
 
-Dedicated run `31290886164` on `ed7773d` passed `484` tests plus `50,000`
-first-exit/Moyal/phase/registration regressions: zero ordering failures, zero
-independent-unit-rescaling failures, minimum Moyal-rate margin `4.039e-09`, and
-zero phase branch-cut gap.  Full causal integration `31290886140` on the same SHA
-passed `484` tests and the entire pre-existing causal stack with master
-`20,000`-trace worst margin `0`.  Recorded artifacts are
-`recorded-results/31290886164/` and `recorded-results/31290886140/`.
+Thus any positive HH generation needed to build carrier energy is dominated by actual positive physical HH work on the same event support.  Hard Fourier/helical roles are read only **at the actual nonlinear interaction event**, where orthogonal work disintegration is exact.  Between interactions the object being transported is smooth.
 
-The **remaining continuum bridge is now recursive hard-event re-entry**.  A
-parent that survives common-slice registration is known to have a large adjoint
-coefficient, but the current theorem does not yet turn that coefficient into a
-new hard physical transfer role.  The next theorem must derive, from the PDE
-itself, the dichotomy
+A second apparent re-entry interface also disappears.  For any resolved field `V`, with `h=u-V`,
 
 \[
 \boxed{
-\text{registered adjoint parent exposes a hard event core}
-\quad\lor\quad
-\text{its collar/interface failure is an already named physical stop}.
+-L_V(Q u)+Q B(V,V)-Q B(h,h)+(L_VQ-QL_V)u=-Q B(u,u).
 }
 \]
 
-A promising physically intrinsic formulation is a **hard-core / collar
-dichotomy** inside the transported smooth envelope `Q`: if the hard core retains
-the registered coefficient with the permitted fixed/summable loss, it seeds the
-next event role; if not, the missing mass/work must live in the envelope collar,
-where moving-projector/nonaffine/relink/source provenance must pay.  This must be
-proved rather than achieved by selecting a fresh maximizing packet or cell.
-Until recursive re-entry is closed for every recursive route, the master remains
-conditional and there is no global-regularity proof for 3D Navier--Stokes.
+Hence changing from `S_(N/4)u` to the parent-scale `S_(N_p/4)u` is an exact **repartition gauge** of the same Navier--Stokes nonlinearity.  It moves interaction between the transport, HH and Heisenberg descriptions but creates no cutoff-switch forcing or currency.  The support geometry renews with a wide margin: for `3/5<N_p/N<5/8`, two low-strain transports give
+
+\[
+\frac{|\xi|}{N_p}\ge\frac{11/20}{5/8}e^{-1/15}
+=\frac{22}{25}e^{-1/15}>\frac12,
+\]
+
+so `S_(N_p/4)u` still has low-low output below the relayed carrier.  The parabolic lifetime remains `64/25<T_p/T<25/9`.
+
+Dedicated relay run `31291697710` passed `489` tests and `50,000` carrier/affine/Hahn/event states; worst two-step intrinsic-zeta residual was `2.707e-15`.  Corrected cutoff run `31291932513` passed `492` tests and `50,000` arbitrary bilinear/cutoff/scale states; worst old/new cutoff identity residual was `1.099e-14`, worst residual against full `-Q B(u,u)` was `8.563e-15`, and the minimum renewed low-low gap was `3.242566e-01`.  Stored artifacts are `recorded-results/31291697710/` and `recorded-results/31291932513/`.  Precursor run `31291900197` was fixture-only: all `492` tests passed and the certificate stopped because Arb object equality was used for exact rational lifetime endpoints; `4fcdc8c` changed only that check to `Fraction`.
+
+The **generated-survivor re-entry algebra and support geometry are therefore supplied**.  The decisive remaining continuum bridge is now **universal physical slab renewal/exhaustion**.  Every recursive source/SGS, critical-dissipation, material/new-ancestry and earlier-HH route must either enter a renewed smooth carrier slab satisfying the already proved scale/moat/service/natural-lifetime hypotheses, or hit an already named first-stop cause.  No synthetic packet selector, cutoff-interface charge, or common-unit tie clock is allowed to stand in for that PDE coverage theorem.
+
+Until this universal renewal is proved for every recursive route, the master remains conditional and there is no global-regularity proof for 3D Navier--Stokes.

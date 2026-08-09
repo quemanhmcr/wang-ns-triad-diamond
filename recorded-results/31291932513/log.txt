@@ -1,0 +1,383 @@
+certify	Set up job	﻿2026-08-09T03:11:52.7098459Z Current runner version: '2.336.0'
+certify	Set up job	2026-08-09T03:11:52.7123365Z ##[group]Runner Image Provisioner
+certify	Set up job	2026-08-09T03:11:52.7124349Z Hosted Compute Agent
+certify	Set up job	2026-08-09T03:11:52.7124936Z Version: 20260707.563
+certify	Set up job	2026-08-09T03:11:52.7125536Z Commit: 02667638d2b423fbc733a8e32a88b44996a3ba6e
+certify	Set up job	2026-08-09T03:11:52.7126565Z Build Date: 2026-07-07T19:33:50Z
+certify	Set up job	2026-08-09T03:11:52.7127279Z Worker ID: {f4e990f6-65e9-473b-9e77-ae986c48e2b4}
+certify	Set up job	2026-08-09T03:11:52.7128028Z Azure Region: eastus
+certify	Set up job	2026-08-09T03:11:52.7128610Z ##[endgroup]
+certify	Set up job	2026-08-09T03:11:52.7130381Z ##[group]Operating System
+certify	Set up job	2026-08-09T03:11:52.7131150Z Ubuntu
+certify	Set up job	2026-08-09T03:11:52.7131673Z 24.04.4
+certify	Set up job	2026-08-09T03:11:52.7132223Z LTS
+certify	Set up job	2026-08-09T03:11:52.7132787Z ##[endgroup]
+certify	Set up job	2026-08-09T03:11:52.7133334Z ##[group]Runner Image
+certify	Set up job	2026-08-09T03:11:52.7133972Z Image: ubuntu-24.04
+certify	Set up job	2026-08-09T03:11:52.7134551Z Version: 20260720.247.2
+certify	Set up job	2026-08-09T03:11:52.7135592Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260720.247/images/ubuntu/Ubuntu2404-Readme.md
+certify	Set up job	2026-08-09T03:11:52.7137588Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260720.247
+certify	Set up job	2026-08-09T03:11:52.7138634Z ##[endgroup]
+certify	Set up job	2026-08-09T03:11:52.7139696Z ##[group]GITHUB_TOKEN Permissions
+certify	Set up job	2026-08-09T03:11:52.7142267Z Contents: read
+certify	Set up job	2026-08-09T03:11:52.7142899Z Metadata: read
+certify	Set up job	2026-08-09T03:11:52.7143507Z ##[endgroup]
+certify	Set up job	2026-08-09T03:11:52.7145594Z Secret source: Actions
+certify	Set up job	2026-08-09T03:11:52.7147215Z Prepare workflow directory
+certify	Set up job	2026-08-09T03:11:52.7468218Z Prepare all required actions
+certify	Set up job	2026-08-09T03:11:52.7516641Z Getting action download info
+certify	Set up job	2026-08-09T03:11:52.9537709Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+certify	Set up job	2026-08-09T03:11:53.2053494Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+certify	Set up job	2026-08-09T03:11:53.2844923Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+certify	Set up job	2026-08-09T03:11:53.5042947Z Complete job name: certify
+certify	Run actions/checkout@v4	﻿2026-08-09T03:11:53.5830145Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5839005Z ##[group]Run actions/checkout@v4
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5839773Z with:
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5840266Z   repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5844342Z   token: ***
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5844779Z   ssh-strict: true
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5845267Z   ssh-user: git
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5845709Z   persist-credentials: true
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5846189Z   clean: true
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5846881Z   sparse-checkout-cone-mode: true
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5847410Z   fetch-depth: 1
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5847830Z   fetch-tags: false
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5848259Z   show-progress: true
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5848695Z   lfs: false
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5849127Z   submodules: false
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5849595Z   set-safe-directory: true
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5850090Z   allow-unsafe-pr-checkout: false
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.5850883Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.6890167Z Syncing repository: quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.6892314Z ##[group]Getting Git version info
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.6893235Z Working directory is '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.6894422Z [command]/usr/bin/git version
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7027951Z git version 2.54.0
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7070155Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7094628Z Temporarily overriding HOME='/home/runner/work/_temp/51eb7550-b01b-4405-90a5-2e3e9d9cd6ec' before making global git config changes
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7097503Z Adding repository directory to the temporary git global config as a safe directory
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7113407Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7177366Z Deleting the contents of '/home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond'
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7183927Z ##[group]Initializing the repository
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7202568Z [command]/usr/bin/git init /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7340068Z hint: Using 'master' as the name for the initial branch. This default branch name
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7342057Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7343847Z hint: to use in all of your new repositories, which will suppress this warning,
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7345745Z hint: call:
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7348832Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7349849Z hint: 	git config --global init.defaultBranch <name>
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7351015Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7352130Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7353965Z hint: 'development'. The just-created branch can be renamed via this command:
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7355480Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7356300Z hint: 	git branch -m <name>
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7357504Z hint:
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7358650Z hint: Disable this message with "git config set advice.defaultBranchName false"
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7360980Z Initialized empty Git repository in /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond/.git/
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7386434Z [command]/usr/bin/git remote add origin https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7460461Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7462512Z ##[group]Disabling automatic garbage collection
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7464558Z [command]/usr/bin/git config --local gc.auto 0
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7502431Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7504049Z ##[group]Setting up auth
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7511210Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.7561832Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.8014357Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.8051996Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.8334282Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.8374353Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.8604936Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.8645471Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.8646611Z ##[group]Fetching the repository
+certify	Run actions/checkout@v4	2026-08-09T03:11:53.8655807Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +4fcdc8c6c3cbb5492ad6acce193dd8754f62c912:refs/remotes/origin/research/smooth-material-carrier-relay
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.4357579Z From https://github.com/quemanhmcr/wang-ns-triad-diamond
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.4360352Z  * [new ref]         4fcdc8c6c3cbb5492ad6acce193dd8754f62c912 -> origin/research/smooth-material-carrier-relay
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.4397590Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.4399662Z ##[group]Determining the checkout info
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.4401925Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.4407763Z [command]/usr/bin/git sparse-checkout disable
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.4460250Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.4493507Z ##[group]Checking out the ref
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.4499768Z [command]/usr/bin/git checkout --progress --force -B research/smooth-material-carrier-relay refs/remotes/origin/research/smooth-material-carrier-relay
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.5184529Z Switched to a new branch 'research/smooth-material-carrier-relay'
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.5187568Z branch 'research/smooth-material-carrier-relay' set up to track 'origin/research/smooth-material-carrier-relay'.
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.5194711Z ##[endgroup]
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.5241639Z [command]/usr/bin/git log -1 --format=%H
+certify	Run actions/checkout@v4	2026-08-09T03:11:54.5267460Z 4fcdc8c6c3cbb5492ad6acce193dd8754f62c912
+certify	Run actions/setup-python@v5	﻿2026-08-09T03:11:54.5610659Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.5613936Z ##[group]Run actions/setup-python@v5
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.5614830Z with:
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.5615580Z   python-version: 3.12
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.5616574Z   cache: pip
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.5617358Z   check-latest: false
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.5621998Z   token: ***
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.5622803Z   update-environment: true
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.5623657Z   allow-prereleases: false
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.5624496Z   freethreaded: false
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.5625284Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.7007031Z ##[group]Installed versions
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.7107101Z (node:2245) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.7109701Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.7111657Z Successfully set up CPython (3.12.13)
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.7113406Z ##[endgroup]
+certify	Run actions/setup-python@v5	2026-08-09T03:11:54.8792087Z [command]/opt/hostedtoolcache/Python/3.12.13/x64/bin/pip cache dir
+certify	Run actions/setup-python@v5	2026-08-09T03:11:55.2473275Z /home/runner/.cache/pip
+certify	Run actions/setup-python@v5	2026-08-09T03:11:55.3276788Z Cache hit for: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b
+certify	Run actions/setup-python@v5	2026-08-09T03:11:55.3387662Z (node:2245) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/setup-python@v5	2026-08-09T03:11:55.7690057Z Received 55859847 of 55859847 (100.0%), 139.1 MBs/sec
+certify	Run actions/setup-python@v5	2026-08-09T03:11:55.7692147Z Cache Size: ~53 MB (55859847 B)
+certify	Run actions/setup-python@v5	2026-08-09T03:11:55.7722403Z [command]/usr/bin/tar -xf /home/runner/work/_temp/f96b57f4-0b23-4905-bb70-16dc975cb77b/cache.tzst -P -C /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond --use-compress-program unzstd
+certify	Run actions/setup-python@v5	2026-08-09T03:11:55.8491530Z Cache restored successfully
+certify	Run actions/setup-python@v5	2026-08-09T03:11:55.8521796Z Cache restored from key: setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b
+certify	Run pip install -r requirements.txt python-flint	﻿2026-08-09T03:11:55.8761335Z ##[group]Run pip install -r requirements.txt python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:55.8762787Z ^[[36;1mpip install -r requirements.txt python-flint^[[0m
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:55.8816266Z shell: /usr/bin/bash -e {0}
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:55.8817463Z env:
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:55.8818259Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:55.8819807Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:55.8821355Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:55.8822718Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:55.8824097Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:55.8825482Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:55.8826810Z ##[endgroup]
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:56.5628448Z Collecting python-flint
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:56.6368718Z   Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:56.8337752Z Collecting numpy==2.2.6 (from -r requirements.txt (line 1))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:56.8352067Z   Using cached numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:56.9554123Z Collecting scipy==1.15.3 (from -r requirements.txt (line 2))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:56.9572036Z   Using cached scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:56.9909373Z Collecting pytest==8.4.1 (from -r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:56.9928701Z   Using cached pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0041021Z Collecting iniconfig>=1 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0054790Z   Using cached iniconfig-2.3.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0174451Z Collecting packaging>=20 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0189387Z   Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0278833Z Collecting pluggy<2,>=1.5 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0290958Z   Using cached pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0441650Z Collecting pygments>=2.7.2 (from pytest==8.4.1->-r requirements.txt (line 3))
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0452926Z   Using cached pygments-2.20.0-py3-none-any.whl.metadata (2.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0491138Z Using cached numpy-2.2.6-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.5 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0563075Z Using cached scipy-1.15.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.3 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0704954Z Using cached pytest-8.4.1-py3-none-any.whl (365 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0716739Z Using cached pluggy-1.6.0-py3-none-any.whl (20 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.0792494Z Downloading python_flint-0.9.0-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (10.1 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.2019064Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.1/10.1 MB 106.5 MB/s  0:00:00
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.2047434Z Using cached iniconfig-2.3.0-py3-none-any.whl (7.5 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.2058036Z Using cached packaging-26.3-py3-none-any.whl (129 kB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.2076466Z Using cached pygments-2.20.0-py3-none-any.whl (1.2 MB)
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:11:57.3330512Z Installing collected packages: python-flint, pygments, pluggy, packaging, numpy, iniconfig, scipy, pytest
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:12:04.8339664Z
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:12:04.8355515Z Successfully installed iniconfig-2.3.0 numpy-2.2.6 packaging-26.3 pluggy-1.6.0 pygments-2.20.0 pytest-8.4.1 python-flint-0.9.0 scipy-1.15.3
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:12:04.8364633Z
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:12:04.8365636Z [notice] A new release of pip is available: 26.1.2 -> 26.2.1
+certify	Run pip install -r requirements.txt python-flint	2026-08-09T03:12:04.8366758Z [notice] To update, run: pip install --upgrade pip
+certify	Run pytest -q	﻿2026-08-09T03:12:04.9007600Z ##[group]Run pytest -q
+certify	Run pytest -q	2026-08-09T03:12:04.9007900Z ^[[36;1mpytest -q^[[0m
+certify	Run pytest -q	2026-08-09T03:12:04.9051818Z shell: /usr/bin/bash -e {0}
+certify	Run pytest -q	2026-08-09T03:12:04.9052089Z env:
+certify	Run pytest -q	2026-08-09T03:12:04.9052358Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:12:04.9052817Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run pytest -q	2026-08-09T03:12:04.9053271Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:12:04.9053674Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:12:04.9054081Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run pytest -q	2026-08-09T03:12:04.9054480Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run pytest -q	2026-08-09T03:12:04.9054803Z ##[endgroup]
+certify	Run pytest -q	2026-08-09T03:12:09.4094346Z ........................................................................ [ 14%]
+certify	Run pytest -q	2026-08-09T03:12:09.5671973Z ........................................................................ [ 29%]
+certify	Run pytest -q	2026-08-09T03:12:09.9232021Z ........................................................................ [ 43%]
+certify	Run pytest -q	2026-08-09T03:12:10.0803748Z ........................................................................ [ 58%]
+certify	Run pytest -q	2026-08-09T03:12:10.2470187Z ........................................................................ [ 73%]
+certify	Run pytest -q	2026-08-09T03:12:10.3621120Z ........................................................................ [ 87%]
+certify	Run pytest -q	2026-08-09T03:12:10.7345685Z ............................................................             [100%]
+certify	Run pytest -q	2026-08-09T03:12:10.7347372Z 492 passed in 5.31s
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	﻿2026-08-09T03:12:10.8280996Z ##[group]Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:10.8281997Z ^[[36;1mpython -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay^[[0m
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:10.8329079Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:10.8329338Z env:
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:10.8329607Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:10.8330072Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:10.8330511Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:10.8330912Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:10.8331313Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:10.8331705Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:10.8332047Z ##[endgroup]
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1685797Z # Resolved-cutoff repartition and parent-scale renewal
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1686776Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1687588Z Status: **EXACT_RESOLVED_CUTOFF_REPARTITION_GAUGE_AND_PARENT_SCALE_RENEWAL__GENERATED_SURVIVOR_REENTRY_NO_NEW_INTERFACE**.
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1688440Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1689646Z Let `w=Q u`, choose any resolved field `V`, put `h=u-V`, and write `L_V f=B(V,f)+B(f,V)`.  Move the resolved transporter to the nonlinear side of the exact outer-role equation.  The entire cutoff-dependent nonlinear expression is
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1691080Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1691301Z `G_V=-L_V(Q u)+Q B(V,V)-Q B(h,h)+(L_V Q-Q L_V)u`.
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1691665Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1691856Z Bilinearity gives the exact cancellation
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1692187Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1692372Z `G_V = Q[B(V,V)-B(h,h)-L_V u] = -Q B(u,u)`.
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1692754Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1694299Z Therefore `G_V` is **independent of V**.  Replacing `V=S_(N/4)u` by `V_p=S_(N_p/4)u` at a common-slice relay does not create a new physical source.  It only repartitions the same Navier--Stokes interaction between resolved transport, HH source and Heisenberg interface.  No cutoff-switch currency is permitted or needed.
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1695582Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1696837Z The support geometry also renews with room to spare.  The smooth parent envelope starts at `11N/20`.  Transport to the common slice costs at most `e^(-1/30)`, and a renewed parent slab costs another `e^(-1/30)`.  Since a signed-good parent has `N_p/N<5/8`, throughout the renewed slab
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1697939Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1698087Z `|xi|/N_p >= (11/20)e^(-1/15)/(5/8) = (22/25)e^(-1/15) > 1/2`.
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1698318Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1698989Z Arb certifies this strict inequality.  Meanwhile `V_p tensor V_p` is supported below `N_p/2`, so the exact low-low exclusion survives the scale change.  The parabolic lifetime also renews without modifying constants:
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1699750Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1699837Z `64/25 < T_p/T < 25/9`.
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1699978Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1700682Z Thus a registered smooth material carrier can be re-anchored at the parent scale, switch to the parent resolved cutoff, and enter the next local role equation without a hard reselection and without a cutoff interface charge.
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1701459Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1701598Z Stress: `50000` arbitrary bilinear/cutoff/scale states
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1701954Z - worst old/new cutoff identity residual: `1.099e-14`
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1702324Z - worst residual against full `-Q B(u,u)`: `8.563e-15`
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1702669Z - minimum renewed low-low support gap: `3.242566e-01`
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1703023Z - minimum sampled lifetime-window margin: `5.371e-06`
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1703241Z
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1704784Z This closes the **algebraic and support-geometric scale renewal of a generated survivor**.  What remains is not a cutoff problem: on each renewed physical slab, any failure of efficient transfer, moat, service, strain/coherent deformation or material coherence must be shown to enter the already named first-stop causes, and the non-generated critical/source/relink recursive routes must be attached to the same renewal mechanism.  No global-regularity claim is made.
+certify	Run python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-resolved-cutoff-repartition-relay	2026-08-09T03:12:21.1707189Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	﻿2026-08-09T03:12:21.2058282Z ##[group]Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:21.2059212Z ^[[36;1mpython -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay^[[0m
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:21.2102731Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:21.2102986Z env:
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:21.2103257Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:21.2103720Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:21.2104178Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:21.2104612Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:21.2105014Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:21.2105435Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:21.2105763Z ##[endgroup]
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6488879Z # Smooth material-carrier relay: hard roles only at physical events
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6489716Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6490318Z Status: **EXACT_COMMON_SLICE_SMOOTH_MATERIAL_CARRIER_RELAY__HARDEN_ONLY_AT_PHYSICAL_GENERATION__UNIVERSAL_SERVICE_REENTRY_REMAINS**.
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6491022Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6491739Z The common slice does not need a fresh hard packet.  If the registered parent is the smooth moving role `w=Q(t,D)u` and its adjoint coefficient is `z=<w,psi>`, then simply
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6492592Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6492715Z `||w||_2^2 >= |z|^2/||psi||_2^2`.
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6492950Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6495180Z Thus the registered coefficient already supplies nonzero terminal energy for the **same physical material carrier**.  Re-anchor that carrier at the common slice, rather than choosing a new maximizing Fourier/coherent cell.  Common affine/Kelvin maps compose, and the intrinsic coordinate `zeta=(L^-1 X/2,L^T k)` is exactly invariant under the composition.  Re-anchoring therefore changes coordinates, not material identity: it carries zero relink mass and zero new `Xi`.
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6498063Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6500027Z On a previous slab for which the existing smooth-role/service hypotheses hold, apply the same outer-role equation and physical-energy gate to `Q u`.  If inherited energy, classified residual work or critical strain fires, the existing cause owns the block.  Otherwise the carrier has definite positive HH generation.  This does **not** make `Q` a new physical transfer law.  If `r` is the signed physical HH work density and `0<=q<=1` is the scalar carrier multiplier,
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6501617Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6501774Z `[ integral q^2 r ]_+ <= integral q^2 [r]_+ <= integral [r]_+`.
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6502037Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6503686Z So positive generation of the smooth carrier is dominated by actual positive physical HH work on the same event support.  Only **at that actual nonlinear event** do we resolve the work into orthogonal hard Fourier/helical roles.  Exact orthogonal work reconstruction then gives the parent/child event labels; no hard boundary is ever differentiated or assumed to persist between events.  Cellwise freezing of the physical multiplier at that event is the already existing summable symbol `Xi`, not a relay cost.
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6505426Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6505531Z The natural architecture is therefore:
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6505722Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6506248Z `hard physical interaction event -> smooth material carrier -> common-slice relay -> smooth material carrier -> next actual HH event -> hard physical interaction event`.
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6506990Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6507133Z Stress: `50000` carrier/affine/Hahn/hard-event states
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6507912Z - minimum coefficient-to-carrier-energy margin: `4.646e-04`
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6508350Z - worst two-step intrinsic-zeta residual: `2.707e-15`
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6508702Z - minimum aggregate-to-Hahn margin: `0.000e+00`
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6509130Z - minimum carrier-to-physical positive-work contraction margin: `0.000e+00`
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6509771Z - worst event hard-resolution residual: `2.842e-14`
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6510116Z - minimum hard-positive dominance margin: `-2.132e-14`
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6510456Z - low-strain generation routes sampled: `50000`
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6510665Z
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6512201Z This removes **intermediate hard-event reselection** as a necessary recursive object.  It does not yet prove universal recursion.  The remaining continuum question is whether every renewed backward slab of the relayed carrier satisfies, or physically exits through, the already named scale/moat/service/natural-lifetime hypotheses.  In particular the relay may not be extended through an arbitrary interval by fiat.  No Navier--Stokes global-regularity claim is made.
+certify	Run python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay	2026-08-09T03:12:43.6513838Z
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	﻿2026-08-09T03:12:43.6682011Z ##[group]Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:12:43.6682887Z ^[[36;1mpython -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction^[[0m
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:12:43.6727659Z shell: /usr/bin/bash -e {0}
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:12:43.6727920Z env:
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:12:43.6728181Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:12:43.6728621Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:12:43.6729058Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:12:43.6729450Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:12:43.6729833Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:12:43.6730231Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:12:43.6730554Z ##[endgroup]
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2831216Z # Exact outer moving-role extraction
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2833434Z
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2838887Z Status: **EXACT_OUTER_MOVING_ROLE_IDENTITY_AND_PERSISTENT_LOWLOW_EXCLUSION__INTERFACE_PROVENANCE_SUPPLIED**.
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2839873Z
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2840994Z Let `V=S_(N/4)u`, `h=u-V`, and `L_V f=P div(V tensor f+f tensor V)`.  For a time-dependent scalar divergence-free Fourier role `w=Q(t,D)u`, direct differentiation of Leray Navier--Stokes gives exactly
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2842260Z
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2842676Z `(dt+L_V-nu Delta)w = Q B(V,V) - Q B(h,h) + (dtQ+[L_V,Q])u`.
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2843214Z
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2845582Z There is no pressure source, and scalar Fourier `Q` commutes with `Delta`.  Anchor `Q` at the already selected frozen physical transfer cell and transport its scalar symbol by the coherent affine dual flow.  On the low-strain branch `K<=1/30`, an anchored lower edge `3N/5` stays above `(3/5)e^(-1/30)N>N/2`, whereas `V tensor V` is supported in `B_(N/2)`.  Hence `Q B(V,V)=0` **throughout the whole role interval**, not merely at the anchor slice.
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2848396Z
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2848744Z The selected outer-role equation is therefore
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2849233Z
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2849585Z `(dt+L_V-nu Delta)w = -Q P div(h tensor h) + R_Q`,
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2850209Z `R_Q=(dtQ+[L_V,Q])u`.
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2850570Z
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2853232Z The first term is the unique genuine quadratic high--high source; its positive coherent Hahn disintegration is already the physical binary causal work law.  For the second term, affine dual transport cancels the common affine advection Heisenberg term exactly, and constant affine stretching commutes with scalar `Q`.  The exact Egorov identity shows that `R_Q` is purely **nonaffine resolved low--high role-interface work** and vanishes for a genuinely affine transporter.
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2856594Z
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2856986Z Stress: `50000` exact algebra/support/Egorov states
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2857699Z - worst outer-role identity residual: `5.245e-15`
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2858396Z - worst scalar-Q/viscosity commutator: `0.000e+00`
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2859067Z - worst affine Heisenberg residual: `0.000e+00`
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2859759Z - worst affine-subtracted Egorov residual: `5.995e-16`
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2860484Z - minimum sampled persistent low-low gap: `8.608317e-02`
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2861000Z
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2863732Z This changes the continuum frontier: constructing the moving outer role itself is no longer the missing PDE step.  The only unclosed outer-role term is the **work-level routing of the nonaffine Heisenberg interface**.  It must be shown to enter exactly once as either coherent deformation/critical `D_V` or physical role-relink/transfer loss; it must not be promoted to a new currency or silently absorbed as representation `Xi`.  No Navier--Stokes global-regularity conclusion is asserted.
+certify	Run python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction	2026-08-09T03:13:42.2866811Z
+certify	Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"	﻿2026-08-09T03:13:42.3319676Z ##[group]Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"
+certify	Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:13:42.3320454Z ^[[36;1mcat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"^[[0m
+certify	Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:13:42.3364528Z shell: /usr/bin/bash -e {0}
+certify	Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:13:42.3364789Z env:
+certify	Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:13:42.3365061Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:13:42.3365540Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:13:42.3366009Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:13:42.3366607Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:13:42.3367029Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:13:42.3367450Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run cat results-resolved-cutoff-repartition-relay/summary.md >> "$GITHUB_STEP_SUMMARY"	2026-08-09T03:13:42.3367786Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	﻿2026-08-09T03:13:42.3520734Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3522098Z ##[group]Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3522379Z with:
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3522634Z   name: resolved-cutoff-repartition-relay-results
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3523320Z   path: results-resolved-cutoff-repartition-relay/
+certify	Run actions/upload-artifact@v4	results-smooth-material-carrier-relay/
+certify	Run actions/upload-artifact@v4	results-outer-moving-role-extraction/
+certify	Run actions/upload-artifact@v4
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3523959Z   if-no-files-found: warn
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3524193Z   compression-level: 6
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3524413Z   overwrite: false
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3524640Z   include-hidden-files: false
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3524878Z env:
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3525127Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3525578Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib/pkgconfig
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3526114Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3526777Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3527173Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.13/x64
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3527564Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.13/x64/lib
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.3527892Z ##[endgroup]
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.5232543Z (node:2383) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.5233323Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.5343383Z Multiple search paths detected. Calculating the least common ancestor of all paths
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.5347876Z The least common ancestor is /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond. This will be the root directory of the artifact
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.5349670Z With the provided path, there will be 6 files uploaded
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.5355296Z Artifact name is valid!
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.5356440Z Root directory input is valid!
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.6771289Z Beginning upload of artifact content to blob storage
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.7050625Z (node:2383) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.7490428Z Uploaded bytes 8923
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.7660621Z Finished uploading artifact content to blob storage!
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.7661869Z SHA256 digest of uploaded artifact zip is b138bae7a7555c60696f9491bc3d9619d5eaf4432a8716890bf100533d842f53
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.7663778Z Finalizing artifact upload
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.9233447Z Artifact resolved-cutoff-repartition-relay-results.zip successfully finalized. Artifact ID 9031687646
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.9235208Z Artifact resolved-cutoff-repartition-relay-results has been successfully uploaded! Final size is 8923 bytes. Artifact ID is 9031687646
+certify	Run actions/upload-artifact@v4	2026-08-09T03:13:42.9243839Z Artifact download URL: https://github.com/quemanhmcr/wang-ns-triad-diamond/actions/runs/31291932513/artifacts/9031687646
+certify	Post Run actions/setup-python@v5	﻿2026-08-09T03:13:42.9454102Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/setup-python@v5	2026-08-09T03:13:42.9455417Z Post job cleanup.
+certify	Post Run actions/setup-python@v5	2026-08-09T03:13:43.0657528Z Cache hit occurred on the primary key setup-python-Linux-x64-24.04-Ubuntu-python-3.12.13-pip-15620516427cd453d88334f04e9af919dff08319eb42e3bc5dfa952c1a7d697b, not saving cache.
+certify	Post Run actions/setup-python@v5	2026-08-09T03:13:43.0659544Z (node:2395) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+certify	Post Run actions/setup-python@v5	2026-08-09T03:13:43.0660442Z (Use `node --trace-deprecation ...` to show where the warning was created)
+certify	Post Run actions/checkout@v4	﻿2026-08-09T03:13:43.0793132Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.0794433Z Post job cleanup.
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.1674891Z [command]/usr/bin/git version
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.1720294Z git version 2.54.0
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.1762831Z Temporarily overriding HOME='/home/runner/work/_temp/cc0c5f9e-1c82-47be-ab43-2322be3a4927' before making global git config changes
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.1764161Z Adding repository directory to the temporary git global config as a safe directory
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.1771732Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/wang-ns-triad-diamond/wang-ns-triad-diamond
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.1815462Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.1856961Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.2114988Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.2150384Z http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.2172429Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.2203957Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.2479724Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+certify	Post Run actions/checkout@v4	2026-08-09T03:13:43.2524474Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+certify	Complete job	﻿2026-08-09T03:13:43.2954064Z Cleaning up orphan processes
+certify	Complete job	2026-08-09T03:13:43.3296579Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

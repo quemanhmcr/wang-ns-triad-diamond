@@ -17,6 +17,8 @@ on:
       - 'src/recursive_physical_witness_constructor.py'
       - 'src/joint_causal_stop_projection.py'
       - 'src/smooth_sgs_first_hit_extraction.py'
+      - 'src/smooth_material_carrier_relay.py'
+      - 'src/resolved_cutoff_repartition_relay.py'
       - 'src/amplitude_entropy_causal_reuse.py'
       - 'src/weighted_causal_reuse.py'
       - 'src/renyi_causal_reuse.py'
@@ -47,6 +49,8 @@ jobs:
       - run: python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor
       - run: python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice
       - run: python -m src.outer_moving_role_extraction --samples 50000 --outdir results-integration/outer-role
+      - run: python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-integration/material-carrier-relay
+      - run: python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-integration/cutoff-repartition-relay
       - run: python -m src.nonaffine_role_interface_work --samples 50000 --outdir results-integration/nonaffine-interface
       - run: python -m src.event_anchored_role_registration --samples 50000 --outdir results-integration/event-role
       - run: python -m src.physical_pair_weighted_productivity --samples 50000 --outdir results-integration/physical-pair-productivity

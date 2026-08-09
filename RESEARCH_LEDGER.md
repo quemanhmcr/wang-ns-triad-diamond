@@ -6286,23 +6286,41 @@ passed `484` tests and the entire causal stack; physical-pair KL margin remained
 `1.958e-01`, and master `20,000` traces had worst margin `0`.  Stored artifacts:
 `recorded-results/31290886164/` and `recorded-results/31290886140/`.
 
-The **decisive remaining continuum bridge has therefore moved to recursive
-hard-event re-entry**.  A parent that survives common-slice registration carries
-a large adjoint coefficient, but this is not yet itself a new hard physical
-transfer event.  The PDE must prove a natural hard-core/collar dichotomy: either
-the registered coefficient exposes a measurable hard event core at the parent
-scale with only the already permitted fixed/summable loss, or the missing
-coefficient/work lives in an envelope collar/interface/source/relink event which
-is already a named first stop.  Choosing a fresh maximizing packet or cell by
-fiat is not an acceptable substitute.  Source, critical-dissipation, material
-relink/new-ancestry and earlier HH-regeneration recursive routes must all re-enter
-through the same physical mechanism.
+Two further exact continuum structures remove the apparent hard-event re-entry machinery.
 
-Outer moving roles, event-role registration, nonaffine-interface provenance,
-physical pair weights, common-slice survival algebra, exact-tie projection and
-**local measurable first-hit extraction** are no longer unresolved bridges.
-Recursive hard-event re-entry is.  Consequently there is still no
-Navier--Stokes global-regularity proof.
+First, a registered common-slice parent stays in the **same smooth material carrier** `w=Q u`.  Since `z=<w,psi>`,
+
+\[
+\|w\|_2^2\ge |z|^2/\|\psi\|_2^2.
+\]
+
+Re-anchoring at the common slice is only composition of common affine/Kelvin transport and leaves intrinsic `zeta` exactly fixed.  It therefore creates no relink, no fresh ancestry and no new representation `Xi`.  If `r` denotes the signed physical HH work density and `0<=q<=1` the scalar carrier symbol,
+
+\[
+\left[\int q^2r\right]_+\le\int q^2[r]_+\le\int[r]_+.
+\]
+
+Thus smooth-carrier generation is dominated by the existing actual positive physical HH law.  Hard Fourier/helical roles are read only at real nonlinear interaction events; they need not persist or be reselected at an intermediate slice.
+
+Second, parent-scale renewal does not create a cutoff interface.  For every resolved field `V`,
+
+\[
+-L_V(Q u)+Q B(V,V)-Q B(u-V,u-V)+(L_VQ-QL_V)u=-Q B(u,u),
+\]
+
+so replacing `S_(N/4)u` by `S_(N_p/4)u` exactly repartitions the same NS interaction between transport, HH source and Heisenberg interface.  With `3/5<N_p/N<5/8`, the relayed envelope satisfies
+
+\[
+|\xi|/N_p\ge(22/25)e^{-1/15}>1/2,
+\]
+
+and parent-scale low-low exclusion remains strict; the parabolic lifetime remains `64/25<T_p/T<25/9`.
+
+Dedicated run `31291697710` passed `489` tests plus `50,000` smooth-carrier relay states, with worst two-step zeta residual `2.707e-15`.  Corrected cutoff run `31291932513` passed `492` tests plus `50,000` cutoff/scale states, with worst old/new identity residual `1.099e-14`, worst full-NS residual `8.563e-15`, and minimum renewed low-low gap `3.242566e-01`.  Stored artifacts: `recorded-results/31291697710/` and `recorded-results/31291932513/`.  Precursor `31291900197` was certificate-fixture only: all `492` tests passed before an inappropriate Arb equality check on exact rational lifetime endpoints; `4fcdc8c` changed only that check to exact `Fraction` arithmetic.
+
+The **generated-survivor return is therefore no longer an unresolved hard-packet or cutoff problem**.  The decisive remaining continuum bridge is **universal physical slab renewal/exhaustion**: after source/SGS, critical dissipation, material/new ancestry or earlier HH regeneration, the actual PDE must either supply a renewed smooth carrier block satisfying the already-certified role/moat/efficiency/natural-lifetime/material hypotheses, or hit one of the already named first-stop causes.  No arbitrary packet selection or synthetic transition state may substitute for this coverage statement.
+
+Outer moving roles, event-role registration, nonaffine-interface provenance, physical pair weights, common-slice survival algebra, exact-tie projection, local measurable first-hit extraction, **smooth material-carrier relay**, and **resolved-cutoff scale renewal** are no longer unresolved bridges.  Universal physical slab renewal/exhaustion across every recursive route is.  Consequently there is still no Navier--Stokes global-regularity proof.
 
 ---
 
@@ -6318,7 +6336,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/complex_young_parent_marking.md`, `docs/dual_gaussian_root_registration.md`, `docs/bargmann_root_cell_registration.md`, `docs/amplitude_entropy_causal_reuse.md`, `docs/common_slice_coefficient_registration.md`, `docs/outer_moving_role_extraction.md`, `docs/nonaffine_role_interface_work.md`, `docs/event_anchored_role_registration.md`, `docs/physical_pair_weighted_productivity.md`, `docs/recursive_physical_witness_constructor.md`, `docs/joint_causal_stop_projection.md`, `docs/smooth_sgs_first_hit_extraction.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/complex_young_parent_marking.md`, `docs/dual_gaussian_root_registration.md`, `docs/bargmann_root_cell_registration.md`, `docs/amplitude_entropy_causal_reuse.md`, `docs/common_slice_coefficient_registration.md`, `docs/outer_moving_role_extraction.md`, `docs/nonaffine_role_interface_work.md`, `docs/event_anchored_role_registration.md`, `docs/physical_pair_weighted_productivity.md`, `docs/recursive_physical_witness_constructor.md`, `docs/joint_causal_stop_projection.md`, `docs/smooth_sgs_first_hit_extraction.md`, `docs/smooth_material_carrier_relay.md`, `docs/resolved_cutoff_repartition_relay.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

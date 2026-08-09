@@ -162,6 +162,8 @@ They need not be manufactured as states of a common clock, and the theorem does 
 
 The theorem begins with **an already recursively selected efficient smooth-SGS block**.  It proves that once such a block is supplied, its local first-hit cause set is measurable and that local no-hit behavior is exhausted by the generated-survivor / Kelvin-flat alternatives.
 
-The remaining continuum bridge is now sharper: prove **recursive re-entry closure**.  After source/SGS, critical dissipation, material/new ancestry, or earlier HH regeneration sends the master back into recursion, the actual continuum selector must again produce a block satisfying the exact role, moat, efficiency, natural-lifetime and material-label hypotheses used above.  That implication cannot be replaced by a dataclass constructor or by choosing a new packet by fiat.
+The generated-survivor part of recursive re-entry is now supplied by the companion material-carrier/cutoff relay theorems: the common-slice coefficient stays in the same smooth carrier, hard roles are created only by actual HH work, and changing to the parent resolved cutoff creates no new source.
+
+The remaining continuum bridge is **universal physical slab renewal/exhaustion**.  After source/SGS, critical dissipation, material/new ancestry, or earlier HH regeneration sends the master back into recursion, the actual PDE must either supply a renewed carrier slab satisfying the exact role/moat/efficiency/natural-lifetime/material hypotheses or hit an already named physical first stop.  This implication cannot be replaced by a dataclass constructor or by choosing a new packet by fiat.
 
 No global-regularity claim is made.

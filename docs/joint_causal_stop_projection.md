@@ -152,17 +152,8 @@ first joint stop** before successful registration.  Its productivity remains
 
 ## 6. New frontier
 
-The old remaining task was phrased as “construct common-unit RN stopping
-densities on positive-measure exact tie sets.”  That task is no longer required
-for the master.  The companion smooth-SGS first-hit theorem now also supplies
-measurable local first-cause sets once a physical block has been supplied.
+The old remaining task was phrased as “construct common-unit RN stopping densities on positive-measure exact tie sets.”  That task is not required for the master, and the smooth-SGS first-hit theorem supplies measurable local first-cause sets once a physical block is supplied.
 
-The continuum question has moved to **recursive hard-event re-entry**.  A parent
-which survives backward registration is known to have a large adjoint coefficient
-on the common slice, but it is not yet automatically a new hard transfer event.
-One must prove that this coefficient exposes a measurable hard event core at the
-parent scale, or that failure of such a core is already carried by a named
-collar/interface/source/relink stop.  No fresh packet may be chosen by fiat.
+The generated-survivor re-entry obstruction has also simplified away.  A continuing common-slice coefficient remains in the same smooth material carrier; no hard role is manufactured there.  Re-anchoring preserves intrinsic material `zeta`, and changing the resolved cutoff to the parent scale is an exact algebraic repartition of `-Q B(u,u)`.  Hard parent/child roles reappear only at actual positive HH interaction events, where the physical work itself supplies the event law.
 
-This is a PDE re-entry problem, not a tie-weight or measure-conversion problem.
-No global-regularity claim is made.
+The continuum question is now **universal physical slab renewal/exhaustion** across every recursive route, especially source/SGS, critical dissipation and material/new-ancestry stops.  This is a PDE coverage problem, not a tie-weight, packet-selection or cutoff-interface problem.  No global-regularity claim is made.

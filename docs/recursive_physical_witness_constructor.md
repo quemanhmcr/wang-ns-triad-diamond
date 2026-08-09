@@ -124,14 +124,18 @@ All terms are nonnegative.  There is no theorem-name overlap.  `HH,recur` is not
 a currency and never enters a reset count; it is simply an earlier quadratic
 physical event.
 
-## 6. Local first hit is now supplied; hard-event re-entry remains
+## 6. Generated-survivor relay is now supplied; universal slab renewal remains
 
-The companion `smooth_sgs_first_hit_extraction` theorem now proves the missing local path-space statement for every **already supplied** smooth-SGS block.  The physical service/work/state observables are continuous or absolutely continuous, their native-unit threshold debuts are Borel, and exact simultaneous hits remain an unsplit measurable cause set.  The no-hit set is exhausted locally by the registered generated survivor and the existing Kelvin-flat continuation.
+The companion `smooth_sgs_first_hit_extraction` theorem supplies the local path-space first-hit statement for every already supplied smooth-SGS block.  The newer `smooth_material_carrier_relay` theorem then shows that a continuing parent does **not** need to be hardened again at the common slice.  If `w=Q u` and `z=<w,psi>`,
 
-The construction deliberately does not scalarize heterogeneous observables.  Independent strictly increasing changes of units leave each stopping set unchanged.  Material coherence is monitored by the absolutely-continuous Moyal energy of an anchored intrinsic-zeta cell rather than by a chattering best-cell label, and helical phase uses branch-free circle holonomy.
+`||w||_2^2 >= |z|^2/||psi||_2^2`,
 
-The continuum frontier has therefore moved one level deeper.  A surviving parent at the common slice is currently certified as a **large adjoint coefficient**, not automatically as a new hard physical event role.  Recursive continuation must prove a physical dichotomy:
+so the registered adjoint coefficient is already terminal energy of the same smooth material carrier.  Re-anchoring the affine chart preserves intrinsic `zeta` exactly and creates neither relink nor a new `Xi`.  Positive HH generation of this carrier is dominated by the positive Hahn part of actual physical HH work, so `Q` never replaces the physical causal law.  Hard Fourier/helical roles are read only at an actual nonlinear interaction event.
 
-> the registered adjoint parent exposes a measurable hard event core at the next parent scale with only the already allowed fixed/summable loss, **or** the missing core lies in a collar/interface/source/relink event which is already a named first stop.
+The `resolved_cutoff_repartition_relay` theorem removes the second artificial operation.  For any resolved field `V`,
 
-Simply projecting onto a newly chosen packet or maximizing over cells would reintroduce observer-dependent structure and is not an acceptable re-entry theorem.  A common-unit tie measure is still unnecessary.  This remaining hard-event re-entry problem is not a Navier--Stokes global-regularity proof.
+`-L_V(Q u)+Q B(V,V)-Q B(u-V,u-V)+(L_V Q-Q L_V)u = -Q B(u,u)`.
+
+Thus switching from the child cutoff to the parent cutoff is only an exact repartition of the same Navier--Stokes interaction.  With `3/5<N_p/N<5/8`, the relayed envelope satisfies `(22/25)e^(-1/15)>1/2`, so parent-scale low-low exclusion and the existing parabolic lifetime window survive.
+
+The generated-survivor route therefore needs neither a fresh maximizing packet nor a cutoff-interface charge.  The remaining PDE bridge is **universal physical slab renewal/exhaustion**: every source/SGS, critical-dissipation, material/new-ancestry and earlier-HH recursive route must either enter a renewed smooth carrier slab satisfying the existing scale/moat/service hypotheses or hit one of the already named physical causes.  This is not a Navier--Stokes global-regularity proof.
