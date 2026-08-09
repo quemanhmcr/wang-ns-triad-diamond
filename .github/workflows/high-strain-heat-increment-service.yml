@@ -1,0 +1,35 @@
+name: High strain heat increment service
+on:
+  push:
+    paths:
+      - 'src/high_strain_heat_increment_service.py'
+      - 'tests/test_high_strain_heat_increment_service.py'
+      - 'docs/high_strain_heat_increment_service.md'
+      - '.github/workflows/high-strain-heat-increment-service.yml'
+      - 'src/high_strain_resolved_ancestor.py'
+      - 'src/coherent_increment_service.py'
+      - 'src/affine_coherent_moyal.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12', cache: pip}
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - run: python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-high-strain-heat-increment-service
+      - run: python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor
+      - run: python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service
+      - run: cat results-high-strain-heat-increment-service/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: high-strain-heat-increment-service-results
+          path: |
+            results-high-strain-heat-increment-service/
+            results-high-strain-resolved-ancestor/
+            results-coherent-increment-service/
