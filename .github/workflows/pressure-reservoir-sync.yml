@@ -9,7 +9,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install -r requirements.txt
+      - run: pip install -r requirements.txt python-flint
       - run: pytest -q
       - run: python -m src.pressure_reservoir_sync --samples 50000 --outdir results-pressure-reservoir-sync
       - run: cat results-pressure-reservoir-sync/summary.md >> "$GITHUB_STEP_SUMMARY"
