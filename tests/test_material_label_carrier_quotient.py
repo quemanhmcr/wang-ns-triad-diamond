@@ -140,7 +140,7 @@ def test_new_quotient_refines_only_pure_label_subtype_of_legacy_conservative_sto
 
 def test_certificate_preserves_ancestry_charge_and_refuses_role_change_quotient():
     cert = theorem_certificate()
-    assert "no second independent coefficient impulse" in cert["no_double_count"]
+    assert "does not add a second independent coefficient impulse" in cert["no_double_count"]
     assert "remains ancestry/service currency" in cert["selected_family"]
     assert "no transparency is claimed" in cert["nonquotient"]
     assert "does not erase material ancestry" in cert["master"]
