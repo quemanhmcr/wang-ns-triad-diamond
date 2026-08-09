@@ -1,6 +1,7 @@
 import math
 
 import numpy as np
+import pytest
 
 from src.critical_annular_carrier_service_reentry import (
     BOUNDED_HEAT_RADIUS,
@@ -44,6 +45,7 @@ def test_transport_keeps_annular_lower_edge_above_low_low_radius():
 
 
 def test_radius_three_retains_clean_half_of_annular_heat_lower():
+    pytest.importorskip("flint")
     cert = arb_bounded_heat_probe_certificate()
     assert cert["status"].startswith("ARB_CERTIFIED_RADIUS_3")
     full = heat_defect_fraction_lower()
@@ -81,6 +83,7 @@ def test_uniform_service_threshold_enters_existing_finite_old_pool_stopping_epoc
 
 
 def test_certificate_does_not_promote_service_to_hh_efficiency_or_whole_carrier_nn():
+    pytest.importorskip("flint")
     cert = theorem_certificate()
     assert "not near-extremal HH transfer efficiency" in cert["no_efficiency_overclaim"]
     assert "not whole-carrier ownership" in cert["material_reentry"]
