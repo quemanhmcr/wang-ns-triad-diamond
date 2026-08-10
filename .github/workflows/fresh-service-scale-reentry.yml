@@ -1,0 +1,41 @@
+name: Fresh service scale reentry
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/fresh_service_scale_reentry.py'
+      - 'tests/test_fresh_service_scale_reentry.py'
+      - 'docs/fresh_service_scale_reentry.md'
+      - 'src/coherent_increment_service.py'
+      - 'src/heat_edge_material_ownership.py'
+      - 'src/critical_shell_service_reentry.py'
+      - '.github/workflows/fresh-service-scale-reentry.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Fresh service scale reentry stress
+        run: python -m src.fresh_service_scale_reentry --samples 50000 --outdir results-fresh-service-scale-reentry
+      - name: Coherent increment dependency
+        run: python -m src.coherent_increment_service --samples 50000 --outdir results-coherent-increment-service
+      - name: Material ownership dependency
+        run: python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership
+      - name: Generic critical shell dependency
+        run: python -m src.critical_shell_service_reentry --samples 50000 --outdir results-critical-shell-service-reentry
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fresh-service-scale-reentry-results
+          path: |
+            results-fresh-service-scale-reentry/
+            results-coherent-increment-service/
+            results-heat-edge-material-ownership/
+            results-critical-shell-service-reentry/

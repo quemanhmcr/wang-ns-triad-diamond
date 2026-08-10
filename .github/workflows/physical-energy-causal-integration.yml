@@ -20,6 +20,7 @@ on:
       - 'src/objective_source_routing_compiler.py'
       - 'src/objective_pressure_pair_atomization.py'
       - 'src/coherent_increment_service.py'
+      - 'src/fresh_service_scale_reentry.py'
       - 'src/high_frequency_dissipation_reentry.py'
       - 'src/complex_young_parent_marking.py'
       - 'src/dual_gaussian_root_registration.py'
@@ -73,6 +74,7 @@ jobs:
       - run: python -m src.objective_source_routing_compiler --samples 50000 --outdir results-integration/objective-source-routing-compiler
       - run: python -m src.objective_pressure_pair_atomization --samples 50000 --outdir results-integration/objective-pressure-pair-atomization
       - run: python -m src.coherent_increment_service --samples 50000 --outdir results-integration/coherent-increment-service
+      - run: python -m src.fresh_service_scale_reentry --samples 50000 --outdir results-integration/fresh-service-scale-reentry
       - run: python -m src.high_frequency_dissipation_reentry --samples 50000 --outdir results-integration/high-frequency-dissipation-reentry
       - run: python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young
       - run: python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian

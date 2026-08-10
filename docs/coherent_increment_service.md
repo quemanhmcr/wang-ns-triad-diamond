@@ -25,7 +25,7 @@ u_j=\phi_j(D)u,
 u=\sum_j\phi_j(D)u_j,
 \]
 
-away from zero, with the high analysis shell `j` supported above `|xi|=M_j/2`.  Such a frame is obtained directly from any smooth dyadic annular cover: choose smooth covering bumps `q_j`, then set `phi_j=q_j/(sum_k |q_k|^2)^(1/2)` on the covered frequency region.  This preserves the annular supports and gives the quadratic partition exactly.  The last identity is then the exact Calderón reconstruction and avoids the false requirement `u=sum_j u_j` for overlapping smooth analysis bands.  This does not remove the ordinary finite `L^3` square-function/Bernstein constants `C_LP,C_B` used below.  It does, however, identify the exact `L^2` comparison needed by the later physical tail-energy theorem:
+away from zero.  Choose the covering bumps once with `supp q_j subset {M_j/2<|xi|<2M_j}` and positive dyadic cores, then set `phi_j=q_j/(sum_k |q_k|^2)^(1/2)` on the covered frequency region.  Square normalization preserves this annular support, gives `|phi_j|<=1`, and yields the quadratic partition exactly.  The last identity is the exact Calderón reconstruction and avoids the false requirement `u=sum_j u_j` for overlapping smooth analysis bands.  The ordinary finite `L^3` square-function/Bernstein constants `C_LP,C_B` below are understood for this one fixed frame.  The same registration also identifies the exact `L^2` comparison needed by the later physical tail-energy theorem:
 
 \[
 \boxed{

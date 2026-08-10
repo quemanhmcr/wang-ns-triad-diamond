@@ -50,6 +50,8 @@ def test_entropy_or_cycle_constants():
 def test_canonical_lp_registration_keeps_observable_and_pde_tail_distinct():
     cert=exact_certificate()
     assert 'square-normalized' in cert['canonical_lp_registration']
+    assert 'M_j/2<|xi|<2M_j' in cert['canonical_lp_registration']
+    assert '|phi_j|<=1' in cert['canonical_lp_registration']
     assert 'D_tail>=D_high/4' in cert['canonical_lp_registration']
     assert 'smooth-LP service observable' in cert['observer_pde_separation']
     assert 'orthogonal PDE dissipation currency' in cert['observer_pde_separation']
