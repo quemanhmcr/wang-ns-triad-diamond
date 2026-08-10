@@ -11,8 +11,10 @@ import numpy as np
 
 from src.common_slice_coefficient_registration import (
     GENERATED_FRACTION,
+    HH_COEFFICIENT_OBSTRUCTION,
     INHERIT_FRACTION,
     RESIDUAL_FRACTION,
+    ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
     exact_adjoint_residual,
 )
 from src.nn_critical_heat_carrier_seed import (
@@ -105,16 +107,23 @@ def seed_backward_first_hit(
 
     monitors = (
         PhysicalPathMonitor("high_strain_critical_dissipation", float(LOW_STRAIN_ACTION), K, ThresholdTopology.CLOSED),
-        PhysicalPathMonitor("classified_role_interface_impulse", RESIDUAL_FRACTION * amp, IR, ThresholdTopology.CLOSED),
-        PhysicalPathMonitor("hh_regeneration_impulse", GENERATED_FRACTION * amp, IH, ThresholdTopology.CLOSED),
+        PhysicalPathMonitor(ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, RESIDUAL_FRACTION * amp, IR, ThresholdTopology.CLOSED),
+        PhysicalPathMonitor(HH_COEFFICIENT_OBSTRUCTION, GENERATED_FRACTION * amp, IH, ThresholdTopology.CLOSED),
         PhysicalPathMonitor("material_boundary_contact", 0.0, tuple(-x for x in dmat), ThresholdTopology.CLOSED),
     )
     out = first_physical_corridor_exit(ell, monitors, tie_tolerance=tie_tolerance)
+    needs_energy_reentry = any(
+        label in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
+        for label in out.joint_first_stops
+    )
     return {
         "first_elapsed": out.first_time,
-        "joint_causes": out.joint_causes,
+        "joint_causes": out.joint_first_stops,
+        "joint_first_stops": out.joint_first_stops,
         "individual_debuts": out.individual_debuts,
         "terminal_amplitude": amp,
+        "requires_physical_energy_reentry": needs_energy_reentry,
+        "coefficient_impulses_used_as_work": False,
     }
 
 
@@ -131,15 +140,15 @@ def natural_corridor_outcome(
 ) -> dict[str, object]:
     """Full backward natural-window outcome after the measurable first-hit pass.
 
-    If a physical monitor hits before or at the requested endpoint, return its
-    unsplit joint cause set.  If t=0 truncates the natural window, the initial
+    If a monitor hits before or at the requested endpoint, return its unsplit
+    joint first-stop set.  If t=0 truncates the natural window, the initial
     boundary is absorbing.  Otherwise the exact Duhamel identity plus strict
     subthreshold impulses forces |z(s)|>=|z(t)|/4.
 
-    A large residual coefficient impulse is only a *classified interface
-    obstruction*: this function does not convert it into physical work.  A large
-    HH coefficient impulse is an earlier-generation obstruction and must re-enter
-    the existing physical-energy gate before any causal weighting.
+    A large residual coefficient impulse is only a role-interface obstruction
+    locator: this function does not convert it into physical work.  A large HH
+    coefficient impulse is likewise an obstruction and must re-enter the existing
+    physical-energy gate before HH generation or any causal weighting is named.
     """
     geom = backward_natural_endpoint(event_time, renewal_frequency, scaled_lifetime)
     zt = complex(terminal_coefficient)
@@ -155,26 +164,36 @@ def natural_corridor_outcome(
         raise ValueError("seed natural-window Duhamel decomposition is not exact")
 
     hit_time = first_hit.get("first_elapsed")
-    causes = tuple(str(x) for x in first_hit.get("joint_causes", ()))
+    causes = tuple(str(x) for x in first_hit.get("joint_first_stops", first_hit.get("joint_causes", ())))
+    needs_energy_reentry = any(
+        label in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
+        for label in causes
+    )
     elapsed_available = float(geom["elapsed_available"])
     if hit_time is not None and float(hit_time) <= elapsed_available + 2e-12 * max(1.0, elapsed_available):
         return {
-            "classification": "named_physical_first_stop",
+            "classification": "named_first_stop",
             "joint_causes": causes,
+            "joint_first_stops": causes,
             "first_elapsed": float(hit_time),
             "primary_selected": False,
             "terminal_amplitude": amp,
             "duhamel_residual": res,
+            "requires_physical_energy_reentry": needs_energy_reentry,
+            "coefficient_impulses_used_as_work": False,
         }
 
     if bool(geom["hits_initial_boundary"]):
         return {
             "classification": "initial_boundary_root",
             "joint_causes": ("t=0",),
+            "joint_first_stops": ("t=0",),
             "first_elapsed": elapsed_available,
             "primary_selected": False,
             "terminal_amplitude": amp,
             "duhamel_residual": res,
+            "requires_physical_energy_reentry": False,
+            "coefficient_impulses_used_as_work": False,
         }
 
     if abs(ir) >= RESIDUAL_FRACTION * amp - 3e-12 * max(1.0, amp):
@@ -191,6 +210,7 @@ def natural_corridor_outcome(
     return {
         "classification": "full_natural_corridor_survivor",
         "joint_causes": (),
+        "joint_first_stops": (),
         "natural_duration": float(geom["natural_duration"]),
         "backward_endpoint": float(geom["backward_endpoint"]),
         "terminal_amplitude": amp,
@@ -202,6 +222,8 @@ def natural_corridor_outcome(
         "duhamel_residual": res,
         "nn_endpoint_witness_survives": True,
         "whole_carrier_declared_nn": False,
+        "requires_physical_energy_reentry": False,
+        "coefficient_impulses_used_as_work": False,
     }
 
 
@@ -218,14 +240,14 @@ def theorem_certificate(scaled_lifetime: float = 1.0) -> dict[str, object]:
     return {
         "status": "EXACT_NN_SEED_BACKWARD_NATURAL_FIRST_STOP_CORRIDOR__ONE_QUARTER_CRITICAL_SURVIVOR_OR_NAMED_STOP__MATERIAL_ATTACHMENT_REMAINS",
         "interval": "for a seed at time t and scale A, inspect the backward natural interval [max(0,t-cA^-2),t] using elapsed time ell=t-s",
-        "first_hit": "native-unit AC monitors are K_A, |I_role-interface|, |I_HH| and minus the minimum distance of the two NN endpoint witnesses to the old-material boundary; exact ties remain an unsplit cause set",
-        "outer_role": "while K_A<1/30, the dual-transported smooth Q_A carrier stays strictly above the A/2 low-low output; the exact outer equation has only HH source plus classified nonaffine role-interface residual",
+        "first_hit": "native-unit AC monitors are K_A, |I_role-interface|, |I_HH| and minus the minimum distance of the two NN endpoint witnesses to the old-material boundary; exact ties remain an unsplit first-stop set",
+        "outer_role": "while K_A<1/30, the dual-transported smooth Q_A carrier stays strictly above the A/2 low-low output; the exact outer equation has only HH source plus the nonaffine role-interface residual",
         "duhamel": "z(t)=z(s)+I_HH[s,t]+I_interface[s,t]; if neither impulse hits A_z/2 or A_z/4 and no material/strain stop occurs, |z(s)|>=|z(t)|/4",
         "critical_survival": f"the seed starts with A|z(t)|^2>={seed:.12g}; a full no-hit natural interval retains A|z(s)|^2>={inherited:.12g}=pi^2/(50c^2) at c={c:.12g}",
         "material": "the two NN heat-edge endpoint witnesses remain outside the old pool until their continuous boundary distance first reaches zero; this preserves witness provenance only and never declares the whole Q_Au carrier NN material",
         "boundary": "if the requested backward natural interval reaches t=0 first, the initial boundary is absorbing rather than a free survivor",
-        "interface_scope": "a large role-interface coefficient impulse delegates to the existing skew-transfer/symmetric-strain provenance theorem; it is not promoted to physical work or a new currency",
-        "hh_scope": "a large HH coefficient impulse is earlier HH regeneration and must pass through the existing physical-energy causal gate before any work-based probability is formed",
+        "interface_scope": "a large role-interface coefficient impulse is not promoted to physical work or a new currency; it only locates smooth-carrier physical-energy reentry, whose actual native interface work may then route to conservative relink or existing strain",
+        "hh_scope": "a large HH coefficient impulse is an obstruction locator and must pass through the existing physical-energy causal gate before HH generation or any work-based probability is named",
         "scope": "this closes temporal coefficient survival-or-first-stop for the high-strain carrier seed itself; attaching the surviving coefficient energy to its NN material witness and proving full efficiency/service renewal, plus universal source/relink re-entry, remain open",
     }
 
@@ -239,7 +261,7 @@ class TemporalSeedStress:
     worst_duhamel_residual: float
     order_invariance_failures: int
     unit_rescaling_failures: int
-    maximum_joint_cause_count: int
+    maximum_joint_first_stop_count: int
     branch_counts: dict[str, int]
 
 
@@ -291,7 +313,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> TemporalSeedStress:
             material_boundary_distance=dmat,
             tie_tolerance=2e-12,
         )
-        max_joint = max(max_joint, len(tuple(hit["joint_causes"])))
+        max_joint = max(max_joint, len(tuple(hit["joint_first_stops"])))
 
         ir_phase = float(rng.uniform(-math.pi, math.pi))
         ih_phase = float(rng.uniform(-math.pi, math.pi))
@@ -338,12 +360,12 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> TemporalSeedStress:
         perm = rng.permutation(len(mons))
         reordered = tuple(mons[int(i)] for i in perm)
         chk = first_physical_corridor_exit(ell, reordered, tie_tolerance=2e-12)
-        if base.first_time != chk.first_time or base.joint_causes != chk.joint_causes:
+        if base.first_time != chk.first_time or base.joint_first_stops != chk.joint_first_stops:
             order_fail += 1
             raise AssertionError("seed first stop depended on monitor order")
         factors = [float(math.exp(rng.uniform(-8.0, 8.0))) for _ in mons]
         scaled = tuple(
-            PhysicalPathMonitor(m.cause, m.threshold * f, tuple(f * x for x in m.values), m.topology)
+            PhysicalPathMonitor(m.label, m.threshold * f, tuple(f * x for x in m.values), m.topology)
             for m, f in zip(mons, factors)
         )
         chk2 = first_physical_corridor_exit(ell, scaled, tie_tolerance=2e-10)
@@ -352,7 +374,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> TemporalSeedStress:
             raise AssertionError("seed first stop changed under independent units")
         if base.first_time is not None and (
             abs(float(base.first_time) - float(chk2.first_time)) > 2e-10
-            or set(base.joint_causes) != set(chk2.joint_causes)
+            or set(base.joint_first_stops) != set(chk2.joint_first_stops)
         ):
             unit_fail += 1
             raise AssertionError("seed first stop changed under independent units")
@@ -405,7 +427,7 @@ def main() -> None:
     (args.outdir / "nn_seed_temporal_first_stop.json").write_text(
         json.dumps({"certificate": cert, "stress": asdict(out)}, indent=2), encoding="utf-8"
     )
-    md = f"""# NN-critical carrier seed: backward natural first-stop corridor\n\nStatus: **{cert['status']}**.\n\nStart from one atom of the already-certified NN-critical heat law.  Its lower-scale smooth carrier `w=Q_Au` has terminal coefficient `z(t)` with\n\n`A|z(t)|^2 >= 8 pi^2/(25 c^2)`.\n\nInspect the **backward natural interval**\n\n`[max(0,t-c A^-2), t]`.\n\nUse elapsed backward time `ell=t-s`.  No common scalar clock is introduced.  Four native continuous/absolutely-continuous observables are monitored independently:\n\n- renewed strain action `K_A[s,t]`, with first contact at `1/30`;\n- magnitude of the classified nonaffine role-interface coefficient impulse, threshold `|z(t)|/4`;\n- magnitude of the HH coefficient impulse, threshold `|z(t)|/2`;\n- minus the minimum distance of the two retained NN heat-edge endpoint witnesses to the old-material boundary, threshold `0`.\n\nTheir first backward debut is measurable by the existing smooth first-hit theorem; exact ties remain one unsplit cause set.  Until the strain face is hit, the dual-transported smooth role stays above the low--low output because\n\n`(3/5)e^(-1/30)A > A/2`.\n\nThe exact outer moving-role equation and adjoint interaction picture give\n\n`z(t)=z(s)+I_HH[s,t]+I_interface[s,t]`.\n\nTherefore there are only three possibilities before the requested natural endpoint:\n\n1. a named physical first stop occurs: strain, classified role-interface impulse, HH regeneration, or material-boundary contact;\n2. the interval reaches `t=0`, which is absorbing;\n3. no stop occurs through a full `cA^-2` interval, in which case the exact triangle inequality forces\n\n`|z(s)| >= |z(t)|/4`.\n\nThe surviving carrier is still quantitatively critical:\n\n`A|z(s)|^2 >= (1/16) A|z(t)|^2 >= pi^2/(50 c^2)`.\n\nThe material statement remains exact but deliberately narrow.  The two NN heat-edge endpoint witnesses stay outside the old pool until their continuous boundary distance reaches zero.  A no-hit survivor therefore retains an NN **witness**, not a claim that the whole Fourier carrier energy is new material.\n\nLikewise, a large interface coefficient impulse is not promoted to physical work: it delegates to the existing conservative-skew / symmetric-strain interface provenance.  A large HH coefficient impulse is only an earlier-generation obstruction until it re-enters the existing physical-energy causal gate.\n\nStress: `{out.samples}` backward natural corridors\n- minimum clean survivor critical-mass margin: `{out.minimum_clean_critical_mass_margin:.3e}`\n- minimum survivor 1/4-coefficient margin: `{out.minimum_survivor_coefficient_margin:.3e}`\n- minimum safe low--low gap: `{out.minimum_low_low_gap:.6e}`\n- worst exact Duhamel residual: `{out.worst_duhamel_residual:.3e}`\n- monitor-order failures: `{out.order_invariance_failures}`\n- independent-unit failures: `{out.unit_rescaling_failures}`\n- maximum exact joint-cause count: `{out.maximum_joint_cause_count}`\n- outcomes: `{out.branch_counts}`\n\nThis closes **temporal coefficient survival-or-first-stop for the high-strain carrier seed**.  The remaining high-strain seam is material/efficiency attachment: connect the surviving critical carrier coefficient to the retained NN witness strongly enough to start the canonical material service epoch, or route it to an already named physical cause.  Universal source/relink renewal remains open.  No global-regularity claim is made.\n"""
+    md = f"""# NN-critical carrier seed: backward natural first-stop corridor\n\nStatus: **{cert['status']}**.\n\nStart from one atom of the already-certified NN-critical heat law.  Its lower-scale smooth carrier `w=Q_Au` has terminal coefficient `z(t)` with\n\n`A|z(t)|^2 >= 8 pi^2/(25 c^2)`.\n\nInspect the **backward natural interval**\n\n`[max(0,t-c A^-2), t]`.\n\nUse elapsed backward time `ell=t-s`.  No common scalar clock is introduced.  Four native continuous/absolutely-continuous observables are monitored independently:\n\n- renewed strain action `K_A[s,t]`, with first contact at `1/30`;\n- magnitude of the nonaffine role-interface coefficient obstruction, threshold `|z(t)|/4`;\n- magnitude of the HH coefficient obstruction, threshold `|z(t)|/2`;\n- minus the minimum distance of the two retained NN heat-edge endpoint witnesses to the old-material boundary, threshold `0`.\n\nTheir first backward debut is measurable by the existing smooth first-hit theorem; exact ties remain one unsplit first-stop set.  Until the strain face is hit, the dual-transported smooth role stays above the low--low output because\n\n`(3/5)e^(-1/30)A > A/2`.\n\nThe exact outer moving-role equation and adjoint interaction picture give\n\n`z(t)=z(s)+I_HH[s,t]+I_interface[s,t]`.\n\nTherefore there are only three possibilities before the requested natural endpoint:\n\n1. a first obstruction occurs: strain, interface coefficient obstruction, HH coefficient obstruction, or material-boundary contact;\n2. the interval reaches `t=0`, which is absorbing;\n3. no stop occurs through a full `cA^-2` interval, in which case the exact triangle inequality forces\n\n`|z(s)| >= |z(t)|/4`.\n\nThe surviving carrier is still quantitatively critical:\n\n`A|z(s)|^2 >= (1/16) A|z(t)|^2 >= pi^2/(50 c^2)`.\n\nThe material statement remains exact but deliberately narrow.  The two NN heat-edge endpoint witnesses stay outside the old pool until their continuous boundary distance reaches zero.  A no-hit survivor therefore retains an NN **witness**, not a claim that the whole Fourier carrier energy is new material.\n\nA large interface coefficient impulse is not promoted to physical work.  It only locates reentry of the same smooth carrier into the physical-energy gate.  If that gate selects actual native interface work, the quadratic-carrier theorem routes it to conservative relink or existing strain.  A large HH coefficient impulse likewise only locates physical-energy reentry; actual HH generation is named there.\n\nStress: `{out.samples}` backward natural corridors\n- minimum clean survivor critical-mass margin: `{out.minimum_clean_critical_mass_margin:.3e}`\n- minimum survivor 1/4-coefficient margin: `{out.minimum_survivor_coefficient_margin:.3e}`\n- minimum safe low--low gap: `{out.minimum_low_low_gap:.6e}`\n- worst exact Duhamel residual: `{out.worst_duhamel_residual:.3e}`\n- monitor-order failures: `{out.order_invariance_failures}`\n- independent-unit failures: `{out.unit_rescaling_failures}`\n- maximum exact joint first-stop count: `{out.maximum_joint_first_stop_count}`\n- outcomes: `{out.branch_counts}`\n\nThis closes **temporal coefficient survival-or-first-stop for the high-strain carrier seed**.  The remaining high-strain seam is material/efficiency attachment and global physical-owner assembly.  Universal source/relink renewal remains open.  No global-regularity claim is made.\n"""
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
 

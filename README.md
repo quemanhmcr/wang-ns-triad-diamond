@@ -9,11 +9,13 @@ This repository **does not claim a proof of global regularity for 3D Navier–St
 ## Start here
 
 1. [`RESEARCH_LEDGER.md`](RESEARCH_LEDGER.md) — the current canonical map of the programme (~1,100 lines), organized by physical structure rather than discovery order.
-2. [`docs/high_tail_natural_window_reentry.md`](docs/high_tail_natural_window_reentry.md) — the newest completed high-tail continuation theorem.
-3. [`docs/physical_energy_causal_bridge.md`](docs/physical_energy_causal_bridge.md) — why causal weights are actual positive child-energy work, not normalized Duhamel mass.
-4. [`docs/objective_source_routing_compiler.md`](docs/objective_source_routing_compiler.md) — current source-owner routing.
-5. [`docs/critical_shell_service_reentry.md`](docs/critical_shell_service_reentry.md) — generic critical-shell first-stop / own-scale service reentry.
-6. [`docs/master_no_escape.md`](docs/master_no_escape.md) — the finite-dimensional/master-side no-escape architecture and its continuum interface.
+2. [`docs/smooth_quadratic_carrier_interface.md`](docs/smooth_quadratic_carrier_interface.md) — the native `Q^2` energy law for genuinely smooth propagated PDE carriers.
+3. [`docs/resolved_interface_donor_quotient.md`](docs/resolved_interface_donor_quotient.md) — the complementary hard-event donor/circulation quotient.
+4. [`docs/high_tail_natural_window_reentry.md`](docs/high_tail_natural_window_reentry.md) — the completed high-tail continuation theorem.
+5. [`docs/physical_energy_causal_bridge.md`](docs/physical_energy_causal_bridge.md) — why causal weights are actual positive child-energy work, not normalized Duhamel mass.
+6. [`docs/objective_source_routing_compiler.md`](docs/objective_source_routing_compiler.md) — current source-owner routing.
+7. [`docs/critical_shell_service_reentry.md`](docs/critical_shell_service_reentry.md) — generic critical-shell first-stop / own-scale service reentry.
+8. [`docs/master_no_escape.md`](docs/master_no_escape.md) — the finite-dimensional/master-side no-escape architecture and its continuum interface.
 
 For the full chronological development, superseded routes, fixture failures, and detailed CI provenance, read [`docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`](docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md).
 
@@ -65,6 +67,8 @@ No packet persistence or observer-chosen time bins are used in this step.
 - **Exact ties remain joint causes.** There is no canonical lexicographic theorem priority.
 - **Critical scale-normalized events recurse.** `NE`, `D_V`, and similar `O(1)` scale-critical quantities are not automatically finite global reset budgets.
 - **Hard projectors are event readers; smooth roles propagate between events.**
+- **Smooth carrier energy is read at `Q^2`.** A non-idempotent `Q` is completed by a square partition; `I-Q` is not its energy complement.
+- **Coefficient obstruction locates an interval, not an owner.** Actual carrier energy and native physical work must reenter the energy gate before causality is assigned.
 - **Entropy symbols are measure-specific.** Pressure-pair, fresh-scale, high-tail scale/time concentration, and causal ancestry entropies must not be interchanged.
 
 The anti-theorem/forbidden-inference list is maintained in [`RESEARCH_LEDGER.md`](RESEARCH_LEDGER.md#28-anti-theorems-and-forbidden-inferences).
@@ -77,7 +81,7 @@ Supplier-specific signed-good geometry and the exact global closure of all recur
 
 ## Validation and reproducibility
 
-Serious theorem validation in this project is performed through GitHub Actions.  The latest high-tail natural-window theorem was certified by dedicated run `31354438956` and full causal integration `31354509984`; the promotion containing the refreshed canonical ledger passed the exact-SHA final sweep before becoming `main`.
+Serious theorem validation in this project is performed through GitHub Actions.  The smooth quadratic-carrier theorem was certified by dedicated run `31401197668` and full causal integration `31401197364` on exact theorem SHA `54bf268fd363a3778627e281756482c64f37ae97`.
 
 Key CI artifacts are stored under `recorded-results/<run-id>/`.
 

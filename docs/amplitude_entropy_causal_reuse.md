@@ -93,10 +93,11 @@ The dual-Gaussian theorem gives, for a parent role with critical Young amplitude
 \]
 
 To move that event mark to the synchronized common slice use the existing adjoint
-first-stop rule.  If no earlier causal stop occurs, the inherited coefficient
+first-stop rule.  If no earlier obstruction occurs, the inherited coefficient
 keeps at least the clean `1/4` fraction.  If it does not, the first failure is
-already an HH-generation, classified-residual/source, or genuine material
-relink stop and the branch terminates there.
+an HH-coefficient obstruction, residual-coefficient obstruction, or genuine
+material relink stop.  Coefficient continuation stops there; coefficient
+obstructions reenter actual physical energy/work before an owner is named.
 
 Therefore every **continuing** node obeys
 
@@ -271,7 +272,7 @@ the natural additive coordinate of that multiplicative physics.
 
 At this stage the remaining continuum task was the registration step stated above: turn
 the eventwise coefficient into the coefficient on the synchronized common slice,
-or stop at the first physical cause preventing that registration.  That interface is now supplied by the common-slice, moving-role, event-role and first-hit theorems.  No global
+or stop at the first obstruction preventing that registration.  A coefficient obstruction locates physical-energy reentry and is not itself a physical cause; a genuine material relink keeps its own sidecar provenance.  That interface is now supplied by the common-slice, moving-role, event-role and first-hit theorems.  No global
 regularity conclusion is asserted.
 
 ## 8. Companion registration theorem closes the selected-role time interface
@@ -279,7 +280,7 @@ regularity conclusion is asserted.
 `common_slice_coefficient_registration.md` now proves the registration premise
 used above at the selected-role model level.  The asynchronous cone keeps every
 parent event inside its natural adjoint interval, and the exact first-stop gate
-returns either an earlier physical obstruction or at least `1/4` of the event
+returns either an earlier first-stop obstruction or at least `1/4` of the event
 coefficient on the common slice.  Hence the `1/16` product factor in `Lambda` is
 no longer a persistence hypothesis.
 

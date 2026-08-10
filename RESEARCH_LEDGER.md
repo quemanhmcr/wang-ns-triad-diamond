@@ -30,6 +30,7 @@ The current architecture has reached the following point.
 11. No critical energy or normalized dissipation event is treated as a scale-independent additive reset.
 12. The first continuum master quotient is now certified: relay depth is quotiented, physical event time is the universal recursion coordinate, bounded-scale full-natural survivor tails hit `t=0`, and any infinite escape is reduced to infinitely recurring named non-free physical owners or UV-unbounded free survivors. Global termination remains open.
 13. The resolved cross/interface branch is no longer an independent recursive generator: for the actual resolved low--high operator `L_V=K+S`, skew `K` is finite same-event conservative donor flux while symmetric `S` is existing strain/deformation ownership. Pure interface circulation is quotiented before recursion.
+14. The propagated smooth-carrier interface is now type-correct at energy level: `Q` is an analysis operator, `Q^2` is its energy effect, smooth roles form a square partition, and coefficient obstruction only locates reentry into actual energy/work causality.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -96,6 +97,12 @@ Smooth scalar PDE envelopes are propagated between events.
 If `P` is the event hard projector and `Q` is smooth with `QP=P`, then
 \[ \langle Pu,\phi\rangle=\langle Qu,P\phi\rangle. \]
 Hard projection does not need to be differentiated in time.
+The propagated carrier energy is
+\[ \|Qu\|_2^2=\langle u,Q^2u\rangle. \]
+Thus `Q` is not treated as a hard projector between events.  Complete smooth
+energy accounting uses a quadratic partition `sum_a A_a^2=I`; for one selected
+carrier the preferred construction is `Q=cos(theta)`, `R=sin(theta)`.  The
+linear complement `I-Q` is forbidden unless `Q^2=Q`.
 ### 2.4 Material labels are sidecars
 Pure old/new label changes do not create a second carrier impulse when the smooth carrier `Q` and dual `psi` are unchanged.
 The coefficient identity remains
@@ -219,8 +226,33 @@ Therefore
 with
 \[ R_Q=(\partial_tQ+[L_V,Q])u. \]
 The first term is the genuine HH quadratic source.
-The second is nonaffine resolved role-interface work.
+The second is the outer-equation nonaffine resolved role-interface forcing.
 There is no separate pressure forcing in this Leray-projected role equation.
+
+For the genuinely smooth carrier, the native energy law is read before assigning
+an interface owner.  With `eta=Q^2`,
+\[
+\boxed{
+\frac d{dt}\|Qu\|_2^2+2\nu\|\nabla Qu\|_2^2
+=\langle u,\partial_t\eta\,u\rangle
+-2\operatorname{Re}\langle\eta u,B(u,u)\rangle.
+}
+\]
+The exact resolved repartition has low--low work, `q^2`-weighted HH work and
+native interface work
+\[
+J_Q=\langle u,\partial_t(Q^2)u\rangle
+-2\operatorname{Re}\langle Q^2u,L_Vu\rangle.
+\]
+On the selected support the low--low term vanishes.  The outer forcing work is
+not `J_Q` by itself: exactly
+\[
+\boxed{
+J_Q=2\operatorname{Re}\langle Qu,R_Q\rangle
+-2\operatorname{Re}\langle Qu,L_VQu\rangle.
+}
+\]
+The commutator is therefore never interpreted in isolation.
 
 ---
 
@@ -252,6 +284,10 @@ Then:
 - symmetric pair work is off-diagonal strain work.
 Thus nonaffine role motion does not create a new generation currency.
 It routes to existing interface/strain provenance.
+A complete orthogonal projector partition proves this directly for hard event
+roles.  For the non-idempotent smooth PDE carrier, the corresponding theorem is
+instead the `Q^2` law above on a square partition.  These observables share
+`K/S` provenance but are not identified as the same physical measure.
 A role change caused only by rewriting the same cutoff decomposition is free by the exact repartition identity.
 A genuine physical role change/relink is not free.
 
@@ -287,10 +323,12 @@ one has terminal coefficient mass
 \[ A|z(t)|^2\ge\frac34\mu_0. \]
 Run the backward natural first-stop corridor with only native monitors:
 - renewed strain;
-- nonaffine/interface coefficient impulse;
-- HH coefficient impulse.
+- nonaffine/interface coefficient obstruction;
+- HH coefficient obstruction.
 No material boundary monitor is needed in the generic theorem.
-If a named stop occurs, route to its owner.
+If a coefficient obstruction occurs, it only locates the stopping interval; the
+same smooth carrier reenters the actual physical-energy gate before any work
+owner or causal weight is assigned.
 If `t=0` is reached, stop at the initial boundary.
 If the full natural corridor survives, then every prefix satisfies
 \[ A|z(s)|^2\ge\frac{3\mu_0}{64}. \]
@@ -673,10 +711,15 @@ or
 or
 \[ |I_{HH}|\ge A/2. \]
 The first is retained carrier amplitude.
-The second routes to classified residual/interface/source ownership.
-The third routes to HH regeneration.
+The second and third locate the first interval on which the clean coefficient
+continuation failed.  They do not themselves supply physical work weights.
 Large coefficient impulse alone is **not** automatically large physical work.
-A separate physical work theorem is required before using energy/entropy conclusions.
+For the smooth role, the actual terminal energy `||Qu||_2^2`, initial carrier
+energy, strain action and positive native `Q^2` interface work reenter the
+physical-energy gate.  It then returns inheritance, high strain, actual
+`q^2`-weighted HH generation, or actual native interface work.  Only the last
+branch is Hahn-routed to conservative relink or existing strain.  A separate
+physical work theorem is always required before energy/entropy conclusions.
 
 ---
 
@@ -803,6 +846,51 @@ with exact ties joint.
 No `M/N` causal reweighting, new entropy, synthetic clock, or interface reset is introduced.
 This closes resolved interface as an independent recursive-generation loophole; it does not prove that the genuine donor/strain owner reached afterward globally terminates.
 
+## 26.7 Smooth propagated interface is a quadratic energy partition
+The preceding donor quotient is an event-role theorem.  The propagated PDE role
+is instead a smooth self-adjoint analysis multiplier.  Complete it by
+\[
+\sum_aA_a^2=I,
+\qquad
+\sum_a\partial_t(A_a^2)=0.
+\]
+For `eta_a=A_a^2`, the native interface row is
+\[
+J_a=\langle u,\partial_t\eta_a u\rangle
+-2\operatorname{Re}\langle\eta_a u,L_Vu\rangle.
+\]
+After `L_V=K+S`, write `J_a=J_a^{rel}+J_a^{str}`.  The relink rows sum to zero.
+More sharply, their exact pair matrix is
+\[
+C_{ab}=M_{ab}+T_{ab}=-C_{ba},
+\qquad
+\sum_bC_{ab}=J_a^{rel},
+\]
+where
+\[
+M_{ab}=\operatorname{Re}\langle u,
+(\dot\eta_a\eta_b-\dot\eta_b\eta_a)u\rangle,
+\quad
+T_{ab}=-2\operatorname{Re}\langle\eta_au,K\eta_bu\rangle.
+\]
+Thus partition motion and skew transport are one conservative smooth-role
+relink law.  The symmetric synthesis matrix
+\[
+D_{ab}=-2\operatorname{Re}\langle\eta_au,S\eta_bu\rangle=D_{ba}
+\]
+has row sums `J_a^{str}` and reconstructs the same global resolved strain work.
+No source, reset, entropy, clock or representation `Xi` is created.
+
+The permanent guard is
+\[
+\mathcal I_Q(K)+\mathcal I_{I-Q}(K)
+=4\operatorname{Re}\langle Q(I-Q)u,Ku\rangle,
+\]
+which need not vanish.  A concrete two-dimensional example has defect `-1`.
+The quadratic complement `R` with `Q^2+R^2=I` restores exact skew conservation.
+This smooth pair measure is not identified with the hard event-role donor
+measure; any future composition needs an explicit physical-work pushforward.
+
 ---
 
 ## 27. Finite-dimensional rigidity modules: supporting geometry, not current PDE bottleneck
@@ -834,7 +922,10 @@ The following statements are either false or non-canonical and must not silently
 `dGamma=dT` is false.
 Use Duhamel for support/adjoint identities, physical positive work for causality.
 ### 28.2 Large coefficient impulse is not automatically large physical work
-A Duhamel or interface coefficient impulse requires an independent energy/work theorem before being promoted to physical generation.
+A Duhamel or interface coefficient impulse is only an interval locator.  For a
+smooth carrier, reenter with `||Qu||_2^2`, the actual native `Q^2` work and the
+existing physical-energy gate.  The impulse magnitude is forbidden from every
+work threshold and causal probability.
 ### 28.3 Young shape does not create an absolute root mass floor
 Trilinear homogeneity allows arbitrary amplitude scaling.
 Any physical cell-energy quantum scales with the parent amplitude squared.
@@ -1003,6 +1094,18 @@ This route now supplies its own forward scale progress `M/N>=2`.
 → whole-shell carrier
 → first stopping.
 Material labels do not alter the smooth carrier coefficient identity by themselves.
+### 30.8 Smooth-carrier obstruction route
+`hard physical event role P`
+→ exact plateau registration `QP=P`
+→ propagate the smooth carrier `Qu`
+→ read energy at `Q^2` inside a complete square partition
+→ coefficient obstruction only locates an interval
+→ actual carrier energy/native work gate
+→ inheritance, high strain, `q^2`-weighted HH generation, or native interface
+→ native interface Hahn split
+→ conservative smooth relink or existing strain.
+The raw coefficient impulse and the smooth commutator pairing never become
+replacement causal laws.
 
 ---
 
@@ -1026,7 +1129,12 @@ Resolved mixed/cross-interface work no longer supplies an independent recursive 
 For the actual resolved operator `L_V=K+S`, the skew part is conservative same-event role flux and the symmetric part is existing strain/deformation work.
 The skew donor closure is finite, all internal circulation cancels in the subset divergence identity, and same-event donor traversal creates no recursion depth or scale progress.
 The symmetric branch delegates once to the already existing deformation/source/critical-`D_V` owners.
-What remains open is termination of those genuine physical owners after this quotient, not an additional interface mechanism.
+For a smooth propagated role, the native `Q^2` law and square partition now
+perform the corresponding type-correct handoff: moving/skew rows are an exact
+antisymmetric relink flux and symmetric rows are the same strain work.  A
+coefficient hit reenters actual energy work instead of becoming a fifth owner.
+What remains open is termination of the genuine donor/relink/strain owners after
+these typed quotients, not an additional interface mechanism.
 ### 31.4 Conditional shell service must remain conditional
 Many supplier routes land in generic critical shells.
 The generic theorem provides a first-stop corridor and full-survivor service.
@@ -1184,6 +1292,45 @@ It completed successfully on the same exact SHA through the full source, pressur
 The initial implementation SHA `6ae71cba...` had one brittle certificate-wording assertion after `659` passing tests; no theorem identity or physical bound failed.  The assertion was relaxed to test semantics rather than exact prose, and the later notation-only `I_a^K -> R_a^K` cleanup changed no equation or routing.
 The theorem closes resolved interface as an independent recursive-generation loophole.  It does not prove global termination of the donor/strain owners and makes no Navier--Stokes regularity claim.
 
+### 33.4 Smooth quadratic-carrier interface and physical energy reentry
+Status:
+`EXACT_SMOOTH_QUADRATIC_CARRIER_INTERFACE__Q2_ENERGY_LAW__SQUARE_PARTITION_CONSERVATIVE_RELINK__SYMMETRIC_WORK_EXISTING_STRAIN__COEFFICIENT_OBSTRUCTION_ENERGY_REENTRY`.
+Dedicated GitHub Actions run:
+`31401197668`.
+Exact theorem SHA:
+`54bf268fd363a3778627e281756482c64f37ae97`.
+Results:
+- `671` tests passed;
+- `50,000` smooth-partition/interface/PDE/reentry states;
+- worst quadratic-partition residual `5.788098890966998e-15`;
+- worst differentiated-partition residual `3.4743781843676355e-15`;
+- worst native/outer recombination residual `8.933646029930295e-16`;
+- worst conservative-relink residual `8.740581016298078e-16`;
+- worst strain reconstruction residual `2.923322109464339e-15`;
+- worst pair antisymmetry/symmetry residual `4.2577563799028453e-16`;
+- worst pair row-sum residual `2.9233228935603255e-15`;
+- worst direct carrier-energy residual `7.85374408451728e-14`;
+- worst resolved-repartition residual `1.4921397450962104e-13`;
+- worst hard-event plateau-registration residual `9.515145095449836e-16`;
+- forbidden linear-complement counterexample defect `1.0`;
+- worst quadratic-complement skew residual `8.006202190830655e-16`;
+- minimum clean HH-generation margin `0.007828068136572788`;
+- all four energy-reentry branches exercised.
+Stored artifact:
+`recorded-results/31401197668/smooth-quadratic-carrier-interface-results/`.
+GitHub artifact digest:
+`sha256:1f15a3fde7a51f3b59167caf190985d7729a0ef53244b53ce6110647f441fd99`.
+Full causal integration:
+`31401197364`.
+It completed successfully on the same exact SHA through the full source,
+pressure, material/service, high-frequency, high-tail, resolved-interface donor,
+smooth/hard role, joint-stop, causal-reuse, physical-branch, and master-episode
+chain.  The master checked `20,000` traces with worst margin `0.0`.
+The theorem closes the local smooth-envelope/projector algebra mismatch and
+coefficient-obstruction energy reentry.  It does not identify the smooth pair
+measure with the hard event-role donor measure, prove global owner termination,
+close the UV-unbounded alternative, or claim Navier--Stokes regularity.
+
 
 ---
 
@@ -1220,32 +1367,33 @@ Then read the following current-spine documents in order:
 1. `docs/physical_energy_causal_bridge.md`
 2. `docs/recursive_coherent_witness_extraction.md`
 3. `docs/outer_moving_role_extraction.md`
-4. `docs/resolved_role_egorov.md`
-5. `docs/nonaffine_role_interface_work.md`
-6. `docs/resolved_interface_donor_quotient.md`
-7. `docs/event_anchored_role_registration.md`
-8. `docs/coherent_service_or_flat.md`
-9. `docs/critical_shell_service_reentry.md`
-10. `docs/high_strain_resolved_ancestor.md`
-11. `docs/high_strain_heat_increment_service.md`
-12. `docs/material_label_carrier_quotient.md`
-13. `docs/objective_source_routing_compiler.md`
-14. `docs/objective_pressure_pair_atomization.md`
-15. `docs/fresh_service_scale_reentry.md`
-16. `docs/high_frequency_dissipation_reentry.md`
-17. `docs/high_tail_binary_work_reentry.md`
-18. `docs/high_tail_ultraviolet_locality.md`
-19. `docs/high_tail_natural_window_reentry.md`
-20. `docs/physical_pair_weighted_productivity.md`
-21. `docs/common_slice_coefficient_registration.md`
-22. `docs/recursive_physical_witness_constructor.md`
-23. `docs/joint_causal_stop_projection.md`
-24. `docs/amplitude_entropy_causal_reuse.md`
-25. `docs/weighted_causal_reuse.md`
-26. `docs/renyi_causal_reuse.md`
-27. `docs/physical_branch_compiler.md`
-28. `docs/continuum_master_event_quotient.md`
-29. `docs/master_no_escape.md`
+4. `docs/smooth_quadratic_carrier_interface.md`
+5. `docs/resolved_role_egorov.md`
+6. `docs/nonaffine_role_interface_work.md`
+7. `docs/resolved_interface_donor_quotient.md`
+8. `docs/event_anchored_role_registration.md`
+9. `docs/coherent_service_or_flat.md`
+10. `docs/critical_shell_service_reentry.md`
+11. `docs/high_strain_resolved_ancestor.md`
+12. `docs/high_strain_heat_increment_service.md`
+13. `docs/material_label_carrier_quotient.md`
+14. `docs/objective_source_routing_compiler.md`
+15. `docs/objective_pressure_pair_atomization.md`
+16. `docs/fresh_service_scale_reentry.md`
+17. `docs/high_frequency_dissipation_reentry.md`
+18. `docs/high_tail_binary_work_reentry.md`
+19. `docs/high_tail_ultraviolet_locality.md`
+20. `docs/high_tail_natural_window_reentry.md`
+21. `docs/physical_pair_weighted_productivity.md`
+22. `docs/common_slice_coefficient_registration.md`
+23. `docs/recursive_physical_witness_constructor.md`
+24. `docs/joint_causal_stop_projection.md`
+25. `docs/amplitude_entropy_causal_reuse.md`
+26. `docs/weighted_causal_reuse.md`
+27. `docs/renyi_causal_reuse.md`
+28. `docs/physical_branch_compiler.md`
+29. `docs/continuum_master_event_quotient.md`
+30. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -1257,9 +1405,13 @@ Navier–Stokes gives actual signed nonlinear work.
 Positive child-energy work defines cause.
 Coherent analysis refines that work into physical parent/child roles.
 Smooth moving carriers transport roles between events.
+Their physical energy is `||Qu||_2^2=<u,Q^2u>` and smooth overlap is completed
+by a quadratic partition, never by pretending `Q` is idempotent.
 Affine/Kelvin motion and cutoff repartition are gauges.
 Nonaffine motion is interface/strain provenance.
 Resolved cross/interface work is immediately split by `L_V=K+S`: `K` is same-event conservative role flux and `S` is existing strain/deformation; circulation is quotiented before recursion.
+Coefficient obstructions locate energy reentry; only actual carrier energy and
+native work assign inheritance, HH generation, relink, or strain causality.
 Objective source variation is split by physical owner.
 Resolved dissipation and pressure/fresh source laws produce actual critical hard shells.
 Generic critical shells enter first-stop corridors and, on full survivors, own-scale service.

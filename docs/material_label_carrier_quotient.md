@@ -22,7 +22,7 @@ There is no factor \(1_O(\zeta)\), no dyadic material address, and no selected c
 
 A material address can move because the physical flow is nonaffine.  That does **not** mean the motion is free: the effect of nonaffine dynamics on the carrier coefficient is already in \(I_{interface}\).  What is forbidden is charging the same event twice by adding another independent `material_relink` impulse merely because an intrinsic address or old/new indicator crossed a bookkeeping boundary.
 
-Thus, while \(Q\) and \(\psi\) remain the same, the carrier first-stop faces are still only
+Thus, while \(Q\) and \(\psi\) remain the same, the carrier coefficient-obstruction faces are still only
 
 \[
 |I_{interface}|\ge\frac14|z(t)|,
@@ -37,6 +37,12 @@ If neither is hit,
 \]
 
 regardless of a simultaneous material-label sidecar event.
+
+These two magnitudes are first-stop locators, not physical-work owners.  At a
+hit, the same smooth carrier reenters the `Q^2` physical-energy gate.  Only the
+actual energy/work alternative returned there may name inheritance, HH
+generation, conservative relink or existing strain.  Neither coefficient
+impulse magnitude is used as a causal weight.
 
 ## Old/new service ownership can be reread without creating service
 
@@ -105,10 +111,15 @@ It does not rewrite old certificates or declare all historical `MATERIAL_RELINK`
 
 A single physical time can therefore carry two different outputs:
 
-- a **carrier decision**: continue, interface stop, or HH-regeneration stop;
+- a **carrier first-stop record**: continue, interface coefficient obstruction,
+  or HH coefficient obstruction;
 - zero or more **material sidecars**: membership update and/or selected-family Moyal switch.
 
-The full joint event set is retained without lexicographic priority.  Sidecars remain ancestry/relink currency.  The only quotient is that sidecar currency does not automatically kill a smooth carrier whose PDE role and probe have not changed.
+The full joint first-stop set is retained without lexicographic priority.
+Sidecars remain ancestry/relink currency.  Coefficient obstructions route to
+physical-energy reentry before ownership.  The only quotient is that sidecar
+currency does not automatically kill a smooth carrier whose PDE role and probe
+have not changed.
 
 This is the carrier-level statement needed by the shortest critical-shell architecture, where materiality is deliberately assigned only after actual own-scale service exists.
 

@@ -32,7 +32,7 @@ Thus the temporal theorem is not merely an endpoint-survival statement.
 
 ## Do not drop inverse heat
 
-The registered coefficient uses the existing affine/Kelvin/viscous analysis dual.  Its backward interaction-picture probe therefore grows under inverse heat.  This is not being asserted as an operator-norm bound for the full nonaffine outer-role adjoint: the mismatch with full resolved transport is precisely part of the already monitored classified interface residual.  The renewed envelope is supported initially in
+The registered coefficient uses the existing affine/Kelvin/viscous analysis dual.  Its backward interaction-picture probe therefore grows under inverse heat.  This is not being asserted as an operator-norm bound for the full nonaffine outer-role adjoint: the mismatch with full resolved transport is precisely part of the already monitored role-interface coefficient obstruction.  That obstruction locates physical-energy reentry; its magnitude is not work.  The renewed envelope is supported initially in
 
 \[
  \frac35 A\le |\xi|\le\frac32 A,

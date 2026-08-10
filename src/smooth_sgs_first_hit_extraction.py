@@ -10,7 +10,11 @@ from typing import Sequence
 
 import numpy as np
 
-from src.common_slice_coefficient_registration import registration_first_stop
+from src.common_slice_coefficient_registration import (
+    HH_COEFFICIENT_OBSTRUCTION,
+    ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
+    registration_first_stop,
+)
 
 
 class ThresholdTopology(str, Enum):
@@ -40,12 +44,22 @@ class PhysicalPathMonitor:
     values: tuple[float, ...]
     topology: ThresholdTopology = ThresholdTopology.CLOSED
 
+    @property
+    def label(self) -> str:
+        """Canonical first-stop label; ``cause`` is retained for API compatibility."""
+        return self.cause
+
 
 @dataclass(frozen=True)
 class JointFirstExit:
     first_time: float | None
     joint_causes: tuple[str, ...]
     individual_debuts: dict[str, float | None]
+
+    @property
+    def joint_first_stops(self) -> tuple[str, ...]:
+        """Canonical first-stop set; ``joint_causes`` is the compatibility field."""
+        return self.joint_causes
 
 
 def _validated_path(times: Sequence[float], values: Sequence[float], threshold: float) -> tuple[np.ndarray, np.ndarray]:
@@ -71,8 +85,8 @@ def superlevel_debut_piecewise_linear(
     No normalization against other observables occurs.  For a strict stop the
     returned time is ``inf{t:f(t)>threshold}``; at a genuine crossing continuity
     normally gives ``f(tau)=threshold``.  This boundary timestamp is exactly what
-    is needed to order physical causes, while any dt-absolutely-continuous work
-    law gives the singleton zero mass.
+    is needed to order native first-stop contacts, while any
+    dt-absolutely-continuous work law gives the singleton zero mass.
     """
     t, v = _validated_path(times, values, threshold)
     strict = topology is ThresholdTopology.STRICT
@@ -112,12 +126,12 @@ def first_physical_corridor_exit(
         raise ValueError("strictly increasing times required")
     if not monitors:
         return JointFirstExit(None, (), {})
-    if len({m.cause for m in monitors}) != len(monitors):
-        raise ValueError("one monitor per already-quotiented physical cause required")
+    if len({m.label for m in monitors}) != len(monitors):
+        raise ValueError("one monitor per already-quotiented first-stop label required")
 
     debuts: dict[str, float | None] = {}
     for m in monitors:
-        debuts[m.cause] = superlevel_debut_piecewise_linear(t, m.values, m.threshold, m.topology)
+        debuts[m.label] = superlevel_debut_piecewise_linear(t, m.values, m.threshold, m.topology)
     finite = [x for x in debuts.values() if x is not None]
     if not finite:
         return JointFirstExit(None, (), debuts)
@@ -127,10 +141,10 @@ def first_physical_corridor_exit(
         tie_tolerance = 128.0 * math.ulp(span)
     if tie_tolerance < 0 or not math.isfinite(tie_tolerance):
         raise ValueError("finite nonnegative tie tolerance required")
-    causes = tuple(sorted(c for c, x in debuts.items() if x is not None and abs(x - first) <= tie_tolerance))
-    if not causes:
-        raise AssertionError("finite first exit lost its cause set")
-    return JointFirstExit(float(first), causes, debuts)
+    labels = tuple(sorted(c for c, x in debuts.items() if x is not None and abs(x - first) <= tie_tolerance))
+    if not labels:
+        raise AssertionError("finite first exit lost its first-stop set")
+    return JointFirstExit(float(first), labels, debuts)
 
 
 def rescale_monitor_units(monitor: PhysicalPathMonitor, factor: float) -> PhysicalPathMonitor:
@@ -143,7 +157,7 @@ def rescale_monitor_units(monitor: PhysicalPathMonitor, factor: float) -> Physic
     if factor <= 0 or not math.isfinite(factor):
         raise ValueError("positive finite unit factor required")
     return PhysicalPathMonitor(
-        cause=monitor.cause,
+        cause=monitor.label,
         threshold=factor * monitor.threshold,
         values=tuple(factor * x for x in monitor.values),
         topology=monitor.topology,
@@ -228,16 +242,31 @@ def registration_no_hit_exhaustion(
     if bool(out["continuing"]):
         return {
             "classification": "registered_generated_survivor",
+            "first_stops": (),
             "stop_causes": (),
             "registered_amplitude_lower": float(out["registered_amplitude_lower"]),
             "event_amplitude": float(out["event_amplitude"]),
+            "requires_physical_energy_reentry": False,
+            "coefficient_impulses_used_as_work": False,
         }
-    causes = tuple(str(x) for x in out.get("stop_causes", (str(out["branch"]),)))
+    stops = tuple(str(x) for x in out.get("first_stops", (str(out["branch"]),)))
+    needs_energy_reentry = any(
+        label in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
+        for label in stops
+    )
     return {
-        "classification": "named_backward_physical_stop",
-        "stop_causes": causes,
+        "classification": (
+            "coefficient_obstruction_energy_reentry"
+            if needs_energy_reentry
+            else "named_backward_physical_stop"
+        ),
+        "first_stops": stops,
+        # Backward-compatible alias; coefficient labels are obstructions, not causes.
+        "stop_causes": stops,
         "registered_amplitude_lower": 0.0,
         "event_amplitude": float(out["event_amplitude"]),
+        "requires_physical_energy_reentry": needs_energy_reentry,
+        "coefficient_impulses_used_as_work": False,
     }
 
 
@@ -257,8 +286,9 @@ def theorem_certificate() -> dict[str, object]:
             "continuity gives f(tau_>)=theta and the open-superlevel crossing germ is the physical state exit"
         ),
         "joint_ties": (
-            "for finitely many physical observables, tau=min_r tau_r and J={r:tau_r=tau} are measurable; "
-            "J is retained as an unsplit cause set with no theorem-name priority or common-unit weights"
+            "for finitely many native observables, tau=min_r tau_r and J={r:tau_r=tau} are measurable; "
+            "J is retained as an unsplit first-stop set with no theorem-name priority or common-unit weights; "
+            "coefficient members require physical-energy routing before they become causes"
         ),
         "unit_invariance": (
             "each stopping set is unchanged under its own strictly increasing continuous change of physical units; "
@@ -279,15 +309,15 @@ def theorem_certificate() -> dict[str, object]:
             "use the branch-free S1 geodesic holonomy acos(Re h) rather than a chosen arg branch, eliminating artificial phase jumps"
         ),
         "generated_no_hit": (
-            "backward adjoint impulses are AC in the backward endpoint; if no residual/source, HH-regeneration, material-relink, or t=0 boundary obstruction hits, "
-            "the exact triangle identity registers the generated coefficient with the existing 1/4 lower factor"
+            "backward adjoint impulses are AC in the backward endpoint; if no role-interface coefficient, HH coefficient, material-relink, or t=0 boundary obstruction hits, "
+            "the exact triangle identity registers the generated coefficient with the existing 1/4 lower factor; a coefficient hit only locates Q^2 physical-energy reentry"
         ),
         "flat_no_hit": (
             "on the retained low-transfer block, absence of the already-certified strain/source/deformation/aspect/radius/phase service exits leaves exactly the existing coherent Kelvin-flat alternative"
         ),
         "scope": (
             "this proves local measurable first-hit extraction for any recursively selected smooth-SGS block once that block is supplied; "
-            "it does not yet prove that every recursive source/dissipation/relink/HH-regeneration re-entry again satisfies the selector hypotheses"
+            "it does not yet prove that every routed source/dissipation/relink/HH-generation re-entry again satisfies the selector hypotheses"
         ),
     }
 
@@ -297,7 +327,7 @@ class FirstHitStress:
     samples: int
     order_invariance_failures: int
     unit_rescaling_failures: int
-    maximum_joint_cause_count: int
+    maximum_joint_first_stop_count: int
     minimum_moyal_rate_margin: float
     worst_phase_branch_cut_gap: float
     minimum_registered_fraction_margin: float
@@ -334,21 +364,21 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> FirstHitStress:
         out = first_physical_corridor_exit(times, mons, tie_tolerance=2e-12)
         if out.first_time is None or abs(out.first_time - tau) > 2e-12:
             raise AssertionError("piecewise-linear first physical exit moved away from the exact crossing")
-        if set(out.joint_causes) != {"strain_action", "material_state_exit"}:
-            raise AssertionError("exact joint physical cause set was not retained")
-        max_joint = max(max_joint, len(out.joint_causes))
+        if set(out.joint_first_stops) != {"strain_action", "material_state_exit"}:
+            raise AssertionError("exact joint first-stop set was not retained")
+        max_joint = max(max_joint, len(out.joint_first_stops))
 
         perm = rng.permutation(len(mons))
         reordered = tuple(mons[int(i)] for i in perm)
         out2 = first_physical_corridor_exit(times, reordered, tie_tolerance=2e-12)
-        if out2.first_time != out.first_time or out2.joint_causes != out.joint_causes:
+        if out2.first_time != out.first_time or out2.joint_first_stops != out.joint_first_stops:
             order_fail += 1
             raise AssertionError("first exit depended on monitor enumeration")
 
         factors = [float(math.exp(rng.uniform(-12.0, 12.0))) for _ in mons]
         rescaled = tuple(rescale_monitor_units(m, a) for m, a in zip(mons, factors))
         out3 = first_physical_corridor_exit(times, rescaled, tie_tolerance=2e-10)
-        if out3.first_time is None or abs(out3.first_time - tau) > 2e-10 or set(out3.joint_causes) != set(out.joint_causes):
+        if out3.first_time is None or abs(out3.first_time - tau) > 2e-10 or set(out3.joint_first_stops) != set(out.joint_first_stops):
             unit_fail += 1
             raise AssertionError("first exit depended on independent physical unit choices")
 
@@ -391,7 +421,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> FirstHitStress:
         samples=samples,
         order_invariance_failures=order_fail,
         unit_rescaling_failures=unit_fail,
-        maximum_joint_cause_count=max_joint,
+        maximum_joint_first_stop_count=max_joint,
         minimum_moyal_rate_margin=min_moyal,
         worst_phase_branch_cut_gap=worst_phase,
         minimum_registered_fraction_margin=min_reg,
@@ -408,7 +438,7 @@ def main() -> None:
     out = stress(args.samples)
     payload = {"certificate": cert, "stress": asdict(out)}
     (args.outdir / "smooth_sgs_first_hit_extraction.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    md = f"""# Smooth-SGS first-hit extraction from physical observables\n\nStatus: **{cert['status']}**.\n\nThe extraction is a **causal filtration**, not one artificial vector clock.  Event/support facts are resolved first; smooth resolved/coherent dynamics then generate continuous or absolutely-continuous physical observables; actual positive HH work creates the child transfer measure; common-slice registration is a backward adjoint problem; Shannon/Renyi information is only formed after the parent law exists.\n\nFor a finite continuous family `f_r(t)` in their own physical units, define each certified superlevel hit/debut separately and set `tau=min_r tau_r`.  Closed-threshold hitting times are Borel because `{{tau_r<=q}}={{sup_[a,q] f_r>=theta_r}}`; strict state exits are Borel by the analogous rational-time open-superlevel formula.  The simultaneous first-cause set `J={{r:tau_r=tau}}` is therefore measurable and finite.  No theorem-name order and no normalization of strain, source work, Moyal relink energy, or phase is needed.  Independent monotone changes of units leave every stopping set unchanged.\n\nMaterial coherence is anchored rather than re-selected.  In intrinsic `zeta=(L^-1 X/2,L^T k)`, common affine transport fixes a cell exactly.  With `F(t)=V_{{g(t)}}u(t)`,\n\n`E_C(t)=||1_C F(t)||_2^2`,\n\n`|E_C'(t)| <= 2 sqrt(E_C) [ ||g||_2 ||u_t||_2 + ||g_t||_2 ||u||_2 ]`.\n\nThus the physical Moyal content of the transported cell is AC.  Dyadic cell boundaries have zero Moyal energy/work because these measures have phase-space densities, so a representation boundary cannot create relink mass.  A genuine new material address/relink is an event of the physical cell measure, not an `argmax` label chatter.\n\nHelical phase is treated similarly: use the branch-free circle distance `acos(Re h)` for unit holonomy `h`, rather than a chosen principal-angle branch.\n\nFor generated events, the backward impulses in `z(t)=z(s)+I_HH+I_R` are AC in the endpoint.  If no residual/source, HH-regeneration, material-relink, or initial-boundary obstruction hits, the existing exact triangle gate gives `|z(s)|>=|z(t)|/4`; hence the no-hit event is precisely a registered generated survivor.  At block level, absence of the already-certified service exits leaves the existing coherent Kelvin-flat alternative.\n\nStress: `{out.samples}` physical-path/Moyal/phase/registration regressions\n- monitor-order failures: `{out.order_invariance_failures}`\n- independent-unit-rescaling failures: `{out.unit_rescaling_failures}`\n- largest exact joint cause set sampled: `{out.maximum_joint_cause_count}`\n- minimum Moyal rate inequality margin: `{out.minimum_moyal_rate_margin:.3e}`\n- worst phase branch-cut gap: `{out.worst_phase_branch_cut_gap:.3e}`\n- minimum registered quarter-factor margin: `{out.minimum_registered_fraction_margin:.3e}`\n\nThis closes the **local measurable first-hit extraction once a smooth-SGS block has been recursively selected**.  It does not yet prove universal recursive re-entry: after a source, critical dissipation, material/new-ancestry, or HH-regeneration stop, one must still show that the next continuum selector again supplies a block satisfying the hypotheses.  No global-regularity claim is made.\n"""
+    md = f"""# Smooth-SGS first-hit extraction from physical observables\n\nStatus: **{cert['status']}**.\n\nThe extraction is a **causal filtration**, not one artificial vector clock.  Event/support facts are resolved first; smooth resolved/coherent dynamics then generate continuous or absolutely-continuous physical observables; actual positive HH work creates the child transfer measure; common-slice registration is a backward adjoint problem; Shannon/Renyi information is only formed after the parent law exists.\n\nFor a finite continuous family `f_r(t)` in their own physical units, define each certified superlevel hit/debut separately and set `tau=min_r tau_r`.  Closed-threshold hitting times are Borel because `{{tau_r<=q}}={{sup_[a,q] f_r>=theta_r}}`; strict state exits are Borel by the analogous rational-time open-superlevel formula.  The simultaneous first-stop set `J={{r:tau_r=tau}}` is therefore measurable and finite.  No theorem-name order and no normalization of strain, source work, Moyal relink energy, or phase is needed.  Independent monotone changes of units leave every stopping set unchanged.\n\nMaterial coherence is anchored rather than re-selected.  In intrinsic `zeta=(L^-1 X/2,L^T k)`, common affine transport fixes a cell exactly.  With `F(t)=V_{{g(t)}}u(t)`,\n\n`E_C(t)=||1_C F(t)||_2^2`,\n\n`|E_C'(t)| <= 2 sqrt(E_C) [ ||g||_2 ||u_t||_2 + ||g_t||_2 ||u||_2 ]`.\n\nThus the physical Moyal content of the transported cell is AC.  Dyadic cell boundaries have zero Moyal energy/work because these measures have phase-space densities, so a representation boundary cannot create relink mass.  A genuine new material address/relink is an event of the physical cell measure, not an `argmax` label chatter.\n\nHelical phase is treated similarly: use the branch-free circle distance `acos(Re h)` for unit holonomy `h`, rather than a chosen principal-angle branch.\n\nFor generated events, the backward impulses in `z(t)=z(s)+I_HH+I_R` are AC in the endpoint.  If no role-interface coefficient, HH coefficient, material-relink, or initial-boundary obstruction hits, the existing exact triangle gate gives `|z(s)|>=|z(t)|/4`; hence the no-hit event is precisely a registered generated survivor.  At block level, absence of the already-certified service exits leaves the existing coherent Kelvin-flat alternative.\n\nStress: `{out.samples}` physical-path/Moyal/phase/registration regressions\n- monitor-order failures: `{out.order_invariance_failures}`\n- independent-unit-rescaling failures: `{out.unit_rescaling_failures}`\n- largest exact joint first-stop set sampled: `{out.maximum_joint_first_stop_count}`\n- minimum Moyal rate inequality margin: `{out.minimum_moyal_rate_margin:.3e}`\n- worst phase branch-cut gap: `{out.worst_phase_branch_cut_gap:.3e}`\n- minimum registered quarter-factor margin: `{out.minimum_registered_fraction_margin:.3e}`\n\nThis closes the **local measurable first-hit extraction once a smooth-SGS block has been recursively selected**.  It does not yet prove universal recursive re-entry: after a routed source, critical dissipation, material/new-ancestry, or HH-generation stop, one must still show that the next continuum selector again supplies a block satisfying the hypotheses.  No global-regularity claim is made.\n"""
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
 
