@@ -528,7 +528,7 @@ def realized_pressure_source_route(
         pair_positive_weights=pair_positive_weights,
         pair_shell_indices=pair_shell_indices,
         pair_frequencies=pair_frequencies,
-        pair_dominance_fraction=pair_dominance_fraction,
+        dominant_fraction=pair_dominance_fraction,
     )
     owners = tuple(pair_route["joint_primary_owners"])
     routes: dict[str, object] = {}
