@@ -14,7 +14,9 @@ from src.objective_source_routing_compiler import (
     objective_sgs_episode_thresholds,
     objective_sgs_high_frequency_physical_reentry,
     objective_sgs_square_service_per_source,
+    pressure_canonical_interface,
     pressure_source_alternatives,
+    realized_pressure_source_route,
     theorem_certificate,
     viscous_dv_reentry,
 )
@@ -50,6 +52,7 @@ def test_joint_owner_tie_is_not_lexicographic():
     assert set(out["joint_owners"]) == set(OWNER_NAMES)
     assert out["additive_reset_created"] is False
     assert out["packet_synchronization_created"] is False
+    assert out["routes"]["pressure"]["aggregate_muV_canonical_route"] is False
 
 
 def test_local_and_viscous_feed_generic_shell_but_remain_recursive():
@@ -62,15 +65,95 @@ def test_local_and_viscous_feed_generic_shell_but_remain_recursive():
         assert out["master_semantics"] == "RECURSE_CRITICAL"
 
 
-def test_pressure_mass_is_not_silently_promoted_to_shell():
+def test_pressure_muV_split_survives_only_as_diagnostic():
     sigma = 0.04
     out = pressure_source_alternatives(sigma, 0.5, 1.2, 1.1, 1.05)
     assert out["resolved_lowpass_mass_occupation_lower"] / 5700.0 == pytest.approx(sigma / 2.0)
     assert out["stress_l32_occupation_lower"] / 380.0 == pytest.approx(sigma / 2.0)
-    assert out["effective_sgs_source_weight_if_stress_branch"] == pytest.approx(sigma / 2.0)
     assert out["resolved_mass_is_generic_critical_shell"] == "NO"
+    assert out["canonical_pressure_route"] is False
+    assert out["master_semantics"] == "DIAGNOSTIC_ONLY"
     assert out["fixed_pair_service_ratio_upper"] < 1.0 / 5.0
-    assert out["fixed_pair_total_future_multiplier_upper"] < 1.25
+
+
+def test_symbolic_pressure_compiler_has_no_aggregate_muV_state():
+    sigma = 0.04
+    out = pressure_canonical_interface(sigma, 0.5, 1.2, 1.1, 1.05)
+    assert out["positive_source_owner_threshold"] == pytest.approx(sigma / 2.0)
+    assert out["sgs_stress_occupation_lower_if_sgs_owner"] == pytest.approx(190.0 * sigma)
+    assert out["pair_quarter_shell_corollary_lower"] == pytest.approx(80.0 * sigma / 0.5)
+    assert out["pair_quarter_entropy_corollary_lower"] == pytest.approx(math.log(4.0))
+    assert out["aggregate_muV_canonical_route"] is False
+    assert "resolved_lowpass_mass_occupation_lower" not in out
+    assert out["realized_positive_source_law_required"] is True
+
+
+def test_realized_diffuse_pressure_pair_law_still_enters_critical_shell():
+    sigma = 1.0
+    out = realized_pressure_source_route(
+        sigma,
+        1.0,
+        1.0,
+        1.2,
+        1.1,
+        1.05,
+        block_frequency=4.0,
+        sgs_positive_source_weight=0.0,
+        pair_positive_weights=[0.2] * 5,
+        pair_shell_indices=[(i, i) for i in range(5)],
+        pair_frequencies=[(1.0 / (2**i), 1.0 / (2**i)) for i in range(5)],
+    )
+    assert out["joint_primary_owners"] == ("resolved_pressure_pair_law",)
+    rr = out["routes"]["resolved_pressure_pair_law"]
+    assert rr["critical_shell_mass_lower"] > 0
+    assert rr["full_survivor_own_scale_service_lower"] > 0
+    assert rr["full_survivor_integrated_service_lower"] > 0
+    assert rr["entropy_weighted_critical_shell_mass_lower"] >= 320.0 - 1e-10
+    assert rr["entropy_weighted_full_survivor_service_lower"] >= rr["clean_entropy_weighted_full_survivor_service_lower"] - 1e-12
+    assert rr["entropy_weighted_full_survivor_integrated_service_lower"] >= rr["clean_entropy_weighted_full_survivor_integrated_service_lower"] - 1e-12
+    assert rr["next_owner"] == "generic_critical_shell_first_stop"
+    assert out["aggregate_muV_used"] is False
+
+
+def test_realized_pressure_sgs_owner_uses_actual_positive_weight():
+    sigma = 1.0
+    out = realized_pressure_source_route(
+        sigma,
+        1.0,
+        1.0,
+        1.2,
+        1.1,
+        1.05,
+        block_frequency=4.0,
+        sgs_positive_source_weight=1.0,
+        pair_positive_weights=[],
+        pair_shell_indices=[],
+        pair_frequencies=[],
+    )
+    assert out["joint_primary_owners"] == ("sgs_pressure_source",)
+    rr = out["routes"]["sgs_pressure_source"]
+    assert rr["stress_l32_occupation_lower"] == pytest.approx(380.0)
+    assert rr["integrated_forced_square_service_lower"] > 0
+    assert rr["next_owner"] == "coherent_service"
+
+
+def test_realized_pressure_exact_half_tie_keeps_both_owners():
+    sigma = 1.0
+    out = realized_pressure_source_route(
+        sigma,
+        1.0,
+        1.0,
+        1.2,
+        1.1,
+        1.05,
+        block_frequency=4.0,
+        sgs_positive_source_weight=0.5,
+        pair_positive_weights=[0.5],
+        pair_shell_indices=[(0, 0)],
+        pair_frequencies=[(1.0, 1.0)],
+    )
+    assert set(out["joint_primary_owners"]) == {"sgs_pressure_source", "resolved_pressure_pair_law"}
+    assert set(out["routes"]) == {"sgs_pressure_source", "resolved_pressure_pair_law"}
 
 
 def test_integrated_sgs_high_frequency_owner_is_not_DV():
@@ -154,11 +237,15 @@ def test_integrated_sgs_entropy_or_cycle_when_no_dominant_edge():
     assert cyc["hidden_pair_lower"] == pytest.approx(0.25)
 
 
-def test_certificate_records_two_forbidden_identifications():
+def test_certificate_records_pressure_pair_native_route_and_forbidden_identifications():
     cert = theorem_certificate()
     assert cert["status"] == STATUS
+    assert "mu_child exp(H2_pair)>=320 Sigma_P/c" in cert["pressure_pair_route"]
+    assert "diagnostic only" in cert["pressure_legacy_muV"]
+    assert "full no-hit shell corridor" in cert["pressure_service_conjugacy"]
     text = cert["forbidden_identifications"]
-    assert "pressure low-pass mass is not generic critical-shell mass" in text
+    assert "aggregate pressure mu_V is not a canonical renewal state" in text
+    assert "pressure H2 is not a causal child-energy probability" in text
     assert "high-frequency SGS dissipation is not resolved D_V" in text
 
 

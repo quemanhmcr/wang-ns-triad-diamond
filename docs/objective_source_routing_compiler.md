@@ -132,46 +132,77 @@ That event enters the generic critical-shell theorem.  If no fresh edge dominate
 
 Crucially, the high-frequency dissipation branch is kept under its own owner.  It is **not** silently renamed resolved `D_V`.
 
-## Pressure keeps its real two-way structure
+## Pressure is pair-native, not reservoir-native
 
-For the strict filtered pressure,
+The coarse resolved estimate
 
 \[
-\rho_P\le \frac{\mu_V}{5700}+\frac{\|R\|_{3/2}}{380}.
+\rho_P\le \frac{\mu_V}{5700}+\frac{\|R\|_{3/2}}{380}
 \]
 
-If an integrated pressure owner has weight `Sigma_P`, then positivity gives the exact alternative
+remains correct and is retained as a **diagnostic API**.  It is no longer the canonical compiler state, because `mu_V=N||V||_2^2` erases the elliptic derivative suppression carried by the actual pressure interaction.
+
+The canonical route scalarizes the actual coherent-averaged pressure Hessian by its event Frobenius dual and uses the exact positive source cover
 
 \[
 \boxed{
-\int \mu_V\,d\tau\ge 2850\Sigma_P
-\quad\text{or}\quad
-\int\|R\|_{3/2}\,d\tau\ge190\Sigma_P.
+\rho_P\le[r_{SGS}]_+ + \sum_{a\le b}[p_{ab}]_+.
 }
 \]
 
-The stress alternative is precisely an effective objective-SGS source weight `Sigma_P/2`, so it enters the same linear coherent-service route above.
+Thus either positive SGS pressure source or the resolved unordered hard-pair law carries at least `Sigma_P/2`; exact ties remain joint.
 
-The resolved-mass alternative is intentionally **not** fed to the generic critical-shell theorem.  `mu_V=N||V||_2^2` is low-pass mass occupation and may sit arbitrarily far below the current block scale.  Calling it a critical shell would be a false geometric assertion.
-
-Instead it remains the objective pressure-Hessian reservoir owner.  The derivative order matters.  For one low--low pair `(a,b)`, the normalized Hessian source has, up to the fixed Riesz/Bernstein constant, coefficient
+If the SGS source law carries actual integrated weight `R_SGS`, the direct order-two source bound gives
 
 \[
-\frac{M_{max}^4\sqrt{M_aM_b}}{N^4}\sqrt{E_aE_b}.
+\int\|R\|_{3/2}\,d\tau\ge380R_{SGS},
 \]
 
-On a supplied signed-good low-strain lineage, reservoir frequencies grow by `<21/20` while the block scale grows by `>8/5`, so every fixed materially reused pair contracts by
+so **that actual weight**, not merely the clean half-threshold, enters the same linear coherent-service map used by the objective SGS owner.
+
+If the resolved pair law is an owner, the pressure-pair theorem already gives
 
 \[
-\left(\frac{21}{20}\right)^5\left(\frac58\right)^4
-=\frac{4084101}{20971520}<\frac15.
+\boxed{
+\mu_{child}e^{H_2^P}\ge320\frac{\Sigma_P}{c}.
+}
 \]
 
-Therefore its total future objective-Hessian capacity is `<5/4` times generation zero.  Persistent pressure-Hessian service must relink to new reservoir pairs, fragment into atomic/component entropy or cycle structure, leave the low-strain reuse regime, or use the SGS part.
+The strict low-pass contraction transfers the resolved `V`-shell lower to the same hard shell of `u`, so every positive resolved pair law supplies an input to the generic critical-shell first-stop theorem.  There is no separate diffuse-pressure fate: large `H_2^P` weakens the shell threshold but does not change its owner.
 
-This must not be confused with the separate H1 **pressure-third** source, whose coefficient is `M_max^3 sqrt(M_aM_b)/N^3`, contracts by `<1/3`, and has total fixed-pair capacity `<3/2`.  The two sources share material-pair provenance but not derivative order.
+On a full no-hit natural shell corridor, the generic shell theorem therefore gives a conditional own-scale service lower.  Because that theorem is linear in the shell critical mass, the pressure conjugacy survives composition exactly:
 
-The material-label sidecar quotient is compatible with this statement: a selected reservoir family may change and pay its Moyal/ancestry charge without automatically destroying an unchanged smooth carrier.  A genuine role/probe change still delegates to the physical interface theorem.
+\[
+\boxed{
+e^{H_2^P}Y_{shell}
+\ge Y_{shell}^{generic}\!\left(320\frac{\Sigma_P}{c}
+ight),
+}
+\]
+
+and for the full-natural integrated service,
+
+\[
+\boxed{
+e^{H_2^P}S_{shell}
+\ge S_{shell}^{generic}\!\left(320\frac{\Sigma_P}{c}
+ight).
+}
+\]
+
+The compiler records these as **conditional full-survivor** bounds; it does **not** claim service before the first-stop corridor is resolved.
+
+The quarter split remains only a readable corollary:
+
+\[
+q_{max}\ge1/4\Rightarrow\mu_{child}\ge80\Sigma_P/c,
+\qquad
+q_{max}\le1/4\Rightarrow H_2^P\ge\log4.
+\]
+
+Neither side creates a new stop class.  Pressure-source `H_2^P` is not a Shannon/Renyi child-energy probability.
+
+The derivative-correct fixed-material-pair `<1/5` lifetime remains useful **after** material sidecars are attached as a reuse/capacity refinement, but it is no longer the pressure renewal entrance.  The old `mu_V` split likewise remains available for diagnostics and compatibility only.
 
 ## Master-facing semantics
 
@@ -180,14 +211,14 @@ The compiler creates no new currency:
 - local coherent source -> resolved `D_V` -> generic critical-shell recursion;
 - viscosity -> resolved `D_V` -> generic critical-shell recursion;
 - SGS -> coherent service -> high-frequency owner / old-pool erosion / `Xi` / fresh shell / entropy-cycle;
-- pressure -> SGS service or pressure-reservoir occupation;
+- pressure -> actual positive SGS coherent service or entropy-weighted critical shell;
 - pure material sidecars remain sidecars; genuine role change remains interface/relink.
 
-No branch above is promoted to an additive finite reset.  `D_V`, critical shell mass, high-frequency dissipation, source service and pressure reservoir occupation are all scale-sensitive recursive currencies unless a separate globally bounded scale-independent theorem says otherwise.
+No branch above is promoted to an additive finite reset.  `D_V`, critical shell mass, high-frequency dissipation and source service are scale-sensitive recursive quantities unless a separate globally bounded scale-independent theorem says otherwise.  Aggregate pressure `mu_V` is not a recursive state at all in the canonical route.
 
 ## Scope
 
-This theorem is an assembly theorem for source ownership.  It deliberately does not prove supplier-specific signed-good scale progress, does not convert low-pass pressure mass into a shell, and does not identify high-frequency enstrophy with resolved low-pass dissipation.
+This theorem is an assembly theorem for source ownership.  It deliberately does not prove supplier-specific signed-good scale progress and does not identify high-frequency enstrophy with resolved low-pass dissipation.  Pressure shell renewal is now supplied directly by the pair theorem rather than by converting aggregate low-pass mass.
 
 The remaining continuum work is the final master assembly/topology that composes these native owners with physical positive HH causality, common-slice propagation, service/flat erosion and the existing entropy/Hodge machinery without double charging.
 

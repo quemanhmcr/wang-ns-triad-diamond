@@ -27,14 +27,21 @@ from src.high_frequency_dissipation_reentry import (
 
 from src.critical_shell_service_reentry import (
     critical_shell_bounded_service_lower,
+    critical_shell_integrated_service_lower,
     dissipation_supplier_shell_mass_threshold,
+)
+from src.objective_pressure_pair_atomization import (
+    STATUS as PRESSURE_PAIR_STATUS,
+    clean_entropy_shell_tradeoff_lower,
+    objective_pressure_pair_route,
 )
 from src.pressure_reservoir_sync import pressure_hessian_pair_energy_service_ratio_upper
 from src.resolved_objective_strain_collision import sgs_gradient_stress_lower
 
 STATUS = (
     "EXACT_COHERENT_OBJECTIVE_SOURCE_OWNER_COMPILER__LOCAL_DV_AND_VISCOSITY_TO_CRITICAL_SHELL__"
-    "SGS_TO_COHERENT_SERVICE__PRESSURE_TO_SGS_OR_RESERVOIR__NO_PACKET_SYNCHRONIZATION"
+    "SGS_TO_COHERENT_SERVICE__PRESSURE_TO_SGS_OR_ENTROPY_WEIGHTED_CRITICAL_SHELL__"
+    "AGGREGATE_MUV_DIAGNOSTIC_ONLY__NO_PACKET_SYNCHRONIZATION"
 )
 
 OWNER_NAMES = ("local_dv", "pressure", "sgs", "viscous")
@@ -410,22 +417,13 @@ def pressure_source_alternatives(
     filter_l1: float,
     lp_constant: float,
     bernstein_constant: float,
-) -> dict[str, float | str]:
-    """Integrated filtered-pressure owner -> low-pass reservoir OR SGS service.
+) -> dict[str, float | str | bool]:
+    """Legacy coarse pressure estimate retained as a diagnostic only.
 
-    From rho_P <= mu_V/5700 + ||R||_(3/2)/380, a pressure owner weight Sigma_P
-    forces at least one of
-
-      int mu_V >= 2850 Sigma_P,
-      int ||R||_(3/2) >= 190 Sigma_P.
-
-    The stress branch is exactly an effective objective-SGS source weight Sigma_P/2.
-    The low-pass mass branch is deliberately NOT converted into a critical shell.
-    It remains a pressure-reservoir occupation; on a supplied signed-good low-strain
-    lineage each fixed material pair has the **objective-Hessian** service ratio
-    `<1/5` and total future capacity `<5/4` of its generation-zero coefficient.
-    This is distinct from the H1 pressure-third one-third-life. Persistence requires pair relink,
-    component entropy/cycle, leaving low strain, or the SGS branch.
+    The bound `rho_P<=mu_V/5700+||R||_(3/2)/380` remains mathematically valid,
+    but aggregate `mu_V` is no longer the canonical pressure renewal state.  The
+    master-facing compiler uses `pressure_canonical_interface` and the realized
+    positive SGS/pair source law instead.
     """
     sigma = float(source_weight)
     c = float(scaled_lifetime)
@@ -437,7 +435,7 @@ def pressure_source_alternatives(
         effective_sgs, filter_l1, lp_constant, bernstein_constant
     )
     return {
-        "owner": "pressure",
+        "owner": "pressure_diagnostic",
         "resolved_lowpass_mass_occupation_lower": 2850.0 * sigma,
         "resolved_lowpass_peak_mass_lower": 2850.0 * sigma / c,
         "stress_l32_occupation_lower": 190.0 * sigma,
@@ -446,7 +444,148 @@ def pressure_source_alternatives(
         "fixed_pair_service_ratio_upper": ratio,
         "fixed_pair_total_future_multiplier_upper": 1.0 / (1.0 - ratio),
         "resolved_mass_is_generic_critical_shell": "NO",
-        "master_semantics": "PRESSURE_RESERVOIR_OR_SGS_SERVICE",
+        "canonical_pressure_route": False,
+        "master_semantics": "DIAGNOSTIC_ONLY",
+    }
+
+
+def pressure_canonical_interface(
+    source_weight: float,
+    scaled_lifetime: float,
+    filter_l1: float,
+    lp_constant: float,
+    bernstein_constant: float,
+) -> dict[str, object]:
+    """Symbolic master-facing interface for one pressure owner.
+
+    The actual averaged pressure tensor is scalarized by its event Frobenius dual.
+    Its positive source law has only two physical owners: SGS pressure source and
+    the resolved unordered hard-pair law.  One carries at least `Sigma_P/2`; ties
+    are joint.  The pair owner is already a generic critical-shell supplier through
+
+      mu_child exp(H2_pair) >= 320 Sigma_P/c.
+
+    No aggregate low-pass mass appears in this canonical interface.
+    """
+    sigma = float(source_weight)
+    c = float(scaled_lifetime)
+    if sigma <= 0 or c <= 0 or not math.isfinite(sigma + c):
+        raise ValueError("positive finite pressure source weight/lifetime required")
+    half = sigma / 2.0
+    return {
+        "owner": "pressure",
+        "positive_source_owner_threshold": half,
+        "sgs_stress_occupation_lower_if_sgs_owner": 380.0 * half,
+        "effective_sgs_source_weight_if_sgs_owner": half,
+        "integrated_square_service_lower_if_sgs_owner": objective_sgs_integrated_square_service_lower(
+            half, filter_l1, lp_constant, bernstein_constant
+        ),
+        "pair_entropy_shell_tradeoff": "mu_child exp(H2_pair)>=320 Sigma_P/c",
+        "pair_quarter_shell_corollary_lower": 80.0 * sigma / c,
+        "pair_quarter_entropy_corollary_lower": math.log(4.0),
+        "pair_theorem_status": PRESSURE_PAIR_STATUS,
+        "realized_positive_source_law_required": True,
+        "aggregate_muV_canonical_route": False,
+        "coarse_muV_estimate_available_as_diagnostic": True,
+        "master_semantics": "PRESSURE_SGS_SERVICE_OR_PAIR_CRITICAL_SHELL",
+    }
+
+
+def realized_pressure_source_route(
+    source_weight: float,
+    scaled_lifetime: float,
+    viscosity: float,
+    filter_l1: float,
+    lp_constant: float,
+    bernstein_constant: float,
+    *,
+    block_frequency: float,
+    sgs_positive_source_weight: float,
+    pair_positive_weights: Sequence[float],
+    pair_shell_indices: Sequence[tuple[int, int]],
+    pair_frequencies: Sequence[tuple[float, float]],
+    pair_dominance_fraction: float = DEFAULT_DOMINANT_FRACTION,
+) -> dict[str, object]:
+    """Compile the **actual** positive pressure source law into native owners.
+
+    This function does not use the coarse `mu_V` split.  It delegates the same
+    Frobenius-dual positive SGS/pair law to the pressure-pair theorem.  If SGS is
+    an owner, its actual positive source weight enters the direct coherent-service
+    map.  If the pair law is an owner, it always exposes a genuine `u` hard shell;
+    the existing generic shell theorem then supplies a conditional own-scale
+    service lower on a full no-hit natural survivor.
+    """
+    sigma = float(source_weight)
+    c = float(scaled_lifetime)
+    nu = float(viscosity)
+    if sigma <= 0 or c <= 0 or nu < 0 or not all(math.isfinite(x) for x in (sigma, c, nu)):
+        raise ValueError("valid pressure source/lifetime/viscosity required")
+    pair_route = objective_pressure_pair_route(
+        sigma,
+        c,
+        block_frequency,
+        sgs_positive_source_weight=sgs_positive_source_weight,
+        pair_positive_weights=pair_positive_weights,
+        pair_shell_indices=pair_shell_indices,
+        pair_frequencies=pair_frequencies,
+        pair_dominance_fraction=pair_dominance_fraction,
+    )
+    owners = tuple(pair_route["joint_primary_owners"])
+    routes: dict[str, object] = {}
+    if "sgs_pressure_source" in owners:
+        sgs_weight = float(sgs_positive_source_weight)
+        routes["sgs_pressure_source"] = {
+            "actual_positive_source_weight": sgs_weight,
+            "stress_l32_occupation_lower": 380.0 * sgs_weight,
+            "integrated_forced_square_service_lower": objective_sgs_integrated_square_service_lower(
+                sgs_weight, filter_l1, lp_constant, bernstein_constant
+            ),
+            "next_owner": "coherent_service",
+            "master_semantics": "RECURSE_CRITICAL_VIA_COHERENT_SERVICE",
+        }
+    if "resolved_pressure_pair_law" in owners:
+        mu0 = float(pair_route["critical_shell_mass_lower"])
+        h2 = float(pair_route["pair_source_entropy"]["H2_pair_source"])
+        clean_mu = clean_entropy_shell_tradeoff_lower(sigma, c, h2)
+        tol = 8e-13 * max(1.0, mu0, clean_mu)
+        if mu0 + tol < clean_mu:
+            raise AssertionError("compiler weakened the certified pressure entropy-shell lower")
+        y_shell = critical_shell_bounded_service_lower(mu0, c, nu)
+        s_shell = critical_shell_integrated_service_lower(mu0, c, nu)
+        exp_h2 = math.exp(h2)
+        weighted_mu = mu0 * exp_h2
+        weighted_y = y_shell * exp_h2
+        weighted_s = s_shell * exp_h2
+        clean_weighted_mu = 320.0 * sigma / c
+        clean_weighted_y = critical_shell_bounded_service_lower(clean_weighted_mu, c, nu)
+        clean_weighted_s = critical_shell_integrated_service_lower(clean_weighted_mu, c, nu)
+        service_tol = 1e-12 * max(1.0, weighted_y, weighted_s, clean_weighted_y, clean_weighted_s)
+        if weighted_mu + service_tol < clean_weighted_mu or weighted_y + service_tol < clean_weighted_y or weighted_s + service_tol < clean_weighted_s:
+            raise AssertionError("pressure compiler lost service-complexity conjugacy")
+        routes["resolved_pressure_pair_law"] = {
+            "pair_source_entropy": h2,
+            "critical_shell_mass_lower": mu0,
+            "entropy_weighted_critical_shell_mass_lower": weighted_mu,
+            "clean_entropy_weighted_critical_shell_mass_lower": clean_weighted_mu,
+            "full_survivor_own_scale_service_lower": y_shell,
+            "full_survivor_integrated_service_lower": s_shell,
+            "entropy_weighted_full_survivor_service_lower": weighted_y,
+            "entropy_weighted_full_survivor_integrated_service_lower": weighted_s,
+            "clean_entropy_weighted_full_survivor_service_lower": clean_weighted_y,
+            "clean_entropy_weighted_full_survivor_integrated_service_lower": clean_weighted_s,
+            "next_owner": "generic_critical_shell_first_stop",
+            "master_semantics": "RECURSE_CRITICAL_VIA_GENERIC_SHELL",
+        }
+    if not routes:
+        raise AssertionError("pressure positive source law produced no physical owner")
+    return {
+        "owner": "pressure",
+        "joint_primary_owners": owners,
+        "routes": routes,
+        "pressure_pair_source_law": pair_route,
+        "aggregate_muV_used": False,
+        "additive_reset_created": False,
+        "master_semantics": "JOINT_RECURSIVE_PRESSURE_OWNERS",
     }
 
 
@@ -494,7 +633,7 @@ def compile_objective_source_owners(
         elif k == "sgs":
             routes[k] = objective_sgs_episode_thresholds(w[k], c, filter_l1, lp_constant, bernstein_constant)
         elif k == "pressure":
-            routes[k] = pressure_source_alternatives(w[k], c, filter_l1, lp_constant, bernstein_constant)
+            routes[k] = pressure_canonical_interface(w[k], c, filter_l1, lp_constant, bernstein_constant)
     return {
         "objective_variation_action": A,
         "scaled_lifetime": c,
@@ -519,13 +658,17 @@ def theorem_certificate() -> dict[str, object]:
         "sgs_owner": "rho_R -> ||R||_(3/2) -> Q^(3/2) -> Y^(2/3), giving exact linear C_Y rho_R",
         "sgs_clean_route": "D_high>=Y/4 OR oldcap>Y/8 OR Xi>=Y/8 OR fresh shell/entropy/cycle",
         "sgs_high_frequency_owner": "smooth-LP D_high enters the orthogonal hard-tail energy theorem only through a certified D_tail>=c_LP D_high comparison, then routes to inherited critical shell OR actual positive HH/resolved-interface regeneration; never resolved D_V",
-        "pressure_owner": "int mu_V>=2850 Sigma_P OR effective SGS weight>=Sigma_P/2",
+        "pressure_owner": "actual Frobenius-dual positive source law: SGS>=Sigma_P/2 OR resolved unordered pair law>=Sigma_P/2; ties joint",
+        "pressure_pair_route": "every resolved pair owner satisfies mu_child exp(H2_pair)>=320 Sigma_P/c and enters generic critical-shell reentry",
+        "pressure_service_conjugacy": "on a full no-hit shell corridor, exp(H2_pair) times own-scale/integrated service is at least the generic-shell service generated by mass 320 Sigma_P/c",
+        "pressure_sgs_route": "actual positive SGS pressure weight r gives int||R||_(3/2)>=380 r and direct coherent service",
+        "pressure_legacy_muV": "rho_P<=mu_V/5700+||R||_(3/2)/380 remains diagnostic only and is absent from the canonical compiler state",
         "pressure_hessian_pair_ratio": f"{ratio.numerator}/{ratio.denominator}<1/5",
-        "pressure_hessian_total_future_pair_capacity": "<5/4 generation-0 pair capacity on supplied signed-good low-strain lineage",
+        "pressure_hessian_total_future_pair_capacity": "<5/4 generation-0 pair capacity on supplied signed-good low-strain lineage; optional material-reuse refinement only",
         "forbidden_identifications": (
-            "pressure low-pass mass is not generic critical-shell mass; high-frequency SGS dissipation is not resolved D_V"
+            "aggregate pressure mu_V is not a canonical renewal state; pressure H2 is not a causal child-energy probability; high-frequency SGS dissipation is not resolved D_V"
         ),
-        "master_rule": "all D_V/shell/source/reservoir outputs remain recursive scale-critical owners; no additive finite reset is created",
+        "master_rule": "all D_V/shell/source/service outputs remain recursive scale-critical owners; no additive finite reset is created",
     }
 
 
@@ -534,17 +677,20 @@ class ObjectiveSourceCompilerStress:
     samples: int
     worst_sgs_closed_form_relative_residual: float
     minimum_owner_pigeonhole_margin: float
-    minimum_pressure_split_identity_margin: float
+    minimum_pressure_diagnostic_split_identity_margin: float
+    minimum_pressure_pair_entropy_shell_margin: float
+    minimum_pressure_pair_full_survivor_service_margin: float
     minimum_local_dv_identity_margin: float
     minimum_viscous_cauchy_identity_margin: float
     maximum_joint_owner_count: int
+    maximum_joint_pressure_owner_count: int
 
 
 def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectiveSourceCompilerStress:
     rng = np.random.default_rng(seed)
     ws = 0.0
-    mo = mp = ml = mv = float("inf")
-    max_joint = 0
+    mo = mp = mpp = mps = ml = mv = float("inf")
+    max_joint = max_pressure_joint = 0
     for _ in range(samples):
         g1 = float(rng.uniform(1.0, 3.0))
         clp = float(rng.uniform(0.8, 3.0))
@@ -583,14 +729,60 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectiveSourceCompil
             raise AssertionError("source owner pigeonhole failed")
 
         sigma = float(rng.lognormal(-3.0, 1.0))
-        p = pressure_source_alternatives(sigma, c, g1, clp, cb)
-        pmass = float(p["resolved_lowpass_mass_occupation_lower"])
-        pstress = float(p["stress_l32_occupation_lower"])
+        # Legacy coarse estimate remains algebraically correct but diagnostic only.
+        pdiag = pressure_source_alternatives(sigma, c, g1, clp, cb)
+        pmass = float(pdiag["resolved_lowpass_mass_occupation_lower"])
+        pstress = float(pdiag["stress_l32_occupation_lower"])
         mp = min(mp, pmass / 5700.0 - sigma / 2.0, pstress / 380.0 - sigma / 2.0)
+        if pdiag["canonical_pressure_route"] is not False:
+            raise AssertionError("legacy pressure mu_V estimate re-entered the canonical compiler")
         if abs(pmass / 5700.0 - sigma / 2.0) > 1e-12 * max(1.0, sigma):
-            raise AssertionError("pressure mass split identity failed")
+            raise AssertionError("pressure diagnostic mass split identity failed")
         if abs(pstress / 380.0 - sigma / 2.0) > 1e-12 * max(1.0, sigma):
-            raise AssertionError("pressure stress split identity failed")
+            raise AssertionError("pressure diagnostic stress split identity failed")
+
+        # Realized positive pressure source law: exact SGS/pair cover with one
+        # physical frequency per hard shell label.
+        frac = float(rng.uniform(0.0, 1.0))
+        sgs_w = frac * sigma
+        pair_total = (1.0 - frac) * sigma
+        npair = int(rng.integers(1, 7))
+        raw = rng.random(npair)
+        raw /= float(raw.sum())
+        pair_w = (pair_total * raw).tolist()
+        Np = float(math.exp(rng.uniform(-1.0, 4.0)))
+        indices = [(j, j) for j in range(npair)]
+        freqs = [(Np / (4.0 * 2.0**j), Np / (4.0 * 2.0**j)) for j in range(npair)]
+        pr = realized_pressure_source_route(
+            sigma,
+            c,
+            nu,
+            g1,
+            clp,
+            cb,
+            block_frequency=Np,
+            sgs_positive_source_weight=sgs_w,
+            pair_positive_weights=pair_w,
+            pair_shell_indices=indices,
+            pair_frequencies=freqs,
+        )
+        powners = tuple(pr["joint_primary_owners"])
+        max_pressure_joint = max(max_pressure_joint, len(powners))
+        if not powners or pr["aggregate_muV_used"]:
+            raise AssertionError("canonical pressure law lost its native positive owners")
+        if "resolved_pressure_pair_law" in powners:
+            rr = pr["routes"]["resolved_pressure_pair_law"]
+            h2 = float(rr["pair_source_entropy"])
+            mu = float(rr["critical_shell_mass_lower"])
+            trade = 320.0 * sigma / c
+            mpp = min(mpp, mu * math.exp(h2) - trade)
+            if mu * math.exp(h2) + 3e-11 * max(1.0, trade) < trade:
+                raise AssertionError("pressure compiler lost entropy-shell tradeoff")
+            weighted_serv = float(rr["entropy_weighted_full_survivor_integrated_service_lower"])
+            clean_weighted_serv = float(rr["clean_entropy_weighted_full_survivor_integrated_service_lower"])
+            mps = min(mps, weighted_serv - clean_weighted_serv)
+            if weighted_serv + 3e-12 * max(1.0, clean_weighted_serv) < clean_weighted_serv:
+                raise AssertionError("pressure compiler lost entropy-weighted full-survivor service lower")
 
         loc = local_dv_reentry(sigma, c, nu)
         C_local = float(loc["local_source_per_DV"])
@@ -606,7 +798,11 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectiveSourceCompil
         if abs(Dv - expect) > 2e-12 * max(1.0, expect):
             raise AssertionError("viscous integrated Cauchy route failed")
 
-    return ObjectiveSourceCompilerStress(samples, ws, mo, mp, ml, mv, max_joint)
+    if not math.isfinite(mpp):
+        mpp = 0.0
+    if not math.isfinite(mps):
+        mps = 0.0
+    return ObjectiveSourceCompilerStress(samples, ws, mo, mp, mpp, mps, ml, mv, max_joint, max_pressure_joint)
 
 
 def main() -> None:
@@ -639,25 +835,30 @@ For the objective SGS owner, the clean collision `||R||_(3/2)>=380 rho_R`, Germa
 
 Thus integrated SGS source weight produces integrated coherent square service with no persistence hypothesis and no affine-radius packet.  The positive service law routes exactly to high-frequency dissipation, old-pool capacity, selected-interface `Xi`, a dominant fresh critical shell, ancestry entropy, or same-ancestry cycle.  High-frequency dissipation is **not** renamed resolved `D_V`.
 
-For pressure,
+For pressure, the coarse estimate `rho_P<=mu_V/5700+||R||_(3/2)/380` is retained only as a diagnostic.  The canonical compiler now uses the actual Frobenius-dual positive source law
 
-`rho_P <= mu_V/5700 + ||R||_(3/2)/380`
+`rho_P <= [r_SGS]_+ + sum_(a<=b)[p_ab]_+`.
 
-integrates to the honest alternative
+Thus positive SGS pressure source or the resolved unordered pair law carries at least `Sigma_P/2`, with exact ties joint.  The SGS owner uses its **actual** positive source weight `r` and gives `int||R||_(3/2)>=380r`, hence direct coherent service.  Every resolved pair owner satisfies
 
-`int mu_V >= 2850 Sigma_P`  OR  `int ||R||_(3/2) >= 190 Sigma_P`.
+`mu_child exp(H2_pair) >= 320 Sigma_P/c`
 
-The stress alternative is exactly an effective SGS source weight `Sigma_P/2` and enters the same coherent-service route.  The resolved low-pass mass alternative is **not** promoted to a generic critical shell.  It remains objective pressure-Hessian reservoir occupation.  On a supplied signed-good low-strain lineage, one fixed materially reused low-low pair has the derivative-correct coefficient ratio `{pressure_hessian_pair_energy_service_ratio_upper().numerator}/{pressure_hessian_pair_energy_service_ratio_upper().denominator}<1/5`, hence total future fixed-pair capacity `<5/4` of generation zero.  Persistent pressure-Hessian service must relink pairs, fragment into component entropy/cycle, leave low strain, or use the SGS branch.  The separate H1 pressure-third source retains its own `<1/3` theorem.
+and therefore enters the generic critical-shell first-stop theorem.  On a full no-hit natural survivor the compiler records the corresponding own-scale service, but it does not turn that conditional service into an unconditional event.  `H2_pair` is only the logarithmic weakening of the shell seed; it is neither a causal child-energy probability nor a separate stop.
+
+The old fixed-material-pair ratio `{pressure_hessian_pair_energy_service_ratio_upper().numerator}/{pressure_hessian_pair_energy_service_ratio_upper().denominator}<1/5` remains a valid optional reuse refinement after material sidecars are attached; it is no longer the pressure renewal entrance.  The separate H1 pressure-third source retains its own `<1/3` theorem.
 
 Stress: `{out.samples}` source-owner states
 - worst SGS closed-form relative residual: `{out.worst_sgs_closed_form_relative_residual:.3e}`
 - minimum owner-pigeonhole margin: `{out.minimum_owner_pigeonhole_margin:.3e}`
-- minimum pressure split identity margin: `{out.minimum_pressure_split_identity_margin:.3e}`
+- minimum pressure diagnostic split margin: `{out.minimum_pressure_diagnostic_split_identity_margin:.3e}`
+- minimum pressure entropy-shell margin: `{out.minimum_pressure_pair_entropy_shell_margin:.3e}`
+- minimum pressure full-survivor service registration margin: `{out.minimum_pressure_pair_full_survivor_service_margin:.3e}`
 - minimum local-DV identity margin: `{out.minimum_local_dv_identity_margin:.3e}`
 - minimum viscous-Cauchy identity margin: `{out.minimum_viscous_cauchy_identity_margin:.3e}`
 - maximum sampled joint owner count: `{out.maximum_joint_owner_count}`
+- maximum sampled joint pressure owner count: `{out.maximum_joint_pressure_owner_count}`
 
-The resulting architecture is source-native: `local/viscous -> D_V -> critical shell`, `SGS -> coherent service`, `pressure -> SGS service or low-frequency reservoir`.  No packet synchronization theorem and no uniform finite resource are inserted.  Final continuum master assembly and supplier-specific signed-good scale geometry remain separate.  No Navier--Stokes global-regularity conclusion is asserted.
+The resulting architecture is source-native: `local/viscous -> D_V -> critical shell`, `SGS -> coherent service`, `pressure -> actual SGS service OR entropy-weighted critical shell`.  No packet synchronization theorem and no uniform finite resource are inserted.  Final continuum master assembly and supplier-specific signed-good scale geometry remain separate.  No Navier--Stokes global-regularity conclusion is asserted.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
