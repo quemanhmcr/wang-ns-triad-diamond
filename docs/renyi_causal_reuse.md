@@ -148,7 +148,7 @@ Thus sufficiently deep binary causality has a transfer-weighted finite alternati
 
 No cost is assigned to the mere existence of the two parent roles.  Only collision amplification above the exact `1/2` baseline is reuse.
 
-The remaining continuum bridge is now sharply localized: build the exact recursive selected packet/coherent coefficient equation and its designated high--high source on canonical material labels.  The physical-energy causal bridge supplies the layer weights directly from actual positive child work, while Duhamel supplies the same-time quadratic parent support; therefore no raw `dGamma=dT` identification is required.  All rejected cross/interface work is still charged once to `Xi`.
+The recursive selected-role equation and high--high source interface identified here are now supplied downstream by the moving outer-role, event-anchored hard-role, nonaffine-interface, and common-slice theorems.  The physical-energy causal bridge supplies layer weights directly from actual positive child work, while Duhamel supplies same-time quadratic parent support; no raw `dGamma=dT` identification is required.  Rényi reuse is therefore no longer waiting on packet/coefficient dynamics.  Its current use is as a causal-ancestry submodule inside the final continuum master assembly.
 
 ## Preferred root closure no longer needs uniform root mass
 

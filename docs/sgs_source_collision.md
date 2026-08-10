@@ -159,6 +159,8 @@ Hence on `s<=s0`, a normalized viscous source `rho_nu` forces
 
 Persistence of this event through a positive fraction of one `N^-2` lifetime immediately pays normalized energy dissipation. Temporal concentration into a much shorter set is a separate CKN/burst branch rather than a free escape.
 
-## 3. Scope
+## 3. Scope and downstream status
 
-This closes the **source-to-physical-observable** step. It does not yet assert that every cubic increment charge contains one fresh Gaussian packet. The next theorem is an Onsager/Littlewood--Paley collision: cubic increments must resolve into a low/base critical-mass band, high-frequency normalized enstrophy, or packet collision entropy.
+This closes the **source-to-physical-observable** step.  The Onsager/Littlewood--Paley collision identified as the next step in the original note was subsequently developed, and the current canonical source route no longer requires extracting one fresh Gaussian packet from every cubic increment.  `objective_source_routing_compiler.md` routes actual source owners to resolved dissipation, coherent SGS service, pressure-pair hard shells, or viscosity; `fresh_service_scale_reentry.md` quotients coherent-cell refinement before producing a hard shell.
+
+This precursor remains useful for the filtered-SGS and viscous source estimates, but its old packet-facing “next theorem” is not the current frontier.

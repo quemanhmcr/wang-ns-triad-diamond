@@ -142,10 +142,10 @@ Do **not** infer that all energy of `Q_Au` or even all energy of `P_ju` lies in 
 
 This is precisely enough to remove packet selection from the eventwise entrance to renewal while leaving the remaining material attachment honest.
 
-## 6. What remains
+## 6. Scope and downstream status
 
-The high-strain route now supplies a positive law of smooth lower-scale carrier **seeds**.  What is still open is temporal/material renewal:
+This theorem supplies the positive law of smooth lower-scale carrier **seeds** and deliberately stops before propagating them.  The temporal seam identified here is now closed downstream by `nn_seed_temporal_first_stop.md`, followed by `critical_annular_carrier_service_reentry.md`; a seed either reaches a named first stop / `t=0` or, on a full no-hit natural corridor, yields an own-scale service lower.
 
-> for almost every seed under that law, extend the smooth carrier through a full `A`-natural slab while retaining the appropriate material provenance, or hit an already named strain/source/relink/HH-generation/initial-boundary first stop.
+Material attachment was also simplified downstream: `material_label_carrier_quotient.md` shows that pure material-label changes do not create a second carrier impulse, and material ownership is reread from new actual service.  The NN heat edge remains provenance; it is not promoted to ownership of the entire renewed shell.
 
 No per-cell mass floor, full-shell NN assertion, or global-regularity conclusion is made.

@@ -143,3 +143,8 @@ The theorem therefore distinguishes:
 This closes the feared loophole in which one old low-frequency reservoir services an infinite chain of progressively smaller scales while paying only once.  On low-strain material reuse its maximum service capacity decays geometrically, regardless of how its amplitude is replenished, because the global energy cap is inserted only after the kinematic coefficient has decayed.
 
 It does **not** yet control many spatially separated high-frequency grains sampling the same band-limited reservoir at one generation.  That is a band-limited sampling/packing theorem.  Nor does it yet register the near-field pressure-third source.  Those are the next continuum bridges.
+
+
+## Current downstream status
+
+The two continuum bridges named in the original scope were developed downstream: band-limited source sampling/packing and pressure-source routing now have dedicated modules, while objective pressure is canonically handled by direct unordered hard-shell pair atomization rather than an aggregate reservoir mass.  This theorem remains the low-strain fixed-reservoir half-life input; it is no longer the current source/pressure frontier.

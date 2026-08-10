@@ -152,9 +152,6 @@ For `f=1/2`, at least half of the heat service is forced out of OO.  This is a f
 
 This theorem closes the **quantitative repeated-OO capacity seam** once the PDE has already supplied a signed-good material recursive epoch with the canonical natural lifetime `T(N)=cN^-2`.
 
-It does not manufacture that epoch.  Universal slab renewal remains open.  Nor does it identify the forced remainder with a final master destination:
-
-- `ON` is a same-time material-interface edge mark, but still needs attachment to an actual temporal interface/relink work law;
-- `NN` is genuinely outside the old material pool, but still needs a renewal/ancestry theorem that does not postulate a packet mass floor.
+It does not manufacture that epoch; universal epoch supply remains a programme-level issue.  The destinations that were open in this theorem are now refined downstream rather than by adding a new heat currency: `old_incident_heat_erosion.md` shows that `OO+ON` together decay on a supplied signed-good epoch, while `nn_critical_heat_carrier_seed.md`, `nn_seed_temporal_first_stop.md`, and the generic shell/service theorems route the NN-critical remainder without a packet mass floor.
 
 No global-regularity claim is made.

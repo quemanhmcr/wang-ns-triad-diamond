@@ -286,3 +286,8 @@ This produces a local dichotomy without symmetry assumptions:
 2. If its norm is close to one, the companion mass is nearly concentrated in one direction. That is precisely the structured fresh-packet branch to be handled by the scale/ancestry ledger.
 
 Thus the spherical module now interfaces directly with the previous Bellman cocycle: balanced companions pay entropy; concentrated companions become trackable fresh grains.
+
+
+## Current downstream status
+
+The fresh-mass/companion conversion discussed here became one supporting branch of a much larger physical architecture.  Current fresh SGS renewal no longer depends on coherent-cell or packet dominance: `fresh_service_scale_reentry.md` first quotients coherent refinement and pushes actual positive service to a canonical LP scale law, producing a hard-shell seed.  The spherical entropy/flat-network module remains useful inside ancestry/Bellman rigidity, but its historical fresh-packet bridge is not the present continuum frontier.

@@ -351,3 +351,7 @@ closed at the Gaussian analysis level.  The remaining continuum task is an
 
 This note does not prove that final recursive assembly, and it makes no global
 regularity claim.
+
+## Current downstream status
+
+The source-routing task left open in the original scope is now handled by `objective_source_routing_compiler.md`: local coherent terms and viscosity route through resolved dissipation, SGS through coherent service/fresh-scale reentry, and pressure through actual SGS or unordered hard pressure pairs.  This averaged-strain theorem remains the exact source identity feeding that compiler.

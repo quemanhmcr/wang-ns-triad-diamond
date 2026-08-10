@@ -1,6 +1,6 @@
 # Exact outer moving-role extraction: low--high transport is algebra, not a packet hypothesis
 
-The current frontier asks for an exact moving Fourier/helical role equation for
+At the stage when this theorem was introduced, the continuum frontier required an exact moving Fourier/helical role equation for
 every recursively selected smooth-SGS block.  The main point of this note is that
 the difficult-looking low--high decomposition is already an exact algebraic
 identity of Navier--Stokes.  No Gaussian persistence theorem is needed to obtain
@@ -228,16 +228,16 @@ In particular:
 - the complete nonlinear generation is one quadratic `h-h` term;
 - no frozen Gaussian persistence is required.
 
-## 7. The new, narrower frontier
+## 7. Historical interface seam (now closed downstream)
 
-One term remains to be routed at **work level**:
+At the time of this theorem one term remained to be routed at **work level**:
 
 \[
 R_Q=(\partial_tQ+[\mathcal L_V,Q])u.
 \]
 
 Its affine part is already zero.  Its remainder is physical non-affine
-low--high transfer across the moving outer-role interface.  The next theorem must
+low--high transfer across the moving outer-role interface.  The required downstream theorem had to
 show an exact single-charge alternative:
 
 \[

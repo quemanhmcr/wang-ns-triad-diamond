@@ -76,7 +76,7 @@ For the two coherent endpoint amplitudes `A_0,A_1`,
 
 Multiplication by any of the nonnegative OO/ON/NN indicators preserves the inequality.  Hence each ownership class is bounded locally by the Moyal energy of **its own endpoints**.
 
-This is the correct doorway to an old-pool capacity theorem.  It does not justify importing the existing signed-good ratio `231525/512000` through the very high-strain interval which violated the low-strain hypothesis.  A heat-specific history/capacity argument is still required.
+This is the correct doorway to an old-pool capacity theorem.  It does not justify importing the existing signed-good ratio `231525/512000` through the very high-strain interval which violated the low-strain hypothesis.  The required heat-specific history/capacity argument is supplied downstream by `first_hit_heat_reservoir_erosion.md` and strengthened to old-incident `OO+ON` erosion by `old_incident_heat_erosion.md`.
 
 ## 5. What ownership means, and what it does not
 
@@ -84,4 +84,4 @@ This is the correct doorway to an old-pool capacity theorem.  It does not justif
 - ON is an actual material-interface edge.  If ownership changes dynamically, the endpoint must cross the material boundary; the positive crossing/service provenance can then be routed to the existing relink/interface ledger.
 - NN is service entirely outside the old pool, but this theorem does **not** assert a fixed packet mass or a selected Young parent.  Its physical consequence must come from dominant coherent service, entropy/cycle, or a renewed carrier theorem.
 
-So the high-strain seed now has exact frequency ancestry, spatial coherent edges, and material endpoint ownership.  The remaining quantitative question is what repeated OO service costs and how ON/NN service enters the existing causal master.  No global-regularity claim is made.
+So this theorem gives exact frequency ancestry, spatial coherent edges, and material endpoint ownership.  Its originally remaining quantitative questions are now routed downstream: repeated `OO` cost is controlled by first-hit heat erosion, `OO+ON` by old-incident erosion, and the resulting NN-critical sublaw feeds shell-carrier renewal.  Universal continuum assembly remains separate.  No global-regularity claim is made.

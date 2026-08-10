@@ -158,12 +158,12 @@ or
 
 They need not be manufactured as states of a common clock, and the theorem does not assert that the two descriptions are mutually exclusive on every block.
 
-## 8. What remains
+## 8. Scope and downstream status
 
 The theorem begins with **an already recursively selected efficient smooth-SGS block**.  It proves that once such a block is supplied, its local first-hit cause set is measurable and that local no-hit behavior is exhausted by the generated-survivor / Kelvin-flat alternatives.
 
 The generated-survivor part of recursive re-entry is now supplied by the companion material-carrier/cutoff relay theorems: the common-slice coefficient stays in the same smooth carrier, hard roles are created only by actual HH work, and changing to the parent resolved cutoff creates no new source.
 
-The remaining continuum bridge is **universal physical slab renewal/exhaustion**.  After source/SGS, critical dissipation, material/new ancestry, or earlier HH regeneration sends the master back into recursion, the actual PDE must either supply a renewed carrier slab satisfying the exact role/moat/efficiency/natural-lifetime/material hypotheses or hit an already named physical first stop.  This implication cannot be replaced by a dataclass constructor or by choosing a new packet by fiat.
+Downstream work has now supplied explicit reentry for several of the recursive owners that were left abstract here: generic critical shells, high-strain dissipation, fresh SGS scale service, and high-tail regeneration through Fourier locality and sliding natural time.  The current continuum problem is to compose those supplied routes with the remaining material/source owners into one measurable master exhaustion theorem.  That composition still cannot be replaced by a dataclass constructor or by choosing a new packet by fiat.
 
 No global-regularity claim is made.

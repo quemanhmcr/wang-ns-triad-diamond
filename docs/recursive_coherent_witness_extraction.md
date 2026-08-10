@@ -228,7 +228,7 @@ selected PDE roles have been supplied**:
 
 with no packet synthesis, no persistence assumption and no new `Xi`.
 
-The remaining continuum bridge is now more specific.  For every recursively
+At the stage of this theorem, the remaining continuum bridge became more specific.  For every recursively
 selected efficient smooth-SGS block one must construct the outer
 Fourier/helical roles and prove that their exact moving equation has:
 
@@ -244,3 +244,8 @@ proved for every continuum block, and it makes no global-regularity claim.
 ## Outer-role update
 
 The outer-role condition in the historical scope is now supplied by `outer_moving_role_extraction.md` and `event_anchored_role_registration.md`.  The nonaffine Heisenberg interface has exact provenance by `nonaffine_role_interface_work.md`: skew work is conservative role flux and symmetric work is off-diagonal strain.  Binary coherent atomization therefore no longer waits on outer-role extraction; it waits only on the recursive first-stop assembly which decides which already-named cause owns each retained physical event.
+
+
+## Current downstream status
+
+The moving selected-role equation, event hard-role registration, nonaffine interface split, physical pair-work productivity, measurable first-hit extraction, and generic shell/service reentry requested by the historical scope are now supplied by downstream companion theorems.  High-frequency regeneration also has a dedicated physical continuation through common-unit work, Fourier UV locality, and sliding natural time.  This witness theorem therefore remains the exact coherent work-atomization/causal-support layer; the current programme-level frontier is final continuum master assembly rather than construction of another coherent packet state.

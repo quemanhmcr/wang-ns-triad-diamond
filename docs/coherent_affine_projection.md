@@ -253,6 +253,6 @@ The companion theorem `coherent_averaged_strain_source.md` derives the exact res
 
 Thus the coherent averaged transporter does not reopen the source ledger.
 
-## 8. Remaining scope
+## 8. Current downstream status
 
-The remaining bridge is the recursive assembly/extraction theorem placing every efficient smooth-SGS block into this averaged transporter/profile/causal-work architecture with the original physical transfer normalization.  No global regularity claim is made.
+The recursive placement problem identified here is now handled locally by the smooth-SGS first-hit, outer-role/event-role, objective-source compiler and generic shell/service theorems.  This coherent affine projection remains the deformation/source input to those modules.  The unresolved programme-level issue is final continuum assembly of all supplied recursive owners, not a new affine-profile persistence theorem.  No global regularity claim is made.

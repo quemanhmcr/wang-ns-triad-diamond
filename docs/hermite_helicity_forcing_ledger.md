@@ -120,3 +120,7 @@ double-count curvature as both polarization forcing and packet leakage.
 The remaining PDE task is now sharper: estimate the **degree-zero projection** of
 role-dependent high-high/cross-cell forcing, while treating the orthogonal
 Hermite sidebands through the fresh/reuse/coherence ledger.
+
+## Current downstream status
+
+The degree-zero/source-routing questions raised in this precursor were absorbed into the later covariant source, coherent averaged-strain, source compiler, and hard-event role architecture.  Higher Hermite towers are not a canonical closure variable in the present continuum spine.  This note is retained for the forcing/helicity provenance that motivated those later reductions.

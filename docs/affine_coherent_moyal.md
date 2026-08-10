@@ -60,3 +60,7 @@ Moyal is continuous and analysis-side. The 5-separated theorem in `affine_cohere
 Therefore ancestry/Bellman bookkeeping can use positive Moyal cell energies, while a separated Riesz representative family is available whenever a discrete Gaussian synthesis is needed.
 
 The remaining bridge is not a generic Bessel estimate. It is to prove that the **physical transfer service selected by a Navier--Stokes block can be assigned to these coherent phase-space cells**, and that changing or merging the cells through recursive generations creates only summable `Xi` or an already named fresh/relink/source cost.
+
+## Current downstream status
+
+The physical service-to-coherent-cell assignment requested here is now supplied downstream by coherent increment service and exact Moyal heat-edge ownership.  Fresh service is subsequently quotiented by coherent-cell refinement before its canonical LP scale pushforward, and pure label changes are sidecars rather than new carrier impulses.  This Moyal identity remains the exact positive phase-space accounting layer.

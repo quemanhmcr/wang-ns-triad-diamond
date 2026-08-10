@@ -134,4 +134,6 @@ Divide a child slab into two equal temporal halves.  One half carries at least h
 }
 \]
 
-This last statement is **only natural-window geometry**.  It does not assert that every extracted parent packet persists coherently on the whole common interval.  Proving enough packet persistence / asynchronous-interface control to turn these overlapping natural windows into genuine synchronized causal layers is the remaining PDE bridge.
+This last statement is **only natural-window geometry**.  It does not assert coherent packet persistence.  The historical synchronization seam was subsequently removed rather than solved by a packet-persistence theorem: common-slice coefficient registration, asynchronous support extraction, the physical-energy causal bridge, and the moving-role/interface theorems provide the required causal continuation using actual work and smooth roles.  High-tail continuation now has its own scale/time route in `high_tail_binary_work_reentry.md`, `high_tail_ultraviolet_locality.md`, and `high_tail_natural_window_reentry.md`.
+
+Thus this note remains the exact adjoint/Duhamel support gate; it is no longer the current continuum frontier, and normalized Duhamel mass is not promoted to the physical causal probability law.

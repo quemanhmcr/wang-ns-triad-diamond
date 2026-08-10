@@ -222,9 +222,7 @@ The two marks need not be declared the same packet:
 - large covariance/aspect/deformation changes are physical strain/radius/`D_V`
   events.
 
-Thus re-extraction is compatible with single charging.  What remains is to make
-this eventwise marking/registration theorem explicit at the continuum selected
-transfer measure level.
+Thus re-extraction is compatible with single charging.  The eventwise marking/registration step requested here is now supplied downstream by the hard-event/smooth-envelope and first-hit theorems.
 
 ## 9. Scope
 
@@ -239,11 +237,8 @@ physical dichotomy:
 }
 \]
 
-The remaining PDE bridge is now the measurable **eventwise Gaussian marking and
-selected-role registration theorem** for every efficient recursive physical
-transfer block, with the existing one global `Xi` ledger.  No global-regularity
-claim is made.
+The measurable eventwise role registration that was open in the original scope is now supplied downstream.  The gate remains a current physical dichotomy, while the programme-level frontier has moved to final continuum assembly of all recursive suppliers under one `Xi`/joint-stop master.  No global-regularity claim is made.
 
 ## Event-role registration update
 
-The historical eventwise-profile selection caveat is now supplied by the hard-core/smooth-envelope theorem.  The Gaussian is an analysis mark of an exact hard physical transfer role, not a persistent synthesis packet.  The remaining continuum task is to invoke this gate inside one measurable first-stop constructor on every recursive physical-transfer block; the gate itself introduces no new selection hypothesis.
+The historical eventwise-profile selection caveat is now supplied by the hard-core/smooth-envelope theorem, and `smooth_sgs_first_hit_extraction.md` provides the measurable local first-stop constructor.  The Gaussian is an analysis mark of an exact hard physical transfer role, not a persistent synthesis packet.  The gate itself introduces no new selection hypothesis.

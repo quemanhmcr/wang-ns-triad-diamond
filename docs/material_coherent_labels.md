@@ -130,9 +130,9 @@ The construction separates four operations:
 
 Thus causal Duhamel, Rényi reuse and Hodge/resistance/holonomy can use one canonical material label by construction. No new relabeling defect is introduced.
 
-## 6. Remaining bridge
+## 6. Current downstream status
 
-This theorem closes the **representation-level material label registration**. It does not by itself prove the final Navier--Stokes contradiction. The remaining single-ledger problem is to combine:
+This theorem closes the **representation-level material label registration**.  Downstream, `material_label_carrier_quotient.md` further shows that a pure material-label or selected-family bookkeeping change does not create a second carrier impulse when the smooth carrier/dual role is unchanged.  The remaining single-ledger problem is the final continuum master assembly combining:
 
 - the already summable frequency/profile/spatial-window errors;
 - the covariance representative schedule above;

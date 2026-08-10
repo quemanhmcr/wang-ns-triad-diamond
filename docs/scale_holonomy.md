@@ -53,3 +53,7 @@ any Hodge threshold `E_H>=h_H` produces the certified block cost `h_H/2`.
 The remaining task is no longer compactness of the single-edge multiplier but
 the PDE-to-transfer-weight bridge that supplies the edge measure and its
 summable errors.
+
+## Current downstream status
+
+Scale holonomy is now a supporting finite-dimensional reuse/flatness module rather than the current PDE bridge.  Actual continuum recursion is carried by positive physical work, joint first stops, shell/service reentry and the source/high-tail supplier theorems.  Holonomy/cycle structure remains available when a causal ancestry layer reaches the corresponding reuse geometry.

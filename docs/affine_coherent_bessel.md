@@ -99,3 +99,7 @@ This is precisely a packet-frame energy budget with `P=25/4` for a `4`-separated
 ## Scope
 
 The Riesz statement does control arbitrary coefficients **after** the family has been reduced to a 5-separated equal-covariance coherent synthesis.  It does not yet prove that an arbitrary transfer-selected Gaussian decomposition admits such a reduction with summable loss, nor synchronize different covariance cells.  The remaining bridge is therefore narrower: construct the iterative transfer-selected reservoir atoms as separated coherent synthesis families inside covariance cells, while rejected close clusters and covariance-cell changes enter `Xi`/fresh/relink bookkeeping.
+
+## Current downstream status
+
+The separated-synthesis construction requested in the historical scope is not a prerequisite of the current continuum spine.  Exact eventwise Moyal/coherent analysis, hard-event/smooth-role registration, and material-label quotienting now carry the physical ownership information without asserting persistence of one global Gaussian synthesis family.  This Bessel/Riesz theorem remains a valid local energy-budget tool, not the current registration frontier.

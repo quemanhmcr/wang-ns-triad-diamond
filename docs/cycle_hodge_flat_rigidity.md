@@ -246,3 +246,7 @@ This is a second additive cocycle: curved networks pay Hodge energy, while
 planar flat networks pay fresh angular span. Converting fresh span into
 critical-mass entropy requires the packet inverse theorem's comparable-mass
 conclusion.
+
+## Current downstream status
+
+The flat-cell/Hodge decomposition remains a supporting no-escape theorem for reuse geometry.  The present continuum programme no longer waits on constructing a global packet network of this type before physical recursion can proceed; causal work, material sidecars, source ownership and critical-shell reentry are handled directly.  Hodge rigidity is invoked only when the certified causal ancestry reaches this finite-dimensional regime.

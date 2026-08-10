@@ -156,9 +156,9 @@ The first branch is already an actual hard critical-shell event and enters the g
 
 The second branch has actual positive HH work whose parent frequencies are at most `2M`.  **Only after this Fourier locality statement has been proved** do we apply exact coherent localization to that restricted source.  Its positive binary Hahn mass dominates the comparable aggregate positive work exactly as in the upstream binary-work theorem.
 
-## 6. What this does not solve
+## 6. Scope and downstream status
 
-This theorem deliberately does not claim:
+This theorem itself does not claim:
 
 - temporal concentration on one `M`-natural interval;
 - signed-good forward scale progress;
@@ -166,6 +166,6 @@ This theorem deliberately does not claim:
 - the generated-energy productivity gate;
 - a finite reset count.
 
-The next seam is time, not scale locality.  The correct time observable is the maximal mass of the same positive comparable-work measure in a **sliding** natural window of length `cM^-2`, avoiding an observer-chosen bin origin.
+The temporal seam identified when this note was written is now closed downstream by `high_tail_natural_window_reentry.md`.  That theorem uses the same positive comparable-work measure and a **sliding** window of exact length `cM^-2`; it proves the scale--time concentration relation and produces an actual critical hard-shell event without packet persistence or fixed time bins.  The present locality theorem remains the Fourier-scale input to that result.
 
 No 3D Navier--Stokes global-regularity conclusion is asserted.

@@ -142,12 +142,8 @@ So every sufficiently old high-strain event on a supplied signed-good material e
 
 No independent pigeonholes are intersected probabilistically; the conclusion is measure algebra on one physical law.
 
-## 6. What remains
+## 6. Scope and downstream status
 
-This theorem removes both OO and ON as indefinitely reusable high-strain service on a supplied epoch.  The remaining high-strain seam is now concentrated on a **NN-critical coherent heat sublaw**.
+This theorem removes both OO and ON as indefinitely reusable high-strain service on a supplied epoch and leaves a positive **NN-critical coherent heat sublaw**.  The renewal implication that was open at this stage is now supplied downstream: `nn_critical_heat_carrier_seed.md` converts the law to a smooth hard-shell carrier seed, `nn_seed_temporal_first_stop.md` gives the natural backward first-stop corridor, and `critical_annular_carrier_service_reentry.md` / `critical_shell_service_reentry.md` provide own-scale service on full survivors.
 
-What is still not proved is the universal renewal implication:
-
-> a positive NN-critical heat sublaw must either generate a renewed smooth material carrier/epoch satisfying the existing role/moat/service/natural-lifetime hypotheses, or hit an already named source/relink/interface cause.
-
-The theorem does not assign a fixed Moyal mass to one cell, select a packet by argmax, or rename `D_V` as a reset.  Universal epoch/slab supply remains open.  No global-regularity claim is made.
+The theorem still does not manufacture the external signed-good epoch assumption by itself.  It does not assign a fixed Moyal mass to one cell, select a packet by argmax, or rename `D_V` as a reset.  Final universal continuum assembly remains open.  No global-regularity claim is made.

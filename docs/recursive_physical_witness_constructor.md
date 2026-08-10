@@ -124,7 +124,7 @@ All terms are nonnegative.  There is no theorem-name overlap.  `HH,recur` is not
 a currency and never enters a reset count; it is simply an earlier quadratic
 physical event.
 
-## 6. Generated-survivor relay is now supplied; universal slab renewal remains
+## 6. Generated-survivor relay and downstream renewal status
 
 The companion `smooth_sgs_first_hit_extraction` theorem supplies the local path-space first-hit statement for every already supplied smooth-SGS block.  The newer `smooth_material_carrier_relay` theorem then shows that a continuing parent does **not** need to be hardened again at the common slice.  If `w=Q u` and `z=<w,psi>`,
 
@@ -138,4 +138,4 @@ The `resolved_cutoff_repartition_relay` theorem removes the second artificial op
 
 Thus switching from the child cutoff to the parent cutoff is only an exact repartition of the same Navier--Stokes interaction.  With `3/5<N_p/N<5/8`, the relayed envelope satisfies `(22/25)e^(-1/15)>1/2`, so parent-scale low-low exclusion and the existing parabolic lifetime window survive.
 
-The generated-survivor route therefore needs neither a fresh maximizing packet nor a cutoff-interface charge.  The remaining PDE bridge is **universal physical slab renewal/exhaustion**: every source/SGS, critical-dissipation, material/new-ancestry and earlier-HH recursive route must either enter a renewed smooth carrier slab satisfying the existing scale/moat/service hypotheses or hit one of the already named physical causes.  This is not a Navier--Stokes global-regularity proof.
+The generated-survivor route therefore needs neither a fresh maximizing packet nor a cutoff-interface charge.  Since this note was written, several major recursive suppliers have acquired their own exact reentry theorems: generic critical shells, high-strain dissipation, refinement-invariant fresh SGS service, and the high-tail common-unit/locality/sliding-natural-window chain.  The remaining programme-level burden is no longer an unspecified “choose a renewed slab” operation; it is to assemble all certified supplier routes into one measurable continuum master and prove exhaustion without double charging or synthetic clocks.  This is not a Navier--Stokes global-regularity proof.

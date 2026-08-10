@@ -1,6 +1,6 @@
 # Smooth SGS symbol freezing: finite transfer edges with summable error
 
-The current PDE frontier asks for a transfer-preserving wave-packet or frequency
+At the stage of this theorem, the PDE frontier asked for a transfer-preserving wave-packet or frequency
 atomic realization of one smooth SGS crossing block.  The multiplier part of
 that problem is easier than a general Coifman--Meyer decomposition because the
 SGS transfer has an explicit Fourier trilinear form and the common spectral moat
@@ -112,16 +112,8 @@ On this compact set the normalized SGS/Leray/helical symbol has a uniform finite
 `L_M`.  The finite edge model is therefore a controlled approximation of the
 actual smooth physical flux, not a free-standing graph ansatz.
 
-## 5. What remains
+## 5. Scope and downstream status
 
-This closes only the **frequency multiplier freezing** part of packetization.
-The remaining hard construction is spatial and temporal:
+This theorem closes the **frequency multiplier freezing** part of the historical packetization programme.  The later continuum architecture avoided the need to solve its remaining list by frozen-packet persistence: smooth moving roles transport the PDE between events, coherent/Moyal localization is reread eventwise, common-slice registration handles asynchronous support, and representation changes enter the existing `Xi`/interface quotients.
 
-1. localize the one-shot Christ Gaussian profile by moving physical windows;
-2. control the overlap between different spatial grains and the `RU`, viscous
-   and window-transport leakage;
-3. preserve the frozen frequency-edge identities over a packet lifetime; and
-4. synchronize the resulting grains across generations.
-
-The multiplier/synthesis error itself can now be made summable by a direct
-relative-cell schedule.
+The multiplier/synthesis error itself remains a valid summable component of `Xi`; it is no longer the current continuum frontier.

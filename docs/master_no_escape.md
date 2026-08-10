@@ -2045,7 +2045,7 @@ productivity, recursive witness, joint stop, Shannon/Renyi and compiler stress;
 master `20,000` traces with worst margin `0`).  Stored artifact:
 `recorded-results/31288063518/`.
 
-## Local first hit and generated-survivor relay are exact; remaining bridge is universal slab renewal
+## Local first hit and generated-survivor relay are exact; downstream supplier reentry is now explicit
 
 The continuum first-hit problem is now expressed directly by the smooth-SGS physics rather than an artificial vector clock.  Event/support facts appear first, then continuous/absolutely-continuous slab observables, then actual positive HH work, backward common-slice registration, and only afterwards ancestry information.  Native-unit threshold debuts are Borel; exact ties remain an unsplit finite cause set.  Material-cell Moyal content is absolutely continuous and helical phase is monitored branch-free, so optimizer chatter and angle branches create no physical stops.
 
@@ -2202,6 +2202,6 @@ Thus high strain, any unit-matched resolved-dissipation source, and dominant fre
 
 The theorem is shell-local and does not invent signed-good scale progress relative to the supplier block.  Pressure mass occupation and unrelated high-frequency enstrophy remain on their existing reservoir/service/entropy routes rather than being relabeled `D_V`.
 
-One remaining conceptual seam now looks partly like a quotient problem rather than a new PDE estimate.  The smooth carrier state and exact coefficient identity contain no old-pool membership variable.  Therefore a **pure intrinsic material-label change**, with `Q_A` and the analysis probe fixed, should not by itself kill the carrier; material ownership can be reread from subsequent actual service.  A true role/probe change remains physical interface/relink currency, and ancestry charges are not erased.  This material-label/physical-role distinction is the next theorem target, not yet canonical.
+The material-label/physical-role quotient proposed at this stage is now canonical in `material_label_carrier_quotient.md`: with `Q_A` and the analysis probe fixed, a pure intrinsic material-label or selected-family bookkeeping change does not create a second carrier impulse.  A genuine role/probe change remains physical interface/relink currency, ancestry charges are not erased, and material ownership is reread from subsequent actual service.
 
-Until the remaining source/pressure/reservoir routing and this relink quotient are assembled into the continuum master, the master remains conditional and there is no global-regularity proof for 3D Navier--Stokes.
+Downstream work has also supplied direct objective-source routing, pressure-pair hard-shell reentry, refinement-invariant fresh SGS scale reentry, physical high-tail regeneration ownership, Fourier UV locality, and sliding natural-window high-tail shell reentry.  The remaining master-facing task is final **continuum assembly** of these certified supplier routes without double counting and without introducing observer-dependent clocks or artificial scale-independent resets.  The master remains conditional at that programme level, and there is no global-regularity proof for 3D Navier--Stokes.

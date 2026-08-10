@@ -141,4 +141,4 @@ For `tau=1/100`, the clean common transfer/pair threshold is
 
 The constant is intentionally conservative.  Its purpose is to establish a genuine uniform positive gate, not to optimize the eventual master exponent.
 
-This theorem is still a packet/physical-block assembly theorem.  The remaining continuum bridge is to show that every recursively extracted efficient PDE block enters its hypotheses with summable selected-interface errors, and then to identify a `tau`-flat block with the synchronized flat episode used by the master barycentric/holonomy erosion theorem.
+This theorem is a precursor packet/physical-block assembly theorem.  Downstream coherent service-or-flat, moving-role, event-role and smooth first-hit theorems replace the packet-persistence part by eventwise physical roles and measurable first stops.  The flat-episode/Bellman machinery remains a supporting no-escape module; final continuum assembly, not packet synchronization, is now the programme-level frontier.

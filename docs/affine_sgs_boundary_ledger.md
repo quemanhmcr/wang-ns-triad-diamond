@@ -166,3 +166,7 @@ resolved window residuals:
 It does not yet prove that the `R` charge or a selected-subfamily interface charge
 always produces a fresh affine Gaussian grain with a uniform constant.  That is
 now an ancestry/extraction problem rather than an unidentified PDE term.
+
+## Current downstream status
+
+The historical “persistent increment charge -> fresh/reused affine grains” bridge is no longer the canonical route.  Filtered SGS source is routed through source collision/coherent service, and fresh service is converted to a refinement-invariant frequency-scale law before hard-shell reentry.  No persistent affine packet is required.

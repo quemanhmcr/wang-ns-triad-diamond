@@ -284,3 +284,7 @@ penalty.  This observation does not by itself close the local pressure-Hessian,
 `RU`, viscous-boundary or packet-overlap coefficients; it only removes the
 geometric obstruction from the window shape.
 \n\n## 8. Two-level packet update\n\nThe microscopic Gaussian/helical roles are roles of the full velocity and do\n**not** carry `RU` as an independent forcing.  `RU` belongs here, in the\nmacroscopic resolved-energy boundary ledger.  With an affine window transported\nby the strict low-frequency jet, differential advection plus `RU` forces the\ncritical charge in `docs/affine_sgs_boundary_ledger.md`; the SGS stress is in\nturn bounded by cubic velocity increments at the filter scale.  Microscopic\npressure is removed by the divergence-free weak packet test in\n`docs/divfree_affine_packet_test.md`, while macroscopic pressure continues to be\nhandled by the combined-work / annular-charge alternative of this note.\n
+
+## Current downstream status
+
+Pressure routing has since been sharpened substantially.  The canonical objective pressure theorem dualizes the actual Hessian source and atomizes the resolved part into unordered physical hard-shell pairs, with the native relation `mu_child exp(H2_pair) >= 320 Sigma_P/c`; aggregate resolved `mu_V` is diagnostic only.  The localized kernel estimates in this note remain valid precursor bounds, not the current pressure renewal entrance.

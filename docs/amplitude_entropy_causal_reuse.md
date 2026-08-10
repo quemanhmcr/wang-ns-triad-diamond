@@ -269,9 +269,9 @@ A highly unbalanced interaction does not need to be called a new currency.  Its
 small and large amplitudes are conjugate through the product, and logarithms are
 the natural additive coordinate of that multiplicative physics.
 
-The remaining continuum task is only the registration step stated above: turn
+At this stage the remaining continuum task was the registration step stated above: turn
 the eventwise coefficient into the coefficient on the synchronized common slice,
-or stop at the first physical cause preventing that registration.  No global
+or stop at the first physical cause preventing that registration.  That interface is now supplied by the common-slice, moving-role, event-role and first-hit theorems.  No global
 regularity conclusion is asserted.
 
 ## 8. Companion registration theorem closes the selected-role time interface
@@ -283,9 +283,7 @@ returns either an earlier physical obstruction or at least `1/4` of the event
 coefficient on the common slice.  Hence the `1/16` product factor in `Lambda` is
 no longer a persistence hypothesis.
 
-The remaining bridge is outside this telescope: construct the exact moving outer
-Fourier/helical selected-role equation for every recursively selected efficient
-smooth-SGS block.  No global-regularity conclusion is asserted.
+That historical outer-role bridge is now closed by `outer_moving_role_extraction.md` together with the nonaffine-interface and event-role companion theorems.  The amplitude--entropy telescope is therefore a supplied causal-reuse module; the remaining burden lies in final continuum assembly, not construction of a persistent selected packet.  No global-regularity conclusion is asserted.
 
 ## Physical-weighted productivity update
 

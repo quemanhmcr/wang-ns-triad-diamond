@@ -1,7 +1,7 @@
 # Single-charge physical branch compiler: causal quotient before ledger projection
 
-This note addresses the current frontier: every transfer-selected efficient
-Navier--Stokes block must be routed into the physical multi-currency master
+At the stage when this compiler was introduced, the central frontier was to route every transfer-selected efficient
+Navier--Stokes block into the physical multi-currency master
 without paying the same physical work twice under different theorem names.
 
 It does **not** claim that the continuum recursive extraction is closed.  The
@@ -382,5 +382,6 @@ smooth-SGS observables on every recursive Navier--Stokes block, and show that it
 no-hit set is precisely the registered generated survivor or certified
 Kelvin-flat continuation.**
 
-No global-regularity claim follows from the current finite/executable theorem
-stack.
+The measurable first-hit burden stated above is now supplied at the smooth-SGS level by `smooth_sgs_first_hit_extraction.md`, with joint-stop semantics in `joint_causal_stop_projection.md`.  Source routing, fresh-scale reentry, direct pressure-pair atomization, and high-tail scale/time continuation have also been added downstream.  The current programme-level frontier is therefore final continuum master assembly across all certified supplier routes, not construction of the causal quotient itself.
+
+No global-regularity claim follows from the current theorem stack.
