@@ -31,7 +31,7 @@ def test_pure_material_membership_change_does_not_add_carrier_impulse():
         intrinsic_material_membership_change=True,
     )
     assert out["carrier_continuation_certified"] is True
-    assert out["carrier_stop_causes"] == ()
+    assert out["carrier_first_stops"] == ()
     assert out["sidecar_events"] == (MATERIAL_MEMBERSHIP_EVENT,)
     assert out["slice_amplitude"] >= 0.25
 
@@ -73,9 +73,11 @@ def test_material_sidecars_do_not_hide_simultaneous_interface_and_hh_carrier_sto
         selected_family_switch_energy=3.0,
     )
     assert out["carrier_continuation_certified"] is False
-    assert set(out["carrier_stop_causes"]) == {INTERFACE_STOP, HH_STOP}
+    assert set(out["carrier_first_stops"]) == {INTERFACE_STOP, HH_STOP}
     assert set(out["sidecar_events"]) == {MATERIAL_MEMBERSHIP_EVENT, SELECTED_FAMILY_EVENT}
-    assert len(out["joint_physical_events"]) == 4
+    assert len(out["joint_first_stop_events"]) == 4
+    assert out["requires_physical_energy_reentry"] is True
+    assert out["coefficient_obstruction_impulses_used_as_work"] is False
     assert out["primary_selected"] is False
 
 
@@ -91,7 +93,7 @@ def test_true_role_or_probe_change_is_never_declared_transparent():
     )
     assert out["quotient_applicable"] is False
     assert out["carrier_continuation_certified"] is False
-    assert out["carrier_stop_causes"] == (ROLE_DELEGATE_EVENT,)
+    assert out["carrier_first_stops"] == (ROLE_DELEGATE_EVENT,)
 
 
 def test_rereading_ownership_reclassifies_but_never_creates_service():
@@ -144,3 +146,5 @@ def test_certificate_preserves_ancestry_charge_and_refuses_role_change_quotient(
     assert "remains ancestry/service currency" in cert["selected_family"]
     assert "no transparency is claimed" in cert["nonquotient"]
     assert "does not erase material ancestry" in cert["master"]
+    assert "not work owners" in cert["carrier_quotient"]
+    assert "no coefficient impulse magnitude" in cert["energy_reentry"]

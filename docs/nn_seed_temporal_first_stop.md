@@ -61,7 +61,7 @@ The thresholds are respectively
 
 For material contact the monitored superlevel variable is `-d_mat`.  A genuine change of either NN endpoint's old/new membership under a continuous material path must first have `d_mat=0`.  Dyadic naming boundaries remain Moyal-null as before.
 
-No source action is divided by strain, and material distance is not compared numerically with a coefficient impulse.  These are separate faces of one physical corridor.  Their closed first debuts are measurable and exact ties remain an unsplit cause set.
+No source action is divided by strain, and material distance is not compared numerically with a coefficient impulse.  These are separate faces of one physical corridor.  Their closed first debuts are measurable and exact ties remain an unsplit first-stop set; coefficient members require physical-energy routing before becoming causes.
 
 ## 3. Before strain contact, the low--low moat persists
 
@@ -98,7 +98,12 @@ z(t)=z(s)+I_{HH}[s,t]+I_{interface}[s,t].
 
 The two cumulative impulses are absolutely continuous in the backward endpoint.
 
-If the interface impulse reaches `|z(t)|/4`, this is a **classified role-interface coefficient obstruction**.  It delegates to the existing skew-transfer / symmetric-strain provenance theorem; its magnitude is not silently converted into physical work.
+If the interface impulse reaches `|z(t)|/4`, this is a **role-interface
+coefficient obstruction**.  It locates the interval on which the same smooth
+carrier must reenter the physical-energy gate.  Its magnitude is not silently
+converted into physical work.  Only if that gate selects actual positive native
+interface work is the event Hahn-routed to conservative relink or existing
+strain provenance.
 
 If the HH impulse reaches `|z(t)|/2`, this is an **earlier HH-regeneration obstruction**.  Raw Duhamel amplitude is not a physical work law; the event must re-enter the existing physical-energy causal gate before causal weighting.
 
@@ -136,7 +141,7 @@ Every seed therefore has only the following backward outcomes before its request
 
 - high strain / critical dissipation;
 - classified nonaffine role-interface coefficient obstruction;
-- earlier HH regeneration;
+- HH coefficient obstruction followed by physical-energy reentry;
 - material-boundary contact of an NN witness endpoint;
 - `t=0` absorbing boundary;
 - or a full natural-interval smooth carrier survivor with retained `1/4` coefficient and critical mass at least `pi^2/(50c^2)`.

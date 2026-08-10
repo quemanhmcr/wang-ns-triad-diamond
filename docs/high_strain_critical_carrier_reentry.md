@@ -65,10 +65,12 @@ Since \(M\le N/4\), the renewed natural lifetime satisfies
 Before renewed service exists, do not invent a material label.  Inspect the backward \(A\)-natural interval using only three native observables:
 
 1. renewed strain action, first contact at \(1/30\);
-2. classified nonaffine role-interface coefficient impulse, first contact at \(|z(t)|/4\);
-3. HH-regeneration coefficient impulse, first contact at \(|z(t)|/2\).
+2. nonaffine role-interface coefficient obstruction, first contact at \(|z(t)|/4\);
+3. HH-regeneration coefficient obstruction, first contact at \(|z(t)|/2\).
 
-Exact ties are retained as one unsplit cause set.  The exact selected-role Duhamel identity is
+Exact ties are retained as one unsplit first-stop set.  Coefficient hits only locate
+physical-energy reentry; their magnitudes are not causal work weights.  The
+exact selected-role Duhamel identity is
 
 \[
 z(t)=z(s)+I_{HH}[s,t]+I_{interface}[s,t].
@@ -142,6 +144,6 @@ t=0,\\
 \end{cases}
 \]
 
-A renewed high-strain stop remains recursive critical dissipation, not a reset.  Interface and HH coefficient stops retain their existing causal owners.  What remains master-facing is universal renewal of source/SGS and genuine relink routes, plus the final assembly proving that every recursive route enters one of the already-certified service/stop corridors.
+A renewed high-strain stop remains recursive critical dissipation, not a reset.  Interface and HH coefficient stops do not yet own physical work: they locate reentry of the same carrier into the `Q^2` energy gate.  Only the actual inheritance, HH generation, native interface/relink, or strain work selected there receives its existing physical owner.  What remains master-facing is universal renewal of source/SGS and genuine relink routes, plus the final assembly proving that every recursive route enters one of the already-certified service/stop corridors.
 
 No global-regularity conclusion is asserted.

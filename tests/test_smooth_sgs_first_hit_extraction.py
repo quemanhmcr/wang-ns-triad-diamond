@@ -2,6 +2,7 @@ import math
 
 import numpy as np
 
+from src.common_slice_coefficient_registration import HH_COEFFICIENT_OBSTRUCTION
 from src.smooth_sgs_first_hit_extraction import (
     PhysicalPathMonitor,
     ThresholdTopology,
@@ -28,7 +29,7 @@ def test_joint_first_exit_keeps_exact_tie_without_priority():
     b=PhysicalPathMonitor("source",7.0,(6.0,7.0,8.0),ThresholdTopology.CLOSED)
     out=first_physical_corridor_exit(t,(b,a))
     assert out.first_time==0.5
-    assert out.joint_causes==("source","strain")
+    assert out.joint_first_stops==("source","strain")
 
 
 def test_independent_change_of_units_leaves_first_exit_unchanged():
@@ -38,7 +39,7 @@ def test_independent_change_of_units_leaves_first_exit_unchanged():
     ref=first_physical_corridor_exit(t,(a,b))
     changed=first_physical_corridor_exit(t,(rescale_monitor_units(a,1e9),rescale_monitor_units(b,1e-7)))
     assert ref.first_time==changed.first_time
-    assert ref.joint_causes==changed.joint_causes
+    assert ref.joint_first_stops==changed.joint_first_stops
 
 
 def test_material_moyal_cell_energy_rate_is_exactly_cauchy_schwarz_controlled():
@@ -79,4 +80,16 @@ def test_backward_material_relink_is_named_stop_not_survivor():
     z_slice=1+0j
     out=registration_no_hit_exhaustion(z_event,z_slice,i_hh,i_r,material_relink=True)
     assert out["classification"]=="named_backward_physical_stop"
-    assert "material_relink" in out["stop_causes"]
+    assert "material_relink" in out["first_stops"]
+
+
+def test_backward_hh_coefficient_obstruction_requires_energy_reentry_not_work():
+    z_event=1+0j
+    i_r=0j
+    i_hh=.5+0j
+    z_slice=z_event-i_hh
+    out=registration_no_hit_exhaustion(z_event,z_slice,i_hh,i_r)
+    assert out["classification"]=="coefficient_obstruction_energy_reentry"
+    assert out["first_stops"]==(HH_COEFFICIENT_OBSTRUCTION,)
+    assert out["requires_physical_energy_reentry"] is True
+    assert out["coefficient_impulses_used_as_work"] is False

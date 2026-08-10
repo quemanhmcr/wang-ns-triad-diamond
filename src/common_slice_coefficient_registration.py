@@ -15,6 +15,8 @@ CONTINUING_COEFFICIENT_FRACTION = INHERIT_FRACTION
 CONTINUING_PRODUCT_FRACTION = INHERIT_FRACTION**2
 ASYNC_CONE = 10.0 / 39.0
 COMMON_SLICE_OFFSET = 2.0 / 5.0
+ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION = "role_interface_coefficient_obstruction_energy_reentry"
+HH_COEFFICIENT_OBSTRUCTION = "hh_coefficient_obstruction_energy_reentry"
 
 
 def common_slice_natural_window_margin(
@@ -44,12 +46,12 @@ def registration_first_stop(
     """Classify an event-to-common-slice registration by the exact adjoint gate.
 
     The exact triangle gate guarantees at least one of inherited coefficient,
-    classified residual, or HH generation.  A genuine material relink is another
-    physical obstruction.  All threshold-crossing obstructions are returned as a
-    set; this registration helper never chooses a primary cause by theorem-name
-    order.  The single-charge compiler owns simultaneous-stop partitioning.  When
-    no obstruction fires, the coefficient is registered on the common slice with
-    the clean inherited fraction 1/4.
+    residual-coefficient obstruction, or HH-coefficient obstruction.  A genuine
+    material relink is another physical obstruction.  All threshold crossings
+    are returned as a set; this registration helper never chooses a primary cause
+    by theorem-name order.  Coefficient obstructions locate physical-energy
+    reentry and are not work owners.  When no obstruction fires, the coefficient
+    is registered on the common slice with the clean inherited fraction 1/4.
     """
     A = abs(complex(z_event))
     if A <= 0:
@@ -61,17 +63,23 @@ def registration_first_stop(
     if material_relink:
         hits.append("material_relink")
     if abs(i_r) >= RESIDUAL_FRACTION * A:
-        hits.append("classified_residual")
+        hits.append(ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION)
     if abs(i_hh) >= GENERATED_FRACTION * A:
-        hits.append("hh_generation")
+        hits.append(HH_COEFFICIENT_OBSTRUCTION)
     if hits:
         branch = {
             "material_relink": "material_relink_stop",
-            "classified_residual": "classified_residual_stop",
-            "hh_generation": "hh_generation_stop",
-        }[hits[0]] if len(hits) == 1 else "multiple_causal_stops_before_common_slice"
+            ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION: "role_interface_coefficient_obstruction_stop",
+            HH_COEFFICIENT_OBSTRUCTION: "hh_coefficient_obstruction_stop",
+        }[hits[0]] if len(hits) == 1 else "multiple_first_stops_before_common_slice"
+        coefficient_hit = any(
+            hit in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
+            for hit in hits
+        )
         return {
             "branch": branch,
+            "first_stops": tuple(hits),
+            # Backward-compatible alias; coefficient labels are obstructions, not causes.
             "stop_causes": tuple(hits),
             "continuing": False,
             "event_amplitude": A,
@@ -80,6 +88,8 @@ def registration_first_stop(
             "hh_impulse": abs(i_hh),
             "hh_threshold": GENERATED_FRACTION * A,
             "registered_amplitude_lower": 0.0,
+            "requires_physical_energy_reentry": coefficient_hit,
+            "coefficient_impulses_used_as_work": False,
             "primary_selected": False,
         }
     # If neither source branch fires, triangle inequality forces inheritance.
@@ -139,10 +149,10 @@ def theorem_certificate() -> dict[str, object]:
         "identity": "z_event=z_slice+I_HH+I_R under the same adjoint Kelvin interaction picture",
         "continuing": "if |I_R|<A/4 and |I_HH|<A/2 and no material relink occurs, then |z_slice|>=A/4",
         "pair": "two continuing parents retain at least 1/16 of their event coefficient product on the common slice",
-        "first_stop": "failure to register returns the complete set of earlier HH-generation, classified-residual/source, and material-relink obstructions; no primary is selected here",
-        "single_charge": "simultaneous registration obstructions are delegated as a set to the physical branch compiler, which alone owns tie partitioning",
-        "weights": "this registration theorem does not replace physical energy weights; expanded HH nodes are still weighted by actual positive child-energy work",
-        "continuum_status": "exact after the selected moving parent-role coefficient equation exists; constructing that equation for every recursive continuum SGS block remains the outer-role extraction bridge",
+        "first_stop": "failure to register returns the complete set of role-interface coefficient, HH coefficient, and material-relink obstructions; no primary is selected here",
+        "single_charge": "simultaneous first stops remain a set; coefficient obstructions locate physical-energy reentry and material relink keeps its physical sidecar owner",
+        "weights": "this registration theorem does not replace physical energy weights; no coefficient impulse magnitude is work, and actual Q^2 carrier energy and gauge-quotiented native work supplies later causality",
+        "continuum_status": "the moving-role equation and Q^2 energy and observer-gauge-quotient handoff now exist; coefficient registration failure is a locator for physical-energy reentry, while global recursive owner termination remains open",
     }
 
 
@@ -233,7 +243,7 @@ def main() -> None:
     (args.outdir / "common_slice_coefficient_registration.json").write_text(
         json.dumps({"certificate": cert, "stress": asdict(out)}, indent=2), encoding="utf-8"
     )
-    md = f"""# Common-slice coefficient registration by first causal stop
+    md = f"""# Common-slice coefficient registration by first obstruction
 
 Status: **{cert['status']}**.
 
@@ -251,7 +261,7 @@ Let `A=|z(t)|`.  The exact triangle gate says
 - `|I_R|>=A/4`, or
 - `|I_HH|>=A/2`.
 
-Therefore coefficient persistence is not an assumption.  If no classified residual/source, HH-generation, or genuine material-relink stop occurs before the common slice, the event coefficient is **registered** with
+Therefore coefficient persistence is not an assumption.  If no residual-coefficient, HH-coefficient, or genuine material-relink obstruction occurs before the common slice, the event coefficient is **registered** with
 
 `|z(s)|>=A/4`.
 
@@ -261,7 +271,7 @@ Two continuing parents consequently retain at least
 
 of their event coefficient product on the synchronized slice.  This is exactly the registration factor used by the amplitude--entropy productivity theorem.
 
-If the factor fails, the parent is not allowed to continue as an uncharged root.  Its first obstruction is itself the earlier causal event: HH generation is re-entered through the physical-energy causal gate, `R_class` delegates to its existing source/interface owner, and a genuine material-cell switch is relink/fresh ancestry.  Small frequency/covariance representative changes remain the already-summable representation `Xi` and are not the physical cause of coefficient loss.
+If the factor fails, the parent is not allowed to continue as an uncharged root.  A coefficient obstruction only locates reentry: actual smooth-carrier `Q^2` energy and gauge-quotiented native work must pass through the physical-energy gate before HH, interface/relink, strain or inheritance ownership is named.  A genuine material-cell switch remains relink/fresh ancestry.  Small frequency/covariance representative changes remain the already-summable representation `Xi` and are not the physical cause of coefficient loss.
 
 Stress: `{out.samples}` exact complex adjoint decompositions
 - common-window margin: `{out.minimum_natural_window_margin:.12g}`

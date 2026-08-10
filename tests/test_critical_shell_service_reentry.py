@@ -3,6 +3,10 @@ import math
 import numpy as np
 import pytest
 
+from src.common_slice_coefficient_registration import (
+    HH_COEFFICIENT_OBSTRUCTION,
+    ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
+)
 from src.critical_annular_carrier_service_reentry import (
     persistent_carrier_critical_mass_lower,
     uniform_bounded_square_service_lower,
@@ -72,9 +76,25 @@ def test_generic_corridor_has_only_three_native_monitors_and_records_horizon():
     assert hit["observed_elapsed_end"] == 1.0
     assert set(hit["individual_debuts"]) == {
         "high_strain_critical_dissipation",
-        "classified_role_interface_impulse",
-        "hh_regeneration_impulse",
+        ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
+        HH_COEFFICIENT_OBSTRUCTION,
     }
+    assert hit["requires_physical_energy_reentry"] is False
+    assert hit["coefficient_impulses_used_as_work"] is False
+
+
+def test_generic_shell_coefficient_hit_requests_energy_reentry_without_work_assignment():
+    amp = 2.0
+    hit = critical_shell_backward_first_hit(
+        np.linspace(0.0, 1.0, 5),
+        terminal_amplitude=amp,
+        strain_action=np.zeros(5),
+        residual_impulse_abs=np.linspace(0.0, 0.6, 5),
+        hh_impulse_abs=np.zeros(5),
+    )
+    assert hit["joint_first_stops"] == (ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,)
+    assert hit["requires_physical_energy_reentry"] is True
+    assert hit["coefficient_impulses_used_as_work"] is False
 
 
 def test_incomplete_monitor_horizon_cannot_certify_survivor_or_boundary():

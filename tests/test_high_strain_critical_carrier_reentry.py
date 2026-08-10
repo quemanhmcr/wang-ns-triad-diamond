@@ -2,6 +2,10 @@ import math
 
 import numpy as np
 
+from src.common_slice_coefficient_registration import (
+    HH_COEFFICIENT_OBSTRUCTION,
+    ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
+)
 from src.high_strain_critical_carrier_reentry import (
     CriticalDissipationAtom,
     critical_seed_backward_first_hit,
@@ -40,9 +44,25 @@ def test_generic_corridor_has_three_native_monitors_and_no_material_monitor():
     assert hit["first_elapsed"] is None
     assert set(hit["individual_debuts"]) == {
         "high_strain_critical_dissipation",
-        "classified_role_interface_impulse",
-        "hh_regeneration_impulse",
+        ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
+        HH_COEFFICIENT_OBSTRUCTION,
     }
+    assert hit["requires_physical_energy_reentry"] is False
+    assert hit["coefficient_impulses_used_as_work"] is False
+
+
+def test_high_strain_hh_coefficient_hit_requests_energy_reentry_without_work_assignment():
+    amp = 2.0
+    hit = critical_seed_backward_first_hit(
+        np.linspace(0.0, 1.0, 5),
+        terminal_amplitude=amp,
+        strain_action=np.zeros(5),
+        residual_impulse_abs=np.zeros(5),
+        hh_impulse_abs=np.linspace(0.0, 1.2, 5),
+    )
+    assert hit["joint_first_stops"] == (HH_COEFFICIENT_OBSTRUCTION,)
+    assert hit["requires_physical_energy_reentry"] is True
+    assert hit["coefficient_impulses_used_as_work"] is False
 
 
 def test_full_generic_critical_corridor_creates_own_scale_service_without_nn():
@@ -102,8 +122,8 @@ def test_high_strain_or_hh_hit_stays_named_recursive_not_service():
         residual_interface_impulse=0j,
         first_hit=hit,
     )
-    assert out["classification"] == "named_recursive_first_stop"
-    assert "high_strain_critical_dissipation" in out["joint_causes"]
+    assert out["classification"] == "named_first_stop"
+    assert "high_strain_critical_dissipation" in out["joint_first_stops"]
 
 
 def test_certificate_explicitly_bypasses_nn_only_for_renewal_entrance():

@@ -15,14 +15,14 @@ The natural order is instead a filtration of information:
 1. **event/support layer:** the physical transfer selection, cross-cell `Xi` excision, and any fixed transfer-loss certificate are already decided at the selected event;
 2. **smooth-SGS evolution layer:** resolved strain, coherent deformation, objective source action, aspect/radius and gauge-invariant phase evolve on the physical slab;
 3. **generation layer:** the child energy balance creates the actual positive HH work measure `dT_HH`; this is a measure on generated events, not another state clock;
-4. **backward registration layer:** for each generated parent mark, the exact adjoint Kelvin equation is read backward to the common slice and may encounter residual/source, HH regeneration, material relink or the initial boundary;
+4. **backward registration layer:** for each generated parent mark, the exact adjoint Kelvin equation is read backward to the common slice and may encounter a role-interface coefficient obstruction, an HH coefficient obstruction, material relink or the initial boundary; coefficient obstructions only locate physical-energy reentry;
 5. **ancestry-information layer:** Shannon/Renyi reuse is formed only after the physical parent law exists.
 
 This is causal ordering by information available in the dynamics, not priority by theorem name.
 
 ## 2. First hit is first exit from a physical corridor
 
-Let `I=[a,b]`.  For each already-quotiented physical cause `r`, keep its observable `f_r:I->R` in its native units and its own certified threshold `theta_r`.  There are two elementary topologies.
+Let `I=[a,b]`.  For each already-quotiented native first-stop label `r`, keep its observable `f_r:I->R` in its native units and its own certified threshold `theta_r`.  Some labels are already physical causes; coefficient-obstruction labels become causes only after energy routing.  There are two elementary topologies.
 
 For a certificate valid at equality,
 
@@ -130,7 +130,7 @@ For one generated parent coefficient the already-proved exact identity is
 
 `z(t)=z(s)+I_HH[s,t]+I_R[s,t]`.
 
-As `s` moves backward inside the common natural window, the two impulses are AC.  Material-cell provenance is measurable by the preceding section, and `t=0` is an absorbing boundary.  Hence residual/source, HH regeneration, material relink and boundary obstruction have measurable first debuts and an unsplit joint cause set if they tie.
+As `s` moves backward inside the common natural window, the two impulses are AC.  Material-cell provenance is measurable by the preceding section, and `t=0` is an absorbing boundary.  Hence role-interface coefficient obstruction, HH coefficient obstruction, material relink and boundary contact have measurable first debuts and an unsplit joint first-stop set if they tie.  A coefficient member of that set is not a work owner: the same carrier must reenter its `Q^2` physical-energy gate.
 
 If none occurs, at the common slice
 
@@ -160,7 +160,7 @@ They need not be manufactured as states of a common clock, and the theorem does 
 
 ## 8. Scope and downstream status
 
-The theorem begins with **an already recursively selected efficient smooth-SGS block**.  It proves that once such a block is supplied, its local first-hit cause set is measurable and that local no-hit behavior is exhausted by the generated-survivor / Kelvin-flat alternatives.
+The theorem begins with **an already recursively selected efficient smooth-SGS block**.  It proves that once such a block is supplied, its local first-stop set is measurable and that local no-hit behavior is exhausted by the generated-survivor / Kelvin-flat alternatives.  Physical causes are named only after any coefficient obstruction has passed through energy routing.
 
 The generated-survivor part of recursive re-entry is now supplied by the companion material-carrier/cutoff relay theorems: the common-slice coefficient stays in the same smooth carrier, hard roles are created only by actual HH work, and changing to the parent resolved cutoff creates no new source.
 

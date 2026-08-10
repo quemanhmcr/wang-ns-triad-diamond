@@ -143,3 +143,45 @@ def test_certificate_states_exact_remaining_escape_dichotomy_without_regularity_
     assert "not causal Shannon/Renyi action" in cert["diagnostic_separation"]
     dich = master_escape_dichotomy()
     assert "bounded by Mbar" in dich["proof"]
+
+
+def test_unrouted_coefficient_obstruction_cannot_enter_canonical_master_state():
+    from src.common_slice_coefficient_registration import ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION
+
+    with pytest.raises(TypeError, match="unrouted coefficient obstruction"):
+        RecursiveEventState(
+            0.6,
+            4.0,
+            "coefficient first-stop locator",
+            (ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,),
+        )
+    with pytest.raises(TypeError, match="unrouted coefficient obstruction"):
+        canonical_owner_bundle(
+            "coefficient first-stop locator",
+            1.0,
+            (ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,),
+        )
+
+
+def test_actual_energy_reentry_adapter_creates_only_physical_owner_bundle():
+    from src.continuum_master_event_quotient import owner_bundle_from_energy_reentry
+
+    reentry = {
+        "branch": "physical_high_high_transfer_generation",
+        "coefficient_impulse_used_as_physical_work": False,
+        "observer_partition_motion_charged_as_physics": False,
+    }
+    out = owner_bundle_from_energy_reentry("actual positive q^2-weighted HH work", 2.5, reentry)
+    assert out.mass == pytest.approx(2.5)
+    assert out.owners == ("physical_high_high_transfer_generation",)
+
+    with pytest.raises(TypeError, match="coefficient impulse"):
+        owner_bundle_from_energy_reentry(
+            "bad locator",
+            1.0,
+            {
+                "branch": "physical_high_high_transfer_generation",
+                "coefficient_impulse_used_as_physical_work": True,
+                "observer_partition_motion_charged_as_physics": False,
+            },
+        )

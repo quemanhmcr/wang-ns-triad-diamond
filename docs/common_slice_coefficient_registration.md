@@ -3,7 +3,8 @@
 The amplitude--entropy causal theorem needs one scale-independent statement:
 a parent coefficient observed at its quadratic interaction time must either be
 registered on the synchronized common slice with a fixed fraction, or the
-attempt to register it must expose an earlier physical causal event.
+attempt to register it must expose an earlier obstruction.  A coefficient
+obstruction receives a physical owner only after energy/work reentry.
 
 No new persistence hypothesis is needed.
 
@@ -56,14 +57,14 @@ Set `A=|z(t)|`.  The existing exact triangle gate gives
 |I_{HH}|\ge A/2.
 \]
 
-Interpret this as **registration by first causal stop**.
+Interpret this as **registration by first obstruction**.
 
-- If `R_class` reaches its threshold first, registration stops and delegates to
-  the already named source/interface cause.
+- If `R_class` reaches its threshold first, registration stops and the same
+  smooth carrier reenters its actual `Q^2` energy/work gate.
 - If high--high amplitude generation reaches its threshold first, registration
-  stops and that parent becomes a generated node.  Its master-facing causal
-  weights are obtained, as always, from the physical-energy gate, not from raw
-  Duhamel mass.
+  stops at a coefficient obstruction.  It becomes a generated node only if the
+  physical-energy gate selects actual positive HH work; raw Duhamel mass never
+  supplies the causal weight.
 - If a genuine material coherent-cell change occurs first, it is a physical
   relink/fresh event.
 - If none of these happens, the only remaining branch is
@@ -71,7 +72,8 @@ Interpret this as **registration by first causal stop**.
   \boxed{|z(s)|\ge A/4.}
   \]
 
-Thus "the packet persists" is never assumed.
+Thus "the packet persists" is never assumed, and a coefficient obstruction is
+never silently promoted to a physical owner.
 
 ## 3. Product consequence
 
@@ -106,23 +108,20 @@ calling it packet decoherence.
 ## 5. Scope
 
 This theorem is exact once the moving selected parent-role coefficient equation
-has been constructed.  It closes the logical gap between asynchronous event
-times and the common-slice coefficient used by the amplitude--entropy root
-budget.
-
-The continuum frontier is therefore pushed outward once more: construct those
-outer moving Fourier/helical roles for every recursively selected efficient SGS
-block with the already classified Egorov/coherent-deformation/source remainders
-and one physical transfer normalization.  No global-regularity claim is made.
+has been constructed.  That equation and its native `Q^2` energy interface are
+now supplied by the outer-role and smooth quadratic-carrier theorems.  The
+remaining frontier is global assembly/termination of the physical owners reached
+after typed energy reentry.  No global-regularity claim is made.
 
 ### Simultaneous obstructions are not ordered lexicographically
 
-A registration interval can meet more than one physical obstruction at the same
-first time.  The registration theorem therefore returns the complete triggered
-set `{HH generation, classified residual/source, material relink}` and does **not**
-choose a primary by theorem name.  Primary ownership or a Radon--Nikodym split on
-an exact tie belongs only to the single-charge physical branch compiler.
+A registration interval can meet more than one obstruction at the same first
+time.  The registration theorem therefore returns the complete triggered set
+`{HH coefficient obstruction, residual coefficient obstruction, material
+relink}` and does **not** choose a primary by theorem name.  Coefficient faces
+must first reenter actual physical energy/work; exact physical ties are handled
+only after that typed routing.
 
 ## Outer-role update
 
-The moving selected role equation assumed in the original scope is now supplied by `outer_moving_role_extraction.md` together with exact hard-event/smooth-envelope registration.  Common-slice failure is therefore interpreted only as the already listed first physical stops.  On the continuing subset, `physical_pair_weighted_productivity.md` uses the registered `1/4` factors under the actual physical transfer law.
+The moving selected role equation assumed in the original scope is now supplied by `outer_moving_role_extraction.md` together with exact hard-event/smooth-envelope registration.  The native smooth-carrier energy handoff is supplied by `smooth_quadratic_carrier_interface.md`: common-slice coefficient failure locates energy reentry and never defines work by amplitude.  On the continuing subset, `physical_pair_weighted_productivity.md` uses the registered `1/4` factors under the actual physical transfer law.
