@@ -87,12 +87,18 @@ def test_composition_yields_actual_high_tail_shell_event_and_weighted_lower():
     W = 1.1 * W_lower
     p_t = 0.4
     Ww = p_t * W
-    N, E, c = 2.0, 100.0, 0.8
+    N, c = 2.0, 0.8
     R = route["locality_radius"]
+    mu_block = route["child_peak_critical_mass"]
+    # Pick fixture energy from the certified block peak so the window capacity
+    # is feasible before testing the theorem composition itself.
+    target_mu = 0.1 * mu_block
+    E_needed = Ww / (12.0 * c * math.sqrt(math.pi) * R * N * math.sqrt(target_mu))
+    E = 2.0 * E_needed
     C = 12.0 * c * math.sqrt(math.pi) * R * N * E
     mu_required = (Ww / C) ** 2
     mu = 1.1 * mu_required
-    assert mu < route["child_peak_critical_mass"]
+    assert mu < mu_block
     T = natural_window_geometry(N, int(route["selected_shell_level"]), c)["selected_natural_window"]
     out = comparable_hh_temporal_shell_reentry(route, D, nu, N, E, c, W, Ww, T, mu)
     clean = nu * D / (48.0 * c * math.sqrt(math.pi) * R * N * E)
@@ -112,8 +118,12 @@ def test_composition_rejects_a_window_from_the_wrong_scale():
     route = _comparable_locality_route(D, nu)
     W = 1.1 * route["comparable_parent_common_work_lower"]
     Ww = 0.4 * W
-    N, E, c = 2.0, 100.0, 0.8
+    N, c = 2.0, 0.8
     R = route["locality_radius"]
+    mu_block = route["child_peak_critical_mass"]
+    target_mu = 0.1 * mu_block
+    E_needed = Ww / (12.0 * c * math.sqrt(math.pi) * R * N * math.sqrt(target_mu))
+    E = 2.0 * E_needed
     C = 12.0 * c * math.sqrt(math.pi) * R * N * E
     mu = 1.1 * (Ww / C) ** 2
     T = natural_window_geometry(N, int(route["selected_shell_level"]), c)["selected_natural_window"]
