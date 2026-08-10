@@ -228,7 +228,7 @@ In particular:
 - the complete nonlinear generation is one quadratic `h-h` term;
 - no frozen Gaussian persistence is required.
 
-## 7. Historical interface seam (now closed downstream)
+## 7. Historical interface seam (closed at the smooth energy level downstream)
 
 At the time of this theorem one term remained to be routed at **work level**:
 
@@ -250,14 +250,26 @@ show an exact single-charge alternative:
 }
 \]
 
-The point is important: this term may **not** be hidden as representation `Xi`,
-because it is physical work, and it may not become a new currency merely because
-it is written as a commutator.  The coherent deformation and transfer/relink
-ledgers already describe its physical meanings.
+The point is important: the commutator may **not** be hidden as representation
+`Xi`, and it may not become a new currency merely because it is written with
+brackets.  At the same time, for a non-idempotent smooth `Q`, its pairing with
+`Q u` is not by itself the native carrier-interface work.
 
 This note does not yet prove that final work-routing lemma, and therefore it does
 not prove Navier--Stokes global regularity.
 
-## Interface-provenance update
+## Smooth-energy interface update
 
-The work-routing item left open in the original scope is now closed algebraically by `nonaffine_role_interface_work.md`.  The skew-adjoint part of the nonaffine interface is an antisymmetric conservative role flux, and the self-adjoint part is exactly off-diagonal physical strain work.  `event_anchored_role_registration.md` also supplies the exact hard physical role inside the smooth PDE envelope.  The remaining task is therefore the recursive first-stop assembly, not construction of `Q` or invention of another interface currency.
+`smooth_quadratic_carrier_interface.md` now performs the missing type-correct
+handoff.  The carrier energy is `<u,Q^2u>`, and the work of `R_Q` is recombined
+with the diagonal `L_V` work already present in this outer equation.  The result
+is the native `Q^2`-weighted interface law.  On a complete smooth square
+partition its moving/skew part is conservative relink and its symmetric part is
+the same resolved strain/deformation work.
+
+`nonaffine_role_interface_work.md` remains the exact orthogonal hard-event
+specialization, while `event_anchored_role_registration.md` supplies `QP=P` on
+the event plateau.  Coefficient obstruction is only an interval locator; actual
+ownership is assigned after physical-energy reentry.  The remaining task is
+global recursive owner assembly, not construction of `Q` or invention of an
+interface currency.

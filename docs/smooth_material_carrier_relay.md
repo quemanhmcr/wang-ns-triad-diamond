@@ -49,6 +49,15 @@ On any renewed previous slab on which the already proved outer-role hypotheses h
 
 Its energy therefore has exactly the existing physical three-way gate: inherited energy, classified residual/strain service, or positive HH generation.  No hard projector is required merely to formulate the carrier energy balance.
 
+The exact smooth-carrier energy effect is `Q^2`.  Consequently the native
+interface contribution is not the work of `R_Q` in isolation.  It is
+
+`<u,dot(Q^2)u> - 2 Re<Q^2u,L_Vu>`,
+
+equivalently the `R_Q` work minus the diagonal `L_V` work of `Q u`.  The smooth
+quadratic-carrier theorem completes `Q` by a square partition and splits this
+native interface into conservative relink plus existing strain.
+
 A possible concern is that the HH work in the `Q` equation is weighted by the smooth symbol, whereas the master causal law is actual physical transfer.  The concern disappears at the Hahn-measure level.
 
 ## 4. Smooth-carrier generation is dominated by actual positive physical work
@@ -94,6 +103,11 @@ There is no intermediate `argmax` packet, no chattering best cell and no theorem
 This theorem removes **hard-event reselection at the common slice** as a necessary recursive bridge.  The correct common-slice object is the same smooth material carrier, whose energy is already controlled by the registered coefficient.
 
 It does not allow the carrier to be propagated backward through an arbitrary interval.  A renewed previous slab must still satisfy the exact scale/moat, service, low-strain/coherent-deformation and natural-lifetime hypotheses, or else exit through one of their already named physical causes.  Proving that these slabs cover every recursive continuation route is the remaining continuum problem.
+
+A large coefficient impulse is only such an exit locator.  It must reenter the
+physical-energy gate on the observed carrier interval; the impulse magnitude is
+not itself residual work.  Only actual positive native interface work may route
+to relink/strain ownership.
 
 So the frontier is no longer “manufacture a new hard parent at the common slice.”  It is:
 

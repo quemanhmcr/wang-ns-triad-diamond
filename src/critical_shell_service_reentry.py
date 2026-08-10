@@ -384,7 +384,7 @@ def theorem_certificate(scaled_lifetime: float = 1.0, viscosity: float = 1.0) ->
         "status": "EXACT_CRITICAL_SHELL_MASS_TO_OWN_SCALE_SERVICE_REENTRY__GENERIC_DV_AND_FRESH_CLUSTER_SUPPLIERS__MATERIALITY_DEFERRED",
         "local_input": "one actual shell-time event with M||P_Mu(t)||_2^2>=mu0>0; no packet, material label or probability law is part of the core theorem",
         "registration": "A=3M/4 and Q_A=1 on {M/2<|xi|<=M} give A|z(t)|^2>=(3/4)mu0 exactly with the shell's normalized state as terminal analysis probe",
-        "first_stop": "before materiality is assigned, use only renewed strain, classified role-interface coefficient impulse and HH-regeneration coefficient impulse; the observed monitor horizon must cover the claimed natural/boundary interval",
+        "first_stop": "before materiality is assigned, use renewed strain plus role-interface and HH coefficient obstructions; coefficient hits only locate physical-energy reentry, and the observed monitor horizon must cover the claimed natural/boundary interval",
         "survivor": "a full no-hit corridor keeps A|z(s)|^2>=(3/64)mu0 on every prefix; the registered analysis-dual cost J gives A||Q_Au(s)||^2>=(3mu0)/(64J^2)",
         "service": "the Arb-certified radius-3 annular heat truncation gives some actual |r|<=3/A with A||delta_r Q_Au||^2 >= (q_b 3mu0)/(64J^2), and normalized full-slab service at least c times this threshold",
         "material_order": "material OO/ON/NN is read only after the renewed positive service law exists; pure shell criticality carries no synthetic old/new label",
@@ -616,7 +616,7 @@ Set `A=3M/4`.  Choose the same smooth scalar role `Q_A` which equals one on the 
 
 `A|z(t)|^2 >= (3/4)mu0`.
 
-Inspect backward through the required `A`-natural interval using exactly three native monitors: renewed strain, classified role-interface coefficient impulse, and HH-regeneration coefficient impulse.  Materiality is not assigned yet.  Exact ties stay unsplit.  The first-hit record also stores the actually observed backward horizon; neither a `t=0` root nor a full-natural survivor may be certified from a shorter monitor path.
+Inspect backward through the required `A`-natural interval using exactly three native monitors: renewed strain, role-interface coefficient obstruction, and HH-regeneration coefficient obstruction.  The two coefficient monitors are interval locators: at a hit, the same smooth carrier must reenter the physical-energy gate before any work owner is named.  Materiality is not assigned yet.  Exact ties stay unsplit.  The first-hit record also stores the actually observed backward horizon; neither a `t=0` root nor a full-natural survivor may be certified from a shorter monitor path.
 
 If a named monitor hits, it keeps its existing physical owner.  If the required interval reaches `t=0`, the initial boundary absorbs it.  Otherwise every prefix remains below both coefficient-impulse faces and
 

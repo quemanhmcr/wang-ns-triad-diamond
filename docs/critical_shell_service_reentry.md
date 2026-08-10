@@ -45,8 +45,8 @@ hence
 Before renewed service exists, material ownership is intentionally unassigned.  Inspect backward with only
 
 1. renewed strain action, hitting \(1/30\);
-2. classified role-interface coefficient impulse, hitting \(|z(t)|/4\);
-3. HH-regeneration coefficient impulse, hitting \(|z(t)|/2\).
+2. role-interface coefficient obstruction, hitting \(|z(t)|/4\);
+3. HH-regeneration coefficient obstruction, hitting \(|z(t)|/2\).
 
 The exact selected-role coefficient identity is
 
@@ -54,7 +54,10 @@ The exact selected-role coefficient identity is
 z(t)=z(s)+I_{HH}[s,t]+I_{interface}[s,t].
 \]
 
-Exact ties remain unsplit.  A renewed strain hit is the already named critical-dissipation recursion at scale \(A\); interface and HH hits keep their existing causal owners.
+Exact ties remain unsplit.  A renewed strain hit is the already named
+critical-dissipation recursion at scale \(A\).  Interface and HH coefficient
+hits are interval locators: they reenter the physical-energy gate, which alone
+assigns inheritance, actual interface work or actual HH work ownership.
 
 The first-hit record also contains the maximum backward elapsed time actually observed.  A theorem caller may not claim a full natural survivor or the absorbing \(t=0\) boundary unless the monitor path covers the whole required interval.  This makes the continuum interface explicit rather than relying on a caller convention.
 

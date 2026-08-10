@@ -166,13 +166,13 @@ SGS/Leray/helical symbol on the hard cell.
 
 This closes the frequency-role / transfer-cell alignment seam at the exact event
 and coefficient levels.  Combined with the exact outer moving-role equation, the
-remaining continuation term is the non-affine smooth-envelope interface.  Its
-operator work has already been split into conservative role redistribution and
-the same physical strain provenance.  On a near-Gaussian low-cost event the
-existing coherent-affine theorem bounds its Gaussian-core action by `K_coh`; if
-that action is large it forces critical `D_V`, while genuine material/role
-switching is relink/transfer cost.
+smooth-envelope continuation is read through the quadratic carrier energy
+`<u,Q^2u>`.  Completing `Q` by a smooth square partition preserves `QP=P` on the
+event plateau while making moving/skew work conservative and symmetric work the
+same resolved strain provenance.  No idempotence of `Q` is asserted.
 
-The remaining audit is therefore to assemble these already proved alternatives
-into one recursive **first-stop witness constructor** on the continuum physical
-transfer measure.  No global-regularity claim is made.
+A large interface coefficient impulse is only a first-hit locator.  Actual
+terminal carrier energy and native interface work must reenter the
+physical-energy gate before inheritance, HH generation, strain or relink becomes
+a causal owner.  Global assembly of the resulting physical owners remains open.
+No global-regularity claim is made.

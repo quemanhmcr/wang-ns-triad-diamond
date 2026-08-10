@@ -295,7 +295,7 @@ def theorem_certificate(scaled_lifetime: float = 1.0, viscosity: float = 1.0) ->
         "positive_input_law": f"high strain gives D_V|_G >= D_V/2 on the actual positive resolved-dissipation law; clean endpoint fraction={frac:.12g}",
         "pushforward": "normalize D_V restricted to G and push its deterministic shell-time mark (j,t) to A=3M/4; no heat edge, coherent-cell argmax, or material label is required for this entrance",
         "critical_seed": f"M||P_j u||^2>=mu_*={mu:.12g} gives A||P_j u||^2>=(3/4)mu_*={seed:.12g}; Q_A=1 on the whole shell registers that coefficient exactly",
-        "first_stop": "backward over one A-natural window use only three native monitors: renewed strain, classified role-interface coefficient impulse, and HH-regeneration coefficient impulse; exact ties remain unsplit",
+        "first_stop": "backward over one A-natural window use renewed strain plus role-interface and HH coefficient obstructions; exact ties remain unsplit and coefficient hits only locate physical-energy reentry",
         "corridor": f"if no monitor hits and t=0 is not reached, |z(s)|>=|z(t)|/4 and the clean retained coefficient mass is >={retained:.12g}",
         "service": f"the full survivor generates its own bounded A-scale increment service: some |r|<=3/A has A||delta_r Q_Au||^2>=Y0={Y0:.12g}, and integrated normalized bounded heat service is >={Sint:.12g}",
         "material_order": "material ownership is deliberately deferred: after the renewed positive service exists, exact Moyal assigns its actual endpoints and OO/ON/NN is read from that new law; no child-scale NN witness is propagated as whole-carrier ownership",
@@ -475,7 +475,7 @@ Normalize `D_V|_G` and push only its deterministic shell-time mark `(j,t)`.  Eve
 
 and the shell's own normalized state registers this coefficient exactly into the smooth scalar envelope `Q_A=1` on the shell.  No child-scale heat edge, coherent-cell maximizer, or material label is needed to create the renewed carrier seed.
 
-Inspect backward through one `A`-natural window with exactly three native first-stop monitors: renewed strain, classified role-interface coefficient impulse, and HH-regeneration coefficient impulse.  There is intentionally no material-boundary monitor because material ownership has not yet been assigned.  Exact ties remain unsplit.
+Inspect backward through one `A`-natural window with exactly three native first-stop monitors: renewed strain, role-interface coefficient obstruction, and HH-regeneration coefficient obstruction.  Coefficient hits only locate reentry of the same smooth carrier into the physical-energy gate; they do not supply work weights.  There is intentionally no material-boundary monitor because material ownership has not yet been assigned.  Exact ties remain unsplit.
 
 If a monitor fires, its already named recursive cause owns the stop.  If the interval reaches `t=0`, the initial boundary absorbs it.  Otherwise the exact Duhamel triangle gives
 

@@ -1,4 +1,4 @@
-# Nonaffine role-interface work: conservative relinking plus physical strain
+# Nonaffine hard-projector role-interface work: conservative relinking plus physical strain
 
 The exact outer-role theorem leaves one operator term
 
@@ -8,9 +8,11 @@ R_Q=(\partial_tQ+[\mathcal L_V,Q])u.
 
 After the scalar role is transported by the coherent affine dual flow, the common
 affine contribution is identically zero.  The remaining operator is the
-non-affine part of resolved linearized transport.  This note identifies its
-**energy meaning exactly**.  The result is simpler than inventing another
-commutator currency.
+non-affine part of resolved linearized transport.  This note identifies the
+corresponding energy algebra exactly on a complete orthogonal **hard event-role
+partition**.  The propagated PDE envelope is smooth and non-idempotent; its
+separate `Q^2` energy handoff is supplied by
+`smooth_quadratic_carrier_interface.md`.
 
 ## 1. Adjoint split of resolved linearized transport
 
@@ -202,30 +204,33 @@ representation `Xi`: both pieces are physical work.
 
 ## 5. Relation to the exact outer-role equation
 
-The companion outer-role theorem gives
+The companion outer-role theorem gives, for a smooth envelope,
 
 \[
 (\partial_t+\mathcal L_V-\nu\Delta)w
 =-Q\mathbb P\nabla\cdot(h\otimes h)+R_Q.
 \]
 
-The first term is true quadratic high--high generation.  The present theorem says
-that the second has no independent generation content:
+The first term is true quadratic high--high generation.  If `Q` is itself an
+orthogonal hard projector, the present theorem says that the second has no
+independent generation content:
 
 1. its skew piece only moves existing role energy;
 2. its symmetric piece is already the resolved deformation work.
 
-This is exactly the causal quotient required by the single-charge compiler.
+For the actual non-idempotent PDE envelope one must not make that substitution.
+The physical carrier energy is `<u,Q^2u>`.  The smooth quadratic-carrier theorem
+proves directly that the native interface work equals the work of `R_Q` minus
+the diagonal `L_V` work of `Q u`; on a complete square partition its skew part
+is conservative relink and its symmetric part is the same resolved strain.
 
 ## 6. Remaining scope
 
-The algebraic currency identity is now closed.  Quantitative eventwise stopping
-still uses the existing physical thresholds: coherent deformation `K_coh`,
-resolved/objective strain and critical `D_V` for the symmetric cause, and the
-canonical material relink/transfer ledger for actual role switching.  The next
-continuum audit must verify that the eventwise frozen scalar/helical role
-partition used by the smooth-SGS selector is the same role partition on which
-this work split is applied, up to the already summable symbol representative
-error.
+The orthogonal hard-role algebraic identity is closed.  The smooth-envelope
+handoff is a distinct theorem because `Q^2` is the energy effect and `I-Q` is not
+the energy complement of a non-idempotent `Q`.  Quantitative eventwise stopping
+still uses actual physical work and the existing coherent-deformation,
+strain/`D_V`, and relink owners.  A coefficient impulse is only a first-hit
+locator until it reenters that physical-energy gate.
 
 No global-regularity claim is made.

@@ -98,7 +98,12 @@ z(t)=z(s)+I_{HH}[s,t]+I_{interface}[s,t].
 
 The two cumulative impulses are absolutely continuous in the backward endpoint.
 
-If the interface impulse reaches `|z(t)|/4`, this is a **classified role-interface coefficient obstruction**.  It delegates to the existing skew-transfer / symmetric-strain provenance theorem; its magnitude is not silently converted into physical work.
+If the interface impulse reaches `|z(t)|/4`, this is a **role-interface
+coefficient obstruction**.  It locates the interval on which the same smooth
+carrier must reenter the physical-energy gate.  Its magnitude is not silently
+converted into physical work.  Only if that gate selects actual positive native
+interface work is the event Hahn-routed to conservative relink or existing
+strain provenance.
 
 If the HH impulse reaches `|z(t)|/2`, this is an **earlier HH-regeneration obstruction**.  Raw Duhamel amplitude is not a physical work law; the event must re-enter the existing physical-energy causal gate before causal weighting.
 
