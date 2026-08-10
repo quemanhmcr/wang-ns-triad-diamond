@@ -20,6 +20,7 @@ The current architecture has reached the following point.
 7. High-frequency coherent service is converted to physical hard-tail energy and then to inherited critical shells or actual regeneration work.
 8. High-tail regeneration now has a complete physical continuation chain:
    - common-unit causal HH/interface ownership;
+   - resolved interface quotient to same-event conservative donor provenance or existing strain/deformation;
    - exact binary HH work atomization;
    - ultraviolet locality paid by physical tail dissipation;
    - sliding natural-time concentration;
@@ -28,6 +29,7 @@ The current architecture has reached the following point.
 10. Exact ties are retained as joint physical cause sets; no lexicographic theorem priority is canonical.
 11. No critical energy or normalized dissipation event is treated as a scale-independent additive reset.
 12. The first continuum master quotient is now certified: relay depth is quotiented, physical event time is the universal recursion coordinate, bounded-scale full-natural survivor tails hit `t=0`, and any infinite escape is reduced to infinitely recurring named non-free physical owners or UV-unbounded free survivors. Global termination remains open.
+13. The resolved cross/interface branch is no longer an independent recursive generator: for the actual resolved low--high operator `L_V=K+S`, skew `K` is finite same-event conservative donor flux while symmetric `S` is existing strain/deformation ownership. Pure interface circulation is quotiented before recursion.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -762,6 +764,47 @@ This theorem is an assembly/quotient theorem only; it does not prove global no-e
 
 ---
 
+## 26.6 Resolved interface is flux/strain, not a third generator
+The resolved cross/interface branch is now structurally quotiented before master recursion.
+At a shell-time event, fix the actual resolved low--high linearized operator on the selected high field and take its adjoint split
+\[
+L_V=K+S,\qquad K^*=-K,\qquad S^*=S.
+\]
+For a complete orthogonal event-role partition `w_a=P_a h`, the signed resolved role work splits exactly as
+\[
+R_a=R_a^K+R_a^S.
+\]
+Hence atom by atom
+\[
+[R]_+\le [R_K]_+ + [R_S]_+.
+\]
+The two pieces have different but already native physical meanings.
+The `S` part is the existing symmetric strain/deformation work and delegates once to the coherent-deformation, high-strain, objective-source, or critical-`D_V` owners.
+The `K` part is conservative role redistribution.  Its pair work satisfies
+\[
+T_{ab}=-T_{ba},\qquad R_a^K=\sum_bT_{ab}.
+\]
+With `F_{b->a}=[T_{ab}]_+`, every role set `C` obeys the exact finite-role divergence identity
+\[
+\boxed{\sum_{a\in C}R_a^K=F_{C^c\to C}-F_{C\to C^c}.}
+\]
+Therefore any role with positive skew gain has a finite backward donor closure containing an actual negative-net donor.  After cycles are deleted, a donor path has at most `#roles-1` edges.
+All such donor tracing occurs at the same physical event time.  Internal role circulation is real redistribution but is neither energy generation nor a new recursive PDE generation; it creates no second causal charge and no scale progress.
+The full resolved mixed-work observable and the moving-projector commutator observable are companion readings of the same `K/S` operator provenance; they are not identified as the same measure.
+On the clean high-tail interface owner, the unchanged common `N dW` law gives
+\[
+W_{interface}^+\ge\nu D_{tail}/2
+\quad\Longrightarrow\quad
+W_K^+\ge\nu D_{tail}/4
+\quad\text{or}\quad
+W_S^+\ge\nu D_{tail}/4,
+\]
+with exact ties joint.
+No `M/N` causal reweighting, new entropy, synthetic clock, or interface reset is introduced.
+This closes resolved interface as an independent recursive-generation loophole; it does not prove that the genuine donor/strain owner reached afterward globally terminates.
+
+---
+
 ## 27. Finite-dimensional rigidity modules: supporting geometry, not current PDE bottleneck
 Earlier layers of the programme established a large library of exact or certified finite-dimensional geometric facts.
 They remain important as local rigidity/registration tools but are no longer the main continuum seam.
@@ -878,6 +921,9 @@ The important point is where each belongs.
 \[ D_{tail}\ge D_{high}/4. \]
 ### High-tail common-unit HH/interface owner
 \[ \ge\nu D_{tail}/2. \]
+### High-tail resolved-interface K/S component
+\[ \ge\nu D_{tail}/4. \]
+on the clean interface owner, in the same common `N dW` unit.
 ### High-tail UV geometric constant
 \[ 3\sqrt\pi. \]
 ### High-tail continuous locality theorem
@@ -936,6 +982,7 @@ A useful compressed view is:
 or
 → actual nonlinear regeneration
 → common-unit HH/interface owner.
+If the interface owner wins, it is immediately quotiented by `L_V=K+S`: `K` is same-event conservative donor provenance and `S` is existing strain/deformation ownership. Only genuine owners reached after that quotient enter recursive depth.
 ### 30.6 High-tail HH continuation
 `positive HH common-unit work`
 → actual positive HH output-shell law
@@ -973,11 +1020,13 @@ The wiring must preserve actual owner sets, exact ties, conditional first-stop s
 ### 31.2 Observer-clock seam is structurally closed
 The master uses actual physical event time only.
 Supplier natural times remain local corridor horizons and are never normalized into a synthetic common clock.
-What remains is to verify the above edge ontology for every service/material/interface continuation, not to synchronize their lifetimes.
-### 31.3 Interface-owner completion
-High-tail regeneration can terminate its first split in resolved mixed/nonaffine interface work rather than HH work.
-That owner already has interface/strain provenance.
-The final assembly must make the continuation through objective source / deformation / relink owners completely explicit and ensure it is charged exactly once.
+What remains is to verify the above edge ontology for every service/material and other supplier continuation; the resolved-interface seam itself is now structurally quotiented.
+### 31.3 Interface-owner seam is structurally closed
+Resolved mixed/cross-interface work no longer supplies an independent recursive owner chain.
+For the actual resolved operator `L_V=K+S`, the skew part is conservative same-event role flux and the symmetric part is existing strain/deformation work.
+The skew donor closure is finite, all internal circulation cancels in the subset divergence identity, and same-event donor traversal creates no recursion depth or scale progress.
+The symmetric branch delegates once to the already existing deformation/source/critical-`D_V` owners.
+What remains open is termination of those genuine physical owners after this quotient, not an additional interface mechanism.
 ### 31.4 Conditional shell service must remain conditional
 Many supplier routes land in generic critical shells.
 The generic theorem provides a first-stop corridor and full-survivor service.
@@ -990,12 +1039,13 @@ Fresh SGS gives only an upper ratio `<=2` and no directional progress.
 Generic shell/material/reuse routes get no invented scale progress.
 The remaining termination argument must use these branch facts exactly as supplied.
 ### 31.6 Global termination mechanism is now the sharp frontier
-The compact-scale free-survivor route is closed by physical time.
+The compact-scale free-survivor route is closed by physical time, and pure resolved-interface circulation has now been removed from recursive depth.
 Therefore an infinite escape avoiding `t=0` must contain either:
-- infinitely many named non-free physical owner events; or
+- infinitely many genuine non-free physical owner events after all zero-charge and same-event donor quotients, such as first-hit, strain/work, service, reuse, or other native owner events; or
 - an UV-unbounded free-survivor tail.
-The next master theorem must show how the first alternative telescopes through actual work, service/reuse, `Xi`, and true globally bounded resources, and how every possible UV-unbounded survivor mechanism enters a certified physical UV route rather than a representation choice.
-Critical `NE`, `D_V`, shell mass, or scale-critical service may not be promoted to finite additive resets.
+The next master theorem must telescope the first alternative only through the native typed ledgers actually supplied by those owners: physical work, service/reuse, `Xi`, and genuinely globally bounded resources where available.
+Separately, every possible UV-unbounded free-survivor mechanism must be shown to enter a certified physical UV route rather than hide in fresh/service/material representation changes.
+Critical `NE`, `D_V`, shell mass, scale-critical service, or same-event interface flux may not be promoted to finite additive resets.
 ### 31.7 Initial data interface
 Backward causal recursion reaching `t=0` is already absorbing.
 For regular initial data, band-limited root counts/energies have scale-decaying bounds.
@@ -1038,6 +1088,8 @@ Same-law relay duplication is quotiented, and different-unit witness relays crea
 ### 32.11 Physical time is the universal recursion coordinate
 Different suppliers keep their own natural horizons, but actual event times live in the same Navier–Stokes time coordinate.
 Bounded-scale full-natural survival therefore cannot Zeno-escape; only named non-free recurrence or UV-unbounded survival remains.
+### 32.12 Circulation is not generation
+The skew part of resolved low--high interface work is an antisymmetric finite-role flux. Internal role cycles cancel from every subset balance and remain at one physical event time. Quotient those cycles and donor relays before recursion; the symmetric remainder is the already existing strain/deformation work.
 These simplifications are central to the programme's current direction.
 
 ---
@@ -1106,6 +1158,33 @@ It completed successfully on the same exact SHA through all source, pressure, ma
 The theorem does not assert global termination.  It certifies the quotient state and the compact-scale free-survivor no-escape dichotomy, reducing the remaining infinite-path problem to named non-free owner recurrence or UV-unbounded free survival.
 
 
+### 33.3 Resolved interface donor/circulation quotient
+Status:
+`EXACT_RESOLVED_INTERFACE_DONOR_QUOTIENT__POSITIVE_INTERFACE_TO_CONSERVATIVE_SKEW_DONOR_OR_EXISTING_STRAIN__FINITE_SAME_EVENT_DONOR_EXHAUSTION__CIRCULATION_ZERO_RECURSION_DEPTH`.
+Dedicated GitHub Actions run:
+`31398210897`.
+Exact theorem SHA:
+`c51846914109abf9d881d0a4ef5545fa023677f3`.
+Results:
+- `660` tests passed;
+- `50,000` split/flux/donor/high-tail states;
+- worst signed `R=R_K+R_S` residual `8.881784197001252e-16`;
+- minimum sampled positive-cover margin `-1.7763568394002505e-15` (floating roundoff around the exact analytic nonnegative cover);
+- worst role-divergence residual `2.100962885439726e-15`;
+- worst total skew-work residual `2.6968038962353156e-15`;
+- worst donor-closure balance residual `2.7511442661221775e-15`;
+- donor-existence failures `0`;
+- largest sampled shortest donor path `4`;
+- high-tail component failures `0`.
+Stored artifact:
+`recorded-results/31398210897/resolved-interface-donor-quotient-results/`.
+Full causal integration:
+`31398211279`.
+It completed successfully on the same exact SHA through the full source, pressure, material, high-tail, resolved-interface, role, joint-stop, causal-reuse, physical-branch, and master-episode chain.
+The initial implementation SHA `6ae71cba...` had one brittle certificate-wording assertion after `659` passing tests; no theorem identity or physical bound failed.  The assertion was relaxed to test semantics rather than exact prose, and the later notation-only `I_a^K -> R_a^K` cleanup changed no equation or routing.
+The theorem closes resolved interface as an independent recursive-generation loophole.  It does not prove global termination of the donor/strain owners and makes no Navier--Stokes regularity claim.
+
+
 ---
 
 ## 34. Certification discipline
@@ -1143,29 +1222,30 @@ Then read the following current-spine documents in order:
 3. `docs/outer_moving_role_extraction.md`
 4. `docs/resolved_role_egorov.md`
 5. `docs/nonaffine_role_interface_work.md`
-6. `docs/event_anchored_role_registration.md`
-7. `docs/coherent_service_or_flat.md`
-8. `docs/critical_shell_service_reentry.md`
-9. `docs/high_strain_resolved_ancestor.md`
-10. `docs/high_strain_heat_increment_service.md`
-11. `docs/material_label_carrier_quotient.md`
-12. `docs/objective_source_routing_compiler.md`
-13. `docs/objective_pressure_pair_atomization.md`
-14. `docs/fresh_service_scale_reentry.md`
-15. `docs/high_frequency_dissipation_reentry.md`
-16. `docs/high_tail_binary_work_reentry.md`
-17. `docs/high_tail_ultraviolet_locality.md`
-18. `docs/high_tail_natural_window_reentry.md`
-19. `docs/physical_pair_weighted_productivity.md`
-20. `docs/common_slice_coefficient_registration.md`
-21. `docs/recursive_physical_witness_constructor.md`
-22. `docs/joint_causal_stop_projection.md`
-23. `docs/amplitude_entropy_causal_reuse.md`
-24. `docs/weighted_causal_reuse.md`
-25. `docs/renyi_causal_reuse.md`
-26. `docs/physical_branch_compiler.md`
-27. `docs/continuum_master_event_quotient.md`
-28. `docs/master_no_escape.md`
+6. `docs/resolved_interface_donor_quotient.md`
+7. `docs/event_anchored_role_registration.md`
+8. `docs/coherent_service_or_flat.md`
+9. `docs/critical_shell_service_reentry.md`
+10. `docs/high_strain_resolved_ancestor.md`
+11. `docs/high_strain_heat_increment_service.md`
+12. `docs/material_label_carrier_quotient.md`
+13. `docs/objective_source_routing_compiler.md`
+14. `docs/objective_pressure_pair_atomization.md`
+15. `docs/fresh_service_scale_reentry.md`
+16. `docs/high_frequency_dissipation_reentry.md`
+17. `docs/high_tail_binary_work_reentry.md`
+18. `docs/high_tail_ultraviolet_locality.md`
+19. `docs/high_tail_natural_window_reentry.md`
+20. `docs/physical_pair_weighted_productivity.md`
+21. `docs/common_slice_coefficient_registration.md`
+22. `docs/recursive_physical_witness_constructor.md`
+23. `docs/joint_causal_stop_projection.md`
+24. `docs/amplitude_entropy_causal_reuse.md`
+25. `docs/weighted_causal_reuse.md`
+26. `docs/renyi_causal_reuse.md`
+27. `docs/physical_branch_compiler.md`
+28. `docs/continuum_master_event_quotient.md`
+29. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -1179,6 +1259,7 @@ Coherent analysis refines that work into physical parent/child roles.
 Smooth moving carriers transport roles between events.
 Affine/Kelvin motion and cutoff repartition are gauges.
 Nonaffine motion is interface/strain provenance.
+Resolved cross/interface work is immediately split by `L_V=K+S`: `K` is same-event conservative role flux and `S` is existing strain/deformation; circulation is quotiented before recursion.
 Objective source variation is split by physical owner.
 Resolved dissipation and pressure/fresh source laws produce actual critical hard shells.
 Generic critical shells enter first-stop corridors and, on full survivors, own-scale service.
@@ -1197,7 +1278,7 @@ All named stops and simultaneous causes feed one joint recursive master.
 Relay depth is quotiented before recursion depth is counted.
 Actual physical time is the universal event coordinate; each supplier keeps its own natural corridor length.
 Bounded-scale free full-natural survivor tails hit `t=0`.
-Therefore any infinite escape must recur through infinitely many named non-free physical owners or become UV-unbounded.
+Therefore any infinite escape must recur through infinitely many genuine named non-free physical owners after relay/donor quotienting, or become UV-unbounded.
 Only true globally bounded scale-independent resources may terminate additively.
 `t=0` is absorbing.
-The present frontier is to telescope the named-owner recurrence and prove that every UV-unbounded free-survivor mechanism enters a certified physical UV route, without reintroducing observer-made structure.
+The present frontier is to telescope genuine named-owner recurrence through native typed physical ledgers, and prove that every UV-unbounded free-survivor mechanism enters a certified physical UV route, without reintroducing observer-made structure.

@@ -2,9 +2,9 @@
 
 ## Status
 
-Candidate theorem.  Certification is pending dedicated GitHub Actions and the full physical-energy causal integration sweep.
+Certified theorem.  Dedicated GitHub Actions and the full physical-energy causal integration sweep both passed on the exact theorem SHA below.
 
-The intended status string is
+The certified status string is
 
 `EXACT_RESOLVED_INTERFACE_DONOR_QUOTIENT__POSITIVE_INTERFACE_TO_CONSERVATIVE_SKEW_DONOR_OR_EXISTING_STRAIN__FINITE_SAME_EVENT_DONOR_EXHAUSTION__CIRCULATION_ZERO_RECURSION_DEPTH`.
 
@@ -233,3 +233,32 @@ This theorem does not prove that the donor role reached by the skew quotient mus
 Its contribution is narrower and structural: resolved interface work is no longer an independent escape mechanism.  The remaining global problem is pushed back to the genuine physical owners already present in Navier--Stokes.
 
 There is no claim here of a proof of global regularity for 3D Navier--Stokes.
+
+## 9. Certification
+
+Dedicated GitHub Actions run: `31398210897`.
+
+Exact theorem SHA: `c51846914109abf9d881d0a4ef5545fa023677f3`.
+
+The dedicated run completed successfully with:
+
+- `660` tests passed;
+- `50,000` split/flux/donor/high-tail stress states;
+- worst signed `R=R_K+R_S` residual `8.881784197001252e-16`;
+- minimum sampled positive-cover margin `-1.7763568394002505e-15`, consistent with floating roundoff around the exact analytic nonnegative cover;
+- worst role-divergence residual `2.100962885439726e-15`;
+- worst total skew-work residual `2.6968038962353156e-15`;
+- worst donor-closure balance residual `2.7511442661221775e-15`;
+- donor-existence failures `0`;
+- largest sampled shortest donor path `4`;
+- high-tail component failures `0`.
+
+The same exact SHA passed the full physical-energy causal integration sweep in run `31398211279`, including source routing, pressure, material/service, high-frequency and high-tail routes, this resolved-interface quotient, moving/event roles, joint stopping, causal reuse, the physical branch compiler, and master-episode stress.
+
+The stored artifact is under
+
+`recorded-results/31398210897/resolved-interface-donor-quotient-results/`.
+
+The initial implementation SHA `6ae71cba...` had one brittle test assertion about certificate wording after `659` other tests had passed.  No theorem identity or physical bound failed.  The test was changed to check semantics rather than exact prose; a later `I_a^K -> R_a^K` normalization was notation-only.
+
+Certification is evidence for the encoded algebra and regression guards, not a proof of global termination.  This theorem makes no claim of global regularity for 3D Navier--Stokes.
