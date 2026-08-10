@@ -1,0 +1,40 @@
+{
+  "certificate": {
+    "status": "EXACT_SMOOTH_QUADRATIC_CARRIER_INTERFACE__Q2_ENERGY_LAW__SQUARE_PARTITION_CONSERVATIVE_RELINK__SYMMETRIC_WORK_EXISTING_STRAIN__COEFFICIENT_OBSTRUCTION_ENERGY_REENTRY",
+    "native_object": "for a smooth PDE carrier w=Q u the physical energy is ||w||_2^2=<u,Q^2u>; Q itself is an analysis operator and eta=Q^2 is the energy effect",
+    "hard_smooth_separation": "hard orthogonal P is read only at an actual event; choose smooth Q with QP=P and complete Q by a smooth square partition, preferably q=cos(theta), r=sin(theta)",
+    "quadratic_partition": "positive self-adjoint smooth carriers satisfy sum_a A_a^2=I and sum_a dot(A_a^2)=0; overlap is physical analysis overlap, not an interface loss",
+    "direct_energy_law": "d||Q u||_2^2/dt+2nu||grad Q u||_2^2=<u,dot(Q^2)u>-2 Re<Q^2u,B(u,u)>",
+    "resolved_repartition": "with V fixed and h=u-V, the direct law splits exactly into low-low work, q^2-weighted HH work and native interface <u,dot eta u>-2 Re<eta u,L_Vu>; selected support kills low-low",
+    "outer_recombination": "native smooth-interface work equals the work of (dot Q+[L_V,Q])u minus the diagonal L_V work of Q u; the commutator must not be interpreted alone",
+    "skew": "after L_V=K+S, moving plus K work is conservative relinking and sums to zero over the complete square partition; the partition-rate pair flux and the K synthesis-pair flux are separately antisymmetric, so their sum has each relink row as its exact row sum",
+    "symmetric": "the S work rows are symmetric synthesis-pair strain work and sum to the same full resolved strain/deformation; no new source or Xi is created",
+    "forbidden_linear_complement": "I-Q is not the energy complement of a non-idempotent Q; its skew defect is 4 Re<Q(I-Q)u,K u>; use Q^2+R^2=I instead",
+    "coefficient_reentry": "a large Duhamel/interface coefficient impulse only locates a stopping interval; actual carrier energy and positive native interface work reenter the physical-energy gate, and the impulse magnitude is never used as work",
+    "causal_route": "the energy gate returns inheritance, high strain, actual q^2-weighted HH generation, or positive native interface work; only the last is Hahn-routed to conservative relink or existing strain, with exact ties joint",
+    "relation_to_donor_quotient": "this theorem supplies the smooth PDE-carrier energy interface; hard event-role donor/circulation quotienting remains a complementary same-event theorem and is not identified with the smooth commutator measure",
+    "scope": "this closes the algebraic smooth-envelope/projector mismatch and local coefficient-obstruction energy reentry; it does not prove global recurrence termination, UV closure or Navier-Stokes regularity"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_quadratic_partition_residual": 5.788098890966998e-15,
+    "worst_partition_derivative_residual": 3.4743781843676355e-15,
+    "worst_native_outer_recombination_residual": 8.933646029930295e-16,
+    "worst_relink_conservation_residual": 8.740581016298078e-16,
+    "worst_strain_reconstruction_residual": 2.923322109464339e-15,
+    "worst_pair_antisymmetry_residual": 4.2577563799028453e-16,
+    "worst_pair_row_sum_residual": 2.9233228935603255e-15,
+    "worst_direct_energy_identity_residual": 7.85374408451728e-14,
+    "worst_resolved_repartition_residual": 1.4921397450962104e-13,
+    "worst_event_registration_residual": 9.515145095449836e-16,
+    "linear_complement_counterexample_defect": 1.0,
+    "worst_quadratic_complement_skew_residual": 8.006202190830655e-16,
+    "minimum_energy_generation_margin": 0.007828068136572788,
+    "branch_counts": {
+      "material_energy_inheritance": 12730,
+      "smooth_interface_physical_work": 12378,
+      "physical_high_high_transfer_generation": 12469,
+      "high_strain_critical_dissipation": 12423
+    }
+  }
+}

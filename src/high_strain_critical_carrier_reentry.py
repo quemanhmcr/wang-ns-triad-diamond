@@ -11,8 +11,10 @@ import numpy as np
 
 from src.common_slice_coefficient_registration import (
     GENERATED_FRACTION,
+    HH_COEFFICIENT_OBSTRUCTION,
     INHERIT_FRACTION,
     RESIDUAL_FRACTION,
+    ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
     exact_adjoint_residual,
 )
 from src.critical_annular_carrier_service_reentry import (
@@ -145,8 +147,8 @@ def critical_seed_backward_first_hit(
 ) -> dict[str, object]:
     """First obstruction for a critical shell seed before materiality is assigned.
 
-    There are exactly three native monitors: renewed strain, classified
-    role-interface coefficient impulse, and HH-regeneration coefficient impulse.
+    There are exactly three native monitors: renewed strain, role-interface
+    coefficient obstruction, and HH coefficient obstruction.
     No artificial material-distance observable is inserted because this route has
     not yet assigned the carrier to old/new material.  Materiality will be read
     only after an actual renewed positive service law exists.
@@ -167,15 +169,22 @@ def critical_seed_backward_first_hit(
         raise ValueError("nonnegative physical monitor paths required")
     monitors = (
         PhysicalPathMonitor("high_strain_critical_dissipation", float(LOW_STRAIN_ACTION), K, ThresholdTopology.CLOSED),
-        PhysicalPathMonitor("classified_role_interface_impulse", RESIDUAL_FRACTION * amp, IR, ThresholdTopology.CLOSED),
-        PhysicalPathMonitor("hh_regeneration_impulse", GENERATED_FRACTION * amp, IH, ThresholdTopology.CLOSED),
+        PhysicalPathMonitor(ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, RESIDUAL_FRACTION * amp, IR, ThresholdTopology.CLOSED),
+        PhysicalPathMonitor(HH_COEFFICIENT_OBSTRUCTION, GENERATED_FRACTION * amp, IH, ThresholdTopology.CLOSED),
     )
     out = first_physical_corridor_exit(ell, monitors, tie_tolerance=tie_tolerance)
+    needs_energy_reentry = any(
+        label in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
+        for label in out.joint_first_stops
+    )
     return {
         "first_elapsed": out.first_time,
-        "joint_causes": out.joint_causes,
+        "joint_causes": out.joint_first_stops,
+        "joint_first_stops": out.joint_first_stops,
         "individual_debuts": out.individual_debuts,
         "terminal_amplitude": amp,
+        "requires_physical_energy_reentry": needs_energy_reentry,
+        "coefficient_impulses_used_as_work": False,
     }
 
 
@@ -194,9 +203,10 @@ def critical_seed_natural_outcome(
     """High-strain critical seed -> named stop, t=0, or own-scale service.
 
     The service conclusion is available only for a full natural no-hit corridor.
-    Large interface/HH coefficient impulses retain their existing provenance and
-    are never promoted to work.  A renewed high-strain hit is another critical
-    dissipation recursion, not an additive reset.
+    Large interface/HH coefficient impulses retain their obstruction provenance,
+    locate physical-energy reentry, and are never promoted to work.  A renewed
+    high-strain hit is another critical dissipation recursion, not an additive
+    reset.
     """
     geom = backward_natural_endpoint(event_time, renewal_frequency, scaled_lifetime)
     A = float(renewal_frequency)
@@ -221,24 +231,34 @@ def critical_seed_natural_outcome(
         raise ValueError("critical-seed Duhamel decomposition is not exact")
 
     hit_time = first_hit.get("first_elapsed")
-    causes = tuple(str(x) for x in first_hit.get("joint_causes", ()))
+    causes = tuple(str(x) for x in first_hit.get("joint_first_stops", first_hit.get("joint_causes", ())))
+    needs_energy_reentry = any(
+        label in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
+        for label in causes
+    )
     elapsed = float(geom["elapsed_available"])
     if hit_time is not None and float(hit_time) <= elapsed + 2e-12 * max(1.0, elapsed):
         return {
-            "classification": "named_recursive_first_stop",
+            "classification": "named_first_stop",
             "joint_causes": causes,
+            "joint_first_stops": causes,
             "first_elapsed": float(hit_time),
             "primary_selected": False,
             "duhamel_residual": res,
             "materiality_assigned": False,
+            "requires_physical_energy_reentry": needs_energy_reentry,
+            "coefficient_impulses_used_as_work": False,
         }
     if bool(geom["hits_initial_boundary"]):
         return {
             "classification": "initial_boundary_root",
             "joint_causes": ("t=0",),
+            "joint_first_stops": ("t=0",),
             "first_elapsed": elapsed,
             "duhamel_residual": res,
             "materiality_assigned": False,
+            "requires_physical_energy_reentry": False,
+            "coefficient_impulses_used_as_work": False,
         }
     if abs(ir) >= RESIDUAL_FRACTION * amp - tol:
         raise ValueError("endpoint interface impulse contradicts no-hit corridor")
@@ -259,6 +279,7 @@ def critical_seed_natural_outcome(
     return {
         "classification": "full_natural_own_scale_service",
         "joint_causes": (),
+        "joint_first_stops": (),
         "natural_duration": float(geom["natural_duration"]),
         "backward_endpoint": float(geom["backward_endpoint"]),
         "terminal_critical_mass": terminal_mass,
@@ -270,6 +291,8 @@ def critical_seed_natural_outcome(
         "duhamel_residual": res,
         "materiality_assigned": "only_after_service_via_exact_Moyal_OO_ON_NN",
         "nn_seed_required": False,
+        "requires_physical_energy_reentry": False,
+        "coefficient_impulses_used_as_work": False,
     }
 
 
@@ -301,7 +324,7 @@ def theorem_certificate(scaled_lifetime: float = 1.0, viscosity: float = 1.0) ->
         "material_order": "material ownership is deliberately deferred: after the renewed positive service exists, exact Moyal assigns its actual endpoints and OO/ON/NN is read from that new law; no child-scale NN witness is propagated as whole-carrier ownership",
         "architectural_shortcut": "the shortest high-strain renewal entrance no longer requires child-scale heat ownership, old-incident erosion, or NN-intersect-critical selection before a carrier can renew; those theorems remain valid refinements for material capacity/provenance",
         "causal_scope": "normalized D_V|_G weights are only a positive diagnostic sampling law for the high-strain recursive route; they never replace actual positive HH child-energy work in Shannon/Renyi or transfer causality",
-        "currency": "a renewed high-strain first hit recursively re-enters critical dissipation; interface/HH hits keep their existing owners; none is promoted to a scale-independent additive reset",
+        "currency": "a renewed high-strain first hit recursively re-enters critical dissipation; interface/HH coefficient hits only locate physical-energy reentry, where actual work receives its native owner; none is promoted to a scale-independent additive reset",
         "scope": "this closes the high-strain route to either an already named recursive stop, the absorbing initial boundary, or a renewed own-scale coherent-service entrance; universal source/SGS and genuine relink slab renewal, and global master closure, remain open",
     }
 
@@ -316,7 +339,7 @@ class HighStrainCriticalReentryStress:
     worst_duhamel_residual: float
     order_invariance_failures: int
     unit_invariance_failures: int
-    maximum_joint_cause_count: int
+    maximum_joint_first_stop_count: int
     branch_counts: dict[str, int]
 
 
@@ -380,19 +403,19 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> HighStrainCriticalRee
             residual_impulse_abs=IRpath,
             hh_impulse_abs=IHpath,
         )
-        max_joint = max(max_joint, len(tuple(hit["joint_causes"])))
+        max_joint = max(max_joint, len(tuple(hit["joint_first_stops"])))
 
-        # Native-unit/order invariance of the first physical cause set.
+        # Native-unit/order invariance of the first-stop set.
         mons = [
             PhysicalPathMonitor("high_strain_critical_dissipation", LOW_STRAIN_ACTION, tuple(Kpath), ThresholdTopology.CLOSED),
-            PhysicalPathMonitor("classified_role_interface_impulse", RESIDUAL_FRACTION * amp, tuple(IRpath), ThresholdTopology.CLOSED),
-            PhysicalPathMonitor("hh_regeneration_impulse", GENERATED_FRACTION * amp, tuple(IHpath), ThresholdTopology.CLOSED),
+            PhysicalPathMonitor(ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, RESIDUAL_FRACTION * amp, tuple(IRpath), ThresholdTopology.CLOSED),
+            PhysicalPathMonitor(HH_COEFFICIENT_OBSTRUCTION, GENERATED_FRACTION * amp, tuple(IHpath), ThresholdTopology.CLOSED),
         ]
         time_tol = 2e-10 * max(1.0, abs(T))
         base = first_physical_corridor_exit(ell, mons, tie_tolerance=time_tol)
         perm = rng.permutation(3)
         alt = first_physical_corridor_exit(ell, [mons[int(i)] for i in perm], tie_tolerance=time_tol)
-        if base.joint_causes != alt.joint_causes or base.first_time != alt.first_time:
+        if base.joint_first_stops != alt.joint_first_stops or base.first_time != alt.first_time:
             order_fail += 1
             raise AssertionError("critical-seed first stop depended on monitor order")
         scaled = [rescale_monitor_units(m, float(math.exp(rng.uniform(-8.0, 8.0)))) for m in mons]
@@ -402,7 +425,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> HighStrainCriticalRee
             raise AssertionError("critical-seed first stop depended on monitor units")
         if base.first_time is not None and (
             abs(float(base.first_time) - float(altu.first_time)) > time_tol
-            or set(base.joint_causes) != set(altu.joint_causes)
+            or set(base.joint_first_stops) != set(altu.joint_first_stops)
         ):
             unit_fail += 1
             raise AssertionError("critical-seed first stop depended on monitor units")
@@ -477,7 +500,7 @@ and the shell's own normalized state registers this coefficient exactly into the
 
 Inspect backward through one `A`-natural window with exactly three native first-stop monitors: renewed strain, role-interface coefficient obstruction, and HH-regeneration coefficient obstruction.  Coefficient hits only locate reentry of the same smooth carrier into the physical-energy gate; they do not supply work weights.  There is intentionally no material-boundary monitor because material ownership has not yet been assigned.  Exact ties remain unsplit.
 
-If a monitor fires, its already named recursive cause owns the stop.  If the interval reaches `t=0`, the initial boundary absorbs it.  Otherwise the exact Duhamel triangle gives
+If strain fires, its already named critical-dissipation cause owns the stop.  If a coefficient monitor fires, it only locates physical-energy reentry; the raw impulse owns no work.  If the interval reaches `t=0`, the initial boundary absorbs it.  Otherwise the exact Duhamel triangle gives
 
 `|z(s)|>=|z(t)|/4`.
 
@@ -503,7 +526,7 @@ Stress: `{out.samples}` critical-dissipation-law/first-stop/service states
 - worst exact Duhamel residual: `{out.worst_duhamel_residual:.3e}`
 - monitor-order failures: `{out.order_invariance_failures}`
 - monitor-unit failures: `{out.unit_invariance_failures}`
-- maximum sampled exact joint-cause count: `{out.maximum_joint_cause_count}`
+- maximum sampled exact joint first-stop count: `{out.maximum_joint_first_stop_count}`
 - outcomes: `{out.branch_counts}`
 
 This closes the **high-strain renewal entrance** to named recursive stop / initial boundary / own-scale coherent service without making `D_V` a reset and without a whole-carrier NN assertion.  Universal source/SGS and genuine material-relink slab renewal remain the master-facing continuum frontier.  No global-regularity claim is made.

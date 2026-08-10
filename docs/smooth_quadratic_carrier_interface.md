@@ -2,10 +2,10 @@
 
 ## Status
 
-Candidate theorem.  Certification is pending its dedicated GitHub Actions run
-and the full physical-energy causal integration sweep.
+Certified theorem.  Dedicated GitHub Actions and the full physical-energy
+causal integration sweep both passed on the exact theorem SHA recorded below.
 
-The intended status string is
+The certified status string is
 
 `EXACT_SMOOTH_QUADRATIC_CARRIER_INTERFACE__Q2_ENERGY_LAW__SQUARE_PARTITION_CONSERVATIVE_RELINK__SYMMETRIC_WORK_EXISTING_STRAIN__COEFFICIENT_OBSTRUCTION_ENERGY_REENTRY`.
 
@@ -503,10 +503,10 @@ probability.  This is the same rule already imposed on HH Duhamel amplitude:
 
 ## 9. Relation to the resolved donor/circulation quotient
 
-The author's current `resolved-interface-donor-quotient` research branch begins
-from actual resolved low--high work on a complete hard event-role partition.  It
-then traces positive skew gain to simultaneous donor roles and quotients role
-circulation from recursive depth.
+The certified resolved-interface donor/circulation quotient begins from actual
+resolved low--high work on a complete hard event-role partition.  It then traces
+positive skew gain to simultaneous donor roles and quotients role circulation
+from recursive depth.
 
 The present theorem is complementary and logically upstream at a different
 representation layer:
@@ -548,3 +548,45 @@ This theorem closes the following local seam:
 It does not prove that repeated strain, relink, service or donor owners terminate
 globally.  It does not close the UV-unbounded full-survivor alternative, and it
 does not prove Navier--Stokes regularity.
+
+## 12. Certification
+
+Dedicated GitHub Actions run: `31401197668`.
+
+Exact theorem SHA: `54bf268fd363a3778627e281756482c64f37ae97`.
+
+The dedicated run completed successfully with:
+
+- `671` tests passed;
+- `50,000` smooth-partition/interface/PDE/reentry states;
+- worst quadratic-partition residual `5.788098890966998e-15`;
+- worst differentiated-partition residual `3.4743781843676355e-15`;
+- worst native/outer recombination residual `8.933646029930295e-16`;
+- worst conservative-relink residual `8.740581016298078e-16`;
+- worst strain reconstruction residual `2.923322109464339e-15`;
+- worst pair antisymmetry/symmetry residual `4.2577563799028453e-16`;
+- worst pair row-sum residual `2.9233228935603255e-15`;
+- worst direct carrier-energy residual `7.85374408451728e-14`;
+- worst resolved repartition residual `1.4921397450962104e-13`;
+- worst hard-event plateau-registration residual `9.515145095449836e-16`;
+- the forbidden linear-complement counterexample defect exactly `1.0`;
+- worst quadratic-complement skew residual `8.006202190830655e-16`;
+- minimum clean HH-generation margin `0.007828068136572788`;
+- all four energy-reentry branches exercised.
+
+The same exact SHA passed the full physical-energy causal integration sweep in
+run `31401197364`, including the complete source, pressure, material, high-tail,
+resolved-interface donor quotient, moving/event role, joint-stop, causal-reuse,
+physical-branch and master-episode chain.  The master checked `20,000` episode
+traces with worst margin `0.0`.
+
+The stored dedicated artifact is under
+
+`recorded-results/31401197668/smooth-quadratic-carrier-interface-results/`.
+
+GitHub artifact digest:
+
+`sha256:1f15a3fde7a51f3b59167caf190985d7729a0ef53244b53ce6110647f441fd99`.
+
+Certification is regression evidence for the encoded exact algebra and guards;
+it is not a proof of global owner termination or Navier--Stokes regularity.

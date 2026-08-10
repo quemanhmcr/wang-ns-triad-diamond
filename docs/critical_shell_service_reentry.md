@@ -81,7 +81,7 @@ The registered affine/Kelvin/viscous analysis dual has the already-certified nat
 \|\psi(s)\|_2\le J\|\psi(t)\|_2,
 \]
 
-where the nonaffine/full-transport mismatch is not hidden in \(J\): it is the classified interface impulse above.  Cauchy gives, at every point of a full no-hit slab,
+where the nonaffine/full-transport mismatch is not hidden in \(J\): it is the role-interface coefficient obstruction above.  On a full no-hit slab that obstruction remains below its coefficient face; no impulse magnitude has been counted as work.  Cauchy gives, at every point of the slab,
 
 \[
 \boxed{

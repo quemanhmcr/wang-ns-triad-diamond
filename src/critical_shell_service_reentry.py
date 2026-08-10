@@ -11,8 +11,10 @@ import numpy as np
 
 from src.common_slice_coefficient_registration import (
     GENERATED_FRACTION,
+    HH_COEFFICIENT_OBSTRUCTION,
     INHERIT_FRACTION,
     RESIDUAL_FRACTION,
+    ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
     exact_adjoint_residual,
 )
 from src.critical_annular_carrier_service_reentry import (
@@ -75,7 +77,7 @@ def critical_shell_persistent_carrier_mass_lower(
     The coefficient survives by 1/4 on every prefix.  The registered
     affine/Kelvin/viscous analysis dual has norm-growth factor J, while all
     nonaffine/full-transport mismatch remains in the separately monitored
-    classified interface impulse.  Cauchy therefore gives
+    role-interface coefficient obstruction.  Cauchy therefore gives
 
         A||Q_Au(s)||_2^2 >= (3 mu0)/(64 J^2).
     """
@@ -238,16 +240,23 @@ def critical_shell_backward_first_hit(
         raise ValueError("nonnegative native monitor paths required")
     monitors = (
         PhysicalPathMonitor("high_strain_critical_dissipation", LOW_STRAIN_ACTION, K, ThresholdTopology.CLOSED),
-        PhysicalPathMonitor("classified_role_interface_impulse", RESIDUAL_FRACTION * amp, IR, ThresholdTopology.CLOSED),
-        PhysicalPathMonitor("hh_regeneration_impulse", GENERATED_FRACTION * amp, IH, ThresholdTopology.CLOSED),
+        PhysicalPathMonitor(ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, RESIDUAL_FRACTION * amp, IR, ThresholdTopology.CLOSED),
+        PhysicalPathMonitor(HH_COEFFICIENT_OBSTRUCTION, GENERATED_FRACTION * amp, IH, ThresholdTopology.CLOSED),
     )
     out = first_physical_corridor_exit(ell, monitors, tie_tolerance=tie_tolerance)
+    needs_energy_reentry = any(
+        label in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
+        for label in out.joint_first_stops
+    )
     return {
         "first_elapsed": out.first_time,
-        "joint_causes": out.joint_causes,
+        "joint_causes": out.joint_first_stops,
+        "joint_first_stops": out.joint_first_stops,
         "individual_debuts": out.individual_debuts,
         "terminal_amplitude": amp,
         "observed_elapsed_end": float(ell[-1]),
+        "requires_physical_energy_reentry": needs_energy_reentry,
+        "coefficient_impulses_used_as_work": False,
     }
 
 
@@ -268,9 +277,10 @@ def critical_shell_natural_outcome(
 
     Material identity is intentionally absent before service.  A strain hit is
     the already named critical-dissipation recursion at the renewed scale;
-    interface and HH hits retain their existing owners.  If no hit occurs, the
-    monitor horizon must actually cover the entire backward interval required by
-    the natural window or initial boundary before a survivor is certified.
+    interface and HH coefficient hits only locate physical-energy reentry.  If no
+    hit occurs, the monitor horizon must actually cover the entire backward
+    interval required by the natural window or initial boundary before a survivor
+    is certified.
     """
     geom = backward_natural_endpoint(event_time, renewal_frequency, scaled_lifetime)
     A = float(renewal_frequency)
@@ -301,26 +311,36 @@ def critical_shell_natural_outcome(
         raise ValueError("first-hit monitors do not cover the required backward corridor")
 
     hit_time = first_hit.get("first_elapsed")
-    causes = tuple(str(x) for x in first_hit.get("joint_causes", ()))
+    causes = tuple(str(x) for x in first_hit.get("joint_first_stops", first_hit.get("joint_causes", ())))
+    needs_energy_reentry = any(
+        label in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
+        for label in causes
+    )
     if hit_time is not None and float(hit_time) <= required + 2e-12 * max(1.0, required):
         return {
-            "classification": "named_recursive_first_stop",
+            "classification": "named_first_stop",
             "joint_causes": causes,
+            "joint_first_stops": causes,
             "first_elapsed": float(hit_time),
             "required_elapsed": required,
             "observed_elapsed_end": horizon,
             "materiality_assigned": False,
             "primary_selected": False,
+            "requires_physical_energy_reentry": needs_energy_reentry,
+            "coefficient_impulses_used_as_work": False,
         }
 
     if bool(geom["hits_initial_boundary"]):
         return {
             "classification": "initial_boundary_root",
             "joint_causes": ("t=0",),
+            "joint_first_stops": ("t=0",),
             "first_elapsed": required,
             "required_elapsed": required,
             "observed_elapsed_end": horizon,
             "materiality_assigned": False,
+            "requires_physical_energy_reentry": False,
+            "coefficient_impulses_used_as_work": False,
         }
 
     res = abs(exact_adjoint_residual(zt, zs, ih, ir))
@@ -347,6 +367,7 @@ def critical_shell_natural_outcome(
     return {
         "classification": "full_natural_own_scale_service",
         "joint_causes": (),
+        "joint_first_stops": (),
         "required_elapsed": required,
         "observed_elapsed_end": horizon,
         "terminal_coefficient_mass": terminal_mass,
@@ -359,6 +380,8 @@ def critical_shell_natural_outcome(
         "integrated_bounded_heat_service_lower": Sint,
         "duhamel_residual": res,
         "materiality_assigned": "only_after_service_via_actual_Moyal_endpoints",
+        "requires_physical_energy_reentry": False,
+        "coefficient_impulses_used_as_work": False,
     }
 
 
@@ -408,7 +431,7 @@ class CriticalShellServiceStress:
     order_invariance_failures: int
     unit_invariance_failures: int
     horizon_guard_failures: int
-    maximum_joint_cause_count: int
+    maximum_joint_first_stop_count: int
     branch_counts: dict[str, int]
 
 
@@ -490,17 +513,17 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> CriticalShellServiceS
             hh_impulse_abs=IHpath,
             tie_tolerance=time_tol,
         )
-        max_joint = max(max_joint, len(tuple(hit["joint_causes"])))
+        max_joint = max(max_joint, len(tuple(hit["joint_first_stops"])))
 
         mons = [
             PhysicalPathMonitor("high_strain_critical_dissipation", LOW_STRAIN_ACTION, tuple(Kpath), ThresholdTopology.CLOSED),
-            PhysicalPathMonitor("classified_role_interface_impulse", RESIDUAL_FRACTION * amp, tuple(IRpath), ThresholdTopology.CLOSED),
-            PhysicalPathMonitor("hh_regeneration_impulse", GENERATED_FRACTION * amp, tuple(IHpath), ThresholdTopology.CLOSED),
+            PhysicalPathMonitor(ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, RESIDUAL_FRACTION * amp, tuple(IRpath), ThresholdTopology.CLOSED),
+            PhysicalPathMonitor(HH_COEFFICIENT_OBSTRUCTION, GENERATED_FRACTION * amp, tuple(IHpath), ThresholdTopology.CLOSED),
         ]
         base = first_physical_corridor_exit(ell, mons, tie_tolerance=time_tol)
         perm = rng.permutation(3)
         alt = first_physical_corridor_exit(ell, [mons[int(i)] for i in perm], tie_tolerance=time_tol)
-        if base.first_time != alt.first_time or set(base.joint_causes) != set(alt.joint_causes):
+        if base.first_time != alt.first_time or set(base.joint_first_stops) != set(alt.joint_first_stops):
             order_fail += 1
             raise AssertionError("generic critical-shell first stop depended on monitor order")
         scaled = [rescale_monitor_units(m, float(math.exp(rng.uniform(-8.0, 8.0)))) for m in mons]
@@ -510,7 +533,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> CriticalShellServiceS
             raise AssertionError("generic critical-shell first stop depended on monitor units")
         if base.first_time is not None and (
             abs(float(base.first_time) - float(altu.first_time)) > time_tol
-            or set(base.joint_causes) != set(altu.joint_causes)
+            or set(base.joint_first_stops) != set(altu.joint_first_stops)
         ):
             unit_fail += 1
             raise AssertionError("generic critical-shell first stop depended on monitor units")
@@ -618,7 +641,7 @@ Set `A=3M/4`.  Choose the same smooth scalar role `Q_A` which equals one on the 
 
 Inspect backward through the required `A`-natural interval using exactly three native monitors: renewed strain, role-interface coefficient obstruction, and HH-regeneration coefficient obstruction.  The two coefficient monitors are interval locators: at a hit, the same smooth carrier must reenter the physical-energy gate before any work owner is named.  Materiality is not assigned yet.  Exact ties stay unsplit.  The first-hit record also stores the actually observed backward horizon; neither a `t=0` root nor a full-natural survivor may be certified from a shorter monitor path.
 
-If a named monitor hits, it keeps its existing physical owner.  If the required interval reaches `t=0`, the initial boundary absorbs it.  Otherwise every prefix remains below both coefficient-impulse faces and
+If renewed strain hits, it keeps its critical-dissipation owner.  If a coefficient monitor hits, it only locates reentry of the same carrier into the physical-energy gate.  If the required interval reaches `t=0`, the initial boundary absorbs it.  Otherwise every prefix remains below both coefficient-obstruction faces and
 
 `|z(s)|>|z(t)|/4`.
 
@@ -667,7 +690,7 @@ Stress: `{out.samples}` generic shell/supplier/corridor/service states
 - monitor-order failures: `{out.order_invariance_failures}`
 - monitor-unit failures: `{out.unit_invariance_failures}`
 - incomplete-horizon certification failures: `{out.horizon_guard_failures}`
-- maximum sampled exact joint-cause count: `{out.maximum_joint_cause_count}`
+- maximum sampled exact joint first-stop count: `{out.maximum_joint_first_stop_count}`
 - outcomes: `{out.branch_counts}`
 
 This theorem is intentionally **shell-local**.  It proves carrier/service re-entry but does not manufacture signed-good scale progress relative to whichever previous block supplied the shell.  Pressure/source routing and pure material-label transparency remain separate continuum tasks.  No global-regularity conclusion is asserted.

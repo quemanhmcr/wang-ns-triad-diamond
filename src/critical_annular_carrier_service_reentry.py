@@ -51,8 +51,10 @@ def renewed_analysis_probe_growth_upper(
 
     The exact registered-coefficient interaction picture puts common affine/Kelvin
     transport and bulk viscosity in the analysis propagator.  The nonaffine/full-
-    transport mismatch belongs to the classified interface residual already
-    monitored by the temporal theorem; it is not hidden in this norm bound.  On T=c A^-2 and transported support |k|<=R A,
+    transport mismatch belongs to the role-interface coefficient obstruction
+    already monitored by the temporal theorem; it is not hidden in this norm
+    bound and its magnitude is not work.  On T=c A^-2 and transported support
+    |k|<=R A,
 
         ||psi(s)|| <= exp(K + nu*c*R^2) ||psi(t)||.
 

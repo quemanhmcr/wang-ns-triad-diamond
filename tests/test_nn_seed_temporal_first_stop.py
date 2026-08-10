@@ -2,6 +2,7 @@ import math
 
 import numpy as np
 
+from src.common_slice_coefficient_registration import ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION
 from src.nn_critical_heat_carrier_seed import renewal_carrier_critical_mass_lower
 from src.nn_seed_temporal_first_stop import (
     backward_natural_endpoint,
@@ -78,7 +79,23 @@ def test_material_boundary_contact_is_named_first_stop():
         hh_impulse_abs=np.zeros(5),
         material_boundary_distance=np.linspace(1.0, 0.0, 5),
     )
-    assert "material_boundary_contact" in hit["joint_causes"]
+    assert "material_boundary_contact" in hit["joint_first_stops"]
+
+
+def test_interface_coefficient_hit_is_explicitly_an_energy_reentry_locator():
+    amp = 2.0
+    ell = np.linspace(0.0, 1.0, 5)
+    hit = seed_backward_first_hit(
+        ell,
+        terminal_amplitude=amp,
+        strain_action=np.zeros(5),
+        residual_impulse_abs=np.linspace(0.0, 0.6, 5),
+        hh_impulse_abs=np.zeros(5),
+        material_boundary_distance=np.ones(5),
+    )
+    assert hit["joint_first_stops"] == (ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,)
+    assert hit["requires_physical_energy_reentry"] is True
+    assert hit["coefficient_impulses_used_as_work"] is False
 
 
 def test_initial_boundary_is_absorbing_even_without_dynamic_hit():

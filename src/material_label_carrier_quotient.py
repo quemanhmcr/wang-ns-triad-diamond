@@ -12,8 +12,10 @@ import numpy as np
 from src.coherent_transfer_cells import selection_jump, symmetric_difference_energy
 from src.common_slice_coefficient_registration import (
     GENERATED_FRACTION,
+    HH_COEFFICIENT_OBSTRUCTION,
     INHERIT_FRACTION,
     RESIDUAL_FRACTION,
+    ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
     exact_adjoint_residual,
     registration_first_stop,
 )
@@ -23,8 +25,8 @@ from src.heat_edge_material_ownership import partition_positive_edge_measure
 MATERIAL_MEMBERSHIP_EVENT = "intrinsic_material_membership_update"
 SELECTED_FAMILY_EVENT = "selected_family_moyal_switch"
 ROLE_DELEGATE_EVENT = "role_or_probe_change_requires_interface_registration"
-INTERFACE_STOP = "classified_role_interface_impulse"
-HH_STOP = "hh_regeneration_impulse"
+INTERFACE_STOP = ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION
+HH_STOP = HH_COEFFICIENT_OBSTRUCTION
 
 
 def reclassify_positive_service_sidecar(
@@ -124,7 +126,8 @@ def carrier_registration_with_material_sidecars(
     function.  Therefore material membership updates and selected-family Moyal
     switches add *no second coefficient impulse*.  They remain explicit sidecar
     physical events/currencies while carrier continuation is decided only by the
-    existing interface and HH amplitude faces.
+    existing interface and HH amplitude faces.  A large coefficient face is a
+    first-stop locator requiring physical-energy reentry, not a work owner.
 
     If Q or psi really changes, this quotient is inapplicable.  The result is
     delegated to event-role / nonaffine-interface registration rather than being
@@ -147,9 +150,11 @@ def carrier_registration_with_material_sidecars(
             "branch": "delegate_role_or_probe_change",
             "quotient_applicable": False,
             "carrier_continuation_certified": False,
+            "carrier_first_stops": (ROLE_DELEGATE_EVENT,),
+            # Backward-compatible alias; role delegation is not a work cause.
             "carrier_stop_causes": (ROLE_DELEGATE_EVENT,),
             "sidecar_events": tuple(sidecars),
-            "joint_physical_events": tuple(sidecars + [ROLE_DELEGATE_EVENT]),
+            "joint_first_stop_events": tuple(sidecars + [ROLE_DELEGATE_EVENT]),
             "selected_family_switch_energy": switch_energy,
             "sidecar_requires_accounting": bool(sidecars),
             "primary_selected": False,
@@ -179,12 +184,16 @@ def carrier_registration_with_material_sidecars(
             "branch": "carrier_first_stop_with_material_sidecars" if sidecars else "carrier_first_stop",
             "quotient_applicable": True,
             "carrier_continuation_certified": False,
+            "carrier_first_stops": tuple(stops),
+            # Backward-compatible alias; coefficient labels are obstructions, not causes.
             "carrier_stop_causes": tuple(stops),
             "sidecar_events": tuple(sidecars),
-            "joint_physical_events": joint,
+            "joint_first_stop_events": joint,
             "selected_family_switch_energy": switch_energy,
             "duhamel_residual": res,
             "sidecar_requires_accounting": bool(sidecars),
+            "requires_physical_energy_reentry": True,
+            "coefficient_obstruction_impulses_used_as_work": False,
             "primary_selected": False,
         }
 
@@ -196,9 +205,10 @@ def carrier_registration_with_material_sidecars(
         "branch": "carrier_continues_with_material_sidecars" if sidecars else "carrier_continues",
         "quotient_applicable": True,
         "carrier_continuation_certified": True,
+        "carrier_first_stops": (),
         "carrier_stop_causes": (),
         "sidecar_events": tuple(sidecars),
-        "joint_physical_events": joint,
+        "joint_first_stop_events": joint,
         "selected_family_switch_energy": switch_energy,
         "event_amplitude": amp,
         "slice_amplitude": inherited,
@@ -252,8 +262,9 @@ def theorem_certificate() -> dict[str, object]:
         "no_double_count": "material-address/membership motion may be physically caused by nonaffine dynamics, but that dynamics is already represented by I_interface; crossing a material bookkeeping boundary does not add a second independent coefficient impulse",
         "service_reclassification": "holding the positive renewed service weights fixed, rereading OO/ON/NN with updated intrinsic endpoint memberships preserves the total service exactly",
         "selected_family": "a selected coherent-family change keeps its exact symmetric-difference Moyal energy R_switch and |Delta E_selected|<=R_switch; this charge remains ancestry/service currency even when the same smooth carrier is reused",
-        "carrier_quotient": "with same Q and psi, pure material sidecars do not join the carrier-stop set; carrier continuation is still decided only by the existing interface |I|>=|z|/4 and HH |I_HH|>=|z|/2 faces",
-        "joint_events": "sidecar material events and carrier stops may occur simultaneously and are returned together without lexicographic primary selection, while sidecar events are separately marked so they do not kill the reusable carrier",
+        "carrier_quotient": "with same Q and psi, pure material sidecars do not join the carrier-stop set; the interface |I|>=|z|/4 and HH |I_HH|>=|z|/2 faces are coefficient obstructions that locate physical-energy reentry and are not work owners",
+        "joint_events": "sidecar material events and coefficient obstructions may occur simultaneously and are returned as one first-stop set without lexicographic primary selection; physical work ownership is assigned only after the required energy reentry",
+        "energy_reentry": "no coefficient impulse magnitude is used as physical work; the same smooth carrier must reenter its Q^2 energy gate before inheritance, HH generation, relink or strain ownership",
         "nonquotient": "if Q or psi changes, no transparency is claimed: delegate to event-role/nonaffine-interface/relink registration and preserve any Moyal symmetric-difference charge",
         "master": "the quotient removes only an unnecessary carrier reconstruction; it does not erase material ancestry, R_switch, entropy/cycle accounting, or promote relink to a free/reset resource",
         "legacy_refinement": legacy,
@@ -272,7 +283,7 @@ class MaterialLabelCarrierQuotientStress:
     switch_charge_losses: int
     role_delegate_failures: int
     maximum_carrier_stop_count: int
-    maximum_joint_physical_event_count: int
+    maximum_joint_first_stop_event_count: int
     branch_counts: dict[str, int]
 
 
@@ -370,14 +381,14 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> MaterialLabelCarrierQ
                 same_analysis_probe=True,
             )
             wr = max(wr, float(out["duhamel_residual"]))
-            max_stops = max(max_stops, len(tuple(out["carrier_stop_causes"])))
-            max_joint = max(max_joint, len(tuple(out["joint_physical_events"])))
+            max_stops = max(max_stops, len(tuple(out["carrier_first_stops"])))
+            max_joint = max(max_joint, len(tuple(out["joint_first_stop_events"])))
 
             # Sidecars may change the master ledger but not the same-role carrier decision.
             base = carrier_registration_with_material_sidecars(ze, zs, ih, ir)
             if (
                 bool(out["carrier_continuation_certified"]) != bool(base["carrier_continuation_certified"])
-                or tuple(out["carrier_stop_causes"]) != tuple(base["carrier_stop_causes"])
+                or tuple(out["carrier_first_stops"]) != tuple(base["carrier_first_stops"])
             ):
                 label_fail += 1
                 raise AssertionError("pure material sidecar changed the same-role carrier first-stop decision")
@@ -431,7 +442,7 @@ For a fixed smooth PDE role `Q` and the same registered analysis probe `psi`, th
 
 There is no old-pool indicator and no selected coherent-family characteristic function in this identity.  A material address/membership crossing may be caused by genuine nonaffine motion, but the effect of that motion on the coefficient is already in `I_interface`; the bookkeeping crossing does not generate a second independent Duhamel impulse.
 
-Therefore, with the same `Q` and `psi`, pure material sidecars do **not** enter the carrier-stop set.  The carrier still stops only when
+Therefore, with the same `Q` and `psi`, pure material sidecars do **not** enter the carrier-stop set.  A coefficient obstruction is first located when
 
 `|I_interface| >= |z_event|/4`
 
@@ -439,7 +450,9 @@ or
 
 `|I_HH| >= |z_event|/2`.
 
-If neither face is hit, the exact triangle gives the same
+Neither face is physical work.  At a hit, the same smooth carrier must reenter
+the `Q^2` physical-energy gate before inheritance, HH generation, relink or
+strain is named.  If neither face is hit, the exact triangle gives the same
 
 `|z_slice| >= |z_event|/4`
 
@@ -466,7 +479,7 @@ Stress: `{out.samples}` exact coefficient/service/switch states
 - switch-charge losses: `{out.switch_charge_losses}`
 - role-delegate failures: `{out.role_delegate_failures}`
 - maximum carrier-stop count: `{out.maximum_carrier_stop_count}`
-- maximum simultaneous physical-event count including sidecars: `{out.maximum_joint_physical_event_count}`
+- maximum simultaneous first-stop event count including sidecars: `{out.maximum_joint_first_stop_event_count}`
 - outcomes: `{out.branch_counts}`
 
 This removes a non-PDE obstruction from the shortest carrier architecture while preserving material ancestry, symmetric-difference energy, and true role-interface physics.  Source/pressure routing and the final continuum master assembly remain open.  No Navier--Stokes global-regularity conclusion is asserted.
