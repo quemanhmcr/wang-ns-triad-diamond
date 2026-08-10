@@ -180,12 +180,12 @@ def skew_flux_balance(skew_pair_matrix: np.ndarray) -> dict[str, object]:
     For any physical signed-work convention, the skew pair matrix obeys
 
         T_ab = -T_ba,
-        I_a^K = sum_b T_ab.
+        R_a^K = sum_b T_ab.
 
     Read F[b->a]=[T_ab]_+.  Then exactly
 
-        I_a^K = incoming_a - outgoing_a,
-        sum_a I_a^K = 0.
+        R_a^K = incoming_a - outgoing_a,
+        sum_a R_a^K = 0.
 
     Thus positive skew interface work is a gain from other roles, not generation.
     """
@@ -379,7 +379,7 @@ def theorem_certificate() -> dict[str, object]:
         "signed_split": "for the actual resolved linearized low-high operator L=K+S with K*=-K and S*=S, every signed work atom satisfies R=R_K+R_S, hence [R]_+<=[R_K]_+ + [R_S]_+",
         "positive_owner_split": "positive resolved cross/interface work is covered by conservative skew redistribution and existing symmetric strain/deformation work; one carries at least half, exact ties joint",
         "skew_divergence": "for the signed resolved-work convention T_ab=-T_ba and R_a^K=sum_b T_ab; with F[b->a]=[T_ab]_+, R_a^K=inflow_a-outflow_a and sum_a R_a^K=0; an overall PDE sign only reverses edge orientation",
-        "subset_identity": "for every role set C, sum_(a in C) I_a^K equals positive boundary inflow minus positive boundary outflow; all internal circulation cancels exactly",
+        "subset_identity": "for every role set C, sum_(a in C) R_a^K equals positive boundary inflow minus positive boundary outflow; all internal circulation cancels exactly",
         "donor_exhaustion": "the backward closure of any positive-gain role under positive incoming skew flux contains a negative-net donor; otherwise it has positive net gain but no positive external inflow, contradicting the subset identity",
         "finite_same_event": "after removing cycles, a donor path has at most (#roles-1) edges and stays at the same physical event time; role-transfer depth is not recursive PDE depth",
         "symmetric_semantics": "the S-branch is the existing physical symmetric strain/deformation work; the moving-commutator interface is its off-diagonal specialization; delegate once to coherent-deformation/high-strain/objective-source/critical-D_V owners, never to a new source currency",
