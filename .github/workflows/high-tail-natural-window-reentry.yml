@@ -1,0 +1,43 @@
+name: High tail natural window reentry
+
+on:
+  push:
+    paths:
+      - 'src/high_tail_natural_window_reentry.py'
+      - 'tests/test_high_tail_natural_window_reentry.py'
+      - 'docs/high_tail_natural_window_reentry.md'
+      - '.github/workflows/high-tail-natural-window-reentry.yml'
+      - 'src/high_tail_ultraviolet_locality.py'
+      - 'src/critical_shell_service_reentry.py'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - name: Sliding natural-window stress
+        run: python -m src.high_tail_natural_window_reentry --samples 50000 --outdir results-high-tail-natural-window-reentry
+      - name: Ultraviolet locality dependency
+        run: python -m src.high_tail_ultraviolet_locality --samples 50000 --outdir results-high-tail-ultraviolet-locality
+      - name: Generic critical-shell dependency
+        run: python -m src.critical_shell_service_reentry --samples 50000 --outdir results-critical-shell-service-reentry
+      - run: cat results-high-tail-natural-window-reentry/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: high-tail-natural-window-reentry-results
+          path: |
+            results-high-tail-natural-window-reentry/
+            results-high-tail-ultraviolet-locality/
+            results-critical-shell-service-reentry/

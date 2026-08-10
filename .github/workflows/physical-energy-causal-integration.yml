@@ -24,6 +24,7 @@ on:
       - 'src/high_frequency_dissipation_reentry.py'
       - 'src/high_tail_binary_work_reentry.py'
       - 'src/high_tail_ultraviolet_locality.py'
+      - 'src/high_tail_natural_window_reentry.py'
       - 'src/complex_young_parent_marking.py'
       - 'src/dual_gaussian_root_registration.py'
       - 'src/bargmann_root_cell_registration.py'
@@ -80,6 +81,7 @@ jobs:
       - run: python -m src.high_frequency_dissipation_reentry --samples 50000 --outdir results-integration/high-frequency-dissipation-reentry
       - run: python -m src.high_tail_binary_work_reentry --samples 50000 --outdir results-integration/high-tail-binary-work-reentry
       - run: python -m src.high_tail_ultraviolet_locality --samples 50000 --outdir results-integration/high-tail-ultraviolet-locality
+      - run: python -m src.high_tail_natural_window_reentry --samples 50000 --outdir results-integration/high-tail-natural-window-reentry
       - run: python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young
       - run: python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian
       - run: python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor
