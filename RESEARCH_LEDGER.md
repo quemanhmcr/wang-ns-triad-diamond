@@ -6752,23 +6752,61 @@ The first compiler SHA `e667f37` failed only because the new wrapper passed keyw
 
 Compiler status: `EXACT_COHERENT_OBJECTIVE_SOURCE_OWNER_COMPILER__LOCAL_DV_AND_VISCOSITY_TO_CRITICAL_SHELL__SGS_TO_COHERENT_SERVICE__PRESSURE_TO_SGS_OR_ENTROPY_WEIGHTED_CRITICAL_SHELL__AGGREGATE_MUV_DIAGNOSTIC_ONLY__NO_PACKET_SYNCHRONIZATION`.
 
-This removes the last **coarse pressure-reservoir state** from the canonical objective-source compiler.  A new simplification is now visible on the fresh SGS side, but it must respect a crucial representation distinction.  Coherent-cell entropy itself depends on the chosen phase-space partition, so the pressure argument cannot simply be copied to cells.  The old material pool, however, is already a measurable intrinsic set `O`, and NN/fresh edge ownership is pointwise on the positive service measure.  Therefore one can first quotient away coherent-cell refinement by summing fresh service **within each canonical LP frequency band**.  If `F_j` is that fresh band service, then partition refinement changes no `F_j`, while
+This removes the last **coarse pressure-reservoir state** from the canonical objective-source compiler.  The analogous fresh-SGS entrance has now also been simplified, but only after quotienting the observer-dependent coherent-cell partition before any concentration statistic is read.
 
-`F_j <= M_j||delta_r u_j||_2^2 <= 4 M_j||u_j||_2^2`.
+Coherent-cell entropy itself depends on how an observer refines phase space, so the pressure hard-pair argument cannot be copied to cells.  The old material pool `O`, however, is already a measurable intrinsic set, and NN/fresh ownership is the pointwise edge indicator
 
-The canonical LP frame is already constructed from a smooth dyadic annular cover and square-normalized, but the current certificate registers only the lower support `|xi|>=M_j/2`.  The next native theorem should fix the harmless missing upper support once and for all, for example
+`1_(O^c)(zeta_0) 1_(O^c)(zeta_1)`
 
-`supp phi_j subset {M_j/2<|xi|<=2M_j}`.
+on the **positive Moyal increment-service measure**.  Push that positive fresh measure only to the fixed LP band index `j` and call the resulting integrated service `F_j`.  Every coherent-cell refinement merely subdivides the same physical measure and leaves each `F_j` exactly unchanged.  Thus `(F_j)` is the refinement quotient of fresh service.
 
-Then `|phi_j|<=1` and one smooth band touches only the two hard annuli at `M_j` and `2M_j`, giving exactly
+The canonical smooth LP frame is now fixed once and for all as a square-normalized dyadic annular analysis--synthesis frame.  Starting from one smooth bump supported in `(1/2,2)` with positive dyadic cores and square-normalizing the cover gives
 
-`M_j||u_j||_2^2 <= mu_(M_j) + (1/2)mu_(2M_j)`
+`sum_j phi_j^2=1`, `|phi_j|<=1`, `supp phi_j subset {M_j/2<|xi|<2M_j}`,
 
-and hence some actual hard shell with mass at least `(2/3)M_j||u_j||_2^2`.  If the fresh band law is normalized and has scale collision entropy `H_2^scale`, a candidate refinement-invariant supplier law is therefore
+with exact Calderon reconstruction `u=sum_j phi_j(D)[phi_j(D)u]`.  The previously used finite square-function/Bernstein constants `C_LP,C_B` are simply the constants of this one fixed frame, while the already-certified high-tail comparison remains `D_tail>=D_high/4` from its lower support.
 
-`mu_hard exp(H_2^scale) >= Y/(24c)`
+For one fresh band on a parent scaled interval of length `c`, exact Moyal plus `||delta_r f||_2<=2||f||_2` gives
 
-whenever fresh integrated service is at least `Y/4`.  This would remove the current quarter **coherent-cell** dominance as a renewal entrance while leaving coherent ancestry entropy/cycle available as a finer material refinement.  The upper-annular-frame registration and the exact measurable fresh-band pushforward are the next theorem target; this last formula is a research direction, not yet canonical.
+`F_j <= 4 int M_j||u_j||_2^2 d tau_N`,
+
+so at some physical time
+
+`M_j||u_j||_2^2 >= F_j/(4c)`.
+
+The annular support touches only the two exact hard shells
+
+`A_0={M_j/2<|xi|<=M_j}`, `A_1={M_j<|xi|<=2M_j}`.
+
+Writing `mu_0=M_j||P_A0 u||_2^2` and `mu_1=2M_j||P_A1 u||_2^2`, the multiplier contraction gives
+
+`M_j||u_j||_2^2 <= mu_0 + (1/2)mu_1 <= (3/2)max(mu_0,mu_1)`.
+
+Hence one **actual hard shell of the full velocity** satisfies
+
+`mu_hard >= F_j/(6c)`.
+
+Now use the already-certified integrated fresh-service lower `F=sum_(j<=0)F_j>=Y/4`.  Normalize the canonical scale law `p_j=F_j/F`, let `p_max=max_j p_j`, and define the native scale concentration `H_inf^scale=-log p_max`.  A countable positive probability law has an attained maximum, so the maximal physical **band**, not a coherent cell, gives
+
+`mu_hard >= p_max Y/(24c)`,
+
+or equivalently the threshold-free relation
+
+`mu_hard exp(H_inf^scale) >= Y/(24c)`.
+
+Because `p_max>=sum_j p_j^2`, the collision-entropy corollary also holds:
+
+`mu_hard exp(H_2^scale) >= Y/(24c)`.
+
+Neither `H_inf^scale` nor `H_2^scale` is a child-energy causal probability or a new stop class.  They quantify only how the **canonical frequency pushforward** spreads fresh physical service.  The fresh NN edge witness remains material provenance only: the whole hard `u` shell is not declared fresh material.  The shell enters the existing material-free generic first-stop theorem, and OO/ON/NN is reread only from subsequent actual renewed service.
+
+On a full no-hit natural shell corridor, linearity of the generic shell service in `mu` preserves the same `H_inf` weighting for bounded own-scale service and its integrated service.  The observed-history guard is unchanged.  For `j<=0`, the two candidate hard-shell frequencies are `M_j` and `2M_j<=2N`; this theorem does **not** fabricate supplier-specific signed-good scale progress relative to the previous block.
+
+The initial SHA `8411f40` failed before any theorem test because a literal annulus `{M_j/2<|xi|<2M_j}` was inserted unescaped inside the existing `coherent_increment_service` summary f-string, producing a Python `SyntaxError` during collection.  Commit `a711819da3a07a5d179ca8cd79a37c957670abcb` escaped only those display braces.  Dedicated GitHub Actions run `31344940186` on exact `a711819` then passed `614` tests, `50,000` fresh refinement/scale/shell/service states, and direct coherent-increment, material-ownership and generic-shell dependencies.  Stress reported worst refinement-pushforward residual `3.553e-15`, minimum two-hard-shell margin `5.851e-05`, clean hard-shell margin `7.631e-09`, `H_inf` tradeoff margin `4.156e-08`, `H_2` tradeoff margin `1.112e-06`, full-survivor service-conjugacy margin `1.108e-139`, and maximum candidate shell/block ratio exactly `2`.  The tiny possible service margin is expected under extreme sampled parameters and confirms again that this is a positive recursive service relation, **not** a uniform finite reset.  Full physical-energy causal integration `31344940173` on the same exact SHA passed the entire PDE/causal stack, branch compiler and master episode stress.  Stored artifact: `recorded-results/31344940186/`.
+
+Status: `EXACT_FRESH_MATERIAL_SERVICE_TO_REFINEMENT_INVARIANT_SCALE_LAW__CANONICAL_ANNULAR_LP_TO_TWO_HARD_SHELLS__NO_COHERENT_CELL_DOMINANCE_REQUIRED`.
+
+Thus coherent-cell quarter dominance is no longer needed for **fresh-service renewal entrance** at theorem level.  It remains useful only as optional fine ancestry/component accounting until the objective-SGS aggregate compiler is migrated to expose the actual fresh band pushforward.  The immediate next assembly step is therefore narrow: replace the current fresh-cell argmax/entropy fate in `objective_sgs_aggregate_route` by the certified `F_j -> hard shell` route while retaining cell ancestry entropy/cycle only as a sideledger.
 
 Beyond that, the remaining structural seams are the own-scale continuation of actual positive high-tail regeneration work, supplier-specific signed-good scale geometry, and final continuum master assembly.  No Navier--Stokes global-regularity proof is claimed.
 
@@ -6786,7 +6824,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/high_frequency_dissipation_reentry.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/complex_young_parent_marking.md`, `docs/dual_gaussian_root_registration.md`, `docs/bargmann_root_cell_registration.md`, `docs/amplitude_entropy_causal_reuse.md`, `docs/common_slice_coefficient_registration.md`, `docs/outer_moving_role_extraction.md`, `docs/nonaffine_role_interface_work.md`, `docs/event_anchored_role_registration.md`, `docs/physical_pair_weighted_productivity.md`, `docs/recursive_physical_witness_constructor.md`, `docs/joint_causal_stop_projection.md`, `docs/smooth_sgs_first_hit_extraction.md`, `docs/smooth_material_carrier_relay.md`, `docs/resolved_cutoff_repartition_relay.md`, `docs/high_strain_resolved_ancestor.md`, `docs/high_strain_heat_increment_service.md`, `docs/heat_edge_material_ownership.md`, `docs/first_hit_heat_reservoir_erosion.md`, `docs/old_incident_heat_erosion.md`, `docs/nn_critical_heat_carrier_seed.md`, `docs/nn_seed_temporal_first_stop.md`, `docs/critical_annular_carrier_service_reentry.md`, `docs/high_strain_critical_carrier_reentry.md`, `docs/critical_shell_service_reentry.md`, `docs/material_label_carrier_quotient.md`, `docs/objective_source_routing_compiler.md`, `docs/objective_pressure_pair_atomization.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/fresh_service_scale_reentry.md`, `docs/high_frequency_dissipation_reentry.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/complex_young_parent_marking.md`, `docs/dual_gaussian_root_registration.md`, `docs/bargmann_root_cell_registration.md`, `docs/amplitude_entropy_causal_reuse.md`, `docs/common_slice_coefficient_registration.md`, `docs/outer_moving_role_extraction.md`, `docs/nonaffine_role_interface_work.md`, `docs/event_anchored_role_registration.md`, `docs/physical_pair_weighted_productivity.md`, `docs/recursive_physical_witness_constructor.md`, `docs/joint_causal_stop_projection.md`, `docs/smooth_sgs_first_hit_extraction.md`, `docs/smooth_material_carrier_relay.md`, `docs/resolved_cutoff_repartition_relay.md`, `docs/high_strain_resolved_ancestor.md`, `docs/high_strain_heat_increment_service.md`, `docs/heat_edge_material_ownership.md`, `docs/first_hit_heat_reservoir_erosion.md`, `docs/old_incident_heat_erosion.md`, `docs/nn_critical_heat_carrier_seed.md`, `docs/nn_seed_temporal_first_stop.md`, `docs/critical_annular_carrier_service_reentry.md`, `docs/high_strain_critical_carrier_reentry.md`, `docs/critical_shell_service_reentry.md`, `docs/material_label_carrier_quotient.md`, `docs/objective_source_routing_compiler.md`, `docs/objective_pressure_pair_atomization.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;
