@@ -81,7 +81,22 @@ I_N^+\ge\frac{\nu D_{tail}}2,
 
 with exact ties retained jointly.
 
-The interface owner stays interface/strain provenance.  It is not renamed HH and is not free.
+
+The interface owner stays physical; it is not renamed HH and is not free.  Its next step is the resolved donor/circulation quotient.  At each shell-time atom the actual resolved low--high operator has the adjoint split `L_V=K+S`.  The `K` part is conservative role flux and the `S` part is the existing symmetric strain/deformation work.  Therefore the clean common-unit interface owner
+
+\[
+I_N^+\ge \frac{\nu D_{tail}}2
+\]
+
+forces, in the **same** `N dW` unit,
+
+\[
+W_K^+\ge\frac{\nu D_{tail}}4
+\quad\text{or}\quad
+W_S^+\ge\frac{\nu D_{tail}}4,
+\]
+
+with exact ties joint.  Skew donor tracing stays at the same physical event time; the symmetric branch delegates to the existing strain/coherent-deformation owners.  No `M_j/N` factor is inserted into this causal split.
 
 ## 3. HH work is already binary before any energy-productivity gate
 

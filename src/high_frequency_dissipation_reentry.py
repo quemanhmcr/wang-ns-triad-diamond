@@ -339,6 +339,7 @@ def classify_regeneration_work_owners(
         "joint_owners": tuple(owners),
         "HH_is_productivity_generated_branch": False,
         "interface_is_free": False,
+        "interface_continuation": "physical resolved cross/interface work must next pass through the K/S donor-circulation quotient; skew work is same-event conservative donor provenance and symmetric work is existing strain/deformation provenance",
     }
 
 
@@ -392,7 +393,7 @@ def theorem_certificate() -> dict[str, object]:
         "regeneration_branch": "positive tail work disintegrates into hard-shell positive work; own-scale shell work is at least twice N W_>^+; low-low is support-excluded at every shell, so positive shell work is covered by HH plus resolved-cross/interface positive work",
         "no_false_productivity": "the HH regeneration owner is actual positive work but is not automatically the generated-energy branch W_HH>=8E1/15; its own physical energy gate is still required before KL productivity",
         "anti_relabel": "D_high alone has no critical-shell floor: at level j choose mu_j=2^-j D_high; smooth LP d_high is not identified with the hard tail without c_LP; no high-frequency owner is renamed resolved low-pass D_V",
-        "master_rule": "both inherited shell and physical regeneration/interface are recursive scale-sensitive owners; no additive reset is created",
+        "master_rule": "inherited high shell and HH regeneration remain recursive scale-sensitive owners; resolved cross/interface work is first quotiented into same-event conservative donor provenance or existing strain/deformation ownership; no additive reset is created",
     }
 
 

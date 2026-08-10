@@ -97,6 +97,7 @@ def test_low_low_free_regeneration_split_keeps_joint_tie():
     }
     assert out["HH_is_productivity_generated_branch"] is False
     assert out["interface_is_free"] is False
+    assert "same-event conservative donor provenance" in out["interface_continuation"]
 
 
 def test_certificate_forbids_two_false_shortcuts():

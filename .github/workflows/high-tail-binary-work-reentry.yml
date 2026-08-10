@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'src/high_tail_binary_work_reentry.py'
+      - 'src/resolved_interface_donor_quotient.py'
       - 'tests/test_high_tail_binary_work_reentry.py'
       - 'docs/high_tail_binary_work_reentry.md'
       - '.github/workflows/high-tail-binary-work-reentry.yml'
@@ -29,6 +30,8 @@ jobs:
       - run: pytest -q
       - name: High-tail binary common-work stress
         run: python -m src.high_tail_binary_work_reentry --samples 50000 --outdir results-high-tail-binary-work-reentry
+      - name: Resolved interface donor quotient dependency
+        run: python -m src.resolved_interface_donor_quotient --samples 50000 --outdir results-resolved-interface-donor-quotient
       - name: High-frequency dissipation dependency
         run: python -m src.high_frequency_dissipation_reentry --samples 50000 --outdir results-high-frequency-dissipation-reentry
       - name: Exact binary coherent-work dependency
@@ -39,5 +42,6 @@ jobs:
           name: high-tail-binary-work-reentry-results
           path: |
             results-high-tail-binary-work-reentry/
+            results-resolved-interface-donor-quotient/
             results-high-frequency-dissipation-reentry/
             results-recursive-coherent-witness/

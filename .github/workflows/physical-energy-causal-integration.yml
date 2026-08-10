@@ -23,6 +23,7 @@ on:
       - 'src/fresh_service_scale_reentry.py'
       - 'src/high_frequency_dissipation_reentry.py'
       - 'src/high_tail_binary_work_reentry.py'
+      - 'src/resolved_interface_donor_quotient.py'
       - 'src/high_tail_ultraviolet_locality.py'
       - 'src/high_tail_natural_window_reentry.py'
       - 'src/continuum_master_event_quotient.py'
@@ -81,6 +82,7 @@ jobs:
       - run: python -m src.fresh_service_scale_reentry --samples 50000 --outdir results-integration/fresh-service-scale-reentry
       - run: python -m src.high_frequency_dissipation_reentry --samples 50000 --outdir results-integration/high-frequency-dissipation-reentry
       - run: python -m src.high_tail_binary_work_reentry --samples 50000 --outdir results-integration/high-tail-binary-work-reentry
+      - run: python -m src.resolved_interface_donor_quotient --samples 50000 --outdir results-integration/resolved-interface-donor-quotient
       - run: python -m src.high_tail_ultraviolet_locality --samples 50000 --outdir results-integration/high-tail-ultraviolet-locality
       - run: python -m src.high_tail_natural_window_reentry --samples 50000 --outdir results-integration/high-tail-natural-window-reentry
       - run: python -m src.continuum_master_event_quotient --samples 50000 --outdir results-integration/continuum-master-event-quotient

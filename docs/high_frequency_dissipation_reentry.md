@@ -208,6 +208,8 @@ and therefore at least `nu c_LP D_high` for an LP-supplied exit.
 
 This is a work statement, not an amplitude statement.  A large interface branch remains physical interface/strain provenance.  A large HH branch is **not** automatically the generated-energy condition `W_HH>=8E_1/15`; its child-energy gate must still be supplied before the current KL productivity theorem is invoked.
 
+The continuation of that branch is now sharper.  Decompose the actual shell resolved operator as `L_V=K+S` before taking positive parts.  The `K` component is conservative role-to-role flux and is quotiented by same-event donor tracing; the `S` component is the already existing strain/deformation owner.  Thus resolved interface is no longer an independent recursive-generation destination.
+
 ## Master-facing route
 
 The coherent-service high-frequency exit is now factored without a unit fiction:

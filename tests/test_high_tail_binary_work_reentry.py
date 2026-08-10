@@ -78,6 +78,8 @@ def test_HH_primary_owner_supplies_clean_binary_work_but_not_productivity():
     assert out["productivity_energy_gate_supplied"] is False
     assert out["Young_near_extremality_supplied"] is False
     assert out["parent_child_scale_locality_supplied"] is False
+    assert out["master_semantics"] == "JOINT_PHYSICAL_WORK_OWNERS__INTERFACE_QUOTIENT_BEFORE_RECURSION"
+    assert "RESOLVED_INTERFACE_DONOR_QUOTIENT" in out["next_owner_if_interface"]
 
 
 def test_scale_reweighting_counterexample_changes_cause_probabilities():
@@ -94,3 +96,4 @@ def test_certificate_forbids_scale_reweighting_and_keeps_locality_open():
     assert "must not redefine probabilities" in cert["anti_reweight"]
     assert "KL/log-productivity remains conditional" in cert["productivity_scope"]
     assert "nonlocal K>>M geometry remains" in cert["locality_scope"]
+    assert "same-event conservative donor tracing" in cert["interface_continuation"]

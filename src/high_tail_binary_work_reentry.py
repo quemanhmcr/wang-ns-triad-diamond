@@ -15,6 +15,7 @@ from src.high_frequency_dissipation_reentry import (
     positive_shell_work_disintegration,
 )
 from src.recursive_coherent_witness_extraction import binary_work_ledger
+from src.resolved_interface_donor_quotient import STATUS as RESOLVED_INTERFACE_DONOR_STATUS
 
 
 STATUS = (
@@ -257,12 +258,12 @@ def high_tail_hh_binary_reentry(
         "HH_primary": hh_primary,
         "clean_binary_positive_common_work_if_HH_owner": clean_binary,
         "clean_Hinf_weighted_selected_ownscale_work_if_HH_owner": 2.0 * clean_binary,
-        "next_owner_if_interface": "classified_resolved_cross_interface",
+        "next_owner_if_interface": RESOLVED_INTERFACE_DONOR_STATUS,
         "next_owner_if_HH": "binary_physical_child_work_law",
         "productivity_energy_gate_supplied": False,
         "Young_near_extremality_supplied": False,
         "parent_child_scale_locality_supplied": False,
-        "master_semantics": "JOINT_RECURSIVE_PHYSICAL_WORK_OWNERS",
+        "master_semantics": "JOINT_PHYSICAL_WORK_OWNERS__INTERFACE_QUOTIENT_BEFORE_RECURSION",
         "status": STATUS,
     }
 
@@ -299,7 +300,8 @@ def theorem_certificate() -> dict[str, object]:
         "scale_diagnostic": "for the common-unit binary law on high shells j>=1, selecting the largest shell atom gives ownscale_selected*exp(H_inf_scale)>=2*binary_positive_common_work; on an HH owner this is >=nu D_tail",
         "productivity_scope": "no W_HH>=8E1/15 child-energy generation gate is assumed; KL/log-productivity remains conditional on that separate gate",
         "locality_scope": "no parent/child scale-comparability or Young near-extremality is inferred from generic high-tail HH work; nonlocal K>>M geometry remains a separate physical seam",
-        "master_rule": "interface and binary-HH are recursive physical owners, retained jointly on exact ties; no additive reset and no lexicographic priority",
+        "interface_continuation": "the resolved-interface owner delegates to the resolved donor/circulation quotient: symmetric work is existing strain/deformation provenance, while skew work is same-event conservative donor tracing with no new recursive generation",
+        "master_rule": "binary-HH remains a recursive physical work owner; resolved interface is first quotiented into existing strain/deformation or same-event conservative donor provenance; exact ties remain joint with no additive reset or lexicographic priority",
         "counterexample": cex,
     }
 
@@ -430,6 +432,8 @@ and low--low support exclusion at each shell gives
 `H_N^+ + I_N^+ >= sum_j N W_j^+`.
 
 Hence HH or resolved interface common-unit work carries at least `nu D_tail/2`; exact ties remain joint.  The stronger own-scale quantity `sum_j M_j W_j^+` remains available as a diagnostic, but it is **not** used to redefine causal probabilities across shells.
+
+The resolved-interface continuation is now the donor/circulation quotient.  In the same common `N dW` unit its actual resolved operator splits as `K+S`, so an interface owner gives either conservative skew donor work or existing symmetric strain/deformation work at least `nu D_tail/4`.  Skew role traversal is same-event provenance, not a new recursive generation; no shell-scale reweighting is used.
 
 On the HH owner, exact coherent atomization is already enough.  Event by event,
 

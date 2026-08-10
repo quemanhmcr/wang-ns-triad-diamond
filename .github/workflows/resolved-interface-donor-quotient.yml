@@ -1,0 +1,51 @@
+name: Resolved interface donor quotient
+
+on:
+  push:
+    paths:
+      - 'src/resolved_interface_donor_quotient.py'
+      - 'tests/test_resolved_interface_donor_quotient.py'
+      - 'docs/resolved_interface_donor_quotient.md'
+      - '.github/workflows/resolved-interface-donor-quotient.yml'
+      - 'src/nonaffine_role_interface_work.py'
+      - 'src/high_tail_binary_work_reentry.py'
+      - 'src/high_frequency_dissipation_reentry.py'
+      - 'src/coherent_service_or_flat.py'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - run: pytest -q
+      - name: Resolved interface donor/circulation stress
+        run: python -m src.resolved_interface_donor_quotient --samples 50000 --outdir results-resolved-interface-donor-quotient
+      - name: Nonaffine interface identity dependency
+        run: python -m src.nonaffine_role_interface_work --samples 50000 --outdir results-nonaffine-role-interface-work
+      - name: High-tail common-unit owner dependency
+        run: python -m src.high_tail_binary_work_reentry --samples 50000 --outdir results-high-tail-binary-work-reentry
+      - name: Physical tail-dissipation dependency
+        run: python -m src.high_frequency_dissipation_reentry --samples 50000 --outdir results-high-frequency-dissipation-reentry
+      - name: Coherent strain/deformation dependency
+        run: python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat
+      - run: cat results-resolved-interface-donor-quotient/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resolved-interface-donor-quotient-results
+          path: |
+            results-resolved-interface-donor-quotient/
+            results-nonaffine-role-interface-work/
+            results-high-tail-binary-work-reentry/
+            results-high-frequency-dissipation-reentry/
+            results-coherent-service-or-flat/
