@@ -6718,7 +6718,59 @@ So the pressure owner is naturally a **service-versus-complexity relation**, not
 
 Dedicated GitHub Actions run `31342227267` on exact `8bdfc89bbfe38ba87a50d3c30b9e945567fa2b2c` passed `601` tests plus `50,000` pressure tensor/pair/source states: worst dual scalar residual `1.232e-14`, positive-cover margin `-1.066e-14` at floating precision, worst unordered reconstruction residual `1.540e-14`, minimum sampled pair-capacity margin `8.889e-19`, minimum owner-half-split margin `3.091e-04`, dominant-shell clean margin `3.476e-02`, diffuse quarter-corollary entropy margin `9.525e-02`, entropy-shell tradeoff margin `8.585e-03`, and maximum joint primary owner count `2`.  Full causal integration `31342227257` on the same exact SHA passed the complete stack and master episode stress.  Stored artifact: `recorded-results/31342227267/`.  Status: `EXACT_OBJECTIVE_PRESSURE_HESSIAN_DUAL_PAIR_ATOMIZATION__PAIR_OWNER_ALWAYS_TO_CRITICAL_SHELL_WITH_ENTROPY_TRADEOFF__QUARTER_SPLIT_ONLY_A_COROLLARY__AGGREGATE_MU_V_NOT_CANONICAL`.
 
-This closes the **local objective-pressure renewal entrance** without aggregate `mu_V`, packet synchronization, or a mandatory pressure-reservoir lineage.  The next assembly task is now mostly compiler hygiene: replace the current coarse pressure branch in `objective_source_routing_compiler` by the certified positive SGS/pair interface, while retaining the old `mu_V` inequality only as a diagnostic fallback.  Beyond that, the main structural seams are the own-scale continuation of actual positive high-tail regeneration work and the final continuum master potential controlling any logarithmic weakening such as `H_2^P`; supplier-specific signed-good scale geometry also remains separate.  No Navier--Stokes global-regularity proof is claimed.
+This closes the **local objective-pressure renewal entrance** without aggregate `mu_V`, packet synchronization, or a mandatory pressure-reservoir lineage.  The compiler migration is now theorem-level as well.  The old function implementing
+
+`rho_P<=mu_V/5700+||R||_(3/2)/380`
+
+is retained only as an explicit `DIAGNOSTIC_ONLY` compatibility interface.  It no longer appears in the canonical master-facing pressure state.
+
+The canonical symbolic pressure interface now records only the actual positive-source split
+
+`SGS pressure source >= Sigma_P/2  OR  resolved unordered pair law >= Sigma_P/2`,
+
+with exact ties joint.  A realized wrapper consumes the **actual** positive SGS/pair source weights from the Frobenius-dual pressure theorem.  If SGS owns the event with actual integrated positive weight `R_SGS`, it uses the exact source bound
+
+`int||R||_(3/2) d tau >= 380 R_SGS`
+
+and enters the same direct coherent-service map as the objective SGS owner.  If the resolved pair law owns the event, it imports the certified
+
+`mu_child exp(H_2^P) >= 320 Sigma_P/c`
+
+and enters the generic critical-shell first-stop theorem.  No `mu_V` reservoir state is manufactured on the way.
+
+Because the generic shell bounded-service theorem is linear in its shell-mass input, this conjugacy survives composition.  On a **full no-hit natural shell survivor** the compiler records
+
+`exp(H_2^P) Y_shell >= Y_shell^generic(320 Sigma_P/c)`
+
+and
+
+`exp(H_2^P) S_shell >= S_shell^generic(320 Sigma_P/c)`.
+
+These are deliberately conditional full-survivor statements: the compiler does not promote service before the shell first-stop corridor is actually resolved.  Pressure `H_2^P` remains a deterministic source-complexity coordinate, not a child-energy causal probability and not a new stop class.  The fixed-material-pair `<1/5` erosion theorem remains an optional post-sidecar reuse refinement only.
+
+The first compiler SHA `e667f37` failed only because the new wrapper passed keyword `pair_dominance_fraction` to the already-certified pressure theorem whose public API names that argument `dominant_fraction`; `602` tests passed and exactly three wrapper fixtures failed with the same `TypeError`.  Commit `e3b1478cda467ea0546c61465bf49185d7daeacd` changed that single wiring keyword.  Dedicated compiler run `31343542038` on exact `e3b1478` then passed `605` tests, `50,000` compiler states, and direct `50,000`-state dependencies for high-tail reentry, critical-shell service, objective pressure pairs, pressure reuse and material-label quotient.  The compiler stress reported worst SGS closed-form residual `1.215e-15`, minimum owner-pigeonhole margin `2.748e-03`, pressure diagnostic split margin `-1.110e-16`, pressure entropy-shell margin `-4.547e-13`, pressure full-survivor service registration margin `-4.441e-16`, maximum joint source-owner count `4`, and maximum sampled joint pressure-owner count `1`; the exact half-tie is covered separately by the deterministic fixture.  Stored artifact: `recorded-results/31343542038/`.  High-frequency integration workflow `31343542019` and full physical-energy causal integration `31343542021` both passed on the same exact SHA; the latter also passed the branch compiler and master episode stress.
+
+Compiler status: `EXACT_COHERENT_OBJECTIVE_SOURCE_OWNER_COMPILER__LOCAL_DV_AND_VISCOSITY_TO_CRITICAL_SHELL__SGS_TO_COHERENT_SERVICE__PRESSURE_TO_SGS_OR_ENTROPY_WEIGHTED_CRITICAL_SHELL__AGGREGATE_MUV_DIAGNOSTIC_ONLY__NO_PACKET_SYNCHRONIZATION`.
+
+This removes the last **coarse pressure-reservoir state** from the canonical objective-source compiler.  A new simplification is now visible on the fresh SGS side, but it must respect a crucial representation distinction.  Coherent-cell entropy itself depends on the chosen phase-space partition, so the pressure argument cannot simply be copied to cells.  The old material pool, however, is already a measurable intrinsic set `O`, and NN/fresh edge ownership is pointwise on the positive service measure.  Therefore one can first quotient away coherent-cell refinement by summing fresh service **within each canonical LP frequency band**.  If `F_j` is that fresh band service, then partition refinement changes no `F_j`, while
+
+`F_j <= M_j||delta_r u_j||_2^2 <= 4 M_j||u_j||_2^2`.
+
+The canonical LP frame is already constructed from a smooth dyadic annular cover and square-normalized, but the current certificate registers only the lower support `|xi|>=M_j/2`.  The next native theorem should fix the harmless missing upper support once and for all, for example
+
+`supp phi_j subset {M_j/2<|xi|<=2M_j}`.
+
+Then `|phi_j|<=1` and one smooth band touches only the two hard annuli at `M_j` and `2M_j`, giving exactly
+
+`M_j||u_j||_2^2 <= mu_(M_j) + (1/2)mu_(2M_j)`
+
+and hence some actual hard shell with mass at least `(2/3)M_j||u_j||_2^2`.  If the fresh band law is normalized and has scale collision entropy `H_2^scale`, a candidate refinement-invariant supplier law is therefore
+
+`mu_hard exp(H_2^scale) >= Y/(24c)`
+
+whenever fresh integrated service is at least `Y/4`.  This would remove the current quarter **coherent-cell** dominance as a renewal entrance while leaving coherent ancestry entropy/cycle available as a finer material refinement.  The upper-annular-frame registration and the exact measurable fresh-band pushforward are the next theorem target; this last formula is a research direction, not yet canonical.
+
+Beyond that, the remaining structural seams are the own-scale continuation of actual positive high-tail regeneration work, supplier-specific signed-good scale geometry, and final continuum master assembly.  No Navier--Stokes global-regularity proof is claimed.
 
 ---
 

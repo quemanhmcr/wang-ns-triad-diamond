@@ -1,0 +1,20 @@
+{
+  "certificate": {
+    "hessian_pair_service_ratio": "4084101/20971520",
+    "hessian_pair_service_clean": "<1/5",
+    "hessian_total_future_pair_capacity": "<5/4 times generation-0 pair energy-capacity coefficient",
+    "pressure_third_pair_service_ratio": "194481/655360",
+    "pressure_third_pair_service_clean": "<1/3",
+    "pressure_third_total_future_pair_capacity": "<3/2 times generation-0 pair energy-capacity coefficient",
+    "status": "EXACT_OBJECTIVE_PRESSURE_HESSIAN_AND_PRESSURE_THIRD_PAIR_EROSION_GIVEN_SIGNED_GOOD_LOW_STRAIN_LINEAGE"
+  },
+  "stress": {
+    "samples": 50000,
+    "maximum_hessian_pair_ratio": 0.18832053732608364,
+    "minimum_one_fifth_margin": 0.011679462673916369,
+    "minimum_hessian_amortized_margin": 0.0,
+    "maximum_pressure_third_pair_ratio": 0.2889629350379978,
+    "minimum_one_third_margin": 0.04437039829533551,
+    "minimum_pressure_third_amortized_margin": 0.0
+  }
+}

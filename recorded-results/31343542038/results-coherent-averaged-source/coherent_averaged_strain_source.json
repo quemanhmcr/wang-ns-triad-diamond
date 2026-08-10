@@ -1,0 +1,23 @@
+{
+  "certificate": {
+    "status": "EXACT_COHERENT_AVERAGED_RESOLVED_STRAIN_SOURCE_IDENTITY__REYNOLDS_CORRECTIONS_ROUTE_TO_CRITICAL_DISSIPATION",
+    "moving_average": "d< f >/dt=<D_t^V f-r.grad f>, r=V-barV-barA(x-X), Xdot=barV, Ldot=barA L",
+    "gradient_identity": "dot barA=-barA^2-<a^2>-<HessP>-<grad div R_sgs>+nu<Delta A>-<r.grad A>",
+    "transport_ibp": "<r.grad A>=<(z.R)(A-barA)> because div r=0 and E[R tensor z]=0",
+    "reynolds_bounds": "||<a^2>||<=kappa^2 K_coh^2; ||<r.grad A>||<=sqrt7 kappa K_coh^2",
+    "scaled_reynolds_route": "Sigma_Reynolds<=C_Reynolds D_V with C_Reynolds=1.18115356379 on kappa<=567/500",
+    "scaled_local_route": "quadratic barA plus Reynolds corrections <=C_local D_V with C_local=2.0383176489",
+    "filtered_sources": "Gaussian averaging does not increase the existing global Linf bounds for filtered pressure/SGS/viscous sources, so their clean collision thresholds are unchanged",
+    "master_rule": "all new averaging corrections are critical D_V, not additive finite resets and not additional pressure/SGS charges",
+    "continuum_status": "the averaged transporter/source calculus is closed at the exact Gaussian-analysis level; remaining bridge is to insert it into the full service-or-flat packet assembly and recursive PDE block selection with the same transfer normalization"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_corotational_identity_residual": 9.171947447016606e-16,
+    "minimum_reynolds_bound_margin": 1.7888354291800743e-07,
+    "minimum_scaled_weight_margin": 2.261191805541865e-07,
+    "minimum_quadratic_weight_margin": 2.633137332480606e-07,
+    "clean_reynolds_source_coefficient": 1.1811535637865864,
+    "clean_total_local_source_coefficient": 2.0383176488988397
+  }
+}
