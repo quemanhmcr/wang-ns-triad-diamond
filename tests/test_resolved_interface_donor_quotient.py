@@ -129,7 +129,8 @@ def test_certificate_quotients_circulation_without_claiming_global_termination()
     assert cert["status"] == STATUS
     assert "not an identified measure" in cert["operator_bridge"]
     assert "same physical event time" in cert["finite_same_event"]
-    assert "not a new source currency" in cert["symmetric_semantics"]
+    assert "new source currency" in cert["symmetric_semantics"]
+    assert "never" in cert["symmetric_semantics"]
     assert "creates neither energy nor a second causal charge" in cert["skew_semantics"]
     assert "no scale progress" in cert["scale"]
     assert "does not prove" in cert["scope"]
