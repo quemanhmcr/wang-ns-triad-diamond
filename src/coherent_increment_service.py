@@ -195,7 +195,7 @@ Let `Q` be the cubic increment charge and `g1=||G||_1`.  Some filter displacemen
 
 `||delta_r u||_3^2 >= (Q/g1)^(2/3)`.
 
-Fix one smooth square-normalized dyadic annular LP analysis--synthesis frame `u_j=phi_j(D)u`, `sum|phi_j|^2=1`, `u=sum phi_j(D)u_j`, with `supp phi_j subset {M_j/2<|xi|<2M_j}` and `|phi_j|<=1`.  Its ordinary `L^3` square-function/Bernstein constants are the supplied finite `C_LP,C_B` for this fixed frame.  In `L^2`, the same frame gives the exact downstream comparison
+Fix one smooth square-normalized dyadic annular LP analysis--synthesis frame `u_j=phi_j(D)u`, `sum|phi_j|^2=1`, `u=sum phi_j(D)u_j`, with `supp phi_j subset {{M_j/2<|xi|<2M_j}}` and `|phi_j|<=1`.  Its ordinary `L^3` square-function/Bernstein constants are the supplied finite `C_LP,C_B` for this fixed frame.  In `L^2`, the same frame gives the exact downstream comparison
 
 `D_tail=N int||grad P_>N u||_2^2 dt >= D_high/4`.
 
