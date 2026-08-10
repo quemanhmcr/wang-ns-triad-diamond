@@ -1,6 +1,6 @@
 # Continuum master event quotient: physical time, not theorem depth
 
-Status: **theorem module added; certification is by GitHub Actions only**.
+Status: **certified on GitHub Actions at exact theorem SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`**.
 
 ## 1. Why the apparent recursion was too large
 
@@ -205,3 +205,11 @@ physical time, so lack of a fresh signed-good ratio is not itself an obstruction
 
 This theorem is a **continuum master assembly/quotient theorem**.  It does not
 prove global no-escape and does not prove 3D Navier--Stokes regularity.
+
+## 9. Certification
+
+Dedicated GitHub Actions run `31369437763` passed `652` tests, `50,000` quotient/path stress states, the generic critical-shell dependency, and the high-tail natural-window dependency.  The theorem artifact is stored under `recorded-results/31369437763/`.
+
+Full physical-energy causal integration run `31369437677` passed on the same exact theorem SHA through the source, pressure, material, high-tail, role, recursive-witness, joint-stop, causal Shannon/Rényi reuse, physical-branch compiler, and master-episode stages.
+
+The stress artifact reports zero owner-mass and physical-time telescope residual, worst log-scale telescope residual `8.881784197001252e-16`, zero bounded-scale boundary failures, and zero supplier-scale failures.  These CI results are regression/certificate evidence around the exact identities above; they are not a substitute for the theorem algebra and do not imply global regularity.

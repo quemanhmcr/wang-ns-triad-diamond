@@ -27,7 +27,7 @@ The current architecture has reached the following point.
 9. Material labels are a sidecar quotient: pure label/family changes do not create a second carrier impulse.
 10. Exact ties are retained as joint physical cause sets; no lexicographic theorem priority is canonical.
 11. No critical energy or normalized dissipation event is treated as a scale-independent additive reset.
-12. The remaining programme-level seam is final continuum master assembly: combine all certified supplier routes into one measurable recursive no-escape architecture without double counting and without inventing observer-dependent clocks, partitions, or currencies.
+12. The first continuum master quotient is now certified: relay depth is quotiented, physical event time is the universal recursion coordinate, bounded-scale full-natural survivor tails hit `t=0`, and any infinite escape is reduced to infinitely recurring named non-free physical owners or UV-unbounded free survivors. Global termination remains open.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -722,6 +722,46 @@ Do not feed it fresh-SGS scale entropy, pressure-pair source entropy, or high-ta
 
 ---
 
+## 26.5 Continuum master event quotient: physical time, not theorem depth
+The first final-master assembly theorem is now certified.
+Its central correction is that theorem depth is not recursion depth.
+Same-law owner relays preserve one unsplit physical measure, while certified witness relays may change observable and units without creating a second causal charge.
+Thus source/SGS/pressure/service/shell compiler layers are quotiented before recursive depth is charged.
+The canonical recursive state contains only:
+- actual physical event time;
+- a supplied physical shell/carrier frequency;
+- the named physical owner measure;
+- the unsplit joint physical cause set;
+- optional material or diagnostic sidecars.
+There is no common normalized master clock and no theorem-priority coordinate.
+For actual backward event times,
+\[ \boxed{\sum_j(t_j-t_{j+1})=t_0-t_L.} \]
+A free full-natural shell survivor at frequency `M` consumes exactly
+\[ cM^{-2} \]
+of backward physical time unless that corridor reaches `t=0`, which is absorbing.
+Hence if a tail of free full-natural survivors satisfies `M_j<=Mbar`, then after at most
+\[ \boxed{\left\lceil t_*Mbar^2/c\right\rceil} \]
+such corridors the initial boundary is forced.
+Consequently, after zero-charge relays are quotiented, every infinite recursive path avoiding `t=0` must do at least one of two things:
+1. contain infinitely many named non-free physical owner events, including first-hit cause sets or work/service/reuse owners; or
+2. have an unbounded-frequency tail of free full-natural survivors.
+The UV alternative is genuine, not a clock artifact, because for `M_j=M_0r^j`, `r>1`,
+\[ \sum_{j\ge0}cM_j^{-2}=\frac{cM_0^{-2}}{1-r^{-2}}<\infty. \]
+Scale progress remains supplier-specific:
+- generated signed-good HH: `3/5<N_next/N<5/8`;
+- resolved `D_V` ancestor: `N_next/N<=1/4`;
+- resolved pressure pair: `N_next/N<=1/4`;
+- high tail: `N_next/N>=2`;
+- fresh SGS: only `N_next/N<=2`, with no directional progress theorem;
+- generic shell, material/reuse, and unresolved HH regeneration: no synthetic scale progress.
+The natural master Bellman object is therefore typed/direct-product rather than scalar.
+Physical time and actual log shell scale telescope kinematically; actual multiplicative transfer cost, work-weighted causal reuse, `Xi`, and each genuinely globally bounded resource telescope only in their own native ledgers.
+Own-scale service remains a recursive state/epoch entrance, not an additive finite resource.
+Fresh/high-tail `H_inf/H2` remain diagnostic concentration coordinates and are forbidden from entering causal Shannon/Rényi action.
+This theorem is an assembly/quotient theorem only; it does not prove global no-escape or Navier–Stokes regularity.
+
+---
+
 ## 27. Finite-dimensional rigidity modules: supporting geometry, not current PDE bottleneck
 Earlier layers of the programme established a large library of exact or certified finite-dimensional geometric facts.
 They remain important as local rigidity/registration tools but are no longer the main continuum seam.
@@ -920,53 +960,48 @@ Material labels do not alter the smooth carrier coefficient identity by themselv
 ---
 
 ## 31. What remains open
-The programme is no longer missing a generic “packet persistence theorem”.
-The remaining problems are architectural and continuum-level.
-### 31.1 Final measurable master assembly
-All supplier routes must be combined into one recursive measurable construction on smooth pre-singular intervals.
-The master must preserve:
-- actual physical owner sets;
-- exact ties;
-- no double counting;
-- `t=0` absorption;
-- representation quotients;
-- supplier-specific scale geometry;
-- conditional first-stop semantics.
-### 31.2 No hidden observer clock
-Generated signed-good lineages, high-strain resolved ancestors, fresh SGS shells, pressure-pair shells, and high-tail shells have different native scale/time geometries.
-The final master must not force them into one artificial synchronized clock.
-Each route should use its own physical natural time and be glued only through actual event times and common causal identities.
+The programme is no longer missing a generic “packet persistence theorem”, a common clock, or a definition of recursive depth.
+The first continuum master quotient has reduced the final seam to genuinely physical recurrence.
+### 31.1 Exhaustive measurable owner assembly
+Every certified supplier must now be wired into the quotient event state on smooth pre-singular intervals, with each transition proved to be either:
+- a zero-charge relay/witness map;
+- a named non-free physical owner event;
+- a free full-natural shell corridor;
+- a true terminal cost/resource event; or
+- absorbing `t=0`.
+The wiring must preserve actual owner sets, exact ties, conditional first-stop semantics, and no double counting.
+### 31.2 Observer-clock seam is structurally closed
+The master uses actual physical event time only.
+Supplier natural times remain local corridor horizons and are never normalized into a synthetic common clock.
+What remains is to verify the above edge ontology for every service/material/interface continuation, not to synchronize their lifetimes.
 ### 31.3 Interface-owner completion
 High-tail regeneration can terminate its first split in resolved mixed/nonaffine interface work rather than HH work.
 That owner already has interface/strain provenance.
-The final master must make the continuation through objective source / deformation / relink owners completely explicit and ensure it is charged exactly once.
+The final assembly must make the continuation through objective source / deformation / relink owners completely explicit and ensure it is charged exactly once.
 ### 31.4 Conditional shell service must remain conditional
-Many supplier routes now land in generic critical shells.
+Many supplier routes land in generic critical shells.
 The generic theorem provides a first-stop corridor and full-survivor service.
-The master must assemble named exits and survivors without silently replacing the corridor by persistence.
-### 31.5 Supplier-specific scale geometry
+The master must attach the endpoint service owner without silently replacing the corridor by packet persistence or unconditional service.
+### 31.5 Supplier-specific scale geometry is now registered, not scalarized
 Hard-tail gives forward ratio at least `2`.
-Signed-good generated transfer gives its own narrow multiplicative scale window.
-High-strain ancestors move to lower resolved scales with lifetime expansion.
-Pressure/fresh source shells have their own support ranges.
-The final no-escape argument must use the geometry each supplier actually proves.
-### 31.6 Global termination mechanism
-Normalized critical events are not finite reset counts.
-Termination must come from the combination of:
-- physical work/energy identities;
-- multiplicative scale progress;
-- material reuse erosion;
-- causal entropy/reuse action;
-- source/service concentration tradeoffs;
-- true globally bounded resources;
-- absorption at `t=0`.
-The final theorem must make this telescope explicit at continuum level.
+Signed-good generated transfer gives `3/5<N_next/N<5/8`.
+Resolved dissipation and pressure-pair shells give lower-frequency ratios at most `1/4`.
+Fresh SGS gives only an upper ratio `<=2` and no directional progress.
+Generic shell/material/reuse routes get no invented scale progress.
+The remaining termination argument must use these branch facts exactly as supplied.
+### 31.6 Global termination mechanism is now the sharp frontier
+The compact-scale free-survivor route is closed by physical time.
+Therefore an infinite escape avoiding `t=0` must contain either:
+- infinitely many named non-free physical owner events; or
+- an UV-unbounded free-survivor tail.
+The next master theorem must show how the first alternative telescopes through actual work, service/reuse, `Xi`, and true globally bounded resources, and how every possible UV-unbounded survivor mechanism enters a certified physical UV route rather than a representation choice.
+Critical `NE`, `D_V`, shell mass, or scale-critical service may not be promoted to finite additive resets.
 ### 31.7 Initial data interface
 Backward causal recursion reaching `t=0` is already absorbing.
 For regular initial data, band-limited root counts/energies have scale-decaying bounds.
-The final master should state the exact initial-data hypothesis required by the complete continuum theorem and connect it to the existing initial-boundary root estimates.
+The eventual complete continuum theorem must state the exact initial-data hypothesis and connect it to the existing initial-boundary root estimates.
 ### 31.8 Singular-time conclusion
-Even after final master assembly, one still must state precisely what contradiction or a priori estimate is obtained as a hypothetical singular time is approached.
+Even after global master termination is proved, one must state precisely what contradiction or a priori estimate is obtained as a hypothetical singular time is approached.
 No such global-regularity conclusion is claimed in the current ledger.
 
 ---
@@ -997,12 +1032,19 @@ Instead of assuming local triads, UV high-high→low work is bounded by the phys
 Pressure, fresh service, high-tail scale, high-tail time, and causal ancestry all produce entropy-like quantities.
 They are not one ontology.
 They become meaningful only after the underlying physical measure is fixed.
+### 32.10 Theorem depth is not recursion depth
+A chain of certified source/pressure/service/shell consequence maps does not by itself create new physical generations.
+Same-law relay duplication is quotiented, and different-unit witness relays create state but no second causal charge.
+### 32.11 Physical time is the universal recursion coordinate
+Different suppliers keep their own natural horizons, but actual event times live in the same Navier–Stokes time coordinate.
+Bounded-scale full-natural survival therefore cannot Zeno-escape; only named non-free recurrence or UV-unbounded survival remains.
 These simplifications are central to the programme's current direction.
 
 ---
 
-## 33. Certified latest high-tail theorem block
-The latest completed bridge is the high-tail sliding natural-window reentry theorem.
+## 33. Certified recent theorem blocks
+### 33.1 High-tail sliding natural-window reentry
+The latest completed high-tail bridge is the high-tail sliding natural-window reentry theorem.
 Status:
 `EXACT_HIGH_TAIL_COMPARABLE_HH_TO_SLIDING_NATURAL_WINDOW__TIME_ORIGIN_AND_UNIT_INVARIANT__SCALE_TIME_CONCENTRATION_TO_CRITICAL_SHELL__NO_PACKET_PERSISTENCE_OR_TIME_BINNING`.
 Dedicated GitHub Actions run:
@@ -1039,6 +1081,30 @@ It completed successfully on the same exact SHA through:
 - physical branch compiler;
 - master episode stress.
 The initial candidate `ea9e89e...` had only two fixture-construction failures after `639` passing tests; no theorem stress ran there and no theorem equation changed in the correction.
+
+### 33.2 Continuum master event quotient
+Status:
+`EXACT_CONTINUUM_MASTER_EVENT_QUOTIENT__ZERO_CHARGE_RELAYS_COLLAPSED__NATIVE_PHYSICAL_TIME_RECURSION__SUPPLIER_SPECIFIC_SCALE_PROGRESS__COMPACT_SCALE_FULL_SURVIVOR_NO_ESCAPE__NO_COMMON_CLOCK_OR_CAUSAL_REWEIGHTING`.
+Dedicated GitHub Actions run:
+`31369437763`.
+Exact theorem SHA:
+`37d43e189de6f8b0294cf7d18f2c672bcb419f87`.
+Results:
+- `652` tests passed;
+- `50,000` quotient/path states;
+- worst zero-charge owner-mass residual `0.0`;
+- worst physical-time telescope residual `0.0`;
+- worst log-scale telescope residual `8.881784197001252e-16`;
+- bounded-scale boundary failures `0`;
+- supplier-scale failures `0`;
+- largest sampled relayed joint-owner set `8`.
+Stored artifact:
+`recorded-results/31369437763/`.
+Full causal integration:
+`31369437677`.
+It completed successfully on the same exact SHA through all source, pressure, material, high-tail, role, joint-stop, causal-reuse, physical-branch, and master-episode stages.
+The theorem does not assert global termination.  It certifies the quotient state and the compact-scale free-survivor no-escape dichotomy, reducing the remaining infinite-path problem to named non-free owner recurrence or UV-unbounded free survival.
+
 
 ---
 
@@ -1098,7 +1164,8 @@ Then read the following current-spine documents in order:
 24. `docs/weighted_causal_reuse.md`
 25. `docs/renyi_causal_reuse.md`
 26. `docs/physical_branch_compiler.md`
-27. `docs/master_no_escape.md`
+27. `docs/continuum_master_event_quotient.md`
+28. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -1127,7 +1194,10 @@ Material labels are attached as sidecars to actual service and do not duplicate 
 Causal Shannon/Rényi reuse is reserved for actual positive child-work ancestry.
 Source/service concentration entropies remain deterministic coordinates of their own measures.
 All named stops and simultaneous causes feed one joint recursive master.
+Relay depth is quotiented before recursion depth is counted.
+Actual physical time is the universal event coordinate; each supplier keeps its own natural corridor length.
+Bounded-scale free full-natural survivor tails hit `t=0`.
+Therefore any infinite escape must recur through infinitely many named non-free physical owners or become UV-unbounded.
 Only true globally bounded scale-independent resources may terminate additively.
 `t=0` is absorbing.
-The remaining task is to assemble these now-certified routes into one continuum no-escape theorem without reintroducing observer-made structure.
-That is the present frontier.
+The present frontier is to telescope the named-owner recurrence and prove that every UV-unbounded free-survivor mechanism enters a certified physical UV route, without reintroducing observer-made structure.
