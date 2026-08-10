@@ -1,0 +1,24 @@
+{
+  "certificate": {
+    "status": "EXACT_BINARY_COHERENT_WORK_ATOMIZATION__EVENT_OUTER_ROLES_SUPPLIED",
+    "parent_source": "N(w1,w2)=sum_CD N(A_C w1,A_D w2) exactly",
+    "work_atoms": "W_CDE=2 Re <A_E w3,N(A_C w1,A_D w2)>",
+    "work_identity": "sum_CDE W_CDE=2 Re <w3,N(w1,w2)>",
+    "positive_measure": "P=sum[W_CDE]_+, N=sum[-W_CDE]_+, P-N=W and P>=[W]_+",
+    "causal_event": "every positive atom has exactly two parent coherent labels and one child coherent label at one physical time",
+    "xi_rule": "omitted positive cross-cell atoms are excised once; retained+Xi=total positive work",
+    "energy_bridge": "W_HH^+>=8E1/15 implies atomic positive mass at least 8E1/15 before Xi; after relative Xi rho retain >=(1-rho)8E1/15",
+    "label_rule": "use the canonical intrinsic-zeta dyadic addresses; no new packet label is introduced",
+    "important_scope": "A_C pieces need not be Fourier compact; scale/helical representative errors remain in the existing symbol/covariance Xi ledgers",
+    "continuum_status": "outer transfer roles and nonaffine interface provenance are supplied by companion theorems; remaining task is recursive first-stop assembly on the retained physical transfer measure"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_bilinear_partition_residual": 3.2035297248083544e-15,
+    "worst_work_reconstruction_residual": 4.321037969488026e-15,
+    "minimum_positive_dominance_margin": 0.0,
+    "worst_probability_residual": 4.440892098500626e-16,
+    "worst_xi_partition_residual": 5.684341886080802e-14,
+    "minimum_retained_generation_margin": 0.0
+  }
+}
