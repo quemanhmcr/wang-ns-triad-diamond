@@ -813,7 +813,7 @@ def theorem_certificate() -> dict[str, object]:
         "pressure_hessian_pair_ratio": f"{ratio.numerator}/{ratio.denominator}<1/5",
         "pressure_hessian_total_future_pair_capacity": "<5/4 generation-0 pair capacity on supplied signed-good low-strain lineage; optional material-reuse refinement only",
         "forbidden_identifications": (
-            "aggregate pressure mu_V is not a canonical renewal state; pressure H2 and fresh-scale H_inf/H2 are not causal child-energy probabilities; coherent-cell entropy is not a canonical fresh renewal fate; high-frequency SGS dissipation is not resolved D_V"
+            "aggregate pressure mu_V is not a canonical renewal state; pressure H2 is not a causal child-energy probability; fresh-scale H_inf/H2 are not causal child-energy probabilities; coherent-cell entropy is not a canonical fresh renewal fate; high-frequency SGS dissipation is not resolved D_V"
         ),
         "master_rule": "all D_V/shell/source/service outputs remain recursive scale-critical owners; no additive finite reset is created",
     }
