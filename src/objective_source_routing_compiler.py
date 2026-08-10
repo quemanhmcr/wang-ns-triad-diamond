@@ -17,6 +17,10 @@ from src.coherent_averaged_strain_source import (
     coherent_local_source_weight_upper,
 )
 from src.coherent_increment_service import cubic_to_square_threshold
+from src.fresh_service_scale_reentry import (
+    STATUS as FRESH_SCALE_REENTRY_STATUS,
+    fresh_service_scale_route,
+)
 from src.high_frequency_dissipation_reentry import (
     STATUS as HIGH_FREQUENCY_REENTRY_STATUS,
     canonical_square_lp_tail_comparison_constant,
@@ -40,8 +44,9 @@ from src.resolved_objective_strain_collision import sgs_gradient_stress_lower
 
 STATUS = (
     "EXACT_COHERENT_OBJECTIVE_SOURCE_OWNER_COMPILER__LOCAL_DV_AND_VISCOSITY_TO_CRITICAL_SHELL__"
-    "SGS_TO_COHERENT_SERVICE__PRESSURE_TO_SGS_OR_ENTROPY_WEIGHTED_CRITICAL_SHELL__"
-    "AGGREGATE_MUV_DIAGNOSTIC_ONLY__NO_PACKET_SYNCHRONIZATION"
+    "SGS_FRESH_SERVICE_TO_REFINEMENT_INVARIANT_SCALE_SHELL__"
+    "PRESSURE_TO_SGS_OR_ENTROPY_WEIGHTED_CRITICAL_SHELL__"
+    "CELL_DOMINANCE_AND_AGGREGATE_MUV_DIAGNOSTIC_ONLY__NO_PACKET_SYNCHRONIZATION"
 )
 
 OWNER_NAMES = ("local_dv", "pressure", "sgs", "viscous")
@@ -194,10 +199,10 @@ def objective_sgs_episode_thresholds(
 
     Hence either D_high>=Y_tot/4, or S_low>=Y_tot/2. On the latter, once old
     integrated capacity is <=Y_tot/8, either Xi>=Y_tot/8 or fresh service>=Y_tot/4.
-    A theta-dominant fresh edge gives pair critical-mass occupation >=theta Y_tot/8,
-    whole-shell occupation >=theta Y_tot/16 and therefore a pointwise shell event
-    >=theta Y_tot/(16c). Otherwise the existing collision chain pays ancestry
-    entropy or same-ancestry pair/cycle mass.
+    Canonically, that fresh positive measure is pushed to the fixed LP band index
+    and enters the refinement-invariant fresh-scale theorem.  The historical
+    theta-dominant coherent-cell / entropy / cycle thresholds below are retained
+    only for optional fine ancestry bookkeeping and backward-compatible diagnostics.
     """
     c = float(scaled_lifetime)
     theta = float(dominant_fraction)
@@ -216,6 +221,8 @@ def objective_sgs_episode_thresholds(
         "old_pool_integrated_capacity_threshold": Y / 8.0,
         "selected_interface_Xi_threshold": Y / 8.0,
         "fresh_service_lower": Y / 4.0,
+        "canonical_fresh_route": FRESH_SCALE_REENTRY_STATUS,
+        "fresh_cell_dominance_is_canonical_renewal": "NO",
         "dominant_pair_mass_occupation_lower": theta * Y / 8.0,
         "dominant_whole_shell_mass_occupation_lower": theta * Y / 16.0,
         "dominant_peak_whole_shell_mass_lower": theta * Y / (16.0 * c),
@@ -223,7 +230,7 @@ def objective_sgs_episode_thresholds(
         "ancestry_entropy_lower": h_anc,
         "same_ancestry_pair_mass_lower": pair,
         "high_frequency_dissipation_is_resolved_DV": "NO",
-        "master_semantics": "RECURSE_CRITICAL / TRANSFER_COST according to realized service branch",
+        "master_semantics": "high-tail / reservoir-capacity / Xi keep existing owners; fresh positive service canonically RECURSE_CRITICAL via scale pushforward; cell entropy/cycle is optional sideledger",
     }
 
 
@@ -242,11 +249,14 @@ def objective_sgs_aggregate_route(
     ancestry_labels: Sequence[object] | None = None,
     dominant_fraction: float = DEFAULT_DOMINANT_FRACTION,
     ancestry_alpha: float = DEFAULT_ANCESTRY_ALPHA,
-) -> dict[str, float | str]:
-    """Route one realized integrated objective-SGS positive service law.
+) -> dict[str, object]:
+    """Legacy coherent-cell realization retained for fine ancestry bookkeeping.
 
-    This is the aggregate analogue of coherent_service_route. It preserves native
-    owners and explicitly refuses the false conversion D_high -> resolved D_V.
+    High-frequency/old-pool/interface exits remain physically valid.  Once the
+    fresh branch is reached, however, the canonical renewal theorem is now
+    `objective_sgs_aggregate_scale_route`; the cell argmax/entropy/cycle below is
+    representation-dependent and must not be used as the canonical renewal fate.
+    This function remains for backward-compatible ancestry diagnostics only.
     """
     th = objective_sgs_episode_thresholds(
         source_weight,
@@ -329,7 +339,9 @@ def objective_sgs_aggregate_route(
             "whole_shell_mass_occupation": whole_occ,
             "peak_whole_shell_mass_lower": peak,
             "clean_peak_whole_shell_mass_lower": clean_peak,
-            "master_semantics": "RECURSE_CRITICAL_VIA_GENERIC_SHELL",
+            "canonical_renewal_fate": False,
+            "canonical_replacement": FRESH_SCALE_REENTRY_STATUS,
+            "master_semantics": "SIDELEDGER_ONLY__LEGACY_CELL_CLUSTER",
         }
 
     q = float(np.dot(p, p))
@@ -342,7 +354,9 @@ def objective_sgs_aggregate_route(
             "branch": "fresh_service_collision_entropy",
             "H_atomic": h,
             "entropy_lower": h0,
-            "master_semantics": "TRANSFER_COST",
+            "canonical_renewal_fate": False,
+            "canonical_replacement": FRESH_SCALE_REENTRY_STATUS,
+            "master_semantics": "SIDELEDGER_ONLY__LEGACY_CELL_ENTROPY",
         }
     if len(ancestry_labels) != len(w):
         raise ValueError("ancestry label length mismatch")
@@ -353,7 +367,9 @@ def objective_sgs_aggregate_route(
             "H_atomic": h,
             "H_ancestry": chain["h_ancestry"],
             "ancestry_entropy_lower": alpha * h0,
-            "master_semantics": "TRANSFER_COST",
+            "canonical_renewal_fate": False,
+            "canonical_replacement": FRESH_SCALE_REENTRY_STATUS,
+            "master_semantics": "SIDELEDGER_ONLY__LEGACY_CELL_ANCESTRY_ENTROPY",
         }
     pair_lower = theta**alpha - theta
     if chain["hidden_pair_mass"] + 2e-13 < pair_lower:
@@ -364,9 +380,137 @@ def objective_sgs_aggregate_route(
         "H_ancestry": chain["h_ancestry"],
         "hidden_pair_mass": chain["hidden_pair_mass"],
         "hidden_pair_lower": pair_lower,
-        "master_semantics": "TRANSFER_COST",
+        "canonical_renewal_fate": False,
+        "canonical_replacement": FRESH_SCALE_REENTRY_STATUS,
+        "master_semantics": "SIDELEDGER_ONLY__LEGACY_CELL_CYCLE",
     }
 
+
+
+def objective_sgs_aggregate_scale_route(
+    source_weight: float,
+    scaled_lifetime: float,
+    viscosity: float,
+    filter_l1: float,
+    lp_constant: float,
+    bernstein_constant: float,
+    *,
+    block_frequency: float,
+    high_frequency_dissipation: float,
+    old_pool_integrated_capacity: float,
+    old_old_integrated_service: float,
+    selected_interface_integrated_service: float,
+    fresh_band_integrated_services: Mapping[int, float],
+) -> dict[str, object]:
+    """Canonical realized objective-SGS owner set after quotienting cell refinement.
+
+    The actual low-service law is validated first.  High-frequency dissipation,
+    uneroded old-pool capacity, selected interface Xi, and the fresh scale law are
+    then registered independently from the same physical data.  All owners whose
+    physical thresholds are met are retained jointly; there is no theorem-name or
+    branch-order priority.  On the fresh owner, only the pushforward to the fixed
+    LP band index enters renewal, never a coherent-cell argmax.
+    """
+    th = objective_sgs_episode_thresholds(
+        source_weight,
+        scaled_lifetime,
+        filter_l1,
+        lp_constant,
+        bernstein_constant,
+    )
+    Y = float(th["integrated_forced_square_service"])
+    c = float(scaled_lifetime)
+    N = float(block_frequency)
+    nu = float(viscosity)
+    d = float(high_frequency_dissipation)
+    oldcap = float(old_pool_integrated_capacity)
+    old = float(old_old_integrated_service)
+    xi = float(selected_interface_integrated_service)
+    if c <= 0 or N <= 0 or nu < 0 or any(v < 0 or not math.isfinite(v) for v in (d, oldcap, old, xi)):
+        raise ValueError("valid lifetime/frequency/viscosity and finite nonnegative service data required")
+    if not all(math.isfinite(x) for x in (c, N, nu)):
+        raise ValueError("finite lifetime/frequency/viscosity required")
+    fresh_law = {int(j): float(v) for j, v in fresh_band_integrated_services.items()}
+    if any(j > 0 or v < 0 or not math.isfinite(v) for j, v in fresh_law.items()):
+        raise ValueError("finite nonnegative fresh low/base band law j<=0 required")
+    fresh = sum(fresh_law.values())
+
+    low_lower = max(0.0, Y - 2.0 * d)
+    total = old + xi + fresh
+    service_tol = 2e-12 * max(1.0, Y, total, low_lower)
+    if old > oldcap + service_tol:
+        raise ValueError("old-old service exceeds certified old-pool capacity")
+    if total + service_tol < low_lower:
+        raise ValueError("band-pushforward service law does not realize the forced low service")
+
+    owners: list[str] = []
+    routes: dict[str, object] = {}
+
+    if d >= Y / 4.0:
+        name = "high_frequency_dissipation"
+        owners.append(name)
+        routes[name] = {
+            "branch_value": d,
+            "threshold": Y / 4.0,
+            "resolved_DV_supplier": "NO",
+            "next_owner_interface": HIGH_FREQUENCY_REENTRY_STATUS,
+            "master_semantics": "RECURSE_CRITICAL_WITH_HIGH_FREQUENCY_OWNER",
+        }
+
+    if oldcap > Y / 8.0:
+        name = "old_pool_not_yet_eroded"
+        owners.append(name)
+        routes[name] = {
+            "branch_value": oldcap,
+            "threshold": Y / 8.0,
+            "master_semantics": "RECURSE_CRITICAL_RESERVOIR_CAPACITY",
+        }
+
+    if xi >= Y / 8.0:
+        name = "selected_interface_Xi"
+        owners.append(name)
+        routes[name] = {
+            "branch_value": xi,
+            "threshold": Y / 8.0,
+            "master_semantics": "TRANSFER_COST",
+        }
+
+    if fresh >= Y / 4.0:
+        scale = fresh_service_scale_route(
+            Y,
+            c,
+            N,
+            fresh_law,
+            viscosity=nu,
+        )
+        name = "fresh_scale_critical_shell"
+        owners.append(name)
+        routes[name] = {
+            "fresh_service": fresh,
+            "fresh_band_law": fresh_law,
+            "scale_route": scale,
+            "critical_shell_mass_lower": float(scale["hard_shell_mass_lower"]),
+            "H_inf_scale": float(scale["H_inf_scale"]),
+            "H2_scale": float(scale["H2_scale"]),
+            "next_owner_interface": FRESH_SCALE_REENTRY_STATUS,
+            "coherent_cell_argmax_used": False,
+            "cell_ancestry_sideledger_optional": True,
+            "master_semantics": "RECURSE_CRITICAL_VIA_REFINEMENT_INVARIANT_SCALE_SHELL",
+        }
+
+    if not owners:
+        raise AssertionError("complete objective-SGS service law reached no physical owner")
+
+    return {
+        "integrated_forced_square_service": Y,
+        "low_service_lower": low_lower,
+        "realized_low_service": total,
+        "fresh_service": fresh,
+        "joint_primary_owners": tuple(owners),
+        "routes": routes,
+        "coherent_cell_priority_used": False,
+        "master_semantics": "JOINT_NATIVE_OWNERS__NO_LEXICOGRAPHIC_PRIORITY",
+    }
 
 def objective_sgs_high_frequency_physical_reentry(
     high_frequency_dissipation: float,
@@ -656,7 +800,10 @@ def theorem_certificate() -> dict[str, object]:
         "local_owner": "Sigma_local<=C_local D_V -> generic critical-shell reentry",
         "viscous_owner": "int rho_nu>=Sigma -> D_V>=(1500 Sigma/nu)^2/c -> generic critical-shell reentry",
         "sgs_owner": "rho_R -> ||R||_(3/2) -> Q^(3/2) -> Y^(2/3), giving exact linear C_Y rho_R",
-        "sgs_clean_route": "D_high>=Y/4 OR oldcap>Y/8 OR Xi>=Y/8 OR fresh shell/entropy/cycle",
+        "sgs_clean_route": "D_high>=Y/4 OR oldcap>Y/8 OR Xi>=Y/8 OR fresh NN band pushforward -> hard critical shell",
+        "sgs_fresh_scale_route": "fresh F>=Y/4, p_j=F_j/F on the fixed LP band index -> mu_hard exp(H_inf_scale)>=Y/(24c); no coherent-cell dominance needed for renewal",
+        "sgs_cell_sideledger": "coherent-cell dominance/entropy/ancestry cycle remains optional fine accounting only and cannot change the canonical fresh renewal fate",
+        "sgs_joint_owner_rule": "high-tail / old-capacity / Xi / fresh-scale conditions are read independently from the realized law and all satisfied owners are retained jointly; no branch-order priority",
         "sgs_high_frequency_owner": "smooth-LP D_high enters the orthogonal hard-tail energy theorem only through a certified D_tail>=c_LP D_high comparison, then routes to inherited critical shell OR actual positive HH/resolved-interface regeneration; never resolved D_V",
         "pressure_owner": "actual Frobenius-dual positive source law: SGS>=Sigma_P/2 OR resolved unordered pair law>=Sigma_P/2; ties joint",
         "pressure_pair_route": "every resolved pair owner satisfies mu_child exp(H2_pair)>=320 Sigma_P/c and enters generic critical-shell reentry",
@@ -666,7 +813,7 @@ def theorem_certificate() -> dict[str, object]:
         "pressure_hessian_pair_ratio": f"{ratio.numerator}/{ratio.denominator}<1/5",
         "pressure_hessian_total_future_pair_capacity": "<5/4 generation-0 pair capacity on supplied signed-good low-strain lineage; optional material-reuse refinement only",
         "forbidden_identifications": (
-            "aggregate pressure mu_V is not a canonical renewal state; pressure H2 is not a causal child-energy probability; high-frequency SGS dissipation is not resolved D_V"
+            "aggregate pressure mu_V is not a canonical renewal state; pressure H2 and fresh-scale H_inf/H2 are not causal child-energy probabilities; coherent-cell entropy is not a canonical fresh renewal fate; high-frequency SGS dissipation is not resolved D_V"
         ),
         "master_rule": "all D_V/shell/source/service outputs remain recursive scale-critical owners; no additive finite reset is created",
     }
@@ -680,17 +827,21 @@ class ObjectiveSourceCompilerStress:
     minimum_pressure_diagnostic_split_identity_margin: float
     minimum_pressure_pair_entropy_shell_margin: float
     minimum_pressure_pair_full_survivor_service_margin: float
+    minimum_fresh_scale_shell_margin: float
+    minimum_fresh_scale_service_conjugacy_margin: float
     minimum_local_dv_identity_margin: float
     minimum_viscous_cauchy_identity_margin: float
     maximum_joint_owner_count: int
     maximum_joint_pressure_owner_count: int
+    fresh_cell_argmax_regressions: int
 
 
 def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectiveSourceCompilerStress:
     rng = np.random.default_rng(seed)
     ws = 0.0
-    mo = mp = mpp = mps = ml = mv = float("inf")
+    mo = mp = mpp = mps = mfs = mfss = ml = mv = float("inf")
     max_joint = max_pressure_joint = 0
+    fresh_cell_argmax_regressions = 0
     for _ in range(samples):
         g1 = float(rng.uniform(1.0, 3.0))
         clp = float(rng.uniform(0.8, 3.0))
@@ -784,6 +935,66 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectiveSourceCompil
             if weighted_serv + 3e-12 * max(1.0, clean_weighted_serv) < clean_weighted_serv:
                 raise AssertionError("pressure compiler lost entropy-weighted full-survivor service lower")
 
+        # Canonical fresh SGS route: construct a fresh band law at exactly the
+        # certified Y/4 threshold after keeping high/old/Xi below their faces.
+        sgs_sigma = float(rng.lognormal(-3.0, 1.0))
+        sth = objective_sgs_episode_thresholds(sgs_sigma, c, g1, clp, cb)
+        Ysgs = float(sth["integrated_forced_square_service"])
+        nband = int(rng.integers(1, 9))
+        raw_band = rng.random(nband)
+        raw_band /= float(raw_band.sum())
+        fresh_total = Ysgs * float(rng.uniform(0.25, 0.55))
+        labels_band = list(range(-nband + 1, 1))
+        band_law = {j: float(p * fresh_total) for j, p in zip(labels_band, raw_band)}
+        # Choose the other low-service owners so the aggregate cover is realized
+        # while staying strictly below their stop thresholds.
+        Dhigh = float(rng.uniform(0.0, 0.24)) * Ysgs
+        oldcap_s = float(rng.uniform(0.0, 0.12)) * Ysgs
+        old_s = float(rng.uniform(0.0, 1.0)) * oldcap_s
+        xi_s = float(rng.uniform(0.0, 0.12)) * Ysgs
+        low_need = max(0.0, Ysgs - 2.0 * Dhigh)
+        current = old_s + xi_s + fresh_total
+        if current < low_need:
+            # Put exactly the missing physical low service into the fresh band law;
+            # scaling all band atoms preserves its concentration coordinates.
+            extra = low_need - current
+            factor = (fresh_total + extra) / fresh_total
+            band_law = {j: v * factor for j, v in band_law.items()}
+            fresh_total += extra
+        Nsgs = float(math.exp(rng.uniform(-1.0, 4.0)))
+        sr = objective_sgs_aggregate_scale_route(
+            sgs_sigma,
+            c,
+            nu,
+            g1,
+            clp,
+            cb,
+            block_frequency=Nsgs,
+            high_frequency_dissipation=Dhigh,
+            old_pool_integrated_capacity=oldcap_s,
+            old_old_integrated_service=old_s,
+            selected_interface_integrated_service=xi_s,
+            fresh_band_integrated_services=band_law,
+        )
+        if tuple(sr["joint_primary_owners"]) != ("fresh_scale_critical_shell",):
+            raise AssertionError("canonical fresh SGS stress state did not retain the unique fresh-scale owner")
+        fresh_route = sr["routes"]["fresh_scale_critical_shell"]
+        if fresh_route["coherent_cell_argmax_used"] or sr["coherent_cell_priority_used"]:
+            fresh_cell_argmax_regressions += 1
+            raise AssertionError("canonical fresh SGS route regressed to coherent-cell selection")
+        fs = fresh_route["scale_route"]
+        pmax_scale = float(fs["p_max"])
+        mu_scale = float(fs["hard_shell_mass_lower"])
+        clean_scale = pmax_scale * Ysgs / (24.0 * c)
+        mfs = min(mfs, mu_scale - clean_scale)
+        if mu_scale + 3e-12 * max(1.0, clean_scale) < clean_scale:
+            raise AssertionError("compiler lost fresh scale hard-shell lower")
+        weighted_s = float(fs["H_inf_weighted_full_survivor_integrated_service_lower"])
+        clean_weighted_s = float(fs["clean_H_inf_weighted_full_survivor_integrated_service_lower"])
+        mfss = min(mfss, weighted_s - clean_weighted_s)
+        if weighted_s + 3e-12 * max(1.0, clean_weighted_s) < clean_weighted_s:
+            raise AssertionError("compiler lost fresh scale service-concentration conjugacy")
+
         loc = local_dv_reentry(sigma, c, nu)
         C_local = float(loc["local_source_per_DV"])
         Dloc = float(loc["resolved_DV_lower"])
@@ -802,7 +1013,14 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> ObjectiveSourceCompil
         mpp = 0.0
     if not math.isfinite(mps):
         mps = 0.0
-    return ObjectiveSourceCompilerStress(samples, ws, mo, mp, mpp, mps, ml, mv, max_joint, max_pressure_joint)
+    if not math.isfinite(mfs):
+        mfs = 0.0
+    if not math.isfinite(mfss):
+        mfss = 0.0
+    return ObjectiveSourceCompilerStress(
+        samples, ws, mo, mp, mpp, mps, mfs, mfss, ml, mv,
+        max_joint, max_pressure_joint, fresh_cell_argmax_regressions
+    )
 
 
 def main() -> None:
@@ -833,7 +1051,11 @@ For the objective SGS owner, the clean collision `||R||_(3/2)>=380 rho_R`, Germa
 
 `C_Y = 380/[g1(1+g1)(C_LP C_B)^2]`.
 
-Thus integrated SGS source weight produces integrated coherent square service with no persistence hypothesis and no affine-radius packet.  The positive service law routes exactly to high-frequency dissipation, old-pool capacity, selected-interface `Xi`, a dominant fresh critical shell, ancestry entropy, or same-ancestry cycle.  High-frequency dissipation is **not** renamed resolved `D_V`.
+Thus integrated SGS source weight produces integrated coherent square service with no persistence hypothesis and no affine-radius packet.  High-frequency dissipation, old-pool capacity and selected-interface `Xi` keep their existing physical owners.  On the fresh NN branch, the canonical compiler now **first quotients coherent-cell refinement** and pushes the actual positive service measure to the fixed LP band index.  If `F_j` are the fresh band weights and `F>=Y/4`, the certified scale law gives
+
+`mu_hard exp(H_inf^scale) >= Y/(24c)`,
+
+so every fresh law enters the generic critical-shell first-stop theorem without a coherent-cell argmax.  Cell dominance/entropy/cycle remains optional ancestry sideledger only.  High-frequency dissipation is **not** renamed resolved `D_V`.
 
 For pressure, the coarse estimate `rho_P<=mu_V/5700+||R||_(3/2)/380` is retained only as a diagnostic.  The canonical compiler now uses the actual Frobenius-dual positive source law
 
@@ -853,12 +1075,15 @@ Stress: `{out.samples}` source-owner states
 - minimum pressure diagnostic split margin: `{out.minimum_pressure_diagnostic_split_identity_margin:.3e}`
 - minimum pressure entropy-shell margin: `{out.minimum_pressure_pair_entropy_shell_margin:.3e}`
 - minimum pressure full-survivor service registration margin: `{out.minimum_pressure_pair_full_survivor_service_margin:.3e}`
+- minimum fresh-scale shell margin: `{out.minimum_fresh_scale_shell_margin:.3e}`
+- minimum fresh-scale full-survivor service-conjugacy margin: `{out.minimum_fresh_scale_service_conjugacy_margin:.3e}`
 - minimum local-DV identity margin: `{out.minimum_local_dv_identity_margin:.3e}`
 - minimum viscous-Cauchy identity margin: `{out.minimum_viscous_cauchy_identity_margin:.3e}`
 - maximum sampled joint owner count: `{out.maximum_joint_owner_count}`
 - maximum sampled joint pressure owner count: `{out.maximum_joint_pressure_owner_count}`
+- fresh coherent-cell argmax regressions: `{out.fresh_cell_argmax_regressions}`
 
-The resulting architecture is source-native: `local/viscous -> D_V -> critical shell`, `SGS -> coherent service`, `pressure -> actual SGS service OR entropy-weighted critical shell`.  No packet synchronization theorem and no uniform finite resource are inserted.  Final continuum master assembly and supplier-specific signed-good scale geometry remain separate.  No Navier--Stokes global-regularity conclusion is asserted.
+The resulting architecture is source-native: `local/viscous -> D_V -> critical shell`, `SGS -> coherent service -> high-tail / old-pool / Xi / refinement-invariant fresh scale shell`, `pressure -> actual SGS service OR entropy-weighted critical shell`.  No packet synchronization theorem and no uniform finite resource are inserted.  Final continuum master assembly and supplier-specific signed-good scale geometry remain separate.  No Navier--Stokes global-regularity conclusion is asserted.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)

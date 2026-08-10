@@ -122,13 +122,33 @@ or
 S_{low}\ge \frac12Y_{tot}.
 \]
 
-On the low branch, once old integrated capacity is at most `Y_tot/8`, either selected-interface service is at least `Y_tot/8`, or fresh new-new service is at least `Y_tot/4`.  With the existing quarter-dominance threshold, a dominant fresh edge gives pair critical-mass occupation at least `Y_tot/32`, whole-shell occupation at least `Y_tot/64`, and therefore a pointwise whole-shell event at least
+On the low branch, once old integrated capacity is at most `Y_tot/8`, either selected-interface service is at least `Y_tot/8`, or fresh new-new service is at least `Y_tot/4`.
+
+The fresh branch is now quotiented **before** any concentration statistic is read.  Freshness is the measurable endpoint indicator on the positive Moyal service law.  Push that physical measure only to the fixed canonical LP band index and denote the integrated band weights by `F_j`.  Coherent-cell refinement may subdivide an edge family, but it cannot change any `F_j`.
+
+With
 
 \[
-\frac{Y_{tot}}{64c}.
+F=\sum_{j\le0}F_j\ge Y_{tot}/4,
+\qquad
+p_j=F_j/F,
+\qquad
+H_\infty^{scale}=-\log p_{max},
 \]
 
-That event enters the generic critical-shell theorem.  If no fresh edge dominates, the existing collision chain gives atomic entropy `>=log 4`, ancestry entropy `>=log 2`, or same-ancestry pair/cycle mass `>=1/4`.
+the certified annular-frame theorem gives an actual hard shell of the full velocity satisfying
+
+\[
+\boxed{
+\mu_{hard}e^{H_\infty^{scale}}\ge \frac{Y_{tot}}{24c}.
+}
+\]
+
+The `H_2^{scale}` corollary has the same right-hand side.  Therefore **every fresh physical scale law enters generic critical-shell reentry**.  No coherent-cell argmax, quarter cell-dominance threshold, or cell entropy/cycle fate is needed for renewal.
+
+The historical coherent-cell dominance/entropy/ancestry-cycle decomposition remains valid only as optional fine ancestry bookkeeping.  Its outputs are explicitly marked `SIDELEDGER_ONLY` and cannot change the canonical renewal owner.
+
+The realized compiler does not treat high-tail, old-capacity, `Xi`, and fresh-scale conditions as a lexicographically ordered case split.  They are read independently from the same actual law and **all satisfied physical owners are retained jointly**.  Thus changing source-code branch order cannot change the PDE fate.
 
 Crucially, the high-frequency dissipation branch is kept under its own owner.  It is **not** silently renamed resolved `D_V`.
 
@@ -210,7 +230,7 @@ The compiler creates no new currency:
 
 - local coherent source -> resolved `D_V` -> generic critical-shell recursion;
 - viscosity -> resolved `D_V` -> generic critical-shell recursion;
-- SGS -> coherent service -> high-frequency owner / old-pool erosion / `Xi` / fresh shell / entropy-cycle;
+- SGS -> coherent service -> high-frequency owner / old-pool erosion / `Xi` / refinement-invariant fresh scale shell; coherent-cell entropy/cycle is sideledger only;
 - pressure -> actual positive SGS coherent service or entropy-weighted critical shell;
 - pure material sidecars remain sidecars; genuine role change remains interface/relink.
 
@@ -218,7 +238,7 @@ No branch above is promoted to an additive finite reset.  `D_V`, critical shell 
 
 ## Scope
 
-This theorem is an assembly theorem for source ownership.  It deliberately does not prove supplier-specific signed-good scale progress and does not identify high-frequency enstrophy with resolved low-pass dissipation.  Pressure shell renewal is now supplied directly by the pair theorem rather than by converting aggregate low-pass mass.
+This theorem is an assembly theorem for source ownership.  It deliberately does not prove supplier-specific signed-good scale progress and does not identify high-frequency enstrophy with resolved low-pass dissipation.  Pressure shell renewal is supplied directly by the pair theorem rather than by converting aggregate low-pass mass, while fresh SGS renewal is supplied by the refinement-invariant frequency pushforward rather than by choosing a coherent cell.
 
 The remaining continuum work is the final master assembly/topology that composes these native owners with physical positive HH causality, common-slice propagation, service/flat erosion and the existing entropy/Hodge machinery without double charging.
 

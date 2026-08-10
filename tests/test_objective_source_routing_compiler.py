@@ -11,6 +11,7 @@ from src.objective_source_routing_compiler import (
     local_dv_reentry,
     objective_owner_weight_threshold,
     objective_sgs_aggregate_route,
+    objective_sgs_aggregate_scale_route,
     objective_sgs_episode_thresholds,
     objective_sgs_high_frequency_physical_reentry,
     objective_sgs_square_service_per_source,
@@ -21,6 +22,7 @@ from src.objective_source_routing_compiler import (
     viscous_dv_reentry,
 )
 from src.resolved_objective_strain_collision import sgs_gradient_stress_lower
+from src.fresh_service_scale_reentry import pushforward_fresh_edges_to_bands
 
 
 def test_exact_sgs_power_cancellation_closed_form():
@@ -175,7 +177,7 @@ def test_integrated_sgs_high_frequency_owner_is_not_DV():
     assert out["resolved_DV_supplier"] == "NO"
 
 
-def test_integrated_sgs_dominant_fresh_edge_supplies_generic_shell():
+def test_legacy_integrated_sgs_dominant_fresh_edge_is_sideledger_only():
     sigma = 0.02
     c = 0.7
     th = objective_sgs_episode_thresholds(sigma, c, 1.2, 1.1, 1.05)
@@ -196,10 +198,11 @@ def test_integrated_sgs_dominant_fresh_edge_supplies_generic_shell():
     )
     assert out["branch"] == "dominant_fresh_critical_shell"
     assert out["clean_peak_whole_shell_mass_lower"] == pytest.approx(Y / (64.0 * c))
-    assert out["master_semantics"] == "RECURSE_CRITICAL_VIA_GENERIC_SHELL"
+    assert out["canonical_renewal_fate"] is False
+    assert out["master_semantics"] == "SIDELEDGER_ONLY__LEGACY_CELL_CLUSTER"
 
 
-def test_integrated_sgs_entropy_or_cycle_when_no_dominant_edge():
+def test_legacy_integrated_sgs_entropy_or_cycle_is_sideledger_only():
     sigma = 0.02
     c = 0.7
     th = objective_sgs_episode_thresholds(sigma, c, 1.2, 1.1, 1.05)
@@ -219,6 +222,8 @@ def test_integrated_sgs_entropy_or_cycle_when_no_dominant_edge():
     )
     assert entropy["branch"] == "fresh_service_collision_entropy"
     assert entropy["entropy_lower"] == pytest.approx(math.log(4.0))
+    assert entropy["canonical_renewal_fate"] is False
+    assert entropy["master_semantics"] == "SIDELEDGER_ONLY__LEGACY_CELL_ENTROPY"
 
     cyc = objective_sgs_aggregate_route(
         sigma,
@@ -235,6 +240,101 @@ def test_integrated_sgs_entropy_or_cycle_when_no_dominant_edge():
     )
     assert cyc["branch"] == "fresh_service_same_ancestry_cycle"
     assert cyc["hidden_pair_lower"] == pytest.approx(0.25)
+    assert cyc["canonical_renewal_fate"] is False
+    assert cyc["master_semantics"] == "SIDELEDGER_ONLY__LEGACY_CELL_CYCLE"
+
+
+
+def test_canonical_sgs_fresh_route_uses_band_pushforward_not_cell_argmax():
+    sigma = 0.02
+    c = 0.7
+    g1, clp, cb = 1.2, 1.1, 1.05
+    th = objective_sgs_episode_thresholds(sigma, c, g1, clp, cb)
+    Y = th["integrated_forced_square_service"]
+    law = {0: 0.30 * Y, -1: 0.30 * Y, -2: 0.30 * Y}
+    out = objective_sgs_aggregate_scale_route(
+        sigma, c, 1.0, g1, clp, cb,
+        block_frequency=8.0,
+        high_frequency_dissipation=0.0,
+        old_pool_integrated_capacity=0.05 * Y,
+        old_old_integrated_service=0.05 * Y,
+        selected_interface_integrated_service=0.05 * Y,
+        fresh_band_integrated_services=law,
+    )
+    assert out["joint_primary_owners"] == ("fresh_scale_critical_shell",)
+    assert out["coherent_cell_priority_used"] is False
+    fresh = out["routes"]["fresh_scale_critical_shell"]
+    assert fresh["coherent_cell_argmax_used"] is False
+    assert fresh["cell_ancestry_sideledger_optional"] is True
+    assert fresh["critical_shell_mass_lower"] > 0
+    assert fresh["master_semantics"] == "RECURSE_CRITICAL_VIA_REFINEMENT_INVARIANT_SCALE_SHELL"
+    scale = fresh["scale_route"]
+    assert scale["H_inf_weighted_hard_shell_mass_lower"] >= Y / (24.0 * c) - 1e-13
+
+
+def test_canonical_sgs_fresh_route_is_invariant_under_coherent_cell_refinement():
+    sigma = 0.02
+    c = 0.7
+    g1, clp, cb = 1.2, 1.1, 1.05
+    Y = objective_sgs_episode_thresholds(sigma, c, g1, clp, cb)["integrated_forced_square_service"]
+    coarse = pushforward_fresh_edges_to_bands(
+        [0.30 * Y, 0.30 * Y, 0.30 * Y],
+        [0, -1, -2],
+        [False, False, False],
+        [False, False, False],
+    )
+    fine = pushforward_fresh_edges_to_bands(
+        [0.10 * Y, 0.20 * Y, 0.12 * Y, 0.18 * Y, 0.05 * Y, 0.25 * Y],
+        [0, 0, -1, -1, -2, -2],
+        [False] * 6,
+        [False] * 6,
+    )
+    assert coarse == pytest.approx(fine)
+    common = dict(
+        source_weight=sigma, scaled_lifetime=c, viscosity=1.0,
+        filter_l1=g1, lp_constant=clp, bernstein_constant=cb,
+        block_frequency=8.0, high_frequency_dissipation=0.0,
+        old_pool_integrated_capacity=0.05 * Y, old_old_integrated_service=0.05 * Y,
+        selected_interface_integrated_service=0.05 * Y,
+    )
+    a = objective_sgs_aggregate_scale_route(**common, fresh_band_integrated_services=coarse)
+    b = objective_sgs_aggregate_scale_route(**common, fresh_band_integrated_services=fine)
+    ar = a["routes"]["fresh_scale_critical_shell"]
+    br = b["routes"]["fresh_scale_critical_shell"]
+    assert ar["critical_shell_mass_lower"] == pytest.approx(br["critical_shell_mass_lower"])
+    assert ar["H_inf_scale"] == pytest.approx(br["H_inf_scale"])
+    assert ar["H2_scale"] == pytest.approx(br["H2_scale"])
+
+
+
+def test_canonical_sgs_realized_ties_keep_all_physical_owners():
+    sigma = 0.02
+    c = 0.7
+    g1, clp, cb = 1.2, 1.1, 1.05
+    Y = objective_sgs_episode_thresholds(sigma, c, g1, clp, cb)["integrated_forced_square_service"]
+    out = objective_sgs_aggregate_scale_route(
+        sigma, c, 1.0, g1, clp, cb,
+        block_frequency=8.0,
+        high_frequency_dissipation=0.25 * Y,
+        old_pool_integrated_capacity=0.13 * Y,
+        old_old_integrated_service=0.13 * Y,
+        selected_interface_integrated_service=0.125 * Y,
+        fresh_band_integrated_services={0: 0.10 * Y, -1: 0.08 * Y, -2: 0.07 * Y},
+    )
+    assert set(out["joint_primary_owners"]) == {
+        "high_frequency_dissipation",
+        "old_pool_not_yet_eroded",
+        "selected_interface_Xi",
+        "fresh_scale_critical_shell",
+    }
+    assert out["coherent_cell_priority_used"] is False
+    assert out["master_semantics"] == "JOINT_NATIVE_OWNERS__NO_LEXICOGRAPHIC_PRIORITY"
+
+
+def test_symbolic_sgs_interface_marks_cell_dominance_noncanonical():
+    th = objective_sgs_episode_thresholds(0.02, 0.7, 1.2, 1.1, 1.05)
+    assert th["fresh_cell_dominance_is_canonical_renewal"] == "NO"
+    assert "FRESH_MATERIAL_SERVICE_TO_REFINEMENT_INVARIANT_SCALE_LAW" in th["canonical_fresh_route"]
 
 
 def test_certificate_records_pressure_pair_native_route_and_forbidden_identifications():
@@ -247,6 +347,9 @@ def test_certificate_records_pressure_pair_native_route_and_forbidden_identifica
     assert "aggregate pressure mu_V is not a canonical renewal state" in text
     assert "pressure H2 is not a causal child-energy probability" in text
     assert "high-frequency SGS dissipation is not resolved D_V" in text
+    assert "coherent-cell entropy is not a canonical fresh renewal fate" in text
+    assert "mu_hard exp(H_inf_scale)>=Y/(24c)" in cert["sgs_fresh_scale_route"]
+    assert "retained jointly" in cert["sgs_joint_owner_rule"]
 
 
 def test_high_frequency_owner_uses_tail_energy_not_resolved_DV():
