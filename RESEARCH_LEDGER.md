@@ -6868,32 +6868,59 @@ Dedicated GitHub Actions run `31349132283` on exact `3a1409dfe08a9f9c9b5984ef5fc
 
 Status: `EXACT_HIGH_TAIL_REGENERATION_COMMON_UNIT_CAUSAL_OWNERS__HH_TO_BINARY_PHYSICAL_WORK_LAW__OWN_SCALE_REWEIGHTING_NOT_CAUSAL__PRODUCTIVITY_AND_LOCALITY_REMAIN_CONDITIONAL`.
 
-This closes the question **what is the physical cause of high-tail regeneration?** without solving a different question by assumption.  Generic HH parents may still be genuinely nonlocal: for a child shell `M`, two nearly cancelling parents can live at `K>>M`.  Static Fourier audit now reveals a native next bridge.  For any field supported above `K`,
+This closes the question **what is the physical cause of high-tail regeneration?** without solving a different question by assumption.  The next Fourier-scale question is now theorem-level too: generic HH parents may be genuinely nonlocal, but the amount of such ultraviolet work is paid directly by physical tail dissipation rather than by a packet count or a chosen locality graph.
+
+Read locality from the **actual positive aggregate HH output-shell law before coherent Hahn refinement**:
+
+`H_j = N int [r_HH,j(t)]_+ dt`, `H=sum_j H_j >= nu D_tail/2`.
+
+Normalize `p_j=H_j/H`, choose the maximal hard output shell `M=2^jN`, and set `H_inf^out=-log p_max`.  Atomic positive Hahn mass is explicitly forbidden as a substitute for `H_j`, because cancellation may make the former strictly larger and thereby manufacture a different scale law.
+
+For any field supported above `K`, exact Fourier Holder gives
 
 `||fhat||_(3/2) <= (4pi/3)^(1/6) K^(-1/2)||grad f||_2`.
 
-If one parent feeding a child `|xi|<=M` lies above `R M`, triad closure forces the other above `(R-1)M`.  Combining this high-pass estimate with the exact physical Young constant and the child hard-shell `L^(3/2)` mass bound collapses all geometric constants to **`3 sqrt(pi)`**.  Consequently, under a child mass cap `mu`, ultra-nonlocal HH work is bounded by
+If one parent feeding a child `|xi|<=M` lies above `R M`, triad closure forces the other above `(R-1)M`.  The strict transporter `S_(M/4)u` vanishes on these ultraviolet parent frequencies, so the unresolved field equals `u` there **exactly**; no cutoff multiplier loss or new `Xi` charge appears.  Combining the high-pass bounds with the physical Young coefficient and the child hard-shell mass estimate collapses all geometric constants to
 
-`N W_UV^+ <= [3 sqrt(pi) sqrt(mu)/sqrt(R(R-1))] D_tail`.
+`C_Y C_hp^3 = 3 sqrt(pi)`.
 
-For the dyadic choice `R=2`, if the selected output shell carries fraction `p` of the actual positive HH common-work law and its child mass stays below `p^2 nu^2/288`, the `>2M` parent part costs less than `p nu D_tail/4`; since the selected shell already carries at least `p nu D_tail/2`, a positive comparable-parent remainder `>=p nu D_tail/4` survives.  Thus the candidate locality conjugacy is
+Hence, if `mu_peak=max_t M||P_Mu(t)||_2^2`,
 
-`mu exp(2 H_inf^scale) >= nu^2/288`
+`N W_UV^abs <= [3 sqrt(pi)/sqrt(R(R-1))] sqrt(mu_peak) D_tail`,
+
+provided the lower UV parent cutoff lies above `N`.  Since the selected output shell carries at least `p_max nu D_tail/2`, the theorem core is the **continuous** locality-radius relation
+
+`W_comp,R exp(H_inf^out)/D_tail + [3 sqrt(pi)/sqrt(R(R-1))] sqrt(mu_peak) exp(H_inf^out) >= nu/2`.
+
+This one inequality is canonical; `R` is a physical locality radius parameter, not a stop class.  The balanced dyadic `R=2` split is only a readable corollary:
+
+`mu_peak exp(2 H_inf^out) >= nu^2/(72 pi)`
 
 or
-`W_comparable exp(H_inf^scale) >= nu D_tail/4`,
 
-where `H_inf^scale=-log p` belongs to the **actual positive HH output-shell law**.  This is the next theorem target; it is not yet canonical.
+`W_comp,2 exp(H_inf^out) >= nu D_tail/4`,
 
-A second, logically separate temporal seam is also visible.  For comparable parents `<=2M`, use the maximal actual positive work in a sliding natural window of length `c M^-2`, not an observer-chosen time partition.  If its fraction is `p_t`, sharp Young and global `L^2` energy give
+with exact ties allowed to satisfy both.  The first owner is an actual hard critical-shell event and enters the generic shell first-stop/service theorem.  On the second owner, both parent frequencies are at most `2M`; **only after this Fourier locality statement has been proved** is exact coherent Hahn atomization applied to the restricted comparable source.  Locality is therefore a property of the PDE triad law, not of coherent representation.
 
-`W_window <= 6 c sqrt(pi) E_global sqrt(mu_child^max)`.
+Dedicated GitHub Actions run `31350897986` on exact `e7cdb0d6645574898a3900cbccc904949bd7e0a1` passed the full theorem suite, `50,000` ultraviolet locality states, and direct common-unit high-tail, physical pair-productivity and generic critical-shell dependencies.  Stress reported exact `3 sqrt(pi)` constant residual `0`, minimum continuous tradeoff margin `7.675e-06`, minimum dimensionless balanced-owner margin `5.070e-05`, minimum localized binary positive-dominance margin `4.025e-06`, maximum joint clean owner count `2`, and `43,657/50,000` sampled cases in which a fake atomic-positive reweighting changed the output-scale `p_max`, confirming that aggregate HH locality and coherent Hahn positivity are genuinely different observables.  Stored artifact: `recorded-results/31350897986/`.  Full physical-energy causal integration `31350897937` on the same exact SHA completed successfully through the locality theorem, physical productivity, recursive witness construction, Shannon/Renyi, branch compiler and master episode stress.
 
-Together with the comparable-work lower this suggests the threshold-free natural-time relation
+Status: `EXACT_HIGH_TAIL_HH_OUTPUT_SCALE_LAW__ULTRAVIOLET_WORK_TO_PHYSICAL_DTAIL__CONTINUOUS_LOCALITY_RADIUS_MASS_TRADEOFF__COMPARABLE_REMAINDER_BINARY_READY__NO_PAIR_COUNT_OR_COHERENT_LOCALITY_SELECTION`.
 
-`sqrt(mu_child^max) exp(H_inf^scale+H_inf^time) >= nu D_tail/[24 c sqrt(pi) E_global]`.
+This closes **where the high-tail HH cause lives in Fourier scale** without imposing a local-triad hypothesis.  The remaining seam is temporal concentration of the already-localized positive comparable-work measure.  The correct observable is the maximal work in a **sliding** natural window of length `c M^-2`, not a partition into observer-chosen bins.  For smooth NS the positive comparable-work density is continuous, so the sliding-window functional is continuous and attains its maximum on the compact admissible interval.
 
-Locality and temporal concentration must be theoremized separately before composition.  Supplier-specific signed-good scale geometry and final continuum master assembly remain separate.  No Navier--Stokes global-regularity proof is claimed.
+A static unit audit corrects the earlier optimistic parent-energy constant.  The canonical strict cutoff currently registers only `|S|<=1`, hence universally `||h||_2=||(I-S)u||_2<=2||u||_2`; one may not silently assume the sharper `0<=S<=1` gauge.  Therefore for comparable parents `<=R M`, one `M`-natural window satisfies the rigorously available capacity
+
+`W_window <= 12 c sqrt(pi) R E_global sqrt(mu_window)`.
+
+For the dyadic `R=2` corollary this is
+
+`W_window <= 24 c sqrt(pi) E_global sqrt(mu_window)`.
+
+If `p_t` is the maximal sliding-window fraction and `H_inf^time=-log p_t`, composition with the certified comparable-work owner would give
+
+`sqrt(mu_window) exp(H_inf^out+H_inf^time) >= nu D_tail/[96 c sqrt(pi) E_global]`.
+
+This temporal relation is the next theorem target and is **not yet canonical**.  A later registration of a nonnegative cutoff gauge may improve the constant, but no proof step is allowed to use that improvement before it is explicitly certified.  Supplier-specific signed-good scale geometry and final continuum master assembly remain separate.  No Navier--Stokes global-regularity proof is claimed.
 
 ---
 
@@ -6909,7 +6936,7 @@ For a new reader, the recommended order is:
 6. `docs/transfer_preserving_profile_extraction.md`, `docs/gaussian_packet_inverse.md` and `docs/packet_inverse_theorem.md`;
 7. `docs/affine_gaussian_grain_dynamics.md`, `docs/intrinsic_3d_triad_plane.md`, and `docs/strain_coherence_objective_gradient.md`;
 8. `docs/helical_spin_transport.md`, `docs/helical_phase_holonomy.md`, `docs/full_strain_observability.md`, `docs/objective_helical_polarization.md`, `docs/extremal_helicity_symplectic.md`, `docs/helical_frame_lipschitz.md`, `docs/relative_polarization_transport.md`, and `docs/localized_polarization_packet.md`;
-9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/fresh_service_scale_reentry.md`, `docs/high_frequency_dissipation_reentry.md`, `docs/high_tail_binary_work_reentry.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/complex_young_parent_marking.md`, `docs/dual_gaussian_root_registration.md`, `docs/bargmann_root_cell_registration.md`, `docs/amplitude_entropy_causal_reuse.md`, `docs/common_slice_coefficient_registration.md`, `docs/outer_moving_role_extraction.md`, `docs/nonaffine_role_interface_work.md`, `docs/event_anchored_role_registration.md`, `docs/physical_pair_weighted_productivity.md`, `docs/recursive_physical_witness_constructor.md`, `docs/joint_causal_stop_projection.md`, `docs/smooth_sgs_first_hit_extraction.md`, `docs/smooth_material_carrier_relay.md`, `docs/resolved_cutoff_repartition_relay.md`, `docs/high_strain_resolved_ancestor.md`, `docs/high_strain_heat_increment_service.md`, `docs/heat_edge_material_ownership.md`, `docs/first_hit_heat_reservoir_erosion.md`, `docs/old_incident_heat_erosion.md`, `docs/nn_critical_heat_carrier_seed.md`, `docs/nn_seed_temporal_first_stop.md`, `docs/critical_annular_carrier_service_reentry.md`, `docs/high_strain_critical_carrier_reentry.md`, `docs/critical_shell_service_reentry.md`, `docs/material_label_carrier_quotient.md`, `docs/objective_source_routing_compiler.md`, `docs/objective_pressure_pair_atomization.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
+9. `docs/affine_gaussian_forcing.md`, `docs/material_phase_lock.md`, `docs/quadratic_swirl_kernel.md`, `docs/affine_polarization_curvature.md`, `docs/affine_shell_aspect.md`, `docs/affine_critical_grain.md`, `docs/affine_window_balance.md`, `docs/sideband_coherence_daughter.md`, `docs/hermite_triad_selection.md`, `docs/curvature_sideband_irrep.md`, `docs/h3_sideband_no_escape.md`, `docs/sideband_pair_ancestry.md`, `docs/h1_swirl_mild_aspect.md`, `docs/h1_swirl_no_escape.md`, `docs/h1_covariant_source.md`, `docs/sgs_source_collision.md`, `docs/onsager_increment_collision.md`, `docs/source_episode_collision.md`, `docs/affine_aspect_sticky.md`, `docs/ancestor_reservoir_sync.md`, `docs/bandlimited_source_sampling.md`, `docs/pressure_reservoir_sync.md`, `docs/reservoir_pool_erosion.md`, `docs/affine_coherent_bessel.md`, `docs/affine_coherent_moyal.md`, `docs/coherent_transfer_cells.md`, `docs/coherent_increment_service.md`, `docs/fresh_service_scale_reentry.md`, `docs/high_frequency_dissipation_reentry.md`, `docs/high_tail_binary_work_reentry.md`, `docs/high_tail_ultraviolet_locality.md`, `docs/coherent_covariance_interface.md`, `docs/coherent_service_stopping.md`, `docs/coherent_sgs_episode.md`, `docs/service_or_flat_rigidity.md`, `docs/physical_flat_episode.md`, `docs/flat_companion_gate.md`, `docs/causal_binary_ancestry.md`, `docs/weighted_causal_reuse.md`, `docs/renyi_causal_reuse.md`, `docs/adjoint_kelvin_duhamel.md`, `docs/asynchronous_duhamel_sync.md`, `docs/physical_energy_causal_bridge.md`, `docs/recursive_coherent_witness_extraction.md`, `docs/resolved_role_egorov.md`, `docs/coherent_affine_projection.md`, `docs/coherent_averaged_strain_source.md`, `docs/coherent_service_or_flat.md`, `docs/complex_young_parent_marking.md`, `docs/dual_gaussian_root_registration.md`, `docs/bargmann_root_cell_registration.md`, `docs/amplitude_entropy_causal_reuse.md`, `docs/common_slice_coefficient_registration.md`, `docs/outer_moving_role_extraction.md`, `docs/nonaffine_role_interface_work.md`, `docs/event_anchored_role_registration.md`, `docs/physical_pair_weighted_productivity.md`, `docs/recursive_physical_witness_constructor.md`, `docs/joint_causal_stop_projection.md`, `docs/smooth_sgs_first_hit_extraction.md`, `docs/smooth_material_carrier_relay.md`, `docs/resolved_cutoff_repartition_relay.md`, `docs/high_strain_resolved_ancestor.md`, `docs/high_strain_heat_increment_service.md`, `docs/heat_edge_material_ownership.md`, `docs/first_hit_heat_reservoir_erosion.md`, `docs/old_incident_heat_erosion.md`, `docs/nn_critical_heat_carrier_seed.md`, `docs/nn_seed_temporal_first_stop.md`, `docs/critical_annular_carrier_service_reentry.md`, `docs/high_strain_critical_carrier_reentry.md`, `docs/critical_shell_service_reentry.md`, `docs/material_label_carrier_quotient.md`, `docs/objective_source_routing_compiler.md`, `docs/objective_pressure_pair_atomization.md`, `docs/material_coherent_labels.md`, `docs/physical_multicurrency_master.md`, `docs/high_strain_dissipation_collision.md`, `docs/resolved_objective_strain_collision.md`, `docs/divfree_coherent_parseval.md`, `docs/coherent_localization_operators.md`, `docs/physical_transfer_defect_moat.md`, and `docs/physical_branch_compiler.md`;
 10. `docs/curvature_balanced_moat.md` and `docs/objective_strain_source_collision.md`;
 11. `docs/scale_holonomy.md`;
 12. `docs/multiscale_bellman.md`;

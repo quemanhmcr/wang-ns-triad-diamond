@@ -1,0 +1,26 @@
+{
+  "certificate": {
+    "status": "EXACT_HIGH_TAIL_HH_OUTPUT_SCALE_LAW__ULTRAVIOLET_WORK_TO_PHYSICAL_DTAIL__CONTINUOUS_LOCALITY_RADIUS_MASS_TRADEOFF__COMPARABLE_REMAINDER_BINARY_READY__NO_PAIR_COUNT_OR_COHERENT_LOCALITY_SELECTION",
+    "upstream": "EXACT_HIGH_TAIL_REGENERATION_COMMON_UNIT_CAUSAL_OWNERS__HH_TO_BINARY_PHYSICAL_WORK_LAW__OWN_SCALE_REWEIGHTING_NOT_CAUSAL__PRODUCTIVITY_AND_LOCALITY_REMAIN_CONDITIONAL",
+    "output_scale_law": "H_j=N int [r_HH,j(t)]_+dt on hard output shells before coherent Hahn refinement; p_j=H_j/sum H_j",
+    "highpass_l32": "supp fhat in {|xi|>K} => ||fhat||_(3/2)<=(4pi/3)^(1/6)K^(-1/2)||grad f||_2",
+    "triad_geometry": "for child |xi|<=M, max(parent)>R M forces the other parent >(R-1)M",
+    "ultraviolet_bound": "N W_UV^abs <= [3 sqrt(pi)/sqrt(R(R-1))] sqrt(mu_peak) D_tail whenever the lower UV parent cutoff lies above N",
+    "native_tradeoff": "W_comp e^(Hinf_out)/D_tail + [3 sqrt(pi)/sqrt(R(R-1))] sqrt(mu_peak)e^(Hinf_out) >= nu/2",
+    "dyadic_R2": "R=2 gives balanced corollary mu_peak e^(2Hinf_out)>=nu^2/(72pi) OR W_comp e^(Hinf_out)>=nu D_tail/4; exact ties may satisfy both",
+    "representation_rule": "locality is read on the signed PDE hard-shell source before coherent refinement; atomic Hahn positive mass is forbidden as a substitute for H_j",
+    "peak_semantics": "on the smooth observed block, t->P_Mu is L2-continuous and the hard-shell critical mass attains its maximum on the compact slab; weaker essential-sup formulations may use epsilon slack",
+    "binary_after_locality": "only after comparable physical work is isolated is exact coherent Hahn atomization applied to that restricted source",
+    "scope": "no temporal natural-window concentration, signed-good parent progress, Young near-extremality or productivity gate is claimed here",
+    "master_rule": "critical-shell and comparable-HH owners are recursive; the balanced split is a corollary of one continuous inequality, not a new stop taxonomy"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_constant_identity_residual": 1.7763568394002505e-15,
+    "minimum_continuous_tradeoff_margin": 1.4503348879646438e-06,
+    "minimum_balanced_owner_margin": 0.010680298331855909,
+    "minimum_binary_localized_dominance_margin": 1.2647981119715855e-06,
+    "maximum_joint_clean_owner_count": 2,
+    "atomic_scale_substitution_failures": 43657
+  }
+}
