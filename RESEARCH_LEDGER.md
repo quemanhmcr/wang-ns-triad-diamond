@@ -6908,17 +6908,21 @@ Status: `EXACT_HIGH_TAIL_HH_OUTPUT_SCALE_LAW__ULTRAVIOLET_WORK_TO_PHYSICAL_DTAIL
 
 This closes **where the high-tail HH cause lives in Fourier scale** without imposing a local-triad hypothesis.  The remaining seam is temporal concentration of the already-localized positive comparable-work measure.  The correct observable is the maximal work in a **sliding** natural window of length `c M^-2`, not a partition into observer-chosen bins.  For smooth NS the positive comparable-work density is continuous, so the sliding-window functional is continuous and attains its maximum on the compact admissible interval.
 
-A static unit audit corrects the earlier optimistic parent-energy constant.  The canonical strict cutoff currently registers only `|S|<=1`, hence universally `||h||_2=||(I-S)u||_2<=2||u||_2`; one may not silently assume the sharper `0<=S<=1` gauge.  Therefore for comparable parents `<=R M`, one `M`-natural window satisfies the rigorously available capacity
+A static unit audit corrects the earlier optimistic parent-energy constant.  The canonical strict cutoff currently registers only `|S|<=1`, hence universally `||h||_2=||(I-S)u||_2<=2||u||_2`; one may not silently assume the sharper `0<=S<=1` gauge.  Therefore for comparable parents `<=R M`, one `M`-natural window satisfies the rigorously available **physical-work** capacity
 
-`W_window <= 12 c sqrt(pi) R E_global sqrt(mu_window)`.
+`W_window^phys <= 12 c sqrt(pi) R E_global sqrt(mu_window)`.
 
-For the dyadic `R=2` corollary this is
+The high-tail causal/locality law is stored in the common unit `N dW`, so the same statement there is
 
-`W_window <= 24 c sqrt(pi) E_global sqrt(mu_window)`.
+`N W_window <= 12 c sqrt(pi) R N E_global sqrt(mu_window)`.
 
-If `p_t` is the maximal sliding-window fraction and `H_inf^time=-log p_t`, composition with the certified comparable-work owner would give
+For the dyadic `R=2` corollary this becomes
 
-`sqrt(mu_window) exp(H_inf^out+H_inf^time) >= nu D_tail/[96 c sqrt(pi) E_global]`.
+`N W_window <= 24 c sqrt(pi) N E_global sqrt(mu_window)`.
+
+If `p_t` is the maximal sliding-window fraction and `H_inf^time=-log p_t`, composition with the certified **common-unit** comparable-work owner would therefore give
+
+`sqrt(mu_window) exp(H_inf^out+H_inf^time) >= nu D_tail/[96 c sqrt(pi) N E_global]`.
 
 This temporal relation is the next theorem target and is **not yet canonical**.  A later registration of a nonnegative cutoff gauge may improve the constant, but no proof step is allowed to use that improvement before it is explicitly certified.  Supplier-specific signed-good scale geometry and final continuum master assembly remain separate.  No Navier--Stokes global-regularity proof is claimed.
 
