@@ -8,7 +8,7 @@ from pathlib import Path
 
 import numpy as np
 
-from src.helical import coupling_g, edge_metrics, helical_basis
+from src.helical import coupling_g, edge_metrics, helical_basis, stable_norm3
 from src.single_edge_certificate import float_jstar
 
 STATUS = (
@@ -16,6 +16,11 @@ STATUS = (
     "UNORDERED_PARENT_PAIR_FACTOR_FOUR__NATIVE_MODAL_CAPACITY__"
     "SIGNED_UPPER_PROGRESS_EQUALS_A_J_C"
 )
+
+_MIN_POSITIVE_FLOAT = math.nextafter(0.0, 1.0)
+_MAX_FINITE_FLOAT = float.fromhex("0x1.fffffffffffffp+1023")
+_MIN_PRODUCT_LOG = math.log(_MIN_POSITIVE_FLOAT)
+_MAX_PRODUCT_LOG = math.log(_MAX_FINITE_FLOAT)
 
 
 def _vec3(x: np.ndarray, name: str) -> np.ndarray:
@@ -39,16 +44,95 @@ def _helicity(s: int, name: str) -> int:
     return q
 
 
+def _physical_parent_pair(
+    x: np.ndarray, y: np.ndarray, z: np.ndarray
+) -> tuple[float, float, float]:
+    nx, ny, nz = map(stable_norm3, (x, y, z))
+    if min(nx, ny, nz) == 0.0:
+        raise ValueError("nonzero parent and child wavevectors required")
+    if stable_norm3(x + y - z) > 2e-12 * max(nx, ny, nz):
+        raise ValueError("physical parent pair must satisfy z=x+y")
+    return nx, ny, nz
+
+
+def _positive_product(factors: tuple[float, ...], name: str) -> float:
+    """Multiply nonnegative native factors, failing closed outside float range."""
+    vals = tuple(float(x) for x in factors)
+    if not all(math.isfinite(x) and x >= 0.0 for x in vals):
+        raise ValueError(f"{name} factors must be finite and nonnegative")
+    if any(x == 0.0 for x in vals):
+        return 0.0
+    log_value = math.fsum(math.log(x) for x in vals)
+    if log_value < _MIN_PRODUCT_LOG or log_value > _MAX_PRODUCT_LOG:
+        raise ValueError(f"{name} left the positive finite native range")
+    value = math.exp(log_value)
+    if not math.isfinite(value) or value == 0.0:
+        raise ValueError(f"{name} left the positive finite native range")
+    return value
+
+
+def _complex_product(factors: tuple[complex, ...], name: str) -> complex:
+    """Multiply complex factors through magnitude/phase without false underflow."""
+    vals = tuple(_complex_scalar(x, name) for x in factors)
+    mags = tuple(abs(x) for x in vals)
+    if any(not math.isfinite(x) for x in mags):
+        raise ValueError(f"{name} magnitude must be finite")
+    if any(x == 0.0 for x in mags):
+        return 0.0j
+    magnitude = _positive_product(mags, name)
+    phase = 1.0 + 0.0j
+    for value, mag in zip(vals, mags):
+        phase *= value / mag
+    out = magnitude * phase
+    if not (math.isfinite(out.real) and math.isfinite(out.imag)):
+        raise ValueError(f"{name} left the finite native range")
+    return complex(out)
+
+
+def _signed_product(factors: tuple[float, ...], name: str) -> float:
+    vals = tuple(float(x) for x in factors)
+    if not all(math.isfinite(x) for x in vals):
+        raise ValueError(f"{name} factors must be finite")
+    if any(x == 0.0 for x in vals):
+        return 0.0
+    sign = -1.0 if sum(x < 0.0 for x in vals) % 2 else 1.0
+    return sign * _positive_product(tuple(abs(x) for x in vals), name)
+
+
+def _relative_gap(a: complex, b: complex, *, scale: float | None = None) -> float:
+    gap = float(abs(a - b))
+    native_scale = max(abs(a), abs(b)) if scale is None else abs(float(scale))
+    if native_scale == 0.0:
+        return 0.0 if gap == 0.0 else math.inf
+    return gap / native_scale
+
+
+def _require_native_equal(
+    name: str,
+    actual: complex,
+    expected: complex,
+    *,
+    scale: float | None = None,
+    relative_tolerance: float = 5e-10,
+) -> None:
+    if _relative_gap(actual, expected, scale=scale) > relative_tolerance:
+        raise AssertionError(f"{name} failed its native-scale identity")
+
+
 def leray_project(k: np.ndarray, value: np.ndarray) -> np.ndarray:
     """Complex Fourier Leray projection at one nonzero real wavevector."""
     q = _vec3(k, "wavevector")
     v = np.asarray(value, dtype=complex)
     if v.shape != (3,) or np.any(~np.isfinite(v.real)) or np.any(~np.isfinite(v.imag)):
         raise ValueError("finite complex three-vector required")
-    n2 = float(np.dot(q, q))
-    if n2 <= 0.0:
+    norm = stable_norm3(q)
+    if norm == 0.0:
         raise ValueError("nonzero wavevector required")
-    return v - q * (np.dot(q, v) / n2)
+    qhat = q / norm
+    projected = v - qhat * np.dot(qhat, v)
+    if np.any(~np.isfinite(projected.real)) or np.any(~np.isfinite(projected.imag)):
+        raise ValueError("Leray projection left the finite native range")
+    return projected
 
 
 def unordered_parent_curl_source(
@@ -78,14 +162,7 @@ def unordered_parent_curl_source(
     sy = _helicity(sy, "sy")
     ax = _complex_scalar(ax, "ax")
     ay = _complex_scalar(ay, "ay")
-    scale = max(1.0, float(np.linalg.norm(x)), float(np.linalg.norm(y)), float(np.linalg.norm(z)))
-    if np.linalg.norm(x + y - z) > 2e-12 * scale:
-        raise ValueError("physical parent pair must satisfy z=x+y")
-    nx = float(np.linalg.norm(x))
-    ny = float(np.linalg.norm(y))
-    nz = float(np.linalg.norm(z))
-    if min(nx, ny, nz) <= 1e-14:
-        raise ValueError("nonzero parent and child wavevectors required")
+    nx, ny, _ = _physical_parent_pair(x, y, z)
 
     hx = helical_basis(x, sx)
     hy = helical_basis(y, sy)
@@ -94,6 +171,8 @@ def unordered_parent_curl_source(
     wx = sx * nx * ux
     wy = sy * ny * uy
     raw = np.cross(ux, wy) + np.cross(uy, wx)
+    if np.any(~np.isfinite(raw.real)) or np.any(~np.isfinite(raw.imag)):
+        raise ValueError("unordered curl source left the finite native range")
     return leray_project(z, raw)
 
 
@@ -127,16 +206,13 @@ def waleffe_child_source_coefficient(
     sz = _helicity(sz, "sz")
     ax = _complex_scalar(ax, "ax")
     ay = _complex_scalar(ay, "ay")
-    scale = max(1.0, float(np.linalg.norm(x)), float(np.linalg.norm(y)), float(np.linalg.norm(z)))
-    if np.linalg.norm(x + y - z) > 2e-12 * scale:
-        raise ValueError("physical parent pair must satisfy z=x+y")
-    nx = float(np.linalg.norm(x))
-    ny = float(np.linalg.norm(y))
-    if min(nx, ny, float(np.linalg.norm(z))) <= 1e-14:
-        raise ValueError("nonzero parent and child wavevectors required")
+    nx, ny, _ = _physical_parent_pair(x, y, z)
     g = coupling_g(x, y, -z, sx, sy, sz)
     signed_frequency = sx * nx - sy * ny
-    return 2.0 * signed_frequency * np.conjugate(g) * ax * ay
+    return _complex_product(
+        (2.0, signed_frequency, np.conjugate(g), ax, ay),
+        "Waleffe child source coefficient",
+    )
 
 
 def direct_child_source_coefficient(
@@ -173,12 +249,19 @@ def phase_alignment(
     ax = _complex_scalar(ax, "ax")
     ay = _complex_scalar(ay, "ay")
     az = _complex_scalar(az, "az")
-    den = abs(g) * abs(ax) * abs(ay) * abs(az)
-    if a == 0.0 or den == 0.0:
+    magnitudes = (abs(g), abs(ax), abs(ay), abs(az))
+    if any(not math.isfinite(x) for x in magnitudes):
+        raise ValueError("phase-alignment magnitude must be finite")
+    if a == 0.0 or any(x == 0.0 for x in magnitudes):
         return 0.0
-    raw = math.copysign(1.0, a) * float(
-        np.real(np.conjugate(az) * np.conjugate(g) * ax * ay)
-    ) / den
+    ng, nx, ny, nz = magnitudes
+    unit_phase = (
+        np.conjugate(az / nz)
+        * np.conjugate(g / ng)
+        * (ax / nx)
+        * (ay / ny)
+    )
+    raw = math.copysign(1.0, a) * float(np.real(unit_phase))
     if abs(raw) > 1.0 + 5e-12:
         raise AssertionError("modal phase alignment left [-1,1]")
     return float(max(-1.0, min(1.0, raw)))
@@ -204,6 +287,7 @@ class HelicalPhysicalEdgeRegistration:
     registered_upper_progress_work: float
     direct_child_source_coefficient: complex
     waleffe_child_source_coefficient: complex
+    native_source_coefficient_scale: float
     direct_vs_waleffe_residual: float
     leray_pairing_residual: float
     upper_progress_identity_residual: float
@@ -213,6 +297,14 @@ class HelicalPhysicalEdgeRegistration:
     duhamel_weight_used_as_causal_law: bool = False
 
     def __post_init__(self) -> None:
+        direct = _complex_scalar(
+            self.direct_child_source_coefficient,
+            "direct child source coefficient",
+        )
+        waleffe = _complex_scalar(
+            self.waleffe_child_source_coefficient,
+            "Waleffe child source coefficient",
+        )
         positive = (
             self.parent_x_frequency,
             self.parent_y_frequency,
@@ -234,20 +326,146 @@ class HelicalPhysicalEdgeRegistration:
             self.signed_child_energy_work,
             self.signed_upper_progress_work,
             self.registered_upper_progress_work,
+            self.native_source_coefficient_scale,
             self.direct_vs_waleffe_residual,
             self.leray_pairing_residual,
             self.upper_progress_identity_residual,
         )
         if not all(math.isfinite(x) for x in finite):
             raise ValueError("finite physical edge registration data required")
-        if self.native_modal_capacity < 0 or self.geometric_multiplier_J < 0 or self.coupling_abs < 0:
-            raise ValueError("capacity and geometric magnitudes must be nonnegative")
+        nonnegative = (
+            self.coupling_abs,
+            self.geometric_multiplier_J,
+            self.native_modal_capacity,
+            self.native_source_coefficient_scale,
+            self.direct_vs_waleffe_residual,
+            self.leray_pairing_residual,
+        )
+        if not all(x >= 0.0 for x in nonnegative):
+            raise ValueError("capacity, source scale, residuals and geometric magnitudes must be nonnegative")
         if self.normalized_multiplier < -5e-12 or self.normalized_multiplier > 1.0 + 5e-10:
             raise AssertionError("single-edge multiplier exceeds the certified global Jstar envelope")
         if abs(self.phase_alignment) > 1.0 + 5e-12:
             raise AssertionError("phase alignment must lie in [-1,1]")
-        if not self.unordered_parent_orientation or self.young_norm_used_as_capacity or self.duhamel_weight_used_as_causal_law:
+        if (
+            self.unordered_parent_orientation is not True
+            or self.young_norm_used_as_capacity is not False
+            or self.duhamel_weight_used_as_causal_law is not False
+        ):
             raise ValueError("physical helical edge registration used a forbidden observer/causal replacement")
+
+        parent_top = max(self.parent_x_frequency, self.parent_y_frequency)
+        _require_native_equal(
+            "parent-top frequency",
+            self.parent_top_frequency,
+            parent_top,
+        )
+        forward_ratio = self.child_frequency / parent_top
+        _require_native_equal("forward ratio", self.forward_ratio, forward_ratio)
+        progress = max(0.0, math.log(forward_ratio))
+        _require_native_equal("scale progress", self.scale_progress, progress)
+
+        # With sx,sy in {+1,-1}, the signed frequency is necessarily one of
+        # +/-(nx+ny) or +/-(nx-ny).  This retains that physical provenance even
+        # though the compact registration stores the signed factor, not both signs.
+        signed_options = (
+            self.parent_x_frequency + self.parent_y_frequency,
+            self.parent_x_frequency - self.parent_y_frequency,
+            -self.parent_x_frequency + self.parent_y_frequency,
+            -self.parent_x_frequency - self.parent_y_frequency,
+        )
+        if min(
+            _relative_gap(self.signed_frequency_factor, option)
+            for option in signed_options
+        ) > 5e-10:
+            raise AssertionError("signed frequency factor has no helical parent provenance")
+
+        expected_j = (
+            progress
+            * (abs(self.signed_frequency_factor) / self.child_frequency)
+            * self.coupling_abs
+        )
+        _require_native_equal(
+            "geometric multiplier J",
+            self.geometric_multiplier_J,
+            expected_j,
+        )
+        expected_normalized = expected_j / self.global_multiplier_Jstar
+        _require_native_equal(
+            "normalized multiplier",
+            self.normalized_multiplier,
+            expected_normalized,
+        )
+
+        coefficient_residual = abs(direct - waleffe)
+        _require_native_equal(
+            "direct/Waleffe coefficient residual",
+            self.direct_vs_waleffe_residual,
+            coefficient_residual,
+            scale=self.native_source_coefficient_scale,
+        )
+        if _relative_gap(
+            direct,
+            waleffe,
+            scale=self.native_source_coefficient_scale,
+        ) > 2e-10:
+            raise AssertionError("direct NS source disagrees with Waleffe coefficient")
+        if (
+            self.leray_pairing_residual > 0.0
+            and _relative_gap(
+                self.leray_pairing_residual,
+                0.0,
+                scale=self.native_source_coefficient_scale,
+            ) > 2e-10
+        ):
+            raise AssertionError("Leray pairing residual exceeds its native source scale")
+
+        expected_upper = _signed_product(
+            (self.signed_child_energy_work, progress),
+            "signed upper-progress work",
+        )
+        _require_native_equal(
+            "signed upper-progress work",
+            self.signed_upper_progress_work,
+            expected_upper,
+        )
+        expected_registered = _signed_product(
+            (
+                self.native_modal_capacity,
+                expected_j,
+                self.phase_alignment,
+            ),
+            "registered upper-progress work",
+        )
+        registration_scale = _positive_product(
+            (self.native_modal_capacity, expected_j),
+            "upper-progress identity scale",
+        )
+        _require_native_equal(
+            "physical registration identity",
+            self.registered_upper_progress_work,
+            expected_registered,
+            scale=registration_scale,
+        )
+        identity_residual = self.signed_upper_progress_work - self.registered_upper_progress_work
+        _require_native_equal(
+            "upper-progress identity residual",
+            self.upper_progress_identity_residual,
+            identity_residual,
+            scale=registration_scale,
+        )
+        if _relative_gap(
+            self.signed_upper_progress_work,
+            self.registered_upper_progress_work,
+            scale=registration_scale,
+        ) > 5e-10:
+            raise AssertionError("physical upper-progress work failed the A*J*c identity")
+        if self.native_modal_capacity == 0.0 and self.signed_child_energy_work != 0.0:
+            raise AssertionError("zero native capacity cannot carry nonzero physical work")
+        if self.positive_forward_work is not (
+            progress > 0.0 and self.signed_child_energy_work > 0.0
+        ):
+            raise AssertionError("positive-forward-work flag disagrees with physical work")
 
 
 def register_helical_physical_edge(
@@ -272,18 +490,31 @@ def register_helical_physical_edge(
     ax = _complex_scalar(ax, "ax")
     ay = _complex_scalar(ay, "ay")
     az = _complex_scalar(az, "az")
-    scale = max(1.0, float(np.linalg.norm(x)), float(np.linalg.norm(y)), float(np.linalg.norm(z)))
-    if np.linalg.norm(x + y - z) > 2e-12 * scale:
-        raise ValueError("physical parent pair must satisfy z=x+y")
-    nx, ny, nz = map(float, map(np.linalg.norm, (x, y, z)))
-    if min(nx, ny, nz) <= 1e-14:
-        raise ValueError("nonzero parent and child wavevectors required")
+    nx, ny, nz = _physical_parent_pair(x, y, z)
 
-    direct = direct_child_source_coefficient(x, y, z, sx, sy, sz, ax, ay)
-    waleffe = waleffe_child_source_coefficient(x, y, z, sx, sy, sz, ax, ay)
-    coeff_scale = max(1.0, abs(direct), abs(waleffe))
+    ax_abs, ay_abs, az_abs = abs(ax), abs(ay), abs(az)
+    # Establish representability before evaluating products in an order that
+    # could silently erase a nonzero physical interaction.
+    capacity = _positive_product(
+        (4.0, nz, ax_abs, ay_abs, az_abs),
+        "native modal capacity",
+    )
+    parent_frequency_sum = max(nx, ny) * (1.0 + min(nx, ny) / max(nx, ny))
+    source_scale = _positive_product(
+        (parent_frequency_sum, ax_abs, ay_abs),
+        "native source coefficient scale",
+    )
+
+    direct = _complex_scalar(
+        direct_child_source_coefficient(x, y, z, sx, sy, sz, ax, ay),
+        "direct child source coefficient",
+    )
+    waleffe = _complex_scalar(
+        waleffe_child_source_coefficient(x, y, z, sx, sy, sz, ax, ay),
+        "Waleffe child source coefficient",
+    )
     coeff_res = abs(direct - waleffe)
-    if coeff_res > 2e-10 * coeff_scale:
+    if _relative_gap(direct, waleffe, scale=source_scale) > 2e-10:
         raise AssertionError("direct Leray/curl source disagrees with Waleffe helical coefficient")
 
     # Pairing a divergence-free child helical vector makes Leray projection free.
@@ -293,31 +524,40 @@ def register_helical_physical_edge(
     uy = ay * hy
     raw = np.cross(ux, sy * ny * uy) + np.cross(uy, sx * nx * ux)
     hz = helical_basis(z, sz)
-    unprojected = complex(np.vdot(hz, raw))
+    unprojected = _complex_scalar(np.vdot(hz, raw), "unprojected child pairing")
     leray_res = abs(unprojected - direct)
-    if leray_res > 2e-10 * max(1.0, abs(unprojected), abs(direct)):
+    if _relative_gap(unprojected, direct, scale=source_scale) > 2e-10:
         raise AssertionError("Leray projection changed a divergence-free child helical pairing")
 
     g = coupling_g(x, y, -z, sx, sy, sz)
     signed_frequency = sx * nx - sy * ny
-    work = 2.0 * float(np.real(np.conjugate(az) * direct))
+    work_pairing = _complex_product(
+        (2.0, np.conjugate(az), waleffe),
+        "child-energy work pairing",
+    )
+    work = float(np.real(work_pairing))
     parent_top = max(nx, ny)
     forward_ratio = nz / parent_top
     progress = max(0.0, math.log(forward_ratio))
-    upper = work * progress
+    upper = _signed_product((work, progress), "signed upper-progress work")
 
     # This is the native modal interaction capacity of the same physical edge.
     # Factor 2: the two parent orders in the unordered convolution orbit.
     # Factor 2: physical child energy derivative 2 Re(conj(a_z) F_z).
-    capacity = 4.0 * nz * abs(ax) * abs(ay) * abs(az)
     metrics = edge_metrics(x, y, z, sx, sy, sz)
     J = float(metrics.efficiency)
     jstar = float_jstar()
     c = phase_alignment(signed_frequency, g, ax, ay, az)
-    registered = capacity * J * c
+    registered = _signed_product(
+        (capacity, J, c),
+        "registered upper-progress work",
+    )
     identity_res = upper - registered
-    tol = 5e-10 * max(1.0, abs(upper), abs(registered), capacity * jstar)
-    if abs(identity_res) > tol:
+    registration_scale = _positive_product(
+        (capacity, J),
+        "upper-progress identity scale",
+    )
+    if _relative_gap(upper, registered, scale=registration_scale) > 5e-10:
         raise AssertionError("physical upper-progress work failed the exact A*J*c registration identity")
     multiplier = J / jstar
     if multiplier > 1.0 + 5e-10:
@@ -342,6 +582,7 @@ def register_helical_physical_edge(
         registered_upper_progress_work=registered,
         direct_child_source_coefficient=direct,
         waleffe_child_source_coefficient=waleffe,
+        native_source_coefficient_scale=source_scale,
         direct_vs_waleffe_residual=coeff_res,
         leray_pairing_residual=leray_res,
         upper_progress_identity_residual=identity_res,
@@ -406,7 +647,7 @@ class HelicalPhysicalEdgeStress:
 
 
 def _relative(a: complex, b: complex) -> float:
-    return float(abs(a - b) / max(1.0, abs(a), abs(b)))
+    return _relative_gap(a, b)
 
 
 def stress(samples: int = 50_000, seed: int = 20260811) -> HelicalPhysicalEdgeStress:
@@ -431,8 +672,22 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> HelicalPhysicalEdgeSt
         ax, ay, az = map(complex, amps)
 
         row = register_helical_physical_edge(x=x, y=y, z=z, sx=sx, sy=sy, sz=sz, ax=ax, ay=ay, az=az)
-        wcoeff = max(wcoeff, row.direct_vs_waleffe_residual / max(1.0, abs(row.direct_child_source_coefficient), abs(row.waleffe_child_source_coefficient)))
-        wleray = max(wleray, row.leray_pairing_residual / max(1.0, abs(row.direct_child_source_coefficient)))
+        wcoeff = max(
+            wcoeff,
+            _relative_gap(
+                row.direct_child_source_coefficient,
+                row.waleffe_child_source_coefficient,
+                scale=row.native_source_coefficient_scale,
+            ),
+        )
+        wleray = max(
+            wleray,
+            _relative_gap(
+                row.leray_pairing_residual,
+                0.0,
+                scale=row.native_source_coefficient_scale,
+            ),
+        )
         wident = max(wident, _relative(row.signed_upper_progress_work, row.registered_upper_progress_work))
         maxm = max(maxm, row.normalized_multiplier)
         if row.scale_progress == 0.0:
@@ -459,7 +714,9 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> HelicalPhysicalEdgeSt
         cp = phase_alignment(row.signed_frequency_factor, gp, axp, ayp, azp)
         wgauge = max(wgauge, abs(cp - row.phase_alignment))
 
-        lam = float(math.exp(rng.uniform(-4.0, 4.0)))
+        # Exercise the same physical geometry across more than 200 decimal
+        # orders of wavevector scale; invariants must follow the edge, not |k|=1.
+        lam = float(math.exp(rng.uniform(-250.0, 250.0)))
         scaled = register_helical_physical_edge(
             x=lam * x,
             y=lam * y,
