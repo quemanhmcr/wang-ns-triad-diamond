@@ -24,8 +24,10 @@ from src.full_natural_service_corridor_quotient import (
     realized_endpoint_hard_shell_witnesses,
 )
 from src.high_strain_critical_carrier_reentry import (
+    CriticalDissipationAtom,
     critical_seed_backward_first_hit,
     critical_seed_natural_outcome,
+    pushforward_critical_dissipation_law,
 )
 from src.nn_critical_heat_carrier_seed import renewal_carrier_critical_mass_lower, renewal_scale
 
@@ -194,6 +196,94 @@ def test_high_strain_monitor_thresholds_are_bound_to_the_actual_terminal_amplitu
     with pytest.raises(ValueError, match="thresholds do not match"):
         critical_seed_natural_outcome(
             event_time=2.0 * T,
+            renewal_frequency=A,
+            scaled_lifetime=c,
+            viscosity=1.0,
+            terminal_coefficient=amp,
+            endpoint_coefficient=amp,
+            hh_impulse=0j,
+            residual_interface_impulse=0j,
+            first_hit=first_hit,
+        )
+
+
+def test_generic_shell_producer_cannot_invent_a_foreign_parent_scale():
+    """The producer, not only the downstream adapter, must bind A=3M/4."""
+    M = 4.0
+    A = renewal_scale(M)
+    c = 1.0
+    T = c / A**2
+    mu0 = 2.0
+    amp = math.sqrt(1.2 * critical_shell_terminal_mass_lower(mu0) / A)
+    first_hit = critical_shell_backward_first_hit(
+        np.linspace(0.0, T, 5),
+        terminal_amplitude=amp,
+        strain_action=np.zeros(5),
+        residual_impulse_abs=np.zeros(5),
+        hh_impulse_abs=np.zeros(5),
+    )
+    with pytest.raises(ValueError, match="parent|renewal|scale|provenance"):
+        critical_shell_natural_outcome(
+            event_time=2.0 * T,
+            parent_shell_frequency=100.0 * M,
+            renewal_frequency=A,
+            shell_critical_mass_lower=mu0,
+            scaled_lifetime=c,
+            viscosity=1.0,
+            terminal_coefficient=amp,
+            endpoint_coefficient=amp,
+            hh_impulse=0j,
+            residual_interface_impulse=0j,
+            first_hit=first_hit,
+        )
+
+
+def test_high_strain_pushforward_rejects_zero_carrier_at_tiny_native_threshold():
+    """A unit-sized tolerance must not turn a zero shell into a critical seed."""
+    with pytest.raises(ValueError, match="critical shell|set G|mass"):
+        pushforward_critical_dissipation_law(
+            (
+                CriticalDissipationAtom(
+                    mass=1.0,
+                    child_frequency=4.0,
+                    shell_upper_frequency=1.0,
+                    shell_energy_u=0.0,
+                    time=1.0,
+                ),
+            ),
+            scaled_lifetime=1.0e8,
+        )
+
+
+def test_high_strain_corridor_cannot_rebind_a_seed_to_a_foreign_event_time():
+    """The carried shell time is part of the PDE event and cannot be replaced."""
+    c = 1.0
+    seed = pushforward_critical_dissipation_law(
+        (
+            CriticalDissipationAtom(
+                mass=1.0,
+                child_frequency=4.0,
+                shell_upper_frequency=1.0,
+                shell_energy_u=10.0,
+                time=4.0,
+            ),
+        ),
+        scaled_lifetime=c,
+    )[0]
+    A = seed.renewal_frequency
+    T = c / A**2
+    amp = math.sqrt(seed.renewal_critical_mass / A)
+    first_hit = critical_seed_backward_first_hit(
+        np.linspace(0.0, T, 5),
+        terminal_amplitude=amp,
+        strain_action=np.zeros(5),
+        residual_impulse_abs=np.zeros(5),
+        hh_impulse_abs=np.zeros(5),
+    )
+    with pytest.raises(ValueError, match="seed|event time|provenance"):
+        critical_seed_natural_outcome(
+            source_seed=seed,
+            event_time=2.0 * seed.time,
             renewal_frequency=A,
             scaled_lifetime=c,
             viscosity=1.0,
