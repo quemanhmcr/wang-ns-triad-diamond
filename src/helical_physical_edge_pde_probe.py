@@ -101,8 +101,8 @@ def _snapshot(
 
     parent_hat = parent_mask[None, ...] * state_hat
     child_hat = child_mask[None, ...] * state_hat
-    designated_hat = -child_mask[None, ...] * _nonlinear_term(
-        parent_hat, k, k2, dealias
+    designated_hat = -(
+        child_mask[None, ...] * _nonlinear_term(parent_hat, k, k2, dealias)
     )
     full_nonlinear = _nonlinear_term(state_hat, k, k2, dealias)
 
