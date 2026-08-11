@@ -104,8 +104,8 @@ def test_tiny_nondivergencefree_vector_cannot_hide_behind_absolute_unit_floor():
 
 def test_fiber_certificate_cannot_rebind_quotient_mass_without_rebinding_atoms():
     fiber = _fiber(amplitude=1.0e-6, quotient_mass=1.0)
-    forged = replace(fiber, quotient_measure_mass=2.0)
     with pytest.raises((ValueError, AssertionError), match="quotient|measure|mass|reconstruct|provenance"):
+        forged = replace(fiber, quotient_measure_mass=2.0)
         continuum_edge_measure_ledger((forged,))
 
 
@@ -113,12 +113,12 @@ def test_fiber_certificate_cannot_forge_native_direct_work_density():
     fiber = _fiber(amplitude=1.0e-7)
     native = abs(fiber.modal_signed_work_density)
     assert native > 0.0
-    forged = replace(
-        fiber,
-        direct_signed_work_density=fiber.direct_signed_work_density + 0.25 * native,
-        signed_work_reconstruction_residual=0.0,
-    )
     with pytest.raises((ValueError, AssertionError), match="work|reconstruct|provenance|fiber"):
+        forged = replace(
+            fiber,
+            direct_signed_work_density=fiber.direct_signed_work_density + 0.25 * native,
+            signed_work_reconstruction_residual=0.0,
+        )
         continuum_edge_measure_ledger((forged,))
 
 
