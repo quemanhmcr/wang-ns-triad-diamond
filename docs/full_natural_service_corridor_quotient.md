@@ -152,4 +152,25 @@ UV-unbounded survivor alternative.
 - comparable endpoint scale is not called directional progress;
 - no packet persistence or coherent-cell dominance is introduced.
 
+## 6. Physical PDE falsification lane
+
+The companion audit probe evolves the unforced three-dimensional incompressible
+Navier--Stokes Fourier--Galerkin system itself.  It uses Leray projection,
+viscosity, the quadratic convective term, 2/3 dealiasing, and RK4 time
+integration on a fixed multiscale divergence-free field.  Across several spatial
+resolutions it reads, from the same evolved physical interval,
+
+- the direct `Q^2` carrier-energy balance, including nonzero nonlinear carrier
+  work;
+- the global NS energy balance and zero global work of the dealiased quadratic
+  nonlinearity;
+- the endpoint two-hard-shell cover and its `2/3` witness lower;
+- positive bounded increment service integrated on that same corridor.
+
+This is a resolved Fourier--Galerkin approximation to Navier--Stokes, not an
+artificial evolution and not a proof of the continuum theorem.  Its purpose is
+falsification: a sign, projection, scale, or duplicate-time error in the proposed
+physical bookkeeping must also survive contact with an actually evolved
+nonlinear incompressible PDE trajectory.
+
 No Navier--Stokes global-regularity claim is made.

@@ -7,7 +7,9 @@ on:
     paths:
       - 'src/full_natural_service_corridor_quotient.py'
       - 'src/critical_shell_service_reentry.py'
+      - 'src/full_natural_service_corridor_pde_probe.py'
       - 'tests/test_full_natural_service_corridor_audit.py'
+      - 'tests/test_full_natural_service_corridor_pde_probe.py'
       - '.github/workflows/audit-full-natural-service-corridor.yml'
   workflow_dispatch:
 
@@ -35,7 +37,10 @@ jobs:
         run: python -m src.critical_shell_service_reentry --samples 100000 --outdir results-audit/critical-shell-service-reentry
       - name: Run high-strain corridor dependency stress
         run: python -m src.high_strain_critical_carrier_reentry --samples 100000 --outdir results-audit/high-strain-critical-carrier-reentry
+      - name: Run actual dealiased Navier-Stokes corridor probe
+        run: python -m src.full_natural_service_corridor_pde_probe --resolutions 12 16 20 --steps 80 --outdir results-audit/full-natural-service-corridor-pde-probe
       - run: cat results-audit/full-natural-service-corridor/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - run: cat results-audit/full-natural-service-corridor-pde-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: audit-full-natural-service-corridor-results
