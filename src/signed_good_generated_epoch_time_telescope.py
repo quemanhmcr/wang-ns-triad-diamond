@@ -476,7 +476,7 @@ def signed_good_generated_epoch_telescope(
                 rel_tol=NATIVE_RELATIVE_TOLERANCE,
                 abs_tol=0.0,
             ):
-                raise ValueError("one physical carrier identity cannot carry different native frequencies")
+                raise ValueError("one physical carrier identity has a different native frequency")
 
     common = tuple(row.common_reference_time for row in rows)
     lifetimes = tuple(row.parent_natural_lifetime for row in rows)
