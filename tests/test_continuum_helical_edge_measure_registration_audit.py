@@ -12,6 +12,7 @@ import numpy as np
 import pytest
 
 from src.continuum_helical_edge_measure_registration import (
+    _nonforward_positive_fiber,
     _symmetric_extremal_fiber,
     continuum_edge_measure_ledger,
     edge_measure_to_service_or_flat,
@@ -211,3 +212,18 @@ def test_continuum_measure_scaling_preserves_dimensionless_law_far_below_unit_sc
     assert tiny.block_transfer_deficit == pytest.approx(base.block_transfer_deficit, abs=3.0e-11)
     assert tiny.capacity_mass / base.capacity_mass == pytest.approx(tiny_mass, rel=3.0e-11)
     assert tiny.signed_direct_work / base.signed_direct_work == pytest.approx(tiny_mass, rel=3.0e-11)
+
+
+def test_nonforward_typed_edge_cannot_forge_physical_work_above_native_capacity():
+    fiber = _nonforward_positive_fiber()
+    candidates = [
+        atom.registration
+        for atom in fiber.modal_atoms
+        if atom.registration.scale_progress == 0.0
+        and atom.registration.native_modal_capacity > 0.0
+    ]
+    assert candidates
+    edge = max(candidates, key=lambda row: row.native_modal_capacity)
+    forged_work = 1.25 * edge.native_modal_capacity
+    with pytest.raises((ValueError, AssertionError), match="work|capacity|physical|provenance"):
+        replace(edge, signed_child_energy_work=forged_work)
