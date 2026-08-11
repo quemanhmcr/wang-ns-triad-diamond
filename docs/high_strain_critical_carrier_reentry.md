@@ -147,3 +147,27 @@ t=0,\\
 A renewed high-strain stop remains recursive critical dissipation, not a reset.  Interface and HH coefficient stops do not yet own physical work: they locate reentry of the same carrier into the `Q^2` energy gate.  Only the actual inheritance, HH generation, native interface/relink, or strain work selected there receives its existing physical owner.  What remains master-facing is universal renewal of source/SGS and genuine relink routes, plus the final assembly proving that every recursive route enters one of the already-certified service/stop corridors.
 
 No global-regularity conclusion is asserted.
+
+## Candidate refinement: repeated high-strain renewal cannot continue forever
+
+This theorem already supplies the exact physical recurrence geometry needed by
+the descending-epoch candidate.  A high-strain stop at child scale `N` is pushed
+to an actual critical resolved ancestor `M<=N/4`, and the renewed smooth carrier
+uses `A=3M/4`.  Therefore a consecutive high-strain child satisfies
+
+`N_next/N<=3/16`.
+
+The new candidate does **not** assume the first-hit histories are disjoint.  With
+
+`G_*=int_0^t* ||grad u||_2^2 dt`,
+
+each event has `D_*<=D_j<=N_j G_*`.  Hence `N_j>=D_*/G_*`, and the geometric scale
+descent makes both `sum N_j` and `sum D_j` finite along one consecutive
+high-strain epoch.
+
+A renewed high-strain stop remains a genuine recursive critical-dissipation
+event.  The conclusion is only that such events cannot form an eventually-pure
+infinite tail.  A different physical owner breaks the epoch.  In particular,
+material/new-ancestry relink remains a genuine owner, whereas the separately
+certified smooth conservative `K_phys` role relink is same-event donor provenance
+and creates no recursive child.

@@ -130,3 +130,30 @@ Thus:
 - material ownership and renewed-slab attachment of those dissipation-seeded edges remain a continuum problem.
 
 So the high-strain event is no longer an anonymous scalar recursion label, but it is still **not** a globally finite reset.  This prevents both false global counting and the equally false step of naming a shell/coherent edge as a selected transfer parent before the PDE supplies material renewal.
+
+## Candidate refinement: the physical descendant route makes consecutive high strain finite
+
+The anti-reset warning above remains essential: `D_V` is not a globally additive
+scale-independent budget, and an arbitrary UV-increasing chain can pay fixed
+normalized dissipation with finite viscous cost.
+
+The actual high-strain recursive route has different geometry.  The certified
+`D_V|_G` ancestor satisfies `M<=N/4`, and the renewed carrier scale is `A=3M/4`.
+Thus consecutive high-strain renewal obeys
+
+`N_next/N <= 3/16`.
+
+Let `G_*=int_0^t* ||grad u||_2^2 dt`.  For every high-strain history, regardless
+of overlap with other histories,
+
+`D_j <= N_j G_*`
+
+by interval restriction and low-pass `L2` contraction.  Together with
+`D_j>=D_*`, this gives the physical scale floor `N_j>=D_*/G_*`, while summing the
+native scale weights gives
+
+`sum D_j <= G_* sum N_j <= (16/13)N_0 G_*`.
+
+So the candidate does not overturn the old anti-reset theorem.  It proves a more
+specific path statement: a **consecutive physically descending high-strain epoch**
+is finite even under arbitrary time overlap.  Mixed-owner recurrence remains open.

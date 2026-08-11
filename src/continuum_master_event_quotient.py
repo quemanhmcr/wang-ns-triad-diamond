@@ -10,6 +10,11 @@ from pathlib import Path
 from typing import Iterable, Sequence
 
 from src.high_strain_resolved_ancestor import TRANSPORTER_RADIUS
+from src.high_strain_descending_epoch_telescope import (
+    HIGH_STRAIN_RENEWAL_RATIO_UPPER,
+    HighStrainRenewalStep,
+    high_strain_epoch_telescope,
+)
 from src.full_natural_checkpoint_quotient import FULL_NATURAL_CHECKPOINT, FullNaturalCheckpoint
 from src.full_natural_service_corridor_quotient import FULL_NATURAL_SERVICE_WITNESS
 from src.same_carrier_checkpoint_segmentation_quotient import (
@@ -41,6 +46,7 @@ STATUS = (
     "NATURAL_HORIZON_CHECKPOINTS_ZERO_EVENT_DEPTH__"
     "SAME_CARRIER_FIRST_HIT_NOT_RESET_BY_CHECKPOINTS__"
     "SMOOTH_RELINK_SAME_EVENT_DONOR_ZERO_DEPTH__"
+    "CONSECUTIVE_HIGH_STRAIN_EPOCHS_FINITE_BY_PHYSICAL_DISSIPATION__"
     "CHECKPOINT_ZENO_NOT_CANONICAL_LINEAGE__NO_COMMON_CLOCK_OR_CAUSAL_REWEIGHTING"
 )
 
@@ -625,13 +631,13 @@ def master_escape_dichotomy() -> dict[str, str]:
     """Analytic infinite-event consequence after checkpoint segmentation is quotiented."""
     return {
         "statement": (
-            "after zero-charge relays, hard/smooth conservative donor relays, same-corridor service witnesses, natural-horizon checkpoints, and same-carrier checkpoint segmentation are quotiented, any infinite recursive EVENT path avoiding t=0 must contain infinitely many genuine named non-free physical owner events"
+            "after zero-charge relays, hard/smooth conservative donor relays, same-corridor service witnesses, natural-horizon checkpoints, and same-carrier checkpoint segmentation are quotiented, any infinite recursive EVENT path avoiding t=0 must contain infinitely many genuine named non-free physical owner events; the physical 3/16 high-strain descent plus the global gradient reservoir additionally forbids the path from eventually consisting only of high-strain critical-dissipation renewals"
         ),
         "proof": (
-            "a no-event natural horizon cannot replace the event-anchored smooth carrier or reset its cumulative strain/coefficient first-hit monitors. Genuine fixed-A,c natural windows have one positive duration and cannot accumulate before t=0. Arbitrary observer cuts carry no window duration; a checkpoint must be bound to an actual no-hit restriction of the exact event/carrier/dual/PDE path, whose gluing leaves the same first stop, and at an interior cut accumulation the actual no-earlier-hit path plus a matching smooth-extension token gives either an endpoint face or continuation of the same carrier"
+            "a no-event natural horizon cannot replace the event-anchored smooth carrier or reset its cumulative strain/coefficient first-hit monitors. Genuine fixed-A,c natural windows have one positive duration and cannot accumulate before t=0. Arbitrary observer cuts carry no window duration; a checkpoint must be bound to an actual no-hit restriction of the exact event/carrier/dual/PDE path, whose gluing leaves the same first stop, and at an interior cut accumulation the actual no-earlier-hit path plus a matching smooth-extension token gives either an endpoint face or continuation of the same carrier. Separately, on every consecutive high-strain epoch one has D_*<=D_j<=N_j G_* and N_(j+1)<=3N_j/16, so the physical gradient reservoir and geometric scale descent force that epoch to be finite even with arbitrary interval overlap"
         ),
         "remaining_physics": (
-            "the remaining infinite-path problem is recurrence of genuine physical owner events and must telescope through their native work/source/service/reuse laws. Actual high-tail dissipation/work remains a genuine event route when its independent physical hypotheses are met; checkpoint re-hardening cannot manufacture that provenance"
+            "the remaining infinite-path problem is mixed recurrence of genuine physical owners after consecutive high-strain epochs are also known finite. Actual high-tail dissipation/work remains a genuine event route when its independent physical hypotheses are met; checkpoint re-hardening cannot manufacture that provenance"
         ),
     }
 
@@ -664,6 +670,9 @@ def theorem_certificate() -> dict[str, object]:
         "smooth_relink_donor_quotient": (
             "gauge-quotiented K_phys relink is a finite antisymmetric same-event role flux; the master rejects conservative_smooth_role_relink as a recursive owner, preserves its donor certificate as zero-depth provenance, and retains any simultaneous existing strain as the recursive owner"
         ),
+        "high_strain_descending_epoch": (
+            "high strain remains a genuine recursive owner, but consecutive high-strain renewal cannot persist indefinitely: every step pays D_V>=D_*, renews to N_next/N<=3/16 through an actual critical resolved ancestor, and obeys D_j<=N_j G_* for the physical global gradient reservoir G_* even under arbitrary interval overlap; hence every pure high-strain epoch is finite without promoting D_V to a global reset"
+        ),
         "universal_time_identity": "sum_j (t_j-t_(j+1)) = t_0-t_L on any ordered physical event or checkpoint times; event counting is a separate ontology",
         "natural_survivor": "a no-hit full-natural corridor consumes its theorem-supplied physical duration, but its horizon endpoint is an analysis checkpoint unless a first stop or t=0 occurs",
         "compact_scale_no_escape": (
@@ -685,7 +694,7 @@ def theorem_certificate() -> dict[str, object]:
         ),
         "boundary": "t=0 is absorbing",
         "scope": (
-            "this is a continuum master assembly/quotient theorem, not a global no-escape or Navier-Stokes regularity proof; checkpoint segmentation is no longer an independent escape seam, while termination of infinitely recurring genuine physical owners remains open"
+            "this is a continuum master assembly/quotient theorem, not a global no-escape or Navier-Stokes regularity proof; checkpoint segmentation and eventually-pure high-strain recurrence are no longer independent escape seams, while mixed recurrence of the remaining genuine physical owners remains open"
         ),
     }
 
@@ -703,6 +712,7 @@ class QuotientStress:
     checkpoint_barrier_failures: int
     checkpoint_segmentation_barrier_failures: int
     smooth_relink_recursion_barrier_failures: int
+    high_strain_epoch_telescope_failures: int
     maximum_relay_owner_count: int
     minimum_uv_time_gap_to_naive_infinite_sum: float
 
@@ -710,7 +720,7 @@ class QuotientStress:
 def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
     rng = random.Random(seed)
     wom = wtime = wscale = 0.0
-    boundary_fail = supplier_fail = obstruction_fail = service_witness_fail = checkpoint_fail = segmentation_fail = relink_fail = 0
+    boundary_fail = supplier_fail = obstruction_fail = service_witness_fail = checkpoint_fail = segmentation_fail = relink_fail = high_strain_epoch_fail = 0
     maxowners = 0
     uv_gap = math.inf
 
@@ -868,6 +878,43 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         relink_fail += 1
         raise AssertionError("pure smooth relink manufactured recursive event depth")
 
+    # High strain remains a real recursive owner, but an uninterrupted epoch of
+    # high-strain renewals has its own physical weighted-dissipation telescope.
+    c_hs = 1.0
+    G_hs = 20.0
+    from src.high_strain_dissipation_collision import clean_high_strain_dissipation_lower
+    from src.nn_critical_heat_carrier_seed import renewal_scale
+
+    D_hs = clean_high_strain_dissipation_lower(c_hs)
+    N_hs = 100.0 * D_hs / G_hs
+    high_strain_rows = []
+    for _ in range(3):
+        M_hs = N_hs / 4.0
+        A_hs = renewal_scale(M_hs)
+        high_strain_rows.append(HighStrainRenewalStep(N_hs, M_hs, A_hs, D_hs))
+        N_hs = A_hs
+    hs_epoch = high_strain_epoch_telescope(
+        high_strain_rows,
+        total_gradient_dissipation=G_hs,
+        scaled_lifetime=c_hs,
+    )
+    if hs_epoch.step_count != 3 or hs_epoch.maximum_observed_scale_ratio > HIGH_STRAIN_RENEWAL_RATIO_UPPER + 1e-12:
+        high_strain_epoch_fail += 1
+        raise AssertionError("physical consecutive high-strain epoch telescope failed")
+    badN_hs = max(high_strain_rows[-1].renewal_frequency * 1.1, 2.0 * D_hs / G_hs)
+    badM_hs = badN_hs / 4.0
+    try:
+        high_strain_epoch_telescope(
+            (*high_strain_rows, HighStrainRenewalStep(badN_hs, badM_hs, renewal_scale(badM_hs), D_hs)),
+            total_gradient_dissipation=G_hs,
+            scaled_lifetime=c_hs,
+        )
+    except ValueError:
+        pass
+    else:
+        high_strain_epoch_fail += 1
+        raise AssertionError("nonconsecutive high-strain restart crossed the epoch telescope")
+
     routed = owner_bundle_from_energy_reentry(
         "actual positive q^2-weighted HH work",
         1.0,
@@ -949,7 +996,7 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         if not (uv > first and math.isfinite(uv)):
             raise AssertionError("UV geometric natural-time obstruction disappeared")
 
-    return QuotientStress(samples, wom, wtime, wscale, boundary_fail, supplier_fail, obstruction_fail, service_witness_fail, checkpoint_fail, segmentation_fail, relink_fail, maxowners, uv_gap)
+    return QuotientStress(samples, wom, wtime, wscale, boundary_fail, supplier_fail, obstruction_fail, service_witness_fail, checkpoint_fail, segmentation_fail, relink_fail, high_strain_epoch_fail, maxowners, uv_gap)
 
 
 def main() -> None:
@@ -972,7 +1019,9 @@ Physical time remains exact. If checkpoint times are `t_0>=...>=t_L`, then `sum_
 
 Endpoint hard-shell rereading at a full-natural checkpoint is likewise witness geometry.  The companion checkpoint theorem keeps the incoming hard shell `M`, the actual corridor scale `A=3M/4`, and endpoint hard-shell candidates `A,2A` distinct.  Their ratios `3/4,3/2` do not supply directional progress and, without a new physical event, those hard-shell readings do not replace the smooth carrier or define a causal scale lineage.
 
-Thus, after zero-charge relays, observer gauges, coefficient locators, hard and smooth same-event donor circulation, same-corridor service layers, natural-horizon checkpoints and exact same-path segmentation are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events. A geometric finite-time sum still warns about genuinely changing-scale physical producers, but it cannot be manufactured from duration-free checkpoint readings. Genuine UV progression enters only through independently certified physical tail work/dissipation or another actual physical event.
+High strain remains a genuine physical owner, but it now has a native path telescope.  On a consecutive high-strain epoch, every event pays `D_j>=D_*`, its physical ancestor/renewal gives `N_(j+1)/N_j<=3/16`, and the global gradient reservoir gives `D_j<=N_j G_*` without any disjointness assumption on the first-hit histories.  Hence a recursive path cannot eventually remain in high strain alone; another genuine owner must break every sufficiently long descending epoch.  `D_V` is not used as a global additive reset.
+
+Thus, after zero-charge relays, observer gauges, coefficient locators, hard and smooth same-event donor circulation, same-corridor service layers, natural-horizon checkpoints and exact same-path segmentation are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events and cannot eventually remain in high strain alone.  A geometric finite-time sum still warns about genuinely changing-scale physical producers, but it cannot be manufactured from duration-free checkpoint readings.  Genuine UV progression enters only through independently certified physical tail work/dissipation or another actual physical event.
 
 Stress: `{out.samples}` quotient/path states
 - worst zero-charge owner-mass residual: `{out.worst_owner_mass_residual:.3e}`
@@ -985,10 +1034,11 @@ Stress: `{out.samples}` quotient/path states
 - full-natural checkpoint barrier failures: `{out.checkpoint_barrier_failures}`
 - same-carrier checkpoint-segmentation barrier failures: `{out.checkpoint_segmentation_barrier_failures}`
 - smooth-relink recursion-barrier failures: `{out.smooth_relink_recursion_barrier_failures}`
+- high-strain descending-epoch telescope failures: `{out.high_strain_epoch_telescope_failures}`
 - largest relayed joint-owner set sampled: `{out.maximum_relay_owner_count}`
 - minimum sampled changing-scale geometric time beyond its first window: `{out.minimum_uv_time_gap_to_naive_infinite_sum:.3e}`
 
-This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes no-event checkpoint segmentation and conservative smooth-relink donor depth from physical lineage; termination of the remaining genuine physical owner events remains the open master problem.
+This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes no-event checkpoint segmentation and conservative smooth-relink donor depth from physical lineage and proves that a recursive path cannot eventually remain forever in high strain alone. Mixed recurrence through the remaining genuine physical owners is still open.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
