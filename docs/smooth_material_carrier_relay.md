@@ -114,3 +114,27 @@ So the frontier is no longer “manufacture a new hard parent at the common slic
 > prove **universal physical slab renewal** for the same material carrier, with every failure routed to an existing first-stop cause.
 
 No global-regularity claim is made.
+
+## Candidate extension: natural horizons do not interrupt the relay
+
+The same-carrier checkpoint-segmentation theorem applies the relay principle to
+full-natural service horizons.  The exact carrier equation does not expire merely
+because one `cA^-2` interval has ended.  If no physical stop fires there, the
+natural endpoint is only an analysis checkpoint and the event search continues on
+the same `Q_A` carrier.
+
+The first-hit data therefore remain cumulative from the original physical event:
+
+`K_A[s,t]`, `|I_role-interface[s,t]|`, `|I_HH[s,t]|`,
+
+with the same terminal coefficient setting the two coefficient faces.  Re-anchoring
+a local affine chart may change coordinates, but it cannot reset those observables.
+The strain action is monotone; coefficient-impulse magnitudes may decrease by
+complex phase cancellation and are never summed per checkpoint segment or used as
+work.
+
+Consequently an accumulation of no-event natural horizons at an interior smooth
+time is either an existing first-stop face at the limit or is crossed by the same
+carrier.  Hardening into a fresh event role requires an actual physical event.
+This extension is a candidate until exact-SHA dedicated and full integration CI
+are green.

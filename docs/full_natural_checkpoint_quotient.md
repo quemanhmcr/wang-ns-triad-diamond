@@ -2,7 +2,7 @@
 
 ## Status
 
-Certified on exact implementation SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated GitHub Actions run `31451492854` and full physical-energy causal integration run `31451492844`.
+Base checkpoint theorem certified on exact implementation SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated GitHub Actions run `31451492854` and full physical-energy causal integration run `31451492844`.  The same-carrier continuation/no-reset refinement below is the current candidate and is not yet certified.
 
 This theorem separates three objects which were previously too easy to conflate:
 
@@ -132,15 +132,15 @@ residual remains only a numerical diagnostic.  Bounded-scale checkpoint
 continuation still reaches `t=0` by physical time, but it is not a chain of
 recursive physical events.
 
-## 4. The UV obstruction survives, in a cleaner ontology
+## 4. The geometric UV sum survives only as a diagnostic anti-theorem
 
-A hypothetical repeated upper-cover re-registration
+A hypothetical repeated upper-cover **reading** sequence
 
 \[
 M_j=M_0(3/2)^j
 \]
 
-uses corridor scales `A_j=3M_j/4`, so
+has corridor scales `A_j=3M_j/4`, so
 
 \[
 \sum_{j\ge0}cA_j^{-2}
@@ -149,13 +149,15 @@ uses corridor scales `A_j=3M_j/4`, so
 <\infty.
 \]
 
-The theorem deliberately **does not** convert this into an infinite event path.
-After checkpoint quotient it is an event-free UV continuation seam of the PDE.
-A subsequent theorem must decide whether such continuation forces actual high-tail
-dissipation/work, a genuine first stop, or another native physical mechanism.
+This remains a valid warning that **physical time alone** cannot distinguish an
+observer-generated scale sequence from real UV dynamics.  The candidate
+same-carrier continuation theorem supplies the missing type information: because
+no physical event fired at the checkpoint, the hard-shell reading does not replace
+the event-anchored carrier and does not reset its cumulative first-hit monitors.
 
-This is stricter than inventing a scale tax: no physical owner has yet been proved,
-so none is charged.
+Hence the geometric sequence above is a diagnostic state-reading construction,
+not an independent PDE continuation lineage.  Actual high-tail dissipation/work
+remains fully physical when its own independently certified hypotheses are met.
 
 ## 5. Fail-closed master semantics
 
@@ -175,10 +177,7 @@ until a new physical first stop/owner event actually occurs.
 
 ## Scope
 
-This theorem removes natural-horizon segmentation and two-shell cover ascent from
-recursive event depth.  It does **not** prove that event-free UV checkpoint
-continuation must enter high-tail work, and it does not prove 3D Navier--Stokes
-global regularity.
+The base theorem removes natural-horizon event depth and two-shell cover ascent.  The current candidate strengthens this: checkpoint hard-shell readings remain state sidecars while the same event-anchored smooth carrier and cumulative first-hit monitors continue.  Thus a UV-growing checkpoint-reading sequence is not a canonical physical lineage.  The candidate still does not telescope infinitely recurring genuine physical owners and does not prove 3D Navier--Stokes global regularity.
 
 ## 6. Endpoint witness selection is performed by the state, not the analyst
 
@@ -259,3 +258,26 @@ integration artifact digest is
 These CI results are regression/certificate evidence around the encoded exact
 identities and type barriers.  They do not close the event-free UV continuation
 seam and do not imply Navier--Stokes global regularity.
+
+## Candidate continuation refinement: checkpoint rereading does not restart the carrier
+
+The companion same-carrier segmentation theorem sharpens `analysis checkpoint`
+one step further.  The hard-shell witness set exposed here is a legitimate state
+reading, but no physical interaction occurred at the horizon.  Therefore the
+canonical event search does **not** replace the smooth carrier by whichever hard
+shell is visible here.
+
+The event-anchored carrier and terminal dual continue.  In particular the native
+first-hit observables remain cumulative from the same physical event:
+
+`K_A[s,t]`, `|I_role-interface[s,t]|`, `|I_HH[s,t]|`.
+
+A checkpoint is not allowed to reset their baselines or the terminal coefficient
+used in their thresholds.  The two coefficient-impulse magnitudes are cumulative
+complex-impulse magnitudes and may decrease by phase cancellation; they are not
+summed across checkpoint segments and are not work.
+
+Thus a sequence of hard-shell checkpoint readings is not, by itself, a physical
+scale lineage.  Actual high-tail dynamics remains governed by the independent
+physical tail dissipation/work theorems.  This refinement is a candidate until
+its exact implementation SHA passes dedicated and full causal integration CI.

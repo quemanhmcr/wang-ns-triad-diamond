@@ -141,14 +141,15 @@ def test_concentration_coordinates_cannot_be_promoted_to_causal_entropy():
 def test_certificate_states_exact_remaining_escape_dichotomy_without_regularity_claim():
     cert = theorem_certificate()
     assert cert["status"] == STATUS
-    assert "full-natural horizon checkpoints are quotiented" in cert["infinite_escape_dichotomy"]
+    assert "same-carrier checkpoint segmentation" in cert["infinite_escape_dichotomy"]
     assert "infinite recursive EVENT path" in cert["infinite_escape_dichotomy"]
-    assert "event-free PDE" in cert["uv_obstruction"]
+    assert "not a canonical physical lineage" in cert["uv_obstruction"]
+    assert "cannot replace the event-anchored smooth carrier" in cert["same_carrier_checkpoint_segmentation"]
     assert "not a global no-escape" in cert["scope"]
     assert "not causal Shannon/Renyi action" in cert["diagnostic_separation"]
     dich = master_escape_dichotomy()
-    assert "bounded-scale checkpoint continuation" in dich["proof"]
-    assert "zero event vertices" in dich["proof"]
+    assert "cannot replace the event-anchored smooth carrier" in dich["proof"]
+    assert "continuation of the same carrier" in dich["proof"]
 
 
 def test_unrouted_coefficient_obstruction_cannot_enter_canonical_master_state():

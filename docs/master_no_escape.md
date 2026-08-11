@@ -2311,3 +2311,30 @@ Consequently the remaining continuum frontier separates into two questions:
 This refinement was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854` and full integration run `31451492844`. It does not claim that the UV
 checkpoint seam necessarily generates high-tail work.  It only removes the
 analyst's natural-horizon segmentation from physical event depth.
+
+## Candidate refinement: checkpoint Zeno is segmentation of one carrier, not a second escape route
+
+The certified checkpoint theorem above correctly removed natural-horizon endpoints
+from event depth, but still left an event-free UV checkpoint sequence as a separate
+continuation seam.  The same-carrier segmentation candidate uses the already
+certified relay structure to sharpen that statement.
+
+A natural service horizon is not a lifetime of `Q_A`.  In the absence of a new
+physical stop, the event-anchored smooth carrier, terminal dual and cumulative
+native monitors continue across the checkpoint.  Inserting or deleting checkpoint
+cuts cannot change the first physical stop.  In particular the checkpoint cannot
+reset `K_A[s,t]`, the terminal coefficient, or the cumulative complex impulses
+`I_R[s,t]`, `I_HH[s,t]`; the magnitudes of the latter are not segment-additive.
+
+Thus repeated hard-shell rereading at `A` or `2A` creates a diagnostic sequence of
+state observations, not a causal scale lineage.  If infinitely many such cuts
+accumulate at an interior smooth time, continuity/absolute continuity yields an
+existing first-stop face at the limit or continuation of the same carrier through
+the accumulation.  If the maximal no-hit continuation reaches `t=0`, the initial
+boundary absorbs.
+
+Actual high-tail dissipation/work remains a genuine UV route whenever its own
+physical hypotheses are met.  The candidate removes only UV motion manufactured by
+no-event re-hardening.  If certified, the remaining global master frontier is
+therefore genuine physical-owner recurrence, not a second checkpoint-Zeno branch.
+No global-regularity conclusion is asserted.

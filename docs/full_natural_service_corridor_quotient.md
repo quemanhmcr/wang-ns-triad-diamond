@@ -142,20 +142,24 @@ A chain
 
 `critical shell -> full natural corridor -> own-scale service -> Moyal/material rereading -> endpoint survivor`
 
-contains one real physical corridor, not several physical intervals.  The extra arrows are witness
-maps on the same corridor, and the certified checkpoint refinement shows that the no-hit horizon itself adds zero recursive event vertices.
+contains one real physical corridor, not several physical intervals.  The extra
+arrows are witness maps on the same corridor, and the certified checkpoint
+refinement shows that the no-hit horizon itself adds zero recursive event vertices.
 
-Therefore an infinite path whose apparent recurrence consists only of these
-full-survivor/service layers is simply an infinite chain of full-natural physical
-corridors.  The existing physical-time telescope already proves:
+The candidate same-carrier checkpoint-segmentation theorem sharpens the next step:
+a no-event natural horizon does not restart the carrier.  The hard-shell endpoint
+readings remain state sidecars while the event-anchored `Q_A` carrier and its
+cumulative first-hit monitors continue.  Therefore repeated endpoint rereading
+cannot by itself create an infinite causal chain of fresh full-natural corridors.
 
-- if its frequencies remain bounded, it reaches `t=0` after finitely many
-  corridors;
-- if it avoids `t=0`, the unresolved route is genuinely UV-unbounded.
+Physical time still telescopes across any inserted checkpoints, and a geometric UV
+reading sequence remains a valid diagnostic counterexample to a time-only argument.
+But that reading sequence is not a canonical physical lineage.  Independent
+source/service/reuse events and actual high-tail work events remain physical and
+still require their own native termination/reuse laws.
 
-This removes **service theorem depth** from the named-owner recurrence problem.
-It does not remove independent source/service/reuse events and does not close the
-UV-unbounded survivor alternative.
+This removes **service theorem depth** from named-owner recurrence and, if the
+candidate passes exact-SHA CI, removes natural-horizon restart depth as well.
 
 ## 5. Anti-theorems encoded by the theorem
 
@@ -291,3 +295,12 @@ must arrive through a typed transition that carries the actual winning
 frequency/mass pair into the next critical-shell producer at the same endpoint
 state.  This makes the endpoint cover a genuine PDE-state rereading without
 turning an observer-chosen candidate shell into dynamics.
+
+### Candidate same-carrier continuation refinement
+
+The current candidate `same_carrier_checkpoint_segmentation_quotient` makes the
+preceding master consequence fail-closed in production: a checkpoint hard-shell
+witness is a state sidecar, `checkpoint_scale_path_is_physical_lineage=False`, and
+the terminal coefficient plus cumulative strain/interface/HH first-hit monitors
+cannot be reset there.  This refinement is not certified until its exact SHA
+passes the dedicated and full causal-integration gates.

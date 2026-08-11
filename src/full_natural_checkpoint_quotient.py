@@ -24,7 +24,8 @@ STATUS = (
     "EXACT_FULL_NATURAL_HORIZON_CHECKPOINT_QUOTIENT__"
     "PHYSICAL_CORRIDOR_TIME_WITH_ZERO_EVENT_DEPTH__"
     "ENDPOINT_HARD_SHELL_COVER_IS_ANALYSIS_REREGISTRATION_NOT_SCALE_PROGRESS__"
-    "UV_CHECKPOINT_CONTINUATION_SEPARATED_FROM_RECURSIVE_EVENT_PATH"
+    "CHECKPOINT_SCALE_READINGS_STATE_SIDECARS__"
+    "SAME_CARRIER_EVENT_SEARCH_CONTINUES_WITHOUT_RESET"
 )
 
 FULL_NATURAL_CHECKPOINT = "full_natural_analysis_checkpoint"
@@ -242,7 +243,12 @@ def checkpoint_reregistration(
         "cover_ascent_interpreted_as_dynamics": False,
         "scale_provenance": "actual_endpoint_shell_state_read_through_same_checkpoint_cover",
         "observer_selected_cover_branch": False,
-        "next_use": "analysis_reregistration_only_until_a_new_physical_first_stop_or_owner_event_occurs",
+        "canonical_event_search_continues_same_carrier": True,
+        "hard_shell_witness_can_replace_carrier_without_event": False,
+        "terminal_coefficient_may_reset_here": False,
+        "cumulative_first_hit_monitors_may_reset_here": False,
+        "checkpoint_scale_path_is_physical_lineage": False,
+        "next_use": "state_sidecar_rereading_only; continue the same event-anchored smooth carrier and cumulative monitors until a new physical stop or t=0",
     }
 
 
@@ -365,6 +371,8 @@ def checkpoint_chain_ledger(
         "causal_charges_added": 0,
         "physical_event_vertices": 0,
         "bounded_or_uv_character_is_path_geometry_not_event_count": True,
+        "checkpoint_scale_path_is_physical_lineage": False,
+        "reading_scale_sequence_is_diagnostic_only": True,
     }
 
 
@@ -373,17 +381,14 @@ def geometric_uv_checkpoint_time(
     scaled_lifetime: float,
     parent_scale_ratio: float = UPPER_COVER_RATIO,
 ) -> float:
-    """Finite time of a hypothetical repeated upper-cover checkpoint sequence.
+    """Finite time of a hypothetical repeated upper-cover checkpoint reading sequence.
 
-    This intentionally preserves the obstruction instead of calling it a recursive
-    event chain.  Parent shells M_j=M_0 r^j use actual corridor scale A_j=3M_j/4,
+    This intentionally preserves the diagnostic counterexample to time-only reasoning without calling the reading sequence a recursive event chain or a physical scale lineage.  Parent shells M_j=M_0 r^j use actual corridor scale A_j=3M_j/4,
     so the total checkpoint time is
 
         sum c/A_j^2 = c/( (3M_0/4)^2 ) / (1-r^-2).
 
-    The formula proves only that theorem horizons can Zeno in physical time if their
-    analysis scales grow.  A separate PDE theorem must show what physical owner, if
-    any, is forced by such UV continuation.
+    The formula proves only that observer-inserted theorem horizons can have a finite total physical duration when their diagnostic reading scales grow.  Under same-carrier continuation this does not define a physical lineage; genuine UV ownership still requires an independent physical event theorem.
     """
     M = float(initial_parent_frequency)
     c = float(scaled_lifetime)
@@ -409,8 +414,9 @@ def theorem_certificate() -> dict[str, object]:
         "transition_provenance": "a checkpoint successor is admissible only through a typed transition carrying the actual endpoint hard-shell masses, the state-selected unique/joint witness set, the exact endpoint time token, and the same witnessed frequency/mass into the next producer",
         "master_barrier": "full_natural_analysis_checkpoint and the legacy full-natural-survivor disposition are forbidden from RecursiveEventState/PhysicalOwnerBundle as recursive physical causes",
         "time_semantics": "typed checkpoint transitions telescope native local physical corridor times while adding zero physical event vertices, zero recursive event depth and zero causal charges; two bare time-contiguous checkpoints are not a certified chain",
-        "remaining_uv": "a UV-unbounded sequence of no-hit analysis checkpoints may have finite physical duration; after checkpoint quotient this is an event-free PDE continuation seam, not an infinite recursive event path",
-        "scope": "this removes natural-horizon segmentation and hard-shell-cover ascent from recursive event depth; it does not prove that UV checkpoint continuation forces high-tail work, nor does it prove Navier-Stokes regularity",
+        "continuation_policy": "the checkpoint hard-shell witness set is state sidecar information only; the canonical event search continues the same event-anchored smooth carrier with the same terminal coefficient and cumulative native first-hit monitors until a new physical stop or t=0",
+        "remaining_uv": "a geometrically UV-growing sequence of checkpoint state readings can have finite total natural-window duration and therefore remains a valid counterexample to physical-time-only reasoning; under the same-carrier continuation policy it is not a canonical physical lineage or independent master obstruction",
+        "scope": "this removes natural-horizon segmentation, cover ascent and checkpoint re-hardening from recursive event topology; it does not telescope infinitely recurring genuine physical owners and does not prove Navier-Stokes regularity",
     }
 
 
@@ -550,7 +556,7 @@ is genuine Navier--Stokes evolution, but its earlier endpoint is only the theore
 
 At that checkpoint the surviving smooth carrier may be reread through the exact hard shells `A` and `2A`, giving ratios `3/4` and `3/2` relative to the incoming shell.  This is state/cover geometry with checkpoint provenance, not a physical high-tail supplier.  On the same incoming-shell reference the upper ratio also obeys `3/2<2`; that numerical check is secondary to the provenance barrier.  Cover ascent is never promoted to UV dynamics or high-tail ownership.
 
-A chain of such checkpoints telescopes its native local physical corridor time while adding no recursive event depth.  It is admitted only through typed transitions carrying the actual endpoint hard-shell masses and reusing one state-selected frequency/mass in the next producer at the exact endpoint time token.  Bare checkpoints that merely have close clock values do not form a chain.  A hypothetical repeated upper-cover sequence can still have finite total physical duration; after the quotient this remains an **event-free UV continuation seam**, not an infinite recursive event path.  A future PDE theorem must decide whether that continuation forces actual tail dissipation/work, a physical first stop, or another native mechanism.  No synthetic scale tax is introduced.
+A chain of such checkpoint readings telescopes its native local physical corridor time while adding no recursive event depth.  It is admitted only through typed transitions carrying the actual endpoint hard-shell masses and reusing one state-selected frequency/mass in the next producer at the exact endpoint time token; bare checkpoints that merely have close global clocks do not form a chain.  A hypothetical repeated upper-cover reading sequence can still have finite total natural-window duration, which remains a useful counterexample to time-only reasoning.  Under the same-carrier continuation policy, however, no-event checkpoint readings do not replace the smooth carrier or reset its cumulative first-hit monitors, so that sequence is not a canonical physical lineage.  Genuine UV progression still requires an independently certified physical event such as actual tail dissipation/work; no synthetic scale tax is introduced.
 
 Stress: `{out.samples}` checkpoint/corridor/cover states
 - worst physical-time telescope residual: `{out.worst_time_identity_residual:.3e}`
@@ -559,7 +565,7 @@ Stress: `{out.samples}` checkpoint/corridor/cover states
 - cover-to-high-tail misclassification failures: `{out.high_tail_misclassification_failures}`
 - minimum UV checkpoint time beyond the first corridor: `{out.minimum_uv_time_beyond_first_corridor:.3e}`
 
-This theorem removes natural-horizon segmentation from recursive event depth.  It does not close the remaining UV checkpoint continuation and makes no Navier--Stokes global-regularity claim.
+This theorem removes natural-horizon segmentation and no-event checkpoint re-hardening from recursive event depth.  A UV-growing sequence of checkpoint state readings remains a useful diagnostic counterexample to time-only reasoning, but it is not a canonical physical lineage while the same event-anchored carrier continues.  Genuine physical-owner recurrence remains open, and no Navier--Stokes global-regularity claim is made.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)

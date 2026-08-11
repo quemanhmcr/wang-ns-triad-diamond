@@ -1,5 +1,3 @@
-import math
-
 import pytest
 
 from src.full_natural_service_corridor_quotient import (
@@ -134,6 +132,8 @@ def test_certificate_removes_service_theorem_depth_without_uv_overclaim():
     assert "second event time or recursion edge" in cert["time_ontology"]
     assert "zero causal charge and zero recursion depth" in cert["material_ontology"]
     assert "3/4 or 3/2" in cert["scale_geometry"]
-    assert "does not terminate UV-unbounded" in cert["scope"]
+    assert "genuine first-hit/work/source/reuse owner recurrence remains open" in cert["scope"]
     assert "zero physical event vertices" in cert["master_quotient"]
     assert "actual shell masses determine" in cert["checkpoint_refinement"]
+    assert "event-anchored Q_A carrier" in cert["same_carrier_candidate"]
+    assert "do not define a causal scale lineage" in cert["same_carrier_candidate"]
