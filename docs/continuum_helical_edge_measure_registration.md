@@ -1,10 +1,10 @@
 # Continuum helical edge-measure registration: signed Navier--Stokes work before Hahn
 
-Status: **candidate theorem; certify only by exact-SHA GitHub Actions**.
+Status: **certified on exact implementation SHA `6bc9099190048a8796b54fb2f4782314b699bd4b` after independent adversarial and actual-Navier--Stokes audit**.
 
 The certified one-edge theorem identifies the physical variables carried by one
-unordered helical parent pair.  The remaining continuum question is not another
-single-edge estimate.  It is a measure-registration question:
+unordered helical parent pair. The continuum question addressed and certified
+here is not another single-edge estimate. It is a measure-registration question:
 
 > how does the actual Fourier convolution of Navier--Stokes become a signed
 > physical edge law without choosing a parent orientation, without losing
@@ -75,6 +75,123 @@ Then
 No lexicographic representative such as `x<y` is selected.  The quotient removes
 only observer ordering; the physical two-parent orbit remains intact.
 
+### 2.1 The outer child variable is part of the same Radon quotient
+
+The preceding fixed-child quotient can be written jointly in variables intrinsic
+to the physical triad:
+
+\[
+z=x+y,
+\qquad
+r=x-y,
+\qquad
+x=\frac{z+r}{2},
+\qquad
+y=\frac{z-r}{2}.
+\]
+
+The inverse linear map has absolute determinant
+
+\[
+\left|\det\frac{\partial(x,y)}{\partial(z,r)}\right|=\frac18.
+\]
+
+At the geometric level parent exchange is `r -> -r`.  On a helicity-resolved
+physical edge, however, the helicity sign stays attached to its physical parent
+mode, so the full involution is
+
+`(r,s_x,s_y,s_z) -> (-r,s_y,s_x,s_z)`.
+
+Let `q:R^3_r -> R^3_r/{+-1}` denote the geometric quotient.  Equivalently, let
+`Q` denote the finite-group quotient of `(r,s_x,s_y)` by the combined involution
+above, with counting measure on the parent helicity signs.  Because the physical
+orbit integrand is the **sum of both ordered parent terms with their signs
+transported with the parent modes**, the joint geometric base measure for child
+plus unordered parents is
+
+\[
+\boxed{
+ d\Lambda_{\rm unord}
+ =\frac1{16}\,dz\,d(q_\#dr).
+}
+\]
+
+For the helicity-resolved edge space the same normalization can be written
+
+\[
+ d\Lambda_{\rm edge}
+ =\frac1{16}\,dz\,d\Big(Q_\#(dr\otimes \#_{s_x,s_y})\Big)\,d\#_{s_z},
+\]
+
+with the orbit-summed edge density understood.  This does **not** quotient away
+helicity: it only quotients the analyst's ordering of the two complete parent
+mode objects `(wavevector,helicity)`.  Mixed assignments `(+,-)` and `(-,+)`
+remain distinct physical assignments unless related by swapping the two complete
+parent modes.
+
+Equivalently, for every integrable ordered triad density `f`,
+
+\[
+\int dz\int dx\,f(z,x,z-x)
+=\frac1{16}\int dz\int dr\,
+\left[
+ f\!\left(z,\frac{z+r}{2},\frac{z-r}{2}\right)
+ +
+ f\!\left(z,\frac{z-r}{2},\frac{z+r}{2}\right)
+\right].
+\]
+
+This is an analytic change-of-variables identity, not a finite-grid ansatz.  The
+quotient is proper: `|r|` descends to a continuous quotient radius, so the inverse
+image of a compact quotient set is closed and bounded in `R^3` times a finite
+helicity set and is therefore compact.  Hence the pushforward of Lebesgue times
+finite counting measure is locally finite Radon.  The fixed locus
+`r=0,s_x=s_y` lies inside the codimension-three null set `r=0`.
+
+The **base measure being Radon is not yet the same statement as the physical
+weights having finite variation**.  That second step comes directly from the
+Navier--Stokes energy class, without a UV parent cutoff.  Write
+
+\[
+E=\int_{\mathbb R^3}|\widehat u(k)|^2\,dk.
+\]
+
+For the two orthogonal helical coefficients,
+
+\[
+\sum_{s=\pm1}|a_s(k)|\le \sqrt2\,|\widehat u(k)|.
+\]
+
+At fixed child `z`, the parent convolution is bounded by Cauchy--Schwarz, while
+the unordered-parent measure contributes its exact factor `1/2`.  Thus for every
+bounded Borel child block `B`,
+
+\[
+\boxed{
+A(B)
+\le
+4\sqrt2\,C_F E^{3/2}
+\left(\int_B |z|^2\,dz\right)^{1/2}.
+}
+\]
+
+The audited one-edge law gives pointwise `|T_e|<=A_e`, including nonforward
+edges, and the global geometric envelope gives `|J_e c_e|<=J_*`.  Therefore
+
+\[
+|W|(B)\le A(B),
+\qquad
+|F|(B)\le J_*A(B).
+\]
+
+So `dA`, signed `dW`, and signed `dF` are locally finite physical Radon measures
+on bounded child blocks.  This bound certifies measure existence only; it is not
+a causal budget, does not tax scale, and does not promote `dA` into a probability
+law.
+
+Thus aggregating several physical child modes before Hahn splitting is not a new
+law: it is a finite probe of the same joint `z`--unordered-parent Radon measure.
+
 ## 3. Helicity is resolved exactly at the event
 
 For every nonzero wavevector,
@@ -104,7 +221,12 @@ T_{\rm vector}
 The same equality holds after multiplying by the common upper-scale progress
 `log_+(|z|/max(|x|,|y|))`.
 
-Helicity sign is physical interaction data and is **not** quotiented.  Only the
+Helicity sign is physical interaction data and is **not erased** by the quotient.
+It travels with the physical wavevector under parent exchange.  The typed edge
+identity therefore stores the unordered pair of physical parent mode objects
+`(wavevector,helicity)` together with the child mode.  Any canonical ordering used
+inside the implementation is only an exact storage key for this finite-group
+quotient and is never a physical orientation, owner or causal choice.  Only the
 phase convention of the helical basis is gauge.
 
 ## 4. Construct the signed physical measure before taking positive parts
@@ -334,3 +456,30 @@ It does **not** prove that every generic HH block is low deficit.  High-deficit
 transfer, positive nonforward work, high-tail physics, source/strain/relink, and
 mixed physical recurrence remain real branches.  No global-regularity claim is
 made.
+
+
+## 10. Certification and adversarial audit
+
+Exact implementation SHA: `6bc9099190048a8796b54fb2f4782314b699bd4b`.
+
+Four exact-SHA gates were required:
+
+- independent audit `31494249932`: **success**, including `50,000` arbitrary
+  continuum fibers, `1,000` near-extremal core blocks, a same-Galerkin-grid
+  representation audit and a three-child same-orbit Navier--Stokes audit;
+- continuum dedicated `31494250081`: **success**, `776` tests plus the dedicated
+  continuum/dependency stresses;
+- helical dependency `31494402810`: **success**, `776` tests and `50,000` physical
+  helical edges;
+- full causal integration `31494250037`: **success**, `61` successful steps.
+
+The independent audit was not ceremonial.  Earlier green candidates were rejected
+after it exposed unit-scale tolerance floors, forgeable summary provenance,
+nonfinite arithmetic, an invalid convergence demand across different Galerkin
+truncations, missing nonforward `|T_e|<=A_e` provenance, duplicate helicity-sector
+identity, and the final gap between a Radon quotient base and locally finite
+weighted physical measures.  The certified source closes each issue fail-closed.
+
+Exact artifacts are stored under `recorded-results/31494249932/`,
+`recorded-results/31494250081/`, `recorded-results/31494402810/`, and
+`recorded-results/31494250037/`.

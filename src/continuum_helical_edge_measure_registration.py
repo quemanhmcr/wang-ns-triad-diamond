@@ -6,6 +6,7 @@ import json
 import math
 from collections.abc import Sequence
 from dataclasses import asdict, dataclass
+from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
@@ -14,7 +15,7 @@ from src.coherent_service_or_flat import (
     coherent_flat_thresholds,
     coherent_service_or_flat_gate,
 )
-from src.helical import coupling_g, helical_basis
+from src.helical import coupling_g, helical_basis, stable_norm3
 from src.helical_physical_edge_registration import (
     STATUS as HELICAL_EDGE_STATUS,
 )
@@ -22,6 +23,12 @@ from src.helical_physical_edge_registration import (
     HelicalPhysicalEdgeRegistration,
     leray_project,
     register_helical_physical_edge,
+)
+from src.helical_physical_edge_registration import (
+    _positive_product as _edge_positive_product,
+)
+from src.helical_physical_edge_registration import (
+    _signed_product as _edge_signed_product,
 )
 from src.physical_pair_weighted_productivity import physical_work_capacity_constant
 from src.physical_transfer_defect_moat import (
@@ -41,13 +48,233 @@ from src.triad_extremizer import symmetric_gamma, symmetric_rstar
 
 STATUS = (
     "EXACT_CONTINUUM_HELICAL_EDGE_MEASURE_REGISTRATION__UNITARY_FOURIER__"
-    "UNORDERED_PARENT_QUOTIENT__EXACT_HELICITY_RECONSTRUCTION__SIGNED_BEFORE_HAHN__"
-    "NATIVE_CAPACITY_POLARIZATION__PHYSICAL_GOOD_CORE_CHANGE_OF_MEASURE"
+    "UNORDERED_PARENT_QUOTIENT__JOINT_OUTER_CHILD_RADON_PUSHFORWARD__"
+    "EXACT_HELICITY_RECONSTRUCTION__SIGNED_BEFORE_HAHN__"
+    "NATIVE_CAPACITY_POLARIZATION__ENERGY_NATIVE_LOCAL_VARIATION__"
+    "PHYSICAL_GOOD_CORE_CHANGE_OF_MEASURE"
 )
 
 UNITARY_FOURIER_CONVOLUTION_FACTOR = (2.0 * math.pi) ** (-1.5)
 GOOD_CORE_ETA = float(GOOD_THRESHOLD)
 LOW_COST_DEFICIT_CEILING = 1.0 / 20_000.0
+SUM_RELATIVE_JACOBIAN = Fraction(1, 8)
+JOINT_UNORDERED_RADON_DENSITY = Fraction(1, 16)
+
+
+
+def parent_pair_to_sum_relative(x: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Return intrinsic outer-child/relative-parent coordinates ``(z,r)``.
+
+    ``z=x+y`` is the physical child wavevector and ``r=x-y`` changes sign under
+    parent exchange.  No orientation of the unordered pair is selected.
+    """
+    xp = _vec3(x, "x")
+    yp = _vec3(y, "y")
+    z = xp + yp
+    r = xp - yp
+    if np.any(~np.isfinite(z)) or np.any(~np.isfinite(r)):
+        raise ValueError("sum/relative parent coordinates must stay finite")
+    return z, r
+
+
+def sum_relative_to_parent_pair(z: np.ndarray, r: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Invert ``z=x+y, r=x-y`` without choosing the sign of the quotient class."""
+    zp = _vec3(z, "z")
+    rp = _vec3(r, "r")
+    x = 0.5 * (zp + rp)
+    y = 0.5 * (zp - rp)
+    if np.any(~np.isfinite(x)) or np.any(~np.isfinite(y)):
+        raise ValueError("reconstructed parent coordinates must stay finite")
+    return x, y
+
+
+def joint_unordered_parent_radon_certificate() -> dict[str, object]:
+    """Exact proper joint quotient for child plus helicity-resolved parents.
+
+    The inverse map ``(z,r)->(x,y)`` has absolute determinant ``1/8`` in three
+    dimensions.  Parent exchange transports the complete physical parent modes,
+    so on the helicity-resolved space it acts by
+    ``(r,sx,sy)->(-r,sy,sx)``.  The a.e. orbit factor ``1/2`` therefore gives
+    the same joint density ``1/16``.
+
+    Properness is explicit rather than inferred from target topology alone:
+    ``|r|`` descends to a continuous quotient radius.  The inverse image of a
+    compact quotient set is closed and radius-bounded in ``R^3`` times a finite
+    helicity set, hence compact.  The pushforward of Lebesgue times finite
+    counting measure is therefore locally finite Radon; product with ``dz`` is
+    Radon as well.
+    """
+    per_coordinate_inverse_det = Fraction(1, 2)
+    jacobian = per_coordinate_inverse_det**3
+    orientation_quotient = Fraction(1, 2)
+    density = jacobian * orientation_quotient
+    if jacobian != SUM_RELATIVE_JACOBIAN or density != JOINT_UNORDERED_RADON_DENSITY:
+        raise AssertionError("joint unordered parent Jacobian/quotient factor changed")
+    return {
+        "sum_relative_inverse_jacobian": "1/8",
+        "parent_orientation_quotient": "1/2",
+        "joint_unordered_radon_density": "1/16",
+        "coordinates": "z=x+y, r=x-y; x=(z+r)/2, y=(z-r)/2",
+        "parent_swap": "(r,sx,sy)->(-r,sy,sx), with helicity attached to the physical parent wavevector",
+        "quotient_space": "combined finite-group quotient of R^3_r times the two parent-helicity signs",
+        "proper_quotient": True,
+        "properness_reason": "the quotient radius |[r]|=|r| is continuous; compact quotient sets have closed bounded compact preimages and the helicity factor is finite",
+        "radon": True,
+        "fixed_locus": "the fixed set r=0,sx=sy lies inside the codimension-3 Lebesgue-null set r=0",
+        "helical_frame_borel": True,
+        "edge_densities_borel": True,
+        "integral_identity": "int dz int dx f(z,x,z-x) = (1/16) int dz int dr [f(z,(z+r)/2,(z-r)/2)+f(z,(z-r)/2,(z+r)/2)] with parent helicities transported under exchange",
+        "physical_scope": "weighted A,W,F local finiteness is supplied separately by the physical L2-energy variation bound, not by Radon base measure alone",
+    }
+
+
+@dataclass(frozen=True)
+class ContinuumEdgeLocalVariationBounds:
+    fourier_energy: float
+    child_second_moment: float
+    capacity_variation_upper: float
+    work_variation_upper: float
+    progress_variation_upper: float
+
+    def __post_init__(self) -> None:
+        values = (
+            self.fourier_energy,
+            self.child_second_moment,
+            self.capacity_variation_upper,
+            self.work_variation_upper,
+            self.progress_variation_upper,
+        )
+        if not all(math.isfinite(float(value)) and float(value) >= 0.0 for value in values):
+            raise ValueError("finite nonnegative continuum local-variation data required")
+        if self.work_variation_upper > self.capacity_variation_upper:
+            raise AssertionError("physical work variation cannot exceed native capacity variation")
+        if self.progress_variation_upper > self.capacity_variation_upper * float_jstar() * (1.0 + 5e-12):
+            raise AssertionError("upper-progress variation exceeded Jstar times capacity variation")
+
+
+def continuum_edge_local_variation_energy_bounds(
+    fourier_energy: float, child_second_moment: float
+) -> ContinuumEdgeLocalVariationBounds:
+    """Energy-native local variation of ``A``, ``W`` and ``F`` on a child block.
+
+    ``fourier_energy`` is ``int |u_hat(k)|^2 dk`` in the unitary convention and
+    ``child_second_moment`` is ``int_B |z|^2 dz``.  Using
+    ``sum_s |a_s(k)| <= sqrt(2)|u_hat(k)|``, the parent-orbit factor ``1/2`` and
+    fixed-child Cauchy--Schwarz gives
+
+    ``A(B) <= 4 sqrt(2) C_F E^(3/2) (int_B |z|^2 dz)^(1/2)``.
+
+    No UV parent cutoff is imposed.  Pointwise physical ``|T_e|<=A_e`` yields
+    ``|W|(B)<=A(B)``, while the certified one-edge envelope yields
+    ``|F|(B)<=J_* A(B)``.
+    """
+    energy = float(fourier_energy)
+    moment = float(child_second_moment)
+    if not math.isfinite(energy) or not math.isfinite(moment) or energy < 0.0 or moment < 0.0:
+        raise ValueError("finite nonnegative Fourier energy and child second moment required")
+    capacity = _edge_positive_product(
+        (4.0 * math.sqrt(2.0), unitary_fourier_convolution_factor(), energy, math.sqrt(energy), math.sqrt(moment)),
+        "continuum L2-energy local capacity variation",
+    )
+    progress = _edge_positive_product(
+        (capacity, float_jstar()),
+        "continuum local progress variation",
+    )
+    return ContinuumEdgeLocalVariationBounds(
+        fourier_energy=energy,
+        child_second_moment=moment,
+        capacity_variation_upper=capacity,
+        work_variation_upper=capacity,
+        progress_variation_upper=progress,
+    )
+
+
+def _complex_norm3(value: np.ndarray) -> float:
+    q = np.asarray(value, dtype=complex)
+    if q.shape != (3,) or np.any(~np.isfinite(q.real)) or np.any(~np.isfinite(q.imag)):
+        raise ValueError("finite complex three-vector required")
+    return float(math.hypot(*(abs(complex(x)) for x in q)))
+
+
+def _finite_complex_scalar(value: complex, name: str) -> complex:
+    z = complex(value)
+    if not (math.isfinite(z.real) and math.isfinite(z.imag)):
+        raise ValueError(f"{name} must be finite")
+    return z
+
+
+def _finite_sum(values: Sequence[float], name: str) -> float:
+    vals = tuple(float(value) for value in values)
+    if not all(math.isfinite(value) for value in vals):
+        raise ValueError(f"{name} terms must be finite")
+    try:
+        out = math.fsum(vals)
+    except OverflowError as exc:
+        raise ValueError(f"{name} left the finite native range") from exc
+    if not math.isfinite(out):
+        raise ValueError(f"{name} left the finite native range")
+    return out
+
+
+def _relative_gap(actual: complex, expected: complex, *, scale: float | None = None) -> float:
+    a = _finite_complex_scalar(actual, "actual native quantity")
+    b = _finite_complex_scalar(expected, "expected native quantity")
+    gap = abs(a - b)
+    if not math.isfinite(gap):
+        raise ValueError("native comparison gap must be finite")
+    if scale is None:
+        native = max(abs(a), abs(b))
+    else:
+        raw_scale = float(scale)
+        if not math.isfinite(raw_scale):
+            raise ValueError("native comparison scale must be finite")
+        native = abs(raw_scale)
+    if native == 0.0:
+        return 0.0 if gap == 0.0 else math.inf
+    out = float(gap / native)
+    if not math.isfinite(out):
+        raise ValueError("native relative gap must be finite")
+    return out
+
+
+def _require_native_equal(
+    name: str,
+    actual: complex,
+    expected: complex,
+    *,
+    scale: float | None = None,
+    relative_tolerance: float = 5e-10,
+) -> None:
+    if _relative_gap(actual, expected, scale=scale) > relative_tolerance:
+        raise AssertionError(f"{name} failed its native-scale identity")
+
+
+def _relative_vector_gap(actual: np.ndarray, expected: np.ndarray, *, scale: float | None = None) -> float:
+    a = _cvec3(actual, "actual vector")
+    b = _cvec3(expected, "expected vector")
+    gap = _complex_norm3(a - b)
+    if scale is None:
+        native = max(_complex_norm3(a), _complex_norm3(b))
+    else:
+        raw_scale = float(scale)
+        if not math.isfinite(raw_scale):
+            raise ValueError("native vector comparison scale must be finite")
+        native = abs(raw_scale)
+    if native == 0.0:
+        return 0.0 if gap == 0.0 else math.inf
+    out = gap / native
+    if not math.isfinite(out):
+        raise ValueError("native vector relative gap must be finite")
+    return out
+
+
+def _physical_triad(x: np.ndarray, y: np.ndarray, z: np.ndarray) -> tuple[float, float, float]:
+    nx, ny, nz = map(stable_norm3, (x, y, z))
+    if min(nx, ny, nz) == 0.0:
+        raise ValueError("nonzero parent and child wavevectors required")
+    if stable_norm3(x + y - z) > 2e-12 * max(nx, ny, nz):
+        raise ValueError("physical triad requires z=x+y")
+    return nx, ny, nz
 
 
 def unitary_fourier_convolution_factor() -> float:
@@ -86,10 +313,14 @@ def _cvec3(value: np.ndarray, name: str) -> np.ndarray:
 def divergence_relative_residual(k: np.ndarray, value: np.ndarray) -> float:
     q = _vec3(k, "wavevector")
     v = _cvec3(value, "Fourier vector")
-    nk = float(np.linalg.norm(q))
-    if nk <= 0.0:
+    nk = stable_norm3(q)
+    if nk == 0.0:
         raise ValueError("nonzero wavevector required")
-    return float(abs(np.dot(q, v)) / max(1.0, nk * float(np.linalg.norm(v))))
+    nv = _complex_norm3(v)
+    if nv == 0.0:
+        return 0.0
+    qhat = q / nk
+    return float(abs(np.dot(qhat, v)) / nv)
 
 
 def _require_divergence_free(k: np.ndarray, value: np.ndarray, name: str) -> np.ndarray:
@@ -113,7 +344,9 @@ def helical_reconstruction(k: np.ndarray, value: np.ndarray) -> tuple[np.ndarray
     v = _require_divergence_free(q, value, "Fourier vector")
     coeff = helical_coefficients(q, v)
     reconstructed = sum((coeff[s] * helical_basis(q, s) for s in (-1, 1)), np.zeros(3, complex))
-    residual = float(np.linalg.norm(reconstructed - v) / max(1.0, float(np.linalg.norm(v))))
+    nv = _complex_norm3(v)
+    gap = _complex_norm3(reconstructed - v)
+    residual = 0.0 if nv == 0.0 and gap == 0.0 else (math.inf if nv == 0.0 else gap / nv)
     if residual > 3e-10:
         raise AssertionError("helical sectors failed to reconstruct a divergence-free Fourier vector")
     return reconstructed, residual
@@ -132,9 +365,7 @@ def ordered_parent_curl_source(
     z = _vec3(z, "z")
     ux = _require_divergence_free(x, ux, "ux")
     uy = _require_divergence_free(y, uy, "uy")
-    scale = max(1.0, float(np.linalg.norm(x)), float(np.linalg.norm(y)), float(np.linalg.norm(z)))
-    if np.linalg.norm(x + y - z) > 2e-12 * scale:
-        raise ValueError("physical triad requires z=x+y")
+    _physical_triad(x, y, z)
     omega_y = 1j * np.cross(y, uy)
     return leray_project(z, np.cross(ux, omega_y))
 
@@ -171,6 +402,80 @@ def direct_vector_child_work(
     return 2.0 * float(np.real(np.vdot(uz, source)))
 
 
+@dataclass(frozen=True, order=True)
+class HelicalModeIdentity:
+    """One physical Fourier mode with helicity attached to its wavevector."""
+
+    wavevector: tuple[float, float, float]
+    helicity: int
+
+    def __post_init__(self) -> None:
+        if len(self.wavevector) != 3:
+            raise ValueError("helical mode identity needs one three-dimensional wavevector")
+        wavevector = tuple(float(value) for value in self.wavevector)
+        if not all(math.isfinite(value) for value in wavevector):
+            raise ValueError("finite helical mode wavevector required")
+        if stable_norm3(np.asarray(wavevector, dtype=float)) == 0.0:
+            raise ValueError("nonzero helical mode wavevector required")
+        helicity = int(self.helicity)
+        if helicity not in (-1, 1):
+            raise ValueError("physical helicity must be plus or minus one")
+        object.__setattr__(self, "wavevector", wavevector)
+        object.__setattr__(self, "helicity", helicity)
+
+
+@dataclass(frozen=True)
+class ContinuumHelicalEdgeIdentity:
+    """Orientation-quotiented physical identity of one helicity edge.
+
+    The two parent *mode objects* are unordered, while each helicity sign stays
+    attached to its own physical wavevector.  Sorting below is only an exact
+    storage key for the finite-group quotient; it is never a physical parent
+    orientation or causal choice.
+    """
+
+    parents: tuple[HelicalModeIdentity, HelicalModeIdentity]
+    child: HelicalModeIdentity
+
+    def __post_init__(self) -> None:
+        if len(self.parents) != 2:
+            raise ValueError("one continuum edge needs exactly two physical parent modes")
+        parents = tuple(sorted(self.parents))
+        if parents[0].wavevector == parents[1].wavevector:
+            raise ValueError("the fixed parent-swap locus is continuum-null and is not a regular eight-sector edge fiber")
+        x = np.asarray(parents[0].wavevector, dtype=float)
+        y = np.asarray(parents[1].wavevector, dtype=float)
+        z = np.asarray(self.child.wavevector, dtype=float)
+        _physical_triad(x, y, z)
+        object.__setattr__(self, "parents", parents)
+
+    @property
+    def parent_wavevector_orbit(self) -> tuple[tuple[float, float, float], tuple[float, float, float]]:
+        return tuple(sorted((self.parents[0].wavevector, self.parents[1].wavevector)))
+
+    @property
+    def helicity_assignment(self) -> tuple[int, int, int]:
+        return (self.parents[0].helicity, self.parents[1].helicity, self.child.helicity)
+
+
+def continuum_helical_edge_identity(
+    x: np.ndarray,
+    y: np.ndarray,
+    z: np.ndarray,
+    sx: int,
+    sy: int,
+    sz: int,
+) -> ContinuumHelicalEdgeIdentity:
+    """Build the exact parent-swap quotient with signs bound to wavevectors."""
+    xx = tuple(float(value) for value in _vec3(x, "edge identity parent x"))
+    yy = tuple(float(value) for value in _vec3(y, "edge identity parent y"))
+    zz = tuple(float(value) for value in _vec3(z, "edge identity child z"))
+    return ContinuumHelicalEdgeIdentity(
+        parents=(HelicalModeIdentity(xx, sx), HelicalModeIdentity(yy, sy)),
+        child=HelicalModeIdentity(zz, sz),
+    )
+
+
 @dataclass(frozen=True)
 class ContinuumModalEdgeAtom:
     """One helicity-resolved edge with only its quotient base-measure mass added.
@@ -193,20 +498,44 @@ class ContinuumModalEdgeAtom:
             raise ValueError("continuum atom must already be parent-orientation quotiented")
 
     @property
+    def physical_edge_identity(self) -> ContinuumHelicalEdgeIdentity:
+        reg = self.registration
+        return continuum_helical_edge_identity(
+            np.asarray(reg.parent_x_wavevector, dtype=float),
+            np.asarray(reg.parent_y_wavevector, dtype=float),
+            np.asarray(reg.child_wavevector, dtype=float),
+            reg.parent_x_helicity,
+            reg.parent_y_helicity,
+            reg.child_helicity,
+        )
+
+    @property
     def base_factor(self) -> float:
-        return unitary_fourier_convolution_factor() * float(self.quotient_measure_mass)
+        return _edge_positive_product(
+            (unitary_fourier_convolution_factor(), float(self.quotient_measure_mass)),
+            "continuum quotient base factor",
+        )
 
     @property
     def signed_work_mass(self) -> float:
-        return self.base_factor * self.registration.signed_child_energy_work
+        return _edge_signed_product(
+            (self.base_factor, self.registration.signed_child_energy_work),
+            "continuum signed work mass",
+        )
 
     @property
     def capacity_mass(self) -> float:
-        return self.base_factor * self.registration.native_modal_capacity
+        return _edge_positive_product(
+            (self.base_factor, self.registration.native_modal_capacity),
+            "continuum capacity mass",
+        )
 
     @property
     def signed_progress_mass(self) -> float:
-        return self.base_factor * self.registration.signed_upper_progress_work
+        return _edge_signed_product(
+            (self.base_factor, self.registration.signed_upper_progress_work),
+            "continuum signed progress mass",
+        )
 
     @property
     def multiplier(self) -> float:
@@ -257,6 +586,77 @@ class ContinuumFiberRegistration:
             raise ValueError("finite continuum fiber certificate required")
         if len(self.modal_atoms) != 8:
             raise ValueError("all eight helical interaction sectors must be retained at the event")
+        identities = tuple(atom.physical_edge_identity for atom in self.modal_atoms)
+        if len(set(identities)) != 8:
+            raise ValueError("all eight physical helicity edge identities must be distinct; duplicate sectors are forbidden")
+        parent_orbits = {identity.parent_wavevector_orbit for identity in identities}
+        child_wavevectors = {identity.child.wavevector for identity in identities}
+        if len(parent_orbits) != 1 or len(child_wavevectors) != 1:
+            raise ValueError("one continuum fiber must retain one physical parent orbit and one child wavevector")
+        expected_helicities = set(itertools.product((-1, 1), repeat=3))
+        observed_helicities = {identity.helicity_assignment for identity in identities}
+        if observed_helicities != expected_helicities:
+            raise ValueError("continuum fiber must contain exactly the eight physical helicity assignments")
+        if any(v < 0.0 for v in (
+            self.ordered_quotient_source_residual,
+            self.parent_swap_residual,
+            self.helical_reconstruction_residual,
+        )):
+            raise ValueError("continuum fiber provenance residuals must be nonnegative")
+        q = float(self.quotient_measure_mass)
+        for atom in self.modal_atoms:
+            _require_native_equal(
+                "continuum atom quotient-measure mass binding",
+                atom.quotient_measure_mass,
+                q,
+                scale=max(abs(atom.quotient_measure_mass), abs(q)),
+            )
+        modal_work = float(sum(a.registration.signed_child_energy_work for a in self.modal_atoms))
+        work_scale = max(
+            abs(self.direct_signed_work_density),
+            sum(abs(a.registration.signed_child_energy_work) for a in self.modal_atoms),
+        )
+        _require_native_equal(
+            "continuum fiber modal work binding",
+            self.modal_signed_work_density,
+            modal_work,
+            scale=work_scale,
+        )
+        _require_native_equal(
+            "continuum fiber direct/modal work reconstruction",
+            self.direct_signed_work_density,
+            modal_work,
+            scale=work_scale,
+        )
+        _require_native_equal(
+            "continuum fiber stored work residual",
+            self.signed_work_reconstruction_residual,
+            self.direct_signed_work_density - self.modal_signed_work_density,
+            scale=work_scale,
+        )
+        modal_progress = float(sum(a.registration.signed_upper_progress_work for a in self.modal_atoms))
+        progress_scale = max(
+            abs(self.direct_signed_progress_density),
+            sum(abs(a.registration.signed_upper_progress_work) for a in self.modal_atoms),
+        )
+        _require_native_equal(
+            "continuum fiber modal progress binding",
+            self.modal_signed_progress_density,
+            modal_progress,
+            scale=progress_scale,
+        )
+        _require_native_equal(
+            "continuum fiber direct/modal progress reconstruction",
+            self.direct_signed_progress_density,
+            modal_progress,
+            scale=progress_scale,
+        )
+        _require_native_equal(
+            "continuum fiber stored progress residual",
+            self.signed_progress_reconstruction_residual,
+            self.direct_signed_progress_density - self.modal_signed_progress_density,
+            scale=progress_scale,
+        )
 
 
 def register_continuum_triad_fiber(
@@ -279,11 +679,7 @@ def register_continuum_triad_fiber(
     qmass = float(quotient_measure_mass)
     if not math.isfinite(qmass) or qmass < 0.0:
         raise ValueError("nonnegative finite quotient-measure mass required")
-    scale = max(1.0, float(np.linalg.norm(x)), float(np.linalg.norm(y)), float(np.linalg.norm(z)))
-    if np.linalg.norm(x + y - z) > 2e-12 * scale:
-        raise ValueError("physical triad requires z=x+y")
-    if min(float(np.linalg.norm(x)), float(np.linalg.norm(y)), float(np.linalg.norm(z))) <= 1e-14:
-        raise ValueError("nonzero parent and child wavevectors required")
+    nx, ny, nz = _physical_triad(x, y, z)
 
     _, rx = helical_reconstruction(x, ux)
     _, ry = helical_reconstruction(y, uy)
@@ -293,15 +689,13 @@ def register_continuum_triad_fiber(
     source_xy = ordered_parent_curl_source(x, y, z, ux, uy)
     source_yx = ordered_parent_curl_source(y, x, z, uy, ux)
     source_unordered = unordered_parent_curl_source_vector(x, y, z, ux, uy)
-    source_res = float(
-        np.linalg.norm(source_unordered - source_xy - source_yx)
-        / max(1.0, float(np.linalg.norm(source_unordered)))
-    )
+    source_scale = max(_complex_norm3(source_unordered), _complex_norm3(source_xy) + _complex_norm3(source_yx))
+    source_res = _relative_vector_gap(source_unordered, source_xy + source_yx, scale=source_scale)
     if source_res > 3e-11:
         raise AssertionError("unordered quotient orbit failed ordered convolution reconstruction")
 
     swapped = unordered_parent_curl_source_vector(y, x, z, uy, ux)
-    swap_res = float(np.linalg.norm(swapped - source_unordered) / max(1.0, float(np.linalg.norm(source_unordered))))
+    swap_res = _relative_vector_gap(swapped, source_unordered)
     if swap_res > 3e-11:
         raise AssertionError("unordered parent quotient depended on parent orientation")
 
@@ -326,18 +720,30 @@ def register_continuum_triad_fiber(
     direct_work = 2.0 * float(np.real(np.vdot(uz, source_unordered)))
     modal_work = float(sum(a.registration.signed_child_energy_work for a in atoms))
     work_res = direct_work - modal_work
-    if abs(work_res) > 5e-10 * max(1.0, abs(direct_work), abs(modal_work)):
-        raise AssertionError("eight helical sectors failed direct vector child-work reconstruction")
+    work_scale = max(abs(direct_work), sum(abs(a.registration.signed_child_energy_work) for a in atoms))
+    _require_native_equal(
+        "eight-helicity direct vector child-work reconstruction",
+        direct_work,
+        modal_work,
+        scale=work_scale,
+        relative_tolerance=5e-10,
+    )
 
     progress = max(
         0.0,
-        math.log(float(np.linalg.norm(z)) / max(float(np.linalg.norm(x)), float(np.linalg.norm(y)))),
+        math.log(nz / max(nx, ny)),
     )
     direct_progress = direct_work * progress
     modal_progress = float(sum(a.registration.signed_upper_progress_work for a in atoms))
     progress_res = direct_progress - modal_progress
-    if abs(progress_res) > 5e-10 * max(1.0, abs(direct_progress), abs(modal_progress)):
-        raise AssertionError("eight helical sectors failed upper-progress work reconstruction")
+    progress_scale = max(abs(direct_progress), sum(abs(a.registration.signed_upper_progress_work) for a in atoms))
+    _require_native_equal(
+        "eight-helicity upper-progress reconstruction",
+        direct_progress,
+        modal_progress,
+        scale=progress_scale,
+        relative_tolerance=5e-10,
+    )
 
     return ContinuumFiberRegistration(
         quotient_measure_mass=qmass,
@@ -358,6 +764,7 @@ def register_continuum_triad_fiber(
 class ContinuumEdgeMeasureLedger:
     fibers: int
     modal_edges: int
+    physical_fibers: tuple[ContinuumFiberRegistration, ...]
     quotient_measure_mass: float
     signed_direct_work: float
     signed_modal_work: float
@@ -389,9 +796,46 @@ class ContinuumEdgeMeasureLedger:
     parent_orientation_chosen: bool = False
 
     def __post_init__(self) -> None:
+        if self.fibers <= 0 or self.modal_edges <= 0:
+            raise ValueError("positive continuum fiber and modal-edge counts required")
+        if len(self.physical_fibers) != self.fibers or sum(len(f.modal_atoms) for f in self.physical_fibers) != self.modal_edges:
+            raise ValueError("continuum ledger physical-fiber provenance count mismatch")
+        numeric = (
+            self.quotient_measure_mass,
+            self.signed_direct_work,
+            self.signed_modal_work,
+            self.positive_edge_work,
+            self.negative_edge_work,
+            self.aggregate_positive_work,
+            self.fiber_positive_work,
+            self.positive_dominance_over_aggregate,
+            self.positive_dominance_over_fibers,
+            self.positive_forward_work,
+            self.positive_nonforward_work,
+            self.capacity_mass,
+            self.signed_direct_progress,
+            self.signed_registered_progress,
+            self.normalized_signed_flux,
+            self.block_transfer_deficit,
+            self.multiplier_deficit,
+            self.phase_deficit,
+            self.polarization_residual,
+            self.good_core_capacity_mass,
+            self.good_core_positive_work,
+            self.good_core_capacity_fraction,
+            self.direct_work_reconstruction_residual,
+            self.direct_progress_reconstruction_residual,
+        )
+        if not all(math.isfinite(float(value)) for value in numeric):
+            raise ValueError("finite continuum edge-measure ledger required")
+        for value in (self.good_core_physical_to_capacity_rn_min, self.good_core_physical_to_capacity_rn_max):
+            if value is not None and not math.isfinite(float(value)):
+                raise ValueError("finite Radon-Nikodym provenance required when present")
+        if self.quotient_measure_mass < 0.0:
+            raise ValueError("nonnegative finite quotient-measure mass required")
         if self.capacity_mass <= 0.0:
             raise ValueError("positive continuum capacity mass required")
-        if self.positive_edge_work < -1e-14 or self.negative_edge_work < -1e-14:
+        if self.positive_edge_work < 0.0 or self.negative_edge_work < 0.0:
             raise ValueError("Hahn masses must be nonnegative")
         if self.capacity_is_causal_law or self.parent_orientation_chosen:
             raise ValueError("capacity/orientation bookkeeping was promoted to physical causality")
@@ -413,33 +857,84 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
     atoms = tuple(a for f in fs for a in f.modal_atoms)
     cf = unitary_fourier_convolution_factor()
 
-    signed_direct = cf * sum(f.quotient_measure_mass * f.direct_signed_work_density for f in fs)
-    signed_modal = sum(a.signed_work_mass for a in atoms)
-    direct_work_res = signed_direct - signed_modal
-    if abs(direct_work_res) > 7e-10 * max(1.0, abs(signed_direct), abs(signed_modal)):
-        raise AssertionError("continuum signed helical edge measure lost direct NS work")
-
-    positive = sum(max(a.signed_work_mass, 0.0) for a in atoms)
-    negative = sum(max(-a.signed_work_mass, 0.0) for a in atoms)
-    hahn_res = (positive - negative) - signed_modal
-    if abs(hahn_res) > 7e-11 * max(1.0, positive + negative, abs(signed_modal)):
-        raise AssertionError("continuum Hahn split failed signed edge reconstruction")
-    aggregate_positive = max(0.0, signed_direct)
-    fiber_positive = cf * sum(
-        f.quotient_measure_mass * max(f.direct_signed_work_density, 0.0)
-        for f in fs
+    signed_direct = _finite_sum(
+        (
+            _edge_signed_product(
+                (cf, f.quotient_measure_mass, f.direct_signed_work_density),
+                "continuum direct signed-work fiber mass",
+            )
+            for f in fs
+        ),
+        "continuum direct signed work",
     )
-    if positive + 7e-11 * max(1.0, positive) < fiber_positive or fiber_positive + 7e-11 * max(1.0, fiber_positive) < aggregate_positive:
+    signed_modal = _finite_sum((a.signed_work_mass for a in atoms), "continuum modal signed work")
+    direct_work_res = signed_direct - signed_modal
+    signed_work_scale = max(
+        abs(signed_direct),
+        _finite_sum((abs(a.signed_work_mass) for a in atoms), "continuum absolute modal work scale"),
+    )
+    _require_native_equal(
+        "continuum signed helical edge measure direct NS work",
+        signed_direct,
+        signed_modal,
+        scale=signed_work_scale,
+        relative_tolerance=7e-10,
+    )
+
+    positive = _finite_sum((max(a.signed_work_mass, 0.0) for a in atoms), "continuum positive Hahn mass")
+    negative = _finite_sum((max(-a.signed_work_mass, 0.0) for a in atoms), "continuum negative Hahn mass")
+    _require_native_equal(
+        "continuum Hahn split signed edge reconstruction",
+        positive - negative,
+        signed_modal,
+        scale=positive + negative,
+        relative_tolerance=7e-11,
+    )
+    aggregate_positive = max(0.0, signed_direct)
+    fiber_positive = _finite_sum(
+        (
+            _edge_positive_product(
+                (cf, f.quotient_measure_mass, max(f.direct_signed_work_density, 0.0)),
+                "continuum fiber-positive work mass",
+            )
+            for f in fs
+        ),
+        "continuum fiber-positive work",
+    )
+    positive_scale = max(positive, fiber_positive, aggregate_positive)
+    positive_slack = 7e-11 * positive_scale
+    if positive + positive_slack < fiber_positive or fiber_positive + positive_slack < aggregate_positive:
         raise AssertionError("positive edge Hahn mass failed physical positive-work dominance")
 
-    capacity = sum(a.capacity_mass for a in atoms)
+    capacity = _finite_sum((a.capacity_mass for a in atoms), "continuum total capacity mass")
     if capacity <= 0.0:
         raise ValueError("positive modal capacity required")
-    direct_progress = cf * sum(f.quotient_measure_mass * f.direct_signed_progress_density for f in fs)
-    registered_progress = sum(a.signed_progress_mass for a in atoms)
+    direct_progress = _finite_sum(
+        (
+            _edge_signed_product(
+                (cf, f.quotient_measure_mass, f.direct_signed_progress_density),
+                "continuum direct signed-progress fiber mass",
+            )
+            for f in fs
+        ),
+        "continuum direct signed progress",
+    )
+    registered_progress = _finite_sum(
+        (a.signed_progress_mass for a in atoms), "continuum registered signed progress"
+    )
     direct_progress_res = direct_progress - registered_progress
-    if abs(direct_progress_res) > 7e-10 * max(1.0, abs(direct_progress), abs(registered_progress), capacity * float_jstar()):
-        raise AssertionError("continuum A*J*c measure lost direct upper-progress work")
+    progress_scale = max(
+        abs(direct_progress),
+        _finite_sum((abs(a.signed_progress_mass) for a in atoms), "continuum absolute progress scale"),
+        _edge_positive_product((capacity, float_jstar()), "continuum J-star capacity scale"),
+    )
+    _require_native_equal(
+        "continuum A*J*c direct upper-progress work",
+        direct_progress,
+        registered_progress,
+        scale=progress_scale,
+        relative_tolerance=7e-10,
+    )
 
     capacities = np.asarray([a.capacity_mass for a in atoms], dtype=float)
     multipliers = np.asarray([a.multiplier for a in atoms], dtype=float)
@@ -454,20 +949,18 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
         raise AssertionError("measure-level polarization ratio disagreed with actual A*J*c progress")
     deficit = 1.0 - ratio
 
-    positive_forward = sum(
-        max(a.signed_work_mass, 0.0)
-        for a in atoms
-        if a.scale_progress > 0.0
+    positive_forward = _finite_sum(
+        (max(a.signed_work_mass, 0.0) for a in atoms if a.scale_progress > 0.0),
+        "continuum positive forward work",
     )
-    positive_nonforward = sum(
-        max(a.signed_work_mass, 0.0)
-        for a in atoms
-        if a.scale_progress <= 0.0
+    positive_nonforward = _finite_sum(
+        (max(a.signed_work_mass, 0.0) for a in atoms if a.scale_progress <= 0.0),
+        "continuum positive nonforward work",
     )
 
     good = [a for a in atoms if a.capacity_mass > 0.0 and a.signed_efficiency > 1.0 - GOOD_CORE_ETA]
-    good_capacity = sum(a.capacity_mass for a in good)
-    good_work = sum(a.signed_work_mass for a in good)
+    good_capacity = _finite_sum((a.capacity_mass for a in good), "continuum good-core capacity mass")
+    good_work = _finite_sum((a.signed_work_mass for a in good), "continuum good-core physical work")
     rn_min: float | None = None
     rn_max: float | None = None
     if good_capacity > 0.0:
@@ -483,7 +976,8 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
     return ContinuumEdgeMeasureLedger(
         fibers=len(fs),
         modal_edges=len(atoms),
-        quotient_measure_mass=sum(f.quotient_measure_mass for f in fs),
+        physical_fibers=fs,
+        quotient_measure_mass=_finite_sum((f.quotient_measure_mass for f in fs), "continuum quotient-measure mass"),
         signed_direct_work=signed_direct,
         signed_modal_work=signed_modal,
         positive_edge_work=positive,
@@ -512,6 +1006,61 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
     )
 
 
+def _replay_physical_ledger(ledger: ContinuumEdgeMeasureLedger) -> ContinuumEdgeMeasureLedger:
+    """Recompute summary observables from the bound physical fiber law.
+
+    A typed summary is not continuation/provenance authority.  Downstream gates
+    must replay the actual registered fibers so ``dataclasses.replace`` or an
+    equivalent forged summary cannot manufacture low deficit or a good core.
+    """
+    replayed = continuum_edge_measure_ledger(tuple(ledger.physical_fibers))
+    numeric_fields = (
+        "quotient_measure_mass",
+        "signed_direct_work",
+        "signed_modal_work",
+        "positive_edge_work",
+        "negative_edge_work",
+        "aggregate_positive_work",
+        "fiber_positive_work",
+        "positive_forward_work",
+        "positive_nonforward_work",
+        "capacity_mass",
+        "signed_direct_progress",
+        "signed_registered_progress",
+        "normalized_signed_flux",
+        "block_transfer_deficit",
+        "multiplier_deficit",
+        "phase_deficit",
+        "polarization_residual",
+        "good_core_capacity_mass",
+        "good_core_positive_work",
+        "good_core_capacity_fraction",
+    )
+    for name in numeric_fields:
+        _require_native_equal(
+            f"continuum ledger replay field {name}",
+            getattr(ledger, name),
+            getattr(replayed, name),
+            relative_tolerance=8e-10,
+        )
+    for name in ("good_core_physical_to_capacity_rn_min", "good_core_physical_to_capacity_rn_max"):
+        actual = getattr(ledger, name)
+        expected = getattr(replayed, name)
+        if actual is None or expected is None:
+            if actual is not expected:
+                raise AssertionError(f"continuum ledger replay field {name} lost physical provenance")
+        else:
+            _require_native_equal(
+                f"continuum ledger replay field {name}",
+                actual,
+                expected,
+                relative_tolerance=8e-10,
+            )
+    if ledger.capacity_is_causal_law != replayed.capacity_is_causal_law or ledger.causal_law != replayed.causal_law or ledger.parent_orientation_chosen != replayed.parent_orientation_chosen:
+        raise AssertionError("continuum ledger replay changed causal/orientation provenance")
+    return replayed
+
+
 @dataclass(frozen=True)
 class PhysicalGoodCoreCertificate:
     block_transfer_deficit: float
@@ -529,6 +1078,7 @@ class PhysicalGoodCoreCertificate:
 
 def signed_good_core_physical_law(ledger: ContinuumEdgeMeasureLedger) -> PhysicalGoodCoreCertificate:
     """Convert the same low-deficit capacity law to actual positive child work on its good core."""
+    ledger = _replay_physical_ledger(ledger)
     eps = float(ledger.block_transfer_deficit)
     if not (0.0 <= eps < LOW_COST_DEFICIT_CEILING):
         raise ValueError("physical good-core change of measure requires deficit <1/20000")
@@ -587,6 +1137,7 @@ def edge_measure_to_service_or_flat(
 
     The caller is deliberately not allowed to supply ``avg_transfer_deficit``.
     """
+    ledger = _replay_physical_ledger(ledger)
     out = coherent_service_or_flat_gate(
         tau=tau,
         avg_transfer_deficit=ledger.block_transfer_deficit,
@@ -623,8 +1174,10 @@ def theorem_certificate() -> dict[str, object]:
         "status": STATUS,
         "upstream_one_edge_status": HELICAL_EDGE_STATUS,
         "unitary_fourier": "fhat=(2pi)^(-3/2) integral exp(-ix.k) f(x)dx, so product convolution carries C_F=(2pi)^(-3/2)",
-        "parent_quotient": "for fixed child z, pi_z(x)={x,z-x} and lambda_z^unord=(1/2)(pi_z)_# dx; the orbit integrand is the sum of both ordered parent terms, so no orientation selector is physical",
-        "helicity": "arbitrary divergence-free parent/child Fourier vectors resolve into the two orthogonal helical sectors at the event; summing all 8 (sx,sy,sz) work channels reconstructs direct vector NS work exactly",
+        "parent_quotient": "for fixed child z, parent exchange acts on the complete parent mode objects: (r,sx,sy)->(-r,sy,sx); each helicity stays attached to its physical wavevector and no orientation selector is physical",
+        "joint_outer_child_radon": joint_unordered_parent_radon_certificate(),
+        "weighted_local_variation": "for every bounded Borel child block B and finite Fourier energy E, A(B)<=4 sqrt(2) C_F E^(3/2) (int_B |z|^2 dz)^(1/2); pointwise |T_e|<=A_e and |J_e c_e|<=J_* then give |W|(B)<=A(B) and |F|(B)<=J_*A(B), so the physical weighted measures are locally finite Radon without a UV parent cutoff",
+        "helicity": "typed atoms retain the orientation-quotiented physical (wavevector,helicity) edge identity; one regular fiber contains exactly the eight distinct parent-mode/child-helicity assignments and their work sum reconstructs direct vector NS work",
         "signed_measure": "dW=C_F T_e d(lambda_unord) is constructed signed before Hahn; W_plus-W_minus=W while W_plus >= [W]_+ under cancellation",
         "capacity_measure": "dA=C_F A_e d(lambda_unord), A_e=4|z||a_x a_y a_z|; dA is a positive reference measure, never the causal child-work law",
         "progress_measure": "dF=g_scale dW=J_e c_e dA and R=F/(J_* A); 1-R=E_A[(1-m)+m(1-c)] exactly",
@@ -635,7 +1188,7 @@ def theorem_certificate() -> dict[str, object]:
         "normalization_distinction": f"native unitary Young work upper at R=1 is C_F*(4A3)={unitary_upper:.12g}, while existing clean productivity upper 4A3={clean_upper:.12g} deliberately dominates it",
         "service_default_deficit_threshold": service_delta,
         "young_distinction": "epsilon=1-F/(J_*A) is the edge geometry/phase signed-efficiency deficit relative to actual modal capacity; it is not the separate Young norm-saturation deficit, which remains downstream",
-        "scope": "this closes continuum signed edge-measure registration and its low-deficit physical-law handoff; it does not prove that every generic HH block is low deficit or terminate nonforward/high-deficit physical events",
+        "scope": "this closes fixed-child and joint outer-child/unordered-parent Radon registration, energy-native local finite variation of the physical weighted measures, signed helical work/capacity/progress reconstruction, and the low-deficit physical-law handoff; it does not prove that every generic HH block is low deficit or terminate nonforward/high-deficit physical events",
     }
 
 
@@ -662,7 +1215,7 @@ class ContinuumEdgeMeasureStress:
 
 
 def _relative(a: float, b: float) -> float:
-    return abs(a - b) / max(1.0, abs(a), abs(b))
+    return _relative_gap(a, b)
 
 
 def _random_divergence_free(rng: np.random.Generator, k: np.ndarray) -> np.ndarray:
@@ -879,6 +1432,14 @@ The unitary Fourier convention contributes `C_F=(2pi)^(-3/2)`.  For fixed child
 orientation:
 
 `lambda_z^unord = (1/2)(pi_z)_# dx`, `pi_z(x)={{x,z-x}}`.
+
+On every bounded Borel child block `B`, finite Fourier energy already gives the
+native local-variation bound
+
+`A(B) <= 4 sqrt(2) C_F E^(3/2) (int_B |z|^2 dz)^(1/2)`,
+
+and therefore `|W|(B)<=A(B)`, `|F|(B)<=J_*A(B)`.  This is local finiteness of
+the physical weighted Radon measures, not a causal charge and not a UV cutoff.
 
 The orbit source is the sum of the two parent orders.  Arbitrary divergence-free
 Fourier vectors then resolve at the event into all eight helical sectors and the

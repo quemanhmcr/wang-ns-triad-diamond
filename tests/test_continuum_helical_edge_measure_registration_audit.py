@@ -1,0 +1,264 @@
+"""Adversarial native-scale and provenance checks for continuum helical edge measures.
+
+These tests deliberately challenge theorem boundaries rather than numerical
+fixtures.  They are intended to run in GitHub Actions on the independent audit
+lane; local development should remain static/basic only.
+"""
+
+import math
+from dataclasses import replace
+
+import numpy as np
+import pytest
+
+from src.continuum_helical_edge_measure_registration import (
+    _nonforward_positive_fiber,
+    _symmetric_extremal_fiber,
+    continuum_edge_local_variation_energy_bounds,
+    continuum_edge_measure_ledger,
+    edge_measure_to_service_or_flat,
+    register_continuum_triad_fiber,
+    signed_good_core_physical_law,
+)
+from src.helical import coupling_g, helical_basis
+
+
+def _edge(scale: float = 1.0):
+    x = scale * np.asarray((0.52, 0.31, 0.0))
+    y = scale * np.asarray((0.52, -0.31, 0.0))
+    return x, y, x + y
+
+
+def _fiber(*, wave_scale: float = 1.0, amplitude: float = 1.0, quotient_mass: float = 1.0):
+    x, y, z = _edge(wave_scale)
+    sx, sy, sz = 1, -1, 1
+    g = coupling_g(x, y, -z, sx, sy, sz)
+    signed_frequency = sx * np.linalg.norm(x) - sy * np.linalg.norm(y)
+    target_sign = 1.0 if signed_frequency >= 0.0 else -1.0
+    az = target_sign * np.exp(-1j * np.angle(g))
+    return register_continuum_triad_fiber(
+        x=x,
+        y=y,
+        z=z,
+        ux=amplitude * helical_basis(x, sx),
+        uy=amplitude * helical_basis(y, sy),
+        uz=amplitude * az * helical_basis(z, sz),
+        quotient_measure_mass=quotient_mass,
+    )
+
+
+def _service(ledger):
+    return edge_measure_to_service_or_flat(
+        ledger,
+        tau=0.01,
+        objective_variation_action=0.0,
+        total_strain_action=0.0,
+        coherent_deformation_action=0.0,
+        aspect=1.0,
+        scale_radius=1.0,
+        has_predecessor=True,
+        scaled_lifetime=1.0,
+    )
+
+
+def test_continuum_registration_is_covariant_under_tiny_uniform_wavevector_dilation():
+    base = continuum_edge_measure_ledger((_fiber(),))
+    scale = 1.0e-120
+    tiny = continuum_edge_measure_ledger((_fiber(wave_scale=scale),))
+
+    assert tiny.block_transfer_deficit == pytest.approx(base.block_transfer_deficit, abs=2.0e-11)
+    assert tiny.normalized_signed_flux == pytest.approx(base.normalized_signed_flux, abs=2.0e-11)
+    assert tiny.signed_direct_work / base.signed_direct_work == pytest.approx(scale, rel=3.0e-11)
+    assert tiny.capacity_mass / base.capacity_mass == pytest.approx(scale, rel=3.0e-11)
+
+
+def test_continuum_registration_rejects_foreign_tiny_child_at_native_scale():
+    x, y, z = _edge(1.0e-12)
+    foreign = z + np.asarray((1.5e-12, 0.0, 0.0))
+    with pytest.raises(ValueError, match=r"z=x\+y|triad|parent pair"):
+        register_continuum_triad_fiber(
+            x=x,
+            y=y,
+            z=foreign,
+            ux=helical_basis(x, 1),
+            uy=helical_basis(y, -1),
+            uz=helical_basis(foreign, 1),
+            quotient_measure_mass=1.0,
+        )
+
+
+def test_tiny_nondivergencefree_vector_cannot_hide_behind_absolute_unit_floor():
+    x, y, z = _edge(1.0e-12)
+    # The parallel component is order-one relative to this tiny Fourier vector.
+    # Multiplying the modal amplitude by the same native scale must not make a
+    # physically longitudinal mode look divergence free merely because |k.u|<1.
+    bad_ux = 1.0e-12 * x / np.linalg.norm(x)
+    with pytest.raises(ValueError, match="divergence free"):
+        register_continuum_triad_fiber(
+            x=x,
+            y=y,
+            z=z,
+            ux=bad_ux.astype(complex),
+            uy=1.0e-12 * helical_basis(y, -1),
+            uz=1.0e-12 * helical_basis(z, 1),
+            quotient_measure_mass=1.0,
+        )
+
+
+def test_fiber_certificate_cannot_rebind_quotient_mass_without_rebinding_atoms():
+    fiber = _fiber(amplitude=1.0e-6, quotient_mass=1.0)
+    with pytest.raises((ValueError, AssertionError), match="quotient|measure|mass|reconstruct|provenance"):
+        forged = replace(fiber, quotient_measure_mass=2.0)
+        continuum_edge_measure_ledger((forged,))
+
+
+def test_fiber_certificate_cannot_forge_native_direct_work_density():
+    fiber = _fiber(amplitude=1.0e-7)
+    native = abs(fiber.modal_signed_work_density)
+    assert native > 0.0
+    with pytest.raises((ValueError, AssertionError), match="work|reconstruct|provenance|fiber"):
+        forged = replace(
+            fiber,
+            direct_signed_work_density=fiber.direct_signed_work_density + 0.25 * native,
+            signed_work_reconstruction_residual=0.0,
+        )
+        continuum_edge_measure_ledger((forged,))
+
+
+def test_high_deficit_ledger_cannot_forge_a_low_deficit_good_core_certificate():
+    x = np.asarray((1.0, 0.0, 0.0))
+    y = np.asarray((-0.8, 0.6, 0.0))
+    z = x + y
+    physical = register_continuum_triad_fiber(
+        x=x,
+        y=y,
+        z=z,
+        ux=helical_basis(x, 1),
+        uy=helical_basis(y, -1),
+        uz=1j * helical_basis(z, 1),
+        quotient_measure_mass=1.0,
+    )
+    ledger = continuum_edge_measure_ledger((physical,))
+    assert ledger.block_transfer_deficit > 0.5
+
+    forged = replace(
+        ledger,
+        block_transfer_deficit=1.0e-8,
+        good_core_capacity_fraction=1.0,
+        good_core_physical_to_capacity_rn_min=1.0,
+        good_core_physical_to_capacity_rn_max=1.0,
+    )
+    with pytest.raises((ValueError, AssertionError), match="ledger|deficit|physical|provenance|replay"):
+        signed_good_core_physical_law(forged)
+
+
+def test_service_adapter_replays_physical_ledger_instead_of_trusting_forged_deficit():
+    x = np.asarray((1.0, 0.0, 0.0))
+    y = np.asarray((-0.8, 0.6, 0.0))
+    z = x + y
+    physical = register_continuum_triad_fiber(
+        x=x,
+        y=y,
+        z=z,
+        ux=helical_basis(x, 1),
+        uy=helical_basis(y, -1),
+        uz=1j * helical_basis(z, 1),
+        quotient_measure_mass=1.0,
+    )
+    ledger = continuum_edge_measure_ledger((physical,))
+    assert ledger.block_transfer_deficit > 0.5
+    forged = replace(ledger, block_transfer_deficit=0.0)
+
+    with pytest.raises((ValueError, AssertionError), match="ledger|deficit|physical|provenance|replay"):
+        _service(forged)
+
+
+def test_nonzero_continuum_capacity_must_not_silently_underflow_to_zero():
+    with pytest.raises(ValueError, match="capacity|native.*range|underflow"):
+        _fiber(amplitude=1.0e-120)
+
+
+def test_typed_ledger_rejects_nan_transfer_deficit_at_construction():
+    ledger = continuum_edge_measure_ledger((_symmetric_extremal_fiber(),))
+    with pytest.raises((ValueError, AssertionError), match="finite|deficit|ledger|provenance"):
+        replace(ledger, block_transfer_deficit=math.nan)
+
+
+def test_good_core_cannot_accept_nan_radon_nikodym_provenance():
+    ledger = continuum_edge_measure_ledger((_symmetric_extremal_fiber(),))
+    assert ledger.block_transfer_deficit < 1.0e-8
+    with pytest.raises((ValueError, AssertionError), match="finite|Radon|Nikodym|ledger|provenance|replay"):
+        forged = replace(ledger, good_core_physical_to_capacity_rn_min=math.nan)
+        signed_good_core_physical_law(forged)
+
+
+def test_continuum_measure_product_overflow_must_fail_closed():
+    # The quotient mass itself is finite, but multiplying it by a nonzero
+    # physical edge capacity/work leaves the finite native floating range.  A
+    # certificate must reject this rather than normalize infinities into a
+    # seemingly excellent zero-deficit block.
+    # With amplitude two, the native modal capacity is >32 on this geometry,
+    # so C_F * qmass * A_e exceeds the largest finite binary64 value even
+    # though qmass and the one-edge physical data are each finite.
+    fiber = _fiber(amplitude=2.0, quotient_mass=1.0e308)
+    with pytest.raises((ValueError, AssertionError, OverflowError), match="finite|range|overflow|capacity|measure"):
+        continuum_edge_measure_ledger((fiber,))
+
+
+def test_continuum_measure_scaling_preserves_dimensionless_law_far_below_unit_scale():
+    base = continuum_edge_measure_ledger((_symmetric_extremal_fiber(quotient_measure_mass=1.0),))
+    tiny_mass = 1.0e-180
+    tiny = continuum_edge_measure_ledger((_symmetric_extremal_fiber(quotient_measure_mass=tiny_mass),))
+    assert tiny.normalized_signed_flux == pytest.approx(base.normalized_signed_flux, abs=3.0e-11)
+    assert tiny.block_transfer_deficit == pytest.approx(base.block_transfer_deficit, abs=3.0e-11)
+    assert tiny.capacity_mass / base.capacity_mass == pytest.approx(tiny_mass, rel=3.0e-11)
+    assert tiny.signed_direct_work / base.signed_direct_work == pytest.approx(tiny_mass, rel=3.0e-11)
+
+
+def test_nonforward_typed_edge_cannot_forge_physical_work_above_native_capacity():
+    fiber = _nonforward_positive_fiber()
+    candidates = [
+        atom.registration
+        for atom in fiber.modal_atoms
+        if atom.registration.scale_progress == 0.0
+        and atom.registration.native_modal_capacity > 0.0
+    ]
+    assert candidates
+    edge = max(candidates, key=lambda row: row.native_modal_capacity)
+    forged_work = 1.25 * edge.native_modal_capacity
+    with pytest.raises((ValueError, AssertionError), match="work|capacity|physical|provenance"):
+        replace(edge, signed_child_energy_work=forged_work)
+
+def test_typed_fiber_cannot_replace_eight_helicity_assignments_by_duplicate_atoms():
+    fiber = _symmetric_extremal_fiber()
+    atom = max(fiber.modal_atoms, key=lambda row: row.capacity_mass)
+    duplicated = (atom,) * 8
+    forged_work = math.fsum(row.registration.signed_child_energy_work for row in duplicated)
+    forged_progress = math.fsum(row.registration.signed_upper_progress_work for row in duplicated)
+    with pytest.raises((ValueError, AssertionError), match="helicit|sector|identity|provenance|duplicate"):
+        replace(
+            fiber,
+            direct_signed_work_density=forged_work,
+            modal_signed_work_density=forged_work,
+            direct_signed_progress_density=forged_progress,
+            modal_signed_progress_density=forged_progress,
+            signed_work_reconstruction_residual=0.0,
+            signed_progress_reconstruction_residual=0.0,
+            modal_atoms=duplicated,
+        )
+
+
+def test_local_variation_bound_preserves_cubic_native_scaling_far_below_unit_energy():
+    base = continuum_edge_local_variation_energy_bounds(1.0, 1.0)
+    tiny_energy = 1.0e-80
+    tiny = continuum_edge_local_variation_energy_bounds(tiny_energy, 1.0)
+    assert tiny.capacity_variation_upper / base.capacity_variation_upper == pytest.approx(
+        tiny_energy**1.5, rel=4.0e-14
+    )
+    assert tiny.work_variation_upper == tiny.capacity_variation_upper
+
+
+def test_local_variation_certificate_cannot_forge_work_above_capacity():
+    bound = continuum_edge_local_variation_energy_bounds(2.0, 3.0)
+    with pytest.raises((ValueError, AssertionError), match="work|capacity|variation"):
+        replace(bound, work_variation_upper=1.01 * bound.capacity_variation_upper)

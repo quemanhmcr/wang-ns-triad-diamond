@@ -1,6 +1,6 @@
 # Continuum master event quotient: physical time, not theorem depth
 
-Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; same-carrier checkpoint-segmentation extension certified on `bd404d8fd79336e094015f8a9463bfef761e9d2d`; smooth-relink donor extension certified on `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03`; high-strain descending-epoch extension certified on `774c702a692e67f5ccdf3a7028c16e437a0c5cc1`**.
+Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; same-carrier checkpoint-segmentation extension certified on `bd404d8fd79336e094015f8a9463bfef761e9d2d`; smooth-relink donor extension certified on `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03`; high-strain descending-epoch extension certified on `774c702a692e67f5ccdf3a7028c16e437a0c5cc1`; continuum signed helical edge-measure extension certified on `6bc9099190048a8796b54fb2f4782314b699bd4b`**.
 
 ## 1. Why the apparent recursion was too large
 
@@ -355,12 +355,30 @@ and the existing geometric/phase variables obey
 
 This is a registration theorem, not a generic-HH termination theorem. Positive
 child work may be nonforward, in which case the upper-progress multiplier is
-zero. The next continuum step must construct the signed unitary-Fourier triad
-measure, keep cancellation before Hahn splitting, and only then form the positive
-causal sublaw used by downstream deficit/Young machinery.
+zero. At the time of this modal extension the signed continuum Fourier triad
+measure was the next open seam; the companion certified extension below now
+supplies it while retaining cancellation before Hahn splitting.
 
-This extension was certified on exact SHA
+This modal extension was certified on exact SHA
 `6d2b721be579e299c42f4ad370448e5336f3f43c` by dedicated run `31472591138` and
 full causal integration `31472591129`; the dedicated run passed `748` tests and
 `50,000` helical physical-edge states, and full integration completed `60`
 successful steps.
+
+
+### Certified extension: continuum signed helical edge measure
+
+Exact implementation SHA `6bc9099190048a8796b54fb2f4782314b699bd4b` now supplies the continuum law that the modal
+edge theorem left open.  Parent order is quotiented on complete wavevector/helicity
+mode objects; the joint `(z,r)` quotient has density `1/16`; arbitrary
+divergence-free Fourier vectors reconstruct exact signed NS work through all eight
+helicity sectors.  With `C_F=(2pi)^(-3/2)`, the same physical law gives signed
+`dW`, positive reference `dA`, and signed upper-progress `dF`.  The signed law is
+reconstructed before Hahn splitting, and finite Fourier energy gives local Radon
+variation of the weighted measures without a UV parent cutoff.
+
+This sharpens the generic-HH frontier but does not terminate it.  The next master
+assembly must route the canonical positive edge-work law itself: bad efficiency
+may enter the existing fixed transfer-loss fate, while surviving good work still
+needs the separate signed hard-cell Young/Christ premise.  Capacity remains a
+reference law, not a causal replacement.

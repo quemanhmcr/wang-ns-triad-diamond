@@ -2469,11 +2469,32 @@ representation gauges of the same physical edge.
 
 This refinement sharpens, but does not close, the generic-HH master branch.
 Positive child work is not automatically forward work; nonforward physical edges
-have zero upper-progress multiplier. Nor may the continuum positive law be
-formed by silently replacing `[integral T]_+` with `integral [T]_+`. The next
-required theorem is therefore a signed continuum Fourier-edge measure
-registration with the unitary convolution normalization and exact cancellation
-retained before Hahn decomposition.
+have zero upper-progress multiplier. Nor may a continuum positive law be formed
+by silently replacing `[integral T]_+` with `integral [T]_+`. At the scope of
+this modal refinement, signed continuum Fourier-edge registration remained open;
+the companion certified refinement below now supplies that measure with unitary
+normalization and exact cancellation retained before Hahn decomposition.
 
-Exact implementation SHA `6d2b721be579e299c42f4ad370448e5336f3f43c` passed
+Exact modal implementation SHA `6d2b721be579e299c42f4ad370448e5336f3f43c` passed
 dedicated run `31472591138` and full causal integration `31472591129`.
+
+
+## Certified refinement: signed continuum helical edge measure
+
+The one-edge modal theorem is now extended to an actual continuum signed Fourier
+work law on exact implementation SHA `6bc9099190048a8796b54fb2f4782314b699bd4b`.  The unitary convolution factor,
+parent-order quotient, child variable, helicity assignments and local weighted
+Radon variation are all registered before positivity.  Thus generic HH may no
+longer hide behind an abstract synthetic capacity: the physical block exposes
+`signed dW`, `reference dA`, `signed dF`, and its native transfer deficit.
+
+The refinement does **not** close generic HH recurrence.  It changes the remaining
+question into a more physical one: partition the canonical Hahn-positive edge
+work itself into actual transfer-loss versus Young-eligible work, without reading
+capacity majority as causal majority and without re-Hahn-splitting a later
+analysis representation.  Positive nonforward work remains real and receives no
+synthetic scale progress.
+
+Independent audit `31494249932`, dedicated continuum run `31494250081`, helical
+dependency `31494402810` and full causal integration `31494250037` all succeeded
+on the same exact implementation SHA.

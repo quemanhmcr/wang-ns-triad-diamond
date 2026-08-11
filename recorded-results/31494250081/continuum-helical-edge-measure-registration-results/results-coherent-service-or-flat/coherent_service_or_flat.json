@@ -1,0 +1,25 @@
+{
+  "certificate": {
+    "status": "EXACT_COHERENT_SERVICE_OR_FLAT_ASSEMBLY_GATE__EVENT_ROLE_REGISTRATION_SUPPLIED",
+    "flatness": "sqrt(E_H_phys)+(dT)_nonconf+C(qmax) I_K <= tau",
+    "nonaffine_coefficient": "C(qmax)=1+qmax/sqrt2+sqrt7/2; default qmax=4.71207563594",
+    "deformation_threshold": "I_K<tau/(3C(qmax)); at tau=1/100 default threshold=0.000589468014821",
+    "large_deformation": "otherwise D_V>=1.26092833997e-06/c for the threshold event (displayed at c=1)",
+    "large_radius": "N r_g>s0 is sticky affine-radius ancestry with critical local mass >=(3/10)s0, not a finite reset",
+    "profile_rule": "Christ Gaussian is an eventwise analysis mark; no frozen-profile persistence is an input to the coherent gate",
+    "single_charge_rule": "the gate returns all threshold-crossing physical roots; it never picks a primary by theorem-name order, and delegates primary selection to the first-causal compiler",
+    "H1H3_status": "existing H1/H3 theorems remain sharper optional diagnostics, not required to control the full non-affine moving Gaussian core",
+    "continuum_status": "event-anchored hard roles and smooth PDE envelopes are supplied by companion theorems; remaining continuum work is the single recursive first-stop constructor which applies this gate and the physical pair-productivity route without duplicate charging"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_hodge_flat_margin": 0.0033327101911257793,
+    "minimum_strain_flat_margin": 0.0001666901510631075,
+    "minimum_nonaffine_flat_margin": 0.00016730937820789993,
+    "minimum_dissipation_threshold": 6.559413790793155e-07,
+    "branch_counts": {
+      "coherent_kelvin_extremal_flat": 6260,
+      "named_physical_causes": 43740
+    }
+  }
+}

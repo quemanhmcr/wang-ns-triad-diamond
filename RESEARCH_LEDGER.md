@@ -37,7 +37,7 @@ The current architecture has reached the following point.
 18. Smooth residual-skew `K_phys` relink is now also topologically quotiented without denying its physics: the exact gauge-quotiented `T_ab^{phys}` matrix is antisymmetric same-event flux, every positive relink recipient has finite negative-net donor closure, and relink creates no child recursive event.  A simultaneous `S` branch remains existing strain/deformation ownership.
 19. Consecutive high-strain recurrence now has a native viscous telescope without demoting high strain from genuine ownership: every high-strain event pays `D_j>=D_*`, its actual `D_V|_G` ancestor renews at `N_(j+1)/N_j<=3/16`, and interval restriction plus low-pass contraction gives `D_j<=N_j G_*` for the physical global gradient reservoir `G_*`.  Thus every pure high-strain epoch is finite even under complete time overlap, while mixed-owner recurrence remains open.
 20. Consecutive signed-good generated-HH recurrence now also has a native parabolic physical-time telescope without turning generation into an event-count cost: a raw `|I_HH|` hit is only a locator; after actual `Q^2` energy reentry selects positive HH child-work and the hard parent is certified `3/5<N_p/N_c<5/8`, parent natural lifetimes grow by more than `64/25` and the asynchronous common registration surfaces move backward by at least `(1792/4875)T_j`.  Their cumulative backshift reaches absorbing `t=0` after finite consecutive signed-good generated depth.  Generic/non-signed-good HH remains open.
-21. Actual unordered helical HH interactions now have a native same-event registration before any Young reduction: direct Fourier--Leray/curl NS work equals the repository Waleffe coefficient, the physical factor four is exact, and each edge carries `A_e=4|z||a_xa_ya_z|`, geometric `J_e`, phase/orientation `c_e`, with `T_e log_+(|z|/p_top)=A_eJ_ec_e`. Positive child work does not imply forward progress: nonforward edges have `J_e=0` and remain physical. The continuum signed Fourier edge measure and generic/non-signed-good HH resolver remain open.
+21. Actual unordered helical HH interactions now have a native same-event registration before any Young reduction: direct Fourier--Leray/curl NS work equals the repository Waleffe coefficient, the physical factor four is exact, and each edge carries `A_e=4|z||a_xa_ya_z|`, geometric `J_e`, phase/orientation `c_e`, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`. The companion continuum theorem now supplies the signed unitary-Fourier edge measure, joint `1/16` child/unordered-parent Radon quotient, local weighted variation from Fourier energy, and native deficit handoff. Positive child work still does not imply forward progress: nonforward edges have `J_e=0` and remain physical. The open HH seam is now canonical positive-edge routing and the separate signed hard-cell Young/Christ test, not continuum measure existence.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -155,6 +155,32 @@ continuous/absolutely-continuous cumulative observables either attain an existin
 closed first-stop face at the limit or retain strict margin and the same carrier
 continues across the accumulation.  Only an actual new physical event may harden
 a new causal role.  `t=0` remains absorbing.
+
+### 2.10 Signed continuum work is reconstructed before Hahn
+For an actual Fourier HH event, quotient representation freedom first and keep the
+nonlinear law signed.  The canonical continuum edge measures are
+\[
+ dW=C_FT_e\,d\Lambda_{edge},\qquad
+ dA=C_FA_e\,d\Lambda_{edge},\qquad
+ dF=J_ec_e\,dA,
+\]
+with `C_F=(2pi)^(-3/2)`.  Here `dW` is signed physical child-energy work, `dA` is
+a positive interaction-capacity **reference** and `dF` is signed upper-progress
+work.  Only after exact signed reconstruction may the Hahn law `dW^+` be formed.
+Never replace `[integral T]_+` by `integral [T]_+`, and never promote `dA` into
+the causal work law.
+
+The quotient base measure being Radon and the weighted physical measures having
+finite variation are separate proof obligations.  The current continuum theorem
+supplies both: the joint child/unordered-parent quotient has density `1/16` in
+`(z,r)=(x+y,x-y)`, while finite Fourier energy gives on every bounded Borel child
+block `B`
+\[
+ A(B)\le4\sqrt2\,C_F E^{3/2}\left(\int_B|z|^2dzight)^{1/2},
+\]
+and hence `|W|(B)<=A(B)` and `|F|(B)<=J_*A(B)`.  This is local measure existence,
+not a scale tax or resource budget.
+
 
 ---
 
@@ -712,7 +738,60 @@ and let `c_e` be the signed phase/orientation alignment of the same modal produc
 \]
 Parent-order exchange, reciprocal helical basis gauge, and uniform wavevector dilation preserve the physical identity in their correct covariant form.
 
-This theorem is deliberately prior to Young/Christ. Young is a downstream comparison theorem for blocks of real edges; it is not the definition of `A_e`. Likewise `T_e>0` does not imply `J_e>0`: positive nonforward child work remains physical but carries zero upper-progress multiplier. The next unresolved bridge is continuum: construct the signed unitary-Fourier triad edge measure with the correct `(2pi)^(-3/2)` convolution normalization, preserve cancellation before Hahn splitting, and only then push the physical law into capacity/geometry/phase deficit theorems.
+This theorem is deliberately prior to Young/Christ. Young is a downstream comparison theorem for blocks of real edges; it is not the definition of `A_e`. Likewise `T_e>0` does not imply `J_e>0`: positive nonforward child work remains physical but carries zero upper-progress multiplier. The companion continuum theorem now supplies the signed unitary-Fourier edge measure, exact parent/helicity provenance, local Radon variation and native block deficit without changing this one-edge ontology.
+
+## 21.6 Continuum helical edge measure: signed NS work before Hahn
+Put `z=x+y` and `r=x-y`.  Then
+\[
+ dx\,dy=rac18dz\,dr,
+\]
+and parent exchange acts on complete parent mode objects by
+`(r,s_x,s_y)->(-r,s_y,s_x)`.  After the finite parent-order quotient the joint
+outer-child base measure has exact density
+\[
+oxed{d\Lambda_{edge}=rac1{16}\,dz\,dQ_\#(dr\otimes\#_{s_x,s_y})\,d\#_{s_z}.}
+\]
+Helicity remains attached to its physical wavevector; it is not quotiented away.
+Each regular triad fiber contains exactly the eight distinct helicity assignments,
+and arbitrary divergence-free Fourier vectors reconstruct direct Navier--Stokes
+work by summing those eight physical edges.
+
+With the unitary Fourier factor `C_F=(2pi)^(-3/2)`, define
+\[
+ dW=C_FT_e\,d\Lambda_{edge},\qquad
+ dA=C_FA_e\,d\Lambda_{edge},\qquad
+ dF=g_e^{scale}dW=J_ec_e\,dA.
+\]
+`dW` is signed physical work; `dA` is a positive capacity reference and is not
+causal.  Signed reconstruction precedes Hahn splitting, so edge-positive work may
+strictly exceed the positive part of an aggregated signed fiber/block when phase
+or helicity cancellation occurs.
+
+The one-edge provenance is hardened pointwise: `|T_e|<=A_e` even on nonforward
+backscatter edges, and the typed continuum atom binds helicity to the actual parent
+wavevector.  Duplicate helicity sectors cannot manufacture an eight-edge fiber.
+On bounded child blocks finite Fourier energy yields
+\[
+ A(B)\le4\sqrt2\,C_FE^{3/2}\left(\int_B|z|^2dzight)^{1/2},
+\]
+therefore `dA`, signed `dW` and signed `dF` are locally finite physical Radon
+measures without a UV parent cutoff.
+
+The same law supplies the native block efficiency
+\[
+R_B=F(B)/(J_*A(B)),\qquad \epsilon_B=1-R_B.
+\]
+No caller may inject this deficit.  On the signed-good capacity core
+`(J_e/J_*)c_e>1-10^-4`, the normalized actual positive-work and capacity laws are
+within the certified `50/53..53/50` Radon--Nikodym band, supplying the physical
+transfer-defect moat.  Positive nonforward work remains in `dW^+` with `J_e=0`;
+it is not silently renamed signed-good.
+
+This closes continuum **measure registration**, not generic HH recurrence.  The
+next sharp seam is to route the canonical positive edge law itself: geometry/phase
+bad actual work must enter native transfer loss, geometry-good actual work may
+only become eligible for the separate signed hard-cell Young test, and no later
+analysis coarsening may create a second causal Hahn law.
 
 ## 22. Physical pair productivity: what the energy gate is actually for
 When a generated child-energy branch satisfies the physical energy gate, use actual positive child-work as the probability law.
@@ -1183,6 +1262,31 @@ physical work.
 
 ### 28.29 A regeneration label is not a signed-good epoch certificate
 `HH_REGENERATION`, a large `|I_HH|`, and actual positive HH work are three different typed objects.  The first is a recursive provenance label, the second is only a coefficient locator, and the third is a physical work law.  Signed-good scale/time geometry may be used only after actual physical HH work has been resolved to a hard parent satisfying `3/5<N_p/N_c<5/8`.  Never infer the parabolic epoch theorem from the word “regeneration” alone.
+
+### 28.30 Hahn splitting does not commute with continuum aggregation
+The physical Fourier law is signed before it is positive.  In general
+\[
+\int[T_e]_+\,d\Lambda\;>\;\left[\int T_e\,d\Lambdaight]_+
+\]
+when physical helicity/fiber cancellation is present.  Reconstruct the signed
+Navier--Stokes measure first, then take its Hahn decomposition.  A positive part
+formed after a different analyst aggregation is not automatically the same causal
+measure.
+
+### 28.31 A Radon base measure does not by itself give finite physical weights
+The joint unordered-parent quotient being locally finite Radon is only a statement
+about the geometric base measure.  The weighted capacity/work/progress measures
+need an independent physical variation bound.  Here that bound is supplied by the
+actual Fourier `L^2` energy and cubic Navier--Stokes homogeneity.  Never hide this
+step behind a UV cutoff or a normalized Young profile.
+
+### 28.32 Capacity is a reference law, not child-work causality
+`dA=C_FA_e dLambda` is positive and is the correct reference for multiplier/phase
+deficit.  The causal generation law is the Hahn-positive part of signed physical
+`dW`.  Capacity fractions may be compared to actual positive work only where an
+explicit physical Radon--Nikodym theorem has been proved; outside that domain no
+capacity-majority statement may be read as a causal-work majority.
+
 ## 29. Structural constants worth remembering
 These constants are not all fundamental; many are clean certified envelopes.
 The important point is where each belongs.
@@ -1476,7 +1580,9 @@ s_j-s_{j+1}\ge\frac{1792}{4875}T_j.
 \]
 Hence a consecutive signed-good generated lineage cannot remain interior forever at finite physical time: its required registration surface reaches `t=0` after finite depth.  This does **not** terminate generic `HH_REGENERATION`; the generic label has no scale law until actual physical resolution, and non-signed-good HH/high-tail remains a genuine route.
 
-The certified helical physical-edge theorem now resolves one important part of that generic label without erasing it. At an actual hard Fourier/helicity interaction the native modal capacity, geometric multiplier and signed phase are read from the same NS edge and obey `T_e log_+(|z|/p_top)=A_eJ_ec_e`. Thus a later continuum resolver may no longer invent a synthetic capacity or infer forward progress merely from positive work. But this one-edge identity is not itself a recurrence theorem: continuum triad cancellation, signed-measure registration, nonforward positive work, and block-level deficit routing remain to be assembled.
+The certified helical/continuum edge theorems now resolve the generic HH label one physical level deeper without erasing it.  At an actual Fourier/helicity interaction the native modal capacity, geometric multiplier and signed phase are read from the same NS edge, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`.  The joint child/unordered-parent Radon theorem then reconstructs the full signed unitary-Fourier law before Hahn splitting and produces actual `dW`, reference `dA`, signed progress `dF`, and the native block deficit `epsilon=1-F/(J_*A)`.  Finite Fourier energy supplies local variation of all three weighted measures without a UV parent cutoff.
+
+This is still not a generic-HH recurrence theorem.  The remaining HH seam is now sharper: the **canonical positive edge-work law** must be partitioned by its actual efficiency without substituting capacity mass, and any later hard/coherent label must inherit that positive law rather than manufacture a new Hahn law by analysis refinement.  Geometry/phase-bad positive work should route to the existing fixed transfer-loss fate; only geometry-good surviving work is eligible for the separate signed hard-cell Young/Christ test.  Positive nonforward work remains physical and receives no synthetic scale progress.
 
 Therefore an infinite event path cannot eventually remain only in high strain, and it also cannot eventually remain only in signed-good generated HH.  If either owner occurs infinitely often, other genuine owners or generic HH regimes must break the corresponding finite epochs infinitely often.
 The surviving global frontier is thus genuinely **mixed-owner recurrence**.  Its events may include actual HH generation, existing strain/deformation, source/SGS/viscosity owners, independent service, material/new-ancestry relink, high-tail work, and causal reuse/Bellman endpoints.  Their recurrence must telescope only through the native typed laws they truly supply:
@@ -1573,6 +1679,21 @@ A physical reservoir need not be partitioned into disjoint event bins before it 
 
 ### 32.21 A physical registration surface is not event depth
 A PDE continuation theorem may require a backward surface on which the **same carrier** is registered without any new interaction occurring there.  In signed-good HH generation, the surfaces `s_j=a_j-(2/5)T_j` move backward geometrically because the actual parent natural lifetimes grow.  Their reaching `t=0` terminates the interior continuation gate, but the surfaces themselves are not recursive event vertices and are never charged one unit each.  Physical geometry can close recursion without turning geometry into currency.
+
+
+### 32.22 Signed cause before positive refinement
+For continuum HH, the PDE first supplies one signed Radon work measure on the
+parent-order/helicity quotient.  Hahn positivity is then a property of that fixed
+physical measure, not a license to re-Hahn every later representation.  Capacity,
+coherent labels and material anchors may refine or compare the cause, but they do
+not create a second positive-work law.
+
+### 32.23 Local Radon variation can come directly from physical energy
+Measure existence need not be bought with a parent-frequency cutoff.  Once the
+actual trilinear amplitude is registered, fixed-child Cauchy--Schwarz and the
+unitary Fourier `L^2` energy give the cubic local-variation bound for `dA`, hence
+for signed `dW` and `dF`.  The apparent UV measure problem disappears when the
+correct physical amplitude and quotient measure are kept together.
 
 ## 33. Certified recent theorem blocks
 ### 33.1 High-tail sliding natural-window reentry
@@ -1982,7 +2103,78 @@ It passed the same `748`-test suite and `60` successful steps through continuum 
 Integration artifact digest:
 `sha256:79e9c35a1b4de41830483d15e4fc0f2d26305eb29a2b2ba9239b48a9954ea27d`.
 
-The theorem closes the one-edge physical registration seam only. It does not construct the continuum signed Fourier triad measure, does not commute positive Hahn splitting with triad integration, does not classify nonforward positive work as signed-good, and makes no Navier--Stokes regularity claim.
+The theorem closes the one-edge physical registration seam only. At the scope of this theorem it did not construct the continuum signed Fourier triad measure, did not commute positive Hahn splitting with triad integration, and did not classify nonforward positive work as signed-good. Companion Section 33.12 now supplies the previously open continuum signed-measure/Radon-registration seam while preserving those one-edge scope boundaries. No Navier--Stokes regularity claim is made.
+
+### 33.12 Continuum helical edge-measure registration: signed NS work before Hahn
+Status:
+`EXACT_CONTINUUM_HELICAL_EDGE_MEASURE_REGISTRATION__UNITARY_FOURIER__UNORDERED_PARENT_QUOTIENT__JOINT_OUTER_CHILD_RADON_PUSHFORWARD__EXACT_HELICITY_RECONSTRUCTION__SIGNED_BEFORE_HAHN__NATIVE_CAPACITY_POLARIZATION__ENERGY_NATIVE_LOCAL_VARIATION__PHYSICAL_GOOD_CORE_CHANGE_OF_MEASURE`.
+
+Exact certified implementation SHA:
+`6bc9099190048a8796b54fb2f4782314b699bd4b`.
+
+This certification used four exact-SHA gates because the independent audit had
+already found real provenance/scale defects that ordinary theorem CI did not expose.
+
+Independent adversarial/actual-NS audit:
+`31494249932` — **success**, `35` successful steps.
+Its `50,000`-fiber / `1,000`-core-block stress recorded worst direct/modal work
+relative residual `1.031e-11`, worst progress residual `3.975e-12`, worst
+polarization residual `5.621e-16`, signed flux range
+`[-0.360319664,0.381444055]`, and `8745` random blocks with positive nonforward
+physical work.  The same audit evolved actual dealiased Fourier--Galerkin
+Navier--Stokes: with one common cutoff embedded on grids `20,24,28`, final child
+energy representation spread was `1.594e-15` and integrated child-work spread
+`1.933e-15`.  A separate same-orbit three-child audit reconstructed every child
+and the outer-child Hahn law with worst joint work/modal/Hahn residual
+`2.115e-16`; its NS energy-balance residual was `6.822e-10`.
+
+Continuum dedicated run:
+`31494250081` — **success**.
+It passed `776` tests, `3,000` arbitrary continuum fibers and `100` near-extremal
+physical core blocks.  Worst helical reconstruction residual was `1.925e-15`,
+parent-quotient and parent-swap residuals were exactly `0`, direct/modal work and
+progress relative residuals were `5.428e-13` and `5.579e-13`, and the good-core
+RN margins remained positive.
+
+Helical one-edge dependency rerun:
+`31494402810` — **success** on the same exact SHA.
+It passed the same `776`-test suite and `50,000` physical helical edges; worst
+direct-Leray/Waleffe residual was `5.025e-16`, `T log=A J c` residual
+`1.300e-11`, and all `16950` sampled nonforward edges were retained rather than
+misclassified signed-good.
+
+Full physical-energy causal integration:
+`31494250037` — **success**, `61` successful steps on the same exact SHA.  The
+continuum measure theorem sits immediately after the physical helical edge and
+before complex Young, then remains green through dual/Bargmann/common-slice,
+smooth `Q^2`, event roles, physical productivity, recursive witness,
+Shannon/Renyi, branch compiler and master episode.
+
+Stored exact-SHA artifacts:
+- `recorded-results/31494249932/`; audit digests
+  `sha256:538e0624e081b4b398fda568372026917012af7e87bbeab51cd21a67b56807d0`,
+  `sha256:9b514e48924483e6b9e536b2828fe48bc9b0fde43d9726431a16301840fa7cd3`,
+  `sha256:82ff62318cf934efcd65872eb5dfb3a3e0ebf22b6c1d90d5ff383c0a726d6137`;
+- `recorded-results/31494250081/`, digest
+  `sha256:1dab5cc8f4817ae351102dddcaa05ac59442cd4358c7bc3bce6ea7b547e1ee42`;
+- `recorded-results/31494402810/`, digest
+  `sha256:49d386a61635391aeeaaf2fc72f417336df7e5e627476efe6263ae0ba75bd434`;
+- `recorded-results/31494250037/`, digest
+  `sha256:0889ad20f55add0df3fa4cc5a50796ba6d70baec5203a3600b281c26f14419f4`.
+
+The audit lineage matters.  Earlier green candidates were deliberately not
+recorded after adversarial checks exposed native-scale floors, forgeable summary
+provenance, nonfinite arithmetic, an unjustified cross-truncation convergence
+gate, missing nonforward capacity domination, duplicate helicity-sector identity,
+and finally the distinction between a Radon base quotient and finite variation of
+the weighted physical measures.  The certified SHA closes those defects rather
+than hiding them behind looser tolerances.
+
+The theorem closes continuum **measure registration** only.  It does not prove
+that capacity majority is causal-work majority, does not authorize re-Hahn after
+analysis coarsening, does not certify Young saturation of the geometry-good work,
+and does not close generic HH or mixed-owner recurrence.  No Navier--Stokes
+regularity claim is made.
 
 ---
 
@@ -2043,17 +2235,18 @@ Then read the following current-spine documents in order:
 25. `docs/high_tail_ultraviolet_locality.md`
 26. `docs/high_tail_natural_window_reentry.md`
 27. `docs/helical_physical_edge_registration.md`
-28. `docs/physical_pair_weighted_productivity.md`
-29. `docs/common_slice_coefficient_registration.md`
-30. `docs/recursive_physical_witness_constructor.md`
-31. `docs/signed_good_generated_epoch_time_telescope.md`
-32. `docs/joint_causal_stop_projection.md`
-33. `docs/amplitude_entropy_causal_reuse.md`
-34. `docs/weighted_causal_reuse.md`
-35. `docs/renyi_causal_reuse.md`
-36. `docs/physical_branch_compiler.md`
-37. `docs/continuum_master_event_quotient.md`
-38. `docs/master_no_escape.md`
+28. `docs/continuum_helical_edge_measure_registration.md`
+29. `docs/physical_pair_weighted_productivity.md`
+30. `docs/common_slice_coefficient_registration.md`
+31. `docs/recursive_physical_witness_constructor.md`
+32. `docs/signed_good_generated_epoch_time_telescope.md`
+33. `docs/joint_causal_stop_projection.md`
+34. `docs/amplitude_entropy_causal_reuse.md`
+35. `docs/weighted_causal_reuse.md`
+36. `docs/renyi_causal_reuse.md`
+37. `docs/physical_branch_compiler.md`
+38. `docs/continuum_master_event_quotient.md`
+39. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -2126,7 +2319,7 @@ high-strain events must therefore contain infinitely many other genuine owners
 which break those epochs.
 
 
-At an actual hard HH interaction, one may now descend one level further before any Young reduction. The unordered helical parent orbit itself carries exact NS work `T_e`, native modal capacity `A_e=4|z||a_xa_ya_z|`, geometric multiplier `J_e`, and signed phase `c_e`, with `T_e log_+(|z|/p_top)=A_eJ_ec_e`. These are same-event physical observables modulo parent orientation and helical gauge. Crucially, positive child work is not synonymous with forward scale progress: nonforward edges have zero upper-progress multiplier and remain physical. The continuum signed triad measure must preserve cancellation before its Hahn-positive causal sublaw is formed.
+At an actual hard HH interaction, one may now descend below Young all the way to the continuum physical edge law.  The unordered helical parent orbit carries exact NS work `T_e`, native modal capacity `A_e=4|z||a_xa_ya_z|`, geometric multiplier `J_e`, and signed phase `c_e`, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`.  In the joint variables `z=x+y`, `r=x-y`, the parent-order quotient has exact density `1/16`; all eight wavevector-bound helicity sectors reconstruct the direct signed Fourier work.  With the unitary factor `C_F`, this gives signed `dW`, reference `dA`, and signed progress `dF`.  Finite Fourier energy makes these weighted measures locally Radon without any parent UV cutoff.  Only after that signed reconstruction is `dW^+` formed.  Positive child work is still not synonymous with forward progress: nonforward edges remain physical with zero upper-progress multiplier.  The next unresolved HH task is therefore no longer measure existence, but routing the canonical positive edge law without replacing it by capacity mass or by a fresh Hahn split after analysis coarsening, and then proving Young saturation only on the surviving eligible work.
 
 Signed-good generated HH is also a genuine recursive event, but its finite-depth
 mechanism is different.  A raw `|I_HH|` threshold is only a locator.  After the

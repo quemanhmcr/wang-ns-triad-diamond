@@ -1,23 +1,32 @@
+import itertools
 import math
+from fractions import Fraction
 
 import numpy as np
 import pytest
 
 from src.continuum_helical_edge_measure_registration import (
     CLEAN_CHANGE_OF_MEASURE,
+    JOINT_UNORDERED_RADON_DENSITY,
     LOW_COST_DEFICIT_CEILING,
+    SUM_RELATIVE_JACOBIAN,
+    continuum_edge_local_variation_energy_bounds,
     continuum_edge_measure_ledger,
     edge_measure_to_service_or_flat,
     helical_coefficients,
     helical_reconstruction,
+    joint_unordered_parent_radon_certificate,
+    parent_pair_to_sum_relative,
     register_continuum_triad_fiber,
     signed_good_core_physical_law,
+    sum_relative_to_parent_pair,
     unitary_fourier_convolution_factor,
     unitary_sharp_young_physical_work_upper,
 )
 from src.helical import coupling_g, helical_basis
 from src.helical_physical_edge_registration import leray_project
 from src.physical_pair_weighted_productivity import physical_work_capacity_constant
+from src.single_edge_certificate import float_jstar
 from src.triad_extremizer import symmetric_gamma, symmetric_rstar
 
 
@@ -94,6 +103,11 @@ def test_arbitrary_divergence_free_vector_fiber_reconstructs_all_eight_helicity_
         quotient_measure_mass=0.7,
     )
     assert len(fiber.modal_atoms) == 8
+    identities = {atom.physical_edge_identity for atom in fiber.modal_atoms}
+    assert len(identities) == 8
+    assert {identity.helicity_assignment for identity in identities} == set(
+        itertools.product((-1, 1), repeat=3)
+    )
     assert fiber.ordered_quotient_source_residual < 3e-11
     assert fiber.parent_swap_residual < 3e-11
     assert abs(fiber.signed_work_reconstruction_residual) < 5e-10
@@ -126,6 +140,17 @@ def test_parent_swap_is_a_quotient_not_a_second_physical_edge():
     assert math.isclose(la.capacity_mass, lb.capacity_mass, rel_tol=2e-10, abs_tol=2e-10)
     assert math.isclose(la.signed_registered_progress, lb.signed_registered_progress, rel_tol=2e-10, abs_tol=2e-10)
     assert math.isclose(la.positive_edge_work, lb.positive_edge_work, rel_tol=2e-10, abs_tol=2e-10)
+
+    atoms_a = {atom.physical_edge_identity: atom for atom in a.modal_atoms}
+    atoms_b = {atom.physical_edge_identity: atom for atom in b.modal_atoms}
+    assert set(atoms_a) == set(atoms_b)
+    assert len(atoms_a) == 8
+    for identity in atoms_a:
+        aa = atoms_a[identity]
+        bb = atoms_b[identity]
+        assert math.isclose(aa.signed_work_mass, bb.signed_work_mass, rel_tol=2e-10, abs_tol=2e-12)
+        assert math.isclose(aa.capacity_mass, bb.capacity_mass, rel_tol=2e-10, abs_tol=2e-12)
+        assert math.isclose(aa.signed_progress_mass, bb.signed_progress_mass, rel_tol=2e-10, abs_tol=2e-12)
 
 
 def test_signed_edge_measure_is_reconstructed_before_hahn_and_positive_atoms_only_dominate_aggregate():
@@ -211,3 +236,64 @@ def test_continuum_layer_rejects_nonphysical_measure_and_nondivergencefree_input
             uz=uz,
             quotient_measure_mass=1.0,
         )
+
+
+def test_joint_outer_child_unordered_parent_radon_pushforward_is_exact():
+    cert = joint_unordered_parent_radon_certificate()
+    assert SUM_RELATIVE_JACOBIAN == Fraction(1, 8)
+    assert JOINT_UNORDERED_RADON_DENSITY == Fraction(1, 16)
+    assert cert["joint_unordered_radon_density"] == "1/16"
+    assert cert["radon"] is True
+    assert cert["proper_quotient"] is True
+    assert cert["helical_frame_borel"] is True
+
+    x = np.array([1.2, -0.4, 0.7])
+    y = np.array([-0.3, 0.9, 0.2])
+    z, r = parent_pair_to_sum_relative(x, y)
+    xr, yr = sum_relative_to_parent_pair(z, r)
+    xs, ys = sum_relative_to_parent_pair(z, -r)
+    assert np.allclose(xr, x, rtol=0.0, atol=2e-15)
+    assert np.allclose(yr, y, rtol=0.0, atol=2e-15)
+    assert np.allclose(xs, y, rtol=0.0, atol=2e-15)
+    assert np.allclose(ys, x, rtol=0.0, atol=2e-15)
+
+    # One quotient orbit of r represents the two ordered parent points with the
+    # exact 1/2 orientation factor; the z,x -> z,r Jacobian supplies 1/8.
+    fxy = 2.3
+    fyx = -0.7
+    dr_volume = 8.0
+    ordered_dx_orbit = 0.5 * (dr_volume / 8.0) * (fxy + fyx)
+    quotient_orbit = float(JOINT_UNORDERED_RADON_DENSITY) * dr_volume * (fxy + fyx)
+    assert math.isclose(ordered_dx_orbit, quotient_orbit, rel_tol=0.0, abs_tol=2e-15)
+
+
+def test_energy_native_local_variation_makes_weighted_edge_measures_locally_finite():
+    energy = 4.0
+    child_second_moment = 9.0
+    out = continuum_edge_local_variation_energy_bounds(energy, child_second_moment)
+    expected_capacity = (
+        4.0
+        * math.sqrt(2.0)
+        * unitary_fourier_convolution_factor()
+        * energy**1.5
+        * math.sqrt(child_second_moment)
+    )
+    assert out.capacity_variation_upper == pytest.approx(expected_capacity, rel=2e-15)
+    assert out.work_variation_upper == pytest.approx(expected_capacity, rel=2e-15)
+    assert out.progress_variation_upper == pytest.approx(expected_capacity * float_jstar(), rel=2e-15)
+
+    # Velocity amplitude a multiplies Fourier energy by a^2, hence the cubic
+    # trilinear local-variation bound by a^3. No unit-scale floor is permitted.
+    amplitude = 3.0
+    scaled = continuum_edge_local_variation_energy_bounds(amplitude**2 * energy, child_second_moment)
+    assert scaled.capacity_variation_upper / out.capacity_variation_upper == pytest.approx(amplitude**3, rel=3e-15)
+
+    zero = continuum_edge_local_variation_energy_bounds(0.0, child_second_moment)
+    assert zero.capacity_variation_upper == 0.0
+    assert zero.work_variation_upper == 0.0
+    assert zero.progress_variation_upper == 0.0
+
+    with pytest.raises(ValueError, match="Fourier energy"):
+        continuum_edge_local_variation_energy_bounds(-1.0, child_second_moment)
+    with pytest.raises(ValueError, match="child second moment"):
+        continuum_edge_local_variation_energy_bounds(energy, math.nan)
