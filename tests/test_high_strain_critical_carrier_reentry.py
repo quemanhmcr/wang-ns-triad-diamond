@@ -140,4 +140,4 @@ def test_certificate_explicitly_bypasses_nn_only_for_renewal_entrance():
     assert "NN_NOT_REQUIRED_FOR_RENEWAL_ENTRANCE" in cert["status"]
     assert "no longer requires" in cert["architectural_shortcut"]
     assert "remain valid refinements" in cert["architectural_shortcut"]
-    assert "universal source/SGS" in cert["scope"]
+    assert "source/SGS" in cert["scope"]

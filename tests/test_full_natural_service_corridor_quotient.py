@@ -113,7 +113,7 @@ def test_endpoint_cover_rejects_insufficient_actual_shell_mass():
 def test_certificate_removes_service_theorem_depth_without_uv_overclaim():
     cert = theorem_certificate()
     assert cert["status"] == STATUS
-    assert "not a second event" in cert["time_ontology"]
+    assert "second event time or recursion edge" in cert["time_ontology"]
     assert "zero causal charge and zero recursion depth" in cert["material_ontology"]
     assert "3/4 or 3/2" in cert["scale_geometry"]
     assert "does not terminate UV-unbounded" in cert["scope"]
