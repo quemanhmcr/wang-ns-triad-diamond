@@ -80,6 +80,7 @@ def test_certificate_keeps_smooth_and_hard_measures_distinct_and_closes_only_rel
     assert "remain distinct physical disintegrations" in cert["measure_separation"]
     assert "physical event/time" in cert["event_semantics"]
     assert "no causal charge, recursive generation, or scale progress" in cert["event_semantics"]
-    assert "not a recursive generation owner" in cert["master_boundary"]
+    assert "same-event relay" in cert["master_boundary"]
+    assert "no child RecursiveEventState" in cert["master_boundary"]
     assert "does not terminate genuine strain" in cert["scope"]
     assert RELINK_OWNER in cert["master_boundary"]
