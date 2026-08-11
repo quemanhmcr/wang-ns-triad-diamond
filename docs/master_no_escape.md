@@ -2269,9 +2269,9 @@ The material-label/physical-role quotient proposed at this stage is now canonica
 
 Downstream work has also supplied direct objective-source routing, pressure-pair hard-shell reentry, refinement-invariant fresh SGS scale reentry, physical high-tail regeneration ownership, Fourier UV locality, and sliding natural-window high-tail shell reentry.  The remaining master-facing task is final **continuum assembly** of these certified supplier routes without double counting and without introducing observer-dependent clocks or artificial scale-independent resets.  The master remains conditional at that programme level, and there is no global-regularity proof for 3D Navier--Stokes.
 
-## Candidate refinement: full-natural horizons are checkpoints, not recursive events
+## Certified refinement: full-natural horizons are checkpoints, not recursive events
 
-The current checkpoint candidate sharpens the last paragraph above without
+The certified checkpoint theorem sharpens the last paragraph above without
 altering any previously certified local corridor estimate.
 
 For a generic shell at incoming scale `M`, the actual no-hit theorem runs on the
@@ -2289,7 +2289,7 @@ recursive event vertices.
 The same checkpoint may expose actual hard-shell state at `A` or `2A`.  The upper
 candidate is `3M/2`, but this is two-shell cover geometry of the surviving smooth
 carrier.  It is explicitly not the certified high-tail geometry, whose physical
-supplier begins only at ratio `>=2`.  The candidate production records therefore
+supplier begins only at ratio `>=2`.  The production records therefore
 forbid promoting the `3/2` cover witness to directional progress or high-tail
 ownership.
 
@@ -2301,6 +2301,6 @@ Consequently the remaining continuum frontier separates into two questions:
   corridor times can have a finite sum and which must be closed by a further PDE
   theorem rather than by event counting or a synthetic scale tax.
 
-This candidate refinement is not yet certified and does not claim that the UV
+This refinement was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854` and full integration run `31451492844`. It does not claim that the UV
 checkpoint seam necessarily generates high-tail work.  It only removes the
 analyst's natural-horizon segmentation from physical event depth.

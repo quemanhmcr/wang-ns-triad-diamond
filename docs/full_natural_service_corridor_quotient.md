@@ -97,8 +97,8 @@ A chain
 
 `critical shell -> full natural corridor -> own-scale service -> Moyal/material rereading -> endpoint survivor`
 
-contains one physical recursion edge, not several.  The extra arrows are witness
-maps on the same corridor.
+contains one real physical corridor, not several physical intervals.  The extra arrows are witness
+maps on the same corridor, and the certified checkpoint refinement shows that the no-hit horizon itself adds zero recursive event vertices.
 
 Therefore an infinite path whose apparent recurrence consists only of these
 full-survivor/service layers is simply an infinite chain of full-natural physical
@@ -169,10 +169,10 @@ in the correction.
 Certification is regression evidence for the encoded exact identities and guards;
 it is not a proof of global no-escape or Navier--Stokes regularity.
 
-## Candidate refinement: the horizon endpoint is a checkpoint, not an event
+## Certified checkpoint refinement: the horizon endpoint is a checkpoint, not an event
 
 The certified theorem above already proves that service/material rereading adds no
-second event layer.  The next candidate quotient makes the remaining endpoint
+second event layer.  The certified checkpoint quotient makes the remaining endpoint
 semantics explicit.
 
 On a full no-hit branch, the earlier endpoint `t-cA^-2` was selected because the
@@ -183,16 +183,16 @@ is an **analysis checkpoint** rather than a causal event vertex.
 Likewise the two-shell statement in Section 3 must be read only as same-time state
 geometry.  The hard shells at `A` and `2A` are actual observables, but the ratios
 `3/4` and `3/2` relative to the incoming shell arise from covering one smooth
-carrier.  The candidate API therefore records explicitly
+carrier.  The production API now records explicitly
 
 - `analysis_checkpoint_reregistration=True`;
 - `directional_scale_progress_supplied=False`;
 - `high_tail_supplier_admissible=False`;
 - `cover_ascent_interpreted_as_dynamics=False`.
 
-This candidate refinement does not alter the certified lower
+This certified refinement does not alter the certified lower
 `max(mu_A,mu_2A)>=(2/3)A||Q_Au||_2^2`; it narrows what may be inferred from that
-lower.  Certification of the checkpoint refinement is pending.
+lower.  The checkpoint refinement was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854` and full integration run `31451492844`.
 
 The checkpoint refinement also closes a potential selection loophole in using the
 two-shell lower.  Downstream re-registration does not accept `A` or `2A` as a
