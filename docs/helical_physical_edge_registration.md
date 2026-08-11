@@ -1,6 +1,6 @@
 # Helical physical edge registration: read the capacity from Navier–Stokes itself
 
-Status: **certified on exact implementation SHA `6d2b721be579e299c42f4ad370448e5336f3f43c`**.
+Status: **base one-edge theorem certified on `6d2b721be579e299c42f4ad370448e5336f3f43c`; physical-identity/nonforward-capacity provenance hardening re-certified on exact continuum implementation SHA `6bc9099190048a8796b54fb2f4782314b699bd4b`**.
 
 ## 1. Do not start from a Young norm
 
@@ -136,21 +136,24 @@ Uniform wavevector dilation leaves the dimensionless geometry `J_e`, `J_e/J_*`,
 `c_e`, and the forward ratio unchanged; both actual work and native capacity scale
 linearly, as the derivative order of Navier--Stokes requires.
 
-## 6. What this does not yet prove
+## 6. One-edge scope and the companion continuum theorem
 
-This is deliberately a **one-edge theorem**.
+This is deliberately a **one-edge theorem**. By itself it does not integrate over
+the child/parent continuum and it does not turn capacity into a causal law. The
+companion certified continuum theorem now supplies the formerly open pieces:
 
-It does not yet:
+- the joint unordered Fourier/helicity edge measure with unitary convolution
+  normalization;
+- exact signed reconstruction before Hahn splitting;
+- the physical block transfer deficit used by `coherent_service_or_flat`;
+- local finite variation of `dA`, signed `dW`, and signed `dF` from Fourier energy.
 
-- construct the continuum unordered Fourier/helicity edge measure;
-- show that the block transfer deficit used by `coherent_service_or_flat` is the
-  deficit of that same continuum physical edge law;
-- claim that nonforward or generic comparable HH is signed-good;
-- claim a raw majority of positive HH work lies on the signed-good capacity core.
-
-Those are measure-registration questions for the next theorem.  Backscatter and
-nonforward positive child work remain physical and are not erased by setting their
-upper-progress multiplier to zero.
+What remains open is **not** continuum measure existence. Nonforward or generic
+comparable HH is still not automatically signed-good; capacity majority is not
+causal-work majority; and geometry-good positive work still needs the separate
+signed hard-cell Young/Christ premise before `marking_good` can be asserted.
+Backscatter and nonforward positive child work remain physical and are not erased
+by setting their upper-progress multiplier to zero.
 
 No Navier--Stokes global-regularity conclusion is asserted.
 
@@ -176,3 +179,25 @@ complex Young, dual/Bargmann/common-slice registration, smooth `Q^2`, event role
 physical pair productivity, recursive witness, signed-good generated epoch,
 Shannon/Rényi, branch compiler and master episode. Its artifact digest is
 `sha256:79e9c35a1b4de41830483d15e4fc0f2d26305eb29a2b2ba9239b48a9954ea27d`.
+
+
+## 8. Provenance hardening under the continuum audit
+
+The continuum audit forced two additional one-edge guards without changing the
+physical formula.  First, the same NS source estimate gives pointwise
+
+`|T_e| <= A_e`
+
+even when `J_e=0`; nonforward/backscatter work therefore cannot be forged above
+the native modal interaction amplitude merely because the progress identity has
+a zero multiplier.
+
+Second, the typed registration now binds `(wavevector,helicity)` together for both
+parents and the child.  Parent order is quotiented only as an unordered pair of
+complete physical mode objects.  Helicity is not discarded, and a continuum
+triad fiber must contain the eight distinct physical helicity assignments rather
+than eight copies of one sector.
+
+These guards were re-certified on exact SHA `6bc9099190048a8796b54fb2f4782314b699bd4b` by helical dependency run
+`31494402810` and full integration `31494250037`.  They are provenance barriers,
+not new causal currencies.

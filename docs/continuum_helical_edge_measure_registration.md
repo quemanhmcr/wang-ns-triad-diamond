@@ -1,10 +1,10 @@
 # Continuum helical edge-measure registration: signed Navier--Stokes work before Hahn
 
-Status: **candidate theorem; certify only by exact-SHA GitHub Actions**.
+Status: **certified on exact implementation SHA `6bc9099190048a8796b54fb2f4782314b699bd4b` after independent adversarial and actual-Navier--Stokes audit**.
 
 The certified one-edge theorem identifies the physical variables carried by one
-unordered helical parent pair.  The remaining continuum question is not another
-single-edge estimate.  It is a measure-registration question:
+unordered helical parent pair. The continuum question addressed and certified
+here is not another single-edge estimate. It is a measure-registration question:
 
 > how does the actual Fourier convolution of Navier--Stokes become a signed
 > physical edge law without choosing a parent orientation, without losing
@@ -456,3 +456,30 @@ It does **not** prove that every generic HH block is low deficit.  High-deficit
 transfer, positive nonforward work, high-tail physics, source/strain/relink, and
 mixed physical recurrence remain real branches.  No global-regularity claim is
 made.
+
+
+## 10. Certification and adversarial audit
+
+Exact implementation SHA: `6bc9099190048a8796b54fb2f4782314b699bd4b`.
+
+Four exact-SHA gates were required:
+
+- independent audit `31494249932`: **success**, including `50,000` arbitrary
+  continuum fibers, `1,000` near-extremal core blocks, a same-Galerkin-grid
+  representation audit and a three-child same-orbit Navier--Stokes audit;
+- continuum dedicated `31494250081`: **success**, `776` tests plus the dedicated
+  continuum/dependency stresses;
+- helical dependency `31494402810`: **success**, `776` tests and `50,000` physical
+  helical edges;
+- full causal integration `31494250037`: **success**, `61` successful steps.
+
+The independent audit was not ceremonial.  Earlier green candidates were rejected
+after it exposed unit-scale tolerance floors, forgeable summary provenance,
+nonfinite arithmetic, an invalid convergence demand across different Galerkin
+truncations, missing nonforward `|T_e|<=A_e` provenance, duplicate helicity-sector
+identity, and the final gap between a Radon quotient base and locally finite
+weighted physical measures.  The certified source closes each issue fail-closed.
+
+Exact artifacts are stored under `recorded-results/31494249932/`,
+`recorded-results/31494250081/`, `recorded-results/31494402810/`, and
+`recorded-results/31494250037/`.
