@@ -385,3 +385,16 @@ Kelvin-flat continuation.**
 The measurable first-hit burden stated above is now supplied at the smooth-SGS level by `smooth_sgs_first_hit_extraction.md`, with joint-stop semantics in `joint_causal_stop_projection.md`.  Source routing, fresh-scale reentry, direct pressure-pair atomization, and high-tail scale/time continuation have also been added downstream.  The current programme-level frontier is therefore final continuum master assembly across all certified supplier routes, not construction of the causal quotient itself.
 
 No global-regularity claim follows from the current theorem stack.
+
+## Master-facing cleanup required by canonical edge-work routing
+
+A fixed transfer-loss gate is a stage-zero fate of an already-selected physical
+work block.  It has no physical first-hit time.  The preferred joint-stop API
+already records this correctly with `first_time=None` and
+`stage_zero_fixed_transfer_loss`.
+
+The fine `_first_causal_split()` path still carries a legacy sentinel
+`first_time=0.0` for `fixed_transfer_loss`.  This must not be interpreted as the
+Navier--Stokes initial surface.  The next canonical positive-edge routing theorem
+should remove the sentinel and return `None`, reserving `t=0` exclusively for the
+absorbing `INITIAL_BOUNDARY` event.

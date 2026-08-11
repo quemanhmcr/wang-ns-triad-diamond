@@ -483,3 +483,20 @@ weighted physical measures.  The certified source closes each issue fail-closed.
 Exact artifacts are stored under `recorded-results/31494249932/`,
 `recorded-results/31494250081/`, `recorded-results/31494402810/`, and
 `recorded-results/31494250037/`.
+
+## 10. Master-facing next seam: route the canonical Hahn law, do not re-Hahn analysis
+
+The present theorem fixes `dW` before positivity.  Consequently the next causal
+operation is the Hahn decomposition of this **same** Fourier/helicity edge law.
+If `mu=dW`, every later hard/coherent/material label must inherit `mu^+` by a
+proved positive restriction/pushforward.  A signed cell representation may be
+Hahn-split for diagnostics, but that positive part is not automatically a second
+master law because positive part does not commute with aggregation.
+
+The next theorem should split actual `mu^+` by the native edge efficiency
+`r=(J/J_*)c` at `eta_0=1e-4`.  The bad support has its own capacity deficit at
+least `1e-4`, which is above every certified coherent fixed-transfer threshold for
+`0<tau<=0.1`, so that **same positive-work sublaw** should terminate as physical
+transfer loss.  The geometry-good support is only Young-eligible: it still needs
+a signed hard-cell compression theorem before complex Young/Christ can certify
+parent marking.  See `canonical_positive_edge_work_routing_frontier.md`.

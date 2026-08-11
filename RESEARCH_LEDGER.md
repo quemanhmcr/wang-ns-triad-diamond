@@ -1287,6 +1287,18 @@ deficit.  The causal generation law is the Hahn-positive part of signed physical
 explicit physical Radon--Nikodym theorem has been proved; outside that domain no
 capacity-majority statement may be read as a causal-work majority.
 
+### 28.33 A later analysis Hahn split is not a second causal law
+Once the canonical signed Fourier/helicity edge law `mu=dW` has been reconstructed and Hahn-split, later hard/coherent/material labels may only inherit `mu^+` by a proved positive pushforward/disintegration.  For a measurable coarsening `pi`, `(pi_#mu)^+ <= pi_#(mu^+)` in general, with strict inequality under physical cancellation.  Re-Hahn splitting after an analyst refinement/coarsening is therefore representation-dependent and cannot replace the master causal law.
+
+### 28.34 Geometry-good capacity is not geometry-good causal-work majority
+The `50/53..53/50` Radon--Nikodym comparison is conditional on the already-selected signed-good core.  Outside that domain, two physical edges may satisfy `A_good>A_bad` while `T_bad^+>T_good^+`.  Therefore the next generic-HH split must restrict the actual `dW^+` law by edge efficiency; it may not infer causal majority from capacity majority.
+
+### 28.35 Geometry-good is not Young-good
+The edge quantity `r=(J/J_*)c` measures native geometry/phase efficiency.  Sharp Young/Christ saturation measures the signed hard-cell trilinear amplitude/profile relative to the frozen physical multiplier and `L^(3/2)` roles.  Passing the first test only makes physical work Young-eligible.  It does not set `marking_good=True`, and the signed cell work must retain cancellation before the Young ratio is formed.
+
+### 28.36 A stage-zero transfer fate is not a PDE event at `t=0`
+A fixed transfer-loss block is classified before any first-hit time is needed.  Canonical joint-stop semantics therefore uses `first_time=None`; `t=0` is reserved for the absorbing initial boundary.  The legacy fine compiler sentinel `first_time=0.0` is a representation bug to remove in the next source theorem, not a physical time assignment.
+
 ## 29. Structural constants worth remembering
 These constants are not all fundamental; many are clean certified envelopes.
 The important point is where each belongs.
@@ -1584,6 +1596,8 @@ The certified helical/continuum edge theorems now resolve the generic HH label o
 
 This is still not a generic-HH recurrence theorem.  The remaining HH seam is now sharper: the **canonical positive edge-work law** must be partitioned by its actual efficiency without substituting capacity mass, and any later hard/coherent label must inherit that positive law rather than manufacture a new Hahn law by analysis refinement.  Geometry/phase-bad positive work should route to the existing fixed transfer-loss fate; only geometry-good surviving work is eligible for the separate signed hard-cell Young/Christ test.  Positive nonforward work remains physical and receives no synthetic scale progress.
 
+The next theorem is now specified measure-theoretically.  With `mu=dW` and canonical Hahn law `mu^+`, put `r_e=(J_e/J_*)c_e`, `eta_0=10^-4`, `B={T_e>0,r_e<=1-eta_0}` and `G={T_e>0,r_e>1-eta_0}`.  Then `mu^+=mu_B^++mu_G^+` exactly.  Since `|T_e|<=A_e`, every nonempty bad-work sublaw has positive capacity, and its own native deficit obeys `epsilon_B>=eta_0`.  For every certified `0<tau<=0.1`, the coherent fixed-loss threshold `tau^2/1036800000` is `<10^-4`.  After the measurable bad restriction is bound to the same selected physical block interface, `mu_B^+` should terminate as stage-zero `TRANSFER_WORK_LOSS`; the scalar threshold comparison alone is not an adapter to an unrelated block.  Only `mu_G^+` is eligible for the separate signed hard-cell Young test; good geometry alone does not certify Young marking or common-slice continuation.
+
 Therefore an infinite event path cannot eventually remain only in high strain, and it also cannot eventually remain only in signed-good generated HH.  If either owner occurs infinitely often, other genuine owners or generic HH regimes must break the corresponding finite epochs infinitely often.
 The surviving global frontier is thus genuinely **mixed-owner recurrence**.  Its events may include actual HH generation, existing strain/deformation, source/SGS/viscosity owners, independent service, material/new-ancestry relink, high-tail work, and causal reuse/Bellman endpoints.  Their recurrence must telescope only through the native typed laws they truly supply:
 - signed/positive physical work and multiplicative productivity;
@@ -1694,6 +1708,9 @@ actual trilinear amplitude is registered, fixed-child Cauchy--Schwarz and the
 unitary Fourier `L^2` energy give the cubic local-variation bound for `dA`, hence
 for signed `dW` and `dF`.  The apparent UV measure problem disappears when the
 correct physical amplitude and quotient measure are kept together.
+
+### 32.24 Push forward cause; do not re-Hahn representation
+Once a signed physical law has a canonical Hahn decomposition, every downstream physical label should inherit the positive cause by restriction or positive pushforward.  A later signed representation may still be essential for cancellation, Young saturation or diagnostics, but taking its positive part again is not a new causal act.  This separates physical cause from the resolution at which an analyst chooses to observe cancellation.
 
 ## 33. Certified recent theorem blocks
 ### 33.1 High-tail sliding natural-window reentry
@@ -2203,6 +2220,8 @@ For a new theorem:
 A passing numerical stress is not itself a proof.
 The source module must encode the theorem algebra and guards; CI is regression/certificate evidence around that structure.
 
+For representation-sensitive measure/provenance theorems, ordinary dedicated + integration green is not enough by itself.  Add an independent falsification lane which actively challenges native scale covariance, nonfinite arithmetic, replay/provenance forgery, duplicate physical identities, parent/helicity quotienting, actual-PDE reconstruction, and representation invariance of the same finite physical system.  If that audit finds a real seam, every earlier green candidate is superseded and the exact repaired SHA must rerun the full certification sweep.  A numerical convergence demand between genuinely different PDE truncations is not an invariant and must not be smuggled into such an audit.
+
 ---
 
 ## 35. Recommended reading order for a new mathematical physicist
@@ -2236,17 +2255,18 @@ Then read the following current-spine documents in order:
 26. `docs/high_tail_natural_window_reentry.md`
 27. `docs/helical_physical_edge_registration.md`
 28. `docs/continuum_helical_edge_measure_registration.md`
-29. `docs/physical_pair_weighted_productivity.md`
-30. `docs/common_slice_coefficient_registration.md`
-31. `docs/recursive_physical_witness_constructor.md`
-32. `docs/signed_good_generated_epoch_time_telescope.md`
-33. `docs/joint_causal_stop_projection.md`
-34. `docs/amplitude_entropy_causal_reuse.md`
-35. `docs/weighted_causal_reuse.md`
-36. `docs/renyi_causal_reuse.md`
-37. `docs/physical_branch_compiler.md`
-38. `docs/continuum_master_event_quotient.md`
-39. `docs/master_no_escape.md`
+29. `docs/canonical_positive_edge_work_routing_frontier.md`
+30. `docs/physical_pair_weighted_productivity.md`
+31. `docs/common_slice_coefficient_registration.md`
+32. `docs/recursive_physical_witness_constructor.md`
+33. `docs/signed_good_generated_epoch_time_telescope.md`
+34. `docs/joint_causal_stop_projection.md`
+35. `docs/amplitude_entropy_causal_reuse.md`
+36. `docs/weighted_causal_reuse.md`
+37. `docs/renyi_causal_reuse.md`
+38. `docs/physical_branch_compiler.md`
+39. `docs/continuum_master_event_quotient.md`
+40. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -2258,6 +2278,8 @@ If only one picture is retained, use this one.
 Navier–Stokes gives actual signed nonlinear work.  Positive child-energy work
 defines cause.  Coherent analysis refines that work into physical parent/child
 roles; representation does not create cause.
+
+At generic HH scale, the canonical signed law now lives on the unordered Fourier/helicity edge space.  Its Hahn-positive part is the causal law.  Later coherent or hard-cell labels may inherit that law, but may not Hahn-split themselves into a competing causal measure.  The next native split acts directly on actual `dW^+`: geometry/phase-bad work is a stage-zero transfer-loss sublaw, while geometry/phase-good work is only eligible for a separate signed hard-cell Young/Christ test.  Capacity is a reference law throughout, never the causal probability.
 
 Smooth moving carriers transport roles between physical events.  Their energy is
 `<u,Q^2u>`, not `<u,Qu>`.  Hard interaction projectors are event-anchored and are

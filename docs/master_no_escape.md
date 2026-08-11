@@ -2498,3 +2498,29 @@ synthetic scale progress.
 Independent audit `31494249932`, dedicated continuum run `31494250081`, helical
 dependency `31494402810` and full causal integration `31494250037` all succeeded
 on the same exact implementation SHA.
+
+## Frontier refinement: canonical positive edge work before coherent/Young routing
+
+The continuum helical edge theorem fixes the signed NS law `mu=dW` on the
+unordered Fourier/helicity edge space.  Its Hahn-positive part `mu^+` is therefore
+the canonical generic-HH causal work law.  Later hard/coherent/material
+representations may inherit that cause by positive restriction/pushforward, but
+must not re-Hahn their own signed cells and thereby manufacture a representation-
+dependent causal mass.
+
+The next native split acts directly on `mu^+`.  With
+`r_e=(J_e/J_*)c_e` and `eta_0=10^-4`, restrict
+
+`B={T_e>0,r_e<=1-eta_0}` and `G={T_e>0,r_e>1-eta_0}`.
+
+Then `mu^+=mu_B^++mu_G^+`.  Because `|T_e|<=A_e`, every nonzero bad-work sublaw
+has a native capacity law, and its own block deficit is at least `eta_0`.  This
+exceeds every certified fixed-transfer threshold for `0<tau<=0.1`; after the
+measurable bad restriction is bound to the same selected physical block interface,
+that positive work should terminate at stage zero as `TRANSFER_WORK_LOSS`, with no
+invented event time.  The threshold comparison alone is not permission to attach
+the deficit to an unrelated coherent block.  Only the good positive work survives to the next question,
+and even there geometry-good is merely **Young-eligible**.  Complex Young/Christ
+must be fed the signed hard-cell trilinear work after physical cancellation, not
+the gross positive edge mass.  No `marking_good` flag is physically justified
+until that signed-cell handoff is proved.
