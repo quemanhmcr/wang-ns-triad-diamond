@@ -20,6 +20,8 @@ from src.helical_physical_edge_registration import (
 )
 from src.helical_physical_edge_registration import (
     HelicalPhysicalEdgeRegistration,
+    _positive_product as _edge_positive_product,
+    _signed_product as _edge_signed_product,
     leray_project,
     register_helical_physical_edge,
 )
@@ -57,12 +59,45 @@ def _complex_norm3(value: np.ndarray) -> float:
     return float(math.hypot(*(abs(complex(x)) for x in q)))
 
 
+def _finite_complex_scalar(value: complex, name: str) -> complex:
+    z = complex(value)
+    if not (math.isfinite(z.real) and math.isfinite(z.imag)):
+        raise ValueError(f"{name} must be finite")
+    return z
+
+
+def _finite_sum(values: Sequence[float], name: str) -> float:
+    vals = tuple(float(value) for value in values)
+    if not all(math.isfinite(value) for value in vals):
+        raise ValueError(f"{name} terms must be finite")
+    try:
+        out = math.fsum(vals)
+    except OverflowError as exc:
+        raise ValueError(f"{name} left the finite native range") from exc
+    if not math.isfinite(out):
+        raise ValueError(f"{name} left the finite native range")
+    return out
+
+
 def _relative_gap(actual: complex, expected: complex, *, scale: float | None = None) -> float:
-    gap = abs(actual - expected)
-    native = max(abs(actual), abs(expected)) if scale is None else abs(float(scale))
+    a = _finite_complex_scalar(actual, "actual native quantity")
+    b = _finite_complex_scalar(expected, "expected native quantity")
+    gap = abs(a - b)
+    if not math.isfinite(gap):
+        raise ValueError("native comparison gap must be finite")
+    if scale is None:
+        native = max(abs(a), abs(b))
+    else:
+        raw_scale = float(scale)
+        if not math.isfinite(raw_scale):
+            raise ValueError("native comparison scale must be finite")
+        native = abs(raw_scale)
     if native == 0.0:
         return 0.0 if gap == 0.0 else math.inf
-    return float(gap / native)
+    out = float(gap / native)
+    if not math.isfinite(out):
+        raise ValueError("native relative gap must be finite")
+    return out
 
 
 def _require_native_equal(
@@ -81,10 +116,19 @@ def _relative_vector_gap(actual: np.ndarray, expected: np.ndarray, *, scale: flo
     a = _cvec3(actual, "actual vector")
     b = _cvec3(expected, "expected vector")
     gap = _complex_norm3(a - b)
-    native = max(_complex_norm3(a), _complex_norm3(b)) if scale is None else abs(float(scale))
+    if scale is None:
+        native = max(_complex_norm3(a), _complex_norm3(b))
+    else:
+        raw_scale = float(scale)
+        if not math.isfinite(raw_scale):
+            raise ValueError("native vector comparison scale must be finite")
+        native = abs(raw_scale)
     if native == 0.0:
         return 0.0 if gap == 0.0 else math.inf
-    return gap / native
+    out = gap / native
+    if not math.isfinite(out):
+        raise ValueError("native vector relative gap must be finite")
+    return out
 
 
 def _physical_triad(x: np.ndarray, y: np.ndarray, z: np.ndarray) -> tuple[float, float, float]:
@@ -244,19 +288,31 @@ class ContinuumModalEdgeAtom:
 
     @property
     def base_factor(self) -> float:
-        return unitary_fourier_convolution_factor() * float(self.quotient_measure_mass)
+        return _edge_positive_product(
+            (unitary_fourier_convolution_factor(), float(self.quotient_measure_mass)),
+            "continuum quotient base factor",
+        )
 
     @property
     def signed_work_mass(self) -> float:
-        return self.base_factor * self.registration.signed_child_energy_work
+        return _edge_signed_product(
+            (self.base_factor, self.registration.signed_child_energy_work),
+            "continuum signed work mass",
+        )
 
     @property
     def capacity_mass(self) -> float:
-        return self.base_factor * self.registration.native_modal_capacity
+        return _edge_positive_product(
+            (self.base_factor, self.registration.native_modal_capacity),
+            "continuum capacity mass",
+        )
 
     @property
     def signed_progress_mass(self) -> float:
-        return self.base_factor * self.registration.signed_upper_progress_work
+        return _edge_signed_product(
+            (self.base_factor, self.registration.signed_upper_progress_work),
+            "continuum signed progress mass",
+        )
 
     @property
     def multiplier(self) -> float:
@@ -506,10 +562,45 @@ class ContinuumEdgeMeasureLedger:
     parent_orientation_chosen: bool = False
 
     def __post_init__(self) -> None:
-        if self.capacity_mass <= 0.0:
-            raise ValueError("positive continuum capacity mass required")
+        if self.fibers <= 0 or self.modal_edges <= 0:
+            raise ValueError("positive continuum fiber and modal-edge counts required")
         if len(self.physical_fibers) != self.fibers or sum(len(f.modal_atoms) for f in self.physical_fibers) != self.modal_edges:
             raise ValueError("continuum ledger physical-fiber provenance count mismatch")
+        numeric = (
+            self.quotient_measure_mass,
+            self.signed_direct_work,
+            self.signed_modal_work,
+            self.positive_edge_work,
+            self.negative_edge_work,
+            self.aggregate_positive_work,
+            self.fiber_positive_work,
+            self.positive_dominance_over_aggregate,
+            self.positive_dominance_over_fibers,
+            self.positive_forward_work,
+            self.positive_nonforward_work,
+            self.capacity_mass,
+            self.signed_direct_progress,
+            self.signed_registered_progress,
+            self.normalized_signed_flux,
+            self.block_transfer_deficit,
+            self.multiplier_deficit,
+            self.phase_deficit,
+            self.polarization_residual,
+            self.good_core_capacity_mass,
+            self.good_core_positive_work,
+            self.good_core_capacity_fraction,
+            self.direct_work_reconstruction_residual,
+            self.direct_progress_reconstruction_residual,
+        )
+        if not all(math.isfinite(float(value)) for value in numeric):
+            raise ValueError("finite continuum edge-measure ledger required")
+        for value in (self.good_core_physical_to_capacity_rn_min, self.good_core_physical_to_capacity_rn_max):
+            if value is not None and not math.isfinite(float(value)):
+                raise ValueError("finite Radon-Nikodym provenance required when present")
+        if self.quotient_measure_mass < 0.0:
+            raise ValueError("nonnegative finite quotient-measure mass required")
+        if self.capacity_mass <= 0.0:
+            raise ValueError("positive continuum capacity mass required")
         if self.positive_edge_work < 0.0 or self.negative_edge_work < 0.0:
             raise ValueError("Hahn masses must be nonnegative")
         if self.capacity_is_causal_law or self.parent_orientation_chosen:
@@ -532,10 +623,22 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
     atoms = tuple(a for f in fs for a in f.modal_atoms)
     cf = unitary_fourier_convolution_factor()
 
-    signed_direct = cf * sum(f.quotient_measure_mass * f.direct_signed_work_density for f in fs)
-    signed_modal = sum(a.signed_work_mass for a in atoms)
+    signed_direct = _finite_sum(
+        (
+            _edge_signed_product(
+                (cf, f.quotient_measure_mass, f.direct_signed_work_density),
+                "continuum direct signed-work fiber mass",
+            )
+            for f in fs
+        ),
+        "continuum direct signed work",
+    )
+    signed_modal = _finite_sum((a.signed_work_mass for a in atoms), "continuum modal signed work")
     direct_work_res = signed_direct - signed_modal
-    signed_work_scale = max(abs(signed_direct), sum(abs(a.signed_work_mass) for a in atoms))
+    signed_work_scale = max(
+        abs(signed_direct),
+        _finite_sum((abs(a.signed_work_mass) for a in atoms), "continuum absolute modal work scale"),
+    )
     _require_native_equal(
         "continuum signed helical edge measure direct NS work",
         signed_direct,
@@ -544,8 +647,8 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
         relative_tolerance=7e-10,
     )
 
-    positive = sum(max(a.signed_work_mass, 0.0) for a in atoms)
-    negative = sum(max(-a.signed_work_mass, 0.0) for a in atoms)
+    positive = _finite_sum((max(a.signed_work_mass, 0.0) for a in atoms), "continuum positive Hahn mass")
+    negative = _finite_sum((max(-a.signed_work_mass, 0.0) for a in atoms), "continuum negative Hahn mass")
     hahn_res = (positive - negative) - signed_modal
     _require_native_equal(
         "continuum Hahn split signed edge reconstruction",
@@ -555,25 +658,42 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
         relative_tolerance=7e-11,
     )
     aggregate_positive = max(0.0, signed_direct)
-    fiber_positive = cf * sum(
-        f.quotient_measure_mass * max(f.direct_signed_work_density, 0.0)
-        for f in fs
+    fiber_positive = _finite_sum(
+        (
+            _edge_positive_product(
+                (cf, f.quotient_measure_mass, max(f.direct_signed_work_density, 0.0)),
+                "continuum fiber-positive work mass",
+            )
+            for f in fs
+        ),
+        "continuum fiber-positive work",
     )
     positive_scale = max(positive, fiber_positive, aggregate_positive)
     positive_slack = 7e-11 * positive_scale
     if positive + positive_slack < fiber_positive or fiber_positive + positive_slack < aggregate_positive:
         raise AssertionError("positive edge Hahn mass failed physical positive-work dominance")
 
-    capacity = sum(a.capacity_mass for a in atoms)
+    capacity = _finite_sum((a.capacity_mass for a in atoms), "continuum total capacity mass")
     if capacity <= 0.0:
         raise ValueError("positive modal capacity required")
-    direct_progress = cf * sum(f.quotient_measure_mass * f.direct_signed_progress_density for f in fs)
-    registered_progress = sum(a.signed_progress_mass for a in atoms)
+    direct_progress = _finite_sum(
+        (
+            _edge_signed_product(
+                (cf, f.quotient_measure_mass, f.direct_signed_progress_density),
+                "continuum direct signed-progress fiber mass",
+            )
+            for f in fs
+        ),
+        "continuum direct signed progress",
+    )
+    registered_progress = _finite_sum(
+        (a.signed_progress_mass for a in atoms), "continuum registered signed progress"
+    )
     direct_progress_res = direct_progress - registered_progress
     progress_scale = max(
         abs(direct_progress),
-        sum(abs(a.signed_progress_mass) for a in atoms),
-        capacity * float_jstar(),
+        _finite_sum((abs(a.signed_progress_mass) for a in atoms), "continuum absolute progress scale"),
+        _edge_positive_product((capacity, float_jstar()), "continuum J-star capacity scale"),
     )
     _require_native_equal(
         "continuum A*J*c direct upper-progress work",
@@ -596,20 +716,18 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
         raise AssertionError("measure-level polarization ratio disagreed with actual A*J*c progress")
     deficit = 1.0 - ratio
 
-    positive_forward = sum(
-        max(a.signed_work_mass, 0.0)
-        for a in atoms
-        if a.scale_progress > 0.0
+    positive_forward = _finite_sum(
+        (max(a.signed_work_mass, 0.0) for a in atoms if a.scale_progress > 0.0),
+        "continuum positive forward work",
     )
-    positive_nonforward = sum(
-        max(a.signed_work_mass, 0.0)
-        for a in atoms
-        if a.scale_progress <= 0.0
+    positive_nonforward = _finite_sum(
+        (max(a.signed_work_mass, 0.0) for a in atoms if a.scale_progress <= 0.0),
+        "continuum positive nonforward work",
     )
 
     good = [a for a in atoms if a.capacity_mass > 0.0 and a.signed_efficiency > 1.0 - GOOD_CORE_ETA]
-    good_capacity = sum(a.capacity_mass for a in good)
-    good_work = sum(a.signed_work_mass for a in good)
+    good_capacity = _finite_sum((a.capacity_mass for a in good), "continuum good-core capacity mass")
+    good_work = _finite_sum((a.signed_work_mass for a in good), "continuum good-core physical work")
     rn_min: float | None = None
     rn_max: float | None = None
     if good_capacity > 0.0:
@@ -626,7 +744,7 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
         fibers=len(fs),
         modal_edges=len(atoms),
         physical_fibers=fs,
-        quotient_measure_mass=sum(f.quotient_measure_mass for f in fs),
+        quotient_measure_mass=_finite_sum((f.quotient_measure_mass for f in fs), "continuum quotient-measure mass"),
         signed_direct_work=signed_direct,
         signed_modal_work=signed_modal,
         positive_edge_work=positive,
