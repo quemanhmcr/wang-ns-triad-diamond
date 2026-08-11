@@ -1,17 +1,23 @@
 import math
+from fractions import Fraction
 
 import numpy as np
 import pytest
 
 from src.continuum_helical_edge_measure_registration import (
     CLEAN_CHANGE_OF_MEASURE,
+    JOINT_UNORDERED_RADON_DENSITY,
     LOW_COST_DEFICIT_CEILING,
+    SUM_RELATIVE_JACOBIAN,
     continuum_edge_measure_ledger,
     edge_measure_to_service_or_flat,
     helical_coefficients,
     helical_reconstruction,
+    joint_unordered_parent_radon_certificate,
+    parent_pair_to_sum_relative,
     register_continuum_triad_fiber,
     signed_good_core_physical_law,
+    sum_relative_to_parent_pair,
     unitary_fourier_convolution_factor,
     unitary_sharp_young_physical_work_upper,
 )
@@ -211,3 +217,30 @@ def test_continuum_layer_rejects_nonphysical_measure_and_nondivergencefree_input
             uz=uz,
             quotient_measure_mass=1.0,
         )
+
+
+def test_joint_outer_child_unordered_parent_radon_pushforward_is_exact():
+    cert = joint_unordered_parent_radon_certificate()
+    assert SUM_RELATIVE_JACOBIAN == Fraction(1, 8)
+    assert JOINT_UNORDERED_RADON_DENSITY == Fraction(1, 16)
+    assert cert["joint_unordered_radon_density"] == "1/16"
+    assert cert["radon"] is True
+
+    x = np.array([1.2, -0.4, 0.7])
+    y = np.array([-0.3, 0.9, 0.2])
+    z, r = parent_pair_to_sum_relative(x, y)
+    xr, yr = sum_relative_to_parent_pair(z, r)
+    xs, ys = sum_relative_to_parent_pair(z, -r)
+    assert np.allclose(xr, x, rtol=0.0, atol=2e-15)
+    assert np.allclose(yr, y, rtol=0.0, atol=2e-15)
+    assert np.allclose(xs, y, rtol=0.0, atol=2e-15)
+    assert np.allclose(ys, x, rtol=0.0, atol=2e-15)
+
+    # One quotient orbit of r represents the two ordered parent points with the
+    # exact 1/2 orientation factor; the z,x -> z,r Jacobian supplies 1/8.
+    fxy = 2.3
+    fyx = -0.7
+    dr_volume = 8.0
+    ordered_dx_orbit = 0.5 * (dr_volume / 8.0) * (fxy + fyx)
+    quotient_orbit = float(JOINT_UNORDERED_RADON_DENSITY) * dr_volume * (fxy + fyx)
+    assert math.isclose(ordered_dx_orbit, quotient_orbit, rel_tol=0.0, abs_tol=2e-15)

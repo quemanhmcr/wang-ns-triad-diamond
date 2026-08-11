@@ -75,6 +75,61 @@ Then
 No lexicographic representative such as `x<y` is selected.  The quotient removes
 only observer ordering; the physical two-parent orbit remains intact.
 
+### 2.1 The outer child variable is part of the same Radon quotient
+
+The preceding fixed-child quotient can be written jointly in variables intrinsic
+to the physical triad:
+
+\[
+z=x+y,
+\qquad
+r=x-y,
+\qquad
+x=\frac{z+r}{2},
+\qquad
+y=\frac{z-r}{2}.
+\]
+
+The inverse linear map has absolute determinant
+
+\[
+\left|\det\frac{\partial(x,y)}{\partial(z,r)}\right|=\frac18.
+\]
+
+Parent exchange is exactly `r -> -r`.  Let
+`q:R^3_r -> R^3_r/{+-1}` be the finite-group quotient.  Because the physical
+orbit integrand is the **sum of both ordered parent terms**, the joint base
+measure for child plus unordered parents is
+
+\[
+\boxed{
+ d\Lambda_{\rm unord}
+ =\frac1{16}\,dz\,d(q_\#dr).
+}
+\]
+
+Equivalently, for every integrable ordered triad density `f`,
+
+\[
+\int dz\int dx\,f(z,x,z-x)
+=\frac1{16}\int dz\int dr\,
+\left[
+ f\!\left(z,\frac{z+r}{2},\frac{z-r}{2}\right)
+ +
+ f\!\left(z,\frac{z-r}{2},\frac{z+r}{2}\right)
+\right].
+\]
+
+This is an analytic change-of-variables identity, not a finite-grid ansatz.  The
+quotient by the finite group `{+-1}` is a locally compact second-countable
+Hausdorff space, hence the pushforward of Lebesgue measure is Radon.  The fixed
+locus `r=0` has codimension three and is null.  On the actual hard event roles
+used here, the child stays away from zero and the existing `L^(3/2)` Young bounds
+supply finite variation of the restricted physical work/capacity measures.
+
+Thus aggregating several physical child modes before Hahn splitting is not a new
+law: it is a finite probe of the same joint `z`--unordered-parent Radon measure.
+
 ## 3. Helicity is resolved exactly at the event
 
 For every nonzero wavevector,

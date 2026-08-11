@@ -238,7 +238,7 @@ Every child is reconstructed from all retained ordered parents, then unordered p
 - NS energy-balance residual: `{result.global_energy_balance_relative_residual:.3e}`;
 - maximum normalized divergence: `{result.maximum_divergence_relative_to_initial_l2:.3e}`.
 
-This is a finite Galerkin outer-child aggregation falsifier, **not** a proof of the continuum `dz d(lambda_z^unord)` disintegration. That joint Radon-measure statement remains a separate analytic proof obligation.
+This is a finite Galerkin outer-child aggregation falsifier of the companion analytic joint Radon theorem `dLambda_unord=(1/16) dz d(q_#dr)`.  The PDE probe does not replace that proof; it attacks its normalization, parent quotient, helicity reconstruction, and Hahn ordering on one evolved Navier--Stokes orbit.
 """
     (args.outdir / "summary.md").write_text(summary, encoding="utf-8")
     print(summary)

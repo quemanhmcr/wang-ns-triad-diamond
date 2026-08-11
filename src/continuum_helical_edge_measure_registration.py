@@ -6,6 +6,7 @@ import json
 import math
 from collections.abc import Sequence
 from dataclasses import asdict, dataclass
+from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
@@ -47,14 +48,78 @@ from src.triad_extremizer import symmetric_gamma, symmetric_rstar
 
 STATUS = (
     "EXACT_CONTINUUM_HELICAL_EDGE_MEASURE_REGISTRATION__UNITARY_FOURIER__"
-    "UNORDERED_PARENT_QUOTIENT__EXACT_HELICITY_RECONSTRUCTION__SIGNED_BEFORE_HAHN__"
+    "UNORDERED_PARENT_QUOTIENT__JOINT_OUTER_CHILD_RADON_PUSHFORWARD__"
+    "EXACT_HELICITY_RECONSTRUCTION__SIGNED_BEFORE_HAHN__"
     "NATIVE_CAPACITY_POLARIZATION__PHYSICAL_GOOD_CORE_CHANGE_OF_MEASURE"
 )
 
 UNITARY_FOURIER_CONVOLUTION_FACTOR = (2.0 * math.pi) ** (-1.5)
 GOOD_CORE_ETA = float(GOOD_THRESHOLD)
 LOW_COST_DEFICIT_CEILING = 1.0 / 20_000.0
+SUM_RELATIVE_JACOBIAN = Fraction(1, 8)
+JOINT_UNORDERED_RADON_DENSITY = Fraction(1, 16)
 
+
+
+def parent_pair_to_sum_relative(x: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Return intrinsic outer-child/relative-parent coordinates ``(z,r)``.
+
+    ``z=x+y`` is the physical child wavevector and ``r=x-y`` changes sign under
+    parent exchange.  No orientation of the unordered pair is selected.
+    """
+    xp = _vec3(x, "x")
+    yp = _vec3(y, "y")
+    z = xp + yp
+    r = xp - yp
+    if np.any(~np.isfinite(z)) or np.any(~np.isfinite(r)):
+        raise ValueError("sum/relative parent coordinates must stay finite")
+    return z, r
+
+
+def sum_relative_to_parent_pair(z: np.ndarray, r: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Invert ``z=x+y, r=x-y`` without choosing the sign of the quotient class."""
+    zp = _vec3(z, "z")
+    rp = _vec3(r, "r")
+    x = 0.5 * (zp + rp)
+    y = 0.5 * (zp - rp)
+    if np.any(~np.isfinite(x)) or np.any(~np.isfinite(y)):
+        raise ValueError("reconstructed parent coordinates must stay finite")
+    return x, y
+
+
+def joint_unordered_parent_radon_certificate() -> dict[str, object]:
+    """Exact joint ``z``/unordered-parent base measure for continuum convolution.
+
+    The linear inverse map ``(z,r)->(x,y)`` has absolute determinant ``1/8`` in
+    three dimensions.  The parent involution is ``r->-r``.  Symmetrizing the two
+    ordered parent terms contributes another factor ``1/2``.  Hence if
+    ``q:R^3 -> R^3/{+-1}`` is the finite-group quotient, the joint unordered base
+    measure is
+
+        dLambda_unord = (1/16) dz d(q_# dr).
+
+    The quotient of Euclidean space by the finite group {+-1} is locally compact
+    Hausdorff/second countable, so the pushforward of Lebesgue measure is Radon.
+    The fixed locus r=0 has codimension three and is Lebesgue-null.
+    """
+    per_coordinate_inverse_det = Fraction(1, 2)
+    jacobian = per_coordinate_inverse_det**3
+    orientation_quotient = Fraction(1, 2)
+    density = jacobian * orientation_quotient
+    if jacobian != SUM_RELATIVE_JACOBIAN or density != JOINT_UNORDERED_RADON_DENSITY:
+        raise AssertionError("joint unordered parent Jacobian/quotient factor changed")
+    return {
+        "sum_relative_inverse_jacobian": "1/8",
+        "parent_orientation_quotient": "1/2",
+        "joint_unordered_radon_density": "1/16",
+        "coordinates": "z=x+y, r=x-y; x=(z+r)/2, y=(z-r)/2",
+        "parent_swap": "r -> -r",
+        "quotient_space": "R^3_r/{+-1}, finite-group quotient of Euclidean space",
+        "radon": True,
+        "fixed_locus": "r=0 has codimension 3 and Lebesgue measure zero",
+        "integral_identity": "int dz int dx f(z,x,z-x) = (1/16) int dz int dr [f(z,(z+r)/2,(z-r)/2)+f(z,(z-r)/2,(z+r)/2)]",
+        "physical_scope": "on event hard roles away from z=0, existing L^(3/2) Young bounds give finite variation for the signed work/capacity restrictions",
+    }
 
 def _complex_norm3(value: np.ndarray) -> float:
     q = np.asarray(value, dtype=complex)
@@ -945,6 +1010,7 @@ def theorem_certificate() -> dict[str, object]:
         "upstream_one_edge_status": HELICAL_EDGE_STATUS,
         "unitary_fourier": "fhat=(2pi)^(-3/2) integral exp(-ix.k) f(x)dx, so product convolution carries C_F=(2pi)^(-3/2)",
         "parent_quotient": "for fixed child z, pi_z(x)={x,z-x} and lambda_z^unord=(1/2)(pi_z)_# dx; the orbit integrand is the sum of both ordered parent terms, so no orientation selector is physical",
+        "joint_outer_child_radon": joint_unordered_parent_radon_certificate(),
         "helicity": "arbitrary divergence-free parent/child Fourier vectors resolve into the two orthogonal helical sectors at the event; summing all 8 (sx,sy,sz) work channels reconstructs direct vector NS work exactly",
         "signed_measure": "dW=C_F T_e d(lambda_unord) is constructed signed before Hahn; W_plus-W_minus=W while W_plus >= [W]_+ under cancellation",
         "capacity_measure": "dA=C_F A_e d(lambda_unord), A_e=4|z||a_x a_y a_z|; dA is a positive reference measure, never the causal child-work law",
@@ -956,7 +1022,7 @@ def theorem_certificate() -> dict[str, object]:
         "normalization_distinction": f"native unitary Young work upper at R=1 is C_F*(4A3)={unitary_upper:.12g}, while existing clean productivity upper 4A3={clean_upper:.12g} deliberately dominates it",
         "service_default_deficit_threshold": service_delta,
         "young_distinction": "epsilon=1-F/(J_*A) is the edge geometry/phase signed-efficiency deficit relative to actual modal capacity; it is not the separate Young norm-saturation deficit, which remains downstream",
-        "scope": "this closes continuum signed edge-measure registration and its low-deficit physical-law handoff; it does not prove that every generic HH block is low deficit or terminate nonforward/high-deficit physical events",
+        "scope": "this closes fixed-child and joint outer-child/unordered-parent Radon registration, signed helical work/capacity/progress reconstruction, and the low-deficit physical-law handoff; it does not prove that every generic HH block is low deficit or terminate nonforward/high-deficit physical events",
     }
 
 
