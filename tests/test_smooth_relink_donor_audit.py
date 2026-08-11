@@ -147,3 +147,31 @@ def test_typed_donor_certificate_rejects_residuals_large_in_its_native_scale():
             row_binding_residual=0.0,
             total_relink_work_residual=0.0,
         )
+
+
+@pytest.mark.parametrize(
+    ("residual_field", "bad_value"),
+    [
+        ("gauge_transport_operator_residual", float("nan")),
+        ("gauge_transport_operator_residual", float("inf")),
+        ("gauge_transport_operator_residual", -1.0),
+        ("skew_decomposition_residual", float("nan")),
+        ("skew_decomposition_residual", float("inf")),
+        ("skew_decomposition_residual", -1.0),
+    ],
+)
+def test_gauge_quotiented_work_rejects_invalid_provenance_residuals(
+    residual_field: str,
+    bad_value: float,
+):
+    values = {
+        "signed_native_interface_atoms": (2.0, -1.0, -1.0),
+        "signed_physical_relink_atoms": (2.0, -1.0, -1.0),
+        "signed_existing_strain_atoms": (0.0, 0.0, 0.0),
+        "gauge_transport_operator_residual": 0.0,
+        "skew_decomposition_residual": 0.0,
+        "signed_physical_relink_pair_matrix": BASE_PAIR_MATRIX,
+    }
+    values[residual_field] = bad_value
+    with pytest.raises(ValueError, match="gauge|skew|residual|finite|nonnegative"):
+        GaugeQuotientedInterfaceWork(**values)
