@@ -16,6 +16,7 @@ from src.common_slice_coefficient_registration import (
     RESIDUAL_FRACTION,
     ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
 )
+from src.full_natural_checkpoint_quotient import FullNaturalCheckpoint
 from src.nn_critical_heat_carrier_seed import LOW_STRAIN_ACTION
 
 
@@ -184,6 +185,33 @@ def test_plain_dictionary_cannot_forge_checkpoint_continuation_authority():
 
     with pytest.raises(TypeError, match="FullNaturalCheckpoint|typed|checkpoint record"):
         same_carrier.checkpoint_continuation_policy(forged)
+
+
+def test_typed_checkpoint_matching_only_time_scale_and_lifetime_cannot_claim_same_pde_path():
+    checkpoint = FullNaturalCheckpoint(
+        terminal_time=2.0,
+        physical_time_drop=0.25,
+        parent_shell_frequency=8.0 / 3.0,
+        parent_shell_critical_mass_lower=2.0,
+        corridor_frequency=2.0,
+        scaled_lifetime=1.0,
+        endpoint_carrier_critical_mass_lower=2.0,
+        endpoint_shell_candidates=(2.0, 4.0),
+    )
+    foreign = same_carrier.SameCarrierProvenance(
+        event_id="foreign-event",
+        carrier_id="foreign-Q",
+        terminal_dual_id="foreign-dual",
+        trajectory_id="foreign-NS-trajectory",
+        terminal_state_token="foreign-terminal-state",
+        terminal_time=2.0,
+        carrier_frequency=2.0,
+        scaled_lifetime=1.0,
+        terminal_coefficient=4.0 + 0.0j,
+    )
+
+    with pytest.raises(TypeError, match="path|restriction|bound|provenance"):
+        same_carrier.checkpoint_continuation_policy(checkpoint, provenance=foreign)
 
 
 def test_segment_carries_complex_path_and_physical_provenance_not_only_magnitudes():
