@@ -140,8 +140,8 @@ def _observables(
     # A single divergence-free plane wave has zero self-advection.  Therefore
     # N(P_p+P_q), restricted to +/-k, is exactly the two ordered p-q atoms.
     parent_pair_nonlinear = _nonlinear_term(parent_pair, k, k2, dealias)
-    designated_hh_forcing = -child_mask[None, ...] * parent_pair_nonlinear
-    full_child_nonlinear_forcing = -child_mask[None, ...] * nonlinear
+    designated_hh_forcing = -(child_mask[None, ...] * parent_pair_nonlinear)
+    full_child_nonlinear_forcing = -(child_mask[None, ...] * nonlinear)
     residual_forcing = full_child_nonlinear_forcing - designated_hh_forcing
 
     child_energy = _physical_inner(child, child, n)
