@@ -207,7 +207,7 @@ def test_tiny_native_work_cannot_fake_heavy_half_or_energy_lower_bound():
             reentry=_reentry(2.0e-120, provenance=token),
             selected_physical_half_slab=_half(
                 start=1.0,
-                end=1.0,
+                end=1.001,
                 mass=1.0e-130,
                 total=1.0e-120,
                 provenance=token,
@@ -225,7 +225,7 @@ def test_selected_positive_sublaw_mass_cannot_exceed_its_total():
             reentry=_reentry(0.8, provenance=token),
             selected_physical_half_slab=_half(
                 start=1.0,
-                end=1.0,
+                end=1.001,
                 mass=3.0,
                 total=2.0,
                 provenance=token,
@@ -248,7 +248,7 @@ def test_nonfinite_parent_span_certificate_fails_closed():
             reentry=_reentry(0.8, provenance=token),
             selected_physical_half_slab=_half(
                 start=1.0,
-                end=1.0,
+                end=1.001,
                 mass=1.1,
                 total=2.0,
                 provenance=token,
@@ -267,14 +267,14 @@ def test_typed_work_provenance_cannot_exceed_the_child_natural_slab():
 
 def test_tiny_native_frequency_cannot_accept_a_foreign_next_carrier():
     c = 1.0e-240
-    row0 = _step(1.0e-120, 0.61e-120, c, 10.0, 10.0)
+    row0 = _step(1.0e-120, 0.61e-120, c, 10.0, 10.1)
     foreign_child = 1.01 * row0.parent_frequency
     row1 = _step(
         foreign_child,
         0.61 * foreign_child,
         c,
-        10.0,
-        10.0,
+        9.5,
+        9.6,
     )
     with pytest.raises(ValueError, match="foreign physical parent carrier|actual signed-good parent carrier scale"):
         signed_good_generated_epoch_telescope((row0, row1))
@@ -282,13 +282,13 @@ def test_tiny_native_frequency_cannot_accept_a_foreign_next_carrier():
 
 def test_tiny_scaled_lifetime_cannot_change_inside_one_epoch():
     c = 1.0e-240
-    row0 = _step(1.0e-120, 0.61e-120, c, 10.0, 10.0)
+    row0 = _step(1.0e-120, 0.61e-120, c, 10.0, 10.1)
     row1 = _step(
         row0.parent_frequency,
         0.61 * row0.parent_frequency,
         1.01 * c,
-        10.0,
-        10.0,
+        9.5,
+        9.6,
     )
     with pytest.raises(ValueError, match="scaled natural-lifetime constant"):
         signed_good_generated_epoch_telescope((row0, row1))

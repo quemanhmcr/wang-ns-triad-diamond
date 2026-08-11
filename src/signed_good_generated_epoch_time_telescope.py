@@ -184,8 +184,8 @@ class SignedGoodGeneratedHHStep:
         if not all(math.isfinite(x) and x > 0 for x in positive):
             raise ValueError("positive finite signed-good generated-HH data required")
         times = (self.work_support_start, self.work_support_end)
-        if not all(math.isfinite(x) and x >= 0 for x in times) or self.work_support_end < self.work_support_start:
-            raise ValueError("finite nonnegative ordered physical work support required")
+        if not all(math.isfinite(x) and x >= 0 for x in times) or self.work_support_end <= self.work_support_start:
+            raise ValueError("positive ordered physical work support required")
         if self.energy_reentry_branch != ACTUAL_HH_GENERATION_BRANCH:
             raise TypeError("only actual physical HH generation after energy reentry may enter the signed-good epoch")
         if self.causal_measure != ACTUAL_HH_CAUSAL_MEASURE:
@@ -242,10 +242,10 @@ class SignedGoodGeneratedHHStep:
 
         width = self.work_support_end - self.work_support_start
         child_half = 0.5 * self.child_natural_lifetime
-        if width > 0.0 and not _native_upper_holds(width, child_half):
+        if not _native_upper_holds(width, child_half):
             raise ValueError("selected generated support is wider than one half child natural slab")
         parent_span = float(INITIAL_HALF_SPAN) * self.parent_natural_lifetime
-        if width > 0.0 and not _native_upper_holds(width, parent_span):
+        if not _native_upper_holds(width, parent_span):
             raise AssertionError("signed-good parent support exceeded the certified 25/128 natural-lifetime span")
 
     @property
@@ -460,6 +460,23 @@ def signed_good_generated_epoch_telescope(
             abs_tol=0.0,
         ):
             raise ValueError("one generated epoch must use one supplied scaled natural-lifetime constant")
+
+    carrier_frequencies: dict[str, float] = {}
+    for row in rows:
+        for carrier_id, frequency in (
+            (row.provenance.child_carrier_id, row.child_frequency),
+            (row.provenance.generated_parent_carrier_id, row.parent_frequency),
+        ):
+            if carrier_id not in carrier_frequencies:
+                carrier_frequencies[carrier_id] = frequency
+                continue
+            if not math.isclose(
+                _finite_positive_ratio(frequency, carrier_frequencies[carrier_id]),
+                1.0,
+                rel_tol=NATIVE_RELATIVE_TOLERANCE,
+                abs_tol=0.0,
+            ):
+                raise ValueError("one physical carrier identity cannot carry different native frequencies")
 
     common = tuple(row.common_reference_time for row in rows)
     lifetimes = tuple(row.parent_natural_lifetime for row in rows)
@@ -803,7 +820,7 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> SignedGoodGeneratedEp
                 parent_frequency=row.parent_frequency,
                 scaled_lifetime=row.scaled_lifetime,
                 work_support_start=shifted_time,
-                work_support_end=shifted_time,
+                work_support_end=shifted_time + 0.25 * row.child_natural_lifetime,
                 physical_hh_work_mass=row.physical_hh_work_mass,
                 physical_hh_work_total=row.physical_hh_work_total,
                 physical_hh_work_lower=row.physical_hh_work_lower,

@@ -155,7 +155,7 @@ def test_nonconsecutive_support_restart_cannot_hide_inside_one_generated_epoch()
     c = 1.0
     r = 0.61
     row0 = _step(10.0, 6.1, c, 5.0, 5.001)
-    row1 = _step(6.1, r * 6.1, c, row0.work_support_end + 1.0, row0.work_support_end + 1.0)
+    row1 = _step(6.1, r * 6.1, c, row0.work_support_end + 1.0, row0.work_support_end + 1.001)
     with pytest.raises(ValueError, match="not contained"):
         signed_good_generated_epoch_telescope((row0, row1))
 
@@ -175,13 +175,13 @@ def test_required_common_surface_reaching_t0_terminates_interior_generated_depth
     # layer can be registered behind it.
     child = 1.0
     parent = 0.61
-    row = _step(child, parent, c, 0.2, 0.2)
+    row = _step(child, parent, c, 0.2, 0.21)
     assert row.common_reference_time < 0.0
     out = signed_good_generated_epoch_telescope((row,))
     assert out.hits_initial_boundary
     assert out.total_layer_upper_before_or_at_boundary == 1
 
-    nxt = _step(parent, 0.61 * parent, c, 0.1, 0.1)
+    nxt = _step(parent, 0.61 * parent, c, 0.1, 0.11)
     with pytest.raises(ValueError, match="continued after.*t=0"):
         signed_good_generated_epoch_telescope((row, nxt))
 
