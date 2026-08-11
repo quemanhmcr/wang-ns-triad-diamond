@@ -1,0 +1,42 @@
+name: Audit continuum helical edge measure registration
+
+on:
+  push:
+    paths:
+      - 'src/continuum_helical_edge_measure_registration.py'
+      - 'tests/test_continuum_helical_edge_measure_registration.py'
+      - 'tests/test_continuum_helical_edge_measure_registration_audit.py'
+      - 'src/helical_physical_edge_registration.py'
+      - 'src/helical.py'
+      - '.github/workflows/audit-continuum-helical-edge-measure-registration.yml'
+      - '.github/workflows/continuum-helical-edge-measure-registration.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adversarial-continuum-edge-measure-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Run native-scale and provenance anti-tests
+        run: pytest -q tests/test_continuum_helical_edge_measure_registration_audit.py
+      - name: Run candidate theorem tests
+        run: pytest -q tests/test_continuum_helical_edge_measure_registration.py
+      - name: Run full theorem suite
+        run: pytest -q
+      - name: Run wide continuum edge-measure stress
+        run: python -m src.continuum_helical_edge_measure_registration --samples 200000 --core-blocks 5000 --outdir results-audit-continuum-helical-edge-measure/continuum-edge-measure
+      - run: cat results-audit-continuum-helical-edge-measure/continuum-edge-measure/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-continuum-helical-edge-measure-results
+          path: results-audit-continuum-helical-edge-measure/
