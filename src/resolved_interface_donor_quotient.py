@@ -287,7 +287,35 @@ def skew_donor_closure(skew_pair_matrix: np.ndarray, recipient_roles: Sequence[i
     b_in = float(balance["boundary_positive_inflow"])
     if b_in > 8e-12 * scale:
         raise AssertionError("backward donor closure still has positive skew inflow from outside")
-    max_shortest = max(distance[a] for a in terminal)
+
+    # Aggregate closure proves the total positive set has donor provenance, but
+    # by itself it can let one connected component borrow a negative donor from
+    # another.  Replay the same finite graph from each positive recipient so the
+    # certificate's "every recipient" statement is literal even when numerical
+    # input is only antisymmetric up to its declared native-scale tolerance.
+    recipient_traces: list[tuple[int, tuple[int, ...], int]] = []
+    for start in starts:
+        one_closure = {start}
+        one_distance = {start: 0}
+        one_frontier = [start]
+        while one_frontier:
+            a = one_frontier.pop(0)
+            for b in range(m):
+                if float(T[a, b]) > tol and b not in one_closure:
+                    one_closure.add(b)
+                    one_distance[b] = one_distance[a] + 1
+                    one_frontier.append(b)
+        one_terminal = tuple(
+            a for a in sorted(one_closure) if float(net[a]) < -tol
+        )
+        if not one_terminal:
+            raise AssertionError(
+                "positive skew recipient has no negative-net donor in its own backward closure"
+            )
+        nearest = min(one_distance[a] for a in one_terminal)
+        recipient_traces.append((start, one_terminal, int(nearest)))
+
+    max_shortest = max(trace[2] for trace in recipient_traces)
     if max_shortest > m - 1:
         raise AssertionError("finite donor trace exceeded simple-path role bound")
 
@@ -301,6 +329,7 @@ def skew_donor_closure(skew_pair_matrix: np.ndarray, recipient_roles: Sequence[i
         "backward_donor_closure": C,
         "terminal_negative_net_donor_roles": terminal,
         "shortest_donor_path_lengths": tuple((a, int(distance[a])) for a in terminal),
+        "recipient_negative_donor_traces": tuple(recipient_traces),
         "maximum_shortest_donor_path_length": int(max_shortest),
         "simple_path_length_upper": m - 1,
         "recipient_net_gain": start_gain,
