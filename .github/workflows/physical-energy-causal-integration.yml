@@ -29,6 +29,7 @@ on:
       - 'src/full_natural_service_corridor_quotient.py'
       - 'src/full_natural_checkpoint_quotient.py'
       - 'src/same_carrier_checkpoint_segmentation_quotient.py'
+      - 'src/same_carrier_checkpoint_segmentation_pde_probe.py'
       - 'src/continuum_master_event_quotient.py'
       - 'src/complex_young_parent_marking.py'
       - 'src/dual_gaussian_root_registration.py'
@@ -82,6 +83,7 @@ jobs:
       - run: python -m src.full_natural_service_corridor_quotient --samples 50000 --outdir results-integration/full-natural-service-corridor-quotient
       - run: python -m src.full_natural_checkpoint_quotient --samples 50000 --outdir results-integration/full-natural-checkpoint-quotient
       - run: python -m src.same_carrier_checkpoint_segmentation_quotient --samples 50000 --outdir results-integration/same-carrier-checkpoint-segmentation
+      - run: python -m src.same_carrier_checkpoint_segmentation_pde_probe --resolutions 20 24 --steps 48 --outdir results-integration/same-carrier-checkpoint-segmentation-pde-probe
       - run: python -m src.material_label_carrier_quotient --samples 50000 --outdir results-integration/material-label-carrier-quotient
       - run: python -m src.objective_source_routing_compiler --samples 50000 --outdir results-integration/objective-source-routing-compiler
       - run: python -m src.objective_pressure_pair_atomization --samples 50000 --outdir results-integration/objective-pressure-pair-atomization

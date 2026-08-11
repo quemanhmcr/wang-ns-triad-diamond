@@ -5,6 +5,7 @@ on:
     paths:
       - 'src/full_natural_checkpoint_quotient.py'
       - 'src/same_carrier_checkpoint_segmentation_quotient.py'
+      - 'src/same_carrier_checkpoint_segmentation_pde_probe.py'
       - 'src/full_natural_service_corridor_quotient.py'
       - 'src/full_natural_service_corridor_pde_probe.py'
       - 'src/critical_shell_service_reentry.py'
@@ -13,6 +14,7 @@ on:
       - 'tests/test_full_natural_checkpoint_audit.py'
       - 'tests/test_same_carrier_checkpoint_segmentation_audit.py'
       - 'tests/test_same_carrier_checkpoint_segmentation_quotient.py'
+      - 'tests/test_same_carrier_checkpoint_segmentation_pde_probe.py'
       - 'tests/test_full_natural_checkpoint_quotient.py'
       - 'tests/test_full_natural_service_corridor_quotient.py'
       - 'tests/test_full_natural_service_corridor_pde_probe.py'
@@ -52,7 +54,12 @@ jobs:
         run: python -m src.full_natural_service_corridor_quotient --samples 100000 --outdir results-audit/full-natural-service-corridor
       - name: Run actual dealiased Navier-Stokes corridor probe
         run: python -m src.full_natural_service_corridor_pde_probe --resolutions 12 16 20 --steps 80 --outdir results-audit/full-natural-service-corridor-pde-probe
-      - run: cat results-audit/full-natural-checkpoint/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Run same-carrier probe on one actual Navier-Stokes trajectory
+        run: python -m src.same_carrier_checkpoint_segmentation_pde_probe --resolutions 20 24 28 --steps 80 --outdir results-audit/same-carrier-checkpoint-segmentation-pde-probe
+      - run: |
+          cat results-audit/full-natural-checkpoint/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-audit/same-carrier-checkpoint-segmentation/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-audit/same-carrier-checkpoint-segmentation-pde-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: audit-full-natural-checkpoint-results
