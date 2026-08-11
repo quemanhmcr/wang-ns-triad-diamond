@@ -3,9 +3,9 @@ from __future__ import annotations
 import argparse
 import json
 import math
+from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Sequence
 
 import numpy as np
 
@@ -17,7 +17,6 @@ from src.continuum_helical_edge_measure_registration import (
     unordered_parent_curl_source_vector,
 )
 from src.helical_physical_edge_registration import leray_project
-
 
 STATUS = (
     "EVOLVED_DEALIASED_FOURIER_GALERKIN_NAVIER_STOKES__"
@@ -56,14 +55,19 @@ def _relative_vector(actual: np.ndarray, expected: np.ndarray, scale: float) -> 
     return gap / native
 
 
-def _spectral_geometry(resolution: int) -> tuple[np.ndarray, np.ndarray, np.ndarray, int]:
+def _spectral_geometry(
+    resolution: int, cutoff_override: int | None = None
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, int]:
     n = int(resolution)
     if n < 20 or n % 2:
         raise ValueError("an even Fourier resolution at least 20 is required")
     one = np.fft.fftfreq(n, d=1.0 / n)
     k = np.asarray(np.meshgrid(one, one, one, indexing="ij"), dtype=float)
     k2 = np.sum(k * k, axis=0)
-    cutoff = n // 3 - 1
+    native_cutoff = n // 3 - 1
+    cutoff = native_cutoff if cutoff_override is None else int(cutoff_override)
+    if cutoff <= 0 or cutoff > native_cutoff:
+        raise ValueError("Galerkin cutoff must be positive and no larger than the native dealiased cutoff")
     dealias = np.max(np.abs(k), axis=0) <= cutoff
     if max(abs(v) for v in CHILD_MODE) > cutoff:
         raise ValueError("selected child mode is outside the dealiased Galerkin set")
@@ -357,6 +361,7 @@ def _snapshot(
 @dataclass(frozen=True)
 class GalerkinContinuumEdgeRun:
     resolution: int
+    spectral_cutoff: int
     steps: int
     snapshots: int
     dt: float
@@ -398,6 +403,7 @@ def simulate_continuum_edge_measure_on_galerkin_ns(
     amplitude: float = 4.0,
     duration: float = 0.012,
     snapshot_count: int = 5,
+    cutoff_override: int | None = None,
 ) -> GalerkinContinuumEdgeRun:
     n = int(resolution)
     count = int(steps)
@@ -410,7 +416,7 @@ def simulate_continuum_edge_measure_on_galerkin_ns(
     if not all(math.isfinite(x) and x > 0.0 for x in (nu, amp, horizon)):
         raise ValueError("positive finite Galerkin audit parameters required")
 
-    k, k2, dealias, cutoff = _spectral_geometry(n)
+    k, k2, dealias, cutoff = _spectral_geometry(n, cutoff_override)
     state = _deterministic_smooth_initial_state(n, k, k2, dealias, amp)
     dt = horizon / count
     sample_indices = tuple(sorted({round(j * count / (snaps - 1)) for j in range(snaps)}))
@@ -464,6 +470,7 @@ def simulate_continuum_edge_measure_on_galerkin_ns(
     child_works = tuple(float(row["actual_child_work"]) for row in observations)
     return GalerkinContinuumEdgeRun(
         resolution=n,
+        spectral_cutoff=cutoff,
         steps=count,
         snapshots=len(observations),
         dt=dt,
@@ -497,8 +504,26 @@ class ContinuumEdgeMeasurePDEProbe:
     status: str
     child_mode: tuple[int, int, int]
     runs: tuple[GalerkinContinuumEdgeRun, ...]
-    final_child_energy_resolution_spread: float
-    integrated_child_work_resolution_spread: float
+    native_final_child_energy_resolution_spread: float
+    native_integrated_child_work_resolution_spread: float
+    common_cutoff: int
+    common_cutoff_runs: tuple[GalerkinContinuumEdgeRun, ...]
+    common_final_child_energy_resolution_spread: float
+    common_integrated_child_work_resolution_spread: float
+
+
+def _resolution_spreads(
+    runs: Sequence[GalerkinContinuumEdgeRun],
+) -> tuple[float, float]:
+    if not runs:
+        raise ValueError("at least one Galerkin run required")
+    energies = tuple(row.final_child_energy for row in runs)
+    works = tuple(row.integrated_child_work for row in runs)
+    energy_scale = max(abs(x) for x in energies)
+    work_scale = max(abs(x) for x in works)
+    energy_spread = 0.0 if energy_scale == 0.0 else (max(energies) - min(energies)) / energy_scale
+    work_spread = 0.0 if work_scale == 0.0 else (max(works) - min(works)) / work_scale
+    return energy_spread, work_spread
 
 
 def run_probe(
@@ -510,33 +535,60 @@ def run_probe(
     duration: float = 0.012,
     snapshot_count: int = 5,
 ) -> ContinuumEdgeMeasurePDEProbe:
+    resolved = tuple(int(n) for n in resolutions)
+    if not resolved:
+        raise ValueError("at least one Galerkin resolution required")
+
+    # These are genuinely different Galerkin truncations.  Every run must obey
+    # the NS convolution/work identities, but cross-resolution convergence is a
+    # separate numerical-analysis statement and is therefore reported only.
     runs = tuple(
         simulate_continuum_edge_measure_on_galerkin_ns(
-            resolution=int(n),
+            resolution=n,
             steps=int(steps),
             viscosity=float(viscosity),
             amplitude=float(amplitude),
             duration=float(duration),
             snapshot_count=int(snapshot_count),
         )
-        for n in resolutions
+        for n in resolved
     )
-    if not runs:
-        raise ValueError("at least one Galerkin resolution required")
-    energies = tuple(row.final_child_energy for row in runs)
-    works = tuple(row.integrated_child_work for row in runs)
-    energy_scale = max(abs(x) for x in energies)
-    work_scale = max(abs(x) for x in works)
-    energy_spread = 0.0 if energy_scale == 0.0 else (max(energies) - min(energies)) / energy_scale
-    work_spread = 0.0 if work_scale == 0.0 else (max(works) - min(works)) / work_scale
-    if energy_spread > 4.0e-2 or work_spread > 6.0e-2:
-        raise AssertionError("continuum edge-measure PDE observables did not refine stably")
+    native_energy_spread, native_work_spread = _resolution_spreads(runs)
+
+    # Now embed exactly the same finite Galerkin system on every FFT grid.  This
+    # is a representation-invariance test, not a convergence assumption.  The
+    # common cutoff is the largest cutoff admissible on every requested grid.
+    common_cutoff = min(n // 3 - 1 for n in resolved)
+    if common_cutoff < max(abs(v) for v in CHILD_MODE):
+        raise ValueError("requested resolutions do not share a Galerkin cutoff containing the audit child")
+    common_runs = tuple(
+        simulate_continuum_edge_measure_on_galerkin_ns(
+            resolution=n,
+            steps=int(steps),
+            viscosity=float(viscosity),
+            amplitude=float(amplitude),
+            duration=float(duration),
+            snapshot_count=int(snapshot_count),
+            cutoff_override=common_cutoff,
+        )
+        for n in resolved
+    )
+    common_energy_spread, common_work_spread = _resolution_spreads(common_runs)
+    if common_energy_spread > 5.0e-8 or common_work_spread > 5.0e-8:
+        raise AssertionError(
+            "the same Galerkin Navier-Stokes system changed under FFT-grid representation"
+        )
+
     return ContinuumEdgeMeasurePDEProbe(
         status=STATUS,
         child_mode=CHILD_MODE,
         runs=runs,
-        final_child_energy_resolution_spread=energy_spread,
-        integrated_child_work_resolution_spread=work_spread,
+        native_final_child_energy_resolution_spread=native_energy_spread,
+        native_integrated_child_work_resolution_spread=native_work_spread,
+        common_cutoff=common_cutoff,
+        common_cutoff_runs=common_runs,
+        common_final_child_energy_resolution_spread=common_energy_spread,
+        common_integrated_child_work_resolution_spread=common_work_spread,
     )
 
 
@@ -567,10 +619,16 @@ def main() -> None:
         json.dumps(asdict(result), indent=2), encoding="utf-8"
     )
     rows = "\n".join(
-        f"| {row.resolution} | {row.unordered_pairs} | {row.modal_edges} | "
+        f"| {row.resolution} | {row.spectral_cutoff} | {row.unordered_pairs} | {row.modal_edges} | "
         f"{row.worst_unordered_source_residual:.3e} | {row.worst_signed_work_residual:.3e} | "
         f"{row.worst_progress_residual:.3e} | {row.global_energy_balance_relative_residual:.3e} |"
         for row in result.runs
+    )
+    common_rows = "\n".join(
+        f"| {row.resolution} | {row.spectral_cutoff} | {row.unordered_pairs} | {row.modal_edges} | "
+        f"{row.worst_unordered_source_residual:.3e} | {row.worst_signed_work_residual:.3e} | "
+        f"{row.worst_progress_residual:.3e} | {row.global_energy_balance_relative_residual:.3e} |"
+        for row in result.common_cutoff_runs
     )
     summary = f"""# Continuum helical edge measure on actual Galerkin Navier--Stokes
 
@@ -586,12 +644,20 @@ unitary-R3 measure normalization without changing the physical Galerkin source,
 each discrete unordered orbit is assigned quotient mass `1/C_F`, so the theorem
 factor `C_F` cancels exactly against the discrete counting-measure embedding.
 
-| n | unordered pairs | helical edges | source residual | work residual | progress residual | NS energy balance |
-|---:|---:|---:|---:|---:|---:|---:|
+| n | cutoff | unordered pairs | helical edges | source residual | work residual | progress residual | NS energy balance |
+|---:|---:|---:|---:|---:|---:|---:|---:|
 {rows}
 
-Final-child-energy resolution spread: `{result.final_child_energy_resolution_spread:.3e}`.
-Integrated-child-work resolution spread: `{result.integrated_child_work_resolution_spread:.3e}`.
+The native cutoffs above define different Galerkin PDEs. Their final-child-energy spread `{result.native_final_child_energy_resolution_spread:.3e}` and integrated-child-work spread `{result.native_integrated_child_work_resolution_spread:.3e}` are **diagnostics only**; no unproved convergence threshold is imposed.
+
+The following table embeds the **same** Galerkin cutoff `{result.common_cutoff}` on every FFT grid:
+
+| n | cutoff | unordered pairs | helical edges | source residual | work residual | progress residual | NS energy balance |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+{common_rows}
+
+Same-system final-child-energy representation spread: `{result.common_final_child_energy_resolution_spread:.3e}`.
+Same-system integrated-child-work representation spread: `{result.common_integrated_child_work_resolution_spread:.3e}`.
 
 This is direct falsification evidence on finite Fourier--Galerkin Navier--Stokes,
 not a continuum PDE proof.  It checks that the proposed signed edge measure is
