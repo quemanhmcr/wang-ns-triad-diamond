@@ -249,3 +249,23 @@ The outer-role condition in the historical scope is now supplied by `outer_movin
 ## Current downstream status
 
 The moving selected-role equation, event hard-role registration, nonaffine interface split, physical pair-work productivity, measurable first-hit extraction, and generic shell/service reentry requested by the historical scope are now supplied by downstream companion theorems.  High-frequency regeneration also has a dedicated physical continuation through common-unit work, Fourier UV locality, and sliding natural time.  This witness theorem therefore remains the exact coherent work-atomization/causal-support layer; the current programme-level frontier is final continuum master assembly rather than construction of another coherent packet state.
+
+## Master-facing caveat after continuum edge-measure registration
+
+The coherent identity in this note remains exact: the signed atoms reconstruct
+quadratic Navier--Stokes work and their positive/negative parts expose the
+cancellation visible at this coherent resolution.  The continuum edge theorem,
+however, fixes a more primitive master-facing causal law before coherent
+refinement: the Hahn-positive part `mu^+` of the canonical signed unordered
+Fourier/helicity edge measure.
+
+Therefore the statement that positive coherent atoms form a causal binary law
+must now be read conditionally.  For the master, a coherent/material binary law
+must be proved to be a positive pushforward/disintegration of that already-fixed
+`mu^+`; otherwise the coherent Hahn split is an exact work representation but not
+a second independent causal law.  This prevents analyst-chosen cell refinement
+from changing causal mass while preserving every signed work identity in this
+module.
+
+The next theorem is specified in
+`docs/canonical_positive_edge_work_routing_frontier.md`.
