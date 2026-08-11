@@ -2,7 +2,7 @@
 
 ## Status
 
-Candidate theorem.  Serious execution is reserved for GitHub Actions.
+Certified on exact implementation/wiring SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated GitHub Actions run `31454546606` and full physical-energy causal integration run `31454546590`.
 
 ## 1. A natural window is a service horizon, not a carrier lifetime
 
@@ -168,3 +168,62 @@ The unresolved global problem therefore returns to **genuine physical owner
 recurrence**.  Those events must still be telescoped through their native work,
 source/service, reuse, `Xi`, or genuinely global resource laws.  No global
 Navier--Stokes regularity conclusion is asserted here.
+
+## 8. Certification
+
+Exact certified implementation/wiring SHA:
+
+`bd404d8fd79336e094015f8a9463bfef761e9d2d`.
+
+Dedicated GitHub Actions run:
+
+`31454546606` — **success**.
+
+It passed:
+
+- `708` theorem tests;
+- `50,000` cumulative-path/checkpoint-segmentation states;
+- worst segmentation first-stop time residual `0.0`;
+- segmentation failures `0`;
+- checkpoint reset-barrier failures `0`;
+- `39,915` sampled paths with genuinely nonmonotone coefficient-impulse magnitudes;
+- `25,000` interior accumulation cases ending on a closed stop face;
+- `25,000` interior accumulation cases crossed by the same carrier;
+- maximum `12` inserted checkpoint cuts in the randomized stress;
+- companion continuum-master checkpoint-segmentation barrier failures `0`;
+- companion master physical-time telescope residual `0.0` and log-scale telescope residual `8.881784197001252e-16`;
+- the independent physical high-frequency dissipation theorem remained green.
+
+Stored artifact:
+
+`recorded-results/31454546606/same-carrier-checkpoint-segmentation-results/`.
+
+GitHub artifact digest:
+
+`sha256:ee8ca26523888e0fbbf1fc034e267643c758e140f8e57ebf8e4f3569d015e41e`.
+
+Full physical-energy causal integration:
+
+`31454546590` — **success** on the same exact SHA.
+
+It passed the same `708`-test suite and the complete physical-energy, source,
+material, generic-shell, service-corridor, checkpoint, same-carrier, high-tail,
+hard/smooth-interface, event-role, first-hit, causal-reuse, physical-branch and
+master chain.  The final master stress checked `20,000` episode traces with worst
+margin `0.0`.
+
+Integration artifact digest:
+
+`sha256:82f05bfce9b84dca883c56df5472393c19874b274d2d7dfa54972c15f1e818d9`.
+
+The initial theorem SHA `a5e4d9a7bc725b72ac3f64210c85721553a90795`
+had one brittle certificate-wording assertion after `707` passing tests; no
+new-theorem stress ran there.  SHA `cc955ec2cf9f51ffa3160a97a434172dff5245e5`
+changed only that fixture.  The final `bd404d8...` commit changed only workflow
+path filters so fixture-only edits automatically rerun both exact-SHA gates.  No
+theorem identity, physical bound, carrier policy, or first-hit routing changed in
+either correction.
+
+These CI results are regression/certificate evidence for the encoded exact
+segmentation and type barriers.  They do not telescope infinitely recurring
+genuine physical owners and do not imply global Navier--Stokes regularity.

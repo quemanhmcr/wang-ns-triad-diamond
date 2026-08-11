@@ -1,6 +1,6 @@
 # Continuum master event quotient: physical time, not theorem depth
 
-Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; same-carrier checkpoint-segmentation extension is the current candidate and is not yet certified**.
+Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; same-carrier checkpoint-segmentation extension certified on `bd404d8fd79336e094015f8a9463bfef761e9d2d`**.
 
 ## 1. Why the apparent recursion was too large
 
@@ -105,11 +105,11 @@ then
 \boxed{\sum_{j\ge0}cA_j^{-2}={cA_0^{-2}\over1-r^{-2}}<\infty.}
 \]
 
-This remains a useful anti-theorem against any argument using physical time alone.  The candidate same-carrier segmentation quotient adds a stronger fact: a no-event natural horizon does not replace the event-anchored smooth carrier or reset its cumulative first-hit filtration.  Therefore a geometrically growing sequence obtained only by checkpoint hard-shell rereading is a sequence of **state observations**, not a canonical physical lineage.
+This remains a useful anti-theorem against any argument using physical time alone.  The certified same-carrier segmentation quotient adds a stronger fact: a no-event natural horizon does not replace the event-anchored smooth carrier or reset its cumulative first-hit filtration.  Therefore a geometrically growing sequence obtained only by checkpoint hard-shell rereading is a sequence of **state observations**, not a canonical physical lineage.
 
 The actual carrier continues with the same terminal coefficient and cumulative native monitors `K_A[s,t]`, `|I_R[s,t]|`, and `|I_HH[s,t]|`.  At an interior accumulation of checkpoint cuts, continuity/absolute continuity gives either an existing first-stop face at the limit or continuation of the same carrier across the accumulation.  Genuine UV progression remains fully physical when the independent high-tail dissipation/work hypotheses actually fire.
 
-This candidate refinement is pending dedicated and full causal-integration CI; the previous checkpoint theorem provenance remains recorded below.
+This refinement is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`; the previous checkpoint theorem provenance remains recorded below.
 
 ## 6. Scale progress is supplier-specific
 
@@ -169,13 +169,13 @@ are concentration coordinates conjugate to shell/service lower bounds.  They are
 
 ## 8. What is genuinely left
 
-With the candidate same-carrier checkpoint segmentation quotient, the master-facing infinite-path frontier becomes one sharply typed problem: **genuine physical owner recurrence**.  Natural-horizon checkpoints, same-corridor service layers, observer re-anchoring, and checkpoint hard-shell rereading do not manufacture new causal vertices or a new scale lineage.
+With the certified same-carrier checkpoint segmentation quotient, the master-facing infinite-path frontier becomes one sharply typed problem: **genuine physical owner recurrence**.  Natural-horizon checkpoints, same-corridor service layers, observer re-anchoring, and checkpoint hard-shell rereading do not manufacture new causal vertices or a new scale lineage.
 
 An infinite recursive event path avoiding `t=0` must therefore recur through actual first-hit/work/source/reuse/independent-service owners.  Those events still have to telescope through the native physical ledgers they truly supply; no critical normalized quantity may be promoted to a synthetic finite reset.
 
 The geometric UV checkpoint sum above remains a diagnostic warning that time alone is insufficient.  It is no longer an independent master escape branch once checkpoint cuts are quotiented inside one fixed carrier.  Actual high-tail dynamics remains available exactly when its physical tail hypotheses are met.
 
-This candidate does **not** prove global no-escape or 3D Navier--Stokes regularity; termination of genuine physical-owner recurrence is still open.
+This extension does **not** prove global no-escape or 3D Navier--Stokes regularity; termination of genuine physical-owner recurrence is still open.
 
 ## 9. Certification
 
@@ -222,7 +222,7 @@ state/cover facts, not directional scale progress.  In particular the upper
 `>=2`, and the production API marks it as inadmissible for high-tail
 ownership.
 
-After this extension, the master has two distinct infinite-path questions:
+At this intermediate certified stage, before the later same-carrier theorem, the master still exposed two distinct questions:
 
 1. an infinite recursive **event path**, which after all quotients can contain
    only genuine named physical owner events;
@@ -230,5 +230,4 @@ After this extension, the master has two distinct infinite-path questions:
    times may have a finite sum and which must be closed by a separate PDE theorem
    if one is available.
 
-The second object is not declared harmless and is not declared high-tail by fiat.
-It is simply removed from artificial event depth.  This extension was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854` and full integration run `31451492844`; the earlier base and service-corridor blocks retain their own provenance.
+At that stage the second object was neither declared harmless nor declared high-tail by fiat; it was only removed from artificial event depth.  The later certified same-carrier segmentation theorem `bd404d8...` closes that remaining checkpoint-continuation interpretation by proving that no-event horizons do not restart the carrier or its cumulative first-hit filtration.  This checkpoint extension itself was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854` and full integration run `31451492844`; the earlier base and service-corridor blocks retain their own provenance.

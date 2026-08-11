@@ -115,9 +115,9 @@ So the frontier is no longer “manufacture a new hard parent at the common slic
 
 No global-regularity claim is made.
 
-## Candidate extension: natural horizons do not interrupt the relay
+## Certified extension: natural horizons do not interrupt the relay
 
-The same-carrier checkpoint-segmentation theorem applies the relay principle to
+The certified same-carrier checkpoint-segmentation theorem applies the relay principle to
 full-natural service horizons.  The exact carrier equation does not expire merely
 because one `cA^-2` interval has ended.  If no physical stop fires there, the
 natural endpoint is only an analysis checkpoint and the event search continues on
@@ -136,5 +136,4 @@ work.
 Consequently an accumulation of no-event natural horizons at an interior smooth
 time is either an existing first-stop face at the limit or is crossed by the same
 carrier.  Hardening into a fresh event role requires an actual physical event.
-This extension is a candidate until exact-SHA dedicated and full integration CI
-are green.
+This extension is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`.

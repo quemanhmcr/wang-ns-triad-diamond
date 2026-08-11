@@ -2,7 +2,7 @@
 
 ## Status
 
-Base checkpoint theorem certified on exact implementation SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated GitHub Actions run `31451492854` and full physical-energy causal integration run `31451492844`.  The same-carrier continuation/no-reset refinement below is the current candidate and is not yet certified.
+Base checkpoint theorem certified on exact implementation SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated GitHub Actions run `31451492854` and full physical-energy causal integration run `31451492844`.  The same-carrier continuation/no-reset refinement below is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`.
 
 This theorem separates three objects which were previously too easy to conflate:
 
@@ -146,7 +146,7 @@ until a new physical first stop/owner event actually occurs.
 
 ## Scope
 
-The base theorem removes natural-horizon event depth and two-shell cover ascent.  The current candidate strengthens this: checkpoint hard-shell readings remain state sidecars while the same event-anchored smooth carrier and cumulative first-hit monitors continue.  Thus a UV-growing checkpoint-reading sequence is not a canonical physical lineage.  The candidate still does not telescope infinitely recurring genuine physical owners and does not prove 3D Navier--Stokes global regularity.
+The base theorem removes natural-horizon event depth and two-shell cover ascent.  The certified same-carrier extension strengthens this: checkpoint hard-shell readings remain state sidecars while the same event-anchored smooth carrier and cumulative first-hit monitors continue.  Thus a UV-growing checkpoint-reading sequence is not a canonical physical lineage.  The extension still does not telescope infinitely recurring genuine physical owners and does not prove 3D Navier--Stokes global regularity.
 
 ## 6. Endpoint witness selection is performed by the state, not the analyst
 
@@ -210,7 +210,7 @@ These CI results are regression/certificate evidence around the encoded exact
 identities and type barriers.  They do not close the event-free UV continuation
 seam and do not imply Navier--Stokes global regularity.
 
-## Candidate continuation refinement: checkpoint rereading does not restart the carrier
+## Certified continuation refinement: checkpoint rereading does not restart the carrier
 
 The companion same-carrier segmentation theorem sharpens `analysis checkpoint`
 one step further.  The hard-shell witness set exposed here is a legitimate state
@@ -230,5 +230,4 @@ summed across checkpoint segments and are not work.
 
 Thus a sequence of hard-shell checkpoint readings is not, by itself, a physical
 scale lineage.  Actual high-tail dynamics remains governed by the independent
-physical tail dissipation/work theorems.  This refinement is a candidate until
-its exact implementation SHA passes dedicated and full causal integration CI.
+physical tail dissipation/work theorems.  This refinement is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`.

@@ -1,0 +1,23 @@
+{
+  "certificate": {
+    "status": "EXACT_COMMON_SLICE_SMOOTH_MATERIAL_CARRIER_RELAY__HARDEN_ONLY_AT_PHYSICAL_GENERATION__UNIVERSAL_SERVICE_REENTRY_REMAINS",
+    "coefficient_to_energy": "z=<Q u,psi> implies ||Q u||_2^2>=|z|^2/||psi||_2^2; no hard role is needed at the common slice",
+    "reanchor": "re-anchoring the same carrier is composition of common affine/Kelvin transport; intrinsic zeta is exactly unchanged, so no relink or new Xi is created",
+    "previous_slab": "the existing outer moving-role equation and physical energy gate apply to the same smooth Q carrier; its native energy effect is Q^2; commutator work is recombined with diagonal L_V role work, and common transported gauge motion is quotiented before residual ownership",
+    "generation_hahn": "for signed physical HH density r and 0<=q<=1, [int q^2 r]_+ <= int q^2[r]_+ <= int[r]_+; smooth-carrier generation is dominated by actual positive physical HH work",
+    "event_hardening": "only at an actual HH interaction is the physical work resolved into orthogonal hard Fourier/helical roles; exact hard work reconstruction needs no persistent hard projector",
+    "causal_law": "Q is never promoted to a new transfer probability law; actual positive physical HH work remains the causal law",
+    "representation": "hard-cell symbol freezing at the actual event reuses the existing summable physical-multiplier Xi; relay/re-anchoring itself costs zero Xi",
+    "scope": "this removes intermediate hard-event reselection from recursion architecture but does not prove that every renewed previous slab satisfies low-strain/service/moat/natural-lifetime hypotheses"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_coefficient_energy_margin": 0.00046458965245732564,
+    "worst_two_step_zeta_residual": 2.7539629846816995e-15,
+    "minimum_hahn_margin": 0.0,
+    "minimum_hahn_contraction_margin": 0.0,
+    "worst_hard_resolution_residual": 2.842170943040401e-14,
+    "minimum_hard_positive_dominance_margin": -1.4210854715202004e-14,
+    "generation_routes": 50000
+  }
+}

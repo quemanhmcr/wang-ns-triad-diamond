@@ -101,7 +101,7 @@ contains one real physical corridor, not several physical intervals.  The extra
 arrows are witness maps on the same corridor, and the certified checkpoint
 refinement shows that the no-hit horizon itself adds zero recursive event vertices.
 
-The candidate same-carrier checkpoint-segmentation theorem sharpens the next step:
+The certified same-carrier checkpoint-segmentation theorem sharpens the next step:
 a no-event natural horizon does not restart the carrier.  The hard-shell endpoint
 readings remain state sidecars while the event-anchored `Q_A` carrier and its
 cumulative first-hit monitors continue.  Therefore repeated endpoint rereading
@@ -113,8 +113,7 @@ But that reading sequence is not a canonical physical lineage.  Independent
 source/service/reuse events and actual high-tail work events remain physical and
 still require their own native termination/reuse laws.
 
-This removes **service theorem depth** from named-owner recurrence and, if the
-candidate passes exact-SHA CI, removes natural-horizon restart depth as well.
+This removes **service theorem depth** from named-owner recurrence and, after the certified same-carrier extension, removes natural-horizon restart depth as well.
 
 ## 5. Anti-theorems encoded by the theorem
 
@@ -204,11 +203,10 @@ chosen branch.  It receives the actual pair `(mu_A,mu_2A)` and applies the exact
 realization lemma internally; unique maxima are physical facts and exact ties stay
 joint.
 
-### Candidate same-carrier continuation refinement
+### Certified same-carrier continuation refinement
 
-The current candidate `same_carrier_checkpoint_segmentation_quotient` makes the
+The certified `same_carrier_checkpoint_segmentation_quotient` makes the
 preceding master consequence fail-closed in production: a checkpoint hard-shell
 witness is a state sidecar, `checkpoint_scale_path_is_physical_lineage=False`, and
 the terminal coefficient plus cumulative strain/interface/HH first-hit monitors
-cannot be reset there.  This refinement is not certified until its exact SHA
-passes the dedicated and full causal-integration gates.
+cannot be reset there.  This refinement is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`.

@@ -2305,11 +2305,11 @@ This refinement was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e44
 checkpoint seam necessarily generates high-tail work.  It only removes the
 analyst's natural-horizon segmentation from physical event depth.
 
-## Candidate refinement: checkpoint Zeno is segmentation of one carrier, not a second escape route
+## Certified refinement: checkpoint Zeno is segmentation of one carrier, not a second escape route
 
 The certified checkpoint theorem above correctly removed natural-horizon endpoints
 from event depth, but still left an event-free UV checkpoint sequence as a separate
-continuation seam.  The same-carrier segmentation candidate uses the already
+continuation seam.  The certified same-carrier segmentation theorem uses the already
 certified relay structure to sharpen that statement.
 
 A natural service horizon is not a lifetime of `Q_A`.  In the absence of a new
@@ -2327,7 +2327,15 @@ the accumulation.  If the maximal no-hit continuation reaches `t=0`, the initial
 boundary absorbs.
 
 Actual high-tail dissipation/work remains a genuine UV route whenever its own
-physical hypotheses are met.  The candidate removes only UV motion manufactured by
-no-event re-hardening.  If certified, the remaining global master frontier is
+physical hypotheses are met.  The theorem removes only UV motion manufactured by
+no-event re-hardening.  Accordingly the remaining global master frontier is
 therefore genuine physical-owner recurrence, not a second checkpoint-Zeno branch.
 No global-regularity conclusion is asserted.
+
+Certification of the same-carrier refinement: exact SHA
+`bd404d8fd79336e094015f8a9463bfef761e9d2d`, dedicated run `31454546606`, full
+causal integration run `31454546590`.  The dedicated `50,000`-state stress had
+zero segmentation and reset-barrier failures, zero first-stop-time residual,
+`39,915` nonmonotone coefficient-impulse paths, and an exact `25,000/25,000` split
+between stop-at-accumulation and continue-across-accumulation cases.  No global
+regularity claim follows.

@@ -32,7 +32,8 @@ The current architecture has reached the following point.
 13. The resolved cross/interface branch is no longer an independent recursive generator: for the actual resolved low--high operator `L_V=K+S`, skew `K` is finite same-event conservative donor flux while symmetric `S` is existing strain/deformation ownership. Pure interface circulation is quotiented before recursion.
 14. The propagated smooth-carrier interface is now type-correct at energy and ownership level: `Q^2` is the carrier energy effect; common affine/Kelvin role motion is quotiented by `dot A+[G,A]=0`; only residual skew `K_phys` is physical relink; raw HH/interface coefficient hits remain first-stop locators until actual energy/work reentry.
 15. A completed full-natural critical-shell corridor carries its own-scale service as a same-interval physical witness; OO/ON/NN rereading adds zero depth, and the endpoint carrier has a same-time two-shell cover at ratios `3/4` or `3/2`, with the actual shell masses deciding the unique/joint witness set.
-16. A complete no-hit natural horizon is now a certified analysis checkpoint, not a recursive physical event. The corridor time is real, but checkpoint cover geometry supplies neither a causal charge nor high-tail/directional scale provenance. Infinite genuine-event recurrence and event-free UV checkpoint continuation are therefore distinct remaining problems.
+16. A complete no-hit natural horizon is an analysis checkpoint, not a carrier lifetime or recursive event.  If no physical stop fires there, the same event-anchored smooth carrier, terminal dual and cumulative native first-hit monitors continue across the horizon; checkpoint hard-shell readings remain state sidecars and cannot reset the filtration.
+17. Checkpoint Zeno is now quotiented as segmentation of one continuous carrier path: at an interior accumulation the cumulative observables either attain an existing closed first-stop face or the same carrier crosses the accumulation.  A geometrically UV-growing checkpoint reading sequence remains a diagnostic counterexample to time-only reasoning, but it is not a physical lineage.  The master frontier is therefore genuine physical-owner recurrence, not a second checkpoint-UV branch.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -127,6 +128,29 @@ An additive reset is permitted only when the resource is genuinely scale-indepen
 A theorem may inspect one native parabolic interval without creating an event at its endpoint.
 For a generic shell at incoming frequency `M`, the actual no-hit corridor runs at `A=3M/4` for time `cA^-2`. If no physical first stop occurs and `t=0` is not reached, that elapsed time is real Navier--Stokes evolution but the earlier endpoint is only an analysis checkpoint.
 Hard-shell rereading there is state observation. The actual pair `(mu_A,mu_2A)` decides which endpoint shell is realized; the observer may not choose the `3M/2` cover branch to manufacture UV progress.
+
+
+### 2.9 A natural service horizon is not a carrier lifetime
+Once a physical event has anchored the smooth carrier `Q_A` and terminal dual,
+the exact carrier/adjoint equations continue on the smooth pre-singular interval
+until a native physical stop or `t=0`.  A completed `cA^-2` service horizon does
+not authorize a restart.
+
+Across any inserted no-event checkpoints the canonical monitors remain cumulative
+from the same terminal event:
+\[
+K_A[s,t],\qquad |I_R[s,t]|,\qquad |I_{HH}[s,t]|.
+\]
+`K_A` is a positive strain action and is monotone as the backward interval grows.
+The two coefficient impulses are complex cumulative integrals; their magnitudes
+may decrease by phase cancellation.  Therefore checkpoint segment magnitudes are
+**not** added and are never reinterpreted as work.
+
+If infinitely many analysis horizons accumulate at an interior smooth time, the
+continuous/absolutely-continuous cumulative observables either attain an existing
+closed first-stop face at the limit or retain strict margin and the same carrier
+continues across the accumulation.  Only an actual new physical event may harden
+a new causal role.  `t=0` remains absorbing.
 
 ---
 
@@ -759,9 +783,10 @@ An interior no-hit horizon is an analysis checkpoint and contributes zero physic
 Hence if a no-hit checkpoint continuation has corridor frequencies bounded by `Mbar`, then after at most
 \[ \boxed{\left\lceil t_*Mbar^2/c\right\rceil} \]
 such physical corridors the initial boundary is forced.
-The later checkpoint quotient sharpens the topology: these no-hit horizons add zero event vertices. Thus any infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events, while UV-unbounded no-hit checkpoint continuation is a separate event-free PDE seam rather than a second branch of the same event path.
-The UV alternative is genuine, not a clock artifact, because for `M_j=M_0r^j`, `r>1`,
+The checkpoint and same-carrier quotients sharpen the topology: no-hit horizons add zero event vertices and do not restart the event-anchored carrier. Thus any infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events.
+A geometrically growing checkpoint-reading sequence still demonstrates that physical time alone is insufficient, because for diagnostic scales `M_j=M_0r^j`, `r>1`,
 \[ \sum_{j\ge0}cM_j^{-2}=\frac{cM_0^{-2}}{1-r^{-2}}<\infty. \]
+The same-carrier theorem shows that this geometric sequence is a diagnostic observer construction, not a physical lineage.
 Scale progress remains supplier-specific:
 - generated signed-good HH: `3/5<N_next/N<5/8`;
 - resolved `D_V` ancestor: `N_next/N<=1/4`;
@@ -882,9 +907,9 @@ Therefore a chain whose apparent extra layers are only
 
 `full natural corridor -> own-scale service -> Moyal/material rereading -> endpoint survivor`
 
-contains one real physical corridor, but if no first stop fires its natural-horizon endpoint contributes zero physical event vertices. After this quotient, bounded-frequency checkpoint continuation still hits `t=0` by physical time. If it avoids `t=0`, the remaining no-hit possibility is an event-free UV continuation seam rather than a recursive-event chain.
+contains one real physical corridor, but if no first stop fires its natural-horizon endpoint contributes zero physical event vertices.  The subsequent checkpoint and same-carrier theorems sharpen this further: the endpoint does not restart the carrier, so repeated service/checkpoint rereading cannot manufacture a new causal corridor chain.
 
-This closes the service-theorem-depth and endpoint-service-attachment seams. The subsequent checkpoint theorem further removes the no-hit horizon itself from event depth. Independent source/service/reuse events remain physical, and UV-unbounded no-hit continuation remains open.
+This closes service-theorem depth, endpoint-service attachment, and no-event horizon restart.  Independent source/service/reuse and genuine high-tail work events remain physical; their recurrence is the unresolved problem.
 
 ---
 
@@ -899,7 +924,51 @@ The endpoint smooth carrier may be reread through the two exact hard shells at `
 
 Thus the upper `3M/2` witness is a genuine state observable when its mass wins, but its appearance does not by itself prove nonlinear UV generation, directional progress, or a high-tail owner. The independently certified high-tail route keeps its own physical `D_tail`/work provenance.
 
-Checkpoint chains telescope their real physical corridor time exactly while adding zero event vertices and zero causal charges. A bounded-scale checkpoint continuation therefore reaches `t=0`. A UV-growing sequence of no-hit checkpoints may still have finite total physical duration; after quotienting horizon segmentation this is an **event-free PDE continuation seam**, not an infinite recursive event path. Closing that seam remains open.
+Checkpoint reading chains telescope their real physical corridor time exactly while adding zero event vertices and zero causal charges.  A geometrically growing sequence of such readings may still have finite total natural-window duration, so physical time alone is insufficient.  The certified same-carrier segmentation theorem supplies the missing type information: without a new physical event, those readings do not replace `Q_A` or reset its cumulative first-hit filtration and therefore are not a physical lineage.
+
+---
+
+## 26.10 Same-carrier checkpoint segmentation: natural horizons do not restart the PDE carrier
+Let a genuine physical shell event at time `t` anchor the smooth carrier `Q_A` and
+its terminal dual.  The exact outer-role/adjoint equations do not contain a
+carrier-expiry clause at the service horizon `cA^-2`.  While no native first-stop
+face has fired, the same carrier continues backward.
+
+The canonical event-to-endpoint monitors are always
+\[
+K_A[s,t],\qquad |I_R[s,t]|,\qquad |I_{HH}[s,t]|,
+\]
+with the **same** terminal coefficient setting the two coefficient thresholds.
+`K_A` is a positive cumulative strain action.  By contrast `I_R` and `I_HH` are
+complex cumulative impulses, so their magnitudes can decrease by phase
+cancellation.  Hence
+\[
+|I[s_2,t]|\neq |I[s_2,s_1]|+|I[s_1,t]|
+\]
+in general.  The master therefore preserves the cumulative event-anchored
+observable and forbids segment-by-segment magnitude addition or checkpoint reset.
+
+Inserting or deleting any finite family of no-event natural-horizon checkpoints
+leaves the first physical stop time and exact joint first-stop set unchanged.  A
+checkpoint may expose hard-shell energy as state sidecar information, but it may
+not replace the carrier, reset the terminal amplitude, reset the cumulative
+monitors, or define a causal scale lineage.
+
+For an infinite sequence of inserted checkpoints accumulating at an interior
+smooth time, continuity/absolute continuity of the native cumulative observables
+gives an exact dichotomy: a closed first-stop face is attained at the limit, or
+all faces retain strict margin and the **same carrier continues through the
+accumulation**.  If maximal no-hit continuation reaches `t=0`, the initial
+boundary absorbs.
+
+Thus the geometric UV checkpoint sum remains only an anti-theorem against a
+physical-time-only proof.  It is not a second physical escape mechanism.  Actual
+UV dynamics remains on the independently certified high-tail dissipation/work
+route when that route's physical hypotheses are genuinely satisfied.
+
+This closes checkpoint Zeno/re-hardening as a master seam.  It does not telescope
+infinitely recurring genuine physical owner events and makes no global
+Navier--Stokes regularity claim.
 
 ---
 
@@ -1004,6 +1073,26 @@ A full-natural own-scale service law is physically real, but when it is proved o
 Completing one natural no-hit window does not make its endpoint a physical event. The physical corridor time is retained, but the horizon is an analysis checkpoint unless a first stop or `t=0` occurs. Likewise, exposing hard shells at `A` and `2A` does not allow the analyst to choose a desired scale branch. The actual endpoint masses decide the unique/joint witness set, and checkpoint-cover provenance is not high-tail provenance.
 
 ---
+
+### 28.27 A no-event checkpoint is not permission to restart the carrier
+Completing a natural service horizon does not expire `Q_A`, reset the terminal
+dual, or create a new event role.  Hard-shell energy may be reread there as state
+sidecar information, but without a physical stop the canonical event search
+continues on the same smooth carrier.  A checkpoint-generated scale sequence is
+not a causal lineage.
+
+### 28.28 A cumulative impulse magnitude is not an additive segment action
+For the fixed event-anchored dual,
+\[
+I[s_2,t]=I[s_2,s_1]+I[s_1,t],
+\]
+but in general
+\[
+|I[s_2,t]|\neq |I[s_2,s_1]|+|I[s_1,t]|.
+\]
+Phase cancellation is physical.  Never reset or add `|I_R|` / `|I_HH|` across
+analysis checkpoints, and never reinterpret those coefficient magnitudes as
+physical work.
 
 ## 29. Structural constants worth remembering
 These constants are not all fundamental; many are clean certified envelopes.
@@ -1156,66 +1245,135 @@ The endpoint ratios `3/4` and `3/2` are comparable geometry only; no directional
 → endpoint is `full_natural_analysis_checkpoint`, not `RecursiveEventState`
 → read actual endpoint masses `(mu_A,mu_2A)`
 → exact realization returns the physical lower-shell witness, upper-shell witness, or joint exact tie
-→ re-register analysis with zero event depth, zero causal charge, and no directional/high-tail provenance
-→ continue until a genuine physical stop/owner occurs or an event-free UV checkpoint continuation must be closed by a separate PDE theorem.
-No observer-selected cover branch can manufacture an increasing recursive path.
+→ reread endpoint state with zero event depth, zero causal charge, and no directional/high-tail provenance
+→ preserve the same event-anchored `Q_A`, terminal coefficient and cumulative first-hit monitors
+→ continue that same carrier until a genuine physical stop or absorbing `t=0`.
+No observer-selected cover branch or natural-horizon cut can manufacture a new carrier lineage.
+
+---
+
+### 30.11 Same-carrier no-event continuation route
+`physical event anchors Q_A at t`
+→ follow the exact outer-role/adjoint equations backward
+→ monitor cumulative `K_A[s,t]`, `|I_R[s,t]|`, `|I_HH[s,t]|`
+→ any natural service horizon may expose service and checkpoint state sidecars
+→ checkpoint insertion/deletion leaves the same first-stop time and joint stop set
+→ interior accumulation: closed stop face at the limit **or** same carrier crosses
+→ coefficient face: actual `Q^2` physical-energy reentry
+→ strain/other physical face: native physical owner
+→ no face before `t=0`: absorbing initial boundary.
+Checkpoint hard-shell readings never replace the carrier without a new physical
+event.  Actual high-tail events remain on their separately certified physical
+`D_tail`/work route.
 
 ---
 
 ## 31. What remains open
-The programme is no longer missing a generic “packet persistence theorem”, a common clock, or a definition of recursive depth.
-The first continuum master quotient has reduced the final seam to genuinely physical recurrence.
+The programme is no longer missing a generic packet-persistence theorem, a common
+clock, a definition of recursive depth, or a closure for no-event checkpoint
+segmentation.  After quotienting representation and theorem horizons, the master
+frontier is now recurrence of **genuine physical owner events**.
+
 ### 31.1 Exhaustive measurable owner assembly
-Every certified supplier must now be wired into the quotient event state on smooth pre-singular intervals, with each transition proved to be either:
+Every certified supplier must be wired into the quotient event state on smooth
+pre-singular intervals, with each transition proved to be exactly one of:
 - a zero-charge relay/witness map;
+- a same-carrier no-event continuation with optional service/checkpoint sidecars;
 - a named non-free physical owner event;
-- a real no-hit physical corridor ending in a zero-event analysis checkpoint;
 - a true terminal cost/resource event; or
 - absorbing `t=0`.
-The wiring must preserve actual owner sets, exact ties, conditional first-stop semantics, and no double counting.
-### 31.2 Observer-clock seam is structurally closed
-The master uses the actual Navier--Stokes time coordinate for both physical events and theorem checkpoints, but only genuine physical stops/owners enter the event state. Supplier natural times remain local corridor horizons and are never normalized into a synthetic common clock. The horizon itself is now quotiented from event topology; what remains is physical continuation, not a clock-definition problem.
+The wiring must preserve actual owner sets, exact ties, conditional first-stop
+semantics, fixed-carrier cumulative monitor baselines, and no double counting.
+
+### 31.2 Observer-clock, horizon, and restart seams are structurally closed
+The master uses actual Navier--Stokes time.  Supplier natural times remain local
+service horizons and are never normalized into a synthetic common clock.  A
+natural horizon is not a carrier lifetime: if no physical stop fires, the same
+smooth event-anchored carrier and cumulative first-hit filtration continue across
+the checkpoint.  Inserting, deleting, or accumulating observer-chosen horizons
+therefore cannot create a new event, carrier, or scale lineage.
+
 ### 31.3 Hard and smooth interface-owner seams are structurally closed
-Resolved mixed/cross-interface work no longer supplies an independent recursive owner chain.
-For a complete orthogonal hard event-role partition of the actual resolved operator `L_V=K+S`, the skew part is conservative same-event role flux and the symmetric part is existing strain/deformation work. The skew donor closure is finite, internal circulation cancels in the subset divergence identity, and donor traversal creates no recursion depth or scale progress.
+Resolved mixed/cross-interface work no longer supplies an independent recursive
+owner chain.  For a complete orthogonal hard event-role partition of the actual
+resolved operator `L_V=K+S`, skew `K` is conservative same-event role flux and
+symmetric `S` is existing strain/deformation work.  Internal skew circulation
+cancels and donor traversal adds no recursion depth.
 
-For the propagated smooth envelope, the measure is different and remains separately typed. Its energy is read at `Q^2`; common transported role motion is certified by `dot A_a+[G,A_a]=0` and quotiented as observer gauge; only `K_phys=K-G` is physical skew relink. Arbitrary square-partition motion is rejected even if its channel exchanges sum to zero. The symmetric branch remains the existing strain/deformation work.
+For the propagated smooth envelope, energy is read at `Q^2`; common transported
+role motion satisfying `dot A_a+[G,A_a]=0` is observer gauge; only residual
+`K_phys=K-G` is physical skew relink.  Raw HH/interface coefficient first stops
+remain locators and must pass through actual `Q^2` energy/work reentry before the
+master receives a physical owner.
 
-Raw HH/interface coefficient first stops are also excluded from physical ownership: they locate a failed continuation interval and must pass through actual `Q^2` energy/work reentry before the master receives inheritance, high strain, HH work, relink, or strain ownership.
+What remains open is termination/telescoping of the genuine owners reached after
+these quotients, not another interface/window/coefficient mechanism.
 
-What remains open is termination/telescoping of those genuine physical owners after these quotients, not an additional hard-interface, smooth-window, or coefficient-amplitude mechanism.
-### 31.4 Full-natural service attachment is structurally closed
-Service remains conditional: it is recorded only after a critical shell survives the complete no-hit natural corridor. But once that corridor is complete, the own-scale service is a positive law **on the corridor already traversed**, not a second event after it.
-Exact Moyal OO/ON/NN reading of the same service law is a zero-depth witness disintegration. The surviving smooth carrier is already present at the corridor endpoint and has a same-time hard-shell witness set at `A` or `2A` with
+### 31.4 Full-natural service/checkpoint attachment is structurally closed
+A full no-hit critical-shell interval is one real physical corridor.  Its own-scale
+service is a positive law on that same corridor; Moyal OO/ON/NN is a zero-depth
+witness disintegration.  The endpoint hard-shell cover satisfies
 \[
-\max(\mu_A,\mu_{2A})\ge\frac23A\|Q_Au\|_2^2.
+\max(\mu_A,\mu_{2A})\ge\frac23A\|Q_Au\|_2^2,
 \]
-Thus the master must not attach a second recursive service owner merely because a service theorem is invoked. The no-hit horizon endpoint is likewise only a checkpoint. A genuinely new event vertex requires an actual first stop/owner law, not merely a new state reading.
-What remains open is not endpoint-service attachment, but the continuation/telescoping of genuine first-hit, work, source, reuse, or independent service events and the separate event-free UV checkpoint seam.
-### 31.5 Supplier-specific scale geometry is now registered, not scalarized
-Hard-tail gives forward ratio at least `2`.
-Signed-good generated transfer gives `3/5<N_next/N<5/8`.
-Resolved dissipation and pressure-pair shells give lower-frequency ratios at most `1/4`.
-Fresh SGS gives only an upper ratio `<=2` and no directional progress.
-Generic shell/material/reuse routes get no invented scale progress. The full-natural checkpoint cover at `3/4` or `3/2` is state geometry only; its actual endpoint masses choose the witness and it is not a supplier-progress theorem.
-The remaining termination argument must use these branch facts exactly as supplied.
-### 31.6 Global termination has split into two sharp physical frontiers
-Pure theorem/representation depth has now been removed from both owner recurrence and no-hit horizon continuation. Hard-interface circulation, smooth observer motion, raw coefficient locators, same-corridor service layers, and natural-horizon checkpoints do not manufacture event vertices.
+but is state observation only.  The endpoint does not restart `Q_A`, the terminal
+coefficient, or cumulative `K_A`, `I_R`, `I_HH`.
 
-The remaining problems are therefore **not one artificial path dichotomy** but two physically distinct questions.
+Thus service attachment, checkpoint eventhood, checkpoint re-hardening, and
+checkpoint Zeno are all structurally quotiented.  A new event vertex requires an
+actual physical stop/owner law.
 
-**A. Genuine event recurrence.** Any infinite recursive event path avoiding `t=0` must contain infinitely many genuine non-free physical owner events after all quotients. These include actual first-hit/work/source/reuse events and independent service events. Their recurrence must telescope only through the native typed laws they actually supply: physical work, causal reuse, independent source/service laws, `Xi`, and genuinely globally bounded resources where available. No critical `NE`, `D_V`, shell mass or scale-critical service may be promoted to a finite reset.
+### 31.5 Supplier-specific scale geometry is registered, not scalarized
+Hard-tail gives genuine forward ratio at least `2` only when the independent
+physical tail theorem fires.  Signed-good generated transfer gives
+`3/5<N_next/N<5/8`; resolved dissipation and pressure-pair shells give ratios at
+most `1/4`; fresh SGS gives only an upper ratio `<=2` and no directional theorem.
+Generic shell/material/reuse routes receive no invented progress.
 
-**B. Event-free UV checkpoint continuation.** A sequence of no-hit checkpoints can consume real corridor time while adding zero event vertices. If its corridor scales remain bounded, physical time forces `t=0`. If the checkpoint scales grow, the total corridor time can be finite. The two-shell checkpoint cover does not close this: even a realized upper `3M/2` shell has checkpoint-cover provenance, not physical high-tail provenance. A future PDE theorem must show whether such UV continuation necessarily forces actual tail dissipation/work, another physical first stop, or some other native obstruction.
+Checkpoint hard-shell ratios `3/4` and `3/2` are diagnostic state geometry, not a
+lineage at all without a new physical event.  The remaining termination argument
+must use each branch exactly as supplied.
 
-The independently certified high-tail route remains available when its physical hypotheses are actually met; the checkpoint theorem deliberately does not infer those hypotheses from cover geometry. Closing A and B, then connecting the result to the initial-data and singular-time interfaces, is the present global frontier.
+### 31.6 Global termination: genuine physical-owner recurrence is the sharp frontier
+After zero-charge relays, observer gauges, coefficient locators, same-event donor
+circulation, same-corridor service layers, natural-horizon checkpoints, and
+same-carrier checkpoint segmentation are quotiented, any infinite recursive
+**event** path avoiding `t=0` must contain infinitely many genuine non-free
+physical owner events.
+
+Those events include actual first-hit/work/source/reuse events and independent
+service events.  Their recurrence must telescope only through the native typed
+laws they truly supply:
+- signed/positive physical work and multiplicative productivity;
+- work-weighted causal Shannon/Rényi reuse;
+- independent source/service laws;
+- `Xi` where it genuinely measures certified representation loss;
+- genuinely globally bounded, scale-independent resources where available.
+
+No critical `NE`, `D_V`, shell mass, scale-critical service, checkpoint count,
+checkpoint scale, or coefficient-impulse magnitude may be promoted to a finite
+additive reset.
+
+The geometric UV checkpoint sum remains an important **diagnostic anti-theorem**:
+physical time alone cannot rule out an observer-generated increasing sequence.
+The same-carrier theorem shows why that sequence is not a second physical escape
+branch.  Actual UV dynamics remains fully present on the independently certified
+high-tail `D_tail`/work route when its physical hypotheses fire.
+
+Closing genuine physical-owner recurrence, then connecting the resulting bound to
+the initial-data and hypothetical singular-time interfaces, is the present global
+frontier.
+
 ### 31.7 Initial data interface
 Backward causal recursion reaching `t=0` is already absorbing.
-For regular initial data, band-limited root counts/energies have scale-decaying bounds.
-The eventual complete continuum theorem must state the exact initial-data hypothesis and connect it to the existing initial-boundary root estimates.
+For regular initial data, band-limited root counts/energies have scale-decaying
+bounds.  The eventual complete continuum theorem must state the exact initial-data
+hypothesis and connect it to the existing initial-boundary root estimates.
+
 ### 31.8 Singular-time conclusion
-Even after global master termination is proved, one must state precisely what contradiction or a priori estimate is obtained as a hypothetical singular time is approached.
-No such global-regularity conclusion is claimed in the current ledger.
+Even after global master termination is proved, one must state precisely what
+contradiction or a priori estimate is obtained as a hypothetical singular time is
+approached.  No such global-regularity conclusion is claimed in the current ledger.
 
 ---
 
@@ -1248,8 +1406,8 @@ They become meaningful only after the underlying physical measure is fixed.
 ### 32.10 Theorem depth is not recursion depth
 A chain of certified source/pressure/service/shell consequence maps does not by itself create new physical generations.
 Same-law relay duplication is quotiented, and different-unit witness relays create state but no second causal charge.
-### 32.11 Physical time is universal; eventhood is not automatic
-Events and checkpoints live in the same Navier--Stokes time coordinate, so physical corridor time telescopes without a synthetic clock. But a theorem-selected horizon does not become an event merely because time was spent reaching it. Bounded-scale checkpoint continuation reaches `t=0`; UV-growing checkpoint continuation can remain finite-time and must be treated as a separate PDE seam.
+### 32.11 Physical time is universal; horizon segmentation is not lineage
+Events and checkpoints live in the same Navier--Stokes time coordinate, so physical corridor time telescopes without a synthetic clock.  But a theorem-selected horizon neither becomes an event nor restarts the carrier.  Even a geometrically UV-growing checkpoint-reading sequence is only diagnostic unless a physical event theorem supplies scale provenance; the same carrier filtration continues across no-event cuts.
 ### 32.12 Circulation is not generation
 The skew part of resolved low--high interface work is an antisymmetric finite-role flux. Internal role cycles cancel from every subset balance and remain at one physical event time. Quotient those cycles and donor relays before recursion; the symmetric remainder is the already existing strain/deformation work.
 These simplifications are central to the programme's current direction.
@@ -1264,6 +1422,17 @@ A measurable coefficient threshold can correctly locate the earliest failure of 
 A physical observable may be discovered after traversing an interval without occurring after that interval in physical time. Full-natural own-scale service and its OO/ON/NN disintegration live on the corridor already counted. Preserve the measure; quotient only the duplicate theorem depth.
 ### 32.16 Horizon segmentation is not event topology
 A natural-window endpoint is an analysis checkpoint unless a physical stop fires there. Preserve the real corridor time, but do not create a recursive vertex. At that checkpoint let the actual shell masses determine the hard-shell witness; never choose the upper cover branch to manufacture scale ascent.
+
+### 32.17 Service horizon is not carrier lifetime
+A scale-native interval may be exactly the right horizon for proving uniform
+service without being the lifetime of the transported PDE carrier.  Do not restart
+`Q_A`, its terminal dual, or its first-hit filtration merely because one service
+window ended.
+
+### 32.18 Complex impulse additivity does not imply magnitude additivity
+The complex coefficient impulse is interval-additive, but its absolute value is
+not.  Phase cancellation is physical.  Preserve the event-anchored cumulative
+impulse; never sum checkpoint-segment magnitudes or turn them into work.
 
 ## 33. Certified recent theorem blocks
 ### 33.1 High-tail sliding natural-window reentry
@@ -1439,7 +1608,62 @@ Full causal integration:
 `31451492844`.
 It completed successfully on the same exact SHA with the same `696`-test suite through the full physical-energy, source, material, generic-shell, service-corridor, checkpoint, high-tail, hard/smooth-interface, first-stop, causal-reuse, physical-branch and master chain. The final master checked `20,000` episode traces with worst margin `0.0`. Integration artifact digest:
 `sha256:23cd2a39f9a19006008f4b29a99ef8dce2ee60b7f34952f4225e30b398027b89`.
-The theorem removes natural-horizon segmentation and observer-selected cover ascent from recursive event topology. It does **not** prove that event-free UV checkpoint continuation forces high-tail work, and it makes no Navier--Stokes global-regularity claim.
+At this intermediate stage the theorem removed natural-horizon event depth and observer-selected cover ascent, while the no-event checkpoint-continuation question was still left open.  Section 33.7 later closes that specific seam by preserving the same carrier and cumulative filtration across checkpoints.  This earlier theorem itself made no Navier--Stokes global-regularity claim.
+
+---
+
+### 33.7 Same-carrier checkpoint segmentation quotient
+Status:
+`EXACT_SAME_CARRIER_CHECKPOINT_SEGMENTATION_QUOTIENT__NATURAL_HORIZONS_DO_NOT_RESET_FIRST_HIT__CUMULATIVE_NATIVE_MONITORS_FROM_ONE_PHYSICAL_EVENT__INTERIOR_CHECKPOINT_ZENO_IS_STOP_OR_CONTINUATION__HARDEN_ONLY_AT_A_NEW_PHYSICAL_EVENT`.
+
+Exact certified implementation/wiring SHA:
+`bd404d8fd79336e094015f8a9463bfef761e9d2d`.
+
+Dedicated GitHub Actions run:
+`31454546606` — **success**.
+
+Results:
+- `708` tests passed;
+- `50,000` same-carrier cumulative-path/checkpoint-segmentation states;
+- worst segmentation first-stop time residual `0.0`;
+- segmentation failures `0`;
+- checkpoint reset-barrier failures `0`;
+- `39,915` sampled paths with nonmonotone coefficient-impulse magnitudes, confirming no hidden monotonicity assumption on `|I_R|` or `|I_HH|`;
+- `25,000` interior checkpoint-accumulation states attaining a closed stop face;
+- `25,000` interior accumulation states crossed by the same carrier;
+- maximum `12` inserted checkpoint cuts in the randomized stress;
+- companion continuum-master checkpoint-segmentation barrier failures `0`;
+- companion master physical-time telescope residual `0.0`;
+- companion master log-scale telescope residual `8.881784197001252e-16`;
+- independent physical high-frequency dissipation dependency remained green.
+
+Stored artifact:
+`recorded-results/31454546606/same-carrier-checkpoint-segmentation-results/`.
+
+GitHub artifact digest:
+`sha256:ee8ca26523888e0fbbf1fc034e267643c758e140f8e57ebf8e4f3569d015e41e`.
+
+Full physical-energy causal integration:
+`31454546590` — **success** on the same exact SHA.
+
+It completed with the same `708`-test suite and `56` successful job steps through
+the full physical-energy, source, material, generic-shell, service-corridor,
+checkpoint, same-carrier, physical high-tail, hard/smooth-interface, event-role,
+first-hit, causal-reuse, physical-branch and master chain.  The final master stress
+checked `20,000` episode traces with worst margin `0.0`.
+
+Integration artifact digest:
+`sha256:82f05bfce9b84dca883c56df5472393c19874b274d2d7dfa54972c15f1e818d9`.
+
+Failure/correction provenance:
+- initial theorem SHA `a5e4d9a7bc725b72ac3f64210c85721553a90795` had one brittle certificate-wording assertion after `707` passing tests; no new-theorem stress ran there;
+- `cc955ec2cf9f51ffa3160a97a434172dff5245e5` changed only that fixture;
+- final `bd404d8...` changed only workflow path filters so fixture-only edits automatically retrigger both exact-SHA gates.
+No theorem identity, physical bound, carrier policy, or first-hit routing changed in either correction.
+
+The theorem closes natural-horizon restart and checkpoint-Zeno/re-hardening as
+independent master escape mechanisms.  It does not terminate infinitely recurring
+genuine physical owners and makes no Navier--Stokes global-regularity claim.
 
 ---
 
@@ -1485,26 +1709,27 @@ Then read the following current-spine documents in order:
 10. `docs/critical_shell_service_reentry.md`
 11. `docs/full_natural_service_corridor_quotient.md`
 12. `docs/full_natural_checkpoint_quotient.md`
-13. `docs/high_strain_resolved_ancestor.md`
-14. `docs/high_strain_heat_increment_service.md`
-15. `docs/material_label_carrier_quotient.md`
-16. `docs/objective_source_routing_compiler.md`
-17. `docs/objective_pressure_pair_atomization.md`
-18. `docs/fresh_service_scale_reentry.md`
-19. `docs/high_frequency_dissipation_reentry.md`
-20. `docs/high_tail_binary_work_reentry.md`
-21. `docs/high_tail_ultraviolet_locality.md`
-22. `docs/high_tail_natural_window_reentry.md`
-23. `docs/physical_pair_weighted_productivity.md`
-24. `docs/common_slice_coefficient_registration.md`
-25. `docs/recursive_physical_witness_constructor.md`
-26. `docs/joint_causal_stop_projection.md`
-27. `docs/amplitude_entropy_causal_reuse.md`
-28. `docs/weighted_causal_reuse.md`
-29. `docs/renyi_causal_reuse.md`
-30. `docs/physical_branch_compiler.md`
-31. `docs/continuum_master_event_quotient.md`
-32. `docs/master_no_escape.md`
+13. `docs/same_carrier_checkpoint_segmentation_quotient.md`
+14. `docs/high_strain_resolved_ancestor.md`
+15. `docs/high_strain_heat_increment_service.md`
+16. `docs/material_label_carrier_quotient.md`
+17. `docs/objective_source_routing_compiler.md`
+18. `docs/objective_pressure_pair_atomization.md`
+19. `docs/fresh_service_scale_reentry.md`
+20. `docs/high_frequency_dissipation_reentry.md`
+21. `docs/high_tail_binary_work_reentry.md`
+22. `docs/high_tail_ultraviolet_locality.md`
+23. `docs/high_tail_natural_window_reentry.md`
+24. `docs/physical_pair_weighted_productivity.md`
+25. `docs/common_slice_coefficient_registration.md`
+26. `docs/recursive_physical_witness_constructor.md`
+27. `docs/joint_causal_stop_projection.md`
+28. `docs/amplitude_entropy_causal_reuse.md`
+29. `docs/weighted_causal_reuse.md`
+30. `docs/renyi_causal_reuse.md`
+31. `docs/physical_branch_compiler.md`
+32. `docs/continuum_master_event_quotient.md`
+33. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -1512,37 +1737,78 @@ For historical development, finite-dimensional precursor geometry, superseded pa
 
 ## 36. Compact one-page mental model
 If only one picture is retained, use this one.
-Navier–Stokes gives actual signed nonlinear work.
-Positive child-energy work defines cause.
-Coherent analysis refines that work into physical parent/child roles.
-Smooth moving carriers transport roles between events, but their energy is `<u,Q^2u>`, not `<u,Qu>`.
-Hard interaction projectors are event-anchored and are not differentiated through the slab; hard shell energy may also be reread at a zero-event checkpoint as a state observable.
-Common affine/Kelvin role transport and cutoff repartition are gauges.
-For a smooth square partition, require `dot A+[G,A]=0` and quotient that common observer motion before ownership.
-Only residual skew `K_phys=K-G` is conservative physical relink; symmetric `S` is existing strain/deformation.
-Conservative motion of observer-selected channels is not itself physics.
-Hard resolved cross/interface work has its separate same-event donor quotient; the hard and smooth measures share provenance but are not identified.
-Objective source variation is split by physical owner.
-Resolved dissipation and pressure/fresh source laws produce actual critical hard shells.
-Generic critical shells enter first-stop corridors at renewal scale `A=3M/4`. A full no-hit branch completes one real physical corridor which already carries its own-scale service as an attached witness; service/material rereading adds no event depth.
-The natural-horizon endpoint is an analysis checkpoint, not an event. At that checkpoint the actual pair `(mu_A,mu_2A)` determines the unique lower/upper shell witness or exact joint tie. Ratios `3/4` and `3/2` are checkpoint-cover geometry, not directional or high-tail progress.
-High strain produces critical resolved ancestors.
-Fresh SGS service is quotiented to a scale law before shell extraction.
-High-frequency service is converted to physical tail dissipation before any causal conclusion.
-High-tail regeneration uses the common causal unit `N dW`.
-Its HH part is already a binary physical work law.
-Its UV nonlocality is paid by physical `D_tail`.
-Its comparable remainder is localized in time by a sliding `M`-natural window.
-That window produces an actual critical hard-shell event with `M/N>=2` and `T_M/T_N<=1/4`.
-Material labels are attached as sidecars to actual service and do not duplicate carrier impulses.
-Causal Shannon/Rényi reuse is reserved for actual positive child-work ancestry.
-Source/service concentration entropies remain deterministic coordinates of their own measures.
-All routed physical owners and simultaneous physical causes feed one joint recursive event master. Raw HH/interface coefficient threshold hits remain typed first-stop locators until actual `Q^2` energy/work reentry. Full-natural checkpoints and same-corridor service witnesses are explicitly excluded from that owner state.
-Relay depth is quotiented before recursion depth is counted.
-Actual physical time is the universal coordinate shared by events and checkpoints; each supplier keeps its own native corridor length, while eventhood is assigned only by physical stops/owners.
-Bounded-scale no-hit checkpoint continuation hits `t=0`.
-An infinite recursive **event** path avoiding `t=0` must therefore recur through infinitely many genuine named physical owners after all quotients. Separately, an event-free UV-growing checkpoint continuation can have finite physical duration and remains an open PDE seam.
-The independently certified high-tail route applies only when its physical tail hypotheses are met; checkpoint cover ascent does not manufacture those hypotheses.
-Only true globally bounded scale-independent resources may terminate additively.
-`t=0` is absorbing.
-The present frontier is twofold: telescope genuine event recurrence through native typed physical ledgers, and prove whether event-free UV checkpoint continuation necessarily enters actual tail work/dissipation or another native physical obstruction, without reintroducing observer-made structure.
+
+Navier–Stokes gives actual signed nonlinear work.  Positive child-energy work
+defines cause.  Coherent analysis refines that work into physical parent/child
+roles; representation does not create cause.
+
+Smooth moving carriers transport roles between physical events.  Their energy is
+`<u,Q^2u>`, not `<u,Qu>`.  Hard interaction projectors are event-anchored and are
+not differentiated through the slab.  Hard-shell energy may also be reread at an
+analysis checkpoint as a state observable, but that reading does not create an
+event or a new carrier.
+
+Common affine/Kelvin role transport and resolved-cutoff repartition are gauges.
+For a smooth square partition require `dot A+[G,A]=0` and quotient common observer
+motion before ownership.  Only residual skew `K_phys=K-G` is conservative physical
+relink; symmetric `S` is existing strain/deformation.  Hard resolved interface
+work has its separate same-event donor quotient.  Conservative motion of
+observer-selected channels is not itself physics.
+
+Generic critical shells enter native first-stop corridors at renewal scale
+`A=3M/4`.  A full no-hit natural interval is one real Navier--Stokes corridor and
+already carries its own-scale service as a same-interval witness.  Service/Moyal
+material rereading adds no event depth.
+
+The natural endpoint is an analysis checkpoint, not a carrier lifetime.  The
+actual pair `(mu_A,mu_2A)` may expose lower/upper hard-shell state witnesses or an
+exact joint tie, but ratios `3/4` and `3/2` are checkpoint-cover geometry only.
+They do not define a causal scale lineage.
+
+If no physical stop fires at that horizon, the **same event-anchored smooth
+carrier continues**.  The terminal dual/coefficient is unchanged, and the native
+first-hit observables remain cumulative from the original physical event:
+
+`K_A[s,t]`, `|I_R[s,t]|`, `|I_HH[s,t]|`.
+
+`K_A` is a positive monotone strain action.  The coefficient impulses are complex
+cumulative integrals; their magnitudes may decrease by phase cancellation.  Never
+reset them at checkpoints, never sum checkpoint-segment magnitudes, and never use
+those magnitudes as physical work.
+
+Inserting or deleting finite checkpoint cuts leaves the first physical stop and
+exact joint stop set unchanged.  If infinitely many cuts accumulate at an
+interior smooth time, the cumulative observables either hit an existing closed
+first-stop face at the limit or retain strict margin and the same carrier crosses
+the accumulation.  If no physical stop occurs before `t=0`, the initial boundary
+absorbs.  Therefore checkpoint Zeno/re-hardening is observer segmentation, not a
+second PDE escape route.
+
+This does not remove real ultraviolet dynamics.  High-frequency coherent service
+must still be converted to physical hard-tail dissipation before causal
+conclusions.  Physical high-tail regeneration uses the common causal unit `N dW`;
+its HH part is actual binary work, its nonlocality is paid by `D_tail`, and its
+sliding natural window can create a genuine hard-shell event with `M/N>=2` and
+`T_M/T_N<=1/4`.  Such scale progress exists because a physical theorem supplies
+its provenance, not because an observer reread a shell at a checkpoint.
+
+Material labels remain sidecars to actual service.  Causal Shannon/Rényi reuse is
+reserved for actual positive child-work ancestry.  Source/service concentration
+entropies remain deterministic coordinates of their named physical measures.
+Raw HH/interface coefficient threshold hits remain first-stop locators until
+actual `Q^2` physical-energy/work reentry resolves an owner.
+
+After relay depth, observer gauges, donor circulation, same-corridor service,
+checkpoint eventhood, and same-carrier checkpoint segmentation are quotiented, an
+infinite recursive **event** path avoiding `t=0` must recur through infinitely
+many genuine physical owner events.  Their recurrence must telescope through the
+native typed laws they actually supply.  No critical `NE`, `D_V`, shell mass,
+scale-critical service, checkpoint count/scale, or coefficient magnitude is a
+finite additive reset.
+
+The geometric UV checkpoint sum remains a useful warning that physical time alone
+is insufficient, but it is a diagnostic observer sequence, not a physical
+lineage.  The present master frontier is therefore one problem: terminate or
+control genuine physical-owner recurrence, then connect that result to the
+initial-data and hypothetical singular-time interfaces.  `t=0` is absorbing.
+There is no global-regularity claim in the present programme state.
