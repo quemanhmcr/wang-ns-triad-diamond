@@ -64,6 +64,11 @@ def test_endpoint_cover_reregistration_adds_no_event_or_causal_charge():
     assert out["high_tail_supplier_admissible"] is False
     assert out["cover_ascent_interpreted_as_dynamics"] is False
     assert out["observer_selected_cover_branch"] is False
+    assert out["canonical_event_search_continues_same_carrier"] is True
+    assert out["hard_shell_witness_can_replace_carrier_without_event"] is False
+    assert out["terminal_coefficient_may_reset_here"] is False
+    assert out["cumulative_first_hit_monitors_may_reset_here"] is False
+    assert out["checkpoint_scale_path_is_physical_lineage"] is False
     assert out["joint_endpoint_witness_frequencies"] == pytest.approx((1.5 * M,))
 
 
@@ -75,12 +80,15 @@ def test_upper_three_halves_cover_witness_is_not_certified_high_tail_progress():
         validate_supplier_scale(SupplierKind.HIGH_TAIL, 8.0, 12.0)
 
 
-def test_checkpoint_chain_telescopes_real_time_with_zero_recursive_events():
+def test_diagnostic_checkpoint_reading_chain_telescopes_time_but_is_not_physical_lineage():
     M1, c = 8.0, 1.0
     out1 = _full_outcome(M1, c, t_factor=6.0)
     cp1 = checkpoint_from_full_natural_outcome(out1, parent_shell_frequency=M1, scaled_lifetime=c)
 
     reread1 = checkpoint_reregistration(cp1, (0.8, 2.0))
+    assert reread1["checkpoint_scale_path_is_physical_lineage"] is False
+    # Reuse the visible upper shell only to test the geometry/time identity of a hypothetical reading sequence.
+    # It is not the canonical next causal carrier.
     M2 = float(reread1["joint_endpoint_witness_frequencies"][0])
     assert M2 == pytest.approx(1.5 * M1)
     A2 = 0.75 * M2
@@ -97,9 +105,11 @@ def test_checkpoint_chain_telescopes_real_time_with_zero_recursive_events():
     assert led["recursive_events_added"] == 0
     assert led["causal_charges_added"] == 0
     assert led["physical_event_vertices"] == 0
+    assert led["checkpoint_scale_path_is_physical_lineage"] is False
+    assert led["reading_scale_sequence_is_diagnostic_only"] is True
 
 
-def test_uv_checkpoint_zano_time_is_preserved_as_event_free_obstruction():
+def test_uv_checkpoint_geometric_time_remains_a_diagnostic_counterexample_not_lineage():
     M, c = 2.0, 1.0
     first = c / (0.75 * M) ** 2
     total = geometric_uv_checkpoint_time(M, c, 1.5)
@@ -155,11 +165,12 @@ def test_exact_endpoint_shell_mass_tie_remains_joint_at_checkpoint():
     assert out["joint_endpoint_witness_ratios"] == pytest.approx((0.75, 1.5))
 
 
-def test_certificate_separates_event_recursion_from_uv_checkpoint_continuation():
+def test_certificate_separates_checkpoint_reading_geometry_from_physical_lineage():
     cert = theorem_certificate()
     assert cert["status"] == STATUS
     assert "zero physical event vertices" in cert["time_semantics"]
     assert "3/4 and 3/2" in cert["cover_geometry"]
     assert "below" in cert["cover_geometry"]
-    assert "event-free PDE continuation seam" in cert["remaining_uv"]
-    assert "does not prove" in cert["scope"]
+    assert "not a canonical physical lineage" in cert["remaining_uv"]
+    assert "same event-anchored smooth carrier" in cert["continuation_policy"]
+    assert "does not telescope infinitely recurring genuine physical owners" in cert["scope"]

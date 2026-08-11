@@ -1,0 +1,63 @@
+name: Same carrier checkpoint segmentation
+
+on:
+  push:
+    paths:
+      - 'src/same_carrier_checkpoint_segmentation_quotient.py'
+      - 'tests/test_same_carrier_checkpoint_segmentation_quotient.py'
+      - 'docs/same_carrier_checkpoint_segmentation_quotient.md'
+      - 'docs/full_natural_checkpoint_quotient.md'
+      - 'docs/full_natural_service_corridor_quotient.md'
+      - 'docs/smooth_material_carrier_relay.md'
+      - 'docs/continuum_master_event_quotient.md'
+      - 'docs/master_no_escape.md'
+      - '.github/workflows/same-carrier-checkpoint-segmentation.yml'
+      - 'src/full_natural_checkpoint_quotient.py'
+      - 'src/continuum_master_event_quotient.py'
+      - 'src/smooth_material_carrier_relay.py'
+      - 'src/smooth_sgs_first_hit_extraction.py'
+      - 'src/high_frequency_dissipation_reentry.py'
+      - 'tests/test_full_natural_checkpoint_quotient.py'
+      - 'tests/test_continuum_master_event_quotient.py'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Same-carrier checkpoint segmentation stress
+        run: python -m src.same_carrier_checkpoint_segmentation_quotient --samples 50000 --outdir results-same-carrier-checkpoint-segmentation
+      - name: Full-natural checkpoint dependency
+        run: python -m src.full_natural_checkpoint_quotient --samples 50000 --outdir results-full-natural-checkpoint-quotient
+      - name: Smooth material-carrier relay dependency
+        run: python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-smooth-material-carrier-relay
+      - name: Smooth first-hit filtration dependency
+        run: python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-smooth-sgs-first-hit-extraction
+      - name: Continuum master same-carrier barrier
+        run: python -m src.continuum_master_event_quotient --samples 50000 --outdir results-continuum-master-event-quotient
+      - name: Physical high-tail dependency
+        run: python -m src.high_frequency_dissipation_reentry --samples 50000 --outdir results-high-frequency-dissipation-reentry
+      - run: cat results-same-carrier-checkpoint-segmentation/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: same-carrier-checkpoint-segmentation-results
+          path: |
+            results-same-carrier-checkpoint-segmentation/
+            results-full-natural-checkpoint-quotient/
+            results-smooth-material-carrier-relay/
+            results-smooth-sgs-first-hit-extraction/
+            results-continuum-master-event-quotient/
+            results-high-frequency-dissipation-reentry/
