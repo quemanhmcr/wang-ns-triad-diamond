@@ -261,3 +261,27 @@ and full physical-energy causal integration run `31457786115`; reciprocal smooth
 quadratic-carrier compatibility run `31457786119` was also green.  It preserves
 physical relink as same-event donor provenance while removing it from recursive
 owner depth.
+
+### Candidate extension: consecutive high-strain epochs telescope through the physical gradient reservoir
+
+High strain remains a genuine recursive owner; it is not quotiented like smooth
+conservative relink.  The candidate adds a path law instead.
+
+At child scale `N_j`, high strain gives
+
+`D_j=N_j int_(I_j)||grad S_(N_j/4)u||_2^2 dt >= D_*`.
+
+Its actual dissipation-weighted critical ancestor satisfies `M_j<=N_j/4`, and the
+renewed carrier uses `N_(j+1)=3M_j/4`, so `N_(j+1)/N_j<=3/16`.
+
+Let `G_*=int_0^t*||grad u||_2^2dt`.  Even if all first-hit histories overlap,
+low-pass contraction and interval restriction give `D_j<=N_jG_*`.  Thus every
+high-strain event in one consecutive epoch satisfies `N_j>=D_*/G_*`, while
+
+`sum_j D_j <= G_* sum_j N_j <= (16/13)N_0G_*`.
+
+This is a native physical overlap/reuse telescope, not a `D_V` reset.  The master
+consequence is that an infinite recursive event path cannot eventually consist
+only of high-strain renewals.  Infinitely many high-strain events would force
+infinitely many other physical owner events to break the descending epochs.
+Mixed-owner recurrence remains open.

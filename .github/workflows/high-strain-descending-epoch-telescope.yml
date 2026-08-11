@@ -1,0 +1,62 @@
+name: High strain descending epoch telescope
+
+on:
+  push:
+    paths:
+      - 'src/high_strain_descending_epoch_telescope.py'
+      - 'tests/test_high_strain_descending_epoch_telescope.py'
+      - 'docs/high_strain_descending_epoch_telescope.md'
+      - '.github/workflows/high-strain-descending-epoch-telescope.yml'
+      - 'src/high_strain_dissipation_collision.py'
+      - 'tests/test_high_strain_dissipation_collision.py'
+      - 'docs/high_strain_dissipation_collision.md'
+      - 'src/high_strain_resolved_ancestor.py'
+      - 'tests/test_high_strain_resolved_ancestor.py'
+      - 'docs/high_strain_resolved_ancestor.md'
+      - 'src/high_strain_critical_carrier_reentry.py'
+      - 'tests/test_high_strain_critical_carrier_reentry.py'
+      - 'docs/high_strain_critical_carrier_reentry.md'
+      - 'src/continuum_master_event_quotient.py'
+      - 'tests/test_continuum_master_event_quotient.py'
+      - 'docs/continuum_master_event_quotient.md'
+      - 'docs/master_no_escape.md'
+      - '.github/workflows/physical-energy-causal-integration.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Full theorem suite
+        run: pytest -q
+      - name: High-strain descending-epoch telescope stress
+        run: python -m src.high_strain_descending_epoch_telescope --samples 50000 --outdir results-high-strain-descending-epoch-telescope
+      - name: High-strain dissipation collision dependency
+        run: python -m src.high_strain_dissipation_collision --samples 50000 --outdir results-high-strain-dissipation-collision
+      - name: High-strain resolved-ancestor dependency
+        run: python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-high-strain-resolved-ancestor
+      - name: High-strain critical-carrier renewal dependency
+        run: python -m src.high_strain_critical_carrier_reentry --samples 50000 --outdir results-high-strain-critical-carrier-reentry
+      - name: Continuum master high-strain epoch certificate
+        run: python -m src.continuum_master_event_quotient --samples 50000 --outdir results-continuum-master-event-quotient
+      - run: cat results-high-strain-descending-epoch-telescope/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: high-strain-descending-epoch-telescope-results
+          path: |
+            results-high-strain-descending-epoch-telescope/
+            results-high-strain-dissipation-collision/
+            results-high-strain-resolved-ancestor/
+            results-high-strain-critical-carrier-reentry/
+            results-continuum-master-event-quotient/

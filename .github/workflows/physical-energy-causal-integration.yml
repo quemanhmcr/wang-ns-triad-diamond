@@ -15,6 +15,8 @@ on:
       - 'src/nn_seed_temporal_first_stop.py'
       - 'src/critical_annular_carrier_service_reentry.py'
       - 'src/high_strain_critical_carrier_reentry.py'
+      - 'src/high_strain_descending_epoch_telescope.py'
+      - 'tests/test_high_strain_descending_epoch_telescope.py'
       - 'src/critical_shell_service_reentry.py'
       - 'src/material_label_carrier_quotient.py'
       - 'src/objective_source_routing_compiler.py'
@@ -81,6 +83,7 @@ jobs:
       - run: python -m src.nn_seed_temporal_first_stop --samples 50000 --outdir results-integration/nn-seed-temporal-first-stop
       - run: python -m src.critical_annular_carrier_service_reentry --samples 50000 --outdir results-integration/critical-annular-carrier-service-reentry
       - run: python -m src.high_strain_critical_carrier_reentry --samples 50000 --outdir results-integration/high-strain-critical-carrier-reentry
+      - run: python -m src.high_strain_descending_epoch_telescope --samples 50000 --outdir results-integration/high-strain-descending-epoch-telescope
       - run: python -m src.critical_shell_service_reentry --samples 50000 --outdir results-integration/critical-shell-service-reentry
       - run: python -m src.full_natural_service_corridor_quotient --samples 50000 --outdir results-integration/full-natural-service-corridor-quotient
       - run: python -m src.full_natural_checkpoint_quotient --samples 50000 --outdir results-integration/full-natural-checkpoint-quotient

@@ -111,3 +111,26 @@ The remaining high-strain question is now precise:
 If that can be done without choosing a packet by fiat, the critical-dissipation route will join the same universal physical slab-renewal architecture as generated survivors.
 
 `D_V` remains a scale-critical `O(1/N)` physical cost, not a finite additive reset.  No global-regularity claim is made.
+
+## Candidate refinement: the ancestor scale now telescopes repeated high strain
+
+The physical significance of `M<=N/4` is stronger when the next recursive stop is
+again high strain.  The canonical shell renewal registers the next smooth carrier
+at `A=3M/4`, hence
+
+`N_next/N <= 3/16`.
+
+The companion candidate `high_strain_descending_epoch_telescope` combines this
+actual ancestor geometry with the global gradient reservoir
+
+`G_*=int ||grad u||_2^2 dt`.
+
+No disjointness of successive high-strain histories is required: each normalized
+resolved dissipation satisfies `D_j<=N_j G_*`, and the native weights `N_j` are
+geometrically summable on the consecutive ancestor-renewal route.  Consequently a
+maximal pure high-strain epoch is finite without promoting `D_V` to a global
+reset.
+
+The ancestor remains a physical `D_V|_G` state, not a transfer-generated Young
+parent.  If another owner interrupts the route, the descending epoch ends rather
+than being continued by theorem fiat.

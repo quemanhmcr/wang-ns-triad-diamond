@@ -2369,3 +2369,32 @@ This refinement was certified on exact SHA
 `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` by dedicated smooth-relink run
 `31457786141` and full causal integration run `31457786115`.  It removes no
 physical `K_phys` work; it quotients only same-event conservative donor depth.
+
+## Candidate refinement: pure high-strain recurrence is physically finite
+
+The critical-dissipation branch remains a genuine owner and `D_V` remains
+forbidden as a scale-independent additive reset.  Nevertheless its **actual
+renewal geometry** gives a native telescope which is unavailable on an arbitrary
+UV chain.
+
+Every high-strain first contact at scale `N_j` pays `D_j>=D_*`.  The certified
+resolved ancestor lies at `M_j<=N_j/4`, and the renewed carrier scale is
+`N_(j+1)=3M_j/4`; hence `N_(j+1)/N_j<=3/16` as long as the next owner is again high
+strain.
+
+For the physical global gradient reservoir
+
+`G_*=int_0^t* ||grad u||_2^2 dt`,
+
+no disjointness of event histories is needed:
+
+`D_j <= N_j G_*`.
+
+Therefore `N_j>=D_*/G_*` and
+
+`sum_jD_j <= G_*sum_jN_j <= (16/13)N_0G_*`.
+
+So a maximal consecutive high-strain epoch is finite.  This removes an
+eventually-pure high-strain tail, but not mixed recurrence: every new HH,
+source/service, material-new-ancestry, strain/deformation, high-tail or reuse event
+breaks the epoch and must be handled by its own physical law.

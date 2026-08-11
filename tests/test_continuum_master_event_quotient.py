@@ -308,3 +308,16 @@ def test_legacy_owner_bundle_wrapper_rejects_pure_relink_zero_depth_route():
             2.0,
             _smooth_relink_reentry(),
         )
+
+
+def test_master_certificate_closes_eventually_pure_high_strain_but_not_mixed_recurrence():
+    cert = theorem_certificate()
+    hs = cert["high_strain_descending_epoch"]
+    assert "genuine recursive owner" in hs
+    assert "N_next/N<=3/16" in hs
+    assert "arbitrary interval overlap" in hs
+    assert "without promoting D_V to a global reset" in hs
+    dich = master_escape_dichotomy()
+    assert "eventually consisting only of high-strain" in dich["statement"]
+    assert "mixed recurrence" in dich["remaining_physics"]
+    assert "eventually-pure high-strain recurrence" in cert["scope"]
