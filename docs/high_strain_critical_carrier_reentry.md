@@ -174,3 +174,14 @@ and creates no recursive child.
 
 
 The consecutive-renewal refinement was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated run `31460525711` and full causal integration run `31460525687`.  High strain remains a genuine owner; only an eventually-pure high-strain tail is excluded.
+
+Independent native-scale audit subsequently found that the epoch verifier could
+accept a foreign/ascending carrier relation below the artificial absolute unit
+floor.  The repair on exact source SHA
+`422ab677e635159d82720a2af60f7900e7b3be9f` validates `M/N`, `A/M`, `A/N` and
+consecutive `N_next/A` directly.  Audit/PDE head
+`70bb2e4a9ec5b7d8826dc1016da5157cbe5fb1ac` then replayed the actual
+Fourier--Galerkin route `N=16`, critical `M=4`, renewal `A=3` from measured
+positive `D_V|_G`; run `31462711590` was green.  The numerical fixture is
+falsification evidence, while actual common-history shell provenance remains an
+analytic hypothesis of the continuum path theorem.

@@ -4,7 +4,10 @@ on:
   push:
     paths:
       - 'src/same_carrier_checkpoint_segmentation_quotient.py'
+      - 'src/same_carrier_checkpoint_segmentation_pde_probe.py'
       - 'tests/test_same_carrier_checkpoint_segmentation_quotient.py'
+      - 'tests/test_same_carrier_checkpoint_segmentation_audit.py'
+      - 'tests/test_same_carrier_checkpoint_segmentation_pde_probe.py'
       - 'docs/same_carrier_checkpoint_segmentation_quotient.md'
       - 'docs/full_natural_checkpoint_quotient.md'
       - 'docs/full_natural_service_corridor_quotient.md'
@@ -41,6 +44,8 @@ jobs:
         run: pytest -q
       - name: Same-carrier checkpoint segmentation stress
         run: python -m src.same_carrier_checkpoint_segmentation_quotient --samples 50000 --outdir results-same-carrier-checkpoint-segmentation
+      - name: Actual Navier-Stokes same-carrier segmentation probe
+        run: python -m src.same_carrier_checkpoint_segmentation_pde_probe --resolutions 20 24 --steps 48 --outdir results-same-carrier-checkpoint-segmentation-pde-probe
       - name: Full-natural checkpoint dependency
         run: python -m src.full_natural_checkpoint_quotient --samples 50000 --outdir results-full-natural-checkpoint-quotient
       - name: Smooth material-carrier relay dependency
@@ -51,12 +56,15 @@ jobs:
         run: python -m src.continuum_master_event_quotient --samples 50000 --outdir results-continuum-master-event-quotient
       - name: Physical high-tail dependency
         run: python -m src.high_frequency_dissipation_reentry --samples 50000 --outdir results-high-frequency-dissipation-reentry
-      - run: cat results-same-carrier-checkpoint-segmentation/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - run: |
+          cat results-same-carrier-checkpoint-segmentation/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-same-carrier-checkpoint-segmentation-pde-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: same-carrier-checkpoint-segmentation-results
           path: |
             results-same-carrier-checkpoint-segmentation/
+            results-same-carrier-checkpoint-segmentation-pde-probe/
             results-full-natural-checkpoint-quotient/
             results-smooth-material-carrier-relay/
             results-smooth-sgs-first-hit-extraction/

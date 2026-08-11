@@ -178,6 +178,16 @@ class GaugeQuotientedInterfaceWork:
     skew_decomposition_residual: float
     signed_physical_relink_pair_matrix: tuple[tuple[float, ...], ...] = ()
 
+    def __post_init__(self) -> None:
+        residuals = (
+            float(self.gauge_transport_operator_residual),
+            float(self.skew_decomposition_residual),
+        )
+        if not all(math.isfinite(value) and value >= 0.0 for value in residuals):
+            raise ValueError(
+                "gauge-transport and skew-decomposition residuals must be finite and nonnegative"
+            )
+
 
 def smooth_quadratic_interface_balance(
     analysis_operators: Sequence[np.ndarray],
@@ -469,7 +479,7 @@ def positive_smooth_interface_split(
         raise ValueError("matching nonempty gauge-quotiented smooth-interface work atoms required")
     if np.any(~np.isfinite(total)) or np.any(~np.isfinite(relink)) or np.any(~np.isfinite(strain)):
         raise ValueError("finite gauge-quotiented smooth-interface work atoms required")
-    scale = max(1.0, float(np.max(np.abs(total))), float(np.max(np.abs(relink))), float(np.max(np.abs(strain))))
+    scale = max(float(np.max(np.abs(total))), float(np.max(np.abs(relink))), float(np.max(np.abs(strain))))
     identity_residual = float(np.max(np.abs(total - relink - strain)))
     if identity_residual > 5e-12 * scale:
         raise ValueError("native interface atoms must split exactly into physical relink plus strain")
@@ -477,7 +487,8 @@ def positive_smooth_interface_split(
     WR = float(np.maximum(relink, 0.0).sum())
     WS = float(np.maximum(strain, 0.0).sum())
     cover = WR + WS - W
-    tol = 8e-13 * max(1.0, W, WR, WS)
+    work_scale = max(W, WR, WS)
+    tol = 8e-13 * work_scale
     if cover < -tol:
         raise AssertionError("positive smooth-interface work escaped physical relink+strain Hahn cover")
     owners: list[str] = []

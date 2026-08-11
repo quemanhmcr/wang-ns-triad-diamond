@@ -19,6 +19,22 @@ from src.high_strain_resolved_ancestor import high_strain_ancestor_mass_threshol
 from src.nn_critical_heat_carrier_seed import renewal_carrier_critical_mass_lower
 
 
+def _source_seed(*, scaled_lifetime: float, renewal_frequency: float, event_time: float, terminal_mass: float):
+    M = renewal_frequency / 0.75
+    return pushforward_critical_dissipation_law(
+        (
+            CriticalDissipationAtom(
+                mass=1.0,
+                child_frequency=4.0 * M,
+                shell_upper_frequency=M,
+                shell_energy_u=terminal_mass / renewal_frequency,
+                time=event_time,
+            ),
+        ),
+        scaled_lifetime=scaled_lifetime,
+    )[0]
+
+
 def test_actual_critical_dissipation_law_pushes_to_carrier_seeds_without_nn():
     c = 1.0
     N = 64.0
@@ -71,7 +87,14 @@ def test_full_generic_critical_corridor_creates_own_scale_service_without_nn():
     c = 1.0
     A = 3.0
     T = c / A**2
-    amp = math.sqrt(renewal_carrier_critical_mass_lower(c) / A)
+    terminal_mass = renewal_carrier_critical_mass_lower(c)
+    amp = math.sqrt(terminal_mass / A)
+    seed = _source_seed(
+        scaled_lifetime=c,
+        renewal_frequency=A,
+        event_time=2.0 * T,
+        terminal_mass=terminal_mass,
+    )
     ell = np.linspace(0.0, T, 5)
     hit = critical_seed_backward_first_hit(
         ell,
@@ -83,6 +106,7 @@ def test_full_generic_critical_corridor_creates_own_scale_service_without_nn():
     ir = 0.1 * amp
     ih = 0.2j * amp
     out = critical_seed_natural_outcome(
+        source_seed=seed,
         event_time=2.0 * T,
         renewal_frequency=A,
         scaled_lifetime=c,
@@ -100,6 +124,7 @@ def test_full_generic_critical_corridor_creates_own_scale_service_without_nn():
     assert out["materiality_assigned"] == "only_after_service_via_exact_Moyal_OO_ON_NN"
     assert out["service_same_corridor_witness"] is True
     assert out["service_adds_recursion_depth"] is False
+    assert out["parent_shell_critical_mass_lower"] == pytest.approx(seed.shell_critical_mass)
     assert out["physical_time_drop"] == pytest.approx(T)
     assert out["corridor_endpoint_time"] == pytest.approx(T)
     cover = endpoint_hard_shell_cover_from_full_natural_outcome(out, parent_shell_frequency=A / 0.75)
@@ -111,7 +136,14 @@ def test_high_strain_or_hh_hit_stays_named_recursive_not_service():
     c = 1.0
     A = 2.0
     T = c / A**2
-    amp = math.sqrt(1.1 * renewal_carrier_critical_mass_lower(c) / A)
+    terminal_mass = 1.1 * renewal_carrier_critical_mass_lower(c)
+    amp = math.sqrt(terminal_mass / A)
+    seed = _source_seed(
+        scaled_lifetime=c,
+        renewal_frequency=A,
+        event_time=2.0 * T,
+        terminal_mass=terminal_mass,
+    )
     ell = np.linspace(0.0, T, 5)
     hit = critical_seed_backward_first_hit(
         ell,
@@ -121,6 +153,7 @@ def test_high_strain_or_hh_hit_stays_named_recursive_not_service():
         hh_impulse_abs=np.zeros(5),
     )
     out = critical_seed_natural_outcome(
+        source_seed=seed,
         event_time=2 * T,
         renewal_frequency=A,
         scaled_lifetime=c,

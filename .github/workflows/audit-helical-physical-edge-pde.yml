@@ -1,0 +1,40 @@
+name: Audit helical edge on actual NS
+
+on:
+  push:
+    paths:
+      - 'src/helical.py'
+      - 'src/helical_physical_edge_registration.py'
+      - 'src/helical_physical_edge_pde_probe.py'
+      - 'tests/test_helical_physical_edge_registration.py'
+      - 'tests/test_helical_physical_edge_registration_audit.py'
+      - 'tests/test_helical_physical_edge_pde_probe.py'
+      - '.github/workflows/audit-helical-physical-edge-pde.yml'
+      - 'src/full_natural_service_corridor_pde_probe.py'
+      - 'src/signed_good_generated_epoch_pde_probe.py'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  actual-ns-helical-edge-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Run focused edge, anti-forgery and PDE tests
+        run: pytest -q tests/test_helical_physical_edge_registration.py tests/test_helical_physical_edge_registration_audit.py tests/test_helical_physical_edge_pde_probe.py
+      - name: Reconstruct the physical edge on refined Navier-Stokes trajectories
+        run: python -m src.helical_physical_edge_pde_probe --resolutions 24 28 32 --steps 128 --outdir results-audit-helical-physical-edge-pde
+      - run: cat results-audit-helical-physical-edge-pde/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-helical-physical-edge-pde-results
+          path: results-audit-helical-physical-edge-pde/

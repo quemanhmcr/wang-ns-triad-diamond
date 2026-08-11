@@ -1,0 +1,66 @@
+name: Audit full natural checkpoint
+
+on:
+  push:
+    paths:
+      - 'src/full_natural_checkpoint_quotient.py'
+      - 'src/same_carrier_checkpoint_segmentation_quotient.py'
+      - 'src/same_carrier_checkpoint_segmentation_pde_probe.py'
+      - 'src/full_natural_service_corridor_quotient.py'
+      - 'src/full_natural_service_corridor_pde_probe.py'
+      - 'src/critical_shell_service_reentry.py'
+      - 'src/high_strain_critical_carrier_reentry.py'
+      - 'src/nn_seed_temporal_first_stop.py'
+      - 'tests/test_full_natural_checkpoint_audit.py'
+      - 'tests/test_same_carrier_checkpoint_segmentation_audit.py'
+      - 'tests/test_same_carrier_checkpoint_segmentation_quotient.py'
+      - 'tests/test_same_carrier_checkpoint_segmentation_pde_probe.py'
+      - 'tests/test_full_natural_checkpoint_quotient.py'
+      - 'tests/test_full_natural_service_corridor_quotient.py'
+      - 'tests/test_full_natural_service_corridor_pde_probe.py'
+      - 'docs/full_natural_checkpoint_quotient.md'
+      - 'docs/same_carrier_checkpoint_segmentation_quotient.md'
+      - 'docs/full_natural_service_corridor_quotient.md'
+      - 'RESEARCH_LEDGER.md'
+      - '.github/workflows/audit-full-natural-checkpoint.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adversarial-checkpoint-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Run checkpoint provenance anti-tests
+        run: pytest -q tests/test_full_natural_checkpoint_audit.py
+      - name: Run same-carrier provenance and native-time anti-tests
+        run: pytest -q tests/test_same_carrier_checkpoint_segmentation_audit.py
+      - name: Run full theorem suite
+        run: pytest -q
+      - name: Run wide checkpoint stress
+        run: python -m src.full_natural_checkpoint_quotient --samples 200000 --outdir results-audit/full-natural-checkpoint
+      - name: Run wide same-carrier segmentation stress
+        run: python -m src.same_carrier_checkpoint_segmentation_quotient --samples 200000 --outdir results-audit/same-carrier-checkpoint-segmentation
+      - name: Run service corridor dependency stress
+        run: python -m src.full_natural_service_corridor_quotient --samples 100000 --outdir results-audit/full-natural-service-corridor
+      - name: Run actual dealiased Navier-Stokes corridor probe
+        run: python -m src.full_natural_service_corridor_pde_probe --resolutions 12 16 20 --steps 80 --outdir results-audit/full-natural-service-corridor-pde-probe
+      - name: Run same-carrier probe on one actual Navier-Stokes trajectory
+        run: python -m src.same_carrier_checkpoint_segmentation_pde_probe --resolutions 20 24 28 --steps 80 --outdir results-audit/same-carrier-checkpoint-segmentation-pde-probe
+      - run: |
+          cat results-audit/full-natural-checkpoint/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-audit/same-carrier-checkpoint-segmentation/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-audit/same-carrier-checkpoint-segmentation-pde-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-full-natural-checkpoint-results
+          path: results-audit/

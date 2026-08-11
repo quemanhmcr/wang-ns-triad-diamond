@@ -1,0 +1,61 @@
+name: Audit smooth relink donor
+
+on:
+  push:
+    paths:
+      - 'src/smooth_relink_donor_quotient.py'
+      - 'src/smooth_relink_donor_pde_probe.py'
+      - 'src/smooth_quadratic_carrier_interface.py'
+      - 'src/resolved_interface_donor_quotient.py'
+      - 'src/continuum_master_event_quotient.py'
+      - 'tests/test_smooth_relink_donor_audit.py'
+      - 'tests/test_smooth_relink_donor_quotient.py'
+      - 'tests/test_smooth_relink_donor_pde_probe.py'
+      - 'tests/test_smooth_quadratic_carrier_interface.py'
+      - 'tests/test_resolved_interface_donor_quotient.py'
+      - 'tests/test_continuum_master_event_quotient.py'
+      - 'docs/smooth_relink_donor_quotient.md'
+      - 'RESEARCH_LEDGER.md'
+      - '.github/workflows/audit-smooth-relink-donor.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adversarial-smooth-relink-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Run native-scale, owner-provenance, and mass anti-tests
+        run: pytest -q tests/test_smooth_relink_donor_audit.py
+      - name: Run full theorem suite
+        run: pytest -q
+      - name: Run wide smooth-relink donor stress
+        run: python -m src.smooth_relink_donor_quotient --samples 200000 --outdir results-audit/smooth-relink-donor
+      - name: Run smooth quadratic carrier dependency stress
+        run: python -m src.smooth_quadratic_carrier_interface --samples 100000 --outdir results-audit/smooth-quadratic-carrier
+      - name: Run hard donor dependency stress
+        run: python -m src.resolved_interface_donor_quotient --samples 100000 --outdir results-audit/resolved-interface-donor
+      - name: Run continuum master dependency stress
+        run: python -m src.continuum_master_event_quotient --samples 100000 --outdir results-audit/continuum-master
+      - name: Run smooth relink on actual dealiased Navier-Stokes trajectories
+        run: python -m src.smooth_relink_donor_pde_probe --resolutions 12 16 20 --steps 48 --outdir results-audit/smooth-relink-donor-pde-probe
+      - name: Publish summaries
+        run: |
+          cat results-audit/smooth-relink-donor/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-audit/smooth-relink-donor-pde-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-audit/smooth-quadratic-carrier/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-audit/resolved-interface-donor/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-audit/continuum-master/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-smooth-relink-donor-results
+          path: results-audit/

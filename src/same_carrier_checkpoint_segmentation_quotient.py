@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import argparse
+import cmath
 import json
 import math
 import random
 from dataclasses import asdict, dataclass
+from fractions import Fraction
 from pathlib import Path
 from typing import Sequence
 
@@ -14,140 +16,277 @@ from src.common_slice_coefficient_registration import (
     RESIDUAL_FRACTION,
     ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
 )
-from src.full_natural_checkpoint_quotient import FULL_NATURAL_CHECKPOINT
+from src.full_natural_checkpoint_quotient import FullNaturalCheckpoint
 from src.nn_critical_heat_carrier_seed import LOW_STRAIN_ACTION
-from src.smooth_sgs_first_hit_extraction import (
-    PhysicalPathMonitor,
-    ThresholdTopology,
-    first_physical_corridor_exit,
-)
+from src.smooth_sgs_first_hit_extraction import superlevel_debut_piecewise_linear
 
 
 STATUS = (
     "EXACT_SAME_CARRIER_CHECKPOINT_SEGMENTATION_QUOTIENT__"
-    "NATURAL_HORIZONS_DO_NOT_RESET_FIRST_HIT__"
-    "CUMULATIVE_NATIVE_MONITORS_FROM_ONE_PHYSICAL_EVENT__"
-    "INTERIOR_CHECKPOINT_ZENO_IS_STOP_OR_CONTINUATION__"
+    "ONE_EVENT_CARRIER_DUAL_AND_PDE_PATH_PROVENANCE__"
+    "CUMULATIVE_COMPLEX_NATIVE_MONITORS__"
+    "NO_HIT_CHECKPOINT_BOUND_TO_ACTUAL_PATH_RESTRICTION__"
+    "OBSERVER_CUTS_ARE_NOT_NATURAL_WINDOWS__"
     "HARDEN_ONLY_AT_A_NEW_PHYSICAL_EVENT"
 )
 
 SAME_CARRIER_CONTINUATION = "same_event_anchored_smooth_carrier_continuation"
+STRAIN_STOP = "high_strain_critical_dissipation"
+
+
+def _finite_complex(value: complex) -> bool:
+    z = complex(value)
+    return math.isfinite(z.real) and math.isfinite(z.imag) and math.isfinite(abs(z))
+
+
+def _native_duration(carrier_frequency: float, scaled_lifetime: float) -> float:
+    """Evaluate c A^-2 without first forming A^2, which may overflow."""
+    A = float(carrier_frequency)
+    c = float(scaled_lifetime)
+    if A <= 0 or c <= 0 or not math.isfinite(A) or not math.isfinite(c):
+        raise ValueError("positive finite carrier frequency and scaled lifetime required")
+    duration = (math.sqrt(c) / A) ** 2
+    if duration <= 0 or not math.isfinite(duration):
+        raise ValueError("fixed-carrier natural duration must be positive and representable in native time")
+    return duration
+
+
+@dataclass(frozen=True)
+class SameCarrierProvenance:
+    """Identity of one event-anchored carrier on one actual PDE trajectory.
+
+    Equality is deliberately exact.  A carrier, terminal dual, trajectory, terminal
+    state, scale, lifetime, or terminal coefficient cannot be rebound merely because
+    the corresponding floating values are numerically close.
+    """
+
+    event_id: str
+    carrier_id: str
+    terminal_dual_id: str
+    trajectory_id: str
+    terminal_state_token: str
+    terminal_time: float
+    carrier_frequency: float
+    scaled_lifetime: float
+    terminal_coefficient: complex
+
+    def __post_init__(self) -> None:
+        labels = (
+            self.event_id,
+            self.carrier_id,
+            self.terminal_dual_id,
+            self.trajectory_id,
+            self.terminal_state_token,
+        )
+        if any(not isinstance(x, str) or not x for x in labels):
+            raise ValueError("nonempty physical event/carrier/dual/trajectory/state tokens required")
+        t = float(self.terminal_time)
+        A = float(self.carrier_frequency)
+        c = float(self.scaled_lifetime)
+        z = complex(self.terminal_coefficient)
+        if min(t, A, c) <= 0 or not all(math.isfinite(x) for x in (t, A, c)):
+            raise ValueError("positive finite terminal time, carrier frequency, and lifetime required")
+        if not _finite_complex(z) or abs(z) <= 0:
+            raise ValueError("nonzero finite terminal coefficient required")
+        _native_duration(A, c)
+        object.__setattr__(self, "terminal_time", t)
+        object.__setattr__(self, "carrier_frequency", A)
+        object.__setattr__(self, "scaled_lifetime", c)
+        object.__setattr__(self, "terminal_coefficient", z)
+
+    @property
+    def terminal_amplitude(self) -> float:
+        return abs(self.terminal_coefficient)
+
+    @property
+    def native_window_duration(self) -> float:
+        return _native_duration(self.carrier_frequency, self.scaled_lifetime)
 
 
 @dataclass(frozen=True)
 class SameCarrierMonitorSegment:
-    """One analysis segment of cumulative monitors for one fixed smooth carrier.
+    """A restriction of one cumulative monitor path to one observer interval.
 
-    The segment boundaries may be natural-horizon checkpoints, plotting times, or
-    any other observer-chosen subdivision.  The monitor values are *not* increments
-    local to this segment.  They are the cumulative observables from the same
-    terminal physical event and the same terminal carrier/dual:
-
-      K(s,t), |I_R(s,t)|, |I_HH(s,t)|.
-
-    Only K is monotone by construction.  The two impulse magnitudes may decrease
-    because the underlying complex cumulative impulses can cancel.  They must not
-    be added segment-by-segment or converted into work.
+    The complex impulses themselves are retained.  Their magnitudes are derived
+    observables, not independently supplied paths.  Shared state tokens and exact
+    cumulative boundary values are the gluing authority.
     """
 
-    carrier_id: str
-    terminal_amplitude: float
+    provenance: SameCarrierProvenance
+    state_tokens: tuple[str, ...]
     elapsed_times: tuple[float, ...]
     strain_action: tuple[float, ...]
-    residual_impulse_abs: tuple[float, ...]
-    hh_impulse_abs: tuple[float, ...]
+    residual_impulse: tuple[complex, ...]
+    hh_impulse: tuple[complex, ...]
 
     def __post_init__(self) -> None:
-        if not self.carrier_id:
-            raise ValueError("same-carrier segment requires a nonempty carrier id")
-        amp = float(self.terminal_amplitude)
-        if amp <= 0 or not math.isfinite(amp):
-            raise ValueError("positive finite fixed terminal amplitude required")
-        rows = (
-            tuple(float(x) for x in self.elapsed_times),
-            tuple(float(x) for x in self.strain_action),
-            tuple(float(x) for x in self.residual_impulse_abs),
-            tuple(float(x) for x in self.hh_impulse_abs),
-        )
-        n = len(rows[0])
-        if n < 2 or any(len(x) != n for x in rows):
-            raise ValueError("matching monitor paths of length at least two required")
-        if any(not math.isfinite(x) for row in rows for x in row):
-            raise ValueError("finite same-carrier monitor data required")
-        if any(rows[0][j + 1] <= rows[0][j] for j in range(n - 1)):
-            raise ValueError("elapsed times must increase strictly inside each segment")
-        if any(x < 0 for row in rows[1:] for x in row):
-            raise ValueError("native cumulative monitor magnitudes/actions are nonnegative")
-        if any(rows[1][j + 1] + 2e-14 < rows[1][j] for j in range(n - 1)):
+        if not isinstance(self.provenance, SameCarrierProvenance):
+            raise TypeError("typed same-carrier provenance required")
+        tokens = tuple(self.state_tokens)
+        elapsed = tuple(float(x) for x in self.elapsed_times)
+        strain = tuple(float(x) for x in self.strain_action)
+        residual = tuple(complex(x) for x in self.residual_impulse)
+        hh = tuple(complex(x) for x in self.hh_impulse)
+        n = len(elapsed)
+        if n < 2 or any(len(row) != n for row in (tokens, strain, residual, hh)):
+            raise ValueError("matching same-carrier paths of length at least two required")
+        if any(not isinstance(token, str) or not token for token in tokens):
+            raise ValueError("nonempty PDE state token required at every path sample")
+        if any(tokens[j + 1] == tokens[j] for j in range(n - 1)):
+            raise ValueError("distinct elapsed samples require distinct PDE state tokens")
+        if any(not math.isfinite(x) or x < 0 for x in elapsed):
+            raise ValueError("finite nonnegative native elapsed times required")
+        if any(elapsed[j + 1] <= elapsed[j] for j in range(n - 1)):
+            raise ValueError("native elapsed times must increase strictly")
+        if any(not math.isfinite(x) or x < 0 for x in strain):
+            raise ValueError("finite nonnegative cumulative strain action required")
+        if any(strain[j + 1] < strain[j] for j in range(n - 1)):
             raise ValueError("cumulative strain action cannot decrease")
+        if any(not _finite_complex(x) for row in (residual, hh) for x in row):
+            raise ValueError("finite cumulative complex coefficient impulses required")
+        object.__setattr__(self, "state_tokens", tokens)
+        object.__setattr__(self, "elapsed_times", elapsed)
+        object.__setattr__(self, "strain_action", strain)
+        object.__setattr__(self, "residual_impulse", residual)
+        object.__setattr__(self, "hh_impulse", hh)
 
+    @property
+    def carrier_id(self) -> str:
+        return self.provenance.carrier_id
 
-def _scale_tol(*values: float) -> float:
-    return 2e-11 * max(1.0, *(abs(float(x)) for x in values))
+    @property
+    def terminal_amplitude(self) -> float:
+        return self.provenance.terminal_amplitude
+
+    @property
+    def residual_impulse_abs(self) -> tuple[float, ...]:
+        return tuple(abs(x) for x in self.residual_impulse)
+
+    @property
+    def hh_impulse_abs(self) -> tuple[float, ...]:
+        return tuple(abs(x) for x in self.hh_impulse)
 
 
 def join_same_carrier_segments(segments: Sequence[SameCarrierMonitorSegment]) -> dict[str, object]:
-    """Remove checkpoint segmentation without changing the cumulative path.
+    """Glue exact restrictions of one event/carrier/dual/PDE path.
 
-    Adjacent segments must meet with the same carrier id, same terminal amplitude,
-    same elapsed time, and the same cumulative monitor values.  A reset to zero at
-    a checkpoint is rejected.  The coefficient-impulse magnitudes are only required
-    to be continuous across a boundary; they are deliberately not required to be
-    monotone or additive.
+    Numerical closeness has no causal authority.  Every shared boundary must carry
+    the same state token, native elapsed token, strain value, and complex impulses.
     """
     segs = tuple(segments)
     if not segs:
         raise ValueError("nonempty same-carrier segment family required")
-    first = segs[0]
-    amp = float(first.terminal_amplitude)
-    if abs(first.elapsed_times[0]) > _scale_tol(first.elapsed_times[0]):
-        raise ValueError("the first segment must start at the terminal event elapsed time zero")
-    for name, value in (
-        ("strain", first.strain_action[0]),
-        ("role-interface impulse", first.residual_impulse_abs[0]),
-        ("HH impulse", first.hh_impulse_abs[0]),
-    ):
-        if abs(value) > _scale_tol(value, amp):
-            raise ValueError(f"cumulative {name} must start at zero at the terminal event")
+    if any(not isinstance(segment, SameCarrierMonitorSegment) for segment in segs):
+        raise TypeError("typed same-carrier monitor segments required")
+    provenance = segs[0].provenance
+    if any(segment.provenance != provenance for segment in segs):
+        raise TypeError("checkpoint cannot replace or rebind event, carrier, terminal dual, trajectory, scale, or terminal coefficient")
 
+    first = segs[0]
+    if first.elapsed_times[0] != 0.0:
+        raise ValueError("the cumulative path must begin at terminal event elapsed time zero")
+    if first.state_tokens[0] != provenance.terminal_state_token:
+        raise TypeError("the first PDE state token is not the event terminal state")
+    if first.strain_action[0] != 0.0:
+        raise ValueError("cumulative strain action must start at zero at the terminal event")
+    if first.residual_impulse[0] != 0.0j or first.hh_impulse[0] != 0.0j:
+        raise ValueError("cumulative coefficient impulses must start at zero at the terminal event")
+
+    tokens = list(first.state_tokens)
     elapsed = list(first.elapsed_times)
     strain = list(first.strain_action)
-    residual = list(first.residual_impulse_abs)
-    hh = list(first.hh_impulse_abs)
-
+    residual = list(first.residual_impulse)
+    hh = list(first.hh_impulse)
     for left, right in zip(segs, segs[1:]):
-        if right.carrier_id != first.carrier_id or left.carrier_id != first.carrier_id:
-            raise TypeError("a no-event checkpoint cannot replace the event-anchored smooth carrier")
-        if abs(float(right.terminal_amplitude) - amp) > _scale_tol(right.terminal_amplitude, amp):
-            raise TypeError("a no-event checkpoint cannot reset the fixed terminal coefficient amplitude")
         boundary_values = (
-            (left.elapsed_times[-1], right.elapsed_times[0], "elapsed time"),
+            (left.state_tokens[-1], right.state_tokens[0], "PDE state token"),
+            (left.elapsed_times[-1], right.elapsed_times[0], "native elapsed time token"),
             (left.strain_action[-1], right.strain_action[0], "cumulative strain action"),
-            (left.residual_impulse_abs[-1], right.residual_impulse_abs[0], "cumulative role-interface impulse magnitude"),
-            (left.hh_impulse_abs[-1], right.hh_impulse_abs[0], "cumulative HH impulse magnitude"),
+            (left.residual_impulse[-1], right.residual_impulse[0], "cumulative complex role-interface impulse"),
+            (left.hh_impulse[-1], right.hh_impulse[0], "cumulative complex HH impulse"),
         )
-        for a, b, name in boundary_values:
-            if abs(float(a) - float(b)) > _scale_tol(a, b, amp):
+        for left_value, right_value, name in boundary_values:
+            if left_value != right_value:
                 raise TypeError(f"checkpoint reset/discontinuity detected in {name}")
+        tokens.extend(right.state_tokens[1:])
         elapsed.extend(right.elapsed_times[1:])
         strain.extend(right.strain_action[1:])
-        residual.extend(right.residual_impulse_abs[1:])
-        hh.extend(right.hh_impulse_abs[1:])
+        residual.extend(right.residual_impulse[1:])
+        hh.extend(right.hh_impulse[1:])
 
-    if any(strain[j + 1] + _scale_tol(strain[j], strain[j + 1]) < strain[j] for j in range(len(strain) - 1)):
+    if any(strain[j + 1] < strain[j] for j in range(len(strain) - 1)):
         raise ValueError("joined cumulative strain action cannot decrease")
     return {
-        "carrier_id": first.carrier_id,
-        "terminal_amplitude": amp,
+        "provenance": provenance,
+        "event_id": provenance.event_id,
+        "carrier_id": provenance.carrier_id,
+        "terminal_dual_id": provenance.terminal_dual_id,
+        "trajectory_id": provenance.trajectory_id,
+        "terminal_amplitude": provenance.terminal_amplitude,
+        "state_tokens": tuple(tokens),
         "elapsed_times": tuple(elapsed),
         "strain_action": tuple(strain),
-        "residual_impulse_abs": tuple(residual),
-        "hh_impulse_abs": tuple(hh),
+        "residual_impulse": tuple(residual),
+        "hh_impulse": tuple(hh),
+        "residual_impulse_abs": tuple(abs(x) for x in residual),
+        "hh_impulse_abs": tuple(abs(x) for x in hh),
         "analysis_segments": len(segs),
         "inserted_checkpoint_boundaries": len(segs) - 1,
         "carrier_restarts": 0,
         "monitor_resets": 0,
+        "complex_phase_preserved": True,
+        "same_pde_trajectory_certified": True,
     }
+
+
+def complex_modulus_debut_piecewise_linear(
+    times: Sequence[float],
+    values: Sequence[complex],
+    threshold: float,
+) -> float | None:
+    """First contact |z|>=threshold for a piecewise-linear complex path.
+
+    Interpolating endpoint magnitudes is wrong when phase changes.  This routine
+    solves the quadratic circle intersection of the actual complex chord.
+    """
+    t = tuple(float(x) for x in times)
+    z = tuple(complex(x) for x in values)
+    level = float(threshold)
+    if len(t) < 2 or len(t) != len(z):
+        raise ValueError("matching complex path samples of length at least two required")
+    if level <= 0 or not math.isfinite(level):
+        raise ValueError("positive finite modulus threshold required")
+    if any(not math.isfinite(x) for x in t) or any(not _finite_complex(x) for x in z):
+        raise ValueError("finite complex path and times required")
+    if any(t[j + 1] <= t[j] for j in range(len(t) - 1)):
+        raise ValueError("strictly increasing native times required")
+    if abs(z[0]) >= level:
+        return t[0]
+
+    for j in range(1, len(t)):
+        left = z[j - 1]
+        right = z[j]
+        if abs(right) < level:
+            continue
+        direction = right - left
+        scale = max(level, abs(left), abs(right))
+        l = left / scale
+        d = direction / scale
+        radius = level / scale
+        qa = d.real * d.real + d.imag * d.imag
+        qb = 2.0 * (l.real * d.real + l.imag * d.imag)
+        qc = l.real * l.real + l.imag * l.imag - radius * radius
+        if qa == 0.0:
+            return t[j]
+        discriminant = max(0.0, qb * qb - 4.0 * qa * qc)
+        root_disc = math.sqrt(discriminant)
+        if qb >= 0.0 and qb + root_disc != 0.0:
+            fraction = (-2.0 * qc) / (qb + root_disc)
+        else:
+            fraction = (-qb + root_disc) / (2.0 * qa)
+        fraction = min(1.0, max(0.0, fraction))
+        return t[j - 1] + fraction * (t[j] - t[j - 1])
+    return None
 
 
 def same_carrier_first_exit(
@@ -155,47 +294,51 @@ def same_carrier_first_exit(
     *,
     tie_tolerance: float | None = None,
 ) -> dict[str, object]:
-    """First stop of one fixed carrier, independent of inserted checkpoint cuts."""
+    """Native first stop of one fixed carrier, independent of observer cuts."""
     path = join_same_carrier_segments(segments)
-    amp = float(path["terminal_amplitude"])
-    monitors = (
-        PhysicalPathMonitor(
-            "high_strain_critical_dissipation",
-            LOW_STRAIN_ACTION,
+    elapsed = tuple(float(x) for x in path["elapsed_times"])
+    amplitude = float(path["terminal_amplitude"])
+    debuts = {
+        STRAIN_STOP: superlevel_debut_piecewise_linear(
+            elapsed,
             tuple(float(x) for x in path["strain_action"]),
-            ThresholdTopology.CLOSED,
+            LOW_STRAIN_ACTION,
         ),
-        PhysicalPathMonitor(
-            ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
-            RESIDUAL_FRACTION * amp,
-            tuple(float(x) for x in path["residual_impulse_abs"]),
-            ThresholdTopology.CLOSED,
+        ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION: complex_modulus_debut_piecewise_linear(
+            elapsed,
+            tuple(complex(x) for x in path["residual_impulse"]),
+            RESIDUAL_FRACTION * amplitude,
         ),
-        PhysicalPathMonitor(
-            HH_COEFFICIENT_OBSTRUCTION,
-            GENERATED_FRACTION * amp,
-            tuple(float(x) for x in path["hh_impulse_abs"]),
-            ThresholdTopology.CLOSED,
+        HH_COEFFICIENT_OBSTRUCTION: complex_modulus_debut_piecewise_linear(
+            elapsed,
+            tuple(complex(x) for x in path["hh_impulse"]),
+            GENERATED_FRACTION * amplitude,
         ),
+    }
+    finite = tuple(value for value in debuts.values() if value is not None)
+    first = min(finite) if finite else None
+    tolerance = 0.0 if tie_tolerance is None else float(tie_tolerance)
+    if tolerance < 0 or not math.isfinite(tolerance):
+        raise ValueError("finite nonnegative regression tie tolerance required")
+    stops = () if first is None else tuple(
+        sorted(label for label, value in debuts.items() if value is not None and abs(value - first) <= tolerance)
     )
-    out = first_physical_corridor_exit(
-        tuple(float(x) for x in path["elapsed_times"]),
-        monitors,
-        tie_tolerance=tie_tolerance,
-    )
-    stops = out.joint_first_stops
     needs_reentry = any(
-        x in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
-        for x in stops
+        label in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
+        for label in stops
     )
     return {
-        "classification": "same_carrier_named_first_stop" if out.first_time is not None else "same_carrier_no_hit_continuation",
+        "classification": "same_carrier_named_first_stop" if first is not None else "same_carrier_no_hit_continuation",
+        "event_id": path["event_id"],
         "carrier_id": path["carrier_id"],
-        "terminal_amplitude": amp,
-        "first_elapsed": out.first_time,
+        "terminal_dual_id": path["terminal_dual_id"],
+        "trajectory_id": path["trajectory_id"],
+        "terminal_amplitude": amplitude,
+        "first_elapsed": first,
         "joint_first_stops": stops,
-        "individual_debuts": out.individual_debuts,
-        "observed_elapsed_end": float(path["elapsed_times"][-1]),
+        "individual_debuts": debuts,
+        "observed_elapsed_end": elapsed[-1],
+        "endpoint_state_token": tuple(path["state_tokens"])[-1],
         "analysis_segments": int(path["analysis_segments"]),
         "inserted_checkpoint_boundaries": int(path["inserted_checkpoint_boundaries"]),
         "carrier_restarts": 0,
@@ -203,24 +346,30 @@ def same_carrier_first_exit(
         "requires_physical_energy_reentry": needs_reentry,
         "coefficient_impulses_used_as_work": False,
         "checkpoint_segmentation_used_as_causal_order": False,
+        "complex_phase_preserved": True,
+        "same_pde_trajectory_certified": True,
     }
 
 
 def partition_same_carrier_path(
     *,
-    carrier_id: str,
-    terminal_amplitude: float,
+    provenance: SameCarrierProvenance,
+    state_tokens: Sequence[str],
     elapsed_times: Sequence[float],
     strain_action: Sequence[float],
-    residual_impulse_abs: Sequence[float],
-    hh_impulse_abs: Sequence[float],
+    residual_impulse: Sequence[complex],
+    hh_impulse: Sequence[complex],
     checkpoint_indices: Sequence[int],
 ) -> tuple[SameCarrierMonitorSegment, ...]:
-    """Insert observer-chosen checkpoint cuts into one already-defined cumulative path."""
-    rows = tuple(tuple(float(x) for x in row) for row in (elapsed_times, strain_action, residual_impulse_abs, hh_impulse_abs))
-    n = len(rows[0])
-    if n < 2 or any(len(row) != n for row in rows):
-        raise ValueError("matching global cumulative monitor paths required")
+    """Restrict one already-certified cumulative PDE path at observer cuts."""
+    tokens = tuple(state_tokens)
+    elapsed = tuple(float(x) for x in elapsed_times)
+    strain = tuple(float(x) for x in strain_action)
+    residual = tuple(complex(x) for x in residual_impulse)
+    hh = tuple(complex(x) for x in hh_impulse)
+    n = len(elapsed)
+    if n < 2 or any(len(row) != n for row in (tokens, strain, residual, hh)):
+        raise ValueError("matching global cumulative same-carrier paths required")
     cuts = tuple(int(x) for x in checkpoint_indices)
     if tuple(sorted(set(cuts))) != cuts or any(x <= 0 or x >= n - 1 for x in cuts):
         raise ValueError("checkpoint indices must be unique increasing interior sample indices")
@@ -228,12 +377,12 @@ def partition_same_carrier_path(
     ends = cuts + (n - 1,)
     return tuple(
         SameCarrierMonitorSegment(
-            carrier_id=carrier_id,
-            terminal_amplitude=float(terminal_amplitude),
-            elapsed_times=rows[0][a : b + 1],
-            strain_action=rows[1][a : b + 1],
-            residual_impulse_abs=rows[2][a : b + 1],
-            hh_impulse_abs=rows[3][a : b + 1],
+            provenance=provenance,
+            state_tokens=tokens[a : b + 1],
+            elapsed_times=elapsed[a : b + 1],
+            strain_action=strain[a : b + 1],
+            residual_impulse=residual[a : b + 1],
+            hh_impulse=hh[a : b + 1],
         )
         for a, b in zip(starts, ends)
     )
@@ -241,77 +390,108 @@ def partition_same_carrier_path(
 
 def segmentation_invariance(
     *,
-    carrier_id: str,
-    terminal_amplitude: float,
+    provenance: SameCarrierProvenance,
+    state_tokens: Sequence[str],
     elapsed_times: Sequence[float],
     strain_action: Sequence[float],
-    residual_impulse_abs: Sequence[float],
-    hh_impulse_abs: Sequence[float],
+    residual_impulse: Sequence[complex],
+    hh_impulse: Sequence[complex],
     checkpoint_indices: Sequence[int],
     tie_tolerance: float | None = None,
 ) -> dict[str, object]:
-    """Compare no checkpoint against any finite checkpoint segmentation of the same path."""
-    whole = partition_same_carrier_path(
-        carrier_id=carrier_id,
-        terminal_amplitude=terminal_amplitude,
-        elapsed_times=elapsed_times,
-        strain_action=strain_action,
-        residual_impulse_abs=residual_impulse_abs,
-        hh_impulse_abs=hh_impulse_abs,
-        checkpoint_indices=(),
-    )
-    segmented = partition_same_carrier_path(
-        carrier_id=carrier_id,
-        terminal_amplitude=terminal_amplitude,
-        elapsed_times=elapsed_times,
-        strain_action=strain_action,
-        residual_impulse_abs=residual_impulse_abs,
-        hh_impulse_abs=hh_impulse_abs,
-        checkpoint_indices=checkpoint_indices,
-    )
-    a = same_carrier_first_exit(whole, tie_tolerance=tie_tolerance)
-    b = same_carrier_first_exit(segmented, tie_tolerance=tie_tolerance)
-    ta = a["first_elapsed"]
-    tb = b["first_elapsed"]
-    if (ta is None) != (tb is None):
-        raise AssertionError("checkpoint insertion changed whether the fixed carrier has a first stop")
-    residual = 0.0 if ta is None else abs(float(ta) - float(tb))
-    if residual > _scale_tol(float(ta or 0.0), float(tb or 0.0), float(elapsed_times[-1])):
-        raise AssertionError("checkpoint insertion moved the fixed-carrier first-stop time")
-    if tuple(a["joint_first_stops"]) != tuple(b["joint_first_stops"]):
-        raise AssertionError("checkpoint insertion changed the fixed-carrier joint first-stop set")
+    """Compare no cut with finite restrictions of the same certified PDE path."""
+    common = {
+        "provenance": provenance,
+        "state_tokens": state_tokens,
+        "elapsed_times": elapsed_times,
+        "strain_action": strain_action,
+        "residual_impulse": residual_impulse,
+        "hh_impulse": hh_impulse,
+    }
+    whole = partition_same_carrier_path(**common, checkpoint_indices=())
+    segmented = partition_same_carrier_path(**common, checkpoint_indices=checkpoint_indices)
+    left = same_carrier_first_exit(whole, tie_tolerance=tie_tolerance)
+    right = same_carrier_first_exit(segmented, tie_tolerance=tie_tolerance)
+    if left["first_elapsed"] != right["first_elapsed"]:
+        raise AssertionError("observer cuts moved the same-path first-stop time")
+    if tuple(left["joint_first_stops"]) != tuple(right["joint_first_stops"]):
+        raise AssertionError("observer cuts changed the same-path exact first-stop set")
     return {
-        "first_elapsed": ta,
-        "joint_first_stops": tuple(a["joint_first_stops"]),
-        "first_time_residual": residual,
+        "first_elapsed": left["first_elapsed"],
+        "joint_first_stops": tuple(left["joint_first_stops"]),
+        "first_time_residual": 0.0,
         "checkpoint_count": len(tuple(checkpoint_indices)),
         "carrier_restarts": 0,
         "monitor_resets": 0,
         "segmentation_changed_first_hit": False,
+        "complex_phase_preserved": True,
+        "same_pde_trajectory_certified": True,
     }
 
 
+@dataclass(frozen=True)
+class SameCarrierCheckpointPathCertificate:
+    """One no-hit checkpoint bound to its actual cumulative PDE restriction.
+
+    Matching ``t``, ``A`` and ``c`` is necessary but not sufficient: unrelated
+    trajectories can share those three numbers.  The gluable cumulative path is
+    therefore part of the certificate, and it must reach exactly the checkpoint's
+    native elapsed endpoint without an earlier named first stop.
+    """
+
+    checkpoint: FullNaturalCheckpoint
+    path_segments: tuple[SameCarrierMonitorSegment, ...]
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.checkpoint, FullNaturalCheckpoint):
+            raise TypeError("typed FullNaturalCheckpoint required in the path certificate")
+        segments = tuple(self.path_segments)
+        path = join_same_carrier_segments(segments)
+        provenance = path["provenance"]
+        if not isinstance(provenance, SameCarrierProvenance):
+            raise AssertionError("checkpoint path lost typed same-carrier provenance")
+        checkpoint = self.checkpoint
+        if checkpoint.terminal_time != provenance.terminal_time:
+            raise TypeError("checkpoint terminal time is not the path event-time token")
+        if checkpoint.corridor_frequency != provenance.carrier_frequency:
+            raise TypeError("checkpoint corridor scale is not the path carrier-frequency token")
+        if checkpoint.scaled_lifetime != provenance.scaled_lifetime:
+            raise TypeError("checkpoint lifetime is not the path fixed-lifetime token")
+        if tuple(path["elapsed_times"])[-1] != checkpoint.physical_time_drop:
+            raise TypeError("cumulative PDE restriction does not end at the checkpoint native-time token")
+        first_exit = same_carrier_first_exit(segments)
+        if first_exit["first_elapsed"] is not None:
+            raise ValueError("a path with an earlier named first stop cannot certify a no-hit checkpoint")
+        object.__setattr__(self, "path_segments", segments)
+
+    @property
+    def provenance(self) -> SameCarrierProvenance:
+        path = join_same_carrier_segments(self.path_segments)
+        provenance = path["provenance"]
+        if not isinstance(provenance, SameCarrierProvenance):
+            raise AssertionError("checkpoint path lost typed same-carrier provenance")
+        return provenance
+
+    @property
+    def endpoint_state_token(self) -> str:
+        return self.path_segments[-1].state_tokens[-1]
+
+
 def checkpoint_continuation_policy(
-    checkpoint_record: dict[str, object],
+    checkpoint_record: SameCarrierCheckpointPathCertificate | object,
     *,
+    provenance: SameCarrierProvenance | None = None,
     request_carrier_replacement: bool = False,
     request_terminal_amplitude_reset: bool = False,
     request_monitor_reset: bool = False,
 ) -> dict[str, object]:
-    """Fail closed if an analysis checkpoint is used to restart the causal carrier.
-
-    Hard-shell observations at the checkpoint remain legitimate state sidecars.
-    They can become event-anchored hard roles only if a later physical interaction
-    or another named physical first stop supplies that event semantics.
-    """
-    if str(checkpoint_record.get("checkpoint_kind", "")) != FULL_NATURAL_CHECKPOINT:
-        raise ValueError("same-carrier checkpoint policy requires a full-natural analysis checkpoint")
-    if bool(checkpoint_record.get("physical_event_created", True)):
-        raise ValueError("checkpoint record unexpectedly claims a physical event")
-    if bool(checkpoint_record.get("causal_charge_created", True)):
-        raise ValueError("checkpoint record unexpectedly claims a causal charge")
-    if int(checkpoint_record.get("recursion_edges_added", 1)) != 0:
-        raise ValueError("checkpoint record unexpectedly adds recursive event depth")
+    """Authorize continuation only from a checkpoint restriction on this PDE path."""
+    if not isinstance(checkpoint_record, SameCarrierCheckpointPathCertificate):
+        raise TypeError("typed checkpoint path/restriction certificate required for same-carrier continuation")
+    if not isinstance(provenance, SameCarrierProvenance):
+        raise TypeError("typed expected same-carrier provenance required at the checkpoint")
+    if checkpoint_record.provenance != provenance:
+        raise TypeError("checkpoint restriction belongs to a different event/carrier/dual/PDE trajectory")
     if request_carrier_replacement:
         raise TypeError("a no-event checkpoint cannot replace the event-anchored smooth carrier")
     if request_terminal_amplitude_reset:
@@ -320,12 +500,51 @@ def checkpoint_continuation_policy(
         raise TypeError("a no-event checkpoint cannot reset cumulative native first-hit monitors")
     return {
         "canonical_continuation": SAME_CARRIER_CONTINUATION,
+        "event_id": provenance.event_id,
+        "carrier_id": provenance.carrier_id,
+        "terminal_dual_id": provenance.terminal_dual_id,
+        "trajectory_id": provenance.trajectory_id,
+        "checkpoint_endpoint_state_token": checkpoint_record.endpoint_state_token,
+        "checkpoint_native_elapsed": checkpoint_record.checkpoint.physical_time_drop,
         "hard_shell_checkpoint_witnesses": "state_sidecars_only",
         "carrier_replacement_authorized": False,
         "terminal_amplitude_reset_authorized": False,
         "monitor_reset_authorized": False,
         "checkpoint_scale_path_is_physical_lineage": False,
         "hardening_requires_new_physical_event": True,
+        "typed_checkpoint_and_carrier_provenance_verified": True,
+        "actual_no_hit_pde_restriction_verified": True,
+    }
+
+
+def fixed_carrier_natural_window_capacity(
+    *,
+    event_time: float,
+    carrier_frequency: float,
+    scaled_lifetime: float,
+) -> dict[str, object]:
+    """Finite capacity of genuine c A^-2 windows for one fixed carrier.
+
+    Arbitrary observer cuts may accumulate, but they are not full-natural service
+    windows.  Genuine fixed-A, fixed-c windows have one positive native duration and
+    therefore cannot form an interior Zeno sequence before t=0.
+    """
+    t = float(event_time)
+    if t <= 0 or not math.isfinite(t):
+        raise ValueError("positive finite event time required")
+    duration = _native_duration(carrier_frequency, scaled_lifetime)
+    time_fraction = Fraction.from_float(t)
+    duration_fraction = Fraction.from_float(duration)
+    maximum = int(time_fraction // duration_fraction)
+    remainder = float(time_fraction - maximum * duration_fraction)
+    return {
+        "native_window_duration": duration,
+        "maximum_complete_windows_before_t0": maximum,
+        "remaining_native_time_after_complete_windows": remainder,
+        "interior_zeno_possible": False,
+        "arbitrary_observer_cuts_are_natural_windows": False,
+        "carrier_frequency_fixed": True,
+        "scaled_lifetime_fixed": True,
     }
 
 
@@ -335,26 +554,27 @@ def maximal_same_carrier_outcome(
     event_time: float,
     tie_tolerance: float | None = None,
 ) -> dict[str, object]:
-    """Continue one carrier through arbitrary horizons until a true stop or t=0.
-
-    Natural-horizon service estimates may be read on subintervals, but the exact
-    carrier equation and cumulative first-hit filtration do not expire there.
-    """
+    """Continue the certified path to its true first stop, t=0, or a later sample."""
+    path = join_same_carrier_segments(segments)
+    provenance = path["provenance"]
+    if not isinstance(provenance, SameCarrierProvenance):
+        raise AssertionError("joined path lost same-carrier provenance")
     t = float(event_time)
-    if t <= 0 or not math.isfinite(t):
-        raise ValueError("positive finite terminal event time required")
+    if t != provenance.terminal_time:
+        raise TypeError("event time was rebound outside same-carrier provenance")
     out = same_carrier_first_exit(segments, tie_tolerance=tie_tolerance)
     observed = float(out["observed_elapsed_end"])
-    if observed > t + _scale_tol(observed, t):
+    if observed > t:
         raise ValueError("same-carrier observation extends before the initial boundary")
     if out["first_elapsed"] is not None:
+        first = float(out["first_elapsed"])
         return {
             **out,
-            "endpoint_time": t - float(out["first_elapsed"]),
+            "endpoint_time": t - first,
             "hits_initial_boundary": False,
             "physical_event_created_by_checkpoint": False,
         }
-    if observed >= t - _scale_tol(observed, t):
+    if observed == t:
         return {
             **out,
             "classification": "absorbing_initial_boundary",
@@ -365,46 +585,89 @@ def maximal_same_carrier_outcome(
             "requires_physical_energy_reentry": False,
             "physical_event_created_by_checkpoint": False,
         }
+    remaining = t - observed
+    if remaining <= 0:
+        raise AssertionError("positive native remaining time was lost")
     return {
         **out,
         "classification": "same_carrier_event_free_continuation",
-        "endpoint_time": t - observed,
+        "endpoint_time": remaining,
         "hits_initial_boundary": False,
-        "remaining_backward_time": t - observed,
+        "remaining_backward_time": remaining,
         "physical_event_created_by_checkpoint": False,
         "next_action": "continue_the_same_event_anchored_carrier_and_cumulative_monitors",
     }
+
+
+@dataclass(frozen=True)
+class SameCarrierPrelimitCertificate:
+    """Actual cumulative path restrictions approaching one proposed cut limit."""
+
+    segments: tuple[SameCarrierMonitorSegment, ...]
+
+    def __post_init__(self) -> None:
+        segments = tuple(self.segments)
+        join_same_carrier_segments(segments)
+        object.__setattr__(self, "segments", segments)
+
+
+@dataclass(frozen=True)
+class SmoothPDEExtensionToken:
+    """Typed statement that the same trajectory is smooth on an open interval."""
+
+    trajectory_id: str
+    state_token: str
+    physical_time: float
+    open_interval: tuple[float, float]
+
+    def __post_init__(self) -> None:
+        if not self.trajectory_id or not self.state_token:
+            raise ValueError("nonempty trajectory and state tokens required")
+        s = float(self.physical_time)
+        interval = tuple(float(x) for x in self.open_interval)
+        if len(interval) != 2 or not all(math.isfinite(x) for x in (s, *interval)):
+            raise ValueError("finite physical time and open smooth interval required")
+        if not interval[0] < s < interval[1]:
+            raise ValueError("smooth extension interval must be open around the accumulation time")
+        object.__setattr__(self, "physical_time", s)
+        object.__setattr__(self, "open_interval", (interval[0], interval[1]))
 
 
 def interior_checkpoint_accumulation_outcome(
     *,
     event_time: float,
     accumulation_time: float,
-    terminal_amplitude: float,
-    strain_action_limit: float,
-    residual_impulse_abs_limit: float,
-    hh_impulse_abs_limit: float,
+    prelimit_certificate: SameCarrierPrelimitCertificate,
+    smooth_extension_token: SmoothPDEExtensionToken | None,
+    tie_tolerance: float | None = None,
 ) -> dict[str, object]:
-    """Classify a limit of infinitely many inserted horizons for one fixed carrier.
+    """Classify a cut accumulation from the actual no-earlier-hit PDE path.
 
-    On a pre-singular smooth interval the cumulative strain action is continuous
-    (indeed AC/monotone) and the complex coefficient impulses are AC, hence their
-    magnitudes are continuous.  If a closed threshold is attained at an interior
-    accumulation time, that time is the first-stop face (coefficient faces still
-    require Q^2 physical-energy reentry).  If all faces remain strictly below,
-    continuity gives an open continuation past the checkpoint accumulation.  If
-    the accumulation is t=0, the initial boundary absorbs.
+    Endpoint scalars alone cannot certify a first hit.  The cumulative complex path
+    must show no earlier debut, and strict-margin continuation at an interior time
+    additionally requires an open smooth-extension token for the same trajectory.
     """
+    if not isinstance(prelimit_certificate, SameCarrierPrelimitCertificate):
+        raise TypeError("typed actual prelimit path certificate required")
+    path = join_same_carrier_segments(prelimit_certificate.segments)
+    provenance = path["provenance"]
+    if not isinstance(provenance, SameCarrierProvenance):
+        raise AssertionError("prelimit path lost same-carrier provenance")
     t = float(event_time)
     s = float(accumulation_time)
-    amp = float(terminal_amplitude)
-    K = float(strain_action_limit)
-    IR = float(residual_impulse_abs_limit)
-    IH = float(hh_impulse_abs_limit)
-    if t <= 0 or s < 0 or s >= t or amp <= 0 or min(K, IR, IH) < 0:
-        raise ValueError("valid positive event/amplitude, interior-or-zero accumulation time, and nonnegative limits required")
-    if not all(math.isfinite(x) for x in (t, s, amp, K, IR, IH)):
-        raise ValueError("finite accumulation data required")
+    if t != provenance.terminal_time:
+        raise TypeError("accumulation event time was rebound outside carrier provenance")
+    if s < 0 or s >= t or not math.isfinite(s):
+        raise ValueError("interior-or-zero finite accumulation time required")
+    elapsed_limit = t - s
+    observed = float(tuple(path["elapsed_times"])[-1])
+    if observed != elapsed_limit:
+        raise TypeError("prelimit path endpoint is not the native accumulation-time token")
+    out = same_carrier_first_exit(prelimit_certificate.segments, tie_tolerance=tie_tolerance)
+    first = out["first_elapsed"]
+    if first is not None and float(first) < elapsed_limit:
+        raise ValueError("an earlier physical first hit contradicts a no-hit checkpoint accumulation")
+
     if s == 0.0:
         return {
             "classification": "absorbing_initial_boundary",
@@ -412,28 +675,33 @@ def interior_checkpoint_accumulation_outcome(
             "requires_physical_energy_reentry": False,
             "checkpoint_accumulation_is_obstruction": False,
             "same_carrier_extends_past_accumulation": False,
+            "prelimit_path_certified": True,
         }
-    tol = _scale_tol(amp, K, IR, IH)
-    hits: list[str] = []
-    if K >= LOW_STRAIN_ACTION - tol:
-        hits.append("high_strain_critical_dissipation")
-    if IR >= RESIDUAL_FRACTION * amp - tol:
-        hits.append(ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION)
-    if IH >= GENERATED_FRACTION * amp - tol:
-        hits.append(HH_COEFFICIENT_OBSTRUCTION)
-    if hits:
-        stops = tuple(sorted(hits))
+    if first is not None:
+        if float(first) != elapsed_limit:
+            raise ValueError("closed face did not occur at the accumulation endpoint")
+        stops = tuple(out["joint_first_stops"])
         return {
             "classification": "first_stop_at_interior_checkpoint_accumulation",
             "joint_first_stops": stops,
             "requires_physical_energy_reentry": any(
-                x in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
-                for x in stops
+                label in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
+                for label in stops
             ),
             "coefficient_impulses_used_as_work": False,
             "checkpoint_accumulation_is_obstruction": False,
             "same_carrier_extends_past_accumulation": False,
+            "prelimit_path_certified": True,
         }
+
+    if not isinstance(smooth_extension_token, SmoothPDEExtensionToken):
+        raise TypeError("strict-margin continuation requires a typed smooth PDE extension token")
+    if smooth_extension_token.trajectory_id != provenance.trajectory_id:
+        raise TypeError("smooth extension belongs to a different PDE trajectory")
+    if smooth_extension_token.state_token != tuple(path["state_tokens"])[-1]:
+        raise TypeError("smooth extension is not attached to the accumulation endpoint state")
+    if smooth_extension_token.physical_time != s:
+        raise TypeError("smooth extension is attached to a different physical-time token")
     return {
         "classification": "same_carrier_extends_across_interior_checkpoint_accumulation",
         "joint_first_stops": (),
@@ -441,22 +709,24 @@ def interior_checkpoint_accumulation_outcome(
         "coefficient_impulses_used_as_work": False,
         "checkpoint_accumulation_is_obstruction": False,
         "same_carrier_extends_past_accumulation": True,
-        "continuation_reason": "all cumulative native monitors retain strict margin and are continuous/AC on the smooth pre-singular interval",
+        "prelimit_path_certified": True,
+        "smooth_pde_extension_certified": True,
+        "continuation_reason": "the actual cumulative path has strict native margins and the same PDE trajectory is smooth on an open interval around the cut accumulation",
     }
 
 
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
-        "fixed_carrier": "between genuine physical events the canonical object is the same smooth event-anchored carrier Q and terminal dual; a theorem horizon does not create a replacement carrier",
-        "cumulative_monitors": "K_A[s,t], |I_role-interface[s,t]| and |I_HH[s,t]| are always read cumulatively from the same terminal event; K is monotone while impulse magnitudes may cancel and are therefore never summed segment-by-segment",
-        "segmentation": "inserting or deleting any finite set of natural-horizon checkpoints leaves the first physical stop time and complete joint first-stop set unchanged",
-        "checkpoint_policy": "hard-shell witnesses exposed at a no-event checkpoint are legitimate state sidecars only; they cannot reset terminal amplitude, monitor baselines, or harden into a new causal carrier without a new physical event",
-        "long_horizon": "the exact outer-role/adjoint equations do not expire after one natural service window; the same carrier continues while cumulative support/strain and coefficient obstruction faces remain unhit",
-        "interior_accumulation": "on a smooth pre-singular interval an interior accumulation of analysis checkpoints is either a closed physical first-stop/energy-reentry face at the limit or is crossed by the same carrier; checkpoint Zeno count and checkpoint scale path are not PDE obstructions",
-        "boundary": "if the maximal same-carrier no-hit continuation reaches t=0, the initial boundary absorbs",
-        "high_tail_separation": "this does not deny physical UV dynamics: actual high-tail dissipation/work remains a separate event theorem; only UV scale motion manufactured by re-hardening at no-event checkpoints is removed from canonical lineage",
-        "scope": "this closes natural-horizon segmentation as a continuation obstruction for a fixed event-anchored carrier; it does not telescope infinitely recurring genuine physical owner events and does not prove Navier-Stokes global regularity",
+        "fixed_carrier": "between genuine physical events the canonical object carries one exact event id, smooth carrier, terminal dual, terminal coefficient, scale/lifetime, terminal state token and actual PDE trajectory id",
+        "cumulative_monitors": "K_A[s,t] is monotone; the actual complex I_role-interface[s,t] and I_HH[s,t] paths are retained, their magnitudes are derived, and segment magnitudes are never added or used as work",
+        "segmentation": "finite checkpoint insertion is only restriction and exact gluing of the same cumulative PDE path; exact shared state/time/complex-boundary tokens leave the first stop unchanged",
+        "checkpoint_policy": "sidecar rereading requires a typed FullNaturalCheckpoint bound to an actual no-hit cumulative PDE restriction ending at its exact native duration, plus exact agreement with the expected event/carrier/dual/trajectory provenance; a bare typed checkpoint, dictionary, foreign path or close floating data cannot reset or replace the carrier",
+        "natural_windows": "arbitrary observer cuts are not full-natural service windows; for fixed A and c every genuine window has one fixed positive native duration c A^-2, so fixed-carrier natural windows cannot have an interior Zeno accumulation",
+        "interior_accumulation": "an arbitrary-cut accumulation is classified only from the actual cumulative prelimit path: an exact endpoint face is the first stop, an earlier crossing invalidates the no-hit premise, and strict-margin continuation requires a matching open smooth-PDE extension token",
+        "boundary": "t=0 is absorbing only when the native cumulative path reaches exactly the full event time; positive remaining native time is never rounded away",
+        "high_tail_separation": "actual high-tail dissipation/work remains a separate certified physical UV route; diagnostic shell readings carry neither fictitious c A_j^-2 durations nor causal scale lineage",
+        "scope": "this closes observer segmentation for one certified event-anchored PDE path; it does not telescope infinitely recurring genuine physical owner events and does not prove Navier-Stokes global regularity",
     }
 
 
@@ -466,192 +736,247 @@ class SameCarrierStress:
     worst_segmentation_first_time_residual: float
     segmentation_failures: int
     reset_barrier_failures: int
-    nonmonotone_impulse_paths: int
+    nonmonotone_impulse_magnitudes: int
     accumulation_stop_cases: int
     accumulation_continue_cases: int
     maximum_checkpoint_count: int
+    fixed_window_zeno_failures: int
 
 
-def _engineered_path(rng: random.Random) -> tuple[float, tuple[float, ...], tuple[float, ...], tuple[float, ...], tuple[float, ...], int]:
+def _engineered_path(
+    rng: random.Random,
+) -> tuple[float, tuple[float, ...], tuple[float, ...], tuple[complex, ...], tuple[complex, ...]]:
     n = rng.randint(8, 30)
     times = tuple(j / (n - 1) for j in range(n))
-    amp = math.exp(rng.uniform(-3.0, 3.0))
+    amplitude = math.exp(rng.uniform(-12.0, 12.0))
     mode = rng.randrange(5)
-
-    # K is a cumulative integral and therefore monotone.
     if mode == 1:
         tau = times[rng.randint(2, n - 3)]
-        K = tuple((LOW_STRAIN_ACTION / tau) * x for x in times)
+        strain = tuple((LOW_STRAIN_ACTION / tau) * x for x in times)
     else:
-        kend = rng.uniform(0.05, 0.85) * LOW_STRAIN_ACTION
+        end = rng.uniform(0.05, 0.85) * LOW_STRAIN_ACTION
         exponent = rng.uniform(0.7, 1.8)
-        K = tuple(kend * (x ** exponent) for x in times)
+        strain = tuple(end * x**exponent for x in times)
 
-    ir_th = RESIDUAL_FRACTION * amp
-    hh_th = GENERATED_FRACTION * amp
-
-    def safe_wave(th: float, phase: float) -> tuple[float, ...]:
-        out = []
+    def wave(threshold: float, phase: float) -> tuple[complex, ...]:
+        values: list[complex] = []
         for x in times:
-            base = 0.42 + 0.25 * math.sin(7.0 * x + phase) + 0.12 * math.sin(17.0 * x + 0.3 * phase)
-            out.append(max(0.0, min(0.82, base)) * th)
-        out[0] = 0.0
-        return tuple(out)
+            radius = max(0.0, min(0.82, 0.42 + 0.25 * math.sin(7.0 * x + phase))) * threshold
+            values.append(radius * cmath.exp(1j * (phase + 9.0 * x)))
+        values[0] = 0.0j
+        return tuple(values)
 
-    IR = safe_wave(ir_th, rng.uniform(-math.pi, math.pi))
-    IH = safe_wave(hh_th, rng.uniform(-math.pi, math.pi))
-    if mode == 2:
-        j = rng.randint(2, n - 3)
-        tau = times[j]
-        IR = tuple((ir_th / tau) * x for x in times)
-    elif mode == 3:
-        j = rng.randint(2, n - 3)
-        tau = times[j]
-        IH = tuple((hh_th / tau) * x for x in times)
-    elif mode == 4:
-        j = rng.randint(2, n - 3)
-        tau = times[j]
-        IR = tuple((ir_th / tau) * x for x in times)
-        IH = tuple((hh_th / tau) * x for x in times)
-    return amp, times, K, IR, IH, mode
+    residual = wave(RESIDUAL_FRACTION * amplitude, rng.uniform(-math.pi, math.pi))
+    hh = wave(GENERATED_FRACTION * amplitude, rng.uniform(-math.pi, math.pi))
+    if mode in (2, 4):
+        tau = times[rng.randint(2, n - 3)]
+        residual = tuple(complex((RESIDUAL_FRACTION * amplitude / tau) * x) for x in times)
+    if mode in (3, 4):
+        tau = times[rng.randint(2, n - 3)]
+        hh = tuple(complex((GENERATED_FRACTION * amplitude / tau) * x) for x in times)
+    return amplitude, times, strain, residual, hh
+
+
+def _provenance(index: int, amplitude: float, terminal_time: float = 2.0) -> SameCarrierProvenance:
+    return SameCarrierProvenance(
+        event_id=f"event-{index}",
+        carrier_id=f"carrier-{index}",
+        terminal_dual_id=f"dual-{index}",
+        trajectory_id=f"trajectory-{index}",
+        terminal_state_token=f"state-{index}-0",
+        terminal_time=terminal_time,
+        carrier_frequency=2.0,
+        scaled_lifetime=1.0,
+        terminal_coefficient=complex(amplitude),
+    )
 
 
 def stress(samples: int = 50_000, seed: int = 20260811) -> SameCarrierStress:
     rng = random.Random(seed)
     worst = 0.0
-    segmentation_fail = 0
-    reset_fail = 0
-    nonmono = 0
+    segmentation_failures = 0
+    reset_failures = 0
+    nonmonotone = 0
     stop_cases = 0
     continue_cases = 0
-    max_checkpoints = 0
+    maximum_cuts = 0
+    zeno_failures = 0
+    capacity = fixed_carrier_natural_window_capacity(
+        event_time=1.0,
+        carrier_frequency=2.0,
+        scaled_lifetime=1.0,
+    )
+    if capacity["interior_zeno_possible"] or capacity["maximum_complete_windows_before_t0"] != 4:
+        zeno_failures += 1
+        raise AssertionError("positive fixed-carrier natural duration admitted interior Zeno")
 
-    for i in range(samples):
-        amp, times, K, IR, IH, _mode = _engineered_path(rng)
-        n = len(times)
-        possible = list(range(1, n - 1))
+    for index in range(samples):
+        amplitude, times, strain, residual, hh = _engineered_path(rng)
+        provenance = _provenance(index, amplitude)
+        tokens = tuple(f"state-{index}-{j}" for j in range(len(times)))
+        possible = list(range(1, len(times) - 1))
         rng.shuffle(possible)
-        count = rng.randint(0, min(len(possible), 12))
-        cuts = tuple(sorted(possible[:count]))
-        max_checkpoints = max(max_checkpoints, len(cuts))
-        inv = segmentation_invariance(
-            carrier_id=f"carrier-{i}",
-            terminal_amplitude=amp,
+        cuts = tuple(sorted(possible[: rng.randint(0, min(len(possible), 12))]))
+        maximum_cuts = max(maximum_cuts, len(cuts))
+        invariant = segmentation_invariance(
+            provenance=provenance,
+            state_tokens=tokens,
             elapsed_times=times,
-            strain_action=K,
-            residual_impulse_abs=IR,
-            hh_impulse_abs=IH,
+            strain_action=strain,
+            residual_impulse=residual,
+            hh_impulse=hh,
             checkpoint_indices=cuts,
-            tie_tolerance=5e-11,
+            tie_tolerance=0.0,
         )
-        residual = float(inv["first_time_residual"])
-        worst = max(worst, residual)
-        if residual > 5e-11 or bool(inv["segmentation_changed_first_hit"]):
-            segmentation_fail += 1
-            raise AssertionError("analysis checkpoint segmentation changed the same-carrier first hit")
+        current = float(invariant["first_time_residual"])
+        worst = max(worst, current)
+        if current != 0.0 or invariant["segmentation_changed_first_hit"]:
+            segmentation_failures += 1
+            raise AssertionError("observer segmentation changed a same-PDE-path first hit")
+        residual_abs = tuple(abs(x) for x in residual)
+        hh_abs = tuple(abs(x) for x in hh)
+        if any(residual_abs[j + 1] < residual_abs[j] for j in range(len(times) - 1)) or any(
+            hh_abs[j + 1] < hh_abs[j] for j in range(len(times) - 1)
+        ):
+            nonmonotone += 1
 
-        if any(IR[j + 1] < IR[j] for j in range(n - 1)) or any(IH[j + 1] < IH[j] for j in range(n - 1)):
-            nonmono += 1
-
-        # Deliberately manufacture a baseline reset at one inserted boundary.
         if cuts:
-            segs = list(
+            segments = list(
                 partition_same_carrier_path(
-                    carrier_id=f"carrier-{i}",
-                    terminal_amplitude=amp,
+                    provenance=provenance,
+                    state_tokens=tokens,
                     elapsed_times=times,
-                    strain_action=K,
-                    residual_impulse_abs=IR,
-                    hh_impulse_abs=IH,
+                    strain_action=strain,
+                    residual_impulse=residual,
+                    hh_impulse=hh,
                     checkpoint_indices=cuts,
                 )
             )
-            b = 1
-            bad = segs[b]
-            segs[b] = SameCarrierMonitorSegment(
-                carrier_id=bad.carrier_id,
-                terminal_amplitude=bad.terminal_amplitude,
+            bad = segments[1]
+            segments[1] = SameCarrierMonitorSegment(
+                provenance=bad.provenance,
+                state_tokens=bad.state_tokens,
                 elapsed_times=bad.elapsed_times,
                 strain_action=(0.0,) + bad.strain_action[1:],
-                residual_impulse_abs=(0.0,) + bad.residual_impulse_abs[1:],
-                hh_impulse_abs=(0.0,) + bad.hh_impulse_abs[1:],
+                residual_impulse=(0.0j,) + bad.residual_impulse[1:],
+                hh_impulse=(0.0j,) + bad.hh_impulse[1:],
             )
             try:
-                join_same_carrier_segments(segs)
+                join_same_carrier_segments(segments)
             except TypeError:
                 pass
             else:
-                reset_fail += 1
-                raise AssertionError("checkpoint baseline reset crossed the same-carrier type barrier")
+                reset_failures += 1
+                raise AssertionError("checkpoint reset crossed exact same-carrier boundary tokens")
 
-        # Interior accumulation: either a face is attained or the fixed carrier crosses it.
-        if i % 2 == 0:
-            acc = interior_checkpoint_accumulation_outcome(
+        elapsed_limit = 1.3
+        acc_provenance = _provenance(index + samples, amplitude, terminal_time=2.0)
+        acc_tokens = (acc_provenance.terminal_state_token, f"acc-state-{index}")
+        if index % 2 == 0:
+            acc_segment = SameCarrierMonitorSegment(
+                provenance=acc_provenance,
+                state_tokens=acc_tokens,
+                elapsed_times=(0.0, elapsed_limit),
+                strain_action=(0.0, 0.7 * LOW_STRAIN_ACTION),
+                residual_impulse=(0.0j, complex(0.7 * RESIDUAL_FRACTION * amplitude)),
+                hh_impulse=(0.0j, complex(0.7 * GENERATED_FRACTION * amplitude)),
+            )
+            extension = SmoothPDEExtensionToken(
+                trajectory_id=acc_provenance.trajectory_id,
+                state_token=acc_tokens[-1],
+                physical_time=0.7,
+                open_interval=(0.6, 0.8),
+            )
+            outcome = interior_checkpoint_accumulation_outcome(
                 event_time=2.0,
                 accumulation_time=0.7,
-                terminal_amplitude=amp,
-                strain_action_limit=0.7 * LOW_STRAIN_ACTION,
-                residual_impulse_abs_limit=0.7 * RESIDUAL_FRACTION * amp,
-                hh_impulse_abs_limit=0.7 * GENERATED_FRACTION * amp,
+                prelimit_certificate=SameCarrierPrelimitCertificate((acc_segment,)),
+                smooth_extension_token=extension,
             )
-            if not bool(acc["same_carrier_extends_past_accumulation"]):
-                raise AssertionError("strictly subthreshold interior checkpoint accumulation blocked the same carrier")
+            if not outcome["same_carrier_extends_past_accumulation"]:
+                raise AssertionError("strict actual margins failed to cross an observer-cut accumulation")
             continue_cases += 1
         else:
-            acc = interior_checkpoint_accumulation_outcome(
+            acc_segment = SameCarrierMonitorSegment(
+                provenance=acc_provenance,
+                state_tokens=acc_tokens,
+                elapsed_times=(0.0, elapsed_limit),
+                strain_action=(0.0, LOW_STRAIN_ACTION),
+                residual_impulse=(0.0j, complex(0.4 * RESIDUAL_FRACTION * amplitude)),
+                hh_impulse=(0.0j, complex(0.4 * GENERATED_FRACTION * amplitude)),
+            )
+            outcome = interior_checkpoint_accumulation_outcome(
                 event_time=2.0,
                 accumulation_time=0.7,
-                terminal_amplitude=amp,
-                strain_action_limit=LOW_STRAIN_ACTION,
-                residual_impulse_abs_limit=0.4 * RESIDUAL_FRACTION * amp,
-                hh_impulse_abs_limit=0.4 * GENERATED_FRACTION * amp,
+                prelimit_certificate=SameCarrierPrelimitCertificate((acc_segment,)),
+                smooth_extension_token=None,
             )
-            if "high_strain_critical_dissipation" not in tuple(acc["joint_first_stops"]):
-                raise AssertionError("closed strain face disappeared at checkpoint accumulation")
+            if STRAIN_STOP not in tuple(outcome["joint_first_stops"]):
+                raise AssertionError("exact endpoint strain face disappeared")
             stop_cases += 1
 
-    return SameCarrierStress(samples, worst, segmentation_fail, reset_fail, nonmono, stop_cases, continue_cases, max_checkpoints)
+    return SameCarrierStress(
+        samples,
+        worst,
+        segmentation_failures,
+        reset_failures,
+        nonmonotone,
+        stop_cases,
+        continue_cases,
+        maximum_cuts,
+        zeno_failures,
+    )
 
 
 def main() -> None:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--samples", type=int, default=50_000)
-    ap.add_argument("--outdir", type=Path, default=Path("results-same-carrier-checkpoint-segmentation-quotient"))
-    args = ap.parse_args()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--samples", type=int, default=50_000)
+    parser.add_argument("--outdir", type=Path, default=Path("results-same-carrier-checkpoint-segmentation-quotient"))
+    args = parser.parse_args()
     args.outdir.mkdir(parents=True, exist_ok=True)
-    cert = theorem_certificate()
-    out = stress(args.samples)
-    payload = {"certificate": cert, "stress": asdict(out)}
+    certificate = theorem_certificate()
+    result = stress(args.samples)
+    payload = {"certificate": certificate, "stress": asdict(result)}
     (args.outdir / "same_carrier_checkpoint_segmentation_quotient.json").write_text(
         json.dumps(payload, indent=2), encoding="utf-8"
     )
-    md = f"""# Same-carrier checkpoint segmentation quotient
+    summary = f"""# Same-carrier checkpoint segmentation quotient
 
-Status: **{cert['status']}**.
+Status: **{certificate['status']}**.
 
-One physical event anchors one smooth carrier and one terminal dual.  Natural service horizons may be inserted while following that carrier, but they do not reset the event-to-endpoint cumulative observables
+Finite observer cuts are quotiented only when exact event/carrier/terminal-dual,
+terminal-coefficient, scale/lifetime, PDE-trajectory, shared-state, native-time and
+cumulative-complex-impulse provenance reconstructs one physical path.  Complex
+phase is retained when locating coefficient faces; magnitudes are never summed as
+segment work.
 
-`K_A[s,t]`, `|I_role-interface[s,t]|`, `|I_HH[s,t]|`.
+A full-natural checkpoint authorizes sidecar rereading only when a typed no-hit
+cumulative restriction of that same path ends at the checkpoint's exact native
+duration and matches the master event provenance.  Matching `t`, `A`, and `c` on a
+bare checkpoint is not path identity.
 
-`K_A` is a monotone physical strain action.  The coefficient-impulse magnitudes need not be monotone because the underlying complex cumulative impulses may cancel; they are therefore **not** summed per segment and never used as work.
+Arbitrary observer cuts are not full-natural service windows.  For one fixed
+carrier, every genuine natural window has the same positive native duration
+`c A^-2`, so such windows cannot form an interior Zeno sequence.  An accumulation
+of arbitrary cuts is classified only from the actual prelimit path and a matching
+smooth-PDE extension token.
 
-Deleting or inserting checkpoint cuts leaves the same native first stop and exact joint tie set.  A no-event checkpoint cannot replace the carrier, reset the fixed terminal amplitude, or reset the cumulative monitor baselines.  Its hard-shell readings remain state sidecars until a new physical event actually hardens a role.
+Stress: `{result.samples}` same-PDE-path/segmentation states
+- worst segmentation first-time residual: `{result.worst_segmentation_first_time_residual:.3e}`
+- segmentation failures: `{result.segmentation_failures}`
+- checkpoint reset-barrier failures: `{result.reset_barrier_failures}`
+- sampled nonmonotone impulse-magnitude paths: `{result.nonmonotone_impulse_magnitudes}`
+- interior accumulation stop cases: `{result.accumulation_stop_cases}`
+- interior accumulation continuation cases: `{result.accumulation_continue_cases}`
+- maximum inserted observer-cut count: `{result.maximum_checkpoint_count}`
+- fixed-window Zeno failures: `{result.fixed_window_zeno_failures}`
 
-An interior accumulation of arbitrarily many checkpoint cuts is likewise not a PDE obstruction.  On a smooth pre-singular interval the native cumulative monitors are continuous/AC: if a closed face is attained at the limit, that is the existing first stop (with coefficient faces routed through physical-energy reentry); if every face retains strict margin, the same carrier continues across the accumulation time.  If the continuation reaches `t=0`, the initial boundary absorbs.
-
-Stress: `{out.samples}` cumulative-path/segmentation states
-- worst segmentation first-time residual: `{out.worst_segmentation_first_time_residual:.3e}`
-- segmentation failures: `{out.segmentation_failures}`
-- checkpoint reset-barrier failures: `{out.reset_barrier_failures}`
-- sampled nonmonotone coefficient-impulse paths: `{out.nonmonotone_impulse_paths}`
-- interior accumulation stop cases: `{out.accumulation_stop_cases}`
-- interior accumulation continuation cases: `{out.accumulation_continue_cases}`
-- maximum inserted checkpoint count sampled: `{out.maximum_checkpoint_count}`
-
-This theorem removes natural-horizon segmentation and no-event re-hardening from the continuation topology of a fixed event-anchored carrier.  It does not remove genuine high-tail physics, does not telescope infinitely recurring physical owner events, and makes no Navier--Stokes global-regularity claim.
+This closes segmentation only for one certified event-anchored PDE path.  It does
+not telescope recurring genuine physical owners and does not prove Navier--Stokes
+global regularity.
 """
-    (args.outdir / "summary.md").write_text(md, encoding="utf-8")
-    print(md)
+    (args.outdir / "summary.md").write_text(summary, encoding="utf-8")
+    print(summary)
 
 
 if __name__ == "__main__":

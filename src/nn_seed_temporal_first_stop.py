@@ -32,9 +32,16 @@ from src.smooth_sgs_first_hit_extraction import (
 def renewed_natural_duration(renewal_frequency: float, scaled_lifetime: float) -> float:
     A = float(renewal_frequency)
     c = float(scaled_lifetime)
-    if A <= 0 or c <= 0 or not math.isfinite(A + c):
+    if A <= 0 or c <= 0 or not all(math.isfinite(x) for x in (A, c)):
         raise ValueError("positive finite renewed frequency and scaled lifetime required")
-    return c / (A * A)
+    # Form sqrt(c)/A first.  The mathematically equivalent c/(A*A) can
+    # overflow its denominator and return zero even when the natural duration
+    # itself is a positive representable subnormal number.
+    root_duration = math.sqrt(c) / A
+    duration = root_duration * root_duration
+    if duration <= 0 or not math.isfinite(duration):
+        raise ValueError("renewed natural duration is outside the finite floating certificate range")
+    return duration
 
 
 def backward_natural_endpoint(event_time: float, renewal_frequency: float, scaled_lifetime: float) -> dict[str, float | bool]:
@@ -42,13 +49,16 @@ def backward_natural_endpoint(event_time: float, renewal_frequency: float, scale
     if t < 0 or not math.isfinite(t):
         raise ValueError("finite nonnegative event time required")
     T = renewed_natural_duration(renewal_frequency, scaled_lifetime)
-    s = max(0.0, t - T)
+    elapsed = min(t, T)
+    hits_boundary = t <= T
+    s = 0.0 if hits_boundary else t - T
     return {
         "event_time": t,
         "natural_duration": T,
         "backward_endpoint": s,
-        "elapsed_available": t - s,
-        "hits_initial_boundary": s == 0.0,
+        "endpoint_elapsed_from_event": elapsed,
+        "elapsed_available": elapsed,
+        "hits_initial_boundary": hits_boundary,
         "full_natural_interval_before_boundary": t >= T,
     }
 

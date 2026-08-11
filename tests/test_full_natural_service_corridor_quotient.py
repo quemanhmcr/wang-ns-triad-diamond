@@ -11,8 +11,9 @@ from src.full_natural_service_corridor_quotient import (
 )
 
 
-def _outcome(A: float, c: float, y: float = 0.3):
+def _outcome(A: float, c: float, y: float = 0.3, *, event_time: float | None = None):
     T = c / A**2
+    t = 4.0 * T if event_time is None else float(event_time)
     return {
         "classification": FULL_NATURAL_SERVICE_WITNESS,
         "joint_first_stops": (),
@@ -20,6 +21,16 @@ def _outcome(A: float, c: float, y: float = 0.3):
         "observed_elapsed_end": T,
         "uniform_square_service_lower": y,
         "integrated_bounded_heat_service_lower": c * y,
+        "endpoint_carrier_critical_mass_lower": 2.0 * y,
+        "corridor_terminal_time": t,
+        "corridor_endpoint_time": t - T,
+        "corridor_endpoint_elapsed_from_terminal": T,
+        "physical_time_drop": T,
+        "renewal_frequency": A,
+        "scaled_lifetime": c,
+        "parent_shell_frequency": A / 0.75,
+        "service_same_corridor_witness": True,
+        "service_adds_recursion_depth": False,
         "requires_physical_energy_reentry": False,
         "coefficient_impulses_used_as_work": False,
     }
@@ -43,7 +54,7 @@ def test_t0_root_cannot_be_retyped_as_full_natural_service():
     T = c / A**2
     with pytest.raises(ValueError, match="absorbing boundary"):
         quotient_full_natural_service_outcome(
-            _outcome(A, c),
+            _outcome(A, c, event_time=T),
             event_time=T,
             renewal_frequency=A,
             scaled_lifetime=c,
@@ -54,7 +65,7 @@ def test_material_rereading_partitions_same_service_without_recursion_depth():
     A, c = 4.0, 0.8
     T = c / A**2
     corridor = quotient_full_natural_service_outcome(
-        _outcome(A, c),
+        _outcome(A, c, event_time=3.0 * T),
         event_time=3.0 * T,
         renewal_frequency=A,
         scaled_lifetime=c,
@@ -81,6 +92,7 @@ def test_endpoint_smooth_carrier_has_two_comparable_hard_shell_witnesses():
     )
     assert cover["renewal_frequency"] == pytest.approx(6.0)
     assert cover["hard_shell_candidates"] == pytest.approx((6.0, 12.0))
+    assert cover["next_corridor_renewal_candidates"] == pytest.approx((4.5, 9.0))
     assert cover["candidate_ratios_to_parent"] == pytest.approx((0.75, 1.5))
     assert cover["guaranteed_max_hard_shell_critical_mass_lower"] == pytest.approx(2.0)
     assert cover["new_causal_charge_created"] is False
@@ -99,6 +111,7 @@ def test_endpoint_hard_shell_exact_tie_stays_joint():
     )
     out = realized_endpoint_hard_shell_witnesses(cover, (2.2, 2.2))
     assert out["joint_witness_frequencies"] == pytest.approx((6.0, 12.0))
+    assert out["joint_next_corridor_renewal_frequencies"] == pytest.approx((4.5, 9.0))
     assert out["causal_primary_selected"] is False
     assert out["recursion_edges_added"] == 0
     assert out["physical_time_drop_added"] == 0.0
@@ -122,5 +135,5 @@ def test_certificate_removes_service_theorem_depth_without_uv_overclaim():
     assert "genuine first-hit/work/source/reuse owner recurrence remains open" in cert["scope"]
     assert "zero physical event vertices" in cert["master_quotient"]
     assert "actual shell masses determine" in cert["checkpoint_refinement"]
-    assert "event-anchored Q_A carrier" in cert["same_carrier_candidate"]
-    assert "do not define a causal scale lineage" in cert["same_carrier_candidate"]
+    assert "event/carrier/terminal-dual/PDE-trajectory" in cert["same_carrier_candidate"]
+    assert "arbitrary cuts and shell readings are duration-free sidecars" in cert["same_carrier_candidate"]

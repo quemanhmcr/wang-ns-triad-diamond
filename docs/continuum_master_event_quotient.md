@@ -1,6 +1,6 @@
 # Continuum master event quotient: physical time, not theorem depth
 
-Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; same-carrier checkpoint-segmentation extension certified on `bd404d8fd79336e094015f8a9463bfef761e9d2d`; smooth-relink donor extension certified on `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03`; high-strain descending-epoch extension certified on `774c702a692e67f5ccdf3a7028c16e437a0c5cc1`**.
+Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; author's initial same-carrier extension on `bd404d8fd79336e094015f8a9463bfef761e9d2d` and audited same-path/native-scale repair on exact source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3`; author's smooth-relink donor extension on `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` with independent repair certified on `d40d6c280973ad860378cad8a0cc078fea81ac1a`; author's high-strain descending-epoch extension on `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` with independent native-scale repair on `422ab677e635159d82720a2af60f7900e7b3be9f` and physical PDE audit head `70bb2e4a9ec5b7d8826dc1016da5157cbe5fb1ac`**.
 
 ## 1. Why the apparent recursion was too large
 
@@ -91,9 +91,9 @@ This statement uses **zero event counting**.  After relays, service witnesses an
 
 This is a topology/physical-time statement, not a regularity conclusion.
 
-## 5. Ultraviolet checkpoint geometry remains diagnostic, not lineage
+## 5. Geometric UV time belongs to physical changing-scale producers
 
-Physical time alone still permits an observer to place checkpoint readings at geometrically increasing scales.  If a diagnostic sequence has
+If independently certified physical producers have geometrically increasing scales
 
 \[
 A_j=A_0r^j,\qquad r>1,
@@ -105,9 +105,23 @@ then
 \boxed{\sum_{j\ge0}cA_j^{-2}={cA_0^{-2}\over1-r^{-2}}<\infty.}
 \]
 
-This remains a useful anti-theorem against any argument using physical time alone.  The certified same-carrier segmentation quotient adds a stronger fact: a no-event natural horizon does not replace the event-anchored smooth carrier or reset its cumulative first-hit filtration.  Therefore a geometrically growing sequence obtained only by checkpoint hard-shell rereading is a sequence of **state observations**, not a canonical physical lineage.
+This remains a useful anti-theorem against any argument using physical time alone
+to terminate a genuinely changing-scale path. It cannot be attached to arbitrary
+observer cuts. For one event-anchored carrier, `A` and `c` remain fixed: every
+genuine natural window has the same positive duration `cA^-2`, whereas arbitrary
+checkpoint/plotting cuts carry no service-window duration.
 
-The actual carrier continues with the same terminal coefficient and cumulative native monitors `K_A[s,t]`, `|I_R[s,t]|`, and `|I_HH[s,t]|`.  At an interior accumulation of checkpoint cuts, continuity/absolute continuity gives either an existing first-stop face at the limit or continuation of the same carrier across the accumulation.  Genuine UV progression remains fully physical when the independent high-tail dissipation/work hypotheses actually fire.
+Same-carrier gluing requires exact event, carrier, terminal-dual, terminal-state,
+trajectory and boundary tokens, and retains the complex cumulative paths
+`I_R[s,t]`, `I_HH[s,t]`. At an arbitrary-cut accumulation, endpoint scalars alone
+prove nothing: the actual no-earlier-hit prelimit path and a matching open smooth
+PDE token yield either an exact endpoint face or continuation. Genuine UV
+progression remains physical when independent tail dissipation/work hypotheses fire.
+
+Likewise, a bare typed checkpoint with matching `t`, `A`, and `c` does not identify
+a PDE trajectory. Sidecar rereading requires the checkpoint to be bound to the
+actual no-hit cumulative restriction ending at its native duration and to match
+the master event/carrier/dual/trajectory provenance exactly.
 
 This refinement is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`; the previous checkpoint theorem provenance remains recorded below.
 
@@ -173,7 +187,10 @@ With the certified same-carrier checkpoint segmentation quotient, the master-fac
 
 An infinite recursive event path avoiding `t=0` must therefore recur through actual first-hit/work/source/reuse/independent-service owners.  Those events still have to telescope through the native physical ledgers they truly supply; no critical normalized quantity may be promoted to a synthetic finite reset.
 
-The geometric UV checkpoint sum above remains a diagnostic warning that time alone is insufficient.  It is no longer an independent master escape branch once checkpoint cuts are quotiented inside one fixed carrier.  Actual high-tail dynamics remains available exactly when its physical tail hypotheses are met.
+The geometric UV sum above remains a warning for independently certified
+changing-scale physical producers. It is not a duration ledger for cuts inside one
+fixed carrier. Actual high-tail dynamics remains available exactly when its
+physical tail hypotheses are met.
 
 This extension does **not** prove global no-escape or 3D Navier--Stokes regularity; termination of genuine physical-owner recurrence is still open.
 
@@ -222,7 +239,15 @@ state/cover facts, not directional scale progress.  In particular the upper
 `>=2`, and the production API marks it as inadmissible for high-tail
 ownership.
 
-At this intermediate certified stage, before the later same-carrier theorem, the master still exposed two distinct questions:
+Checkpoint continuation is not certified by time contiguity or membership in the
+candidate set alone.  A typed transition must carry the two actual endpoint shell
+masses, retain the state-selected unique/joint witnesses, and reuse one witnessed
+frequency together with the same mass as the next producer input at the exact
+endpoint state.  Native local durations, rather than subtraction of nearly equal
+global clocks, form the physical-time ledger.
+
+At the checkpoint-only stage, the master appeared to have two distinct
+infinite-path questions:
 
 1. an infinite recursive **event path**, which after all quotients can contain
    only genuine named physical owner events;
@@ -230,7 +255,21 @@ At this intermediate certified stage, before the later same-carrier theorem, the
    times may have a finite sum and which must be closed by a separate PDE theorem
    if one is available.
 
-At that stage the second object was neither declared harmless nor declared high-tail by fiat; it was only removed from artificial event depth.  The later certified same-carrier segmentation theorem `bd404d8...` closes that remaining checkpoint-continuation interpretation by proving that no-event horizons do not restart the carrier or its cumulative first-hit filtration.  This checkpoint extension itself was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854` and full integration run `31451492844`; the earlier base and service-corridor blocks retain their own provenance.
+At that stage the second object was neither declared harmless nor declared
+high-tail by fiat.  It was simply removed from artificial event depth.  That
+extension was certified on
+exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854`
+and full integration run `31451492844`; it records the pre-segmentation frontier.
+
+The audited same-path refinement removes the observer-generated version of the
+second question.  With no new physical stop, the event-anchored carrier keeps
+fixed `A,c`; its genuine natural windows have one positive duration and cannot
+Zeno, while arbitrary cuts carry no duration.  Hard-shell readings at those cuts
+are state sidecars and cannot form a physical UV lineage.  Therefore any genuine
+scale change must enter through an independently certified physical producer or
+event, and such changing-scale event paths remain subject to the geometric
+anti-theorem.  The current infinite-path frontier is recurrence of those genuine
+physical owners, not recurrence of checkpoint observations.
 
 ### Certified extension: smooth conservative relink is same-event provenance
 
@@ -250,10 +289,11 @@ a recursive owner after the conservative relink quotient.  Pure relink creates n
 child event.  No hard/smooth measure identification, scale reweighting, or donor
 priority is introduced.
 
-If this candidate is certified, the genuine-owner recurrence frontier shrinks by
-one more class: smooth conservative relink will no longer be an independent
-recursion mechanism.  Strain/deformation, HH generation, source/dissipation,
-independent service, new material ancestry and causal reuse remain genuine.
+The independently repaired audit certifies that the genuine-owner recurrence
+frontier shrinks by one more class: smooth conservative relink is not an
+independent recursion mechanism.  Strain/deformation, HH generation,
+source/dissipation, independent service, new material ancestry and causal reuse
+remain genuine.
 
 This smooth-relink extension was certified on exact SHA
 `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` by dedicated run `31457786141`
@@ -262,10 +302,20 @@ quadratic-carrier compatibility run `31457786119` was also green.  It preserves
 physical relink as same-event donor provenance while removing it from recursive
 owner depth.
 
-### Certified extension: consecutive high-strain epochs telescope through the physical gradient reservoir
+The stronger adversarial audit is green on exact SHA
+`d40d6c280973ad860378cad8a0cc078fea81ac1a`: run `31460849461` passed `17`
+anti-tests, all `785` theorem tests, `200,000` native-scale relink laws, three
+`100,000`-state dependency stresses, and a three-resolution probe of the actual
+dealiased Fourier--Galerkin Navier--Stokes evolution.  It additionally requires
+one negative-net donor trace for every positive recipient, replays native owner
+and mass data inside the master, and rejects nonfinite/negative gauge provenance.
+Stored artifact:
+`recorded-results/31460849461/audit-smooth-relink-donor-results/`.
+
+### Independently audited extension: consecutive high-strain epochs telescope through the physical gradient reservoir
 
 High strain remains a genuine recursive owner; it is not quotiented like smooth
-conservative relink.  The candidate adds a path law instead.
+conservative relink.  The certified high-strain theorem adds a path law instead.
 
 At child scale `N_j`, high strain gives
 
@@ -288,3 +338,68 @@ Mixed-owner recurrence remains open.
 
 
 This high-strain path extension was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated run `31460525711` and full causal integration run `31460525687`.  It removes eventually-pure high-strain recurrence while leaving mixed genuine-owner recurrence open.
+
+The independent audit found that the original executable used dimensional
+`max(1,...)` tolerance floors and therefore accepted ascending ancestors,
+subthreshold dissipation, global-reservoir overdrafts and foreign consecutive
+carriers at tiny native scale.  Exact red run `31461890777` failed `6/6`
+anti-tests.  The native-ratio/logarithmic repair on exact source SHA
+`422ab677e635159d82720a2af60f7900e7b3be9f` passed those anti-tests and a
+`200,000`-epoch sweep from frequencies `3.170e-199` to `2.431e202`.
+
+On exact PDE audit head `70bb2e4a9ec5b7d8826dc1016da5157cbe5fb1ac`, run
+`31462711590` passed all `801` theorem tests, the wide stress, every direct
+dependency, and a three-resolution actual dealiased Fourier--Galerkin
+Navier--Stokes probe of `K_N`, `D_N`, `G_*`, critical `D_V|_G` shells and the
+physical `N=16 -> M=4 -> A=3` renewal.  Stored artifact:
+`recorded-results/31462711590/audit-high-strain-descending-epoch-results/`.
+The same exact head passed the complete causal integration in run `31462711518`;
+its `100`-file artifact digest is
+`sha256:49239ed32c57e1f7a54c8fd351ac463b889816bf3d61b22464b95244a0997977`.
+
+### Certified extension: signed-good generated HH has finite parabolic depth
+
+This certified extension does **not** classify a raw HH coefficient obstruction as a generated
+owner.  `|I_HH|` remains only a first-stop locator.  The same smooth carrier must
+first reenter actual `Q^2`/physical-energy causality; only the branch carrying
+positive physical HH child-energy work is eligible.
+
+On that actual work law, keep the physical heavy half-slab and its same-time hard
+parent pair.  If the parent is signed-good,
+
+`3/5 < N_parent/N_child < 5/8`,
+
+then `T_parent/T_child>64/25`.  For parent-work support `H_j=[a_j,b_j]`, the
+existing asynchronous registration surface
+
+`s_j=a_j-(2/5)T_j`
+
+is not an event vertex.  The heavy-half support obeys
+`|H_j|/T_j<=25/128<10/39`, and the next generated support is required to be the
+same physical lineage, namely `H_(j+1) subset [s_j,b_j]`.  Therefore
+
+`s_j-s_(j+1)>=(1792/4875)T_j`,
+
+and
+
+`Delta s_L >= (1792/7605)T_0[(64/25)^L-1]`.
+
+At finite physical time the required backward registration surface consequently
+reaches `t=0` after finite consecutive signed-good generated depth.  The event
+times themselves are not assigned a synthetic minimum decrement, and no event
+count is charged.  The initial surface terminates the registration because `t=0`
+is physically absorbing.
+
+The master consequence is only that an infinite recursive path
+cannot eventually consist solely of **signed-good** generated HH renewals.  Generic
+HH/high-tail work without this signed-good geometry remains a genuine separate
+route.  Shannon/Renyi also remains the native breadth/collision/reuse law of the
+ancestry rather than being repurposed as a clock.
+
+This signed-good generated-HH extension was certified on exact implementation SHA
+`72864e407b0f704e6cab2b330d2fb49c78bcf9a4` by dedicated run `31467837283` and
+full causal integration run `31467837226`.  The dedicated run passed `738` tests
+and `50,000` generated-epoch states; the companion master stress had zero
+signed-good generated-epoch failures.  The initial `39c558b...` run was
+fixture-only: one certificate wording assertion failed after `737` passing tests,
+with no theorem stress and no source theorem change.

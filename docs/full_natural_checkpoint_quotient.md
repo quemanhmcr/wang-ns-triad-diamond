@@ -2,7 +2,7 @@
 
 ## Status
 
-Base checkpoint theorem certified on exact implementation SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated GitHub Actions run `31451492854` and full physical-energy causal integration run `31451492844`.  The same-carrier continuation/no-reset refinement below is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`.
+Base checkpoint theorem certified on exact implementation SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated GitHub Actions run `31451492854` and full physical-energy causal integration run `31451492844`.  The author's initial same-carrier continuation/no-reset refinement was certified on `bd404d8fd79336e094015f8a9463bfef761e9d2d`; independent adversarial audit subsequently found native-scale and PDE-path provenance gaps.  The repaired refinement below is verified on exact source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3` by audit run `31456579940`, dedicated run `31456579975`, and full integration run `31456580020`.
 
 This theorem separates three objects which were previously too easy to conflate:
 
@@ -43,6 +43,19 @@ was selected because the theorem chose one natural horizon.  No physical conditi
 fired there.  It is therefore an **analysis checkpoint**, not a new causal/event
 vertex.
 
+The checkpoint carries `cA^-2` directly as a native local elapsed coordinate.  Its
+absolute endpoint `t-cA^-2` is only a diagnostic: for sufficiently deep UV scales,
+the two global clock values can be the same floating-point number even though the
+PDE interval is strictly positive.  No certificate recovers the local duration by
+subtracting those nearly equal clocks, and no dimensional comparison uses an
+observer-unit floor such as `max(1,...)`.
+
+The adapter also replays the complete service-corridor certificate and reads
+`M`, its input critical mass, `A`, `c`, and the local duration from the producer.
+External arguments may verify these quantities but cannot rebind them.  In
+particular, the covariance `(M,c) -> (2M,4c)`, which preserves `c/A^2`, cannot be
+used to attach one PDE state to a foreign shell.
+
 ## 2. Endpoint hard shells are state witnesses, not automatically scale dynamics
 
 The surviving smooth carrier has transported support inside `(A/2,2A)`.  Hence it
@@ -77,7 +90,7 @@ This does not deny that the hard shell at `3M/2` is an actual state observable.
 It says only that the **reason it was exposed** is checkpoint re-registration, not
 an already-proved nonlinear UV-generation mechanism.
 
-## 3. Checkpoint chains carry time but zero recursive event depth
+## 3. State-certified checkpoint chains carry time but zero event depth
 
 A sequence of no-hit checkpoints
 
@@ -91,25 +104,43 @@ still obeys the exact physical identity
 \sum_j(t_j-t_{j+1})=t_0-t_L.
 \]
 
-The quotient assigns
+Time contiguity by itself is insufficient. If an analyst makes a diagnostic
+changing-scale producer comparison between consecutive corridors, its transition
+must carry
+
+- the two actual endpoint hard-shell critical masses;
+- the unique/joint maximizing witness set determined by those masses;
+- the exact endpoint time token;
+- one selected witness frequency and the same critical mass as the next producer's
+  parent-shell input;
+- the same fixed scaled lifetime `c`.
+
+A list of bare checkpoints is therefore not a certified comparison, even if its
+global clocks are close. The typed record rejects an unrelated shell, losing cover
+branch, or rebound mass. Even a valid record is diagnostic and does not replace the
+canonical same carrier without a physical event.
+
+The quotient then assigns
 
 - physical time drop: actual corridor time;
 - event vertices added: `0`;
 - causal charges added: `0`;
 - hard-shell rereading: analysis witness only.
 
-Thus bounded-scale checkpoint continuation still reaches `t=0` by physical time,
-but it is not a chain of recursive physical events.
+Thus native local time edges telescope inside this diagnostic comparison, while
+the absolute endpoint-clock residual remains numerical only. Canonical same-carrier
+continuation instead keeps fixed `A,c`; its genuine natural windows have one
+positive duration and are not a recursive event chain.
 
-## 4. The geometric UV sum survives only as a diagnostic anti-theorem
+## 4. The geometric UV sum belongs to changing-scale producers, not observer cuts
 
-A hypothetical repeated upper-cover **reading** sequence
+A hypothetical family of independently certified changing-scale producers
 
 \[
 M_j=M_0(3/2)^j
 \]
 
-has corridor scales `A_j=3M_j/4`, so
+with corridor scales `A_j=3M_j/4` obeys
 
 \[
 \sum_{j\ge0}cA_j^{-2}
@@ -118,15 +149,15 @@ has corridor scales `A_j=3M_j/4`, so
 <\infty.
 \]
 
-This remains a valid warning that **physical time alone** cannot distinguish an
-observer-generated scale sequence from real UV dynamics.  The candidate
-same-carrier continuation theorem supplies the missing type information: because
-no physical event fired at the checkpoint, the hard-shell reading does not replace
-the event-anchored carrier and does not reset its cumulative first-hit monitors.
+This remains a valid warning that **physical time alone** cannot terminate a real
+changing-scale physical path. It is not a duration formula for an
+observer-generated reading sequence. Under same-carrier continuation, `A` and `c`
+remain fixed, so every genuine natural window has the same positive duration
+`cA^-2`; arbitrary plotting/checkpoint cuts carry no service-window duration.
 
-Hence the geometric sequence above is a diagnostic state-reading construction,
-not an independent PDE continuation lineage.  Actual high-tail dissipation/work
-remains fully physical when its own independently certified hypotheses are met.
+The endpoint hard-shell reading does not replace the event-anchored carrier or
+reset its cumulative path. Actual high-tail dissipation/work remains physical when
+its own independently certified hypotheses create a changing-scale event.
 
 ## 5. Fail-closed master semantics
 
@@ -146,7 +177,7 @@ until a new physical first stop/owner event actually occurs.
 
 ## Scope
 
-The base theorem removes natural-horizon event depth and two-shell cover ascent.  The certified same-carrier extension strengthens this: checkpoint hard-shell readings remain state sidecars while the same event-anchored smooth carrier and cumulative first-hit monitors continue.  Thus a UV-growing checkpoint-reading sequence is not a canonical physical lineage.  The extension still does not telescope infinitely recurring genuine physical owners and does not prove 3D Navier--Stokes global regularity.
+The base theorem removes natural-horizon event depth and two-shell cover ascent. The audited refinement strengthens this: checkpoint hard-shell readings remain duration-free state sidecars while exact event/carrier/terminal-dual/PDE-path provenance and cumulative complex monitors continue. Fixed-carrier natural windows retain their positive physical duration. The refinement still does not telescope infinitely recurring genuine physical owners and does not prove 3D Navier--Stokes global regularity.
 
 ## 6. Endpoint witness selection is performed by the state, not the analyst
 
@@ -165,8 +196,29 @@ would be convenient.
 
 Thus even the checkpoint re-registration geometry is state-driven: the observer
 chooses the language used to read the endpoint, but not which physical shell won.
+The diagnostic changing-scale comparison additionally requires a proposed next
+producer to reuse the winning pair `(H,mu_H)` at exactly the previous checkpoint
+state. Knowing merely that `H` belongs to `{A,2A}` is not enough. Canonical
+same-carrier continuation uses neither candidate as a replacement: it requires the
+typed checkpoint to be bound to the actual cumulative no-hit PDE restriction and
+to the expected event/carrier/dual/trajectory provenance.
 
-## 7. Certification
+## 7. Numerical falsification lane
+
+The checkpoint anti-tests range across native scales rather than a moderate fixed
+unit window.  They include deep-UV clocks for which `A^2` overflows while
+`cA^-2` remains a positive representable subnormal, and global endpoint clocks
+whose subtraction loses the local interval.
+
+The accompanying physical probe evolves the unforced three-dimensional
+incompressible Navier--Stokes Fourier--Galerkin system with Leray projection,
+viscosity, the quadratic transport term, `2/3` dealiasing, and RK4 at three
+resolutions.  It rereads the carrier balance, heat increment, and hard-shell cover
+from the same evolved corridor.  This is a strong attempt to falsify the encoded
+identities on actual NS dynamics; it is not a continuum proof and supplies no
+global-regularity claim.
+
+## 8. Original checkpoint certification
 
 Exact implementation SHA:
 
@@ -206,9 +258,11 @@ integration artifact digest is
 
 `sha256:23cd2a39f9a19006008f4b29a99ef8dce2ee60b7f34952f4225e30b398027b89`.
 
-These CI results are regression/certificate evidence around the encoded exact
-identities and type barriers.  They do not close the event-free UV continuation
-seam and do not imply Navier--Stokes global regularity.
+These base-theorem CI results are regression/certificate evidence around the
+encoded exact identities and type barriers.  By themselves they did not close the
+event-free UV continuation seam.  The audited refinement below removes the
+observer-generated same-carrier version of that seam, but does not terminate
+genuine physical-owner recurrence or imply Navier--Stokes global regularity.
 
 ## Certified continuation refinement: checkpoint rereading does not restart the carrier
 
@@ -218,16 +272,30 @@ reading, but no physical interaction occurred at the horizon.  Therefore the
 canonical event search does **not** replace the smooth carrier by whichever hard
 shell is visible here.
 
-The event-anchored carrier and terminal dual continue.  In particular the native
-first-hit observables remain cumulative from the same physical event:
+The event-anchored carrier and terminal dual continue only under exact event,
+carrier, terminal-dual, terminal-state and PDE-trajectory provenance. In particular
+the native first-hit observables remain cumulative from the same physical event:
 
-`K_A[s,t]`, `|I_role-interface[s,t]|`, `|I_HH[s,t]|`.
+`K_A[s,t]`, `I_role-interface[s,t]`, `I_HH[s,t]`.
 
-A checkpoint is not allowed to reset their baselines or the terminal coefficient
-used in their thresholds.  The two coefficient-impulse magnitudes are cumulative
-complex-impulse magnitudes and may decrease by phase cancellation; they are not
-summed across checkpoint segments and are not work.
+A checkpoint is not allowed to reset their baselines or terminal coefficient. The
+actual complex impulses are retained and glued at exact shared PDE state/time
+tokens; their derived magnitudes may decrease by phase cancellation and are never
+summed across segments or treated as work.
 
-Thus a sequence of hard-shell checkpoint readings is not, by itself, a physical
-scale lineage.  Actual high-tail dynamics remains governed by the independent
-physical tail dissipation/work theorems.  This refinement is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`.
+Arbitrary observer cuts are not natural service windows. Genuine fixed-`A,c`
+windows have one positive duration and cannot accumulate at an interior time;
+arbitrary cuts can accumulate but carry no duration, and continuation there needs
+the actual no-earlier-hit path plus a matching open smooth-PDE token. Actual
+high-tail dynamics remains governed by independent physical tail-work theorems.
+
+A bare checkpoint record is insufficient even when `t`, `A`, and `c` match. The
+same-carrier policy also requires its cumulative no-hit PDE restriction to end at
+the exact checkpoint duration and to match the provenance of the master event.
+
+The repaired source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3`
+passed `759` tests, `200,000` checkpoint states, `200,000` same-path segmentation
+states, and the dealiased Fourier--Galerkin Navier--Stokes probe in audit run
+`31456579940`.  This is strong regression and numerical-falsification evidence;
+the same-path restriction remains an explicit continuum hypothesis rather than a
+fact inferred from matching record fields.

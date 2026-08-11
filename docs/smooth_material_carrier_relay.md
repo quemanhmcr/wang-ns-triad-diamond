@@ -117,29 +117,36 @@ No global-regularity claim is made.
 
 ## Certified extension: natural horizons do not interrupt the relay
 
-The certified same-carrier checkpoint-segmentation theorem applies the relay principle to
-full-natural service horizons.  The exact carrier equation does not expire merely
-because one `cA^-2` interval has ended.  If no physical stop fires there, the
-natural endpoint is only an analysis checkpoint and the event search continues on
-the same `Q_A` carrier.
+The author's initial extension at `bd404d8fd79336e094015f8a9463bfef761e9d2d`
+was tightened after adversarial audit.  The exact repaired source
+`55b950fa289ccc3646c67a1c0318287a2d71bea3` passed audit run `31456579940`,
+dedicated same-carrier run `31456579975`, and full integration run `31456580020`.
+
+The same-carrier checkpoint-segmentation theorem applies the relay principle to
+full-natural service horizons. The exact carrier equation does not expire merely
+because one `cA^-2` interval has ended. If no physical stop fires, continuation is
+on the same `Q_A` only with exact event/carrier/terminal-dual/PDE-trajectory and
+shared-state provenance; a matching label alone is insufficient.
+
+Nor are matching `t`, `A`, and `c` on a bare typed checkpoint sufficient. The
+checkpoint must be bound to the actual cumulative no-hit restriction of this same
+path through its exact native endpoint; otherwise it has no continuation authority.
 
 The first-hit data therefore remain cumulative from the original physical event:
 
-`K_A[s,t]`, `|I_role-interface[s,t]|`, `|I_HH[s,t]|`,
+`K_A[s,t]`, `I_role-interface[s,t]`, `I_HH[s,t]`,
 
-with the same terminal coefficient setting the two coefficient faces.  Re-anchoring
-a local affine chart may change coordinates, but it cannot reset those observables.
-The strain action is monotone; coefficient-impulse magnitudes may decrease by
-complex phase cancellation and are never summed per checkpoint segment or used as
-work.
+with the same terminal coefficient setting the two coefficient faces. The actual
+complex impulses are glued at exact state/time tokens; their derived magnitudes may
+decrease by phase cancellation and are never summed as segment work.
 
-Consequently an accumulation of no-event natural horizons at an interior smooth
-time is either an existing first-stop face at the limit or is crossed by the same
-carrier.  Hardening into a fresh event role requires an actual physical event.
-This extension is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`.
+Genuine fixed-`A,c` natural horizons have one positive duration and cannot
+accumulate at an interior time. Arbitrary observer cuts can accumulate but carry no
+window duration; their continuation requires the actual no-earlier-hit path and a
+matching open smooth-PDE token. Hardening still requires a physical event.
 
 
-## Certified extension: smooth physical relink remains at the event
+## Independently audited extension: smooth physical relink remains at the event
 
 The certified smooth-relink donor quotient sharpens the physical-energy reentry
 without changing the relay carrier.  After common observer motion has already been
@@ -155,7 +162,16 @@ recursive state.  In a relink/strain tie, relink remains same-event provenance a
 strain remains the recursive owner.
 
 Smooth and hard event-role measures are not identified; only the finite
-antisymmetric-flux lemma is shared.  This extension is certified on exact SHA
-`8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` by dedicated run `31457786141`, full
-causal integration run `31457786115`, and reciprocal smooth-interface run
-`31457786119`.
+antisymmetric-flux lemma is shared.  The author's candidate on exact SHA
+`8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` passed dedicated run `31457786141`,
+full causal integration run `31457786115`, and reciprocal smooth-interface run
+`31457786119`; the stronger independent native-work audit is recorded separately.
+
+That independent audit is now green on exact SHA
+`d40d6c280973ad860378cad8a0cc078fea81ac1a`.  Audit run `31460849461`
+replayed every native owner and mass, removed unit-scale tolerance floors, rejected
+invalid gauge provenance, and required a donor path independently for each
+positive relink recipient.  It passed `17` anti-tests, `785` theorem tests,
+`200,000` native-scale laws and an actual three-resolution dealiased
+Navier--Stokes probe.  Pure relink still creates no child event; only the genuine
+strain component of a tie remains recursive.

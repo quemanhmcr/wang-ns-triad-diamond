@@ -33,6 +33,37 @@ must not be interpreted as a second event after the corridor.  The service is a
 physical observable of the interval which has already consumed the time drop
 `cA^-2`.
 
+The corridor object carries the complete native provenance supplied by the PDE
+theorem: the incoming hard-shell frequency `M`, renewal-carrier frequency
+`A=3M/4`, scaled lifetime `c`, terminal time, endpoint time, actual time drop,
+the incoming hard-shell critical-mass input, and endpoint carrier-mass lower.  A downstream reader may verify these data but
+cannot provide replacements for them.  In particular, a carrier proved near one
+`A` cannot be rebound to a foreign hard-shell scale by passing a new number to an
+adapter.
+
+That binding is enforced at the producer boundary as well.  The generic-shell
+producer receives the actual parent `M` and rejects any requested `A` other than
+`3M/4`; its survivor output also carries the exact parent-shell critical-mass
+input so a checkpoint successor cannot invent or rebind that resource.  On the high-strain route, the pushed-forward critical seed carries its
+own shell time, parent and child frequencies, scaled lifetime, and actual renewed
+critical mass.  The corridor must reuse all of them, including the event time and
+the terminal coefficient mass; it cannot manufacture a later event so that a
+short corridor appears full-natural.
+
+Every numerical equality guard is relative to the like-dimensional physical
+quantity.  No `max(1,...)` absolute floor is permitted.  This matters on the UV
+route because `cA^-2` and the corresponding critical masses can be arbitrarily
+small under natural rescaling.
+
+The corridor therefore carries `cA^-2` in its native local elapsed-time
+coordinate.  Its global endpoint `t-cA^-2` is retained only as a diagnostic
+reading: at deep UV, binary floating arithmetic may round that subtraction back
+to `t` even though the positive duration itself remains representable.  The
+physical-time telescope uses the carried duration, not subtraction of two nearly
+equal observer-clock readings.  The floating certificate still rejects scales
+whose duration itself falls outside its finite representable range; this
+numerical lane is evidence, not the continuum proof.
+
 ## 2. Materiality is a disintegration of the same law
 
 After the positive service exists, Moyal gives its physical phase-space edge
@@ -47,6 +78,11 @@ This partition creates no second service mass, causal charge, event time, or
 recursion edge.  A downstream theorem may use one positive submeasure to certify
 a genuinely new state, but that theorem must supply the actual physical state and
 time it creates.
+
+The input weights here are the complete integrated Moyal edge measure of this
+corridor, not an arbitrary positive array.  Their total must realize at least the
+certified integrated service lower.  A zero or under-mass edge array cannot be
+labelled as the same positive service law.
 
 ## 3. The endpoint carrier already contains a hard shell
 
@@ -91,6 +127,15 @@ comparable-scale statement, not monotone progress.  If the two actual shell
 masses tie, both witnesses are retained; no frequency-order or theorem-order
 priority is introduced.
 
+If an endpoint hard shell `H` is used to start the next generic-shell corridor,
+the next renewal carrier is `3H/4`.  Thus the typed chain is
+
+`parent shell M -> current carrier A=3M/4 -> endpoint shell H in {A,2A} -> next carrier 3H/4`.
+
+Only the corridor step consumes physical time.  The intermediate registrations
+are zero-time witness maps, but their distinct frequency roles must not be
+identified.
+
 ## 4. Master consequence
 
 A chain
@@ -101,17 +146,17 @@ contains one real physical corridor, not several physical intervals.  The extra
 arrows are witness maps on the same corridor, and the certified checkpoint
 refinement shows that the no-hit horizon itself adds zero recursive event vertices.
 
-The certified same-carrier checkpoint-segmentation theorem sharpens the next step:
-a no-event natural horizon does not restart the carrier.  The hard-shell endpoint
-readings remain state sidecars while the event-anchored `Q_A` carrier and its
-cumulative first-hit monitors continue.  Therefore repeated endpoint rereading
-cannot by itself create an infinite causal chain of fresh full-natural corridors.
+The audited same-carrier checkpoint-segmentation refinement sharpens the next step:
+a no-event natural horizon does not restart the carrier. Exact event/carrier/
+terminal-dual/PDE-path and cumulative-complex boundary provenance continues, while
+hard-shell endpoint readings remain state sidecars. Repeated rereading cannot by
+itself create fresh full-natural corridors.
 
-Physical time still telescopes across any inserted checkpoints, and a geometric UV
-reading sequence remains a valid diagnostic counterexample to a time-only argument.
-But that reading sequence is not a canonical physical lineage.  Independent
-source/service/reuse events and actual high-tail work events remain physical and
-still require their own native termination/reuse laws.
+For fixed `A,c`, genuine natural windows all have the same positive `cA^-2`
+duration and cannot Zeno before `t=0`. Arbitrary observer cuts may accumulate but
+carry no service-window duration. A finite geometric parabolic-time sum remains a
+counterexample only for independently certified changing-scale physical producers.
+Independent source/service/reuse and high-tail work events retain their native laws.
 
 This removes **service theorem depth** from named-owner recurrence and, after the certified same-carrier extension, removes natural-horizon restart depth as well.
 
@@ -122,8 +167,49 @@ This removes **service theorem depth** from named-owner recurrence and, after th
 - a service lower is not an additive globally bounded reset;
 - OO/ON/NN does not create another causal law;
 - endpoint hard-shell existence does not justify a lexicographic tie break;
+- a carrier scale cannot be rebound to an independently supplied shell scale;
+- an absolute unit-sized tolerance cannot certify a UV corridor or shell mass;
+- arbitrary or zero weights cannot be relabelled as the same positive service;
+- a non-finite edge total cannot be relabelled as a finite positive service law;
+- the endpoint-cover reader must replay the completed-corridor certificate rather
+  than trust classification flags in an arbitrary dictionary;
+- numerical tie slack is capped at the certificate tolerance and cannot promote
+  a zero or subcritical shell into the joint witness set;
 - comparable endpoint scale is not called directional progress;
 - no packet persistence or coherent-cell dominance is introduced.
+
+## 6. Physical PDE falsification lane
+
+The companion audit probe evolves the unforced three-dimensional incompressible
+Navier--Stokes Fourier--Galerkin system itself.  It uses Leray projection,
+viscosity, the quadratic convective term, 2/3 dealiasing, and RK4 time
+integration on a fixed multiscale divergence-free field.  Across several spatial
+resolutions it reads, from the same evolved physical interval,
+
+- the direct `Q^2` carrier-energy balance, including nonzero nonlinear carrier
+  work;
+- the global NS energy balance and zero global work of the dealiased quadratic
+  nonlinearity;
+- the endpoint two-hard-shell cover and its `2/3` witness lower;
+- positive bounded increment service integrated on that same corridor.
+
+The heat-service row is evaluated from the exact intrinsic Gaussian displacement
+law.  In Fourier variables the probe uses
+
+\[
+2\left(1-e^{-|\xi|^2/(2A^2)}\right)
+\]
+
+and removes the radius-`3/A` tail with the same certified Gaussian tail bound as
+the theorem.  It checks both the full annular heat lower and the retained bounded
+lower at every evolved time; no hand-picked list of translation directions is
+used as a surrogate.
+
+This is a resolved Fourier--Galerkin approximation to Navier--Stokes, not an
+artificial evolution and not a proof of the continuum theorem.  Its purpose is
+falsification: a sign, projection, scale, or duplicate-time error in the proposed
+physical bookkeeping must also survive contact with an actually evolved
+nonlinear incompressible PDE trajectory.
 
 No Navier--Stokes global-regularity claim is made.
 
@@ -203,10 +289,22 @@ chosen branch.  It receives the actual pair `(mu_A,mu_2A)` and applies the exact
 realization lemma internally; unique maxima are physical facts and exact ties stay
 joint.
 
-### Certified same-carrier continuation refinement
+Nor may a downstream ledger concatenate bare checkpoint records.  The successor
+must arrive through a typed transition that carries the actual winning
+frequency/mass pair into the next critical-shell producer at the same endpoint
+state.  This makes the endpoint cover a genuine PDE-state rereading without
+turning an observer-chosen candidate shell into dynamics.
 
-The certified `same_carrier_checkpoint_segmentation_quotient` makes the
-preceding master consequence fail-closed in production: a checkpoint hard-shell
-witness is a state sidecar, `checkpoint_scale_path_is_physical_lineage=False`, and
-the terminal coefficient plus cumulative strain/interface/HH first-hit monitors
-cannot be reset there.  This refinement is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`.
+### Audited same-carrier continuation refinement
+
+The audited `same_carrier_checkpoint_segmentation_quotient` makes the
+preceding consequence fail-closed: a hard-shell witness is a state sidecar,
+`checkpoint_scale_path_is_physical_lineage=False`, and only exact event/carrier/
+dual/trajectory/state-token gluing may continue the complex cumulative monitors.
+Checkpoint authority additionally requires the actual cumulative no-hit PDE
+restriction through its exact native endpoint; a bare checkpoint matching only
+`t`, `A`, and `c` is rejected.
+Arbitrary cuts are explicitly separated from positive-duration natural windows.
+The repaired source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3` passed
+audit run `31456579940` and full integration run `31456580020`, including the
+same-corridor and same-carrier Navier--Stokes falsification probes.

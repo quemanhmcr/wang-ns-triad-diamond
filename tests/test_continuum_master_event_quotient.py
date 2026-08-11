@@ -321,3 +321,26 @@ def test_master_certificate_closes_eventually_pure_high_strain_but_not_mixed_rec
     assert "eventually consisting only of high-strain" in dich["statement"]
     assert "mixed recurrence" in dich["remaining_physics"]
     assert "eventually-pure high-strain recurrence" in cert["scope"]
+
+
+def test_master_certificate_closes_eventually_pure_signed_good_generated_hh_but_not_generic_hh():
+    cert = theorem_certificate()
+    gen = cert["signed_good_generated_epoch"]
+    assert "actual Q^2/physical-energy reentry" in gen
+    assert "3/5<N_parent/N_child<5/8" in gen
+    assert "1792/4875" in gen
+    assert "Common surfaces are not event vertices" in gen
+    assert "generic non-signed-good HH" in gen
+    dich = master_escape_dichotomy()
+    assert "eventually-pure signed-good generated tail" in dich["statement"]
+    assert "Generic HH/high-tail" in dich["remaining_physics"]
+    assert "generic non-signed-good HH/high-tail recurrence remain open" in cert["scope"]
+
+
+def test_generic_hh_regeneration_does_not_inherit_signed_good_scale_progress_by_name():
+    generic = supplier_scale_certificate(SupplierKind.HH_REGENERATION)
+    signed = supplier_scale_certificate(SupplierKind.GENERATED_SIGNED_GOOD_HH)
+    assert "no_scale_progress_until_physical_HH_owner_is_resolved" in generic.directional_progress
+    assert generic.ratio_lower is None and generic.ratio_upper is None
+    assert signed.ratio_lower == pytest.approx(3.0 / 5.0)
+    assert signed.ratio_upper == pytest.approx(5.0 / 8.0)

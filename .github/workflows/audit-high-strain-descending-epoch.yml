@@ -1,0 +1,67 @@
+name: Audit high-strain descending epoch
+
+on:
+  push:
+    paths:
+      - 'src/high_strain_descending_epoch_telescope.py'
+      - 'src/high_strain_descending_epoch_pde_probe.py'
+      - 'tests/test_high_strain_descending_epoch_telescope.py'
+      - 'tests/test_high_strain_descending_epoch_audit.py'
+      - 'tests/test_high_strain_descending_epoch_pde_probe.py'
+      - 'docs/high_strain_descending_epoch_telescope.md'
+      - '.github/workflows/audit-high-strain-descending-epoch.yml'
+      - '.github/workflows/high-strain-descending-epoch-telescope.yml'
+      - 'src/high_strain_dissipation_collision.py'
+      - 'src/high_strain_resolved_ancestor.py'
+      - 'src/high_strain_critical_carrier_reentry.py'
+      - 'src/continuum_master_event_quotient.py'
+      - 'tests/test_continuum_master_event_quotient.py'
+      - '.github/workflows/physical-energy-causal-integration.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adversarial-high-strain-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Run native-scale high-strain anti-tests
+        run: pytest -q tests/test_high_strain_descending_epoch_audit.py
+      - name: Run full theorem suite
+        run: pytest -q
+      - name: Run wide high-strain descending-epoch stress
+        run: python -m src.high_strain_descending_epoch_telescope --samples 200000 --outdir results-audit-high-strain/high-strain-epoch
+      - name: Run high-strain telescope on actual dealiased Navier-Stokes trajectories
+        run: python -m src.high_strain_descending_epoch_pde_probe --resolutions 12 16 20 --steps 128 --outdir results-audit-high-strain/high-strain-pde-probe
+      - name: Run high-strain collision dependency stress
+        run: python -m src.high_strain_dissipation_collision --samples 100000 --outdir results-audit-high-strain/high-strain-collision
+      - name: Run resolved-ancestor dependency stress
+        run: python -m src.high_strain_resolved_ancestor --samples 100000 --outdir results-audit-high-strain/resolved-ancestor
+      - name: Run critical-carrier dependency stress
+        run: python -m src.high_strain_critical_carrier_reentry --samples 100000 --outdir results-audit-high-strain/critical-carrier
+      - name: Run continuum-master dependency stress
+        run: python -m src.continuum_master_event_quotient --samples 100000 --outdir results-audit-high-strain/continuum-master
+      - name: Publish summary
+        if: always()
+        run: |
+          if [ -f results-audit-high-strain/high-strain-epoch/summary.md ]; then
+            cat results-audit-high-strain/high-strain-epoch/summary.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f results-audit-high-strain/high-strain-pde-probe/summary.md ]; then
+            cat results-audit-high-strain/high-strain-pde-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: audit-high-strain-descending-epoch-results
+          path: results-audit-high-strain/
+          if-no-files-found: ignore

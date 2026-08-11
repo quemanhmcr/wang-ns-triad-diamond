@@ -10,11 +10,14 @@ from typing import Sequence
 
 from src.full_natural_service_corridor_quotient import (
     FULL_NATURAL_SERVICE_WITNESS,
+    RELATIVE_CERTIFICATE_TOLERANCE,
     RENEWAL_TO_PARENT_SHELL_RATIO,
     endpoint_comparable_hard_shell_cover,
     endpoint_hard_shell_cover_from_full_natural_outcome,
+    quotient_full_natural_service_outcome,
     realized_endpoint_hard_shell_witnesses,
 )
+from src.nn_seed_temporal_first_stop import renewed_natural_duration
 
 
 STATUS = (
@@ -28,6 +31,31 @@ STATUS = (
 FULL_NATURAL_CHECKPOINT = "full_natural_analysis_checkpoint"
 UPPER_COVER_RATIO = 2.0 * RENEWAL_TO_PARENT_SHELL_RATIO
 CERTIFIED_HIGH_TAIL_RATIO_LOWER = 2.0
+CHECKPOINT_CERTIFICATE_TOLERANCE = max(RELATIVE_CERTIFICATE_TOLERANCE, 8.0e-12)
+
+
+def _native_close(
+    left: float,
+    right: float,
+    *,
+    tolerance: float = CHECKPOINT_CERTIFICATE_TOLERANCE,
+) -> bool:
+    """Compare like-dimensional checkpoint data without a one-unit floor."""
+    a = float(left)
+    b = float(right)
+    eps = float(tolerance)
+    if not all(math.isfinite(x) for x in (a, b, eps)) or eps < 0:
+        return False
+    scale = max(abs(a), abs(b))
+    if scale == 0.0:
+        return a == b
+    return abs(a - b) <= eps * scale
+
+
+def _native_sequence_close(left: Sequence[float], right: Sequence[float]) -> bool:
+    a = tuple(float(x) for x in left)
+    b = tuple(float(x) for x in right)
+    return len(a) == len(b) and all(_native_close(x, y) for x, y in zip(a, b))
 
 
 @dataclass(frozen=True)
@@ -41,8 +69,9 @@ class FullNaturalCheckpoint:
     """
 
     terminal_time: float
-    endpoint_time: float
+    physical_time_drop: float
     parent_shell_frequency: float
+    parent_shell_critical_mass_lower: float
     corridor_frequency: float
     scaled_lifetime: float
     endpoint_carrier_critical_mass_lower: float
@@ -51,8 +80,9 @@ class FullNaturalCheckpoint:
     def __post_init__(self) -> None:
         vals = (
             self.terminal_time,
-            self.endpoint_time,
+            self.physical_time_drop,
             self.parent_shell_frequency,
+            self.parent_shell_critical_mass_lower,
             self.corridor_frequency,
             self.scaled_lifetime,
             self.endpoint_carrier_critical_mass_lower,
@@ -60,26 +90,37 @@ class FullNaturalCheckpoint:
         )
         if not all(math.isfinite(x) for x in vals):
             raise ValueError("finite checkpoint data required")
-        if self.terminal_time <= 0 or self.endpoint_time < 0 or self.endpoint_time >= self.terminal_time:
+        if self.terminal_time <= 0 or self.physical_time_drop <= 0 or self.physical_time_drop >= self.terminal_time:
             raise ValueError("one nontrivial backward physical corridor required")
-        if min(self.parent_shell_frequency, self.corridor_frequency, self.scaled_lifetime, self.endpoint_carrier_critical_mass_lower) <= 0:
-            raise ValueError("positive parent/corridor scales and lifetime required")
+        if min(
+            self.parent_shell_frequency,
+            self.parent_shell_critical_mass_lower,
+            self.corridor_frequency,
+            self.scaled_lifetime,
+            self.endpoint_carrier_critical_mass_lower,
+            *self.endpoint_shell_candidates,
+        ) <= 0:
+            raise ValueError("positive parent/corridor scales, masses, lifetime, and endpoint shell candidates required")
         A = RENEWAL_TO_PARENT_SHELL_RATIO * self.parent_shell_frequency
-        tol = 7e-12 * max(1.0, A, self.corridor_frequency)
-        if abs(self.corridor_frequency - A) > tol:
+        if not _native_close(self.corridor_frequency, A):
             raise ValueError("checkpoint corridor scale is not the actual A=3M/4 renewal scale")
-        expected = self.scaled_lifetime / (self.corridor_frequency * self.corridor_frequency)
-        actual = self.terminal_time - self.endpoint_time
-        if abs(actual - expected) > 7e-12 * max(1.0, expected, actual):
+        expected = renewed_natural_duration(self.corridor_frequency, self.scaled_lifetime)
+        if expected <= 0 or not math.isfinite(expected) or not _native_close(self.physical_time_drop, expected):
             raise ValueError("checkpoint physical time is not the completed A-natural corridor")
         cands = self.endpoint_shell_candidates
         expected_cands = (A, 2.0 * A)
-        if any(abs(x - y) > 7e-12 * max(1.0, abs(x), abs(y)) for x, y in zip(cands, expected_cands)):
+        if len(cands) != 2 or not _native_sequence_close(cands, expected_cands):
             raise ValueError("checkpoint endpoint hard-shell candidates do not match the carrier cover")
 
     @property
-    def physical_time_drop(self) -> float:
-        return self.terminal_time - self.endpoint_time
+    def endpoint_elapsed_from_terminal(self) -> float:
+        """Native local PDE time; this remains nonzero when global clocks round."""
+        return self.physical_time_drop
+
+    @property
+    def endpoint_time(self) -> float:
+        """Diagnostic global clock, never the authority for the UV telescope."""
+        return self.terminal_time - self.physical_time_drop
 
     @property
     def candidate_ratios_to_parent(self) -> tuple[float, float]:
@@ -89,8 +130,8 @@ class FullNaturalCheckpoint:
 def checkpoint_from_full_natural_outcome(
     outcome: dict[str, object],
     *,
-    parent_shell_frequency: float,
-    scaled_lifetime: float,
+    parent_shell_frequency: float | None = None,
+    scaled_lifetime: float | None = None,
 ) -> FullNaturalCheckpoint:
     """Retype a full no-hit shell outcome as a physical corridor + analysis checkpoint.
 
@@ -111,22 +152,26 @@ def checkpoint_from_full_natural_outcome(
     if bool(outcome.get("service_adds_recursion_depth", True)):
         raise ValueError("service theorem depth cannot be present in a checkpoint")
 
-    M = float(parent_shell_frequency)
-    c = float(scaled_lifetime)
-    if M <= 0 or c <= 0 or not math.isfinite(M + c):
-        raise ValueError("positive finite parent shell and lifetime required")
-    A = RENEWAL_TO_PARENT_SHELL_RATIO * M
+    M = float(outcome.get("parent_shell_frequency", math.nan))
+    A = float(outcome.get("renewal_frequency", math.nan))
+    c = float(outcome.get("scaled_lifetime", math.nan))
     t = float(outcome.get("corridor_terminal_time", math.nan))
-    s = float(outcome.get("corridor_endpoint_time", math.nan))
-    drop = float(outcome.get("physical_time_drop", math.nan))
-    expected = c / (A * A)
-    tol = 7e-12 * max(1.0, expected, abs(drop), abs(t - s) if math.isfinite(t + s) else 1.0)
-    if not all(math.isfinite(x) for x in (t, s, drop)):
-        raise ValueError("full-natural outcome must expose actual corridor endpoint times")
-    if abs(drop - expected) > tol or abs((t - s) - expected) > tol:
-        raise ValueError("full-natural outcome does not expose the actual A-natural physical corridor")
-    if s <= 0:
-        raise ValueError("a corridor reaching t=0 is an absorbing boundary, not an interior checkpoint")
+    parent_mass = float(outcome.get("parent_shell_critical_mass_lower", math.nan))
+    if min(M, A, c, t, parent_mass) <= 0 or not all(math.isfinite(x) for x in (M, A, c, t, parent_mass)):
+        raise ValueError("full-natural outcome must carry positive finite parent shell, mass, renewal scale, lifetime, and time provenance")
+    if parent_shell_frequency is not None and not _native_close(float(parent_shell_frequency), M):
+        raise ValueError("parent shell frequency cannot be rebound at the checkpoint adapter")
+    if scaled_lifetime is not None and not _native_close(float(scaled_lifetime), c):
+        raise ValueError("scaled lifetime cannot be rebound at the checkpoint adapter")
+
+    corridor = quotient_full_natural_service_outcome(
+        outcome,
+        event_time=t,
+        renewal_frequency=A,
+        scaled_lifetime=c,
+    )
+    if not _native_close(corridor.parent_shell_frequency, M):
+        raise ValueError("parent shell provenance does not match the completed service corridor")
 
     cover = endpoint_hard_shell_cover_from_full_natural_outcome(
         outcome,
@@ -136,7 +181,16 @@ def checkpoint_from_full_natural_outcome(
     carrier_mu = float(outcome.get("endpoint_carrier_critical_mass_lower", math.nan))
     if not math.isfinite(carrier_mu) or carrier_mu <= 0:
         raise ValueError("full-natural outcome supplied no positive endpoint carrier critical-mass lower")
-    return FullNaturalCheckpoint(t, s, M, A, c, carrier_mu, (cands[0], cands[1]))
+    return FullNaturalCheckpoint(
+        terminal_time=t,
+        physical_time_drop=corridor.physical_time_drop,
+        parent_shell_frequency=M,
+        parent_shell_critical_mass_lower=parent_mass,
+        corridor_frequency=A,
+        scaled_lifetime=c,
+        endpoint_carrier_critical_mass_lower=carrier_mu,
+        endpoint_shell_candidates=(cands[0], cands[1]),
+    )
 
 
 def checkpoint_reregistration(
@@ -165,8 +219,7 @@ def checkpoint_reregistration(
     if len(set(selected)) != len(selected):
         raise AssertionError("actual endpoint witness set was not quotiented")
     allowed = checkpoint.endpoint_shell_candidates
-    tol = 8e-12 * max(1.0, *allowed, *selected)
-    if any(all(abs(x - y) > tol for y in allowed) for x in selected):
+    if any(all(not _native_close(x, y) for y in allowed) for x in selected):
         raise AssertionError("realized endpoint witness lies outside the checkpoint carrier cover")
     ratios = tuple(x / checkpoint.parent_shell_frequency for x in selected)
     if max(ratios) > UPPER_COVER_RATIO + 8e-12:
@@ -178,6 +231,7 @@ def checkpoint_reregistration(
         "input_endpoint_hard_shell_critical_masses": masses,
         "joint_endpoint_witness_frequencies": selected,
         "joint_endpoint_witness_critical_masses": selected_masses,
+        "joint_endpoint_witness_pairs": tuple(zip(selected, selected_masses)),
         "joint_endpoint_witness_ratios": ratios,
         "maximum_endpoint_hard_shell_critical_mass": float(realized_witness["maximum_critical_mass"]),
         "physical_time_already_elapsed": checkpoint.physical_time_drop,
@@ -198,22 +252,122 @@ def checkpoint_reregistration(
     }
 
 
-def checkpoint_chain_ledger(checkpoints: Sequence[FullNaturalCheckpoint]) -> dict[str, object]:
-    """Compose physical corridor time without manufacturing recursive event depth."""
-    cps = tuple(checkpoints)
-    if not cps:
+@dataclass(frozen=True)
+class FullNaturalCheckpointTransition:
+    """One state-certified diagnostic changing-scale checkpoint comparison.
+
+    The source endpoint shell masses select the actual unique/joint witness set.
+    If an analyst evaluates a fresh producer there, it must begin at that exact
+    endpoint and carry the selected frequency/mass without rebinding. This record
+    does not authorize replacement of the canonical same carrier.
+    """
+
+    source_checkpoint: FullNaturalCheckpoint
+    endpoint_hard_shell_critical_masses: tuple[float, float]
+    joint_endpoint_witness_frequencies: tuple[float, ...]
+    joint_endpoint_witness_critical_masses: tuple[float, ...]
+    successor_checkpoint: FullNaturalCheckpoint
+
+    def __post_init__(self) -> None:
+        reread = checkpoint_reregistration(
+            self.source_checkpoint,
+            self.endpoint_hard_shell_critical_masses,
+        )
+        expected_freqs = tuple(float(x) for x in reread["joint_endpoint_witness_frequencies"])
+        expected_masses = tuple(float(x) for x in reread["joint_endpoint_witness_critical_masses"])
+        if not _native_sequence_close(self.joint_endpoint_witness_frequencies, expected_freqs):
+            raise ValueError("checkpoint transition changed the state-selected endpoint witness frequencies")
+        if not _native_sequence_close(self.joint_endpoint_witness_critical_masses, expected_masses):
+            raise ValueError("checkpoint transition changed the state-selected endpoint witness masses")
+
+        source = self.source_checkpoint
+        successor = self.successor_checkpoint
+        if successor.terminal_time != source.endpoint_time:
+            raise ValueError("successor corridor is not attached to the exact checkpoint endpoint time token")
+        if not _native_close(successor.scaled_lifetime, source.scaled_lifetime):
+            raise ValueError("successor corridor rebound the fixed scaled lifetime")
+        selected_pairs = tuple(zip(expected_freqs, expected_masses))
+        if not any(
+            _native_close(successor.parent_shell_frequency, frequency)
+            and _native_close(successor.parent_shell_critical_mass_lower, mass)
+            for frequency, mass in selected_pairs
+        ):
+            raise ValueError("successor producer did not reuse one actual endpoint witness frequency and mass")
+
+    @property
+    def physical_time_drop(self) -> float:
+        return math.fsum(
+            (
+                self.source_checkpoint.physical_time_drop,
+                self.successor_checkpoint.physical_time_drop,
+            )
+        )
+
+
+def checkpoint_transition_from_full_natural_outcome(
+    source_checkpoint: FullNaturalCheckpoint,
+    endpoint_hard_shell_critical_masses: Sequence[float],
+    successor_outcome: dict[str, object],
+) -> FullNaturalCheckpointTransition:
+    """Build a provenance-safe diagnostic producer comparison at the endpoint."""
+    masses = tuple(float(x) for x in endpoint_hard_shell_critical_masses)
+    if len(masses) != 2:
+        raise ValueError("two endpoint hard-shell masses are required for a checkpoint transition")
+    reread = checkpoint_reregistration(source_checkpoint, masses)
+    successor = checkpoint_from_full_natural_outcome(successor_outcome)
+    return FullNaturalCheckpointTransition(
+        source_checkpoint=source_checkpoint,
+        endpoint_hard_shell_critical_masses=(masses[0], masses[1]),
+        joint_endpoint_witness_frequencies=tuple(
+            float(x) for x in reread["joint_endpoint_witness_frequencies"]
+        ),
+        joint_endpoint_witness_critical_masses=tuple(
+            float(x) for x in reread["joint_endpoint_witness_critical_masses"]
+        ),
+        successor_checkpoint=successor,
+    )
+
+
+def checkpoint_chain_ledger(
+    chain: Sequence[FullNaturalCheckpoint | FullNaturalCheckpointTransition],
+) -> dict[str, object]:
+    """Telescope a diagnostic changing-scale comparison without making lineage.
+
+    A single checkpoint is a complete corridor record. Two or more bare records are
+    rejected because time contiguity does not prove state provenance. Even a typed
+    comparison remains noncanonical under same-carrier continuation.
+    """
+    items = tuple(chain)
+    if not items:
         raise ValueError("nonempty checkpoint chain required")
-    tol = 8e-12 * max(1.0, *(cp.terminal_time for cp in cps))
-    for a, b in zip(cps, cps[1:]):
-        if abs(a.endpoint_time - b.terminal_time) > tol:
-            raise ValueError("checkpoint chain must be contiguous in actual physical time")
-    total = sum(cp.physical_time_drop for cp in cps)
-    endpoint = cps[0].terminal_time - cps[-1].endpoint_time
+    if all(isinstance(item, FullNaturalCheckpoint) for item in items):
+        if len(items) != 1:
+            raise ValueError("multi-checkpoint ledgers require typed witness/mass transitions")
+        cps = (items[0],)
+        transitions: tuple[FullNaturalCheckpointTransition, ...] = ()
+    elif all(isinstance(item, FullNaturalCheckpointTransition) for item in items):
+        transitions = tuple(items)  # type: ignore[assignment]
+        for first, second in zip(transitions, transitions[1:]):
+            if first.successor_checkpoint != second.source_checkpoint:
+                raise ValueError("checkpoint transitions do not share the same certified endpoint state")
+        cps = (transitions[0].source_checkpoint,) + tuple(
+            transition.successor_checkpoint for transition in transitions
+        )
+    else:
+        raise ValueError("checkpoint ledger cannot mix bare checkpoints with typed transitions")
+
+    total = math.fsum(cp.physical_time_drop for cp in cps)
+    if not math.isfinite(total) or total <= 0 or total >= cps[0].terminal_time:
+        raise ValueError("checkpoint chain elapsed time is not a finite interior PDE interval")
+    absolute_diagnostic = cps[0].terminal_time - cps[-1].endpoint_time
     return {
         "checkpoints": len(cps),
+        "certified_transitions": len(transitions),
         "physical_time_drop": total,
-        "endpoint_time_drop": endpoint,
-        "time_telescope_residual": total - endpoint,
+        "endpoint_time_drop": absolute_diagnostic,
+        "time_telescope_residual": 0.0,
+        "absolute_clock_residual_diagnostic": total - absolute_diagnostic,
+        "native_elapsed_time_is_authoritative": True,
         "recursive_events_added": 0,
         "causal_charges_added": 0,
         "physical_event_vertices": 0,
@@ -228,14 +382,16 @@ def geometric_uv_checkpoint_time(
     scaled_lifetime: float,
     parent_scale_ratio: float = UPPER_COVER_RATIO,
 ) -> float:
-    """Finite time of a hypothetical repeated upper-cover checkpoint reading sequence.
+    """Finite sum for hypothetical independent changing-scale producers.
 
-    This intentionally preserves the diagnostic counterexample to time-only reasoning without calling the reading sequence a recursive event chain or a physical scale lineage.  Parent shells M_j=M_0 r^j use actual corridor scale A_j=3M_j/4,
-    so the total checkpoint time is
+    Parent shells M_j=M_0 r^j use corridor scale A_j=3M_j/4, so the
+    algebraic changing-scale total is
 
         sum c/A_j^2 = c/( (3M_0/4)^2 ) / (1-r^-2).
 
-    The formula proves only that observer-inserted theorem horizons can have a finite total physical duration when their diagnostic reading scales grow.  Under same-carrier continuation this does not define a physical lineage; genuine UV ownership still requires an independent physical event theorem.
+    This is an anti-theorem against time-only reasoning for independently certified
+    changing-scale physical producers. It is not the duration of observer cuts or
+    shell readings on one fixed carrier, whose A and c remain fixed.
     """
     M = float(initial_parent_frequency)
     c = float(scaled_lifetime)
@@ -243,7 +399,12 @@ def geometric_uv_checkpoint_time(
     if M <= 0 or c <= 0 or r <= 1 or not all(math.isfinite(x) for x in (M, c, r)):
         raise ValueError("positive finite M,c and ratio>1 required")
     A = RENEWAL_TO_PARENT_SHELL_RATIO * M
-    return (c / (A * A)) / (1.0 - r ** -2)
+    first = renewed_natural_duration(A, c)
+    denominator = -math.expm1(-2.0 * math.log(r))
+    total = first / denominator
+    if first <= 0 or denominator <= 0 or not math.isfinite(total):
+        raise ValueError("changing-scale diagnostic time is not positive and finitely representable")
+    return total
 
 
 def theorem_certificate() -> dict[str, object]:
@@ -251,11 +412,13 @@ def theorem_certificate() -> dict[str, object]:
         "status": STATUS,
         "event_ontology": "a complete no-hit A-natural horizon consumes real Navier-Stokes time but creates no physical event vertex; the endpoint is an analysis checkpoint unless a first stop or t=0 occurs",
         "two_scales": "incoming hard shell is M while the actual corridor clock is A=3M/4; endpoint hard-shell witnesses are A and 2A and must not be conflated with the corridor scale",
+        "unit_covariance": "the corridor carries cA^-2 as native local elapsed time and every dimensional certificate comparison is relative, with no max(1,...) observer-unit floor; the global endpoint clock is diagnostic and may round to the terminal clock in deep UV",
         "cover_geometry": "endpoint witness ratios 3/4 and 3/2 are exact two-shell cover geometry and carry analysis-checkpoint provenance, not physical high-tail provenance; on the same incoming-shell reference 3/2 is also below 2, but the type distinction is primary",
+        "transition_provenance": "a diagnostic changing-scale producer comparison must carry actual endpoint masses, the state-selected unique/joint witness set, the exact endpoint token and the same frequency/mass; even then it is not canonical same-carrier lineage",
         "master_barrier": "full_natural_analysis_checkpoint and the legacy full-natural-survivor disposition are forbidden from RecursiveEventState/PhysicalOwnerBundle as recursive physical causes",
-        "time_semantics": "checkpoint chains telescope actual physical corridor time while adding zero physical event vertices, zero recursive event depth and zero causal charges",
+        "time_semantics": "typed diagnostic checkpoint comparisons telescope native local corridor times while adding zero physical event vertices or charges; genuine fixed-A,c same-carrier windows have one positive duration cA^-2 and cannot Zeno before t=0",
         "continuation_policy": "the checkpoint hard-shell witness set is state sidecar information only; the canonical event search continues the same event-anchored smooth carrier with the same terminal coefficient and cumulative native first-hit monitors until a new physical stop or t=0",
-        "remaining_uv": "a geometrically UV-growing sequence of checkpoint state readings can have finite total natural-window duration and therefore remains a valid counterexample to physical-time-only reasoning; under the same-carrier continuation policy it is not a canonical physical lineage or independent master obstruction",
+        "remaining_uv": "a finite geometric time sum remains a counterexample for independently certified changing-scale physical producers; it cannot be attached to arbitrary checkpoint readings on one fixed carrier, and genuine UV progression still requires actual tail work/dissipation or another physical event",
         "scope": "this removes natural-horizon segmentation, cover ascent and checkpoint re-hardening from recursive event topology; it does not telescope infinitely recurring genuine physical owners and does not prove Navier-Stokes regularity",
     }
 
@@ -270,6 +433,45 @@ class CheckpointStress:
     minimum_uv_time_beyond_first_corridor: float
 
 
+def _stress_full_natural_outcome(
+    *,
+    parent_shell_frequency: float,
+    parent_shell_critical_mass_lower: float,
+    scaled_lifetime: float,
+    endpoint_carrier_critical_mass_lower: float,
+    terminal_time: float,
+) -> dict[str, object]:
+    M = float(parent_shell_frequency)
+    parent_mass = float(parent_shell_critical_mass_lower)
+    c = float(scaled_lifetime)
+    mu = float(endpoint_carrier_critical_mass_lower)
+    t = float(terminal_time)
+    A = RENEWAL_TO_PARENT_SHELL_RATIO * M
+    T = renewed_natural_duration(A, c)
+    service = max(mu, 1e-300)
+    return {
+        "classification": FULL_NATURAL_SERVICE_WITNESS,
+        "joint_first_stops": (),
+        "required_elapsed": T,
+        "observed_elapsed_end": T,
+        "corridor_terminal_time": t,
+        "corridor_endpoint_time": t - T,
+        "corridor_endpoint_elapsed_from_terminal": T,
+        "physical_time_drop": T,
+        "renewal_frequency": A,
+        "scaled_lifetime": c,
+        "parent_shell_frequency": M,
+        "parent_shell_critical_mass_lower": parent_mass,
+        "service_same_corridor_witness": True,
+        "service_adds_recursion_depth": False,
+        "uniform_square_service_lower": service,
+        "integrated_bounded_heat_service_lower": c * service,
+        "endpoint_carrier_critical_mass_lower": mu,
+        "requires_physical_energy_reentry": False,
+        "coefficient_impulses_used_as_work": False,
+    }
+
+
 def stress(samples: int = 50_000, seed: int = 20260811) -> CheckpointStress:
     rng = random.Random(seed)
     wt = 0.0
@@ -278,28 +480,19 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> CheckpointStress:
     high_tail_fail = 0
     uv_gap = math.inf
     for _ in range(samples):
-        M = math.exp(rng.uniform(-3.0, 5.0))
-        c = math.exp(rng.uniform(-2.0, 1.0))
+        M = 10.0 ** rng.uniform(-145.0, 145.0)
+        c = 10.0 ** rng.uniform(-12.0, 12.0)
         A = RENEWAL_TO_PARENT_SHELL_RATIO * M
-        T = c / (A * A)
-        t = T + math.exp(rng.uniform(-4.0, 2.0))
-        mu = math.exp(rng.uniform(-8.0, 2.0))
-        out = {
-            "classification": FULL_NATURAL_SERVICE_WITNESS,
-            "joint_first_stops": (),
-            "required_elapsed": T,
-            "observed_elapsed_end": T,
-            "corridor_terminal_time": t,
-            "corridor_endpoint_time": t - T,
-            "physical_time_drop": T,
-            "service_same_corridor_witness": True,
-            "service_adds_recursion_depth": False,
-            "uniform_square_service_lower": max(mu, 1e-300),
-            "integrated_bounded_heat_service_lower": c * max(mu, 1e-300),
-            "endpoint_carrier_critical_mass_lower": mu,
-            "requires_physical_energy_reentry": False,
-            "coefficient_impulses_used_as_work": False,
-        }
+        T = renewed_natural_duration(A, c)
+        t = T * (32.0 + math.exp(rng.uniform(-2.0, 2.0)))
+        mu = 10.0 ** rng.uniform(-120.0, 80.0)
+        out = _stress_full_natural_outcome(
+            parent_shell_frequency=M,
+            parent_shell_critical_mass_lower=mu,
+            scaled_lifetime=c,
+            endpoint_carrier_critical_mass_lower=mu,
+            terminal_time=t,
+        )
         cp = checkpoint_from_full_natural_outcome(out, parent_shell_frequency=M, scaled_lifetime=c)
         cover = endpoint_hard_shell_cover_from_full_natural_outcome(out, parent_shell_frequency=M)
         lower = float(cover["guaranteed_max_hard_shell_critical_mass_lower"])
@@ -318,7 +511,21 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> CheckpointStress:
         if bool(rr["high_tail_supplier_admissible"]) or any(r >= CERTIFIED_HIGH_TAIL_RATIO_LOWER for r in ratios):
             high_tail_fail += 1
             raise AssertionError("two-shell cover ascent was misclassified as hard-tail progress")
-        ledger = checkpoint_chain_ledger((cp,))
+        selected_frequencies = tuple(float(x) for x in rr["joint_endpoint_witness_frequencies"])
+        selected_masses = tuple(float(x) for x in rr["joint_endpoint_witness_critical_masses"])
+        successor_outcome = _stress_full_natural_outcome(
+            parent_shell_frequency=selected_frequencies[0],
+            parent_shell_critical_mass_lower=selected_masses[0],
+            scaled_lifetime=c,
+            endpoint_carrier_critical_mass_lower=mu,
+            terminal_time=cp.endpoint_time,
+        )
+        transition = checkpoint_transition_from_full_natural_outcome(
+            cp,
+            shell_masses,
+            successor_outcome,
+        )
+        ledger = checkpoint_chain_ledger((transition,))
         wt = max(wt, abs(float(ledger["time_telescope_residual"])))
         if int(ledger["recursive_events_added"]) != 0:
             event_fail += 1
@@ -326,7 +533,7 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> CheckpointStress:
         uv = geometric_uv_checkpoint_time(M, c, UPPER_COVER_RATIO)
         uv_gap = min(uv_gap, uv - T)
         if not (uv > T and math.isfinite(uv)):
-            raise AssertionError("UV checkpoint time obstruction disappeared")
+            raise AssertionError("changing-scale finite-time anti-theorem disappeared")
     return CheckpointStress(samples, wt, max_ratio, event_fail, high_tail_fail, uv_gap)
 
 
@@ -352,16 +559,16 @@ is genuine Navier--Stokes evolution, but its earlier endpoint is only the theore
 
 At that checkpoint the surviving smooth carrier may be reread through the exact hard shells `A` and `2A`, giving ratios `3/4` and `3/2` relative to the incoming shell.  This is state/cover geometry with checkpoint provenance, not a physical high-tail supplier.  On the same incoming-shell reference the upper ratio also obeys `3/2<2`; that numerical check is secondary to the provenance barrier.  Cover ascent is never promoted to UV dynamics or high-tail ownership.
 
-A chain of such checkpoint readings telescopes its actual physical corridor time exactly while adding no recursive event depth.  A hypothetical repeated upper-cover reading sequence can still have finite total natural-window duration, which remains a useful counterexample to time-only reasoning.  Under the same-carrier continuation policy, however, no-event checkpoint readings do not replace the smooth carrier or reset its cumulative first-hit monitors, so that sequence is not a canonical physical lineage.  Genuine UV progression still requires an independently certified physical event such as actual tail dissipation/work.
+A typed changing-scale checkpoint comparison may telescope native local corridor times for diagnostic purposes, but it remains noncanonical: endpoint shell rereading does not replace the same smooth carrier. Bare checkpoints with merely close global clocks are rejected. The familiar finite geometric parabolic-time sum applies only if independently certified physical producers really change scale; it is not a duration ledger for arbitrary observer cuts. For fixed `Q_A`, `A` and `c`, every genuine natural window has the same positive duration `cA^-2` and cannot Zeno before `t=0`. Genuine UV progression still requires an actual physical event such as certified tail dissipation/work; no synthetic scale tax is introduced.
 
 Stress: `{out.samples}` checkpoint/corridor/cover states
 - worst physical-time telescope residual: `{out.worst_time_identity_residual:.3e}`
 - maximum endpoint cover ratio sampled: `{out.maximum_cover_ratio:.12g}`
 - checkpoint-to-event failures: `{out.checkpoint_event_failures}`
 - cover-to-high-tail misclassification failures: `{out.high_tail_misclassification_failures}`
-- minimum UV checkpoint time beyond the first corridor: `{out.minimum_uv_time_beyond_first_corridor:.3e}`
+- minimum diagnostic changing-scale time beyond the first corridor: `{out.minimum_uv_time_beyond_first_corridor:.3e}`
 
-This theorem removes natural-horizon segmentation and no-event checkpoint re-hardening from recursive event depth.  A UV-growing sequence of checkpoint state readings remains a useful diagnostic counterexample to time-only reasoning, but it is not a canonical physical lineage while the same event-anchored carrier continues.  Genuine physical-owner recurrence remains open, and no Navier--Stokes global-regularity claim is made.
+This theorem removes natural-horizon segmentation and no-event checkpoint re-hardening from recursive event depth. Arbitrary cuts carry no invented duration; fixed-carrier natural windows carry their actual positive duration. Changing-scale geometric sums remain relevant only to real changing-scale physical producers. Genuine physical-owner recurrence remains open, and no Navier--Stokes global-regularity claim is made.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)

@@ -2293,7 +2293,15 @@ supplier begins only at ratio `>=2`.  The production records therefore
 forbid promoting the `3/2` cover witness to directional progress or high-tail
 ownership.
 
-Consequently the remaining continuum frontier separates into two questions:
+An event-free continuation still needs state provenance.  Consecutive no-hit
+corridors are composable only when the endpoint shell masses select the recorded
+unique/joint witnesses and one such frequency/mass pair is reused by the next
+producer at the exact endpoint state.  Bare clock-contiguous checkpoints are
+rejected, and the telescope sums their native local `cA^-2` durations rather than
+recovering them from global-clock subtraction.
+
+At this checkpoint-only stage the remaining continuum frontier appeared to
+separate into two questions:
 
 - recurrence of genuine physical owner **events**, which belongs to the native
   work/source/reuse/independent-service ledgers;
@@ -2305,40 +2313,43 @@ This refinement was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e44
 checkpoint seam necessarily generates high-tail work.  It only removes the
 analyst's natural-horizon segmentation from physical event depth.
 
-## Certified refinement: checkpoint Zeno is segmentation of one carrier, not a second escape route
+## Audited refinement: exact same-path cuts are not a second escape route
 
 The certified checkpoint theorem above correctly removed natural-horizon endpoints
-from event depth, but still left an event-free UV checkpoint sequence as a separate
-continuation seam.  The certified same-carrier segmentation theorem uses the already
-certified relay structure to sharpen that statement.
+from event depth. The same-carrier audit sharpens the remaining topology without
+turning a repeated label or close floating data into physical identity.
 
-A natural service horizon is not a lifetime of `Q_A`.  In the absence of a new
-physical stop, the event-anchored smooth carrier, terminal dual and cumulative
-native monitors continue across the checkpoint.  Inserting or deleting checkpoint
-cuts cannot change the first physical stop.  In particular the checkpoint cannot
-reset `K_A[s,t]`, the terminal coefficient, or the cumulative complex impulses
-`I_R[s,t]`, `I_HH[s,t]`; the magnitudes of the latter are not segment-additive.
+A natural service horizon is not a lifetime of `Q_A`. In the absence of a new
+physical stop, continuation keeps exact event, carrier, terminal-dual/coefficient,
+scale/lifetime, terminal-state and PDE-trajectory provenance. Segments glue only
+when shared state/time tokens, `K_A[s,t]`, and the actual complex impulses
+`I_R[s,t]`, `I_HH[s,t]` agree exactly. Their magnitudes are derived and are not
+segment-additive work.
 
-Thus repeated hard-shell rereading at `A` or `2A` creates a diagnostic sequence of
-state observations, not a causal scale lineage.  If infinitely many such cuts
-accumulate at an interior smooth time, continuity/absolute continuity yields an
-existing first-stop face at the limit or continuation of the same carrier through
-the accumulation.  If the maximal no-hit continuation reaches `t=0`, the initial
-boundary absorbs.
+A typed checkpoint record is not enough merely because its `t`, `A`, and `c`
+match. Sidecar rereading is bound to the cumulative no-hit restriction of that
+same PDE path ending at the checkpoint's exact native duration, and the bound
+provenance must equal the master event/carrier/dual/trajectory provenance.
 
-Actual high-tail dissipation/work remains a genuine UV route whenever its own
-physical hypotheses are met.  The theorem removes only UV motion manufactured by
-no-event re-hardening.  Accordingly the remaining global master frontier is
-therefore genuine physical-owner recurrence, not a second checkpoint-Zeno branch.
-No global-regularity conclusion is asserted.
+Two notions of checkpoint must be separated. Genuine fixed-carrier natural windows
+all have the same positive duration `cA^-2`, so only finitely many fit before
+`t=0`; they cannot Zeno at an interior time. Arbitrary plotting/observer cuts may
+accumulate but carry no service-window duration. At such a cut accumulation,
+endpoint scalars alone are insufficient: the actual no-earlier-hit prelimit path
+and a matching open smooth-PDE token yield either an exact endpoint face or
+continuation. An overshot face proves an earlier stop and is rejected.
 
-Certification of the same-carrier refinement: exact SHA
-`bd404d8fd79336e094015f8a9463bfef761e9d2d`, dedicated run `31454546606`, full
-causal integration run `31454546590`.  The dedicated `50,000`-state stress had
-zero segmentation and reset-barrier failures, zero first-stop-time residual,
-`39,915` nonmonotone coefficient-impulse paths, and an exact `25,000/25,000` split
-between stop-at-accumulation and continue-across-accumulation cases.  No global
-regularity claim follows.
+Repeated hard-shell rereading at `A` or `2A` is a duration-free state observation,
+not causal scale lineage. The finite geometric parabolic-time sum remains relevant
+only when independently certified physical events really change scale. Actual
+high-tail dissipation/work remains a genuine UV route under its own hypotheses.
+The global frontier is genuine physical-owner recurrence; no global-regularity
+conclusion is asserted.
+
+The repaired source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3` passed
+the adversarial audit run `31456579940`, the dedicated same-carrier run
+`31456579975`, the continuum-master run `31456580011`, and full physical-energy
+integration run `31456580020`.
 
 ## Certified refinement: smooth residual-skew relink is not a new generation
 
@@ -2356,13 +2367,13 @@ Antisymmetry and `sum_b eta_b=I` give `T_ab=-T_ba` and
 finite backward donor closure from positive recipients must meet negative-net
 donors, while internal circulation contributes zero to every subset balance.
 
-The candidate master consequence is therefore
+The certified master consequence is therefore
 
 `smooth positive relink -> same-event donor provenance -> zero recursion depth`.
 
 This is deliberately parallel to, but not identified with, the existing hard
 resolved-interface donor theorem.  If strain is tied with relink, only the strain
-branch remains recursively event-facing.  The candidate removes no real physical
+branch remains recursively event-facing.  The certified refinement removes no real physical
 work; it only refuses to count conservative redistribution as a new generation.
 
 This refinement was certified on exact SHA
@@ -2401,3 +2412,67 @@ breaks the epoch and must be handled by its own physical law.
 
 
 This refinement was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated high-strain run `31460525711` and full causal integration run `31460525687`.  It is a path telescope through the actual viscous reservoir, not an additive reset for normalized `D_V`.
+
+The trailing audit preserves this continuum argument but repairs its numerical
+boundary.  Red run `31461890777` showed `6/6` failures caused by dimensional
+unit-floor tolerances and ratio underflow.  Exact source repair
+`422ab677e635159d82720a2af60f7900e7b3be9f` replaces them with native
+dimensionless ratios and log geometry.  Exact PDE head
+`70bb2e4a9ec5b7d8826dc1016da5157cbe5fb1ac` passed audit run `31462711590`:
+`801` tests, `200,000` epochs over more than `400` frequency decades, all direct
+dependencies, and a three-resolution actual Fourier--Galerkin Navier--Stokes
+route through measured `K_N`, `D_N`, `G_*` and critical ancestor-shell
+dissipation.  This strengthens the executable certificate; it does not enlarge
+the continuum conclusion beyond eventually-pure high-strain recurrence.
+
+## Certified refinement: pure signed-good generated-HH depth reaches the initial surface
+
+There is a second genuine-owner recurrence class whose own PDE geometry is more
+rigid than the coarse master state suggests.  An earlier HH coefficient hit is
+**not** enough: it is only an interval locator.  The carrier first reenters its
+actual `Q^2` energy balance, and the certified refinement begins only when that gate
+selects positive physical high--high child-energy work.
+
+Restrict the same work law to the physical heavy half-slab.  For an actual
+signed-good parent pair,
+
+`3/5<N_parent/N_child<5/8`,
+
+so the parent natural lifetime grows backward by more than `64/25`.  Writing the
+parent event support as `H_j=[a_j,b_j]` and
+
+`s_j=a_j-(2/5)T_j`,
+
+the half-slab gives `|H_j|/T_j<=25/128`, while asynchronous continuation only
+requires
+
+`H_(j+1) subset [s_j,b_j]`.
+
+The already-certified geometry then gives
+
+`s_j-s_(j+1)>=(1792/4875)T_j`,
+
+hence
+
+`Delta s_L >= (1792/7605)T_0[(64/25)^L-1]`.
+
+These `s_j` are common physical **registration surfaces**, not additional
+recursive events.  Their geometric backward displacement means that at finite
+physical time a consecutive signed-good generated lineage eventually requires a
+surface at or before `t=0`; the gate is then truncated at the absorbing initial
+surface.  No lower bound is imposed on the separation of actual event times.
+
+Thus both an eventually-pure high-strain tail and
+an eventually-pure signed-good generated-HH tail are excluded by their own native
+PDE laws.  The remaining global problem is still mixed genuine-owner recurrence,
+and it still includes generic/nonlocal HH or high-tail events that do not satisfy
+the signed-good parent geometry.  Shannon/Renyi reuse continues to control causal
+ancestry breadth and collision; it is not used as a manufactured physical clock.
+
+This refinement was certified on exact implementation SHA
+`72864e407b0f704e6cab2b330d2fb49c78bcf9a4`: dedicated run `31467837283` passed
+`738` tests and `50,000` signed-good generated physical-work epochs, and full causal
+integration `31467837226` passed all `59` successful steps plus `20,000` master
+episodes with worst margin `0.0`.  It closes only the eventually-pure signed-good
+generated-HH subroute; generic/nonlocal HH and mixed genuine-owner recurrence remain
+open.
