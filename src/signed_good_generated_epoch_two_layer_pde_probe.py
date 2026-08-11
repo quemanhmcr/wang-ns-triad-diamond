@@ -194,7 +194,7 @@ def simulate_signed_good_two_layer_galerkin(
     amplitude: float = 96.0,
     scaled_lifetime: float = 0.05,
     middle_seed_weight: float = 5.0e-4,
-    partner_polarization_angle: float = 0.0,
+    partner_polarization_angle: float = math.pi / 4.0,
 ) -> GalerkinSignedGoodTwoLayerRun:
     """Falsify two consecutive signed-good steps on one actual NS orbit."""
     n = int(resolution)
@@ -511,7 +511,7 @@ def run_probe(
     amplitude: float = 96.0,
     scaled_lifetime: float = 0.05,
     middle_seed_weight: float = 5.0e-4,
-    partner_polarization_angle: float = 0.0,
+    partner_polarization_angle: float = math.pi / 4.0,
 ) -> SignedGoodTwoLayerPDEProbe:
     runs = tuple(
         simulate_signed_good_two_layer_galerkin(
@@ -541,44 +541,6 @@ def run_probe(
     )
 
 
-def search_fixture_candidates(
-    *,
-    resolution: int = 28,
-    steps: int = 32,
-) -> tuple[dict[str, object], ...]:
-    """Remote-only deterministic search; every survivor still runs all PDE guards."""
-    outcomes: list[dict[str, object]] = []
-    for seed_weight in (5.0e-4, 1.5e-3, 2.5e-3):
-        for index in range(16):
-            angle = index * math.pi / 8.0
-            try:
-                run = simulate_signed_good_two_layer_galerkin(
-                    resolution=resolution,
-                    steps=steps,
-                    middle_seed_weight=seed_weight,
-                    partner_polarization_angle=angle,
-                )
-            except (AssertionError, ValueError) as exc:
-                outcomes.append(
-                    {
-                        "seed_weight": seed_weight,
-                        "partner_angle": angle,
-                        "status": "rejected_by_physical_guard",
-                        "reason": str(exc),
-                    }
-                )
-            else:
-                outcomes.append(
-                    {
-                        "seed_weight": seed_weight,
-                        "partner_angle": angle,
-                        "status": "fully_certified_candidate",
-                        "run": asdict(run),
-                    }
-                )
-    return tuple(outcomes)
-
-
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--resolutions", type=int, nargs="+", default=(28, 32))
@@ -587,8 +549,7 @@ def main() -> None:
     ap.add_argument("--amplitude", type=float, default=96.0)
     ap.add_argument("--scaled-lifetime", type=float, default=0.05)
     ap.add_argument("--middle-seed-weight", type=float, default=5.0e-4)
-    ap.add_argument("--partner-polarization-angle", type=float, default=0.0)
-    ap.add_argument("--search-fixtures", action="store_true")
+    ap.add_argument("--partner-polarization-angle", type=float, default=math.pi / 4.0)
     ap.add_argument(
         "--outdir",
         type=Path,
@@ -596,29 +557,6 @@ def main() -> None:
     )
     args = ap.parse_args()
     args.outdir.mkdir(parents=True, exist_ok=True)
-    if args.search_fixtures:
-        outcomes = search_fixture_candidates(
-            resolution=args.resolutions[0], steps=args.steps
-        )
-        (args.outdir / "two_layer_fixture_search.json").write_text(
-            json.dumps(outcomes, indent=2), encoding="utf-8"
-        )
-        certified = tuple(row for row in outcomes if row["status"] == "fully_certified_candidate")
-        table = "\n".join(
-            f"| {row['seed_weight']:.4g} | {row['partner_angle']:.6f} | {row['status']} | {row.get('reason', 'all guards passed')} |"
-            for row in outcomes
-        )
-        md = f"""# Two-layer Navier--Stokes fixture search
-
-Certified candidates: `{len(certified)}` of `{len(outcomes)}`.
-
-| seed | angle | status | physical decision |
-|---:|---:|---|---|
-{table}
-"""
-        (args.outdir / "summary.md").write_text(md, encoding="utf-8")
-        print(md)
-        return
     result = run_probe(
         args.resolutions,
         steps=args.steps,
