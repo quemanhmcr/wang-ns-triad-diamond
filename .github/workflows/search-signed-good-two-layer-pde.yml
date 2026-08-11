@@ -1,0 +1,31 @@
+name: Search signed-good two-layer PDE fixture
+
+on:
+  push:
+    paths:
+      - 'src/signed_good_generated_epoch_two_layer_pde_probe.py'
+      - 'tests/test_signed_good_generated_epoch_two_layer_pde_probe.py'
+      - '.github/workflows/search-signed-good-two-layer-pde.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Search only through actual Navier-Stokes trajectories
+        run: python -m src.signed_good_generated_epoch_two_layer_pde_probe --resolutions 28 --steps 32 --search-fixtures --outdir results-two-layer-fixture-search
+      - run: cat results-two-layer-fixture-search/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: signed-good-two-layer-fixture-search
+          path: results-two-layer-fixture-search/

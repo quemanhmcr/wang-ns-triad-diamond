@@ -57,6 +57,7 @@ def _two_layer_initial_state(
     resolution: int,
     amplitude: float,
     middle_seed_weight: float,
+    partner_polarization_angle: float,
     k: np.ndarray,
     k2: np.ndarray,
     dealias: np.ndarray,
@@ -72,7 +73,12 @@ def _two_layer_initial_state(
     state = np.zeros((3, n, n, n), dtype=complex)
     p_polarization = np.asarray((2.0, -3.0, 0.0)) / math.sqrt(13.0)
     q_polarization = np.asarray((0.0, 0.0, 1.0))
-    partner_polarization = np.asarray((0.0, 1.0, -1.0)) / math.sqrt(2.0)
+    partner_basis_one = np.asarray((0.0, 1.0, -1.0)) / math.sqrt(2.0)
+    partner_basis_two = np.asarray((-4.0, 1.0, 1.0)) / math.sqrt(18.0)
+    partner_polarization = (
+        math.cos(partner_polarization_angle) * partner_basis_one
+        + math.sin(partner_polarization_angle) * partner_basis_two
+    )
 
     for wavevector, polarization in (
         (PARENT_P, p_polarization),
@@ -147,6 +153,7 @@ class GalerkinSignedGoodTwoLayerRun:
     viscosity: float
     amplitude: float
     middle_seed_weight: float
+    partner_polarization_angle: float
     top_parent_child_ratio: float
     middle_parent_child_ratio: float
     initial_global_energy: float
@@ -187,6 +194,7 @@ def simulate_signed_good_two_layer_galerkin(
     amplitude: float = 96.0,
     scaled_lifetime: float = 0.05,
     middle_seed_weight: float = 5.0e-4,
+    partner_polarization_angle: float = 0.0,
 ) -> GalerkinSignedGoodTwoLayerRun:
     """Falsify two consecutive signed-good steps on one actual NS orbit."""
     n = int(resolution)
@@ -195,9 +203,12 @@ def simulate_signed_good_two_layer_galerkin(
     amp = float(amplitude)
     c = float(scaled_lifetime)
     seed_weight = float(middle_seed_weight)
+    partner_angle = float(partner_polarization_angle)
     if n < 28 or n % 2 or count < 32 or count % 32:
         raise ValueError("resolution >=28 and an RK4 step count divisible by 32 required")
-    if not all(math.isfinite(x) and x > 0.0 for x in (nu, amp, c, seed_weight)):
+    if not all(math.isfinite(x) and x > 0.0 for x in (nu, amp, c, seed_weight)) or not math.isfinite(
+        partner_angle
+    ):
         raise ValueError("positive finite two-layer Galerkin parameters required")
 
     top_frequency = math.sqrt(sum(value * value for value in TOP_CHILD))
@@ -237,7 +248,9 @@ def simulate_signed_good_two_layer_galerkin(
 
     middle_low_pass = _strict_low_pass_symbol(k2, 0.25 * middle_frequency)
     top_low_pass = _strict_low_pass_symbol(k2, 0.25 * top_frequency)
-    state = _two_layer_initial_state(n, amp, seed_weight, k, k2, dealias)
+    state = _two_layer_initial_state(
+        n, amp, seed_weight, partner_angle, k, k2, dealias
+    )
     times = tuple(dt * index for index in range(count + 1))
     middle_observations: list[dict[str, float]] = []
     top_observations: list[dict[str, float]] = []
@@ -443,6 +456,7 @@ def simulate_signed_good_two_layer_galerkin(
         viscosity=nu,
         amplitude=amp,
         middle_seed_weight=seed_weight,
+        partner_polarization_angle=partner_angle,
         top_parent_child_ratio=middle_frequency / top_frequency,
         middle_parent_child_ratio=base_frequency / middle_frequency,
         initial_global_energy=initial_global,
@@ -497,6 +511,7 @@ def run_probe(
     amplitude: float = 96.0,
     scaled_lifetime: float = 0.05,
     middle_seed_weight: float = 5.0e-4,
+    partner_polarization_angle: float = 0.0,
 ) -> SignedGoodTwoLayerPDEProbe:
     runs = tuple(
         simulate_signed_good_two_layer_galerkin(
@@ -506,6 +521,7 @@ def run_probe(
             amplitude=float(amplitude),
             scaled_lifetime=float(scaled_lifetime),
             middle_seed_weight=float(middle_seed_weight),
+            partner_polarization_angle=float(partner_polarization_angle),
         )
         for resolution in resolutions
     )
@@ -525,6 +541,44 @@ def run_probe(
     )
 
 
+def search_fixture_candidates(
+    *,
+    resolution: int = 28,
+    steps: int = 32,
+) -> tuple[dict[str, object], ...]:
+    """Remote-only deterministic search; every survivor still runs all PDE guards."""
+    outcomes: list[dict[str, object]] = []
+    for seed_weight in (5.0e-4, 1.5e-3, 2.5e-3):
+        for index in range(16):
+            angle = index * math.pi / 8.0
+            try:
+                run = simulate_signed_good_two_layer_galerkin(
+                    resolution=resolution,
+                    steps=steps,
+                    middle_seed_weight=seed_weight,
+                    partner_polarization_angle=angle,
+                )
+            except (AssertionError, ValueError) as exc:
+                outcomes.append(
+                    {
+                        "seed_weight": seed_weight,
+                        "partner_angle": angle,
+                        "status": "rejected_by_physical_guard",
+                        "reason": str(exc),
+                    }
+                )
+            else:
+                outcomes.append(
+                    {
+                        "seed_weight": seed_weight,
+                        "partner_angle": angle,
+                        "status": "fully_certified_candidate",
+                        "run": asdict(run),
+                    }
+                )
+    return tuple(outcomes)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--resolutions", type=int, nargs="+", default=(28, 32))
@@ -533,6 +587,8 @@ def main() -> None:
     ap.add_argument("--amplitude", type=float, default=96.0)
     ap.add_argument("--scaled-lifetime", type=float, default=0.05)
     ap.add_argument("--middle-seed-weight", type=float, default=5.0e-4)
+    ap.add_argument("--partner-polarization-angle", type=float, default=0.0)
+    ap.add_argument("--search-fixtures", action="store_true")
     ap.add_argument(
         "--outdir",
         type=Path,
@@ -540,6 +596,29 @@ def main() -> None:
     )
     args = ap.parse_args()
     args.outdir.mkdir(parents=True, exist_ok=True)
+    if args.search_fixtures:
+        outcomes = search_fixture_candidates(
+            resolution=args.resolutions[0], steps=args.steps
+        )
+        (args.outdir / "two_layer_fixture_search.json").write_text(
+            json.dumps(outcomes, indent=2), encoding="utf-8"
+        )
+        certified = tuple(row for row in outcomes if row["status"] == "fully_certified_candidate")
+        table = "\n".join(
+            f"| {row['seed_weight']:.4g} | {row['partner_angle']:.6f} | {row['status']} | {row.get('reason', 'all guards passed')} |"
+            for row in outcomes
+        )
+        md = f"""# Two-layer Navier--Stokes fixture search
+
+Certified candidates: `{len(certified)}` of `{len(outcomes)}`.
+
+| seed | angle | status | physical decision |
+|---:|---:|---|---|
+{table}
+"""
+        (args.outdir / "summary.md").write_text(md, encoding="utf-8")
+        print(md)
+        return
     result = run_probe(
         args.resolutions,
         steps=args.steps,
@@ -547,6 +626,7 @@ def main() -> None:
         amplitude=args.amplitude,
         scaled_lifetime=args.scaled_lifetime,
         middle_seed_weight=args.middle_seed_weight,
+        partner_polarization_angle=args.partner_polarization_angle,
     )
     (args.outdir / "signed_good_generated_epoch_two_layer_pde_probe.json").write_text(
         json.dumps(asdict(result), indent=2), encoding="utf-8"
