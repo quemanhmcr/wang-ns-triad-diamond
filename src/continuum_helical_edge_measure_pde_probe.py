@@ -260,12 +260,22 @@ def _snapshot(
     k2: np.ndarray,
     dealias: np.ndarray,
     cutoff: int,
+    *,
+    child_mode: tuple[int, int, int] = CHILD_MODE,
+    nonlinear_hat: np.ndarray | None = None,
 ) -> dict[str, float]:
     n = int(state_hat.shape[1])
-    child = CHILD_MODE
+    child = tuple(int(value) for value in child_mode)
+    if child == (0, 0, 0) or max(abs(value) for value in child) > int(cutoff):
+        raise ValueError("nonzero audit child must lie inside the retained Galerkin cutoff")
     z = np.asarray(child, dtype=float)
     uz = _series_coefficient(state_hat, child)
-    nonlinear = _nonlinear_term(state_hat, k, k2, dealias)
+    if nonlinear_hat is None:
+        nonlinear = _nonlinear_term(state_hat, k, k2, dealias)
+    else:
+        nonlinear = np.asarray(nonlinear_hat, dtype=complex)
+        if nonlinear.shape != state_hat.shape or np.any(~np.isfinite(nonlinear.real)) or np.any(~np.isfinite(nonlinear.imag)):
+            raise ValueError("finite nonlinear Galerkin field with matching shape required")
     actual_source = -np.asarray(
         nonlinear[(slice(None),) + _index(child, n)], dtype=complex
     ) / float(n**3)
@@ -350,6 +360,10 @@ def _snapshot(
         "block_transfer_deficit": ledger.block_transfer_deficit,
         "capacity_mass": ledger.capacity_mass,
         "actual_child_work": actual_work,
+        "ledger_signed_direct_work": ledger.signed_direct_work,
+        "ledger_signed_modal_work": ledger.signed_modal_work,
+        "direct_progress": direct_progress,
+        "registered_progress": ledger.signed_registered_progress,
         "global_energy": global_energy,
         "global_gradient": global_gradient,
         "global_nonlinear_work": global_nonlinear_work,

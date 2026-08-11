@@ -10,6 +10,8 @@ on:
       - 'src/helical.py'
       - 'src/continuum_helical_edge_measure_pde_probe.py'
       - 'tests/test_continuum_helical_edge_measure_pde_probe.py'
+      - 'src/continuum_helical_edge_measure_multichild_pde_probe.py'
+      - 'tests/test_continuum_helical_edge_measure_multichild_pde_probe.py'
       - '.github/workflows/audit-continuum-helical-edge-measure-registration.yml'
       - '.github/workflows/continuum-helical-edge-measure-registration.yml'
       - 'requirements.txt'
@@ -62,3 +64,23 @@ jobs:
         with:
           name: audit-continuum-helical-edge-measure-pde-results
           path: results-audit-continuum-helical-edge-measure-pde/
+
+  actual-ns-multichild-edge-measure-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Run focused multi-child PDE aggregation test
+        run: pytest -q tests/test_continuum_helical_edge_measure_multichild_pde_probe.py
+      - name: Aggregate multiple physical children on one Navier-Stokes orbit
+        run: python -m src.continuum_helical_edge_measure_multichild_pde_probe --resolution 24 --cutoff 5 --steps 32 --duration 0.006 --snapshots 3 --outdir results-audit-continuum-helical-edge-measure-multichild-pde
+      - run: cat results-audit-continuum-helical-edge-measure-multichild-pde/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-continuum-helical-edge-measure-multichild-pde-results
+          path: results-audit-continuum-helical-edge-measure-multichild-pde/
