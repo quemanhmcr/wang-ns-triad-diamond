@@ -4,7 +4,7 @@
 
 The previous high-strain route first converted resolved dissipation to child-scale heat service, aged the old material pool, extracted an `NN intersect critical` heat sublaw, and only then made a lower-scale smooth carrier seed.  That route is valid, but it is stronger than necessary for **renewal entrance**.
 
-The reason is simple: once a full-natural critical annular carrier survives, it creates its **own** bounded increment service at the renewed scale.  Material ownership can be read from that new positive service law.  Therefore the carrier does not need to inherit a child-scale `NN` ownership label.
+The reason is simple: once a full-natural critical annular carrier survives, the completed corridor already **carries** its own bounded increment service at the renewed scale.  Material ownership can be read from that positive service law, but the service is a same-corridor witness rather than a second event.  Therefore the carrier does not need to inherit a child-scale `NN` ownership label.
 
 ## 1. Use the actual dissipation law as selector
 
@@ -76,7 +76,7 @@ exact selected-role Duhamel identity is
 z(t)=z(s)+I_{HH}[s,t]+I_{interface}[s,t].
 \]
 
-Thus either a named recursive stop occurs, the interval reaches the absorbing initial surface, or a full natural interval survives with
+Thus either a named recursive stop occurs, the interval reaches the absorbing initial surface, or one full physical natural corridor survives with
 
 \[
 |z(s)|\ge\frac14|z(t)|.
@@ -84,7 +84,7 @@ Thus either a named recursive stop occurs, the interval reaches the absorbing in
 
 No material-boundary monitor is needed on this route.
 
-## 4. The survivor manufactures its own service
+## 4. The completed corridor carries its own service
 
 The companion annular-service theorem converts the full-natural survivor into a uniform carrier-energy lower after keeping the scale-independent inverse-heat cost of the registered affine/Kelvin/viscous analysis dual.  Because the role stays in a fixed annulus away from zero frequency, the \(A\)-scale heat defect is uniformly positive.
 
@@ -140,7 +140,7 @@ A high-strain recursive stop now has an exhaustive short route:
 \begin{cases}
 \text{renewed high strain / interface / HH stop},\\
 t=0,\\
-\text{own-scale bounded coherent service}.
+\text{completed full-natural corridor with own-scale service witness}.
 \end{cases}
 \]
 

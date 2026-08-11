@@ -234,7 +234,7 @@ The compiler creates no new currency:
 - pressure -> actual positive SGS coherent service or entropy-weighted critical shell;
 - pure material sidecars remain sidecars; genuine role change remains interface/relink.
 
-No branch above is promoted to an additive finite reset.  `D_V`, critical shell mass, high-frequency dissipation and source service are scale-sensitive recursive quantities unless a separate globally bounded scale-independent theorem says otherwise.  Aggregate pressure `mu_V` is not a recursive state at all in the canonical route.
+No branch above is promoted to an additive finite reset.  Actual `D_V`, critical hard shells and independent source-service outputs remain scale-sensitive physical suppliers.  If such a shell later completes a full-natural no-hit corridor, the own-scale service lower proved on that corridor is attached to the corridor as a zero-depth witness rather than promoted to another recursive owner event.  Aggregate pressure `mu_V` is not a recursive state at all in the canonical route.
 
 ## Scope
 

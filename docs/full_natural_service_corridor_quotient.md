@@ -1,8 +1,8 @@
 # Full-natural service corridor quotient
 
-## Candidate status
+## Status
 
-Candidate theorem awaiting exact-SHA GitHub Actions certification.
+Certified on exact implementation SHA `e351d0d6bef5a6bd6275083e1d2e706acf717a18` by dedicated GitHub Actions run `31448743219` and full physical-energy causal integration run `31448763557`.
 
 The theorem is deliberately an ontology/assembly correction, not a new scalar
 estimate.  It asks where the already-certified own-scale service actually lives
@@ -112,7 +112,7 @@ This removes **service theorem depth** from the named-owner recurrence problem.
 It does not remove independent source/service/reuse events and does not close the
 UV-unbounded survivor alternative.
 
-## 5. Anti-theorems encoded by the candidate
+## 5. Anti-theorems encoded by the theorem
 
 - physical service is not denied or discarded; only duplicate event depth is
   removed;
@@ -123,3 +123,48 @@ UV-unbounded survivor alternative.
 - no packet persistence or coherent-cell dominance is introduced.
 
 No Navier--Stokes global-regularity claim is made.
+
+## 6. Certification
+
+Exact implementation SHA:
+
+`e351d0d6bef5a6bd6275083e1d2e706acf717a18`.
+
+Dedicated GitHub Actions run:
+
+`31448743219` — **success**.
+
+It passed:
+
+- `684` theorem tests;
+- `50,000` corridor/service/material/endpoint-shell states;
+- worst natural-time identity residual `4.440892098500626e-16`;
+- worst OO/ON/NN same-measure partition residual `1.0658141036401503e-14`;
+- minimum sampled two-hard-shell cover margin `2.840630292262874e-08`;
+- exact joint hard-shell witness tie retained;
+- companion continuum-master service-witness barrier failures `0`.
+
+The stored dedicated artifact is under
+
+`recorded-results/31448743219/full-natural-service-corridor-quotient-results/`.
+
+GitHub artifact digest:
+
+`sha256:47a7296117a1dc966c47d325aecaab6754bb73bb9d9f8d59f5fc5b1dd49b0c5e`.
+
+Full physical-energy causal integration:
+
+`31448763557` — **success** on the same exact SHA.
+
+It passed the same `684`-test suite and the complete source, pressure, material,
+critical-shell, full-natural-service quotient, high-tail, hard/smooth interface,
+first-stop, causal-reuse, physical-branch and master chain.  The final master
+stress checked `20,000` episode traces with worst margin `0.0`.
+
+The initial implementation SHA `4d19bf616c88e634698039c098e2c774be01a669`
+had only two certificate-wording assertion failures after `682` passing tests;
+no theorem stress ran and no theorem equation, physical bound, or routing changed
+in the correction.
+
+Certification is regression evidence for the encoded exact identities and guards;
+it is not a proof of global no-escape or Navier--Stokes regularity.

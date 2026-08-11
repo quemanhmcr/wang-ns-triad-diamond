@@ -2231,11 +2231,11 @@ This also reveals a shorter high-strain route.  The positive resolved-dissipatio
 
 Thus the shortest high-strain recursion is now
 
-`high strain -> D_V|_G -> critical smooth carrier -> named stop / t=0 / own-scale service`.
+`high strain -> D_V|_G -> critical smooth carrier -> named stop / t=0 / completed full-natural corridor [own-scale service witness]`.
 
 Child-scale heat ownership, old-incident erosion and `NN intersect critical` remain valid material-capacity refinements but are no longer prerequisites for renewal entrance.  The corrected dedicated run `31303385148` and full integration `31303385157` on exact `7ef566a` passed `547` tests and the full causal stack; the first `51840e6` run was fixture-only because a unit-rescaling stress used an absolute rather than corridor-scale timestamp tolerance.  On the corrected SHA the worst Duhamel residual was `4.974e-14`, monitor-order/unit failures were zero, physical log-product margin remained `1.665`, and master `20,000` traces had worst margin `0`.
 
-Accordingly **critical high-strain dissipation is no longer part of the universal-renewal gap**: it already enters an existing recursive stop, the absorbing boundary, or a renewed coherent-service episode without making `D_V` a reset.
+Accordingly **critical high-strain dissipation is no longer part of the universal-renewal gap**: it already enters an existing recursive stop, the absorbing boundary, or a completed full-natural corridor carrying its same-corridor coherent-service witness without making `D_V` a reset.
 
 The remaining master-facing continuum problem is narrower again because the carrier theorem is now **generic in the critical shell mass**, not specific to high strain.  At any actual shell-time event with
 
@@ -2251,6 +2251,8 @@ and the existing radius-three annular heat theorem gives actual bounded own-scal
 
 `A||delta_r Q_Au||_2^2 >= q_b 3mu_0/(64J^2)`,  `|r|<=3/A`.
 
+This service is a positive witness on the corridor already traversed; exact Moyal OO/ON/NN rereading adds no second recursion edge.  At the same earlier endpoint the surviving carrier support lies in `(A/2,2A)`, so the exact hard shells at `A` and `2A` satisfy `max(mu_A,mu_2A)>=(2/3)A||Q_Au||_2^2`.  With `A=3M/4` these are comparable witnesses at ratios `3/4` or `3/2`, with exact ties retained jointly; no monotone progress is asserted.
+
 Material OO/ON/NN is assigned only afterwards from the renewed positive service law.
 
 Any certified resolved `D_V>=D_0>0` is now a supplier: `mu_0=D_0/c` makes the low-mass dissipation at most `D_0/2`, so at least half the actual `D_V` lies on qualifying shells.  These normalized dissipation weights remain diagnostic and never replace positive HH causal probabilities.  The existing dominant fresh coherent-service branch is another supplier: `M(E_C+E_{C-r})>=theta Y/8` implies `M E_shell>=theta Y/16`, hence `Y/64` at `theta=1/4`.  This uses only whole-shell domination of each cell and creates no cell mass floor.
@@ -2259,7 +2261,7 @@ The specialization `mu_0=32pi^2/(75c^2)` reproduces the high-strain terminal, su
 
 Thus high strain, any unit-matched resolved-dissipation source, and dominant fresh coherent mass all enter the same local recursion
 
-`critical shell -> named stop / t=0 / own-scale coherent service`.
+`critical shell -> named stop / t=0 / completed full-natural corridor [own-scale coherent-service witness]`.
 
 The theorem is shell-local and does not invent signed-good scale progress relative to the supplier block.  Pressure mass occupation and unrelated high-frequency enstrophy remain on their existing reservoir/service/entropy routes rather than being relabeled `D_V`.
 

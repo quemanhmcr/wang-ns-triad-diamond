@@ -31,6 +31,7 @@ The current architecture has reached the following point.
 12. The first continuum master quotient is now certified: relay depth is quotiented, physical event time is the universal recursion coordinate, bounded-scale full-natural survivor tails hit `t=0`, and any infinite escape is reduced to infinitely recurring named non-free physical owners or UV-unbounded free survivors. Global termination remains open.
 13. The resolved cross/interface branch is no longer an independent recursive generator: for the actual resolved low--high operator `L_V=K+S`, skew `K` is finite same-event conservative donor flux while symmetric `S` is existing strain/deformation ownership. Pure interface circulation is quotiented before recursion.
 14. The propagated smooth-carrier interface is now type-correct at energy and ownership level: `Q^2` is the carrier energy effect; common affine/Kelvin role motion is quotiented by `dot A+[G,A]=0`; only residual skew `K_phys` is physical relink; raw HH/interface coefficient hits remain first-stop locators until actual energy/work reentry.
+15. A completed full-natural critical-shell corridor now carries its own-scale service as a same-interval physical witness rather than a second recursive event; OO/ON/NN rereading adds zero depth, and the endpoint carrier already has a same-time hard-shell witness set at ratios `3/4` or `3/2`.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -754,7 +755,7 @@ Hence if a tail of free full-natural survivors satisfies `M_j<=Mbar`, then after
 \[ \boxed{\left\lceil t_*Mbar^2/c\right\rceil} \]
 such corridors the initial boundary is forced.
 Consequently, after zero-charge relays are quotiented, every infinite recursive path avoiding `t=0` must do at least one of two things:
-1. contain infinitely many named non-free physical owner events, including first-hit cause sets or work/service/reuse owners; or
+1. contain infinitely many named non-free physical owner events, including genuine first-hit/work/source/reuse owners or independent service owners not merely attached to a completed full-natural corridor; or
 2. have an unbounded-frequency tail of free full-natural survivors.
 The UV alternative is genuine, not a clock artifact, because for `M_j=M_0r^j`, `r>1`,
 \[ \sum_{j\ge0}cM_j^{-2}=\frac{cM_0^{-2}}{1-r^{-2}}<\infty. \]
@@ -839,6 +840,48 @@ A square partition whose motion is chosen independently by the observer may stil
 The common-slice coefficient thresholds `|I_R|>=A/4` and `|I_HH|>=A/2` are therefore typed first-stop locators only. They cannot enter `RecursiveEventState` or `PhysicalOwnerBundle` as physical owners. The same carrier must first reenter actual `Q^2` energy/work causality. Interface work is owner-eligible only after the observer gauge has been quotiented; HH generation is owner-eligible only after actual positive HH work is selected.
 
 This closes the smooth-envelope/projector mismatch, the arbitrary-moving-window loophole, and the coefficient-locator/master type hole. It creates no new interface currency and does not prove termination of the genuine physical owners reached afterward.
+
+---
+
+## 26.8 Full-natural service is a corridor witness, not a second event
+A generic critical shell which survives its full backward natural interval has already traversed the physical corridor
+\[
+I=[t-cA^{-2},t],\qquad A=\frac34M.
+\]
+The own-scale bounded heat/increment service proved on that interval is a genuine positive Navier--Stokes observable, but it is supported on the **same completed corridor**. Reading that service does not create another event time, causal charge, or recursion edge.
+
+The same is true of its material reading. Exact Moyal disintegration gives
+\[
+S_{OO}+S_{ON}+S_{NN}=S_{service}.
+\]
+OO/ON/NN are positive submeasures of the same service law. They may certify downstream physical states, but their mere rereading adds zero recursion depth.
+
+The surviving smooth carrier is already present at the earlier corridor endpoint. Its transported support lies inside
+\[
+(A/2,2A).
+\]
+Splitting into the exact hard shells `(A/2,A]` and `(A,2A]`, with
+\[
+\mu_A=A\|P_Au\|_2^2,\qquad \mu_{2A}=2A\|P_{2A}u\|_2^2,
+\]
+gives
+\[
+A\|Q_Au\|_2^2\le \mu_A+\frac12\mu_{2A}
+\le\frac32\max(\mu_A,\mu_{2A}).
+\]
+Hence
+\[
+\boxed{\max(\mu_A,\mu_{2A})\ge\frac23A\|Q_Au\|_2^2.}
+\]
+This is a same-endpoint hard-shell witness set. Relative to the incoming shell `M`, its frequencies are `3M/4` and `3M/2`. This is comparable-scale geometry, not monotone progress. Exact ties remain joint.
+
+Therefore a chain whose apparent extra layers are only
+
+`full natural corridor -> own-scale service -> Moyal/material rereading -> endpoint survivor`
+
+contains one physical recursion edge: the natural corridor itself. After this quotient, bounded-frequency chains of such free corridors still hit `t=0` by physical time. If they avoid `t=0`, the remaining corridor-only possibility is genuinely UV-unbounded.
+
+This closes the service-theorem-depth and endpoint-service-attachment seams. It does not remove independent source/service/reuse events and does not close UV-unbounded survival.
 
 ---
 
@@ -933,6 +976,11 @@ Before charging relink, prove `dot A_a+[G,A_a]=0` for the common physical transp
 ### 28.24 A coefficient first-stop locator is not a physical owner
 The labels produced when `|I_R|` or `|I_HH|` crosses its registration face describe where clean coefficient continuation failed.
 They are forbidden from the canonical physical-owner state until actual `Q^2` energy/work reentry resolves a physical owner.
+
+---
+
+### 28.25 A positive observable layer is not automatically a new physical event
+A full-natural own-scale service law is physically real, but when it is proved on the corridor just traversed it is a witness of that interval, not a second recursive event. Moyal/material disintegration of the same service measure likewise adds no event time or causal charge. A downstream theorem must supply an actual new state/time if it creates a new recursion edge.
 
 ---
 
@@ -1066,6 +1114,18 @@ No arbitrary motion of the smooth analysis windows and no raw coefficient impuls
 
 ---
 
+### 30.9 Full-natural service corridor route
+`actual critical hard shell at (t,M)`
+→ backward first-stop corridor at `A=3M/4`
+→ named physical stop / absorbing `t=0` / completed full-natural corridor
+→ on the full survivor: own-scale service is attached to that same interval
+→ OO/ON/NN is a same-measure material witness partition
+→ at the same endpoint: hard-shell witness set at `A` or `2A`, with critical mass at least `(2/3)A||Q_Au||_2^2`
+→ only a downstream theorem supplying a genuinely new physical state/time creates another recursion edge.
+The endpoint ratios `3/4` and `3/2` are comparable geometry only; no directional scale progress is inferred.
+
+---
+
 ## 31. What remains open
 The programme is no longer missing a generic “packet persistence theorem”, a common clock, or a definition of recursive depth.
 The first continuum master quotient has reduced the final seam to genuinely physical recurrence.
@@ -1090,10 +1150,14 @@ For the propagated smooth envelope, the measure is different and remains separat
 Raw HH/interface coefficient first stops are also excluded from physical ownership: they locate a failed continuation interval and must pass through actual `Q^2` energy/work reentry before the master receives inheritance, high strain, HH work, relink, or strain ownership.
 
 What remains open is termination/telescoping of those genuine physical owners after these quotients, not an additional hard-interface, smooth-window, or coefficient-amplitude mechanism.
-### 31.4 Conditional shell service must remain conditional
-Many supplier routes land in generic critical shells.
-The generic theorem provides a first-stop corridor and full-survivor service.
-The master must attach the endpoint service owner without silently replacing the corridor by packet persistence or unconditional service.
+### 31.4 Full-natural service attachment is structurally closed
+Service remains conditional: it is recorded only after a critical shell survives the complete no-hit natural corridor. But once that corridor is complete, the own-scale service is a positive law **on the corridor already traversed**, not a second event after it.
+Exact Moyal OO/ON/NN reading of the same service law is a zero-depth witness disintegration. The surviving smooth carrier is already present at the corridor endpoint and has a same-time hard-shell witness set at `A` or `2A` with
+\[
+\max(\mu_A,\mu_{2A})\ge\frac23A\|Q_Au\|_2^2.
+\]
+Thus the master must not attach a second recursive service owner merely because a service theorem is invoked. A genuinely new recursion edge requires a downstream theorem that supplies a new physical state/time.
+What remains open is not endpoint-service attachment, but the continuation/telescoping of genuine first-hit, work, source, reuse, or independent service events and any UV-unbounded free-corridor chain.
 ### 31.5 Supplier-specific scale geometry is now registered, not scalarized
 Hard-tail gives forward ratio at least `2`.
 Signed-good generated transfer gives `3/5<N_next/N<5/8`.
@@ -1102,12 +1166,13 @@ Fresh SGS gives only an upper ratio `<=2` and no directional progress.
 Generic shell/material/reuse routes get no invented scale progress.
 The remaining termination argument must use these branch facts exactly as supplied.
 ### 31.6 Global termination mechanism is now the sharp frontier
-The compact-scale free-survivor route is closed by physical time, and pure resolved-interface circulation has now been removed from recursive depth.
+The compact-scale free-survivor route is closed by physical time. Pure hard-interface circulation, smooth observer motion, raw coefficient locators, and full-natural service theorem depth have all been removed from recursion.
 Therefore an infinite escape avoiding `t=0` must contain either:
-- infinitely many genuine non-free physical owner events after all zero-charge relays, observer-gauge quotients, coefficient-locator reentries, and same-event donor quotients, such as first-hit, strain/work, service, reuse, or other native owner events; or
-- an UV-unbounded free-survivor tail.
-The next master theorem must telescope the first alternative only through the native typed ledgers actually supplied by those owners: physical work, service/reuse, `Xi`, and genuinely globally bounded resources where available.
-Separately, every possible UV-unbounded free-survivor mechanism must be shown to enter a certified physical UV route rather than hide in fresh/service/material representation changes.
+- infinitely many **genuine non-free physical owner events** after all zero-charge relays, observer-gauge quotients, coefficient-energy reentries, same-event donor quotients, and same-corridor service quotients; these include actual first-hit/work/source/reuse events and independent service events not merely generated by a completed free corridor; or
+- a UV-unbounded tail of genuine full-natural physical corridors.
+The next master theorem must telescope the first alternative only through the native typed laws actually supplied by those owners: physical work, causal reuse, independent service/source laws, `Xi`, and genuinely globally bounded resources where available.
+Separately, every possible UV-unbounded corridor mechanism must be shown to enter a certified physical UV route rather than hide in representation, service rereading, or material labeling.
+The new same-endpoint hard-shell witness gives only comparable ratios `3/4` or `3/2`; it is not directional progress and cannot by itself close UV escape.
 Critical `NE`, `D_V`, shell mass, scale-critical service, or same-event interface flux may not be promoted to finite additive resets.
 ### 31.7 Initial data interface
 Backward causal recursion reaching `t=0` is already absorbing.
@@ -1161,6 +1226,9 @@ These simplifications are central to the programme's current direction.
 A decomposition may conserve total energy while merely moving energy between observer-selected channels. Physical ownership begins only after the representation motion is tied to the actual PDE transport and that common gauge has been quotiented.
 ### 32.14 First stop is not necessarily first cause
 A measurable coefficient threshold can correctly locate the earliest failure of clean continuation without itself carrying a physical work law. The master stores physical owners only after the required energy/work reentry.
+### 32.15 Observable layer is not event depth
+A physical observable may be discovered after traversing an interval without occurring after that interval in physical time. Full-natural own-scale service and its OO/ON/NN disintegration live on the corridor already counted. Preserve the measure; quotient only the duplicate theorem depth.
+
 ## 33. Certified recent theorem blocks
 ### 33.1 High-tail sliding natural-window reentry
 The latest completed high-tail bridge is the high-tail sliding natural-window reentry theorem.
@@ -1282,6 +1350,33 @@ It completed successfully on the same exact SHA with the same `676`-test suite, 
 The theorem says neither that every genuine relink/strain/HH owner terminates nor that every UV-unbounded survivor is closed. It makes no Navier–Stokes regularity claim.
 
 
+### 33.5 Full-natural service corridor quotient
+Status:
+`EXACT_FULL_NATURAL_SERVICE_CORRIDOR_QUOTIENT__OWN_SCALE_SERVICE_IS_SAME_INTERVAL_WITNESS_NOT_NEW_EVENT__MATERIAL_DISINTEGRATION_ZERO_RECURSION_DEPTH__ENDPOINT_SMOOTH_CARRIER_HAS_COMPARABLE_HARD_SHELL_WITNESS_SET`.
+Dedicated GitHub Actions run:
+`31448743219`.
+Exact implementation SHA:
+`e351d0d6bef5a6bd6275083e1d2e706acf717a18`.
+Results:
+- `684` tests passed;
+- `50,000` corridor/service/material/endpoint-shell states;
+- worst natural-time identity residual `4.440892098500626e-16`;
+- worst OO/ON/NN same-measure partition residual `1.0658141036401503e-14`;
+- minimum sampled two-hard-shell cover margin `2.840630292262874e-08`;
+- exact joint hard-shell witness tie retained;
+- companion continuum-master service-witness barrier failures `0`.
+Stored artifact:
+`recorded-results/31448743219/full-natural-service-corridor-quotient-results/`.
+GitHub artifact digest:
+`sha256:47a7296117a1dc966c47d325aecaab6754bb73bb9d9f8d59f5fc5b1dd49b0c5e`.
+Full causal integration:
+`31448763557`.
+It completed successfully on the same exact SHA with the same `684`-test suite through source, pressure, material, critical-shell, service-corridor quotient, high-tail, hard/smooth interface, first-stop, causal-reuse, physical-branch, and master stages. The master checked `20,000` episode traces with worst margin `0.0`.
+The initial SHA `4d19bf616c88e634698039c098e2c774be01a669` had only two brittle certificate-wording assertion failures after `682` passing tests; no theorem stress ran there and no theorem equation, physical bound, or routing changed in the correction.
+The theorem removes service-theorem depth and closes endpoint-service attachment. It does not terminate genuine first-hit/work/source/reuse/independent-service recurrence or UV-unbounded full-survivor chains, and makes no Navier--Stokes regularity claim.
+
+---
+
 ## 34. Certification discipline
 Serious theorem validation is performed only in GitHub Actions.
 Local work is restricted to:
@@ -1322,26 +1417,27 @@ Then read the following current-spine documents in order:
 8. `docs/event_anchored_role_registration.md`
 9. `docs/coherent_service_or_flat.md`
 10. `docs/critical_shell_service_reentry.md`
-11. `docs/high_strain_resolved_ancestor.md`
-12. `docs/high_strain_heat_increment_service.md`
-13. `docs/material_label_carrier_quotient.md`
-14. `docs/objective_source_routing_compiler.md`
-15. `docs/objective_pressure_pair_atomization.md`
-16. `docs/fresh_service_scale_reentry.md`
-17. `docs/high_frequency_dissipation_reentry.md`
-18. `docs/high_tail_binary_work_reentry.md`
-19. `docs/high_tail_ultraviolet_locality.md`
-20. `docs/high_tail_natural_window_reentry.md`
-21. `docs/physical_pair_weighted_productivity.md`
-22. `docs/common_slice_coefficient_registration.md`
-23. `docs/recursive_physical_witness_constructor.md`
-24. `docs/joint_causal_stop_projection.md`
-25. `docs/amplitude_entropy_causal_reuse.md`
-26. `docs/weighted_causal_reuse.md`
-27. `docs/renyi_causal_reuse.md`
-28. `docs/physical_branch_compiler.md`
-29. `docs/continuum_master_event_quotient.md`
-30. `docs/master_no_escape.md`
+11. `docs/full_natural_service_corridor_quotient.md`
+12. `docs/high_strain_resolved_ancestor.md`
+13. `docs/high_strain_heat_increment_service.md`
+14. `docs/material_label_carrier_quotient.md`
+15. `docs/objective_source_routing_compiler.md`
+16. `docs/objective_pressure_pair_atomization.md`
+17. `docs/fresh_service_scale_reentry.md`
+18. `docs/high_frequency_dissipation_reentry.md`
+19. `docs/high_tail_binary_work_reentry.md`
+20. `docs/high_tail_ultraviolet_locality.md`
+21. `docs/high_tail_natural_window_reentry.md`
+22. `docs/physical_pair_weighted_productivity.md`
+23. `docs/common_slice_coefficient_registration.md`
+24. `docs/recursive_physical_witness_constructor.md`
+25. `docs/joint_causal_stop_projection.md`
+26. `docs/amplitude_entropy_causal_reuse.md`
+27. `docs/weighted_causal_reuse.md`
+28. `docs/renyi_causal_reuse.md`
+29. `docs/physical_branch_compiler.md`
+30. `docs/continuum_master_event_quotient.md`
+31. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -1361,7 +1457,8 @@ Conservative motion of observer-selected channels is not itself physics.
 Hard resolved cross/interface work has its separate same-event donor quotient; the hard and smooth measures share provenance but are not identified.
 Objective source variation is split by physical owner.
 Resolved dissipation and pressure/fresh source laws produce actual critical hard shells.
-Generic critical shells enter first-stop corridors and, on full survivors, own-scale service.
+Generic critical shells enter first-stop corridors. A full survivor completes one physical natural corridor which already carries its own-scale service as an attached witness; service/material rereading adds no second event depth.
+At that same endpoint the surviving carrier has a comparable hard-shell witness set at ratios `3/4` or `3/2`; this is not directional progress.
 High strain produces critical resolved ancestors.
 Fresh SGS service is quotiented to a scale law before shell extraction.
 High-frequency service is converted to physical tail dissipation before any causal conclusion.
@@ -1377,7 +1474,7 @@ All routed physical owners and simultaneous physical causes feed one joint recur
 Relay depth is quotiented before recursion depth is counted.
 Actual physical time is the universal event coordinate; each supplier keeps its own natural corridor length.
 Bounded-scale free full-natural survivor tails hit `t=0`.
-Therefore any infinite escape must recur through infinitely many genuine named non-free physical owners after relay, observer-gauge, coefficient-reentry, and donor quotienting, or become UV-unbounded.
+Therefore any infinite escape must recur through infinitely many genuine named non-free physical owners after relay, observer-gauge, coefficient-reentry, donor, and same-corridor service quotienting, or become a UV-unbounded chain of genuine full-natural physical corridors.
 Only true globally bounded scale-independent resources may terminate additively.
 `t=0` is absorbing.
 The present frontier is to telescope genuine named-owner recurrence through native typed physical ledgers, and prove that every UV-unbounded free-survivor mechanism enters a certified physical UV route, without reintroducing observer-made structure.

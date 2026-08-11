@@ -112,9 +112,11 @@ Y_{shell}(\mu_0)
 }
 \]
 
-The normalized full-natural-slab bounded heat service is at least \(cY_{shell}(\mu_0)\).
+The normalized full-natural-slab bounded heat service is at least \(cY_{shell}(\mu_0)\).  This service lives on the very full-natural corridor just completed; recording or disintegrating it adds no second recursion edge.
 
-Only after this positive service exists do we apply exact Moyal and read material OO/ON/NN from the service law's actual two intrinsic endpoints.
+At the earlier corridor endpoint the surviving smooth carrier is already present.  Its support lies inside `(A/2,2A)`, so the two exact hard shells at `A` and `2A` satisfy `max(mu_A,mu_2A)>=(2/3)A||Q_Au||_2^2`.  Since `A=3M/4`, these are comparable endpoint witnesses at ratios `3/4` or `3/2`, not a monotone-progress theorem.
+
+Only after this positive service exists do we apply exact Moyal and read material OO/ON/NN from the same service law endpoints; this is a same-measure witness partition, not a second causal law.
 
 ## Supplier 1: any certified resolved-dissipation lower
 
