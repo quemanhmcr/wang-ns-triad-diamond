@@ -1,0 +1,54 @@
+name: Helical physical edge registration
+
+on:
+  push:
+    paths:
+      - 'src/helical_physical_edge_registration.py'
+      - 'tests/test_helical_physical_edge_registration.py'
+      - 'docs/helical_physical_edge_registration.md'
+      - '.github/workflows/helical-physical-edge-registration.yml'
+      - 'src/helical.py'
+      - 'tests/test_helical.py'
+      - 'src/single_edge_certificate.py'
+      - 'tests/test_single_edge_certificate.py'
+      - 'src/smooth_flux_cocycle.py'
+      - 'tests/test_smooth_flux_cocycle.py'
+      - 'src/physical_pair_weighted_productivity.py'
+      - 'tests/test_physical_pair_weighted_productivity.py'
+      - '.github/workflows/physical-energy-causal-integration.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Physical helical edge 50k stress
+        run: python -m src.helical_physical_edge_registration --samples 50000 --outdir results-helical-physical-edge-registration
+      - name: Global single-edge Jstar dependency
+        run: python -m src.single_edge_certificate --stress-samples 50000 --outdir results-single-edge-certificate
+      - name: Smooth flux polarization dependency
+        run: python -m src.smooth_flux_cocycle --samples 50000 --outdir results-smooth-flux-cocycle
+      - name: Physical pair factor-four/productivity dependency
+        run: python -m src.physical_pair_weighted_productivity --samples 50000 --outdir results-physical-pair-weighted-productivity
+      - run: cat results-helical-physical-edge-registration/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: helical-physical-edge-registration-results
+          path: |
+            results-helical-physical-edge-registration/
+            results-single-edge-certificate/
+            results-smooth-flux-cocycle/
+            results-physical-pair-weighted-productivity/
