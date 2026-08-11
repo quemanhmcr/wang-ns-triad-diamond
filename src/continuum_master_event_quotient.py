@@ -15,6 +15,11 @@ from src.high_strain_descending_epoch_telescope import (
     HighStrainRenewalStep,
     high_strain_epoch_telescope,
 )
+from src.signed_good_generated_epoch_time_telescope import (
+    SignedGoodGeneratedHHStep,
+    signed_good_generated_epoch_telescope,
+    signed_good_step_from_energy_reentry,
+)
 from src.full_natural_checkpoint_quotient import FULL_NATURAL_CHECKPOINT, FullNaturalCheckpoint
 from src.full_natural_service_corridor_quotient import FULL_NATURAL_SERVICE_WITNESS
 from src.same_carrier_checkpoint_segmentation_quotient import (
@@ -47,6 +52,7 @@ STATUS = (
     "SAME_CARRIER_FIRST_HIT_NOT_RESET_BY_CHECKPOINTS__"
     "SMOOTH_RELINK_SAME_EVENT_DONOR_ZERO_DEPTH__"
     "CONSECUTIVE_HIGH_STRAIN_EPOCHS_FINITE_BY_PHYSICAL_DISSIPATION__"
+    "SIGNED_GOOD_GENERATED_HH_EPOCHS_FINITE_BY_PARABOLIC_TIME__"
     "CHECKPOINT_ZENO_NOT_CANONICAL_LINEAGE__NO_COMMON_CLOCK_OR_CAUSAL_REWEIGHTING"
 )
 
@@ -631,13 +637,13 @@ def master_escape_dichotomy() -> dict[str, str]:
     """Analytic infinite-event consequence after checkpoint segmentation is quotiented."""
     return {
         "statement": (
-            "after zero-charge relays, hard/smooth conservative donor relays, same-corridor service witnesses, natural-horizon checkpoints, and same-carrier checkpoint segmentation are quotiented, any infinite recursive EVENT path avoiding t=0 must contain infinitely many genuine named non-free physical owner events; the physical 3/16 high-strain descent plus the global gradient reservoir additionally forbids the path from eventually consisting only of high-strain critical-dissipation renewals"
+            "after zero-charge relays, hard/smooth conservative donor relays, same-corridor service witnesses, natural-horizon checkpoints, and same-carrier checkpoint segmentation are quotiented, any infinite recursive EVENT path avoiding t=0 must contain infinitely many genuine named non-free physical owner events; the physical 3/16 high-strain descent plus the global gradient reservoir additionally forbids the path from eventually consisting only of high-strain critical-dissipation renewals, while signed-good actual HH generation has a separate parabolic common-surface telescope which forbids an eventually-pure signed-good generated tail"
         ),
         "proof": (
-            "a no-event natural horizon cannot replace the event-anchored smooth carrier or reset its cumulative strain/coefficient first-hit monitors. Genuine fixed-A,c natural windows have one positive duration and cannot accumulate before t=0. Arbitrary observer cuts carry no window duration; a checkpoint must be bound to an actual no-hit restriction of the exact event/carrier/dual/PDE path, whose gluing leaves the same first stop, and at an interior cut accumulation the actual no-earlier-hit path plus a matching smooth-extension token gives either an endpoint face or continuation of the same carrier. Separately, on every consecutive high-strain epoch one has D_*<=D_j<=N_j G_* and N_(j+1)<=3N_j/16, so the physical gradient reservoir and geometric scale descent force that epoch to be finite even with arbitrary interval overlap"
+            "a no-event natural horizon cannot replace the event-anchored smooth carrier or reset its cumulative strain/coefficient first-hit monitors. Genuine fixed-A,c natural windows have one positive duration and cannot accumulate before t=0. Arbitrary observer cuts carry no window duration; a checkpoint must be bound to an actual no-hit restriction of the exact event/carrier/dual/PDE path, whose gluing leaves the same first stop, and at an interior cut accumulation the actual no-earlier-hit path plus a matching smooth-extension token gives either an endpoint face or continuation of the same carrier. Separately, on every consecutive high-strain epoch one has D_*<=D_j<=N_j G_* and N_(j+1)<=3N_j/16, so the physical gradient reservoir and geometric scale descent force that epoch to be finite even with arbitrary interval overlap. On every consecutive signed-good generated-HH epoch, only actual positive HH work after physical-energy reentry is admitted; 3/5<N_parent/N_child<5/8 makes parent natural lifetimes grow by more than 64/25, and the asynchronous common registration surfaces satisfy s_j-s_(j+1)>=(1792/4875)T_j, so their cumulative physical backshift reaches the absorbing initial surface after finite generated depth"
         ),
         "remaining_physics": (
-            "the remaining infinite-path problem is mixed recurrence of genuine physical owners after consecutive high-strain epochs are also known finite. Actual high-tail dissipation/work remains a genuine event route when its independent physical hypotheses are met; checkpoint re-hardening cannot manufacture that provenance"
+            "the remaining infinite-path problem is mixed recurrence of genuine physical owners after consecutive high-strain and consecutive signed-good generated-HH epochs are both known finite. Generic HH/high-tail generation which lacks the signed-good physical geometry remains a separate genuine route; checkpoint re-hardening or raw coefficient obstruction cannot manufacture signed-good provenance"
         ),
     }
 
@@ -673,6 +679,9 @@ def theorem_certificate() -> dict[str, object]:
         "high_strain_descending_epoch": (
             "high strain remains a genuine recursive owner, but consecutive high-strain renewal cannot persist indefinitely: every step pays D_V>=D_*, renews to N_next/N<=3/16 through an actual critical resolved ancestor, and obeys D_j<=N_j G_* for the physical global gradient reservoir G_* even under arbitrary interval overlap; hence every pure high-strain epoch is finite without promoting D_V to a global reset"
         ),
+        "signed_good_generated_epoch": (
+            "signed-good HH generation remains a genuine recursive owner, but a coefficient obstruction enters this epoch only after actual Q^2/physical-energy reentry selects positive HH child-energy work. A physical heavy-half parent support has width <=25/128 of its parent natural lifetime; strict 3/5<N_parent/N_child<5/8 gives T_next/T>64/25, and H_next subset [s,b] gives s_j-s_(j+1)>=(1792/4875)T_j. Thus required common registration surfaces reach absorbing t=0 after finite consecutive signed-good generated depth. Common surfaces are not event vertices, Duhamel weights are not causal probabilities, and generic non-signed-good HH is not claimed"
+        ),
         "universal_time_identity": "sum_j (t_j-t_(j+1)) = t_0-t_L on any ordered physical event or checkpoint times; event counting is a separate ontology",
         "natural_survivor": "a no-hit full-natural corridor consumes its theorem-supplied physical duration, but its horizon endpoint is an analysis checkpoint unless a first stop or t=0 occurs",
         "compact_scale_no_escape": (
@@ -694,7 +703,7 @@ def theorem_certificate() -> dict[str, object]:
         ),
         "boundary": "t=0 is absorbing",
         "scope": (
-            "this is a continuum master assembly/quotient theorem, not a global no-escape or Navier-Stokes regularity proof; checkpoint segmentation and eventually-pure high-strain recurrence are no longer independent escape seams, while mixed recurrence of the remaining genuine physical owners remains open"
+            "this is a continuum master assembly/quotient theorem, not a global no-escape or Navier-Stokes regularity proof; checkpoint segmentation, eventually-pure high-strain recurrence, and eventually-pure signed-good generated-HH recurrence are no longer independent escape seams, while mixed recurrence and generic non-signed-good HH/high-tail recurrence remain open"
         ),
     }
 
@@ -713,6 +722,7 @@ class QuotientStress:
     checkpoint_segmentation_barrier_failures: int
     smooth_relink_recursion_barrier_failures: int
     high_strain_epoch_telescope_failures: int
+    signed_good_generated_epoch_telescope_failures: int
     maximum_relay_owner_count: int
     minimum_uv_time_gap_to_naive_infinite_sum: float
 
@@ -720,7 +730,7 @@ class QuotientStress:
 def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
     rng = random.Random(seed)
     wom = wtime = wscale = 0.0
-    boundary_fail = supplier_fail = obstruction_fail = service_witness_fail = checkpoint_fail = segmentation_fail = relink_fail = high_strain_epoch_fail = 0
+    boundary_fail = supplier_fail = obstruction_fail = service_witness_fail = checkpoint_fail = segmentation_fail = relink_fail = high_strain_epoch_fail = generated_epoch_fail = 0
     maxowners = 0
     uv_gap = math.inf
 
@@ -915,6 +925,71 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         high_strain_epoch_fail += 1
         raise AssertionError("nonconsecutive high-strain restart crossed the epoch telescope")
 
+    # Signed-good HH generation is a genuine recursive owner, but its native
+    # parabolic registration geometry forbids an infinite consecutive interior
+    # lineage.  No event-count fee or Duhamel causal weight is introduced.
+    generated_rows: list[SignedGoodGeneratedHHStep] = []
+    c_gen = 1.0
+    child_gen = 10.0
+    end_gen = 5.0
+    for _ in range(3):
+        parent_gen = 0.61 * child_gen
+        Tchild_gen = c_gen / (child_gen * child_gen)
+        width_gen = 0.2 * Tchild_gen
+        if generated_rows:
+            end_gen = generated_rows[-1].work_support_end
+        start_gen = end_gen - width_gen
+        generated_rows.append(
+            signed_good_step_from_energy_reentry(
+                reentry={
+                    "branch": "physical_high_high_transfer_generation",
+                    "energy_gate": {
+                        "branch": "physical_high_high_transfer_generation",
+                        "physical_hh_work_lower": 0.8,
+                    },
+                    "coefficient_impulse_used_as_physical_work": False,
+                    "observer_partition_motion_charged_as_physics": False,
+                },
+                selected_physical_half_slab={
+                    "start": start_gen,
+                    "end": end_gen,
+                    "mass": 1.1,
+                    "total": 2.0,
+                    "normalized_parent_span_upper": 25.0 / 128.0,
+                },
+                child_frequency=child_gen,
+                parent_frequency=parent_gen,
+                scaled_lifetime=c_gen,
+            )
+        )
+        child_gen = parent_gen
+    generated_epoch = signed_good_generated_epoch_telescope(generated_rows)
+    if generated_epoch.layer_count != 3 or generated_epoch.common_slices_are_recursive_events:
+        generated_epoch_fail += 1
+        raise AssertionError("signed-good generated physical-time epoch telescope failed")
+    try:
+        signed_good_step_from_energy_reentry(
+            reentry={
+                "branch": HH_COEFFICIENT_OBSTRUCTION,
+                "requires_physical_energy_reentry": True,
+            },
+            selected_physical_half_slab={
+                "start": 1.0,
+                "end": 1.0,
+                "mass": 1.0,
+                "total": 1.0,
+                "normalized_parent_span_upper": 25.0 / 128.0,
+            },
+            child_frequency=10.0,
+            parent_frequency=6.1,
+            scaled_lifetime=1.0,
+        )
+    except TypeError:
+        pass
+    else:
+        generated_epoch_fail += 1
+        raise AssertionError("raw HH coefficient obstruction crossed the signed-good generated epoch boundary")
+
     routed = owner_bundle_from_energy_reentry(
         "actual positive q^2-weighted HH work",
         1.0,
@@ -996,7 +1071,7 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         if not (uv > first and math.isfinite(uv)):
             raise AssertionError("UV geometric natural-time obstruction disappeared")
 
-    return QuotientStress(samples, wom, wtime, wscale, boundary_fail, supplier_fail, obstruction_fail, service_witness_fail, checkpoint_fail, segmentation_fail, relink_fail, high_strain_epoch_fail, maxowners, uv_gap)
+    return QuotientStress(samples, wom, wtime, wscale, boundary_fail, supplier_fail, obstruction_fail, service_witness_fail, checkpoint_fail, segmentation_fail, relink_fail, high_strain_epoch_fail, generated_epoch_fail, maxowners, uv_gap)
 
 
 def main() -> None:
@@ -1021,7 +1096,9 @@ Endpoint hard-shell rereading at a full-natural checkpoint is likewise witness g
 
 High strain remains a genuine physical owner, but it now has a native path telescope.  On a consecutive high-strain epoch, every event pays `D_j>=D_*`, its physical ancestor/renewal gives `N_(j+1)/N_j<=3/16`, and the global gradient reservoir gives `D_j<=N_j G_*` without any disjointness assumption on the first-hit histories.  Hence a recursive path cannot eventually remain in high strain alone; another genuine owner must break every sufficiently long descending epoch.  `D_V` is not used as a global additive reset.
 
-Thus, after zero-charge relays, observer gauges, coefficient locators, hard and smooth same-event donor circulation, same-corridor service layers, natural-horizon checkpoints and exact same-path segmentation are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events and cannot eventually remain in high strain alone.  A geometric finite-time sum still warns about genuinely changing-scale physical producers, but it cannot be manufactured from duration-free checkpoint readings.  Genuine UV progression enters only through independently certified physical tail work/dissipation or another actual physical event.
+Signed-good generated HH has a different native telescope.  A raw `|I_HH|` coefficient hit is rejected until actual `Q^2`/physical-energy reentry selects positive HH child-energy work.  On the signed-good parent support, `3/5<N_parent/N_child<5/8`, so natural lifetimes grow by more than `64/25`; the actual heavy-half support lies inside the asynchronous cone and its common registration surfaces obey `s_j-s_(j+1)>=(1792/4875)T_j`.  Their cumulative physical backshift grows geometrically and reaches the absorbing initial surface after finite consecutive signed-good generated depth.  The common surfaces are not recursive events and Duhamel amplitude is not a causal law.
+
+Thus, after zero-charge relays, observer gauges, coefficient locators, hard and smooth same-event donor circulation, same-corridor service layers, natural-horizon checkpoints and exact same-path segmentation are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events and can eventually remain in neither high strain alone nor signed-good generated HH alone.  A geometric finite-time sum still warns about genuinely changing-scale physical producers, but it cannot be manufactured from duration-free checkpoint readings.  Genuine UV progression enters only through independently certified physical tail work/dissipation or another actual physical event.
 
 Stress: `{out.samples}` quotient/path states
 - worst zero-charge owner-mass residual: `{out.worst_owner_mass_residual:.3e}`
@@ -1035,10 +1112,11 @@ Stress: `{out.samples}` quotient/path states
 - same-carrier checkpoint-segmentation barrier failures: `{out.checkpoint_segmentation_barrier_failures}`
 - smooth-relink recursion-barrier failures: `{out.smooth_relink_recursion_barrier_failures}`
 - high-strain descending-epoch telescope failures: `{out.high_strain_epoch_telescope_failures}`
+- signed-good generated-HH epoch telescope failures: `{out.signed_good_generated_epoch_telescope_failures}`
 - largest relayed joint-owner set sampled: `{out.maximum_relay_owner_count}`
 - minimum sampled changing-scale geometric time beyond its first window: `{out.minimum_uv_time_gap_to_naive_infinite_sum:.3e}`
 
-This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes no-event checkpoint segmentation and conservative smooth-relink donor depth from physical lineage and proves that a recursive path cannot eventually remain forever in high strain alone. Mixed recurrence through the remaining genuine physical owners is still open.
+This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes no-event checkpoint segmentation and conservative smooth-relink donor depth from physical lineage and proves that a recursive path cannot eventually remain forever in high strain alone or in signed-good generated HH alone. Mixed recurrence and generic non-signed-good HH/high-tail recurrence remain open.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)

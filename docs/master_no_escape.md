@@ -2424,3 +2424,47 @@ dependencies, and a three-resolution actual Fourier--Galerkin Navier--Stokes
 route through measured `K_N`, `D_N`, `G_*` and critical ancestor-shell
 dissipation.  This strengthens the executable certificate; it does not enlarge
 the continuum conclusion beyond eventually-pure high-strain recurrence.
+
+## Candidate refinement: pure signed-good generated-HH depth reaches the initial surface
+
+There is a second genuine-owner recurrence class whose own PDE geometry is more
+rigid than the coarse master state suggests.  An earlier HH coefficient hit is
+**not** enough: it is only an interval locator.  The carrier first reenters its
+actual `Q^2` energy balance, and the present candidate begins only when that gate
+selects positive physical high--high child-energy work.
+
+Restrict the same work law to the physical heavy half-slab.  For an actual
+signed-good parent pair,
+
+`3/5<N_parent/N_child<5/8`,
+
+so the parent natural lifetime grows backward by more than `64/25`.  Writing the
+parent event support as `H_j=[a_j,b_j]` and
+
+`s_j=a_j-(2/5)T_j`,
+
+the half-slab gives `|H_j|/T_j<=25/128`, while asynchronous continuation only
+requires
+
+`H_(j+1) subset [s_j,b_j]`.
+
+The already-certified geometry then gives
+
+`s_j-s_(j+1)>=(1792/4875)T_j`,
+
+hence
+
+`Delta s_L >= (1792/7605)T_0[(64/25)^L-1]`.
+
+These `s_j` are common physical **registration surfaces**, not additional
+recursive events.  Their geometric backward displacement means that at finite
+physical time a consecutive signed-good generated lineage eventually requires a
+surface at or before `t=0`; the gate is then truncated at the absorbing initial
+surface.  No lower bound is imposed on the separation of actual event times.
+
+Thus, if this candidate is certified, both an eventually-pure high-strain tail and
+an eventually-pure signed-good generated-HH tail are excluded by their own native
+PDE laws.  The remaining global problem is still mixed genuine-owner recurrence,
+and it still includes generic/nonlocal HH or high-tail events that do not satisfy
+the signed-good parent geometry.  Shannon/Renyi reuse continues to control causal
+ancestry breadth and collision; it is not used as a manufactured physical clock.
