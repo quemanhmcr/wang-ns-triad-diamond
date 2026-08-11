@@ -1,0 +1,43 @@
+name: Audit helical physical edge registration
+
+on:
+  push:
+    paths:
+      - 'src/helical_physical_edge_registration.py'
+      - 'tests/test_helical_physical_edge_registration.py'
+      - 'tests/test_helical_physical_edge_registration_audit.py'
+      - 'src/helical.py'
+      - 'tests/test_helical.py'
+      - '.github/workflows/helical-physical-edge-registration.yml'
+      - '.github/workflows/audit-helical-physical-edge-registration.yml'
+      - '.github/workflows/physical-energy-causal-integration.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adversarial-helical-edge-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Run native-scale and typed-certificate anti-tests
+        run: pytest -q tests/test_helical_physical_edge_registration_audit.py
+      - name: Run full theorem suite
+        run: pytest -q
+      - name: Run wide physical-edge stress
+        run: python -m src.helical_physical_edge_registration --samples 200000 --outdir results-audit-helical-physical-edge-registration/helical-edge
+      - name: Run single-edge envelope dependency
+        run: python -m src.single_edge_certificate --stress-samples 100000 --outdir results-audit-helical-physical-edge-registration/single-edge
+      - run: cat results-audit-helical-physical-edge-registration/helical-edge/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-helical-physical-edge-registration-results
+          path: results-audit-helical-physical-edge-registration/
