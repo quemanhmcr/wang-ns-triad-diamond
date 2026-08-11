@@ -1,0 +1,72 @@
+name: Signed-good generated epoch time telescope
+
+on:
+  push:
+    paths:
+      - 'src/signed_good_generated_epoch_time_telescope.py'
+      - 'tests/test_signed_good_generated_epoch_time_telescope.py'
+      - 'docs/signed_good_generated_epoch_time_telescope.md'
+      - '.github/workflows/signed-good-generated-epoch-time-telescope.yml'
+      - 'src/asynchronous_duhamel_sync.py'
+      - 'tests/test_asynchronous_duhamel_sync.py'
+      - 'docs/asynchronous_duhamel_sync.md'
+      - 'src/physical_energy_causal_bridge.py'
+      - 'tests/test_physical_energy_causal_bridge.py'
+      - 'docs/physical_energy_causal_bridge.md'
+      - 'src/common_slice_coefficient_registration.py'
+      - 'tests/test_common_slice_coefficient_registration.py'
+      - 'src/smooth_quadratic_carrier_interface.py'
+      - 'tests/test_smooth_quadratic_carrier_interface.py'
+      - 'src/recursive_physical_witness_constructor.py'
+      - 'tests/test_recursive_physical_witness_constructor.py'
+      - 'src/continuum_master_event_quotient.py'
+      - 'tests/test_continuum_master_event_quotient.py'
+      - 'docs/continuum_master_event_quotient.md'
+      - 'docs/recursive_physical_witness_constructor.md'
+      - 'docs/master_no_escape.md'
+      - '.github/workflows/physical-energy-causal-integration.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Signed-good generated epoch physical-time stress
+        run: python -m src.signed_good_generated_epoch_time_telescope --samples 50000 --outdir results-signed-good-generated-epoch-time-telescope
+      - name: Asynchronous parabolic synchronization dependency
+        run: python -m src.asynchronous_duhamel_sync --samples 50000 --outdir results-asynchronous-duhamel-sync
+      - name: Physical-energy causal work dependency
+        run: python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge
+      - name: Common-slice coefficient locator dependency
+        run: python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-common-slice-coefficient-registration
+      - name: Smooth Q2 energy reentry dependency
+        run: python -m src.smooth_quadratic_carrier_interface --samples 50000 --outdir results-smooth-quadratic-carrier-interface
+      - name: Generated first-stop/reentry dependency
+        run: python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor
+      - name: Continuum master generated-epoch certificate
+        run: python -m src.continuum_master_event_quotient --samples 50000 --outdir results-continuum-master-event-quotient
+      - run: cat results-signed-good-generated-epoch-time-telescope/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: signed-good-generated-epoch-time-telescope-results
+          path: |
+            results-signed-good-generated-epoch-time-telescope/
+            results-asynchronous-duhamel-sync/
+            results-physical-energy-causal-bridge/
+            results-common-slice-coefficient-registration/
+            results-smooth-quadratic-carrier-interface/
+            results-recursive-physical-witness-constructor/
+            results-continuum-master-event-quotient/

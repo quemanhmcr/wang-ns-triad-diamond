@@ -45,6 +45,8 @@ on:
       - 'src/event_anchored_role_registration.py'
       - 'src/physical_pair_weighted_productivity.py'
       - 'src/recursive_physical_witness_constructor.py'
+      - 'src/signed_good_generated_epoch_time_telescope.py'
+      - 'tests/test_signed_good_generated_epoch_time_telescope.py'
       - 'src/joint_causal_stop_projection.py'
       - 'src/smooth_sgs_first_hit_extraction.py'
       - 'src/smooth_material_carrier_relay.py'
@@ -112,6 +114,7 @@ jobs:
       - run: python -m src.event_anchored_role_registration --samples 50000 --outdir results-integration/event-role
       - run: python -m src.physical_pair_weighted_productivity --samples 50000 --outdir results-integration/physical-pair-productivity
       - run: python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-integration/recursive-witness
+      - run: python -m src.signed_good_generated_epoch_time_telescope --samples 50000 --outdir results-integration/signed-good-generated-epoch-time-telescope
       - run: python -m src.joint_causal_stop_projection --samples 50000 --outdir results-integration/joint-stop
       - run: python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-integration/first-hit
       - run: python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy

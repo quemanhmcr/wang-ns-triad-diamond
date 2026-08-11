@@ -139,3 +139,20 @@ The `resolved_cutoff_repartition_relay` theorem removes the second artificial op
 Thus switching from the child cutoff to the parent cutoff is only an exact repartition of the same Navier--Stokes interaction.  With `3/5<N_p/N<5/8`, the relayed envelope satisfies `(22/25)e^(-1/15)>1/2`, so parent-scale low-low exclusion and the existing parabolic lifetime window survive.
 
 The generated-survivor route therefore needs neither a fresh maximizing packet nor a cutoff-interface charge.  Since this note was written, several major recursive suppliers have acquired their own exact reentry theorems: generic critical shells, high-strain dissipation, refinement-invariant fresh SGS service, and the high-tail common-unit/locality/sliding-natural-window chain.  The remaining programme-level burden is no longer an unspecified “choose a renewed slab” operation; it is to assemble all certified supplier routes into one measurable continuum master and prove exhaustion without double charging or synthetic clocks.  This is not a Navier--Stokes global-regularity proof.
+
+## Candidate refinement: earlier HH regeneration is not a free depth label
+
+The `HH,recur` term above is correctly **not** a currency.  The new candidate
+refines what happens when that earlier quadratic event is resolved physically.
+A coefficient obstruction itself is never admitted.  It must first pass through
+actual `Q^2` energy reentry.  If the result is physical HH generation and its hard
+parent pair is on the signed-good core, the event enters the existing asynchronous
+parabolic geometry.
+
+For consecutive such events the parent natural lifetimes grow by more than
+`64/25`, while their common registration surfaces move backward by at least
+`(1792/4875)T_j` per layer.  Therefore a pure signed-good regeneration lineage
+reaches the absorbing initial surface after finite depth at finite physical time.
+This does not convert `HH,recur` into a transfer cost and does not cover generic
+HH/high-tail generation; it identifies the native physical geometry of the
+signed-good subroute.

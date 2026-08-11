@@ -288,3 +288,42 @@ Mixed-owner recurrence remains open.
 
 
 This high-strain path extension was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated run `31460525711` and full causal integration run `31460525687`.  It removes eventually-pure high-strain recurrence while leaving mixed genuine-owner recurrence open.
+
+### Candidate extension: signed-good generated HH has finite parabolic depth
+
+This candidate does **not** classify a raw HH coefficient obstruction as a generated
+owner.  `|I_HH|` remains only a first-stop locator.  The same smooth carrier must
+first reenter actual `Q^2`/physical-energy causality; only the branch carrying
+positive physical HH child-energy work is eligible.
+
+On that actual work law, keep the physical heavy half-slab and its same-time hard
+parent pair.  If the parent is signed-good,
+
+`3/5 < N_parent/N_child < 5/8`,
+
+then `T_parent/T_child>64/25`.  For parent-work support `H_j=[a_j,b_j]`, the
+existing asynchronous registration surface
+
+`s_j=a_j-(2/5)T_j`
+
+is not an event vertex.  The heavy-half support obeys
+`|H_j|/T_j<=25/128<10/39`, and the next generated support is required to be the
+same physical lineage, namely `H_(j+1) subset [s_j,b_j]`.  Therefore
+
+`s_j-s_(j+1)>=(1792/4875)T_j`,
+
+and
+
+`Delta s_L >= (1792/7605)T_0[(64/25)^L-1]`.
+
+At finite physical time the required backward registration surface consequently
+reaches `t=0` after finite consecutive signed-good generated depth.  The event
+times themselves are not assigned a synthetic minimum decrement, and no event
+count is charged.  The initial surface terminates the registration because `t=0`
+is physically absorbing.
+
+The master consequence, if certified, is only that an infinite recursive path
+cannot eventually consist solely of **signed-good** generated HH renewals.  Generic
+HH/high-tail work without this signed-good geometry remains a genuine separate
+route.  Shannon/Renyi also remains the native breadth/collision/reuse law of the
+ancestry rather than being repurposed as a clock.
