@@ -2340,7 +2340,7 @@ zero segmentation and reset-barrier failures, zero first-stop-time residual,
 between stop-at-accumulation and continue-across-accumulation cases.  No global
 regularity claim follows.
 
-## Candidate refinement: smooth residual-skew relink is not a new generation
+## Certified refinement: smooth residual-skew relink is not a new generation
 
 The smooth `Q^2` interface theorem already pays the important physical price:
 arbitrary analysis-window motion is rejected, common affine/Kelvin transport is
@@ -2364,3 +2364,8 @@ This is deliberately parallel to, but not identified with, the existing hard
 resolved-interface donor theorem.  If strain is tied with relink, only the strain
 branch remains recursively event-facing.  The candidate removes no real physical
 work; it only refuses to count conservative redistribution as a new generation.
+
+This refinement was certified on exact SHA
+`8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` by dedicated smooth-relink run
+`31457786141` and full causal integration run `31457786115`.  It removes no
+physical `K_phys` work; it quotients only same-event conservative donor depth.

@@ -107,7 +107,7 @@ It does not allow the carrier to be propagated backward through an arbitrary int
 A large coefficient impulse is only such an exit locator.  It must reenter the
 physical-energy gate on the observed carrier interval; the impulse magnitude is
 not itself residual work.  Only actual positive native interface work may route
-to relink/strain ownership.
+to physical relink provenance or strain ownership.  The later certified smooth-relink donor quotient keeps residual `K_phys` relink physical but closes it as finite same-event donor flux; only simultaneous strain remains recursively event-facing.
 
 So the frontier is no longer “manufacture a new hard parent at the common slice.”  It is:
 
@@ -137,3 +137,25 @@ Consequently an accumulation of no-event natural horizons at an interior smooth
 time is either an existing first-stop face at the limit or is crossed by the same
 carrier.  Hardening into a fresh event role requires an actual physical event.
 This extension is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`.
+
+
+## Certified extension: smooth physical relink remains at the event
+
+The certified smooth-relink donor quotient sharpens the physical-energy reentry
+without changing the relay carrier.  After common observer motion has already been
+removed, residual `K_phys` work is genuine physical relink.  For the smooth square
+partition `eta_a=A_a^2`, the same gauge-quotiented work certificate stores
+
+`T_ab^phys=-2 Re<eta_a u,K_phys eta_b u>`.
+
+This matrix is antisymmetric and its row sums are exactly the signed relink work.
+Therefore every positive relink recipient has finite negative-net donor provenance
+at the same physical event; internal cycles cancel.  Pure relink creates no child
+recursive state.  In a relink/strain tie, relink remains same-event provenance and
+strain remains the recursive owner.
+
+Smooth and hard event-role measures are not identified; only the finite
+antisymmetric-flux lemma is shared.  This extension is certified on exact SHA
+`8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` by dedicated run `31457786141`, full
+causal integration run `31457786115`, and reciprocal smooth-interface run
+`31457786119`.

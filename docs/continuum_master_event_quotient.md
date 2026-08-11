@@ -1,6 +1,6 @@
 # Continuum master event quotient: physical time, not theorem depth
 
-Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; same-carrier checkpoint-segmentation extension certified on `bd404d8fd79336e094015f8a9463bfef761e9d2d`**.
+Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; same-carrier checkpoint-segmentation extension certified on `bd404d8fd79336e094015f8a9463bfef761e9d2d`; smooth-relink donor extension certified on `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03`**.
 
 ## 1. Why the apparent recursion was too large
 
@@ -232,11 +232,11 @@ At this intermediate certified stage, before the later same-carrier theorem, the
 
 At that stage the second object was neither declared harmless nor declared high-tail by fiat; it was only removed from artificial event depth.  The later certified same-carrier segmentation theorem `bd404d8...` closes that remaining checkpoint-continuation interpretation by proving that no-event horizons do not restart the carrier or its cumulative first-hit filtration.  This checkpoint extension itself was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854` and full integration run `31451492844`; the earlier base and service-corridor blocks retain their own provenance.
 
-### Candidate extension: smooth conservative relink is same-event provenance
+### Certified extension: smooth conservative relink is same-event provenance
 
 The current smooth quadratic-carrier theorem already separates native interface
 work into physical residual skew `K_phys` relink and existing symmetric strain.
-The companion candidate now sharpens their event topology.
+The certified companion sharpens their event topology.
 
 The `K_phys` synthesis-pair matrix is bound into the same gauge-quotiented work
 certificate and obeys exact antisymmetric finite-flux divergence.  Positive
@@ -254,3 +254,10 @@ If this candidate is certified, the genuine-owner recurrence frontier shrinks by
 one more class: smooth conservative relink will no longer be an independent
 recursion mechanism.  Strain/deformation, HH generation, source/dissipation,
 independent service, new material ancestry and causal reuse remain genuine.
+
+This smooth-relink extension was certified on exact SHA
+`8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` by dedicated run `31457786141`
+and full physical-energy causal integration run `31457786115`; reciprocal smooth
+quadratic-carrier compatibility run `31457786119` was also green.  It preserves
+physical relink as same-event donor provenance while removing it from recursive
+owner depth.

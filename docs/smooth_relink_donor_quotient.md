@@ -2,7 +2,7 @@
 
 ## Status
 
-**Candidate theorem.** Serious validation is reserved for GitHub Actions.
+**Certified theorem** on exact implementation SHA `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` by dedicated GitHub Actions run `31457786141` and full physical-energy causal integration run `31457786115`.
 
 The candidate status string is
 
@@ -151,6 +151,64 @@ It also does not identify hard and smooth interface measures, choose a primary d
 
 ## 7. Remaining frontier
 
-If certified, smooth `K_phys` relink joins hard skew circulation as a structurally closed recursion seam.  Genuine recurrence still includes resolved strain/deformation, actual HH generation, source/dissipation, independent service, material/new ancestry, and causal reuse/Bellman endpoints.
+Smooth `K_phys` relink now joins hard skew circulation as a certified structurally closed recursion seam.  Genuine recurrence still includes resolved strain/deformation, actual HH generation, source/dissipation, independent service, material/new ancestry, and causal reuse/Bellman endpoints.
 
 No Navier--Stokes global-regularity claim is made.
+
+## 8. Certification
+
+Exact certified implementation/final fixture SHA:
+
+`8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03`.
+
+Dedicated GitHub Actions run:
+
+`31457786141` — **success**.
+
+It passed:
+
+- `716` theorem tests;
+- `50,000` bound smooth `K_phys` relink laws;
+- worst pair antisymmetry residual `0.0`;
+- worst row-binding residual `0.0`;
+- worst total relink residual `1.4210854715202004e-14`;
+- minimum incoming-minus-recipient-gain margin `0.0`;
+- donor-existence failures `0`;
+- maximum sampled shortest donor path `3`;
+- pair-binding rejection failures `0`;
+- the smooth `Q^2` carrier dependency remained green;
+- the hard resolved donor lemma remained green;
+- companion `50,000`-state continuum-master smooth-relink recursion-barrier failures `0`.
+
+Stored artifact:
+
+`recorded-results/31457786141/smooth-relink-donor-quotient-results/`.
+
+GitHub artifact digest:
+
+`sha256:be54c2dad2836ef6deca51dc69f21b198a81375fad6f9107001536517e071b5c`.
+
+Full physical-energy causal integration:
+
+`31457786115` — **success** on the same exact SHA.
+
+It passed the same `716`-test suite and the complete causal spine with `57`
+successful job steps.  The final master episode stress checked `20,000` traces
+with worst margin `0.0`.
+
+Integration artifact digest:
+
+`sha256:2bf74da42e08d053fd5348b60892bc511e68795f0c9d016b61751d6af55d3201`.
+
+The companion smooth quadratic-carrier workflow `31457786119` also completed
+successfully on the same exact SHA, certifying the pair-matrix binding in both
+directions.
+
+Failure/correction provenance:
+
+- initial implementation SHA `bc0bc248356e7dc18235532649c4a3c1ccdd5a8d` had one brittle certificate-wording assertion after `715` passing tests; no theorem stress ran;
+- SHA `113133f31bf3852f16bbc80e692dbce26430967a` changed only that fixture and exposed a second brittle substring assertion in the same certificate test, again after `715` passing tests and before theorem stress;
+- final SHA `8f8cdb2...` changed only that second fixture assertion to semantic checks.
+
+No theorem identity, pair law, donor closure, master routing, physical bound, or
+workflow topology changed in either correction.

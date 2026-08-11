@@ -502,8 +502,7 @@ This theorem closes the following local seam:
 - a coefficient obstruction is only a first-stop locator and cannot enter the
   canonical master until actual energy/work reentry resolves it.
 
-It does not prove that repeated strain, relink, service or donor owners terminate
-globally.  It does not close the UV-unbounded full-survivor alternative, and it
+The later certified smooth-relink donor quotient removes residual-skew relink as a recursive owner while preserving it as same-event physical provenance. This base theorem by itself did not prove termination of repeated strain, service or other genuine owners.  It does not close the UV-unbounded full-survivor alternative, and it
 does not prove Navier--Stokes regularity.
 
 ## 12. Certification
@@ -564,7 +563,7 @@ This certification is regression evidence around the encoded exact identities
 and guards. It is not a proof of global owner termination, ultraviolet closure,
 or Navier--Stokes regularity.
 
-## Candidate refinement: physical `K_phys` relink has same-event donor closure
+## Certified refinement: physical `K_phys` relink has same-event donor closure
 
 The certified theorem above already proves that the gauge-quotiented residual-skew
 pair matrix
@@ -574,7 +573,7 @@ T_{ab}^{phys}=-2\operatorname{Re}\langle A_a^2u,K_{phys}A_b^2u\rangle
 \]
 
 is antisymmetric, reconstructs the signed relink rows, and has zero total work.
-The companion candidate `smooth_relink_donor_quotient` uses exactly that stored
+The certified companion `smooth_relink_donor_quotient` uses exactly that stored
 pair matrix, not a new disintegration, to close the remaining topology question.
 
 With `F[b->a]=[T_ab^{phys}]_+`, every positive relink row is incoming minus
@@ -589,5 +588,4 @@ creates no child event; if strain is simultaneous, strain remains the genuine
 recursive owner.  Smooth and hard role measures remain distinct and share only
 the abstract antisymmetric-flux lemma.
 
-This refinement is a candidate until dedicated and full causal-integration CI are
-green on one exact SHA.
+This refinement was certified on exact SHA `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` by dedicated run `31457786141`, full integration `31457786115`, and reciprocal smooth-interface compatibility run `31457786119`.
