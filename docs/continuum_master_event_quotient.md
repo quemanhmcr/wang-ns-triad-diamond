@@ -289,10 +289,11 @@ a recursive owner after the conservative relink quotient.  Pure relink creates n
 child event.  No hard/smooth measure identification, scale reweighting, or donor
 priority is introduced.
 
-If this candidate is certified, the genuine-owner recurrence frontier shrinks by
-one more class: smooth conservative relink will no longer be an independent
-recursion mechanism.  Strain/deformation, HH generation, source/dissipation,
-independent service, new material ancestry and causal reuse remain genuine.
+The independently repaired audit certifies that the genuine-owner recurrence
+frontier shrinks by one more class: smooth conservative relink is not an
+independent recursion mechanism.  Strain/deformation, HH generation,
+source/dissipation, independent service, new material ancestry and causal reuse
+remain genuine.
 
 This smooth-relink extension was certified on exact SHA
 `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` by dedicated run `31457786141`
@@ -300,3 +301,13 @@ and full physical-energy causal integration run `31457786115`; reciprocal smooth
 quadratic-carrier compatibility run `31457786119` was also green.  It preserves
 physical relink as same-event donor provenance while removing it from recursive
 owner depth.
+
+The stronger adversarial audit is green on exact SHA
+`d40d6c280973ad860378cad8a0cc078fea81ac1a`: run `31460849461` passed `17`
+anti-tests, all `785` theorem tests, `200,000` native-scale relink laws, three
+`100,000`-state dependency stresses, and a three-resolution probe of the actual
+dealiased Fourier--Galerkin Navier--Stokes evolution.  It additionally requires
+one negative-net donor trace for every positive recipient, replays native owner
+and mass data inside the master, and rejects nonfinite/negative gauge provenance.
+Stored artifact:
+`recorded-results/31460849461/audit-smooth-relink-donor-results/`.

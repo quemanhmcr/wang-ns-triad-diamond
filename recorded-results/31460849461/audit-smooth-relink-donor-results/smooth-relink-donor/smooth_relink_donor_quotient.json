@@ -1,0 +1,30 @@
+{
+  "certificate": {
+    "status": "EXACT_SMOOTH_PHYSICAL_RELINK_DONOR_QUOTIENT__GAUGE_QUOTIENTED_KPHYS_PAIR_FLUX__FINITE_SAME_EVENT_NEGATIVE_DONOR_CLOSURE__SMOOTH_RELINK_ZERO_RECURSION_DEPTH",
+    "input_type": "only a GaugeQuotientedInterfaceWork carrying its exact K_phys pair matrix is admissible; arbitrary relink atom arrays cannot enter the theorem",
+    "measure_separation": "smooth eta_a=A_a^2 roles and hard orthogonal event roles remain distinct physical disintegrations; only the abstract antisymmetric finite-flux lemma is shared",
+    "pair_law": "T_ab=-2 Re<eta_a u,K_phys eta_b u> is antisymmetric and its row sums are exactly the signed smooth physical-relink work atoms",
+    "divergence": "with F[b->a]=[T_ab]_+, each relink row is incoming minus outgoing positive same-event flux and the total relink work is zero",
+    "donor_exhaustion": "the backward positive-inflow closure of each positive-net smooth role independently contains a negative-net donor in at most (#roles-1) edges after quotienting cycles; aggregate closure cannot let one component borrow another component's donor",
+    "event_semantics": "smooth relink donor tracing stays at one physical event/time and creates no causal charge, recursive generation, or scale progress",
+    "strain_separation": "the simultaneous S branch remains existing resolved strain/deformation and is not removed by the skew donor quotient",
+    "master_boundary": "conservative_smooth_role_relink is a same-event relay label, not a recursive owner label; a pure-relink interface reentry therefore creates no child RecursiveEventState",
+    "scope": "this closes smooth K_phys relink as an independent recursion mechanism; it does not terminate genuine strain, HH, source, dissipation, service, or reuse owners and does not prove Navier-Stokes regularity"
+  },
+  "stress": {
+    "samples": 200000,
+    "worst_antisymmetry_residual": 0.0,
+    "worst_row_binding_residual": 0.0,
+    "worst_total_relink_residual": 6.769213120412146e+125,
+    "worst_antisymmetry_relative_residual": 0.0,
+    "worst_row_binding_relative_residual": 0.0,
+    "worst_total_relink_relative_residual": 1.5926191473695354e-15,
+    "minimum_native_pair_scale": 1.1755287224360775e-141,
+    "maximum_native_pair_scale": 1.5765341334611322e+141,
+    "minimum_incoming_minus_gain_margin": 0.0,
+    "minimum_incoming_minus_gain_relative_margin": 0.0,
+    "donor_existence_failures": 0,
+    "maximum_shortest_donor_path_length": 3,
+    "binding_rejection_failures": 0
+  }
+}

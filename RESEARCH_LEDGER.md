@@ -1777,6 +1777,82 @@ The theorem keeps smooth residual relink physical while removing it as an indepe
 
 ---
 
+### 33.9 Independent adversarial audit of the smooth relink donor quotient
+
+The author's algebraic core is retained: after the observer gauge has been
+removed, `T_ab=-2 Re<eta_a u,K_phys eta_b u>` is an antisymmetric same-event
+physical flux and its rows reconstruct the signed smooth relink work.  The audit
+did not quotient away that physical work.  It challenged whether the executable
+certificate and master routing actually enforced the hypotheses of the finite
+flux theorem at the native PDE scale.
+
+Three red gates were theorem-boundary failures:
+
+- `5911a4289637833e221b339c3ca87fea21a14e7f`, run `31459124052`: all `6/6`
+  anti-tests failed.  Unit-scale tolerance floors accepted large relative defects
+  at tiny native work, while the master trusted claimed owner labels and claimed
+  mass instead of replaying the bound interface split;
+- `b10a823bfce35b310c1234e79871fd3e35885bc6`, run `31460257649`: `6` failed,
+  `10` passed.  The typed gauge certificate accepted negative, `NaN`, and
+  infinite provenance residuals;
+- `0d6a5506300b0d04404f8708723c7799cf591ce2`, run `31460546986`: `1` failed,
+  `16` passed.  Aggregate backward closure allowed a donor in one disconnected
+  flux component to certify a positive recipient in another component which had
+  no donor path of its own.
+
+The final repair at exact SHA
+`d40d6c280973ad860378cad8a0cc078fea81ac1a` uses native-relative validation with
+no physical `max(1,...)` floor, requires finite nonnegative gauge provenance,
+replays the actual native owner split and positive mass in the continuum master,
+routes only the genuine positive strain component recursively in a mixed event,
+and constructs a separate negative-donor trace for every positive relink
+recipient.
+
+Exact-head adversarial audit run `31460849461` was **success**:
+
+- `17/17` anti-tests and `785/785` theorem tests;
+- `200,000` smooth relink laws over native pair-work scales
+  `[1.176e-141,1.577e+141]`;
+- worst native-relative pair antisymmetry and row-binding residuals `0.0`;
+- worst native-relative total relink residual `1.593e-15`;
+- incoming-minus-recipient-gain margin `0.0`, donor failures `0`, pair-binding
+  failures `0`, maximum shortest donor path `3`;
+- `100,000` smooth quadratic-carrier states, `100,000` hard donor states, and
+  `100,000` continuum-master states, all green.
+
+The audit also evolved the actual unforced incompressible three-dimensional
+Fourier--Galerkin Navier--Stokes system with Leray projection, viscosity, `2/3`
+dealiasing and RK4.  The `K_phys/S` split came from Hilbert pairings of the actual
+resolved linearized operator on each evolved state, not from a random proxy.  At
+resolutions `12,16,20`, all `49/49` snapshots entered the mixed relink/strain
+route; maximum divergence was `7.223e-17`, global balance residual was at most
+`1.173e-11`, `K` antisymmetry was `0`, `K` row residual was at most `6.628e-15`,
+`S` row residual was at most `8.865e-15`, maximum donor path was `1`, master
+failures were `0`, and the final positive-relink resolution spread was
+`1.234e-6`.
+
+Stored artifact:
+`recorded-results/31460849461/audit-smooth-relink-donor-results/`.
+
+GitHub artifact digest:
+`sha256:cac760c5ae1388d5f3d7cde20e3105272f72a4201aa542e709f4ff7781b51177`.
+
+Exact-head dedicated run `31460849463` was also **success**; artifact digest
+`sha256:ee914926547fb47bbf11f2b4c37f147efd0aa808f35e11f1c247f6e807c1d395`.
+
+Full physical-energy causal integration run `31460849500` was **success** on the
+same SHA with all `785` theorem tests and the complete causal spine; artifact
+digest
+`sha256:e58cdeca217a1d36cc8b10f49aea74ebc6b2858f3fc9fbfa5390e3ed67756e3d`.
+
+Proof boundary: the finite antisymmetric-flux theorem is exact once the physical
+gauge-quotiented pair work is supplied.  The numerical trajectories test that
+binding on Galerkin Navier--Stokes states but do not prove arbitrary data came
+from a continuum solution.  Strain, HH, source/dissipation, service, material
+ancestry and reuse recurrence remain open; there is no global-regularity claim.
+
+---
+
 ## 34. Certification discipline
 Serious theorem validation is performed only in GitHub Actions.
 Local work is restricted to:

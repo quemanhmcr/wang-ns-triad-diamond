@@ -146,7 +146,7 @@ window duration; their continuation requires the actual no-earlier-hit path and 
 matching open smooth-PDE token. Hardening still requires a physical event.
 
 
-## Candidate extension under audit: smooth physical relink remains at the event
+## Independently audited extension: smooth physical relink remains at the event
 
 The certified smooth-relink donor quotient sharpens the physical-energy reentry
 without changing the relay carrier.  After common observer motion has already been
@@ -166,3 +166,12 @@ antisymmetric-flux lemma is shared.  The author's candidate on exact SHA
 `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` passed dedicated run `31457786141`,
 full causal integration run `31457786115`, and reciprocal smooth-interface run
 `31457786119`; the stronger independent native-work audit is recorded separately.
+
+That independent audit is now green on exact SHA
+`d40d6c280973ad860378cad8a0cc078fea81ac1a`.  Audit run `31460849461`
+replayed every native owner and mass, removed unit-scale tolerance floors, rejected
+invalid gauge provenance, and required a donor path independently for each
+positive relink recipient.  It passed `17` anti-tests, `785` theorem tests,
+`200,000` native-scale laws and an actual three-resolution dealiased
+Navier--Stokes probe.  Pure relink still creates no child event; only the genuine
+strain component of a tie remains recursive.

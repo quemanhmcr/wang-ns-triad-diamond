@@ -2,7 +2,12 @@
 
 ## Status
 
-**Certified theorem** on exact implementation SHA `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` by dedicated GitHub Actions run `31457786141` and full physical-energy causal integration run `31457786115`.
+**Independently audited theorem**.  The author's candidate was certified on exact
+SHA `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03`.  Adversarial audit then exposed
+three distinct fail-open seams in native-scale validation, master owner/mass
+replay, typed gauge provenance, and donor closure.  The repaired exact audit SHA
+is `d40d6c280973ad860378cad8a0cc078fea81ac1a`; the red-to-green record is in
+Section 8.
 
 The candidate status string is
 
@@ -98,21 +103,30 @@ Internal cycles are circulation and disappear from this balance.
 
 ## 4. Finite donor closure
 
-Start with all roles satisfying
+Fix **one** role satisfying
 
 \[
 R_a^{K_{phys}}>0
 \]
 
-and repeatedly add every role which sends positive flux into the current set.  Since the role set is finite, this closure terminates.
+and repeatedly add every role which sends positive flux into its current backward
+closure.  Since the role set is finite, this closure terminates.
 
-It must contain a role with
+This recipient-specific closure must contain a role with
 
 \[
 R_b^{K_{phys}}<0.
 \]
 
-Otherwise the closed set would have strictly positive total net relink work while, by construction, receiving no positive flux from outside.  That contradicts the exact subset divergence identity.
+Otherwise every role in the closure would have nonnegative net relink work and
+the starting recipient would make their total strictly positive, while by
+construction the closure receives no positive flux from outside.  That
+contradicts the exact subset divergence identity.
+
+The argument is replayed independently for **every** positive recipient.  It is
+not enough to close the union of all recipients and find one donor somewhere in
+that aggregate: disconnected components may not borrow donor provenance from one
+another.
 
 After quotienting internal cycles, a donor path uses at most
 
@@ -155,7 +169,86 @@ Smooth `K_phys` relink now joins hard skew circulation as a certified structural
 
 No Navier--Stokes global-regularity claim is made.
 
-## 8. Certification
+## 8. Independent audit certification
+
+The independent audit deliberately began with tests that the candidate was
+expected to reject.  Three exact red gates found three different theorem-boundary
+failures:
+
+- exact SHA `5911a4289637833e221b339c3ca87fea21a14e7f`, run `31459124052`:
+  `6/6` anti-tests failed.  Unit-scale tolerance floors destroyed covariance at
+  tiny native work, substantial relative pair/row defects were accepted, and the
+  continuum master trusted forged owner labels and arbitrary claimed mass instead
+  of replaying the typed native work split;
+- exact SHA `b10a823bfce35b310c1234e79871fd3e35885bc6`, run `31460257649`:
+  `6` failed and `10` passed.  The typed gauge-quotiented work certificate
+  accepted negative, `NaN`, and infinite gauge/skew provenance residuals;
+- exact SHA `0d6a5506300b0d04404f8708723c7799cf591ce2`, run `31460546986`:
+  `1` failed and `16` passed.  Aggregate backward closure let a recipient in one
+  disconnected component borrow the donor found for another component.
+
+The repaired implementation removes every physical `max(1,...)` tolerance floor,
+uses native-relative comparisons, replays the actual positive smooth-interface
+split inside the master, binds master mass to the replayed native work, validates
+gauge provenance as finite and nonnegative, and constructs an independent
+negative-donor trace for every positive relink recipient.  In a mixed
+relink/strain event only the positive strain component enters the recursive owner
+bundle; conservative relink remains same-event provenance.
+
+Exact independently audited SHA:
+
+`d40d6c280973ad860378cad8a0cc078fea81ac1a`.
+
+Adversarial GitHub Actions run `31460849461` completed successfully:
+
+- `17/17` native-scale, provenance, mass, gauge and per-recipient anti-tests;
+- `785/785` theorem tests;
+- `200,000` bound smooth relink laws over native pair-work scales
+  `[1.176e-141,1.577e+141]`;
+- worst native-relative pair antisymmetry and row-binding residuals `0.0`;
+- worst native-relative total relink residual `1.593e-15`;
+- minimum native-relative incoming-minus-recipient-gain margin `0.0`;
+- donor-existence and pair-binding failures `0`;
+- maximum sampled shortest donor path `3`;
+- `100,000` smooth quadratic-carrier dependencies, `100,000` hard-donor
+  dependencies and `100,000` continuum-master dependencies, all green.
+
+The same audit run evolved the unforced three-dimensional incompressible
+Fourier--Galerkin Navier--Stokes system with Leray projection, viscosity, `2/3`
+dealiasing and RK4.  At every evolved state it applied the actual resolved
+linearized operator `L_V f=B(V,f)+B(f,V)` and read the `K_phys/S` work split from
+physical Hilbert pairings; no random matrix supplied the operator.  For
+resolutions `12,16,20`, all `49/49` snapshots had positive relink and mixed
+relink/strain work, maximum divergence was `7.223e-17`, global balance residual
+was at most `1.173e-11`, `K` antisymmetry residual was `0`, `K` row residual was at
+most `6.628e-15`, `S` row residual was at most `8.865e-15`, donor path length was
+`1`, and master failures were `0`.  The final positive-relink resolution spread
+was `1.234e-6`.
+
+Stored audit artifact:
+
+`recorded-results/31460849461/audit-smooth-relink-donor-results/`.
+
+GitHub artifact digest:
+
+`sha256:cac760c5ae1388d5f3d7cde20e3105272f72a4201aa542e709f4ff7781b51177`.
+
+The exact-head dedicated workflow `31460849463` was also successful with the
+same `785` tests, `50,000` native-scale donor laws, the three-resolution physical
+PDE probe, and all direct dependencies.  Its artifact digest is
+`sha256:ee914926547fb47bbf11f2b4c37f147efd0aa808f35e11f1c247f6e807c1d395`.
+
+Full physical-energy causal integration run `31460849500` was successful on the
+same exact SHA with all `785` theorem tests and the complete causal stack.  Its
+artifact digest is
+`sha256:e58cdeca217a1d36cc8b10f49aea74ebc6b2858f3fc9fbfa5390e3ed67756e3d`.
+
+These numerical trajectories are falsification evidence, not a continuum proof.
+The exact theorem is the finite antisymmetric-flux argument conditional on the
+gauge-quotiented work certificate being produced by the stated PDE carrier,
+state and operator.
+
+### Author pre-audit certification
 
 Exact certified implementation/final fixture SHA:
 
