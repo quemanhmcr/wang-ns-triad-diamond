@@ -2453,3 +2453,27 @@ integration `31467837226` passed all `59` successful steps plus `20,000` master
 episodes with worst margin `0.0`.  It closes only the eventually-pure signed-good
 generated-HH subroute; generic/nonlocal HH and mixed genuine-owner recurrence remain
 open.
+
+## Certified refinement: native helical physical-edge registration before continuum HH resolution
+
+The generic HH frontier can now be read one physical level below a hard event
+without introducing a norm-defined capacity. For one actual unordered helical
+parent orbit feeding child `z=x+y`, direct Fourier--Leray/curl Navier--Stokes and
+the repository Waleffe convention agree exactly. The resulting signed child work
+and native modal capacity satisfy
+
+`T_e log_+(|z|/p_top)=A_e J_e c_e`,
+
+with `A_e=4|z||a_xa_ya_z|`. Parent-order exchange and helical basis phase are
+representation gauges of the same physical edge.
+
+This refinement sharpens, but does not close, the generic-HH master branch.
+Positive child work is not automatically forward work; nonforward physical edges
+have zero upper-progress multiplier. Nor may the continuum positive law be
+formed by silently replacing `[integral T]_+` with `integral [T]_+`. The next
+required theorem is therefore a signed continuum Fourier-edge measure
+registration with the unitary convolution normalization and exact cancellation
+retained before Hahn decomposition.
+
+Exact implementation SHA `6d2b721be579e299c42f4ad370448e5336f3f43c` passed
+dedicated run `31472591138` and full causal integration `31472591129`.

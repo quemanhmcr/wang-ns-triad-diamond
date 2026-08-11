@@ -335,3 +335,32 @@ and `50,000` generated-epoch states; the companion master stress had zero
 signed-good generated-epoch failures.  The initial `39c558b...` run was
 fixture-only: one certificate wording assertion failed after `737` passing tests,
 with no theorem stress and no source theorem change.
+
+### Certified extension: actual helical HH edges carry native capacity before Young
+
+At one actual hard Fourier/helicity event, the unordered parent orbit is now
+registered directly from the Navier--Stokes curl/Leray source. For parents
+`x,y`, child `z=x+y`, and modal amplitudes `a_x,a_y,a_z`, the repository Waleffe
+convention agrees exactly with the direct source and gives
+
+`T_e=4(s_x|x|-s_y|y|) Re[conj(a_z)conj(g_e)a_xa_y]`.
+
+Hence the same physical edge carries
+
+`A_e=4|z||a_xa_ya_z|`,
+
+and the existing geometric/phase variables obey
+
+`T_e log_+(|z|/p_top)=A_e J_e c_e`.
+
+This is a registration theorem, not a generic-HH termination theorem. Positive
+child work may be nonforward, in which case the upper-progress multiplier is
+zero. The next continuum step must construct the signed unitary-Fourier triad
+measure, keep cancellation before Hahn splitting, and only then form the positive
+causal sublaw used by downstream deficit/Young machinery.
+
+This extension was certified on exact SHA
+`6d2b721be579e299c42f4ad370448e5336f3f43c` by dedicated run `31472591138` and
+full causal integration `31472591129`; the dedicated run passed `748` tests and
+`50,000` helical physical-edge states, and full integration completed `60`
+successful steps.

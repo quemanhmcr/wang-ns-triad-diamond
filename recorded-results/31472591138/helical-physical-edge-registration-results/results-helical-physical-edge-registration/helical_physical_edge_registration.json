@@ -1,0 +1,29 @@
+{
+  "certificate": {
+    "status": "EXACT_HELICAL_PHYSICAL_EDGE_REGISTRATION__DIRECT_LERAY_CURL_EQUALS_WALEFFE__UNORDERED_PARENT_PAIR_FACTOR_FOUR__NATIVE_MODAL_CAPACITY__SIGNED_UPPER_PROGRESS_EQUALS_A_J_C",
+    "ns_identity": "for incompressible NS, -P(u.grad u)=P(u x omega); one unordered parent orbit contributes u_x x omega_y + u_y x omega_x at z=x+y",
+    "helical_projection": "with repository coupling g(x,y,-z), <h_z,F_z>=2(s_x|x|-s_y|y|)conj(g)a_xa_y; direct curl/Leray pairing is checked against this coefficient",
+    "physical_work": "production child-energy convention is T_e=2 Re(conj(a_z)<h_z,F_z>), hence the unordered parent orbit carries the canonical factor four",
+    "native_capacity": "A_e=4|z||a_x a_y a_z| is modal interaction capacity of the same physical Fourier edge; no Young norm product is substituted for it",
+    "geometry": "J_e=log_+(|z|/p_top)|s_x|x|-s_y|y|| |g_e|/|z| and m_e=J_e/J_* with the global sign-exhausted single-edge J_*",
+    "phase": "c_e=sign(s_x|x|-s_y|y|) Re(conj(a_z)conj(g)a_xa_y)/(|g a_x a_y a_z|) lies in [-1,1]",
+    "registration": "exact signed identity T_e log_+(|z|/p_top)=A_e J_e c_e on the same physical event; backscatter is retained before positive Hahn restriction",
+    "orientation": "swapping the two parent orientations changes both the signed frequency factor and Waleffe g sign, leaving source, work, capacity, J and c invariant",
+    "gauge": "reciprocal phase changes of helical bases and modal amplitudes leave c_e and the physical edge identity invariant",
+    "scale": "uniform wavevector dilation leaves J_e, m_e, c_e and forward ratio invariant while both T_e and A_e scale linearly",
+    "scope": "this is one physical Fourier/helical edge registration theorem only; it does not yet construct the continuum edge measure, prove a low-deficit block, or identify every generic HH event with signed-good generation"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_direct_waleffe_relative_residual": 3.0472764930177753e-14,
+    "worst_leray_pairing_relative_residual": 1.0359057878235692e-14,
+    "worst_upper_progress_relative_residual": 1.2645440250480533e-13,
+    "worst_parent_swap_relative_residual": 8.393508110771108e-12,
+    "worst_gauge_phase_alignment_residual": 1.27675647831893e-15,
+    "worst_scale_invariance_residual": 3.977623785900164e-12,
+    "maximum_normalized_multiplier": 0.9990427280708386,
+    "minimum_positive_forward_phase_alignment": 2.1352202898792428e-06,
+    "positive_forward_samples": 16543,
+    "nonforward_samples": 16950
+  }
+}

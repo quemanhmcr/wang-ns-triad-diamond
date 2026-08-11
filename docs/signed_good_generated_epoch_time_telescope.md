@@ -27,6 +27,12 @@ not normalized Duhamel amplitude.
 Restrict this same positive work to the certified heavy half-child slab.  The hard
 parent pair is read only at those actual same-time nonlinear interactions.
 
+Before the signed-good restriction, the certified helical physical-edge theorem now reads the same actual hard interaction as
+
+`T_e log_+(|z|/p_top)=A_e J_e c_e`, `A_e=4|z||a_xa_ya_z|`.
+
+This removes any need to invent a Young capacity at the event. It also prevents a converse mistake: `T_e>0` alone does **not** imply forward/signed-good geometry. Nonforward positive work has zero upper-progress multiplier and stays outside the present epoch theorem.
+
 ## 2. Signed-good parents carry a longer natural lifetime
 
 On the signed-good generated core,

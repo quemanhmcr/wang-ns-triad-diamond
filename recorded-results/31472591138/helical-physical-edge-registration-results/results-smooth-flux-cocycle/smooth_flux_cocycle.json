@@ -1,0 +1,18 @@
+{
+  "rstar": 0.610904101586766,
+  "gamma": 0.4928152853421352,
+  "stress": {
+    "samples": 50000,
+    "delta": 0.05,
+    "shell_halfwidth": 0.06,
+    "worst_midgap_identity_residual": 1.4210854715202004e-14,
+    "minimum_moat_margin": 0.08701843057227442,
+    "worst_polarization_identity_residual": 6.661338147750939e-16
+  },
+  "theorem": {
+    "filter_invariant_mellin": true,
+    "midgap_tail_exact_on_common_moat": true,
+    "polarization_identity": true,
+    "example_delta": 0.05
+  }
+}

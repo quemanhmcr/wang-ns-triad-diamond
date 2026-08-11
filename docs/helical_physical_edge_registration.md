@@ -1,6 +1,6 @@
 # Helical physical edge registration: read the capacity from Navier–Stokes itself
 
-Status: **candidate theorem; certify only by exact-SHA GitHub Actions**.
+Status: **certified on exact implementation SHA `6d2b721be579e299c42f4ad370448e5336f3f43c`**.
 
 ## 1. Do not start from a Young norm
 
@@ -143,3 +143,26 @@ nonforward positive child work remain physical and are not erased by setting the
 upper-progress multiplier to zero.
 
 No Navier--Stokes global-regularity conclusion is asserted.
+
+## 7. Certification
+
+Dedicated GitHub Actions run `31472591138` passed the `748`-test theorem suite,
+`50,000` random physical helical triads/amplitudes, the global single-edge
+`J_*` dependency, smooth-flux polarization, and physical-pair factor-four/productivity.
+The dedicated stress recorded worst direct-Leray/Waleffe relative residual
+`3.0472764930177753e-14`, worst `T log=A J c` residual
+`1.2645440250480533e-13`, maximum sampled `J/J_*=0.9990427280708386`,
+`16543` positive forward-work samples, and `16950` nonforward samples retained
+with zero upper-progress multiplier.
+
+The dedicated artifact is stored under
+`recorded-results/31472591138/helical-physical-edge-registration-results/` and has
+GitHub digest
+`sha256:0aa0e684d210dc8af109dc9cfe31b0b312967468fb3a5bd79d4c29a6143fda3a`.
+
+Full physical-energy causal integration run `31472591129` also succeeded on the
+same exact SHA through `60` successful steps, including continuum master,
+complex Young, dual/Bargmann/common-slice registration, smooth `Q^2`, event roles,
+physical pair productivity, recursive witness, signed-good generated epoch,
+Shannon/Rényi, branch compiler and master episode. Its artifact digest is
+`sha256:79e9c35a1b4de41830483d15e4fc0f2d26305eb29a2b2ba9239b48a9954ea27d`.

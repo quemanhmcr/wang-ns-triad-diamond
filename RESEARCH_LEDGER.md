@@ -37,6 +37,7 @@ The current architecture has reached the following point.
 18. Smooth residual-skew `K_phys` relink is now also topologically quotiented without denying its physics: the exact gauge-quotiented `T_ab^{phys}` matrix is antisymmetric same-event flux, every positive relink recipient has finite negative-net donor closure, and relink creates no child recursive event.  A simultaneous `S` branch remains existing strain/deformation ownership.
 19. Consecutive high-strain recurrence now has a native viscous telescope without demoting high strain from genuine ownership: every high-strain event pays `D_j>=D_*`, its actual `D_V|_G` ancestor renews at `N_(j+1)/N_j<=3/16`, and interval restriction plus low-pass contraction gives `D_j<=N_j G_*` for the physical global gradient reservoir `G_*`.  Thus every pure high-strain epoch is finite even under complete time overlap, while mixed-owner recurrence remains open.
 20. Consecutive signed-good generated-HH recurrence now also has a native parabolic physical-time telescope without turning generation into an event-count cost: a raw `|I_HH|` hit is only a locator; after actual `Q^2` energy reentry selects positive HH child-work and the hard parent is certified `3/5<N_p/N_c<5/8`, parent natural lifetimes grow by more than `64/25` and the asynchronous common registration surfaces move backward by at least `(1792/4875)T_j`.  Their cumulative backshift reaches absorbing `t=0` after finite consecutive signed-good generated depth.  Generic/non-signed-good HH remains open.
+21. Actual unordered helical HH interactions now have a native same-event registration before any Young reduction: direct Fourier--Leray/curl NS work equals the repository Waleffe coefficient, the physical factor four is exact, and each edge carries `A_e=4|z||a_xa_ya_z|`, geometric `J_e`, phase/orientation `c_e`, with `T_e log_+(|z|/p_top)=A_eJ_ec_e`. Positive child work does not imply forward progress: nonforward edges have `J_e=0` and remain physical. The continuum signed Fourier edge measure and generic/non-signed-good HH resolver remain open.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -683,6 +684,35 @@ This progress does not use signed-good Young near-extremality.
 Full-survivor own-scale service remains conditional on the generic shell corridor.
 
 ---
+
+## 21.5 Native helical physical-edge registration before Young
+For one actual unordered helical parent pair `x,y` feeding `z=x+y`, write
+`u_x=a_x h_(s_x)(x)`, `u_y=a_y h_(s_y)(y)`, `u_z=a_z h_(s_z)(z)`.
+Using the incompressible identity `-P(u.grad u)=P(u x omega)`, the two parent orders form one physical unordered orbit. With the repository Waleffe convention, direct Leray/curl evaluation gives exactly
+\[
+\langle h_z,F_z\rangle=2(s_x|x|-s_y|y|)\overline{g_e}\,a_xa_y.
+\]
+The child-energy convention supplies the second factor two, so
+\[
+\boxed{T_e=4(s_x|x|-s_y|y|)\operatorname{Re}(\overline{a_z}\,\overline{g_e}\,a_xa_y).}
+\]
+The same edge therefore has the native modal interaction capacity
+\[
+\boxed{A_e=4|z|\,|a_xa_ya_z|,}
+\]
+not a Young norm product. Put
+\[
+g_e^{scale}=\log_+\frac{|z|}{\max(|x|,|y|)},
+\qquad
+J_e=g_e^{scale}\frac{|s_x|x|-s_y|y||\,|g_e|}{|z|},
+\]
+and let `c_e` be the signed phase/orientation alignment of the same modal product. Then exactly
+\[
+\boxed{T_e g_e^{scale}=A_eJ_ec_e.}
+\]
+Parent-order exchange, reciprocal helical basis gauge, and uniform wavevector dilation preserve the physical identity in their correct covariant form.
+
+This theorem is deliberately prior to Young/Christ. Young is a downstream comparison theorem for blocks of real edges; it is not the definition of `A_e`. Likewise `T_e>0` does not imply `J_e>0`: positive nonforward child work remains physical but carries zero upper-progress multiplier. The next unresolved bridge is continuum: construct the signed unitary-Fourier triad edge measure with the correct `(2pi)^(-3/2)` convolution normalization, preserve cancellation before Hahn splitting, and only then push the physical law into capacity/geometry/phase deficit theorems.
 
 ## 22. Physical pair productivity: what the energy gate is actually for
 When a generated child-energy branch satisfies the physical energy gate, use actual positive child-work as the probability law.
@@ -1446,6 +1476,8 @@ s_j-s_{j+1}\ge\frac{1792}{4875}T_j.
 \]
 Hence a consecutive signed-good generated lineage cannot remain interior forever at finite physical time: its required registration surface reaches `t=0` after finite depth.  This does **not** terminate generic `HH_REGENERATION`; the generic label has no scale law until actual physical resolution, and non-signed-good HH/high-tail remains a genuine route.
 
+The certified helical physical-edge theorem now resolves one important part of that generic label without erasing it. At an actual hard Fourier/helicity interaction the native modal capacity, geometric multiplier and signed phase are read from the same NS edge and obey `T_e log_+(|z|/p_top)=A_eJ_ec_e`. Thus a later continuum resolver may no longer invent a synthetic capacity or infer forward progress merely from positive work. But this one-edge identity is not itself a recurrence theorem: continuum triad cancellation, signed-measure registration, nonforward positive work, and block-level deficit routing remain to be assembled.
+
 Therefore an infinite event path cannot eventually remain only in high strain, and it also cannot eventually remain only in signed-good generated HH.  If either owner occurs infinitely often, other genuine owners or generic HH regimes must break the corresponding finite epochs infinitely often.
 The surviving global frontier is thus genuinely **mixed-owner recurrence**.  Its events may include actual HH generation, existing strain/deformation, source/SGS/viscosity owners, independent service, material/new-ancestry relink, high-tail work, and causal reuse/Bellman endpoints.  Their recurrence must telescope only through the native typed laws they truly supply:
 - signed/positive physical work and multiplicative productivity;
@@ -1914,6 +1946,46 @@ The initial implementation SHA `39c558b541056ae55350ccf35f4b7404203a060b` had on
 The theorem closes eventually-pure **signed-good** generated-HH recurrence.  It does not identify generic `HH_REGENERATION` with signed-good generation, does not close generic/nonlocal high-tail HH, does not replace Shannon/Rényi ancestry reuse, and makes no Navier–Stokes regularity claim.
 
 ---
+### 33.11 Helical physical-edge registration: native NS capacity before Young
+Status:
+`EXACT_HELICAL_PHYSICAL_EDGE_REGISTRATION__DIRECT_LERAY_CURL_EQUALS_WALEFFE__UNORDERED_PARENT_PAIR_FACTOR_FOUR__NATIVE_MODAL_CAPACITY__SIGNED_UPPER_PROGRESS_EQUALS_A_J_C`.
+
+Exact certified implementation SHA:
+`6d2b721be579e299c42f4ad370448e5336f3f43c`.
+
+Dedicated GitHub Actions run:
+`31472591138` — **success**.
+
+Results:
+- `748` tests passed;
+- `50,000` random physical helical triads/amplitudes;
+- worst direct-Leray/Waleffe relative residual `3.0472764930177753e-14`;
+- worst Leray-free child-pairing relative residual `1.0359057878235692e-14`;
+- worst exact `T log = A J c` relative residual `1.2645440250480533e-13`;
+- worst unordered-parent swap residual `8.393508110771108e-12`;
+- worst helical gauge residual `1.27675647831893e-15`;
+- worst uniform-wavevector scale residual `3.977623785900164e-12`;
+- maximum sampled `J/J_*` `0.9990427280708386`;
+- positive forward-work samples `16543`;
+- nonforward samples retained with zero upper-progress multiplier `16950`.
+
+Stored artifact:
+`recorded-results/31472591138/helical-physical-edge-registration-results/`.
+
+GitHub artifact digest:
+`sha256:0aa0e684d210dc8af109dc9cfe31b0b312967468fb3a5bd79d4c29a6143fda3a`.
+
+Full physical-energy causal integration:
+`31472591129` — **success** on the same exact SHA.
+It passed the same `748`-test suite and `60` successful steps through continuum master, the new helical edge registration, complex Young, dual/Bargmann/common-slice registration, smooth `Q^2`, event hard roles, physical pair productivity, recursive witness, signed-good generated epoch, Shannon/Renyi reuse, branch compiler and master episode.
+
+Integration artifact digest:
+`sha256:79e9c35a1b4de41830483d15e4fc0f2d26305eb29a2b2ba9239b48a9954ea27d`.
+
+The theorem closes the one-edge physical registration seam only. It does not construct the continuum signed Fourier triad measure, does not commute positive Hahn splitting with triad integration, does not classify nonforward positive work as signed-good, and makes no Navier--Stokes regularity claim.
+
+---
+
 ## 34. Certification discipline
 Serious theorem validation is performed only in GitHub Actions.
 Local work is restricted to:
@@ -1970,17 +2042,18 @@ Then read the following current-spine documents in order:
 24. `docs/high_tail_binary_work_reentry.md`
 25. `docs/high_tail_ultraviolet_locality.md`
 26. `docs/high_tail_natural_window_reentry.md`
-27. `docs/physical_pair_weighted_productivity.md`
-28. `docs/common_slice_coefficient_registration.md`
-29. `docs/recursive_physical_witness_constructor.md`
-30. `docs/signed_good_generated_epoch_time_telescope.md`
-31. `docs/joint_causal_stop_projection.md`
-32. `docs/amplitude_entropy_causal_reuse.md`
-33. `docs/weighted_causal_reuse.md`
-34. `docs/renyi_causal_reuse.md`
-35. `docs/physical_branch_compiler.md`
-36. `docs/continuum_master_event_quotient.md`
-37. `docs/master_no_escape.md`
+27. `docs/helical_physical_edge_registration.md`
+28. `docs/physical_pair_weighted_productivity.md`
+29. `docs/common_slice_coefficient_registration.md`
+30. `docs/recursive_physical_witness_constructor.md`
+31. `docs/signed_good_generated_epoch_time_telescope.md`
+32. `docs/joint_causal_stop_projection.md`
+33. `docs/amplitude_entropy_causal_reuse.md`
+34. `docs/weighted_causal_reuse.md`
+35. `docs/renyi_causal_reuse.md`
+36. `docs/physical_branch_compiler.md`
+37. `docs/continuum_master_event_quotient.md`
+38. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -2052,6 +2125,8 @@ the actual descending physical lineage.  An infinite path with infinitely many
 high-strain events must therefore contain infinitely many other genuine owners
 which break those epochs.
 
+
+At an actual hard HH interaction, one may now descend one level further before any Young reduction. The unordered helical parent orbit itself carries exact NS work `T_e`, native modal capacity `A_e=4|z||a_xa_ya_z|`, geometric multiplier `J_e`, and signed phase `c_e`, with `T_e log_+(|z|/p_top)=A_eJ_ec_e`. These are same-event physical observables modulo parent orientation and helical gauge. Crucially, positive child work is not synonymous with forward scale progress: nonforward edges have zero upper-progress multiplier and remain physical. The continuum signed triad measure must preserve cancellation before its Hahn-positive causal sublaw is formed.
 
 Signed-good generated HH is also a genuine recursive event, but its finite-depth
 mechanism is different.  A raw `|I_HH|` threshold is only a locator.  After the
