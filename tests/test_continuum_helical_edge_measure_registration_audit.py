@@ -12,6 +12,7 @@ import numpy as np
 import pytest
 
 from src.continuum_helical_edge_measure_registration import (
+    _symmetric_extremal_fiber,
     continuum_edge_measure_ledger,
     edge_measure_to_service_or_flat,
     register_continuum_triad_fiber,
@@ -173,3 +174,37 @@ def test_service_adapter_replays_physical_ledger_instead_of_trusting_forged_defi
 def test_nonzero_continuum_capacity_must_not_silently_underflow_to_zero():
     with pytest.raises(ValueError, match="capacity|native.*range|underflow"):
         _fiber(amplitude=1.0e-120)
+
+
+def test_typed_ledger_rejects_nan_transfer_deficit_at_construction():
+    ledger = continuum_edge_measure_ledger((_symmetric_extremal_fiber(),))
+    with pytest.raises((ValueError, AssertionError), match="finite|deficit|ledger|provenance"):
+        replace(ledger, block_transfer_deficit=math.nan)
+
+
+def test_good_core_cannot_accept_nan_radon_nikodym_provenance():
+    ledger = continuum_edge_measure_ledger((_symmetric_extremal_fiber(),))
+    assert ledger.block_transfer_deficit < 1.0e-8
+    with pytest.raises((ValueError, AssertionError), match="finite|Radon|Nikodym|ledger|provenance|replay"):
+        forged = replace(ledger, good_core_physical_to_capacity_rn_min=math.nan)
+        signed_good_core_physical_law(forged)
+
+
+def test_continuum_measure_product_overflow_must_fail_closed():
+    # The quotient mass itself is finite, but multiplying it by a nonzero
+    # physical edge capacity/work leaves the finite native floating range.  A
+    # certificate must reject this rather than normalize infinities into a
+    # seemingly excellent zero-deficit block.
+    fiber = _symmetric_extremal_fiber(quotient_measure_mass=1.0e308)
+    with pytest.raises((ValueError, AssertionError, OverflowError), match="finite|range|overflow|capacity|measure"):
+        continuum_edge_measure_ledger((fiber,))
+
+
+def test_continuum_measure_scaling_preserves_dimensionless_law_far_below_unit_scale():
+    base = continuum_edge_measure_ledger((_symmetric_extremal_fiber(quotient_measure_mass=1.0),))
+    tiny_mass = 1.0e-180
+    tiny = continuum_edge_measure_ledger((_symmetric_extremal_fiber(quotient_measure_mass=tiny_mass),))
+    assert tiny.normalized_signed_flux == pytest.approx(base.normalized_signed_flux, abs=3.0e-11)
+    assert tiny.block_transfer_deficit == pytest.approx(base.block_transfer_deficit, abs=3.0e-11)
+    assert tiny.capacity_mass / base.capacity_mass == pytest.approx(tiny_mass, rel=3.0e-11)
+    assert tiny.signed_direct_work / base.signed_direct_work == pytest.approx(tiny_mass, rel=3.0e-11)
