@@ -8,6 +8,8 @@ on:
       - 'tests/test_continuum_helical_edge_measure_registration_audit.py'
       - 'src/helical_physical_edge_registration.py'
       - 'src/helical.py'
+      - 'src/continuum_helical_edge_measure_pde_probe.py'
+      - 'tests/test_continuum_helical_edge_measure_pde_probe.py'
       - '.github/workflows/audit-continuum-helical-edge-measure-registration.yml'
       - '.github/workflows/continuum-helical-edge-measure-registration.yml'
       - 'requirements.txt'
@@ -40,3 +42,23 @@ jobs:
         with:
           name: audit-continuum-helical-edge-measure-results
           path: results-audit-continuum-helical-edge-measure/
+
+  actual-ns-continuum-edge-measure-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Run focused actual-PDE registration test
+        run: pytest -q tests/test_continuum_helical_edge_measure_pde_probe.py
+      - name: Reconstruct the full retained parent convolution on refined NS trajectories
+        run: python -m src.continuum_helical_edge_measure_pde_probe --resolutions 20 24 28 --steps 64 --duration 0.012 --snapshots 5 --outdir results-audit-continuum-helical-edge-measure-pde
+      - run: cat results-audit-continuum-helical-edge-measure-pde/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-continuum-helical-edge-measure-pde-results
+          path: results-audit-continuum-helical-edge-measure-pde/
