@@ -104,6 +104,8 @@ def test_common_transport_gauge_cancels_before_physical_relink():
     assert abs(out["total_physical_relink_work"]) < 1e-12
     assert out["observer_partition_motion_charged_as_physics"] is False
     assert isinstance(out["work_certificate"], GaugeQuotientedInterfaceWork)
+    cert = out["work_certificate"]
+    assert len(cert.signed_physical_relink_pair_matrix) == 2
 
 
 def test_direct_Q_squared_NS_energy_law_has_exact_low_low_HH_interface_repartition():

@@ -270,3 +270,26 @@ scale change must enter through an independently certified physical producer or
 event, and such changing-scale event paths remain subject to the geometric
 anti-theorem.  The current infinite-path frontier is recurrence of those genuine
 physical owners, not recurrence of checkpoint observations.
+
+### Candidate extension: smooth conservative relink is same-event provenance
+
+The current smooth quadratic-carrier theorem already separates native interface
+work into physical residual skew `K_phys` relink and existing symmetric strain.
+The companion candidate now sharpens their event topology.
+
+The `K_phys` synthesis-pair matrix is bound into the same gauge-quotiented work
+certificate and obeys exact antisymmetric finite-flux divergence.  Positive
+smooth relink therefore traces to negative-net donor roles at the **same physical
+event**.  The canonical master route keeps this as a zero-depth relay rather than
+placing `conservative_smooth_role_relink` in `PhysicalOwnerBundle` or
+`RecursiveEventState`.
+
+A relink/strain tie remains joint physical provenance, but only strain survives as
+a recursive owner after the conservative relink quotient.  Pure relink creates no
+child event.  No hard/smooth measure identification, scale reweighting, or donor
+priority is introduced.
+
+If this candidate is certified, the genuine-owner recurrence frontier shrinks by
+one more class: smooth conservative relink will no longer be an independent
+recursion mechanism.  Strain/deformation, HH generation, source/dissipation,
+independent service, new material ancestry and causal reuse remain genuine.
