@@ -1,6 +1,6 @@
 # Continuum master event quotient: physical time, not theorem depth
 
-Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; author's initial same-carrier extension on `bd404d8fd79336e094015f8a9463bfef761e9d2d`; audited same-path/native-scale repair on exact source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3` by audit run `31456579940`, continuum-master run `31456580011`, and full integration run `31456580020`; author's smooth-relink donor candidate on `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03`, now under independent native-work audit**.
+Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; author's initial same-carrier extension on `bd404d8fd79336e094015f8a9463bfef761e9d2d` and audited same-path/native-scale repair on exact source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3`; author's smooth-relink donor extension on `8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03` with independent repair certified on `d40d6c280973ad860378cad8a0cc078fea81ac1a`; author's high-strain descending-epoch extension certified on `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` and now under independent native-scale audit**.
 
 ## 1. Why the apparent recursion was too large
 
@@ -312,7 +312,7 @@ and mass data inside the master, and rejects nonfinite/negative gauge provenance
 Stored artifact:
 `recorded-results/31460849461/audit-smooth-relink-donor-results/`.
 
-### Candidate extension: consecutive high-strain epochs telescope through the physical gradient reservoir
+### Author-certified extension under independent audit: consecutive high-strain epochs telescope through the physical gradient reservoir
 
 High strain remains a genuine recursive owner; it is not quotiented like smooth
 conservative relink.  The candidate adds a path law instead.
@@ -335,3 +335,6 @@ consequence is that an infinite recursive event path cannot eventually consist
 only of high-strain renewals.  Infinitely many high-strain events would force
 infinitely many other physical owner events to break the descending epochs.
 Mixed-owner recurrence remains open.
+
+
+This high-strain path extension was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated run `31460525711` and full causal integration run `31460525687`.  It removes eventually-pure high-strain recurrence while leaving mixed genuine-owner recurrence open.

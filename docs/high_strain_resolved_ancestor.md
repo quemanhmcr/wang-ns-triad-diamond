@@ -112,7 +112,7 @@ If that can be done without choosing a packet by fiat, the critical-dissipation 
 
 `D_V` remains a scale-critical `O(1/N)` physical cost, not a finite additive reset.  No global-regularity claim is made.
 
-## Candidate refinement: the ancestor scale now telescopes repeated high strain
+## Certified refinement: the ancestor scale now telescopes repeated high strain
 
 The physical significance of `M<=N/4` is stronger when the next recursive stop is
 again high strain.  The canonical shell renewal registers the next smooth carrier
@@ -134,3 +134,6 @@ reset.
 The ancestor remains a physical `D_V|_G` state, not a transfer-generated Young
 parent.  If another owner interrupts the route, the descending epoch ends rather
 than being continued by theorem fiat.
+
+
+This use of the physical ancestor scale as a recurrence telescope was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated run `31460525711` and full causal integration run `31460525687`.
