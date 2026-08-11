@@ -36,6 +36,7 @@ The current architecture has reached the following point.
 17. Checkpoint Zeno is now quotiented as segmentation of one continuous carrier path: at an interior accumulation the cumulative observables either attain an existing closed first-stop face or the same carrier crosses the accumulation.  A geometrically UV-growing checkpoint reading sequence remains a diagnostic counterexample to time-only reasoning, but it is not a physical lineage.  The master frontier is therefore genuine physical-owner recurrence, not a second checkpoint-UV branch.
 18. Smooth residual-skew `K_phys` relink is topologically quotiented without denying its physics: the independently audited gauge-quotiented `T_ab^{phys}` matrix is antisymmetric same-event flux, every positive recipient has its own finite negative-net donor trace, and relink creates no child recursive event.  A simultaneous `S` branch remains existing strain/deformation ownership.
 19. The independently audited consecutive high-strain extension supplies a native viscous telescope without demoting high strain from genuine ownership: every high-strain event pays `D_j>=D_*`, its actual `D_V|_G` ancestor renews at `N_(j+1)/N_j<=3/16`, and interval restriction plus low-pass contraction gives `D_j<=N_j G_*` for the physical global gradient reservoir `G_*`.  Thus every pure high-strain epoch is finite even under complete time overlap, while mixed-owner recurrence remains open.  Its executable guards now preserve native-scale covariance and have a direct Galerkin Navier--Stokes falsification lane.
+20. Consecutive signed-good generated-HH recurrence now also has a native parabolic physical-time telescope without turning generation into an event-count cost: a raw `|I_HH|` hit is only a locator; after actual `Q^2` energy reentry selects positive HH child-work and the hard parent is certified `3/5<N_p/N_c<5/8`, parent natural lifetimes grow by more than `64/25` and the asynchronous common registration surfaces move backward by at least `(1792/4875)T_j`.  Their cumulative backshift reaches absorbing `t=0` after finite consecutive signed-good generated depth.  Generic/non-signed-good HH remains open.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -742,6 +743,23 @@ The second and third are coefficient **first-stop locators**, not physical work 
 A large coefficient impulse alone is **not** automatically large physical work.
 At a coefficient hit the same smooth carrier must reenter the actual `Q^2` energy law. For an interface hit, the common observer gauge must additionally be quotiented before gauge-quotiented native work is Hahn-routed to residual physical relink provenance or existing strain; relink then passes through finite same-event donor closure and is excluded from recursive ownership, while any simultaneous strain remains eligible. HH generation is named only when the physical-energy gate selects actual positive HH work.
 Raw coefficient-obstruction labels are forbidden from entering the canonical master physical-owner state directly.
+
+The certified signed-good generated-epoch theorem now closes the **consecutive physical depth** of the HH-generation subroute once those type gates have actually fired.  Restrict the same positive HH child-work law to its physical heavy half-slab.  If the actual hard parent satisfies
+\[
+\frac35<\frac{N_p}{N_c}<\frac58,
+\]
+then `T_p/T_c>64/25`.  For physical parent-work support `H_j=[a_j,b_j]`, put
+\[
+s_j=a_j-\frac25T_j.
+\]
+The heavy-half geometry gives `|H_j|/T_j<=25/128<10/39`, and a consecutive generated lineage requires only `H_(j+1) subset [s_j,b_j]`.  The existing asynchronous support theorem then yields
+\[
+s_j-s_{j+1}\ge\frac{1792}{4875}T_j,
+\qquad
+s_0-s_L\ge\frac{1792}{7605}T_0\left[\left(\frac{64}{25}\right)^L-1\right].
+\]
+Thus at finite physical time the required backward **registration surface** reaches `t=0` after finite signed-good generated depth.  The surfaces `s_j` are not event vertices, and no lower bound is imposed on the separation of the actual HH event times.
+
 ## 25. Recursive first stopping and joint master projection
 The recursive physical witness constructor acts on retained **actual positive work** after the relevant physical gate.
 `Xi` is excised once before causal routing.
@@ -762,7 +780,7 @@ If
 the logarithmic conditioning penalty is at most `log 2`.
 If
 \[ q<1/2, \]
-a majority of actual current work has already exited through a named cause or earlier regeneration.
+a majority of actual current work has already stopped through a named cause or entered an earlier HH regeneration.  The latter is not automatically an epoch exit: if physical `Q^2` reentry resolves it as signed-good HH generation, it enters the certified parabolic generated-epoch telescope; otherwise it remains generic HH recursion.
 There is no fourth free continuation branch.
 
 ---
@@ -958,6 +976,24 @@ Canonical continuation does not form a changing-scale checkpoint chain. It keeps
 
 ---
 
+
+## 26.11 Signed-good generated HH is a finite parabolic epoch, not a regeneration counter
+The recursive label `HH_REGENERATION` by itself carries **no** scale progress.  It may have arisen from a coefficient locator or from a generic physical HH event, and neither fact authorizes signed-good geometry.
+
+The canonical typed route is:
+
+`HH coefficient obstruction`
+→ same smooth carrier reenters actual `Q^2` energy law
+→ physical-energy gate selects actual positive HH child-work
+→ restrict that same work law to a physical heavy half-slab
+→ read the same-time hard parent pair
+→ **only if** `3/5<N_p/N_c<5/8`, enter the signed-good generated epoch.
+
+Inside that epoch the parent natural lifetime grows by more than `64/25` per layer and the asynchronous common registration surfaces obey the exact geometric backward-shift law above.  Therefore a consecutive signed-good generated lineage has finite interior depth at finite physical time and terminates when its required registration surface reaches the absorbing initial surface.
+
+This is not a unit cost per generated event.  It is not a Duhamel-weighted causal law.  It does not say every comparable HH event is signed-good, and it says nothing about generic/nonlocal high-tail HH except that those routes must keep their own physical provenance.  Shannon/Rényi remains the native breadth/collision law for the generated ancestry; the present theorem concerns single-lineage parabolic depth.
+
+---
 ## 27. Finite-dimensional rigidity modules: supporting geometry, not current PDE bottleneck
 Earlier layers of the programme established a large library of exact or certified finite-dimensional geometric facts.
 They remain important as local rigidity/registration tools but are no longer the main continuum seam.
@@ -1084,6 +1120,9 @@ Phase cancellation is physical.  Never reset or add `|I_R|` / `|I_HH|` across
 analysis checkpoints, and never reinterpret those coefficient magnitudes as
 physical work.
 
+
+### 28.29 A regeneration label is not a signed-good epoch certificate
+`HH_REGENERATION`, a large `|I_HH|`, and actual positive HH work are three different typed objects.  The first is a recursive provenance label, the second is only a coefficient locator, and the third is a physical work law.  Signed-good scale/time geometry may be used only after actual physical HH work has been resolved to a hard parent satisfying `3/5<N_p/N_c<5/8`.  Never infer the parabolic epoch theorem from the word “regeneration” alone.
 ## 29. Structural constants worth remembering
 These constants are not all fundamental; many are clean certified envelopes.
 The important point is where each belongs.
@@ -1097,6 +1136,10 @@ The important point is where each belongs.
 \[ \frac{8\pi^2}{25c^2}. \]
 ### Energy-generated HH work fraction
 \[ 8/15. \]
+### Signed-good generated parent scale
+`3/5<N_parent/N_child<5/8`, hence `64/25<T_parent/T_child<25/9`.
+### Signed-good asynchronous registration backshift
+`s_j-s_(j+1)>=(1792/4875)T_j`; cumulative lower `(1792/7605)T_0[(64/25)^L-1]`.
 ### Common-slice retained coefficient factor
 `1/4` on the clean survivor.
 ### Heat-shell lower comparison
@@ -1247,6 +1290,23 @@ No observer-selected cover branch can manufacture an increasing recursive path o
 
 ---
 
+
+### 30.12 Signed-good generated-HH parabolic epoch route
+`HH coefficient first-stop locator`
+→ same smooth carrier reenters actual `Q^2` physical-energy law
+→ energy gate selects actual positive HH child-work
+→ choose the physical heavy half-slab of that same work law
+→ read the actual same-time hard parent pair
+→ if `3/5<N_p/N_c<5/8`: enter the signed-good generated epoch
+→ parent natural lifetime grows by more than `64/25`
+→ common registration surface `s_j=a_j-(2/5)T_j`
+→ next generated support remains inside `[s_j,b_j]`
+→ `s_j-s_(j+1)>=(1792/4875)T_j`
+→ finite consecutive depth when the required registration surface reaches absorbing `t=0`.
+
+If the physical HH event is not signed-good, it remains on the generic HH/high-tail route and receives no synthetic scale progress.  The common surfaces are not recursive events, and Shannon/Rényi is not used as a clock.
+
+---
 ## 31. What remains open
 The programme is no longer missing a generic packet-persistence theorem, a common
 clock, a definition of recursive depth, or a closure for no-event checkpoint
@@ -1331,19 +1391,34 @@ N_{j+1}\le\frac{3}{16}N_j,
 \]
 so every such epoch is finite even if all first-hit histories overlap.  Therefore an infinite event path cannot eventually remain in high strain alone.  If it contains infinitely many high-strain events, it must also contain infinitely many **other genuine owner events** which break the descending epochs.
 
+
+The signed-good generated-HH theorem removes a second pure recurrence class, by a **different physical law**.  Once an HH locator has passed through actual energy reentry and the physical hard parent is certified signed-good,
+\[
+\frac35<\frac{N_{j+1}}{N_j}<\frac58,
+\qquad
+T_{j+1}>\frac{64}{25}T_j,
+\]
+and the asynchronous common surfaces satisfy
+\[
+s_j-s_{j+1}\ge\frac{1792}{4875}T_j.
+\]
+Hence a consecutive signed-good generated lineage cannot remain interior forever at finite physical time: its required registration surface reaches `t=0` after finite depth.  This does **not** terminate generic `HH_REGENERATION`; the generic label has no scale law until actual physical resolution, and non-signed-good HH/high-tail remains a genuine route.
+
+Therefore an infinite event path cannot eventually remain only in high strain, and it also cannot eventually remain only in signed-good generated HH.  If either owner occurs infinitely often, other genuine owners or generic HH regimes must break the corresponding finite epochs infinitely often.
 The surviving global frontier is thus genuinely **mixed-owner recurrence**.  Its events may include actual HH generation, existing strain/deformation, source/SGS/viscosity owners, independent service, material/new-ancestry relink, high-tail work, and causal reuse/Bellman endpoints.  Their recurrence must telescope only through the native typed laws they truly supply:
 - signed/positive physical work and multiplicative productivity;
 - the physical global gradient reservoir on descending high-strain epochs;
+- physical parabolic registration-surface backshift on consecutive signed-good generated-HH epochs;
 - work-weighted causal Shannon/Rényi reuse;
 - independent source/service laws;
 - `Xi` where it genuinely measures certified representation loss;
 - genuinely globally bounded, scale-independent resources where available.
 
-No critical `NE`, normalized `D_V`, shell mass, scale-critical service, checkpoint count, checkpoint scale, or coefficient-impulse magnitude may be promoted to a finite additive reset.  The high-strain theorem is not an exception: its bound depends on the epoch root scale and physical `3/16` descent.
+No critical `NE`, normalized `D_V`, shell mass, scale-critical service, checkpoint count, checkpoint scale, or coefficient-impulse magnitude may be promoted to a finite additive reset.  The high-strain theorem is not an exception: its bound depends on the epoch root scale and physical `3/16` descent.  The signed-good generated theorem is also not a reset: it uses actual parent natural lifetimes and the absorbing initial surface, not a unit generation count.
 
 The geometric UV checkpoint sum remains an important diagnostic anti-theorem: physical time alone cannot rule out an observer-generated increasing sequence.  The same-carrier theorem shows why that sequence is not a second physical escape branch.  Actual UV dynamics remains fully present on the independently certified high-tail `D_tail`/work route when its physical hypotheses fire.
 
-Closing mixed genuine-owner recurrence, then connecting the resulting bound to the initial-data and hypothetical singular-time interfaces, is the present global frontier.
+Closing mixed genuine-owner recurrence — now with pure high-strain and pure signed-good generated-HH tails removed, but generic non-signed-good HH/high-tail still present — then connecting the resulting bound to the initial-data and hypothetical singular-time interfaces, is the present global frontier.
 
 A finite geometric parabolic-time sum still proves that physical time alone cannot terminate an independently certified changing-scale physical event path. It cannot be manufactured from checkpoint shell readings. Connecting genuine owner recurrence to the initial-data and singular-time interfaces is the present global frontier.
 ### 31.7 Initial data interface
@@ -1424,6 +1499,10 @@ A work law may be completely physical and still create no new generation.  After
 
 ### 32.20 Physical overlap can telescope through native scale weights
 A physical reservoir need not be partitioned into disjoint event bins before it can control recurrence.  Consecutive high-strain histories may overlap arbitrarily in time; the actual low-pass dissipation still obeys `D_j<=N_jG_*`.  Because the PDE supplies the descending renewal `N_(j+1)<=3N_j/16`, repeated readings of the same viscous spacetime reservoir carry geometrically summable native weights.  Preserve the overlap; telescope the physical weights.  This is not an additive reset for normalized `D_V`.
+
+
+### 32.21 A physical registration surface is not event depth
+A PDE continuation theorem may require a backward surface on which the **same carrier** is registered without any new interaction occurring there.  In signed-good HH generation, the surfaces `s_j=a_j-(2/5)T_j` move backward geometrically because the actual parent natural lifetimes grow.  Their reaching `t=0` terminates the interior continuation gate, but the surfaces themselves are not recursive event vertices and are never charged one unit each.  Physical geometry can close recursion without turning geometry into currency.
 
 ## 33. Certified recent theorem blocks
 ### 33.1 High-tail sliding natural-window reentry
@@ -2003,6 +2082,52 @@ Navier--Stokes regularity remain open.
 
 ---
 
+
+### 33.12 Signed-good generated-HH parabolic physical-time epoch telescope
+Status:
+`EXACT_SIGNED_GOOD_GENERATED_HH_PARABOLIC_EPOCH_TELESCOPE__ACTUAL_PHYSICAL_HH_WORK_AFTER_ENERGY_REENTRY_ONLY__ASYNCHRONOUS_COMMON_SLICE_BACKSHIFT_TO_T0__NO_DUHAMEL_WEIGHT_OR_EVENT_COUNT_BUDGET`.
+
+Exact certified implementation/final fixture SHA:
+`72864e407b0f704e6cab2b330d2fb49c78bcf9a4`.
+
+Dedicated GitHub Actions run:
+`31467837283` — **success**.
+
+Results:
+- `738` tests passed;
+- `50,000` signed-good generated physical-work epochs;
+- minimum strict signed-good scale-window margin `0.0030000147542257327`;
+- minimum heavy-half physical-work margin `8.684648789003546e-07`;
+- minimum one-step common-surface backshift margin `7.843254792838327e-05`;
+- minimum cumulative-backshift margin `0.0` (the zero-transition case is exact);
+- maximum sampled certified layer upper bound `14`;
+- raw HH coefficient-obstruction rejections `7143`;
+- non-signed-good HH rejections `4546`;
+- nonconsecutive support-restart rejections `3256`;
+- companion continuum-master signed-good generated-epoch telescope failures `0`;
+- companion master physical-time telescope residual `0.0`;
+- companion master log-scale telescope residual `8.881784197001252e-16`.
+
+The randomized epoch stress deliberately sampled interior room; deterministic theorem tests separately certify that when a required common surface lies at/before `t=0`, no further interior generated layer is admissible.
+
+Stored artifact:
+`recorded-results/31467837283/signed-good-generated-epoch-time-telescope-results/`.
+
+GitHub artifact digest:
+`sha256:f39c93332d801fe2f1812272a55b27d3e1b2319357aff5d65ae2ebdeedab5376`.
+
+Full physical-energy causal integration:
+`31467837226` — **success** on the same exact SHA.
+It passed the same `738`-test suite and `59` successful job steps through physical energy, high strain/service, generic shell, high-tail, continuum master, smooth `Q^2`, recursive witness, the new generated-epoch theorem, joint first stop, Shannon/Rényi, branch compiler, and master episode.  The final master checked `20,000` traces with worst margin `0.0`.
+
+Integration artifact digest:
+`sha256:5bca7887a05aa9ec3ec740f45e570250b85a7ab3f912c807ffb304ee5683b5a6`.
+
+The initial implementation SHA `39c558b541056ae55350ccf35f4b7404203a060b` had one brittle certificate-string assertion after `737` passing tests; neither dedicated nor full integration reached theorem stress on that SHA.  The correction changed only that test assertion into semantic checks.  No theorem identity, physical work gate, scale/support condition, master routing, or workflow topology changed.
+
+The theorem closes eventually-pure **signed-good** generated-HH recurrence.  It does not identify generic `HH_REGENERATION` with signed-good generation, does not close generic/nonlocal high-tail HH, does not replace Shannon/Rényi ancestry reuse, and makes no Navier–Stokes regularity claim.
+
+---
 ## 34. Certification discipline
 Serious theorem validation is performed only in GitHub Actions.
 Local work is restricted to:
@@ -2062,13 +2187,14 @@ Then read the following current-spine documents in order:
 27. `docs/physical_pair_weighted_productivity.md`
 28. `docs/common_slice_coefficient_registration.md`
 29. `docs/recursive_physical_witness_constructor.md`
-30. `docs/joint_causal_stop_projection.md`
-31. `docs/amplitude_entropy_causal_reuse.md`
-32. `docs/weighted_causal_reuse.md`
-33. `docs/renyi_causal_reuse.md`
-34. `docs/physical_branch_compiler.md`
-35. `docs/continuum_master_event_quotient.md`
-36. `docs/master_no_escape.md`
+30. `docs/signed_good_generated_epoch_time_telescope.md`
+31. `docs/joint_causal_stop_projection.md`
+32. `docs/amplitude_entropy_causal_reuse.md`
+33. `docs/weighted_causal_reuse.md`
+34. `docs/renyi_causal_reuse.md`
+35. `docs/physical_branch_compiler.md`
+36. `docs/continuum_master_event_quotient.md`
+37. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -2139,6 +2265,18 @@ the actual descending physical lineage.  An infinite path with infinitely many
 high-strain events must therefore contain infinitely many other genuine owners
 which break those epochs.
 
+
+Signed-good generated HH is also a genuine recursive event, but its finite-depth
+mechanism is different.  A raw `|I_HH|` threshold is only a locator.  After the
+same carrier reenters actual `Q^2` energy and physical positive HH work is selected,
+a hard parent satisfying `3/5<N_p/N_c<5/8` has a natural lifetime more than
+`64/25` times the child's.  Its physical heavy-half support admits the common
+registration surface `s_j=a_j-(2/5)T_j`, and consecutive generated support gives
+`s_j-s_(j+1)>=(1792/4875)T_j`.  The cumulative required backshift therefore reaches
+`t=0` after finite signed-good generated depth.  The registration surfaces are not
+events, Duhamel amplitudes are not causal weights, and generic/non-signed-good HH
+remains outside this theorem.  Shannon/Rényi still governs breadth and reuse of the
+actual child-work ancestry rather than serving as a clock.
 This does not remove real ultraviolet dynamics.  High-frequency coherent service
 must still be converted to physical hard-tail dissipation before causal
 conclusions.  Physical high-tail regeneration uses the common causal unit `N dW`;
@@ -2167,5 +2305,5 @@ or coefficient magnitude is a finite additive reset.
 
 The geometric UV checkpoint sum remains a useful warning that physical time alone
 is insufficient, but it is a diagnostic observer sequence, not a physical
-lineage.  The present master frontier is therefore one problem: terminate or control **mixed** genuine-owner recurrence after pure high-strain epochs have been excluded, then connect that result to the initial-data and hypothetical singular-time interfaces.  `t=0` is absorbing.
+lineage.  The present master frontier is therefore one problem: terminate or control **mixed** genuine-owner recurrence after pure high-strain and pure signed-good generated-HH epochs have been excluded, while generic non-signed-good HH/high-tail remains, then connect that result to the initial-data and hypothetical singular-time interfaces.  `t=0` is absorbing.
 There is no global-regularity claim in the present programme state.

@@ -567,7 +567,7 @@ def theorem_certificate() -> dict[str, object]:
         "physical_input": "only an energy reentry which selects actual positive HH child-energy work may enter; the raw |I_HH| coefficient obstruction is an interval locator and is rejected",
         "signed_good_geometry": "each actual generated parent satisfies strict 3/5<N_parent/N_child<5/8, hence its natural lifetime grows by more than 64/25 backward",
         "physical_support": "the positive HH work law is restricted to an actual heavy half-slab; same-time parent-pair support then occupies at most 25/128 of the parent natural lifetime",
-        "common_surface": "for H_j=[a_j,b_j], the s_j=a_j-(2/5)T_j are physical registration surfaces, not event vertices, recursive events, or checkpoint currency",
+        "common_surface": "for H_j=[a_j,b_j], each s_j=a_j-(2/5)T_j is a physical registration surface for the same parent carrier, not a recursive event, event vertex, or checkpoint currency",
         "asynchronous_backshift": "H_(j+1) subset [s_j,b_j] and alpha_j<=10/39 imply s_j-s_(j+1)>=(1792/4875)T_j even when the next generated support begins anywhere in the previous common interval",
         "time_telescope": "Delta s_L>=(1792/7605)T_0[(64/25)^L-1], so at finite physical time a consecutive signed-good generated ancestry reaches the absorbing t=0 registration boundary after finite depth",
         "causal_weights": "all generation masses are actual positive child-energy HH work; raw Duhamel/adjoint amplitude weights are not used as a causal probability law",

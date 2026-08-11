@@ -315,7 +315,7 @@ Stored artifact:
 ### Independently audited extension: consecutive high-strain epochs telescope through the physical gradient reservoir
 
 High strain remains a genuine recursive owner; it is not quotiented like smooth
-conservative relink.  The extension adds a path law instead.
+conservative relink.  The certified high-strain theorem adds a path law instead.
 
 At child scale `N_j`, high strain gives
 
@@ -357,9 +357,9 @@ The same exact head passed the complete causal integration in run `31462711518`;
 its `100`-file artifact digest is
 `sha256:49239ed32c57e1f7a54c8fd351ac463b889816bf3d61b22464b95244a0997977`.
 
-### Candidate extension: signed-good generated HH has finite parabolic depth
+### Certified extension: signed-good generated HH has finite parabolic depth
 
-This candidate does **not** classify a raw HH coefficient obstruction as a generated
+This certified extension does **not** classify a raw HH coefficient obstruction as a generated
 owner.  `|I_HH|` remains only a first-stop locator.  The same smooth carrier must
 first reenter actual `Q^2`/physical-energy causality; only the branch carrying
 positive physical HH child-energy work is eligible.
@@ -390,8 +390,16 @@ times themselves are not assigned a synthetic minimum decrement, and no event
 count is charged.  The initial surface terminates the registration because `t=0`
 is physically absorbing.
 
-The master consequence, if certified, is only that an infinite recursive path
+The master consequence is only that an infinite recursive path
 cannot eventually consist solely of **signed-good** generated HH renewals.  Generic
 HH/high-tail work without this signed-good geometry remains a genuine separate
 route.  Shannon/Renyi also remains the native breadth/collision/reuse law of the
 ancestry rather than being repurposed as a clock.
+
+This signed-good generated-HH extension was certified on exact implementation SHA
+`72864e407b0f704e6cab2b330d2fb49c78bcf9a4` by dedicated run `31467837283` and
+full causal integration run `31467837226`.  The dedicated run passed `738` tests
+and `50,000` generated-epoch states; the companion master stress had zero
+signed-good generated-epoch failures.  The initial `39c558b...` run was
+fixture-only: one certificate wording assertion failed after `737` passing tests,
+with no theorem stress and no source theorem change.
