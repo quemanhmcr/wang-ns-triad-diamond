@@ -5,8 +5,10 @@ on:
     paths:
       - 'src/signed_good_generated_epoch_time_telescope.py'
       - 'src/signed_good_generated_epoch_pde_probe.py'
+      - 'src/signed_good_generated_epoch_two_layer_pde_probe.py'
       - 'tests/test_signed_good_generated_epoch_time_telescope.py'
       - 'tests/test_signed_good_generated_epoch_pde_probe.py'
+      - 'tests/test_signed_good_generated_epoch_two_layer_pde_probe.py'
       - 'docs/signed_good_generated_epoch_time_telescope.md'
       - '.github/workflows/signed-good-generated-epoch-time-telescope.yml'
       - 'src/asynchronous_duhamel_sync.py'
@@ -50,6 +52,8 @@ jobs:
         run: python -m src.signed_good_generated_epoch_time_telescope --samples 50000 --outdir results-signed-good-generated-epoch-time-telescope
       - name: Actual Navier-Stokes signed-good parent-pair work
         run: python -m src.signed_good_generated_epoch_pde_probe --resolutions 24 28 32 --steps 96 --outdir results-signed-good-generated-epoch-pde-probe
+      - name: Actual two-layer signed-good work on one Navier-Stokes trajectory
+        run: python -m src.signed_good_generated_epoch_two_layer_pde_probe --resolutions 28 32 --steps 96 --outdir results-signed-good-generated-epoch-two-layer-pde-probe
       - name: Asynchronous parabolic synchronization dependency
         run: python -m src.asynchronous_duhamel_sync --samples 50000 --outdir results-asynchronous-duhamel-sync
       - name: Physical-energy causal work dependency
@@ -71,6 +75,7 @@ jobs:
           path: |
             results-signed-good-generated-epoch-time-telescope/
             results-signed-good-generated-epoch-pde-probe/
+            results-signed-good-generated-epoch-two-layer-pde-probe/
             results-asynchronous-duhamel-sync/
             results-physical-energy-causal-bridge/
             results-common-slice-coefficient-registration/
