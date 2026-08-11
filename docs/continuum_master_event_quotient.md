@@ -250,7 +250,7 @@ a recursive owner after the conservative relink quotient.  Pure relink creates n
 child event.  No hard/smooth measure identification, scale reweighting, or donor
 priority is introduced.
 
-If this candidate is certified, the genuine-owner recurrence frontier shrinks by
+The certified smooth-relink theorem shrinks the genuine-owner recurrence frontier by
 one more class: smooth conservative relink will no longer be an independent
 recursion mechanism.  Strain/deformation, HH generation, source/dissipation,
 independent service, new material ancestry and causal reuse remain genuine.
@@ -265,7 +265,7 @@ owner depth.
 ### Certified extension: consecutive high-strain epochs telescope through the physical gradient reservoir
 
 High strain remains a genuine recursive owner; it is not quotiented like smooth
-conservative relink.  The candidate adds a path law instead.
+conservative relink.  The certified high-strain theorem adds a path law instead.
 
 At child scale `N_j`, high strain gives
 
@@ -289,9 +289,9 @@ Mixed-owner recurrence remains open.
 
 This high-strain path extension was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated run `31460525711` and full causal integration run `31460525687`.  It removes eventually-pure high-strain recurrence while leaving mixed genuine-owner recurrence open.
 
-### Candidate extension: signed-good generated HH has finite parabolic depth
+### Certified extension: signed-good generated HH has finite parabolic depth
 
-This candidate does **not** classify a raw HH coefficient obstruction as a generated
+This certified extension does **not** classify a raw HH coefficient obstruction as a generated
 owner.  `|I_HH|` remains only a first-stop locator.  The same smooth carrier must
 first reenter actual `Q^2`/physical-energy causality; only the branch carrying
 positive physical HH child-energy work is eligible.
@@ -322,8 +322,16 @@ times themselves are not assigned a synthetic minimum decrement, and no event
 count is charged.  The initial surface terminates the registration because `t=0`
 is physically absorbing.
 
-The master consequence, if certified, is only that an infinite recursive path
+The master consequence is only that an infinite recursive path
 cannot eventually consist solely of **signed-good** generated HH renewals.  Generic
 HH/high-tail work without this signed-good geometry remains a genuine separate
 route.  Shannon/Renyi also remains the native breadth/collision/reuse law of the
 ancestry rather than being repurposed as a clock.
+
+This signed-good generated-HH extension was certified on exact implementation SHA
+`72864e407b0f704e6cab2b330d2fb49c78bcf9a4` by dedicated run `31467837283` and
+full causal integration run `31467837226`.  The dedicated run passed `738` tests
+and `50,000` generated-epoch states; the companion master stress had zero
+signed-good generated-epoch failures.  The initial `39c558b...` run was
+fixture-only: one certificate wording assertion failed after `737` passing tests,
+with no theorem stress and no source theorem change.

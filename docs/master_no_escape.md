@@ -2356,13 +2356,13 @@ Antisymmetry and `sum_b eta_b=I` give `T_ab=-T_ba` and
 finite backward donor closure from positive recipients must meet negative-net
 donors, while internal circulation contributes zero to every subset balance.
 
-The candidate master consequence is therefore
+The certified master consequence is therefore
 
 `smooth positive relink -> same-event donor provenance -> zero recursion depth`.
 
 This is deliberately parallel to, but not identified with, the existing hard
 resolved-interface donor theorem.  If strain is tied with relink, only the strain
-branch remains recursively event-facing.  The candidate removes no real physical
+branch remains recursively event-facing.  The certified refinement removes no real physical
 work; it only refuses to count conservative redistribution as a new generation.
 
 This refinement was certified on exact SHA
@@ -2402,12 +2402,12 @@ breaks the epoch and must be handled by its own physical law.
 
 This refinement was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated high-strain run `31460525711` and full causal integration run `31460525687`.  It is a path telescope through the actual viscous reservoir, not an additive reset for normalized `D_V`.
 
-## Candidate refinement: pure signed-good generated-HH depth reaches the initial surface
+## Certified refinement: pure signed-good generated-HH depth reaches the initial surface
 
 There is a second genuine-owner recurrence class whose own PDE geometry is more
 rigid than the coarse master state suggests.  An earlier HH coefficient hit is
 **not** enough: it is only an interval locator.  The carrier first reenters its
-actual `Q^2` energy balance, and the present candidate begins only when that gate
+actual `Q^2` energy balance, and the certified refinement begins only when that gate
 selects positive physical high--high child-energy work.
 
 Restrict the same work law to the physical heavy half-slab.  For an actual
@@ -2439,9 +2439,17 @@ physical time a consecutive signed-good generated lineage eventually requires a
 surface at or before `t=0`; the gate is then truncated at the absorbing initial
 surface.  No lower bound is imposed on the separation of actual event times.
 
-Thus, if this candidate is certified, both an eventually-pure high-strain tail and
+Thus both an eventually-pure high-strain tail and
 an eventually-pure signed-good generated-HH tail are excluded by their own native
 PDE laws.  The remaining global problem is still mixed genuine-owner recurrence,
 and it still includes generic/nonlocal HH or high-tail events that do not satisfy
 the signed-good parent geometry.  Shannon/Renyi reuse continues to control causal
 ancestry breadth and collision; it is not used as a manufactured physical clock.
+
+This refinement was certified on exact implementation SHA
+`72864e407b0f704e6cab2b330d2fb49c78bcf9a4`: dedicated run `31467837283` passed
+`738` tests and `50,000` signed-good generated physical-work epochs, and full causal
+integration `31467837226` passed all `59` successful steps plus `20,000` master
+episodes with worst margin `0.0`.  It closes only the eventually-pure signed-good
+generated-HH subroute; generic/nonlocal HH and mixed genuine-owner recurrence remain
+open.

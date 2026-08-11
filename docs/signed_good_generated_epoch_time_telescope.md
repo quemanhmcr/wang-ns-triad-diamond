@@ -1,6 +1,6 @@
 # Signed-good generated HH: the parabolic clock is already in the PDE
 
-Status: **candidate theorem; certify only by exact-SHA GitHub Actions**.
+Status: **certified on exact implementation SHA `72864e407b0f704e6cab2b330d2fb49c78bcf9a4`**.
 
 ## 1. The physical object
 
@@ -118,3 +118,26 @@ physical parabolic depth of one consecutive signed-good generated lineage.
 
 No event-count currency, Duhamel causal reweighting, scale-independent reset or
 Navier--Stokes global-regularity conclusion is asserted.
+
+## 6. Certification
+
+The corrected implementation/certification SHA is
+`72864e407b0f704e6cab2b330d2fb49c78bcf9a4`.  The preceding implementation SHA
+`39c558b541056ae55350ccf35f4b7404203a060b` differed only by one brittle
+certificate-string assertion in the new test: `737` tests passed before that
+assertion failed, and no theorem stress ran on that SHA.  No theorem equation,
+physical gate, support condition, master routing or workflow topology changed in
+the correction.
+
+Dedicated GitHub Actions run `31467837283` passed `738` tests and `50,000`
+signed-good generated physical-work epochs, together with the asynchronous,
+physical-energy, common-slice, smooth-`Q^2`, recursive-witness and continuum-master
+dependencies.  The dedicated artifact is stored at
+`recorded-results/31467837283/signed-good-generated-epoch-time-telescope-results/`
+and has GitHub digest
+`sha256:f39c93332d801fe2f1812272a55b27d3e1b2319357aff5d65ae2ebdeedab5376`.
+
+Full physical-energy causal integration run `31467837226` passed on the same exact
+SHA through `59` successful steps.  The final master episode stress checked
+`20,000` traces with worst margin `0.0`; its integration artifact digest is
+`sha256:5bca7887a05aa9ec3ec740f45e570250b85a7ab3f912c807ffb304ee5683b5a6`.
