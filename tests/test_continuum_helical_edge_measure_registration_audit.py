@@ -227,3 +227,21 @@ def test_nonforward_typed_edge_cannot_forge_physical_work_above_native_capacity(
     forged_work = 1.25 * edge.native_modal_capacity
     with pytest.raises((ValueError, AssertionError), match="work|capacity|physical|provenance"):
         replace(edge, signed_child_energy_work=forged_work)
+
+def test_typed_fiber_cannot_replace_eight_helicity_assignments_by_duplicate_atoms():
+    fiber = _symmetric_extremal_fiber()
+    atom = max(fiber.modal_atoms, key=lambda row: row.capacity_mass)
+    duplicated = (atom,) * 8
+    forged_work = math.fsum(row.registration.signed_child_energy_work for row in duplicated)
+    forged_progress = math.fsum(row.registration.signed_upper_progress_work for row in duplicated)
+    with pytest.raises((ValueError, AssertionError), match="helicit|sector|identity|provenance|duplicate"):
+        replace(
+            fiber,
+            direct_signed_work_density=forged_work,
+            modal_signed_work_density=forged_work,
+            direct_signed_progress_density=forged_progress,
+            modal_signed_progress_density=forged_progress,
+            signed_work_reconstruction_residual=0.0,
+            signed_progress_reconstruction_residual=0.0,
+            modal_atoms=duplicated,
+        )
