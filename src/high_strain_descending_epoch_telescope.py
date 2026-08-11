@@ -22,6 +22,31 @@ STATUS = (
 
 ANCESTOR_TO_CHILD_RATIO_UPPER = 1.0 / 4.0
 HIGH_STRAIN_RENEWAL_RATIO_UPPER = RENEWAL_SCALE_FACTOR * ANCESTOR_TO_CHILD_RATIO_UPPER
+STEP_RELATIVE_TOLERANCE = 8.0e-12
+EPOCH_RELATIVE_TOLERANCE = 1.0e-11
+
+
+def _finite_positive_ratio(numerator: float, denominator: float) -> float:
+    """Return one native dimensionless ratio, rejecting overflow/underflow.
+
+    Scale relations in this theorem are homogeneous.  Comparing dimensional
+    frequencies against an absolute unit tolerance destroys that covariance, so
+    every guard is expressed through a ratio of quantities in the same unit.
+    """
+    x = float(numerator)
+    y = float(denominator)
+    if not (math.isfinite(x) and x > 0.0 and math.isfinite(y) and y > 0.0):
+        raise ValueError("positive finite native quantities required")
+    ratio = x / y
+    if not math.isfinite(ratio) or ratio <= 0.0:
+        raise ValueError("native ratio left the positive finite floating range")
+    return ratio
+
+
+def _native_product_upper_holds(value: float, left: float, right: float) -> bool:
+    """Check ``value <= left*right`` without forming a fragile product."""
+    log_excess = math.log(value) - math.log(left) - math.log(right)
+    return log_excess <= math.log1p(EPOCH_RELATIVE_TOLERANCE)
 
 
 @dataclass(frozen=True)
@@ -52,19 +77,30 @@ class HighStrainRenewalStep:
         )
         if not all(math.isfinite(x) and x > 0 for x in vals):
             raise ValueError("positive finite high-strain renewal data required")
-        freq_tol = 8e-12 * max(
-            1.0,
-            self.child_frequency,
-            self.ancestor_shell_frequency,
-            self.renewal_frequency,
+        ancestor_ratio = _finite_positive_ratio(
+            self.ancestor_shell_frequency, self.child_frequency
         )
-        if self.ancestor_shell_frequency > self.child_frequency / 4.0 + freq_tol:
+        if ancestor_ratio > ANCESTOR_TO_CHILD_RATIO_UPPER * (
+            1.0 + STEP_RELATIVE_TOLERANCE
+        ):
             raise ValueError("high-strain resolved ancestor must satisfy M<=N/4")
-        expected = renewal_scale(self.ancestor_shell_frequency)
-        if abs(self.renewal_frequency - expected) > freq_tol:
+        renewal_to_ancestor = _finite_positive_ratio(
+            self.renewal_frequency, self.ancestor_shell_frequency
+        )
+        if not math.isclose(
+            renewal_to_ancestor,
+            RENEWAL_SCALE_FACTOR,
+            rel_tol=STEP_RELATIVE_TOLERANCE,
+            abs_tol=0.0,
+        ):
             raise ValueError("renewal scale must be the physical A=3M/4 shell registration")
-        if self.renewal_frequency > HIGH_STRAIN_RENEWAL_RATIO_UPPER * self.child_frequency + freq_tol:
-            raise AssertionError("high-strain renewal exceeded the exact 3/16 scale ratio")
+        renewal_ratio = _finite_positive_ratio(
+            self.renewal_frequency, self.child_frequency
+        )
+        if renewal_ratio > HIGH_STRAIN_RENEWAL_RATIO_UPPER * (
+            1.0 + STEP_RELATIVE_TOLERANCE
+        ):
+            raise ValueError("high-strain renewal exceeded the exact 3/16 scale ratio")
 
 
 @dataclass(frozen=True)
@@ -92,16 +128,15 @@ class HighStrainEpochCertificate:
         positive = (
             self.root_frequency,
             self.last_child_frequency,
+            self.total_gradient_dissipation,
             self.high_strain_dissipation_lower,
             self.physical_frequency_floor,
             self.geometric_frequency_sum_upper,
+            self.normalized_dissipation_sum,
             self.normalized_dissipation_capacity_upper,
         )
         if not all(math.isfinite(x) and x > 0 for x in positive):
             raise ValueError("positive finite epoch certificate values required")
-        nonnegative = (self.total_gradient_dissipation, self.normalized_dissipation_sum)
-        if not all(math.isfinite(x) and x >= 0 for x in nonnegative):
-            raise ValueError("finite nonnegative physical dissipation values required")
         if self.frequency_floor_count_upper < self.step_count:
             raise ValueError("frequency-floor count bound does not cover observed epoch")
         if self.weighted_capacity_count_upper < self.step_count:
@@ -110,7 +145,11 @@ class HighStrainEpochCertificate:
             self.frequency_floor_count_upper, self.weighted_capacity_count_upper
         ):
             raise ValueError("certified count must be the minimum native bound")
-        if self.maximum_observed_scale_ratio > HIGH_STRAIN_RENEWAL_RATIO_UPPER + 8e-12:
+        if not math.isfinite(self.maximum_observed_scale_ratio) or self.maximum_observed_scale_ratio < 0.0:
+            raise ValueError("finite nonnegative observed scale ratio required")
+        if self.maximum_observed_scale_ratio > HIGH_STRAIN_RENEWAL_RATIO_UPPER * (
+            1.0 + STEP_RELATIVE_TOLERANCE
+        ):
             raise ValueError("epoch contains a non-high-strain scale renewal")
         if not self.arbitrary_time_overlap_allowed:
             raise ValueError("the theorem must not assume disjoint high-strain histories")
@@ -131,7 +170,10 @@ def kinetic_energy_gradient_dissipation_upper(initial_kinetic_energy: float, vis
     nu = float(viscosity)
     if E0 < 0 or not math.isfinite(E0) or nu <= 0 or not math.isfinite(nu):
         raise ValueError("finite nonnegative initial energy and positive viscosity required")
-    return E0 / (2.0 * nu)
+    out = E0 / (2.0 * nu)
+    if not math.isfinite(out):
+        raise ValueError("energy/viscosity data produced no finite gradient reservoir upper")
+    return out
 
 
 def physical_high_strain_frequency_floor(
@@ -151,19 +193,27 @@ def physical_high_strain_frequency_floor(
     c = float(scaled_lifetime)
     if G <= 0 or not math.isfinite(G) or c <= 0 or not math.isfinite(c):
         raise ValueError("positive finite global gradient dissipation and scaled lifetime required")
-    return clean_high_strain_dissipation_lower(c) / G
+    Dstar = clean_high_strain_dissipation_lower(c)
+    out = Dstar / G
+    if not math.isfinite(Dstar) or Dstar <= 0.0 or not math.isfinite(out) or out <= 0.0:
+        raise ValueError("physical high-strain frequency floor left the positive finite range")
+    return out
 
 
 def _frequency_floor_count_upper(root_frequency: float, floor_frequency: float) -> int:
     N0 = float(root_frequency)
     Nmin = float(floor_frequency)
-    if N0 <= 0 or Nmin <= 0 or not math.isfinite(N0 + Nmin):
+    if N0 <= 0 or Nmin <= 0 or not all(math.isfinite(x) for x in (N0, Nmin)):
         raise ValueError("positive finite root/floor frequencies required")
     if N0 < Nmin:
         return 0
     r = HIGH_STRAIN_RENEWAL_RATIO_UPPER
     # Steps have child scales N_j <= r^j N_0 and require N_j>=Nmin.
-    q = math.log(Nmin / N0) / math.log(r)
+    # Subtract logarithms before division.  Forming Nmin/N0 first can underflow
+    # even though the finite geometric count is perfectly representable.
+    q = (math.log(Nmin) - math.log(N0)) / math.log(r)
+    if not math.isfinite(q):
+        raise ValueError("finite logarithmic scale coordinate required")
     return max(1, int(math.floor(q + 8e-12)) + 1)
 
 
@@ -197,52 +247,70 @@ def high_strain_epoch_telescope(
     if G <= 0 or not math.isfinite(G) or c <= 0 or not math.isfinite(c):
         raise ValueError("positive finite global gradient dissipation and scaled lifetime required")
     Dstar = clean_high_strain_dissipation_lower(c)
-    diss_tol = 1e-11 * max(
-        1.0,
-        Dstar,
-        *(x.normalized_resolved_dissipation for x in rows),
-        *(x.child_frequency * G for x in rows),
-    )
-    freq_tol = 1e-11 * max(
-        1.0,
-        *(x.child_frequency for x in rows),
-        *(x.renewal_frequency for x in rows),
-    )
+    if not math.isfinite(Dstar) or Dstar <= 0.0:
+        raise ValueError("positive finite high-strain dissipation threshold required")
 
     max_ratio = 0.0
     for j, row in enumerate(rows):
-        if row.normalized_resolved_dissipation < Dstar - diss_tol:
+        threshold_ratio = _finite_positive_ratio(
+            row.normalized_resolved_dissipation, Dstar
+        )
+        if threshold_ratio < 1.0 - EPOCH_RELATIVE_TOLERANCE:
             raise ValueError("epoch contains a step below the physical high-strain dissipation threshold")
-        if row.normalized_resolved_dissipation > row.child_frequency * G + diss_tol:
+        if not _native_product_upper_holds(
+            row.normalized_resolved_dissipation, row.child_frequency, G
+        ):
             raise ValueError("resolved event dissipation exceeds the supplied global gradient reservoir")
-        ratio = row.renewal_frequency / row.child_frequency
+        ratio = _finite_positive_ratio(row.renewal_frequency, row.child_frequency)
         max_ratio = max(max_ratio, ratio)
         if j + 1 < len(rows):
             nxt = rows[j + 1]
-            if abs(nxt.child_frequency - row.renewal_frequency) > freq_tol:
+            consecutive_ratio = _finite_positive_ratio(
+                nxt.child_frequency, row.renewal_frequency
+            )
+            if not math.isclose(
+                consecutive_ratio,
+                1.0,
+                rel_tol=EPOCH_RELATIVE_TOLERANCE,
+                abs_tol=0.0,
+            ):
                 raise ValueError("high-strain epoch must follow the actual renewed carrier scale consecutively")
 
     N0 = rows[0].child_frequency
     Nlast = rows[-1].child_frequency
-    Nmin = Dstar / G
-    if Nlast < Nmin - freq_tol:
+    Nmin = physical_high_strain_frequency_floor(G, c)
+    if math.log(Nlast) + math.log(G) < math.log(Dstar) + math.log1p(
+        -EPOCH_RELATIVE_TOLERANCE
+    ):
         raise AssertionError("certified high-strain event fell below the physical dissipation floor")
 
-    frequency_sum = sum(x.child_frequency for x in rows)
+    frequency_sum = math.fsum(x.child_frequency for x in rows)
     geometric_frequency_sum_upper = N0 / (1.0 - HIGH_STRAIN_RENEWAL_RATIO_UPPER)
-    frequency_sum_tol = 1e-11 * max(1.0, frequency_sum, geometric_frequency_sum_upper)
-    if frequency_sum > geometric_frequency_sum_upper + frequency_sum_tol:
+    if not all(
+        math.isfinite(x) and x > 0.0
+        for x in (frequency_sum, geometric_frequency_sum_upper)
+    ):
+        raise ValueError("frequency telescope left the positive finite range")
+    if _finite_positive_ratio(
+        frequency_sum, geometric_frequency_sum_upper
+    ) > 1.0 + EPOCH_RELATIVE_TOLERANCE:
         raise AssertionError("high-strain physical renewal failed its geometric scale telescope")
 
-    Dsum = sum(x.normalized_resolved_dissipation for x in rows)
+    Dsum = math.fsum(x.normalized_resolved_dissipation for x in rows)
     capacity = G * frequency_sum
     geometric_capacity = G * geometric_frequency_sum_upper
-    capacity_tol = 1e-11 * max(1.0, Dsum, capacity, geometric_capacity)
-    if Dsum > capacity + capacity_tol:
+    if not all(
+        math.isfinite(x) and x > 0.0 for x in (Dsum, capacity, geometric_capacity)
+    ):
+        raise ValueError("dissipation telescope left the positive finite range")
+    if _finite_positive_ratio(Dsum, capacity) > 1.0 + EPOCH_RELATIVE_TOLERANCE:
         raise AssertionError("overlapping high-strain histories exceeded the weighted global gradient reservoir")
 
     floor_count = _frequency_floor_count_upper(N0, Nmin)
-    weighted_count = int(math.floor(geometric_capacity / Dstar + 8e-12))
+    weighted_ratio = geometric_capacity / Dstar
+    if not math.isfinite(weighted_ratio) or weighted_ratio < 1.0:
+        raise ValueError("finite positive weighted high-strain count capacity required")
+    weighted_count = int(math.floor(weighted_ratio + 8e-12))
     certified = min(floor_count, weighted_count)
     if len(rows) > certified:
         raise AssertionError("observed high-strain epoch exceeded its physical count telescope")
@@ -289,6 +357,13 @@ class HighStrainEpochStress:
     worst_frequency_sum_margin: float
     worst_normalized_capacity_margin: float
     minimum_frequency_floor_margin: float
+    minimum_frequency_sum_relative_margin: float
+    minimum_normalized_capacity_relative_margin: float
+    minimum_frequency_floor_relative_margin: float
+    minimum_native_child_frequency: float
+    maximum_native_child_frequency: float
+    minimum_native_normalized_dissipation: float
+    maximum_native_normalized_dissipation: float
     maximum_certified_epoch_count: int
     arbitrary_overlap_cases: int
     ascending_chain_rejections: int
@@ -298,14 +373,21 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> HighStrainEpochStress
     rng = random.Random(seed)
     wf = wc = float("inf")
     minfloor = float("inf")
+    wf_rel = wc_rel = floor_rel = float("inf")
+    min_frequency = min_dissipation = float("inf")
+    max_frequency = max_dissipation = 0.0
     maxcount = overlap = rejected = 0
     rmax = HIGH_STRAIN_RENEWAL_RATIO_UPPER
 
     for _ in range(samples):
-        c = math.exp(rng.uniform(math.log(0.25), math.log(3.0)))
+        # D_*=const/c is itself a native physical scale.  Sweep c and G over
+        # wide reciprocal ranges so the same dimensionless epoch law is tested
+        # far below and far above the artificial unit scale 1.
+        c = math.exp(rng.uniform(math.log(1.0e-140), math.log(1.0e140)))
         Dstar = clean_high_strain_dissipation_lower(c)
-        G = math.exp(rng.uniform(math.log(0.5), math.log(50.0)))
-        N0 = math.exp(rng.uniform(math.log(2.0 * Dstar / G), math.log(1e4 * Dstar / G)))
+        G = math.exp(rng.uniform(math.log(1.0e-60), math.log(1.0e60)))
+        root_factor = math.exp(rng.uniform(math.log(2.0), math.log(1.0e4)))
+        N0 = root_factor * Dstar / G
         Nmin = Dstar / G
         cap = _frequency_floor_count_upper(N0, Nmin)
         L = rng.randint(1, max(1, min(cap, 24)))
@@ -326,10 +408,33 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> HighStrainEpochStress
         if not rows:
             continue
         out = high_strain_epoch_telescope(rows, total_gradient_dissipation=G, scaled_lifetime=c)
-        fsum = sum(x.child_frequency for x in rows)
+        fsum = math.fsum(x.child_frequency for x in rows)
+        capacity = G * fsum
         wf = min(wf, out.geometric_frequency_sum_upper - fsum)
-        wc = min(wc, G * fsum - out.normalized_dissipation_sum)
+        wc = min(wc, capacity - out.normalized_dissipation_sum)
         minfloor = min(minfloor, out.last_child_frequency - out.physical_frequency_floor)
+        wf_rel = min(
+            wf_rel,
+            (out.geometric_frequency_sum_upper - fsum)
+            / out.geometric_frequency_sum_upper,
+        )
+        wc_rel = min(
+            wc_rel,
+            (capacity - out.normalized_dissipation_sum) / capacity,
+        )
+        floor_rel = min(
+            floor_rel,
+            (out.last_child_frequency - out.physical_frequency_floor)
+            / out.last_child_frequency,
+        )
+        min_frequency = min(min_frequency, *(x.child_frequency for x in rows))
+        max_frequency = max(max_frequency, *(x.child_frequency for x in rows))
+        min_dissipation = min(
+            min_dissipation, *(x.normalized_resolved_dissipation for x in rows)
+        )
+        max_dissipation = max(
+            max_dissipation, *(x.normalized_resolved_dissipation for x in rows)
+        )
         maxcount = max(maxcount, out.certified_count_upper)
         overlap += 1  # theorem deliberately gives no interval-disjointness input.
 
@@ -346,7 +451,22 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> HighStrainEpochStress
         else:
             raise AssertionError("non-consecutive scale restart crossed the high-strain epoch telescope")
 
-    return HighStrainEpochStress(samples, wf, wc, minfloor, maxcount, overlap, rejected)
+    return HighStrainEpochStress(
+        samples,
+        wf,
+        wc,
+        minfloor,
+        wf_rel,
+        wc_rel,
+        floor_rel,
+        min_frequency,
+        max_frequency,
+        min_dissipation,
+        max_dissipation,
+        maxcount,
+        overlap,
+        rejected,
+    )
 
 
 def main() -> None:
@@ -379,6 +499,11 @@ Stress: `{out.samples}` descending high-strain epochs
 - minimum geometric-frequency capacity margin: `{out.worst_frequency_sum_margin:.3e}`
 - minimum weighted normalized-dissipation margin: `{out.worst_normalized_capacity_margin:.3e}`
 - minimum last-scale/frequency-floor margin: `{out.minimum_frequency_floor_margin:.3e}`
+- minimum native-relative geometric-frequency margin: `{out.minimum_frequency_sum_relative_margin:.3e}`
+- minimum native-relative normalized-capacity margin: `{out.minimum_normalized_capacity_relative_margin:.3e}`
+- minimum native-relative frequency-floor margin: `{out.minimum_frequency_floor_relative_margin:.3e}`
+- sampled native child-frequency range: `[{out.minimum_native_child_frequency:.3e},{out.maximum_native_child_frequency:.3e}]`
+- sampled native normalized-dissipation range: `[{out.minimum_native_normalized_dissipation:.3e},{out.maximum_native_normalized_dissipation:.3e}]`
 - maximum certified epoch count sampled: `{out.maximum_certified_epoch_count}`
 - arbitrary-overlap cases: `{out.arbitrary_overlap_cases}`
 - non-consecutive/ascending restart rejections: `{out.ascending_chain_rejections}`
