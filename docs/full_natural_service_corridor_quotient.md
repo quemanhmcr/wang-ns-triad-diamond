@@ -168,3 +168,34 @@ in the correction.
 
 Certification is regression evidence for the encoded exact identities and guards;
 it is not a proof of global no-escape or Navier--Stokes regularity.
+
+## Candidate refinement: the horizon endpoint is a checkpoint, not an event
+
+The certified theorem above already proves that service/material rereading adds no
+second event layer.  The next candidate quotient makes the remaining endpoint
+semantics explicit.
+
+On a full no-hit branch, the earlier endpoint `t-cA^-2` was selected because the
+analysis chose one natural horizon.  No first-stop condition fired there.  Thus
+physical time has genuinely elapsed across the corridor, but the endpoint itself
+is an **analysis checkpoint** rather than a causal event vertex.
+
+Likewise the two-shell statement in Section 3 must be read only as same-time state
+geometry.  The hard shells at `A` and `2A` are actual observables, but the ratios
+`3/4` and `3/2` relative to the incoming shell arise from covering one smooth
+carrier.  The candidate API therefore records explicitly
+
+- `analysis_checkpoint_reregistration=True`;
+- `directional_scale_progress_supplied=False`;
+- `high_tail_supplier_admissible=False`;
+- `cover_ascent_interpreted_as_dynamics=False`.
+
+This candidate refinement does not alter the certified lower
+`max(mu_A,mu_2A)>=(2/3)A||Q_Au||_2^2`; it narrows what may be inferred from that
+lower.  Certification of the checkpoint refinement is pending.
+
+The checkpoint refinement also closes a potential selection loophole in using the
+two-shell lower.  Downstream re-registration does not accept `A` or `2A` as a
+chosen branch.  It receives the actual pair `(mu_A,mu_2A)` and applies the exact
+realization lemma internally; unique maxima are physical facts and exact ties stay
+joint.

@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Iterable, Sequence
 
 from src.high_strain_resolved_ancestor import TRANSPORTER_RADIUS
+from src.full_natural_checkpoint_quotient import FULL_NATURAL_CHECKPOINT
 from src.full_natural_service_corridor_quotient import FULL_NATURAL_SERVICE_WITNESS
 from src.common_slice_coefficient_registration import (
     HH_COEFFICIENT_OBSTRUCTION,
@@ -20,7 +21,8 @@ from src.common_slice_coefficient_registration import (
 STATUS = (
     "EXACT_CONTINUUM_MASTER_EVENT_QUOTIENT__ZERO_CHARGE_RELAYS_COLLAPSED__"
     "NATIVE_PHYSICAL_TIME_RECURSION__SUPPLIER_SPECIFIC_SCALE_PROGRESS__"
-    "COMPACT_SCALE_FULL_SURVIVOR_NO_ESCAPE__NO_COMMON_CLOCK_OR_CAUSAL_REWEIGHTING"
+    "NATURAL_HORIZON_CHECKPOINTS_ZERO_EVENT_DEPTH__"
+    "COMPACT_SCALE_CHECKPOINT_NO_ESCAPE__NO_COMMON_CLOCK_OR_CAUSAL_REWEIGHTING"
 )
 
 
@@ -29,6 +31,7 @@ COEFFICIENT_OBSTRUCTION_LABELS = frozenset(
 )
 
 NON_EVENT_CORRIDOR_WITNESS_LABELS = frozenset({FULL_NATURAL_SERVICE_WITNESS})
+NON_EVENT_CHECKPOINT_LABELS = frozenset({FULL_NATURAL_CHECKPOINT})
 
 
 def require_routed_physical_owner_labels(labels: Iterable[str]) -> tuple[str, ...]:
@@ -51,6 +54,12 @@ def require_routed_physical_owner_labels(labels: Iterable[str]) -> tuple[str, ..
         raise TypeError(
             "full-natural own-scale service is a same-corridor physical witness, not a separate recursive owner event: "
             + ", ".join(witness_bad)
+        )
+    checkpoint_bad = tuple(sorted(set(out).intersection(NON_EVENT_CHECKPOINT_LABELS)))
+    if checkpoint_bad:
+        raise TypeError(
+            "full-natural horizon checkpoint is analysis re-registration after real corridor time, not a recursive physical owner event: "
+            + ", ".join(checkpoint_bad)
         )
     return out
 
@@ -102,7 +111,7 @@ class SupplierKind(str, Enum):
 
 class EventDisposition(str, Enum):
     NAMED_RECURSIVE_PHYSICAL_EVENT = "named_recursive_physical_event"
-    FULL_NATURAL_SURVIVOR = "full_natural_survivor"
+    FULL_NATURAL_SURVIVOR = "full_natural_survivor"  # legacy compatibility only; rejected by RecursiveEventState
     ABSORBING_INITIAL_BOUNDARY = "absorbing_initial_boundary"
     TERMINAL_COST = "terminal_multiplicative_or_global_resource_cost"
 
@@ -135,6 +144,8 @@ class RecursiveEventState:
         require_routed_physical_owner_labels(self.joint_causes)
         if len(set(self.joint_causes)) != len(self.joint_causes):
             raise ValueError("joint physical cause set must already be quotiented")
+        if self.disposition is EventDisposition.FULL_NATURAL_SURVIVOR:
+            raise TypeError("full-natural no-hit horizon is an analysis checkpoint, not a RecursiveEventState")
         if self.disposition is EventDisposition.ABSORBING_INITIAL_BOUNDARY and self.time != 0.0:
             raise ValueError("the absorbing initial boundary is exactly t=0")
 
@@ -308,7 +319,7 @@ def natural_duration(frequency: float, scaled_lifetime: float) -> float:
 
 
 def full_natural_survivor_endpoint(event_time: float, frequency: float, scaled_lifetime: float) -> dict[str, float | str | bool]:
-    """One free shell corridor uses its own physical natural time, never a common clock."""
+    """One no-hit corridor uses its own physical natural time; an interior horizon returns an analysis checkpoint, not an event."""
     t = float(event_time)
     if t < 0 or not math.isfinite(t):
         raise ValueError("finite nonnegative event time required")
@@ -328,12 +339,15 @@ def full_natural_survivor_endpoint(event_time: float, frequency: float, scaled_l
         "end_time": t - T,
         "actual_time_drop": T,
         "hits_initial_boundary": False,
-        "disposition": EventDisposition.FULL_NATURAL_SURVIVOR.value,
+        "disposition": FULL_NATURAL_CHECKPOINT,
+        "checkpoint_kind": FULL_NATURAL_CHECKPOINT,
+        "physical_event_created": False,
+        "recursion_edges_added": 0,
     }
 
 
 def physical_time_telescope(times: Sequence[float]) -> dict[str, float]:
-    """Exact universal recursion identity: sum physical time drops = t0-tL."""
+    """Exact physical-time identity for any ordered event or checkpoint times."""
     t = tuple(float(x) for x in times)
     if len(t) < 1 or any((not math.isfinite(x) or x < 0) for x in t):
         raise ValueError("nonempty finite nonnegative physical times required")
@@ -367,10 +381,10 @@ def bounded_scale_full_survivor_steps_to_boundary(
     frequency_upper: float,
     scaled_lifetime: float,
 ) -> int:
-    """Number of full-natural free edges sufficient to force t=0.
+    """Number of bounded-scale no-hit checkpoint corridors sufficient to force t=0.
 
     If every survivor scale M_j<=Mbar then every requested duration is at least
-    c/Mbar^2. Therefore K=ceil(t0 Mbar^2/c) such edges cannot all remain interior.
+    c/Mbar^2. Therefore K=ceil(t0 Mbar^2/c) such checkpoint corridors cannot all remain interior.
     """
     t0 = float(initial_time)
     M = float(frequency_upper)
@@ -387,7 +401,7 @@ def trace_full_natural_survivors(
     survivor_frequencies: Sequence[float],
     scaled_lifetime: float,
 ) -> dict[str, object]:
-    """Finite prefix of consecutive free shell survivors with exact physical endpoints."""
+    """Compatibility helper for a finite prefix of no-hit physical corridors; interior endpoints are checkpoints."""
     t = float(initial_time)
     if t < 0 or not math.isfinite(t):
         raise ValueError("finite nonnegative initial time required")
@@ -406,6 +420,8 @@ def trace_full_natural_survivors(
     return {
         "times": tuple(times),
         "survivors_used": used,
+        "checkpoints_used": used,
+        "recursive_events_added": 0,
         "hits_initial_boundary": boundary,
         "final_time": t,
         "physical_time_telescope_residual": float(tel["residual"]),
@@ -494,14 +510,13 @@ def master_escape_dichotomy() -> dict[str, str]:
     """Analytic infinite-path consequence of the quotient architecture."""
     return {
         "statement": (
-            "after zero-charge relays and same-corridor full-natural service witnesses are quotiented, any infinite recursive path avoiding t=0 must either contain infinitely many named non-free physical owner events (first-hit/work/source/reuse owners or service owners not generated merely by a completed free corridor) "
-            "or have an unbounded-frequency tail of consecutive full-natural survivors"
+            "after zero-charge relays, same-corridor full-natural service witnesses, and full-natural horizon checkpoints are quotiented, any infinite recursive EVENT path avoiding t=0 must contain infinitely many genuine named non-free physical owner events; a no-hit checkpoint continuation is not an event path"
         ),
         "proof": (
-            "if named non-free physical owner events are finite, the tail is all free full-natural survivors; if their frequencies were bounded by Mbar, each tail edge would consume at least c/Mbar^2 physical time, forcing t=0 after finitely many edges"
+            "full-natural no-hit horizons add zero event vertices. Their real corridor times still telescope; a bounded-scale checkpoint continuation reaches t=0, while an UV-unbounded checkpoint continuation is a separate event-free PDE seam rather than recursive event depth"
         ),
         "remaining_physics": (
-            "named-owner recurrence must telescope through actual transfer/work, genuine source/service/reuse events, or genuinely bounded resources; full-natural own-scale service itself is already attached to the free corridor; UV survivor escape must be handled by physical scale/work routing such as the certified high-tail locality+natural-window seam"
+            "named-owner recurrence concerns only actual physical events. Separately, any UV-unbounded no-hit checkpoint continuation must be closed by a PDE theorem linking that continuation to actual tail work/dissipation or another native owner; hard-shell cover ascent alone supplies no such progress"
         ),
     }
 
@@ -525,14 +540,17 @@ def theorem_certificate() -> dict[str, object]:
         "full_natural_service_barrier": (
             "full_natural_own_scale_service is a positive witness carried by the already-completed natural corridor, not a second recursive owner event; canonical owner states reject this classification label as an owner"
         ),
-        "universal_time_identity": "sum_j (t_j-t_(j+1)) = t_0-t_L on actual physical event times",
-        "natural_survivor": "a free full-natural shell corridor at physical scale M consumes exactly c M^-2 backward time unless t=0 truncates it, in which case t=0 absorbs",
+        "full_natural_checkpoint_barrier": (
+            "a complete no-hit natural horizon consumes actual physical corridor time but is only an analysis checkpoint; RecursiveEventState rejects both the checkpoint label and the legacy full-natural-survivor disposition"
+        ),
+        "universal_time_identity": "sum_j (t_j-t_(j+1)) = t_0-t_L on any ordered physical event or checkpoint times; event counting is a separate ontology",
+        "natural_survivor": "a no-hit full-natural corridor consumes its theorem-supplied physical duration, but its horizon endpoint is an analysis checkpoint unless a first stop or t=0 occurs",
         "compact_scale_no_escape": (
-            "if a tail of full-natural survivors has M_j<=Mbar, every edge consumes at least c/Mbar^2; therefore ceil(t0 Mbar^2/c) such edges force the initial boundary"
+            "if a no-hit checkpoint continuation stays in a bounded corridor-scale range, its actual physical corridor durations have a positive lower bound and therefore force t=0; no recursive event count is used"
         ),
         "infinite_escape_dichotomy": master_escape_dichotomy()["statement"],
         "uv_obstruction": (
-            "time alone cannot exclude M_j growing geometrically: sum_j c M_j^-2 is finite; this is a real UV possibility, not a clock artifact, and must be paid/routed by the physical UV suppliers"
+            "checkpoint time alone cannot exclude UV-growing analysis scales with finite total physical duration; after checkpoint quotient this is an event-free PDE continuation obstruction, not an infinite recursive event path"
         ),
         "scale_progress": scale,
         "bellman_coordinate": (
@@ -546,7 +564,7 @@ def theorem_certificate() -> dict[str, object]:
         ),
         "boundary": "t=0 is absorbing",
         "scope": (
-            "this is a continuum master assembly/quotient theorem, not a global no-escape or Navier-Stokes regularity proof; it isolates the only remaining infinite-path mechanisms after relay/clock artifacts are removed"
+            "this is a continuum master assembly/quotient theorem, not a global no-escape or Navier-Stokes regularity proof; it separates genuine recursive event recurrence from the remaining event-free UV checkpoint continuation seam"
         ),
     }
 
@@ -561,6 +579,7 @@ class QuotientStress:
     supplier_scale_failures: int
     coefficient_obstruction_barrier_failures: int
     service_witness_barrier_failures: int
+    checkpoint_barrier_failures: int
     maximum_relay_owner_count: int
     minimum_uv_time_gap_to_naive_infinite_sum: float
 
@@ -568,7 +587,7 @@ class QuotientStress:
 def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
     rng = random.Random(seed)
     wom = wtime = wscale = 0.0
-    boundary_fail = supplier_fail = obstruction_fail = service_witness_fail = 0
+    boundary_fail = supplier_fail = obstruction_fail = service_witness_fail = checkpoint_fail = 0
     maxowners = 0
     uv_gap = math.inf
 
@@ -603,6 +622,32 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
     else:
         service_witness_fail += 1
         raise AssertionError("full-natural service witness crossed the canonical recursive-owner boundary")
+
+    try:
+        canonical_owner_bundle(
+            "full-natural checkpoint rereading",
+            1.0,
+            (FULL_NATURAL_CHECKPOINT,),
+        )
+    except TypeError:
+        pass
+    else:
+        checkpoint_fail += 1
+        raise AssertionError("analysis checkpoint crossed the canonical physical-owner boundary")
+
+    try:
+        RecursiveEventState(
+            0.5,
+            4.0,
+            "no-hit natural horizon",
+            (),
+            EventDisposition.FULL_NATURAL_SURVIVOR,
+        )
+    except TypeError:
+        pass
+    else:
+        checkpoint_fail += 1
+        raise AssertionError("legacy full-natural survivor disposition crossed into RecursiveEventState")
 
     routed = owner_bundle_from_energy_reentry(
         "actual positive q^2-weighted HH work",
@@ -658,7 +703,10 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
             traced = trace_full_natural_survivors(t0, ff, c)
             if not bool(traced["hits_initial_boundary"]):
                 boundary_fail += 1
-                raise AssertionError("bounded-scale full-survivor tail escaped t=0")
+                raise AssertionError("bounded-scale full-survivor checkpoint continuation escaped t=0")
+            if int(traced["recursive_events_added"]) != 0:
+                checkpoint_fail += 1
+                raise AssertionError("full-natural checkpoints manufactured recursive event depth")
 
         kind = rng.choice(suppliers_with_sampled_geometry)
         N = math.exp(rng.uniform(-3.0, 3.0))
@@ -682,7 +730,7 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         if not (uv > first and math.isfinite(uv)):
             raise AssertionError("UV geometric natural-time obstruction disappeared")
 
-    return QuotientStress(samples, wom, wtime, wscale, boundary_fail, supplier_fail, obstruction_fail, service_witness_fail, maxowners, uv_gap)
+    return QuotientStress(samples, wom, wtime, wscale, boundary_fail, supplier_fail, obstruction_fail, service_witness_fail, checkpoint_fail, maxowners, uv_gap)
 
 
 def main() -> None:
@@ -695,7 +743,32 @@ def main() -> None:
     cert = theorem_certificate()
     payload = {"certificate": cert, "stress": asdict(out)}
     (args.outdir / "continuum_master_event_quotient.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    md = f"""# Continuum master event quotient\n\nStatus: **{cert['status']}**.\n\nThe recursive state is now a physical event state, not a theorem-stack state: actual event time, supplied shell/carrier scale, named positive physical law, unsplit joint physical-owner set, and optional sidecars. Raw HH/interface coefficient obstructions remain outside this state until actual Q^2 energy/work reentry.  Likewise `full_natural_own_scale_service` is rejected as a separate owner classification because it is a positive witness on the already-completed natural corridor.  Same-law owner transformations are **zero-charge relays** and preserve one unsplit physical mass.  More general certified witness relays may change observable and units---for example actual pressure-pair work can force a critical shell mass---but they still create no second causal charge.  Inserting another theorem manifestation cannot manufacture causal entropy.\n\nThere is no synthetic master clock.  For actual backward event times, exactly\n\n`sum_j (t_j-t_(j+1)) = t_0-t_L`.\n\nOn a free full-natural critical-shell survivor at scale `M`, the physical drop is exactly `c M^-2`, unless the interval reaches `t=0`, which is absorbing.  Consequently, if a survivor tail stays below `Mbar`, every free edge consumes at least `c/Mbar^2`, and at most\n\n`ceil(t_0 Mbar^2/c)`\n\nfull-survivor edges can occur before the initial boundary is forced.  Hence after zero-charge relays and same-corridor full-natural service witnesses are quotiented, an infinite recursive path avoiding `t=0` has only two possibilities: **infinitely many genuine named non-free physical owner events**, or an **unbounded-frequency tail of full-natural survivors**.  The own-scale service produced by a completed full-natural corridor belongs to the second route as an attached witness; it is not a third event layer.\n\nThe second possibility is genuinely ultraviolet rather than a clock defect: for `M_j=M_0 r^j`, `r>1`,\n\n`sum_j c M_j^-2 = c M_0^-2/(1-r^-2) < infinity`.\n\nScale motion therefore remains supplier-specific.  Generated signed-good HH parents satisfy `3/5<N_next/N<5/8`; resolved-dissipation and resolved-pressure ancestors satisfy `N_next/N<=1/4`; hard tail satisfies `N_next/N>=2`; fresh SGS only supplies `N_next/N<=2` and **no directional progress**.  Generic shell service, material reuse and unresolved HH regeneration do not acquire synthetic scale progress.\n\nThe natural Bellman object is correspondingly typed, not scalar: physical time and actual log shell scale telescope kinematically; multiplicative physical-work cost, causal work-weighted reuse, `Xi`, and each genuinely globally bounded resource telescope only in their own native ledgers.  Own-scale service generated by a completed full-natural corridor is a same-interval witness: rereading or materially partitioning it adds no recursion depth.  Independent source/service/reuse events remain physical owners.  No service quantity is an additive reset.  Fresh/high-tail concentration `H_inf/H2` remains diagnostic and cannot be charged as causal entropy.\n\nStress: `{out.samples}` quotient/path states\n- worst zero-charge owner-mass residual: `{out.worst_owner_mass_residual:.3e}`\n- worst physical-time telescope residual: `{out.worst_time_telescope_residual:.3e}`\n- worst log-scale telescope residual: `{out.worst_scale_telescope_residual:.3e}`\n- bounded-scale boundary failures: `{out.bounded_scale_boundary_failures}`\n- supplier-scale failures: `{out.supplier_scale_failures}`\n- coefficient-obstruction barrier failures: `{out.coefficient_obstruction_barrier_failures}`\n- full-natural service-witness barrier failures: `{out.service_witness_barrier_failures}`\n- largest relayed joint-owner set sampled: `{out.maximum_relay_owner_count}`\n- minimum sampled UV tail-time beyond its first natural window: `{out.minimum_uv_time_gap_to_naive_infinite_sum:.3e}`\n\nThis theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes representation/clock recursion from the master and isolates the remaining physical task: telescope infinitely recurring named physical owner events, and close any UV-unbounded survivor route by the already certified or future physical UV work/service mechanisms.\n"""
+    md = f"""# Continuum master event quotient
+
+Status: **{cert['status']}**.
+
+The canonical recursive state contains physical event vertices only.  Raw HH/interface coefficient thresholds are interval locators until actual `Q^2` energy/work reentry; `full_natural_own_scale_service` is a same-corridor witness; and a complete no-hit natural horizon is an **analysis checkpoint**, not a recursive event.
+
+Physical time remains exact.  If checkpoint times are `t_0>=...>=t_L`, then `sum_j(t_j-t_(j+1))=t_0-t_L` whether or not any event occurs there.  A bounded-scale no-hit checkpoint continuation therefore reaches `t=0` after finite physical time.  An UV-growing checkpoint sequence can instead have finite total duration; after the quotient this is an event-free PDE continuation seam rather than an infinite recursive event path.
+
+Endpoint hard-shell rereading at a full-natural checkpoint is likewise witness geometry.  The companion checkpoint theorem keeps the incoming hard shell `M`, the actual corridor scale `A=3M/4`, and endpoint hard-shell candidates `A,2A` distinct.  Their ratios `3/4,3/2` do not supply directional progress and cannot be relabeled as the independently certified high-tail ratio `>=2`.
+
+Thus, after zero-charge relays, observer gauges, coefficient locators, same-event donor circulation, same-corridor service layers and natural-horizon checkpoints are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events.  Separately, an event-free UV checkpoint continuation remains to be closed by a PDE theorem using actual work/dissipation or another native mechanism.
+
+Stress: `{out.samples}` quotient/path states
+- worst zero-charge owner-mass residual: `{out.worst_owner_mass_residual:.3e}`
+- worst physical-time telescope residual: `{out.worst_time_telescope_residual:.3e}`
+- worst log-scale telescope residual: `{out.worst_scale_telescope_residual:.3e}`
+- bounded-scale boundary failures: `{out.bounded_scale_boundary_failures}`
+- supplier-scale failures: `{out.supplier_scale_failures}`
+- coefficient-obstruction barrier failures: `{out.coefficient_obstruction_barrier_failures}`
+- full-natural service-witness barrier failures: `{out.service_witness_barrier_failures}`
+- full-natural checkpoint barrier failures: `{out.checkpoint_barrier_failures}`
+- largest relayed joint-owner set sampled: `{out.maximum_relay_owner_count}`
+- minimum sampled UV checkpoint time beyond its first natural window: `{out.minimum_uv_time_gap_to_naive_infinite_sum:.3e}`
+
+This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It separates recursive physical-event topology from event-free PDE continuation and leaves the latter UV seam explicit.
+"""
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
 

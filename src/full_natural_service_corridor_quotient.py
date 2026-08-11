@@ -197,6 +197,11 @@ def endpoint_comparable_hard_shell_cover(
         "tie_rule": "retain_all_exact_maximizers_as_joint_witnesses; no causal priority is created",
         "new_causal_charge_created": False,
         "new_physical_time_edge_created": False,
+        "analysis_checkpoint_reregistration": True,
+        "scale_provenance": "same_checkpoint_two_shell_cover_not_physical_high_tail_supplier",
+        "directional_scale_progress_supplied": False,
+        "high_tail_supplier_admissible": False,
+        "cover_ascent_interpreted_as_dynamics": False,
     }
 
 
@@ -237,7 +242,8 @@ def theorem_certificate() -> dict[str, object]:
         "hard_shell_cover": f"transported support lies in ({lo:.12g}A,{hi:.12g}A) subset (A/2,2A); therefore max(mu_A,mu_2A)>=(2/3) A||Q_Au||^2 at the same endpoint",
         "scale_geometry": "with A=3M/4, the endpoint witness set lies at shell ratios 3/4 or 3/2 relative to the incoming shell; this is comparable geometry, not monotone progress",
         "ties": "equal hard-shell witnesses remain joint; no theorem-name or frequency-order priority is introduced",
-        "master_quotient": "a chain which only alternates full-natural corridors with their own-scale service/material witness layers is just a chain of full-natural physical corridors; bounded-scale such chains hit t=0 by physical time",
+        "master_quotient": "a full no-hit natural interval is one real physical corridor; service/material layers are same-corridor witnesses and the horizon endpoint is analysis re-registration, so zero physical event vertices are added unless a first stop or t=0 occurs",
+        "checkpoint_refinement": "endpoint hard-shell cover is state rereading at the same no-hit checkpoint; actual shell masses determine the unique/joint witness set downstream and no cover branch supplies directional or high-tail provenance",
         "scope": "this removes service-theorem depth from the master and closes the endpoint-service attachment seam; it does not terminate UV-unbounded full-survivor chains or genuine first-hit/work/source/reuse owner recurrence",
     }
 
@@ -360,7 +366,7 @@ Hence a master path which only inserts
 
 `full natural corridor -> own-scale service -> Moyal/material rereading -> endpoint survivor`
 
-has acquired only **one** physical recursion edge: the natural corridor itself.  All intermediate service/material theorem layers are same-corridor witness maps.  If such a corridor chain remains bounded in frequency, the existing physical-time telescope forces `t=0`; if it avoids `t=0`, its unresolved possibility is genuinely UV-unbounded rather than service-theorem recursion.
+has traversed one **real physical corridor**, while service/material theorem layers and the no-hit horizon endpoint add **zero physical event vertices**.  The endpoint is an analysis checkpoint.  If such checkpoint continuation remains bounded in corridor frequency, the existing physical-time telescope forces `t=0`; if it avoids `t=0`, its unresolved possibility is an event-free UV continuation seam rather than service-theorem or horizon recursion.
 
 Stress: `{out.samples}` corridor/service/material/endpoint-shell states
 - worst natural-time identity residual: `{out.worst_time_identity_residual:.3e}`
@@ -368,7 +374,7 @@ Stress: `{out.samples}` corridor/service/material/endpoint-shell states
 - minimum two-hard-shell cover margin: `{out.minimum_hard_shell_cover_margin:.3e}`
 - exact joint shell-witness ties retained: `{out.joint_tie_witnesses}`
 
-This theorem removes service-theorem depth from the continuum master.  It does not prove UV no-escape and does not terminate genuine first-hit, work, source or material-reuse owner recurrence.  No Navier--Stokes global-regularity claim is made.
+This theorem removes service-theorem depth from the continuum master; the checkpoint refinement also removes the no-hit horizon itself from event depth.  It does not prove UV no-escape and does not terminate genuine first-hit, work, source or material-reuse owner recurrence.  No Navier--Stokes global-regularity claim is made.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)

@@ -221,3 +221,42 @@ and full integration run `31448763557`.  The dedicated run passed `684` tests
 and `50,000` corridor/service/material/endpoint-shell states; the full integration
 passed the complete causal spine and `20,000` master episodes with worst margin
 `0.0`.  The base master identities retain their original certification above.
+
+### Candidate natural-horizon checkpoint extension
+
+The next quotient sharpens the distinction above without changing any certified
+physical-time identity.  A generic critical shell at hard-shell scale `M` runs its
+actual no-hit corridor at
+
+\[
+A=\frac34M,
+\qquad
+T_A=cA^{-2}.
+\]
+
+If a physical first stop occurs before the horizon, that stop is an event-facing
+object.  If the corridor reaches `t=0`, the initial surface absorbs.  If neither
+occurs and the entire `A`-natural interval survives, then real Navier--Stokes time
+`T_A` has elapsed but **no physical condition fired at the earlier endpoint**.
+The endpoint is therefore a theorem-selected analysis checkpoint, not a new
+recursive event vertex.
+
+The endpoint carrier may still be reread through the actual hard shells `A` and
+`2A`.  Relative to the incoming shell these have ratios `3/4` and `3/2`.  These are
+state/cover facts, not directional scale progress.  In particular the upper
+`3/2` cover witness is strictly below the independently certified high-tail ratio
+`>=2`, and the candidate production API marks it as inadmissible for high-tail
+ownership.
+
+After this extension, the master has two distinct infinite-path questions:
+
+1. an infinite recursive **event path**, which after all quotients can contain
+   only genuine named physical owner events;
+2. an event-free UV-growing **checkpoint continuation**, whose physical corridor
+   times may have a finite sum and which must be closed by a separate PDE theorem
+   if one is available.
+
+The second object is not declared harmless and is not declared high-tail by fiat.
+It is simply removed from artificial event depth.  Candidate implementation and
+GitHub certification are pending; the certified base and service-corridor
+extensions above retain their existing provenance.

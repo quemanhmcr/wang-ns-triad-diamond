@@ -87,6 +87,11 @@ def test_endpoint_smooth_carrier_has_two_comparable_hard_shell_witnesses():
     assert cover["guaranteed_max_hard_shell_critical_mass_lower"] == pytest.approx(2.0)
     assert cover["new_causal_charge_created"] is False
     assert cover["new_physical_time_edge_created"] is False
+    assert cover["analysis_checkpoint_reregistration"] is True
+    assert cover["scale_provenance"] == "same_checkpoint_two_shell_cover_not_physical_high_tail_supplier"
+    assert cover["directional_scale_progress_supplied"] is False
+    assert cover["high_tail_supplier_admissible"] is False
+    assert cover["cover_ascent_interpreted_as_dynamics"] is False
 
 
 def test_endpoint_hard_shell_exact_tie_stays_joint():
@@ -117,3 +122,5 @@ def test_certificate_removes_service_theorem_depth_without_uv_overclaim():
     assert "zero causal charge and zero recursion depth" in cert["material_ontology"]
     assert "3/4 or 3/2" in cert["scale_geometry"]
     assert "does not terminate UV-unbounded" in cert["scope"]
+    assert "zero physical event vertices" in cert["master_quotient"]
+    assert "actual shell masses determine" in cert["checkpoint_refinement"]

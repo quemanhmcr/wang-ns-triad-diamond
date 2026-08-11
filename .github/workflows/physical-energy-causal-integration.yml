@@ -27,6 +27,7 @@ on:
       - 'src/high_tail_ultraviolet_locality.py'
       - 'src/high_tail_natural_window_reentry.py'
       - 'src/full_natural_service_corridor_quotient.py'
+      - 'src/full_natural_checkpoint_quotient.py'
       - 'src/continuum_master_event_quotient.py'
       - 'src/complex_young_parent_marking.py'
       - 'src/dual_gaussian_root_registration.py'
@@ -78,6 +79,7 @@ jobs:
       - run: python -m src.high_strain_critical_carrier_reentry --samples 50000 --outdir results-integration/high-strain-critical-carrier-reentry
       - run: python -m src.critical_shell_service_reentry --samples 50000 --outdir results-integration/critical-shell-service-reentry
       - run: python -m src.full_natural_service_corridor_quotient --samples 50000 --outdir results-integration/full-natural-service-corridor-quotient
+      - run: python -m src.full_natural_checkpoint_quotient --samples 50000 --outdir results-integration/full-natural-checkpoint-quotient
       - run: python -m src.material_label_carrier_quotient --samples 50000 --outdir results-integration/material-label-carrier-quotient
       - run: python -m src.objective_source_routing_compiler --samples 50000 --outdir results-integration/objective-source-routing-compiler
       - run: python -m src.objective_pressure_pair_atomization --samples 50000 --outdir results-integration/objective-pressure-pair-atomization

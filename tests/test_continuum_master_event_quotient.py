@@ -92,6 +92,9 @@ def test_full_natural_survivor_uses_its_own_physical_duration_and_t0_truncates()
     assert out["requested_duration"] == pytest.approx(0.25)
     assert out["end_time"] == pytest.approx(0.75)
     assert not out["hits_initial_boundary"]
+    assert out["disposition"] == "full_natural_analysis_checkpoint"
+    assert out["physical_event_created"] is False
+    assert out["recursion_edges_added"] == 0
     root = full_natural_survivor_endpoint(0.2, 2.0, 1.0)
     assert root["end_time"] == 0.0
     assert root["hits_initial_boundary"]
@@ -108,6 +111,7 @@ def test_bounded_scale_full_survivor_tail_must_hit_initial_boundary():
     assert out["hits_initial_boundary"]
     assert out["final_time"] == 0.0
     assert out["physical_time_telescope_residual"] == pytest.approx(0.0, abs=1e-14)
+    assert out["recursive_events_added"] == 0
 
 
 def test_uv_geometric_survivors_have_finite_total_physical_natural_time():
@@ -137,13 +141,14 @@ def test_concentration_coordinates_cannot_be_promoted_to_causal_entropy():
 def test_certificate_states_exact_remaining_escape_dichotomy_without_regularity_claim():
     cert = theorem_certificate()
     assert cert["status"] == STATUS
-    assert "same-corridor full-natural service witnesses are quotiented" in cert["infinite_escape_dichotomy"]
-    assert "service owners not generated merely by a completed free corridor" in cert["infinite_escape_dichotomy"]
-    assert "unbounded-frequency" in cert["infinite_escape_dichotomy"]
+    assert "full-natural horizon checkpoints are quotiented" in cert["infinite_escape_dichotomy"]
+    assert "infinite recursive EVENT path" in cert["infinite_escape_dichotomy"]
+    assert "event-free PDE" in cert["uv_obstruction"]
     assert "not a global no-escape" in cert["scope"]
     assert "not causal Shannon/Renyi action" in cert["diagnostic_separation"]
     dich = master_escape_dichotomy()
-    assert "bounded by Mbar" in dich["proof"]
+    assert "bounded-scale checkpoint continuation" in dich["proof"]
+    assert "zero event vertices" in dich["proof"]
 
 
 def test_unrouted_coefficient_obstruction_cannot_enter_canonical_master_state():
@@ -203,4 +208,23 @@ def test_full_natural_service_witness_cannot_be_promoted_to_separate_owner_event
             "completed full-natural service law",
             1.0,
             (FULL_NATURAL_SERVICE_WITNESS,),
+        )
+
+
+def test_full_natural_checkpoint_cannot_enter_recursive_event_state_or_owner_bundle():
+    from src.full_natural_checkpoint_quotient import FULL_NATURAL_CHECKPOINT
+
+    with pytest.raises(TypeError, match="analysis re-registration"):
+        canonical_owner_bundle(
+            "no-hit horizon checkpoint",
+            1.0,
+            (FULL_NATURAL_CHECKPOINT,),
+        )
+    with pytest.raises(TypeError, match="analysis checkpoint"):
+        RecursiveEventState(
+            0.5,
+            4.0,
+            "no-hit horizon",
+            (),
+            EventDisposition.FULL_NATURAL_SURVIVOR,
         )
