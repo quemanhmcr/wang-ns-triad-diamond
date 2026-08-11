@@ -254,11 +254,12 @@ def checkpoint_reregistration(
 
 @dataclass(frozen=True)
 class FullNaturalCheckpointTransition:
-    """One state-certified checkpoint continuation, with no invented event.
+    """One state-certified diagnostic changing-scale checkpoint comparison.
 
     The source endpoint shell masses select the actual unique/joint witness set.
-    The successor producer must then begin at exactly that endpoint state and must
-    carry one selected hard-shell frequency and critical mass without rebinding.
+    If an analyst evaluates a fresh producer there, it must begin at that exact
+    endpoint and carry the selected frequency/mass without rebinding. This record
+    does not authorize replacement of the canonical same carrier.
     """
 
     source_checkpoint: FullNaturalCheckpoint
@@ -308,7 +309,7 @@ def checkpoint_transition_from_full_natural_outcome(
     endpoint_hard_shell_critical_masses: Sequence[float],
     successor_outcome: dict[str, object],
 ) -> FullNaturalCheckpointTransition:
-    """Build the only admissible no-hit successor from the actual endpoint state."""
+    """Build a provenance-safe diagnostic producer comparison at the endpoint."""
     masses = tuple(float(x) for x in endpoint_hard_shell_critical_masses)
     if len(masses) != 2:
         raise ValueError("two endpoint hard-shell masses are required for a checkpoint transition")
@@ -330,11 +331,11 @@ def checkpoint_transition_from_full_natural_outcome(
 def checkpoint_chain_ledger(
     chain: Sequence[FullNaturalCheckpoint | FullNaturalCheckpointTransition],
 ) -> dict[str, object]:
-    """Telescope native PDE time only through state-certified transitions.
+    """Telescope a diagnostic changing-scale comparison without making lineage.
 
-    A single checkpoint is a complete corridor record.  Two or more bare
-    checkpoints are deliberately rejected: time contiguity alone does not prove
-    that the next parent shell and mass came from the preceding endpoint state.
+    A single checkpoint is a complete corridor record. Two or more bare records are
+    rejected because time contiguity does not prove state provenance. Even a typed
+    comparison remains noncanonical under same-carrier continuation.
     """
     items = tuple(chain)
     if not items:
@@ -381,14 +382,16 @@ def geometric_uv_checkpoint_time(
     scaled_lifetime: float,
     parent_scale_ratio: float = UPPER_COVER_RATIO,
 ) -> float:
-    """Finite time of a hypothetical repeated upper-cover checkpoint reading sequence.
+    """Finite sum for hypothetical independent changing-scale producers.
 
-    This intentionally preserves the diagnostic counterexample to time-only reasoning without calling the reading sequence a recursive event chain or a physical scale lineage.  Parent shells M_j=M_0 r^j use actual corridor scale A_j=3M_j/4,
-    so the total checkpoint time is
+    Parent shells M_j=M_0 r^j use corridor scale A_j=3M_j/4, so the
+    algebraic changing-scale total is
 
         sum c/A_j^2 = c/( (3M_0/4)^2 ) / (1-r^-2).
 
-    The formula proves only that observer-inserted theorem horizons can have a finite total physical duration when their diagnostic reading scales grow.  Under same-carrier continuation this does not define a physical lineage; genuine UV ownership still requires an independent physical event theorem.
+    This is an anti-theorem against time-only reasoning for independently certified
+    changing-scale physical producers. It is not the duration of observer cuts or
+    shell readings on one fixed carrier, whose A and c remain fixed.
     """
     M = float(initial_parent_frequency)
     c = float(scaled_lifetime)
@@ -400,7 +403,7 @@ def geometric_uv_checkpoint_time(
     denominator = -math.expm1(-2.0 * math.log(r))
     total = first / denominator
     if first <= 0 or denominator <= 0 or not math.isfinite(total):
-        raise ValueError("UV checkpoint time is not positive and finitely representable")
+        raise ValueError("changing-scale diagnostic time is not positive and finitely representable")
     return total
 
 
@@ -411,11 +414,11 @@ def theorem_certificate() -> dict[str, object]:
         "two_scales": "incoming hard shell is M while the actual corridor clock is A=3M/4; endpoint hard-shell witnesses are A and 2A and must not be conflated with the corridor scale",
         "unit_covariance": "the corridor carries cA^-2 as native local elapsed time and every dimensional certificate comparison is relative, with no max(1,...) observer-unit floor; the global endpoint clock is diagnostic and may round to the terminal clock in deep UV",
         "cover_geometry": "endpoint witness ratios 3/4 and 3/2 are exact two-shell cover geometry and carry analysis-checkpoint provenance, not physical high-tail provenance; on the same incoming-shell reference 3/2 is also below 2, but the type distinction is primary",
-        "transition_provenance": "a checkpoint successor is admissible only through a typed transition carrying the actual endpoint hard-shell masses, the state-selected unique/joint witness set, the exact endpoint time token, and the same witnessed frequency/mass into the next producer",
+        "transition_provenance": "a diagnostic changing-scale producer comparison must carry actual endpoint masses, the state-selected unique/joint witness set, the exact endpoint token and the same frequency/mass; even then it is not canonical same-carrier lineage",
         "master_barrier": "full_natural_analysis_checkpoint and the legacy full-natural-survivor disposition are forbidden from RecursiveEventState/PhysicalOwnerBundle as recursive physical causes",
-        "time_semantics": "typed checkpoint transitions telescope native local physical corridor times while adding zero physical event vertices, zero recursive event depth and zero causal charges; two bare time-contiguous checkpoints are not a certified chain",
+        "time_semantics": "typed diagnostic checkpoint comparisons telescope native local corridor times while adding zero physical event vertices or charges; genuine fixed-A,c same-carrier windows have one positive duration cA^-2 and cannot Zeno before t=0",
         "continuation_policy": "the checkpoint hard-shell witness set is state sidecar information only; the canonical event search continues the same event-anchored smooth carrier with the same terminal coefficient and cumulative native first-hit monitors until a new physical stop or t=0",
-        "remaining_uv": "a geometrically UV-growing sequence of checkpoint state readings can have finite total natural-window duration and therefore remains a valid counterexample to physical-time-only reasoning; under the same-carrier continuation policy it is not a canonical physical lineage or independent master obstruction",
+        "remaining_uv": "a finite geometric time sum remains a counterexample for independently certified changing-scale physical producers; it cannot be attached to arbitrary checkpoint readings on one fixed carrier, and genuine UV progression still requires actual tail work/dissipation or another physical event",
         "scope": "this removes natural-horizon segmentation, cover ascent and checkpoint re-hardening from recursive event topology; it does not telescope infinitely recurring genuine physical owners and does not prove Navier-Stokes regularity",
     }
 
@@ -530,7 +533,7 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> CheckpointStress:
         uv = geometric_uv_checkpoint_time(M, c, UPPER_COVER_RATIO)
         uv_gap = min(uv_gap, uv - T)
         if not (uv > T and math.isfinite(uv)):
-            raise AssertionError("UV checkpoint time obstruction disappeared")
+            raise AssertionError("changing-scale finite-time anti-theorem disappeared")
     return CheckpointStress(samples, wt, max_ratio, event_fail, high_tail_fail, uv_gap)
 
 
@@ -556,16 +559,16 @@ is genuine Navier--Stokes evolution, but its earlier endpoint is only the theore
 
 At that checkpoint the surviving smooth carrier may be reread through the exact hard shells `A` and `2A`, giving ratios `3/4` and `3/2` relative to the incoming shell.  This is state/cover geometry with checkpoint provenance, not a physical high-tail supplier.  On the same incoming-shell reference the upper ratio also obeys `3/2<2`; that numerical check is secondary to the provenance barrier.  Cover ascent is never promoted to UV dynamics or high-tail ownership.
 
-A chain of such checkpoint readings telescopes its native local physical corridor time while adding no recursive event depth.  It is admitted only through typed transitions carrying the actual endpoint hard-shell masses and reusing one state-selected frequency/mass in the next producer at the exact endpoint time token; bare checkpoints that merely have close global clocks do not form a chain.  A hypothetical repeated upper-cover reading sequence can still have finite total natural-window duration, which remains a useful counterexample to time-only reasoning.  Under the same-carrier continuation policy, however, no-event checkpoint readings do not replace the smooth carrier or reset its cumulative first-hit monitors, so that sequence is not a canonical physical lineage.  Genuine UV progression still requires an independently certified physical event such as actual tail dissipation/work; no synthetic scale tax is introduced.
+A typed changing-scale checkpoint comparison may telescope native local corridor times for diagnostic purposes, but it remains noncanonical: endpoint shell rereading does not replace the same smooth carrier. Bare checkpoints with merely close global clocks are rejected. The familiar finite geometric parabolic-time sum applies only if independently certified physical producers really change scale; it is not a duration ledger for arbitrary observer cuts. For fixed `Q_A`, `A` and `c`, every genuine natural window has the same positive duration `cA^-2` and cannot Zeno before `t=0`. Genuine UV progression still requires an actual physical event such as certified tail dissipation/work; no synthetic scale tax is introduced.
 
 Stress: `{out.samples}` checkpoint/corridor/cover states
 - worst physical-time telescope residual: `{out.worst_time_identity_residual:.3e}`
 - maximum endpoint cover ratio sampled: `{out.maximum_cover_ratio:.12g}`
 - checkpoint-to-event failures: `{out.checkpoint_event_failures}`
 - cover-to-high-tail misclassification failures: `{out.high_tail_misclassification_failures}`
-- minimum UV checkpoint time beyond the first corridor: `{out.minimum_uv_time_beyond_first_corridor:.3e}`
+- minimum diagnostic changing-scale time beyond the first corridor: `{out.minimum_uv_time_beyond_first_corridor:.3e}`
 
-This theorem removes natural-horizon segmentation and no-event checkpoint re-hardening from recursive event depth.  A UV-growing sequence of checkpoint state readings remains a useful diagnostic counterexample to time-only reasoning, but it is not a canonical physical lineage while the same event-anchored carrier continues.  Genuine physical-owner recurrence remains open, and no Navier--Stokes global-regularity claim is made.
+This theorem removes natural-horizon segmentation and no-event checkpoint re-hardening from recursive event depth. Arbitrary cuts carry no invented duration; fixed-carrier natural windows carry their actual positive duration. Changing-scale geometric sums remain relevant only to real changing-scale physical producers. Genuine physical-owner recurrence remains open, and no Navier--Stokes global-regularity claim is made.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)

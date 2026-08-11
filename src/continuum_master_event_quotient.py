@@ -13,6 +13,8 @@ from src.high_strain_resolved_ancestor import TRANSPORTER_RADIUS
 from src.full_natural_checkpoint_quotient import FULL_NATURAL_CHECKPOINT, FullNaturalCheckpoint
 from src.full_natural_service_corridor_quotient import FULL_NATURAL_SERVICE_WITNESS
 from src.same_carrier_checkpoint_segmentation_quotient import (
+    SameCarrierCheckpointPathCertificate,
+    SameCarrierMonitorSegment,
     SameCarrierProvenance,
     checkpoint_continuation_policy,
 )
@@ -434,11 +436,11 @@ def trace_full_natural_survivors(
 
 
 def geometric_uv_natural_time_sum(initial_frequency: float, scaled_lifetime: float, scale_ratio: float = 2.0) -> float:
-    """Total requested natural time of M_j=M0*r^j, r>1.
+    """Total time of independently certified scales M_j=M0*r^j, r>1.
 
-    This finite geometric sum is the precise reason physical time alone cannot
-    rule out UV Zeno escape; one needs the certified physical high-tail/work or
-    other UV routing there.
+    The finite sum warns that time alone cannot terminate a genuinely
+    changing-scale physical path. It is not a duration assignment for arbitrary
+    observer cuts on one fixed carrier.
     """
     M = float(initial_frequency)
     c = float(scaled_lifetime)
@@ -518,7 +520,7 @@ def master_escape_dichotomy() -> dict[str, str]:
             "after zero-charge relays, same-corridor service witnesses, natural-horizon checkpoints, and same-carrier checkpoint segmentation are quotiented, any infinite recursive EVENT path avoiding t=0 must contain infinitely many genuine named non-free physical owner events"
         ),
         "proof": (
-            "a no-event natural horizon cannot replace the event-anchored smooth carrier or reset its cumulative strain/coefficient first-hit monitors. Inserting checkpoints therefore leaves the same first stop. At an interior accumulation of such horizons, continuity/AC gives either the existing first-stop face at the limit or continuation of the same carrier across the accumulation; if no stop occurs before t=0, the initial boundary absorbs"
+            "a no-event natural horizon cannot replace the event-anchored smooth carrier or reset its cumulative strain/coefficient first-hit monitors. Genuine fixed-A,c natural windows have one positive duration and cannot accumulate before t=0. Arbitrary observer cuts carry no window duration; a checkpoint must be bound to an actual no-hit restriction of the exact event/carrier/dual/PDE path, whose gluing leaves the same first stop, and at an interior cut accumulation the actual no-earlier-hit path plus a matching smooth-extension token gives either an endpoint face or continuation of the same carrier"
         ),
         "remaining_physics": (
             "the remaining infinite-path problem is recurrence of genuine physical owner events and must telescope through their native work/source/service/reuse laws. Actual high-tail dissipation/work remains a genuine event route when its independent physical hypotheses are met; checkpoint re-hardening cannot manufacture that provenance"
@@ -549,16 +551,16 @@ def theorem_certificate() -> dict[str, object]:
             "a complete no-hit natural horizon consumes actual physical corridor time but is only an analysis checkpoint; RecursiveEventState rejects both the checkpoint label and the legacy full-natural-survivor disposition"
         ),
         "same_carrier_checkpoint_segmentation": (
-            "a no-event checkpoint cannot replace the event-anchored smooth carrier or reset its terminal coefficient, cumulative strain action, or cumulative coefficient-impulse monitors; hard-shell readings there are state sidecars until a new physical event hardens a role"
+            "a no-event checkpoint cannot replace the event-anchored smooth carrier or reset its terminal coefficient, cumulative strain action, or cumulative complex coefficient-impulse monitors; a bare checkpoint is insufficient, because an actual no-hit cumulative restriction ending at its exact native duration and matching the expected event/carrier/terminal-dual/PDE trajectory is required; hard-shell readings remain sidecars until a new physical event hardens a role"
         ),
         "universal_time_identity": "sum_j (t_j-t_(j+1)) = t_0-t_L on any ordered physical event or checkpoint times; event counting is a separate ontology",
         "natural_survivor": "a no-hit full-natural corridor consumes its theorem-supplied physical duration, but its horizon endpoint is an analysis checkpoint unless a first stop or t=0 occurs",
         "compact_scale_no_escape": (
-            "bounded-scale checkpoint segmentation still reaches t=0 by physical time, but the stronger same-carrier quotient makes checkpoint scale paths noncanonical regardless of boundedness: checkpoints do not restart the causal carrier"
+            "for the same fixed carrier every genuine cA^-2 window has positive fixed duration and reaches t=0 after finitely many complete windows; arbitrary checkpoint cuts are duration-free restrictions and checkpoint scale readings are noncanonical"
         ),
         "infinite_escape_dichotomy": master_escape_dichotomy()["statement"],
         "uv_obstruction": (
-            "time alone still allows a geometrically UV-growing sequence of checkpoint state readings with finite total natural-window duration, but after the same-carrier segmentation quotient that sequence is not a canonical physical lineage or master obstruction; genuine UV progression requires independently certified physical tail work/dissipation provenance"
+            "time alone still allows an independently certified geometrically changing-scale physical path to have finite parabolic duration; that anti-theorem cannot attach natural-window durations to checkpoint state readings, which are not a canonical physical lineage, and genuine UV progression requires physical tail work/dissipation or another event"
         ),
         "scale_progress": scale,
         "bellman_coordinate": (
@@ -693,7 +695,20 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         scaled_lifetime=1.0,
         terminal_coefficient=1.0 + 0.0j,
     )
-    policy = checkpoint_continuation_policy(checkpoint_record, provenance=provenance)
+    checkpoint_path = SameCarrierCheckpointPathCertificate(
+        checkpoint_record,
+        (
+            SameCarrierMonitorSegment(
+                provenance=provenance,
+                state_tokens=(provenance.terminal_state_token, "master-stress-checkpoint-state"),
+                elapsed_times=(0.0, checkpoint_record.physical_time_drop),
+                strain_action=(0.0, 0.0),
+                residual_impulse=(0.0j, 0.0j),
+                hh_impulse=(0.0j, 0.0j),
+            ),
+        ),
+    )
+    policy = checkpoint_continuation_policy(checkpoint_path, provenance=provenance)
     if bool(policy["carrier_replacement_authorized"]) or bool(policy["monitor_reset_authorized"]):
         segmentation_fail += 1
         raise AssertionError("full-natural checkpoint authorized a same-carrier restart/reset")
@@ -703,7 +718,7 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         {"request_monitor_reset": True},
     ):
         try:
-            checkpoint_continuation_policy(checkpoint_record, provenance=provenance, **request)
+            checkpoint_continuation_policy(checkpoint_path, provenance=provenance, **request)
         except TypeError:
             pass
         else:
@@ -810,11 +825,11 @@ Status: **{cert['status']}**.
 
 The canonical recursive state contains physical event vertices only.  Raw HH/interface coefficient thresholds are interval locators until actual `Q^2` energy/work reentry; `full_natural_own_scale_service` is a same-corridor witness; and a complete no-hit natural horizon is an **analysis checkpoint**, not a recursive event.
 
-Physical time remains exact.  If checkpoint times are `t_0>=...>=t_L`, then `sum_j(t_j-t_(j+1))=t_0-t_L` whether or not any event occurs there.  More strongly, a no-event natural horizon does not restart the event-anchored smooth carrier: its fixed terminal coefficient and cumulative native first-hit monitors continue across every inserted checkpoint.  Checkpoint segmentation therefore cannot manufacture a second continuation branch.
+Physical time remains exact. If checkpoint times are `t_0>=...>=t_L`, then `sum_j(t_j-t_(j+1))=t_0-t_L`. More strongly, a no-event horizon does not restart the event-anchored smooth carrier: its exact event/carrier/terminal-dual/PDE-path provenance, terminal coefficient and cumulative complex first-hit monitors continue. Genuine fixed-carrier natural windows have one positive `cA^-2` duration; arbitrary observer cuts have no service duration.
 
 Endpoint hard-shell rereading at a full-natural checkpoint is likewise witness geometry.  The companion checkpoint theorem keeps the incoming hard shell `M`, the actual corridor scale `A=3M/4`, and endpoint hard-shell candidates `A,2A` distinct.  Their ratios `3/4,3/2` do not supply directional progress and, without a new physical event, those hard-shell readings do not replace the smooth carrier or define a causal scale lineage.
 
-Thus, after zero-charge relays, observer gauges, coefficient locators, same-event donor circulation, same-corridor service layers, natural-horizon checkpoints and checkpoint segmentation are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events.  A geometrically UV-growing sequence obtained only by checkpoint rereading remains a diagnostic state-reading sequence, not a master lineage.  Genuine UV progression still enters only through independently certified physical tail work/dissipation or another actual physical event.
+Thus, after zero-charge relays, observer gauges, coefficient locators, same-event donor circulation, same-corridor service layers, natural-horizon checkpoints and exact same-path segmentation are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events. A geometric finite-time sum still warns about genuinely changing-scale physical producers, but it cannot be manufactured from duration-free checkpoint readings. Genuine UV progression enters only through certified tail work/dissipation or another physical event.
 
 Stress: `{out.samples}` quotient/path states
 - worst zero-charge owner-mass residual: `{out.worst_owner_mass_residual:.3e}`
@@ -827,7 +842,7 @@ Stress: `{out.samples}` quotient/path states
 - full-natural checkpoint barrier failures: `{out.checkpoint_barrier_failures}`
 - same-carrier checkpoint-segmentation barrier failures: `{out.checkpoint_segmentation_barrier_failures}`
 - largest relayed joint-owner set sampled: `{out.maximum_relay_owner_count}`
-- minimum sampled UV checkpoint time beyond its first natural window: `{out.minimum_uv_time_gap_to_naive_infinite_sum:.3e}`
+- minimum sampled changing-scale geometric time beyond its first window: `{out.minimum_uv_time_gap_to_naive_infinite_sum:.3e}`
 
 This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes no-event checkpoint segmentation from physical lineage; termination of infinitely recurring genuine physical owner events remains the open master problem.
 """

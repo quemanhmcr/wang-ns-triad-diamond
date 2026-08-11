@@ -2312,29 +2312,35 @@ This refinement was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e44
 checkpoint seam necessarily generates high-tail work.  It only removes the
 analyst's natural-horizon segmentation from physical event depth.
 
-## Candidate refinement: checkpoint Zeno is segmentation of one carrier, not a second escape route
+## Audited candidate: exact same-path cuts are not a second escape route
 
 The certified checkpoint theorem above correctly removed natural-horizon endpoints
-from event depth, but still left an event-free UV checkpoint sequence as a separate
-continuation seam.  The same-carrier segmentation candidate uses the already
-certified relay structure to sharpen that statement.
+from event depth. The same-carrier audit sharpens the remaining topology without
+turning a repeated label or close floating data into physical identity.
 
-A natural service horizon is not a lifetime of `Q_A`.  In the absence of a new
-physical stop, the event-anchored smooth carrier, terminal dual and cumulative
-native monitors continue across the checkpoint.  Inserting or deleting checkpoint
-cuts cannot change the first physical stop.  In particular the checkpoint cannot
-reset `K_A[s,t]`, the terminal coefficient, or the cumulative complex impulses
-`I_R[s,t]`, `I_HH[s,t]`; the magnitudes of the latter are not segment-additive.
+A natural service horizon is not a lifetime of `Q_A`. In the absence of a new
+physical stop, continuation keeps exact event, carrier, terminal-dual/coefficient,
+scale/lifetime, terminal-state and PDE-trajectory provenance. Segments glue only
+when shared state/time tokens, `K_A[s,t]`, and the actual complex impulses
+`I_R[s,t]`, `I_HH[s,t]` agree exactly. Their magnitudes are derived and are not
+segment-additive work.
 
-Thus repeated hard-shell rereading at `A` or `2A` creates a diagnostic sequence of
-state observations, not a causal scale lineage.  If infinitely many such cuts
-accumulate at an interior smooth time, continuity/absolute continuity yields an
-existing first-stop face at the limit or continuation of the same carrier through
-the accumulation.  If the maximal no-hit continuation reaches `t=0`, the initial
-boundary absorbs.
+A typed checkpoint record is not enough merely because its `t`, `A`, and `c`
+match. Sidecar rereading is bound to the cumulative no-hit restriction of that
+same PDE path ending at the checkpoint's exact native duration, and the bound
+provenance must equal the master event/carrier/dual/trajectory provenance.
 
-Actual high-tail dissipation/work remains a genuine UV route whenever its own
-physical hypotheses are met.  The candidate removes only UV motion manufactured by
-no-event re-hardening.  If certified, the remaining global master frontier is
-therefore genuine physical-owner recurrence, not a second checkpoint-Zeno branch.
-No global-regularity conclusion is asserted.
+Two notions of checkpoint must be separated. Genuine fixed-carrier natural windows
+all have the same positive duration `cA^-2`, so only finitely many fit before
+`t=0`; they cannot Zeno at an interior time. Arbitrary plotting/observer cuts may
+accumulate but carry no service-window duration. At such a cut accumulation,
+endpoint scalars alone are insufficient: the actual no-earlier-hit prelimit path
+and a matching open smooth-PDE token yield either an exact endpoint face or
+continuation. An overshot face proves an earlier stop and is rejected.
+
+Repeated hard-shell rereading at `A` or `2A` is a duration-free state observation,
+not causal scale lineage. The finite geometric parabolic-time sum remains relevant
+only when independently certified physical events really change scale. Actual
+high-tail dissipation/work remains a genuine UV route under its own hypotheses.
+The global frontier is genuine physical-owner recurrence; no global-regularity
+conclusion is asserted.

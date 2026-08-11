@@ -104,8 +104,9 @@ still obeys the exact physical identity
 \sum_j(t_j-t_{j+1})=t_0-t_L.
 \]
 
-Time contiguity by itself is insufficient.  Between consecutive corridors the
-transition must carry
+Time contiguity by itself is insufficient. If an analyst makes a diagnostic
+changing-scale producer comparison between consecutive corridors, its transition
+must carry
 
 - the two actual endpoint hard-shell critical masses;
 - the unique/joint maximizing witness set determined by those masses;
@@ -114,11 +115,10 @@ transition must carry
   parent-shell input;
 - the same fixed scaled lifetime `c`.
 
-A list of bare checkpoints is therefore not a certified chain, even if its global
-clock fields happen to be close.  The typed transition replays endpoint
-re-registration and rejects an unrelated shell, a losing cover branch, or a
-rebound mass.  For an exact tie both witnesses remain in the transition record;
-following either state branch does not declare a causal primary.
+A list of bare checkpoints is therefore not a certified comparison, even if its
+global clocks are close. The typed record rejects an unrelated shell, losing cover
+branch, or rebound mass. Even a valid record is diagnostic and does not replace the
+canonical same carrier without a physical event.
 
 The quotient then assigns
 
@@ -127,20 +127,20 @@ The quotient then assigns
 - causal charges added: `0`;
 - hard-shell rereading: analysis witness only.
 
-Thus the native local time edges telescope, while the absolute endpoint-clock
-residual remains only a numerical diagnostic.  Bounded-scale checkpoint
-continuation still reaches `t=0` by physical time, but it is not a chain of
-recursive physical events.
+Thus native local time edges telescope inside this diagnostic comparison, while
+the absolute endpoint-clock residual remains numerical only. Canonical same-carrier
+continuation instead keeps fixed `A,c`; its genuine natural windows have one
+positive duration and are not a recursive event chain.
 
-## 4. The geometric UV sum survives only as a diagnostic anti-theorem
+## 4. The geometric UV sum belongs to changing-scale producers, not observer cuts
 
-A hypothetical repeated upper-cover **reading** sequence
+A hypothetical family of independently certified changing-scale producers
 
 \[
 M_j=M_0(3/2)^j
 \]
 
-has corridor scales `A_j=3M_j/4`, so
+with corridor scales `A_j=3M_j/4` obeys
 
 \[
 \sum_{j\ge0}cA_j^{-2}
@@ -149,15 +149,15 @@ has corridor scales `A_j=3M_j/4`, so
 <\infty.
 \]
 
-This remains a valid warning that **physical time alone** cannot distinguish an
-observer-generated scale sequence from real UV dynamics.  The candidate
-same-carrier continuation theorem supplies the missing type information: because
-no physical event fired at the checkpoint, the hard-shell reading does not replace
-the event-anchored carrier and does not reset its cumulative first-hit monitors.
+This remains a valid warning that **physical time alone** cannot terminate a real
+changing-scale physical path. It is not a duration formula for an
+observer-generated reading sequence. Under same-carrier continuation, `A` and `c`
+remain fixed, so every genuine natural window has the same positive duration
+`cA^-2`; arbitrary plotting/checkpoint cuts carry no service-window duration.
 
-Hence the geometric sequence above is a diagnostic state-reading construction,
-not an independent PDE continuation lineage.  Actual high-tail dissipation/work
-remains fully physical when its own independently certified hypotheses are met.
+The endpoint hard-shell reading does not replace the event-anchored carrier or
+reset its cumulative path. Actual high-tail dissipation/work remains physical when
+its own independently certified hypotheses create a changing-scale event.
 
 ## 5. Fail-closed master semantics
 
@@ -177,7 +177,7 @@ until a new physical first stop/owner event actually occurs.
 
 ## Scope
 
-The base theorem removes natural-horizon event depth and two-shell cover ascent.  The current candidate strengthens this: checkpoint hard-shell readings remain state sidecars while the same event-anchored smooth carrier and cumulative first-hit monitors continue.  Thus a UV-growing checkpoint-reading sequence is not a canonical physical lineage.  The candidate still does not telescope infinitely recurring genuine physical owners and does not prove 3D Navier--Stokes global regularity.
+The base theorem removes natural-horizon event depth and two-shell cover ascent. The current candidate strengthens this: checkpoint hard-shell readings remain duration-free state sidecars while exact event/carrier/terminal-dual/PDE-path provenance and cumulative complex monitors continue. Fixed-carrier natural windows retain their positive physical duration. The candidate still does not telescope infinitely recurring genuine physical owners and does not prove 3D Navier--Stokes global regularity.
 
 ## 6. Endpoint witness selection is performed by the state, not the analyst
 
@@ -196,9 +196,12 @@ would be convenient.
 
 Thus even the checkpoint re-registration geometry is state-driven: the observer
 chooses the language used to read the endpoint, but not which physical shell won.
-The continuation API additionally requires the next no-hit producer to reuse the
-winning pair `(H,mu_H)` at exactly the previous checkpoint state.  Knowing merely
-that `H` belongs to the candidate set `{A,2A}` is not enough.
+The diagnostic changing-scale comparison additionally requires a proposed next
+producer to reuse the winning pair `(H,mu_H)` at exactly the previous checkpoint
+state. Knowing merely that `H` belongs to `{A,2A}` is not enough. Canonical
+same-carrier continuation uses neither candidate as a replacement: it requires the
+typed checkpoint to be bound to the actual cumulative no-hit PDE restriction and
+to the expected event/carrier/dual/trajectory provenance.
 
 ## 7. Numerical falsification lane
 
@@ -267,17 +270,23 @@ reading, but no physical interaction occurred at the horizon.  Therefore the
 canonical event search does **not** replace the smooth carrier by whichever hard
 shell is visible here.
 
-The event-anchored carrier and terminal dual continue.  In particular the native
-first-hit observables remain cumulative from the same physical event:
+The event-anchored carrier and terminal dual continue only under exact event,
+carrier, terminal-dual, terminal-state and PDE-trajectory provenance. In particular
+the native first-hit observables remain cumulative from the same physical event:
 
-`K_A[s,t]`, `|I_role-interface[s,t]|`, `|I_HH[s,t]|`.
+`K_A[s,t]`, `I_role-interface[s,t]`, `I_HH[s,t]`.
 
-A checkpoint is not allowed to reset their baselines or the terminal coefficient
-used in their thresholds.  The two coefficient-impulse magnitudes are cumulative
-complex-impulse magnitudes and may decrease by phase cancellation; they are not
-summed across checkpoint segments and are not work.
+A checkpoint is not allowed to reset their baselines or terminal coefficient. The
+actual complex impulses are retained and glued at exact shared PDE state/time
+tokens; their derived magnitudes may decrease by phase cancellation and are never
+summed across segments or treated as work.
 
-Thus a sequence of hard-shell checkpoint readings is not, by itself, a physical
-scale lineage.  Actual high-tail dynamics remains governed by the independent
-physical tail dissipation/work theorems.  This refinement is a candidate until
-its exact implementation SHA passes dedicated and full causal integration CI.
+Arbitrary observer cuts are not natural service windows. Genuine fixed-`A,c`
+windows have one positive duration and cannot accumulate at an interior time;
+arbitrary cuts can accumulate but carry no duration, and continuation there needs
+the actual no-earlier-hit path plus a matching open smooth-PDE token. Actual
+high-tail dynamics remains governed by independent physical tail-work theorems.
+
+A bare checkpoint record is insufficient even when `t`, `A`, and `c` match. The
+same-carrier policy also requires its cumulative no-hit PDE restriction to end at
+the exact checkpoint duration and to match the provenance of the master event.

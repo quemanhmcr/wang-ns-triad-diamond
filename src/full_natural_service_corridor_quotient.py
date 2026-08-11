@@ -346,7 +346,7 @@ def theorem_certificate() -> dict[str, object]:
         "ties": "equal hard-shell witnesses remain joint; numerical tie slack is capped by the certificate tolerance and cannot promote a subcritical shell; no theorem-name or frequency-order priority is introduced",
         "master_quotient": "a full no-hit natural interval is one real physical corridor; service/material layers are same-corridor witnesses and the horizon endpoint is analysis re-registration, so zero physical event vertices are added unless a first stop or t=0 occurs",
         "checkpoint_refinement": "endpoint hard-shell cover is state rereading at the same no-hit checkpoint; actual shell masses determine the unique/joint witness set downstream and no cover branch supplies directional or high-tail provenance",
-        "same_carrier_candidate": "the companion same-carrier segmentation theorem keeps the event-anchored Q_A carrier and cumulative first-hit monitors across a no-event horizon; checkpoint hard-shell readings remain state sidecars and do not define a causal scale lineage",
+        "same_carrier_candidate": "the companion same-carrier theorem glues only exact event/carrier/terminal-dual/PDE-trajectory restrictions with cumulative complex monitors; checkpoint authority additionally requires the actual no-hit path restriction through the exact native endpoint, not merely matching t,A,c; fixed-A,c natural windows have positive fixed duration, while arbitrary cuts and shell readings are duration-free sidecars",
         "scope": "this removes service-theorem depth and endpoint-service attachment from the master; under the companion candidate no-event checkpoint restart is also removed, while genuine first-hit/work/source/reuse owner recurrence remains open",
     }
 
@@ -489,7 +489,7 @@ Hence a master path which only inserts
 
 `full natural corridor -> own-scale service -> Moyal/material rereading -> endpoint survivor`
 
-has traversed one **real physical corridor**, while service/material theorem layers and the no-hit horizon endpoint add **zero physical event vertices**.  The endpoint is an analysis checkpoint.  The companion same-carrier candidate further forbids using that checkpoint to replace `Q_A`, reset the terminal coefficient, or reset cumulative strain/interface/HH first-hit monitors.  Repeated endpoint hard-shell readings therefore remain diagnostic state sidecars rather than a physical UV lineage.
+has traversed one **real physical corridor**, while service/material theorem layers and the no-hit horizon endpoint add **zero physical event vertices**. The endpoint is an analysis checkpoint. The companion same-carrier candidate requires exact event/carrier/terminal-dual/PDE-path and cumulative-complex boundary provenance, binds checkpoint authority to the actual no-hit restriction through its exact native endpoint, and forbids using that checkpoint to replace `Q_A` or reset its monitors. Fixed-`A,c` natural windows retain their positive native duration; arbitrary endpoint readings are duration-free state sidecars rather than a UV lineage.
 
 Stress: `{out.samples}` corridor/service/material/endpoint-shell states
 - worst natural-time identity relative residual: `{out.worst_time_identity_relative_residual:.3e}`

@@ -148,9 +148,13 @@ away by an observer-unit floor.
 ## 6. Typed checkpoint policy
 
 A few dictionary flags such as `physical_event_created=False` do not constitute a
-checkpoint theorem. The continuation policy accepts an actual
-`FullNaturalCheckpoint` and verifies exact agreement with the carrier's event time,
-frequency `A`, and lifetime `c`.
+checkpoint theorem. Neither does a bare `FullNaturalCheckpoint` whose event time,
+frequency `A`, and lifetime `c` merely happen to match another trajectory. The
+continuation policy requires a `SameCarrierCheckpointPathCertificate`: the typed
+checkpoint together with the actual cumulative no-hit PDE restriction from the
+terminal event to exactly its native endpoint. That restriction must carry the
+same event/carrier/terminal-dual/trajectory provenance expected by the master and
+must contain no earlier named first stop.
 
 The checkpoint's hard-shell readings are state sidecars. They cannot
 

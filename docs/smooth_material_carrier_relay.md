@@ -118,23 +118,24 @@ No global-regularity claim is made.
 ## Candidate extension: natural horizons do not interrupt the relay
 
 The same-carrier checkpoint-segmentation theorem applies the relay principle to
-full-natural service horizons.  The exact carrier equation does not expire merely
-because one `cA^-2` interval has ended.  If no physical stop fires there, the
-natural endpoint is only an analysis checkpoint and the event search continues on
-the same `Q_A` carrier.
+full-natural service horizons. The exact carrier equation does not expire merely
+because one `cA^-2` interval has ended. If no physical stop fires, continuation is
+on the same `Q_A` only with exact event/carrier/terminal-dual/PDE-trajectory and
+shared-state provenance; a matching label alone is insufficient.
+
+Nor are matching `t`, `A`, and `c` on a bare typed checkpoint sufficient. The
+checkpoint must be bound to the actual cumulative no-hit restriction of this same
+path through its exact native endpoint; otherwise it has no continuation authority.
 
 The first-hit data therefore remain cumulative from the original physical event:
 
-`K_A[s,t]`, `|I_role-interface[s,t]|`, `|I_HH[s,t]|`,
+`K_A[s,t]`, `I_role-interface[s,t]`, `I_HH[s,t]`,
 
-with the same terminal coefficient setting the two coefficient faces.  Re-anchoring
-a local affine chart may change coordinates, but it cannot reset those observables.
-The strain action is monotone; coefficient-impulse magnitudes may decrease by
-complex phase cancellation and are never summed per checkpoint segment or used as
-work.
+with the same terminal coefficient setting the two coefficient faces. The actual
+complex impulses are glued at exact state/time tokens; their derived magnitudes may
+decrease by phase cancellation and are never summed as segment work.
 
-Consequently an accumulation of no-event natural horizons at an interior smooth
-time is either an existing first-stop face at the limit or is crossed by the same
-carrier.  Hardening into a fresh event role requires an actual physical event.
-This extension is a candidate until exact-SHA dedicated and full integration CI
-are green.
+Genuine fixed-`A,c` natural horizons have one positive duration and cannot
+accumulate at an interior time. Arbitrary observer cuts can accumulate but carry no
+window duration; their continuation requires the actual no-earlier-hit path and a
+matching open smooth-PDE token. Hardening still requires a physical event.

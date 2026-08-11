@@ -118,7 +118,7 @@ def test_diagnostic_checkpoint_reading_chain_telescopes_time_but_is_not_physical
     assert led["reading_scale_sequence_is_diagnostic_only"] is True
 
 
-def test_uv_checkpoint_geometric_time_remains_a_diagnostic_counterexample_not_lineage():
+def test_geometric_time_remains_a_counterexample_only_for_changing_scale_producers():
     M, c = 2.0, 1.0
     first = c / (0.75 * M) ** 2
     total = geometric_uv_checkpoint_time(M, c, 1.5)
@@ -180,6 +180,7 @@ def test_certificate_separates_checkpoint_reading_geometry_from_physical_lineage
     assert "zero physical event vertices" in cert["time_semantics"]
     assert "3/4 and 3/2" in cert["cover_geometry"]
     assert "below" in cert["cover_geometry"]
-    assert "not a canonical physical lineage" in cert["remaining_uv"]
+    assert "independently certified changing-scale physical producers" in cert["remaining_uv"]
+    assert "cannot be attached to arbitrary checkpoint readings" in cert["remaining_uv"]
     assert "same event-anchored smooth carrier" in cert["continuation_policy"]
     assert "does not telescope infinitely recurring genuine physical owners" in cert["scope"]

@@ -147,16 +147,16 @@ arrows are witness maps on the same corridor, and the certified checkpoint
 refinement shows that the no-hit horizon itself adds zero recursive event vertices.
 
 The candidate same-carrier checkpoint-segmentation theorem sharpens the next step:
-a no-event natural horizon does not restart the carrier.  The hard-shell endpoint
-readings remain state sidecars while the event-anchored `Q_A` carrier and its
-cumulative first-hit monitors continue.  Therefore repeated endpoint rereading
-cannot by itself create an infinite causal chain of fresh full-natural corridors.
+a no-event natural horizon does not restart the carrier. Exact event/carrier/
+terminal-dual/PDE-path and cumulative-complex boundary provenance continues, while
+hard-shell endpoint readings remain state sidecars. Repeated rereading cannot by
+itself create fresh full-natural corridors.
 
-Physical time still telescopes across any inserted checkpoints, and a geometric UV
-reading sequence remains a valid diagnostic counterexample to a time-only argument.
-But that reading sequence is not a canonical physical lineage.  Independent
-source/service/reuse events and actual high-tail work events remain physical and
-still require their own native termination/reuse laws.
+For fixed `A,c`, genuine natural windows all have the same positive `cA^-2`
+duration and cannot Zeno before `t=0`. Arbitrary observer cuts may accumulate but
+carry no service-window duration. A finite geometric parabolic-time sum remains a
+counterexample only for independently certified changing-scale physical producers.
+Independent source/service/reuse and high-tail work events retain their native laws.
 
 This removes **service theorem depth** from named-owner recurrence and, if the
 candidate passes exact-SHA CI, removes natural-horizon restart depth as well.
@@ -299,8 +299,10 @@ turning an observer-chosen candidate shell into dynamics.
 ### Candidate same-carrier continuation refinement
 
 The current candidate `same_carrier_checkpoint_segmentation_quotient` makes the
-preceding master consequence fail-closed in production: a checkpoint hard-shell
-witness is a state sidecar, `checkpoint_scale_path_is_physical_lineage=False`, and
-the terminal coefficient plus cumulative strain/interface/HH first-hit monitors
-cannot be reset there.  This refinement is not certified until its exact SHA
-passes the dedicated and full causal-integration gates.
+preceding consequence fail-closed: a hard-shell witness is a state sidecar,
+`checkpoint_scale_path_is_physical_lineage=False`, and only exact event/carrier/
+dual/trajectory/state-token gluing may continue the complex cumulative monitors.
+Checkpoint authority additionally requires the actual cumulative no-hit PDE
+restriction through its exact native endpoint; a bare checkpoint matching only
+`t`, `A`, and `c` is rejected.
+Arbitrary cuts are explicitly separated from positive-duration natural windows.

@@ -91,9 +91,9 @@ This statement uses **zero event counting**.  After relays, service witnesses an
 
 This is a topology/physical-time statement, not a regularity conclusion.
 
-## 5. Ultraviolet checkpoint geometry remains diagnostic, not lineage
+## 5. Geometric UV time belongs to physical changing-scale producers
 
-Physical time alone still permits an observer to place checkpoint readings at geometrically increasing scales.  If a diagnostic sequence has
+If independently certified physical producers have geometrically increasing scales
 
 \[
 A_j=A_0r^j,\qquad r>1,
@@ -105,9 +105,23 @@ then
 \boxed{\sum_{j\ge0}cA_j^{-2}={cA_0^{-2}\over1-r^{-2}}<\infty.}
 \]
 
-This remains a useful anti-theorem against any argument using physical time alone.  The candidate same-carrier segmentation quotient adds a stronger fact: a no-event natural horizon does not replace the event-anchored smooth carrier or reset its cumulative first-hit filtration.  Therefore a geometrically growing sequence obtained only by checkpoint hard-shell rereading is a sequence of **state observations**, not a canonical physical lineage.
+This remains a useful anti-theorem against any argument using physical time alone
+to terminate a genuinely changing-scale path. It cannot be attached to arbitrary
+observer cuts. For one event-anchored carrier, `A` and `c` remain fixed: every
+genuine natural window has the same positive duration `cA^-2`, whereas arbitrary
+checkpoint/plotting cuts carry no service-window duration.
 
-The actual carrier continues with the same terminal coefficient and cumulative native monitors `K_A[s,t]`, `|I_R[s,t]|`, and `|I_HH[s,t]|`.  At an interior accumulation of checkpoint cuts, continuity/absolute continuity gives either an existing first-stop face at the limit or continuation of the same carrier across the accumulation.  Genuine UV progression remains fully physical when the independent high-tail dissipation/work hypotheses actually fire.
+Same-carrier gluing requires exact event, carrier, terminal-dual, terminal-state,
+trajectory and boundary tokens, and retains the complex cumulative paths
+`I_R[s,t]`, `I_HH[s,t]`. At an arbitrary-cut accumulation, endpoint scalars alone
+prove nothing: the actual no-earlier-hit prelimit path and a matching open smooth
+PDE token yield either an exact endpoint face or continuation. Genuine UV
+progression remains physical when independent tail dissipation/work hypotheses fire.
+
+Likewise, a bare typed checkpoint with matching `t`, `A`, and `c` does not identify
+a PDE trajectory. Sidecar rereading requires the checkpoint to be bound to the
+actual no-hit cumulative restriction ending at its native duration and to match
+the master event/carrier/dual/trajectory provenance exactly.
 
 This candidate refinement is pending dedicated and full causal-integration CI; the previous checkpoint theorem provenance remains recorded below.
 
@@ -173,7 +187,10 @@ With the candidate same-carrier checkpoint segmentation quotient, the master-fac
 
 An infinite recursive event path avoiding `t=0` must therefore recur through actual first-hit/work/source/reuse/independent-service owners.  Those events still have to telescope through the native physical ledgers they truly supply; no critical normalized quantity may be promoted to a synthetic finite reset.
 
-The geometric UV checkpoint sum above remains a diagnostic warning that time alone is insufficient.  It is no longer an independent master escape branch once checkpoint cuts are quotiented inside one fixed carrier.  Actual high-tail dynamics remains available exactly when its physical tail hypotheses are met.
+The geometric UV sum above remains a warning for independently certified
+changing-scale physical producers. It is not a duration ledger for cuts inside one
+fixed carrier. Actual high-tail dynamics remains available exactly when its
+physical tail hypotheses are met.
 
 This candidate does **not** prove global no-escape or 3D Navier--Stokes regularity; termination of genuine physical-owner recurrence is still open.
 
@@ -238,4 +255,10 @@ After this extension, the master has two distinct infinite-path questions:
    if one is available.
 
 The second object is not declared harmless and is not declared high-tail by fiat.
-It is simply removed from artificial event depth.  This extension was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854` and full integration run `31451492844`; the earlier base and service-corridor blocks retain their own provenance.
+It is simply removed from artificial event depth. This extension was certified on
+exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854`
+and full integration run `31451492844`; it records the pre-segmentation frontier.
+The current audited candidate sharpens it: a typed changing-scale checkpoint chain
+is diagnostic, fixed-carrier windows cannot Zeno, and arbitrary cuts carry no
+invented duration. Genuine changing-scale physical events remain subject to the
+geometric anti-theorem.

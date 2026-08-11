@@ -135,5 +135,5 @@ def test_certificate_removes_service_theorem_depth_without_uv_overclaim():
     assert "genuine first-hit/work/source/reuse owner recurrence remains open" in cert["scope"]
     assert "zero physical event vertices" in cert["master_quotient"]
     assert "actual shell masses determine" in cert["checkpoint_refinement"]
-    assert "event-anchored Q_A carrier" in cert["same_carrier_candidate"]
-    assert "do not define a causal scale lineage" in cert["same_carrier_candidate"]
+    assert "event/carrier/terminal-dual/PDE-trajectory" in cert["same_carrier_candidate"]
+    assert "arbitrary cuts and shell readings are duration-free sidecars" in cert["same_carrier_candidate"]

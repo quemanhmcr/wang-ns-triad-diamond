@@ -13,6 +13,7 @@ from src.nn_critical_heat_carrier_seed import LOW_STRAIN_ACTION
 from src.same_carrier_checkpoint_segmentation_quotient import (
     SAME_CARRIER_CONTINUATION,
     STATUS,
+    SameCarrierCheckpointPathCertificate,
     SameCarrierMonitorSegment,
     SameCarrierPrelimitCertificate,
     SameCarrierProvenance,
@@ -65,6 +66,31 @@ def _partition(cuts=()):
         hh_impulse=hh,
         checkpoint_indices=cuts,
     )
+
+
+def _checkpoint_path_certificate(
+    provenance: SameCarrierProvenance | None = None,
+) -> SameCarrierCheckpointPathCertificate:
+    bound = provenance or _provenance(4.0)
+    checkpoint = FullNaturalCheckpoint(
+        terminal_time=bound.terminal_time,
+        physical_time_drop=0.25,
+        parent_shell_frequency=8.0 / 3.0,
+        parent_shell_critical_mass_lower=2.0,
+        corridor_frequency=2.0,
+        scaled_lifetime=1.0,
+        endpoint_carrier_critical_mass_lower=2.0,
+        endpoint_shell_candidates=(2.0, 4.0),
+    )
+    segment = SameCarrierMonitorSegment(
+        provenance=bound,
+        state_tokens=(bound.terminal_state_token, "checkpoint-endpoint-state"),
+        elapsed_times=(0.0, 0.25),
+        strain_action=(0.0, 0.0),
+        residual_impulse=(0.0j, 0.0j),
+        hh_impulse=(0.0j, 0.0j),
+    )
+    return SameCarrierCheckpointPathCertificate(checkpoint, (segment,))
 
 
 def _accumulation_segment(
@@ -176,20 +202,13 @@ def test_checkpoint_cannot_reset_terminal_coefficient_or_replace_carrier():
 
 def test_checkpoint_policy_keeps_hard_shell_readings_as_sidecars_only():
     provenance = _provenance(4.0)
-    checkpoint = FullNaturalCheckpoint(
-        terminal_time=provenance.terminal_time,
-        physical_time_drop=0.25,
-        parent_shell_frequency=8.0 / 3.0,
-        parent_shell_critical_mass_lower=2.0,
-        corridor_frequency=2.0,
-        scaled_lifetime=1.0,
-        endpoint_carrier_critical_mass_lower=2.0,
-        endpoint_shell_candidates=(2.0, 4.0),
-    )
+    checkpoint = _checkpoint_path_certificate(provenance)
     out = checkpoint_continuation_policy(checkpoint, provenance=provenance)
     assert out["canonical_continuation"] == SAME_CARRIER_CONTINUATION
     assert out["hard_shell_checkpoint_witnesses"] == "state_sidecars_only"
     assert out["typed_checkpoint_and_carrier_provenance_verified"] is True
+    assert out["actual_no_hit_pde_restriction_verified"] is True
+    assert out["checkpoint_endpoint_state_token"] == "checkpoint-endpoint-state"
     for request, message in (
         ({"request_carrier_replacement": True}, "cannot replace"),
         ({"request_terminal_amplitude_reset": True}, "cannot reset the terminal"),
@@ -197,6 +216,21 @@ def test_checkpoint_policy_keeps_hard_shell_readings_as_sidecars_only():
     ):
         with pytest.raises(TypeError, match=message):
             checkpoint_continuation_policy(checkpoint, provenance=provenance, **request)
+
+
+def test_checkpoint_path_certificate_rejects_an_earlier_physical_first_stop():
+    provenance = _provenance(4.0)
+    base = _checkpoint_path_certificate(provenance)
+    hit = SameCarrierMonitorSegment(
+        provenance=provenance,
+        state_tokens=(provenance.terminal_state_token, "hit-before-checkpoint"),
+        elapsed_times=(0.0, 0.25),
+        strain_action=(0.0, 0.0),
+        residual_impulse=(0.0j, RESIDUAL_FRACTION * provenance.terminal_amplitude),
+        hh_impulse=(0.0j, 0.0j),
+    )
+    with pytest.raises(ValueError, match="earlier named first stop|no-hit"):
+        SameCarrierCheckpointPathCertificate(base.checkpoint, (hit,))
 
 
 def test_interior_checkpoint_accumulation_with_strict_margin_is_crossed_by_same_carrier():

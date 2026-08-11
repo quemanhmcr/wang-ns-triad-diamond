@@ -214,6 +214,42 @@ def test_typed_checkpoint_matching_only_time_scale_and_lifetime_cannot_claim_sam
         same_carrier.checkpoint_continuation_policy(checkpoint, provenance=foreign)
 
 
+def test_checkpoint_path_certificate_rejects_a_foreign_expected_trajectory():
+    checkpoint = FullNaturalCheckpoint(
+        terminal_time=2.0,
+        physical_time_drop=0.25,
+        parent_shell_frequency=8.0 / 3.0,
+        parent_shell_critical_mass_lower=2.0,
+        corridor_frequency=2.0,
+        scaled_lifetime=1.0,
+        endpoint_carrier_critical_mass_lower=2.0,
+        endpoint_shell_candidates=(2.0, 4.0),
+    )
+    actual_segment = _segment(
+        elapsed=(0.0, 0.25),
+        state_tokens=("terminal-state", "actual-checkpoint-state"),
+    )
+    certificate = same_carrier.SameCarrierCheckpointPathCertificate(
+        checkpoint,
+        (actual_segment,),
+    )
+    actual = actual_segment.provenance
+    foreign = same_carrier.SameCarrierProvenance(
+        event_id=actual.event_id,
+        carrier_id=actual.carrier_id,
+        terminal_dual_id=actual.terminal_dual_id,
+        trajectory_id="foreign-NS-trajectory",
+        terminal_state_token=actual.terminal_state_token,
+        terminal_time=actual.terminal_time,
+        carrier_frequency=actual.carrier_frequency,
+        scaled_lifetime=actual.scaled_lifetime,
+        terminal_coefficient=actual.terminal_coefficient,
+    )
+
+    with pytest.raises(TypeError, match="different.*trajectory|event/carrier/dual/PDE"):
+        same_carrier.checkpoint_continuation_policy(certificate, provenance=foreign)
+
+
 def test_segment_carries_complex_path_and_physical_provenance_not_only_magnitudes():
     fields = set(same_carrier.SameCarrierMonitorSegment.__dataclass_fields__)
     assert {"provenance", "state_tokens", "residual_impulse", "hh_impulse"} <= fields

@@ -25,6 +25,7 @@ STATUS = (
     "EXACT_SAME_CARRIER_CHECKPOINT_SEGMENTATION_QUOTIENT__"
     "ONE_EVENT_CARRIER_DUAL_AND_PDE_PATH_PROVENANCE__"
     "CUMULATIVE_COMPLEX_NATIVE_MONITORS__"
+    "NO_HIT_CHECKPOINT_BOUND_TO_ACTUAL_PATH_RESTRICTION__"
     "OBSERVER_CUTS_ARE_NOT_NATURAL_WINDOWS__"
     "HARDEN_ONLY_AT_A_NEW_PHYSICAL_EVENT"
 )
@@ -428,25 +429,69 @@ def segmentation_invariance(
     }
 
 
+@dataclass(frozen=True)
+class SameCarrierCheckpointPathCertificate:
+    """One no-hit checkpoint bound to its actual cumulative PDE restriction.
+
+    Matching ``t``, ``A`` and ``c`` is necessary but not sufficient: unrelated
+    trajectories can share those three numbers.  The gluable cumulative path is
+    therefore part of the certificate, and it must reach exactly the checkpoint's
+    native elapsed endpoint without an earlier named first stop.
+    """
+
+    checkpoint: FullNaturalCheckpoint
+    path_segments: tuple[SameCarrierMonitorSegment, ...]
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.checkpoint, FullNaturalCheckpoint):
+            raise TypeError("typed FullNaturalCheckpoint required in the path certificate")
+        segments = tuple(self.path_segments)
+        path = join_same_carrier_segments(segments)
+        provenance = path["provenance"]
+        if not isinstance(provenance, SameCarrierProvenance):
+            raise AssertionError("checkpoint path lost typed same-carrier provenance")
+        checkpoint = self.checkpoint
+        if checkpoint.terminal_time != provenance.terminal_time:
+            raise TypeError("checkpoint terminal time is not the path event-time token")
+        if checkpoint.corridor_frequency != provenance.carrier_frequency:
+            raise TypeError("checkpoint corridor scale is not the path carrier-frequency token")
+        if checkpoint.scaled_lifetime != provenance.scaled_lifetime:
+            raise TypeError("checkpoint lifetime is not the path fixed-lifetime token")
+        if tuple(path["elapsed_times"])[-1] != checkpoint.physical_time_drop:
+            raise TypeError("cumulative PDE restriction does not end at the checkpoint native-time token")
+        first_exit = same_carrier_first_exit(segments)
+        if first_exit["first_elapsed"] is not None:
+            raise ValueError("a path with an earlier named first stop cannot certify a no-hit checkpoint")
+        object.__setattr__(self, "path_segments", segments)
+
+    @property
+    def provenance(self) -> SameCarrierProvenance:
+        path = join_same_carrier_segments(self.path_segments)
+        provenance = path["provenance"]
+        if not isinstance(provenance, SameCarrierProvenance):
+            raise AssertionError("checkpoint path lost typed same-carrier provenance")
+        return provenance
+
+    @property
+    def endpoint_state_token(self) -> str:
+        return self.path_segments[-1].state_tokens[-1]
+
+
 def checkpoint_continuation_policy(
-    checkpoint_record: FullNaturalCheckpoint | object,
+    checkpoint_record: SameCarrierCheckpointPathCertificate | object,
     *,
     provenance: SameCarrierProvenance | None = None,
     request_carrier_replacement: bool = False,
     request_terminal_amplitude_reset: bool = False,
     request_monitor_reset: bool = False,
 ) -> dict[str, object]:
-    """Authorize continuation only from a typed checkpoint bound to this carrier."""
-    if not isinstance(checkpoint_record, FullNaturalCheckpoint):
-        raise TypeError("typed FullNaturalCheckpoint record required for same-carrier continuation")
+    """Authorize continuation only from a checkpoint restriction on this PDE path."""
+    if not isinstance(checkpoint_record, SameCarrierCheckpointPathCertificate):
+        raise TypeError("typed checkpoint path/restriction certificate required for same-carrier continuation")
     if not isinstance(provenance, SameCarrierProvenance):
-        raise TypeError("typed same-carrier provenance required at the checkpoint")
-    if checkpoint_record.terminal_time != provenance.terminal_time:
-        raise TypeError("checkpoint terminal time is not the event terminal time token")
-    if checkpoint_record.corridor_frequency != provenance.carrier_frequency:
-        raise TypeError("checkpoint corridor scale is not the fixed carrier frequency token")
-    if checkpoint_record.scaled_lifetime != provenance.scaled_lifetime:
-        raise TypeError("checkpoint rebound the fixed carrier lifetime token")
+        raise TypeError("typed expected same-carrier provenance required at the checkpoint")
+    if checkpoint_record.provenance != provenance:
+        raise TypeError("checkpoint restriction belongs to a different event/carrier/dual/PDE trajectory")
     if request_carrier_replacement:
         raise TypeError("a no-event checkpoint cannot replace the event-anchored smooth carrier")
     if request_terminal_amplitude_reset:
@@ -459,6 +504,8 @@ def checkpoint_continuation_policy(
         "carrier_id": provenance.carrier_id,
         "terminal_dual_id": provenance.terminal_dual_id,
         "trajectory_id": provenance.trajectory_id,
+        "checkpoint_endpoint_state_token": checkpoint_record.endpoint_state_token,
+        "checkpoint_native_elapsed": checkpoint_record.checkpoint.physical_time_drop,
         "hard_shell_checkpoint_witnesses": "state_sidecars_only",
         "carrier_replacement_authorized": False,
         "terminal_amplitude_reset_authorized": False,
@@ -466,6 +513,7 @@ def checkpoint_continuation_policy(
         "checkpoint_scale_path_is_physical_lineage": False,
         "hardening_requires_new_physical_event": True,
         "typed_checkpoint_and_carrier_provenance_verified": True,
+        "actual_no_hit_pde_restriction_verified": True,
     }
 
 
@@ -673,7 +721,7 @@ def theorem_certificate() -> dict[str, object]:
         "fixed_carrier": "between genuine physical events the canonical object carries one exact event id, smooth carrier, terminal dual, terminal coefficient, scale/lifetime, terminal state token and actual PDE trajectory id",
         "cumulative_monitors": "K_A[s,t] is monotone; the actual complex I_role-interface[s,t] and I_HH[s,t] paths are retained, their magnitudes are derived, and segment magnitudes are never added or used as work",
         "segmentation": "finite checkpoint insertion is only restriction and exact gluing of the same cumulative PDE path; exact shared state/time/complex-boundary tokens leave the first stop unchanged",
-        "checkpoint_policy": "only a typed FullNaturalCheckpoint bound to the fixed carrier scale, lifetime and event time can authorize sidecar rereading; a dictionary or close floating data cannot reset or replace the carrier",
+        "checkpoint_policy": "sidecar rereading requires a typed FullNaturalCheckpoint bound to an actual no-hit cumulative PDE restriction ending at its exact native duration, plus exact agreement with the expected event/carrier/dual/trajectory provenance; a bare typed checkpoint, dictionary, foreign path or close floating data cannot reset or replace the carrier",
         "natural_windows": "arbitrary observer cuts are not full-natural service windows; for fixed A and c every genuine window has one fixed positive native duration c A^-2, so fixed-carrier natural windows cannot have an interior Zeno accumulation",
         "interior_accumulation": "an arbitrary-cut accumulation is classified only from the actual cumulative prelimit path: an exact endpoint face is the first stop, an earlier crossing invalidates the no-hit premise, and strict-margin continuation requires a matching open smooth-PDE extension token",
         "boundary": "t=0 is absorbing only when the native cumulative path reaches exactly the full event time; positive remaining native time is never rounded away",
@@ -901,6 +949,11 @@ terminal-coefficient, scale/lifetime, PDE-trajectory, shared-state, native-time 
 cumulative-complex-impulse provenance reconstructs one physical path.  Complex
 phase is retained when locating coefficient faces; magnitudes are never summed as
 segment work.
+
+A full-natural checkpoint authorizes sidecar rereading only when a typed no-hit
+cumulative restriction of that same path ends at the checkpoint's exact native
+duration and matches the master event provenance.  Matching `t`, `A`, and `c` on a
+bare checkpoint is not path identity.
 
 Arbitrary observer cuts are not full-natural service windows.  For one fixed
 carrier, every genuine natural window has the same positive native duration
