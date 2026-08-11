@@ -18,7 +18,12 @@ from src.same_carrier_checkpoint_segmentation_quotient import (
     SameCarrierProvenance,
     checkpoint_continuation_policy,
 )
-from src.smooth_quadratic_carrier_interface import RELINK_OWNER, STRAIN_OWNER, GaugeQuotientedInterfaceWork
+from src.smooth_quadratic_carrier_interface import (
+    RELINK_OWNER,
+    STRAIN_OWNER,
+    GaugeQuotientedInterfaceWork,
+    positive_smooth_interface_split,
+)
 from src.smooth_relink_donor_quotient import (
     SMOOTH_RELINK_SAME_EVENT_RELAY,
     SmoothRelinkDonorCertificate,
@@ -243,13 +248,24 @@ def energy_reentry_master_route(
     relays: tuple[str, ...] = ()
     donor_cert: SmoothRelinkDonorCertificate | None = None
     if branch == "smooth_interface_physical_work":
-        owners = tuple(str(x) for x in reentry.get("joint_interface_owners", ()))
+        work = reentry.get("gauge_quotiented_interface_work_certificate")
+        if not isinstance(work, GaugeQuotientedInterfaceWork):
+            raise TypeError("smooth interface route requires its gauge-quotiented physical work certificate")
+        replay = positive_smooth_interface_split(work)
+        owners = tuple(str(x) for x in replay["joint_physical_owners"])
+        claimed_owners = tuple(str(x) for x in reentry.get("joint_interface_owners", ()))
+        if tuple(sorted(set(claimed_owners))) != tuple(sorted(set(owners))):
+            raise TypeError("claimed smooth-interface owner labels do not match the replayed physical work split")
         if not owners:
             raise TypeError("smooth-interface energy reentry supplied no physical relink/strain owner")
+        native_mass = float(replay["positive_native_interface_work"])
+        supplied_mass = float(mass)
+        if not math.isfinite(supplied_mass) or supplied_mass <= 0.0:
+            raise ValueError("smooth-interface route requires positive finite native interface mass")
+        mass_scale = max(abs(supplied_mass), native_mass)
+        if abs(supplied_mass - native_mass) > 8e-12 * mass_scale:
+            raise ValueError("smooth-interface route mass is not the actual positive native interface work")
         if RELINK_OWNER in owners:
-            work = reentry.get("gauge_quotiented_interface_work_certificate")
-            if not isinstance(work, GaugeQuotientedInterfaceWork):
-                raise TypeError("smooth relink owner requires its bound gauge-quotiented pair-work certificate")
             quotient = smooth_relink_donor_quotient(work)
             donor_cert = quotient["certificate"]
             if not isinstance(donor_cert, SmoothRelinkDonorCertificate):
@@ -271,7 +287,17 @@ def energy_reentry_master_route(
     else:
         raise TypeError("unrecognized or unresolved physical-energy reentry branch")
 
-    bundle = canonical_owner_bundle(physical_measure, mass, owners) if owners else None
+    if branch == "smooth_interface_physical_work" and owners:
+        strain_mass = float(replay["positive_existing_strain_work"])
+        if strain_mass <= 0.0:
+            raise AssertionError("replayed strain owner has no positive native strain work")
+        bundle = canonical_owner_bundle(
+            "positive existing smooth strain work",
+            strain_mass,
+            owners,
+        )
+    else:
+        bundle = canonical_owner_bundle(physical_measure, mass, owners) if owners else None
     return EnergyReentryMasterRoute(
         str(physical_measure), float(mass), bundle, tuple(sorted(relays)), donor_cert
     )

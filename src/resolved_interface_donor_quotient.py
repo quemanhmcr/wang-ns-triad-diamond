@@ -166,10 +166,12 @@ def _validated_skew_pair_matrix(skew_pair_matrix: np.ndarray) -> np.ndarray:
         raise ValueError("square skew pair matrix of size at least two required")
     if np.any(~np.isfinite(T)):
         raise ValueError("finite skew pair matrix required")
-    scale = max(1.0, float(np.max(np.abs(T))))
-    if float(np.max(np.abs(T + T.T))) > 8e-12 * scale:
+    scale = float(np.max(np.abs(T)))
+    antisymmetry_residual = float(np.max(np.abs(T + T.T)))
+    diagonal_residual = float(np.max(np.abs(np.diag(T))))
+    if antisymmetry_residual > 8e-12 * scale:
         raise ValueError("resolved skew pair work must be antisymmetric")
-    if float(np.max(np.abs(np.diag(T)))) > 8e-12 * scale:
+    if diagonal_residual > 8e-12 * scale:
         raise ValueError("skew role self-transfer must vanish")
     return T
 
@@ -255,7 +257,7 @@ def skew_donor_closure(skew_pair_matrix: np.ndarray, recipient_roles: Sequence[i
     if not starts or any(x < 0 or x >= m for x in starts):
         raise ValueError("nonempty valid recipient role set required")
     net = T.sum(axis=1)
-    scale = max(1.0, float(np.max(np.abs(T))), float(np.max(np.abs(net))))
+    scale = max(float(np.max(np.abs(T))), float(np.max(np.abs(net))))
     tol = 32.0 * math.ulp(scale)
     if any(float(net[a]) <= tol for a in starts):
         raise ValueError("every starting recipient must have strictly positive net skew work")

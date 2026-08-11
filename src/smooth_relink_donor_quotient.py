@@ -75,6 +75,16 @@ class SmoothRelinkDonorCertificate:
             raise ValueError("finite nonnegative smooth relink donor diagnostics required")
         if self.positive_relink_work <= 0:
             raise ValueError("positive smooth relink work required")
+        native_scale = max(self.positive_relink_work, self.recipient_positive_incoming_flux)
+        residual_limit = 8e-11 * native_scale
+        if max(
+            self.pair_antisymmetry_residual,
+            self.row_binding_residual,
+            self.total_relink_work_residual,
+        ) > residual_limit:
+            raise ValueError("smooth relink donor residual exceeds its native physical-work scale")
+        if self.recipient_positive_incoming_flux + residual_limit < self.positive_relink_work:
+            raise ValueError("smooth relink certificate lost actual incoming donor flux")
         if not self.same_physical_event or not self.same_physical_time:
             raise ValueError("smooth relink donor trace must remain at the same physical event/time")
         if self.new_causal_charge_created or self.recursive_generation_created or self.scale_progress_created:
@@ -95,7 +105,9 @@ def _bound_smooth_relink_pair_matrix(
         raise ValueError("smooth relink donor quotient requires the bound square K_phys pair matrix")
     if np.any(~np.isfinite(T)) or np.any(~np.isfinite(relink)):
         raise ValueError("finite smooth relink atoms and pair matrix required")
-    scale = max(1.0, float(np.max(np.abs(T))), float(np.max(np.abs(relink))))
+    scale = max(float(np.max(np.abs(T))), float(np.max(np.abs(relink))))
+    if scale <= 0.0:
+        raise ValueError("positive native smooth relink scale required")
     antisym = float(np.max(np.abs(T + T.T)))
     row = float(np.max(np.abs(T.sum(axis=1) - relink)))
     total = abs(float(relink.sum()))
@@ -211,15 +223,17 @@ class SmoothRelinkStress:
 def _random_certificate(rng: np.random.Generator, m: int) -> GaugeQuotientedInterfaceWork:
     A = rng.normal(size=(m, m))
     T = A - A.T
+    native_scale = 10.0 ** float(rng.uniform(-140.0, 140.0))
+    T *= native_scale
     # Avoid the measure-zero all-zero pair law and keep pure relink as the owner.
-    if float(np.max(np.abs(T))) < 1e-8:
-        T[0, 1] = 1.0
-        T[1, 0] = -1.0
+    if float(np.max(np.abs(T))) == 0.0:
+        T[0, 1] = native_scale
+        T[1, 0] = -native_scale
     relink = T.sum(axis=1)
-    if float(np.max(np.abs(relink))) < 1e-8:
+    if float(np.max(np.abs(relink))) == 0.0:
         T[:] = 0.0
-        T[0, 1] = 1.0
-        T[1, 0] = -1.0
+        T[0, 1] = native_scale
+        T[1, 0] = -native_scale
         relink = T.sum(axis=1)
     native = relink.copy()
     strain = np.zeros(m, dtype=float)
@@ -264,7 +278,8 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> SmoothRelinkStress:
 
         # Pair/row binding is part of the physical certificate and must fail closed.
         rows = [list(row) for row in work.signed_physical_relink_pair_matrix]
-        rows[0][1] += 0.25
+        pair_scale = max(abs(value) for row in rows for value in row)
+        rows[0][1] += 0.25 * pair_scale
         bad = GaugeQuotientedInterfaceWork(
             work.signed_native_interface_atoms,
             work.signed_physical_relink_atoms,

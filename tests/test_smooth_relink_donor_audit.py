@@ -52,14 +52,16 @@ def _smooth_reentry(
 def test_smooth_relink_donor_law_is_covariant_at_tiny_native_work_scale():
     reference = smooth_relink_donor_quotient(_pure_relink_work(1.0))
     tiny = smooth_relink_donor_quotient(_pure_relink_work(1.0e-120))
+    huge = smooth_relink_donor_quotient(_pure_relink_work(1.0e120))
 
-    assert tiny["recipient_roles"] == reference["recipient_roles"] == (0,)
-    assert tiny["terminal_negative_net_donor_roles"] == reference[
-        "terminal_negative_net_donor_roles"
-    ]
-    assert tiny["maximum_shortest_donor_path_length"] == reference[
-        "maximum_shortest_donor_path_length"
-    ]
+    for rescaled in (tiny, huge):
+        assert rescaled["recipient_roles"] == reference["recipient_roles"] == (0,)
+        assert rescaled["terminal_negative_net_donor_roles"] == reference[
+            "terminal_negative_net_donor_roles"
+        ]
+        assert rescaled["maximum_shortest_donor_path_length"] == reference[
+            "maximum_shortest_donor_path_length"
+        ]
     assert positive_smooth_interface_split(_pure_relink_work(1.0e-120))[
         "joint_physical_owners"
     ] == (RELINK_OWNER,)
@@ -91,6 +93,17 @@ def test_master_binds_supplied_mass_to_actual_positive_native_interface_work():
         energy_reentry_master_route(
             "positive native smooth interface work",
             200.0,
+            _smooth_reentry(work, (RELINK_OWNER,)),
+        )
+
+
+@pytest.mark.parametrize("bad_mass", [0.0, -1.0, float("nan"), float("inf")])
+def test_master_rejects_nonphysical_smooth_interface_route_mass(bad_mass: float):
+    work = _pure_relink_work(1.0)
+    with pytest.raises(ValueError, match="mass|positive|finite"):
+        energy_reentry_master_route(
+            "positive native smooth interface work",
+            bad_mass,
             _smooth_reentry(work, (RELINK_OWNER,)),
         )
 
