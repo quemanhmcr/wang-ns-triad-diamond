@@ -563,3 +563,31 @@ quotient or the canonical coefficient-obstruction type barrier.
 This certification is regression evidence around the encoded exact identities
 and guards. It is not a proof of global owner termination, ultraviolet closure,
 or Navier--Stokes regularity.
+
+## Candidate refinement: physical `K_phys` relink has same-event donor closure
+
+The certified theorem above already proves that the gauge-quotiented residual-skew
+pair matrix
+
+\[
+T_{ab}^{phys}=-2\operatorname{Re}\langle A_a^2u,K_{phys}A_b^2u\rangle
+\]
+
+is antisymmetric, reconstructs the signed relink rows, and has zero total work.
+The companion candidate `smooth_relink_donor_quotient` uses exactly that stored
+pair matrix, not a new disintegration, to close the remaining topology question.
+
+With `F[b->a]=[T_ab^{phys}]_+`, every positive relink row is incoming minus
+outgoing same-event flux.  The finite backward positive-inflow closure of all
+positive recipients must reach negative-net donor roles; otherwise a closed
+positive-net subset would have no positive external inflow, contradicting the
+subset divergence identity.  Internal cycles cancel.
+
+Thus the candidate does not demote `K_phys` to observer gauge.  It keeps the
+relink physical while quotienting its **recursive depth**.  Pure smooth relink
+creates no child event; if strain is simultaneous, strain remains the genuine
+recursive owner.  Smooth and hard role measures remain distinct and share only
+the abstract antisymmetric-flux lemma.
+
+This refinement is a candidate until dedicated and full causal-integration CI are
+green on one exact SHA.

@@ -2339,3 +2339,28 @@ zero segmentation and reset-barrier failures, zero first-stop-time residual,
 `39,915` nonmonotone coefficient-impulse paths, and an exact `25,000/25,000` split
 between stop-at-accumulation and continue-across-accumulation cases.  No global
 regularity claim follows.
+
+## Candidate refinement: smooth residual-skew relink is not a new generation
+
+The smooth `Q^2` interface theorem already pays the important physical price:
+arbitrary analysis-window motion is rejected, common affine/Kelvin transport is
+quotiented, and only `K_phys=K-G` remains as genuine residual skew work.  The
+remaining question is then topological rather than energetic.
+
+For `eta_a=A_a^2`, the exact same work certificate now stores
+
+`T_ab=-2 Re<eta_a u,K_phys eta_b u>`.
+
+Antisymmetry and `sum_b eta_b=I` give `T_ab=-T_ba` and
+`R_a=sum_b T_ab`.  Hence positive relink is conservative same-event inflow.  A
+finite backward donor closure from positive recipients must meet negative-net
+donors, while internal circulation contributes zero to every subset balance.
+
+The candidate master consequence is therefore
+
+`smooth positive relink -> same-event donor provenance -> zero recursion depth`.
+
+This is deliberately parallel to, but not identified with, the existing hard
+resolved-interface donor theorem.  If strain is tied with relink, only the strain
+branch remains recursively event-facing.  The candidate removes no real physical
+work; it only refuses to count conservative redistribution as a new generation.

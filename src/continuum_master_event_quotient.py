@@ -13,6 +13,12 @@ from src.high_strain_resolved_ancestor import TRANSPORTER_RADIUS
 from src.full_natural_checkpoint_quotient import FULL_NATURAL_CHECKPOINT
 from src.full_natural_service_corridor_quotient import FULL_NATURAL_SERVICE_WITNESS
 from src.same_carrier_checkpoint_segmentation_quotient import checkpoint_continuation_policy
+from src.smooth_quadratic_carrier_interface import RELINK_OWNER, STRAIN_OWNER, GaugeQuotientedInterfaceWork
+from src.smooth_relink_donor_quotient import (
+    SMOOTH_RELINK_SAME_EVENT_RELAY,
+    SmoothRelinkDonorCertificate,
+    smooth_relink_donor_quotient,
+)
 from src.common_slice_coefficient_registration import (
     HH_COEFFICIENT_OBSTRUCTION,
     ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
@@ -24,6 +30,7 @@ STATUS = (
     "NATIVE_PHYSICAL_TIME_RECURSION__SUPPLIER_SPECIFIC_SCALE_PROGRESS__"
     "NATURAL_HORIZON_CHECKPOINTS_ZERO_EVENT_DEPTH__"
     "SAME_CARRIER_FIRST_HIT_NOT_RESET_BY_CHECKPOINTS__"
+    "SMOOTH_RELINK_SAME_EVENT_DONOR_ZERO_DEPTH__"
     "CHECKPOINT_ZENO_NOT_CANONICAL_LINEAGE__NO_COMMON_CLOCK_OR_CAUSAL_REWEIGHTING"
 )
 
@@ -34,6 +41,7 @@ COEFFICIENT_OBSTRUCTION_LABELS = frozenset(
 
 NON_EVENT_CORRIDOR_WITNESS_LABELS = frozenset({FULL_NATURAL_SERVICE_WITNESS})
 NON_EVENT_CHECKPOINT_LABELS = frozenset({FULL_NATURAL_CHECKPOINT})
+NON_EVENT_SAME_EVENT_RELAY_LABELS = frozenset({RELINK_OWNER})
 
 
 def require_routed_physical_owner_labels(labels: Iterable[str]) -> tuple[str, ...]:
@@ -63,6 +71,12 @@ def require_routed_physical_owner_labels(labels: Iterable[str]) -> tuple[str, ..
             "full-natural horizon checkpoint is analysis re-registration after real corridor time, not a recursive physical owner event: "
             + ", ".join(checkpoint_bad)
         )
+    relay_bad = tuple(sorted(set(out).intersection(NON_EVENT_SAME_EVENT_RELAY_LABELS)))
+    if relay_bad:
+        raise TypeError(
+            "conservative smooth physical relink is a finite same-event donor relay, not a recursive generation owner: "
+            + ", ".join(relay_bad)
+        )
     return out
 
 
@@ -71,31 +85,18 @@ def owner_bundle_from_energy_reentry(
     mass: float,
     reentry: dict[str, object],
 ) -> "PhysicalOwnerBundle":
-    """Typed adapter from an actual energy/work reentry result to master ownership.
+    """Compatibility wrapper for energy reentries that leave a recursive owner.
 
-    The adapter refuses raw obstruction impulses.  For the smooth-interface branch
-    it uses only the gauge-quotiented physical relink/strain owners returned after
-    the energy gate.  Other gate branches use their physical branch name directly.
+    The canonical API is :func:`energy_reentry_master_route`.  A pure smooth
+    relink reentry is intentionally not representable as a PhysicalOwnerBundle,
+    because its K_phys work is finite same-event donor provenance.
     """
-    if bool(reentry.get("coefficient_impulse_used_as_physical_work", True)):
-        raise TypeError("energy reentry must certify that coefficient impulse magnitude was not used as physical work")
-    if bool(reentry.get("observer_partition_motion_charged_as_physics", True)):
-        raise TypeError("energy reentry must quotient observer partition motion before physical ownership")
-    branch = str(reentry.get("branch", ""))
-    if branch == "smooth_interface_physical_work":
-        owners = tuple(str(x) for x in reentry.get("joint_interface_owners", ()))
-        if not owners:
-            raise TypeError("smooth-interface energy reentry supplied no physical relink/strain owner")
-    elif branch in {
-        "material_energy_inheritance",
-        "high_strain_critical_dissipation",
-        "physical_high_high_transfer_generation",
-    }:
-        owners = (branch,)
-    else:
-        raise TypeError("unrecognized or unresolved physical-energy reentry branch")
-    owners = require_routed_physical_owner_labels(owners)
-    return canonical_owner_bundle(physical_measure, mass, owners)
+    route = energy_reentry_master_route(physical_measure, mass, reentry)
+    if route.owner_bundle is None:
+        raise TypeError(
+            "energy reentry resolves only conservative smooth relink; use energy_reentry_master_route for its same-event donor relay"
+        )
+    return route.owner_bundle
 
 
 class SupplierKind(str, Enum):
@@ -188,6 +189,87 @@ def canonical_owner_bundle(
     """Quotient duplicate owner manifestations without splitting physical mass."""
     canonical = tuple(sorted({str(x) for x in owners if str(x)}))
     return PhysicalOwnerBundle(str(physical_measure), float(mass), canonical)
+
+
+@dataclass(frozen=True)
+class EnergyReentryMasterRoute:
+    """Typed projection of one physical-energy reentry into master topology.
+
+    Recursive owner mass and same-event conservative provenance are deliberately
+    separate fields.  A pure K_phys relink can therefore be physical without
+    manufacturing a child RecursiveEventState.
+    """
+
+    physical_measure: str
+    mass: float
+    owner_bundle: PhysicalOwnerBundle | None
+    same_event_relays: tuple[str, ...] = ()
+    smooth_relink_donor_certificate: SmoothRelinkDonorCertificate | None = None
+
+    def __post_init__(self) -> None:
+        if not self.physical_measure or not math.isfinite(self.mass) or self.mass < 0:
+            raise ValueError("valid physical reentry measure and mass required")
+        if tuple(sorted(set(self.same_event_relays))) != self.same_event_relays:
+            raise ValueError("same-event relay set must be sorted and quotiented")
+        if SMOOTH_RELINK_SAME_EVENT_RELAY in self.same_event_relays:
+            cert = self.smooth_relink_donor_certificate
+            if cert is None or cert.recursive_generation_created or cert.new_causal_charge_created:
+                raise ValueError("smooth relink relay requires a zero-depth donor certificate")
+        elif self.smooth_relink_donor_certificate is not None:
+            raise ValueError("smooth relink donor certificate supplied without its relay label")
+
+    @property
+    def recursive_event_created(self) -> bool:
+        return self.owner_bundle is not None
+
+
+def energy_reentry_master_route(
+    physical_measure: str,
+    mass: float,
+    reentry: dict[str, object],
+) -> EnergyReentryMasterRoute:
+    """Route actual Q^2 energy/work while quotienting smooth relink event depth."""
+    if bool(reentry.get("coefficient_impulse_used_as_physical_work", True)):
+        raise TypeError("energy reentry must certify that coefficient impulse magnitude was not used as physical work")
+    if bool(reentry.get("observer_partition_motion_charged_as_physics", True)):
+        raise TypeError("energy reentry must quotient observer partition motion before physical ownership")
+
+    branch = str(reentry.get("branch", ""))
+    relays: tuple[str, ...] = ()
+    donor_cert: SmoothRelinkDonorCertificate | None = None
+    if branch == "smooth_interface_physical_work":
+        owners = tuple(str(x) for x in reentry.get("joint_interface_owners", ()))
+        if not owners:
+            raise TypeError("smooth-interface energy reentry supplied no physical relink/strain owner")
+        if RELINK_OWNER in owners:
+            work = reentry.get("gauge_quotiented_interface_work_certificate")
+            if not isinstance(work, GaugeQuotientedInterfaceWork):
+                raise TypeError("smooth relink owner requires its bound gauge-quotiented pair-work certificate")
+            quotient = smooth_relink_donor_quotient(work)
+            donor_cert = quotient["certificate"]
+            if not isinstance(donor_cert, SmoothRelinkDonorCertificate):
+                raise TypeError("smooth relink donor quotient lost typed certificate")
+            relays = (SMOOTH_RELINK_SAME_EVENT_RELAY,)
+            owners = tuple(x for x in owners if x != RELINK_OWNER)
+        unknown = tuple(x for x in owners if x != STRAIN_OWNER)
+        if unknown:
+            raise TypeError(
+                "unrecognized smooth-interface recursive owner after relink quotient: "
+                + ", ".join(unknown)
+            )
+    elif branch in {
+        "material_energy_inheritance",
+        "high_strain_critical_dissipation",
+        "physical_high_high_transfer_generation",
+    }:
+        owners = (branch,)
+    else:
+        raise TypeError("unrecognized or unresolved physical-energy reentry branch")
+
+    bundle = canonical_owner_bundle(physical_measure, mass, owners) if owners else None
+    return EnergyReentryMasterRoute(
+        str(physical_measure), float(mass), bundle, tuple(sorted(relays)), donor_cert
+    )
 
 
 def zero_charge_owner_relay(bundle: PhysicalOwnerBundle, downstream_owners: Iterable[str]) -> PhysicalOwnerBundle:
@@ -512,7 +594,7 @@ def master_escape_dichotomy() -> dict[str, str]:
     """Analytic infinite-event consequence after checkpoint segmentation is quotiented."""
     return {
         "statement": (
-            "after zero-charge relays, same-corridor service witnesses, natural-horizon checkpoints, and same-carrier checkpoint segmentation are quotiented, any infinite recursive EVENT path avoiding t=0 must contain infinitely many genuine named non-free physical owner events"
+            "after zero-charge relays, hard/smooth conservative donor relays, same-corridor service witnesses, natural-horizon checkpoints, and same-carrier checkpoint segmentation are quotiented, any infinite recursive EVENT path avoiding t=0 must contain infinitely many genuine named non-free physical owner events"
         ),
         "proof": (
             "a no-event natural horizon cannot replace the event-anchored smooth carrier or reset its cumulative strain/coefficient first-hit monitors. Inserting checkpoints therefore leaves the same first stop. At an interior accumulation of such horizons, continuity/AC gives either the existing first-stop face at the limit or continuation of the same carrier across the accumulation; if no stop occurs before t=0, the initial boundary absorbs"
@@ -537,7 +619,7 @@ def theorem_certificate() -> dict[str, object]:
             "exact ties and multiple certified downstream owner names remain a set-valued provenance mark on one unsplit physical mass; no lexicographic priority and no heterogeneous RN tie normalization"
         ),
         "coefficient_obstruction_barrier": (
-            "Duhamel HH/interface coefficient threshold hits are first-stop locators, not physical owners; the canonical event state and owner bundle reject those labels until actual Q^2 energy/work reentry returns a physical inheritance, high-strain, HH-work, relink or strain owner"
+            "Duhamel HH/interface coefficient threshold hits are first-stop locators, not physical owners; actual Q^2 energy/work reentry may return inheritance, high strain, HH generation, or smooth interface work; smooth K_phys relink is then quotiented to same-event donor provenance while simultaneous strain remains a recursive owner"
         ),
         "full_natural_service_barrier": (
             "full_natural_own_scale_service is a positive witness carried by the already-completed natural corridor, not a second recursive owner event; canonical owner states reject this classification label as an owner"
@@ -547,6 +629,9 @@ def theorem_certificate() -> dict[str, object]:
         ),
         "same_carrier_checkpoint_segmentation": (
             "a no-event checkpoint cannot replace the event-anchored smooth carrier or reset its terminal coefficient, cumulative strain action, or cumulative coefficient-impulse monitors; hard-shell readings there are state sidecars until a new physical event hardens a role"
+        ),
+        "smooth_relink_donor_quotient": (
+            "gauge-quotiented K_phys relink is a finite antisymmetric same-event role flux; the master rejects conservative_smooth_role_relink as a recursive owner, preserves its donor certificate as zero-depth provenance, and retains any simultaneous existing strain as the recursive owner"
         ),
         "universal_time_identity": "sum_j (t_j-t_(j+1)) = t_0-t_L on any ordered physical event or checkpoint times; event counting is a separate ontology",
         "natural_survivor": "a no-hit full-natural corridor consumes its theorem-supplied physical duration, but its horizon endpoint is an analysis checkpoint unless a first stop or t=0 occurs",
@@ -586,6 +671,7 @@ class QuotientStress:
     service_witness_barrier_failures: int
     checkpoint_barrier_failures: int
     checkpoint_segmentation_barrier_failures: int
+    smooth_relink_recursion_barrier_failures: int
     maximum_relay_owner_count: int
     minimum_uv_time_gap_to_naive_infinite_sum: float
 
@@ -593,7 +679,7 @@ class QuotientStress:
 def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
     rng = random.Random(seed)
     wom = wtime = wscale = 0.0
-    boundary_fail = supplier_fail = obstruction_fail = service_witness_fail = checkpoint_fail = segmentation_fail = 0
+    boundary_fail = supplier_fail = obstruction_fail = service_witness_fail = checkpoint_fail = segmentation_fail = relink_fail = 0
     maxowners = 0
     uv_gap = math.inf
 
@@ -678,6 +764,37 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
             segmentation_fail += 1
             raise AssertionError("checkpoint restart/reset request crossed the same-carrier master barrier")
 
+    try:
+        canonical_owner_bundle("raw smooth relink", 1.0, (RELINK_OWNER,))
+    except TypeError:
+        pass
+    else:
+        relink_fail += 1
+        raise AssertionError("smooth conservative relink crossed the recursive-owner boundary")
+
+    relink_work = GaugeQuotientedInterfaceWork(
+        (2.0, -1.0, -1.0),
+        (2.0, -1.0, -1.0),
+        (0.0, 0.0, 0.0),
+        0.0,
+        0.0,
+        ((0.0, 3.0, -1.0), (-3.0, 0.0, 2.0), (1.0, -2.0, 0.0)),
+    )
+    relink_route = energy_reentry_master_route(
+        "positive native smooth interface work",
+        2.0,
+        {
+            "branch": "smooth_interface_physical_work",
+            "joint_interface_owners": (RELINK_OWNER,),
+            "coefficient_impulse_used_as_physical_work": False,
+            "observer_partition_motion_charged_as_physics": False,
+            "gauge_quotiented_interface_work_certificate": relink_work,
+        },
+    )
+    if relink_route.recursive_event_created or relink_route.owner_bundle is not None:
+        relink_fail += 1
+        raise AssertionError("pure smooth relink manufactured recursive event depth")
+
     routed = owner_bundle_from_energy_reentry(
         "actual positive q^2-weighted HH work",
         1.0,
@@ -759,7 +876,7 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         if not (uv > first and math.isfinite(uv)):
             raise AssertionError("UV geometric natural-time obstruction disappeared")
 
-    return QuotientStress(samples, wom, wtime, wscale, boundary_fail, supplier_fail, obstruction_fail, service_witness_fail, checkpoint_fail, segmentation_fail, maxowners, uv_gap)
+    return QuotientStress(samples, wom, wtime, wscale, boundary_fail, supplier_fail, obstruction_fail, service_witness_fail, checkpoint_fail, segmentation_fail, relink_fail, maxowners, uv_gap)
 
 
 def main() -> None:
@@ -782,7 +899,7 @@ Physical time remains exact.  If checkpoint times are `t_0>=...>=t_L`, then `sum
 
 Endpoint hard-shell rereading at a full-natural checkpoint is likewise witness geometry.  The companion checkpoint theorem keeps the incoming hard shell `M`, the actual corridor scale `A=3M/4`, and endpoint hard-shell candidates `A,2A` distinct.  Their ratios `3/4,3/2` do not supply directional progress and, without a new physical event, those hard-shell readings do not replace the smooth carrier or define a causal scale lineage.
 
-Thus, after zero-charge relays, observer gauges, coefficient locators, same-event donor circulation, same-corridor service layers, natural-horizon checkpoints and checkpoint segmentation are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events.  A geometrically UV-growing sequence obtained only by checkpoint rereading remains a diagnostic state-reading sequence, not a master lineage.  Genuine UV progression still enters only through independently certified physical tail work/dissipation or another actual physical event.
+Thus, after zero-charge relays, observer gauges, coefficient locators, hard and smooth same-event donor circulation, same-corridor service layers, natural-horizon checkpoints and checkpoint segmentation are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events.  A geometrically UV-growing sequence obtained only by checkpoint rereading remains a diagnostic state-reading sequence, not a master lineage.  Genuine UV progression still enters only through independently certified physical tail work/dissipation or another actual physical event.
 
 Stress: `{out.samples}` quotient/path states
 - worst zero-charge owner-mass residual: `{out.worst_owner_mass_residual:.3e}`
@@ -794,10 +911,11 @@ Stress: `{out.samples}` quotient/path states
 - full-natural service-witness barrier failures: `{out.service_witness_barrier_failures}`
 - full-natural checkpoint barrier failures: `{out.checkpoint_barrier_failures}`
 - same-carrier checkpoint-segmentation barrier failures: `{out.checkpoint_segmentation_barrier_failures}`
+- smooth-relink recursion-barrier failures: `{out.smooth_relink_recursion_barrier_failures}`
 - largest relayed joint-owner set sampled: `{out.maximum_relay_owner_count}`
 - minimum sampled UV checkpoint time beyond its first natural window: `{out.minimum_uv_time_gap_to_naive_infinite_sum:.3e}`
 
-This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes no-event checkpoint segmentation from physical lineage; termination of infinitely recurring genuine physical owner events remains the open master problem.
+This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes no-event checkpoint segmentation and conservative smooth-relink donor depth from physical lineage; termination of the remaining genuine physical owner events remains the open master problem.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)

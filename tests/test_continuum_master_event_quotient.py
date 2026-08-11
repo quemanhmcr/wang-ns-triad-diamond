@@ -229,3 +229,82 @@ def test_full_natural_checkpoint_cannot_enter_recursive_event_state_or_owner_bun
             (),
             EventDisposition.FULL_NATURAL_SURVIVOR,
         )
+
+
+def _smooth_relink_reentry(*, with_strain: bool = False):
+    from src.smooth_quadratic_carrier_interface import (
+        RELINK_OWNER,
+        STRAIN_OWNER,
+        GaugeQuotientedInterfaceWork,
+    )
+
+    T = (
+        (0.0, 3.0, -1.0),
+        (-3.0, 0.0, 2.0),
+        (1.0, -2.0, 0.0),
+    )
+    relink = (2.0, -1.0, -1.0)
+    strain = (2.0, 0.0, 0.0) if with_strain else (0.0, 0.0, 0.0)
+    native = tuple(a + b for a, b in zip(relink, strain, strict=True))
+    work = GaugeQuotientedInterfaceWork(
+        native,
+        relink,
+        strain,
+        0.0,
+        0.0,
+        T,
+    )
+    owners = (RELINK_OWNER, STRAIN_OWNER) if with_strain else (RELINK_OWNER,)
+    return {
+        "branch": "smooth_interface_physical_work",
+        "joint_interface_owners": owners,
+        "coefficient_impulse_used_as_physical_work": False,
+        "observer_partition_motion_charged_as_physics": False,
+        "gauge_quotiented_interface_work_certificate": work,
+    }
+
+
+def test_raw_smooth_relink_cannot_enter_recursive_owner_bundle():
+    from src.smooth_quadratic_carrier_interface import RELINK_OWNER
+
+    with pytest.raises(TypeError, match="same-event donor relay"):
+        canonical_owner_bundle("smooth K_phys relink", 1.0, (RELINK_OWNER,))
+
+
+def test_pure_smooth_relink_energy_reentry_becomes_zero_depth_same_event_relay():
+    from src.continuum_master_event_quotient import energy_reentry_master_route
+    from src.smooth_relink_donor_quotient import SMOOTH_RELINK_SAME_EVENT_RELAY
+
+    route = energy_reentry_master_route("positive native smooth interface work", 2.0, _smooth_relink_reentry())
+    assert route.owner_bundle is None
+    assert route.recursive_event_created is False
+    assert route.same_event_relays == (SMOOTH_RELINK_SAME_EVENT_RELAY,)
+    assert route.smooth_relink_donor_certificate is not None
+    assert route.smooth_relink_donor_certificate.recursive_generation_created is False
+
+
+def test_smooth_relink_plus_strain_keeps_only_strain_as_recursive_owner():
+    from src.continuum_master_event_quotient import energy_reentry_master_route
+    from src.smooth_quadratic_carrier_interface import STRAIN_OWNER
+    from src.smooth_relink_donor_quotient import SMOOTH_RELINK_SAME_EVENT_RELAY
+
+    route = energy_reentry_master_route(
+        "positive native smooth interface work",
+        4.0,
+        _smooth_relink_reentry(with_strain=True),
+    )
+    assert route.owner_bundle is not None
+    assert route.owner_bundle.owners == (STRAIN_OWNER,)
+    assert route.recursive_event_created is True
+    assert route.same_event_relays == (SMOOTH_RELINK_SAME_EVENT_RELAY,)
+
+
+def test_legacy_owner_bundle_wrapper_rejects_pure_relink_zero_depth_route():
+    from src.continuum_master_event_quotient import owner_bundle_from_energy_reentry
+
+    with pytest.raises(TypeError, match="same-event donor relay"):
+        owner_bundle_from_energy_reentry(
+            "positive native smooth interface work",
+            2.0,
+            _smooth_relink_reentry(),
+        )

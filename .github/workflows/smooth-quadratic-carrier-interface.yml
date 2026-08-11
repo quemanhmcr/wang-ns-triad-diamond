@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'src/smooth_quadratic_carrier_interface.py'
+      - 'src/smooth_relink_donor_quotient.py'
+      - 'tests/test_smooth_relink_donor_quotient.py'
+      - 'docs/smooth_relink_donor_quotient.md'
       - 'tests/test_smooth_quadratic_carrier_interface.py'
       - 'docs/smooth_quadratic_carrier_interface.md'
       - '.github/workflows/smooth-quadratic-carrier-interface.yml'
@@ -40,6 +43,8 @@ jobs:
         run: pytest -q
       - name: Smooth quadratic-carrier interface stress
         run: python -m src.smooth_quadratic_carrier_interface --samples 50000 --outdir results-smooth-quadratic-carrier-interface
+      - name: Smooth relink donor quotient dependency
+        run: python -m src.smooth_relink_donor_quotient --samples 50000 --outdir results-smooth-relink-donor-quotient
       - name: Direct outer moving-role dependency
         run: python -m src.outer_moving_role_extraction --samples 50000 --outdir results-outer-moving-role-extraction
       - name: Hard-projector interface dependency
@@ -60,6 +65,7 @@ jobs:
           name: smooth-quadratic-carrier-interface-results
           path: |
             results-smooth-quadratic-carrier-interface/
+            results-smooth-relink-donor-quotient/
             results-outer-moving-role-extraction/
             results-nonaffine-role-interface-work/
             results-resolved-interface-donor-quotient/

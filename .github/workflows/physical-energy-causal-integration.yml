@@ -38,6 +38,8 @@ on:
       - 'src/outer_moving_role_extraction.py'
       - 'src/nonaffine_role_interface_work.py'
       - 'src/smooth_quadratic_carrier_interface.py'
+      - 'src/smooth_relink_donor_quotient.py'
+      - 'tests/test_smooth_relink_donor_quotient.py'
       - 'src/event_anchored_role_registration.py'
       - 'src/physical_pair_weighted_productivity.py'
       - 'src/recursive_physical_witness_constructor.py'
@@ -103,6 +105,7 @@ jobs:
       - run: python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-integration/cutoff-repartition-relay
       - run: python -m src.nonaffine_role_interface_work --samples 50000 --outdir results-integration/nonaffine-interface
       - run: python -m src.smooth_quadratic_carrier_interface --samples 50000 --outdir results-integration/smooth-quadratic-carrier-interface
+      - run: python -m src.smooth_relink_donor_quotient --samples 50000 --outdir results-integration/smooth-relink-donor-quotient
       - run: python -m src.event_anchored_role_registration --samples 50000 --outdir results-integration/event-role
       - run: python -m src.physical_pair_weighted_productivity --samples 50000 --outdir results-integration/physical-pair-productivity
       - run: python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-integration/recursive-witness

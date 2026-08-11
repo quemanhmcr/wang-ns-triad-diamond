@@ -1,0 +1,59 @@
+name: Smooth relink donor quotient
+
+on:
+  push:
+    paths:
+      - 'src/smooth_relink_donor_quotient.py'
+      - 'tests/test_smooth_relink_donor_quotient.py'
+      - 'docs/smooth_relink_donor_quotient.md'
+      - '.github/workflows/smooth-relink-donor-quotient.yml'
+      - 'src/smooth_quadratic_carrier_interface.py'
+      - 'tests/test_smooth_quadratic_carrier_interface.py'
+      - 'docs/smooth_quadratic_carrier_interface.md'
+      - 'src/resolved_interface_donor_quotient.py'
+      - 'tests/test_resolved_interface_donor_quotient.py'
+      - 'src/continuum_master_event_quotient.py'
+      - 'tests/test_continuum_master_event_quotient.py'
+      - 'docs/continuum_master_event_quotient.md'
+      - 'src/physical_energy_causal_bridge.py'
+      - 'docs/master_no_escape.md'
+      - '.github/workflows/physical-energy-causal-integration.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Smooth relink donor quotient stress
+        run: python -m src.smooth_relink_donor_quotient --samples 50000 --outdir results-smooth-relink-donor-quotient
+      - name: Smooth quadratic carrier dependency
+        run: python -m src.smooth_quadratic_carrier_interface --samples 50000 --outdir results-smooth-quadratic-carrier-interface
+      - name: Hard resolved donor lemma compatibility
+        run: python -m src.resolved_interface_donor_quotient --samples 50000 --outdir results-resolved-interface-donor-quotient
+      - name: Continuum master smooth-relink barrier
+        run: python -m src.continuum_master_event_quotient --samples 50000 --outdir results-continuum-master-event-quotient
+      - name: Physical-energy causal dependency
+        run: python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge
+      - run: cat results-smooth-relink-donor-quotient/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: smooth-relink-donor-quotient-results
+          path: |
+            results-smooth-relink-donor-quotient/
+            results-smooth-quadratic-carrier-interface/
+            results-resolved-interface-donor-quotient/
+            results-continuum-master-event-quotient/
+            results-physical-energy-causal-bridge/
