@@ -20,10 +20,14 @@ from src.helical_physical_edge_registration import (
 )
 from src.helical_physical_edge_registration import (
     HelicalPhysicalEdgeRegistration,
-    _positive_product as _edge_positive_product,
-    _signed_product as _edge_signed_product,
     leray_project,
     register_helical_physical_edge,
+)
+from src.helical_physical_edge_registration import (
+    _positive_product as _edge_positive_product,
+)
+from src.helical_physical_edge_registration import (
+    _signed_product as _edge_signed_product,
 )
 from src.physical_pair_weighted_productivity import physical_work_capacity_constant
 from src.physical_transfer_defect_moat import (
@@ -649,7 +653,6 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
 
     positive = _finite_sum((max(a.signed_work_mass, 0.0) for a in atoms), "continuum positive Hahn mass")
     negative = _finite_sum((max(-a.signed_work_mass, 0.0) for a in atoms), "continuum negative Hahn mass")
-    hahn_res = (positive - negative) - signed_modal
     _require_native_equal(
         "continuum Hahn split signed edge reconstruction",
         positive - negative,

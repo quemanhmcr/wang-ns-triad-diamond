@@ -5,8 +5,8 @@ fixtures.  They are intended to run in GitHub Actions on the independent audit
 lane; local development should remain static/basic only.
 """
 
-from dataclasses import replace
 import math
+from dataclasses import replace
 
 import numpy as np
 import pytest
