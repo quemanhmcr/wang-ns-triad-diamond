@@ -34,7 +34,7 @@ from src.nn_critical_heat_carrier_seed import (
     persistent_seed_low_low_gap,
     renewal_scale,
 )
-from src.nn_seed_temporal_first_stop import backward_natural_endpoint
+from src.nn_seed_temporal_first_stop import backward_natural_endpoint, renewed_natural_duration
 from src.smooth_sgs_first_hit_extraction import (
     PhysicalPathMonitor,
     ThresholdTopology,
@@ -408,6 +408,7 @@ def critical_shell_natural_outcome(
         "observed_elapsed_end": horizon,
         "corridor_terminal_time": float(event_time),
         "corridor_endpoint_time": float(event_time - required),
+        "corridor_endpoint_elapsed_from_terminal": required,
         "physical_time_drop": required,
         "renewal_frequency": A,
         "scaled_lifetime": c,
@@ -522,7 +523,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> CriticalShellServiceS
         # Generic three-monitor corridor.
         M = float(math.exp(rng.uniform(-2.0, 5.0)))
         A = renewal_scale(M)
-        T = c / (A * A)
+        T = renewed_natural_duration(A, c)
         terminal_lower = critical_shell_terminal_mass_lower(mu0)
         terminal_mass = float(rng.uniform(1.0, 2.0)) * terminal_lower
         amp = math.sqrt(terminal_mass / A)

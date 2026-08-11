@@ -10,6 +10,7 @@ from typing import Sequence
 
 from src.critical_annular_carrier_service_reentry import transported_annular_support_ratios
 from src.heat_edge_material_ownership import partition_positive_edge_measure
+from src.nn_seed_temporal_first_stop import renewed_natural_duration
 
 
 STATUS = (
@@ -54,7 +55,7 @@ class FullNaturalServiceCorridor:
     """
 
     terminal_time: float
-    endpoint_time: float
+    physical_time_drop: float
     renewal_frequency: float
     scaled_lifetime: float
     uniform_service_lower: float
@@ -64,7 +65,7 @@ class FullNaturalServiceCorridor:
     def __post_init__(self) -> None:
         vals = (
             self.terminal_time,
-            self.endpoint_time,
+            self.physical_time_drop,
             self.renewal_frequency,
             self.scaled_lifetime,
             self.uniform_service_lower,
@@ -73,7 +74,7 @@ class FullNaturalServiceCorridor:
         )
         if not all(math.isfinite(x) for x in vals):
             raise ValueError("finite corridor/service data required")
-        if self.terminal_time <= 0 or self.endpoint_time <= 0 or self.endpoint_time >= self.terminal_time:
+        if self.terminal_time <= 0 or self.physical_time_drop <= 0 or self.physical_time_drop >= self.terminal_time:
             raise ValueError("full-natural service requires one nontrivial backward physical interval")
         if self.renewal_frequency <= 0 or self.scaled_lifetime <= 0:
             raise ValueError("positive renewal frequency and lifetime required")
@@ -83,17 +84,22 @@ class FullNaturalServiceCorridor:
             self.endpoint_carrier_critical_mass_lower,
         ) <= 0:
             raise ValueError("positive own-scale service and endpoint carrier lower required")
-        expected = self.scaled_lifetime / (self.renewal_frequency * self.renewal_frequency)
-        actual = self.terminal_time - self.endpoint_time
-        if not _relative_certificate_close(actual, expected):
+        expected = renewed_natural_duration(self.renewal_frequency, self.scaled_lifetime)
+        if not _relative_certificate_close(self.physical_time_drop, expected):
             raise ValueError("service witness interval is not the completed natural corridor")
         expected_integrated = self.scaled_lifetime * self.uniform_service_lower
         if not _relative_certificate_close(self.integrated_service_lower, expected_integrated):
             raise ValueError("integrated service lower is not the normalized service of this corridor")
 
     @property
-    def physical_time_drop(self) -> float:
-        return self.terminal_time - self.endpoint_time
+    def endpoint_elapsed_from_terminal(self) -> float:
+        """Native local coordinate used by the physical-time telescope."""
+        return self.physical_time_drop
+
+    @property
+    def endpoint_time(self) -> float:
+        """Diagnostic absolute endpoint; it may round to terminal_time in deep UV."""
+        return self.terminal_time - self.physical_time_drop
 
     @property
     def parent_shell_frequency(self) -> float:
@@ -132,7 +138,7 @@ def quotient_full_natural_service_outcome(
     c = float(scaled_lifetime)
     if t <= 0 or A <= 0 or c <= 0 or not all(math.isfinite(x) for x in (t, A, c)):
         raise ValueError("positive finite event time, renewal frequency and lifetime required")
-    required = c / (A * A)
+    required = renewed_natural_duration(A, c)
     if required >= t:
         raise ValueError("a corridor reaching t=0 is an absorbing boundary, not a full-natural service witness")
     reported = float(outcome.get("required_elapsed", -1.0))
@@ -140,12 +146,13 @@ def quotient_full_natural_service_outcome(
         raise ValueError("service outcome does not report the same completed natural interval")
     horizon = float(outcome.get("observed_elapsed_end", -1.0))
     horizon_tol = RELATIVE_CERTIFICATE_TOLERANCE * max(abs(horizon), required)
-    if horizon <= 0 or horizon + horizon_tol < required:
+    if not math.isfinite(horizon) or horizon <= 0 or horizon + horizon_tol < required:
         raise ValueError("service outcome was inferred from an incomplete monitor horizon")
 
     provenance = {
         "corridor_terminal_time": t,
         "corridor_endpoint_time": t - required,
+        "corridor_endpoint_elapsed_from_terminal": required,
         "physical_time_drop": required,
         "renewal_frequency": A,
         "scaled_lifetime": c,
@@ -158,7 +165,7 @@ def quotient_full_natural_service_outcome(
 
     return FullNaturalServiceCorridor(
         terminal_time=t,
-        endpoint_time=t - required,
+        physical_time_drop=required,
         renewal_frequency=A,
         scaled_lifetime=c,
         uniform_service_lower=float(outcome["uniform_square_service_lower"]),
@@ -173,27 +180,24 @@ def endpoint_hard_shell_cover_from_full_natural_outcome(
     parent_shell_frequency: float,
 ) -> dict[str, object]:
     """Read the endpoint hard-shell cover directly from a certified survivor output."""
-    if str(outcome.get("classification", "")) != FULL_NATURAL_SERVICE_WITNESS:
-        raise ValueError("endpoint hard-shell cover requires a full-natural survivor output")
-    if not bool(outcome.get("service_same_corridor_witness", False)) or bool(outcome.get("service_adds_recursion_depth", True)):
-        raise ValueError("full-natural outcome has not certified same-corridor service semantics")
     A = float(outcome.get("renewal_frequency", -1.0))
     c = float(outcome.get("scaled_lifetime", -1.0))
-    reported_parent = float(outcome.get("parent_shell_frequency", -1.0))
-    if min(A, c, reported_parent) <= 0 or not all(math.isfinite(x) for x in (A, c, reported_parent)):
+    t = float(outcome.get("corridor_terminal_time", -1.0))
+    if min(A, c, t) <= 0 or not all(math.isfinite(x) for x in (A, c, t)):
         raise ValueError("full-natural outcome supplied no physical scale provenance")
-    derived_parent = A / RENEWAL_TO_PARENT_SHELL_RATIO
+    corridor = quotient_full_natural_service_outcome(
+        outcome,
+        event_time=t,
+        renewal_frequency=A,
+        scaled_lifetime=c,
+    )
+    derived_parent = corridor.parent_shell_frequency
     requested_parent = float(parent_shell_frequency)
-    if not _relative_certificate_close(reported_parent, derived_parent) or not _relative_certificate_close(
-        requested_parent, derived_parent
-    ):
+    if not _relative_certificate_close(requested_parent, derived_parent):
         raise ValueError("parent shell frequency does not match the certified carrier scale provenance")
-    mu = float(outcome.get("endpoint_carrier_critical_mass_lower", -1.0))
-    if mu <= 0 or not math.isfinite(mu):
-        raise ValueError("full-natural outcome supplied no positive endpoint carrier mass lower")
     return endpoint_comparable_hard_shell_cover(
         parent_shell_frequency=derived_parent,
-        endpoint_carrier_critical_mass=mu,
+        endpoint_carrier_critical_mass=corridor.endpoint_carrier_critical_mass_lower,
     )
 
 
@@ -210,7 +214,12 @@ def material_partition_is_same_corridor_measure(
     may use one of these positive submeasures to certify a new physical state, but
     that theorem must supply the actual state/time it creates.
     """
-    part = partition_positive_edge_measure(edge_weights, old_here, old_neighbor)
+    weights = tuple(float(value) for value in edge_weights)
+    if any(not math.isfinite(value) or value < 0 for value in weights) or not math.isfinite(sum(weights)):
+        raise ValueError("edge measure and its OO/ON/NN partition must remain finite")
+    part = partition_positive_edge_measure(weights, old_here, old_neighbor)
+    if not all(math.isfinite(float(value)) for value in part.values()):
+        raise ValueError("edge measure and its OO/ON/NN partition must remain finite")
     total = float(part["total"])
     lower = corridor.integrated_service_lower
     tol = RELATIVE_CERTIFICATE_TOLERANCE * max(total, lower)
@@ -220,6 +229,7 @@ def material_partition_is_same_corridor_measure(
         **part,
         "corridor_terminal_time": corridor.terminal_time,
         "corridor_endpoint_time": corridor.endpoint_time,
+        "corridor_endpoint_elapsed_from_terminal": corridor.endpoint_elapsed_from_terminal,
         "physical_time_drop_already_counted": corridor.physical_time_drop,
         "recursion_edges_added": 0,
         "causal_charge_created": False,
@@ -282,18 +292,27 @@ def realized_endpoint_hard_shell_witnesses(
     """Read all maximizing endpoint shell witnesses without lexicographic priority."""
     freqs = tuple(float(x) for x in cover["hard_shell_candidates"])
     masses = tuple(float(x) for x in candidate_critical_masses)
-    if len(freqs) != 2 or len(masses) != 2 or any((not math.isfinite(x) or x < 0) for x in masses):
-        raise ValueError("two finite nonnegative endpoint hard-shell masses required")
+    if (
+        len(freqs) != 2
+        or any(not math.isfinite(x) or x <= 0 for x in freqs)
+        or len(masses) != 2
+        or any((not math.isfinite(x) or x < 0) for x in masses)
+    ):
+        raise ValueError("two positive finite frequencies and two finite nonnegative endpoint shell masses required")
     lower = float(cover["guaranteed_max_hard_shell_critical_mass_lower"])
+    if not math.isfinite(lower) or lower <= 0:
+        raise ValueError("positive finite endpoint hard-shell witness lower required")
     mx = max(masses)
     cert_tol = RELATIVE_CERTIFICATE_TOLERANCE * max(mx, lower)
     if mx + cert_tol < lower:
         raise ValueError("actual endpoint shell masses do not realize the certified smooth-carrier cover")
     tie_eps = float(tie_tolerance)
-    if not math.isfinite(tie_eps) or tie_eps < 0:
+    if not math.isfinite(tie_eps) or tie_eps < 0 or tie_eps > RELATIVE_CERTIFICATE_TOLERANCE:
         raise ValueError("finite nonnegative tie tolerance required")
     tie_tol = tie_eps * mx
     ids = tuple(i for i, x in enumerate(masses) if mx - x <= tie_tol)
+    if any(masses[i] + cert_tol < lower for i in ids):
+        raise ValueError("tie tolerance selected a shell which is not a certified endpoint witness")
     return {
         "joint_witness_frequencies": tuple(freqs[i] for i in ids),
         "joint_witness_critical_masses": tuple(masses[i] for i in ids),
@@ -313,13 +332,13 @@ def theorem_certificate() -> dict[str, object]:
         "status": STATUS,
         "time_ontology": "full_natural_own_scale_service is a positive law carried by the already-completed physical interval [t-cA^-2,t]; reading it does not create a second event time or recursion edge",
         "scale_provenance": "the producer carries parent shell M, renewal carrier A=3M/4, scaled lifetime c, and both physical endpoints; downstream adapters may verify but never rebind those values",
-        "unit_covariance": "all corridor, service, and hard-shell certificate comparisons use relative native-unit slack with no max(1,...) absolute floor",
+        "unit_covariance": "all corridor, service, and hard-shell certificate comparisons use relative native-unit slack with no max(1,...) absolute floor; cA^-2 is carried as local elapsed time so deep-UV duration is not recovered by subtracting nearly equal global clocks",
         "material_ontology": "OO/ON/NN is a positive disintegration of that same service measure and adds zero causal charge and zero recursion depth",
-        "material_mass_gate": "the complete integrated edge measure must realize at least the corridor's positive integrated service lower before it can be marked as the same physical law",
+        "material_mass_gate": "the complete finite integrated edge measure must realize at least the corridor's positive integrated service lower before it can be marked as the same physical law",
         "endpoint_carrier": "the surviving Q_A carrier is present at the corridor endpoint itself; service is a sidecar/witness, not a prerequisite for inventing endpoint persistence",
         "hard_shell_cover": f"transported support lies in ({lo:.12g}A,{hi:.12g}A) subset (A/2,2A); therefore max(mu_A,mu_2A)>=(2/3) A||Q_Au||^2 at the same endpoint",
         "scale_geometry": "with A=3M/4, the endpoint hard-shell witness ratios are 3/4 or 3/2 relative to M; the next corridor registrations are 3/4 of those witnessed shell scales. Parent shell, carrier, witness shell, and next carrier remain separately typed",
-        "ties": "equal hard-shell witnesses remain joint; no theorem-name or frequency-order priority is introduced",
+        "ties": "equal hard-shell witnesses remain joint; numerical tie slack is capped by the certificate tolerance and cannot promote a subcritical shell; no theorem-name or frequency-order priority is introduced",
         "master_quotient": "a chain which only alternates full-natural corridors with their own-scale service/material witness layers is just a chain of full-natural physical corridors; bounded-scale such chains hit t=0 by physical time",
         "scope": "this removes service-theorem depth from the master and closes the endpoint-service attachment seam; it does not terminate UV-unbounded full-survivor chains or genuine first-hit/work/source/reuse owner recurrence",
     }
@@ -340,9 +359,9 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> ServiceCorridorStress
     mh = math.inf
     ties = 0
     for i in range(samples):
-        A = 10.0 ** rng.uniform(-40.0, 40.0)
+        A = 10.0 ** rng.uniform(-145.0, 145.0)
         c = 10.0 ** rng.uniform(-12.0, 12.0)
-        T = c / (A * A)
+        T = renewed_natural_duration(A, c)
         t = T * (1.0 + math.exp(rng.uniform(-2.0, 2.0)))
         y = 10.0 ** rng.uniform(-120.0, 80.0)
         outcome = {
@@ -355,6 +374,7 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> ServiceCorridorStress
             "endpoint_carrier_critical_mass_lower": 2.0 * y,
             "corridor_terminal_time": t,
             "corridor_endpoint_time": t - T,
+            "corridor_endpoint_elapsed_from_terminal": T,
             "physical_time_drop": T,
             "renewal_frequency": A,
             "scaled_lifetime": c,

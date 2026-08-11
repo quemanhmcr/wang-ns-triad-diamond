@@ -54,6 +54,15 @@ quantity.  No `max(1,...)` absolute floor is permitted.  This matters on the UV
 route because `cA^-2` and the corresponding critical masses can be arbitrarily
 small under natural rescaling.
 
+The corridor therefore carries `cA^-2` in its native local elapsed-time
+coordinate.  Its global endpoint `t-cA^-2` is retained only as a diagnostic
+reading: at deep UV, binary floating arithmetic may round that subtraction back
+to `t` even though the positive duration itself remains representable.  The
+physical-time telescope uses the carried duration, not subtraction of two nearly
+equal observer-clock readings.  The floating certificate still rejects scales
+whose duration itself falls outside its finite representable range; this
+numerical lane is evidence, not the continuum proof.
+
 ## 2. Materiality is a disintegration of the same law
 
 After the positive service exists, Moyal gives its physical phase-space edge
@@ -157,6 +166,11 @@ UV-unbounded survivor alternative.
 - a carrier scale cannot be rebound to an independently supplied shell scale;
 - an absolute unit-sized tolerance cannot certify a UV corridor or shell mass;
 - arbitrary or zero weights cannot be relabelled as the same positive service;
+- a non-finite edge total cannot be relabelled as a finite positive service law;
+- the endpoint-cover reader must replay the completed-corridor certificate rather
+  than trust classification flags in an arbitrary dictionary;
+- numerical tie slack is capped at the certificate tolerance and cannot promote
+  a zero or subcritical shell into the joint witness set;
 - comparable endpoint scale is not called directional progress;
 - no packet persistence or coherent-cell dominance is introduced.
 

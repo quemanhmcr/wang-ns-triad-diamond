@@ -35,7 +35,7 @@ from src.nn_critical_heat_carrier_seed import (
     renewal_natural_lifetime_ratio,
     renewal_scale,
 )
-from src.nn_seed_temporal_first_stop import backward_natural_endpoint
+from src.nn_seed_temporal_first_stop import backward_natural_endpoint, renewed_natural_duration
 from src.smooth_sgs_first_hit_extraction import (
     PhysicalPathMonitor,
     ThresholdTopology,
@@ -377,8 +377,11 @@ def critical_seed_natural_outcome(
         "joint_first_stops": (),
         "natural_duration": float(geom["natural_duration"]),
         "backward_endpoint": float(geom["backward_endpoint"]),
+        "required_elapsed": elapsed,
+        "observed_elapsed_end": horizon,
         "corridor_terminal_time": t,
         "corridor_endpoint_time": float(geom["backward_endpoint"]),
+        "corridor_endpoint_elapsed_from_terminal": float(geom["elapsed_available"]),
         "physical_time_drop": float(geom["natural_duration"]),
         "renewal_frequency": A,
         "scaled_lifetime": c,
@@ -468,7 +471,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> HighStrainCriticalRee
             j = int(rng.integers(0, 8))
             M = (N / 4.0) * (2.0 ** (-j))
             A_atom = renewal_scale(M)
-            T_atom = c / (A_atom * A_atom)
+            T_atom = renewed_natural_duration(A_atom, c)
             Eu = float(rng.uniform(1.0, 4.0)) * mu / M
             atoms.append(
                 CriticalDissipationAtom(
@@ -487,7 +490,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> HighStrainCriticalRee
             raise AssertionError("critical D_V seed law lost normalized mass")
         chosen = seeds[int(rng.integers(0, len(seeds)))]
         A = chosen.renewal_frequency
-        T = c / (A * A)
+        T = renewed_natural_duration(A, c)
         amp = math.sqrt(chosen.renewal_critical_mass / A)
         theta = float(rng.uniform(-math.pi, math.pi))
         zt = amp * complex(math.cos(theta), math.sin(theta))

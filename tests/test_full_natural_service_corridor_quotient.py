@@ -26,6 +26,7 @@ def _outcome(A: float, c: float, y: float = 0.3, *, event_time: float | None = N
         "endpoint_carrier_critical_mass_lower": 2.0 * y,
         "corridor_terminal_time": t,
         "corridor_endpoint_time": t - T,
+        "corridor_endpoint_elapsed_from_terminal": T,
         "physical_time_drop": T,
         "renewal_frequency": A,
         "scaled_lifetime": c,

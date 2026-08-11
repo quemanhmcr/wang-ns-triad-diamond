@@ -21,6 +21,7 @@ from src.full_natural_service_corridor_quotient import (
     endpoint_comparable_hard_shell_cover,
     endpoint_hard_shell_cover_from_full_natural_outcome,
     material_partition_is_same_corridor_measure,
+    quotient_full_natural_service_outcome,
     realized_endpoint_hard_shell_witnesses,
 )
 from src.high_strain_critical_carrier_reentry import (
@@ -30,6 +31,7 @@ from src.high_strain_critical_carrier_reentry import (
     pushforward_critical_dissipation_law,
 )
 from src.nn_critical_heat_carrier_seed import renewal_carrier_critical_mass_lower, renewal_scale
+from src.nn_seed_temporal_first_stop import backward_natural_endpoint, renewed_natural_duration
 
 
 def _high_strain_source_seed(
@@ -96,7 +98,7 @@ def test_corridor_identity_rejects_the_same_relative_error_at_every_parabolic_sc
     with pytest.raises(ValueError, match="completed natural corridor"):
         FullNaturalServiceCorridor(
             terminal_time=2.0 * expected,
-            endpoint_time=1.5 * expected,
+            physical_time_drop=0.5 * expected,
             renewal_frequency=A,
             scaled_lifetime=1.0,
             uniform_service_lower=1.0,
@@ -122,7 +124,7 @@ def test_endpoint_cover_cannot_rebind_a_certified_carrier_to_a_foreign_shell_sca
 def test_positive_corridor_service_cannot_be_relabelled_as_a_zero_edge_measure():
     corridor = FullNaturalServiceCorridor(
         terminal_time=2.0,
-        endpoint_time=1.0,
+        physical_time_drop=1.0,
         renewal_frequency=1.0,
         scaled_lifetime=1.0,
         uniform_service_lower=0.5,
@@ -349,6 +351,38 @@ def test_uv_corridor_carries_local_elapsed_time_without_subtracting_a_global_clo
     )
     assert corridor.physical_time_drop == drop
     assert corridor.endpoint_elapsed_from_terminal == drop
+    outcome = {
+        "classification": FULL_NATURAL_SERVICE_WITNESS,
+        "joint_first_stops": (),
+        "required_elapsed": drop,
+        "observed_elapsed_end": drop,
+        "uniform_square_service_lower": 1.0,
+        "integrated_bounded_heat_service_lower": 1.0,
+        "endpoint_carrier_critical_mass_lower": 1.0,
+        "corridor_terminal_time": 1.0,
+        "corridor_endpoint_time": 1.0 - drop,
+        "corridor_endpoint_elapsed_from_terminal": drop,
+        "physical_time_drop": drop,
+        "renewal_frequency": 1.0e100,
+        "scaled_lifetime": 1.0,
+        "parent_shell_frequency": 1.0e100 / 0.75,
+        "service_same_corridor_witness": True,
+        "service_adds_recursion_depth": False,
+        "requires_physical_energy_reentry": False,
+        "coefficient_impulses_used_as_work": False,
+    }
+    certified = quotient_full_natural_service_outcome(
+        outcome,
+        event_time=1.0,
+        renewal_frequency=1.0e100,
+        scaled_lifetime=1.0,
+    )
+    assert certified.physical_time_drop == drop
+    subnormal_drop = renewed_natural_duration(1.0e160, 1.0)
+    assert subnormal_drop > 0.0
+    geometry = backward_natural_endpoint(1.0, 1.0e160, 1.0)
+    assert geometry["elapsed_available"] == subnormal_drop
+    assert geometry["backward_endpoint"] == 1.0
 
 
 def test_endpoint_cover_rejects_a_dict_without_a_completed_corridor_certificate():
@@ -361,7 +395,7 @@ def test_endpoint_cover_rejects_a_dict_without_a_completed_corridor_certificate(
         "parent_shell_frequency": 4.0,
         "endpoint_carrier_critical_mass_lower": 1.0,
     }
-    with pytest.raises((KeyError, ValueError), match="corridor|service|elapsed|time"):
+    with pytest.raises((KeyError, ValueError), match="corridor|service|elapsed|time|provenance"):
         endpoint_hard_shell_cover_from_full_natural_outcome(
             forged,
             parent_shell_frequency=4.0,
@@ -385,7 +419,7 @@ def test_oversized_tie_tolerance_cannot_promote_a_zero_shell_to_joint_witness():
 def test_overflowed_edge_sum_cannot_be_marked_as_the_same_finite_service_measure():
     corridor = FullNaturalServiceCorridor(
         terminal_time=2.0,
-        endpoint_time=1.0,
+        physical_time_drop=1.0,
         renewal_frequency=1.0,
         scaled_lifetime=1.0,
         uniform_service_lower=0.5,
@@ -398,4 +432,49 @@ def test_overflowed_edge_sum_cannot_be_marked_as_the_same_finite_service_measure
             edge_weights=[1.0e308, 1.0e308],
             old_here=[True, False],
             old_neighbor=[True, False],
+        )
+
+
+def test_generic_producer_rejects_nonfinite_coefficients_and_inconsistent_first_hit_data():
+    M = 4.0
+    A = renewal_scale(M)
+    c = 1.0
+    T = c / A**2
+    mu0 = 2.0
+    amp = math.sqrt(1.2 * critical_shell_terminal_mass_lower(mu0) / A)
+    hit = critical_shell_backward_first_hit(
+        np.linspace(0.0, T, 5),
+        terminal_amplitude=amp,
+        strain_action=np.zeros(5),
+        residual_impulse_abs=np.zeros(5),
+        hh_impulse_abs=np.zeros(5),
+    )
+    common = {
+        "event_time": 2.0 * T,
+        "parent_shell_frequency": M,
+        "renewal_frequency": A,
+        "shell_critical_mass_lower": mu0,
+        "scaled_lifetime": c,
+        "viscosity": 1.0,
+        "terminal_coefficient": amp,
+        "hh_impulse": 0j,
+        "residual_interface_impulse": 0j,
+    }
+    with pytest.raises(ValueError, match="finite"):
+        critical_shell_natural_outcome(
+            **common,
+            endpoint_coefficient=complex(math.nan, 0.0),
+            first_hit=hit,
+        )
+    forged_hit = {
+        **hit,
+        "first_elapsed": None,
+        "joint_first_stops": ("high_strain_critical_dissipation",),
+        "joint_causes": ("high_strain_critical_dissipation",),
+    }
+    with pytest.raises(ValueError, match="debut time|inconsistent"):
+        critical_shell_natural_outcome(
+            **common,
+            endpoint_coefficient=amp,
+            first_hit=forged_hit,
         )
