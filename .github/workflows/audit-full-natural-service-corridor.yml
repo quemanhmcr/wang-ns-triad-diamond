@@ -1,0 +1,29 @@
+name: Audit full natural service corridor
+
+on:
+  push:
+    branches:
+      - 'audit/full-natural-service-corridor-e351'
+    paths:
+      - 'src/full_natural_service_corridor_quotient.py'
+      - 'src/critical_shell_service_reentry.py'
+      - 'tests/test_full_natural_service_corridor_audit.py'
+      - '.github/workflows/audit-full-natural-service-corridor.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adversarial-boundary-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Run scale, provenance, and positivity anti-tests
+        run: pytest -q tests/test_full_natural_service_corridor_audit.py
