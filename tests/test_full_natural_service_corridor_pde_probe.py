@@ -7,4 +7,6 @@ def test_dealiased_navier_stokes_corridor_keeps_q2_cover_and_service_on_one_inte
     assert result.scaled_lifetime == result.duration * result.carrier_frequency**2
     assert result.final_carrier_energy_resolution_spread < 2.0e-2
     assert all(run.maximum_absolute_carrier_nonlinear_work > 1.0e-8 for run in result.runs)
-    assert all(run.integrated_same_interval_bounded_service > 0 for run in result.runs)
+    assert all(run.minimum_full_heat_service_to_carrier_mass_ratio > 0 for run in result.runs)
+    assert all(run.minimum_bounded_heat_lower_to_carrier_mass_ratio > 0 for run in result.runs)
+    assert all(run.integrated_same_interval_bounded_heat_service_lower > 0 for run in result.runs)

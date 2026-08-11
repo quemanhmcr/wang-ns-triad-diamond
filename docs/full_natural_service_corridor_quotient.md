@@ -41,6 +41,14 @@ cannot provide replacements for them.  In particular, a carrier proved near one
 `A` cannot be rebound to a foreign hard-shell scale by passing a new number to an
 adapter.
 
+That binding is enforced at the producer boundary as well.  The generic-shell
+producer receives the actual parent `M` and rejects any requested `A` other than
+`3M/4`.  On the high-strain route, the pushed-forward critical seed carries its
+own shell time, parent and child frequencies, scaled lifetime, and actual renewed
+critical mass.  The corridor must reuse all of them, including the event time and
+the terminal coefficient mass; it cannot manufacture a later event so that a
+short corridor appears full-natural.
+
 Every numerical equality guard is relative to the like-dimensional physical
 quantity.  No `max(1,...)` absolute floor is permitted.  This matters on the UV
 route because `cA^-2` and the corresponding critical masses can be arbitrarily
@@ -166,6 +174,18 @@ resolutions it reads, from the same evolved physical interval,
   nonlinearity;
 - the endpoint two-hard-shell cover and its `2/3` witness lower;
 - positive bounded increment service integrated on that same corridor.
+
+The heat-service row is evaluated from the exact intrinsic Gaussian displacement
+law.  In Fourier variables the probe uses
+
+\[
+2\left(1-e^{-|\xi|^2/(2A^2)}\right)
+\]
+
+and removes the radius-`3/A` tail with the same certified Gaussian tail bound as
+the theorem.  It checks both the full annular heat lower and the retained bounded
+lower at every evolved time; no hand-picked list of translation directions is
+used as a surrogate.
 
 This is a resolved Fourier--Galerkin approximation to Navier--Stokes, not an
 artificial evolution and not a proof of the continuum theorem.  Its purpose is

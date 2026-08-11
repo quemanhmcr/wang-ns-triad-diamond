@@ -32,6 +32,28 @@ from src.high_strain_critical_carrier_reentry import (
 from src.nn_critical_heat_carrier_seed import renewal_carrier_critical_mass_lower, renewal_scale
 
 
+def _high_strain_source_seed(
+    *,
+    scaled_lifetime: float,
+    renewal_frequency: float,
+    event_time: float,
+    terminal_mass: float,
+):
+    M = renewal_frequency / 0.75
+    return pushforward_critical_dissipation_law(
+        (
+            CriticalDissipationAtom(
+                mass=1.0,
+                child_frequency=4.0 * M,
+                shell_upper_frequency=M,
+                shell_energy_u=terminal_mass / renewal_frequency,
+                time=event_time,
+            ),
+        ),
+        scaled_lifetime=scaled_lifetime,
+    )[0]
+
+
 def _actual_full_natural_outcome(*, parent_shell_frequency: float = 4.0) -> tuple[dict[str, object], float]:
     c = 1.0
     M = float(parent_shell_frequency)
@@ -51,6 +73,7 @@ def _actual_full_natural_outcome(*, parent_shell_frequency: float = 4.0) -> tupl
     hh = 0.2j * amp
     outcome = critical_shell_natural_outcome(
         event_time=2.0 * T,
+        parent_shell_frequency=M,
         renewal_frequency=A,
         shell_critical_mass_lower=mu0,
         scaled_lifetime=c,
@@ -141,6 +164,7 @@ def test_generic_uv_corridor_cannot_be_certified_from_half_of_its_monitor_histor
     with pytest.raises(ValueError, match="do not cover"):
         critical_shell_natural_outcome(
             event_time=2.0 * T,
+            parent_shell_frequency=A / 0.75,
             renewal_frequency=A,
             shell_critical_mass_lower=mu0,
             scaled_lifetime=c,
@@ -157,7 +181,14 @@ def test_high_strain_uv_corridor_requires_a_full_monitor_horizon():
     A = 1.0e8
     c = 1.0
     T = c / A**2
-    amp = math.sqrt(1.1 * renewal_carrier_critical_mass_lower(c) / A)
+    terminal_mass = 1.1 * renewal_carrier_critical_mass_lower(c)
+    amp = math.sqrt(terminal_mass / A)
+    seed = _high_strain_source_seed(
+        scaled_lifetime=c,
+        renewal_frequency=A,
+        event_time=2.0 * T,
+        terminal_mass=terminal_mass,
+    )
     elapsed = np.linspace(0.0, 0.5 * T, 4)
     first_hit = critical_seed_backward_first_hit(
         elapsed,
@@ -168,6 +199,7 @@ def test_high_strain_uv_corridor_requires_a_full_monitor_horizon():
     )
     with pytest.raises(ValueError, match="do not cover"):
         critical_seed_natural_outcome(
+            source_seed=seed,
             event_time=2.0 * T,
             renewal_frequency=A,
             scaled_lifetime=c,
@@ -184,7 +216,14 @@ def test_high_strain_monitor_thresholds_are_bound_to_the_actual_terminal_amplitu
     A = 3.0
     c = 1.0
     T = c / A**2
-    amp = math.sqrt(1.1 * renewal_carrier_critical_mass_lower(c) / A)
+    terminal_mass = 1.1 * renewal_carrier_critical_mass_lower(c)
+    amp = math.sqrt(terminal_mass / A)
+    seed = _high_strain_source_seed(
+        scaled_lifetime=c,
+        renewal_frequency=A,
+        event_time=2.0 * T,
+        terminal_mass=terminal_mass,
+    )
     elapsed = np.linspace(0.0, T, 4)
     first_hit = critical_seed_backward_first_hit(
         elapsed,
@@ -195,6 +234,7 @@ def test_high_strain_monitor_thresholds_are_bound_to_the_actual_terminal_amplitu
     )
     with pytest.raises(ValueError, match="thresholds do not match"):
         critical_seed_natural_outcome(
+            source_seed=seed,
             event_time=2.0 * T,
             renewal_frequency=A,
             scaled_lifetime=c,

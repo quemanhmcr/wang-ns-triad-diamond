@@ -9,7 +9,13 @@ from typing import Sequence
 
 import numpy as np
 
-from src.critical_annular_carrier_service_reentry import transported_annular_support_ratios
+from src.critical_annular_carrier_service_reentry import (
+    BOUNDED_HEAT_RADIUS,
+    bounded_heat_defect_fraction_lower,
+    gaussian_3d_tail_probability,
+    heat_defect_fraction_lower,
+    transported_annular_support_ratios,
+)
 
 
 STATUS = (
@@ -143,27 +149,31 @@ def _carrier_symbol(k2: np.ndarray, carrier_frequency: float) -> np.ndarray:
     return symbol
 
 
-def _bounded_increment_energy(
+def _intrinsic_heat_increment_energies(
     carrier_hat: np.ndarray,
-    k: np.ndarray,
+    k2: np.ndarray,
     carrier_frequency: float,
     resolution: int,
-) -> float:
-    directions = (
-        (1.0, 0.0, 0.0),
-        (0.0, 1.0, 0.0),
-        (0.0, 0.0, 1.0),
-        (1.0 / math.sqrt(2.0), 1.0 / math.sqrt(2.0), 0.0),
-        (1.0 / math.sqrt(3.0), 1.0 / math.sqrt(3.0), 1.0 / math.sqrt(3.0)),
+) -> tuple[float, float]:
+    """Exact heat-law service and its radius-3/A retained lower.
+
+    For the intrinsic displacement r~N(0,A^-2 I), Plancherel gives the exact
+    multiplier 2(1-exp(-|k|^2/(2A^2))).  Removing |r|>3/A costs at most four
+    times the Gaussian tail probability times ||Q_A u||_2^2.  This is the same
+    heat-semigroup law and the same truncation used by the continuum theorem;
+    no observer-chosen list of displacement directions is substituted.
+    """
+    A = float(carrier_frequency)
+    heat_multiplier = 2.0 * (1.0 - np.exp(-0.5 * k2 / (A * A)))
+    full_heat = _spectral_inner(
+        np.sqrt(heat_multiplier)[None, ...] * carrier_hat,
+        np.sqrt(heat_multiplier)[None, ...] * carrier_hat,
+        resolution,
     )
-    radius = 1.5 / carrier_frequency
-    best = 0.0
-    for direction in directions:
-        phase = radius * sum(float(direction[j]) * k[j] for j in range(3))
-        multiplier = np.exp(1j * phase) - 1.0
-        increment = carrier_hat * multiplier[None, ...]
-        best = max(best, _spectral_inner(increment, increment, resolution))
-    return best
+    carrier_energy = _spectral_inner(carrier_hat, carrier_hat, resolution)
+    tail = gaussian_3d_tail_probability(BOUNDED_HEAT_RADIUS)
+    bounded_heat_lower = full_heat - 4.0 * tail * carrier_energy
+    return full_heat, bounded_heat_lower
 
 
 def _observables(
@@ -216,8 +226,14 @@ def _observables(
         max(0.0, float(np.vdot(divergence_hat, divergence_hat).real / float(n**6)))
     )
 
-    increment_energy = _bounded_increment_energy(carrier, k, carrier_frequency, n)
-    bounded_service = carrier_frequency * increment_energy
+    full_heat_energy, bounded_heat_energy_lower = _intrinsic_heat_increment_energies(
+        carrier,
+        k2,
+        carrier_frequency,
+        n,
+    )
+    full_heat_service = carrier_frequency * full_heat_energy
+    bounded_heat_service_lower = carrier_frequency * bounded_heat_energy_lower
     return {
         "carrier_energy": carrier_energy,
         "carrier_critical_mass": carrier_critical_mass,
@@ -226,8 +242,10 @@ def _observables(
         "direct_identity_relative_residual": abs(direct_carrier_derivative - carrier_power) / identity_scale,
         "hard_shell_cover_relative_margin": (cover_sum - carrier_critical_mass) / cover_scale,
         "hard_shell_max_relative_margin": (max(mu_a, mu_2a) - (2.0 / 3.0) * carrier_critical_mass) / cover_scale,
-        "bounded_service": bounded_service,
-        "bounded_service_to_carrier_mass_ratio": bounded_service / cover_scale,
+        "full_heat_service": full_heat_service,
+        "full_heat_service_to_carrier_mass_ratio": full_heat_service / cover_scale,
+        "bounded_heat_service_lower": bounded_heat_service_lower,
+        "bounded_heat_lower_to_carrier_mass_ratio": bounded_heat_service_lower / cover_scale,
         "global_energy": global_energy,
         "global_power": global_power,
         "global_nonlinear_work": global_nonlinear_work,
@@ -249,8 +267,9 @@ class GalerkinCorridorRun:
     maximum_divergence_norm: float
     minimum_hard_shell_cover_relative_margin: float
     minimum_hard_shell_max_relative_margin: float
-    minimum_bounded_service_to_carrier_mass_ratio: float
-    integrated_same_interval_bounded_service: float
+    minimum_full_heat_service_to_carrier_mass_ratio: float
+    minimum_bounded_heat_lower_to_carrier_mass_ratio: float
+    integrated_same_interval_bounded_heat_service_lower: float
     maximum_absolute_carrier_nonlinear_work: float
 
 
@@ -283,7 +302,8 @@ def simulate_galerkin_corridor(
     max_divergence = float(before["divergence_norm"])
     min_cover = float(before["hard_shell_cover_relative_margin"])
     min_max_cover = float(before["hard_shell_max_relative_margin"])
-    min_service = float(before["bounded_service_to_carrier_mass_ratio"])
+    min_full_heat = float(before["full_heat_service_to_carrier_mass_ratio"])
+    min_bounded_heat = float(before["bounded_heat_lower_to_carrier_mass_ratio"])
     max_carrier_nonlinear = abs(float(before["carrier_nonlinear_work"]))
 
     for _ in range(count):
@@ -292,14 +312,18 @@ def simulate_galerkin_corridor(
         carrier_action += 0.5 * dt * (float(before["carrier_power"]) + float(after["carrier_power"]))
         global_action += 0.5 * dt * (float(before["global_power"]) + float(after["global_power"]))
         integrated_service += 0.5 * dt * A**2 * (
-            float(before["bounded_service"]) + float(after["bounded_service"])
+            float(before["bounded_heat_service_lower"]) + float(after["bounded_heat_service_lower"])
         )
         max_identity = max(max_identity, float(after["direct_identity_relative_residual"]))
         max_global_nonlinear = max(max_global_nonlinear, abs(float(after["global_nonlinear_work"])))
         max_divergence = max(max_divergence, float(after["divergence_norm"]))
         min_cover = min(min_cover, float(after["hard_shell_cover_relative_margin"]))
         min_max_cover = min(min_max_cover, float(after["hard_shell_max_relative_margin"]))
-        min_service = min(min_service, float(after["bounded_service_to_carrier_mass_ratio"]))
+        min_full_heat = min(min_full_heat, float(after["full_heat_service_to_carrier_mass_ratio"]))
+        min_bounded_heat = min(
+            min_bounded_heat,
+            float(after["bounded_heat_lower_to_carrier_mass_ratio"]),
+        )
         max_carrier_nonlinear = max(max_carrier_nonlinear, abs(float(after["carrier_nonlinear_work"])))
         before = after
 
@@ -320,8 +344,9 @@ def simulate_galerkin_corridor(
         maximum_divergence_norm=max_divergence,
         minimum_hard_shell_cover_relative_margin=min_cover,
         minimum_hard_shell_max_relative_margin=min_max_cover,
-        minimum_bounded_service_to_carrier_mass_ratio=min_service,
-        integrated_same_interval_bounded_service=integrated_service,
+        minimum_full_heat_service_to_carrier_mass_ratio=min_full_heat,
+        minimum_bounded_heat_lower_to_carrier_mass_ratio=min_bounded_heat,
+        integrated_same_interval_bounded_heat_service_lower=integrated_service,
         maximum_absolute_carrier_nonlinear_work=max_carrier_nonlinear,
     )
 
@@ -375,9 +400,14 @@ def run_physical_pde_probe(
             raise AssertionError("actual evolved Q carrier escaped its two hard shells")
         if run.minimum_hard_shell_max_relative_margin < -2.0e-12:
             raise AssertionError("actual evolved endpoint shell witness lost the two-thirds lower")
-        if run.minimum_bounded_service_to_carrier_mass_ratio <= 1.0e-8:
-            raise AssertionError("evolved annular carrier lost bounded increment service")
-        if run.integrated_same_interval_bounded_service <= 0:
+        if run.minimum_full_heat_service_to_carrier_mass_ratio + 2.0e-12 < heat_defect_fraction_lower():
+            raise AssertionError("evolved annular carrier violated the intrinsic heat-service lower")
+        if (
+            run.minimum_bounded_heat_lower_to_carrier_mass_ratio + 2.0e-12
+            < bounded_heat_defect_fraction_lower()
+        ):
+            raise AssertionError("evolved annular carrier violated the radius-3 bounded heat lower")
+        if run.integrated_same_interval_bounded_heat_service_lower <= 0:
             raise AssertionError("same physical corridor carried no integrated bounded service")
         if run.maximum_absolute_carrier_nonlinear_work <= 1.0e-8:
             raise AssertionError("PDE probe degenerated to a nonlinear-null carrier")
@@ -427,15 +457,18 @@ def main() -> None:
         "",
         f"Physical corridor: `T={result.duration:.12g}=c A^-2`, `c={result.scaled_lifetime:.12g}`, `A={result.carrier_frequency:.12g}`, `nu={result.viscosity:.12g}`.",
         "",
-        "| N | steps | Q2 identity | carrier balance | global balance | shell-cover margin | service/carrier | nonlinear work |",
-        "|---:|---:|---:|---:|---:|---:|---:|---:|",
+        f"Intrinsic heat-law thresholds: full annular fraction `q={heat_defect_fraction_lower():.12g}`; radius-{BOUNDED_HEAT_RADIUS:g}/A retained fraction `q_b={bounded_heat_defect_fraction_lower():.12g}`.",
+        "",
+        "| N | steps | Q2 identity | carrier balance | global balance | shell-cover margin | full heat/carrier | bounded heat lower/carrier | nonlinear work |",
+        "|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for run in result.runs:
         lines.append(
             f"| {run.resolution} | {run.steps} | {run.maximum_direct_q2_identity_relative_residual:.3e} | "
             f"{run.carrier_energy_balance_relative_residual:.3e} | {run.global_energy_balance_relative_residual:.3e} | "
             f"{run.minimum_hard_shell_cover_relative_margin:.3e} | "
-            f"{run.minimum_bounded_service_to_carrier_mass_ratio:.3e} | "
+            f"{run.minimum_full_heat_service_to_carrier_mass_ratio:.3e} | "
+            f"{run.minimum_bounded_heat_lower_to_carrier_mass_ratio:.3e} | "
             f"{run.maximum_absolute_carrier_nonlinear_work:.3e} |"
         )
     lines.extend(

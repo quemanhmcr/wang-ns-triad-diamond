@@ -65,6 +65,7 @@ class CriticalCarrierSeed:
     normalized_dissipation_weight: float
     dissipation_mass: float
     time: float
+    scaled_lifetime: float
     child_frequency: float
     shell_upper_frequency: float
     renewal_frequency: float
@@ -96,13 +97,15 @@ def pushforward_critical_dissipation_law(
     total = 0.0
     for a in rows:
         vals = (a.mass, a.child_frequency, a.shell_upper_frequency, a.shell_energy_u, a.time)
-        if a.mass <= 0 or a.child_frequency <= 0 or a.shell_upper_frequency <= 0 or a.shell_energy_u < 0:
-            raise ValueError("positive mass/frequencies and nonnegative shell energy required")
+        if a.mass <= 0 or a.child_frequency <= 0 or a.shell_upper_frequency <= 0 or a.shell_energy_u < 0 or a.time <= 0:
+            raise ValueError("positive mass/frequencies/time and nonnegative shell energy required")
         if not all(math.isfinite(x) for x in vals):
             raise ValueError("finite critical dissipation atom data required")
         if a.shell_upper_frequency > a.child_frequency / 4.0 * (1.0 + 1e-13):
             raise ValueError("critical ancestor shell must satisfy M<=N/4")
-        if a.shell_upper_frequency * a.shell_energy_u < mu_star - 3e-13 * max(1.0, mu_star):
+        shell_mass = a.shell_upper_frequency * a.shell_energy_u
+        shell_tol = 3e-13 * max(shell_mass, mu_star)
+        if shell_mass + shell_tol < mu_star:
             raise ValueError("dissipation atom is not on the critical shell-time set G")
         total += a.mass
     seeds: list[CriticalCarrierSeed] = []
@@ -114,6 +117,7 @@ def pushforward_critical_dissipation_law(
                 normalized_dissipation_weight=a.mass / total,
                 dissipation_mass=a.mass,
                 time=a.time,
+                scaled_lifetime=c,
                 child_frequency=a.child_frequency,
                 shell_upper_frequency=M,
                 renewal_frequency=A,
@@ -126,7 +130,8 @@ def pushforward_critical_dissipation_law(
         raise AssertionError("critical dissipation-law pushforward failed to normalize")
     lower = renewal_carrier_critical_mass_lower(c)
     for x in seeds:
-        if x.renewal_critical_mass < lower - 4e-13 * max(1.0, lower):
+        renewed_tol = 4e-13 * max(x.renewal_critical_mass, lower)
+        if x.renewal_critical_mass + renewed_tol < lower:
             raise AssertionError("critical D_V atom lost renewed whole-shell mass")
     return tuple(seeds)
 
@@ -193,6 +198,7 @@ def critical_seed_backward_first_hit(
 
 def critical_seed_natural_outcome(
     *,
+    source_seed: CriticalCarrierSeed,
     event_time: float,
     renewal_frequency: float,
     scaled_lifetime: float,
@@ -211,23 +217,82 @@ def critical_seed_natural_outcome(
     high-strain hit is another critical dissipation recursion, not an additive
     reset.
     """
-    geom = backward_natural_endpoint(event_time, renewal_frequency, scaled_lifetime)
+    seed = source_seed
+    t = float(event_time)
     A = float(renewal_frequency)
     zt = complex(terminal_coefficient)
     zs = complex(endpoint_coefficient)
     ih = complex(hh_impulse)
     ir = complex(residual_interface_impulse)
     amp = abs(zt)
-    if A <= 0 or amp <= 0:
-        raise ValueError("positive renewal frequency and nonzero terminal coefficient required")
     c = float(scaled_lifetime)
     nu = float(viscosity)
-    if c <= 0 or nu < 0 or not math.isfinite(c + nu):
-        raise ValueError("positive finite lifetime and nonnegative viscosity required")
+    source_values = (
+        seed.normalized_dissipation_weight,
+        seed.dissipation_mass,
+        seed.time,
+        seed.scaled_lifetime,
+        seed.child_frequency,
+        seed.shell_upper_frequency,
+        seed.renewal_frequency,
+        seed.shell_critical_mass,
+        seed.renewal_critical_mass,
+        seed.natural_lifetime_ratio,
+    )
+    if (
+        A <= 0
+        or amp <= 0
+        or c <= 0
+        or nu < 0
+        or t <= 0
+        or not all(
+            math.isfinite(x)
+            for x in (
+                A,
+                amp,
+                c,
+                nu,
+                t,
+                zt.real,
+                zt.imag,
+                zs.real,
+                zs.imag,
+                ih.real,
+                ih.imag,
+                ir.real,
+                ir.imag,
+            )
+        )
+        or not all(
+        math.isfinite(x) and x > 0 for x in source_values
+        )
+    ):
+        raise ValueError("positive finite source seed, event/lifetime and nonnegative viscosity required")
+    expected_A = renewal_scale(seed.shell_upper_frequency)
+    expected_renewed_mass = RENEWAL_SCALE_FACTOR * seed.shell_critical_mass
+    expected_lifetime_ratio = renewal_natural_lifetime_ratio(seed.child_frequency, seed.shell_upper_frequency)
+    provenance = (
+        (t, seed.time, "event time"),
+        (A, seed.renewal_frequency, "renewal frequency"),
+        (A, expected_A, "parent-shell renewal scale"),
+        (c, seed.scaled_lifetime, "scaled lifetime"),
+        (seed.renewal_critical_mass, expected_renewed_mass, "renewed critical mass"),
+        (seed.natural_lifetime_ratio, expected_lifetime_ratio, "natural lifetime ratio"),
+    )
+    for supplied, carried, name in provenance:
+        tol = 4e-12 * max(abs(supplied), abs(carried))
+        if abs(supplied - carried) > tol:
+            raise ValueError(f"source seed {name} provenance does not match the requested corridor")
+    if seed.shell_upper_frequency > seed.child_frequency / 4.0 * (1.0 + 1e-13):
+        raise ValueError("source seed parent shell escaped its certified child-scale range")
+    geom = backward_natural_endpoint(t, A, c)
     seed_lower = renewal_carrier_critical_mass_lower(c)
     terminal_mass = A * amp * amp
-    terminal_tol = 4e-12 * max(terminal_mass, seed_lower)
-    if terminal_mass + terminal_tol < seed_lower:
+    terminal_tol = 4e-12 * max(terminal_mass, seed.renewal_critical_mass)
+    if abs(terminal_mass - seed.renewal_critical_mass) > terminal_tol:
+        raise ValueError("terminal coefficient does not realize the carried source seed mass")
+    lower_tol = 4e-12 * max(terminal_mass, seed_lower)
+    if terminal_mass + lower_tol < seed_lower:
         raise ValueError("terminal coefficient is not a certified critical shell seed")
     monitor_amp = float(first_hit.get("terminal_amplitude", -1.0))
     monitor_amp_tol = 4e-12 * max(amp, abs(monitor_amp))
@@ -250,6 +315,19 @@ def critical_seed_natural_outcome(
     if horizon <= 0 or horizon + horizon_tol < elapsed:
         raise ValueError("first-hit monitors do not cover the required backward corridor")
     hit = None if hit_time is None else float(hit_time)
+    allowed_causes = {
+        "high_strain_critical_dissipation",
+        ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
+        HH_COEFFICIENT_OBSTRUCTION,
+    }
+    if any(label not in allowed_causes for label in causes):
+        raise ValueError("first-hit certificate contains an unknown physical monitor")
+    if hit is None and causes:
+        raise ValueError("first-hit causes require an actual finite debut time")
+    if hit is not None and (not math.isfinite(hit) or hit < 0 or not causes):
+        raise ValueError("first-hit debut and joint cause set are inconsistent")
+    if hit is not None and hit > horizon + 2e-12 * max(abs(hit), horizon):
+        raise ValueError("first-hit debut lies beyond the observed monitor horizon")
     hit_tol = 0.0 if hit is None else 2e-12 * max(abs(hit), elapsed)
     if hit is not None and hit <= elapsed + hit_tol:
         return {
@@ -299,12 +377,15 @@ def critical_seed_natural_outcome(
         "joint_first_stops": (),
         "natural_duration": float(geom["natural_duration"]),
         "backward_endpoint": float(geom["backward_endpoint"]),
-        "corridor_terminal_time": float(event_time),
+        "corridor_terminal_time": t,
         "corridor_endpoint_time": float(geom["backward_endpoint"]),
         "physical_time_drop": float(geom["natural_duration"]),
         "renewal_frequency": A,
         "scaled_lifetime": c,
-        "parent_shell_frequency": A / RENEWAL_SCALE_FACTOR,
+        "parent_shell_frequency": seed.shell_upper_frequency,
+        "source_child_frequency": seed.child_frequency,
+        "source_dissipation_mass": seed.dissipation_mass,
+        "source_event_time": seed.time,
         "service_same_corridor_witness": True,
         "service_adds_recursion_depth": False,
         "terminal_critical_mass": terminal_mass,
@@ -342,7 +423,7 @@ def theorem_certificate(scaled_lifetime: float = 1.0, viscosity: float = 1.0) ->
     return {
         "status": "EXACT_HIGH_STRAIN_CRITICAL_DISSIPATION_LAW_TO_OWN_SCALE_SERVICE_REENTRY__NN_NOT_REQUIRED_FOR_RENEWAL_ENTRANCE__UNIVERSAL_SOURCE_RELINK_REMAINS",
         "positive_input_law": f"high strain gives D_V|_G >= D_V/2 on the actual positive resolved-dissipation law; clean endpoint fraction={frac:.12g}",
-        "pushforward": "normalize D_V restricted to G and push its deterministic shell-time mark (j,t) to A=3M/4; no heat edge, coherent-cell argmax, or material label is required for this entrance",
+        "pushforward": "normalize D_V restricted to G and push its deterministic shell-time mark (j,t) to A=3M/4; the typed seed carries t, c, child N, parent M, A and actual renewed mass, all of which the corridor must reuse; no heat edge, coherent-cell argmax, or material label is required for this entrance",
         "critical_seed": f"M||P_j u||^2>=mu_*={mu:.12g} gives A||P_j u||^2>=(3/4)mu_*={seed:.12g}; Q_A=1 on the whole shell registers that coefficient exactly",
         "first_stop": "backward over one A-natural window use renewed strain plus role-interface and HH coefficient obstructions; exact ties remain unsplit and coefficient hits only locate physical-energy reentry",
         "corridor": f"if no monitor hits and t=0 is not reached, |z(s)|>=|z(t)|/4 and the clean retained coefficient mass is >={retained:.12g}",
@@ -386,6 +467,8 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> HighStrainCriticalRee
         for _a in range(n_atoms):
             j = int(rng.integers(0, 8))
             M = (N / 4.0) * (2.0 ** (-j))
+            A_atom = renewal_scale(M)
+            T_atom = c / (A_atom * A_atom)
             Eu = float(rng.uniform(1.0, 4.0)) * mu / M
             atoms.append(
                 CriticalDissipationAtom(
@@ -393,7 +476,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> HighStrainCriticalRee
                     child_frequency=N,
                     shell_upper_frequency=M,
                     shell_energy_u=Eu,
-                    time=float(rng.uniform(0.0, 4.0 * c / (N * N))),
+                    time=float(rng.uniform(0.15, 2.5)) * T_atom,
                 )
             )
         seeds = pushforward_critical_dissipation_law(atoms, scaled_lifetime=c)
@@ -437,7 +520,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> HighStrainCriticalRee
             PhysicalPathMonitor(ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, RESIDUAL_FRACTION * amp, tuple(IRpath), ThresholdTopology.CLOSED),
             PhysicalPathMonitor(HH_COEFFICIENT_OBSTRUCTION, GENERATED_FRACTION * amp, tuple(IHpath), ThresholdTopology.CLOSED),
         ]
-        time_tol = 2e-10 * max(1.0, abs(T))
+        time_tol = 2e-10 * abs(T)
         base = first_physical_corridor_exit(ell, mons, tie_tolerance=time_tol)
         perm = rng.permutation(3)
         alt = first_physical_corridor_exit(ell, [mons[int(i)] for i in perm], tie_tolerance=time_tol)
@@ -463,11 +546,9 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> HighStrainCriticalRee
         ir = IRend * complex(math.cos(rp), math.sin(rp))
         ih = IHend * complex(math.cos(hp), math.sin(hp))
         zs = zt - ir - ih
-        event_time = float(rng.uniform(1.1, 2.5)) * T
-        if mode == 4:
-            event_time = float(rng.uniform(0.15, 0.85)) * T
         out = critical_seed_natural_outcome(
-            event_time=event_time,
+            source_seed=chosen,
+            event_time=chosen.time,
             renewal_frequency=A,
             scaled_lifetime=c,
             viscosity=nu,

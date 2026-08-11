@@ -16,6 +16,11 @@ Set
 A=\frac34M.
 \]
 
+This registration is typed at the producer boundary.  The natural-corridor
+constructor receives the actual parent `M` and verifies `A=3M/4` before emitting
+any scale provenance.  A caller therefore cannot attach a valid carrier
+calculation to a foreign shell merely by supplying another frequency.
+
 The hard shell becomes
 
 \[
