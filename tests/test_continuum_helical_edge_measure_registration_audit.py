@@ -195,7 +195,10 @@ def test_continuum_measure_product_overflow_must_fail_closed():
     # physical edge capacity/work leaves the finite native floating range.  A
     # certificate must reject this rather than normalize infinities into a
     # seemingly excellent zero-deficit block.
-    fiber = _symmetric_extremal_fiber(quotient_measure_mass=1.0e308)
+    # With amplitude two, the native modal capacity is >32 on this geometry,
+    # so C_F * qmass * A_e exceeds the largest finite binary64 value even
+    # though qmass and the one-edge physical data are each finite.
+    fiber = _fiber(amplitude=2.0, quotient_mass=1.0e308)
     with pytest.raises((ValueError, AssertionError, OverflowError), match="finite|range|overflow|capacity|measure"):
         continuum_edge_measure_ledger((fiber,))
 
