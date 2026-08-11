@@ -2,21 +2,20 @@
 
 ## Status
 
-Candidate theorem awaiting exact-SHA certification on the integration branch.
-The draft PR's earlier green runs are historical input only; they do not certify
-the observer-gauge correction introduced here.
+Certified theorem on exact implementation SHA
+`309d6ee83e39a96d8efd2a0ddcfcbf6839d9264b`.
 
-The candidate status string is
+The certified status string is
 
 `EXACT_SMOOTH_QUADRATIC_CARRIER_INTERFACE__Q2_ENERGY_LAW__COMMON_GAUGE_QUOTIENT_BEFORE_PHYSICAL_RELINK__SYMMETRIC_WORK_EXISTING_STRAIN__COEFFICIENT_OBSTRUCTION_ENERGY_REENTRY`.
 
 This theorem repairs two representation mismatches in the continuum spine.
 First, the propagated PDE carrier is a smooth non-idempotent envelope `Q`, so
-its energy effect is `Q^2`, not `Q`.  Second, a moving analysis partition is not
-automatically a physical relink law.  Observer motion is quotiented before any
+its energy effect is `Q^2`, not `Q`. Second, a moving analysis partition is not
+automatically a physical relink law. Observer motion is quotiented before any
 causal owner is assigned.
 
-The event reader remains the hard orthogonal projector `P` with `QP=P`.  The
+The event reader remains the hard orthogonal projector `P` with `QP=P`. The
 hard-projector donor theorem remains an event theorem; the smooth theorem below
 uses its own `Q^2` energy law and never borrows hard idempotence.
 
@@ -443,7 +442,7 @@ J=J^{rel}+J^{str},
 [J]_+\le[J^{rel}]_++[J^{str}]_+,
 \]
 
-positive native interface work is covered by conservative relink and existing
+positive gauge-quotiented native interface work is covered by conservative relink and existing
 strain work.  One carries at least half of the positive interface law; exact
 ties remain joint.
 
@@ -490,7 +489,7 @@ by the same affine dual flow as the selected carrier.
 
 ## 11. What this closes and what remains
 
-This candidate closes the following local seam if exact-SHA CI confirms it:
+This theorem closes the following local seam:
 
 - the propagated envelope energy is read at `Q^2` rather than pretending `Q`
   is a hard projector;
@@ -509,11 +508,58 @@ does not prove Navier--Stokes regularity.
 
 ## 12. Certification
 
-The corrected observer-gauge theorem has not yet been promoted.  Its dedicated
-workflow and the full physical-energy causal integration workflow are wired to
-run on the exact implementation SHA.  Certification data and stored artifacts
-will be recorded here only after those exact-SHA runs succeed.
+Exact implementation SHA:
+`309d6ee83e39a96d8efd2a0ddcfcbf6839d9264b`.
 
-The earlier draft-PR runs remain useful regression history for the underlying
-`Q^2` algebra, but they are **not** used as certification evidence for the new
-`dot A+[G,A]=0` gauge quotient or the canonical master obstruction barrier.
+Dedicated GitHub Actions run:
+`31444417439` — **success**.
+
+It certified:
+
+- `676` tests passed;
+- `50,000` transported square-partition/interface/PDE/reentry states;
+- worst quadratic-partition residual `4.583749441582483e-15`;
+- worst differentiated-partition residual `1.669620150224271e-14`;
+- worst common-gauge transport residual `1.594436429147036e-16`;
+- worst gauge-work cancellation residual `1.7157190746562474e-16`;
+- worst native/outer recombination residual `6.010633403939076e-16`;
+- worst physical-relink conservation residual `8.888567800392867e-16`;
+- worst strain reconstruction residual `1.894411407492663e-15`;
+- worst pair antisymmetry/symmetry residual `3.394426358046581e-16`;
+- worst pair row-sum residual `2.27440342480979e-15`;
+- worst direct carrier-energy identity residual `7.105427357601002e-14`;
+- worst resolved repartition residual `2.4513724383723456e-13`;
+- worst hard-event plateau-registration residual `9.36581393064982e-16`;
+- forbidden linear-complement counterexample defect exactly `1.0`;
+- worst quadratic-complement skew residual `6.894847688453817e-16`;
+- arbitrary observer-motion rejection count `1` with zero admissions;
+- minimum clean HH-generation margin `0.009243824425688763`;
+- all four physical-energy reentry branches exercised.
+
+The dedicated dependency artifact also certified the canonical master type
+barrier on `50,000` quotient/path states with coefficient-obstruction barrier
+failures `0`.
+
+Full physical-energy causal integration run:
+`31444417546` — **success** on the same exact SHA.
+It passed the same `676`-test suite and all source, pressure, material, high-tail,
+continuum-master, common-slice, hard/smooth role, first-stop, Shannon/Rényi,
+physical-branch, and master-episode stages. The master checked `20,000` episode
+traces with worst margin `0.0`.
+
+Stored dedicated artifact:
+`recorded-results/31444417439/smooth-quadratic-carrier-interface-results/`.
+
+GitHub dedicated artifact digest:
+`sha256:892b1aca0ee01bf67f6032170c5e571d21bf4cca85f67a86bc1c3232502ceeb5`.
+
+Full integration artifact digest:
+`sha256:a864bb7f68dd59a32252ff40ae7704a6c37dd6f49822775fac6243c477a30ca6`.
+
+The earlier draft-PR runs remain historical evidence for the pre-correction
+`Q^2` algebra only. They are not the certification source for the observer-gauge
+quotient or the canonical coefficient-obstruction type barrier.
+
+This certification is regression evidence around the encoded exact identities
+and guards. It is not a proof of global owner termination, ultraviolet closure,
+or Navier--Stokes regularity.

@@ -30,6 +30,7 @@ The current architecture has reached the following point.
 11. No critical energy or normalized dissipation event is treated as a scale-independent additive reset.
 12. The first continuum master quotient is now certified: relay depth is quotiented, physical event time is the universal recursion coordinate, bounded-scale full-natural survivor tails hit `t=0`, and any infinite escape is reduced to infinitely recurring named non-free physical owners or UV-unbounded free survivors. Global termination remains open.
 13. The resolved cross/interface branch is no longer an independent recursive generator: for the actual resolved low--high operator `L_V=K+S`, skew `K` is finite same-event conservative donor flux while symmetric `S` is existing strain/deformation ownership. Pure interface circulation is quotiented before recursion.
+14. The propagated smooth-carrier interface is now type-correct at energy and ownership level: `Q^2` is the carrier energy effect; common affine/Kelvin role motion is quotiented by `dot A+[G,A]=0`; only residual skew `K_phys` is physical relink; raw HH/interface coefficient hits remain first-stop locators until actual energy/work reentry.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -96,6 +97,14 @@ Smooth scalar PDE envelopes are propagated between events.
 If `P` is the event hard projector and `Q` is smooth with `QP=P`, then
 \[ \langle Pu,\phi\rangle=\langle Qu,P\phi\rangle. \]
 Hard projection does not need to be differentiated in time.
+The propagated smooth carrier is not a hard projector. Its physical energy is
+\[ \boxed{\|Qu\|_2^2=\langle u,Q^2u\rangle.} \]
+A complete smooth analysis may use a square partition
+\[ \sum_a A_a^2=I. \]
+That identity is analysis bookkeeping, not by itself a physical transfer law.
+Before any moving-window exchange is charged, the common affine/Kelvin transport generator `G` must be identified and the roles must satisfy
+\[ \boxed{\dot A_a+[G,A_a]=0\quad\text{for every }a.} \]
+This common motion is observer gauge and is quotiented. Only residual skew work after that quotient may be called physical relink.
 ### 2.4 Material labels are sidecars
 Pure old/new label changes do not create a second carrier impulse when the smooth carrier `Q` and dual `psi` are unchanged.
 The coefficient identity remains
@@ -219,11 +228,15 @@ Therefore
 with
 \[ R_Q=(\partial_tQ+[L_V,Q])u. \]
 The first term is the genuine HH quadratic source.
-The second is nonaffine resolved role-interface work.
+The second is an outer-equation forcing term; its work is not the commutator pairing by itself.
+For the smooth carrier, with `eta=Q^2`, the native carrier-energy identity is
+\[ \boxed{\frac d{dt}\|Qu\|_2^2+2\nu\|\nabla Qu\|_2^2
+=\langle u,\partial_t(Q^2)u\rangle-2\operatorname{Re}\langle Q^2u,B(u,u)\rangle.} \]
+The native resolved interface work is
+\[ J_Q=\langle u,\partial_t(Q^2)u\rangle-2\operatorname{Re}\langle Q^2u,L_Vu\rangle, \]
+and the outer-role equation reproduces it exactly only after diagonal resolved work is restored:
+\[ \boxed{J_Q=2\operatorname{Re}\langle Qu,R_Q\rangle-2\operatorname{Re}\langle Qu,L_VQu\rangle.} \]
 There is no separate pressure forcing in this Leray-projected role equation.
-
----
-
 ## 7. Exact Egorov structure and coherent deformation
 For convolution kernel `K_N`, after subtracting the affine jet `A=\nabla V(X)`, the exact scalar commutator is
 \[ (\dot Q+[V\cdot\nabla,Q])f(x) = \int K_N(y) [V(x)-V(x-y)-Ay]\cdot\nabla f(x-y)dy. \]
@@ -245,18 +258,16 @@ It is not arbitrary packet error.
 ---
 
 ## 8. Nonaffine role-interface work
-Write the nonaffine linear role operator as
-\[ L_{na}=K+S, \qquad K^*=-K, \quad S^*=S. \]
-Then:
-- skew pair work is antisymmetric and transfers energy conservatively between roles;
-- symmetric pair work is off-diagonal strain work.
-Thus nonaffine role motion does not create a new generation currency.
-It routes to existing interface/strain provenance.
-A role change caused only by rewriting the same cutoff decomposition is free by the exact repartition identity.
-A genuine physical role change/relink is not free.
-
----
-
+Write the resolved linear role operator as
+\[ L_V=K+S, \qquad K^*=-K, \quad S^*=S. \]
+For a complete orthogonal **hard event-role** partition, the `K` pair work is antisymmetric conservative same-event flux and the `S` pair work is symmetric strain/deformation. This is the hard donor/circulation theorem.
+For the propagated non-idempotent smooth carrier, do not import hard-projector algebra. Complete the carrier by `sum_a A_a^2=I`, then first quotient the actual common role transport:
+\[ \dot A_a+[G,A_a]=0. \]
+After this has been verified, write
+\[ K=G+K_{phys}. \]
+The moving partition work cancels the common `G` work exactly. Only `K_phys` remains as antisymmetric conservative **physical** relink, while `S` remains the existing strain/deformation work.
+Thus conservation of channel exchange is not enough to make an observer-selected window motion physical. A role change caused only by observer gauge or cutoff repartition is free; a genuine residual physical relink is not.
+The hard event-role and smooth propagated measures share `K/S` provenance but are not identified as the same measure without an explicit physical-work pushforward.
 ## 9. Coherent averaged strain source and service-or-flat gate
 The affine/Kelvin carrier uses a coherent averaged resolved gradient.
 The exact moving-average source equation has the form
@@ -287,8 +298,8 @@ one has terminal coefficient mass
 \[ A|z(t)|^2\ge\frac34\mu_0. \]
 Run the backward natural first-stop corridor with only native monitors:
 - renewed strain;
-- nonaffine/interface coefficient impulse;
-- HH coefficient impulse.
+- nonaffine/interface coefficient obstruction;
+- HH coefficient obstruction.
 No material boundary monitor is needed in the generic theorem.
 If a named stop occurs, route to its owner.
 If `t=0` is reached, stop at the initial boundary.
@@ -666,24 +677,22 @@ It provides common backward reference slices for generated roles.
 On the signed-good generated lineage, parent/child scale ratios give compatible natural-time windows.
 At a common slice the exact coefficient identity is
 \[ z(t)=z(s)+I_{HH}+I_R. \]
-A triangle split gives the named alternatives
+A triangle split gives the alternatives
 \[ |z(s)|\ge A/4, \]
 or
 \[ |I_R|\ge A/4, \]
 or
 \[ |I_{HH}|\ge A/2. \]
 The first is retained carrier amplitude.
-The second routes to classified residual/interface/source ownership.
-The third routes to HH regeneration.
-Large coefficient impulse alone is **not** automatically large physical work.
-A separate physical work theorem is required before using energy/entropy conclusions.
-
----
-
+The second and third are coefficient **first-stop locators**, not physical work owners.
+A large coefficient impulse alone is **not** automatically large physical work.
+At a coefficient hit the same smooth carrier must reenter the actual `Q^2` energy law. For an interface hit, the common observer gauge must additionally be quotiented before gauge-quotiented native work is Hahn-routed to residual physical relink or existing strain. HH generation is named only when the physical-energy gate selects actual positive HH work.
+Raw coefficient-obstruction labels are forbidden from entering the canonical master physical-owner state directly.
 ## 25. Recursive first stopping and joint master projection
 The recursive physical witness constructor acts on retained **actual positive work** after the relevant physical gate.
 `Xi` is excised once before causal routing.
 At each physical event, the preferred master records the first actual cause set.
+Coefficient threshold debuts are recorded one layer earlier as typed first-stop locators. They are not admitted to the canonical physical-owner set until actual `Q^2` energy/work reentry resolves them.
 Terminal semantics are:
 1. `t=0` → absorbing initial boundary;
 2. fixed multiplicative transfer/reuse cost → `TRANSFER_COST`;
@@ -805,6 +814,34 @@ This closes resolved interface as an independent recursive-generation loophole; 
 
 ---
 
+## 26.7 Smooth propagated interface: `Q^2` energy and observer-gauge quotient
+The hard event-role donor theorem does not directly apply to the propagated smooth non-idempotent envelope.
+For `w=Qu`, the physical carrier energy is
+\[ \boxed{E_Q=\|Qu\|_2^2=\langle u,Q^2u\rangle.} \]
+A complete smooth analysis uses `eta_a=A_a^2` with
+\[ \sum_a\eta_a=I. \]
+The native smooth-interface row is
+\[ J_a=\langle u,\partial_t\eta_a u\rangle-2\operatorname{Re}\langle\eta_a u,L_Vu\rangle. \]
+It is also exactly the outer Heisenberg work minus the diagonal resolved work, so the commutator is never interpreted alone.
+
+The decisive quotient comes before ownership. Let `G` be the common skew generator of the affine/Kelvin transport actually used to propagate all smooth roles. Require
+\[ \boxed{\dot A_a+[G,A_a]=0\quad\forall a.} \]
+Then
+\[ \langle u,\partial_t\eta_a u\rangle-2\operatorname{Re}\langle\eta_a u,Gu\rangle=0. \]
+Writing the actual skew resolved operator as
+\[ K=G+K_{phys}, \]
+the common observer motion disappears and only
+\[ -2\operatorname{Re}\langle\eta_a u,K_{phys}u\rangle \]
+remains as smooth physical relink. Its synthesis-pair matrix is antisymmetric and has zero total work. The symmetric `S` rows reconstruct the existing resolved strain/deformation work.
+
+A square partition whose motion is chosen independently by the observer may still exchange channel energy with zero total. That fact is **not** sufficient for physical ownership. Such motion is rejected unless it satisfies the certified common transport equation above.
+
+The common-slice coefficient thresholds `|I_R|>=A/4` and `|I_HH|>=A/2` are therefore typed first-stop locators only. They cannot enter `RecursiveEventState` or `PhysicalOwnerBundle` as physical owners. The same carrier must first reenter actual `Q^2` energy/work causality. Interface work is owner-eligible only after the observer gauge has been quotiented; HH generation is owner-eligible only after actual positive HH work is selected.
+
+This closes the smooth-envelope/projector mismatch, the arbitrary-moving-window loophole, and the coefficient-locator/master type hole. It creates no new interface currency and does not prove termination of the genuine physical owners reached afterward.
+
+---
+
 ## 27. Finite-dimensional rigidity modules: supporting geometry, not current PDE bottleneck
 Earlier layers of the programme established a large library of exact or certified finite-dimensional geometric facts.
 They remain important as local rigidity/registration tools but are no longer the main continuum seam.
@@ -887,6 +924,15 @@ A shell event enters a first-stop corridor.
 Service is recorded only if the full no-hit natural corridor survives.
 ### 28.22 A critical shell is not automatically fresh material
 Material provenance is attached only by actual physical service/ownership information.
+
+---
+
+### 28.23 Conservative analysis-window exchange is not automatically physical relink
+A time-dependent square partition can move channel energies while their sum stays fixed even when the Navier–Stokes state is unchanged.
+Before charging relink, prove `dot A_a+[G,A_a]=0` for the common physical transport and quotient that gauge. Only residual `K_phys` work is physical relink.
+### 28.24 A coefficient first-stop locator is not a physical owner
+The labels produced when `|I_R|` or `|I_HH|` crosses its registration face describe where clean coefficient continuation failed.
+They are forbidden from the canonical physical-owner state until actual `Q^2` energy/work reentry resolves a physical owner.
 
 ---
 
@@ -1006,6 +1052,20 @@ Material labels do not alter the smooth carrier coefficient identity by themselv
 
 ---
 
+### 30.8 Smooth propagated carrier route
+`hard physical event P`
+→ exact registration into smooth `Q` with `QP=P`
+→ carrier energy read as `<u,Q^2u>`
+→ common transported gauge `dot A+[G,A]=0` quotiented
+→ coefficient obstruction, if any, remains only a locator
+→ actual physical-energy reentry
+→ inheritance / high strain / actual HH work / gauge-quotiented interface work
+→ interface work only: residual physical relink `K_phys` or existing strain `S`
+→ canonical physical-owner state.
+No arbitrary motion of the smooth analysis windows and no raw coefficient impulse becomes a recursive generation.
+
+---
+
 ## 31. What remains open
 The programme is no longer missing a generic “packet persistence theorem”, a common clock, or a definition of recursive depth.
 The first continuum master quotient has reduced the final seam to genuinely physical recurrence.
@@ -1021,12 +1081,15 @@ The wiring must preserve actual owner sets, exact ties, conditional first-stop s
 The master uses actual physical event time only.
 Supplier natural times remain local corridor horizons and are never normalized into a synthetic common clock.
 What remains is to verify the above edge ontology for every service/material and other supplier continuation; the resolved-interface seam itself is now structurally quotiented.
-### 31.3 Interface-owner seam is structurally closed
+### 31.3 Hard and smooth interface-owner seams are structurally closed
 Resolved mixed/cross-interface work no longer supplies an independent recursive owner chain.
-For the actual resolved operator `L_V=K+S`, the skew part is conservative same-event role flux and the symmetric part is existing strain/deformation work.
-The skew donor closure is finite, all internal circulation cancels in the subset divergence identity, and same-event donor traversal creates no recursion depth or scale progress.
-The symmetric branch delegates once to the already existing deformation/source/critical-`D_V` owners.
-What remains open is termination of those genuine physical owners after this quotient, not an additional interface mechanism.
+For a complete orthogonal hard event-role partition of the actual resolved operator `L_V=K+S`, the skew part is conservative same-event role flux and the symmetric part is existing strain/deformation work. The skew donor closure is finite, internal circulation cancels in the subset divergence identity, and donor traversal creates no recursion depth or scale progress.
+
+For the propagated smooth envelope, the measure is different and remains separately typed. Its energy is read at `Q^2`; common transported role motion is certified by `dot A_a+[G,A_a]=0` and quotiented as observer gauge; only `K_phys=K-G` is physical skew relink. Arbitrary square-partition motion is rejected even if its channel exchanges sum to zero. The symmetric branch remains the existing strain/deformation work.
+
+Raw HH/interface coefficient first stops are also excluded from physical ownership: they locate a failed continuation interval and must pass through actual `Q^2` energy/work reentry before the master receives inheritance, high strain, HH work, relink, or strain ownership.
+
+What remains open is termination/telescoping of those genuine physical owners after these quotients, not an additional hard-interface, smooth-window, or coefficient-amplitude mechanism.
 ### 31.4 Conditional shell service must remain conditional
 Many supplier routes land in generic critical shells.
 The generic theorem provides a first-stop corridor and full-survivor service.
@@ -1041,7 +1104,7 @@ The remaining termination argument must use these branch facts exactly as suppli
 ### 31.6 Global termination mechanism is now the sharp frontier
 The compact-scale free-survivor route is closed by physical time, and pure resolved-interface circulation has now been removed from recursive depth.
 Therefore an infinite escape avoiding `t=0` must contain either:
-- infinitely many genuine non-free physical owner events after all zero-charge and same-event donor quotients, such as first-hit, strain/work, service, reuse, or other native owner events; or
+- infinitely many genuine non-free physical owner events after all zero-charge relays, observer-gauge quotients, coefficient-locator reentries, and same-event donor quotients, such as first-hit, strain/work, service, reuse, or other native owner events; or
 - an UV-unbounded free-survivor tail.
 The next master theorem must telescope the first alternative only through the native typed ledgers actually supplied by those owners: physical work, service/reuse, `Xi`, and genuinely globally bounded resources where available.
 Separately, every possible UV-unbounded free-survivor mechanism must be shown to enter a certified physical UV route rather than hide in fresh/service/material representation changes.
@@ -1094,6 +1157,10 @@ These simplifications are central to the programme's current direction.
 
 ---
 
+### 32.13 Conservation of representation is not yet physics
+A decomposition may conserve total energy while merely moving energy between observer-selected channels. Physical ownership begins only after the representation motion is tied to the actual PDE transport and that common gauge has been quotiented.
+### 32.14 First stop is not necessarily first cause
+A measurable coefficient threshold can correctly locate the earliest failure of clean continuation without itself carrying a physical work law. The master stores physical owners only after the required energy/work reentry.
 ## 33. Certified recent theorem blocks
 ### 33.1 High-tail sliding natural-window reentry
 The latest completed high-tail bridge is the high-tail sliding natural-window reentry theorem.
@@ -1187,6 +1254,34 @@ The theorem closes resolved interface as an independent recursive-generation loo
 
 ---
 
+### 33.4 Smooth quadratic-carrier observer-gauge quotient
+Status:
+`EXACT_SMOOTH_QUADRATIC_CARRIER_INTERFACE__Q2_ENERGY_LAW__COMMON_GAUGE_QUOTIENT_BEFORE_PHYSICAL_RELINK__SYMMETRIC_WORK_EXISTING_STRAIN__COEFFICIENT_OBSTRUCTION_ENERGY_REENTRY`.
+Dedicated GitHub Actions run:
+`31444417439`.
+Exact implementation SHA:
+`309d6ee83e39a96d8efd2a0ddcfcbf6839d9264b`.
+Results:
+- `676` tests passed;
+- `50,000` transported square-partition/interface/PDE/reentry states;
+- worst quadratic-partition residual `4.583749441582483e-15`;
+- worst differentiated-partition residual `1.669620150224271e-14`;
+- worst common-gauge transport residual `1.594436429147036e-16`;
+- worst gauge-work cancellation residual `1.7157190746562474e-16`;
+- worst native/outer recombination residual `6.010633403939076e-16`;
+- worst physical-relink conservation residual `8.888567800392867e-16`;
+- worst strain reconstruction residual `1.894411407492663e-15`;
+- forbidden linear-complement counterexample defect `1.0`;
+- arbitrary observer-motion rejection count `1`, with no admission;
+- coefficient-obstruction master-barrier failures `0` in the companion `50,000`-state master stress.
+Stored artifact:
+`recorded-results/31444417439/smooth-quadratic-carrier-interface-results/`.
+Full causal integration:
+`31444417546`.
+It completed successfully on the same exact SHA with the same `676`-test suite, all source/pressure/material/high-tail/master/role/reuse/compiler stages, and `20,000` master episode traces with worst margin `0.0`.
+The theorem says neither that every genuine relink/strain/HH owner terminates nor that every UV-unbounded survivor is closed. It makes no Navier–Stokes regularity claim.
+
+
 ## 34. Certification discipline
 Serious theorem validation is performed only in GitHub Actions.
 Local work is restricted to:
@@ -1220,32 +1315,33 @@ Then read the following current-spine documents in order:
 1. `docs/physical_energy_causal_bridge.md`
 2. `docs/recursive_coherent_witness_extraction.md`
 3. `docs/outer_moving_role_extraction.md`
-4. `docs/resolved_role_egorov.md`
-5. `docs/nonaffine_role_interface_work.md`
-6. `docs/resolved_interface_donor_quotient.md`
-7. `docs/event_anchored_role_registration.md`
-8. `docs/coherent_service_or_flat.md`
-9. `docs/critical_shell_service_reentry.md`
-10. `docs/high_strain_resolved_ancestor.md`
-11. `docs/high_strain_heat_increment_service.md`
-12. `docs/material_label_carrier_quotient.md`
-13. `docs/objective_source_routing_compiler.md`
-14. `docs/objective_pressure_pair_atomization.md`
-15. `docs/fresh_service_scale_reentry.md`
-16. `docs/high_frequency_dissipation_reentry.md`
-17. `docs/high_tail_binary_work_reentry.md`
-18. `docs/high_tail_ultraviolet_locality.md`
-19. `docs/high_tail_natural_window_reentry.md`
-20. `docs/physical_pair_weighted_productivity.md`
-21. `docs/common_slice_coefficient_registration.md`
-22. `docs/recursive_physical_witness_constructor.md`
-23. `docs/joint_causal_stop_projection.md`
-24. `docs/amplitude_entropy_causal_reuse.md`
-25. `docs/weighted_causal_reuse.md`
-26. `docs/renyi_causal_reuse.md`
-27. `docs/physical_branch_compiler.md`
-28. `docs/continuum_master_event_quotient.md`
-29. `docs/master_no_escape.md`
+4. `docs/smooth_quadratic_carrier_interface.md`
+5. `docs/resolved_role_egorov.md`
+6. `docs/nonaffine_role_interface_work.md`
+7. `docs/resolved_interface_donor_quotient.md`
+8. `docs/event_anchored_role_registration.md`
+9. `docs/coherent_service_or_flat.md`
+10. `docs/critical_shell_service_reentry.md`
+11. `docs/high_strain_resolved_ancestor.md`
+12. `docs/high_strain_heat_increment_service.md`
+13. `docs/material_label_carrier_quotient.md`
+14. `docs/objective_source_routing_compiler.md`
+15. `docs/objective_pressure_pair_atomization.md`
+16. `docs/fresh_service_scale_reentry.md`
+17. `docs/high_frequency_dissipation_reentry.md`
+18. `docs/high_tail_binary_work_reentry.md`
+19. `docs/high_tail_ultraviolet_locality.md`
+20. `docs/high_tail_natural_window_reentry.md`
+21. `docs/physical_pair_weighted_productivity.md`
+22. `docs/common_slice_coefficient_registration.md`
+23. `docs/recursive_physical_witness_constructor.md`
+24. `docs/joint_causal_stop_projection.md`
+25. `docs/amplitude_entropy_causal_reuse.md`
+26. `docs/weighted_causal_reuse.md`
+27. `docs/renyi_causal_reuse.md`
+28. `docs/physical_branch_compiler.md`
+29. `docs/continuum_master_event_quotient.md`
+30. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -1256,10 +1352,13 @@ If only one picture is retained, use this one.
 Navier–Stokes gives actual signed nonlinear work.
 Positive child-energy work defines cause.
 Coherent analysis refines that work into physical parent/child roles.
-Smooth moving carriers transport roles between events.
-Affine/Kelvin motion and cutoff repartition are gauges.
-Nonaffine motion is interface/strain provenance.
-Resolved cross/interface work is immediately split by `L_V=K+S`: `K` is same-event conservative role flux and `S` is existing strain/deformation; circulation is quotiented before recursion.
+Smooth moving carriers transport roles between events, but their energy is `<u,Q^2u>`, not `<u,Qu>`.
+Hard projectors are event readers; they are not differentiated through the slab.
+Common affine/Kelvin role transport and cutoff repartition are gauges.
+For a smooth square partition, require `dot A+[G,A]=0` and quotient that common observer motion before ownership.
+Only residual skew `K_phys=K-G` is conservative physical relink; symmetric `S` is existing strain/deformation.
+Conservative motion of observer-selected channels is not itself physics.
+Hard resolved cross/interface work has its separate same-event donor quotient; the hard and smooth measures share provenance but are not identified.
 Objective source variation is split by physical owner.
 Resolved dissipation and pressure/fresh source laws produce actual critical hard shells.
 Generic critical shells enter first-stop corridors and, on full survivors, own-scale service.
@@ -1274,11 +1373,11 @@ That window produces an actual critical hard-shell event with `M/N>=2` and `T_M/
 Material labels are attached as sidecars to actual service and do not duplicate carrier impulses.
 Causal Shannon/Rényi reuse is reserved for actual positive child-work ancestry.
 Source/service concentration entropies remain deterministic coordinates of their own measures.
-All named stops and simultaneous causes feed one joint recursive master.
+All routed physical owners and simultaneous physical causes feed one joint recursive master. Raw HH/interface coefficient threshold hits remain typed first-stop locators until actual `Q^2` energy/work reentry.
 Relay depth is quotiented before recursion depth is counted.
 Actual physical time is the universal event coordinate; each supplier keeps its own natural corridor length.
 Bounded-scale free full-natural survivor tails hit `t=0`.
-Therefore any infinite escape must recur through infinitely many genuine named non-free physical owners after relay/donor quotienting, or become UV-unbounded.
+Therefore any infinite escape must recur through infinitely many genuine named non-free physical owners after relay, observer-gauge, coefficient-reentry, and donor quotienting, or become UV-unbounded.
 Only true globally bounded scale-independent resources may terminate additively.
 `t=0` is absorbing.
 The present frontier is to telescope genuine named-owner recurrence through native typed physical ledgers, and prove that every UV-unbounded free-survivor mechanism enters a certified physical UV route, without reintroducing observer-made structure.

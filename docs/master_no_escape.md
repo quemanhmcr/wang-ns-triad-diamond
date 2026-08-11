@@ -2127,7 +2127,7 @@ Thus any positive HH generation needed to build carrier energy is dominated by a
 If coefficient continuation fails before that next event, neither the HH nor
 interface Duhamel impulse is promoted to work.  The same carrier reenters the
 direct `Q^2` energy identity with its actual initial/terminal energy, strain
-action and positive native interface work.  Only an interface branch selected by
+action and positive gauge-quotiented native interface work.  Only an interface branch selected by
 that gate is split into conservative smooth relink and existing strain.
 
 A second apparent re-entry interface also disappears.  For any resolved field `V`, with `h=u-V`,

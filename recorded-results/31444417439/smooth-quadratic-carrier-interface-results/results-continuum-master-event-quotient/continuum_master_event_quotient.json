@@ -1,0 +1,104 @@
+{
+  "certificate": {
+    "status": "EXACT_CONTINUUM_MASTER_EVENT_QUOTIENT__ZERO_CHARGE_RELAYS_COLLAPSED__NATIVE_PHYSICAL_TIME_RECURSION__SUPPLIER_SPECIFIC_SCALE_PROGRESS__COMPACT_SCALE_FULL_SURVIVOR_NO_ESCAPE__NO_COMMON_CLOCK_OR_CAUSAL_REWEIGHTING",
+    "canonical_state": "one physical event time, one supplied physical shell/carrier frequency, one named physical measure, an unsplit joint physical-owner set after any required coefficient-energy reentry, and optional sidecars; no theorem-depth counter or common normalized clock",
+    "relay_quotient": "same-law owner relays preserve one unsplit physical mass; certified witness relays may change units/observable (for example source work to shell mass) but create no second causal charge. Inserting/removing either relay cannot manufacture causal entropy",
+    "joint_owners": "exact ties and multiple certified downstream owner names remain a set-valued provenance mark on one unsplit physical mass; no lexicographic priority and no heterogeneous RN tie normalization",
+    "coefficient_obstruction_barrier": "Duhamel HH/interface coefficient threshold hits are first-stop locators, not physical owners; the canonical event state and owner bundle reject those labels until actual Q^2 energy/work reentry returns a physical inheritance, high-strain, HH-work, relink or strain owner",
+    "universal_time_identity": "sum_j (t_j-t_(j+1)) = t_0-t_L on actual physical event times",
+    "natural_survivor": "a free full-natural shell corridor at physical scale M consumes exactly c M^-2 backward time unless t=0 truncates it, in which case t=0 absorbs",
+    "compact_scale_no_escape": "if a tail of full-natural survivors has M_j<=Mbar, every edge consumes at least c/Mbar^2; therefore ceil(t0 Mbar^2/c) such edges force the initial boundary",
+    "infinite_escape_dichotomy": "after zero-charge relays are quotiented, any infinite recursive path avoiding t=0 must either contain infinitely many named non-free physical owner events (first-hit cause sets or work/service/reuse owners) or have an unbounded-frequency tail of consecutive full-natural survivors",
+    "uv_obstruction": "time alone cannot exclude M_j growing geometrically: sum_j c M_j^-2 is finite; this is a real UV possibility, not a clock artifact, and must be paid/routed by the physical UV suppliers",
+    "scale_progress": {
+      "generated_signed_good_hh_parent": {
+        "supplier": "generated_signed_good_hh_parent",
+        "ratio_lower": 0.6,
+        "ratio_upper": 0.625,
+        "lower_strict": true,
+        "upper_strict": true,
+        "directional_progress": "strictly_to_lower_frequency",
+        "physical_meaning": "actual signed-good HH parent role; T_parent/T_child is in (64/25,25/9)"
+      },
+      "resolved_dissipation_ancestor": {
+        "supplier": "resolved_dissipation_ancestor",
+        "ratio_lower": null,
+        "ratio_upper": 0.25,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "to_lower_frequency",
+        "physical_meaning": "actual resolved D_V shell satisfies M<=N/4; natural lifetime is at least 16 times longer"
+      },
+      "resolved_pressure_pair_shell": {
+        "supplier": "resolved_pressure_pair_shell",
+        "ratio_lower": null,
+        "ratio_upper": 0.25,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "to_lower_frequency",
+        "physical_meaning": "actual resolved pressure pair lies inside V=S_(N/4)u and supplies a u hard shell M<=N/4"
+      },
+      "fresh_sgs_scale_shell": {
+        "supplier": "fresh_sgs_scale_shell",
+        "ratio_lower": null,
+        "ratio_upper": 2.0,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "no_directional_progress_supplied",
+        "physical_meaning": "refinement-invariant low/base LP pushforward gives one of two hard shells with M<=2N; no lower ratio is certified"
+      },
+      "high_tail_hard_shell": {
+        "supplier": "high_tail_hard_shell",
+        "ratio_lower": 2.0,
+        "ratio_upper": null,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "to_higher_frequency",
+        "physical_meaning": "hard-tail support gives M/N>=2 and T_M/T_N<=1/4"
+      },
+      "generic_critical_shell_corridor": {
+        "supplier": "generic_critical_shell_corridor",
+        "ratio_lower": null,
+        "ratio_upper": null,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "no_supplier_relative_scale_progress",
+        "physical_meaning": "generic shell theorem gives named first stop / t=0 / full own-scale service; A=3M/4 is analysis registration, not master scale progress"
+      },
+      "material_reuse_or_service": {
+        "supplier": "material_reuse_or_service",
+        "ratio_lower": null,
+        "ratio_upper": null,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "no_scale_progress_without_external_epoch_geometry",
+        "physical_meaning": "service/reuse is physical ancestry routing; signed-good scale progress must be supplied independently"
+      },
+      "hh_regeneration_owner": {
+        "supplier": "hh_regeneration_owner",
+        "ratio_lower": null,
+        "ratio_upper": null,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "no_scale_progress_until_physical_HH_owner_is_resolved",
+        "physical_meaning": "coefficient regeneration is only an earlier-generation obstruction until re-entered through actual positive HH work"
+      }
+    },
+    "bellman_coordinate": "there is no canonical scalar exchange rate between log scale, physical work, service/reuse and global resources; the natural master ledger is typed/direct-product. Physical time and actual log shell scale telescope kinematically, while transfer cost, causal reuse and each genuinely global resource telescope only on their own physical laws",
+    "service_semantics": "own-scale service is a recursive state/epoch entrance, not an additive globally bounded currency; its continuation is handled by material reservoir/reuse/service theorems",
+    "diagnostic_separation": "fresh-scale H_inf/H2 and high-tail scale/time concentration coordinates remain conjugate lower-bound diagnostics; they are not causal Shannon/Renyi action and cannot be inserted into the causal ledger",
+    "boundary": "t=0 is absorbing",
+    "scope": "this is a continuum master assembly/quotient theorem, not a global no-escape or Navier-Stokes regularity proof; it isolates the only remaining infinite-path mechanisms after relay/clock artifacts are removed"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_owner_mass_residual": 0.0,
+    "worst_time_telescope_residual": 0.0,
+    "worst_scale_telescope_residual": 8.881784197001252e-16,
+    "bounded_scale_boundary_failures": 0,
+    "supplier_scale_failures": 0,
+    "coefficient_obstruction_barrier_failures": 0,
+    "maximum_relay_owner_count": 8,
+    "minimum_uv_time_gap_to_naive_infinite_sum": 4.3197628809686856e-05
+  }
+}
