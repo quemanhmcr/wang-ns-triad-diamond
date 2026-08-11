@@ -175,3 +175,28 @@ def test_gauge_quotiented_work_rejects_invalid_provenance_residuals(
     values[residual_field] = bad_value
     with pytest.raises(ValueError, match="gauge|skew|residual|finite|nonnegative"):
         GaugeQuotientedInterfaceWork(**values)
+
+
+def test_joint_closure_cannot_hide_a_recipient_without_its_own_negative_donor():
+    # Role 0 has a small positive diagonal defect, hence no actual incoming
+    # edge from another role and no negative donor of its own.  Roles 1 and 2
+    # form a valid donor component.  Aggregate closure alone incorrectly lets
+    # role 2 certify both positive recipients while all residuals remain inside
+    # the numerical binding tolerance.
+    defect = 1.0e-12
+    pair = (
+        (defect, 0.0, 0.0),
+        (0.0, 0.0, 1.0),
+        (0.0, -1.0, 0.0),
+    )
+    relink = (defect, 1.0, -1.0)
+    work = GaugeQuotientedInterfaceWork(
+        signed_native_interface_atoms=relink,
+        signed_physical_relink_atoms=relink,
+        signed_existing_strain_atoms=(0.0, 0.0, 0.0),
+        gauge_transport_operator_residual=0.0,
+        skew_decomposition_residual=0.0,
+        signed_physical_relink_pair_matrix=pair,
+    )
+    with pytest.raises(AssertionError, match="negative-net donor|recipient|closure"):
+        smooth_relink_donor_quotient(work)
