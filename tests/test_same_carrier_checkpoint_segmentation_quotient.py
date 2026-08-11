@@ -263,5 +263,6 @@ def test_certificate_closes_checkpoint_segmentation_not_genuine_owner_recurrence
     assert "never summed segment-by-segment" in cert["cumulative_monitors"]
     assert "leaves the first physical stop time" in cert["segmentation"]
     assert "cannot reset terminal amplitude" in cert["checkpoint_policy"]
-    assert "stop or is crossed" in cert["interior_accumulation"]
+    assert "first-stop/energy-reentry face" in cert["interior_accumulation"]
+    assert "is crossed by the same carrier" in cert["interior_accumulation"]
     assert "does not telescope infinitely recurring genuine physical owner events" in cert["scope"]
