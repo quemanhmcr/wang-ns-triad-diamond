@@ -30,6 +30,13 @@ therefore gives, for **every** prefix \(s\),
 
 Thus the temporal theorem is not merely an endpoint-survival statement.
 
+For a high-strain-supplied seed, the shell-time pushforward is retained as typed
+PDE provenance: child frequency, parent shell, renewal frequency, scaled
+lifetime, event time, and renewed critical mass.  The natural-corridor theorem
+must reuse that event and must realize the carried mass with its terminal
+coefficient.  Replacing the shell time or scale would be a different event, not a
+change of notation.
+
 ## Do not drop inverse heat
 
 The registered coefficient uses the existing affine/Kelvin/viscous analysis dual.  Its backward interaction-picture probe therefore grows under inverse heat.  This is not being asserted as an operator-norm bound for the full nonaffine outer-role adjoint: the mismatch with full resolved transport is precisely part of the already monitored classified interface residual.  The renewed envelope is supported initially in

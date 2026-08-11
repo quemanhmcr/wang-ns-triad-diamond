@@ -30,10 +30,11 @@ from src.high_strain_resolved_ancestor import (
 )
 from src.nn_critical_heat_carrier_seed import (
     LOW_STRAIN_ACTION,
+    RENEWAL_SCALE_FACTOR,
     persistent_seed_low_low_gap,
     renewal_scale,
 )
-from src.nn_seed_temporal_first_stop import backward_natural_endpoint
+from src.nn_seed_temporal_first_stop import backward_natural_endpoint, renewed_natural_duration
 from src.smooth_sgs_first_hit_extraction import (
     PhysicalPathMonitor,
     ThresholdTopology,
@@ -263,6 +264,7 @@ def critical_shell_backward_first_hit(
 def critical_shell_natural_outcome(
     *,
     event_time: float,
+    parent_shell_frequency: float,
     renewal_frequency: float,
     shell_critical_mass_lower: float,
     scaled_lifetime: float,
@@ -282,7 +284,7 @@ def critical_shell_natural_outcome(
     interval required by the natural window or initial boundary before a survivor
     is certified.
     """
-    geom = backward_natural_endpoint(event_time, renewal_frequency, scaled_lifetime)
+    M = float(parent_shell_frequency)
     A = float(renewal_frequency)
     mu0 = float(shell_critical_mass_lower)
     c = float(scaled_lifetime)
@@ -292,22 +294,39 @@ def critical_shell_natural_outcome(
     ih = complex(hh_impulse)
     ir = complex(residual_interface_impulse)
     amp = abs(zt)
-    if A <= 0 or mu0 <= 0 or c <= 0 or nu < 0 or amp <= 0:
-        raise ValueError("positive renewal scale/shell mass/lifetime/coefficient and nonnegative viscosity required")
-    if not all(math.isfinite(x) for x in (A, mu0, c, nu, amp)):
+    if M <= 0 or A <= 0 or mu0 <= 0 or c <= 0 or nu < 0 or amp <= 0:
+        raise ValueError("positive parent/renewal scale, shell mass, lifetime/coefficient and nonnegative viscosity required")
+    coefficient_data = (
+        zt.real,
+        zt.imag,
+        zs.real,
+        zs.imag,
+        ih.real,
+        ih.imag,
+        ir.real,
+        ir.imag,
+    )
+    if not all(math.isfinite(x) for x in (M, A, mu0, c, nu, amp, *coefficient_data)):
         raise ValueError("finite critical-shell outcome data required")
+    expected_A = renewal_scale(M)
+    scale_tol = 4e-12 * max(A, expected_A)
+    if abs(A - expected_A) > scale_tol:
+        raise ValueError("renewal frequency does not match the certified parent shell scale")
+    geom = backward_natural_endpoint(event_time, A, c)
     terminal_lower = critical_shell_terminal_mass_lower(mu0)
     terminal_mass = A * amp * amp
-    if terminal_mass < terminal_lower - 4e-12 * max(1.0, terminal_lower):
+    terminal_tol = 4e-12 * max(terminal_mass, terminal_lower)
+    if terminal_mass + terminal_tol < terminal_lower:
         raise ValueError("terminal coefficient does not realize the certified critical shell lower")
     monitor_amp = float(first_hit.get("terminal_amplitude", -1.0))
-    amp_tol = 4e-12 * max(1.0, amp, abs(monitor_amp))
+    amp_tol = 4e-12 * max(amp, abs(monitor_amp))
     if monitor_amp <= 0 or not math.isfinite(monitor_amp) or abs(monitor_amp - amp) > amp_tol:
         raise ValueError("first-hit monitor thresholds do not match the terminal coefficient amplitude")
 
     required = float(geom["elapsed_available"])
     horizon = float(first_hit.get("observed_elapsed_end", -1.0))
-    if horizon + 2e-12 * max(1.0, required) < required:
+    horizon_tol = 2e-12 * max(abs(horizon), required)
+    if horizon <= 0 or horizon + horizon_tol < required:
         raise ValueError("first-hit monitors do not cover the required backward corridor")
 
     hit_time = first_hit.get("first_elapsed")
@@ -316,12 +335,27 @@ def critical_shell_natural_outcome(
         label in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
         for label in causes
     )
-    if hit_time is not None and float(hit_time) <= required + 2e-12 * max(1.0, required):
+    hit = None if hit_time is None else float(hit_time)
+    allowed_causes = {
+        "high_strain_critical_dissipation",
+        ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
+        HH_COEFFICIENT_OBSTRUCTION,
+    }
+    if any(label not in allowed_causes for label in causes):
+        raise ValueError("first-hit certificate contains an unknown physical monitor")
+    if hit is None and causes:
+        raise ValueError("first-hit causes require an actual finite debut time")
+    if hit is not None and (not math.isfinite(hit) or hit < 0 or not causes):
+        raise ValueError("first-hit debut and joint cause set are inconsistent")
+    if hit is not None and hit > horizon + 2e-12 * max(abs(hit), horizon):
+        raise ValueError("first-hit debut lies beyond the observed monitor horizon")
+    hit_tol = 0.0 if hit is None else 2e-12 * max(abs(hit), required)
+    if hit is not None and hit <= required + hit_tol:
         return {
             "classification": "named_first_stop",
             "joint_causes": causes,
             "joint_first_stops": causes,
-            "first_elapsed": float(hit_time),
+            "first_elapsed": hit,
             "required_elapsed": required,
             "observed_elapsed_end": horizon,
             "materiality_assigned": False,
@@ -344,19 +378,21 @@ def critical_shell_natural_outcome(
         }
 
     res = abs(exact_adjoint_residual(zt, zs, ih, ir))
-    tol = 4e-12 * max(1.0, amp, abs(zs), abs(ih), abs(ir))
-    if res > tol:
+    duhamel_tol = 4e-12 * max(amp, abs(zs), abs(ih), abs(ir))
+    if res > duhamel_tol:
         raise ValueError("critical-shell Duhamel decomposition is not exact")
-    if abs(ir) >= RESIDUAL_FRACTION * amp - tol:
+    coefficient_tol = 4e-12 * amp
+    if abs(ir) >= RESIDUAL_FRACTION * amp - coefficient_tol:
         raise ValueError("endpoint interface impulse contradicts full no-hit corridor")
-    if abs(ih) >= GENERATED_FRACTION * amp - tol:
+    if abs(ih) >= GENERATED_FRACTION * amp - coefficient_tol:
         raise ValueError("endpoint HH impulse contradicts full no-hit corridor")
     inherited = abs(zs)
-    if inherited < INHERIT_FRACTION * amp - tol:
+    if inherited < INHERIT_FRACTION * amp - coefficient_tol:
         raise AssertionError("full natural critical-shell corridor lost the quarter coefficient")
     retained_mass = A * inherited * inherited
     clean_retained = critical_shell_survivor_coefficient_mass_lower(mu0)
-    if retained_mass < clean_retained - 5e-12 * max(1.0, clean_retained):
+    retained_tol = 5e-12 * max(retained_mass, clean_retained)
+    if retained_mass + retained_tol < clean_retained:
         raise AssertionError("critical-shell survivor lost its clean coefficient mass")
 
     carrier = critical_shell_persistent_carrier_mass_lower(mu0, c, nu)
@@ -372,7 +408,11 @@ def critical_shell_natural_outcome(
         "observed_elapsed_end": horizon,
         "corridor_terminal_time": float(event_time),
         "corridor_endpoint_time": float(event_time - required),
+        "corridor_endpoint_elapsed_from_terminal": required,
         "physical_time_drop": required,
+        "renewal_frequency": A,
+        "scaled_lifetime": c,
+        "parent_shell_frequency": M,
         "service_same_corridor_witness": True,
         "service_adds_recursion_depth": False,
         "terminal_coefficient_mass": terminal_mass,
@@ -403,16 +443,16 @@ def theorem_certificate(scaled_lifetime: float = 1.0, viscosity: float = 1.0) ->
     service_hs = critical_shell_bounded_service_lower(mu_hs, c, nu)
     existing_carrier = high_strain_persistent_carrier_mass_lower(c, nu)
     existing_service = high_strain_uniform_service_lower(c, nu)
-    if not math.isclose(carrier_hs, existing_carrier, rel_tol=2e-14, abs_tol=2e-14):
+    if not math.isclose(carrier_hs, existing_carrier, rel_tol=2e-14, abs_tol=0.0):
         raise AssertionError("generic shell theorem did not specialize to the existing high-strain carrier lower")
-    if not math.isclose(service_hs, existing_service, rel_tol=2e-14, abs_tol=2e-14):
+    if not math.isclose(service_hs, existing_service, rel_tol=2e-14, abs_tol=0.0):
         raise AssertionError("generic shell theorem did not specialize to the existing high-strain service lower")
     if persistent_seed_low_low_gap() <= 0:
         raise AssertionError("canonical shell envelope lost the low-low moat")
     return {
         "status": "EXACT_CRITICAL_SHELL_MASS_TO_OWN_SCALE_SERVICE_REENTRY__GENERIC_DV_AND_FRESH_CLUSTER_SUPPLIERS__MATERIALITY_DEFERRED",
         "local_input": "one actual shell-time event with M||P_Mu(t)||_2^2>=mu0>0; no packet, material label or probability law is part of the core theorem",
-        "registration": "A=3M/4 and Q_A=1 on {M/2<|xi|<=M} give A|z(t)|^2>=(3/4)mu0 exactly with the shell's normalized state as terminal analysis probe",
+        "registration": "the producer receives the actual parent M, verifies A=3M/4, and uses Q_A=1 on {M/2<|xi|<=M}; then A|z(t)|^2>=(3/4)mu0 exactly with the shell's normalized state as terminal analysis probe",
         "first_stop": "before materiality is assigned, use renewed strain plus role-interface and HH coefficient obstructions; coefficient hits only locate physical-energy reentry, and the observed monitor horizon must cover the claimed natural/boundary interval",
         "survivor": "a full no-hit corridor keeps A|z(s)|^2>=(3/64)mu0 on every prefix; the registered analysis-dual cost J gives A||Q_Au(s)||^2>=(3mu0)/(64J^2)",
         "service": "the Arb-certified radius-3 annular heat truncation gives actual own-scale service on the already-completed full natural corridor; it is a same-interval physical witness, not a second recursive event",
@@ -483,7 +523,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> CriticalShellServiceS
         # Generic three-monitor corridor.
         M = float(math.exp(rng.uniform(-2.0, 5.0)))
         A = renewal_scale(M)
-        T = c / (A * A)
+        T = renewed_natural_duration(A, c)
         terminal_lower = critical_shell_terminal_mass_lower(mu0)
         terminal_mass = float(rng.uniform(1.0, 2.0)) * terminal_lower
         amp = math.sqrt(terminal_mass / A)
@@ -552,6 +592,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> CriticalShellServiceS
         zs = zt - ir - ih
         out = critical_shell_natural_outcome(
             event_time=event_time,
+            parent_shell_frequency=M,
             renewal_frequency=A,
             shell_critical_mass_lower=mu0,
             scaled_lifetime=c,
@@ -583,6 +624,7 @@ def stress(samples: int = 50_000, seed: int = 20260809) -> CriticalShellServiceS
             try:
                 critical_shell_natural_outcome(
                     event_time=event_time,
+                    parent_shell_frequency=M,
                     renewal_frequency=A,
                     shell_critical_mass_lower=mu0,
                     scaled_lifetime=c,
