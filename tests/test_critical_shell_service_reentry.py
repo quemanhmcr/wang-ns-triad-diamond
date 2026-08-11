@@ -196,6 +196,7 @@ def test_full_generic_shell_corridor_creates_positive_own_scale_service_before_m
     assert out["materiality_assigned"] == "only_after_service_via_actual_Moyal_endpoints"
     assert out["service_same_corridor_witness"] is True
     assert out["service_adds_recursion_depth"] is False
+    assert out["parent_shell_critical_mass_lower"] == pytest.approx(mu0)
     assert out["physical_time_drop"] == pytest.approx(T)
     assert out["corridor_endpoint_time"] == pytest.approx(T)
     cover = endpoint_hard_shell_cover_from_full_natural_outcome(out, parent_shell_frequency=M)

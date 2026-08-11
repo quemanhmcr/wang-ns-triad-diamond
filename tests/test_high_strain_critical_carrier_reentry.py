@@ -124,6 +124,7 @@ def test_full_generic_critical_corridor_creates_own_scale_service_without_nn():
     assert out["materiality_assigned"] == "only_after_service_via_exact_Moyal_OO_ON_NN"
     assert out["service_same_corridor_witness"] is True
     assert out["service_adds_recursion_depth"] is False
+    assert out["parent_shell_critical_mass_lower"] == pytest.approx(seed.shell_critical_mass)
     assert out["physical_time_drop"] == pytest.approx(T)
     assert out["corridor_endpoint_time"] == pytest.approx(T)
     cover = endpoint_hard_shell_cover_from_full_natural_outcome(out, parent_shell_frequency=A / 0.75)

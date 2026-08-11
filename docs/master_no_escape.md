@@ -2293,6 +2293,13 @@ supplier begins only at ratio `>=2`.  The candidate production records therefore
 forbid promoting the `3/2` cover witness to directional progress or high-tail
 ownership.
 
+An event-free continuation still needs state provenance.  Consecutive no-hit
+corridors are composable only when the endpoint shell masses select the recorded
+unique/joint witnesses and one such frequency/mass pair is reused by the next
+producer at the exact endpoint state.  Bare clock-contiguous checkpoints are
+rejected, and the telescope sums their native local `cA^-2` durations rather than
+recovering them from global-clock subtraction.
+
 Consequently the remaining continuum frontier separates into two questions:
 
 - recurrence of genuine physical owner **events**, which belongs to the native

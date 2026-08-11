@@ -43,6 +43,19 @@ was selected because the theorem chose one natural horizon.  No physical conditi
 fired there.  It is therefore an **analysis checkpoint**, not a new causal/event
 vertex.
 
+The checkpoint carries `cA^-2` directly as a native local elapsed coordinate.  Its
+absolute endpoint `t-cA^-2` is only a diagnostic: for sufficiently deep UV scales,
+the two global clock values can be the same floating-point number even though the
+PDE interval is strictly positive.  No certificate recovers the local duration by
+subtracting those nearly equal clocks, and no dimensional comparison uses an
+observer-unit floor such as `max(1,...)`.
+
+The adapter also replays the complete service-corridor certificate and reads
+`M`, its input critical mass, `A`, `c`, and the local duration from the producer.
+External arguments may verify these quantities but cannot rebind them.  In
+particular, the covariance `(M,c) -> (2M,4c)`, which preserves `c/A^2`, cannot be
+used to attach one PDE state to a foreign shell.
+
 ## 2. Endpoint hard shells are state witnesses, not automatically scale dynamics
 
 The surviving smooth carrier has transported support inside `(A/2,2A)`.  Hence it
@@ -77,7 +90,7 @@ This does not deny that the hard shell at `3M/2` is an actual state observable.
 It says only that the **reason it was exposed** is checkpoint re-registration, not
 an already-proved nonlinear UV-generation mechanism.
 
-## 3. Checkpoint chains carry time but zero recursive event depth
+## 3. State-certified checkpoint chains carry time but zero event depth
 
 A sequence of no-hit checkpoints
 
@@ -91,15 +104,33 @@ still obeys the exact physical identity
 \sum_j(t_j-t_{j+1})=t_0-t_L.
 \]
 
-The quotient assigns
+Time contiguity by itself is insufficient.  Between consecutive corridors the
+transition must carry
+
+- the two actual endpoint hard-shell critical masses;
+- the unique/joint maximizing witness set determined by those masses;
+- the exact endpoint time token;
+- one selected witness frequency and the same critical mass as the next producer's
+  parent-shell input;
+- the same fixed scaled lifetime `c`.
+
+A list of bare checkpoints is therefore not a certified chain, even if its global
+clock fields happen to be close.  The typed transition replays endpoint
+re-registration and rejects an unrelated shell, a losing cover branch, or a
+rebound mass.  For an exact tie both witnesses remain in the transition record;
+following either state branch does not declare a causal primary.
+
+The quotient then assigns
 
 - physical time drop: actual corridor time;
 - event vertices added: `0`;
 - causal charges added: `0`;
 - hard-shell rereading: analysis witness only.
 
-Thus bounded-scale checkpoint continuation still reaches `t=0` by physical time,
-but it is not a chain of recursive physical events.
+Thus the native local time edges telescope, while the absolute endpoint-clock
+residual remains only a numerical diagnostic.  Bounded-scale checkpoint
+continuation still reaches `t=0` by physical time, but it is not a chain of
+recursive physical events.
 
 ## 4. The UV obstruction survives, in a cleaner ontology
 
@@ -166,3 +197,21 @@ would be convenient.
 
 Thus even the checkpoint re-registration geometry is state-driven: the observer
 chooses the language used to read the endpoint, but not which physical shell won.
+The continuation API additionally requires the next no-hit producer to reuse the
+winning pair `(H,mu_H)` at exactly the previous checkpoint state.  Knowing merely
+that `H` belongs to the candidate set `{A,2A}` is not enough.
+
+## 7. Numerical falsification lane
+
+The checkpoint anti-tests range across native scales rather than a moderate fixed
+unit window.  They include deep-UV clocks for which `A^2` overflows while
+`cA^-2` remains a positive representable subnormal, and global endpoint clocks
+whose subtraction loses the local interval.
+
+The accompanying physical probe evolves the unforced three-dimensional
+incompressible Navier--Stokes Fourier--Galerkin system with Leray projection,
+viscosity, the quadratic transport term, `2/3` dealiasing, and RK4 at three
+resolutions.  It rereads the carrier balance, heat increment, and hard-shell cover
+from the same evolved corridor.  This is a strong attempt to falsify the encoded
+identities on actual NS dynamics; it is not a continuum proof and supplies no
+global-regularity claim.

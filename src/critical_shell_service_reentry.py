@@ -413,6 +413,7 @@ def critical_shell_natural_outcome(
         "renewal_frequency": A,
         "scaled_lifetime": c,
         "parent_shell_frequency": M,
+        "parent_shell_critical_mass_lower": mu0,
         "service_same_corridor_witness": True,
         "service_adds_recursion_depth": False,
         "terminal_coefficient_mass": terminal_mass,

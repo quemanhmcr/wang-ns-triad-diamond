@@ -36,14 +36,15 @@ physical observable of the interval which has already consumed the time drop
 The corridor object carries the complete native provenance supplied by the PDE
 theorem: the incoming hard-shell frequency `M`, renewal-carrier frequency
 `A=3M/4`, scaled lifetime `c`, terminal time, endpoint time, actual time drop,
-and endpoint carrier-mass lower.  A downstream reader may verify these data but
+the incoming hard-shell critical-mass input, and endpoint carrier-mass lower.  A downstream reader may verify these data but
 cannot provide replacements for them.  In particular, a carrier proved near one
 `A` cannot be rebound to a foreign hard-shell scale by passing a new number to an
 adapter.
 
 That binding is enforced at the producer boundary as well.  The generic-shell
 producer receives the actual parent `M` and rejects any requested `A` other than
-`3M/4`.  On the high-strain route, the pushed-forward critical seed carries its
+`3M/4`; its survivor output also carries the exact parent-shell critical-mass
+input so a checkpoint successor cannot invent or rebind that resource.  On the high-strain route, the pushed-forward critical seed carries its
 own shell time, parent and child frequencies, scaled lifetime, and actual renewed
 critical mass.  The corridor must reuse all of them, including the event time and
 the terminal coefficient mass; it cannot manufacture a later event so that a
@@ -284,3 +285,9 @@ two-shell lower.  Downstream re-registration does not accept `A` or `2A` as a
 chosen branch.  It receives the actual pair `(mu_A,mu_2A)` and applies the exact
 realization lemma internally; unique maxima are physical facts and exact ties stay
 joint.
+
+Nor may a downstream ledger concatenate bare checkpoint records.  The successor
+must arrive through a typed transition that carries the actual winning
+frequency/mass pair into the next critical-shell producer at the same endpoint
+state.  This makes the endpoint cover a genuine PDE-state rereading without
+turning an observer-chosen candidate shell into dynamics.

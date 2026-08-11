@@ -11,6 +11,7 @@ from src.full_natural_checkpoint_quotient import (
     checkpoint_chain_ledger,
     checkpoint_from_full_natural_outcome,
     checkpoint_reregistration,
+    checkpoint_transition_from_full_natural_outcome,
     geometric_uv_checkpoint_time,
     theorem_certificate,
 )
@@ -30,7 +31,12 @@ def _full_outcome(M: float, c: float, mu: float = 2.0, t_factor: float = 4.0):
         "observed_elapsed_end": T,
         "corridor_terminal_time": t,
         "corridor_endpoint_time": t - T,
+        "corridor_endpoint_elapsed_from_terminal": T,
         "physical_time_drop": T,
+        "renewal_frequency": A,
+        "scaled_lifetime": c,
+        "parent_shell_frequency": M,
+        "parent_shell_critical_mass_lower": mu,
         "service_same_corridor_witness": True,
         "service_adds_recursion_depth": False,
         "uniform_square_service_lower": 0.2,
@@ -92,7 +98,10 @@ def test_checkpoint_chain_telescopes_real_time_with_zero_recursive_events():
     out2["physical_time_drop"] = T2
     cp2 = checkpoint_from_full_natural_outcome(out2, parent_shell_frequency=M2, scaled_lifetime=c)
 
-    led = checkpoint_chain_ledger((cp1, cp2))
+    transition = checkpoint_transition_from_full_natural_outcome(cp1, (0.8, 2.0), out2)
+    assert transition.successor_checkpoint == cp2
+    led = checkpoint_chain_ledger((transition,))
+    assert led["certified_transitions"] == 1
     assert led["time_telescope_residual"] == pytest.approx(0.0, abs=1e-15)
     assert led["recursive_events_added"] == 0
     assert led["causal_charges_added"] == 0

@@ -386,6 +386,7 @@ def critical_seed_natural_outcome(
         "renewal_frequency": A,
         "scaled_lifetime": c,
         "parent_shell_frequency": seed.shell_upper_frequency,
+        "parent_shell_critical_mass_lower": seed.shell_critical_mass,
         "source_child_frequency": seed.child_frequency,
         "source_dissipation_mass": seed.dissipation_mass,
         "source_event_time": seed.time,

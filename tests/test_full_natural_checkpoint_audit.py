@@ -15,6 +15,7 @@ from src.full_natural_checkpoint_quotient import (
     checkpoint_chain_ledger,
     checkpoint_from_full_natural_outcome,
     checkpoint_reregistration,
+    checkpoint_transition_from_full_natural_outcome,
     geometric_uv_checkpoint_time,
 )
 from src.full_natural_service_corridor_quotient import (
@@ -36,11 +37,13 @@ def _full_outcome(
     mu: float = 2.0,
     terminal_time: float | None = None,
     physical_time_drop: float | None = None,
+    parent_shell_critical_mass_lower: float | None = None,
 ) -> dict[str, object]:
     A = RENEWAL_TO_PARENT_SHELL_RATIO * M
     natural = _native_duration(A, c)
     drop = natural if physical_time_drop is None else float(physical_time_drop)
     t = 8.0 * natural if terminal_time is None else float(terminal_time)
+    parent_mass = mu if parent_shell_critical_mass_lower is None else float(parent_shell_critical_mass_lower)
     return {
         "classification": FULL_NATURAL_SERVICE_WITNESS,
         "joint_first_stops": (),
@@ -53,6 +56,7 @@ def _full_outcome(
         "renewal_frequency": A,
         "scaled_lifetime": c,
         "parent_shell_frequency": M,
+        "parent_shell_critical_mass_lower": parent_mass,
         "service_same_corridor_witness": True,
         "service_adds_recursion_depth": False,
         "uniform_square_service_lower": 0.2,
@@ -69,7 +73,7 @@ def test_checkpoint_rejects_half_length_uv_corridor_in_native_units():
     natural = _native_duration(A, c)
     bad = _full_outcome(M, c, physical_time_drop=0.5 * natural)
 
-    with pytest.raises(ValueError, match="corridor|elapsed|provenance|physical"):
+    with pytest.raises(ValueError, match="corridor|elapsed|provenance|physical|interval"):
         checkpoint_from_full_natural_outcome(
             bad,
             parent_shell_frequency=M,
@@ -120,6 +124,36 @@ def test_deep_uv_checkpoint_keeps_local_elapsed_when_global_endpoint_rounds():
     assert checkpoint.endpoint_time == checkpoint.terminal_time
 
 
+def test_deep_uv_typed_chain_telescopes_when_all_global_clocks_round_together():
+    M, c = 1.0e10, 1.0
+    first = checkpoint_from_full_natural_outcome(
+        _full_outcome(M, c, terminal_time=1.0),
+        parent_shell_frequency=M,
+        scaled_lifetime=c,
+    )
+    endpoint_masses = (2.0, 0.8)
+    successor_outcome = _full_outcome(
+        0.75 * M,
+        c,
+        terminal_time=first.endpoint_time,
+        parent_shell_critical_mass_lower=endpoint_masses[0],
+    )
+    transition = checkpoint_transition_from_full_natural_outcome(
+        first,
+        endpoint_masses,
+        successor_outcome,
+    )
+    ledger = checkpoint_chain_ledger((transition,))
+
+    assert transition.successor_checkpoint.endpoint_time == first.terminal_time
+    assert ledger["physical_time_drop"] > 0.0
+    assert ledger["endpoint_time_drop"] == 0.0
+    assert ledger["absolute_clock_residual_diagnostic"] == pytest.approx(
+        ledger["physical_time_drop"], rel=2e-12, abs=0.0
+    )
+    assert ledger["time_telescope_residual"] == 0.0
+
+
 def test_tiny_parent_scale_cannot_accept_a_foreign_corridor_scale():
     M, c = 1.0e-13, 1.0
     A = RENEWAL_TO_PARENT_SHELL_RATIO * M
@@ -129,8 +163,9 @@ def test_tiny_parent_scale_cannot_accept_a_foreign_corridor_scale():
     with pytest.raises(ValueError, match="corridor scale|renewal scale"):
         FullNaturalCheckpoint(
             terminal_time=4.0 * drop,
-            endpoint_time=3.0 * drop,
+            physical_time_drop=drop,
             parent_shell_frequency=M,
+            parent_shell_critical_mass_lower=2.0,
             corridor_frequency=foreign_A,
             scaled_lifetime=c,
             endpoint_carrier_critical_mass_lower=2.0,
@@ -146,8 +181,9 @@ def test_tiny_parent_scale_cannot_certify_zero_endpoint_shells():
     with pytest.raises(ValueError, match="candidate|shell|positive"):
         FullNaturalCheckpoint(
             terminal_time=4.0 * drop,
-            endpoint_time=3.0 * drop,
+            physical_time_drop=drop,
             parent_shell_frequency=M,
+            parent_shell_critical_mass_lower=2.0,
             corridor_frequency=A,
             scaled_lifetime=c,
             endpoint_carrier_critical_mass_lower=2.0,
@@ -210,6 +246,82 @@ def test_chain_cannot_take_the_losing_cover_branch_without_its_actual_mass():
     # winning mass into the next producer, so it must fail closed.
     with pytest.raises(ValueError, match="witness|transition|mass|provenance"):
         checkpoint_chain_ledger((first, second))
+
+
+def test_typed_transition_reuses_the_state_selected_frequency_and_mass():
+    M, c = 8.0, 1.0
+    first = checkpoint_from_full_natural_outcome(
+        _full_outcome(M, c),
+        parent_shell_frequency=M,
+        scaled_lifetime=c,
+    )
+    endpoint_masses = (2.0, 0.8)
+    winner_M, winner_mass = 0.75 * M, endpoint_masses[0]
+    successor_outcome = _full_outcome(
+        winner_M,
+        c,
+        terminal_time=first.endpoint_time,
+        parent_shell_critical_mass_lower=winner_mass,
+    )
+
+    transition = checkpoint_transition_from_full_natural_outcome(
+        first,
+        endpoint_masses,
+        successor_outcome,
+    )
+    assert transition.successor_checkpoint.parent_shell_frequency == pytest.approx(winner_M)
+    assert transition.successor_checkpoint.parent_shell_critical_mass_lower == pytest.approx(winner_mass)
+    ledger = checkpoint_chain_ledger((transition,))
+    assert ledger["checkpoints"] == 2
+    assert ledger["certified_transitions"] == 1
+    assert ledger["recursive_events_added"] == 0
+
+
+def test_typed_transition_rejects_a_rebound_winner_mass():
+    M, c = 8.0, 1.0
+    first = checkpoint_from_full_natural_outcome(
+        _full_outcome(M, c),
+        parent_shell_frequency=M,
+        scaled_lifetime=c,
+    )
+    endpoint_masses = (2.0, 0.8)
+    bad_successor = _full_outcome(
+        0.75 * M,
+        c,
+        terminal_time=first.endpoint_time,
+        parent_shell_critical_mass_lower=1.0,
+    )
+
+    with pytest.raises(ValueError, match="frequency and mass|witness.*mass"):
+        checkpoint_transition_from_full_natural_outcome(
+            first,
+            endpoint_masses,
+            bad_successor,
+        )
+
+
+def test_typed_transition_rejects_a_foreign_endpoint_time_token():
+    M, c = 8.0, 1.0
+    first = checkpoint_from_full_natural_outcome(
+        _full_outcome(M, c),
+        parent_shell_frequency=M,
+        scaled_lifetime=c,
+    )
+    endpoint_masses = (2.0, 0.8)
+    foreign_time = math.nextafter(first.endpoint_time, math.inf)
+    bad_successor = _full_outcome(
+        0.75 * M,
+        c,
+        terminal_time=foreign_time,
+        parent_shell_critical_mass_lower=endpoint_masses[0],
+    )
+
+    with pytest.raises(ValueError, match="endpoint time token"):
+        checkpoint_transition_from_full_natural_outcome(
+            first,
+            endpoint_masses,
+            bad_successor,
+        )
 
 
 def test_chain_contiguity_has_no_one_unit_absolute_time_floor():

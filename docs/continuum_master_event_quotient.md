@@ -248,6 +248,13 @@ state/cover facts, not directional scale progress.  In particular the upper
 `>=2`, and the candidate production API marks it as inadmissible for high-tail
 ownership.
 
+Checkpoint continuation is not certified by time contiguity or membership in the
+candidate set alone.  A typed transition must carry the two actual endpoint shell
+masses, retain the state-selected unique/joint witnesses, and reuse one witnessed
+frequency together with the same mass as the next producer input at the exact
+endpoint state.  Native local durations, rather than subtraction of nearly equal
+global clocks, form the physical-time ledger.
+
 After this extension, the master has two distinct infinite-path questions:
 
 1. an infinite recursive **event path**, which after all quotients can contain
