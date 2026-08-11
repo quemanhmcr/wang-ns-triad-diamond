@@ -4,8 +4,10 @@ on:
   push:
     paths:
       - 'src/high_strain_descending_epoch_telescope.py'
+      - 'src/high_strain_descending_epoch_pde_probe.py'
       - 'tests/test_high_strain_descending_epoch_telescope.py'
       - 'tests/test_high_strain_descending_epoch_audit.py'
+      - 'tests/test_high_strain_descending_epoch_pde_probe.py'
       - 'docs/high_strain_descending_epoch_telescope.md'
       - '.github/workflows/audit-high-strain-descending-epoch.yml'
       - '.github/workflows/high-strain-descending-epoch-telescope.yml'
@@ -38,6 +40,8 @@ jobs:
         run: pytest -q
       - name: Run wide high-strain descending-epoch stress
         run: python -m src.high_strain_descending_epoch_telescope --samples 200000 --outdir results-audit-high-strain/high-strain-epoch
+      - name: Run high-strain telescope on actual dealiased Navier-Stokes trajectories
+        run: python -m src.high_strain_descending_epoch_pde_probe --resolutions 12 16 20 --steps 128 --outdir results-audit-high-strain/high-strain-pde-probe
       - name: Run high-strain collision dependency stress
         run: python -m src.high_strain_dissipation_collision --samples 100000 --outdir results-audit-high-strain/high-strain-collision
       - name: Run resolved-ancestor dependency stress
@@ -51,6 +55,9 @@ jobs:
         run: |
           if [ -f results-audit-high-strain/high-strain-epoch/summary.md ]; then
             cat results-audit-high-strain/high-strain-epoch/summary.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f results-audit-high-strain/high-strain-pde-probe/summary.md ]; then
+            cat results-audit-high-strain/high-strain-pde-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
           fi
       - uses: actions/upload-artifact@v4
         if: always()

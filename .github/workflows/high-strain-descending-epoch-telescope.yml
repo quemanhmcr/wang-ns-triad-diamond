@@ -4,7 +4,9 @@ on:
   push:
     paths:
       - 'src/high_strain_descending_epoch_telescope.py'
+      - 'src/high_strain_descending_epoch_pde_probe.py'
       - 'tests/test_high_strain_descending_epoch_telescope.py'
+      - 'tests/test_high_strain_descending_epoch_pde_probe.py'
       - 'docs/high_strain_descending_epoch_telescope.md'
       - '.github/workflows/high-strain-descending-epoch-telescope.yml'
       - 'src/high_strain_dissipation_collision.py'
@@ -42,6 +44,8 @@ jobs:
         run: pytest -q
       - name: High-strain descending-epoch telescope stress
         run: python -m src.high_strain_descending_epoch_telescope --samples 50000 --outdir results-high-strain-descending-epoch-telescope
+      - name: Actual Navier-Stokes high-strain descending-epoch probe
+        run: python -m src.high_strain_descending_epoch_pde_probe --resolutions 12 16 20 --steps 128 --outdir results-high-strain-descending-epoch-pde-probe
       - name: High-strain dissipation collision dependency
         run: python -m src.high_strain_dissipation_collision --samples 50000 --outdir results-high-strain-dissipation-collision
       - name: High-strain resolved-ancestor dependency
@@ -50,12 +54,15 @@ jobs:
         run: python -m src.high_strain_critical_carrier_reentry --samples 50000 --outdir results-high-strain-critical-carrier-reentry
       - name: Continuum master high-strain epoch certificate
         run: python -m src.continuum_master_event_quotient --samples 50000 --outdir results-continuum-master-event-quotient
-      - run: cat results-high-strain-descending-epoch-telescope/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - run: |
+          cat results-high-strain-descending-epoch-telescope/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-high-strain-descending-epoch-pde-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: high-strain-descending-epoch-telescope-results
           path: |
             results-high-strain-descending-epoch-telescope/
+            results-high-strain-descending-epoch-pde-probe/
             results-high-strain-dissipation-collision/
             results-high-strain-resolved-ancestor/
             results-high-strain-critical-carrier-reentry/
