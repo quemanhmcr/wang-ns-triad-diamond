@@ -10,20 +10,33 @@ import numpy as np
 Array = np.ndarray
 
 
-def _canonical_sign(k: Array, tol: float = 1e-13) -> int:
+def _wavevector(k: Array, name: str = "wavevector") -> Array:
+    q = np.asarray(k, dtype=float)
+    if q.shape != (3,) or np.any(~np.isfinite(q)):
+        raise ValueError(f"{name} must be a finite three-vector")
+    return q
+
+
+def stable_norm3(k: Array) -> float:
+    """Euclidean norm without squaring away tiny or overflowing large modes."""
+    q = _wavevector(k)
+    return float(math.hypot(*(float(x) for x in q)))
+
+
+def _canonical_sign(k: Array) -> int:
     """Return +1 if the first nonzero component is positive, else -1."""
-    for x in k:
-        if abs(float(x)) > tol:
+    for x in _wavevector(k):
+        if float(x) != 0.0:
             return 1 if x > 0 else -1
     raise ValueError("zero wavevector")
 
 
 def helical_basis(k: Array, s: int) -> Array:
     """A deterministic unit helical vector with h_s(-k)=conj(h_s(k))."""
-    k = np.asarray(k, dtype=float)
+    k = _wavevector(k)
     if s not in (-1, 1):
         raise ValueError("helicity must be ±1")
-    norm = np.linalg.norm(k)
+    norm = stable_norm3(k)
     if norm == 0:
         raise ValueError("zero wavevector")
 
@@ -35,7 +48,7 @@ def helical_basis(k: Array, s: int) -> Array:
     refs = np.eye(3)
     ref = refs[np.argmin(np.abs(refs @ khat))]
     e1 = np.cross(ref, khat)
-    e1 /= np.linalg.norm(e1)
+    e1 /= stable_norm3(e1)
     e2 = np.cross(khat, e1)
     # i k × h = s |k| h
     h = (e1 + 1j * s * e2) / math.sqrt(2.0)
@@ -45,16 +58,19 @@ def helical_basis(k: Array, s: int) -> Array:
 def check_helical_eigenvector(k: Array, s: int, atol: float = 1e-10) -> bool:
     h = helical_basis(k, s)
     lhs = 1j * np.cross(k, h)
-    rhs = s * np.linalg.norm(k) * h
+    rhs = s * stable_norm3(k) * h
     return bool(np.allclose(lhs, rhs, atol=atol, rtol=atol))
 
 
 def coupling_g(k: Array, p: Array, q: Array, sk: int, sp: int, sq: int) -> complex:
     """Waleffe geometric coefficient; requires k+p+q=0."""
-    k = np.asarray(k, float)
-    p = np.asarray(p, float)
-    q = np.asarray(q, float)
-    if np.linalg.norm(k + p + q) > 1e-8 * max(1.0, np.linalg.norm(k), np.linalg.norm(p), np.linalg.norm(q)):
+    k = _wavevector(k, "k")
+    p = _wavevector(p, "p")
+    q = _wavevector(q, "q")
+    scale = max(stable_norm3(k), stable_norm3(p), stable_norm3(q))
+    if scale == 0.0:
+        raise ValueError("zero wavevector")
+    if stable_norm3(k + p + q) > 2e-12 * scale:
         raise ValueError("triad does not close")
     hk = helical_basis(k, sk)
     hp = helical_basis(p, sp)
@@ -88,13 +104,16 @@ def edge_metrics(x: Array, y: Array, z: Array, sx: int, sy: int, sz: int) -> Edg
     The closed triad is (x,y,-z). The child-energy coefficient is
     A = sx|x| - sy|y|. The phase target is chosen so dE_child/dt > 0.
     """
-    x = np.asarray(x, float)
-    y = np.asarray(y, float)
-    z = np.asarray(z, float)
-    if np.linalg.norm(x + y - z) > 1e-9:
+    x = _wavevector(x, "x")
+    y = _wavevector(y, "y")
+    z = _wavevector(z, "z")
+    nx, ny, nz = map(stable_norm3, (x, y, z))
+    scale = max(nx, ny, nz)
+    if scale == 0.0:
+        return EdgeResult(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+    if stable_norm3(x + y - z) > 2e-12 * scale:
         raise ValueError("z must equal x+y")
-    nx, ny, nz = map(np.linalg.norm, (x, y, z))
-    if min(nx, ny, nz) <= 1e-12:
+    if min(nx, ny, nz) == 0.0:
         return EdgeResult(0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
     g = coupling_g(x, y, -z, sx, sy, sz)
     a = sx * nx - sy * ny
