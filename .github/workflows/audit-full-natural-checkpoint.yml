@@ -13,6 +13,9 @@ on:
       - 'tests/test_full_natural_checkpoint_quotient.py'
       - 'tests/test_full_natural_service_corridor_quotient.py'
       - 'tests/test_full_natural_service_corridor_pde_probe.py'
+      - 'docs/full_natural_checkpoint_quotient.md'
+      - 'docs/full_natural_service_corridor_quotient.md'
+      - 'RESEARCH_LEDGER.md'
       - '.github/workflows/audit-full-natural-checkpoint.yml'
       - 'requirements.txt'
   workflow_dispatch:
