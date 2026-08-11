@@ -2,7 +2,7 @@
 
 ## Status
 
-**Candidate theorem.** Serious execution is reserved for GitHub Actions.
+**Certified theorem** on exact implementation SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated GitHub Actions run `31460525711` and full physical-energy causal integration run `31460525687`.
 
 Candidate status:
 
@@ -202,3 +202,50 @@ Those breakers may be actual HH generation, source/SGS, independent service, hig
 This theorem therefore shrinks the mixed-owner recurrence frontier but does not close it.
 
 No global Navier--Stokes regularity claim is made.
+
+
+## 8. Certification
+
+Exact certified implementation SHA:
+
+`774c702a692e67f5ccdf3a7028c16e437a0c5cc1`.
+
+Dedicated GitHub Actions run:
+
+`31460525711` — **success**.
+
+It passed:
+
+- `725` theorem tests;
+- `50,000` descending high-strain epochs with arbitrary interval overlap permitted by construction;
+- minimum geometric-frequency capacity margin `0.010872081991569138`;
+- minimum weighted normalized-dissipation capacity margin `0.08466728285959269`;
+- minimum last-scale/frequency-floor margin `1.2235436031599045e-05`;
+- maximum sampled certified epoch count `6`;
+- arbitrary-overlap cases `50,000`;
+- non-consecutive/ascending restart rejections `50,000`;
+- companion continuum-master high-strain epoch telescope failures `0`;
+- companion master physical-time telescope residual `0.0`;
+- companion master log-scale telescope residual `8.881784197001252e-16`.
+
+Stored artifact:
+
+`recorded-results/31460525711/high-strain-descending-epoch-telescope-results/`.
+
+GitHub artifact digest:
+
+`sha256:6869f07693605cc5ff1576b74b26a9bca79ff5a7c2dd0057135f17b1b3d41b56`.
+
+Full physical-energy causal integration:
+
+`31460525687` — **success** on the same exact SHA.
+
+It passed the same `725`-test suite and `58` successful job steps through the complete causal spine.  The final master episode stress checked `20,000` traces with worst margin `0.0`.
+
+Integration artifact digest:
+
+`sha256:9b16322218e71e464ce0b2f1c69090a260550a1e10550239562c7b63126abd1f`.
+
+No fixture correction or theorem-source correction was required: the first implementation SHA passed both serious gates.
+
+This theorem closes eventually-pure consecutive high-strain recurrence.  It does not close mixed-owner recurrence and makes no Navier--Stokes global-regularity claim.

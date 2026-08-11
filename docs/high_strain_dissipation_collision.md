@@ -131,7 +131,7 @@ Thus:
 
 So the high-strain event is no longer an anonymous scalar recursion label, but it is still **not** a globally finite reset.  This prevents both false global counting and the equally false step of naming a shell/coherent edge as a selected transfer parent before the PDE supplies material renewal.
 
-## Candidate refinement: the physical descendant route makes consecutive high strain finite
+## Certified refinement: the physical descendant route makes consecutive high strain finite
 
 The anti-reset warning above remains essential: `D_V` is not a globally additive
 scale-independent budget, and an arbitrary UV-increasing chain can pay fixed
@@ -157,3 +157,6 @@ native scale weights gives
 So the candidate does not overturn the old anti-reset theorem.  It proves a more
 specific path statement: a **consecutive physically descending high-strain epoch**
 is finite even under arbitrary time overlap.  Mixed-owner recurrence remains open.
+
+
+This descending-epoch refinement was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated run `31460525711` and full causal integration run `31460525687`.  It leaves the original anti-reset theorem intact: `D_V` is still not a scale-independent global budget.

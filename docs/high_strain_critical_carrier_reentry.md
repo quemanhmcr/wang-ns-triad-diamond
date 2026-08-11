@@ -148,7 +148,7 @@ A renewed high-strain stop remains recursive critical dissipation, not a reset. 
 
 No global-regularity conclusion is asserted.
 
-## Candidate refinement: repeated high-strain renewal cannot continue forever
+## Certified refinement: repeated high-strain renewal cannot continue forever
 
 This theorem already supplies the exact physical recurrence geometry needed by
 the descending-epoch candidate.  A high-strain stop at child scale `N` is pushed
@@ -171,3 +171,6 @@ infinite tail.  A different physical owner breaks the epoch.  In particular,
 material/new-ancestry relink remains a genuine owner, whereas the separately
 certified smooth conservative `K_phys` role relink is same-event donor provenance
 and creates no recursive child.
+
+
+The consecutive-renewal refinement was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated run `31460525711` and full causal integration run `31460525687`.  High strain remains a genuine owner; only an eventually-pure high-strain tail is excluded.

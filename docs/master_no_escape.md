@@ -2370,7 +2370,7 @@ This refinement was certified on exact SHA
 `31457786141` and full causal integration run `31457786115`.  It removes no
 physical `K_phys` work; it quotients only same-event conservative donor depth.
 
-## Candidate refinement: pure high-strain recurrence is physically finite
+## Certified refinement: pure high-strain recurrence is physically finite
 
 The critical-dissipation branch remains a genuine owner and `D_V` remains
 forbidden as a scale-independent additive reset.  Nevertheless its **actual
@@ -2398,3 +2398,6 @@ So a maximal consecutive high-strain epoch is finite.  This removes an
 eventually-pure high-strain tail, but not mixed recurrence: every new HH,
 source/service, material-new-ancestry, strain/deformation, high-tail or reuse event
 breaks the epoch and must be handled by its own physical law.
+
+
+This refinement was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated high-strain run `31460525711` and full causal integration run `31460525687`.  It is a path telescope through the actual viscous reservoir, not an additive reset for normalized `D_V`.
