@@ -35,6 +35,8 @@ def test_transfer_gate_absorbs_later_manifestations_and_xi_is_disjoint():
     assert out.currency_mass[PhysicalCurrency.MULTIPLICATIVE_TRANSFER.value] == 9.0
     assert PhysicalCurrency.RESOLVED_SOURCE_SGS.value not in out.currency_mass
     assert math.isclose(sum(out.currency_mass.values()), 10.0)
+    assert out.first_time is None
+    assert out.tied_causes == (PhysicalCause.TRANSFER_WORK_LOSS.value,)
 
 
 def test_duplicate_theorem_manifestations_of_one_causal_root_do_not_double_charge():

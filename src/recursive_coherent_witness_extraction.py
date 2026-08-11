@@ -147,7 +147,13 @@ class PositiveBinaryEvent:
 
 
 def normalized_positive_binary_events(atoms: np.ndarray) -> tuple[PositiveBinaryEvent, ...]:
-    """Normalize positive physical work atoms into a binary causal probability law."""
+    """Normalize the positive Hahn atoms of this coherent signed-work representation.
+
+    This is an exact representation-level probability law.  After canonical
+    continuum edge registration it is *not* automatically the master causal law:
+    that identification requires a positive mass-preserving kernel from the
+    already-fixed physical edge law ``dW+``.
+    """
     w = np.asarray(atoms, float)
     pos = np.maximum(w, 0.0)
     total = float(pos.sum())
@@ -308,13 +314,13 @@ def theorem_certificate() -> dict[str, object]:
         "parent_source": "N(w1,w2)=sum_CD N(A_C w1,A_D w2) exactly",
         "work_atoms": "W_CDE=2 Re <A_E w3,N(A_C w1,A_D w2)>",
         "work_identity": "sum_CDE W_CDE=2 Re <w3,N(w1,w2)>",
-        "positive_measure": "P=sum[W_CDE]_+, N=sum[-W_CDE]_+, P-N=W and P>=[W]_+",
-        "causal_event": "every positive atom has exactly two parent coherent labels and one child coherent label at one physical time",
+        "positive_measure": "P=sum[W_CDE]_+, N=sum[-W_CDE]_+, P-N=W and P>=[W]_+; this is the Hahn law of the coherent signed representation, not automatically the canonical causal law",
+        "causal_event": "conditional only: a positive coherent atom becomes master-facing causal mass only after a positive mass-preserving pushforward/disintegration from canonical edge dW+ is proved",
         "xi_rule": "omitted positive cross-cell atoms are excised once; retained+Xi=total positive work",
         "energy_bridge": "W_HH^+>=8E1/15 implies atomic positive mass at least 8E1/15 before Xi; after relative Xi rho retain >=(1-rho)8E1/15",
         "label_rule": "use the canonical intrinsic-zeta dyadic addresses; no new packet label is introduced",
         "important_scope": "A_C pieces need not be Fourier compact; scale/helical representative errors remain in the existing symbol/covariance Xi ledgers",
-        "continuum_status": "outer transfer roles and nonaffine interface provenance are supplied by companion theorems; remaining task is recursive first-stop assembly on the retained physical transfer measure",
+        "continuum_status": "deterministic hard Fourier/helicity cells may inherit canonical dW+ by pushforward; a general coherent POVM remains signed diagnostic until a positive dW+ kernel theorem is supplied",
     }
 
 
@@ -329,7 +335,7 @@ def main() -> None:
     (args.outdir / "recursive_coherent_witness_extraction.json").write_text(
         json.dumps({"certificate": cert, "stress": asdict(out)}, indent=2), encoding="utf-8"
     )
-    md = f"""# Recursive coherent witness extraction\n\nStatus: **{cert['status']}**.\n\nOnce the exact selected divergence-free parent/child roles exist, no packet synthesis is needed to create binary causal events.  For any coherent localization partitions with `sum_C A_C=I`, bilinearity gives\n\n`N(w1,w2)=sum_(C,D) N(A_C w1,A_D w2)`\n\nand the actual child-energy work decomposes exactly as\n\n`W_CDE=2 Re <A_E w3,N(A_C w1,A_D w2)>`,\n`sum_CDE W_CDE=2 Re <w3,N(w1,w2)>`.\n\nTaking positive and negative parts is a Hahn decomposition of **actual quadratic work**: `P-N=W` and `P>=[W]_+`.  Each positive atom already carries exactly two parent coherent labels and one child label at one physical time.  Thus binary causality is a disintegration of the Navier--Stokes quadratic work, not a graph ansatz.\n\nCombining with the physical-energy causal gate, the generated low-strain branch has atomic positive mass at least `8E1/15` before selected cross-cell excision.  If the physical defect moat removes a relative positive-work fraction `rho`, retained binary generation is at least `(1-rho)8E1/15`.  Omitted positive atoms enter `Xi` once; negative atoms remain physical backscatter/cancellation.\n\nThe labels are the existing intrinsic-zeta material coherent addresses.  No assertion is made that an individual `A_C w` has compact Fourier support; scale/helical representative information is still supplied by the outer selected role and the already summable symbol/covariance representation ledgers.\n\nStress: `{out.samples}` finite Parseval/POVM bilinear-work states\n- worst quadratic-source partition residual: `{out.worst_bilinear_partition_residual:.3e}`\n- worst work reconstruction residual: `{out.worst_work_reconstruction_residual:.3e}`\n- minimum atomic-positive dominance margin: `{out.minimum_positive_dominance_margin:.3e}`\n- worst binary probability residual: `{out.worst_probability_residual:.3e}`\n- worst Xi positive-mass partition residual: `{out.worst_xi_partition_residual:.3e}`\n- minimum retained-generation formula margin: `{out.minimum_retained_generation_margin:.3e}`\n\nThe remaining continuum bridge is now outside this binary atomization: prove that every recursively selected efficient smooth-SGS block supplies the outer Fourier/helical roles and classified non-affine residual work required by service-or-flat, with the same physical transfer normalization.\n"""
+    md = f"""# Recursive coherent witness extraction\n\nStatus: **{cert['status']}**.\n\nOnce the exact selected divergence-free parent/child roles exist, no packet synthesis is needed to create binary causal events.  For any coherent localization partitions with `sum_C A_C=I`, bilinearity gives\n\n`N(w1,w2)=sum_(C,D) N(A_C w1,A_D w2)`\n\nand the actual child-energy work decomposes exactly as\n\n`W_CDE=2 Re <A_E w3,N(A_C w1,A_D w2)>`,\n`sum_CDE W_CDE=2 Re <w3,N(w1,w2)>`.\n\nTaking positive and negative parts is a Hahn decomposition of the **coherent signed-work representation**: `P-N=W` and `P>=[W]_+`.  The signed identity remains exact.  However, after the canonical continuum edge law has been fixed, these positive coherent Hahn atoms are not automatically a second master causal law.  A general POVM localization must first be supplied with a positive mass-preserving kernel from canonical edge `dW+`; absent that theorem, the coherent positive atoms are representation diagnostics rather than newly minted cause.\n\nCombining with the physical-energy causal gate, the generated low-strain branch has atomic positive mass at least `8E1/15` before selected cross-cell excision.  If the physical defect moat removes a relative positive-work fraction `rho`, retained binary generation is at least `(1-rho)8E1/15`.  Omitted positive atoms enter `Xi` once; negative atoms remain physical backscatter/cancellation.\n\nThe labels are the existing intrinsic-zeta material coherent addresses.  No assertion is made that an individual `A_C w` has compact Fourier support; scale/helical representative information is still supplied by the outer selected role and the already summable symbol/covariance representation ledgers.\n\nStress: `{out.samples}` finite Parseval/POVM bilinear-work states\n- worst quadratic-source partition residual: `{out.worst_bilinear_partition_residual:.3e}`\n- worst work reconstruction residual: `{out.worst_work_reconstruction_residual:.3e}`\n- minimum atomic-positive dominance margin: `{out.minimum_positive_dominance_margin:.3e}`\n- worst binary probability residual: `{out.worst_probability_residual:.3e}`\n- worst Xi positive-mass partition residual: `{out.worst_xi_partition_residual:.3e}`\n- minimum retained-generation formula margin: `{out.minimum_retained_generation_margin:.3e}`\n\nThe deterministic hard Fourier/helicity event-role path is now the preferred master-facing bridge because it is a measurable label map on the canonical edge space.  General coherent POVM positivity remains a separate open kernel/disintegration seam; no re-Hahn of coherent cells may replace inherited canonical `dW+`.\n"""
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
 

@@ -210,7 +210,7 @@ def _first_causal_split(witness: BlockWitness) -> tuple[dict[PhysicalCurrency, f
     """
 
     if witness.fixed_transfer_loss:
-        return {PhysicalCurrency.MULTIPLICATIVE_TRANSFER: 1.0}, 0.0, (
+        return {PhysicalCurrency.MULTIPLICATIVE_TRANSFER: 1.0}, None, (
             PhysicalCause.TRANSFER_WORK_LOSS.value,
         )
 

@@ -1,0 +1,64 @@
+name: Canonical positive edge-work routing
+
+on:
+  push:
+    paths:
+      - 'src/canonical_positive_edge_work_routing.py'
+      - 'tests/test_canonical_positive_edge_work_routing.py'
+      - 'docs/canonical_positive_edge_work_routing.md'
+      - 'docs/canonical_positive_edge_work_routing_frontier.md'
+      - 'src/continuum_helical_edge_measure_registration.py'
+      - 'tests/test_continuum_helical_edge_measure_registration.py'
+      - 'src/helical_physical_edge_registration.py'
+      - 'tests/test_helical_physical_edge_registration.py'
+      - 'src/event_anchored_role_registration.py'
+      - 'src/complex_young_parent_marking.py'
+      - 'src/physical_branch_compiler.py'
+      - 'tests/test_physical_branch_compiler.py'
+      - 'src/joint_causal_stop_projection.py'
+      - 'tests/test_joint_causal_stop_projection.py'
+      - 'src/coherent_service_or_flat.py'
+      - 'src/service_or_flat_rigidity.py'
+      - 'src/recursive_coherent_witness_extraction.py'
+      - '.github/workflows/canonical-positive-edge-work-routing.yml'
+      - '.github/workflows/audit-canonical-positive-edge-work-routing.yml'
+      - '.github/workflows/physical-energy-causal-integration.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Canonical positive edge routing stress
+        run: python -m src.canonical_positive_edge_work_routing --samples 50000 --outdir results-canonical-positive-edge-work-routing
+      - name: Continuum signed edge dependency
+        run: python -m src.continuum_helical_edge_measure_registration --samples 5000 --core-blocks 200 --outdir results-continuum-edge-dependency
+      - name: Physical helical edge dependency
+        run: python -m src.helical_physical_edge_registration --samples 20000 --outdir results-helical-edge-dependency
+      - name: Fine compiler stage-zero dependency
+        run: python -m src.physical_branch_compiler --samples 50000 --outdir results-physical-branch-compiler
+      - name: Joint stop stage-zero dependency
+        run: python -m src.joint_causal_stop_projection --samples 50000 --outdir results-joint-stop
+      - run: cat results-canonical-positive-edge-work-routing/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: canonical-positive-edge-work-routing-results
+          path: |
+            results-canonical-positive-edge-work-routing/
+            results-continuum-edge-dependency/
+            results-helical-edge-dependency/
+            results-physical-branch-compiler/
+            results-joint-stop/
