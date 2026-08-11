@@ -5,6 +5,7 @@ law on one PDE history.  These tests make sure the executable cannot replace
 that native law by absolute observer units or splice unrelated certificates.
 """
 
+from dataclasses import replace
 import math
 
 import pytest
@@ -235,6 +236,11 @@ def test_selected_positive_sublaw_mass_cannot_exceed_its_total():
         )
 
 
+def test_positive_physical_work_cannot_live_on_a_zero_duration_support():
+    with pytest.raises(ValueError, match="positive.*work support|duration"):
+        _step(10.0, 6.1, 1.0, 1.0, 1.0)
+
+
 def test_nonfinite_parent_span_certificate_fails_closed():
     token = _provenance()
     with pytest.raises((TypeError, ValueError), match="span|finite"):
@@ -310,3 +316,15 @@ def test_native_unit_covariance_accepts_the_same_dimensionless_epoch():
     )
     out = signed_good_generated_epoch_telescope((row0, row1))
     assert out.cumulative_reference_backshift >= out.minimum_cumulative_backshift
+
+
+def test_one_carrier_identity_cannot_reappear_at_a_different_native_frequency():
+    row0 = _step(10.0, 6.1, 1.0, 5.0, 5.001)
+    row1 = _step(6.1, 0.61 * 6.1, 1.0, 4.99, 4.991)
+    recycled = replace(
+        row1.provenance,
+        generated_parent_carrier_id=row0.provenance.child_carrier_id,
+    )
+    row1 = replace(row1, provenance=recycled)
+    with pytest.raises(ValueError, match="carrier identity.*native frequency"):
+        signed_good_generated_epoch_telescope((row0, row1))
