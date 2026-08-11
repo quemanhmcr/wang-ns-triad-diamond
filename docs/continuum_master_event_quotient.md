@@ -1,6 +1,6 @@
 # Continuum master event quotient: physical time, not theorem depth
 
-Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor full-natural service extension certified on exact SHA `e351d0d6bef5a6bd6275083e1d2e706acf717a18`**.
+Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`**.
 
 ## 1. Why the apparent recursion was too large
 
@@ -39,88 +39,78 @@ before comparison with source work, Moyal relink energy, or strain.
 
 `t=0` is absorbing.
 
-## 3. The universal identity is just physical time
+## 3. The universal identity is physical time, not event count
 
 Let
 
 ` t_0 >= t_1 >= ... >= t_L >= 0 `
 
-be the actual backward recursive event times.  Then, identically,
+be any ordered backward times at which either a physical event is read or a theorem checkpoint is placed.  Then, identically,
 
 \[
 \boxed{\sum_{j<L}(t_j-t_{j+1})=t_0-t_L.}
 \]
 
-This is the only universal clock needed.  It is not synthetic: it is the time
-coordinate of Navier--Stokes itself.
+This is the only universal clock needed.  It is the time coordinate of Navier--Stokes itself.  Whether a time slice is an **event vertex** is a separate physical question.
 
-For a generic critical shell at frequency `M`, a full no-hit natural corridor has
-requested duration
+For an incoming generic hard shell at frequency `M`, the actual no-hit carrier corridor is registered at
 
 \[
-T_M=cM^{-2}.
+A=\frac34M,
+\qquad
+T_A=cA^{-2}.
 \]
 
-The generic shell theorem already proves that such a corridor ends in own-scale
-service unless the initial boundary is reached.  Therefore a genuinely free
-full-survivor transition consumes exactly `c M^-2` physical backward time.  If
-`cM^-2>=t`, the corridor is truncated by `t=0`, which absorbs the recursion.
+If a physical first stop occurs before `T_A`, that stop remains event-facing after its native routing.  If `t=0` is reached, the boundary absorbs.  If neither happens and the whole interval survives, exactly `T_A` of physical time has elapsed, but the earlier endpoint is only an **analysis checkpoint**.  It adds zero physical event vertices and zero causal charges.
 
 No packet persistence or time bin is used here.
 
-## 4. Compact-scale full survivors cannot escape
+## 4. Compact-scale checkpoint continuation cannot escape physical time
 
-Suppose a tail of consecutive free full-natural survivors has
-
-\[
-M_j\le \overline M.
-\]
-
-Every one of those edges consumes at least
+Suppose a sequence of consecutive no-hit checkpoint corridors has corridor frequencies
 
 \[
-c\overline M^{-2}
+A_j\le \overline A.
 \]
 
-of physical time.  Hence after
+Every corridor consumes at least
 
 \[
-\boxed{K=\left\lceil t_*\overline M^2/c\right\rceil}
+c\overline A^{-2}
 \]
 
-such free edges, the initial boundary must have been reached.
+of real physical time.  Hence after
 
-This gives the continuum dichotomy:
+\[
+\boxed{K=\left\lceil t_*\overline A^2/c\right\rceil}
+\]
 
-> After zero-charge relays and same-corridor full-natural service witnesses are quotiented, any infinite recursive path avoiding `t=0` either has infinitely many **genuine named non-free physical owner events** (first-hit/work/source/reuse owners or independent service owners), or has an **unbounded-frequency tail of full-natural survivors**.
+such corridors, the initial boundary must have been reached.
 
-Indeed, if named non-free physical owner events occur only finitely often, the tail consists only of
-full-natural survivors.  If that tail were bounded in frequency, the preceding
-physical-time estimate would terminate it.
+This statement uses **zero event counting**.  After relays, service witnesses and natural-horizon checkpoints are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine named physical owner events.  A no-hit checkpoint continuation is not an event path.
 
 This is a topology/physical-time statement, not a regularity conclusion.
 
-## 5. Why ultraviolet escape is a real obstruction
+## 5. Why ultraviolet checkpoint continuation is a real obstruction
 
-Physical time alone cannot exclude a UV Zeno tail.  If
+Physical time alone cannot exclude an event-free UV-growing checkpoint sequence.  If the actual corridor scales obey
 
 \[
-M_j=M_0r^j,\qquad r>1,
+A_j=A_0r^j,\qquad r>1,
 \]
 
 then
 
 \[
 \boxed{
-\sum_{j\ge0}cM_j^{-2}
-={cM_0^{-2}\over1-r^{-2}}<\infty.
+\sum_{j\ge0}cA_j^{-2}
+={cA_0^{-2}\over1-r^{-2}}<\infty.
 }
 \]
 
-Thus the failure of the compact-scale argument at unbounded frequency is not an
-artifact of our representation or clock.  It is a genuine UV possibility.  This
-is precisely where physical high-tail work/locality/natural-window routing is
-needed; one must not repair it by imposing an observer-chosen common time grid.
+Thus the failure of the compact-scale argument at unbounded corridor frequency is not an artifact of our clock.  But after checkpoint quotient it is **not** an infinite recursive event chain either.  It is an event-free PDE continuation seam.
+
+The endpoint two-shell cover does not close this seam: actual endpoint masses may realize a shell at `A` or `2A`, but that reading has checkpoint-cover provenance.  It is not automatically the independently certified physical high-tail supplier.  A further PDE theorem must decide whether UV checkpoint continuation forces actual tail dissipation/work, another physical first stop, or some other native obstruction.
 
 ## 6. Scale progress is supplier-specific
 
@@ -180,28 +170,14 @@ are concentration coordinates conjugate to shell/service lower bounds.  They are
 
 ## 8. What is genuinely left
 
-The final continuum problem is now smaller than a universal packet theorem.
-After quotienting representation and relay depth, infinite escape can only hide
-in two places:
+The final continuum problem is now smaller and more sharply typed than one universal recursion tree.  After quotienting representation, relay, service and natural-horizon depth, two distinct physical questions remain.
 
-1. **infinitely many named recursive physical owner events** before full-natural
-   corridors can consume time; these must telescope through actual transfer
-   cost, source/service/reuse structure, or a genuinely globally bounded
-   resource;
-2. **UV-unbounded full-survivor scale escape**; this must be closed by physical
-   UV work/locality/service mechanisms, not by a common clock.
+1. **Genuine recursive event recurrence.**  An infinite event path avoiding `t=0` can contain only actual first-hit/work/source/reuse/independent-service owners.  Their recurrence must telescope through the native physical ledgers they actually supply; no critical normalized quantity may be turned into a synthetic finite reset.
+2. **Event-free UV checkpoint continuation.**  A no-hit sequence may move to growing analysis/corridor scales while consuming a finite total physical time.  Hard-shell checkpoint rereading does not itself prove high-tail dynamics.  This seam needs a separate PDE theorem if it is to be closed.
 
-The recently certified high-tail locality plus sliding natural-window theorem is
-already exactly of type 2: it turns physical tail dissipation and comparable HH
-work into an actual higher-frequency shell event with its own natural-time
-corridor.  The source/pressure/resolved branches of type 1 often move to much
-lower frequency and therefore make the physical-time obstruction stronger, not
-weaker.  Fresh service is the important scale-neutral supplier: it cannot claim
-monotone progress, but repeated bounded-scale full survivors still terminate by
-physical time, so lack of a fresh signed-good ratio is not itself an obstruction.
+The certified high-tail locality plus sliding natural-window theorem remains exactly available when its **physical tail hypotheses** are met: it converts actual tail dissipation/comparable HH work into a higher-frequency shell event.  The checkpoint quotient does not weaken that route; it only prevents an analysis cover from impersonating it.
 
-This theorem is a **continuum master assembly/quotient theorem**.  It does not
-prove global no-escape and does not prove 3D Navier--Stokes regularity.
+This is a **continuum master assembly/quotient theorem**.  It does not prove global no-escape and does not prove 3D Navier--Stokes regularity.
 
 ## 9. Certification
 
@@ -222,9 +198,9 @@ and `50,000` corridor/service/material/endpoint-shell states; the full integrati
 passed the complete causal spine and `20,000` master episodes with worst margin
 `0.0`.  The base master identities retain their original certification above.
 
-### Candidate natural-horizon checkpoint extension
+### Certified natural-horizon checkpoint extension
 
-The next quotient sharpens the distinction above without changing any certified
+The certified checkpoint quotient sharpens the distinction above without changing any certified
 physical-time identity.  A generic critical shell at hard-shell scale `M` runs its
 actual no-hit corridor at
 
@@ -245,7 +221,7 @@ The endpoint carrier may still be reread through the actual hard shells `A` and
 `2A`.  Relative to the incoming shell these have ratios `3/4` and `3/2`.  These are
 state/cover facts, not directional scale progress.  In particular the upper
 `3/2` cover witness is strictly below the independently certified high-tail ratio
-`>=2`, and the candidate production API marks it as inadmissible for high-tail
+`>=2`, and the production API marks it as inadmissible for high-tail
 ownership.
 
 Checkpoint continuation is not certified by time contiguity or membership in the
@@ -264,6 +240,4 @@ After this extension, the master has two distinct infinite-path questions:
    if one is available.
 
 The second object is not declared harmless and is not declared high-tail by fiat.
-It is simply removed from artificial event depth.  Candidate implementation and
-GitHub certification are pending; the certified base and service-corridor
-extensions above retain their existing provenance.
+It is simply removed from artificial event depth.  This extension was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854` and full integration run `31451492844`; the earlier base and service-corridor blocks retain their own provenance.

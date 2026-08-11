@@ -1,0 +1,20 @@
+{
+  "certificate": {
+    "status": "EXACT_FULL_NATURAL_HORIZON_CHECKPOINT_QUOTIENT__PHYSICAL_CORRIDOR_TIME_WITH_ZERO_EVENT_DEPTH__ENDPOINT_HARD_SHELL_COVER_IS_ANALYSIS_REREGISTRATION_NOT_SCALE_PROGRESS__UV_CHECKPOINT_CONTINUATION_SEPARATED_FROM_RECURSIVE_EVENT_PATH",
+    "event_ontology": "a complete no-hit A-natural horizon consumes real Navier-Stokes time but creates no physical event vertex; the endpoint is an analysis checkpoint unless a first stop or t=0 occurs",
+    "two_scales": "incoming hard shell is M while the actual corridor clock is A=3M/4; endpoint hard-shell witnesses are A and 2A and must not be conflated with the corridor scale",
+    "cover_geometry": "endpoint witness ratios 3/4 and 3/2 are exact two-shell cover geometry and carry analysis-checkpoint provenance, not physical high-tail provenance; on the same incoming-shell reference 3/2 is also below 2, but the type distinction is primary",
+    "master_barrier": "full_natural_analysis_checkpoint and the legacy full-natural-survivor disposition are forbidden from RecursiveEventState/PhysicalOwnerBundle as recursive physical causes",
+    "time_semantics": "checkpoint chains telescope actual physical corridor time while adding zero physical event vertices, zero recursive event depth and zero causal charges",
+    "remaining_uv": "a UV-unbounded sequence of no-hit analysis checkpoints may have finite physical duration; after checkpoint quotient this is an event-free PDE continuation seam, not an infinite recursive event path",
+    "scope": "this removes natural-horizon segmentation and hard-shell-cover ascent from recursive event depth; it does not prove that UV checkpoint continuation forces high-tail work, nor does it prove Navier-Stokes regularity"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_time_identity_residual": 0.0,
+    "maximum_cover_ratio": 1.5000000000000002,
+    "checkpoint_event_failures": 0,
+    "high_tail_misclassification_failures": 0,
+    "minimum_uv_time_beyond_first_corridor": 8.874718028220728e-06
+  }
+}

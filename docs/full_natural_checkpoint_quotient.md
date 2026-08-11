@@ -1,8 +1,8 @@
 # Full-natural horizon checkpoint quotient
 
-## Candidate status
+## Status
 
-Candidate theorem awaiting exact-SHA GitHub Actions certification.
+Certified on exact implementation SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated GitHub Actions run `31451492854` and full physical-energy causal integration run `31451492844`.
 
 This theorem separates three objects which were previously too easy to conflate:
 
@@ -215,3 +215,47 @@ resolutions.  It rereads the carrier balance, heat increment, and hard-shell cov
 from the same evolved corridor.  This is a strong attempt to falsify the encoded
 identities on actual NS dynamics; it is not a continuum proof and supplies no
 global-regularity claim.
+
+## 8. Original checkpoint certification
+
+Exact implementation SHA:
+
+`75ceff3481dccc41a9e915ce8c1400638e440820`.
+
+Dedicated GitHub Actions run:
+
+`31451492854` — **success**.
+
+It passed:
+
+- `696` theorem tests;
+- `50,000` checkpoint/corridor/cover states;
+- worst physical-time telescope residual `0.0`;
+- maximum sampled checkpoint-cover ratio `1.5000000000000002`;
+- checkpoint-to-event failures `0`;
+- cover-to-high-tail misclassification failures `0`;
+- minimum sampled UV checkpoint time beyond the first corridor `8.874718028220728e-06`;
+- companion `50,000`-state continuum-master checkpoint-barrier failures `0`;
+- the physical high-frequency dissipation dependency remained independently green.
+
+Stored artifact:
+
+`recorded-results/31451492854/full-natural-checkpoint-quotient-results/`.
+
+GitHub artifact digest:
+
+`sha256:212a85c8d90535c74dc4035b0e8372cfb4d51ca1b4282888a4852ed06d9e07cb`.
+
+Full physical-energy causal integration run:
+
+`31451492844` — **success** on the same exact SHA.
+
+It passed the same `696`-test suite and the complete causal spine.  The final
+master episode stress checked `20,000` traces with worst margin `0.0`.  The
+integration artifact digest is
+
+`sha256:23cd2a39f9a19006008f4b29a99ef8dce2ee60b7f34952f4225e30b398027b89`.
+
+These CI results are regression/certificate evidence around the encoded exact
+identities and type barriers.  They do not close the event-free UV continuation
+seam and do not imply Navier--Stokes global regularity.
