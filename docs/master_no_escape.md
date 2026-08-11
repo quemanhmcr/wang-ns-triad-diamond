@@ -2300,7 +2300,8 @@ producer at the exact endpoint state.  Bare clock-contiguous checkpoints are
 rejected, and the telescope sums their native local `cA^-2` durations rather than
 recovering them from global-clock subtraction.
 
-Consequently the remaining continuum frontier separates into two questions:
+At this checkpoint-only stage the remaining continuum frontier appeared to
+separate into two questions:
 
 - recurrence of genuine physical owner **events**, which belongs to the native
   work/source/reuse/independent-service ledgers;
@@ -2312,7 +2313,7 @@ This refinement was certified on exact SHA `75ceff3481dccc41a9e915ce8c1400638e44
 checkpoint seam necessarily generates high-tail work.  It only removes the
 analyst's natural-horizon segmentation from physical event depth.
 
-## Audited candidate: exact same-path cuts are not a second escape route
+## Audited refinement: exact same-path cuts are not a second escape route
 
 The certified checkpoint theorem above correctly removed natural-horizon endpoints
 from event depth. The same-carrier audit sharpens the remaining topology without
@@ -2344,3 +2345,8 @@ only when independently certified physical events really change scale. Actual
 high-tail dissipation/work remains a genuine UV route under its own hypotheses.
 The global frontier is genuine physical-owner recurrence; no global-regularity
 conclusion is asserted.
+
+The repaired source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3` passed
+the adversarial audit run `31456579940`, the dedicated same-carrier run
+`31456579975`, the continuum-master run `31456580011`, and full physical-energy
+integration run `31456580020`.

@@ -115,7 +115,12 @@ So the frontier is no longer “manufacture a new hard parent at the common slic
 
 No global-regularity claim is made.
 
-## Candidate extension: natural horizons do not interrupt the relay
+## Certified extension: natural horizons do not interrupt the relay
+
+The author's initial extension at `bd404d8fd79336e094015f8a9463bfef761e9d2d`
+was tightened after adversarial audit.  The exact repaired source
+`55b950fa289ccc3646c67a1c0318287a2d71bea3` passed audit run `31456579940`,
+dedicated same-carrier run `31456579975`, and full integration run `31456580020`.
 
 The same-carrier checkpoint-segmentation theorem applies the relay principle to
 full-natural service horizons. The exact carrier equation does not expire merely

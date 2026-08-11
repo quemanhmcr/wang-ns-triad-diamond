@@ -2,8 +2,19 @@
 
 ## Status and proof boundary
 
-Audit repair candidate. Serious execution, stress, and Navier--Stokes numerical
-falsification are reserved for GitHub Actions.
+The author's initial implementation/wiring SHA
+`bd404d8fd79336e094015f8a9463bfef761e9d2d` passed its original suite, but is a
+historical pre-audit baseline. Independent adversarial run `31454633883` made all
+`14` new native-scale/provenance tests fail. After the first repair, run
+`31456282001` exposed one remaining gap: a bare typed checkpoint from a foreign PDE
+trajectory could still claim continuation when only `t`, `A`, and `c` matched.
+
+The audited repair is exact source SHA
+`55b950fa289ccc3646c67a1c0318287a2d71bea3`. Audit run `31456579940`, dedicated
+same-carrier run `31456579975`, continuum-master run `31456580011`, and full
+physical-energy integration run `31456580020` all completed successfully. Serious
+execution, stress, and Navier--Stokes numerical falsification are reserved for
+GitHub Actions.
 
 This lemma concerns one already-defined smooth event-anchored carrier on one
 pre-singular PDE trajectory. It does not construct such a trajectory beyond its
@@ -178,6 +189,37 @@ The experiment must also verify incompressibility, the global energy balance, th
 carrier `Q^2` balance, the complex coefficient/Duhamel residual, low--low moat,
 nonzero nonlinear activity, partition invariance, and resolution refinement. This
 is numerical falsification evidence, not a continuum proof.
+
+On exact repaired source SHA `55b950f`, the audit lane passed
+
+- `15` checkpoint anti-tests, `16` same-carrier anti-tests, and all `759` theorem
+  tests;
+- `200,000` checkpoint states, `200,000` same-carrier segmentation states, and
+  `100,000` service-corridor states;
+- `159,723` nonmonotone impulse-magnitude paths, with zero segmentation, reset, or
+  fixed-window-Zeno failures;
+- `100,000` endpoint-stop and `100,000` strict-margin continuation accumulation
+  cases.
+
+For `T=0.015625`, `A=4`, `nu=0.05`, four fixed natural windows, and `80` RK4
+steps, the direct Navier--Stokes probe reported:
+
+| `N` | max divergence | global energy residual | `Q^2` balance residual | complex Duhamel residual | cut first-time residual |
+|---:|---:|---:|---:|---:|---:|
+| 20 | `3.919e-17` | `1.600e-11` | `1.963e-7` | `2.664e-9` | `0.0` |
+| 24 | `4.746e-17` | `1.600e-11` | `1.970e-7` | `2.815e-9` | `0.0` |
+| 28 | `5.579e-17` | `1.600e-11` | `1.970e-7` | `2.815e-9` | `0.0` |
+
+The terminal-amplitude resolution spread was `1.928e-6`; the imaginary impulse
+was nonzero (maximum magnitude `1.298e-4`), so the probe did not silently collapse
+the complex phase to a real monotone proxy. The exact audit artifact is stored at
+`recorded-results/31456579940/audit-full-natural-checkpoint-results/`; its GitHub
+digest is
+`sha256:807c66f76bd01b755f324df0aff2833ba09098dc19b7c44b33139eac827fd2d9`.
+
+The full integration ran all `759` tests and `57/57` successful job steps. Its
+artifact digest is
+`sha256:e5b9e11ee40c730943b0acb0444e9052063a5a964537328b523f536198f94ef8`.
 
 ## 8. Remaining frontier
 

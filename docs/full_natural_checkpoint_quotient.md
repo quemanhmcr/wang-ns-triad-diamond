@@ -2,7 +2,7 @@
 
 ## Status
 
-Base checkpoint theorem certified on exact implementation SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated GitHub Actions run `31451492854` and full physical-energy causal integration run `31451492844`.  The same-carrier continuation/no-reset refinement below is the current candidate and is not yet certified.
+Base checkpoint theorem certified on exact implementation SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated GitHub Actions run `31451492854` and full physical-energy causal integration run `31451492844`.  The author's initial same-carrier continuation/no-reset refinement was certified on `bd404d8fd79336e094015f8a9463bfef761e9d2d`; independent adversarial audit subsequently found native-scale and PDE-path provenance gaps.  The repaired refinement below is verified on exact source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3` by audit run `31456579940`, dedicated run `31456579975`, and full integration run `31456580020`.
 
 This theorem separates three objects which were previously too easy to conflate:
 
@@ -177,7 +177,7 @@ until a new physical first stop/owner event actually occurs.
 
 ## Scope
 
-The base theorem removes natural-horizon event depth and two-shell cover ascent. The current candidate strengthens this: checkpoint hard-shell readings remain duration-free state sidecars while exact event/carrier/terminal-dual/PDE-path provenance and cumulative complex monitors continue. Fixed-carrier natural windows retain their positive physical duration. The candidate still does not telescope infinitely recurring genuine physical owners and does not prove 3D Navier--Stokes global regularity.
+The base theorem removes natural-horizon event depth and two-shell cover ascent. The audited refinement strengthens this: checkpoint hard-shell readings remain duration-free state sidecars while exact event/carrier/terminal-dual/PDE-path provenance and cumulative complex monitors continue. Fixed-carrier natural windows retain their positive physical duration. The refinement still does not telescope infinitely recurring genuine physical owners and does not prove 3D Navier--Stokes global regularity.
 
 ## 6. Endpoint witness selection is performed by the state, not the analyst
 
@@ -258,11 +258,13 @@ integration artifact digest is
 
 `sha256:23cd2a39f9a19006008f4b29a99ef8dce2ee60b7f34952f4225e30b398027b89`.
 
-These CI results are regression/certificate evidence around the encoded exact
-identities and type barriers.  They do not close the event-free UV continuation
-seam and do not imply Navier--Stokes global regularity.
+These base-theorem CI results are regression/certificate evidence around the
+encoded exact identities and type barriers.  By themselves they did not close the
+event-free UV continuation seam.  The audited refinement below removes the
+observer-generated same-carrier version of that seam, but does not terminate
+genuine physical-owner recurrence or imply Navier--Stokes global regularity.
 
-## Candidate continuation refinement: checkpoint rereading does not restart the carrier
+## Certified continuation refinement: checkpoint rereading does not restart the carrier
 
 The companion same-carrier segmentation theorem sharpens `analysis checkpoint`
 one step further.  The hard-shell witness set exposed here is a legitimate state
@@ -290,3 +292,10 @@ high-tail dynamics remains governed by independent physical tail-work theorems.
 A bare checkpoint record is insufficient even when `t`, `A`, and `c` match. The
 same-carrier policy also requires its cumulative no-hit PDE restriction to end at
 the exact checkpoint duration and to match the provenance of the master event.
+
+The repaired source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3`
+passed `759` tests, `200,000` checkpoint states, `200,000` same-path segmentation
+states, and the dealiased Fourier--Galerkin Navier--Stokes probe in audit run
+`31456579940`.  This is strong regression and numerical-falsification evidence;
+the same-path restriction remains an explicit continuum hypothesis rather than a
+fact inferred from matching record fields.

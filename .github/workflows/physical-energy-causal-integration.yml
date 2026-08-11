@@ -30,6 +30,7 @@ on:
       - 'src/full_natural_checkpoint_quotient.py'
       - 'src/same_carrier_checkpoint_segmentation_quotient.py'
       - 'src/same_carrier_checkpoint_segmentation_pde_probe.py'
+      - 'tests/test_same_carrier_checkpoint_segmentation_quotient.py'
       - 'src/continuum_master_event_quotient.py'
       - 'src/complex_young_parent_marking.py'
       - 'src/dual_gaussian_root_registration.py'

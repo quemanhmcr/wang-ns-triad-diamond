@@ -146,7 +146,7 @@ contains one real physical corridor, not several physical intervals.  The extra
 arrows are witness maps on the same corridor, and the certified checkpoint
 refinement shows that the no-hit horizon itself adds zero recursive event vertices.
 
-The candidate same-carrier checkpoint-segmentation theorem sharpens the next step:
+The audited same-carrier checkpoint-segmentation refinement sharpens the next step:
 a no-event natural horizon does not restart the carrier. Exact event/carrier/
 terminal-dual/PDE-path and cumulative-complex boundary provenance continues, while
 hard-shell endpoint readings remain state sidecars. Repeated rereading cannot by
@@ -158,8 +158,7 @@ carry no service-window duration. A finite geometric parabolic-time sum remains 
 counterexample only for independently certified changing-scale physical producers.
 Independent source/service/reuse and high-tail work events retain their native laws.
 
-This removes **service theorem depth** from named-owner recurrence and, if the
-candidate passes exact-SHA CI, removes natural-horizon restart depth as well.
+This removes **service theorem depth** from named-owner recurrence and, after the certified same-carrier extension, removes natural-horizon restart depth as well.
 
 ## 5. Anti-theorems encoded by the theorem
 
@@ -296,9 +295,9 @@ frequency/mass pair into the next critical-shell producer at the same endpoint
 state.  This makes the endpoint cover a genuine PDE-state rereading without
 turning an observer-chosen candidate shell into dynamics.
 
-### Candidate same-carrier continuation refinement
+### Audited same-carrier continuation refinement
 
-The current candidate `same_carrier_checkpoint_segmentation_quotient` makes the
+The audited `same_carrier_checkpoint_segmentation_quotient` makes the
 preceding consequence fail-closed: a hard-shell witness is a state sidecar,
 `checkpoint_scale_path_is_physical_lineage=False`, and only exact event/carrier/
 dual/trajectory/state-token gluing may continue the complex cumulative monitors.
@@ -306,3 +305,6 @@ Checkpoint authority additionally requires the actual cumulative no-hit PDE
 restriction through its exact native endpoint; a bare checkpoint matching only
 `t`, `A`, and `c` is rejected.
 Arbitrary cuts are explicitly separated from positive-duration natural windows.
+The repaired source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3` passed
+audit run `31456579940` and full integration run `31456580020`, including the
+same-corridor and same-carrier Navier--Stokes falsification probes.

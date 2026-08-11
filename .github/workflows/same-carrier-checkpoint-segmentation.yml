@@ -15,6 +15,7 @@ on:
       - 'docs/continuum_master_event_quotient.md'
       - 'docs/master_no_escape.md'
       - '.github/workflows/same-carrier-checkpoint-segmentation.yml'
+      - '.github/workflows/physical-energy-causal-integration.yml'
       - 'src/full_natural_checkpoint_quotient.py'
       - 'src/continuum_master_event_quotient.py'
       - 'src/smooth_material_carrier_relay.py'

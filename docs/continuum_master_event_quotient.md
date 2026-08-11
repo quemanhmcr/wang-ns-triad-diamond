@@ -1,6 +1,6 @@
 # Continuum master event quotient: physical time, not theorem depth
 
-Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; same-carrier checkpoint-segmentation extension is the current candidate and is not yet certified**.
+Status: **base continuum master certified on exact SHA `37d43e189de6f8b0294cf7d18f2c672bcb419f87`; same-corridor service extension on `e351d0d6bef5a6bd6275083e1d2e706acf717a18`; natural-horizon checkpoint extension on `75ceff3481dccc41a9e915ce8c1400638e440820`; author's initial same-carrier extension on `bd404d8fd79336e094015f8a9463bfef761e9d2d`; audited same-path/native-scale repair on exact source SHA `55b950fa289ccc3646c67a1c0318287a2d71bea3` by audit run `31456579940`, continuum-master run `31456580011`, and full integration run `31456580020`**.
 
 ## 1. Why the apparent recursion was too large
 
@@ -123,7 +123,7 @@ a PDE trajectory. Sidecar rereading requires the checkpoint to be bound to the
 actual no-hit cumulative restriction ending at its native duration and to match
 the master event/carrier/dual/trajectory provenance exactly.
 
-This candidate refinement is pending dedicated and full causal-integration CI; the previous checkpoint theorem provenance remains recorded below.
+This refinement is certified on exact SHA `bd404d8fd79336e094015f8a9463bfef761e9d2d` by dedicated run `31454546606` and full integration run `31454546590`; the previous checkpoint theorem provenance remains recorded below.
 
 ## 6. Scale progress is supplier-specific
 
@@ -183,7 +183,7 @@ are concentration coordinates conjugate to shell/service lower bounds.  They are
 
 ## 8. What is genuinely left
 
-With the candidate same-carrier checkpoint segmentation quotient, the master-facing infinite-path frontier becomes one sharply typed problem: **genuine physical owner recurrence**.  Natural-horizon checkpoints, same-corridor service layers, observer re-anchoring, and checkpoint hard-shell rereading do not manufacture new causal vertices or a new scale lineage.
+With the certified same-carrier checkpoint segmentation quotient, the master-facing infinite-path frontier becomes one sharply typed problem: **genuine physical owner recurrence**.  Natural-horizon checkpoints, same-corridor service layers, observer re-anchoring, and checkpoint hard-shell rereading do not manufacture new causal vertices or a new scale lineage.
 
 An infinite recursive event path avoiding `t=0` must therefore recur through actual first-hit/work/source/reuse/independent-service owners.  Those events still have to telescope through the native physical ledgers they truly supply; no critical normalized quantity may be promoted to a synthetic finite reset.
 
@@ -192,7 +192,7 @@ changing-scale physical producers. It is not a duration ledger for cuts inside o
 fixed carrier. Actual high-tail dynamics remains available exactly when its
 physical tail hypotheses are met.
 
-This candidate does **not** prove global no-escape or 3D Navier--Stokes regularity; termination of genuine physical-owner recurrence is still open.
+This extension does **not** prove global no-escape or 3D Navier--Stokes regularity; termination of genuine physical-owner recurrence is still open.
 
 ## 9. Certification
 
@@ -246,7 +246,8 @@ frequency together with the same mass as the next producer input at the exact
 endpoint state.  Native local durations, rather than subtraction of nearly equal
 global clocks, form the physical-time ledger.
 
-After this extension, the master has two distinct infinite-path questions:
+At the checkpoint-only stage, the master appeared to have two distinct
+infinite-path questions:
 
 1. an infinite recursive **event path**, which after all quotients can contain
    only genuine named physical owner events;
@@ -254,11 +255,18 @@ After this extension, the master has two distinct infinite-path questions:
    times may have a finite sum and which must be closed by a separate PDE theorem
    if one is available.
 
-The second object is not declared harmless and is not declared high-tail by fiat.
-It is simply removed from artificial event depth. This extension was certified on
+At that stage the second object was neither declared harmless nor declared
+high-tail by fiat.  It was simply removed from artificial event depth.  That
+extension was certified on
 exact SHA `75ceff3481dccc41a9e915ce8c1400638e440820` by dedicated run `31451492854`
 and full integration run `31451492844`; it records the pre-segmentation frontier.
-The current audited candidate sharpens it: a typed changing-scale checkpoint chain
-is diagnostic, fixed-carrier windows cannot Zeno, and arbitrary cuts carry no
-invented duration. Genuine changing-scale physical events remain subject to the
-geometric anti-theorem.
+
+The audited same-path refinement removes the observer-generated version of the
+second question.  With no new physical stop, the event-anchored carrier keeps
+fixed `A,c`; its genuine natural windows have one positive duration and cannot
+Zeno, while arbitrary cuts carry no duration.  Hard-shell readings at those cuts
+are state sidecars and cannot form a physical UV lineage.  Therefore any genuine
+scale change must enter through an independently certified physical producer or
+event, and such changing-scale event paths remain subject to the geometric
+anti-theorem.  The current infinite-path frontier is recurrence of those genuine
+physical owners, not recurrence of checkpoint observations.

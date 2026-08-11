@@ -5,6 +5,7 @@ on:
     paths:
       - 'src/full_natural_checkpoint_quotient.py'
       - 'src/same_carrier_checkpoint_segmentation_quotient.py'
+      - 'tests/test_same_carrier_checkpoint_segmentation_quotient.py'
       - 'tests/test_full_natural_checkpoint_quotient.py'
       - 'docs/full_natural_checkpoint_quotient.md'
       - '.github/workflows/full-natural-checkpoint-quotient.yml'

@@ -128,6 +128,40 @@ A theorem may inspect one native parabolic interval without creating an event at
 For a generic shell at incoming frequency `M`, the actual no-hit corridor runs at `A=3M/4` for time `cA^-2`. If no physical first stop occurs and `t=0` is not reached, that elapsed time is real Navier--Stokes evolution but the earlier endpoint is only an analysis checkpoint.
 Hard-shell rereading there is state observation. The actual pair `(mu_A,mu_2A)` decides which endpoint shell is realized; the observer may not choose the `3M/2` cover branch to manufacture UV progress.
 
+
+### 2.9 A natural service horizon is not a carrier lifetime
+Once a physical event has anchored the smooth carrier `Q_A` and terminal dual,
+the exact carrier/adjoint equations continue on the smooth pre-singular interval
+until a native physical stop or `t=0`.  A completed `cA^-2` service horizon does
+not authorize a restart.
+
+Across any inserted no-event checkpoints the canonical monitors remain cumulative
+from the same terminal event:
+\[
+K_A[s,t],\qquad I_R[s,t],\qquad I_{HH}[s,t].
+\]
+`K_A` is a positive strain action and is monotone as the backward interval grows.
+The two coefficient impulses are complex cumulative integrals; their magnitudes
+may decrease by phase cancellation.  Therefore checkpoint segment magnitudes are
+**not** added and are never reinterpreted as work.
+
+Continuation authority at a completed natural horizon requires more than a typed
+checkpoint with matching `t`, `A`, and `c`.  It requires the actual cumulative
+no-hit restriction of this event/carrier/dual/PDE path from the terminal event to
+the exact native checkpoint endpoint.  The typed representation records that
+hypothesis; it does not manufacture proof that independently supplied arrays came
+from one Navier--Stokes solution.
+
+For fixed `A,c`, every genuine natural window has the same positive duration
+`cA^-2`, so only finitely many complete windows fit before `t=0`; such windows
+cannot Zeno at an interior time.  Infinitely many arbitrary observer cuts may
+accumulate, but they are not service windows and carry no separate duration.
+Their limit can be classified only from the actual cumulative prelimit path.  An
+earlier closed face invalidates the no-hit premise; an exact endpoint face is the
+existing first stop; strict-margin continuation additionally requires the same
+PDE trajectory to be smooth on an open interval around the limit.  Only an actual
+new physical event may harden a new causal role.  `t=0` remains absorbing.
+
 ---
 
 ## 3. Canonical observables and their meanings
@@ -1005,6 +1039,30 @@ Completing one natural no-hit window does not make its endpoint a physical event
 
 ---
 
+### 28.27 A no-event checkpoint is not permission to restart the carrier
+Completing a natural service horizon does not expire `Q_A`, reset the terminal
+dual, or create a new event role.  Hard-shell energy may be reread there as state
+sidecar information, but without a physical stop the canonical event search
+continues on the same smooth carrier.  A checkpoint-generated scale sequence is
+not a causal lineage.  A bare checkpoint matching only `t`, `A`, and `c` has no
+continuation authority: it must be bound to the actual cumulative no-hit
+restriction of the expected event/carrier/dual/PDE path through the exact native
+endpoint.  This is a same-path hypothesis, not a way to infer PDE identity from
+labels or floating-point closeness.
+
+### 28.28 A cumulative impulse magnitude is not an additive segment action
+For the fixed event-anchored dual,
+\[
+I[s_2,t]=I[s_2,s_1]+I[s_1,t],
+\]
+but in general
+\[
+|I[s_2,t]|\neq |I[s_2,s_1]|+|I[s_1,t]|.
+\]
+Phase cancellation is physical.  Never reset or add `|I_R|` / `|I_HH|` across
+analysis checkpoints, and never reinterpret those coefficient magnitudes as
+physical work.
+
 ## 29. Structural constants worth remembering
 These constants are not all fundamental; many are clean certified envelopes.
 The important point is where each belongs.
@@ -1164,32 +1222,52 @@ No observer-selected cover branch can manufacture an increasing recursive path o
 ---
 
 ## 31. What remains open
-The programme is no longer missing a generic “packet persistence theorem”, a common clock, or a definition of recursive depth.
-The first continuum master quotient has reduced the final seam to genuinely physical recurrence.
+The programme is no longer missing a generic packet-persistence theorem, a common
+clock, a definition of recursive depth, or a closure for no-event checkpoint
+segmentation.  After quotienting representation and theorem horizons, the master
+frontier is now recurrence of **genuine physical owner events**.
+
 ### 31.1 Exhaustive measurable owner assembly
-Every certified supplier must now be wired into the quotient event state on smooth pre-singular intervals, with each transition proved to be either:
+Every certified supplier must be wired into the quotient event state on smooth
+pre-singular intervals, with each transition proved to be exactly one of:
 - a zero-charge relay/witness map;
+- a same-carrier no-event continuation with optional service/checkpoint sidecars;
 - a named non-free physical owner event;
-- a real no-hit physical corridor ending in a zero-event analysis checkpoint;
 - a true terminal cost/resource event; or
 - absorbing `t=0`.
-The wiring must preserve actual owner sets, exact ties, conditional first-stop semantics, and no double counting.
-### 31.2 Observer-clock seam is structurally closed
-The master uses the actual Navier--Stokes time coordinate for both physical events and theorem checkpoints, but only genuine physical stops/owners enter the event state. Supplier natural times remain local corridor horizons and are never normalized into a synthetic common clock. The horizon itself is now quotiented from event topology; what remains is physical continuation, not a clock-definition problem.
+The wiring must preserve actual owner sets, exact ties, conditional first-stop
+semantics, fixed-carrier cumulative monitor baselines, and no double counting.
+
+### 31.2 Observer-clock, horizon, and restart seams are structurally closed
+The master uses actual Navier--Stokes time.  Supplier natural times remain local
+service horizons and are never normalized into a synthetic common clock.  A
+natural horizon is not a carrier lifetime: if no physical stop fires, the same
+smooth event-anchored carrier and cumulative first-hit filtration continue across
+the checkpoint.  Inserting, deleting, or accumulating observer-chosen horizons
+therefore cannot create a new event, carrier, or scale lineage.
+
 ### 31.3 Hard and smooth interface-owner seams are structurally closed
-Resolved mixed/cross-interface work no longer supplies an independent recursive owner chain.
-For a complete orthogonal hard event-role partition of the actual resolved operator `L_V=K+S`, the skew part is conservative same-event role flux and the symmetric part is existing strain/deformation work. The skew donor closure is finite, internal circulation cancels in the subset divergence identity, and donor traversal creates no recursion depth or scale progress.
+Resolved mixed/cross-interface work no longer supplies an independent recursive
+owner chain.  For a complete orthogonal hard event-role partition of the actual
+resolved operator `L_V=K+S`, skew `K` is conservative same-event role flux and
+symmetric `S` is existing strain/deformation work.  Internal skew circulation
+cancels and donor traversal adds no recursion depth.
 
-For the propagated smooth envelope, the measure is different and remains separately typed. Its energy is read at `Q^2`; common transported role motion is certified by `dot A_a+[G,A_a]=0` and quotiented as observer gauge; only `K_phys=K-G` is physical skew relink. Arbitrary square-partition motion is rejected even if its channel exchanges sum to zero. The symmetric branch remains the existing strain/deformation work.
+For the propagated smooth envelope, energy is read at `Q^2`; common transported
+role motion satisfying `dot A_a+[G,A_a]=0` is observer gauge; only residual
+`K_phys=K-G` is physical skew relink.  Raw HH/interface coefficient first stops
+remain locators and must pass through actual `Q^2` energy/work reentry before the
+master receives a physical owner.
 
-Raw HH/interface coefficient first stops are also excluded from physical ownership: they locate a failed continuation interval and must pass through actual `Q^2` energy/work reentry before the master receives inheritance, high strain, HH work, relink, or strain ownership.
+What remains open is termination/telescoping of the genuine owners reached after
+these quotients, not another interface/window/coefficient mechanism.
 
-What remains open is termination/telescoping of those genuine physical owners after these quotients, not an additional hard-interface, smooth-window, or coefficient-amplitude mechanism.
-### 31.4 Full-natural service attachment is structurally closed
-Service remains conditional: it is recorded only after a critical shell survives the complete no-hit natural corridor. But once that corridor is complete, the own-scale service is a positive law **on the corridor already traversed**, not a second event after it.
-Exact Moyal OO/ON/NN reading of the same service law is a zero-depth witness disintegration. The surviving smooth carrier is already present at the corridor endpoint and has a same-time hard-shell witness set at `A` or `2A` with
+### 31.4 Full-natural service/checkpoint attachment is structurally closed
+A full no-hit critical-shell interval is one real physical corridor.  Its own-scale
+service is a positive law on that same corridor; Moyal OO/ON/NN is a zero-depth
+witness disintegration.  The endpoint hard-shell cover satisfies
 \[
-\max(\mu_A,\mu_{2A})\ge\frac23A\|Q_Au\|_2^2.
+\max(\mu_A,\mu_{2A})\ge\frac23A\|Q_Au\|_2^2,
 \]
 Thus the master must not attach a second recursive service owner merely because a service theorem is invoked. The no-hit horizon endpoint is likewise only a checkpoint. A genuinely new event vertex requires an actual first stop/owner law, not merely a new state reading.
 What remains open is not endpoint-service attachment or checkpoint segmentation, but the continuation/telescoping of genuine first-hit, work, source, reuse, independent service, or physical UV events.
@@ -1210,11 +1288,14 @@ Thus any infinite canonical path avoiding `t=0` must recur through infinitely ma
 A finite geometric parabolic-time sum still proves that physical time alone cannot terminate an independently certified changing-scale physical event path. It cannot be manufactured from checkpoint shell readings. Connecting genuine owner recurrence to the initial-data and singular-time interfaces is the present global frontier.
 ### 31.7 Initial data interface
 Backward causal recursion reaching `t=0` is already absorbing.
-For regular initial data, band-limited root counts/energies have scale-decaying bounds.
-The eventual complete continuum theorem must state the exact initial-data hypothesis and connect it to the existing initial-boundary root estimates.
+For regular initial data, band-limited root counts/energies have scale-decaying
+bounds.  The eventual complete continuum theorem must state the exact initial-data
+hypothesis and connect it to the existing initial-boundary root estimates.
+
 ### 31.8 Singular-time conclusion
-Even after global master termination is proved, one must state precisely what contradiction or a priori estimate is obtained as a hypothetical singular time is approached.
-No such global-regularity conclusion is claimed in the current ledger.
+Even after global master termination is proved, one must state precisely what
+contradiction or a priori estimate is obtained as a hypothetical singular time is
+approached.  No such global-regularity conclusion is claimed in the current ledger.
 
 ---
 
@@ -1263,6 +1344,20 @@ A measurable coefficient threshold can correctly locate the earliest failure of 
 A physical observable may be discovered after traversing an interval without occurring after that interval in physical time. Full-natural own-scale service and its OO/ON/NN disintegration live on the corridor already counted. Preserve the measure; quotient only the duplicate theorem depth.
 ### 32.16 Horizon segmentation is not event topology
 A natural-window endpoint is an analysis checkpoint unless a physical stop fires there. Preserve the real corridor time, but do not create a recursive vertex. At that checkpoint let the actual shell masses determine the hard-shell witness; never choose the upper cover branch to manufacture scale ascent. Continuation authority additionally requires the actual cumulative no-hit restriction of the same event/carrier/dual/PDE path through the exact native endpoint; matching `t,A,c` or a carrier label is insufficient.
+
+### 32.17 Service horizon is not carrier lifetime
+A scale-native interval may be exactly the right horizon for proving uniform
+service without being the lifetime of the transported PDE carrier.  Do not restart
+`Q_A`, its terminal dual, or its first-hit filtration merely because one service
+window ended.  Fixed `A,c` gives every genuine natural window the same positive
+duration `cA^-2`, so those windows cannot accumulate before `t=0`.  Arbitrary
+observer cuts may accumulate, but they carry no service-window duration and no
+causal charge.
+
+### 32.18 Complex impulse additivity does not imply magnitude additivity
+The complex coefficient impulse is interval-additive, but its absolute value is
+not.  Phase cancellation is physical.  Preserve the event-anchored cumulative
+impulse; never sum checkpoint-segment magnitudes or turn them into work.
 
 ## 33. Certified recent theorem blocks
 ### 33.1 High-tail sliding natural-window reentry
@@ -1438,7 +1533,153 @@ Full causal integration:
 `31451492844`.
 It completed successfully on the same exact SHA with the same `696`-test suite through the full physical-energy, source, material, generic-shell, service-corridor, checkpoint, high-tail, hard/smooth-interface, first-stop, causal-reuse, physical-branch and master chain. The final master checked `20,000` episode traces with worst margin `0.0`. Integration artifact digest:
 `sha256:23cd2a39f9a19006008f4b29a99ef8dce2ee60b7f34952f4225e30b398027b89`.
-The theorem removes natural-horizon segmentation and observer-selected cover ascent from recursive event topology. It does **not** prove that event-free UV checkpoint continuation forces high-tail work, and it makes no Navier--Stokes global-regularity claim.
+At this intermediate stage the theorem removed natural-horizon event depth and observer-selected cover ascent, while the no-event checkpoint-continuation question was still left open.  Section 33.7 records the author's first same-carrier answer; the adversarially repaired result is recorded in Section 33.8.  This earlier theorem itself made no Navier--Stokes global-regularity claim.
+
+---
+
+### 33.7 Original same-carrier checkpoint certification (pre-audit)
+Status:
+`EXACT_SAME_CARRIER_CHECKPOINT_SEGMENTATION_QUOTIENT__NATURAL_HORIZONS_DO_NOT_RESET_FIRST_HIT__CUMULATIVE_NATIVE_MONITORS_FROM_ONE_PHYSICAL_EVENT__INTERIOR_CHECKPOINT_ZENO_IS_STOP_OR_CONTINUATION__HARDEN_ONLY_AT_A_NEW_PHYSICAL_EVENT`.
+
+Exact certified implementation/wiring SHA:
+`bd404d8fd79336e094015f8a9463bfef761e9d2d`.
+
+Dedicated GitHub Actions run:
+`31454546606` — **success**.
+
+Results:
+- `708` tests passed;
+- `50,000` same-carrier cumulative-path/checkpoint-segmentation states;
+- worst segmentation first-stop time residual `0.0`;
+- segmentation failures `0`;
+- checkpoint reset-barrier failures `0`;
+- `39,915` sampled paths with nonmonotone coefficient-impulse magnitudes, confirming no hidden monotonicity assumption on `|I_R|` or `|I_HH|`;
+- `25,000` interior checkpoint-accumulation states attaining a closed stop face;
+- `25,000` interior accumulation states crossed by the same carrier;
+- maximum `12` inserted checkpoint cuts in the randomized stress;
+- companion continuum-master checkpoint-segmentation barrier failures `0`;
+- companion master physical-time telescope residual `0.0`;
+- companion master log-scale telescope residual `8.881784197001252e-16`;
+- independent physical high-frequency dissipation dependency remained green.
+
+Stored artifact:
+`recorded-results/31454546606/same-carrier-checkpoint-segmentation-results/`.
+
+GitHub artifact digest:
+`sha256:ee8ca26523888e0fbbf1fc034e267643c758e140f8e57ebf8e4f3569d015e41e`.
+
+Full physical-energy causal integration:
+`31454546590` — **success** on the same exact SHA.
+
+It completed with the same `708`-test suite and `56` successful job steps through
+the full physical-energy, source, material, generic-shell, service-corridor,
+checkpoint, same-carrier, physical high-tail, hard/smooth-interface, event-role,
+first-hit, causal-reuse, physical-branch and master chain.  The final master stress
+checked `20,000` episode traces with worst margin `0.0`.
+
+Integration artifact digest:
+`sha256:82f05bfce9b84dca883c56df5472393c19874b274d2d7dfa54972c15f1e818d9`.
+
+Failure/correction provenance:
+- initial theorem SHA `a5e4d9a7bc725b72ac3f64210c85721553a90795` had one brittle certificate-wording assertion after `707` passing tests; no new-theorem stress ran there;
+- `cc955ec2cf9f51ffa3160a97a434172dff5245e5` changed only that fixture;
+- final `bd404d8...` changed only workflow path filters so fixture-only edits automatically retrigger both exact-SHA gates.
+No theorem identity, physical bound, carrier policy, or first-hit routing changed in either correction.
+
+This was the author's exact original certification record.  It is preserved for
+provenance, but its closing claim is superseded by the adversarial audit in Section
+33.8.  In particular, the original API did not bind continuation to the actual PDE
+path restriction, used scale-destroying approximate comparisons at small native
+sizes, represented complex coefficient paths too weakly, and conflated arbitrary
+observer cuts with positive-duration natural windows.  The original green suite
+did not exercise those failures.  No Navier--Stokes global-regularity claim was
+made.
+
+### 33.8 Audited same-path checkpoint segmentation repair
+Status:
+`EXACT_SAME_CARRIER_CHECKPOINT_SEGMENTATION_QUOTIENT__ONE_EVENT_CARRIER_DUAL_AND_PDE_PATH_PROVENANCE__CUMULATIVE_COMPLEX_NATIVE_MONITORS__NO_HIT_CHECKPOINT_BOUND_TO_ACTUAL_PATH_RESTRICTION__OBSERVER_CUTS_ARE_NOT_NATURAL_WINDOWS__HARDEN_ONLY_AT_A_NEW_PHYSICAL_EVENT`.
+
+The audit first froze the author's theorem source at
+`a5e4d9a7bc725b72ac3f64210c85721553a90795`.  The later author certification SHA
+`bd404d8fd79336e094015f8a9463bfef761e9d2d` changed only its test fixture and
+workflow wiring, not the theorem source.
+
+Adversarial red evidence:
+- exact SHA `0245688a0def1c946d5cb63e14d603538896283e`, run `31454633883`: all `14` same-carrier native-time/provenance anti-tests failed after the independent checkpoint anti-tests had passed;
+- the failures exposed nonzero event origins accepted as zero, hidden native-time gaps, absolute tolerances that rebound tiny amplitudes and merged distinct first times, endpoint-only accumulation classification, dictionary-forged continuation, loss of complex phase, and a false interior-Zeno interpretation of fixed-carrier natural windows;
+- after the first repair, exact SHA `4916cfee061d7a52025400af261b8617b1b3ca57`, run `31456282001`: `1` new test failed and `14` passed, proving that a bare typed checkpoint from a foreign PDE trajectory could still claim continuation whenever only `t`, `A`, and `c` matched.
+
+Exact repaired source SHA:
+`55b950fa289ccc3646c67a1c0318287a2d71bea3`.
+
+The repair:
+- retains exact event, carrier, terminal-dual, terminal-state, trajectory, scale/lifetime, and complex terminal-coefficient provenance;
+- glues only actual cumulative complex-path restrictions at identical PDE state and native-time boundary tokens;
+- locates coefficient faces on the complex chord rather than interpolating magnitudes;
+- requires `SameCarrierCheckpointPathCertificate`, namely a typed checkpoint plus the cumulative no-hit restriction of the same expected PDE path ending exactly at the checkpoint native duration;
+- rejects any earlier named first stop and any foreign expected trajectory;
+- separates fixed-`A,c` natural windows, which have one positive duration and cannot Zeno before `t=0`, from arbitrary observer cuts, which carry no duration or causal charge;
+- classifies a cut accumulation only from the actual no-earlier-hit prelimit path, with a matching open smooth-PDE extension token required for strict-margin continuation.
+
+Exact audit run:
+`31456579940` — **success**.
+
+Results:
+- `15` checkpoint provenance anti-tests passed;
+- `16` same-carrier provenance/native-scale anti-tests passed;
+- all `759` theorem tests passed;
+- `200,000` checkpoint/corridor/cover states;
+- `200,000` same-carrier path/segmentation states with first-time residual `0.0`, segmentation failures `0`, reset failures `0`, and fixed-window-Zeno failures `0`;
+- `159,723` nonmonotone coefficient-impulse-magnitude paths;
+- `100,000` exact accumulation-stop cases and `100,000` strict-margin continuation cases;
+- maximum `12` inserted observer cuts;
+- `100,000` full-natural service-corridor states.
+
+The same run evolved the unforced 3D incompressible Fourier--Galerkin
+Navier--Stokes system with Leray projection, viscosity, `2/3` dealiasing, and RK4,
+not a proxy recurrence.  On one evolved trajectory at resolutions `N=20,24,28`,
+with `T=0.015625`, `A=4`, `nu=0.05`, four fixed natural windows, and `80` steps:
+- maximum divergence norms were `3.919e-17`, `4.746e-17`, `5.579e-17`;
+- global energy-balance residuals were approximately `1.600e-11`;
+- `Q^2` carrier-balance residuals were at most `1.970e-7`;
+- direct `Q^2` identity residuals were at most `2.633e-15`;
+- nonlinear-split residuals were at most `3.445e-16`;
+- complex Duhamel residuals were at most `2.815e-9`;
+- the low--low moat ratios were at most `3.559e-18`;
+- the imaginary impulse was nonzero, with maximum magnitude `1.298e-4`;
+- whole-path versus segmented first-stop residual was `0.0` at every resolution;
+- terminal-amplitude resolution spread was `1.928e-6`.
+
+The companion actual-PDE service-corridor probe at `N=12,16,20` had direct `Q^2`
+identity residual at most `8.895e-16`, carrier-energy balance at most `2.504e-13`,
+global-energy balance at most `6.655e-14`, minimum two-shell cover margin `0.6327`,
+positive bounded heat-service lower/carrier ratio `0.9177`, and final carrier-energy
+resolution spread `1.449e-7`.
+
+Stored artifact:
+`recorded-results/31456579940/audit-full-natural-checkpoint-results/`.
+
+GitHub artifact digest:
+`sha256:807c66f76bd01b755f324df0aff2833ba09098dc19b7c44b33139eac827fd2d9`.
+
+Companion exact-source runs were also successful:
+- same-carrier dedicated run `31456579975`, artifact digest `sha256:d5255aaac2c18ffef52c42502b523029e3029de2beae477bed12c613d6c63622`;
+- continuum-master run `31456580011`, digest `sha256:1345a2e5cd2bf8af5ef545e38daf6a8db08ce5e191cb75f31c940f37e9fe31cf`;
+- full-natural checkpoint run `31456580064`, digest `sha256:bb7df659180bb239878fc32f49b4415d1678217a6dcf7bf7e289d7929069d677`;
+- full-natural service run `31456579954`, digest `sha256:e25f733b7326915c755cbf3996f7e45108e8a00a012fdc7d113de2db24ae8494`.
+
+Full physical-energy causal integration run:
+`31456580020` — **success** with all `759` tests and `57/57` successful job
+steps.  Integration artifact digest:
+`sha256:e5b9e11ee40c730943b0acb0444e9052063a5a964537328b523f536198f94ef8`.
+
+Proof boundary: this is an exact restriction/gluing theorem conditional on one
+already-defined smooth event-anchored Navier--Stokes path.  Typed provenance makes
+the implementation fail closed; it does not prove that arbitrary input arrays came
+from that PDE path.  The numerical probes are falsification evidence, not a
+continuum proof.  The repair removes observer segmentation/re-hardening as an
+independent escape route.  It does not telescope infinitely recurring genuine
+physical owners and does not prove Navier--Stokes global regularity.
 
 ---
 
