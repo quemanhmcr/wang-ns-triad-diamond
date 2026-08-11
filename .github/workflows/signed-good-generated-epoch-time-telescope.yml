@@ -4,7 +4,9 @@ on:
   push:
     paths:
       - 'src/signed_good_generated_epoch_time_telescope.py'
+      - 'src/signed_good_generated_epoch_pde_probe.py'
       - 'tests/test_signed_good_generated_epoch_time_telescope.py'
+      - 'tests/test_signed_good_generated_epoch_pde_probe.py'
       - 'docs/signed_good_generated_epoch_time_telescope.md'
       - '.github/workflows/signed-good-generated-epoch-time-telescope.yml'
       - 'src/asynchronous_duhamel_sync.py'
@@ -46,6 +48,8 @@ jobs:
         run: pytest -q
       - name: Signed-good generated epoch physical-time stress
         run: python -m src.signed_good_generated_epoch_time_telescope --samples 50000 --outdir results-signed-good-generated-epoch-time-telescope
+      - name: Actual Navier-Stokes signed-good parent-pair work
+        run: python -m src.signed_good_generated_epoch_pde_probe --resolutions 24 28 32 --steps 96 --outdir results-signed-good-generated-epoch-pde-probe
       - name: Asynchronous parabolic synchronization dependency
         run: python -m src.asynchronous_duhamel_sync --samples 50000 --outdir results-asynchronous-duhamel-sync
       - name: Physical-energy causal work dependency
@@ -58,12 +62,15 @@ jobs:
         run: python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-recursive-physical-witness-constructor
       - name: Continuum master generated-epoch certificate
         run: python -m src.continuum_master_event_quotient --samples 50000 --outdir results-continuum-master-event-quotient
-      - run: cat results-signed-good-generated-epoch-time-telescope/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - run: |
+          cat results-signed-good-generated-epoch-time-telescope/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-signed-good-generated-epoch-pde-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: signed-good-generated-epoch-time-telescope-results
           path: |
             results-signed-good-generated-epoch-time-telescope/
+            results-signed-good-generated-epoch-pde-probe/
             results-asynchronous-duhamel-sync/
             results-physical-energy-causal-bridge/
             results-common-slice-coefficient-registration/
