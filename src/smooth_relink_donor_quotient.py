@@ -214,7 +214,13 @@ class SmoothRelinkStress:
     worst_antisymmetry_residual: float
     worst_row_binding_residual: float
     worst_total_relink_residual: float
+    worst_antisymmetry_relative_residual: float
+    worst_row_binding_relative_residual: float
+    worst_total_relink_relative_residual: float
+    minimum_native_pair_scale: float
+    maximum_native_pair_scale: float
     minimum_incoming_minus_gain_margin: float
+    minimum_incoming_minus_gain_relative_margin: float
     donor_existence_failures: int
     maximum_shortest_donor_path_length: int
     binding_rejection_failures: int
@@ -250,7 +256,11 @@ def _random_certificate(rng: np.random.Generator, m: int) -> GaugeQuotientedInte
 def stress(samples: int = 50_000, seed: int = 20260811) -> SmoothRelinkStress:
     rng = np.random.default_rng(seed)
     wa = wr = wt = 0.0
+    war = wrr = wtr = 0.0
+    minscale = float("inf")
+    maxscale = 0.0
     minmargin = float("inf")
+    minrelative = float("inf")
     donor_fail = bind_fail = 0
     maxpath = 0
 
@@ -265,10 +275,22 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> SmoothRelinkStress:
         wa = max(wa, float(out["pair_antisymmetry_residual"]))
         wr = max(wr, float(out["row_binding_residual"]))
         wt = max(wt, float(out["total_relink_work_residual"]))
-        minmargin = min(
-            minmargin,
-            float(out["recipient_positive_incoming_flux"]) - float(out["positive_relink_work"]),
+        pair = np.asarray(work.signed_physical_relink_pair_matrix, dtype=float)
+        relink = np.asarray(work.signed_physical_relink_atoms, dtype=float)
+        native_pair_scale = max(
+            float(np.max(np.abs(pair))),
+            float(np.max(np.abs(relink))),
         )
+        minscale = min(minscale, native_pair_scale)
+        maxscale = max(maxscale, native_pair_scale)
+        war = max(war, float(out["pair_antisymmetry_residual"]) / native_pair_scale)
+        wrr = max(wrr, float(out["row_binding_residual"]) / native_pair_scale)
+        wtr = max(wtr, float(out["total_relink_work_residual"]) / native_pair_scale)
+        margin = float(out["recipient_positive_incoming_flux"]) - float(
+            out["positive_relink_work"]
+        )
+        minmargin = min(minmargin, margin)
+        minrelative = min(minrelative, margin / native_pair_scale)
         maxpath = max(maxpath, int(out["maximum_shortest_donor_path_length"]))
         cert = out["certificate"]
         if not isinstance(cert, SmoothRelinkDonorCertificate):
@@ -296,7 +318,22 @@ def stress(samples: int = 50_000, seed: int = 20260811) -> SmoothRelinkStress:
             bind_fail += 1
             raise AssertionError("unbound smooth relink pair matrix crossed donor quotient")
 
-    return SmoothRelinkStress(samples, wa, wr, wt, minmargin, donor_fail, maxpath, bind_fail)
+    return SmoothRelinkStress(
+        samples=samples,
+        worst_antisymmetry_residual=wa,
+        worst_row_binding_residual=wr,
+        worst_total_relink_residual=wt,
+        worst_antisymmetry_relative_residual=war,
+        worst_row_binding_relative_residual=wrr,
+        worst_total_relink_relative_residual=wtr,
+        minimum_native_pair_scale=minscale,
+        maximum_native_pair_scale=maxscale,
+        minimum_incoming_minus_gain_margin=minmargin,
+        minimum_incoming_minus_gain_relative_margin=minrelative,
+        donor_existence_failures=donor_fail,
+        maximum_shortest_donor_path_length=maxpath,
+        binding_rejection_failures=bind_fail,
+    )
 
 
 def main() -> None:
@@ -322,10 +359,11 @@ The bound work certificate verifies `T_ab=-T_ba` and `R_a=sum_b T_ab`, where `R_
 Starting from all positive-net relink recipients and closing backward under positive inflow must meet a negative-net donor in finitely many roles.  Internal cycles cancel from subset divergence and create no PDE generation.  Smooth and hard role measures are never identified; only the finite antisymmetric-flux lemma is shared.
 
 Stress: `{out.samples}` bound smooth relink laws
-- worst pair antisymmetry residual: `{out.worst_antisymmetry_residual:.3e}`
-- worst row-binding residual: `{out.worst_row_binding_residual:.3e}`
-- worst total relink residual: `{out.worst_total_relink_residual:.3e}`
-- minimum incoming-minus-recipient-gain margin: `{out.minimum_incoming_minus_gain_margin:.3e}`
+- sampled native pair-work scale range: `[{out.minimum_native_pair_scale:.3e},{out.maximum_native_pair_scale:.3e}]`
+- worst native-relative pair antisymmetry residual: `{out.worst_antisymmetry_relative_residual:.3e}`
+- worst native-relative row-binding residual: `{out.worst_row_binding_relative_residual:.3e}`
+- worst native-relative total relink residual: `{out.worst_total_relink_relative_residual:.3e}`
+- minimum native-relative incoming-minus-recipient-gain margin: `{out.minimum_incoming_minus_gain_relative_margin:.3e}`
 - donor-existence failures: `{out.donor_existence_failures}`
 - maximum shortest donor path: `{out.maximum_shortest_donor_path_length}`
 - pair-binding rejection failures: `{out.binding_rejection_failures}`

@@ -178,6 +178,16 @@ class GaugeQuotientedInterfaceWork:
     skew_decomposition_residual: float
     signed_physical_relink_pair_matrix: tuple[tuple[float, ...], ...] = ()
 
+    def __post_init__(self) -> None:
+        residuals = (
+            float(self.gauge_transport_operator_residual),
+            float(self.skew_decomposition_residual),
+        )
+        if not all(math.isfinite(value) and value >= 0.0 for value in residuals):
+            raise ValueError(
+                "gauge-transport and skew-decomposition residuals must be finite and nonnegative"
+            )
+
 
 def smooth_quadratic_interface_balance(
     analysis_operators: Sequence[np.ndarray],
