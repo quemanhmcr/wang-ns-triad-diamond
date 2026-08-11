@@ -243,8 +243,10 @@ def skew_donor_closure(skew_pair_matrix: np.ndarray, recipient_roles: Sequence[i
     Starting from one or several roles with strictly positive net skew work, add
     every role that sends positive skew flux into the current set.  The resulting
     backward donor closure is finite.  It must contain a role with negative net
-    skew work.  Otherwise the closure has strictly positive total net work, while
-    by construction it has no positive boundary inflow, contradicting the exact
+    skew work.  The same closure is replayed independently from every starting
+    recipient, so disconnected components cannot borrow each other's donors.
+    Otherwise one such closure has strictly positive total net work, while by
+    construction it has no positive boundary inflow, contradicting the exact
     subset divergence identity.
 
     No donor is selected as primary.  All reachable negative-net donors are

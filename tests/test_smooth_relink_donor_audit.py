@@ -62,6 +62,9 @@ def test_smooth_relink_donor_law_is_covariant_at_tiny_native_work_scale():
         assert rescaled["maximum_shortest_donor_path_length"] == reference[
             "maximum_shortest_donor_path_length"
         ]
+        traces = tuple(rescaled["recipient_negative_donor_traces"])
+        assert tuple(trace[0] for trace in traces) == rescaled["recipient_roles"]
+        assert all(trace[1] and trace[2] <= 2 for trace in traces)
     assert positive_smooth_interface_split(_pure_relink_work(1.0e-120))[
         "joint_physical_owners"
     ] == (RELINK_OWNER,)
