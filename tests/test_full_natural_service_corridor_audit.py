@@ -333,3 +333,69 @@ def test_high_strain_corridor_cannot_rebind_a_seed_to_a_foreign_event_time():
             residual_interface_impulse=0j,
             first_hit=first_hit,
         )
+
+
+def test_uv_corridor_carries_local_elapsed_time_without_subtracting_a_global_clock():
+    """A representable c*A^-2 must survive even when t-(c*A^-2) rounds to t."""
+    drop = 1.0e-200
+    corridor = FullNaturalServiceCorridor(
+        terminal_time=1.0,
+        physical_time_drop=drop,
+        renewal_frequency=1.0e100,
+        scaled_lifetime=1.0,
+        uniform_service_lower=1.0,
+        integrated_service_lower=1.0,
+        endpoint_carrier_critical_mass_lower=1.0,
+    )
+    assert corridor.physical_time_drop == drop
+    assert corridor.endpoint_elapsed_from_terminal == drop
+
+
+def test_endpoint_cover_rejects_a_dict_without_a_completed_corridor_certificate():
+    forged = {
+        "classification": FULL_NATURAL_SERVICE_WITNESS,
+        "service_same_corridor_witness": True,
+        "service_adds_recursion_depth": False,
+        "renewal_frequency": 3.0,
+        "scaled_lifetime": 1.0,
+        "parent_shell_frequency": 4.0,
+        "endpoint_carrier_critical_mass_lower": 1.0,
+    }
+    with pytest.raises((KeyError, ValueError), match="corridor|service|elapsed|time"):
+        endpoint_hard_shell_cover_from_full_natural_outcome(
+            forged,
+            parent_shell_frequency=4.0,
+        )
+
+
+def test_oversized_tie_tolerance_cannot_promote_a_zero_shell_to_joint_witness():
+    cover = endpoint_comparable_hard_shell_cover(
+        parent_shell_frequency=1.0,
+        endpoint_carrier_critical_mass=1.0,
+    )
+    lower = float(cover["guaranteed_max_hard_shell_critical_mass_lower"])
+    with pytest.raises(ValueError, match="tie tolerance|witness"):
+        realized_endpoint_hard_shell_witnesses(
+            cover,
+            (lower, 0.0),
+            tie_tolerance=2.0,
+        )
+
+
+def test_overflowed_edge_sum_cannot_be_marked_as_the_same_finite_service_measure():
+    corridor = FullNaturalServiceCorridor(
+        terminal_time=2.0,
+        endpoint_time=1.0,
+        renewal_frequency=1.0,
+        scaled_lifetime=1.0,
+        uniform_service_lower=0.5,
+        integrated_service_lower=0.5,
+        endpoint_carrier_critical_mass_lower=0.5,
+    )
+    with pytest.raises(ValueError, match="finite|measure"):
+        material_partition_is_same_corridor_measure(
+            corridor,
+            edge_weights=[1.0e308, 1.0e308],
+            old_here=[True, False],
+            old_neighbor=[True, False],
+        )
