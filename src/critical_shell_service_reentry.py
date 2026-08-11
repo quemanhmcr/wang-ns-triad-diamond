@@ -30,6 +30,7 @@ from src.high_strain_resolved_ancestor import (
 )
 from src.nn_critical_heat_carrier_seed import (
     LOW_STRAIN_ACTION,
+    RENEWAL_SCALE_FACTOR,
     persistent_seed_low_low_gap,
     renewal_scale,
 )
@@ -298,16 +299,18 @@ def critical_shell_natural_outcome(
         raise ValueError("finite critical-shell outcome data required")
     terminal_lower = critical_shell_terminal_mass_lower(mu0)
     terminal_mass = A * amp * amp
-    if terminal_mass < terminal_lower - 4e-12 * max(1.0, terminal_lower):
+    terminal_tol = 4e-12 * max(terminal_mass, terminal_lower)
+    if terminal_mass + terminal_tol < terminal_lower:
         raise ValueError("terminal coefficient does not realize the certified critical shell lower")
     monitor_amp = float(first_hit.get("terminal_amplitude", -1.0))
-    amp_tol = 4e-12 * max(1.0, amp, abs(monitor_amp))
+    amp_tol = 4e-12 * max(amp, abs(monitor_amp))
     if monitor_amp <= 0 or not math.isfinite(monitor_amp) or abs(monitor_amp - amp) > amp_tol:
         raise ValueError("first-hit monitor thresholds do not match the terminal coefficient amplitude")
 
     required = float(geom["elapsed_available"])
     horizon = float(first_hit.get("observed_elapsed_end", -1.0))
-    if horizon + 2e-12 * max(1.0, required) < required:
+    horizon_tol = 2e-12 * max(abs(horizon), required)
+    if horizon <= 0 or horizon + horizon_tol < required:
         raise ValueError("first-hit monitors do not cover the required backward corridor")
 
     hit_time = first_hit.get("first_elapsed")
@@ -316,12 +319,14 @@ def critical_shell_natural_outcome(
         label in {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
         for label in causes
     )
-    if hit_time is not None and float(hit_time) <= required + 2e-12 * max(1.0, required):
+    hit = None if hit_time is None else float(hit_time)
+    hit_tol = 0.0 if hit is None else 2e-12 * max(abs(hit), required)
+    if hit is not None and hit <= required + hit_tol:
         return {
             "classification": "named_first_stop",
             "joint_causes": causes,
             "joint_first_stops": causes,
-            "first_elapsed": float(hit_time),
+            "first_elapsed": hit,
             "required_elapsed": required,
             "observed_elapsed_end": horizon,
             "materiality_assigned": False,
@@ -344,19 +349,21 @@ def critical_shell_natural_outcome(
         }
 
     res = abs(exact_adjoint_residual(zt, zs, ih, ir))
-    tol = 4e-12 * max(1.0, amp, abs(zs), abs(ih), abs(ir))
-    if res > tol:
+    duhamel_tol = 4e-12 * max(amp, abs(zs), abs(ih), abs(ir))
+    if res > duhamel_tol:
         raise ValueError("critical-shell Duhamel decomposition is not exact")
-    if abs(ir) >= RESIDUAL_FRACTION * amp - tol:
+    coefficient_tol = 4e-12 * amp
+    if abs(ir) >= RESIDUAL_FRACTION * amp - coefficient_tol:
         raise ValueError("endpoint interface impulse contradicts full no-hit corridor")
-    if abs(ih) >= GENERATED_FRACTION * amp - tol:
+    if abs(ih) >= GENERATED_FRACTION * amp - coefficient_tol:
         raise ValueError("endpoint HH impulse contradicts full no-hit corridor")
     inherited = abs(zs)
-    if inherited < INHERIT_FRACTION * amp - tol:
+    if inherited < INHERIT_FRACTION * amp - coefficient_tol:
         raise AssertionError("full natural critical-shell corridor lost the quarter coefficient")
     retained_mass = A * inherited * inherited
     clean_retained = critical_shell_survivor_coefficient_mass_lower(mu0)
-    if retained_mass < clean_retained - 5e-12 * max(1.0, clean_retained):
+    retained_tol = 5e-12 * max(retained_mass, clean_retained)
+    if retained_mass + retained_tol < clean_retained:
         raise AssertionError("critical-shell survivor lost its clean coefficient mass")
 
     carrier = critical_shell_persistent_carrier_mass_lower(mu0, c, nu)
@@ -373,6 +380,9 @@ def critical_shell_natural_outcome(
         "corridor_terminal_time": float(event_time),
         "corridor_endpoint_time": float(event_time - required),
         "physical_time_drop": required,
+        "renewal_frequency": A,
+        "scaled_lifetime": c,
+        "parent_shell_frequency": A / RENEWAL_SCALE_FACTOR,
         "service_same_corridor_witness": True,
         "service_adds_recursion_depth": False,
         "terminal_coefficient_mass": terminal_mass,

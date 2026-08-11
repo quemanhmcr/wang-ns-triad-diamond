@@ -33,6 +33,19 @@ must not be interpreted as a second event after the corridor.  The service is a
 physical observable of the interval which has already consumed the time drop
 `cA^-2`.
 
+The corridor object carries the complete native provenance supplied by the PDE
+theorem: the incoming hard-shell frequency `M`, renewal-carrier frequency
+`A=3M/4`, scaled lifetime `c`, terminal time, endpoint time, actual time drop,
+and endpoint carrier-mass lower.  A downstream reader may verify these data but
+cannot provide replacements for them.  In particular, a carrier proved near one
+`A` cannot be rebound to a foreign hard-shell scale by passing a new number to an
+adapter.
+
+Every numerical equality guard is relative to the like-dimensional physical
+quantity.  No `max(1,...)` absolute floor is permitted.  This matters on the UV
+route because `cA^-2` and the corresponding critical masses can be arbitrarily
+small under natural rescaling.
+
 ## 2. Materiality is a disintegration of the same law
 
 After the positive service exists, Moyal gives its physical phase-space edge
@@ -47,6 +60,11 @@ This partition creates no second service mass, causal charge, event time, or
 recursion edge.  A downstream theorem may use one positive submeasure to certify
 a genuinely new state, but that theorem must supply the actual physical state and
 time it creates.
+
+The input weights here are the complete integrated Moyal edge measure of this
+corridor, not an arbitrary positive array.  Their total must realize at least the
+certified integrated service lower.  A zero or under-mass edge array cannot be
+labelled as the same positive service law.
 
 ## 3. The endpoint carrier already contains a hard shell
 
@@ -91,6 +109,15 @@ comparable-scale statement, not monotone progress.  If the two actual shell
 masses tie, both witnesses are retained; no frequency-order or theorem-order
 priority is introduced.
 
+If an endpoint hard shell `H` is used to start the next generic-shell corridor,
+the next renewal carrier is `3H/4`.  Thus the typed chain is
+
+`parent shell M -> current carrier A=3M/4 -> endpoint shell H in {A,2A} -> next carrier 3H/4`.
+
+Only the corridor step consumes physical time.  The intermediate registrations
+are zero-time witness maps, but their distinct frequency roles must not be
+identified.
+
 ## 4. Master consequence
 
 A chain
@@ -119,6 +146,9 @@ UV-unbounded survivor alternative.
 - a service lower is not an additive globally bounded reset;
 - OO/ON/NN does not create another causal law;
 - endpoint hard-shell existence does not justify a lexicographic tie break;
+- a carrier scale cannot be rebound to an independently supplied shell scale;
+- an absolute unit-sized tolerance cannot certify a UV corridor or shell mass;
+- arbitrary or zero weights cannot be relabelled as the same positive service;
 - comparable endpoint scale is not called directional progress;
 - no packet persistence or coherent-cell dominance is introduced.
 

@@ -23,7 +23,11 @@ from src.full_natural_service_corridor_quotient import (
     material_partition_is_same_corridor_measure,
     realized_endpoint_hard_shell_witnesses,
 )
-from src.nn_critical_heat_carrier_seed import renewal_scale
+from src.high_strain_critical_carrier_reentry import (
+    critical_seed_backward_first_hit,
+    critical_seed_natural_outcome,
+)
+from src.nn_critical_heat_carrier_seed import renewal_carrier_critical_mass_lower, renewal_scale
 
 
 def _actual_full_natural_outcome(*, parent_shell_frequency: float = 4.0) -> tuple[dict[str, object], float]:
@@ -72,6 +76,7 @@ def test_corridor_identity_rejects_the_same_relative_error_at_every_parabolic_sc
             scaled_lifetime=1.0,
             uniform_service_lower=1.0,
             integrated_service_lower=1.0,
+            endpoint_carrier_critical_mass_lower=1.0,
         )
 
 
@@ -97,6 +102,7 @@ def test_positive_corridor_service_cannot_be_relabelled_as_a_zero_edge_measure()
         scaled_lifetime=1.0,
         uniform_service_lower=0.5,
         integrated_service_lower=0.5,
+        endpoint_carrier_critical_mass_lower=0.5,
     )
     with pytest.raises(ValueError, match="positive service|service lower|same measure"):
         material_partition_is_same_corridor_measure(
@@ -114,3 +120,86 @@ def test_positive_tiny_carrier_cannot_be_realized_by_two_zero_hard_shells():
     )
     with pytest.raises(ValueError, match="do not realize"):
         realized_endpoint_hard_shell_witnesses(cover, (0.0, 0.0))
+
+
+def test_generic_uv_corridor_cannot_be_certified_from_half_of_its_monitor_history():
+    A = 1.0e8
+    c = 1.0
+    T = c / A**2
+    mu0 = 2.0
+    amp = math.sqrt(1.2 * critical_shell_terminal_mass_lower(mu0) / A)
+    elapsed = np.linspace(0.0, 0.5 * T, 4)
+    first_hit = critical_shell_backward_first_hit(
+        elapsed,
+        terminal_amplitude=amp,
+        strain_action=np.zeros(4),
+        residual_impulse_abs=np.zeros(4),
+        hh_impulse_abs=np.zeros(4),
+    )
+    with pytest.raises(ValueError, match="do not cover"):
+        critical_shell_natural_outcome(
+            event_time=2.0 * T,
+            renewal_frequency=A,
+            shell_critical_mass_lower=mu0,
+            scaled_lifetime=c,
+            viscosity=1.0,
+            terminal_coefficient=amp,
+            endpoint_coefficient=amp,
+            hh_impulse=0j,
+            residual_interface_impulse=0j,
+            first_hit=first_hit,
+        )
+
+
+def test_high_strain_uv_corridor_requires_a_full_monitor_horizon():
+    A = 1.0e8
+    c = 1.0
+    T = c / A**2
+    amp = math.sqrt(1.1 * renewal_carrier_critical_mass_lower(c) / A)
+    elapsed = np.linspace(0.0, 0.5 * T, 4)
+    first_hit = critical_seed_backward_first_hit(
+        elapsed,
+        terminal_amplitude=amp,
+        strain_action=np.zeros(4),
+        residual_impulse_abs=np.zeros(4),
+        hh_impulse_abs=np.zeros(4),
+    )
+    with pytest.raises(ValueError, match="do not cover"):
+        critical_seed_natural_outcome(
+            event_time=2.0 * T,
+            renewal_frequency=A,
+            scaled_lifetime=c,
+            viscosity=1.0,
+            terminal_coefficient=amp,
+            endpoint_coefficient=amp,
+            hh_impulse=0j,
+            residual_interface_impulse=0j,
+            first_hit=first_hit,
+        )
+
+
+def test_high_strain_monitor_thresholds_are_bound_to_the_actual_terminal_amplitude():
+    A = 3.0
+    c = 1.0
+    T = c / A**2
+    amp = math.sqrt(1.1 * renewal_carrier_critical_mass_lower(c) / A)
+    elapsed = np.linspace(0.0, T, 4)
+    first_hit = critical_seed_backward_first_hit(
+        elapsed,
+        terminal_amplitude=10.0 * amp,
+        strain_action=np.zeros(4),
+        residual_impulse_abs=np.zeros(4),
+        hh_impulse_abs=np.zeros(4),
+    )
+    with pytest.raises(ValueError, match="thresholds do not match"):
+        critical_seed_natural_outcome(
+            event_time=2.0 * T,
+            renewal_frequency=A,
+            scaled_lifetime=c,
+            viscosity=1.0,
+            terminal_coefficient=amp,
+            endpoint_coefficient=amp,
+            hh_impulse=0j,
+            residual_interface_impulse=0j,
+            first_hit=first_hit,
+        )
