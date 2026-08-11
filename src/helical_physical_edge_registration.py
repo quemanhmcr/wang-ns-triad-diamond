@@ -99,6 +99,26 @@ def _signed_product(factors: tuple[float, ...], name: str) -> float:
     return sign * _positive_product(tuple(abs(x) for x in vals), name)
 
 
+def _signed_product_over_positive(
+    factors: tuple[float, ...], denominator: float, name: str
+) -> float:
+    """Multiply signed native factors and divide by one positive factor in log scale."""
+    vals = tuple(float(x) for x in factors)
+    den = float(denominator)
+    if not all(math.isfinite(x) for x in vals) or not math.isfinite(den) or den <= 0.0:
+        raise ValueError(f"{name} needs finite factors and a positive finite denominator")
+    if any(x == 0.0 for x in vals):
+        return 0.0
+    sign = -1.0 if sum(x < 0.0 for x in vals) % 2 else 1.0
+    log_value = math.fsum(math.log(abs(x)) for x in vals) - math.log(den)
+    if log_value < _MIN_PRODUCT_LOG or log_value > _MAX_PRODUCT_LOG:
+        raise ValueError(f"{name} left the finite native range")
+    magnitude = math.exp(log_value)
+    if not math.isfinite(magnitude) or magnitude == 0.0:
+        raise ValueError(f"{name} left the finite native range")
+    return sign * magnitude
+
+
 def _relative_gap(a: complex, b: complex, *, scale: float | None = None) -> float:
     gap = float(abs(a - b))
     native_scale = max(abs(a), abs(b)) if scale is None else abs(float(scale))
@@ -269,6 +289,12 @@ def phase_alignment(
 
 @dataclass(frozen=True)
 class HelicalPhysicalEdgeRegistration:
+    parent_x_wavevector: tuple[float, float, float]
+    parent_y_wavevector: tuple[float, float, float]
+    child_wavevector: tuple[float, float, float]
+    parent_x_helicity: int
+    parent_y_helicity: int
+    child_helicity: int
     parent_x_frequency: float
     parent_y_frequency: float
     child_frequency: float
@@ -297,6 +323,35 @@ class HelicalPhysicalEdgeRegistration:
     duhamel_weight_used_as_causal_law: bool = False
 
     def __post_init__(self) -> None:
+        x = _vec3(np.asarray(self.parent_x_wavevector, dtype=float), "registered parent x wavevector")
+        y = _vec3(np.asarray(self.parent_y_wavevector, dtype=float), "registered parent y wavevector")
+        z = _vec3(np.asarray(self.child_wavevector, dtype=float), "registered child wavevector")
+        sx = _helicity(self.parent_x_helicity, "registered parent x helicity")
+        sy = _helicity(self.parent_y_helicity, "registered parent y helicity")
+        sz = _helicity(self.child_helicity, "registered child helicity")
+        nx, ny, nz = _physical_parent_pair(x, y, z)
+        object.__setattr__(self, "parent_x_wavevector", tuple(float(v) for v in x))
+        object.__setattr__(self, "parent_y_wavevector", tuple(float(v) for v in y))
+        object.__setattr__(self, "child_wavevector", tuple(float(v) for v in z))
+        object.__setattr__(self, "parent_x_helicity", sx)
+        object.__setattr__(self, "parent_y_helicity", sy)
+        object.__setattr__(self, "child_helicity", sz)
+
+        _require_native_equal("registered parent x frequency provenance", self.parent_x_frequency, nx)
+        _require_native_equal("registered parent y frequency provenance", self.parent_y_frequency, ny)
+        _require_native_equal("registered child frequency provenance", self.child_frequency, nz)
+        _require_native_equal(
+            "registered signed-frequency provenance",
+            self.signed_frequency_factor,
+            sx * nx - sy * ny,
+        )
+        g_identity = coupling_g(x, y, -z, sx, sy, sz)
+        _require_native_equal(
+            "registered Waleffe-coupling provenance",
+            self.coupling_abs,
+            abs(g_identity),
+        )
+
         direct = _complex_scalar(
             self.direct_child_source_coefficient,
             "direct child source coefficient",
@@ -460,6 +515,22 @@ class HelicalPhysicalEdgeRegistration:
             scale=registration_scale,
         ) > 5e-10:
             raise AssertionError("physical upper-progress work failed the A*J*c identity")
+        expected_work = _signed_product_over_positive(
+            (
+                self.native_modal_capacity,
+                abs(self.signed_frequency_factor),
+                self.coupling_abs,
+                self.phase_alignment,
+            ),
+            self.child_frequency,
+            "physical child-energy work replay",
+        )
+        _require_native_equal(
+            "physical child-energy work from native capacity/frequency/coupling/phase",
+            self.signed_child_energy_work,
+            expected_work,
+            scale=max(abs(self.signed_child_energy_work), abs(expected_work), self.native_modal_capacity),
+        )
         if self.native_modal_capacity == 0.0:
             if self.signed_child_energy_work != 0.0:
                 raise AssertionError("zero native capacity cannot carry nonzero physical work")
@@ -572,6 +643,12 @@ def register_helical_physical_edge(
         raise AssertionError("physical edge geometric multiplier exceeded global Jstar")
 
     return HelicalPhysicalEdgeRegistration(
+        parent_x_wavevector=tuple(float(v) for v in x),
+        parent_y_wavevector=tuple(float(v) for v in y),
+        child_wavevector=tuple(float(v) for v in z),
+        parent_x_helicity=sx,
+        parent_y_helicity=sy,
+        child_helicity=sz,
         parent_x_frequency=nx,
         parent_y_frequency=ny,
         child_frequency=nz,

@@ -334,6 +334,80 @@ def direct_vector_child_work(
     return 2.0 * float(np.real(np.vdot(uz, source)))
 
 
+@dataclass(frozen=True, order=True)
+class HelicalModeIdentity:
+    """One physical Fourier mode with helicity attached to its wavevector."""
+
+    wavevector: tuple[float, float, float]
+    helicity: int
+
+    def __post_init__(self) -> None:
+        if len(self.wavevector) != 3:
+            raise ValueError("helical mode identity needs one three-dimensional wavevector")
+        wavevector = tuple(float(value) for value in self.wavevector)
+        if not all(math.isfinite(value) for value in wavevector):
+            raise ValueError("finite helical mode wavevector required")
+        if stable_norm3(np.asarray(wavevector, dtype=float)) == 0.0:
+            raise ValueError("nonzero helical mode wavevector required")
+        helicity = int(self.helicity)
+        if helicity not in (-1, 1):
+            raise ValueError("physical helicity must be plus or minus one")
+        object.__setattr__(self, "wavevector", wavevector)
+        object.__setattr__(self, "helicity", helicity)
+
+
+@dataclass(frozen=True)
+class ContinuumHelicalEdgeIdentity:
+    """Orientation-quotiented physical identity of one helicity edge.
+
+    The two parent *mode objects* are unordered, while each helicity sign stays
+    attached to its own physical wavevector.  Sorting below is only an exact
+    storage key for the finite-group quotient; it is never a physical parent
+    orientation or causal choice.
+    """
+
+    parents: tuple[HelicalModeIdentity, HelicalModeIdentity]
+    child: HelicalModeIdentity
+
+    def __post_init__(self) -> None:
+        if len(self.parents) != 2:
+            raise ValueError("one continuum edge needs exactly two physical parent modes")
+        parents = tuple(sorted(self.parents))
+        if parents[0].wavevector == parents[1].wavevector:
+            raise ValueError("the fixed parent-swap locus is continuum-null and is not a regular eight-sector edge fiber")
+        x = np.asarray(parents[0].wavevector, dtype=float)
+        y = np.asarray(parents[1].wavevector, dtype=float)
+        z = np.asarray(self.child.wavevector, dtype=float)
+        _physical_triad(x, y, z)
+        object.__setattr__(self, "parents", parents)
+
+    @property
+    def parent_wavevector_orbit(self) -> tuple[tuple[float, float, float], tuple[float, float, float]]:
+        return tuple(sorted((self.parents[0].wavevector, self.parents[1].wavevector)))
+
+    @property
+    def helicity_assignment(self) -> tuple[int, int, int]:
+        return (self.parents[0].helicity, self.parents[1].helicity, self.child.helicity)
+
+
+def continuum_helical_edge_identity(
+    x: np.ndarray,
+    y: np.ndarray,
+    z: np.ndarray,
+    sx: int,
+    sy: int,
+    sz: int,
+) -> ContinuumHelicalEdgeIdentity:
+    """Build the exact parent-swap quotient with signs bound to wavevectors."""
+    xx = tuple(float(value) for value in _vec3(x, "edge identity parent x"))
+    yy = tuple(float(value) for value in _vec3(y, "edge identity parent y"))
+    zz = tuple(float(value) for value in _vec3(z, "edge identity child z"))
+    return ContinuumHelicalEdgeIdentity(
+        parents=(HelicalModeIdentity(xx, sx), HelicalModeIdentity(yy, sy)),
+        child=HelicalModeIdentity(zz, sz),
+    )
+
+
 @dataclass(frozen=True)
 class ContinuumModalEdgeAtom:
     """One helicity-resolved edge with only its quotient base-measure mass added.
@@ -354,6 +428,18 @@ class ContinuumModalEdgeAtom:
             raise ValueError("continuum atom inherited a forbidden capacity/causal replacement")
         if not self.registration.unordered_parent_orientation:
             raise ValueError("continuum atom must already be parent-orientation quotiented")
+
+    @property
+    def physical_edge_identity(self) -> ContinuumHelicalEdgeIdentity:
+        reg = self.registration
+        return continuum_helical_edge_identity(
+            np.asarray(reg.parent_x_wavevector, dtype=float),
+            np.asarray(reg.parent_y_wavevector, dtype=float),
+            np.asarray(reg.child_wavevector, dtype=float),
+            reg.parent_x_helicity,
+            reg.parent_y_helicity,
+            reg.child_helicity,
+        )
 
     @property
     def base_factor(self) -> float:
@@ -432,6 +518,17 @@ class ContinuumFiberRegistration:
             raise ValueError("finite continuum fiber certificate required")
         if len(self.modal_atoms) != 8:
             raise ValueError("all eight helical interaction sectors must be retained at the event")
+        identities = tuple(atom.physical_edge_identity for atom in self.modal_atoms)
+        if len(set(identities)) != 8:
+            raise ValueError("all eight physical helicity edge identities must be distinct; duplicate sectors are forbidden")
+        parent_orbits = {identity.parent_wavevector_orbit for identity in identities}
+        child_wavevectors = {identity.child.wavevector for identity in identities}
+        if len(parent_orbits) != 1 or len(child_wavevectors) != 1:
+            raise ValueError("one continuum fiber must retain one physical parent orbit and one child wavevector")
+        expected_helicities = set(itertools.product((-1, 1), repeat=3))
+        observed_helicities = {identity.helicity_assignment for identity in identities}
+        if observed_helicities != expected_helicities:
+            raise ValueError("continuum fiber must contain exactly the eight physical helicity assignments")
         if any(v < 0.0 for v in (
             self.ordered_quotient_source_residual,
             self.parent_swap_residual,
@@ -1009,9 +1106,9 @@ def theorem_certificate() -> dict[str, object]:
         "status": STATUS,
         "upstream_one_edge_status": HELICAL_EDGE_STATUS,
         "unitary_fourier": "fhat=(2pi)^(-3/2) integral exp(-ix.k) f(x)dx, so product convolution carries C_F=(2pi)^(-3/2)",
-        "parent_quotient": "for fixed child z, pi_z(x)={x,z-x} and lambda_z^unord=(1/2)(pi_z)_# dx; the orbit integrand is the sum of both ordered parent terms, so no orientation selector is physical",
+        "parent_quotient": "for fixed child z, parent exchange acts on the complete parent mode objects: (r,sx,sy)->(-r,sy,sx); each helicity stays attached to its physical wavevector and no orientation selector is physical",
         "joint_outer_child_radon": joint_unordered_parent_radon_certificate(),
-        "helicity": "arbitrary divergence-free parent/child Fourier vectors resolve into the two orthogonal helical sectors at the event; summing all 8 (sx,sy,sz) work channels reconstructs direct vector NS work exactly",
+        "helicity": "typed atoms retain the orientation-quotiented physical (wavevector,helicity) edge identity; one regular fiber contains exactly the eight distinct parent-mode/child-helicity assignments and their work sum reconstructs direct vector NS work",
         "signed_measure": "dW=C_F T_e d(lambda_unord) is constructed signed before Hahn; W_plus-W_minus=W while W_plus >= [W]_+ under cancellation",
         "capacity_measure": "dA=C_F A_e d(lambda_unord), A_e=4|z||a_x a_y a_z|; dA is a positive reference measure, never the causal child-work law",
         "progress_measure": "dF=g_scale dW=J_e c_e dA and R=F/(J_* A); 1-R=E_A[(1-m)+m(1-c)] exactly",

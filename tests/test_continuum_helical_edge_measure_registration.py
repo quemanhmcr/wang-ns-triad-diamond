@@ -1,3 +1,4 @@
+import itertools
 import math
 from fractions import Fraction
 
@@ -100,6 +101,11 @@ def test_arbitrary_divergence_free_vector_fiber_reconstructs_all_eight_helicity_
         quotient_measure_mass=0.7,
     )
     assert len(fiber.modal_atoms) == 8
+    identities = {atom.physical_edge_identity for atom in fiber.modal_atoms}
+    assert len(identities) == 8
+    assert {identity.helicity_assignment for identity in identities} == set(
+        itertools.product((-1, 1), repeat=3)
+    )
     assert fiber.ordered_quotient_source_residual < 3e-11
     assert fiber.parent_swap_residual < 3e-11
     assert abs(fiber.signed_work_reconstruction_residual) < 5e-10
@@ -132,6 +138,17 @@ def test_parent_swap_is_a_quotient_not_a_second_physical_edge():
     assert math.isclose(la.capacity_mass, lb.capacity_mass, rel_tol=2e-10, abs_tol=2e-10)
     assert math.isclose(la.signed_registered_progress, lb.signed_registered_progress, rel_tol=2e-10, abs_tol=2e-10)
     assert math.isclose(la.positive_edge_work, lb.positive_edge_work, rel_tol=2e-10, abs_tol=2e-10)
+
+    atoms_a = {atom.physical_edge_identity: atom for atom in a.modal_atoms}
+    atoms_b = {atom.physical_edge_identity: atom for atom in b.modal_atoms}
+    assert set(atoms_a) == set(atoms_b)
+    assert len(atoms_a) == 8
+    for identity in atoms_a:
+        aa = atoms_a[identity]
+        bb = atoms_b[identity]
+        assert math.isclose(aa.signed_work_mass, bb.signed_work_mass, rel_tol=2e-10, abs_tol=2e-12)
+        assert math.isclose(aa.capacity_mass, bb.capacity_mass, rel_tol=2e-10, abs_tol=2e-12)
+        assert math.isclose(aa.signed_progress_mass, bb.signed_progress_mass, rel_tol=2e-10, abs_tol=2e-12)
 
 
 def test_signed_edge_measure_is_reconstructed_before_hahn_and_positive_atoms_only_dominate_aggregate():

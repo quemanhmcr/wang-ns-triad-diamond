@@ -96,10 +96,18 @@ The inverse linear map has absolute determinant
 \left|\det\frac{\partial(x,y)}{\partial(z,r)}\right|=\frac18.
 \]
 
-Parent exchange is exactly `r -> -r`.  Let
-`q:R^3_r -> R^3_r/{+-1}` be the finite-group quotient.  Because the physical
-orbit integrand is the **sum of both ordered parent terms**, the joint base
-measure for child plus unordered parents is
+At the geometric level parent exchange is `r -> -r`.  On a helicity-resolved
+physical edge, however, the helicity sign stays attached to its physical parent
+mode, so the full involution is
+
+`(r,s_x,s_y,s_z) -> (-r,s_y,s_x,s_z)`.
+
+Let `q:R^3_r -> R^3_r/{+-1}` denote the geometric quotient.  Equivalently, let
+`Q` denote the finite-group quotient of `(r,s_x,s_y)` by the combined involution
+above, with counting measure on the parent helicity signs.  Because the physical
+orbit integrand is the **sum of both ordered parent terms with their signs
+transported with the parent modes**, the joint geometric base measure for child
+plus unordered parents is
 
 \[
 \boxed{
@@ -107,6 +115,19 @@ measure for child plus unordered parents is
  =\frac1{16}\,dz\,d(q_\#dr).
 }
 \]
+
+For the helicity-resolved edge space the same normalization can be written
+
+\[
+ d\Lambda_{\rm edge}
+ =\frac1{16}\,dz\,d\Big(Q_\#(dr\otimes \#_{s_x,s_y})\Big)\,d\#_{s_z},
+\]
+
+with the orbit-summed edge density understood.  This does **not** quotient away
+helicity: it only quotients the analyst's ordering of the two complete parent
+mode objects `(wavevector,helicity)`.  Mixed assignments `(+,-)` and `(-,+)`
+remain distinct physical assignments unless related by swapping the two complete
+parent modes.
 
 Equivalently, for every integrable ordered triad density `f`,
 
@@ -159,7 +180,12 @@ T_{\rm vector}
 The same equality holds after multiplying by the common upper-scale progress
 `log_+(|z|/max(|x|,|y|))`.
 
-Helicity sign is physical interaction data and is **not** quotiented.  Only the
+Helicity sign is physical interaction data and is **not erased** by the quotient.
+It travels with the physical wavevector under parent exchange.  The typed edge
+identity therefore stores the unordered pair of physical parent mode objects
+`(wavevector,helicity)` together with the child mode.  Any canonical ordering used
+inside the implementation is only an exact storage key for this finite-group
+quotient and is never a physical orientation, owner or causal choice.  Only the
 phase convention of the helical basis is gauge.
 
 ## 4. Construct the signed physical measure before taking positive parts
