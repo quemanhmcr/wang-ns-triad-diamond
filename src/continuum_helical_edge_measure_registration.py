@@ -14,7 +14,7 @@ from src.coherent_service_or_flat import (
     coherent_flat_thresholds,
     coherent_service_or_flat_gate,
 )
-from src.helical import coupling_g, helical_basis
+from src.helical import coupling_g, helical_basis, stable_norm3
 from src.helical_physical_edge_registration import (
     STATUS as HELICAL_EDGE_STATUS,
 )
@@ -48,6 +48,52 @@ STATUS = (
 UNITARY_FOURIER_CONVOLUTION_FACTOR = (2.0 * math.pi) ** (-1.5)
 GOOD_CORE_ETA = float(GOOD_THRESHOLD)
 LOW_COST_DEFICIT_CEILING = 1.0 / 20_000.0
+
+
+def _complex_norm3(value: np.ndarray) -> float:
+    q = np.asarray(value, dtype=complex)
+    if q.shape != (3,) or np.any(~np.isfinite(q.real)) or np.any(~np.isfinite(q.imag)):
+        raise ValueError("finite complex three-vector required")
+    return float(math.hypot(*(abs(complex(x)) for x in q)))
+
+
+def _relative_gap(actual: complex, expected: complex, *, scale: float | None = None) -> float:
+    gap = abs(actual - expected)
+    native = max(abs(actual), abs(expected)) if scale is None else abs(float(scale))
+    if native == 0.0:
+        return 0.0 if gap == 0.0 else math.inf
+    return float(gap / native)
+
+
+def _require_native_equal(
+    name: str,
+    actual: complex,
+    expected: complex,
+    *,
+    scale: float | None = None,
+    relative_tolerance: float = 5e-10,
+) -> None:
+    if _relative_gap(actual, expected, scale=scale) > relative_tolerance:
+        raise AssertionError(f"{name} failed its native-scale identity")
+
+
+def _relative_vector_gap(actual: np.ndarray, expected: np.ndarray, *, scale: float | None = None) -> float:
+    a = _cvec3(actual, "actual vector")
+    b = _cvec3(expected, "expected vector")
+    gap = _complex_norm3(a - b)
+    native = max(_complex_norm3(a), _complex_norm3(b)) if scale is None else abs(float(scale))
+    if native == 0.0:
+        return 0.0 if gap == 0.0 else math.inf
+    return gap / native
+
+
+def _physical_triad(x: np.ndarray, y: np.ndarray, z: np.ndarray) -> tuple[float, float, float]:
+    nx, ny, nz = map(stable_norm3, (x, y, z))
+    if min(nx, ny, nz) == 0.0:
+        raise ValueError("nonzero parent and child wavevectors required")
+    if stable_norm3(x + y - z) > 2e-12 * max(nx, ny, nz):
+        raise ValueError("physical triad requires z=x+y")
+    return nx, ny, nz
 
 
 def unitary_fourier_convolution_factor() -> float:
@@ -86,10 +132,14 @@ def _cvec3(value: np.ndarray, name: str) -> np.ndarray:
 def divergence_relative_residual(k: np.ndarray, value: np.ndarray) -> float:
     q = _vec3(k, "wavevector")
     v = _cvec3(value, "Fourier vector")
-    nk = float(np.linalg.norm(q))
-    if nk <= 0.0:
+    nk = stable_norm3(q)
+    if nk == 0.0:
         raise ValueError("nonzero wavevector required")
-    return float(abs(np.dot(q, v)) / max(1.0, nk * float(np.linalg.norm(v))))
+    nv = _complex_norm3(v)
+    if nv == 0.0:
+        return 0.0
+    qhat = q / nk
+    return float(abs(np.dot(qhat, v)) / nv)
 
 
 def _require_divergence_free(k: np.ndarray, value: np.ndarray, name: str) -> np.ndarray:
@@ -113,7 +163,9 @@ def helical_reconstruction(k: np.ndarray, value: np.ndarray) -> tuple[np.ndarray
     v = _require_divergence_free(q, value, "Fourier vector")
     coeff = helical_coefficients(q, v)
     reconstructed = sum((coeff[s] * helical_basis(q, s) for s in (-1, 1)), np.zeros(3, complex))
-    residual = float(np.linalg.norm(reconstructed - v) / max(1.0, float(np.linalg.norm(v))))
+    nv = _complex_norm3(v)
+    gap = _complex_norm3(reconstructed - v)
+    residual = 0.0 if nv == 0.0 and gap == 0.0 else (math.inf if nv == 0.0 else gap / nv)
     if residual > 3e-10:
         raise AssertionError("helical sectors failed to reconstruct a divergence-free Fourier vector")
     return reconstructed, residual
@@ -132,9 +184,7 @@ def ordered_parent_curl_source(
     z = _vec3(z, "z")
     ux = _require_divergence_free(x, ux, "ux")
     uy = _require_divergence_free(y, uy, "uy")
-    scale = max(1.0, float(np.linalg.norm(x)), float(np.linalg.norm(y)), float(np.linalg.norm(z)))
-    if np.linalg.norm(x + y - z) > 2e-12 * scale:
-        raise ValueError("physical triad requires z=x+y")
+    _physical_triad(x, y, z)
     omega_y = 1j * np.cross(y, uy)
     return leray_project(z, np.cross(ux, omega_y))
 
@@ -257,6 +307,66 @@ class ContinuumFiberRegistration:
             raise ValueError("finite continuum fiber certificate required")
         if len(self.modal_atoms) != 8:
             raise ValueError("all eight helical interaction sectors must be retained at the event")
+        if any(v < 0.0 for v in (
+            self.ordered_quotient_source_residual,
+            self.parent_swap_residual,
+            self.helical_reconstruction_residual,
+        )):
+            raise ValueError("continuum fiber provenance residuals must be nonnegative")
+        q = float(self.quotient_measure_mass)
+        for atom in self.modal_atoms:
+            _require_native_equal(
+                "continuum atom quotient-measure mass binding",
+                atom.quotient_measure_mass,
+                q,
+                scale=max(abs(atom.quotient_measure_mass), abs(q)),
+            )
+        modal_work = float(sum(a.registration.signed_child_energy_work for a in self.modal_atoms))
+        work_scale = max(
+            abs(self.direct_signed_work_density),
+            sum(abs(a.registration.signed_child_energy_work) for a in self.modal_atoms),
+        )
+        _require_native_equal(
+            "continuum fiber modal work binding",
+            self.modal_signed_work_density,
+            modal_work,
+            scale=work_scale,
+        )
+        _require_native_equal(
+            "continuum fiber direct/modal work reconstruction",
+            self.direct_signed_work_density,
+            modal_work,
+            scale=work_scale,
+        )
+        _require_native_equal(
+            "continuum fiber stored work residual",
+            self.signed_work_reconstruction_residual,
+            self.direct_signed_work_density - self.modal_signed_work_density,
+            scale=work_scale,
+        )
+        modal_progress = float(sum(a.registration.signed_upper_progress_work for a in self.modal_atoms))
+        progress_scale = max(
+            abs(self.direct_signed_progress_density),
+            sum(abs(a.registration.signed_upper_progress_work) for a in self.modal_atoms),
+        )
+        _require_native_equal(
+            "continuum fiber modal progress binding",
+            self.modal_signed_progress_density,
+            modal_progress,
+            scale=progress_scale,
+        )
+        _require_native_equal(
+            "continuum fiber direct/modal progress reconstruction",
+            self.direct_signed_progress_density,
+            modal_progress,
+            scale=progress_scale,
+        )
+        _require_native_equal(
+            "continuum fiber stored progress residual",
+            self.signed_progress_reconstruction_residual,
+            self.direct_signed_progress_density - self.modal_signed_progress_density,
+            scale=progress_scale,
+        )
 
 
 def register_continuum_triad_fiber(
@@ -279,11 +389,7 @@ def register_continuum_triad_fiber(
     qmass = float(quotient_measure_mass)
     if not math.isfinite(qmass) or qmass < 0.0:
         raise ValueError("nonnegative finite quotient-measure mass required")
-    scale = max(1.0, float(np.linalg.norm(x)), float(np.linalg.norm(y)), float(np.linalg.norm(z)))
-    if np.linalg.norm(x + y - z) > 2e-12 * scale:
-        raise ValueError("physical triad requires z=x+y")
-    if min(float(np.linalg.norm(x)), float(np.linalg.norm(y)), float(np.linalg.norm(z))) <= 1e-14:
-        raise ValueError("nonzero parent and child wavevectors required")
+    nx, ny, nz = _physical_triad(x, y, z)
 
     _, rx = helical_reconstruction(x, ux)
     _, ry = helical_reconstruction(y, uy)
@@ -293,15 +399,13 @@ def register_continuum_triad_fiber(
     source_xy = ordered_parent_curl_source(x, y, z, ux, uy)
     source_yx = ordered_parent_curl_source(y, x, z, uy, ux)
     source_unordered = unordered_parent_curl_source_vector(x, y, z, ux, uy)
-    source_res = float(
-        np.linalg.norm(source_unordered - source_xy - source_yx)
-        / max(1.0, float(np.linalg.norm(source_unordered)))
-    )
+    source_scale = max(_complex_norm3(source_unordered), _complex_norm3(source_xy) + _complex_norm3(source_yx))
+    source_res = _relative_vector_gap(source_unordered, source_xy + source_yx, scale=source_scale)
     if source_res > 3e-11:
         raise AssertionError("unordered quotient orbit failed ordered convolution reconstruction")
 
     swapped = unordered_parent_curl_source_vector(y, x, z, uy, ux)
-    swap_res = float(np.linalg.norm(swapped - source_unordered) / max(1.0, float(np.linalg.norm(source_unordered))))
+    swap_res = _relative_vector_gap(swapped, source_unordered)
     if swap_res > 3e-11:
         raise AssertionError("unordered parent quotient depended on parent orientation")
 
@@ -326,18 +430,30 @@ def register_continuum_triad_fiber(
     direct_work = 2.0 * float(np.real(np.vdot(uz, source_unordered)))
     modal_work = float(sum(a.registration.signed_child_energy_work for a in atoms))
     work_res = direct_work - modal_work
-    if abs(work_res) > 5e-10 * max(1.0, abs(direct_work), abs(modal_work)):
-        raise AssertionError("eight helical sectors failed direct vector child-work reconstruction")
+    work_scale = max(abs(direct_work), sum(abs(a.registration.signed_child_energy_work) for a in atoms))
+    _require_native_equal(
+        "eight-helicity direct vector child-work reconstruction",
+        direct_work,
+        modal_work,
+        scale=work_scale,
+        relative_tolerance=5e-10,
+    )
 
     progress = max(
         0.0,
-        math.log(float(np.linalg.norm(z)) / max(float(np.linalg.norm(x)), float(np.linalg.norm(y)))),
+        math.log(nz / max(nx, ny)),
     )
     direct_progress = direct_work * progress
     modal_progress = float(sum(a.registration.signed_upper_progress_work for a in atoms))
     progress_res = direct_progress - modal_progress
-    if abs(progress_res) > 5e-10 * max(1.0, abs(direct_progress), abs(modal_progress)):
-        raise AssertionError("eight helical sectors failed upper-progress work reconstruction")
+    progress_scale = max(abs(direct_progress), sum(abs(a.registration.signed_upper_progress_work) for a in atoms))
+    _require_native_equal(
+        "eight-helicity upper-progress reconstruction",
+        direct_progress,
+        modal_progress,
+        scale=progress_scale,
+        relative_tolerance=5e-10,
+    )
 
     return ContinuumFiberRegistration(
         quotient_measure_mass=qmass,
@@ -358,6 +474,7 @@ def register_continuum_triad_fiber(
 class ContinuumEdgeMeasureLedger:
     fibers: int
     modal_edges: int
+    physical_fibers: tuple[ContinuumFiberRegistration, ...]
     quotient_measure_mass: float
     signed_direct_work: float
     signed_modal_work: float
@@ -391,7 +508,9 @@ class ContinuumEdgeMeasureLedger:
     def __post_init__(self) -> None:
         if self.capacity_mass <= 0.0:
             raise ValueError("positive continuum capacity mass required")
-        if self.positive_edge_work < -1e-14 or self.negative_edge_work < -1e-14:
+        if len(self.physical_fibers) != self.fibers or sum(len(f.modal_atoms) for f in self.physical_fibers) != self.modal_edges:
+            raise ValueError("continuum ledger physical-fiber provenance count mismatch")
+        if self.positive_edge_work < 0.0 or self.negative_edge_work < 0.0:
             raise ValueError("Hahn masses must be nonnegative")
         if self.capacity_is_causal_law or self.parent_orientation_chosen:
             raise ValueError("capacity/orientation bookkeeping was promoted to physical causality")
@@ -416,20 +535,33 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
     signed_direct = cf * sum(f.quotient_measure_mass * f.direct_signed_work_density for f in fs)
     signed_modal = sum(a.signed_work_mass for a in atoms)
     direct_work_res = signed_direct - signed_modal
-    if abs(direct_work_res) > 7e-10 * max(1.0, abs(signed_direct), abs(signed_modal)):
-        raise AssertionError("continuum signed helical edge measure lost direct NS work")
+    signed_work_scale = max(abs(signed_direct), sum(abs(a.signed_work_mass) for a in atoms))
+    _require_native_equal(
+        "continuum signed helical edge measure direct NS work",
+        signed_direct,
+        signed_modal,
+        scale=signed_work_scale,
+        relative_tolerance=7e-10,
+    )
 
     positive = sum(max(a.signed_work_mass, 0.0) for a in atoms)
     negative = sum(max(-a.signed_work_mass, 0.0) for a in atoms)
     hahn_res = (positive - negative) - signed_modal
-    if abs(hahn_res) > 7e-11 * max(1.0, positive + negative, abs(signed_modal)):
-        raise AssertionError("continuum Hahn split failed signed edge reconstruction")
+    _require_native_equal(
+        "continuum Hahn split signed edge reconstruction",
+        positive - negative,
+        signed_modal,
+        scale=positive + negative,
+        relative_tolerance=7e-11,
+    )
     aggregate_positive = max(0.0, signed_direct)
     fiber_positive = cf * sum(
         f.quotient_measure_mass * max(f.direct_signed_work_density, 0.0)
         for f in fs
     )
-    if positive + 7e-11 * max(1.0, positive) < fiber_positive or fiber_positive + 7e-11 * max(1.0, fiber_positive) < aggregate_positive:
+    positive_scale = max(positive, fiber_positive, aggregate_positive)
+    positive_slack = 7e-11 * positive_scale
+    if positive + positive_slack < fiber_positive or fiber_positive + positive_slack < aggregate_positive:
         raise AssertionError("positive edge Hahn mass failed physical positive-work dominance")
 
     capacity = sum(a.capacity_mass for a in atoms)
@@ -438,8 +570,18 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
     direct_progress = cf * sum(f.quotient_measure_mass * f.direct_signed_progress_density for f in fs)
     registered_progress = sum(a.signed_progress_mass for a in atoms)
     direct_progress_res = direct_progress - registered_progress
-    if abs(direct_progress_res) > 7e-10 * max(1.0, abs(direct_progress), abs(registered_progress), capacity * float_jstar()):
-        raise AssertionError("continuum A*J*c measure lost direct upper-progress work")
+    progress_scale = max(
+        abs(direct_progress),
+        sum(abs(a.signed_progress_mass) for a in atoms),
+        capacity * float_jstar(),
+    )
+    _require_native_equal(
+        "continuum A*J*c direct upper-progress work",
+        direct_progress,
+        registered_progress,
+        scale=progress_scale,
+        relative_tolerance=7e-10,
+    )
 
     capacities = np.asarray([a.capacity_mass for a in atoms], dtype=float)
     multipliers = np.asarray([a.multiplier for a in atoms], dtype=float)
@@ -483,6 +625,7 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
     return ContinuumEdgeMeasureLedger(
         fibers=len(fs),
         modal_edges=len(atoms),
+        physical_fibers=fs,
         quotient_measure_mass=sum(f.quotient_measure_mass for f in fs),
         signed_direct_work=signed_direct,
         signed_modal_work=signed_modal,
@@ -512,6 +655,61 @@ def continuum_edge_measure_ledger(fibers: Sequence[ContinuumFiberRegistration]) 
     )
 
 
+def _replay_physical_ledger(ledger: ContinuumEdgeMeasureLedger) -> ContinuumEdgeMeasureLedger:
+    """Recompute summary observables from the bound physical fiber law.
+
+    A typed summary is not continuation/provenance authority.  Downstream gates
+    must replay the actual registered fibers so ``dataclasses.replace`` or an
+    equivalent forged summary cannot manufacture low deficit or a good core.
+    """
+    replayed = continuum_edge_measure_ledger(tuple(ledger.physical_fibers))
+    numeric_fields = (
+        "quotient_measure_mass",
+        "signed_direct_work",
+        "signed_modal_work",
+        "positive_edge_work",
+        "negative_edge_work",
+        "aggregate_positive_work",
+        "fiber_positive_work",
+        "positive_forward_work",
+        "positive_nonforward_work",
+        "capacity_mass",
+        "signed_direct_progress",
+        "signed_registered_progress",
+        "normalized_signed_flux",
+        "block_transfer_deficit",
+        "multiplier_deficit",
+        "phase_deficit",
+        "polarization_residual",
+        "good_core_capacity_mass",
+        "good_core_positive_work",
+        "good_core_capacity_fraction",
+    )
+    for name in numeric_fields:
+        _require_native_equal(
+            f"continuum ledger replay field {name}",
+            getattr(ledger, name),
+            getattr(replayed, name),
+            relative_tolerance=8e-10,
+        )
+    for name in ("good_core_physical_to_capacity_rn_min", "good_core_physical_to_capacity_rn_max"):
+        actual = getattr(ledger, name)
+        expected = getattr(replayed, name)
+        if actual is None or expected is None:
+            if actual is not expected:
+                raise AssertionError(f"continuum ledger replay field {name} lost physical provenance")
+        else:
+            _require_native_equal(
+                f"continuum ledger replay field {name}",
+                actual,
+                expected,
+                relative_tolerance=8e-10,
+            )
+    if ledger.capacity_is_causal_law != replayed.capacity_is_causal_law or ledger.causal_law != replayed.causal_law or ledger.parent_orientation_chosen != replayed.parent_orientation_chosen:
+        raise AssertionError("continuum ledger replay changed causal/orientation provenance")
+    return replayed
+
+
 @dataclass(frozen=True)
 class PhysicalGoodCoreCertificate:
     block_transfer_deficit: float
@@ -529,6 +727,7 @@ class PhysicalGoodCoreCertificate:
 
 def signed_good_core_physical_law(ledger: ContinuumEdgeMeasureLedger) -> PhysicalGoodCoreCertificate:
     """Convert the same low-deficit capacity law to actual positive child work on its good core."""
+    ledger = _replay_physical_ledger(ledger)
     eps = float(ledger.block_transfer_deficit)
     if not (0.0 <= eps < LOW_COST_DEFICIT_CEILING):
         raise ValueError("physical good-core change of measure requires deficit <1/20000")
@@ -587,6 +786,7 @@ def edge_measure_to_service_or_flat(
 
     The caller is deliberately not allowed to supply ``avg_transfer_deficit``.
     """
+    ledger = _replay_physical_ledger(ledger)
     out = coherent_service_or_flat_gate(
         tau=tau,
         avg_transfer_deficit=ledger.block_transfer_deficit,
@@ -662,7 +862,7 @@ class ContinuumEdgeMeasureStress:
 
 
 def _relative(a: float, b: float) -> float:
-    return abs(a - b) / max(1.0, abs(a), abs(b))
+    return _relative_gap(a, b)
 
 
 def _random_divergence_free(rng: np.random.Generator, k: np.ndarray) -> np.ndarray:

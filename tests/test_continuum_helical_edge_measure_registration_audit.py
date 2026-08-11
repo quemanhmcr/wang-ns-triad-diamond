@@ -17,7 +17,7 @@ from src.continuum_helical_edge_measure_registration import (
     register_continuum_triad_fiber,
     signed_good_core_physical_law,
 )
-from src.helical import helical_basis
+from src.helical import coupling_g, helical_basis
 
 
 def _edge(scale: float = 1.0):
@@ -28,13 +28,18 @@ def _edge(scale: float = 1.0):
 
 def _fiber(*, wave_scale: float = 1.0, amplitude: float = 1.0, quotient_mass: float = 1.0):
     x, y, z = _edge(wave_scale)
+    sx, sy, sz = 1, -1, 1
+    g = coupling_g(x, y, -z, sx, sy, sz)
+    signed_frequency = sx * np.linalg.norm(x) - sy * np.linalg.norm(y)
+    target_sign = 1.0 if signed_frequency >= 0.0 else -1.0
+    az = target_sign * np.exp(-1j * np.angle(g))
     return register_continuum_triad_fiber(
         x=x,
         y=y,
         z=z,
-        ux=amplitude * helical_basis(x, 1),
-        uy=amplitude * helical_basis(y, -1),
-        uz=1j * amplitude * helical_basis(z, 1),
+        ux=amplitude * helical_basis(x, sx),
+        uy=amplitude * helical_basis(y, sy),
+        uz=amplitude * az * helical_basis(z, sz),
         quotient_measure_mass=quotient_mass,
     )
 
