@@ -17,6 +17,7 @@ from src.high_strain_descending_epoch_telescope import (
 )
 from src.signed_good_generated_epoch_time_telescope import (
     SignedGoodGeneratedHHStep,
+    SignedGoodGeneratedWorkProvenance,
     signed_good_generated_epoch_telescope,
     signed_good_step_from_energy_reentry,
 )
@@ -932,13 +933,25 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
     c_gen = 1.0
     child_gen = 10.0
     end_gen = 5.0
-    for _ in range(3):
+    for layer in range(3):
         parent_gen = 0.61 * child_gen
         Tchild_gen = c_gen / (child_gen * child_gen)
         width_gen = 0.2 * Tchild_gen
         if generated_rows:
             end_gen = generated_rows[-1].work_support_end
         start_gen = end_gen - width_gen
+        provenance_gen = SignedGoodGeneratedWorkProvenance(
+            event_id=f"master-generated-event-{layer}",
+            trajectory_id="master-generated-NS-history",
+            child_carrier_id=f"master-carrier-{child_gen:.17g}",
+            generated_parent_carrier_id=f"master-carrier-{parent_gen:.17g}",
+            work_law_id=f"master-positive-HH-work-{layer}",
+            child_frequency=child_gen,
+            parent_frequency=parent_gen,
+            scaled_lifetime=c_gen,
+            slab_start=end_gen - Tchild_gen,
+            slab_end=end_gen,
+        )
         generated_rows.append(
             signed_good_step_from_energy_reentry(
                 reentry={
@@ -946,7 +959,9 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
                     "energy_gate": {
                         "branch": "physical_high_high_transfer_generation",
                         "physical_hh_work_lower": 0.8,
+                        "provenance": provenance_gen,
                     },
+                    "provenance": provenance_gen,
                     "coefficient_impulse_used_as_physical_work": False,
                     "observer_partition_motion_charged_as_physics": False,
                 },
@@ -956,6 +971,7 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
                     "mass": 1.1,
                     "total": 2.0,
                     "normalized_parent_span_upper": 25.0 / 128.0,
+                    "provenance": provenance_gen,
                 },
                 child_frequency=child_gen,
                 parent_frequency=parent_gen,

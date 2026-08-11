@@ -12,20 +12,33 @@ import pytest
 from src.asynchronous_duhamel_sync import INITIAL_HALF_SPAN
 from src.signed_good_generated_epoch_time_telescope import (
     ACTUAL_HH_GENERATION_BRANCH,
+    SignedGoodGeneratedWorkProvenance,
     signed_good_generated_epoch_telescope,
     signed_good_step_from_energy_reentry,
 )
 
 
-def _provenance(tag: str = "a") -> dict[str, object]:
-    return {
-        "event_id": f"event-{tag}",
-        "trajectory_id": "actual-NS-history",
-        "carrier_id": "smooth-carrier-Q",
-        "work_law_id": f"positive-HH-work-{tag}",
-        "slab_start": 0.0,
-        "slab_end": 20.0,
-    }
+def _provenance(
+    tag: str = "a",
+    *,
+    child: float = 10.0,
+    parent: float = 6.1,
+    c: float = 1.0,
+    slab_start: float = 1.0,
+    slab_end: float = 1.01,
+) -> SignedGoodGeneratedWorkProvenance:
+    return SignedGoodGeneratedWorkProvenance(
+        event_id=f"event-{tag}",
+        trajectory_id="actual-NS-history",
+        child_carrier_id=f"carrier-{child:.17g}",
+        generated_parent_carrier_id=f"carrier-{parent:.17g}",
+        work_law_id=f"positive-HH-work-{tag}",
+        child_frequency=child,
+        parent_frequency=parent,
+        scaled_lifetime=c,
+        slab_start=slab_start,
+        slab_end=slab_end,
+    )
 
 
 def _reentry(
@@ -40,6 +53,7 @@ def _reentry(
             "branch": ACTUAL_HH_GENERATION_BRANCH,
             "physical_hh_work_lower": lower,
             "coefficient_impulse_used_as_physical_work": nested_coefficient_flag,
+            "provenance": provenance,
         },
         "coefficient_impulse_used_as_physical_work": False,
         "observer_partition_motion_charged_as_physics": False,
@@ -79,7 +93,20 @@ def _step(
     *,
     provenance: object | None = None,
 ):
-    token = _provenance() if provenance is None else provenance
+    if provenance is None:
+        Tchild = math.exp(math.log(c) - 2.0 * math.log(child))
+        slab_end = end if end > 0.0 else Tchild
+        slab_start = max(0.0, slab_end - Tchild)
+        token = _provenance(
+            f"{child:.17g}-{start:.17g}",
+            child=child,
+            parent=parent,
+            c=c,
+            slab_start=slab_start,
+            slab_end=slab_end,
+        )
+    else:
+        token = provenance
     return signed_good_step_from_energy_reentry(
         reentry=_reentry(0.8, provenance=token),
         selected_physical_half_slab=_half(
@@ -122,6 +149,27 @@ def test_energy_gate_and_half_slab_cannot_splice_foreign_work_laws():
                 mass=1.1,
                 total=2.0,
                 provenance=_provenance("half"),
+            ),
+            child_frequency=10.0,
+            parent_frequency=6.1,
+            scaled_lifetime=1.0,
+        )
+
+
+def test_nested_energy_gate_cannot_splice_a_foreign_typed_work_law():
+    gate_token = _provenance("gate")
+    foreign_token = _provenance("nested")
+    reentry = _reentry(0.8, provenance=gate_token)
+    reentry["energy_gate"]["provenance"] = foreign_token
+    with pytest.raises(TypeError, match="provenance|foreign physical work laws"):
+        signed_good_step_from_energy_reentry(
+            reentry=reentry,
+            selected_physical_half_slab=_half(
+                start=1.0,
+                end=1.001,
+                mass=1.1,
+                total=2.0,
+                provenance=gate_token,
             ),
             child_frequency=10.0,
             parent_frequency=6.1,
@@ -206,6 +254,11 @@ def test_nonfinite_parent_span_certificate_fails_closed():
         )
 
 
+def test_typed_work_provenance_cannot_exceed_the_child_natural_slab():
+    with pytest.raises(ValueError, match="child natural slab"):
+        _provenance("long-slab", slab_start=1.0, slab_end=1.02)
+
+
 def test_tiny_native_frequency_cannot_accept_a_foreign_next_carrier():
     c = 1.0e-240
     row0 = _step(1.0e-120, 0.61e-120, c, 10.0, 10.0)
@@ -217,7 +270,7 @@ def test_tiny_native_frequency_cannot_accept_a_foreign_next_carrier():
         10.0,
         10.0,
     )
-    with pytest.raises(ValueError, match="actual signed-good parent carrier scale"):
+    with pytest.raises(ValueError, match="foreign physical parent carrier|actual signed-good parent carrier scale"):
         signed_good_generated_epoch_telescope((row0, row1))
 
 
@@ -237,7 +290,23 @@ def test_tiny_scaled_lifetime_cannot_change_inside_one_epoch():
 
 def test_tiny_native_time_cannot_move_common_surfaces_forward():
     c = 1.0e-120
-    row0 = _step(10.0, 6.1, c, 1.0e-13, 1.0e-13)
-    row1 = _step(6.1, 0.61 * 6.1, c, 2.0e-13, 2.0e-13)
-    with pytest.raises((ValueError, AssertionError), match="contained|backward|displacement"):
-        signed_good_generated_epoch_telescope((row0, row1))
+    with pytest.raises((ValueError, AssertionError), match="native backward-time"):
+        _step(10.0, 6.1, c, 1.0e-13, 1.0e-13)
+
+
+def test_native_unit_covariance_accepts_the_same_dimensionless_epoch():
+    c = 1.0e-180
+    child = 1.0e-60
+    parent = 0.61 * child
+    Tchild = math.exp(math.log(c) - 2.0 * math.log(child))
+    row0 = _step(child, parent, c, 100.0 * Tchild, 100.25 * Tchild)
+    Tchild1 = math.exp(math.log(c) - 2.0 * math.log(parent))
+    row1 = _step(
+        parent,
+        0.61 * parent,
+        c,
+        row0.work_support_end - 0.2 * Tchild1,
+        row0.work_support_end,
+    )
+    out = signed_good_generated_epoch_telescope((row0, row1))
+    assert out.cumulative_reference_backshift >= out.minimum_cumulative_backshift

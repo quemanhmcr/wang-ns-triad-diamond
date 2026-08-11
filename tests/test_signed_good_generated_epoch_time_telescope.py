@@ -11,33 +11,56 @@ from src.physical_energy_causal_bridge import heavy_half_physical_transfer, rout
 from src.signed_good_generated_epoch_time_telescope import (
     ACTUAL_HH_GENERATION_BRANCH,
     STATUS,
+    SignedGoodGeneratedWorkProvenance,
     signed_good_generated_epoch_telescope,
     signed_good_step_from_energy_reentry,
     theorem_certificate,
 )
 
 
-def _reentry(lower: float = 1.0):
+def _provenance(child: float, parent: float, c: float, start: float, end: float):
+    Tchild = c / child**2
+    slab_start = max(0.0, end - Tchild)
+    slab_end = max(end, slab_start + Tchild)
+    return SignedGoodGeneratedWorkProvenance(
+        event_id=f"event-{child:.17g}-{start:.17g}",
+        trajectory_id="test-NS-history",
+        child_carrier_id=f"carrier-{child:.17g}",
+        generated_parent_carrier_id=f"carrier-{parent:.17g}",
+        work_law_id=f"positive-HH-{child:.17g}-{start:.17g}",
+        child_frequency=child,
+        parent_frequency=parent,
+        scaled_lifetime=c,
+        slab_start=slab_start,
+        slab_end=slab_end,
+    )
+
+
+def _reentry(lower: float, provenance: SignedGoodGeneratedWorkProvenance):
     return {
         "branch": ACTUAL_HH_GENERATION_BRANCH,
         "energy_gate": {
             "branch": ACTUAL_HH_GENERATION_BRANCH,
             "physical_hh_work_lower": lower,
+            "provenance": provenance,
         },
+        "provenance": provenance,
         "coefficient_impulse_used_as_physical_work": False,
         "observer_partition_motion_charged_as_physics": False,
     }
 
 
 def _step(child: float, parent: float, c: float, start: float, end: float, total: float = 2.0):
+    provenance = _provenance(child, parent, c, start, end)
     return signed_good_step_from_energy_reentry(
-        reentry=_reentry(0.8),
+        reentry=_reentry(0.8, provenance),
         selected_physical_half_slab={
             "start": start,
             "end": end,
             "mass": 1.1,
             "total": total,
             "normalized_parent_span_upper": float(INITIAL_HALF_SPAN),
+            "provenance": provenance,
         },
         child_frequency=child,
         parent_frequency=parent,
@@ -191,19 +214,33 @@ def test_canonical_adapter_accepts_the_real_physical_energy_and_heavy_half_outpu
     parent = 6.1
     c = 1.0
     Tchild = c / child**2
-    gate = route_physical_energy_causality(
+    gate = dict(route_physical_energy_causality(
         terminal_energy=1.0,
         initial_energy=0.1,
         residual_positive_work=0.1,
         strain_action=0.0,
-    )
+    ))
     assert gate["branch"] == ACTUAL_HH_GENERATION_BRANCH
-    half = heavy_half_physical_transfer(
+    half = dict(heavy_half_physical_transfer(
         times=[0.1 * Tchild, 0.3 * Tchild, 0.7 * Tchild, 0.9 * Tchild],
         positive_work_weights=[0.2, 0.2, 0.8, 0.4],
         slab_start=0.0,
         slab_end=Tchild,
+    ))
+    provenance = SignedGoodGeneratedWorkProvenance(
+        event_id="real-adapter-event",
+        trajectory_id="real-adapter-NS-history",
+        child_carrier_id="real-adapter-child",
+        generated_parent_carrier_id="real-adapter-parent",
+        work_law_id="real-adapter-positive-HH-work",
+        child_frequency=child,
+        parent_frequency=parent,
+        scaled_lifetime=c,
+        slab_start=0.0,
+        slab_end=Tchild,
     )
+    gate["provenance"] = provenance
+    half["provenance"] = provenance
     row = signed_good_step_from_energy_reentry(
         reentry=gate,
         selected_physical_half_slab=half,
