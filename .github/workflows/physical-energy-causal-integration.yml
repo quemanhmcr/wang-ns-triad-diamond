@@ -41,6 +41,13 @@ on:
       - 'tests/test_smooth_flux_cocycle.py'
       - 'src/helical_physical_edge_registration.py'
       - 'tests/test_helical_physical_edge_registration.py'
+      - 'src/continuum_helical_edge_measure_registration.py'
+      - 'tests/test_continuum_helical_edge_measure_registration.py'
+      - 'src/physical_transfer_defect_moat.py'
+      - 'tests/test_physical_transfer_defect_moat.py'
+      - 'tests/test_coherent_service_or_flat.py'
+      - 'src/triad_extremizer.py'
+      - '.github/workflows/continuum-helical-edge-measure-registration.yml'
       - 'src/complex_young_parent_marking.py'
       - 'src/dual_gaussian_root_registration.py'
       - 'src/bargmann_root_cell_registration.py'
@@ -110,6 +117,7 @@ jobs:
       - run: python -m src.high_tail_natural_window_reentry --samples 50000 --outdir results-integration/high-tail-natural-window-reentry
       - run: python -m src.continuum_master_event_quotient --samples 50000 --outdir results-integration/continuum-master-event-quotient
       - run: python -m src.helical_physical_edge_registration --samples 50000 --outdir results-integration/helical-physical-edge-registration
+      - run: python -m src.continuum_helical_edge_measure_registration --samples 3000 --core-blocks 100 --outdir results-integration/continuum-helical-edge-measure-registration
       - run: python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young
       - run: python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian
       - run: python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor

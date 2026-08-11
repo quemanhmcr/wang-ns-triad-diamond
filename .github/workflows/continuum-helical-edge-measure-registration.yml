@@ -1,0 +1,70 @@
+name: Continuum helical edge measure registration
+
+on:
+  push:
+    paths:
+      - 'src/continuum_helical_edge_measure_registration.py'
+      - 'tests/test_continuum_helical_edge_measure_registration.py'
+      - 'docs/continuum_helical_edge_measure_registration.md'
+      - '.github/workflows/continuum-helical-edge-measure-registration.yml'
+      - 'src/helical_physical_edge_registration.py'
+      - 'tests/test_helical_physical_edge_registration.py'
+      - 'src/helical.py'
+      - 'tests/test_helical.py'
+      - 'src/single_edge_certificate.py'
+      - 'tests/test_single_edge_certificate.py'
+      - 'src/smooth_flux_cocycle.py'
+      - 'tests/test_smooth_flux_cocycle.py'
+      - 'src/physical_transfer_defect_moat.py'
+      - 'tests/test_physical_transfer_defect_moat.py'
+      - 'src/coherent_service_or_flat.py'
+      - 'tests/test_coherent_service_or_flat.py'
+      - 'src/physical_pair_weighted_productivity.py'
+      - 'tests/test_physical_pair_weighted_productivity.py'
+      - 'src/triad_extremizer.py'
+      - '.github/workflows/physical-energy-causal-integration.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Continuum signed edge-measure stress
+        run: python -m src.continuum_helical_edge_measure_registration --samples 3000 --core-blocks 100 --outdir results-continuum-helical-edge-measure
+      - name: Physical helical edge dependency
+        run: python -m src.helical_physical_edge_registration --samples 10000 --outdir results-helical-physical-edge-registration
+      - name: Global single-edge dependency
+        run: python -m src.single_edge_certificate --stress-samples 50000 --outdir results-single-edge-certificate
+      - name: Smooth flux polarization dependency
+        run: python -m src.smooth_flux_cocycle --samples 50000 --outdir results-smooth-flux-cocycle
+      - name: Physical transfer defect moat dependency
+        run: python -m src.physical_transfer_defect_moat --samples 50000 --outdir results-physical-transfer-defect-moat
+      - name: Coherent service-or-flat dependency
+        run: python -m src.coherent_service_or_flat --samples 50000 --outdir results-coherent-service-or-flat
+      - name: Physical pair productivity dependency
+        run: python -m src.physical_pair_weighted_productivity --samples 50000 --outdir results-physical-pair-weighted-productivity
+      - run: cat results-continuum-helical-edge-measure/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: continuum-helical-edge-measure-registration-results
+          path: |
+            results-continuum-helical-edge-measure/
+            results-helical-physical-edge-registration/
+            results-single-edge-certificate/
+            results-smooth-flux-cocycle/
+            results-physical-transfer-defect-moat/
+            results-coherent-service-or-flat/
+            results-physical-pair-weighted-productivity/
