@@ -10,6 +10,7 @@ from src.continuum_helical_edge_measure_registration import (
     JOINT_UNORDERED_RADON_DENSITY,
     LOW_COST_DEFICIT_CEILING,
     SUM_RELATIVE_JACOBIAN,
+    continuum_edge_local_variation_energy_bounds,
     continuum_edge_measure_ledger,
     edge_measure_to_service_or_flat,
     helical_coefficients,
@@ -25,6 +26,7 @@ from src.continuum_helical_edge_measure_registration import (
 from src.helical import coupling_g, helical_basis
 from src.helical_physical_edge_registration import leray_project
 from src.physical_pair_weighted_productivity import physical_work_capacity_constant
+from src.single_edge_certificate import float_jstar
 from src.triad_extremizer import symmetric_gamma, symmetric_rstar
 
 
@@ -242,6 +244,8 @@ def test_joint_outer_child_unordered_parent_radon_pushforward_is_exact():
     assert JOINT_UNORDERED_RADON_DENSITY == Fraction(1, 16)
     assert cert["joint_unordered_radon_density"] == "1/16"
     assert cert["radon"] is True
+    assert cert["proper_quotient"] is True
+    assert cert["helical_frame_borel"] is True
 
     x = np.array([1.2, -0.4, 0.7])
     y = np.array([-0.3, 0.9, 0.2])
@@ -261,3 +265,35 @@ def test_joint_outer_child_unordered_parent_radon_pushforward_is_exact():
     ordered_dx_orbit = 0.5 * (dr_volume / 8.0) * (fxy + fyx)
     quotient_orbit = float(JOINT_UNORDERED_RADON_DENSITY) * dr_volume * (fxy + fyx)
     assert math.isclose(ordered_dx_orbit, quotient_orbit, rel_tol=0.0, abs_tol=2e-15)
+
+
+def test_energy_native_local_variation_makes_weighted_edge_measures_locally_finite():
+    energy = 4.0
+    child_second_moment = 9.0
+    out = continuum_edge_local_variation_energy_bounds(energy, child_second_moment)
+    expected_capacity = (
+        4.0
+        * math.sqrt(2.0)
+        * unitary_fourier_convolution_factor()
+        * energy**1.5
+        * math.sqrt(child_second_moment)
+    )
+    assert out.capacity_variation_upper == pytest.approx(expected_capacity, rel=2e-15)
+    assert out.work_variation_upper == pytest.approx(expected_capacity, rel=2e-15)
+    assert out.progress_variation_upper == pytest.approx(expected_capacity * float_jstar(), rel=2e-15)
+
+    # Velocity amplitude a multiplies Fourier energy by a^2, hence the cubic
+    # trilinear local-variation bound by a^3. No unit-scale floor is permitted.
+    amplitude = 3.0
+    scaled = continuum_edge_local_variation_energy_bounds(amplitude**2 * energy, child_second_moment)
+    assert scaled.capacity_variation_upper / out.capacity_variation_upper == pytest.approx(amplitude**3, rel=3e-15)
+
+    zero = continuum_edge_local_variation_energy_bounds(0.0, child_second_moment)
+    assert zero.capacity_variation_upper == 0.0
+    assert zero.work_variation_upper == 0.0
+    assert zero.progress_variation_upper == 0.0
+
+    with pytest.raises(ValueError, match="Fourier energy"):
+        continuum_edge_local_variation_energy_bounds(-1.0, child_second_moment)
+    with pytest.raises(ValueError, match="child second moment"):
+        continuum_edge_local_variation_energy_bounds(energy, math.nan)

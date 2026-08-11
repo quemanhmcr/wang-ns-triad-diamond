@@ -142,11 +142,52 @@ Equivalently, for every integrable ordered triad density `f`,
 \]
 
 This is an analytic change-of-variables identity, not a finite-grid ansatz.  The
-quotient by the finite group `{+-1}` is a locally compact second-countable
-Hausdorff space, hence the pushforward of Lebesgue measure is Radon.  The fixed
-locus `r=0` has codimension three and is null.  On the actual hard event roles
-used here, the child stays away from zero and the existing `L^(3/2)` Young bounds
-supply finite variation of the restricted physical work/capacity measures.
+quotient is proper: `|r|` descends to a continuous quotient radius, so the inverse
+image of a compact quotient set is closed and bounded in `R^3` times a finite
+helicity set and is therefore compact.  Hence the pushforward of Lebesgue times
+finite counting measure is locally finite Radon.  The fixed locus
+`r=0,s_x=s_y` lies inside the codimension-three null set `r=0`.
+
+The **base measure being Radon is not yet the same statement as the physical
+weights having finite variation**.  That second step comes directly from the
+Navier--Stokes energy class, without a UV parent cutoff.  Write
+
+\[
+E=\int_{\mathbb R^3}|\widehat u(k)|^2\,dk.
+\]
+
+For the two orthogonal helical coefficients,
+
+\[
+\sum_{s=\pm1}|a_s(k)|\le \sqrt2\,|\widehat u(k)|.
+\]
+
+At fixed child `z`, the parent convolution is bounded by Cauchy--Schwarz, while
+the unordered-parent measure contributes its exact factor `1/2`.  Thus for every
+bounded Borel child block `B`,
+
+\[
+\boxed{
+A(B)
+\le
+4\sqrt2\,C_F E^{3/2}
+\left(\int_B |z|^2\,dz\right)^{1/2}.
+}
+\]
+
+The audited one-edge law gives pointwise `|T_e|<=A_e`, including nonforward
+edges, and the global geometric envelope gives `|J_e c_e|<=J_*`.  Therefore
+
+\[
+|W|(B)\le A(B),
+\qquad
+|F|(B)\le J_*A(B).
+\]
+
+So `dA`, signed `dW`, and signed `dF` are locally finite physical Radon measures
+on bounded child blocks.  This bound certifies measure existence only; it is not
+a causal budget, does not tax scale, and does not promote `dA` into a probability
+law.
 
 Thus aggregating several physical child modes before Hahn splitting is not a new
 law: it is a finite probe of the same joint `z`--unordered-parent Radon measure.

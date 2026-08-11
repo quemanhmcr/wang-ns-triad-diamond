@@ -50,7 +50,8 @@ STATUS = (
     "EXACT_CONTINUUM_HELICAL_EDGE_MEASURE_REGISTRATION__UNITARY_FOURIER__"
     "UNORDERED_PARENT_QUOTIENT__JOINT_OUTER_CHILD_RADON_PUSHFORWARD__"
     "EXACT_HELICITY_RECONSTRUCTION__SIGNED_BEFORE_HAHN__"
-    "NATIVE_CAPACITY_POLARIZATION__PHYSICAL_GOOD_CORE_CHANGE_OF_MEASURE"
+    "NATIVE_CAPACITY_POLARIZATION__ENERGY_NATIVE_LOCAL_VARIATION__"
+    "PHYSICAL_GOOD_CORE_CHANGE_OF_MEASURE"
 )
 
 UNITARY_FOURIER_CONVOLUTION_FACTOR = (2.0 * math.pi) ** (-1.5)
@@ -88,19 +89,20 @@ def sum_relative_to_parent_pair(z: np.ndarray, r: np.ndarray) -> tuple[np.ndarra
 
 
 def joint_unordered_parent_radon_certificate() -> dict[str, object]:
-    """Exact joint ``z``/unordered-parent base measure for continuum convolution.
+    """Exact proper joint quotient for child plus helicity-resolved parents.
 
-    The linear inverse map ``(z,r)->(x,y)`` has absolute determinant ``1/8`` in
-    three dimensions.  The parent involution is ``r->-r``.  Symmetrizing the two
-    ordered parent terms contributes another factor ``1/2``.  Hence if
-    ``q:R^3 -> R^3/{+-1}`` is the finite-group quotient, the joint unordered base
-    measure is
+    The inverse map ``(z,r)->(x,y)`` has absolute determinant ``1/8`` in three
+    dimensions.  Parent exchange transports the complete physical parent modes,
+    so on the helicity-resolved space it acts by
+    ``(r,sx,sy)->(-r,sy,sx)``.  The a.e. orbit factor ``1/2`` therefore gives
+    the same joint density ``1/16``.
 
-        dLambda_unord = (1/16) dz d(q_# dr).
-
-    The quotient of Euclidean space by the finite group {+-1} is locally compact
-    Hausdorff/second countable, so the pushforward of Lebesgue measure is Radon.
-    The fixed locus r=0 has codimension three and is Lebesgue-null.
+    Properness is explicit rather than inferred from target topology alone:
+    ``|r|`` descends to a continuous quotient radius.  The inverse image of a
+    compact quotient set is closed and radius-bounded in ``R^3`` times a finite
+    helicity set, hence compact.  The pushforward of Lebesgue times finite
+    counting measure is therefore locally finite Radon; product with ``dz`` is
+    Radon as well.
     """
     per_coordinate_inverse_det = Fraction(1, 2)
     jacobian = per_coordinate_inverse_det**3
@@ -113,13 +115,79 @@ def joint_unordered_parent_radon_certificate() -> dict[str, object]:
         "parent_orientation_quotient": "1/2",
         "joint_unordered_radon_density": "1/16",
         "coordinates": "z=x+y, r=x-y; x=(z+r)/2, y=(z-r)/2",
-        "parent_swap": "r -> -r",
-        "quotient_space": "R^3_r/{+-1}, finite-group quotient of Euclidean space",
+        "parent_swap": "(r,sx,sy)->(-r,sy,sx), with helicity attached to the physical parent wavevector",
+        "quotient_space": "combined finite-group quotient of R^3_r times the two parent-helicity signs",
+        "proper_quotient": True,
+        "properness_reason": "the quotient radius |[r]|=|r| is continuous; compact quotient sets have closed bounded compact preimages and the helicity factor is finite",
         "radon": True,
-        "fixed_locus": "r=0 has codimension 3 and Lebesgue measure zero",
-        "integral_identity": "int dz int dx f(z,x,z-x) = (1/16) int dz int dr [f(z,(z+r)/2,(z-r)/2)+f(z,(z-r)/2,(z+r)/2)]",
-        "physical_scope": "on event hard roles away from z=0, existing L^(3/2) Young bounds give finite variation for the signed work/capacity restrictions",
+        "fixed_locus": "the fixed set r=0,sx=sy lies inside the codimension-3 Lebesgue-null set r=0",
+        "helical_frame_borel": True,
+        "edge_densities_borel": True,
+        "integral_identity": "int dz int dx f(z,x,z-x) = (1/16) int dz int dr [f(z,(z+r)/2,(z-r)/2)+f(z,(z-r)/2,(z+r)/2)] with parent helicities transported under exchange",
+        "physical_scope": "weighted A,W,F local finiteness is supplied separately by the physical L2-energy variation bound, not by Radon base measure alone",
     }
+
+
+@dataclass(frozen=True)
+class ContinuumEdgeLocalVariationBounds:
+    fourier_energy: float
+    child_second_moment: float
+    capacity_variation_upper: float
+    work_variation_upper: float
+    progress_variation_upper: float
+
+    def __post_init__(self) -> None:
+        values = (
+            self.fourier_energy,
+            self.child_second_moment,
+            self.capacity_variation_upper,
+            self.work_variation_upper,
+            self.progress_variation_upper,
+        )
+        if not all(math.isfinite(float(value)) and float(value) >= 0.0 for value in values):
+            raise ValueError("finite nonnegative continuum local-variation data required")
+        if self.work_variation_upper > self.capacity_variation_upper:
+            raise AssertionError("physical work variation cannot exceed native capacity variation")
+        if self.progress_variation_upper > self.capacity_variation_upper * float_jstar() * (1.0 + 5e-12):
+            raise AssertionError("upper-progress variation exceeded Jstar times capacity variation")
+
+
+def continuum_edge_local_variation_energy_bounds(
+    fourier_energy: float, child_second_moment: float
+) -> ContinuumEdgeLocalVariationBounds:
+    """Energy-native local variation of ``A``, ``W`` and ``F`` on a child block.
+
+    ``fourier_energy`` is ``int |u_hat(k)|^2 dk`` in the unitary convention and
+    ``child_second_moment`` is ``int_B |z|^2 dz``.  Using
+    ``sum_s |a_s(k)| <= sqrt(2)|u_hat(k)|``, the parent-orbit factor ``1/2`` and
+    fixed-child Cauchy--Schwarz gives
+
+    ``A(B) <= 4 sqrt(2) C_F E^(3/2) (int_B |z|^2 dz)^(1/2)``.
+
+    No UV parent cutoff is imposed.  Pointwise physical ``|T_e|<=A_e`` yields
+    ``|W|(B)<=A(B)``, while the certified one-edge envelope yields
+    ``|F|(B)<=J_* A(B)``.
+    """
+    energy = float(fourier_energy)
+    moment = float(child_second_moment)
+    if not math.isfinite(energy) or not math.isfinite(moment) or energy < 0.0 or moment < 0.0:
+        raise ValueError("finite nonnegative Fourier energy and child second moment required")
+    capacity = _edge_positive_product(
+        (4.0 * math.sqrt(2.0), unitary_fourier_convolution_factor(), energy, math.sqrt(energy), math.sqrt(moment)),
+        "continuum L2-energy local capacity variation",
+    )
+    progress = _edge_positive_product(
+        (capacity, float_jstar()),
+        "continuum local progress variation",
+    )
+    return ContinuumEdgeLocalVariationBounds(
+        fourier_energy=energy,
+        child_second_moment=moment,
+        capacity_variation_upper=capacity,
+        work_variation_upper=capacity,
+        progress_variation_upper=progress,
+    )
+
 
 def _complex_norm3(value: np.ndarray) -> float:
     q = np.asarray(value, dtype=complex)
@@ -1108,6 +1176,7 @@ def theorem_certificate() -> dict[str, object]:
         "unitary_fourier": "fhat=(2pi)^(-3/2) integral exp(-ix.k) f(x)dx, so product convolution carries C_F=(2pi)^(-3/2)",
         "parent_quotient": "for fixed child z, parent exchange acts on the complete parent mode objects: (r,sx,sy)->(-r,sy,sx); each helicity stays attached to its physical wavevector and no orientation selector is physical",
         "joint_outer_child_radon": joint_unordered_parent_radon_certificate(),
+        "weighted_local_variation": "for every bounded Borel child block B and finite Fourier energy E, A(B)<=4 sqrt(2) C_F E^(3/2) (int_B |z|^2 dz)^(1/2); pointwise |T_e|<=A_e and |J_e c_e|<=J_* then give |W|(B)<=A(B) and |F|(B)<=J_*A(B), so the physical weighted measures are locally finite Radon without a UV parent cutoff",
         "helicity": "typed atoms retain the orientation-quotiented physical (wavevector,helicity) edge identity; one regular fiber contains exactly the eight distinct parent-mode/child-helicity assignments and their work sum reconstructs direct vector NS work",
         "signed_measure": "dW=C_F T_e d(lambda_unord) is constructed signed before Hahn; W_plus-W_minus=W while W_plus >= [W]_+ under cancellation",
         "capacity_measure": "dA=C_F A_e d(lambda_unord), A_e=4|z||a_x a_y a_z|; dA is a positive reference measure, never the causal child-work law",
@@ -1119,7 +1188,7 @@ def theorem_certificate() -> dict[str, object]:
         "normalization_distinction": f"native unitary Young work upper at R=1 is C_F*(4A3)={unitary_upper:.12g}, while existing clean productivity upper 4A3={clean_upper:.12g} deliberately dominates it",
         "service_default_deficit_threshold": service_delta,
         "young_distinction": "epsilon=1-F/(J_*A) is the edge geometry/phase signed-efficiency deficit relative to actual modal capacity; it is not the separate Young norm-saturation deficit, which remains downstream",
-        "scope": "this closes fixed-child and joint outer-child/unordered-parent Radon registration, signed helical work/capacity/progress reconstruction, and the low-deficit physical-law handoff; it does not prove that every generic HH block is low deficit or terminate nonforward/high-deficit physical events",
+        "scope": "this closes fixed-child and joint outer-child/unordered-parent Radon registration, energy-native local finite variation of the physical weighted measures, signed helical work/capacity/progress reconstruction, and the low-deficit physical-law handoff; it does not prove that every generic HH block is low deficit or terminate nonforward/high-deficit physical events",
     }
 
 
@@ -1363,6 +1432,14 @@ The unitary Fourier convention contributes `C_F=(2pi)^(-3/2)`.  For fixed child
 orientation:
 
 `lambda_z^unord = (1/2)(pi_z)_# dx`, `pi_z(x)={{x,z-x}}`.
+
+On every bounded Borel child block `B`, finite Fourier energy already gives the
+native local-variation bound
+
+`A(B) <= 4 sqrt(2) C_F E^(3/2) (int_B |z|^2 dz)^(1/2)`,
+
+and therefore `|W|(B)<=A(B)`, `|F|(B)<=J_*A(B)`.  This is local finiteness of
+the physical weighted Radon measures, not a causal charge and not a UV cutoff.
 
 The orbit source is the sum of the two parent orders.  Arbitrary divergence-free
 Fourier vectors then resolve at the event into all eight helical sectors and the

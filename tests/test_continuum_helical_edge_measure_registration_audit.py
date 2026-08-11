@@ -14,6 +14,7 @@ import pytest
 from src.continuum_helical_edge_measure_registration import (
     _nonforward_positive_fiber,
     _symmetric_extremal_fiber,
+    continuum_edge_local_variation_energy_bounds,
     continuum_edge_measure_ledger,
     edge_measure_to_service_or_flat,
     register_continuum_triad_fiber,
@@ -245,3 +246,19 @@ def test_typed_fiber_cannot_replace_eight_helicity_assignments_by_duplicate_atom
             signed_progress_reconstruction_residual=0.0,
             modal_atoms=duplicated,
         )
+
+
+def test_local_variation_bound_preserves_cubic_native_scaling_far_below_unit_energy():
+    base = continuum_edge_local_variation_energy_bounds(1.0, 1.0)
+    tiny_energy = 1.0e-80
+    tiny = continuum_edge_local_variation_energy_bounds(tiny_energy, 1.0)
+    assert tiny.capacity_variation_upper / base.capacity_variation_upper == pytest.approx(
+        tiny_energy**1.5, rel=4.0e-14
+    )
+    assert tiny.work_variation_upper == tiny.capacity_variation_upper
+
+
+def test_local_variation_certificate_cannot_forge_work_above_capacity():
+    bound = continuum_edge_local_variation_energy_bounds(2.0, 3.0)
+    with pytest.raises((ValueError, AssertionError), match="work|capacity|variation"):
+        replace(bound, work_variation_upper=1.01 * bound.capacity_variation_upper)
