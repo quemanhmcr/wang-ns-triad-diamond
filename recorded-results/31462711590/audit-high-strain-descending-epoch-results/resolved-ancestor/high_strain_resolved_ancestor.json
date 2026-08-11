@@ -1,0 +1,21 @@
+{
+  "certificate": {
+    "status": "EXACT_HIGH_STRAIN_DISSIPATION_WEIGHTED_RESOLVED_ANCESTOR__HALF_DV_ON_CRITICAL_LOW_SHELLS__MATERIAL_RENEWAL_REMAINS",
+    "dyadic_geometry": "A_j={M_j/2<|xi|<=M_j}, M_j=(N/4)2^-j, sum_j M_j=N/2",
+    "shell_bound": "with |S_(N/4)(xi)|<=1, N||grad P_j V||_2^2 <= N M_j [M_j||P_j u||_2^2]",
+    "low_mass_bound": "on mu_j(t)=M_j||P_j u||_2^2<mu_*, total normalized dissipation is <=c mu_*/2",
+    "high_strain": "K>=1/30 gives D_V>=D_*=4.21103121113; choosing mu_*=D_*/c=4.21103121113 leaves at least half of the actual D_V measure on critical resolved-shell ancestors",
+    "causal_law": "the retained law is the actual positive normalized resolved dissipation N|xi|^2|Vhat|^2 dt dxi, not a packet probability or shell argmax",
+    "scale": "every retained ancestor shell has M<=N/4, hence its parabolic natural lifetime is at least 16 times the child lifetime",
+    "currency": "D_V is still O(1/N) in physical viscous cost and is not promoted to an additive finite reset; the theorem adds a physical low-frequency ancestor mark to its recursive route",
+    "scope": "a resolved-shell critical-mass ancestor is not yet a selected coherent transfer parent; material/coherent localization and universal slab renewal of this dissipation-seeded route remain"
+  },
+  "stress": {
+    "samples": 100000,
+    "minimum_bad_upper_margin": 0.25092892059101857,
+    "minimum_half_law_margin": 0.25981565299228676,
+    "minimum_critical_mass_threshold": 0.07712932657989678,
+    "minimum_lifetime_ratio": 16.0,
+    "maximum_retained_fraction": 1.0
+  }
+}

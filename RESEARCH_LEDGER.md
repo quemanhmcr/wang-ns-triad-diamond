@@ -35,7 +35,7 @@ The current architecture has reached the following point.
 16. A complete no-hit natural horizon is an analysis checkpoint, not a recursive physical event. The corridor time is real, but checkpoint cover geometry supplies neither a causal charge nor high-tail/directional scale provenance. Exact same-path segmentation leaves the carrier and first stop unchanged: a bare checkpoint matching only `t,A,c` has no continuation authority, fixed-carrier natural windows cannot Zeno, and arbitrary cuts cannot be assigned invented corridor durations. The remaining canonical infinite-path problem is genuine physical-owner recurrence.
 17. Checkpoint Zeno is now quotiented as segmentation of one continuous carrier path: at an interior accumulation the cumulative observables either attain an existing closed first-stop face or the same carrier crosses the accumulation.  A geometrically UV-growing checkpoint reading sequence remains a diagnostic counterexample to time-only reasoning, but it is not a physical lineage.  The master frontier is therefore genuine physical-owner recurrence, not a second checkpoint-UV branch.
 18. Smooth residual-skew `K_phys` relink is topologically quotiented without denying its physics: the independently audited gauge-quotiented `T_ab^{phys}` matrix is antisymmetric same-event flux, every positive recipient has its own finite negative-net donor trace, and relink creates no child recursive event.  A simultaneous `S` branch remains existing strain/deformation ownership.
-19. The author's consecutive high-strain extension supplies a native viscous telescope without demoting high strain from genuine ownership: every high-strain event pays `D_j>=D_*`, its actual `D_V|_G` ancestor renews at `N_(j+1)/N_j<=3/16`, and interval restriction plus low-pass contraction gives `D_j<=N_j G_*` for the physical global gradient reservoir `G_*`.  Thus every pure high-strain epoch is finite even under complete time overlap, while mixed-owner recurrence remains open.  Its native-scale executable guards are now under independent adversarial audit.
+19. The independently audited consecutive high-strain extension supplies a native viscous telescope without demoting high strain from genuine ownership: every high-strain event pays `D_j>=D_*`, its actual `D_V|_G` ancestor renews at `N_(j+1)/N_j<=3/16`, and interval restriction plus low-pass contraction gives `D_j<=N_j G_*` for the physical global gradient reservoir `G_*`.  Thus every pure high-strain epoch is finite even under complete time overlap, while mixed-owner recurrence remains open.  Its executable guards now preserve native-scale covariance and have a direct Galerkin Navier--Stokes falsification lane.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -1913,7 +1913,93 @@ Integration artifact digest:
 
 The first implementation SHA passed both serious gates; no fixture or theorem-source correction was required.
 
+This sentence records the author's original gate result.  The later independent
+native-scale audit in Section 33.11 found executable theorem-boundary failures
+which that original suite did not exercise.
+
 The theorem keeps high strain as a genuine recursive owner but closes eventually-pure consecutive high-strain recurrence.  It does not terminate mixed recurrence through HH, strain, source/service, material-new-ancestry, high-tail or causal-reuse owners and makes no Navier--Stokes regularity claim.
+
+---
+
+### 33.11 Independent native-scale and physical-PDE audit of the high-strain epoch telescope
+
+The continuum core survived audit.  For every actual consecutive high-strain
+route,
+
+`D_*<=D_j<=N_jG_*`, `N_(j+1)<=3N_j/16`,
+
+so the physical frequency floor and geometric weighted-reservoir telescope are
+valid even with arbitrarily overlapping event histories.  The red failures were
+in the executable guards used to certify those hypotheses.
+
+Exact anti-test SHA `30a42157fc126ccf1bd4755cb6825e54eb3efdc6`, run
+`31461890777`: all `6/6` tests failed.  At native scales below the artificial
+absolute unit floor, the original code accepted `M=2N`, `D=D_*/2`, `D>N G_*`,
+and a foreign next carrier at twice the actual renewal frequency.  A typed
+certificate also accepted a `NaN` scale ratio, while a finite scale range
+`1e300/1e-300` raised `math domain error` because the ratio underflowed before
+its logarithm was taken.
+
+Exact repaired source SHA:
+`422ab677e635159d82720a2af60f7900e7b3be9f`.
+
+The repair removes every dimensional `max(1,...)` tolerance from the epoch
+verifier.  It compares the native dimensionless ratios `M/N`, `A/M`, `A/N`,
+`D/D_*`, and `N_next/A_previous`; validates `D<=NG_*` as a logarithmic product;
+subtracts scale logarithms before division; and rejects nonfinite certificate
+data.  The continuum inequalities and physical `3/16` renewal geometry are
+unchanged.
+
+Exact audited PDE head:
+`70bb2e4a9ec5b7d8826dc1016da5157cbe5fb1ac`.
+
+Audit run `31462711590` was **success**:
+
+- `6/6` anti-tests and `801/801` theorem tests;
+- `200,000` arbitrary-overlap epochs over child frequencies
+  `[3.170e-199,2.431e+202]` and normalized dissipation
+  `[4.331e-140,1.032e+141]`;
+- minimum native-relative geometric-frequency, normalized-capacity and
+  frequency-floor margins `3.270e-3`, `2.012e-2`, `2.453e-5`;
+- `200,000/200,000` foreign/ascending restarts rejected;
+- collision, resolved-ancestor, critical-carrier and continuum-master dependency
+  stresses each at `100,000` states, with high-strain master failures `0`.
+
+The audit evolved the actual unforced incompressible three-dimensional
+Fourier--Galerkin Navier--Stokes system with Leray projection, viscosity, `2/3`
+dealiasing and RK4.  On the same states it integrated the strict-low-pass strain
+action `K_N`, normalized dissipation `D_N`, global reservoir `G_*`, and the
+positive `D_V` law over actual dyadic critical shells.  For the physical renewal
+`N=16 -> M=4 -> A=3` at resolutions `12,16,20`, maximum relative divergence was
+`6.933e-17`, energy-balance residual was at most `6.305e-9`, `K_N` was
+`2.199--2.246`, `D_N` was `3.521e6--3.534e6`, reservoir margins were
+`0.3027--0.3217`, retained critical fraction was `1.0`, and the half-law margin
+was `0.5`.  The renewed cutoff `A/4=0.75` lies below the first nonzero periodic
+mode, so the measured descendant/root gradient ratio was `0`; root-dissipation
+resolution spread was `3.777e-3`.
+
+Stored audit artifact:
+`recorded-results/31462711590/audit-high-strain-descending-epoch-results/`.
+
+GitHub artifact digest:
+`sha256:de5a450a55267a40f0b2b843f7f6d29a44d9ed4dc949352b7818a093b10c8972`.
+
+Exact-head dedicated run `31462711516` was also **success**; artifact digest
+`sha256:e663f217f76b36a9b648cce354ba3691813d3303a8a3f23c84bdfb121231d040`.
+
+Exact-head full causal integration run `31462711518` was **success**: `801`
+theorem tests, the repaired high-strain stress and physical PDE probe, all
+existing physical owner/service/reuse lanes, and the `20,000`-episode master
+stress with worst margin `0.0`.  All `58` main workflow steps passed.  Its
+`100`-file artifact digest is
+`sha256:49239ed32c57e1f7a54c8fd351ac463b889816bf3d61b22464b95244a0997977`.
+
+Proof boundary: the numerical lane is falsification evidence on a finite
+Galerkin NS system, not a continuum proof.  The exact path theorem remains
+conditional on each scalar step being produced by an actual high-strain event
+and critical-shell renewal on one common PDE history.  It closes only an
+eventually-pure high-strain tail; mixed genuine-owner recurrence and global
+Navier--Stokes regularity remain open.
 
 ---
 

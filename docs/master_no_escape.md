@@ -2412,3 +2412,15 @@ breaks the epoch and must be handled by its own physical law.
 
 
 This refinement was certified on exact SHA `774c702a692e67f5ccdf3a7028c16e437a0c5cc1` by dedicated high-strain run `31460525711` and full causal integration run `31460525687`.  It is a path telescope through the actual viscous reservoir, not an additive reset for normalized `D_V`.
+
+The trailing audit preserves this continuum argument but repairs its numerical
+boundary.  Red run `31461890777` showed `6/6` failures caused by dimensional
+unit-floor tolerances and ratio underflow.  Exact source repair
+`422ab677e635159d82720a2af60f7900e7b3be9f` replaces them with native
+dimensionless ratios and log geometry.  Exact PDE head
+`70bb2e4a9ec5b7d8826dc1016da5157cbe5fb1ac` passed audit run `31462711590`:
+`801` tests, `200,000` epochs over more than `400` frequency decades, all direct
+dependencies, and a three-resolution actual Fourier--Galerkin Navier--Stokes
+route through measured `K_N`, `D_N`, `G_*` and critical ancestor-shell
+dissipation.  This strengthens the executable certificate; it does not enlarge
+the continuum conclusion beyond eventually-pure high-strain recurrence.
