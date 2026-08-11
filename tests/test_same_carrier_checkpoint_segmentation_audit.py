@@ -22,18 +22,35 @@ from src.nn_critical_heat_carrier_seed import LOW_STRAIN_ACTION
 def _segment(
     *,
     amplitude: float = 4.0,
+    terminal_time: float = 2.0,
     elapsed: tuple[float, ...] = (0.0, 1.0),
     strain: tuple[float, ...] = (0.0, 0.0),
     residual: tuple[float, ...] = (0.0, 0.0),
     hh: tuple[float, ...] = (0.0, 0.0),
+    state_tokens: tuple[str, ...] | None = None,
 ):
-    return same_carrier.SameCarrierMonitorSegment(
+    provenance = same_carrier.SameCarrierProvenance(
+        event_id="event",
         carrier_id="event-Q",
-        terminal_amplitude=amplitude,
+        terminal_dual_id="terminal-dual",
+        trajectory_id="actual-NS-trajectory",
+        terminal_state_token="terminal-state",
+        terminal_time=terminal_time,
+        carrier_frequency=2.0,
+        scaled_lifetime=1.0,
+        terminal_coefficient=complex(amplitude),
+    )
+    tokens = state_tokens or tuple(
+        "terminal-state" if j == 0 and elapsed[0] == 0.0 else f"state-{j}"
+        for j in range(len(elapsed))
+    )
+    return same_carrier.SameCarrierMonitorSegment(
+        provenance=provenance,
+        state_tokens=tokens,
         elapsed_times=elapsed,
         strain_action=strain,
-        residual_impulse_abs=residual,
-        hh_impulse_abs=hh,
+        residual_impulse=tuple(complex(x) for x in residual),
+        hh_impulse=tuple(complex(x) for x in hh),
     )
 
 
@@ -57,8 +74,14 @@ def test_nonzero_cumulative_impulse_at_event_is_not_erased_by_unit_floor():
 
 
 def test_native_time_gap_cannot_be_hidden_when_checkpoint_rows_are_joined():
-    left = _segment(elapsed=(0.0, 1.0e-20))
-    right = _segment(elapsed=(2.0e-20, 3.0e-20))
+    left = _segment(
+        elapsed=(0.0, 1.0e-20),
+        state_tokens=("terminal-state", "shared-boundary"),
+    )
+    right = _segment(
+        elapsed=(2.0e-20, 3.0e-20),
+        state_tokens=("shared-boundary", "later-state"),
+    )
 
     with pytest.raises(TypeError, match="elapsed time|time token|discontinuity"):
         same_carrier.join_same_carrier_segments((left, right))
@@ -66,8 +89,16 @@ def test_native_time_gap_cannot_be_hidden_when_checkpoint_rows_are_joined():
 
 def test_tiny_terminal_coefficient_cannot_be_rebound_by_order_one_factor():
     amplitude = 1.0e-30
-    left = _segment(amplitude=amplitude, elapsed=(0.0, 1.0))
-    right = _segment(amplitude=2.0 * amplitude, elapsed=(1.0, 2.0))
+    left = _segment(
+        amplitude=amplitude,
+        elapsed=(0.0, 1.0),
+        state_tokens=("terminal-state", "shared-boundary"),
+    )
+    right = _segment(
+        amplitude=2.0 * amplitude,
+        elapsed=(1.0, 2.0),
+        state_tokens=("shared-boundary", "later-state"),
+    )
 
     with pytest.raises(TypeError, match="terminal coefficient|amplitude|reset"):
         same_carrier.join_same_carrier_segments((left, right))
@@ -91,13 +122,24 @@ def test_distinct_native_debuts_are_not_fused_into_an_exact_tie():
 
 def test_tiny_coefficient_scale_retains_strict_accumulation_margin():
     amplitude = 1.0e-30
+    segment = _segment(
+        amplitude=amplitude,
+        elapsed=(0.0, 1.3),
+        strain=(0.0, 0.5 * LOW_STRAIN_ACTION),
+        residual=(0.0, 0.5 * RESIDUAL_FRACTION * amplitude),
+        hh=(0.0, 0.5 * GENERATED_FRACTION * amplitude),
+        state_tokens=("terminal-state", "accumulation-state"),
+    )
     out = same_carrier.interior_checkpoint_accumulation_outcome(
         event_time=2.0,
         accumulation_time=0.7,
-        terminal_amplitude=amplitude,
-        strain_action_limit=0.5 * LOW_STRAIN_ACTION,
-        residual_impulse_abs_limit=0.5 * RESIDUAL_FRACTION * amplitude,
-        hh_impulse_abs_limit=0.5 * GENERATED_FRACTION * amplitude,
+        prelimit_certificate=same_carrier.SameCarrierPrelimitCertificate((segment,)),
+        smooth_extension_token=same_carrier.SmoothPDEExtensionToken(
+            trajectory_id="actual-NS-trajectory",
+            state_token="accumulation-state",
+            physical_time=0.7,
+            open_interval=(0.6, 0.8),
+        ),
     )
 
     assert out["classification"] == "same_carrier_extends_across_interior_checkpoint_accumulation"
@@ -105,19 +147,26 @@ def test_tiny_coefficient_scale_retains_strict_accumulation_margin():
 
 
 def test_above_threshold_limit_cannot_be_declared_first_hit_at_accumulation():
+    segment = _segment(
+        elapsed=(0.0, 1.3),
+        strain=(0.0, 1.1 * LOW_STRAIN_ACTION),
+        state_tokens=("terminal-state", "accumulation-state"),
+    )
     with pytest.raises(ValueError, match="earlier|first|no-hit|continuity|overshoot"):
         same_carrier.interior_checkpoint_accumulation_outcome(
             event_time=2.0,
             accumulation_time=0.7,
-            terminal_amplitude=4.0,
-            strain_action_limit=1.1 * LOW_STRAIN_ACTION,
-            residual_impulse_abs_limit=0.0,
-            hh_impulse_abs_limit=0.0,
+            prelimit_certificate=same_carrier.SameCarrierPrelimitCertificate((segment,)),
+            smooth_extension_token=None,
         )
 
 
 def test_positive_remaining_native_time_is_not_rounded_to_t0():
-    segment = _segment(elapsed=(0.0, 5.0e-21))
+    segment = _segment(
+        terminal_time=1.0e-20,
+        elapsed=(0.0, 5.0e-21),
+        state_tokens=("terminal-state", "interior-state"),
+    )
     out = same_carrier.maximal_same_carrier_outcome((segment,), event_time=1.0e-20)
 
     assert out["classification"] == "same_carrier_event_free_continuation"

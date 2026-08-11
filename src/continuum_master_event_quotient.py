@@ -10,9 +10,12 @@ from pathlib import Path
 from typing import Iterable, Sequence
 
 from src.high_strain_resolved_ancestor import TRANSPORTER_RADIUS
-from src.full_natural_checkpoint_quotient import FULL_NATURAL_CHECKPOINT
+from src.full_natural_checkpoint_quotient import FULL_NATURAL_CHECKPOINT, FullNaturalCheckpoint
 from src.full_natural_service_corridor_quotient import FULL_NATURAL_SERVICE_WITNESS
-from src.same_carrier_checkpoint_segmentation_quotient import checkpoint_continuation_policy
+from src.same_carrier_checkpoint_segmentation_quotient import (
+    SameCarrierProvenance,
+    checkpoint_continuation_policy,
+)
 from src.common_slice_coefficient_registration import (
     HH_COEFFICIENT_OBSTRUCTION,
     ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
@@ -655,13 +658,42 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         checkpoint_fail += 1
         raise AssertionError("legacy full-natural survivor disposition crossed into RecursiveEventState")
 
-    checkpoint_record = {
+    forged_checkpoint_record = {
         "checkpoint_kind": FULL_NATURAL_CHECKPOINT,
         "physical_event_created": False,
         "causal_charge_created": False,
         "recursion_edges_added": 0,
     }
-    policy = checkpoint_continuation_policy(checkpoint_record)
+    try:
+        checkpoint_continuation_policy(forged_checkpoint_record)
+    except TypeError:
+        pass
+    else:
+        segmentation_fail += 1
+        raise AssertionError("dictionary flags forged same-carrier checkpoint authority")
+
+    checkpoint_record = FullNaturalCheckpoint(
+        terminal_time=2.0,
+        physical_time_drop=0.25,
+        parent_shell_frequency=8.0 / 3.0,
+        parent_shell_critical_mass_lower=2.0,
+        corridor_frequency=2.0,
+        scaled_lifetime=1.0,
+        endpoint_carrier_critical_mass_lower=2.0,
+        endpoint_shell_candidates=(2.0, 4.0),
+    )
+    provenance = SameCarrierProvenance(
+        event_id="master-stress-event",
+        carrier_id="master-stress-Q",
+        terminal_dual_id="master-stress-dual",
+        trajectory_id="master-stress-NS-trajectory",
+        terminal_state_token="master-stress-terminal-state",
+        terminal_time=2.0,
+        carrier_frequency=2.0,
+        scaled_lifetime=1.0,
+        terminal_coefficient=1.0 + 0.0j,
+    )
+    policy = checkpoint_continuation_policy(checkpoint_record, provenance=provenance)
     if bool(policy["carrier_replacement_authorized"]) or bool(policy["monitor_reset_authorized"]):
         segmentation_fail += 1
         raise AssertionError("full-natural checkpoint authorized a same-carrier restart/reset")
@@ -671,7 +703,7 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         {"request_monitor_reset": True},
     ):
         try:
-            checkpoint_continuation_policy(checkpoint_record, **request)
+            checkpoint_continuation_policy(checkpoint_record, provenance=provenance, **request)
         except TypeError:
             pass
         else:

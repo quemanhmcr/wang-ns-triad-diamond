@@ -1,170 +1,186 @@
 # Same-carrier checkpoint segmentation quotient
 
-## Status
+## Status and proof boundary
 
-Candidate theorem.  Serious execution is reserved for GitHub Actions.
+Audit repair candidate. Serious execution, stress, and Navier--Stokes numerical
+falsification are reserved for GitHub Actions.
 
-## 1. A natural window is a service horizon, not a carrier lifetime
+This lemma concerns one already-defined smooth event-anchored carrier on one
+pre-singular PDE trajectory. It does not construct such a trajectory beyond its
+smooth interval, does not terminate genuine owner recurrence, and does not prove
+3D Navier--Stokes regularity.
 
-Let a genuine physical event at time `t` anchor the smooth carrier
+## 1. The object being segmented is a physical path, not an array label
 
-\[
-w(s)=Q_A(s,D)u(s)
-\]
+Fix one genuine physical event at terminal time `t`, one smooth carrier `Q_A`, one
+terminal dual, and the actual Navier--Stokes trajectory on which they are followed.
+The audit representation binds all of
 
-and its terminal dual.  The exact outer-role and adjoint equations exist on the
-smooth pre-singular interval on which this fixed carrier is followed.  They do
-not contain a clause saying that `Q_A` ceases to exist after `cA^{-2}`.
+- physical event token;
+- carrier token and frequency `A`;
+- terminal-dual token and complex terminal coefficient `z(t)`;
+- scaled lifetime `c`;
+- terminal PDE state token and trajectory token.
 
-The natural interval `cA^-2` is important because it gives a scale-independent
-service theorem.  It is **not** a physical expiry time for the carrier.
+These data form one `SameCarrierProvenance`. Equality is exact. A repeated string
+such as `"fixed-Q"`, or dimensional quantities that happen to be numerically
+close, cannot prove that two rows belong to the same carrier.
 
-Therefore, if no physical first stop occurs at the natural endpoint, the canonical
-continuation is not
-
-`checkpoint -> hard-shell rereading -> new carrier`.
-
-It is
-
-`same event-anchored smooth carrier -> continue`.
-
-Hard-shell energy observed at the checkpoint remains a legitimate state sidecar.
-It does not replace the carrier in the causal/event search.
-
-## 2. The native monitors remain cumulative from one physical event
-
-For the fixed terminal event and fixed dual, the exact coefficient identity is
+For elapsed backward time `ell=t-s`, the cumulative observables are
 
 \[
-z(t)=z(s)+I_{HH}[s,t]+I_R[s,t].
+K_A[s,t],\qquad I_R[s,t],\qquad I_{HH}[s,t].
 \]
 
-The low--low moat is controlled by
+`K_A` is nonnegative and monotone. The coefficient impulses are stored as their
+actual complex cumulative paths. Their magnitudes are derived only when the
+closed faces
 
 \[
-K_A[s,t]=\int_s^t\|\operatorname{sym}A_A(\tau)\|_{op}\,d\tau.
+|I_R|=|z(t)|/4,\qquad |I_{HH}|=|z(t)|/2
 \]
 
-The first-stop faces are therefore read from
+are located. This retains phase cancellation and prevents segment magnitudes from
+being added or promoted to work.
+
+## 2. Exact finite-segmentation lemma
+
+Let a finite family of segments be restrictions of the preceding path. At every
+shared boundary require exact equality of
+
+- the complete carrier provenance;
+- the PDE state token;
+- native elapsed time;
+- cumulative strain action;
+- both cumulative complex impulses.
+
+The first row must be the terminal PDE state at elapsed time exactly zero, with
+all three cumulative monitors exactly zero. Concatenation then deletes one copy of
+each shared boundary and reconstructs the original path identically. Consequently
+inserting or deleting finitely many observer cuts leaves unchanged
+
+- the first native elapsed time;
+- the complete exact joint first-stop set;
+- whether coefficient-energy reentry is required.
+
+This is a restriction/gluing identity. It is not evidence that independently
+generated arrays belong to one PDE solution. The provenance and boundary tokens
+are the hypothesis that supplies that fact.
+
+## 3. Why complex phase belongs in the certificate
+
+Linear interpolation of endpoint magnitudes is not the magnitude of a linearly
+interpolated complex impulse. For example, the complex chord
 
 \[
-K_A[s,t],\qquad |I_R[s,t]|,\qquad |I_{HH}[s,t]|,
+I(\theta)=0.5-2.5\theta
 \]
 
-with the same terminal amplitude `|z(t)|` in the coefficient thresholds.
+first reaches `|I|=1` at `theta=0.6`; interpolating the endpoint magnitudes
+`0.5 -> 2` would incorrectly report `theta=1/3`.
 
-These quantities must **not** be reset when an analysis horizon is crossed.
-
-There is also an important asymmetry between them.  `K_A` is a positive integral
-and hence monotone as the backward interval grows.  The coefficient impulses are
-complex cumulative integrals.  Their magnitudes are continuous but can decrease
-because of phase cancellation.  Thus
+The regression implementation therefore solves the quadratic circle intersection
 
 \[
-|I[s_2,t]|\ne |I[s_2,s_1]|+|I[s_1,t]|
+|I_0+\theta(I_1-I_0)|^2=\lambda^2
 \]
 
-in general.  A correct checkpoint quotient preserves the cumulative complex/absolute
-observable; it never adds per-segment magnitudes and never treats them as work.
+on every complex chord. The analytic theorem remains a statement about the actual
+continuous/absolutely-continuous complex impulse, not about this discretization.
+An optional numerical tie tolerance is explicitly regression-only; the default
+exact first-stop set does not merge distinct native debut times.
 
-## 3. Inserting checkpoints cannot move the first physical stop
+## 4. A natural service window is not an arbitrary observer cut
 
-Take any finite family of analysis checkpoints inside one fixed-carrier interval.
-Each segment stores the *same cumulative paths from `t`*.  At a shared boundary,
-physical elapsed time and all cumulative monitor values agree.
-
-Concatenating the segments therefore reconstructs exactly the original path.
-The existing measurable first-exit theorem then gives the same
-
-- first physical time;
-- complete exact-tie first-stop set;
-- coefficient-energy-reentry requirement
-
-with or without the inserted checkpoints.
-
-A reset of the terminal amplitude, carrier identity, strain action, or coefficient
-impulse baseline at a no-event checkpoint is rejected as a type error.
-
-## 4. Re-anchoring the same carrier does not erase accumulated physics
-
-The already-certified smooth material-carrier relay proves that common affine/Kelvin
-re-anchoring is composition of the same gauge.  Its intrinsic material coordinate
-is unchanged, and the theorem explicitly states that re-anchoring does not erase
-accumulated nonaffine/strain action.
-
-The present theorem extends that rule to natural-horizon checkpoints.  One may
-change the local coordinate chart used to describe the carrier.  One may inspect
-hard-shell energy at the checkpoint.  Neither operation is a physical interaction,
-so neither operation creates permission to restart the causal filtration.
-
-Hard interaction roles are created only when actual work/another named physical
-stop makes them event-anchored again.
-
-## 5. Interior checkpoint Zeno is not a PDE endpoint
-
-Suppose an observer inserts infinitely many no-event horizons
+For the fixed carrier, `A` and `c` do not change. Every genuine full-natural
+window therefore has the same positive native duration
 
 \[
-t=t_0>t_1>t_2>\cdots\downarrow t_\infty>0
+T_A=cA^{-2}>0.
 \]
 
-while following one fixed event-anchored carrier.
-
-On a smooth pre-singular interval, the native cumulative observables are continuous
-(or absolutely continuous).  At `t_infty` exactly two possibilities remain.
-
-If a closed face is attained,
+Starting from a finite event time `t`, at most
 
 \[
-K_A=1/30,
-\qquad |I_R|=|z(t)|/4,
-\qquad |I_{HH}|=|z(t)|/2,
+\left\lfloor t/T_A\right\rfloor
 \]
 
-then `t_infty` is the existing first-stop face.  Coefficient faces still only locate
-`Q^2` physical-energy reentry; their magnitudes are not work.
+complete fixed-carrier natural windows fit before `t=0`. Hence genuine
+fixed-carrier natural windows cannot have a Zeno accumulation at a positive
+physical time.
 
-If every face has strict margin at `t_infty`, continuity gives an open interval
-past `t_infty` on which the same carrier remains admissible.  Hence the checkpoint
-accumulation was not a maximal PDE obstruction at all.
+An analyst may, of course, insert infinitely many plotting or observation cuts
+which accumulate in the interior. Those cuts have no service-window status and
+cannot each be assigned a fictitious duration `c A_j^-2`. Likewise, shell scales
+read as state sidecars at those cuts do not become a carrier-scale lineage.
 
-If the maximal no-hit continuation reaches `t=0`, the initial boundary absorbs.
+This distinction removes the apparent contradiction cleanly:
 
-Thus checkpoint count and a scale sequence obtained by repeatedly re-hardening at
-those checkpoints do not define another physical escape mechanism.
+- fixed natural windows use their actual positive PDE durations;
+- arbitrary cuts use no physical duration or causal charge at all.
 
-## 6. What happens to the apparent UV checkpoint path
+## 5. Interior accumulation is conditional on the actual path
 
-The earlier checkpoint theorem correctly refused to call the two-shell cover
-ratio `3/2` physical high-tail progress.  The present theorem makes the stronger
-continuation statement: without a new physical event, that hard-shell reading is
-not the next causal carrier either.
+Endpoint limit scalars alone cannot establish a first stop at an accumulation.
+The implementation requires a typed prelimit certificate containing the actual
+cumulative path from the terminal event to the proposed limit.
 
-Therefore a sequence such as
+There are then three cases.
 
-\[
-M_{j+1}=\frac32M_j
-\]
+1. If a closed face was crossed earlier, the premise “no-hit checkpoints
+   accumulate here” is false and is rejected.
+2. If the first face occurs exactly at the endpoint, that endpoint is the existing
+   first stop. Coefficient faces still require physical `Q^2` energy reentry and
+   are not work.
+3. If no face occurs and the endpoint is interior, continuation is asserted only
+   with a matching token certifying that the same PDE trajectory is smooth on an
+   open interval around the endpoint. Continuity then preserves the strict margins
+   on a smaller open interval.
 
-obtained only by checkpoint rereading is an observer-generated **state-reading
-sequence**, not a physical lineage.  It may be useful diagnostically, but its
-finite parabolic-time sum cannot be used as a master escape branch.
+Values strictly above a threshold cannot be called a first contact at the limit:
+continuity would have produced an earlier contact. A `max(1,...)` absolute
+tolerance is forbidden because it destroys this statement at small native scales.
 
-This does not remove real UV physics.  When actual tail dissipation/work meets the
-separately certified high-tail hypotheses, that theorem creates a genuine physical
-high-frequency event with its own provenance.  The present quotient only removes
-UV motion manufactured by no-event re-hardening.
+At `t=0` the initial boundary absorbs only when cumulative native elapsed time
+equals the full event time exactly. Positive remaining native time is not rounded
+away by an observer-unit floor.
 
-## 7. Remaining frontier
+## 6. Typed checkpoint policy
 
-After this quotient, a no-event carrier continuation has only the native outcomes:
+A few dictionary flags such as `physical_event_created=False` do not constitute a
+checkpoint theorem. The continuation policy accepts an actual
+`FullNaturalCheckpoint` and verifies exact agreement with the carrier's event time,
+frequency `A`, and lifetime `c`.
 
-- a genuine strain/deformation stop;
-- a coefficient obstruction followed by physical-energy reentry;
-- another named physical stop from the fixed-carrier filtration;
-- or absorbing `t=0`.
+The checkpoint's hard-shell readings are state sidecars. They cannot
 
-The unresolved global problem therefore returns to **genuine physical owner
-recurrence**.  Those events must still be telescoped through their native work,
-source/service, reuse, `Xi`, or genuinely global resource laws.  No global
-Navier--Stokes regularity conclusion is asserted here.
+- replace the event-anchored carrier or terminal dual;
+- reset the terminal coefficient or cumulative monitors;
+- create recursion depth, causal charge, or a physical scale lineage.
+
+Actual high-frequency dissipation/work remains a genuine UV route whenever its
+independent physical hypotheses hold. The quotient removes only motion created by
+observer rereading.
+
+## 7. Numerical falsification lane
+
+The audit lane evolves the unforced 3D incompressible Fourier--Galerkin
+Navier--Stokes system with Leray projection, viscosity, `2/3` dealiasing, and RK4.
+On one and the same evolved trajectory it fixes `Q_A` and a terminal dual, forms
+the cumulative complex nonlinear pieces and the resolved strain action, then
+compares whole-path and multiply segmented first stops.
+
+The experiment must also verify incompressibility, the global energy balance, the
+carrier `Q^2` balance, the complex coefficient/Duhamel residual, low--low moat,
+nonzero nonlinear activity, partition invariance, and resolution refinement. This
+is numerical falsification evidence, not a continuum proof.
+
+## 8. Remaining frontier
+
+After exact same-path segmentation is removed, a free branch may end only through
+an actual named physical stop, `t=0`, or continuation of the same smooth PDE path.
+The global frontier is still recurrence of genuine physical owners. Those events
+must telescope through the native work, source/service, reuse, `Xi`, or true global
+resource laws they actually possess.
+
+No artificial norm, synthetic scale tax, or checkpoint count is introduced.
