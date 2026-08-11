@@ -137,7 +137,8 @@ def test_concentration_coordinates_cannot_be_promoted_to_causal_entropy():
 def test_certificate_states_exact_remaining_escape_dichotomy_without_regularity_claim():
     cert = theorem_certificate()
     assert cert["status"] == STATUS
-    assert "infinitely many named non-free physical owner events (first-hit cause sets or work/service/reuse owners)" in cert["infinite_escape_dichotomy"]
+    assert "same-corridor full-natural service witnesses are quotiented" in cert["infinite_escape_dichotomy"]
+    assert "service owners not generated merely by a completed free corridor" in cert["infinite_escape_dichotomy"]
     assert "unbounded-frequency" in cert["infinite_escape_dichotomy"]
     assert "not a global no-escape" in cert["scope"]
     assert "not causal Shannon/Renyi action" in cert["diagnostic_separation"]
@@ -184,4 +185,22 @@ def test_actual_energy_reentry_adapter_creates_only_physical_owner_bundle():
                 "coefficient_impulse_used_as_physical_work": True,
                 "observer_partition_motion_charged_as_physics": False,
             },
+        )
+
+
+def test_full_natural_service_witness_cannot_be_promoted_to_separate_owner_event():
+    from src.full_natural_service_corridor_quotient import FULL_NATURAL_SERVICE_WITNESS
+
+    with pytest.raises(TypeError, match="same-corridor physical witness"):
+        RecursiveEventState(
+            0.5,
+            4.0,
+            "completed full-natural service law",
+            (FULL_NATURAL_SERVICE_WITNESS,),
+        )
+    with pytest.raises(TypeError, match="same-corridor physical witness"):
+        canonical_owner_bundle(
+            "completed full-natural service law",
+            1.0,
+            (FULL_NATURAL_SERVICE_WITNESS,),
         )

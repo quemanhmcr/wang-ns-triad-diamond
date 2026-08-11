@@ -1,6 +1,7 @@
 import math
 
 import numpy as np
+import pytest
 
 from src.common_slice_coefficient_registration import (
     HH_COEFFICIENT_OBSTRUCTION,
@@ -13,6 +14,7 @@ from src.high_strain_critical_carrier_reentry import (
     pushforward_critical_dissipation_law,
     theorem_certificate,
 )
+from src.full_natural_service_corridor_quotient import endpoint_hard_shell_cover_from_full_natural_outcome
 from src.high_strain_resolved_ancestor import high_strain_ancestor_mass_threshold
 from src.nn_critical_heat_carrier_seed import renewal_carrier_critical_mass_lower
 
@@ -96,6 +98,13 @@ def test_full_generic_critical_corridor_creates_own_scale_service_without_nn():
     assert out["integrated_bounded_heat_service_lower"] > 0
     assert out["nn_seed_required"] is False
     assert out["materiality_assigned"] == "only_after_service_via_exact_Moyal_OO_ON_NN"
+    assert out["service_same_corridor_witness"] is True
+    assert out["service_adds_recursion_depth"] is False
+    assert out["physical_time_drop"] == pytest.approx(T)
+    assert out["corridor_endpoint_time"] == pytest.approx(T)
+    cover = endpoint_hard_shell_cover_from_full_natural_outcome(out, parent_shell_frequency=A / 0.75)
+    assert cover["candidate_ratios_to_parent"] == pytest.approx((0.75, 1.5))
+    assert cover["guaranteed_max_hard_shell_critical_mass_lower"] == pytest.approx((2.0/3.0) * out["endpoint_carrier_critical_mass_lower"])
 
 
 def test_high_strain_or_hh_hit_stays_named_recursive_not_service():

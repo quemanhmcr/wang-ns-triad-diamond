@@ -815,7 +815,7 @@ def theorem_certificate() -> dict[str, object]:
         "forbidden_identifications": (
             "aggregate pressure mu_V is not a canonical renewal state; pressure H2 is not a causal child-energy probability; fresh-scale H_inf/H2 are not causal child-energy probabilities; coherent-cell entropy is not a canonical fresh renewal fate; high-frequency SGS dissipation is not resolved D_V"
         ),
-        "master_rule": "all D_V/shell/source/service outputs remain recursive scale-critical owners; no additive finite reset is created",
+        "master_rule": "actual D_V, source and hard-shell outputs remain recursive physical suppliers; an own-scale service lower generated only by a completed full-natural shell corridor is attached to that same corridor as a zero-depth witness, while independent source-service/reuse events retain their physical ownership; no additive finite reset is created",
     }
 
 

@@ -1,0 +1,63 @@
+name: Full natural service corridor quotient
+
+on:
+  push:
+    paths:
+      - 'src/full_natural_service_corridor_quotient.py'
+      - 'tests/test_full_natural_service_corridor_quotient.py'
+      - 'docs/full_natural_service_corridor_quotient.md'
+      - '.github/workflows/full-natural-service-corridor-quotient.yml'
+      - 'src/critical_shell_service_reentry.py'
+      - 'src/high_strain_critical_carrier_reentry.py'
+      - 'src/critical_annular_carrier_service_reentry.py'
+      - 'src/heat_edge_material_ownership.py'
+      - 'src/continuum_master_event_quotient.py'
+      - 'src/objective_source_routing_compiler.py'
+      - 'tests/test_critical_shell_service_reentry.py'
+      - 'tests/test_high_strain_critical_carrier_reentry.py'
+      - 'tests/test_continuum_master_event_quotient.py'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Full-natural service corridor quotient stress
+        run: python -m src.full_natural_service_corridor_quotient --samples 50000 --outdir results-full-natural-service-corridor-quotient
+      - name: Generic critical-shell dependency
+        run: python -m src.critical_shell_service_reentry --samples 50000 --outdir results-critical-shell-service-reentry
+      - name: High-strain critical-carrier dependency
+        run: python -m src.high_strain_critical_carrier_reentry --samples 50000 --outdir results-high-strain-critical-carrier-reentry
+      - name: Annular service dependency
+        run: python -m src.critical_annular_carrier_service_reentry --samples 50000 --outdir results-critical-annular-carrier-service-reentry
+      - name: Material edge ownership dependency
+        run: python -m src.heat_edge_material_ownership --samples 50000 --outdir results-heat-edge-material-ownership
+      - name: Continuum master witness barrier
+        run: python -m src.continuum_master_event_quotient --samples 50000 --outdir results-continuum-master-event-quotient
+      - name: Objective-source compiler service semantics
+        run: python -m src.objective_source_routing_compiler --samples 50000 --outdir results-objective-source-routing-compiler
+      - run: cat results-full-natural-service-corridor-quotient/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: full-natural-service-corridor-quotient-results
+          path: |
+            results-full-natural-service-corridor-quotient/
+            results-critical-shell-service-reentry/
+            results-high-strain-critical-carrier-reentry/
+            results-critical-annular-carrier-service-reentry/
+            results-heat-edge-material-ownership/
+            results-continuum-master-event-quotient/
+            results-objective-source-routing-compiler/

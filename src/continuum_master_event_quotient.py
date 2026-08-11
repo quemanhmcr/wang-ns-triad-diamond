@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Iterable, Sequence
 
 from src.high_strain_resolved_ancestor import TRANSPORTER_RADIUS
+from src.full_natural_service_corridor_quotient import FULL_NATURAL_SERVICE_WITNESS
 from src.common_slice_coefficient_registration import (
     HH_COEFFICIENT_OBSTRUCTION,
     ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION,
@@ -27,6 +28,8 @@ COEFFICIENT_OBSTRUCTION_LABELS = frozenset(
     {ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION, HH_COEFFICIENT_OBSTRUCTION}
 )
 
+NON_EVENT_CORRIDOR_WITNESS_LABELS = frozenset({FULL_NATURAL_SERVICE_WITNESS})
+
 
 def require_routed_physical_owner_labels(labels: Iterable[str]) -> tuple[str, ...]:
     """Reject Duhamel coefficient locators at the canonical physical-owner boundary.
@@ -42,6 +45,12 @@ def require_routed_physical_owner_labels(labels: Iterable[str]) -> tuple[str, ..
         raise TypeError(
             "unrouted coefficient obstruction cannot enter the canonical physical owner state; resolve actual Q^2 energy/work first: "
             + ", ".join(bad)
+        )
+    witness_bad = tuple(sorted(set(out).intersection(NON_EVENT_CORRIDOR_WITNESS_LABELS)))
+    if witness_bad:
+        raise TypeError(
+            "full-natural own-scale service is a same-corridor physical witness, not a separate recursive owner event: "
+            + ", ".join(witness_bad)
         )
     return out
 
@@ -252,7 +261,7 @@ def supplier_scale_certificate(supplier: SupplierKind) -> SupplierScaleCertifica
     if supplier is SupplierKind.MATERIAL_REUSE:
         return SupplierScaleCertificate(
             supplier, None, None, False, False, "no_scale_progress_without_external_epoch_geometry",
-            "service/reuse is physical ancestry routing; signed-good scale progress must be supplied independently",
+            "full-natural own-scale service is a same-corridor witness; genuinely independent material reuse or source-service ownership is physical ancestry routing. No scale progress is inferred without a separate PDE theorem",
         )
     if supplier is SupplierKind.HH_REGENERATION:
         return SupplierScaleCertificate(
@@ -485,14 +494,14 @@ def master_escape_dichotomy() -> dict[str, str]:
     """Analytic infinite-path consequence of the quotient architecture."""
     return {
         "statement": (
-            "after zero-charge relays are quotiented, any infinite recursive path avoiding t=0 must either contain infinitely many named non-free physical owner events (first-hit cause sets or work/service/reuse owners) "
+            "after zero-charge relays and same-corridor full-natural service witnesses are quotiented, any infinite recursive path avoiding t=0 must either contain infinitely many named non-free physical owner events (first-hit/work/source/reuse owners or service owners not generated merely by a completed free corridor) "
             "or have an unbounded-frequency tail of consecutive full-natural survivors"
         ),
         "proof": (
             "if named non-free physical owner events are finite, the tail is all free full-natural survivors; if their frequencies were bounded by Mbar, each tail edge would consume at least c/Mbar^2 physical time, forcing t=0 after finitely many edges"
         ),
         "remaining_physics": (
-            "named-owner recurrence must telescope through actual transfer/work, service/reuse, or genuinely bounded resources; UV survivor escape must be handled by physical scale/work routing such as the certified high-tail locality+natural-window seam"
+            "named-owner recurrence must telescope through actual transfer/work, genuine source/service/reuse events, or genuinely bounded resources; full-natural own-scale service itself is already attached to the free corridor; UV survivor escape must be handled by physical scale/work routing such as the certified high-tail locality+natural-window seam"
         ),
     }
 
@@ -513,6 +522,9 @@ def theorem_certificate() -> dict[str, object]:
         "coefficient_obstruction_barrier": (
             "Duhamel HH/interface coefficient threshold hits are first-stop locators, not physical owners; the canonical event state and owner bundle reject those labels until actual Q^2 energy/work reentry returns a physical inheritance, high-strain, HH-work, relink or strain owner"
         ),
+        "full_natural_service_barrier": (
+            "full_natural_own_scale_service is a positive witness carried by the already-completed natural corridor, not a second recursive owner event; canonical owner states reject this classification label as an owner"
+        ),
         "universal_time_identity": "sum_j (t_j-t_(j+1)) = t_0-t_L on actual physical event times",
         "natural_survivor": "a free full-natural shell corridor at physical scale M consumes exactly c M^-2 backward time unless t=0 truncates it, in which case t=0 absorbs",
         "compact_scale_no_escape": (
@@ -527,7 +539,7 @@ def theorem_certificate() -> dict[str, object]:
             "there is no canonical scalar exchange rate between log scale, physical work, service/reuse and global resources; the natural master ledger is typed/direct-product. Physical time and actual log shell scale telescope kinematically, while transfer cost, causal reuse and each genuinely global resource telescope only on their own physical laws"
         ),
         "service_semantics": (
-            "own-scale service is a recursive state/epoch entrance, not an additive globally bounded currency; its continuation is handled by material reservoir/reuse/service theorems"
+            "own-scale service produced by a completed full-natural shell corridor is a same-interval physical witness and adds zero recursion depth; material rereading of that same law is also a witness relay. Independent source/service/reuse events remain physical owners. No service observable is promoted to an additive globally bounded currency"
         ),
         "diagnostic_separation": (
             "fresh-scale H_inf/H2 and high-tail scale/time concentration coordinates remain conjugate lower-bound diagnostics; they are not causal Shannon/Renyi action and cannot be inserted into the causal ledger"
@@ -548,6 +560,7 @@ class QuotientStress:
     bounded_scale_boundary_failures: int
     supplier_scale_failures: int
     coefficient_obstruction_barrier_failures: int
+    service_witness_barrier_failures: int
     maximum_relay_owner_count: int
     minimum_uv_time_gap_to_naive_infinite_sum: float
 
@@ -555,7 +568,7 @@ class QuotientStress:
 def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
     rng = random.Random(seed)
     wom = wtime = wscale = 0.0
-    boundary_fail = supplier_fail = obstruction_fail = 0
+    boundary_fail = supplier_fail = obstruction_fail = service_witness_fail = 0
     maxowners = 0
     uv_gap = math.inf
 
@@ -578,6 +591,18 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
     else:
         obstruction_fail += 1
         raise AssertionError("raw coefficient obstruction crossed the canonical physical-owner boundary")
+
+    try:
+        canonical_owner_bundle(
+            "completed natural-corridor service witness",
+            1.0,
+            (FULL_NATURAL_SERVICE_WITNESS,),
+        )
+    except TypeError:
+        pass
+    else:
+        service_witness_fail += 1
+        raise AssertionError("full-natural service witness crossed the canonical recursive-owner boundary")
 
     routed = owner_bundle_from_energy_reentry(
         "actual positive q^2-weighted HH work",
@@ -657,7 +682,7 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         if not (uv > first and math.isfinite(uv)):
             raise AssertionError("UV geometric natural-time obstruction disappeared")
 
-    return QuotientStress(samples, wom, wtime, wscale, boundary_fail, supplier_fail, obstruction_fail, maxowners, uv_gap)
+    return QuotientStress(samples, wom, wtime, wscale, boundary_fail, supplier_fail, obstruction_fail, service_witness_fail, maxowners, uv_gap)
 
 
 def main() -> None:
@@ -670,7 +695,7 @@ def main() -> None:
     cert = theorem_certificate()
     payload = {"certificate": cert, "stress": asdict(out)}
     (args.outdir / "continuum_master_event_quotient.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
-    md = f"""# Continuum master event quotient\n\nStatus: **{cert['status']}**.\n\nThe recursive state is now a physical event state, not a theorem-stack state: actual event time, supplied shell/carrier scale, named positive physical law, unsplit joint physical-owner set, and optional sidecars. Raw HH/interface coefficient obstructions remain outside this state until actual Q^2 energy/work reentry.  Same-law owner transformations are **zero-charge relays** and preserve one unsplit physical mass.  More general certified witness relays may change observable and units---for example actual pressure-pair work can force a critical shell mass---but they still create no second causal charge.  Inserting another theorem manifestation cannot manufacture causal entropy.\n\nThere is no synthetic master clock.  For actual backward event times, exactly\n\n`sum_j (t_j-t_(j+1)) = t_0-t_L`.\n\nOn a free full-natural critical-shell survivor at scale `M`, the physical drop is exactly `c M^-2`, unless the interval reaches `t=0`, which is absorbing.  Consequently, if a survivor tail stays below `Mbar`, every free edge consumes at least `c/Mbar^2`, and at most\n\n`ceil(t_0 Mbar^2/c)`\n\nfull-survivor edges can occur before the initial boundary is forced.  Hence an infinite recursive path avoiding `t=0` has only two possibilities after relay quotient: **infinitely many named non-free physical owner events (first-hit cause sets or work/service/reuse owners)**, or an **unbounded-frequency tail of full-natural survivors**.\n\nThe second possibility is genuinely ultraviolet rather than a clock defect: for `M_j=M_0 r^j`, `r>1`,\n\n`sum_j c M_j^-2 = c M_0^-2/(1-r^-2) < infinity`.\n\nScale motion therefore remains supplier-specific.  Generated signed-good HH parents satisfy `3/5<N_next/N<5/8`; resolved-dissipation and resolved-pressure ancestors satisfy `N_next/N<=1/4`; hard tail satisfies `N_next/N>=2`; fresh SGS only supplies `N_next/N<=2` and **no directional progress**.  Generic shell service, material reuse and unresolved HH regeneration do not acquire synthetic scale progress.\n\nThe natural Bellman object is correspondingly typed, not scalar: physical time and actual log shell scale telescope kinematically; multiplicative physical-work cost, causal work-weighted reuse, `Xi`, and each genuinely globally bounded resource telescope only in their own native ledgers.  Own-scale service is an epoch/reentry state, not an additive reset.  Fresh/high-tail concentration `H_inf/H2` remains diagnostic and cannot be charged as causal entropy.\n\nStress: `{out.samples}` quotient/path states\n- worst zero-charge owner-mass residual: `{out.worst_owner_mass_residual:.3e}`\n- worst physical-time telescope residual: `{out.worst_time_telescope_residual:.3e}`\n- worst log-scale telescope residual: `{out.worst_scale_telescope_residual:.3e}`\n- bounded-scale boundary failures: `{out.bounded_scale_boundary_failures}`\n- supplier-scale failures: `{out.supplier_scale_failures}`\n- coefficient-obstruction barrier failures: `{out.coefficient_obstruction_barrier_failures}`\n- largest relayed joint-owner set sampled: `{out.maximum_relay_owner_count}`\n- minimum sampled UV tail-time beyond its first natural window: `{out.minimum_uv_time_gap_to_naive_infinite_sum:.3e}`\n\nThis theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes representation/clock recursion from the master and isolates the remaining physical task: telescope infinitely recurring named physical owner events, and close any UV-unbounded survivor route by the already certified or future physical UV work/service mechanisms.\n"""
+    md = f"""# Continuum master event quotient\n\nStatus: **{cert['status']}**.\n\nThe recursive state is now a physical event state, not a theorem-stack state: actual event time, supplied shell/carrier scale, named positive physical law, unsplit joint physical-owner set, and optional sidecars. Raw HH/interface coefficient obstructions remain outside this state until actual Q^2 energy/work reentry.  Likewise `full_natural_own_scale_service` is rejected as a separate owner classification because it is a positive witness on the already-completed natural corridor.  Same-law owner transformations are **zero-charge relays** and preserve one unsplit physical mass.  More general certified witness relays may change observable and units---for example actual pressure-pair work can force a critical shell mass---but they still create no second causal charge.  Inserting another theorem manifestation cannot manufacture causal entropy.\n\nThere is no synthetic master clock.  For actual backward event times, exactly\n\n`sum_j (t_j-t_(j+1)) = t_0-t_L`.\n\nOn a free full-natural critical-shell survivor at scale `M`, the physical drop is exactly `c M^-2`, unless the interval reaches `t=0`, which is absorbing.  Consequently, if a survivor tail stays below `Mbar`, every free edge consumes at least `c/Mbar^2`, and at most\n\n`ceil(t_0 Mbar^2/c)`\n\nfull-survivor edges can occur before the initial boundary is forced.  Hence after zero-charge relays and same-corridor full-natural service witnesses are quotiented, an infinite recursive path avoiding `t=0` has only two possibilities: **infinitely many genuine named non-free physical owner events**, or an **unbounded-frequency tail of full-natural survivors**.  The own-scale service produced by a completed full-natural corridor belongs to the second route as an attached witness; it is not a third event layer.\n\nThe second possibility is genuinely ultraviolet rather than a clock defect: for `M_j=M_0 r^j`, `r>1`,\n\n`sum_j c M_j^-2 = c M_0^-2/(1-r^-2) < infinity`.\n\nScale motion therefore remains supplier-specific.  Generated signed-good HH parents satisfy `3/5<N_next/N<5/8`; resolved-dissipation and resolved-pressure ancestors satisfy `N_next/N<=1/4`; hard tail satisfies `N_next/N>=2`; fresh SGS only supplies `N_next/N<=2` and **no directional progress**.  Generic shell service, material reuse and unresolved HH regeneration do not acquire synthetic scale progress.\n\nThe natural Bellman object is correspondingly typed, not scalar: physical time and actual log shell scale telescope kinematically; multiplicative physical-work cost, causal work-weighted reuse, `Xi`, and each genuinely globally bounded resource telescope only in their own native ledgers.  Own-scale service generated by a completed full-natural corridor is a same-interval witness: rereading or materially partitioning it adds no recursion depth.  Independent source/service/reuse events remain physical owners.  No service quantity is an additive reset.  Fresh/high-tail concentration `H_inf/H2` remains diagnostic and cannot be charged as causal entropy.\n\nStress: `{out.samples}` quotient/path states\n- worst zero-charge owner-mass residual: `{out.worst_owner_mass_residual:.3e}`\n- worst physical-time telescope residual: `{out.worst_time_telescope_residual:.3e}`\n- worst log-scale telescope residual: `{out.worst_scale_telescope_residual:.3e}`\n- bounded-scale boundary failures: `{out.bounded_scale_boundary_failures}`\n- supplier-scale failures: `{out.supplier_scale_failures}`\n- coefficient-obstruction barrier failures: `{out.coefficient_obstruction_barrier_failures}`\n- full-natural service-witness barrier failures: `{out.service_witness_barrier_failures}`\n- largest relayed joint-owner set sampled: `{out.maximum_relay_owner_count}`\n- minimum sampled UV tail-time beyond its first natural window: `{out.minimum_uv_time_gap_to_naive_infinite_sum:.3e}`\n\nThis theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes representation/clock recursion from the master and isolates the remaining physical task: telescope infinitely recurring named physical owner events, and close any UV-unbounded survivor route by the already certified or future physical UV work/service mechanisms.\n"""
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
 

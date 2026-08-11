@@ -24,6 +24,7 @@ from src.critical_shell_service_reentry import (
     theorem_certificate,
     two_cell_cluster_to_whole_shell_mass_lower,
 )
+from src.full_natural_service_corridor_quotient import endpoint_hard_shell_cover_from_full_natural_outcome
 from src.high_strain_resolved_ancestor import high_strain_ancestor_mass_threshold
 from src.nn_critical_heat_carrier_seed import LOW_STRAIN_ACTION, renewal_scale
 
@@ -190,6 +191,13 @@ def test_full_generic_shell_corridor_creates_positive_own_scale_service_before_m
     assert out["clean_retained_coefficient_mass_lower"] == critical_shell_survivor_coefficient_mass_lower(mu0)
     assert out["uniform_square_service_lower"] > 0
     assert out["materiality_assigned"] == "only_after_service_via_actual_Moyal_endpoints"
+    assert out["service_same_corridor_witness"] is True
+    assert out["service_adds_recursion_depth"] is False
+    assert out["physical_time_drop"] == pytest.approx(T)
+    assert out["corridor_endpoint_time"] == pytest.approx(T)
+    cover = endpoint_hard_shell_cover_from_full_natural_outcome(out, parent_shell_frequency=M)
+    assert cover["candidate_ratios_to_parent"] == pytest.approx((0.75, 1.5))
+    assert cover["guaranteed_max_hard_shell_critical_mass_lower"] == pytest.approx((2.0/3.0) * out["endpoint_carrier_critical_mass_lower"])
 
 
 def test_certificate_keeps_DV_sampling_noncausal_and_scale_progress_supplier_specific():

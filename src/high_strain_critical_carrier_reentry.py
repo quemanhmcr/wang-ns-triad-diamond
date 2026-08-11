@@ -20,6 +20,7 @@ from src.common_slice_coefficient_registration import (
 from src.critical_annular_carrier_service_reentry import (
     BOUNDED_HEAT_RADIUS,
     integrated_bounded_heat_service_lower,
+    persistent_carrier_critical_mass_lower,
     uniform_bounded_square_service_lower,
 )
 from src.high_strain_resolved_ancestor import (
@@ -272,6 +273,7 @@ def critical_seed_natural_outcome(
     clean_retained = INHERIT_FRACTION**2 * seed_lower
     if retained_mass < clean_retained - 5e-12 * max(1.0, clean_retained):
         raise AssertionError("critical seed survivor lost clean critical coefficient mass")
+    carrier = persistent_carrier_critical_mass_lower(c, nu)
     Y0 = uniform_bounded_square_service_lower(c, nu)
     Sint = integrated_bounded_heat_service_lower(c, nu)
     if Y0 <= 0 or Sint <= 0:
@@ -282,9 +284,15 @@ def critical_seed_natural_outcome(
         "joint_first_stops": (),
         "natural_duration": float(geom["natural_duration"]),
         "backward_endpoint": float(geom["backward_endpoint"]),
+        "corridor_terminal_time": float(event_time),
+        "corridor_endpoint_time": float(geom["backward_endpoint"]),
+        "physical_time_drop": float(geom["natural_duration"]),
+        "service_same_corridor_witness": True,
+        "service_adds_recursion_depth": False,
         "terminal_critical_mass": terminal_mass,
         "retained_coefficient_critical_mass": retained_mass,
         "clean_retained_coefficient_mass_lower": clean_retained,
+        "endpoint_carrier_critical_mass_lower": carrier,
         "bounded_displacement_radius_over_A": BOUNDED_HEAT_RADIUS,
         "uniform_square_service_lower": Y0,
         "integrated_bounded_heat_service_lower": Sint,
@@ -320,12 +328,12 @@ def theorem_certificate(scaled_lifetime: float = 1.0, viscosity: float = 1.0) ->
         "critical_seed": f"M||P_j u||^2>=mu_*={mu:.12g} gives A||P_j u||^2>=(3/4)mu_*={seed:.12g}; Q_A=1 on the whole shell registers that coefficient exactly",
         "first_stop": "backward over one A-natural window use renewed strain plus role-interface and HH coefficient obstructions; exact ties remain unsplit and coefficient hits only locate physical-energy reentry",
         "corridor": f"if no monitor hits and t=0 is not reached, |z(s)|>=|z(t)|/4 and the clean retained coefficient mass is >={retained:.12g}",
-        "service": f"the full survivor generates its own bounded A-scale increment service: some |r|<=3/A has A||delta_r Q_Au||^2>=Y0={Y0:.12g}, and integrated normalized bounded heat service is >={Sint:.12g}",
+        "service": f"the completed full-natural corridor carries its own bounded A-scale increment service: some |r|<=3/A has A||delta_r Q_Au||^2>=Y0={Y0:.12g}, and integrated normalized bounded heat service is >={Sint:.12g}; this is a same-corridor witness and adds no second recursion edge",
         "material_order": "material ownership is deliberately deferred: after the renewed positive service exists, exact Moyal assigns its actual endpoints and OO/ON/NN is read from that new law; no child-scale NN witness is propagated as whole-carrier ownership",
         "architectural_shortcut": "the shortest high-strain renewal entrance no longer requires child-scale heat ownership, old-incident erosion, or NN-intersect-critical selection before a carrier can renew; those theorems remain valid refinements for material capacity/provenance",
         "causal_scope": "normalized D_V|_G weights are only a positive diagnostic sampling law for the high-strain recursive route; they never replace actual positive HH child-energy work in Shannon/Renyi or transfer causality",
         "currency": "a renewed high-strain first hit recursively re-enters critical dissipation; interface/HH coefficient hits only locate physical-energy reentry, where actual gauge-quotiented work receives its native owner; none is promoted to a scale-independent additive reset",
-        "scope": "this closes the high-strain route to either an already named recursive stop, the absorbing initial boundary, or a renewed own-scale coherent-service entrance; universal source/SGS and genuine relink slab renewal, and global master closure, remain open",
+        "scope": "this closes the high-strain route to either an already named recursive stop, the absorbing initial boundary, or a completed full-natural corridor carrying its own coherent-service witness; the service witness adds no event depth. Universal source/SGS and genuine relink slab renewal, and global master closure, remain open",
     }
 
 
@@ -529,7 +537,7 @@ Stress: `{out.samples}` critical-dissipation-law/first-stop/service states
 - maximum sampled exact joint first-stop count: `{out.maximum_joint_first_stop_count}`
 - outcomes: `{out.branch_counts}`
 
-This closes the **high-strain renewal entrance** to named recursive stop / initial boundary / own-scale coherent service without making `D_V` a reset and without a whole-carrier NN assertion.  Universal source/SGS and genuine material-relink slab renewal remain the master-facing continuum frontier.  No global-regularity claim is made.
+This closes the **high-strain corridor alternative** to named recursive stop / initial boundary / a completed full-natural corridor carrying own-scale coherent service.  That service is attached to the corridor and does not add a second recursion edge; `D_V` is not a reset and no whole-carrier NN assertion is made.  Universal source/SGS and genuine material-relink slab renewal remain the master-facing continuum frontier.  No global-regularity claim is made.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
