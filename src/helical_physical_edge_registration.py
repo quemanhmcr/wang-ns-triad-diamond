@@ -460,8 +460,16 @@ class HelicalPhysicalEdgeRegistration:
             scale=registration_scale,
         ) > 5e-10:
             raise AssertionError("physical upper-progress work failed the A*J*c identity")
-        if self.native_modal_capacity == 0.0 and self.signed_child_energy_work != 0.0:
-            raise AssertionError("zero native capacity cannot carry nonzero physical work")
+        if self.native_modal_capacity == 0.0:
+            if self.signed_child_energy_work != 0.0:
+                raise AssertionError("zero native capacity cannot carry nonzero physical work")
+        elif abs(self.signed_child_energy_work) > self.native_modal_capacity:
+            if _relative_gap(
+                abs(self.signed_child_energy_work),
+                self.native_modal_capacity,
+                scale=self.native_modal_capacity,
+            ) > 5e-10:
+                raise AssertionError("physical child-energy work exceeds native modal capacity")
         if self.positive_forward_work is not (
             progress > 0.0 and self.signed_child_energy_work > 0.0
         ):

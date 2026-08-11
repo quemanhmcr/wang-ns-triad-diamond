@@ -69,6 +69,16 @@ repository:
 
 No packet count or observer orientation enters.
 
+The same physical edge also obeys the pointwise capacity domination
+
+`|T_e| <= A_e`.
+
+Indeed, in divergence form `u_x.y=u_x.z` and `u_y.x=u_y.z` by incompressibility
+and `x+y=z`.  The two ordered parent terms therefore have total source norm at
+most `2|z||a_x a_y|`; pairing with the child and differentiating child energy
+adds the remaining factor two.  This remains physical on nonforward/backscatter
+edges where the upper-progress multiplier is zero.
+
 ## 4. Native modal capacity, geometry and phase
 
 Define
