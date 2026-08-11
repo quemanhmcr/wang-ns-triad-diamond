@@ -79,6 +79,8 @@ class CanonicalPositiveEdgeRoutingPDEProbe:
     worst_positive_mass_reconstruction_relative: float
     worst_hard_pushforward_relative: float
     maximum_coarsened_cancellation_fraction: float
+    maximum_exact_role_mixed_good_fraction: float
+    maximum_coarsened_mixed_good_fraction: float
     minimum_bad_deficit_margin: float | None
     minimum_bad_fixed_transfer_margin: float | None
     stage_zero_first_time_failures: int
@@ -112,6 +114,8 @@ def run_probe(
     worst_mass = 0.0
     worst_push = 0.0
     max_cancel = 0.0
+    max_exact_mixed_good = 0.0
+    max_coarse_mixed_good = 0.0
     min_bad = math.inf
     min_fixed = math.inf
     first_time_failures = 0
@@ -144,6 +148,17 @@ def run_probe(
             )
             if coarse.inherited_positive_work > 0.0:
                 max_cancel = max(max_cancel, coarse.cancellation_gap / coarse.inherited_positive_work)
+            if route.good_positive_work > 0.0:
+                max_exact_mixed_good = max(
+                    max_exact_mixed_good,
+                    route.young_eligible.unresolved_mixed_positive_work / route.good_positive_work,
+                )
+                coarse_mixed_good = math.fsum(
+                    cell.inherited_good_positive_work
+                    for cell in coarse.cells
+                    if cell.inherited_good_positive_work > 0.0 and cell.inherited_bad_positive_work > 0.0
+                )
+                max_coarse_mixed_good = max(max_coarse_mixed_good, coarse_mixed_good / route.good_positive_work)
 
             positive_snapshots += route.total_positive_work > 0.0
             bad_snapshots += route.bad_positive_work > 0.0
@@ -190,6 +205,8 @@ def run_probe(
         worst_positive_mass_reconstruction_relative=worst_mass,
         worst_hard_pushforward_relative=worst_push,
         maximum_coarsened_cancellation_fraction=max_cancel,
+        maximum_exact_role_mixed_good_fraction=max_exact_mixed_good,
+        maximum_coarsened_mixed_good_fraction=max_coarse_mixed_good,
         minimum_bad_deficit_margin=None if math.isinf(min_bad) else min_bad,
         minimum_bad_fixed_transfer_margin=None if math.isinf(min_fixed) else min_fixed,
         stage_zero_first_time_failures=first_time_failures,

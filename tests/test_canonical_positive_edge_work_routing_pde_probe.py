@@ -9,5 +9,7 @@ def test_actual_galerkin_ns_routes_the_same_canonical_positive_edge_law():
     assert out.worst_signed_ns_reconstruction_relative < 3e-8
     assert out.worst_positive_mass_reconstruction_relative < 3e-9
     assert out.worst_hard_pushforward_relative < 3e-9
+    assert 0.0 <= out.maximum_exact_role_mixed_good_fraction <= 1.0
+    assert 0.0 <= out.maximum_coarsened_mixed_good_fraction <= 1.0 + 1e-10
     assert out.stage_zero_first_time_failures == 0
     assert out.geometry_good_marking_promotions == 0

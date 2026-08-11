@@ -94,7 +94,7 @@ cellwise and after summation.  The gap is exactly cancellation hidden by the cho
 
 This is the signed-cell compression needed by Young/Christ.  Young sees `T_C`, not the gross positive mass `P_C`.
 
-## 4. Geometry-good means only Young-eligible
+## 4. Geometry-good means only Young-eligible; signed-cell binding needs fate purity
 
 The good causal restriction is exported as a `YoungEligiblePositiveWork` handle.  Its fields enforce
 
@@ -102,7 +102,23 @@ The good causal restriction is exported as a `YoungEligiblePositiveWork` handle.
 - `young_certified=False`;
 - `registered_generated_continuation=False`.
 
-For every hard cell intersecting the good causal support, the handle points to the full signed `T_C`.  Downstream complex Young/Christ must still compare that signed trilinear work with its sharp norm product, then apply symbol-freezing/phase and common-slice registration.  Geometry-good, Young-good and generated continuation therefore remain three different physical layers.
+There is a further physical obstruction that must not be hidden by refinement.  A hard cell can contain good positive causal work, bad positive causal work already sent to transfer loss, and negative signed work.  Young must see the **full signed** trilinear cell work in order to preserve cancellation.  But then a mixed cell would let already-terminal bad positive work help the good branch.  Subtracting only the bad positive part is not allowed either: that nonlinear subtraction is no longer the signed trilinear work of the hard cell.
+
+Therefore the theorem binds a good causal sublaw to signed-cell Young only on a **fate-pure hard cell**
+
+\[
+ (\pi_#\mu_G^+)(C)>0,\qquad (\pi_#\mu_B^+)(C)=0.
+\]
+
+On such a cell, downstream Young/Christ receives the full
+
+\[
+ T_C=(\pi_#dW)(C),
+\]
+
+so negative work still cancels before saturation, while no already-terminal bad positive work can assist.  If a hard cell contains both good and bad positive causal mass, the good mass remains exactly accounted as **unresolved Young-eligible mixed-fate work**.  The theorem does not invent a finer cell to remove that obstruction.
+
+Thus geometry-good, fate-pure signed-cell binding, Young-good and generated continuation are distinct physical layers.
 
 ## 5. Why the general coherent POVM is not used as the causal adapter
 
@@ -127,9 +143,9 @@ Dedicated tests/audit are required to cover:
 - the native bad deficit, equality with the whole-block transfer gate's threshold/cause channel, and every certified `tau<=0.1` fixed-transfer implication;
 - parent swap, helical gauge representation and unit scaling invariance;
 - replay rejection of forged ledger summaries;
-- hard coarsening/refinement preserving inherited `dW+` while changing visible signed cancellation;
+- hard coarsening/refinement preserving inherited `dW+` while changing visible signed cancellation, and a deliberate coarsening that creates a mixed good/bad cell which remains unresolved rather than being promoted to Young;
 - `fixed_transfer_loss.first_time is None`;
 - geometry-good never promoting itself to Young-good or `marking_good`;
 - an actual dealiased Fourier--Galerkin Navier--Stokes trajectory whose replayed edge law passes the same routing and hard pushforward.
 
-This theorem does not certify Young saturation of the good branch, does not identify a general coherent POVM Hahn law with canonical causality, does not close generic HH recurrence, and makes no claim of global regularity for 3D Navier--Stokes.
+This theorem does not certify Young saturation of the good branch.  In particular, mixed-fate hard cells remain an explicit signed-cell handoff seam rather than being repaired by arbitrary refinement.  It also does not identify a general coherent POVM Hahn law with canonical causality, does not close generic HH recurrence, and makes no claim of global regularity for 3D Navier--Stokes.

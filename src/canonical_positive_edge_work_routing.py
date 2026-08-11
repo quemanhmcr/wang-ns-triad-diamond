@@ -36,7 +36,7 @@ from src.triad_extremizer import symmetric_gamma, symmetric_rstar
 STATUS = (
     "EXACT_CANONICAL_POSITIVE_EDGE_WORK_ROUTING__ACTUAL_DW_HAHN_RESTRICTION__"
     "GEOMETRY_BAD_SAME_LAW_STAGE_ZERO_TRANSFER_LOSS__GEOMETRY_GOOD_ONLY_YOUNG_ELIGIBLE__"
-    "DETERMINISTIC_HARD_CELL_SIGNED_COMPRESSION__POSITIVE_PUSHFORWARD_NOT_REHAHN"
+    "FATE_PURE_SIGNED_CELL_BINDING_ONLY__MIXED_FATE_CELL_SEAM_EXPOSED__POSITIVE_PUSHFORWARD_NOT_REHAHN"
 )
 
 ETA0 = 1.0e-4
@@ -290,7 +290,10 @@ class BadPositiveWorkRoute:
 class YoungEligiblePositiveWork:
     support: tuple[CanonicalPositiveEdgeOccurrence, ...]
     physical_work_mass: float
-    hard_cells: tuple[HardCellWork, ...]
+    fate_pure_hard_cells: tuple[HardCellWork, ...]
+    mixed_fate_hard_cells: tuple[HardCellWork, ...]
+    fate_pure_positive_work: float
+    unresolved_mixed_positive_work: float
     marking_good: bool = False
     registered_generated_continuation: bool = False
     young_certified: bool = False
@@ -306,6 +309,30 @@ class YoungEligiblePositiveWork:
             factor=8.0e-10,
         ):
             raise AssertionError("Young eligibility changed physical dW+ mass")
+        for cell in self.fate_pure_hard_cells:
+            if not cell.inherited_good_positive_work > 0.0 or cell.inherited_bad_positive_work != 0.0:
+                raise AssertionError("fate-pure Young cell contains terminal bad positive work")
+        for cell in self.mixed_fate_hard_cells:
+            if not (cell.inherited_good_positive_work > 0.0 and cell.inherited_bad_positive_work > 0.0):
+                raise AssertionError("mixed-fate hard cell must contain both good and bad positive causal work")
+        pure = _finite_sum(
+            [cell.inherited_good_positive_work for cell in self.fate_pure_hard_cells],
+            "fate-pure Young-eligible dW+ mass",
+        )
+        mixed = _finite_sum(
+            [cell.inherited_good_positive_work for cell in self.mixed_fate_hard_cells],
+            "mixed-fate unresolved good dW+ mass",
+        )
+        if not _native_close(self.fate_pure_positive_work, pure, factor=8.0e-10):
+            raise AssertionError("fate-pure Young binding changed inherited good dW+ mass")
+        if not _native_close(self.unresolved_mixed_positive_work, mixed, factor=8.0e-10):
+            raise AssertionError("mixed-fate Young seam changed inherited good dW+ mass")
+        if not _native_close(
+            self.fate_pure_positive_work + self.unresolved_mixed_positive_work,
+            self.physical_work_mass,
+            factor=8.0e-10,
+        ):
+            raise AssertionError("hard-cell fate classification lost Young-eligible dW+ mass")
 
 
 @dataclass(frozen=True)
@@ -530,11 +557,31 @@ def route_canonical_positive_edge_work(
         )
 
     compression = compress_signed_edge_work_to_hard_cells(replayed, mode_roles)
-    young_cells = tuple(cell for cell in compression.cells if cell.inherited_good_positive_work > 0.0)
+    fate_pure_cells = tuple(
+        cell
+        for cell in compression.cells
+        if cell.inherited_good_positive_work > 0.0 and cell.inherited_bad_positive_work == 0.0
+    )
+    mixed_fate_cells = tuple(
+        cell
+        for cell in compression.cells
+        if cell.inherited_good_positive_work > 0.0 and cell.inherited_bad_positive_work > 0.0
+    )
+    fate_pure_work = _finite_sum(
+        [cell.inherited_good_positive_work for cell in fate_pure_cells],
+        "fate-pure Young-eligible dW+ mass",
+    )
+    mixed_good_work = _finite_sum(
+        [cell.inherited_good_positive_work for cell in mixed_fate_cells],
+        "mixed-fate unresolved good dW+ mass",
+    )
     young = YoungEligiblePositiveWork(
         support=good,
         physical_work_mass=good_work,
-        hard_cells=young_cells,
+        fate_pure_hard_cells=fate_pure_cells,
+        mixed_fate_hard_cells=mixed_fate_cells,
+        fate_pure_positive_work=fate_pure_work,
+        unresolved_mixed_positive_work=mixed_good_work,
     )
     return CanonicalPositiveEdgeWorkRouting(
         total_positive_work=total_work,
@@ -559,8 +606,9 @@ def theorem_certificate() -> dict[str, object]:
         "fixed_transfer_threshold": f"delta_tau=tau^2/{CURVATURE_DENOM}, 0<tau<=0.1, hence delta_tau<1e-4",
         "bad_fate": "same dW+ restriction -> shared physical FixedTransferLossGate -> fixed_transfer_loss -> TRANSFER_WORK_LOSS -> TRANSFER_COST; first_time=None",
         "good_fate": "Young-eligible only; marking_good=False and generated continuation remain unproved",
-        "hard_cell_handoff": "deterministic hard Fourier/helicity mode map carries pi_#dW+ as cause and pi_#dW as signed Young datum",
-        "young_input": "T_C=(pi_#dW)(C), not gross (pi_#dW+)(C); physical cancellation retained before Young saturation",
+        "hard_cell_handoff": "deterministic hard Fourier/helicity map carries pi_#dW+ as inherited cause and pi_#dW as signed cell work; no later Hahn is causal",
+        "young_input": "full signed T_C=(pi_#dW)(C), not gross (pi_#dW+)(C), may bind the good branch only on fate-pure cells with zero inherited bad-positive mass",
+        "mixed_fate_seam": "if one hard cell contains both good and bad dW+ mass, using full T_C would let already-terminal bad work assist Young while subtracting only bad positive work destroys trilinear identity; such good mass stays unresolved Young-eligible and no arbitrary refinement is introduced",
         "later_hahn": "(pi_#dW)^+ is a cancellation diagnostic and never a second causal law; (pi_#dW)^+ <= pi_#dW+",
         "coherent_povm_scope": "general positive coherent localization remains an exact signed-work representation; no causal Hahn identification is made without a positive mass-preserving kernel from dW+",
         "capacity_is_causal_law": False,
@@ -576,6 +624,7 @@ class CanonicalPositiveEdgeRoutingStress:
     worst_mass_reconstruction_relative: float
     worst_hard_pushforward_relative: float
     maximum_coarsened_cancellation_fraction: float
+    maximum_coarsened_mixed_good_fraction: float
     nonforward_bad_cases: int
     geometry_good_marking_promotions: int
     first_time_sentinel_failures: int
@@ -645,6 +694,7 @@ def stress(samples: int = 50_000, seed: int = 20260812) -> CanonicalPositiveEdge
     worst_mass = 0.0
     worst_push = 0.0
     max_cancel = 0.0
+    max_mixed_good = 0.0
     nonforward = 0
     marking = 0
     first_time_fail = 0
@@ -679,6 +729,16 @@ def stress(samples: int = 50_000, seed: int = 20260812) -> CanonicalPositiveEdge
         coarse = compress_signed_edge_work_to_hard_cells(ledger, single_hard_role_map(ledger))
         if coarse.inherited_positive_work > 0.0:
             max_cancel = max(max_cancel, coarse.cancellation_gap / coarse.inherited_positive_work)
+        if coarse.inherited_good_positive_work > 0.0:
+            coarse_mixed_good = _finite_sum(
+                [
+                    cell.inherited_good_positive_work
+                    for cell in coarse.cells
+                    if cell.inherited_good_positive_work > 0.0 and cell.inherited_bad_positive_work > 0.0
+                ],
+                "coarsened mixed-fate good dW+ mass",
+            )
+            max_mixed_good = max(max_mixed_good, coarse_mixed_good / coarse.inherited_good_positive_work)
         if not _native_close(coarse.inherited_positive_work, out.total_positive_work, factor=8.0e-10):
             raise AssertionError("analyst coarsening changed inherited canonical dW+ mass")
 
@@ -689,6 +749,7 @@ def stress(samples: int = 50_000, seed: int = 20260812) -> CanonicalPositiveEdge
         worst_mass_reconstruction_relative=worst_mass,
         worst_hard_pushforward_relative=worst_push,
         maximum_coarsened_cancellation_fraction=max_cancel,
+        maximum_coarsened_mixed_good_fraction=max_mixed_good,
         nonforward_bad_cases=nonforward,
         geometry_good_marking_promotions=marking,
         first_time_sentinel_failures=first_time_fail,

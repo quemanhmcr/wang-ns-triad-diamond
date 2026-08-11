@@ -131,11 +131,35 @@ def test_geometry_good_is_only_young_eligible_and_signed_cell_work_is_retained()
     assert not out.young_eligible.marking_good
     assert not out.young_eligible.young_certified
     assert not out.young_eligible.registered_generated_continuation
-    assert out.young_eligible.hard_cells
-    for cell in out.young_eligible.hard_cells:
-        # Young sees the signed pi_#dW cell datum, never gross pi_#dW+.
+    assert out.young_eligible.fate_pure_hard_cells
+    assert out.young_eligible.unresolved_mixed_positive_work == pytest.approx(0.0)
+    for cell in out.young_eligible.fate_pure_hard_cells:
+        # Only a fate-pure cell may expose full signed pi_#dW to Young: negative
+        # cancellation remains, while no already-terminal bad positive work can assist.
+        assert cell.inherited_bad_positive_work == pytest.approx(0.0)
         assert cell.signed_work <= cell.inherited_positive_work + 1e-12 * max(1.0, cell.inherited_positive_work)
         assert not cell.fresh_cell_hahn_is_causal_law
+
+
+def test_analyst_coarsening_cannot_turn_mixed_good_bad_cause_into_signed_young_binding():
+    ledger = continuum_edge_measure_ledger((
+        _near_extremal_positive_fiber(1.0),
+        _nonforward_positive_fiber(1.0),
+        _nonforward_positive_fiber(0.2, phase_sign=-1.0),
+    ))
+    coarse_roles = single_hard_role_map(ledger)
+    out = route_canonical_positive_edge_work(ledger, tau=0.1, mode_roles=coarse_roles)
+    assert out.good_positive_work > 0.0
+    assert out.bad_positive_work > 0.0
+    assert out.young_eligible.fate_pure_positive_work == pytest.approx(0.0)
+    assert out.young_eligible.unresolved_mixed_positive_work == pytest.approx(out.good_positive_work)
+    assert len(out.young_eligible.mixed_fate_hard_cells) == 1
+    cell = out.young_eligible.mixed_fate_hard_cells[0]
+    assert cell.inherited_good_positive_work > 0.0
+    assert cell.inherited_bad_positive_work > 0.0
+    assert not cell.fresh_cell_hahn_is_causal_law
+    assert not out.young_eligible.young_certified
+    assert not out.young_eligible.marking_good
 
 
 def test_hard_coarsening_and_refinement_preserve_inherited_cause_but_not_fresh_hahn():
@@ -253,6 +277,8 @@ def test_certificate_keeps_signed_before_positive_and_coherent_povm_seam_open():
     assert cert["status"] == STATUS
     assert "dW+" in cert["canonical_causal_law"]
     assert "T_C" in cert["young_input"]
+    assert "already-terminal bad work assist Young" in cert["mixed_fate_seam"]
+    assert "no arbitrary refinement" in cert["mixed_fate_seam"]
     assert "positive mass-preserving kernel" in cert["coherent_povm_scope"]
     assert not cert["capacity_is_causal_law"]
     assert not cert["claims_global_regularity"]
