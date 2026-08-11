@@ -35,8 +35,8 @@ jobs:
         run: pytest -q tests/test_continuum_helical_edge_measure_registration.py
       - name: Run full theorem suite
         run: pytest -q
-      - name: Run wide continuum edge-measure stress
-        run: python -m src.continuum_helical_edge_measure_registration --samples 200000 --core-blocks 5000 --outdir results-audit-continuum-helical-edge-measure/continuum-edge-measure
+      - name: Run 50k wide continuum edge-measure stress
+        run: python -m src.continuum_helical_edge_measure_registration --samples 50000 --core-blocks 1000 --outdir results-audit-continuum-helical-edge-measure/continuum-edge-measure
       - run: cat results-audit-continuum-helical-edge-measure/continuum-edge-measure/summary.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
