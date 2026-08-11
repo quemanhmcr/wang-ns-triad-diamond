@@ -1,0 +1,50 @@
+name: Audit signed-good generated epoch
+
+on:
+  push:
+    paths:
+      - 'src/signed_good_generated_epoch_time_telescope.py'
+      - 'tests/test_signed_good_generated_epoch_time_telescope.py'
+      - 'tests/test_signed_good_generated_epoch_audit.py'
+      - 'docs/signed_good_generated_epoch_time_telescope.md'
+      - '.github/workflows/audit-signed-good-generated-epoch.yml'
+      - '.github/workflows/signed-good-generated-epoch-time-telescope.yml'
+      - 'src/asynchronous_duhamel_sync.py'
+      - 'src/physical_energy_causal_bridge.py'
+      - 'src/continuum_master_event_quotient.py'
+      - 'tests/test_continuum_master_event_quotient.py'
+      - '.github/workflows/physical-energy-causal-integration.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adversarial-signed-good-generated-epoch-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Run native-scale and provenance anti-tests
+        run: pytest -q tests/test_signed_good_generated_epoch_audit.py
+      - name: Run full theorem suite
+        run: pytest -q
+      - name: Run wide signed-good generated-epoch stress
+        run: python -m src.signed_good_generated_epoch_time_telescope --samples 200000 --outdir results-audit-signed-good-generated-epoch/signed-good-generated-epoch
+      - name: Run asynchronous synchronization dependency stress
+        run: python -m src.asynchronous_duhamel_sync --samples 100000 --outdir results-audit-signed-good-generated-epoch/asynchronous-sync
+      - name: Run physical-energy dependency stress
+        run: python -m src.physical_energy_causal_bridge --samples 100000 --outdir results-audit-signed-good-generated-epoch/physical-energy
+      - name: Run continuum-master dependency stress
+        run: python -m src.continuum_master_event_quotient --samples 100000 --outdir results-audit-signed-good-generated-epoch/continuum-master
+      - run: cat results-audit-signed-good-generated-epoch/signed-good-generated-epoch/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-signed-good-generated-epoch-results
+          path: results-audit-signed-good-generated-epoch/
