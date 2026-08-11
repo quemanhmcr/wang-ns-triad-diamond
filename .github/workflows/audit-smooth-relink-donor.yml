@@ -4,11 +4,13 @@ on:
   push:
     paths:
       - 'src/smooth_relink_donor_quotient.py'
+      - 'src/smooth_relink_donor_pde_probe.py'
       - 'src/smooth_quadratic_carrier_interface.py'
       - 'src/resolved_interface_donor_quotient.py'
       - 'src/continuum_master_event_quotient.py'
       - 'tests/test_smooth_relink_donor_audit.py'
       - 'tests/test_smooth_relink_donor_quotient.py'
+      - 'tests/test_smooth_relink_donor_pde_probe.py'
       - 'tests/test_smooth_quadratic_carrier_interface.py'
       - 'tests/test_resolved_interface_donor_quotient.py'
       - 'tests/test_continuum_master_event_quotient.py'
@@ -44,9 +46,12 @@ jobs:
         run: python -m src.resolved_interface_donor_quotient --samples 100000 --outdir results-audit/resolved-interface-donor
       - name: Run continuum master dependency stress
         run: python -m src.continuum_master_event_quotient --samples 100000 --outdir results-audit/continuum-master
+      - name: Run smooth relink on actual dealiased Navier-Stokes trajectories
+        run: python -m src.smooth_relink_donor_pde_probe --resolutions 12 16 20 --steps 48 --outdir results-audit/smooth-relink-donor-pde-probe
       - name: Publish summaries
         run: |
           cat results-audit/smooth-relink-donor/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-audit/smooth-relink-donor-pde-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
           cat results-audit/smooth-quadratic-carrier/summary.md >> "$GITHUB_STEP_SUMMARY"
           cat results-audit/resolved-interface-donor/summary.md >> "$GITHUB_STEP_SUMMARY"
           cat results-audit/continuum-master/summary.md >> "$GITHUB_STEP_SUMMARY"

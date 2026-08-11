@@ -4,7 +4,9 @@ on:
   push:
     paths:
       - 'src/smooth_relink_donor_quotient.py'
+      - 'src/smooth_relink_donor_pde_probe.py'
       - 'tests/test_smooth_relink_donor_quotient.py'
+      - 'tests/test_smooth_relink_donor_pde_probe.py'
       - 'docs/smooth_relink_donor_quotient.md'
       - '.github/workflows/smooth-relink-donor-quotient.yml'
       - 'src/smooth_quadratic_carrier_interface.py'
@@ -39,6 +41,8 @@ jobs:
         run: pytest -q
       - name: Smooth relink donor quotient stress
         run: python -m src.smooth_relink_donor_quotient --samples 50000 --outdir results-smooth-relink-donor-quotient
+      - name: Actual Navier-Stokes smooth relink donor probe
+        run: python -m src.smooth_relink_donor_pde_probe --resolutions 12 16 20 --steps 48 --outdir results-smooth-relink-donor-pde-probe
       - name: Smooth quadratic carrier dependency
         run: python -m src.smooth_quadratic_carrier_interface --samples 50000 --outdir results-smooth-quadratic-carrier-interface
       - name: Hard resolved donor lemma compatibility
@@ -47,12 +51,15 @@ jobs:
         run: python -m src.continuum_master_event_quotient --samples 50000 --outdir results-continuum-master-event-quotient
       - name: Physical-energy causal dependency
         run: python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-physical-energy-causal-bridge
-      - run: cat results-smooth-relink-donor-quotient/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - run: |
+          cat results-smooth-relink-donor-quotient/summary.md >> "$GITHUB_STEP_SUMMARY"
+          cat results-smooth-relink-donor-pde-probe/summary.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: smooth-relink-donor-quotient-results
           path: |
             results-smooth-relink-donor-quotient/
+            results-smooth-relink-donor-pde-probe/
             results-smooth-quadratic-carrier-interface/
             results-resolved-interface-donor-quotient/
             results-continuum-master-event-quotient/
