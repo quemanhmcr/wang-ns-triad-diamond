@@ -9,7 +9,7 @@ from pathlib import Path
 
 import numpy as np
 
-from src.coherent_service_or_flat import coherent_flat_thresholds
+from src.coherent_service_or_flat import FixedTransferLossGate, fixed_transfer_loss_gate
 from src.continuum_helical_edge_measure_registration import (
     ContinuumEdgeMeasureLedger,
     ContinuumHelicalEdgeIdentity,
@@ -243,7 +243,7 @@ class BadPositiveWorkRoute:
     signed_progress_mass: float
     deficit: float
     tau: float
-    fixed_transfer_threshold: float
+    fixed_transfer_gate: FixedTransferLossGate
     transfer_partition: TransferPartition
     joint_projection: JointStopProjection
 
@@ -255,11 +255,15 @@ class BadPositiveWorkRoute:
         if not (0.0 < self.tau <= MAX_CERTIFIED_TAU):
             raise ValueError("bad route uses only the certified 0<tau<=0.1 range")
         expected_delta = self.tau * self.tau / CURVATURE_DENOM
-        if not _native_close(self.fixed_transfer_threshold, expected_delta, factor=5.0e-14):
+        if not _native_close(self.fixed_transfer_gate.threshold, expected_delta, factor=5.0e-14):
             raise AssertionError("fixed-transfer threshold changed from the certified physical block interface")
+        if not _native_close(self.fixed_transfer_gate.avg_transfer_deficit, self.deficit, factor=8.0e-10):
+            raise AssertionError("fixed-transfer gate was not evaluated on this same bad physical restriction")
+        if not self.fixed_transfer_gate.triggered or self.fixed_transfer_gate.cause != "physical_transfer_cost":
+            raise AssertionError("bad physical restriction did not trigger the physical block transfer channel")
         if self.deficit < ETA0 - 2.0e-10:
             raise AssertionError("bad physical restriction failed its native eta0 transfer deficit")
-        if not self.deficit > self.fixed_transfer_threshold:
+        if not self.deficit > self.fixed_transfer_gate.threshold:
             raise AssertionError("bad physical restriction did not cross the certified fixed-transfer gate")
         if not _native_close(self.transfer_partition.total_mass, self.physical_work_mass, factor=8.0e-10):
             raise AssertionError("compiler was not bound to the same bad dW+ mass")
@@ -501,16 +505,18 @@ def route_canonical_positive_edge_work(
         if bad_capacity <= 0.0:
             raise AssertionError("nonzero bad dW+ restriction has zero native capacity")
         deficit = 1.0 - bad_progress / (float_jstar() * bad_capacity)
-        threshold = float(coherent_flat_thresholds(t)["block_transfer_deficit"])
+        transfer_gate = fixed_transfer_loss_gate(tau=t, avg_transfer_deficit=deficit)
         expected = t * t / CURVATURE_DENOM
-        if not _native_close(threshold, expected, factor=5.0e-14):
-            raise AssertionError("coherent fixed-transfer interface threshold changed")
+        if not _native_close(transfer_gate.threshold, expected, factor=5.0e-14):
+            raise AssertionError("physical fixed-transfer block interface threshold changed")
+        if not transfer_gate.triggered or transfer_gate.cause != "physical_transfer_cost":
+            raise AssertionError("same bad dW+ restriction failed to bind to the physical fixed-transfer block gate")
         transfer = compile_transfer_measure(
             total_mass=bad_work,
             xi_mass=0.0,
-            witness=BlockWitness(fixed_transfer_loss=True, kelvin_flat_certified=False),
+            witness=BlockWitness(fixed_transfer_loss=transfer_gate.triggered, kelvin_flat_certified=False),
         )
-        projection = joint_stop_master_projection(fixed_transfer_loss=True)
+        projection = joint_stop_master_projection(fixed_transfer_loss=transfer_gate.triggered)
         bad_route = BadPositiveWorkRoute(
             support=bad,
             physical_work_mass=bad_work,
@@ -518,7 +524,7 @@ def route_canonical_positive_edge_work(
             signed_progress_mass=bad_progress,
             deficit=deficit,
             tau=t,
-            fixed_transfer_threshold=threshold,
+            fixed_transfer_gate=transfer_gate,
             transfer_partition=transfer,
             joint_projection=projection,
         )
@@ -551,7 +557,7 @@ def theorem_certificate() -> dict[str, object]:
         "eta0": ETA0,
         "bad_deficit": "epsilon_B=1-F(B)/(J*A(B))>=1e-4 on the same measurable bad dW+ restriction",
         "fixed_transfer_threshold": f"delta_tau=tau^2/{CURVATURE_DENOM}, 0<tau<=0.1, hence delta_tau<1e-4",
-        "bad_fate": "same dW+ restriction -> fixed_transfer_loss -> TRANSFER_WORK_LOSS -> TRANSFER_COST; first_time=None",
+        "bad_fate": "same dW+ restriction -> shared physical FixedTransferLossGate -> fixed_transfer_loss -> TRANSFER_WORK_LOSS -> TRANSFER_COST; first_time=None",
         "good_fate": "Young-eligible only; marking_good=False and generated continuation remain unproved",
         "hard_cell_handoff": "deterministic hard Fourier/helicity mode map carries pi_#dW+ as cause and pi_#dW as signed Young datum",
         "young_input": "T_C=(pi_#dW)(C), not gross (pi_#dW+)(C); physical cancellation retained before Young saturation",
@@ -658,7 +664,7 @@ def stress(samples: int = 50_000, seed: int = 20260812) -> CanonicalPositiveEdge
             raise AssertionError("physical nonforward positive edge disappeared from bad route")
         nonforward += 1
         min_bad = min(min_bad, out.bad_route.deficit - ETA0)
-        min_transfer = min(min_transfer, out.bad_route.deficit - out.bad_route.fixed_transfer_threshold)
+        min_transfer = min(min_transfer, out.bad_route.deficit - out.bad_route.fixed_transfer_gate.threshold)
         scale = max(out.total_positive_work, 1.0e-300)
         worst_mass = max(worst_mass, abs(out.mass_reconstruction_residual) / scale)
         worst_push = max(

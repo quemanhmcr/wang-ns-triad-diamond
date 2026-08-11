@@ -65,7 +65,7 @@ For every certified `0<tau<=0.1`, the existing physical block interface uses
  \delta_\tau=\frac{\tau^2}{1\,036\,800\,000}<10^{-4}.
 \]
 
-The source binds the computed bad `dW+` mass itself to `compile_transfer_measure(... fixed_transfer_loss=True)` and to the joint stop projection.  Thus
+The source first passes the bad restriction's own `epsilon_B` through the exact transfer-deficit channel factored from `coherent_service_or_flat_gate`.  That typed `FixedTransferLossGate` is the same threshold/cause interface used by the whole physical block gate; only after it returns `triggered=True, cause=physical_transfer_cost` may the source construct the compiler witness.  The computed bad `dW+` mass itself is then passed unchanged to `compile_transfer_measure` and to the joint stop projection.  Thus
 
 \[
  \mu_B^+\to \texttt{fixed\_transfer\_loss}
@@ -124,7 +124,7 @@ Dedicated tests/audit are required to cover:
 - a genuine helical example with good capacity majority but bad actual-work majority;
 - positive nonforward work routed to `B`;
 - exact `mu_G^+ + mu_B^+ = mu^+`;
-- the native bad deficit and every certified `tau<=0.1` fixed-transfer implication;
+- the native bad deficit, equality with the whole-block transfer gate's threshold/cause channel, and every certified `tau<=0.1` fixed-transfer implication;
 - parent swap, helical gauge representation and unit scaling invariance;
 - replay rejection of forged ledger summaries;
 - hard coarsening/refinement preserving inherited `dW+` while changing visible signed cancellation;

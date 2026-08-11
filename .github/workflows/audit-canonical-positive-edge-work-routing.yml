@@ -12,6 +12,10 @@ on:
       - 'src/helical_physical_edge_registration.py'
       - 'src/helical.py'
       - 'src/event_anchored_role_registration.py'
+      - 'src/coherent_service_or_flat.py'
+      - 'tests/test_coherent_service_or_flat.py'
+      - 'src/high_tail_binary_work_reentry.py'
+      - 'tests/test_high_tail_binary_work_reentry.py'
       - 'src/recursive_coherent_witness_extraction.py'
       - 'src/physical_branch_compiler.py'
       - 'src/joint_causal_stop_projection.py'
@@ -35,7 +39,7 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt python-flint
       - name: Focused routing and stage-zero anti-tests
-        run: pytest -q tests/test_canonical_positive_edge_work_routing.py tests/test_physical_branch_compiler.py tests/test_joint_causal_stop_projection.py tests/test_recursive_coherent_witness_extraction.py
+        run: pytest -q tests/test_canonical_positive_edge_work_routing.py tests/test_physical_branch_compiler.py tests/test_joint_causal_stop_projection.py tests/test_recursive_coherent_witness_extraction.py tests/test_high_tail_binary_work_reentry.py
       - name: Full theorem suite
         run: pytest -q
       - name: Wide canonical routing stress

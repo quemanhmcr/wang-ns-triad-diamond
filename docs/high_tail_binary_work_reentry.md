@@ -18,13 +18,13 @@ On the regeneration owner,
 
 The remaining object is already physical positive nonlinear work.  There is no reason to manufacture a persistent packet merely to say what caused it.
 
-The important correction is instead one of **units**.  Across all hard output shells, the causal weights must remain in the same unit
+The important correction is first one of **units**.  Across all hard output shells, physical owner work must remain in the same unit
 
 \[
 \boxed{N\,dW.}
 \]
 
-Multiplying the work at shell `M_j` by `M_j/N` can be useful after the causal law exists, because it reads the work in the child's own scale.  But it changes the relative weights between shells and therefore cannot be used to decide causal probabilities.
+Multiplying the work at shell `M_j` by `M_j/N` can be useful as an own-scale diagnostic, because it reads the work in the child's own scale.  But it changes relative weights between shells and therefore cannot be used to define inherited canonical `dW+` probabilities.
 
 ## 2. Common-unit shell disintegration
 
@@ -138,11 +138,11 @@ P_{binary}\ge\frac{\nu D_{tail}}2.
 }
 \]
 
-Every positive atom already has exactly two parent coherent labels and one child label at one physical event.  Normalizing these atoms in their common `N dW` unit gives a genuine binary **physical child-work causal law**.
+Every positive coherent Hahn atom has exactly two parent coherent labels and one child label at one physical event.  Normalizing these atoms in their common `N dW` unit gives a binary **representation-level** law.  After canonical continuum edge registration, this is not automatically the master causal law: a general coherent POVM still needs a positive mass-preserving kernel/disintegration from canonical edge `dW+`.
 
 No Duhamel pair weights are introduced.  No coherent packet persistence is assumed.
 
-## 4. Why own-scale weighting is not causal weighting
+## 4. Why own-scale weighting cannot define canonical causal weighting
 
 Take two equal physical positive work atoms, one at shell level `j=1` and one at `j=10`.  In the common work unit their probabilities are
 
@@ -167,7 +167,7 @@ Therefore:
 
 This is the same distinction already enforced elsewhere between actual child-energy transfer and diagnostic/sampling measures.
 
-## 5. Own-scale strength can still be read after the causal law exists
+## 5. Own-scale strength can still be read from the signed/coherent representation
 
 Let the positive binary common-unit work be pushed to the canonical output-shell index:
 
@@ -235,6 +235,6 @@ The resulting clean frontier is therefore:
 \end{cases}
 \]
 
-The next question is no longer “how do we invent a packet?”  It is the actual triad-locality question carried by that binary law: comparable parent scales versus genuinely nonlocal `K>>M` backscatter/scale transport.
+The next master-facing question is not “how do we invent a packet?”  It is to route canonical edge `dW+` through deterministic hard labels, and only then ask signed-cell triad locality/Young questions.  The coherent binary representation remains useful diagnostically; its positive kernel into material labels is a separate open seam.
 
 No 3D Navier--Stokes global-regularity conclusion is asserted.

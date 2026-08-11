@@ -67,6 +67,53 @@ def coherent_flat_thresholds(
     }
 
 
+@dataclass(frozen=True)
+class FixedTransferLossGate:
+    """The transfer-deficit channel of the physical whole-block gate.
+
+    This certificate contains no causal mass.  It only says whether the supplied
+    physical block deficit crosses the already-certified transfer threshold.
+    A caller that owns an actual causal sublaw must bind *that same law* to this
+    certificate before handing it to the single-charge compiler.
+    """
+
+    tau: float
+    avg_transfer_deficit: float
+    threshold: float
+    triggered: bool
+    cause: str | None
+
+    def __post_init__(self) -> None:
+        vals = (self.tau, self.avg_transfer_deficit, self.threshold)
+        if not all(math.isfinite(float(v)) for v in vals):
+            raise ValueError("finite fixed-transfer gate data required")
+        if not (0.0 < self.tau <= 0.1) or self.avg_transfer_deficit < 0.0 or self.threshold <= 0.0:
+            raise ValueError("invalid fixed-transfer gate data")
+        expected = self.avg_transfer_deficit >= self.threshold
+        if self.triggered != expected:
+            raise AssertionError("fixed-transfer gate trigger disagrees with the physical deficit")
+        expected_cause = "physical_transfer_cost" if expected else None
+        if self.cause != expected_cause:
+            raise AssertionError("fixed-transfer gate cause disagrees with the physical threshold crossing")
+
+
+def fixed_transfer_loss_gate(*, tau: float, avg_transfer_deficit: float) -> FixedTransferLossGate:
+    """Expose the exact transfer channel used by ``coherent_service_or_flat_gate``."""
+    deficit = float(avg_transfer_deficit)
+    if not math.isfinite(deficit) or deficit < 0.0:
+        raise ValueError("finite nonnegative physical block transfer deficit required")
+    th = coherent_flat_thresholds(float(tau))
+    threshold = float(th["block_transfer_deficit"])
+    triggered = deficit >= threshold
+    return FixedTransferLossGate(
+        tau=float(tau),
+        avg_transfer_deficit=deficit,
+        threshold=threshold,
+        triggered=triggered,
+        cause="physical_transfer_cost" if triggered else None,
+    )
+
+
 def coherent_connection_flatness_upper(
     avg_transfer_deficit: float,
     objective_variation_action: float,
@@ -135,11 +182,14 @@ def coherent_service_or_flat_gate(
         raise ValueError("invalid coherent block data")
     th = coherent_flat_thresholds(tau, radius_cap, carrier_ratio, aspect_cap)
     roots: list[dict[str, object]] = []
-    if avg_transfer_deficit >= th["block_transfer_deficit"]:
+    transfer_gate = fixed_transfer_loss_gate(tau=tau, avg_transfer_deficit=avg_transfer_deficit)
+    if not math.isclose(transfer_gate.threshold, th["block_transfer_deficit"], rel_tol=2e-15, abs_tol=0.0):
+        raise AssertionError("whole-block gate and fixed-transfer channel thresholds diverged")
+    if transfer_gate.triggered:
         roots.append({
-            "cause": "physical_transfer_cost",
-            "threshold": th["block_transfer_deficit"],
-            "value": avg_transfer_deficit,
+            "cause": transfer_gate.cause,
+            "threshold": transfer_gate.threshold,
+            "value": transfer_gate.avg_transfer_deficit,
         })
     if objective_variation_action >= th["objective_strain_variation_action"]:
         roots.append({
@@ -226,7 +276,7 @@ def theorem_certificate() -> dict[str, object]:
         "large_deformation": f"otherwise D_V>={dmin:.12g}/c for the threshold event (displayed at c=1)",
         "large_radius": "N r_g>s0 is sticky affine-radius ancestry with critical local mass >=(3/10)s0, not a finite reset",
         "profile_rule": "Christ Gaussian is an eventwise analysis mark; no frozen-profile persistence is an input to the coherent gate",
-        "single_charge_rule": "the gate returns all threshold-crossing physical roots; it never picks a primary by theorem-name order, and delegates primary selection to the first-causal compiler",
+        "single_charge_rule": "the gate returns all threshold-crossing physical roots; its transfer channel is the reusable FixedTransferLossGate, and it never picks a primary by theorem-name order before the first-causal compiler",
         "H1H3_status": "existing H1/H3 theorems remain sharper optional diagnostics, not required to control the full non-affine moving Gaussian core",
         "continuum_status": "event-anchored hard roles and smooth PDE envelopes are supplied by companion theorems; remaining continuum work is the single recursive first-stop constructor which applies this gate and the physical pair-productivity route without duplicate charging",
     }

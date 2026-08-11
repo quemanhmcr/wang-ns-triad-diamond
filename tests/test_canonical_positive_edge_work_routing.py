@@ -17,6 +17,7 @@ from src.canonical_positive_edge_work_routing import (
     single_hard_role_map,
     theorem_certificate,
 )
+from src.coherent_service_or_flat import coherent_service_or_flat_gate
 from src.continuum_helical_edge_measure_registration import continuum_edge_measure_ledger
 from src.physical_branch_compiler import MasterDisposition, PhysicalCause, PhysicalCurrency
 
@@ -66,11 +67,58 @@ def test_bad_restriction_has_native_deficit_and_all_certified_tau_hit_fixed_tran
         bad = out.bad_route
         assert bad is not None
         assert bad.deficit >= ETA0 - 2e-10
-        assert bad.fixed_transfer_threshold == pytest.approx(tau * tau / 1_036_800_000, rel=2e-15)
-        assert bad.deficit > bad.fixed_transfer_threshold
+        assert bad.fixed_transfer_gate.threshold == pytest.approx(tau * tau / 1_036_800_000, rel=2e-15)
+        assert bad.deficit > bad.fixed_transfer_gate.threshold
         assert bad.transfer_partition.first_time is None
         assert bad.joint_projection.first_time is None
         assert bad.joint_projection.terminal_certificate_used == "stage_zero_fixed_transfer_loss"
+
+
+def test_bad_route_uses_the_same_transfer_channel_as_the_whole_physical_block_gate():
+    ledger = continuum_edge_measure_ledger((_nonforward_positive_fiber(1.0),))
+    out = _route(ledger, tau=0.1)
+    bad = out.bad_route
+    assert bad is not None
+    full_gate = coherent_service_or_flat_gate(
+        tau=bad.tau,
+        avg_transfer_deficit=bad.deficit,
+        objective_variation_action=0.0,
+        total_strain_action=0.0,
+        coherent_deformation_action=0.0,
+        aspect=1.0,
+        scale_radius=1.0,
+        has_predecessor=False,
+        scaled_lifetime=1.0,
+        phase_holonomy=0.0,
+    )
+    roots = tuple(full_gate["triggered_causes"])
+    transfer_roots = tuple(root for root in roots if root["cause"] == "physical_transfer_cost")
+    assert len(transfer_roots) == 1
+    root = transfer_roots[0]
+    assert root["threshold"] == pytest.approx(bad.fixed_transfer_gate.threshold, rel=2e-15)
+    assert root["value"] == pytest.approx(bad.fixed_transfer_gate.avg_transfer_deficit, rel=2e-15)
+    assert bad.fixed_transfer_gate.triggered
+    assert bad.fixed_transfer_gate.cause == "physical_transfer_cost"
+
+
+def test_subthreshold_transfer_channel_cannot_self_certify_fixed_loss():
+    tau = 0.1
+    ledger = continuum_edge_measure_ledger((_near_extremal_positive_fiber(1.0),))
+    out = _route(ledger, tau=tau)
+    assert out.bad_route is None
+    full_gate = coherent_service_or_flat_gate(
+        tau=tau,
+        avg_transfer_deficit=0.0,
+        objective_variation_action=0.0,
+        total_strain_action=0.0,
+        coherent_deformation_action=0.0,
+        aspect=1.0,
+        scale_radius=1.0,
+        has_predecessor=False,
+        scaled_lifetime=1.0,
+        phase_holonomy=0.0,
+    )
+    assert all(root["cause"] != "physical_transfer_cost" for root in full_gate["triggered_causes"])
 
 
 def test_geometry_good_is_only_young_eligible_and_signed_cell_work_is_retained():

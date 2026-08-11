@@ -153,7 +153,7 @@ def run_probe(
                 min_bad = min(min_bad, route.bad_route.deficit - 1.0e-4)
                 min_fixed = min(
                     min_fixed,
-                    route.bad_route.deficit - route.bad_route.fixed_transfer_threshold,
+                    route.bad_route.deficit - route.bad_route.fixed_transfer_gate.threshold,
                 )
                 first_time_failures += int(route.bad_route.transfer_partition.first_time is not None)
                 if ledger.positive_nonforward_work > 0.0 and route.bad_positive_work <= 0.0:

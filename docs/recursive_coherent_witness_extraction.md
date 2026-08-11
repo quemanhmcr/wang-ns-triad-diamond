@@ -84,7 +84,7 @@ packet or a compactly Fourier-supported solution.  The outer role carries the
 strict frequency/helicity information.  Coherent cells carry material
 phase-space ancestry.
 
-## 3. Positive atoms are a physical binary causal measure
+## 3. Positive coherent Hahn atoms are representation-level until a canonical positive kernel is proved
 
 Take the Hahn split
 
@@ -114,19 +114,25 @@ Every positive atom has, before any graph construction,
 - one physical interaction time;
 - positive actual child-work mass `[W_CDE]_+`.
 
-So after normalization the atoms define a probability law on **binary parent
-slots conditioned on a child event**.  This is precisely the structure required
-by Shannon/Rényi causal reuse.
+So after normalization the atoms define a probability law on **positive atoms of
+this coherent signed-work representation**.  This is a valid representation-level
+binary law, but after canonical continuum edge registration it is not automatically
+the master causal law.  A general coherent POVM is not a deterministic measurable
+map on Fourier/helicity edges: cross-term interference can change the later Hahn
+split.  Master-facing Shannon/Rényi use therefore requires a separate positive
+mass-preserving kernel/disintegration from the already-fixed canonical `dW+`.
 
-The graph is therefore not imposed on the flow.  It is the support of the
-positive part of the quadratic Navier--Stokes work measure.
+The signed coherent identity remains exact and is not a graph ansatz.  What is
+forbidden is promoting its later Hahn split to a second causal law without that
+positive handoff theorem.
 
 ## 4. Backscatter is not hidden
 
 The negative mass `N` is physical backscatter/cancellation.  Taking positive
 parts atom by atom can create more total positive mass than the positive part of
-the aggregate signed work, but this is not double counting: the exact identity
-`P-N=W_HH` records the compensating negative work.
+the aggregate signed work.  The exact identity `P-N=W_HH` records the compensating
+negative work, but after canonical `dW+` is fixed this excess is representation
+variation, not newly created master causal mass.
 
 This is the same physical distinction already used by the coherent work ledger.
 No absolute forcing norm is introduced.

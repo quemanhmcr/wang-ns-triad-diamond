@@ -119,7 +119,7 @@ def binary_hh_common_work_law(
     event_shell_levels: Sequence[int],
     event_atom_arrays: Sequence[np.ndarray],
 ) -> dict[str, object]:
-    """Exact positive binary law from time/event-resolved signed HH work atoms.
+    """Positive coherent-Hahn representation from time/event-resolved signed HH work atoms.
 
     For each physical shell-time event the coherent atom theorem gives
 
@@ -128,8 +128,9 @@ def binary_hh_common_work_law(
 
     Inputs here are already in the **same common work unit**, canonically N times
     physical child-energy work.  Multiplying every event by the common factor N
-    leaves the normalized causal law unchanged.  Shell-dependent M_j factors are
-    not inserted into the probabilities.
+    leaves this normalized representation-level law unchanged.  Shell-dependent M_j factors are
+    not inserted into the probabilities.  After canonical edge registration these probabilities
+    are not master-causal unless a positive mass-preserving kernel from edge dW+ is supplied.
     """
     levels, arrays = _validate_atom_events(event_shell_levels, event_atom_arrays)
     aggregate_positive = 0.0
@@ -170,7 +171,7 @@ def binary_hh_common_work_law(
         row["probability"] = float(row["mass"]) / atomic_positive
     probability_residual = sum(float(row["probability"]) for row in raw_events) - 1.0
     if abs(probability_residual) > 3e-13:
-        raise AssertionError("common-unit binary causal law failed to normalize")
+        raise AssertionError("common-unit coherent-Hahn representation failed to normalize")
 
     scale_total = sum(shell_positive.values())
     if abs(scale_total - atomic_positive) > tol:
@@ -199,8 +200,12 @@ def binary_hh_common_work_law(
         "selected_shell_own_scale_binary_work": ownscale_selected,
         "H_inf_weighted_selected_own_scale_binary_work": hinf_weighted_ownscale,
         "clean_two_times_binary_common_work": clean_two_atomic,
-        "causal_probability_uses_common_N_work": True,
+        "representation_probability_uses_common_N_work": True,
+        "representation_probability_uses_Mj_reweighting": False,
+        "causal_probability_uses_common_N_work": False,
         "causal_probability_uses_Mj_reweighting": False,
+        "canonical_positive_kernel_supplied": False,
+        "master_causal_law_identified": False,
     }
 
 
@@ -214,13 +219,15 @@ def high_tail_hh_binary_reentry(
     event_shell_levels: Sequence[int],
     event_atom_arrays: Sequence[np.ndarray],
 ) -> dict[str, object]:
-    """Compose high-tail regeneration ownership with exact HH binary atomization.
+    """Compose high-tail regeneration ownership with exact signed coherent atomization.
 
-    If HH is a primary common-unit owner, its time/event-resolved positive work is
-    exactly the aggregate positive work reconstructed by the atom family.  Atomic
-    positive mass therefore carries at least nu D_tail/2.  The normalized atom law
-    is a genuine binary physical child-work causal law.  No statement is made that
-    its parents are comparable-scale, Young-good, or productivity-generating.
+    If HH is a primary common-unit owner, its time/event-resolved positive aggregate
+    work is reconstructed by the atom family.  Atomic positive mass therefore has the
+    representation-level lower bound nu D_tail/2.  After canonical continuum edge
+    registration, the normalized coherent-Hahn atom law is not itself a master causal
+    law unless a positive mass-preserving kernel from canonical edge dW+ is supplied.
+    No statement is made that its parents are comparable-scale, Young-good, or
+    productivity-generating.
     """
     route = common_unit_regeneration_owners(
         physical_tail_dissipation_lower,
@@ -243,7 +250,7 @@ def high_tail_hh_binary_reentry(
     clean_binary = 0.5 * float(viscosity) * float(physical_tail_dissipation_lower)
     if hh_primary:
         if binary is None:
-            raise AssertionError("HH primary owner requires a positive binary work law")
+            raise AssertionError("HH primary owner requires its signed coherent work representation")
         P = float(binary["binary_positive_common_work"])
         diag = float(binary["H_inf_weighted_selected_own_scale_binary_work"])
         tol = 7e-13 * max(1.0, clean_binary, P, diag)
@@ -259,7 +266,7 @@ def high_tail_hh_binary_reentry(
         "clean_binary_positive_common_work_if_HH_owner": clean_binary,
         "clean_Hinf_weighted_selected_ownscale_work_if_HH_owner": 2.0 * clean_binary,
         "next_owner_if_interface": RESOLVED_INTERFACE_DONOR_STATUS,
-        "next_owner_if_HH": "binary_physical_child_work_law",
+        "next_owner_if_HH": "canonical_edge_dW_plus_routing__coherent_positive_kernel_still_required_for_POVM_labels",
         "productivity_energy_gate_supplied": False,
         "Young_near_extremality_supplied": False,
         "parent_child_scale_locality_supplied": False,
@@ -280,7 +287,7 @@ def own_scale_reweighting_counterexample() -> dict[str, object]:
         "common_unit_probabilities": tuple(float(x) for x in common_prob),
         "own_scale_reweighted_probabilities": tuple(float(x) for x in own_prob),
         "maximum_probability_distortion": float(np.max(np.abs(common_prob - own_prob))),
-        "lesson": "M_j/N weighting changes causal probabilities across shells and is diagnostic only",
+        "lesson": "M_j/N weighting changes representation probabilities across shells; it remains diagnostic and cannot define canonical causal weights",
     }
 
 
@@ -291,17 +298,18 @@ def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
         "upstream": HIGH_TAIL_STATUS,
-        "common_unit": "all cross-shell causal weights are N times actual positive child-energy work; the common factor N cancels under normalization",
+        "common_unit": "all cross-shell hard-owner work is kept in the common N times child-energy-work unit; the factor N cancels under representation-level normalization",
         "owner_cover": "regeneration owner N W_>^+>=nu D_tail; sum_j N W_j^+>=N W_>^+; low-low exclusion gives H_N^+ + I_N^+ >= sum_j N W_j^+",
         "clean_owner": "HH or resolved interface common-unit work carries at least nu D_tail/2, exact ties joint",
         "binary_atomization": "for each shell-time HH event, exact coherent work atoms satisfy P-N=W_HH and P>=[W_HH]_+; after integration binary positive common work dominates positive HH common work",
-        "causal_law": "normalize positive coherent HH atoms in their common N dW unit; every event has exactly two parent coherent labels and one child label",
-        "anti_reweight": "M_j/N weighting may be used only to read own-scale strength after the causal law exists; it must not redefine probabilities across shells",
+        "coherent_positive_law": "normalize positive coherent HH Hahn atoms in their common N dW unit only as a representation-level law",
+        "canonical_causal_status": "not identified: master causality is canonical edge dW+ and a general coherent POVM requires a separate positive mass-preserving kernel/disintegration",
+        "anti_reweight": "M_j/N weighting may be used only to read own-scale strength; it must not redefine either inherited canonical dW+ weights or coherent representation probabilities across shells",
         "scale_diagnostic": "for the common-unit binary law on high shells j>=1, selecting the largest shell atom gives ownscale_selected*exp(H_inf_scale)>=2*binary_positive_common_work; on an HH owner this is >=nu D_tail",
         "productivity_scope": "no W_HH>=8E1/15 child-energy generation gate is assumed; KL/log-productivity remains conditional on that separate gate",
         "locality_scope": "no parent/child scale-comparability or Young near-extremality is inferred from generic high-tail HH work; nonlocal K>>M geometry remains a separate physical seam",
         "interface_continuation": "the resolved-interface owner delegates to the resolved donor/circulation quotient: symmetric work is existing strain/deformation provenance, while skew work is same-event conservative donor tracing with no new recursive generation",
-        "master_rule": "binary-HH remains a recursive physical work owner; resolved interface is first quotiented into existing strain/deformation or same-event conservative donor provenance; exact ties remain joint with no additive reset or lexicographic priority",
+        "master_rule": "HH common-unit signed work remains a physical owner, but its coherent-Hahn atom probabilities are not a master causal law without the canonical dW+ positive kernel; resolved interface is first quotiented into existing strain/deformation or same-event conservative donor provenance; exact ties remain joint",
         "counterexample": cex,
     }
 
@@ -374,7 +382,7 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> HighTailBinaryWorkStr
         inv = max((abs(a - b) for a, b in zip(p0, p1)), default=0.0)
         wi = max(wi, inv)
         if inv > 3e-13:
-            raise AssertionError("common work-unit scaling changed causal probabilities")
+            raise AssertionError("common work-unit scaling changed coherent representation probabilities")
 
         out = high_tail_hh_binary_reentry(D, nu, W, shell_work, H, I, levels, atoms)
         if out["HH_primary"]:
@@ -423,7 +431,7 @@ The high-tail energy theorem already supplies a physical regeneration owner
 
 `N W_>^+ >= nu D_tail`.
 
-The causal law must stay in this common physical unit.  Orthogonal hard-shell work gives
+The hard-owner work must stay in this common physical unit.  Orthogonal hard-shell work gives
 
 `sum_j N W_j^+ >= N W_>^+`,
 
@@ -431,7 +439,7 @@ and low--low support exclusion at each shell gives
 
 `H_N^+ + I_N^+ >= sum_j N W_j^+`.
 
-Hence HH or resolved interface common-unit work carries at least `nu D_tail/2`; exact ties remain joint.  The stronger own-scale quantity `sum_j M_j W_j^+` remains available as a diagnostic, but it is **not** used to redefine causal probabilities across shells.
+Hence HH or resolved interface common-unit work carries at least `nu D_tail/2`; exact ties remain joint.  The stronger own-scale quantity `sum_j M_j W_j^+` remains available as a diagnostic, but it is **not** used to redefine canonical causal mass or coherent representation probabilities across shells.
 
 The resolved-interface continuation is now the donor/circulation quotient.  In the same common `N dW` unit its actual resolved operator splits as `K+S`, so an interface owner gives either conservative skew donor work or existing symmetric strain/deformation work at least `nu D_tail/4`.  Skew role traversal is same-event provenance, not a new recursive generation; no shell-scale reweighting is used.
 
@@ -443,11 +451,11 @@ and the Hahn split gives
 
 `sum_CDE [W_CDE]_+ >= [W_HH(event)]_+`.
 
-Therefore the integrated positive coherent atoms carry at least `nu D_tail/2` common-unit physical child work whenever HH is a primary owner.  Normalizing those atoms gives a genuine binary causal law with two parent coherent labels and one child label.  No generated-energy gate is needed merely to create this law.
+Therefore the integrated positive coherent Hahn atoms carry at least `nu D_tail/2` in that coherent representation whenever HH is a primary owner.  Normalizing those atoms gives a binary representation law with two parent coherent labels and one child label.  It is **not** a second master causal law after canonical edge `dW+` has been fixed; that identification remains conditional on a positive mass-preserving coherent kernel/disintegration.
 
-The distinction is essential.  Two equal physical work atoms at shell levels `1` and `10` have common-unit probabilities `(1/2,1/2)`.  Multiplying them by `M_j/N=2^j` changes those probabilities to `{cert['counterexample']['own_scale_reweighted_probabilities']}`.  That changes the apparent cause by changing the observer's scale unit, so it is forbidden for causal weighting.
+The distinction is essential.  Two equal physical work atoms at shell levels `1` and `10` have common-unit probabilities `(1/2,1/2)`.  Multiplying them by `M_j/N=2^j` changes those probabilities to `{cert['counterexample']['own_scale_reweighted_probabilities']}`.  That changes the representation weights by changing the observer's scale unit, so it cannot be used to define inherited canonical causal weighting.
 
-After the common-unit law exists, its shell pushforward may be used diagnostically.  Since every high shell has `M_j/N>=2`, the maximal binary-work shell satisfies
+After the common-unit coherent representation law exists, its shell pushforward may be used diagnostically.  Since every high shell has `M_j/N>=2`, the maximal binary-work shell satisfies
 
 `ownscale_selected * exp(H_inf^binary-scale) >= 2 P_binary`,
 
@@ -466,7 +474,7 @@ Stress: `{out.samples}` common-unit owner / coherent Hahn / probability states
 - maximum joint owner count: `{out.maximum_joint_owner_count}`
 - forbidden scale-reweighting example probability distortion: `{out.scale_reweighting_counterexample_distortion:.6f}`
 
-This theorem adds no packet, no reset currency, and no locality hypothesis.  It only keeps the physical work law in its natural unit and exposes the binary Navier--Stokes cause already present in the quadratic term.  No global-regularity conclusion is asserted.
+This theorem adds no packet, no reset currency, and no locality hypothesis.  It keeps the signed HH work in its natural unit and exposes exact binary coherent work labels.  Canonical master causality remains the separately registered edge `dW+`; no positive coherent kernel is claimed here, and no global-regularity conclusion is asserted.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)

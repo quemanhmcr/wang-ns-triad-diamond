@@ -48,8 +48,12 @@ def test_event_resolved_hahn_atoms_dominate_positive_HH_and_define_binary_law():
     assert out["binary_positive_common_work"] == pytest.approx(9.0)
     assert out["atomic_positive_dominance_margin"] == pytest.approx(6.0)
     assert sum(e["probability"] for e in out["events"]) == pytest.approx(1.0)
-    assert out["causal_probability_uses_common_N_work"] is True
+    assert out["representation_probability_uses_common_N_work"] is True
+    assert out["representation_probability_uses_Mj_reweighting"] is False
+    assert out["causal_probability_uses_common_N_work"] is False
     assert out["causal_probability_uses_Mj_reweighting"] is False
+    assert out["canonical_positive_kernel_supplied"] is False
+    assert out["master_causal_law_identified"] is False
 
 
 def test_common_work_unit_rescaling_does_not_change_binary_probabilities():
@@ -82,7 +86,7 @@ def test_HH_primary_owner_supplies_clean_binary_work_but_not_productivity():
     assert "RESOLVED_INTERFACE_DONOR_QUOTIENT" in out["next_owner_if_interface"]
 
 
-def test_scale_reweighting_counterexample_changes_cause_probabilities():
+def test_scale_reweighting_counterexample_changes_representation_probabilities():
     out = own_scale_reweighting_counterexample()
     assert out["common_unit_probabilities"] == pytest.approx((0.5, 0.5))
     assert out["maximum_probability_distortion"] > 0.49
@@ -92,8 +96,10 @@ def test_scale_reweighting_counterexample_changes_cause_probabilities():
 def test_certificate_forbids_scale_reweighting_and_keeps_locality_open():
     cert = theorem_certificate()
     assert cert["status"] == STATUS
-    assert "N times actual positive child-energy work" in cert["common_unit"]
-    assert "must not redefine probabilities" in cert["anti_reweight"]
+    assert "common N times child-energy-work unit" in cert["common_unit"]
+    assert "must not redefine either inherited canonical dW+ weights" in cert["anti_reweight"]
+    assert "not identified" in cert["canonical_causal_status"]
+    assert "positive mass-preserving kernel/disintegration" in cert["canonical_causal_status"]
     assert "KL/log-productivity remains conditional" in cert["productivity_scope"]
     assert "nonlocal K>>M geometry remains" in cert["locality_scope"]
     assert "same-event conservative donor tracing" in cert["interface_continuation"]
