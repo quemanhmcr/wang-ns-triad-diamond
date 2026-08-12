@@ -276,8 +276,10 @@ At **every RK4 output time**, not merely at a few selected snapshots, it:
 5. forms gross `W+` and `W-` before any modal summation;
 6. checks that `W+ - W-` reconstructs the independently projected actual helical modal work;
 7. trapezoid-integrates the gross work, helical modal stock, and viscous term over the same RK4 output grid;
-8. checks the exact interval stock/work/viscosity balance;
+8. checks the interval stock/work/viscosity balance with a tolerance owned by the finite RK4/trapezoid audit, not by the exact theorem object;
 9. compares the same cutoff-7 Galerkin system represented on FFT grids `24` and `28`.
+
+The exact theorem itself has no numerical tolerance.  In particular, a helicity component whose initial energy is exactly or nearly zero can have a finite-step relative quadrature residual that is much larger than machine epsilon even while the same PDE law converges correctly.  The probe therefore records the residual and enforces its own finite-step threshold on the native energy-throughput scale.
 
 The audit also runs the sign-reversed divergence-free initial state and the opposite child helicity.  These are real Navier--Stokes states/modes, not synthetic balance fixtures.
 

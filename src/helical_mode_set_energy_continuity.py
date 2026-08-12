@@ -209,8 +209,10 @@ class HelicalModeSetIntervalContinuity:
             _finite_nonnegative(value, name)
         if self.native_energy_throughput_scale <= 0.0:
             raise ValueError("positive native energy-throughput scale required")
-        if self.balance_native_residual > 5.0e-8:
-            raise AssertionError("mode-set interval continuity left its native physical energy scale")
+        # The mathematical continuity law is exact.  This object records a
+        # finite-precision / finite-time-quadrature residual but does not impose
+        # a universal numerical tolerance: that tolerance belongs to the
+        # concrete PDE discretization/audit which produced the observation.
         if (
             self.fifo_matching_used
             or self.lifo_matching_used
