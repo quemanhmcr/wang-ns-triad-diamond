@@ -1,0 +1,80 @@
+name: Mixed-fate reserved Young handoff
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/mixed_fate_reserved_young_handoff.py'
+      - 'tests/test_mixed_fate_reserved_young_handoff.py'
+      - 'src/mixed_fate_reserved_young_handoff_pde_probe.py'
+      - 'tests/test_mixed_fate_reserved_young_handoff_pde_probe.py'
+      - 'src/canonical_positive_edge_work_routing.py'
+      - 'src/continuum_helical_edge_measure_registration.py'
+      - 'src/helical_physical_edge_registration.py'
+      - 'src/single_edge_certificate.py'
+      - 'src/smooth_flux_cocycle.py'
+      - 'src/complex_young_parent_marking.py'
+      - 'docs/mixed_fate_reserved_young_handoff.md'
+      - '.github/workflows/mixed-fate-reserved-young-handoff.yml'
+permissions:
+  contents: read
+jobs:
+  analytic-and-adversarial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused mixed-fate theorem tests
+        run: pytest -q tests/test_mixed_fate_reserved_young_handoff.py
+      - name: Dependency seam tests
+        run: pytest -q tests/test_single_edge_certificate.py tests/test_continuum_helical_edge_measure_registration.py tests/test_canonical_positive_edge_work_routing.py tests/test_complex_young_parent_marking.py
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Mixed-fate algebra and rigorous-constant stress
+        run: python -m src.mixed_fate_reserved_young_handoff --samples 75000 --seed 2026081202 --outdir results-mixed-fate/analytic
+      - name: Canonical routing dependency stress
+        run: python -m src.canonical_positive_edge_work_routing --samples 50000 --seed 20260812 --outdir results-mixed-fate/canonical-routing
+      - name: Summary
+        run: |
+          cat results-mixed-fate/analytic/summary.md >> "$GITHUB_STEP_SUMMARY"
+          echo >> "$GITHUB_STEP_SUMMARY"
+          cat results-mixed-fate/canonical-routing/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mixed-fate-reserved-young-analytic-results
+          path: results-mixed-fate/
+
+  actual-ns:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused evolved Galerkin NS test
+        run: pytest -q tests/test_mixed_fate_reserved_young_handoff_pde_probe.py tests/test_canonical_positive_edge_work_routing_pde_probe.py
+      - name: Evolved dealiased mixed-fate NS audit
+        run: python -m src.mixed_fate_reserved_young_handoff_pde_probe --resolution 24 --steps 32 --duration 0.001 --snapshots 5 --tau 0.1 --outdir results-mixed-fate-ns/main
+      - name: Amplitude adversaries on the same physical Fourier geometry
+        run: |
+          for a in 0.5 2.0; do
+            tag=${a/./p}
+            python -m src.mixed_fate_reserved_young_handoff_pde_probe \
+              --resolution 24 --steps 24 --amplitude "$a" --duration 0.00075 --snapshots 4 --tau 0.1 \
+              --outdir "results-mixed-fate-ns/amplitude-$tag"
+          done
+      - name: Summary
+        run: |
+          for f in results-mixed-fate-ns/*/summary.md; do
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat "$f" >> "$GITHUB_STEP_SUMMARY"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mixed-fate-reserved-young-actual-ns-results
+          path: results-mixed-fate-ns/

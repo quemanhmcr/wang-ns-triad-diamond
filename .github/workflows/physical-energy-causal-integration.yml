@@ -46,6 +46,11 @@ on:
       - 'src/canonical_positive_edge_work_routing.py'
       - 'tests/test_canonical_positive_edge_work_routing.py'
       - 'src/canonical_positive_edge_work_routing_pde_probe.py'
+      - 'src/mixed_fate_reserved_young_handoff.py'
+      - 'tests/test_mixed_fate_reserved_young_handoff.py'
+      - 'src/mixed_fate_reserved_young_handoff_pde_probe.py'
+      - 'tests/test_mixed_fate_reserved_young_handoff_pde_probe.py'
+      - '.github/workflows/mixed-fate-reserved-young-handoff.yml'
       - 'tests/test_canonical_positive_edge_work_routing_pde_probe.py'
       - '.github/workflows/canonical-positive-edge-work-routing.yml'
       - '.github/workflows/audit-canonical-positive-edge-work-routing.yml'
@@ -125,6 +130,7 @@ jobs:
       - run: python -m src.helical_physical_edge_registration --samples 50000 --outdir results-integration/helical-physical-edge-registration
       - run: python -m src.continuum_helical_edge_measure_registration --samples 3000 --core-blocks 100 --outdir results-integration/continuum-helical-edge-measure-registration
       - run: python -m src.canonical_positive_edge_work_routing --samples 50000 --outdir results-integration/canonical-positive-edge-work-routing
+      - run: python -m src.mixed_fate_reserved_young_handoff --samples 50000 --seed 2026081202 --outdir results-integration/mixed-fate-reserved-young-handoff
       - run: python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young
       - run: python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian
       - run: python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor
