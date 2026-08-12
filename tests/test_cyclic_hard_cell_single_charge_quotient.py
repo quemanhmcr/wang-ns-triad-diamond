@@ -278,3 +278,26 @@ def test_semantic_guards_reject_new_owner_progress_failure_payment_and_between_t
         replace(atom, creates_new_event=True)
     with pytest.raises(ValueError, match="may not create cause, event depth, or scale progress"):
         replace(atom, replaces_recipient_causal_law=True)
+
+
+def test_restricted_submeasure_domination_is_certified_on_native_work_scale_not_tiny_realized_recipient_mass():
+    triad = generic_two_donor_counterexample()
+    quotient = hard_cell_single_charge_quotient(
+        triad, quotient_measure_mass=1.0, mode_roles=fine_hard_role_map(triad)
+    )
+    restricted = pushforward_restricted_hard_cell_donor_work(
+        quotient, donor_cells=(quotient.donor_charges[0].cell,)
+    )
+    sub = restricted.recipient_subcharges[0]
+    # Native-scale roundoff may put a floating submeasure infinitesimally above
+    # its independently reconstructed full recipient mass.  This is numerical
+    # certification only; the exact theorem remains submeasure domination.
+    replace(
+        sub,
+        submeasure_mass=sub.full_canonical_positive_work_mass + 1.0e-12 * sub.native_work_mass_scale,
+    )
+    with pytest.raises(AssertionError, match="native work scale"):
+        replace(
+            sub,
+            submeasure_mass=sub.full_canonical_positive_work_mass + 1.0e-8 * sub.native_work_mass_scale,
+        )

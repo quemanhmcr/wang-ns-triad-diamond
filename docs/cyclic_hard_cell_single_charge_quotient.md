@@ -246,7 +246,7 @@ No canonical FIFO/LIFO pairing of deposits and later withdrawals follows from th
 
 The exact theorem applies to every mathematically nonzero cyclic work law.  Numerically, the sign of an extremely phase-cancelled work vector is ill-conditioned.  The predecessor theorem already established the correct policy: use native modal capacity only as an immutable floating **error envelope**, never in the transport law, and mint no donor atom when the realized work is below numerical sign resolution.
 
-The hard-cell quotient inherits that policy.  It refuses unresolved kernels rather than manufacturing hard-cell provenance from rounded Hahn signs.
+The hard-cell quotient inherits that policy.  It refuses unresolved kernels rather than manufacturing hard-cell provenance from rounded Hahn signs.  Submeasure-domination residuals are also certified on the native work-mass envelope, never by dividing through a possibly tiny realized recipient Hahn mass.
 
 ---
 

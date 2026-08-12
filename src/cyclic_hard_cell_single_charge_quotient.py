@@ -180,6 +180,7 @@ class RestrictedRecipientSubcharge:
     fate: str
     submeasure_mass: float
     full_canonical_positive_work_mass: float
+    native_work_mass_scale: float
     incoming_selected_donor_cell_count: int
 
     def __post_init__(self) -> None:
@@ -187,10 +188,15 @@ class RestrictedRecipientSubcharge:
             raise ValueError("restricted recipient fate must be inherited from canonical routing")
         _finite_nonnegative(self.submeasure_mass, "restricted recipient submeasure mass")
         _finite_nonnegative(self.full_canonical_positive_work_mass, "full canonical recipient dW+ mass")
-        if self.submeasure_mass <= 0.0 or self.incoming_selected_donor_cell_count <= 0:
-            raise ValueError("restricted recipient subcharge must carry positive donor provenance")
-        if self.submeasure_mass > self.full_canonical_positive_work_mass * (1.0 + 5.0e-10):
-            raise AssertionError("restricted donor pushforward exceeded its canonical recipient charge")
+        _finite_nonnegative(self.native_work_mass_scale, "restricted recipient native work-mass scale")
+        if self.submeasure_mass <= 0.0 or self.native_work_mass_scale <= 0.0 or self.incoming_selected_donor_cell_count <= 0:
+            raise ValueError("restricted recipient subcharge must carry positive donor provenance and native work scale")
+        # The exact theorem is submeasure domination.  Floating certification must
+        # not divide by an accidentally tiny realized recipient Hahn mass: near
+        # phase cancellation that sign/mass is ill-conditioned.  Use only the
+        # predecessor theorem's immutable native work-error envelope.
+        if self.submeasure_mass - self.full_canonical_positive_work_mass > 5.0e-10 * self.native_work_mass_scale:
+            raise AssertionError("restricted donor pushforward exceeded its canonical recipient charge on the native work scale")
 
 
 @dataclass(frozen=True)
@@ -537,6 +543,7 @@ def pushforward_restricted_hard_cell_donor_work(
                 fate=full.fate,
                 submeasure_mass=mass,
                 full_canonical_positive_work_mass=full.canonical_positive_work_mass,
+                native_work_mass_scale=native,
                 incoming_selected_donor_cell_count=len({atom.donor_cell for atom in selected_atoms}),
             )
         )
