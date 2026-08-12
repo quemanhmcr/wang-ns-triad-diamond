@@ -86,14 +86,15 @@ This is stage-zero block fate.  It has `first_time=None`.  The legacy fine compi
 
 ## 3. Deterministic hard cells inherit cause and separately compress signed work
 
-The event-anchored role theorem already supplies deterministic disjoint Borel frequency cells together with pointwise orthogonal helical projectors.  Such a hard role assignment is a genuine measurable map `pi` on the physical mode/edge space.  Therefore it has two different, simultaneously valid outputs:
+The event-anchored role theorem already supplies deterministic disjoint Borel frequency cells together with pointwise orthogonal helical projectors.  Such a hard role assignment is a genuine measurable map `pi` on the physical mode/edge space.  Therefore it has three different, simultaneously valid linear pushforwards:
 
 \[
  P_C=(\pi_#\mu^+)(C),\qquad
- T_C=(\pi_#\mu)(C)=\int_{\pi^{-1}(C)}dW.
+ N_C=(\pi_#\mu^-)(C),\qquad
+ T_C=(\pi_#\mu)(C)=P_C-N_C.
 \]
 
-`P_C` is inherited causal mass.  `T_C` is signed hard-cell trilinear work.  The implementation certifies
+`P_C` is inherited causal mass. `N_C` is the directly inherited canonical Hahn-negative mass, retained for cancellation provenance; it is not reconstructed by a later hard-cell Hahn split. `T_C` is signed hard-cell trilinear work.  The implementation certifies
 
 \[
  [T_C]_+\le P_C

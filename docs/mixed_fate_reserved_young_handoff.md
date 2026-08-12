@@ -45,13 +45,13 @@ Because the Hahn decomposition was performed once, on edge space, linear pushfor
 \boxed{T_C=g_C+b_C-n_C.}
 \]
 
-The existing hard-cell object stores `T_C` and `g_C+b_C`. Therefore
+The hard-cell compression carries all three linear pushforwards directly: `pi_#dW`, `pi_#dW^+`, and `pi_#dW^-`. In particular, `n_C` is accumulated from the original negative edge masses before hard aggregation. The exact identity
 
 \[
 \boxed{n_C=(g_C+b_C)-T_C}
 \]
 
-recovers `pi_#dW^-`; this is **not** the positive or negative part of `T_C` and therefore is not a later Hahn split.
+remains a theorem check, but it is **not** used numerically to manufacture `n_C` by subtracting nearly cancelling aggregates. This preserves tiny canonical negative work and is still not a later Hahn split.
 
 Every term has the units of physical child-energy work. Parent exchange, helicity basis gauge, and the continuum parent quotient have already been removed before these masses are formed, so this identity inherits those symmetries.
 
@@ -106,7 +106,7 @@ Therefore no theorem downstream is permitted to feed `U_C` to Young, Christ, Duh
 
 ## 3. Bad-assistance-free Young/Christ gate
 
-Let `xi_C>=0` be the normalized symbol-freezing error for this same physical hard cell, and let `delta_Christ(epsilon_G)>0` be any legitimate modulus supplied by the external inverse Young theorem at the desired Gaussian tolerance. No numerical value for that modulus is invented here.
+Let `xi_C>=0` be the normalized symbol-freezing error for this same physical hard cell, and let `delta_Christ(epsilon_G)>0` be any legitimate modulus supplied by the external inverse Young theorem at the desired Gaussian tolerance. Replace it, harmlessly if necessary, by its minimum with any fixed number strictly below `1`; thus the API uses `0<delta_Christ<1`. No numerical value for that modulus is invented here.
 
 Assume
 

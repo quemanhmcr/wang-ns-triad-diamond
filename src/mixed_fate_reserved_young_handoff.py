@@ -32,25 +32,24 @@ def _close(a: float, b: float, *, factor: float = 2.0e-10) -> bool:
 
 
 def inherited_negative_work(cell: HardCellWork) -> float:
-    """Pushforward mass of the already-fixed canonical Hahn-negative edge law.
+    """Direct pushforward mass of the already-fixed canonical Hahn-negative edge law.
 
-    Since ``pi_# dW = pi_# dW+ - pi_# dW-`` on every hard product cell,
-
-      n_C = (pi_# dW-)(C) = P_C - T_C.
-
-    This is not a new Hahn split after aggregation.  It is the negative mass of
-    the original edge-space Hahn decomposition, recovered from its two verified
-    pushforwards.
+    The hard representation now carries ``pi_# dW-`` explicitly, in parallel
+    with ``pi_# dW+`` and ``pi_# dW``.  We deliberately do not reconstruct it
+    by subtracting two coarsened floating aggregates ``P_C-T_C``: that identity
+    is mathematically exact but numerically loses provenance when negative work
+    is tiny compared with positive work.  No later Hahn split is performed.
     """
-    raw = float(cell.inherited_positive_work) - float(cell.signed_work)
-    tol = 3.0e-10 * max(
-        abs(float(cell.inherited_positive_work)),
-        abs(float(cell.signed_work)),
-        1.0e-300,
-    )
-    if raw < -tol:
-        raise AssertionError("hard cell violates pi_#dW = pi_#dW+ - pi_#dW-")
-    return 0.0 if raw < 0.0 else raw
+    n = float(cell.inherited_negative_work)
+    if n < 0.0 or not math.isfinite(n):
+        raise AssertionError("hard cell lost the direct canonical dW- pushforward")
+    if not _close(
+        float(cell.inherited_positive_work) - n,
+        float(cell.signed_work),
+        factor=8.0e-10,
+    ):
+        raise AssertionError("direct hard-cell Hahn pushforwards do not reconstruct signed work")
+    return n
 
 
 @dataclass(frozen=True)
@@ -534,7 +533,7 @@ def theorem_certificate(*, rigorous: bool = False) -> dict[str, object]:
     coherent = coherent_fresh_hahn_kernel_counterexample()
     out: dict[str, object] = {
         "status": STATUS,
-        "cell_hahn_identity": "T_C=g_C+b_C-n_C with g=pi_#dW_G+, b=pi_#dW_B+, n=pi_#dW- from the single edge-space Hahn decomposition",
+        "cell_hahn_identity": "T_C=g_C+b_C-n_C with g=pi_#dW_G+, b=pi_#dW_B+, n=pi_#dW- pushed forward directly from the single edge-space Hahn decomposition",
         "reservation_identity": "delta_res=1-(T_C-b_C)/Y_C = (1-T_C/Y_C)+b_C/Y_C = delta_full+bad_assistance",
         "young_semantics": "Young/Christ receives only the actual full signed trilinear T_C; T_C-b_C is a sufficient-condition certificate only and is never a work law or causal law",
         "safe_handoff": "delta_res+xi<=delta_Christ implies delta_full+xi<=delta_Christ and certifies the inherited good dW+ branch without terminal bad-positive assistance",
@@ -577,6 +576,7 @@ def _make_cell(g: float, b: float, n: float, label: str = "stress") -> HardCellW
         cell=HardProductCell(parent_roles=(f"{label}-p1", f"{label}-p2"), child_role=f"{label}-c"),
         signed_work=T,
         inherited_positive_work=P,
+        inherited_negative_work=float(n),
         inherited_good_positive_work=float(g),
         inherited_bad_positive_work=float(b),
         fresh_cell_hahn_positive=fresh,

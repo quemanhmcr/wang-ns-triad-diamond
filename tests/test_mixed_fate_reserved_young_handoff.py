@@ -35,6 +35,7 @@ def _cell(*, g: float, b: float, n: float) -> HardCellWork:
         cell=HardProductCell(parent_roles=("p0", "p1"), child_role="c"),
         signed_work=T,
         inherited_positive_work=P,
+        inherited_negative_work=n,
         inherited_good_positive_work=g,
         inherited_bad_positive_work=b,
         fresh_cell_hahn_positive=fresh,
@@ -128,6 +129,17 @@ def test_reserved_gate_exact_tie_is_deterministic_and_allowed():
     assert out.reserved_young_deficit == 0.1875
     assert out.reserved_young_deficit + out.normalized_symbol_freezing_error == 0.25
     assert out.young_handoff_certified
+
+
+def test_christ_modulus_is_capped_below_one_for_failure_alternative_semantics():
+    cell = _cell(g=0.99, b=0.005, n=0.002)
+    with pytest.raises(ValueError, match="Christ modulus"):
+        certify_reserved_young_handoff(
+            cell,
+            certified_full_cell_young_upper=1.0,
+            normalized_symbol_freezing_error=0.0,
+            christ_modulus=1.0,
+        )
 
 
 def test_positive_rescaling_changes_no_dimensionless_handoff_deficit():

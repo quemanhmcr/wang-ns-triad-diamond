@@ -138,6 +138,7 @@ class HardCellWork:
     cell: HardProductCell
     signed_work: float
     inherited_positive_work: float
+    inherited_negative_work: float
     inherited_good_positive_work: float
     inherited_bad_positive_work: float
     fresh_cell_hahn_positive: float
@@ -148,6 +149,7 @@ class HardCellWork:
         vals = (
             self.signed_work,
             self.inherited_positive_work,
+            self.inherited_negative_work,
             self.inherited_good_positive_work,
             self.inherited_bad_positive_work,
             self.fresh_cell_hahn_positive,
@@ -157,6 +159,7 @@ class HardCellWork:
             raise ValueError("finite hard-cell work required")
         if min(
             self.inherited_positive_work,
+            self.inherited_negative_work,
             self.inherited_good_positive_work,
             self.inherited_bad_positive_work,
             self.fresh_cell_hahn_positive,
@@ -176,6 +179,12 @@ class HardCellWork:
             factor=8.0e-10,
         ):
             raise AssertionError("hard cell lost the exact G/B restriction of inherited dW+")
+        if not _native_close(
+            self.inherited_positive_work - self.inherited_negative_work,
+            self.signed_work,
+            factor=8.0e-10,
+        ):
+            raise AssertionError("hard cell lost the direct pushforward identity dW=dW+-dW-")
         expected_hahn = max(self.signed_work, 0.0)
         if not _native_close(self.fresh_cell_hahn_positive, expected_hahn, factor=8.0e-10):
             raise AssertionError("hard-cell diagnostic Hahn mass is not the positive part of signed cell work")
@@ -196,6 +205,7 @@ class HardCellCompression:
     cells: tuple[HardCellWork, ...]
     canonical_positive_work: float
     inherited_positive_work: float
+    inherited_negative_work: float
     inherited_good_positive_work: float
     inherited_bad_positive_work: float
     fresh_hahn_positive_work: float
@@ -207,6 +217,7 @@ class HardCellCompression:
         vals = (
             self.canonical_positive_work,
             self.inherited_positive_work,
+            self.inherited_negative_work,
             self.inherited_good_positive_work,
             self.inherited_bad_positive_work,
             self.fresh_hahn_positive_work,
@@ -454,7 +465,7 @@ def _compress_replayed_signed_edge_work_to_hard_cells(
     required before a downstream Young/Christ comparison.
     """
     roles = _validate_mode_roles(replayed, mode_roles)
-    buckets: dict[HardProductCell, list[tuple[float, float, bool]]] = {}
+    buckets: dict[HardProductCell, list[tuple[float, float, float, bool]]] = {}
     for _, atom in _flatten_atoms(replayed):
         identity = atom.physical_edge_identity
         cell = HardProductCell(
@@ -463,22 +474,25 @@ def _compress_replayed_signed_edge_work_to_hard_cells(
         )
         work = float(atom.signed_work_mass)
         pos = max(work, 0.0)
+        neg = max(-work, 0.0)
         good = bool(pos > 0.0 and atom.signed_efficiency > 1.0 - ETA0)
-        buckets.setdefault(cell, []).append((work, pos, good))
+        buckets.setdefault(cell, []).append((work, pos, neg, good))
 
     cells: list[HardCellWork] = []
     for cell in sorted(buckets):
         rows = buckets[cell]
         signed = _finite_sum([row[0] for row in rows], "signed hard-cell work")
         inherited = _finite_sum([row[1] for row in rows], "inherited hard-cell dW+ mass")
-        good = _finite_sum([row[1] for row in rows if row[2]], "hard-cell geometry-good dW+ mass")
-        bad = _finite_sum([row[1] for row in rows if row[1] > 0.0 and not row[2]], "hard-cell geometry-bad dW+ mass")
+        negative = _finite_sum([row[2] for row in rows], "inherited hard-cell dW- mass")
+        good = _finite_sum([row[1] for row in rows if row[3]], "hard-cell geometry-good dW+ mass")
+        bad = _finite_sum([row[1] for row in rows if row[1] > 0.0 and not row[3]], "hard-cell geometry-bad dW+ mass")
         fresh = max(signed, 0.0)
         cells.append(
             HardCellWork(
                 cell=cell,
                 signed_work=signed,
                 inherited_positive_work=inherited,
+                inherited_negative_work=negative,
                 inherited_good_positive_work=good,
                 inherited_bad_positive_work=bad,
                 fresh_cell_hahn_positive=fresh,
@@ -488,13 +502,17 @@ def _compress_replayed_signed_edge_work_to_hard_cells(
 
     canonical = float(replayed.positive_edge_work)
     inherited_total = _finite_sum([c.inherited_positive_work for c in cells], "hard-cell inherited dW+ total")
+    negative_total = _finite_sum([c.inherited_negative_work for c in cells], "hard-cell inherited dW- total")
     good_total = _finite_sum([c.inherited_good_positive_work for c in cells], "hard-cell good dW+ total")
     bad_total = _finite_sum([c.inherited_bad_positive_work for c in cells], "hard-cell bad dW+ total")
     fresh_total = _finite_sum([c.fresh_cell_hahn_positive for c in cells], "hard-cell fresh Hahn diagnostic total")
+    if not _native_close(negative_total, replayed.negative_edge_work, factor=8.0e-10):
+        raise AssertionError("deterministic hard-cell pushforward did not preserve the original edge Hahn-negative mass")
     return HardCellCompression(
         cells=tuple(cells),
         canonical_positive_work=canonical,
         inherited_positive_work=inherited_total,
+        inherited_negative_work=negative_total,
         inherited_good_positive_work=good_total,
         inherited_bad_positive_work=bad_total,
         fresh_hahn_positive_work=fresh_total,

@@ -187,6 +187,8 @@ def test_hard_coarsening_and_refinement_preserve_inherited_cause_but_not_fresh_h
     coarse = compress_signed_edge_work_to_hard_cells(ledger, single_hard_role_map(ledger))
     assert refined.inherited_positive_work == pytest.approx(ledger.positive_edge_work, rel=3e-11)
     assert coarse.inherited_positive_work == pytest.approx(ledger.positive_edge_work, rel=3e-11)
+    assert refined.inherited_negative_work == pytest.approx(ledger.negative_edge_work, rel=3e-11)
+    assert coarse.inherited_negative_work == pytest.approx(ledger.negative_edge_work, rel=3e-11)
     assert coarse.inherited_positive_work == pytest.approx(refined.inherited_positive_work, rel=3e-11)
     assert coarse.cancellation_gap >= -1e-12
     assert coarse.fresh_hahn_positive_work <= coarse.inherited_positive_work + 1e-12
