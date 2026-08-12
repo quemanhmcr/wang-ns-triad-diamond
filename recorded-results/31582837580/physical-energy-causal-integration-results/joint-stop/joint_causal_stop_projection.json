@@ -1,0 +1,22 @@
+{
+  "certificate": {
+    "status": "EXACT_JOINT_CAUSAL_STOP_MASTER_PROJECTION__NO_RN_TIE_SPLIT_REQUIRED",
+    "physical_statement": "an exact simultaneous first hit is retained as one joint physical stop carrying the full unsplit transfer mass and the complete set of certified causes",
+    "boundary": "t=0 is absorbing",
+    "terminal_dominance": "if any joint cause already certifies a fixed multiplicative transfer cost, the whole joint stop is terminal transfer-cost; otherwise a valid uniform global resource may terminate as additive reset",
+    "recursive_joint": "source, critical dissipation, material/new ancestry, and earlier HH regeneration are all coarse RECURSE; their exact tie requires no fractional ownership",
+    "weights": "arbitrary positive CauseHit weights do not affect the preferred master projection; RN weights are optional fine-subledger data only",
+    "single_charge": "the joint event/block transfer mass is never split or duplicated; provenance is set-valued, master disposition is single-valued",
+    "scope": "this supersedes RN splitting as a necessary continuum bridge for the master; RN splitting may still be used when a physically meaningful fine-currency partition is independently available",
+    "continuum_status": "remaining PDE task is first-hit witness extraction itself, not construction of common-unit tie weights"
+  },
+  "stress": {
+    "samples": 50000,
+    "weight_invariance_failures": 0,
+    "transfer_terminal_samples": 38901,
+    "reset_terminal_samples": 12645,
+    "recurse_joint_samples": 11099,
+    "boundary_samples": 12628,
+    "maximum_joint_size": 6
+  }
+}

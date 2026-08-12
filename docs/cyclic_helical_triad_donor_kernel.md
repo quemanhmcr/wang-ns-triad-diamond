@@ -599,7 +599,7 @@ It would **not**:
 - close the initial-data or singular-time interfaces;
 - prove 3D Navier--Stokes global regularity.
 
-The immediate next local question after this provenance theorem is narrower: whether a hard-cell restriction of donor work can be pushed into the already-existing positive recipient causes with an exact **single-charge quotient**, including overlapping recipient support and coarse self-loops, without creating a new owner or recursion depth.  Only after that quotient is clean should any separate between-time modal energy inventory be tested against mixed-owner recurrence; same-time redistribution must never be turned into a scalar Bellman currency.
+That immediate local question is now answered by the certified `cyclic_hard_cell_single_charge_quotient.md`: restricted donor hard-cell rows push to the already-existing good/bad positive recipient charges exactly once, even with overlapping donor support and coarse self-loops, and add neither owner depth nor scale progress.  The next negative-work question is therefore genuinely different: whether the separate between-time modewise Navier--Stokes energy/work/viscous-dissipation balance supplies useful recurrence information without inventing a FIFO/LIFO deposit-withdrawal matching.  Same-time redistribution must never be turned into a scalar Bellman currency.
 
 
 ---

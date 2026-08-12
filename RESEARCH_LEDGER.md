@@ -37,7 +37,7 @@ The current architecture has reached the following point.
 18. Smooth residual-skew `K_phys` relink is now also topologically quotiented without denying its physics: the exact gauge-quotiented `T_ab^{phys}` matrix is antisymmetric same-event flux, every positive relink recipient has finite negative-net donor closure, and relink creates no child recursive event.  A simultaneous `S` branch remains existing strain/deformation ownership.
 19. Consecutive high-strain recurrence now has a native viscous telescope without demoting high strain from genuine ownership: every high-strain event pays `D_j>=D_*`, its actual `D_V|_G` ancestor renews at `N_(j+1)/N_j<=3/16`, and interval restriction plus low-pass contraction gives `D_j<=N_j G_*` for the physical global gradient reservoir `G_*`.  Thus every pure high-strain epoch is finite even under complete time overlap, while mixed-owner recurrence remains open.
 20. Consecutive signed-good generated-HH recurrence now also has a native parabolic physical-time telescope without turning generation into an event-count cost: a raw `|I_HH|` hit is only a locator; after actual `Q^2` energy reentry selects positive HH child-work and the hard parent is certified `3/5<N_p/N_c<5/8`, parent natural lifetimes grow by more than `64/25` and the asynchronous common registration surfaces move backward by at least `(1792/4875)T_j`.  Their cumulative backshift reaches absorbing `t=0` after finite consecutive signed-good generated depth.  Generic/non-signed-good HH remains open.
-21. Actual unordered helical HH interactions now have native same-event registration, canonical positive-edge routing, **and a certified mixed-fate reserved Young/Christ handoff before any generated-ancestry continuation**.  The continuum law is reconstructed signed, `mu=dW`, before its Hahn-positive causal law `mu^+=dW^+` is restricted by native edge efficiency `r_e=(J_e/J_*)c_e`.  Geometry/phase-bad positive work, including every positive nonforward edge with `J_e=0`, terminates through the shared fixed-transfer interface as `TRANSFER_WORK_LOSS` with `first_time=None`; geometry-good work remains only Young-eligible until the full signed hard-cell theorem fires.  Hard cells now carry the three direct pushforwards `pi_#dW`, `pi_#dW^+`, and `pi_#dW^-`.  Writing `T_C=g_C+b_C-n_C`, the reserved deficit `1-(T_C-b_C)/Y_C` is only a certificate, never a new work law, and equals the full signed Young deficit plus `b_C/Y_C`.  Thus a mixed cell may pass Young/Christ exactly when the already-terminal bad-positive contribution fits inside the unused Christ margin; nondegenerate-margin failures are quantitatively dominated by actual terminal bad-positive plus canonical negative work on low-native-deficit blocks.  The local frontier has therefore moved beyond mixed fate and beyond the same-time triad structure of canonical negative work: cyclic closed-triad conservation now disintegrates canonical `dW^-` into the already-existing canonical `dW^+` recipient law with zero added event depth.  What remains locally is degenerate full-signed Young margin, a hard-cell restricted-donor single-charge quotient (without double charging overlapping recipient support or coarse self-loops), any separately needed positive coherent kernel, and—only as a separate PDE ledger—between-time modal energy inventory.
+21. Actual unordered helical HH interactions now have native same-event registration, canonical positive-edge routing, **and a certified mixed-fate reserved Young/Christ handoff before any generated-ancestry continuation**.  The continuum law is reconstructed signed, `mu=dW`, before its Hahn-positive causal law `mu^+=dW^+` is restricted by native edge efficiency `r_e=(J_e/J_*)c_e`.  Geometry/phase-bad positive work, including every positive nonforward edge with `J_e=0`, terminates through the shared fixed-transfer interface as `TRANSFER_WORK_LOSS` with `first_time=None`; geometry-good work remains only Young-eligible until the full signed hard-cell theorem fires.  Hard cells now carry the three direct pushforwards `pi_#dW`, `pi_#dW^+`, and `pi_#dW^-`.  Writing `T_C=g_C+b_C-n_C`, the reserved deficit `1-(T_C-b_C)/Y_C` is only a certificate, never a new work law, and equals the full signed Young deficit plus `b_C/Y_C`.  Thus a mixed cell may pass Young/Christ exactly when the already-terminal bad-positive contribution fits inside the unused Christ margin; nondegenerate-margin failures are quantitatively dominated by actual terminal bad-positive plus canonical negative work on low-native-deficit blocks.  The local frontier has therefore moved beyond mixed fate and beyond the same-time triad structure of canonical negative work: cyclic closed-triad conservation now disintegrates canonical `dW^-` into the already-existing canonical `dW^+` recipient law with zero added event depth.  The hard-cell single-charge layer is now also closed: restricted `pi_#dW^-` rows push to the already-existing good/bad `pi_#dW^+` recipient charges exactly once, even under overlapping donor support and coarse self-loops, with zero added event depth and no scale progress.  What remains locally is degenerate full-signed Young margin, any separately needed positive coherent kernel, and—now as the next negative-work question in a strictly separate PDE ledger—between-time modewise energy/work/dissipation inventory.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -2472,11 +2472,163 @@ work.  It does not close degenerate Young/Christ margin, does not provide a
 between-time provenance matching from earlier deposits to later withdrawals, does
 not identify hard-cell coarsening with a progress map, and does not terminate
 generic HH or mixed genuine-owner recurrence.  Coarse donor/recipient roots may
-even map to the same hard cell.  The next local seam is therefore a hard-cell
-restricted-donor **single-charge quotient** into existing positive recipient causes,
-with no double charge and no synthetic owner; any modewise energy/dissipation
-inventory across time must remain a separate physical ledger.  No Navier--Stokes
+even map to the same hard cell.  The representation-level question left here—how
+restricted donor hard cells charge overlapping positive recipient support without
+double counting—is now answered by §33.16 below.  Any modewise energy/dissipation
+inventory across time remains a separate physical ledger.  No Navier--Stokes
 global-regularity claim is made.
+
+---
+
+### 33.16 Cyclic hard-cell single-charge quotient
+Status:
+`EXACT_CYCLIC_HARD_CELL_SINGLE_CHARGE_QUOTIENT__RESTRICTED_DW_MINUS_ROWS__CANONICAL_DW_PLUS_GOOD_BAD_COLUMNS__OVERLAPPING_RECIPIENT_SUPPORT_NO_DOUBLE_CHARGE__COARSE_SELF_LOOPS_ZERO_RECURSION_DEPTH`.
+
+Exact certified implementation/provenance SHA:
+`964b72b0a614bb44c88a42d41160f11bd550d97a`.
+
+The cyclic donor theorem fixes the same-time physical measure before hard
+coarsening.  If `M_triangle` is its donor/recipient measure, `pi` is the existing
+deterministic hard Fourier/helicity map, and `phi` is the already-certified
+recipient fate map, define only the positive pushforward
+\[
+K(C,D,F)
+=
+(\pi_{donor},\pi_{recipient},\phi_{recipient})_\#
+\mathcal M_\triangle(C,D,F).
+\]
+No hard-cell Hahn split is introduced.  The donor rows are exactly the inherited
+Hahn-negative hard law,
+\[
+\boxed{\sum_{D,F}K(C,D,F)=(\pi_\#dW^-)(C)=n_C,}
+\]
+while the recipient columns retain the already-canonical positive fate laws,
+\[
+\boxed{\sum_CK(C,D,G)=(\pi_\#dW_G^+)(D)=g_D,\qquad
+\sum_CK(C,D,B)=(\pi_\#dW_B^+)(D)=b_D.}
+\]
+Thus disjoint donor restrictions are positive submeasures of the existing
+recipient cause and recombine to it exactly.  Several donor cells may overlap on
+the same recipient support, and several disjoint closed-triad measure pieces may
+land in the same hard `(cell,fate)` slot, but they are aggregated into **one**
+canonical recipient charge.  Donor provenance disintegrates cause; it does not
+multiply cause.
+
+The generic two-donor anti-theorem remains active.  A positive recipient may have
+two energy donors.  Fine hard cells then carry two positive incoming donor atoms,
+but their sum is the single canonical recipient `dW+` charge.  Conversely, on the
+signed-good forward triad one donor feeds the geometry-good child and the actual
+positive nonforward side recipient.  The former remains only Young-eligible; the
+latter remains on the existing `TRANSFER_WORK_LOSS` stage-zero recursion route.
+That route termination is not viscous dissipation: the side mode retains real
+Navier--Stokes energy and may participate in later PDE interactions.
+
+Hard coarsening may identify physically distinct donor and recipient roots.  Then
+`K(C,C,F)>0` is a real representation-level self-loop.  The theorem keeps this
+mass exactly and proves only the correct ontology: same-time redistribution, zero
+additional event depth, and no supplied scale progress.  In the maximal coarse
+fixture every transported atom is a self-loop and the self-loop mass fraction is
+exactly one.  Therefore cyclic donor provenance cannot itself be used as a scale
+telescope.
+
+This theorem also sharpens the mixed-fate failure statement without overreading
+it.  The existing nondegenerate-margin inequality
+\[
+g_C<n_C+(\mu^{-1}-1)b_C
+\]
+remains a scalar domination theorem only.  Although `n_C` now has exact hard-cell
+donor provenance into existing same-time positive causes, there is **no** theorem
+mapping failed good work in cell `C` to that negative donor mass.  The recipient
+may be good, bad, in another cell, or in the same coarse cell.  “Negative work
+pays failed good work” remains forbidden.
+
+The single-charge theorem is also distinct from the existing
+`physical_branch_compiler`.  That compiler quotients duplicate theorem
+manifestations after a positive causal root has been selected.  The present
+result is upstream: it proves that hard-coarsened cyclic `dW^-` provenance reaches
+the already-selected positive roots without cloning their measure.  The two
+quotients therefore compose without introducing a new owner or recursion depth.
+
+Dedicated run `31582837653` — **success** on the exact SHA.  The full theorem suite
+passed `856` tests; focused single-charge tests passed `14`, and the focused
+physical-provenance dependency set passed `60`.  The `75,000`-triad stress had:
+- `37,492` one-donor and `37,508` two-donor states;
+- `24,156` overlapping-recipient-charge states;
+- `33,286` coarse-self-loop states;
+- zero numerically unresolved states;
+- worst total balance native residual `1.952e-16`;
+- worst donor/recipient marginal residuals `9.902e-17` / `9.760e-17`;
+- worst restricted-donor pushforward residual `9.902e-17`;
+- exact recipient fate-partition residual `0` in the reported stress;
+- signed-good good/bad recipient masses `0.540401435212` / `0.17237839362`;
+- maximal-coarsening self-loop fraction `1`.
+
+The same dedicated run passed `6` focused evolved-PDE tests and evolved the actual
+`2/3`-dealiased incompressible Fourier--Galerkin Navier--Stokes system at common
+cutoff `7` on FFT grids `24` and `28`.  On the ordinary phase branch, the initial
+physical triad had one donor and two recipients with good/bad work
+`8.51111181869` / `2.71489246258`; the worst total-work cross-representation native
+residual was `1.150e-16`, and the NS energy-balance residual was about `2.963e-12`.
+Negating the divergence-free initial field reverses the cubic nonlinear work
+signs without changing the PDE: that branch began with two donors feeding one bad
+recipient of work `11.2260042813`, overlapping-recipient count `1`, worst total
+representation native residual `5.746e-17`, and NS energy-balance residual about
+`2.677e-11`.  Both branches had maximal-coarsening self-loop fraction `1`.  The
+amplitude `0.5` and `2.0` adversaries also passed on the same physical geometry.
+
+Independent audit `31582837613` — **success** on the same exact SHA.  Its focused
+algebra/provenance set passed `74` tests and the independent `100,000`-triad stress
+had `50,346` one-donor and `49,654` two-donor states, `31,762`
+overlapping-recipient states, `44,373` coarse-self-loop states, zero unresolved
+states, worst total balance native residual `1.784e-16`, donor/recipient marginal
+residuals `9.699e-17` / `1.051e-16`, and worst restricted-donor pushforward
+residual `1.075e-16`.  Its actual-NS job passed `5` focused tests and longer
+`48`-step, `6`-snapshot audits on grids `24,28`: the positive branch had maximum
+total/good/bad representation residuals `1.045e-16` / `8.712e-17` / `2.178e-17`
+and NS energy-balance residual about `1.758e-12`; the phase-reversed branch had
+`5.246e-17` / `0` / `5.246e-17` and energy-balance residual about `2.574e-11`.
+The existing mixed-fate actual-NS dependency was green as well.
+
+Full physical-energy causal integration `31582837580` — **success** on the exact
+SHA.  It passed the full `856`-test suite and inserted the new theorem immediately
+after the `50,000`-state cyclic donor kernel and before complex Young.  Its own
+`50,000`-state single-charge run had `25,007` one-donor and `24,993` two-donor
+states, `16,112` overlapping-recipient states, `22,120` coarse-self-loop states,
+zero unresolved states, worst balance native residual `1.586e-16`, worst
+donor/recipient marginal residuals `9.085e-17` / `9.129e-17`, and worst restricted
+pushforward residual `9.522e-17`.  The entire downstream witness, donor-quotient,
+reuse, branch-compiler and master spine completed successfully.
+
+Stored artifact trees:
+- `recorded-results/31582837653/`, deterministic file-tree digest `sha256:0c8e55157ccf4e96667fc4517d1d1e61d193c5c4bc24ddf5694d4f44ba3ed9e3`;
+- `recorded-results/31582837613/`, deterministic file-tree digest `sha256:ad3902bfe50bc9ddb2b6704a5f3eb2e8247e08c5b3c4021310c581599cba5fed`;
+- `recorded-results/31582837580/`, deterministic file-tree digest `sha256:7fd87d1b02aa83bae219cb1371b91484dadedd63121368f013882bd8aa666f93`.
+
+Failure/correction lineage is intentionally retained.  Initial candidate
+`55a54b02f0a7a77a4b7a73b0403e90311cf0eeb8` passed the focused theorem tests and
+both new evolved-NS sign branches, but the independent `100,000`-state audit found
+a floating certification seam: restricted submeasure domination was checked
+relative to an accidentally tiny realized recipient Hahn mass.  The exact
+submeasure theorem was not false; independently reconstructed masses near phase
+cancellation had an ill-conditioned relative comparison.  Final SHA
+`964b72b0a614bb44c88a42d41160f11bd550d97a` certifies that floating domination on
+the predecessor theorem's native work-mass error envelope instead, while keeping
+native capacity completely outside the donor kernel, causal law, probability and
+recurrence currency.  The first audit also exposed one workflow-only mistake: an
+unsupported `--cutoff` argument was passed to the existing mixed-fate dependency
+probe; the final workflow removes only that argument.  No physical threshold,
+sample count, hard map, fate law, signed identity, work transport or causal
+semantics was weakened.
+
+The theorem closes the **same-time hard-cell negative-work single-charge seam**.
+It does not solve degenerate full-signed Young/Christ margin, does not create a
+positive coherent kernel, and does not provide a canonical matching from earlier
+positive modal deposits to later negative withdrawals.  The next negative-work
+question is therefore a separate between-time physical ledger: modewise energy,
+actual positive/negative nonlinear work, and viscous dissipation must first be
+registered in their native PDE balance before asking what recurrence information
+that balance genuinely supplies.  No FIFO/LIFO matching may be invented, and no
+Navier--Stokes global-regularity claim is made.
 
 ---
 
@@ -2557,17 +2709,18 @@ Then read the following current-spine documents in order:
 30. `docs/canonical_positive_edge_work_routing_frontier.md`
 31. `docs/mixed_fate_reserved_young_handoff.md`
 32. `docs/cyclic_helical_triad_donor_kernel.md`
-33. `docs/physical_pair_weighted_productivity.md`
-34. `docs/common_slice_coefficient_registration.md`
-35. `docs/recursive_physical_witness_constructor.md`
-36. `docs/signed_good_generated_epoch_time_telescope.md`
-37. `docs/joint_causal_stop_projection.md`
-38. `docs/amplitude_entropy_causal_reuse.md`
-39. `docs/weighted_causal_reuse.md`
-40. `docs/renyi_causal_reuse.md`
-41. `docs/physical_branch_compiler.md`
-42. `docs/continuum_master_event_quotient.md`
-43. `docs/master_no_escape.md`
+33. `docs/cyclic_hard_cell_single_charge_quotient.md`
+34. `docs/physical_pair_weighted_productivity.md`
+35. `docs/common_slice_coefficient_registration.md`
+36. `docs/recursive_physical_witness_constructor.md`
+37. `docs/signed_good_generated_epoch_time_telescope.md`
+38. `docs/joint_causal_stop_projection.md`
+39. `docs/amplitude_entropy_causal_reuse.md`
+40. `docs/weighted_causal_reuse.md`
+41. `docs/renyi_causal_reuse.md`
+42. `docs/physical_branch_compiler.md`
+43. `docs/continuum_master_event_quotient.md`
+44. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -2642,7 +2795,7 @@ high-strain events must therefore contain infinitely many other genuine owners
 which break those epochs.
 
 
-At an actual hard HH interaction, one may now descend below Young all the way to the continuum physical edge law.  The unordered helical parent orbit carries exact NS work `T_e`, native modal capacity `A_e=4|z||a_xa_ya_z|`, geometric multiplier `J_e`, and signed phase `c_e`, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`.  In the joint variables `z=x+y`, `r=x-y`, the parent-order quotient has exact density `1/16`; all eight wavevector-bound helicity sectors reconstruct the direct signed Fourier work.  With the unitary factor `C_F`, this gives signed `dW`, reference `dA`, and signed progress `dF`.  Finite Fourier energy makes these weighted measures locally Radon without any parent UV cutoff.  Only after that signed reconstruction is `dW^+` formed.  Its native efficiency routing is also certified: bad positive work, including nonforward work, terminates through the same physical transfer-loss interface, while good positive work is inherited by hard cells and is Young-eligible only.  The mixed-fate terminal-bad-assistance handoff and the same-time cyclic donor provenance of canonical negative work are now certified.  The unresolved HH task is therefore degenerate full-signed Young/Christ margin, hard-cell restricted-donor single charging into existing positive recipient causes (plus any genuinely required coherent positive kernel), and then recurrence of the surviving genuine owners; any between-time modal inventory remains a separate physical ledger.
+At an actual hard HH interaction, one may now descend below Young all the way to the continuum physical edge law.  The unordered helical parent orbit carries exact NS work `T_e`, native modal capacity `A_e=4|z||a_xa_ya_z|`, geometric multiplier `J_e`, and signed phase `c_e`, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`.  In the joint variables `z=x+y`, `r=x-y`, the parent-order quotient has exact density `1/16`; all eight wavevector-bound helicity sectors reconstruct the direct signed Fourier work.  With the unitary factor `C_F`, this gives signed `dW`, reference `dA`, and signed progress `dF`.  Finite Fourier energy makes these weighted measures locally Radon without any parent UV cutoff.  Only after that signed reconstruction is `dW^+` formed.  Its native efficiency routing is also certified: bad positive work, including nonforward work, terminates through the same physical transfer-loss interface, while good positive work is inherited by hard cells and is Young-eligible only.  The mixed-fate terminal-bad-assistance handoff, the same-time cyclic donor provenance of canonical negative work, and its hard-cell single-charge quotient into existing good/bad positive recipient causes are now certified.  Multiple donor cells may overlap one recipient support and coarse donor/recipient labels may self-loop, but the recipient cause is charged once and same-time redistribution adds no event depth or scale progress.  The unresolved HH task is therefore degenerate full-signed Young/Christ margin (plus any genuinely required coherent positive kernel), then recurrence of the surviving genuine owners; the next negative-work theorem must instead start from the separate between-time modewise energy/work/viscous-dissipation balance, without inventing deposit/withdrawal matching.
 
 Signed-good generated HH is also a genuine recursive event, but its finite-depth
 mechanism is different.  A raw `|I_HH|` threshold is only a locator.  After the

@@ -1,0 +1,25 @@
+{
+  "certificate": {
+    "status": "EXACT_SQUARE_LP_HIGH_SERVICE_TO_PHYSICAL_TAIL_ENERGY__INHERITED_CRITICAL_SHELL_OR_PHYSICAL_REGENERATION__NO_RESOLVED_DV_RELABEL",
+    "native_currency": "D_tail=N int||grad P_>N u||_2^2 dt is the physical orthogonal-tail dissipation currency; it is neither smooth-LP d_high nor resolved low-pass D_V",
+    "lp_supplier": "if high LP multipliers satisfy supp phi_j subset {|xi|>=a M_j}, a>=1/2, and sum|phi_j|^2<=B, then D_tail>=(a^2/B)D_high; the canonical square-normalized smooth dyadic choice a=1/2,B=1 gives c_LP=1/4 exactly",
+    "spectral_bridge": "for hard annular D_>^hard=sum 2^j int mu_j d tau, D_>^hard/4 <= D_tail <= D_>^hard",
+    "energy_gate": "N||P_>N u(s)||_2^2 + N W_>^+ >= 2 nu D_tail, so inherited tail energy or actual positive nonlinear tail work is >=nu D_tail",
+    "inherited_branch": "N||P_>N u||^2=sum 2^-j mu_j with sum 2^-j=1; therefore some M_j>=2N has mu_j>=nu D_tail (or >=nu c_LP D_high for an LP supplier) and enters the generic critical-shell theorem",
+    "regeneration_branch": "positive tail work disintegrates into hard-shell positive work; own-scale shell work is at least twice N W_>^+; low-low is support-excluded at every shell, so positive shell work is covered by HH plus resolved-cross/interface positive work",
+    "no_false_productivity": "the HH regeneration owner is actual positive work but is not automatically the generated-energy branch W_HH>=8E1/15; its own physical energy gate is still required before KL productivity",
+    "anti_relabel": "D_high alone has no critical-shell floor: at level j choose mu_j=2^-j D_high; smooth LP d_high is not identified with the hard tail without c_LP; no high-frequency owner is renamed resolved low-pass D_V",
+    "master_rule": "inherited high shell and HH regeneration remain recursive scale-sensitive owners; resolved cross/interface work is first quotiented into same-event conservative donor provenance or existing strain/deformation ownership; no additive reset is created"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_gradient_lower_margin": 7.821275056741745e-08,
+    "minimum_gradient_upper_margin": 7.350629828704506e-09,
+    "minimum_energy_owner_margin": 2.94624479859038e-07,
+    "minimum_inherited_shell_margin": 2.0199166651565716e-08,
+    "minimum_shell_work_disintegration_margin": 5.521137541683697e-08,
+    "minimum_regeneration_owner_margin": 1.8059409835057158e-07,
+    "maximum_joint_energy_owner_count": 2,
+    "maximum_joint_regeneration_owner_count": 2
+  }
+}

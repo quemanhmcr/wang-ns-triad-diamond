@@ -1,6 +1,6 @@
 # Cyclic hard-cell single-charge quotient
 
-Status: **candidate theorem block; certification requires dedicated, independent adversarial/actual-NS, and full causal-integration GitHub Actions gates.**
+Status: **CERTIFIED** on exact theorem SHA `964b72b0a614bb44c88a42d41160f11bd550d97a`. Dedicated run `31582837653`, independent audit `31582837613`, and full physical-energy causal integration `31582837580` all completed successfully on that SHA.
 
 The certified cyclic helical-triad donor theorem already identifies canonical Hahn-negative edge work as same-time energy-donor work.  Its recipient marginal is the already-fixed canonical Hahn-positive edge law.  The present theorem asks the next narrower question: what happens when the analyst observes those physical roots only through the deterministic hard cells used by the Young/Christ handoff?
 
@@ -289,3 +289,15 @@ It would **not**:
 - prove 3D Navier--Stokes global regularity.
 
 Only after this same-time single-charge quotient is certified should the programme consider the separate between-time modewise energy/dissipation inventory theorem.
+
+
+---
+
+## Certification record
+
+The final certified theorem SHA is `964b72b0a614bb44c88a42d41160f11bd550d97a`.
+The dedicated run `31582837653` passed `856` tests, `75,000` hard-cell single-charge stress states, both evolved Navier--Stokes sign patterns on FFT grids `24,28`, and amplitude adversaries.  Independent audit `31582837613` passed `100,000` hard-cell states plus longer positive/negative-phase evolved NS; full integration `31582837580` passed `856` tests and a `50,000`-state theorem run in the causal spine immediately after cyclic donor provenance and before complex Young.
+
+The independent `100,000`-state audit retained `31,762` cases in which distinct donor hard cells overlapped one recipient charge and `44,373` cases with at least one coarse self-loop; worst restricted-donor pushforward native residual was `1.075e-16`.  The longer actual-NS audit retained the one-donor/two-recipient and phase-reversed two-donor/one-recipient patterns with cross-FFT charge residuals at about `1e-16`.
+
+Initial candidate `55a54b02f0a7a77a4b7a73b0403e90311cf0eeb8` is retained in the failure lineage.  It passed the focused theorem and new PDE lanes, but the independent 100k stress exposed a floating guard that compared restricted submeasure domination against an accidentally tiny realized recipient Hahn mass.  Final SHA `964b72b...` uses the certified native work-mass scale only as a floating error envelope for that comparison; it does not place capacity in the kernel or causal law.  The same repair removed one unsupported `--cutoff` argument from an existing dependency workflow.  No theorem threshold, sample count, physical transport, fate map, or causal semantics was weakened.

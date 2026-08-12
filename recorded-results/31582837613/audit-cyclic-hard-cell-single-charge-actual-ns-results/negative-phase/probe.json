@@ -1,0 +1,126 @@
+{
+  "common_cutoff": 7,
+  "maximum_bad_recipient_work_representation_native_residual": 5.246145850723227e-17,
+  "maximum_good_recipient_work_representation_native_residual": 0.0,
+  "maximum_total_positive_work_representation_native_residual": 5.246145850723227e-17,
+  "phase_sign": -1,
+  "runs": [
+    {
+      "amplitude": 1.3,
+      "cutoff": 7,
+      "duration": 0.0012,
+      "global_energy_balance_relative_residual": 2.573893284715589e-11,
+      "initial_bad_recipient_mass": 24.66353140594689,
+      "initial_coarse_self_loop_fraction": 1.0,
+      "initial_donor_count": 2,
+      "initial_good_recipient_mass": 0.0,
+      "initial_overlapping_recipient_charge_count": 1,
+      "initial_recipient_count": 1,
+      "maximum_divergence_relative_to_initial_l2": 4.675396453612875e-16,
+      "maximum_global_nonlinear_work_relative_rate": 2.1029418927218604e-18,
+      "phase_sign": -1,
+      "resolution": 24,
+      "selected_bad_recipient_work_snapshots": [
+        24.66353140594689,
+        24.62558274468686,
+        24.591003548056552,
+        24.55211311863805,
+        24.51669264951065,
+        24.476874508042386
+      ],
+      "selected_good_recipient_work_snapshots": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_native_work_mass_scale_snapshots": [
+        204.7106331743126,
+        204.39565417366802,
+        204.10864218338492,
+        203.78584638027414,
+        203.49185171519335,
+        203.1613557776359
+      ],
+      "selected_total_positive_work_snapshots": [
+        24.66353140594689,
+        24.62558274468686,
+        24.591003548056552,
+        24.55211311863805,
+        24.51669264951065,
+        24.476874508042386
+      ],
+      "snapshots": 6,
+      "steps": 48,
+      "viscosity": 0.03,
+      "worst_balance_native_residual": 6.983500614605188e-17,
+      "worst_coarse_fate_native_residual": 0.0,
+      "worst_coarse_total_native_residual": 0.0,
+      "worst_donor_marginal_native_residual": 3.491750307302594e-17,
+      "worst_fate_partition_native_residual": 0.0,
+      "worst_recipient_marginal_native_residual": 1.7487152835744097e-17,
+      "worst_restricted_pushforward_native_residual": 8.729375768256485e-18
+    },
+    {
+      "amplitude": 1.3,
+      "cutoff": 7,
+      "duration": 0.0012,
+      "global_energy_balance_relative_residual": 2.5738932237978674e-11,
+      "initial_bad_recipient_mass": 24.6635314059469,
+      "initial_coarse_self_loop_fraction": 0.9999999999999999,
+      "initial_donor_count": 2,
+      "initial_good_recipient_mass": 0.0,
+      "initial_overlapping_recipient_charge_count": 1,
+      "initial_recipient_count": 1,
+      "maximum_divergence_relative_to_initial_l2": 4.079809636572483e-16,
+      "maximum_global_nonlinear_work_relative_rate": 1.4594344164162417e-18,
+      "phase_sign": -1,
+      "resolution": 28,
+      "selected_bad_recipient_work_snapshots": [
+        24.6635314059469,
+        24.62558274468686,
+        24.59100354805654,
+        24.552113118638054,
+        24.516692649510652,
+        24.476874508042396
+      ],
+      "selected_good_recipient_work_snapshots": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "selected_native_work_mass_scale_snapshots": [
+        204.7106331743126,
+        204.39565417366802,
+        204.10864218338492,
+        203.78584638027414,
+        203.49185171519355,
+        203.16135577763598
+      ],
+      "selected_total_positive_work_snapshots": [
+        24.6635314059469,
+        24.62558274468686,
+        24.59100354805654,
+        24.552113118638054,
+        24.516692649510652,
+        24.476874508042396
+      ],
+      "snapshots": 6,
+      "steps": 48,
+      "viscosity": 0.03,
+      "worst_balance_native_residual": 8.690775968704993e-17,
+      "worst_coarse_fate_native_residual": 0.0,
+      "worst_coarse_total_native_residual": 0.0,
+      "worst_donor_marginal_native_residual": 3.4763103874819975e-17,
+      "worst_fate_partition_native_residual": 0.0,
+      "worst_recipient_marginal_native_residual": 3.4763103874819975e-17,
+      "worst_restricted_pushforward_native_residual": 8.690775968704994e-18
+    }
+  ],
+  "status": "EVOLVED_DEALIASED_FOURIER_GALERKIN_NS_CYCLIC_HARD_CELL_SINGLE_CHARGE_AUDIT__ACTUAL_DW_MINUS_ROWS_TO_CANONICAL_DW_PLUS_FATE_COLUMNS__COARSE_SELF_LOOPS_ZERO_DEPTH__ONE_DONOR_TWO_RECIPIENT_AND_PHASE_REVERSED_TWO_DONOR_ONE_RECIPIENT"
+}

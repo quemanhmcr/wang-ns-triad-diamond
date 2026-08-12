@@ -1,0 +1,23 @@
+{
+  "certificate": {
+    "status": "EXACT_HIGH_STRAIN_DESCENDING_EPOCH_TELESCOPE__PHYSICAL_GLOBAL_GRADIENT_RESERVOIR__THREE_SIXTEENTHS_RENEWAL_SCALE_DESCENT__ARBITRARY_TIME_OVERLAP_WEIGHTED_BY_SCALE__NO_EVENT_COUNT_RESET",
+    "high_strain_unit": "every genuine first high-strain contact pays D_V>=D_*=4.21103121113 on its actual resolved low-pass history",
+    "physical_renewal_scale": "D_V|_G supplies M<=N/4 and the renewed smooth carrier uses A=3M/4, hence every consecutive high-strain renewal has N_next/N<=3/16",
+    "global_reservoir": "for G_*=int_0^t* ||grad u||_2^2 dt, low-pass L2 contraction and interval restriction give D_j<=N_j G_* even when event histories overlap arbitrarily",
+    "frequency_floor": "combining D_j>=D_* with D_j<=N_j G_* gives the physical lower scale N_j>=D_*/G_* for every high-strain event in the epoch",
+    "overlap_telescope": "sum_j D_j<=G_* sum_j N_j<=N_0 G_*/(1-3/16); repeated readings of the same viscous spacetime reservoir cannot manufacture infinite normalized dissipation because their native scale weights are geometrically summable",
+    "energy_inequality": "for unforced Navier-Stokes with nu>0, G_*<=||u_0||_2^2/(2nu), so the high-strain frequency floor is at least 2nu D_*/||u_0||_2^2",
+    "master_consequence": "a maximal consecutive high-strain recursive epoch is finite; an infinite event path with infinitely many high-strain events must contain infinitely many non-high-strain epoch breakers",
+    "anti_reset": "D_V is not promoted to a globally additive event-count budget; the bound depends on the epoch root scale and uses the actual descending physical renewal geometry",
+    "scope": "this closes eventually-pure high-strain recurrence, not mixed recurrence with infinitely many HH/source/service/reuse/high-tail epoch breakers; no Navier-Stokes global-regularity claim is made"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_frequency_sum_margin": 0.010872081991569138,
+    "worst_normalized_capacity_margin": 0.08466728285959269,
+    "minimum_frequency_floor_margin": 1.2235436031599045e-05,
+    "maximum_certified_epoch_count": 6,
+    "arbitrary_overlap_cases": 50000,
+    "ascending_chain_rejections": 50000
+  }
+}

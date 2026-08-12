@@ -1,6 +1,6 @@
 # Canonical positive edge-work routing frontier
 
-Status: **CANONICAL ROUTING, MIXED-FATE HANDOFF, AND CYCLIC NEGATIVE-WORK DONOR KERNEL CERTIFIED**.  Mixed fate itself is no longer a binary Young obstruction, and canonical `dW^-` now has exact same-triad donor provenance into the already-fixed canonical `dW^+`.  The remaining seam is not an invented cancellation budget: it is the representation-level single-charge routing of restricted donor work and, separately, any between-time physical energy inventory needed for recurrence.
+Status: **CANONICAL ROUTING, MIXED-FATE HANDOFF, CYCLIC NEGATIVE-WORK DONOR KERNEL, AND HARD-CELL SINGLE-CHARGE QUOTIENT CERTIFIED**.  Mixed fate itself is no longer a binary Young obstruction; canonical `dW^-` has exact same-triad donor provenance into the already-fixed canonical `dW^+`, and hard coarsening now preserves those recipient charges exactly once even under overlapping donor support and coarse self-loops.  The remaining local seam is degenerate full-signed Young/Christ margin (plus a positive coherent kernel only if a later representation genuinely requires one); any between-time physical energy inventory is a separate PDE problem, not a continuation of the same-time donor quotient.
 
 The continuum helical edge-measure theorem fixes the physical signed law before
 any later representation is introduced.  Let
@@ -77,11 +77,20 @@ Generic positive work can still have two donors.  Unique energy donor is proved
 only on the signed-good forward triad, where the second interaction parent is a
 simultaneous positive nonforward recipient.  Its energy is not dissipation.
 
-The next local question is therefore a **single-charge quotient after hard-cell
-restriction**, not a new Hahn split: restricted donor mass should be pushed to
-existing positive recipient causes exactly once, even when several donor cells
-land on overlapping recipient support or a coarse cell maps back to itself.
-Fresh coherent Hahn remains noncausal without a separate positive kernel.
+That representation layer is now certified by `cyclic_hard_cell_single_charge_quotient.md` on exact SHA `964b72b0a614bb44c88a42d41160f11bd550d97a`.  Writing `K(C,D,F)` for the pushforward of the already-certified cyclic donor measure through donor hard cell, recipient hard cell, and inherited recipient fate,
+
+\[
+\sum_{D,F}K(C,D,F)=(\pi_\#dW^-)(C),
+\]
+
+while
+
+\[
+\sum_CK(C,D,G)=(\pi_\#dW_G^+)(D),\qquad
+\sum_CK(C,D,B)=(\pi_\#dW_B^+)(D).
+\]
+
+Thus overlapping donor cells disintegrate one canonical recipient charge rather than cloning it.  Coarse self-loops are retained as real same-time redistribution with zero event depth and no scale progress.  This does not turn the mixed-fate failure domination `g_C<n_C+(mu^{-1}-1)b_C` into a causal payment map.  Fresh coherent Hahn remains noncausal without a separate positive kernel.  The next negative-work question, if needed for recurrence, must instead start from the separate between-time modewise energy/work/viscous-dissipation balance.
 
 ## 1. The Hahn level is physical and must be fixed before analysis refinement
 
