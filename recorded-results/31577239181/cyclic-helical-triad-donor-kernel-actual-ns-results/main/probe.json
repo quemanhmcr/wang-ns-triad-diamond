@@ -1,0 +1,138 @@
+{
+  "common_cutoff": 7,
+  "maximum_selected_root_work_representation_native_residual": 7.668370993680806e-17,
+  "maximum_selected_triad_positive_work_representation_native_residual": 5.751278245260604e-17,
+  "runs": [
+    {
+      "amplitude": 1.0,
+      "cutoff": 7,
+      "duration": 0.001,
+      "global_energy_balance_relative_residual": 2.9633086909113505e-12,
+      "initial_child_to_donor_ratio": 0.7581603930876304,
+      "initial_donor_count": 1,
+      "initial_recipient_count": 2,
+      "initial_side_forward_ratio": 0.6105139414683932,
+      "initial_side_geometric_multiplier": 0.0,
+      "initial_side_to_child_ratio": 0.31898211660394216,
+      "initial_side_to_donor_ratio": 0.24183960691236916,
+      "initial_signed_good_efficiency": 0.9999966463082317,
+      "maximum_divergence_relative_to_initial_l2": 4.441779813485712e-16,
+      "maximum_global_nonlinear_work_relative_rate": 9.25513489244777e-19,
+      "resolution": 24,
+      "selected_native_work_mass_scale_snapshots": [
+        93.1773478262688,
+        93.04906877555246,
+        92.91989627937608,
+        92.78983481487087,
+        92.6588888755682
+      ],
+      "selected_root_work_snapshots": [
+        [
+          8.51111181868995,
+          2.7148924625785478,
+          -11.226004281268501
+        ],
+        [
+          8.499394407000143,
+          2.711154817796613,
+          -11.210549224796756
+        ],
+        [
+          8.487595385193373,
+          2.707391140846834,
+          -11.194986526040212
+        ],
+        [
+          8.475715162223793,
+          2.7036015621782687,
+          -11.179316724402062
+        ],
+        [
+          8.46375414854284,
+          2.699786212717592,
+          -11.16354036126044
+        ]
+      ],
+      "selected_triad_positive_work_snapshots": [
+        11.2260042812685,
+        11.210549224796756,
+        11.194986526040209,
+        11.179316724402062,
+        11.163540361260434
+      ],
+      "snapshots": 5,
+      "steps": 32,
+      "viscosity": 0.03,
+      "worst_cyclic_coupling_native_residual": 7.850462293418876e-17,
+      "worst_cyclic_energy_conservation_native_residual": 8.147644180785855e-17,
+      "worst_measure_donor_marginal_native_residual": 5.751278245260604e-17,
+      "worst_measure_recipient_marginal_native_residual": 1.9170927484202014e-17
+    },
+    {
+      "amplitude": 1.0,
+      "cutoff": 7,
+      "duration": 0.001,
+      "global_energy_balance_relative_residual": 2.962780037792707e-12,
+      "initial_child_to_donor_ratio": 0.7581603930876307,
+      "initial_donor_count": 1,
+      "initial_recipient_count": 2,
+      "initial_side_forward_ratio": 0.6105139414683932,
+      "initial_side_geometric_multiplier": 0.0,
+      "initial_side_to_child_ratio": 0.31898211660394216,
+      "initial_side_to_donor_ratio": 0.24183960691236925,
+      "initial_signed_good_efficiency": 0.9999966463082318,
+      "maximum_divergence_relative_to_initial_l2": 4.750247905566787e-16,
+      "maximum_global_nonlinear_work_relative_rate": 1.1744972208302138e-18,
+      "resolution": 28,
+      "selected_native_work_mass_scale_snapshots": [
+        93.1773478262688,
+        93.04906877555246,
+        92.91989627937608,
+        92.78983481487083,
+        92.65888887556815
+      ],
+      "selected_root_work_snapshots": [
+        [
+          8.511111818689953,
+          2.7148924625785487,
+          -11.226004281268501
+        ],
+        [
+          8.499394407000143,
+          2.711154817796613,
+          -11.210549224796756
+        ],
+        [
+          8.487595385193373,
+          2.707391140846833,
+          -11.194986526040209
+        ],
+        [
+          8.475715162223786,
+          2.703601562178268,
+          -11.17931672440206
+        ],
+        [
+          8.463754148542836,
+          2.6997862127175907,
+          -11.163540361260432
+        ]
+      ],
+      "selected_triad_positive_work_snapshots": [
+        11.226004281268501,
+        11.210549224796756,
+        11.194986526040209,
+        11.179316724402058,
+        11.163540361260429
+      ],
+      "snapshots": 5,
+      "steps": 32,
+      "viscosity": 0.03,
+      "worst_cyclic_coupling_native_residual": 7.850462293418876e-17,
+      "worst_cyclic_energy_conservation_native_residual": 7.178952480130258e-17,
+      "worst_measure_donor_marginal_native_residual": 3.8341854968404047e-17,
+      "worst_measure_recipient_marginal_native_residual": 3.828774656069471e-17
+    }
+  ],
+  "status": "EVOLVED_DEALIASED_FOURIER_GALERKIN_NS_CYCLIC_HELICAL_TRIAD_DONOR_KERNEL_AUDIT__ACTUAL_MODAL_COEFFICIENTS__THREE_ROOT_ENERGY_CONSERVATION__DW_MINUS_TO_DW_PLUS_MARGINALS__SIGNED_GOOD_NONFORWARD_SIDE_RECIPIENT"
+}

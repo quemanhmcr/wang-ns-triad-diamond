@@ -2531,4 +2531,19 @@ The continuum HH interface now begins from one signed physical Fourier/helicity 
 
 Geometry/phase-good positive work is not automatically a Young theorem.  A deterministic hard Fourier/helicity map inherits `pi_#dW^+`, the original Hahn-negative law `pi_#dW^-`, and signed cell work `pi_#dW` by direct pushforward; no later Hahn split is allowed to replace the master law.  The certified mixed-fate reserved handoff writes `T_C=g_C+b_C-n_C` and uses `T_C-b_C` only as a sufficient-condition scalar, never as a new trilinear work.  For a separately certified Young upper `Y_C`, `delta_res=delta_full+b_C/Y_C`; hence the actual full signed `T_C` may enter Young/Christ in a mixed cell precisely when terminal bad-positive assistance fits inside the unused Christ margin.  Negative work remains inside `T_C` and only makes the gate harder.
 
-Accordingly, generic bad HH routing and terminal-bad assistance in mixed cells are no longer open recursive branches.  On low native-deficit blocks, nondegenerate full-signed Christ-margin failures are quantitatively dominated by actual canonical negative work plus already-terminal bad-positive work through an explicit `dW/dA>19/100` good-core comparison; no capacity probability is made causal.  The sharp local HH seam has moved to degenerate full-signed Young margin, the native physical structure/telescoping of canonical negative work, and any separately required positive coherent kernel/disintegration.  This sharpens but does not close mixed genuine-owner recurrence and makes no global-regularity claim.
+Accordingly, generic bad HH routing and terminal-bad assistance in mixed cells are no longer open recursive branches.  On low native-deficit blocks, nondegenerate full-signed Christ-margin failures are quantitatively dominated by actual canonical negative work plus already-terminal bad-positive work through an explicit `dW/dA>19/100` good-core comparison; no capacity probability is made causal.  Before the cyclic theorem below, the sharp local HH seam was degenerate full-signed Young margin plus the native physical structure of canonical negative work.  The cyclic theorem closes that same-time triad structure but not the remaining hard-cell single-charge or between-time recurrence questions.  No global-regularity claim is made.
+
+The native **same-time** structure of that canonical negative work is now also
+certified.  On each closed helical triad, cyclic rerooting gives three actual modal
+energy works whose signed sum is exactly zero before Hahn.  The resulting positive
+donor-to-recipient kernel has `dW^-` as donor marginal and the already canonical
+`dW^+` as recipient marginal; it adds provenance but no event depth and no new
+causal probability.  Generic triads may have two donors.  In the signed-good
+forward case there is exactly one energy donor, while the other interaction parent
+is an actual positive nonforward side recipient with
+`3/10 < W_side+/W_child+ < 1/3`; that side work is routed by the existing
+`TRANSFER_WORK_LOSS` recursion rule but remains real modal energy in Navier--Stokes,
+not dissipated or reset.  Therefore the remaining negative-work seam is now the
+coarse restricted-donor **single-charge quotient** and any separately needed
+between-time modal inventory; these two native ledgers must not be collapsed into
+a scalar cancellation/telescoping budget.

@@ -1,0 +1,34 @@
+{
+  "certificate": {
+    "status": "EXACT_PHYSICAL_ENERGY_CAUSAL_GATE_AND_MEASURE_AGNOSTIC_SYNC__CONTINUUM_EXTRACTION_CONDITIONAL",
+    "countermodel": "even for G=R=0, c'=1, c(0)=0: normalized dGamma=dt but normalized physical dT=2t dt, so raw kernels are not equal",
+    "adjoint_energy_lift": "2 Re<c,F> = 2||psi||^-2 Re(conj(<psi,c>)<psi,F>) + 2 Re<c_perp,F>",
+    "energy_gate": "E1 <= exp(2K)(E0+W_HH^+ + W_R^+)",
+    "clean_low_strain_route": "K<=1/30, E0<E1/5, W_R^+<E1/5 => W_HH^+ >= 8E1/15",
+    "physical_causal_measure": "dT_HH=2[Re<c,F_HH,alpha>]_+ dt on same-time parent-pair events",
+    "synchronization": "the half-slab and parabolic cone use only positivity/support, so they apply to dT_HH directly",
+    "renyi_rule": "Shannon/Renyi parent-slot weights are taken from normalized dT_HH, not from raw dGamma",
+    "duhamel_role": "adjoint Duhamel remains an amplitude/support diagnostic; it is not required to equal the physical transfer kernel",
+    "continuum_status": "still requires actual recursive Navier-Stokes block extraction with the exact selected coefficient equation and canonical material labels"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_projection_identity_residual": 8.881784197001252e-15,
+    "minimum_generation_margin": 0.0013809986148592083,
+    "minimum_half_mass_margin": 8.067118883126057e-06,
+    "countermodel_half_cdf_gap": 0.25,
+    "branch_counts": {
+      "high_strain_critical_dissipation": 12497,
+      "classified_residual_physical_work": 12538,
+      "physical_high_high_transfer_generation": 12402,
+      "material_energy_inheritance": 12563
+    }
+  },
+  "flat_scalar_countermodel": {
+    "time": 0.5,
+    "duhamel_cdf": 0.5,
+    "physical_transfer_cdf": 0.25,
+    "cdf_gap": 0.25,
+    "energy_lift_density": 1.0
+  }
+}

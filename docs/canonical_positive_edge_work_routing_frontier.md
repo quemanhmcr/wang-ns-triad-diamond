@@ -1,6 +1,6 @@
 # Canonical positive edge-work routing frontier
 
-Status: **CANONICAL ROUTING AND MIXED-FATE TERMINAL-BAD-ASSISTANCE HANDOFF CERTIFIED**.  Mixed fate itself is no longer a binary Young obstruction: the remaining local frontier is degenerate full-signed Young/Christ margin, canonical negative-work structure/telescoping, and—only where a later representation genuinely needs it—a separately proved positive coherent kernel/disintegration.
+Status: **CANONICAL ROUTING, MIXED-FATE HANDOFF, AND CYCLIC NEGATIVE-WORK DONOR KERNEL CERTIFIED**.  Mixed fate itself is no longer a binary Young obstruction, and canonical `dW^-` now has exact same-triad donor provenance into the already-fixed canonical `dW^+`.  The remaining seam is not an invented cancellation budget: it is the representation-level single-charge routing of restricted donor work and, separately, any between-time physical energy inventory needed for recurrence.
 
 The continuum helical edge-measure theorem fixes the physical signed law before
 any later representation is introduced.  Let
@@ -66,13 +66,22 @@ Thus the remaining nondegenerate failure is physically supported by canonical
 negative work and/or bad-positive work that has already terminated.  Failed good
 mass is not reclassified by this inequality.
 
-This sharpens the next research question.  One should first understand whether
-`\pi_\#dW^-` has a canonical native donor/recipient structure under the exact
-cyclic three-mode Navier--Stokes energy law before inventing any cancellation
-budget.  A promising route is cyclic re-rooting of one closed helical triad, but
-that continuum positive kernel and its multiplicity/provenance are **not yet a
-certified theorem**.  Fresh coherent Hahn remains noncausal without a separate
-positive kernel.
+That next layer is now certified by `cyclic_helical_triad_donor_kernel.md` on
+exact SHA `647065ab1562e15da84c97d9be5265c2e43dc84d`.  On one closed triad the
+three actual child-energy works share one Waleffe phase and sum to zero **before
+Hahn**.  The unique three-slot positive transport
+`M(i->j)=[-T_i]_+[T_j]_+/Q` has donor marginal canonical `dW^-` and recipient
+marginal the already-fixed canonical `dW^+`; full `S3` closed-triad quotienting
+and the three root charts recover exactly the existing `1/16` edge density.
+Generic positive work can still have two donors.  Unique energy donor is proved
+only on the signed-good forward triad, where the second interaction parent is a
+simultaneous positive nonforward recipient.  Its energy is not dissipation.
+
+The next local question is therefore a **single-charge quotient after hard-cell
+restriction**, not a new Hahn split: restricted donor mass should be pushed to
+existing positive recipient causes exactly once, even when several donor cells
+land on overlapping recipient support or a coarse cell maps back to itself.
+Fresh coherent Hahn remains noncausal without a separate positive kernel.
 
 ## 1. The Hahn level is physical and must be fixed before analysis refinement
 

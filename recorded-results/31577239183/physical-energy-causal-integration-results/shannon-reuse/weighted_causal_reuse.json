@@ -1,0 +1,20 @@
+{
+  "status": "EXACT_TRANSFER_WEIGHTED_CAUSAL_REUSE_INFORMATION",
+  "theorem": {
+    "layer_identity": "R_j=H(child)+log2-H(parent)=H(child,role|parent)>=0",
+    "telescope": "sum R_j=L log2-H(root) for one terminal atom",
+    "physical_lower": "sum R_j >= L log(48/25)-log(P E_global N_base/eta)",
+    "rich_layer": "L log(36/25)>log(P E_global N_base/eta) forces some R_j>log(4/3)",
+    "role_baseline": "the log2 two-parent-role entropy is baseline causality and is not itself charged as Bellman cost"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_telescope_residual": 3.9968028886505635e-15,
+    "minimum_conditional_information": 0.0,
+    "minimum_depth_margin": 3.554889713752729e-05,
+    "branch_counts": {
+      "transfer_weighted_reuse_information_rich": 35957,
+      "causal_depth_not_yet_forced": 14043
+    }
+  }
+}

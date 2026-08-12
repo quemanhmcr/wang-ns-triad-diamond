@@ -1,0 +1,21 @@
+{
+  "certificate": {
+    "status": "EXACT_POSITIVE_HEAT_EDGE_MATERIAL_OWNERSHIP_PARTITION__AFFINE_ENDPOINT_LABELS_INVARIANT__CAPACITY_ROUTING_REMAINS",
+    "edge": "a coherent heat-increment atom connects intrinsic endpoints zeta(X,k) and zeta(X-r,k)",
+    "partition": "for any fixed old material set O, 1_O(z0)1_O(z1)+1_O(z0)1_Oc(z1)+1_Oc(z0)1_O(z1)+1_Oc(z0)1_Oc(z1)=1 pointwise on the positive edge density",
+    "no_cross_term": "OO/ON/NN classification is performed after positive Moyal disintegration, not by decomposing the velocity field; therefore the three edge measures add exactly",
+    "affine_invariance": "under L->ML, X->MX, r->Mr, k->M^-T k, both intrinsic edge endpoints are unchanged; common affine motion cannot change material ownership",
+    "interface": "old-new is an actual material-interface edge mark; a time-dependent ownership change under continuous nonaffine evolution can occur only through the material-pool boundary",
+    "local_capacity": "classwise |e^{-ik.r}A_neighbor-A_here|^2 <= 2(|A_here|^2+|A_neighbor|^2)",
+    "boundary": "half-open dyadic conventions only assign null boundaries; they do not manufacture edge service or relink mass",
+    "scope": "this closes exact ownership classification of the high-strain heat-edge law; it does not prove old-old lifetime capacity on a high-strain slab, nor that new-new service is already a selected transfer parent"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_affine_endpoint_residual": 2.6858449694084783e-15,
+    "worst_partition_residual": 1.7053025658242404e-13,
+    "minimum_class_capacity_margin": 0.0,
+    "orientation_failures": 0,
+    "membership_invariance_failures": 0
+  }
+}

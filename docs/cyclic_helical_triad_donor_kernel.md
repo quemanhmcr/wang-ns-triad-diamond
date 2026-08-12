@@ -1,6 +1,6 @@
 # Cyclic helical-triad donor/recipient kernel
 
-Status: **candidate theorem block; certification requires dedicated, independent adversarial/actual-NS, and full causal-integration GitHub Actions gates.**
+Status: **CERTIFIED** on exact theorem SHA `647065ab1562e15da84c97d9be5265c2e43dc84d`. Dedicated run `31577239181`, independent audit `31577239221`, and full physical-energy causal integration `31577239183` all completed successfully on that SHA.
 
 The mixed-fate reserved Young theorem moved the sharp local HH obstruction from terminal bad-positive assistance to the physical structure of canonical negative work.  This note follows that negative work down to the smallest closed Navier--Stokes object on which its destination is determined: one closed Fourier/helicity triad.
 
@@ -599,4 +599,46 @@ It would **not**:
 - close the initial-data or singular-time interfaces;
 - prove 3D Navier--Stokes global regularity.
 
-The next global question after this provenance theorem would be whether the donor/recipient law, the already-terminal nonforward side branch, and the existing native recurrence laws can be assembled into a genuine typed telescope for **mixed owner recurrence**, without turning same-time redistribution into a scalar Bellman currency.
+The immediate next local question after this provenance theorem is narrower: whether a hard-cell restriction of donor work can be pushed into the already-existing positive recipient causes with an exact **single-charge quotient**, including overlapping recipient support and coarse self-loops, without creating a new owner or recursion depth.  Only after that quotient is clean should any separate between-time modal energy inventory be tested against mixed-owner recurrence; same-time redistribution must never be turned into a scalar Bellman currency.
+
+
+---
+
+## Certification record
+
+The final certified theorem SHA is
+`647065ab1562e15da84c97d9be5265c2e43dc84d`.
+
+The dedicated workflow `31577239181` passed the full `838`-test theorem suite,
+`75,000` generic closed-triad stress states, the signed-good anti-shortcut checks,
+and the actual dealiased Fourier--Galerkin Navier--Stokes probe on the same cutoff-7
+system represented at FFT resolutions `24` and `28`.  The worst generic
+pre-Hahn energy-conservation native residual was `1.505e-16`; the worst cyclic
+coupling native residual was `3.433e-16`.  In the evolved PDE probe the maximum
+selected root-work cross-representation native residual was `7.668e-17`, while
+the global NS energy-balance residual was about `2.963e-12`.
+
+The independent workflow `31577239221` then reran the fragile provenance layer
+with `100,000` closed-triad states and a longer evolved actual-NS audit.  It found
+`50,187` one-donor and `49,813` two-donor generic triads, with worst pre-Hahn
+energy-conservation native residual `1.844e-16`, and the actual-NS energy balance
+at about `1.758e-12`.  This independent lane is the one that exposed both earlier
+conditioning seams, so its final green result is a certification gate rather than
+a redundant replay.
+
+Full physical-energy causal integration `31577239183` passed the same `838`-test
+suite and a `50,000`-state cyclic theorem stress in the current causal spine.
+Artifacts are stored under `recorded-results/31577239181/`,
+`recorded-results/31577239221/`, and `recorded-results/31577239183/`.
+
+Candidate lineage is intentionally retained.  `d6ce290fdec673d71298f6e25802a64a00713bde`
+failed the independent cyclic-coupling audit because a true near-zero coupling was
+used as its own floating denominator.  `83e32db216b7599bc804c84025f238b61b4ac18a`
+repaired that normalization but exposed the same defect in pre-Hahn energy and
+marginal residuals near phase cancellation.  `a09b2bb0e9591afcc89eec7273e44286720f3804`
+introduced the native modal-capacity scale **only as a floating error envelope**,
+made near-zero numerical Hahn certification fail closed, and kept it out of the
+donor kernel and causal law.  Final SHA `647065ab1562e15da84c97d9be5265c2e43dc84d`
+completed the same discipline for permutation, translation, wavevector-scaling,
+amplitude-scaling, reality, and cross-FFT representation audits.  No tolerance,
+stress count, sign law, or physical work identity was weakened.

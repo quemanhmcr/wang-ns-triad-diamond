@@ -1,0 +1,66 @@
+{
+  "common_cutoff": 7,
+  "maximum_selected_root_work_representation_native_residual": 0.0,
+  "maximum_selected_triad_positive_work_representation_native_residual": 0.0,
+  "runs": [
+    {
+      "amplitude": 2.0,
+      "cutoff": 7,
+      "duration": 0.00075,
+      "global_energy_balance_relative_residual": 2.906451970788044e-12,
+      "initial_child_to_donor_ratio": 0.7581603930876303,
+      "initial_donor_count": 1,
+      "initial_recipient_count": 2,
+      "initial_side_forward_ratio": 0.6105139414683932,
+      "initial_side_geometric_multiplier": 0.0,
+      "initial_side_to_child_ratio": 0.3189821166039422,
+      "initial_side_to_donor_ratio": 0.24183960691236914,
+      "initial_signed_good_efficiency": 0.9999966463082317,
+      "maximum_divergence_relative_to_initial_l2": 4.3555883276151876e-16,
+      "maximum_global_nonlinear_work_relative_rate": 1.1106161870937324e-18,
+      "resolution": 24,
+      "selected_native_work_mass_scale_snapshots": [
+        745.4187826101502,
+        744.4295753632258,
+        743.4058100837123,
+        742.3476032237122
+      ],
+      "selected_root_work_snapshots": [
+        [
+          68.08889454951958,
+          21.71913970062838,
+          -89.80803425014801
+        ],
+        [
+          67.99853725037757,
+          21.690317338097447,
+          -89.6888545884751
+        ],
+        [
+          67.90502331186384,
+          21.660488064058352,
+          -89.56551137592221
+        ],
+        [
+          67.80836337093852,
+          21.629655271511186,
+          -89.4380186424497
+        ]
+      ],
+      "selected_triad_positive_work_snapshots": [
+        89.808034250148,
+        89.68885458847505,
+        89.5655113759222,
+        89.4380186424497
+      ],
+      "snapshots": 4,
+      "steps": 24,
+      "viscosity": 0.03,
+      "worst_cyclic_coupling_native_residual": 7.850462293418876e-17,
+      "worst_cyclic_energy_conservation_native_residual": 1.0976513738393855e-16,
+      "worst_measure_donor_marginal_native_residual": 5.726876733075055e-17,
+      "worst_measure_recipient_marginal_native_residual": 3.817917822050037e-17
+    }
+  ],
+  "status": "EVOLVED_DEALIASED_FOURIER_GALERKIN_NS_CYCLIC_HELICAL_TRIAD_DONOR_KERNEL_AUDIT__ACTUAL_MODAL_COEFFICIENTS__THREE_ROOT_ENERGY_CONSERVATION__DW_MINUS_TO_DW_PLUS_MARGINALS__SIGNED_GOOD_NONFORWARD_SIDE_RECIPIENT"
+}
