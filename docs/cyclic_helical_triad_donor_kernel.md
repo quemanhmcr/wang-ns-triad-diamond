@@ -543,7 +543,7 @@ It checks:
 4. signed-good unique donor and side-recipient ratios at the engineered initial event;
 5. side positive nonforward geometry;
 6. Navier--Stokes energy balance and incompressibility;
-7. representation invariance of the **same cutoff-7 Galerkin system** embedded on different FFT grids;
+7. representation invariance of the **same cutoff-7 Galerkin system** embedded on different FFT grids, measured against the same native triad work envelope rather than realized positive work;
 8. amplitude adversaries, which must preserve dimensionless routing and scale every work cubically.
 
 Different Galerkin truncations are not required to agree.  Only different FFT representations of the same finite physical system are an invariant.

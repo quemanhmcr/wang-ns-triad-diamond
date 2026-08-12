@@ -93,6 +93,7 @@ class CyclicDonorKernelNSRun:
     initial_recipient_count: int
     selected_triad_positive_work_snapshots: tuple[float, ...]
     selected_root_work_snapshots: tuple[tuple[float, float, float], ...]
+    selected_native_work_mass_scale_snapshots: tuple[float, ...]
 
 
 @dataclass(frozen=True)
@@ -100,8 +101,8 @@ class CyclicDonorKernelPDEProbe:
     status: str
     runs: tuple[CyclicDonorKernelNSRun, ...]
     common_cutoff: int
-    maximum_selected_triad_positive_work_representation_spread: float
-    maximum_selected_root_work_representation_spread: float
+    maximum_selected_triad_positive_work_representation_native_residual: float
+    maximum_selected_root_work_representation_native_residual: float
 
 
 def _run_one(
@@ -140,6 +141,7 @@ def _run_one(
     divergence: list[float] = []
     total_positive_snapshots: list[float] = []
     root_work_snapshots: list[tuple[float, float, float]] = []
+    native_work_scale_snapshots: list[float] = []
     worst_energy = worst_coupling = worst_donor = worst_recipient = 0.0
     initial_efficiency = initial_side = initial_child_donor = initial_side_donor = 0.0
     initial_side_forward = initial_side_j = 0.0
@@ -163,6 +165,7 @@ def _run_one(
             worst_recipient = max(worst_recipient, measure.recipient_marginal_native_residual)
             total_positive_snapshots.append(measure.total_mass)
             root_work_snapshots.append(tuple(slot.signed_work for slot in triad.slots))
+            native_work_scale_snapshots.append(measure.native_work_mass_scale)
             if step == 0:
                 recipient = triad.slot_for_edge_child_wavevector(CHILD)
                 side = signed_good_side_recipient_certificate(
@@ -217,6 +220,7 @@ def _run_one(
         initial_recipient_count=initial_recipients,
         selected_triad_positive_work_snapshots=tuple(total_positive_snapshots),
         selected_root_work_snapshots=tuple(root_work_snapshots),
+        selected_native_work_mass_scale_snapshots=tuple(native_work_scale_snapshots),
     )
 
 
@@ -257,23 +261,22 @@ def run_probe(
     worst_total = 0.0
     worst_root = 0.0
     for j in range(runs[0].snapshots):
-        worst_total = max(
-            worst_total,
-            _relative_spread(tuple(run.selected_triad_positive_work_snapshots[j] for run in runs)),
-        )
+        native = max(run.selected_native_work_mass_scale_snapshots[j] for run in runs)
+        if native <= 0.0:
+            raise AssertionError("selected evolved triad lost positive native work scale")
+        totals = tuple(run.selected_triad_positive_work_snapshots[j] for run in runs)
+        worst_total = max(worst_total, (max(totals)-min(totals))/native)
         for root in range(3):
             values = tuple(run.selected_root_work_snapshots[j][root] for run in runs)
-            scale = max(abs(v) for v in values)
-            spread = 0.0 if scale == 0.0 else (max(values) - min(values)) / scale
-            worst_root = max(worst_root, abs(spread))
+            worst_root = max(worst_root, (max(values)-min(values))/native)
     if worst_total > 5.0e-8 or worst_root > 5.0e-8:
-        raise AssertionError("the same cutoff-7 Galerkin NS system changed under FFT representation")
+        raise AssertionError("the same cutoff-7 Galerkin NS system changed on its native triad work scale under FFT representation")
     return CyclicDonorKernelPDEProbe(
         status=STATUS,
         runs=runs,
         common_cutoff=int(cutoff),
-        maximum_selected_triad_positive_work_representation_spread=worst_total,
-        maximum_selected_root_work_representation_spread=worst_root,
+        maximum_selected_triad_positive_work_representation_native_residual=worst_total,
+        maximum_selected_root_work_representation_native_residual=worst_root,
     )
 
 
@@ -308,8 +311,8 @@ def main() -> None:
         "",
         f"- common cutoff: `{out.common_cutoff}`",
         f"- FFT representations: `{', '.join(str(run.resolution) for run in out.runs)}`",
-        f"- maximum selected-triad positive-work representation spread: `{out.maximum_selected_triad_positive_work_representation_spread:.3e}`",
-        f"- maximum selected root-work representation spread: `{out.maximum_selected_root_work_representation_spread:.3e}`",
+        f"- maximum selected-triad positive-work representation native residual: `{out.maximum_selected_triad_positive_work_representation_native_residual:.3e}`",
+        f"- maximum selected root-work representation native residual: `{out.maximum_selected_root_work_representation_native_residual:.3e}`",
     ]
     for run in out.runs:
         lines.extend([

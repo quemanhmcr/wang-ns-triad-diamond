@@ -882,6 +882,7 @@ def theorem_certificate() -> dict[str, object]:
         "cyclic_work": "for k0+k1+k2=0, root i has child -ki and work T_i=(s_j|k_j|-s_l|k_l|) R with one common physical Waleffe phase factor R; therefore sum_i T_i=0 before Hahn",
         "donor_kernel": "Q=sum[T_i]_+=sum[-T_i]_+; M(i->j)=[-T_i]_+[T_j]_+/Q.  On three slots the zero-sum sign pattern has a singleton donor or recipient side, so this is the unique positive transport with dW- donor and dW+ recipient marginals",
         "causal_semantics": "the recipient marginal is the already-canonical dW+ law; the kernel adds same-time same-triad donor provenance and neither replaces cause nor creates an event",
+        "numerical_certification": "native modal capacity appears only as the immutable physical work-error envelope for floating reconstruction/resolution; it never enters M(i->j), a causal probability, or recurrence currency, and near-zero phase-cancelled work mints no numerical donor atom",
         "negative_restriction": "every measurable/replayed restriction of cyclic dW- pushes through the same positive kernel to a mass-preserving submeasure of canonical recipient dW+; this rereads cancellation as donor provenance, not as a new owner or budget",
         "generic_anti_theorem": "a generic triad may have two energy donors and one positive recipient; unique donor is not a generic HH law",
         "signed_good_helicity": f"same-helicity parents would have J/J*<={SAME_HELICITY_MULTIPLIER_UPPER}; signed-good efficiency >1-1e-4 therefore forces opposite parent helicities",
@@ -909,11 +910,11 @@ class CyclicDonorKernelStress:
     worst_measure_donor_marginal_native_residual: float
     worst_measure_recipient_marginal_native_residual: float
     worst_restricted_negative_mass_native_residual: float
-    worst_permutation_work_residual: float
-    worst_translation_work_residual: float
-    worst_wavevector_scaling_residual: float
-    worst_amplitude_cubic_scaling_residual: float
-    worst_reality_work_multiset_residual: float
+    worst_permutation_work_native_residual: float
+    worst_translation_work_native_residual: float
+    worst_wavevector_scaling_native_residual: float
+    worst_amplitude_cubic_scaling_native_residual: float
+    worst_reality_work_multiset_native_residual: float
     signed_good_side_ratio: float
     signed_good_child_donor_ratio: float
     signed_good_side_donor_ratio: float
@@ -924,10 +925,21 @@ def _work_multiset(triad: ClosedHelicalTriadRegistration) -> tuple[float, float,
     return tuple(sorted(slot.signed_work for slot in triad.slots))
 
 
-def _multiset_relative(a: Sequence[float], b: Sequence[float]) -> float:
+def _native_work_scale(triad: ClosedHelicalTriadRegistration) -> float:
+    return math.fsum(float(slot.edge_registration.native_modal_capacity) for slot in triad.slots)
+
+
+def _multiset_native_residual(
+    a: Sequence[float], b: Sequence[float], *, native_scale: float
+) -> float:
     aa, bb = tuple(sorted(float(x) for x in a)), tuple(sorted(float(x) for x in b))
-    scale = max(math.fsum(abs(x) for x in aa), math.fsum(abs(x) for x in bb), 1.0e-300)
-    return max(abs(x - y) for x, y in zip(aa, bb)) / scale
+    scale = float(native_scale)
+    if not math.isfinite(scale) or scale < 0.0:
+        raise ValueError("finite nonnegative native work scale required")
+    gap = max(abs(x-y) for x,y in zip(aa,bb))
+    if scale == 0.0:
+        return 0.0 if gap == 0.0 else math.inf
+    return gap/scale
 
 
 def stress(samples: int = 75_000, seed: int = 2026081203) -> CyclicDonorKernelStress:
@@ -983,21 +995,39 @@ def stress(samples: int = 75_000, seed: int = 2026081203) -> CyclicDonorKernelSt
                 helicities=tuple(helicities[j] for j in perm),
                 amplitudes=tuple(amps[j] for j in perm),
             )
-            wp = max(wp, _multiset_relative(_work_multiset(triad), _work_multiset(ptriad)))
+            wp = max(
+                wp,
+                _multiset_native_residual(
+                    _work_multiset(triad), _work_multiset(ptriad),
+                    native_scale=max(_native_work_scale(triad), _native_work_scale(ptriad)),
+                ),
+            )
 
             x0 = rng.normal(size=3)
             tamps = translate_closed_amplitudes((k0, k1, k2), amps, x0)
             ttriad = register_closed_helical_triad(
                 wavevectors=(k0, k1, k2), helicities=helicities, amplitudes=tamps
             )
-            wt = max(wt, _multiset_relative(_work_multiset(triad), _work_multiset(ttriad)))
+            wt = max(
+                wt,
+                _multiset_native_residual(
+                    _work_multiset(triad), _work_multiset(ttriad),
+                    native_scale=max(_native_work_scale(triad), _native_work_scale(ttriad)),
+                ),
+            )
 
             lam = math.exp(float(rng.uniform(-5.0, 5.0)))
             striad = register_closed_helical_triad(
                 wavevectors=(lam*k0, lam*k1, lam*k2), helicities=helicities, amplitudes=amps
             )
             expected_scale = tuple(lam*x for x in _work_multiset(triad))
-            ws = max(ws, _multiset_relative(expected_scale, _work_multiset(striad)))
+            ws = max(
+                ws,
+                _multiset_native_residual(
+                    expected_scale, _work_multiset(striad),
+                    native_scale=max(lam*_native_work_scale(triad), _native_work_scale(striad)),
+                ),
+            )
 
             amp_scale = math.exp(float(rng.uniform(-4.0, 4.0)))
             atriad = register_closed_helical_triad(
@@ -1006,11 +1036,23 @@ def stress(samples: int = 75_000, seed: int = 2026081203) -> CyclicDonorKernelSt
                 amplitudes=tuple(amp_scale*a for a in amps),
             )
             expected_amp = tuple(amp_scale**3*x for x in _work_multiset(triad))
-            wa = max(wa, _multiset_relative(expected_amp, _work_multiset(atriad)))
+            wa = max(
+                wa,
+                _multiset_native_residual(
+                    expected_amp, _work_multiset(atriad),
+                    native_scale=max(amp_scale**3*_native_work_scale(triad), _native_work_scale(atriad)),
+                ),
+            )
 
             nk, na = global_reality_negation((k0, k1, k2), amps)
             rtriad = register_closed_helical_triad(wavevectors=nk, helicities=helicities, amplitudes=na)
-            wreal = max(wreal, _multiset_relative(_work_multiset(triad), _work_multiset(rtriad)))
+            wreal = max(
+                wreal,
+                _multiset_native_residual(
+                    _work_multiset(triad), _work_multiset(rtriad),
+                    native_scale=max(_native_work_scale(triad), _native_work_scale(rtriad)),
+                ),
+            )
 
     anti = generic_two_donor_counterexample()
     anti_ok = anti.donor_kernel.donor_count == 2 and anti.donor_kernel.recipient_count == 1
@@ -1032,11 +1074,11 @@ def stress(samples: int = 75_000, seed: int = 2026081203) -> CyclicDonorKernelSt
         worst_measure_donor_marginal_native_residual=wmd,
         worst_measure_recipient_marginal_native_residual=wmr,
         worst_restricted_negative_mass_native_residual=wrestrict,
-        worst_permutation_work_residual=wp,
-        worst_translation_work_residual=wt,
-        worst_wavevector_scaling_residual=ws,
-        worst_amplitude_cubic_scaling_residual=wa,
-        worst_reality_work_multiset_residual=wreal,
+        worst_permutation_work_native_residual=wp,
+        worst_translation_work_native_residual=wt,
+        worst_wavevector_scaling_native_residual=ws,
+        worst_amplitude_cubic_scaling_native_residual=wa,
+        worst_reality_work_multiset_native_residual=wreal,
         signed_good_side_ratio=side.side_to_recipient_ratio,
         signed_good_child_donor_ratio=side.recipient_to_donor_ratio,
         signed_good_side_donor_ratio=side.side_to_donor_ratio,
@@ -1056,7 +1098,7 @@ def main() -> None:
     (args.outdir / "certificate.json").write_text(
         json.dumps({"certificate": cert, "stress": asdict(out)}, indent=2, sort_keys=True) + "\n"
     )
-    summary = f"""# Cyclic helical-triad donor/recipient kernel\n\nStatus: **{STATUS}**.\n\nOne regular closed helical triad is quotient by the full `S3` ordering symmetry.  Marking one of its three physical roots recovers exactly the existing parent-swap edge quotient: `3*(1/48)=1/16`.  The three cyclic root works use the same Waleffe phase factor and satisfy `T0+T1+T2=0` before Hahn.\n\nThe positive same-triad transport `M(i->j)=[-T_i]_+[T_j]_+/Q`, `Q=sum[T]_+=sum[-T]_+`, has donor marginal `dW-` and recipient marginal the already-canonical `dW+`.  On three slots this transport is unique because every nonzero zero-sum sign pattern has a singleton donor or recipient side.  It adds same-time donor provenance; it does not replace causality or create a new event.\n\nStress: `{out.samples}` generic physical closed triads\n- one-donor cases: `{out.one_donor_cases}`\n- two-donor cases: `{out.two_donor_cases}`\n- exact zero-native-work cases: `{out.zero_work_cases}`\n- numerically unresolved near-zero work cases: `{out.numerically_unresolved_near_zero_cases}`\n- worst cyclic energy-conservation native residual: `{out.worst_energy_conservation_native_residual:.3e}`\n- worst cyclic-coupling native residual: `{out.worst_cyclic_coupling_native_residual:.3e}`\n- worst density donor/recipient native residuals: `{out.worst_donor_marginal_native_residual:.3e}` / `{out.worst_recipient_marginal_native_residual:.3e}`\n- worst measure donor/recipient native residuals: `{out.worst_measure_donor_marginal_native_residual:.3e}` / `{out.worst_measure_recipient_marginal_native_residual:.3e}`\n- worst restricted dW- to canonical dW+ submeasure native mass residual: `{out.worst_restricted_negative_mass_native_residual:.3e}`\n- worst permutation / translation work residuals: `{out.worst_permutation_work_residual:.3e}` / `{out.worst_translation_work_residual:.3e}`\n- worst wavevector / amplitude scaling residuals: `{out.worst_wavevector_scaling_residual:.3e}` / `{out.worst_amplitude_cubic_scaling_residual:.3e}`\n- worst global-reality work-multiset residual: `{out.worst_reality_work_multiset_residual:.3e}`\n\nOn the signed-good integer triad, the interaction parents remain two but exactly one is the energy donor.  The other is a simultaneous positive nonforward side recipient.  The certified work ratios are\n\n`3/10 < W_side+/W_child+ < 1/3`,\n`3/4 < W_child+/W_donor- < 10/13`,\n`3/13 < W_side+/W_donor- < 1/4`.\n\nThe side work is real physical energy redistribution and already lies on the existing positive-nonforward transfer-loss route.  It is not dissipation, a reset budget, or a proof that the good child itself terminates.  No global-regularity claim is made.\n"""
+    summary = f"""# Cyclic helical-triad donor/recipient kernel\n\nStatus: **{STATUS}**.\n\nOne regular closed helical triad is quotient by the full `S3` ordering symmetry.  Marking one of its three physical roots recovers exactly the existing parent-swap edge quotient: `3*(1/48)=1/16`.  The three cyclic root works use the same Waleffe phase factor and satisfy `T0+T1+T2=0` before Hahn.\n\nThe positive same-triad transport `M(i->j)=[-T_i]_+[T_j]_+/Q`, `Q=sum[T]_+=sum[-T]_+`, has donor marginal `dW-` and recipient marginal the already-canonical `dW+`.  On three slots this transport is unique because every nonzero zero-sum sign pattern has a singleton donor or recipient side.  It adds same-time donor provenance; it does not replace causality or create a new event.\n\nStress: `{out.samples}` generic physical closed triads\n- one-donor cases: `{out.one_donor_cases}`\n- two-donor cases: `{out.two_donor_cases}`\n- exact zero-native-work cases: `{out.zero_work_cases}`\n- numerically unresolved near-zero work cases: `{out.numerically_unresolved_near_zero_cases}`\n- worst cyclic energy-conservation native residual: `{out.worst_energy_conservation_native_residual:.3e}`\n- worst cyclic-coupling native residual: `{out.worst_cyclic_coupling_native_residual:.3e}`\n- worst density donor/recipient native residuals: `{out.worst_donor_marginal_native_residual:.3e}` / `{out.worst_recipient_marginal_native_residual:.3e}`\n- worst measure donor/recipient native residuals: `{out.worst_measure_donor_marginal_native_residual:.3e}` / `{out.worst_measure_recipient_marginal_native_residual:.3e}`\n- worst restricted dW- to canonical dW+ submeasure native mass residual: `{out.worst_restricted_negative_mass_native_residual:.3e}`\n- worst permutation / translation work native residuals: `{out.worst_permutation_work_native_residual:.3e}` / `{out.worst_translation_work_native_residual:.3e}`\n- worst wavevector / amplitude scaling native residuals: `{out.worst_wavevector_scaling_native_residual:.3e}` / `{out.worst_amplitude_cubic_scaling_native_residual:.3e}`\n- worst global-reality work-multiset native residual: `{out.worst_reality_work_multiset_native_residual:.3e}`\n\nOn the signed-good integer triad, the interaction parents remain two but exactly one is the energy donor.  The other is a simultaneous positive nonforward side recipient.  The certified work ratios are\n\n`3/10 < W_side+/W_child+ < 1/3`,\n`3/4 < W_child+/W_donor- < 10/13`,\n`3/13 < W_side+/W_donor- < 1/4`.\n\nThe side work is real physical energy redistribution and already lies on the existing positive-nonforward transfer-loss route.  It is not dissipation, a reset budget, or a proof that the good child itself terminates.  No global-regularity claim is made.\n"""
     (args.outdir / "summary.md").write_text(summary)
     print(summary)
 
