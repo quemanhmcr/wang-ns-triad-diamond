@@ -1,0 +1,90 @@
+name: Helical mode-set energy continuity
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/helical_mode_set_energy_continuity.py'
+      - 'tests/test_helical_mode_set_energy_continuity.py'
+      - 'src/helical_mode_set_energy_continuity_pde_probe.py'
+      - 'tests/test_helical_mode_set_energy_continuity_pde_probe.py'
+      - 'docs/helical_mode_set_energy_continuity.md'
+      - 'src/cyclic_helical_triad_donor_kernel.py'
+      - 'src/cyclic_hard_cell_single_charge_quotient.py'
+      - 'src/continuum_helical_edge_measure_registration.py'
+      - 'src/continuum_helical_edge_measure_pde_probe.py'
+      - 'src/helical.py'
+      - '.github/workflows/helical-mode-set-energy-continuity.yml'
+      - '.github/workflows/audit-helical-mode-set-energy-continuity.yml'
+      - 'requirements.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  analytic-and-adversarial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused helical mode-set continuity tests
+        run: pytest -q tests/test_helical_mode_set_energy_continuity.py
+      - name: Physical flow/marginal dependency tests
+        run: pytest -q tests/test_cyclic_helical_triad_donor_kernel.py tests/test_cyclic_hard_cell_single_charge_quotient.py tests/test_continuum_helical_edge_measure_registration.py
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Physical closed-triad mode-set stress
+        run: python -m src.helical_mode_set_energy_continuity --samples 75000 --seed 2026081205 --outdir results-mode-continuity/main
+      - name: Cyclic donor dependency stress
+        run: python -m src.cyclic_helical_triad_donor_kernel --samples 75000 --seed 2026081203 --outdir results-mode-continuity/cyclic-dependency
+      - name: Summary
+        run: |
+          cat results-mode-continuity/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+          echo >> "$GITHUB_STEP_SUMMARY"
+          cat results-mode-continuity/cyclic-dependency/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: helical-mode-set-energy-continuity-analytic-results
+          path: results-mode-continuity/
+
+  actual-ns:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused evolved NS continuity tests
+        run: pytest -q tests/test_helical_mode_set_energy_continuity_pde_probe.py tests/test_continuum_helical_edge_measure_pde_probe.py
+      - name: Actual NS selected helical mode on two FFT representations
+        run: python -m src.helical_mode_set_energy_continuity_pde_probe --resolutions 24 28 --cutoff 7 --steps 64 --duration 0.001 --helicity 1 --phase-sign 1 --outdir results-mode-continuity-ns/main
+      - name: Sign-reversed actual NS
+        run: python -m src.helical_mode_set_energy_continuity_pde_probe --resolutions 24 28 --cutoff 7 --steps 64 --duration 0.001 --helicity 1 --phase-sign -1 --outdir results-mode-continuity-ns/negative-phase
+      - name: Opposite helical child mode
+        run: python -m src.helical_mode_set_energy_continuity_pde_probe --resolutions 24 28 --cutoff 7 --steps 64 --duration 0.001 --helicity -1 --phase-sign 1 --outdir results-mode-continuity-ns/opposite-helicity
+      - name: Amplitude adversaries
+        run: |
+          for a in 0.5 2.0; do
+            tag=${a/./p}
+            python -m src.helical_mode_set_energy_continuity_pde_probe \
+              --resolutions 24 --cutoff 7 --steps 48 --duration 0.00075 --amplitude "$a" --helicity 1 --phase-sign 1 \
+              --outdir "results-mode-continuity-ns/amplitude-$tag"
+          done
+      - name: Summary
+        run: |
+          for f in results-mode-continuity-ns/*/summary.md; do
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat "$f" >> "$GITHUB_STEP_SUMMARY"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: helical-mode-set-energy-continuity-actual-ns-results
+          path: results-mode-continuity-ns/
