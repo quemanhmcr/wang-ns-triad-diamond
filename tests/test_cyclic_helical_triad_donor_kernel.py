@@ -77,7 +77,7 @@ def test_cyclic_sum_relative_reroot_is_the_same_closed_triad_with_unit_jacobian_
 def test_three_cyclic_physical_edges_share_one_waleffe_factor_and_conserve_signed_energy_before_hahn():
     k, s, a = _generic_data()
     triad = register_closed_helical_triad(wavevectors=k, helicities=s, amplitudes=a)
-    assert triad.signed_energy_conservation_residual < 4e-10
+    assert triad.signed_energy_conservation_native_residual < 5e-10
     assert triad.cyclic_coupling_native_residual < 5e-12
     assert sum(slot.signed_work for slot in triad.slots) == pytest.approx(0.0, abs=2e-11)
     for slot in triad.slots:
@@ -145,16 +145,16 @@ def test_generic_positive_recipient_can_have_two_energy_donors():
     assert not out.donor_kernel.canonical_positive_law_replaced
 
 
-def test_measure_kernel_has_exact_canonical_negative_and_positive_root_marginals():
+def test_measure_kernel_binds_theorem_canonical_marginals_on_native_physical_scale():
     k, s, a = _generic_data()
     triad = register_closed_helical_triad(wavevectors=k, helicities=s, amplitudes=a)
     out = cyclic_triad_measure_kernel(triad, quotient_measure_mass=2.75)
-    assert out.total_mass == pytest.approx(sum(out.donor_edge_negative_masses), rel=4e-11)
-    assert out.total_mass == pytest.approx(sum(out.recipient_edge_positive_masses), rel=4e-11)
-    assert out.donor_marginal_residual < 4e-10
-    assert out.recipient_marginal_residual < 4e-10
-    assert out.recipient_is_submeasure_of_canonical_dW_plus
-    assert out.donor_is_restriction_of_canonical_dW_minus
+    assert out.numerically_resolved_transport
+    assert out.balance_native_residual < 5e-10
+    assert out.donor_marginal_native_residual < 5e-10
+    assert out.recipient_marginal_native_residual < 5e-10
+    assert out.theorem_recipient_is_submeasure_of_canonical_dW_plus
+    assert out.theorem_donor_is_restriction_of_canonical_dW_minus
     assert not out.canonical_dW_plus_replaced
     assert not out.creates_new_event
 
@@ -166,13 +166,29 @@ def test_any_nonempty_negative_root_restriction_pushes_to_a_submeasure_of_same_t
     assert len(donors) == 2
     for selected in ((donors[0],), (donors[1],), donors):
         out = pushforward_restricted_negative_work(kernel, donor_closed_mode_indices=selected)
-        assert out.recipient_total_mass == pytest.approx(out.selected_negative_mass, rel=4e-11)
+        assert out.mass_conservation_native_residual < 5e-10
         assert all(out.recipient_dominated_by_full_canonical_positive_mass)
         for got, full in zip(out.recipient_masses, kernel.recipient_edge_positive_masses):
-            assert got <= full + 4e-10 * max(got, full, 1e-300)
+            assert got <= full + 5e-10 * kernel.native_work_mass_scale
         assert not out.creates_new_event
-        assert not out.capacity_used
+        assert not out.capacity_used_as_causal_law
         assert not out.later_hahn_used
+
+
+def test_near_zero_phase_cancellation_does_not_mint_floating_donor_provenance():
+    k, s, _a = _generic_data()
+    g = coupling_g(k[1], k[2], k[0], s[1], s[2], s[0])
+    a0 = 1j * g / abs(g)
+    triad = register_closed_helical_triad(wavevectors=k, helicities=s, amplitudes=(a0, 1.0, 1.0))
+    assert not triad.donor_kernel.numerically_resolved_transport
+    assert triad.donor_kernel.flows == ()
+    kernel = cyclic_triad_measure_kernel(triad, quotient_measure_mass=1.0)
+    assert not kernel.numerically_resolved_transport
+    assert kernel.atoms == ()
+    donors = tuple(i for i,mass in enumerate(kernel.donor_edge_negative_masses) if mass>0.0)
+    if donors:
+        with pytest.raises(ValueError, match="numerically resolved"):
+            pushforward_restricted_negative_work(kernel, donor_closed_mode_indices=(donors[0],))
 
 
 def test_signed_good_forward_recipient_has_unique_energy_donor_and_positive_nonforward_side_recipient():

@@ -199,13 +199,16 @@ class CyclicTriadDonorKernel:
     flows: tuple[DonorRecipientFlow, ...]
     total_positive_work: float
     total_negative_work: float
-    donor_marginal_residual: float
-    recipient_marginal_residual: float
+    native_work_scale: float
+    balance_native_residual: float
+    donor_marginal_native_residual: float
+    recipient_marginal_native_residual: float
     donor_count: int
     recipient_count: int
     transport_unique: bool
+    numerically_resolved_transport: bool
     canonical_positive_law_replaced: bool = False
-    capacity_used: bool = False
+    capacity_used_as_causal_law: bool = False
     creates_new_event: bool = False
     later_hahn_used: bool = False
 
@@ -213,27 +216,45 @@ class CyclicTriadDonorKernel:
         vals = (
             self.total_positive_work,
             self.total_negative_work,
-            self.donor_marginal_residual,
-            self.recipient_marginal_residual,
+            self.native_work_scale,
+            self.balance_native_residual,
+            self.donor_marginal_native_residual,
+            self.recipient_marginal_native_residual,
         )
         if not all(math.isfinite(float(v)) for v in vals):
             raise ValueError("finite cyclic donor-kernel data required")
-        if min(self.total_positive_work, self.total_negative_work) < 0.0:
-            raise ValueError("nonnegative positive/negative work totals required")
-        if self.canonical_positive_law_replaced or self.capacity_used or self.creates_new_event or self.later_hahn_used:
+        if min(self.total_positive_work, self.total_negative_work, self.native_work_scale) < 0.0:
+            raise ValueError("nonnegative work totals/native scale required")
+        if self.canonical_positive_law_replaced or self.capacity_used_as_causal_law or self.creates_new_event or self.later_hahn_used:
             raise ValueError("cyclic donor kernel may only add same-triad provenance to the canonical work law")
         if not self.transport_unique:
-            raise ValueError("three-slot donor transport must be the unique work-marginal coupling")
-        scale = max(self.total_positive_work, self.total_negative_work, 1.0e-300)
-        if abs(self.total_positive_work - self.total_negative_work) > 3.0e-10 * scale:
-            raise AssertionError("closed triad did not conserve nonlinear energy before Hahn splitting")
-        if self.donor_marginal_residual > 4.0e-10 or self.recipient_marginal_residual > 4.0e-10:
-            raise AssertionError("donor kernel failed the canonical dW-/dW+ marginals")
-        if self.total_positive_work == 0.0:
-            if self.flows or self.donor_count or self.recipient_count:
-                raise AssertionError("zero-work triad cannot carry donor-recipient atoms")
-        elif not (1 <= self.donor_count <= 2 and 1 <= self.recipient_count <= 2):
-            raise AssertionError("nonzero three-slot conservative triad must have one/two donors and recipients")
+            raise ValueError("three-slot donor transport must be the unique theorem-level work-marginal coupling")
+        if self.balance_native_residual > 5.0e-10:
+            raise AssertionError("closed triad left the native physical work scale before Hahn splitting")
+        if self.donor_marginal_native_residual > 5.0e-10 or self.recipient_marginal_native_residual > 5.0e-10:
+            raise AssertionError("numerical donor kernel left the native dW-/dW+ work scale")
+        if self.native_work_scale == 0.0:
+            if self.total_positive_work != 0.0 or self.total_negative_work != 0.0 or self.flows:
+                raise AssertionError("zero native triad work scale carried nonzero work")
+            return
+        if self.numerically_resolved_transport:
+            if not (self.total_positive_work > 0.0 and self.total_negative_work > 0.0):
+                raise AssertionError("resolved donor transport needs both positive and negative work")
+            if not (1 <= self.donor_count <= 2 and 1 <= self.recipient_count <= 2):
+                raise AssertionError("resolved three-slot triad must have one/two donors and recipients")
+            if not self.flows:
+                raise AssertionError("resolved nonzero donor transport lost its physical work atoms")
+        else:
+            # At a true work zero the mathematical Hahn laws are zero.  Floating
+            # independent edge registrations may leave one-sided O(roundoff) work.
+            # Such a sign is not allowed to mint a donor relation.  The native
+            # residual fields certify that the unresolved mass is below the same
+            # physical work scale used by the edge registrations.
+            if self.flows:
+                raise AssertionError("numerically unresolved near-zero triad minted donor atoms")
+            unresolved = max(self.total_positive_work, self.total_negative_work)
+            if unresolved > 5.0e-10 * self.native_work_scale:
+                raise AssertionError("nonzero triad work was incorrectly classified as numerically unresolved")
 
 
 @dataclass(frozen=True)
@@ -258,33 +279,43 @@ class CyclicTriadMeasureKernel:
     recipient_edge_positive_masses: tuple[float, float, float]
     atoms: tuple[DonorRecipientMeasureAtom, ...]
     total_mass: float
-    donor_marginal_residual: float
-    recipient_marginal_residual: float
-    recipient_is_submeasure_of_canonical_dW_plus: bool = True
-    donor_is_restriction_of_canonical_dW_minus: bool = True
+    native_work_mass_scale: float
+    balance_native_residual: float
+    donor_marginal_native_residual: float
+    recipient_marginal_native_residual: float
+    numerically_resolved_transport: bool
+    theorem_recipient_is_submeasure_of_canonical_dW_plus: bool = True
+    theorem_donor_is_restriction_of_canonical_dW_minus: bool = True
     canonical_dW_plus_replaced: bool = False
     creates_new_event: bool = False
 
     def __post_init__(self) -> None:
         if not math.isfinite(self.quotient_measure_mass) or self.quotient_measure_mass < 0.0:
             raise ValueError("finite nonnegative closed-triad quotient measure mass required")
-        vals = (*self.donor_edge_negative_masses, *self.recipient_edge_positive_masses, self.total_mass)
+        vals = (
+            *self.donor_edge_negative_masses,
+            *self.recipient_edge_positive_masses,
+            self.total_mass,
+            self.native_work_mass_scale,
+            self.balance_native_residual,
+            self.donor_marginal_native_residual,
+            self.recipient_marginal_native_residual,
+        )
         if not all(math.isfinite(float(v)) and float(v) >= 0.0 for v in vals):
-            raise ValueError("finite nonnegative cyclic work masses required")
+            raise ValueError("finite nonnegative cyclic work masses/native residuals required")
         if (
-            not self.recipient_is_submeasure_of_canonical_dW_plus
-            or not self.donor_is_restriction_of_canonical_dW_minus
+            not self.theorem_recipient_is_submeasure_of_canonical_dW_plus
+            or not self.theorem_donor_is_restriction_of_canonical_dW_minus
             or self.canonical_dW_plus_replaced
             or self.creates_new_event
         ):
             raise ValueError("measure kernel may only transport restricted dW- into inherited canonical dW+ provenance")
-        dtotal = math.fsum(self.donor_edge_negative_masses)
-        ptotal = math.fsum(self.recipient_edge_positive_masses)
-        scale = max(dtotal, ptotal, self.total_mass, 1.0e-300)
-        if max(abs(dtotal-self.total_mass), abs(ptotal-self.total_mass)) > 4.0e-10*scale:
-            raise AssertionError("cyclic measure kernel changed total physical work mass")
-        if self.donor_marginal_residual > 4.0e-10 or self.recipient_marginal_residual > 4.0e-10:
-            raise AssertionError("cyclic measure kernel lost its dW-/dW+ marginals")
+        if self.balance_native_residual > 5.0e-10:
+            raise AssertionError("measure-level cyclic work balance left its native physical mass scale")
+        if self.donor_marginal_native_residual > 5.0e-10 or self.recipient_marginal_native_residual > 5.0e-10:
+            raise AssertionError("measure kernel marginals left the native physical work-mass scale")
+        if not self.numerically_resolved_transport and self.atoms:
+            raise AssertionError("numerically unresolved near-zero measure minted donor atoms")
 
 
 @dataclass(frozen=True)
@@ -293,9 +324,11 @@ class RestrictedNegativeRecipientPushforward:
     selected_negative_mass: float
     recipient_masses: tuple[float, float, float]
     recipient_total_mass: float
+    native_work_mass_scale: float
+    mass_conservation_native_residual: float
     recipient_dominated_by_full_canonical_positive_mass: tuple[bool, bool, bool]
     creates_new_event: bool = False
-    capacity_used: bool = False
+    capacity_used_as_causal_law: bool = False
     later_hahn_used: bool = False
 
     def __post_init__(self) -> None:
@@ -307,15 +340,17 @@ class RestrictedNegativeRecipientPushforward:
             raise ValueError("donor restriction indices must lie in {0,1,2}")
         if not math.isfinite(self.selected_negative_mass) or self.selected_negative_mass <= 0.0:
             raise ValueError("positive selected canonical negative-work mass required")
+        if not math.isfinite(self.native_work_mass_scale) or self.native_work_mass_scale <= 0.0:
+            raise ValueError("positive native work-mass scale required for restricted pushforward")
         if any(not math.isfinite(v) or v < 0.0 for v in self.recipient_masses):
             raise ValueError("finite nonnegative recipient pushforward masses required")
-        if abs(math.fsum(self.recipient_masses)-self.recipient_total_mass) > 4.0e-10*max(self.recipient_total_mass,1.0e-300):
-            raise AssertionError("restricted recipient pushforward total changed")
-        if abs(self.recipient_total_mass-self.selected_negative_mass) > 4.0e-10*max(self.selected_negative_mass,1.0e-300):
-            raise AssertionError("restricted dW- mass was not preserved by same-triad positive pushforward")
+        if abs(math.fsum(self.recipient_masses)-self.recipient_total_mass) > 5.0e-15*self.native_work_mass_scale:
+            raise AssertionError("restricted recipient atom sum changed on the native work-mass scale")
+        if self.mass_conservation_native_residual > 5.0e-10:
+            raise AssertionError("restricted dW- pushforward left the native physical work-mass scale")
         if not all(self.recipient_dominated_by_full_canonical_positive_mass):
-            raise AssertionError("restricted negative-work recipient law exceeded canonical dW+ on a cyclic root")
-        if self.creates_new_event or self.capacity_used or self.later_hahn_used:
+            raise AssertionError("restricted negative-work recipient law exceeded canonical dW+ beyond native roundoff")
+        if self.creates_new_event or self.capacity_used_as_causal_law or self.later_hahn_used:
             raise ValueError("restricted negative-work pushforward changed physical event/cause semantics")
 
 
@@ -326,7 +361,7 @@ class ClosedHelicalTriadRegistration:
     common_waleffe_coupling: complex
     common_phase_work_factor: float
     slots: tuple[CyclicTriadSlotWork, CyclicTriadSlotWork, CyclicTriadSlotWork]
-    signed_energy_conservation_residual: float
+    signed_energy_conservation_native_residual: float
     cyclic_coupling_native_residual: float
     donor_kernel: CyclicTriadDonorKernel
     parent_permutation_quotiented: bool = True
@@ -344,12 +379,15 @@ class ClosedHelicalTriadRegistration:
         if stable_norm3(vec_sum) > 3.0e-12 * scale:
             raise AssertionError("stored closed helical triad no longer sums to zero")
         works = tuple(slot.signed_work for slot in self.slots)
-        variation = math.fsum(abs(w) for w in works)
-        expected_res = 0.0 if variation == 0.0 else abs(math.fsum(works)) / variation
-        if abs(self.signed_energy_conservation_residual - expected_res) > 3.0e-14 * max(1.0, expected_res):
-            raise AssertionError("stored cyclic energy-conservation residual changed")
-        if self.signed_energy_conservation_residual > 4.0e-10:
-            raise AssertionError("one helical closed triad lost exact nonlinear energy conservation")
+        native_scale = math.fsum(float(slot.edge_registration.native_modal_capacity) for slot in self.slots)
+        if native_scale == 0.0:
+            expected_res = 0.0 if all(w == 0.0 for w in works) else math.inf
+        else:
+            expected_res = abs(math.fsum(works)) / native_scale
+        if abs(self.signed_energy_conservation_native_residual - expected_res) > 3.0e-14 * max(1.0, expected_res):
+            raise AssertionError("stored cyclic native energy-conservation residual changed")
+        if self.signed_energy_conservation_native_residual > 5.0e-10:
+            raise AssertionError("one helical closed triad lost nonlinear energy conservation on its native work scale")
         if self.cyclic_coupling_native_residual > 5.0e-12:
             raise AssertionError("cyclic Waleffe triple-product coupling left its native unit-basis scale")
 
@@ -394,18 +432,49 @@ def _build_donor_kernel(slots: Sequence[CyclicTriadSlotWork]) -> CyclicTriadDono
     negative = {slot.closed_mode_index: slot.negative_work for slot in slots if slot.negative_work > 0.0}
     total_p = math.fsum(positive.values())
     total_n = math.fsum(negative.values())
-    scale = max(total_p, total_n, math.fsum(abs(slot.signed_work) for slot in slots), 1.0e-300)
-    if abs(total_p - total_n) > 4.0e-10 * scale:
-        raise AssertionError("cannot construct donor kernel before exact closed-triad energy conservation")
-    if total_p == 0.0:
-        return CyclicTriadDonorKernel((), 0.0, 0.0, 0.0, 0.0, 0, 0, True)
+    native_scale = math.fsum(float(slot.edge_registration.native_modal_capacity) for slot in slots)
+    if native_scale == 0.0:
+        if total_p != 0.0 or total_n != 0.0:
+            raise AssertionError("zero native modal capacity carried nonzero cyclic work")
+        return CyclicTriadDonorKernel((), 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0, 0, True, False)
+    balance = abs(total_p-total_n)/native_scale
+    if balance > 5.0e-10:
+        raise AssertionError("cannot construct donor kernel: closed-triad work balance left native modal-capacity scale")
+
+    resolved_level = max(total_p,total_n)/native_scale
+    if resolved_level <= 5.0e-10:
+        return CyclicTriadDonorKernel(
+            (), total_p, total_n, native_scale, balance,
+            total_n/native_scale, total_p/native_scale,
+            len(negative), len(positive), True, False
+        )
+
+    # A mathematically nonzero conservative triad has both donor and recipient
+    # sides.  If independent double-precision edge registrations leave only a
+    # one-sided work of size O(native roundoff), its Hahn sign is numerically
+    # unresolved and must not mint a donor relation.  This does not alter the
+    # exact theorem law; it refuses a floating causal inference below resolution.
+    if total_p == 0.0 or total_n == 0.0:
+        unresolved = max(total_p,total_n)/native_scale
+        if unresolved > 5.0e-10:
+            raise AssertionError("one-sided cyclic work is too large to be a near-zero numerical ambiguity")
+        return CyclicTriadDonorKernel(
+            (), total_p, total_n, native_scale, balance,
+            total_n/native_scale, total_p/native_scale,
+            len(negative), len(positive), True, False
+        )
     if min(len(positive), len(negative)) != 1:
-        raise AssertionError("a three-slot zero-sum work vector must have a singleton donor or recipient side")
+        raise AssertionError("a resolved three-slot zero-sum work vector must have a singleton donor or recipient side")
+
+    # In exact arithmetic total_p=total_n=Q.  The symmetric denominator below
+    # avoids privileging either independently registered Hahn side when their
+    # tiny floating mismatch is only native-scale roundoff.
+    q = 0.5*(total_p+total_n)
     slots_by_index = {slot.closed_mode_index: slot for slot in slots}
     flows: list[DonorRecipientFlow] = []
     for donor, nwork in negative.items():
         for recipient, pwork in positive.items():
-            work = nwork * pwork / total_p
+            work = nwork * pwork / q
             dslot = slots_by_index[donor]
             rslot = slots_by_index[recipient]
             flows.append(
@@ -420,20 +489,23 @@ def _build_donor_kernel(slots: Sequence[CyclicTriadSlotWork]) -> CyclicTriadDono
     row_res = 0.0
     for donor, expected in negative.items():
         actual = math.fsum(flow.physical_work for flow in flows if flow.donor_closed_mode_index == donor)
-        row_res = max(row_res, _relative_gap(actual, expected, max(expected, total_p)))
+        row_res = max(row_res, abs(actual-expected)/native_scale)
     col_res = 0.0
     for recipient, expected in positive.items():
         actual = math.fsum(flow.physical_work for flow in flows if flow.recipient_closed_mode_index == recipient)
-        col_res = max(col_res, _relative_gap(actual, expected, max(expected, total_p)))
+        col_res = max(col_res, abs(actual-expected)/native_scale)
     return CyclicTriadDonorKernel(
         flows=tuple(flows),
         total_positive_work=total_p,
         total_negative_work=total_n,
-        donor_marginal_residual=row_res,
-        recipient_marginal_residual=col_res,
+        native_work_scale=native_scale,
+        balance_native_residual=balance,
+        donor_marginal_native_residual=row_res,
+        recipient_marginal_native_residual=col_res,
         donor_count=len(negative),
         recipient_count=len(positive),
         transport_unique=True,
+        numerically_resolved_transport=True,
     )
 
 
@@ -498,8 +570,11 @@ def register_closed_helical_triad(
                 expected_signed_work=coeff * common,
             )
         )
-    variation = math.fsum(abs(slot.signed_work) for slot in slots)
-    conservation = 0.0 if variation == 0.0 else abs(math.fsum(slot.signed_work for slot in slots)) / variation
+    native_work_scale = math.fsum(float(slot.edge_registration.native_modal_capacity) for slot in slots)
+    if native_work_scale == 0.0:
+        conservation = 0.0 if all(slot.signed_work == 0.0 for slot in slots) else math.inf
+    else:
+        conservation = abs(math.fsum(slot.signed_work for slot in slots)) / native_work_scale
     kernel = _build_donor_kernel(slots)
     return ClosedHelicalTriadRegistration(
         modes=(modes[0], modes[1], modes[2]),
@@ -507,7 +582,7 @@ def register_closed_helical_triad(
         common_waleffe_coupling=complex(g0),
         common_phase_work_factor=common,
         slots=(slots[0], slots[1], slots[2]),
-        signed_energy_conservation_residual=conservation,
+        signed_energy_conservation_native_residual=conservation,
         cyclic_coupling_native_residual=cyclic_res,
         donor_kernel=kernel,
     )
@@ -522,13 +597,18 @@ def cyclic_triad_measure_kernel(
     unitary Fourier factor is the same ``C_F`` already used by canonical edge
     registration.  Root marking is handled by the exact ``3*(1/48)=1/16``
     quotient theorem; no extra multiplicity is inserted here.
+
+    Floating marginal residuals are normalized by the same native modal-capacity
+    work scale as the three physical edge registrations, never by a realized Hahn
+    mass which can vanish at phase cancellation.
     """
-    q = float(quotient_measure_mass)
-    if not math.isfinite(q) or q < 0.0:
+    qmass = float(quotient_measure_mass)
+    if not math.isfinite(qmass) or qmass < 0.0:
         raise ValueError("finite nonnegative closed-triad quotient measure mass required")
-    factor = unitary_fourier_convolution_factor() * q
+    factor = unitary_fourier_convolution_factor() * qmass
     donor = tuple(factor*slot.negative_work for slot in triad.slots)
     recipient = tuple(factor*slot.positive_work for slot in triad.slots)
+    native_mass_scale = factor*triad.donor_kernel.native_work_scale
     atoms = tuple(
         DonorRecipientMeasureAtom(
             donor_closed_mode_index=flow.donor_closed_mode_index,
@@ -541,26 +621,30 @@ def cyclic_triad_measure_kernel(
         if factor*flow.physical_work > 0.0
     )
     total = math.fsum(atom.physical_work_mass for atom in atoms)
-    row_res = 0.0
-    for i, expected in enumerate(donor):
-        if expected <= 0.0:
-            continue
-        actual = math.fsum(atom.physical_work_mass for atom in atoms if atom.donor_closed_mode_index==i)
-        row_res=max(row_res,_relative_gap(actual,expected,max(total,expected)))
-    col_res = 0.0
-    for i, expected in enumerate(recipient):
-        if expected <= 0.0:
-            continue
-        actual = math.fsum(atom.physical_work_mass for atom in atoms if atom.recipient_closed_mode_index==i)
-        col_res=max(col_res,_relative_gap(actual,expected,max(total,expected)))
+    if native_mass_scale == 0.0:
+        row_res=col_res=balance=0.0
+    else:
+        dtotal=math.fsum(donor); ptotal=math.fsum(recipient)
+        balance=abs(dtotal-ptotal)/native_mass_scale
+        row_res=0.0
+        for i,expected in enumerate(donor):
+            actual=math.fsum(atom.physical_work_mass for atom in atoms if atom.donor_closed_mode_index==i)
+            row_res=max(row_res,abs(actual-expected)/native_mass_scale)
+        col_res=0.0
+        for i,expected in enumerate(recipient):
+            actual=math.fsum(atom.physical_work_mass for atom in atoms if atom.recipient_closed_mode_index==i)
+            col_res=max(col_res,abs(actual-expected)/native_mass_scale)
     return CyclicTriadMeasureKernel(
-        quotient_measure_mass=q,
+        quotient_measure_mass=qmass,
         donor_edge_negative_masses=(donor[0],donor[1],donor[2]),
         recipient_edge_positive_masses=(recipient[0],recipient[1],recipient[2]),
         atoms=atoms,
         total_mass=total,
-        donor_marginal_residual=row_res,
-        recipient_marginal_residual=col_res,
+        native_work_mass_scale=native_mass_scale,
+        balance_native_residual=balance,
+        donor_marginal_native_residual=row_res,
+        recipient_marginal_native_residual=col_res,
+        numerically_resolved_transport=triad.donor_kernel.numerically_resolved_transport,
     )
 
 
@@ -569,17 +653,22 @@ def pushforward_restricted_negative_work(
 ) -> RestrictedNegativeRecipientPushforward:
     """Push one canonical ``dW-`` restriction to same-triad positive recipients.
 
-    The output is a positive submeasure of the already-existing canonical ``dW+``
-    recipient law.  It is not a new Hahn decomposition and does not change event
-    time.  This is the interface needed to read a hard-cell ``n_C`` obstruction
-    as physical donor provenance rather than a cancellation budget.
+    The exact theorem output is a positive submeasure of canonical ``dW+``.  The
+    numerical API refuses near-zero sign-indeterminate kernels rather than minting
+    provenance from floating Hahn noise.  For resolved transport, every residual
+    is measured in the native physical work-mass scale.
     """
+    if not kernel.numerically_resolved_transport:
+        raise ValueError("restricted donor pushforward requires numerically resolved nonzero cyclic work")
     selected=tuple(sorted(set(int(i) for i in donor_closed_mode_indices)))
     if not selected or any(i not in (0,1,2) for i in selected):
         raise ValueError("nonempty donor restriction inside {0,1,2} required")
     selected_mass=math.fsum(kernel.donor_edge_negative_masses[i] for i in selected)
     if selected_mass<=0.0:
         raise ValueError("selected cyclic roots carry no canonical negative work")
+    native=kernel.native_work_mass_scale
+    if native<=0.0:
+        raise AssertionError("resolved donor kernel lost positive native work-mass scale")
     recipient=[]
     dominated=[]
     for j in range(3):
@@ -590,12 +679,16 @@ def pushforward_restricted_negative_work(
         )
         recipient.append(mass)
         full=kernel.recipient_edge_positive_masses[j]
-        dominated.append(mass <= full + 4.0e-10*max(full,mass,1.0e-300))
+        dominated.append(mass <= full + 5.0e-10*native)
+    total=math.fsum(recipient)
+    residual=abs(total-selected_mass)/native
     return RestrictedNegativeRecipientPushforward(
         selected_donor_closed_mode_indices=selected,
         selected_negative_mass=selected_mass,
         recipient_masses=(recipient[0],recipient[1],recipient[2]),
-        recipient_total_mass=math.fsum(recipient),
+        recipient_total_mass=total,
+        native_work_mass_scale=native,
+        mass_conservation_native_residual=residual,
         recipient_dominated_by_full_canonical_positive_mass=(dominated[0],dominated[1],dominated[2]),
     )
 
@@ -808,13 +901,14 @@ class CyclicDonorKernelStress:
     one_donor_cases: int
     two_donor_cases: int
     zero_work_cases: int
-    worst_energy_conservation_relative: float
+    numerically_unresolved_near_zero_cases: int
+    worst_energy_conservation_native_residual: float
     worst_cyclic_coupling_native_residual: float
-    worst_donor_marginal_relative: float
-    worst_recipient_marginal_relative: float
-    worst_measure_donor_marginal_relative: float
-    worst_measure_recipient_marginal_relative: float
-    worst_restricted_negative_mass_residual: float
+    worst_donor_marginal_native_residual: float
+    worst_recipient_marginal_native_residual: float
+    worst_measure_donor_marginal_native_residual: float
+    worst_measure_recipient_marginal_native_residual: float
+    worst_restricted_negative_mass_native_residual: float
     worst_permutation_work_residual: float
     worst_translation_work_residual: float
     worst_wavevector_scaling_residual: float
@@ -840,7 +934,7 @@ def stress(samples: int = 75_000, seed: int = 2026081203) -> CyclicDonorKernelSt
     if samples <= 0:
         raise ValueError("positive stress sample count required")
     rng = np.random.default_rng(seed)
-    one = two = zero = 0
+    one = two = zero = unresolved = 0
     we = wc = wd = wr = wmd = wmr = wrestrict = wp = wt = ws = wa = wreal = 0.0
     for i in range(int(samples)):
         while True:
@@ -858,31 +952,29 @@ def stress(samples: int = 75_000, seed: int = 2026081203) -> CyclicDonorKernelSt
             wavevectors=(k0, k1, k2), helicities=helicities, amplitudes=amps
         )
         kernel = triad.donor_kernel
-        we = max(we, triad.signed_energy_conservation_residual)
+        we = max(we, triad.signed_energy_conservation_native_residual)
         wc = max(wc, triad.cyclic_coupling_native_residual)
-        wd = max(wd, kernel.donor_marginal_residual)
-        wr = max(wr, kernel.recipient_marginal_residual)
+        wd = max(wd, kernel.donor_marginal_native_residual)
+        wr = max(wr, kernel.recipient_marginal_native_residual)
         qmass = math.exp(float(rng.uniform(-8.0, 8.0)))
         mkernel = cyclic_triad_measure_kernel(triad, quotient_measure_mass=qmass)
-        wmd = max(wmd, mkernel.donor_marginal_residual)
-        wmr = max(wmr, mkernel.recipient_marginal_residual)
+        wmd = max(wmd, mkernel.donor_marginal_native_residual)
+        wmr = max(wmr, mkernel.recipient_marginal_native_residual)
         donors = tuple(i for i,mass in enumerate(mkernel.donor_edge_negative_masses) if mass>0.0)
-        if donors:
+        if donors and mkernel.numerically_resolved_transport:
             chosen = donors[:1] if len(donors)==1 or rng.random()<0.5 else donors
             restricted = pushforward_restricted_negative_work(mkernel, donor_closed_mode_indices=chosen)
-            wrestrict = max(
-                wrestrict,
-                abs(restricted.recipient_total_mass-restricted.selected_negative_mass)
-                / max(restricted.selected_negative_mass,1.0e-300),
-            )
-        if kernel.total_positive_work == 0.0:
+            wrestrict = max(wrestrict, restricted.mass_conservation_native_residual)
+        if kernel.native_work_scale == 0.0:
             zero += 1
+        elif not kernel.numerically_resolved_transport:
+            unresolved += 1
         elif kernel.donor_count == 1:
             one += 1
         elif kernel.donor_count == 2:
             two += 1
         else:
-            raise AssertionError("three-slot donor count left {1,2}")
+            raise AssertionError("resolved three-slot donor count left {1,2}")
 
         if i % 12 == 0:
             perm = tuple(int(x) for x in rng.permutation(3))
@@ -932,13 +1024,14 @@ def stress(samples: int = 75_000, seed: int = 2026081203) -> CyclicDonorKernelSt
         one_donor_cases=one,
         two_donor_cases=two,
         zero_work_cases=zero,
-        worst_energy_conservation_relative=we,
+        numerically_unresolved_near_zero_cases=unresolved,
+        worst_energy_conservation_native_residual=we,
         worst_cyclic_coupling_native_residual=wc,
-        worst_donor_marginal_relative=wd,
-        worst_recipient_marginal_relative=wr,
-        worst_measure_donor_marginal_relative=wmd,
-        worst_measure_recipient_marginal_relative=wmr,
-        worst_restricted_negative_mass_residual=wrestrict,
+        worst_donor_marginal_native_residual=wd,
+        worst_recipient_marginal_native_residual=wr,
+        worst_measure_donor_marginal_native_residual=wmd,
+        worst_measure_recipient_marginal_native_residual=wmr,
+        worst_restricted_negative_mass_native_residual=wrestrict,
         worst_permutation_work_residual=wp,
         worst_translation_work_residual=wt,
         worst_wavevector_scaling_residual=ws,
@@ -963,7 +1056,7 @@ def main() -> None:
     (args.outdir / "certificate.json").write_text(
         json.dumps({"certificate": cert, "stress": asdict(out)}, indent=2, sort_keys=True) + "\n"
     )
-    summary = f"""# Cyclic helical-triad donor/recipient kernel\n\nStatus: **{STATUS}**.\n\nOne regular closed helical triad is quotient by the full `S3` ordering symmetry.  Marking one of its three physical roots recovers exactly the existing parent-swap edge quotient: `3*(1/48)=1/16`.  The three cyclic root works use the same Waleffe phase factor and satisfy `T0+T1+T2=0` before Hahn.\n\nThe positive same-triad transport `M(i->j)=[-T_i]_+[T_j]_+/Q`, `Q=sum[T]_+=sum[-T]_+`, has donor marginal `dW-` and recipient marginal the already-canonical `dW+`.  On three slots this transport is unique because every nonzero zero-sum sign pattern has a singleton donor or recipient side.  It adds same-time donor provenance; it does not replace causality or create a new event.\n\nStress: `{out.samples}` generic physical closed triads\n- one-donor cases: `{out.one_donor_cases}`\n- two-donor cases: `{out.two_donor_cases}`\n- zero-work cases: `{out.zero_work_cases}`\n- worst cyclic energy-conservation relative residual: `{out.worst_energy_conservation_relative:.3e}`\n- worst cyclic-coupling native residual: `{out.worst_cyclic_coupling_native_residual:.3e}`\n- worst density donor/recipient marginal residuals: `{out.worst_donor_marginal_relative:.3e}` / `{out.worst_recipient_marginal_relative:.3e}`\n- worst measure donor/recipient marginal residuals: `{out.worst_measure_donor_marginal_relative:.3e}` / `{out.worst_measure_recipient_marginal_relative:.3e}`\n- worst restricted dW- to canonical dW+ submeasure mass residual: `{out.worst_restricted_negative_mass_residual:.3e}`\n- worst permutation / translation work residuals: `{out.worst_permutation_work_residual:.3e}` / `{out.worst_translation_work_residual:.3e}`\n- worst wavevector / amplitude scaling residuals: `{out.worst_wavevector_scaling_residual:.3e}` / `{out.worst_amplitude_cubic_scaling_residual:.3e}`\n- worst global-reality work-multiset residual: `{out.worst_reality_work_multiset_residual:.3e}`\n\nOn the signed-good integer triad, the interaction parents remain two but exactly one is the energy donor.  The other is a simultaneous positive nonforward side recipient.  The certified work ratios are\n\n`3/10 < W_side+/W_child+ < 1/3`,\n`3/4 < W_child+/W_donor- < 10/13`,\n`3/13 < W_side+/W_donor- < 1/4`.\n\nThe side work is real physical energy redistribution and already lies on the existing positive-nonforward transfer-loss route.  It is not dissipation, a reset budget, or a proof that the good child itself terminates.  No global-regularity claim is made.\n"""
+    summary = f"""# Cyclic helical-triad donor/recipient kernel\n\nStatus: **{STATUS}**.\n\nOne regular closed helical triad is quotient by the full `S3` ordering symmetry.  Marking one of its three physical roots recovers exactly the existing parent-swap edge quotient: `3*(1/48)=1/16`.  The three cyclic root works use the same Waleffe phase factor and satisfy `T0+T1+T2=0` before Hahn.\n\nThe positive same-triad transport `M(i->j)=[-T_i]_+[T_j]_+/Q`, `Q=sum[T]_+=sum[-T]_+`, has donor marginal `dW-` and recipient marginal the already-canonical `dW+`.  On three slots this transport is unique because every nonzero zero-sum sign pattern has a singleton donor or recipient side.  It adds same-time donor provenance; it does not replace causality or create a new event.\n\nStress: `{out.samples}` generic physical closed triads\n- one-donor cases: `{out.one_donor_cases}`\n- two-donor cases: `{out.two_donor_cases}`\n- exact zero-native-work cases: `{out.zero_work_cases}`\n- numerically unresolved near-zero work cases: `{out.numerically_unresolved_near_zero_cases}`\n- worst cyclic energy-conservation native residual: `{out.worst_energy_conservation_native_residual:.3e}`\n- worst cyclic-coupling native residual: `{out.worst_cyclic_coupling_native_residual:.3e}`\n- worst density donor/recipient native residuals: `{out.worst_donor_marginal_native_residual:.3e}` / `{out.worst_recipient_marginal_native_residual:.3e}`\n- worst measure donor/recipient native residuals: `{out.worst_measure_donor_marginal_native_residual:.3e}` / `{out.worst_measure_recipient_marginal_native_residual:.3e}`\n- worst restricted dW- to canonical dW+ submeasure native mass residual: `{out.worst_restricted_negative_mass_native_residual:.3e}`\n- worst permutation / translation work residuals: `{out.worst_permutation_work_residual:.3e}` / `{out.worst_translation_work_residual:.3e}`\n- worst wavevector / amplitude scaling residuals: `{out.worst_wavevector_scaling_residual:.3e}` / `{out.worst_amplitude_cubic_scaling_residual:.3e}`\n- worst global-reality work-multiset residual: `{out.worst_reality_work_multiset_residual:.3e}`\n\nOn the signed-good integer triad, the interaction parents remain two but exactly one is the energy donor.  The other is a simultaneous positive nonforward side recipient.  The certified work ratios are\n\n`3/10 < W_side+/W_child+ < 1/3`,\n`3/4 < W_child+/W_donor- < 10/13`,\n`3/13 < W_side+/W_donor- < 1/4`.\n\nThe side work is real physical energy redistribution and already lies on the existing positive-nonforward transfer-loss route.  It is not dissipation, a reset budget, or a proof that the good child itself terminates.  No global-regularity claim is made.\n"""
     (args.outdir / "summary.md").write_text(summary)
     print(summary)
 

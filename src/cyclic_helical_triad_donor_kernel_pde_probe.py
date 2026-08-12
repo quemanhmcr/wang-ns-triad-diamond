@@ -76,10 +76,10 @@ class CyclicDonorKernelNSRun:
     duration: float
     viscosity: float
     amplitude: float
-    worst_cyclic_energy_conservation_relative: float
+    worst_cyclic_energy_conservation_native_residual: float
     worst_cyclic_coupling_native_residual: float
-    worst_measure_donor_marginal_relative: float
-    worst_measure_recipient_marginal_relative: float
+    worst_measure_donor_marginal_native_residual: float
+    worst_measure_recipient_marginal_native_residual: float
     global_energy_balance_relative_residual: float
     maximum_global_nonlinear_work_relative_rate: float
     maximum_divergence_relative_to_initial_l2: float
@@ -157,10 +157,10 @@ def _run_one(
             measure = cyclic_triad_measure_kernel(
                 triad, quotient_measure_mass=discrete_triad_qmass
             )
-            worst_energy = max(worst_energy, triad.signed_energy_conservation_residual)
+            worst_energy = max(worst_energy, triad.signed_energy_conservation_native_residual)
             worst_coupling = max(worst_coupling, triad.cyclic_coupling_native_residual)
-            worst_donor = max(worst_donor, measure.donor_marginal_residual)
-            worst_recipient = max(worst_recipient, measure.recipient_marginal_residual)
+            worst_donor = max(worst_donor, measure.donor_marginal_native_residual)
+            worst_recipient = max(worst_recipient, measure.recipient_marginal_native_residual)
             total_positive_snapshots.append(measure.total_mass)
             root_work_snapshots.append(tuple(slot.signed_work for slot in triad.slots))
             if step == 0:
@@ -188,8 +188,10 @@ def _run_one(
     max_divergence = max(divergence) / math.sqrt(initial_energy)
     if balance > 5.0e-5 or max_nonlinear > 5.0e-10 or max_divergence > 5.0e-11:
         raise AssertionError("cyclic donor probe trajectory lost a native Navier-Stokes invariant")
-    if max(worst_energy, worst_coupling, worst_donor, worst_recipient) > 4.0e-8:
-        raise AssertionError("cyclic donor kernel lost physical work provenance on evolved NS")
+    if worst_coupling > 5.0e-12:
+        raise AssertionError("cyclic Waleffe identity left its native unit-basis scale on evolved NS")
+    if max(worst_energy, worst_donor, worst_recipient) > 5.0e-10:
+        raise AssertionError("cyclic donor kernel left its native physical work scale on evolved NS")
     return CyclicDonorKernelNSRun(
         resolution=n,
         cutoff=int(cutoff),
@@ -198,10 +200,10 @@ def _run_one(
         duration=horizon,
         viscosity=nu,
         amplitude=amp,
-        worst_cyclic_energy_conservation_relative=worst_energy,
+        worst_cyclic_energy_conservation_native_residual=worst_energy,
         worst_cyclic_coupling_native_residual=worst_coupling,
-        worst_measure_donor_marginal_relative=worst_donor,
-        worst_measure_recipient_marginal_relative=worst_recipient,
+        worst_measure_donor_marginal_native_residual=worst_donor,
+        worst_measure_recipient_marginal_native_residual=worst_recipient,
         global_energy_balance_relative_residual=balance,
         maximum_global_nonlinear_work_relative_rate=max_nonlinear,
         maximum_divergence_relative_to_initial_l2=max_divergence,
@@ -314,8 +316,8 @@ def main() -> None:
             "",
             f"## resolution {run.resolution}",
             f"- steps/snapshots: `{run.steps}` / `{run.snapshots}`",
-            f"- worst cyclic energy-conservation residual: `{run.worst_cyclic_energy_conservation_relative:.3e}`",
-            f"- worst donor/recipient measure marginal residuals: `{run.worst_measure_donor_marginal_relative:.3e}` / `{run.worst_measure_recipient_marginal_relative:.3e}`",
+            f"- worst cyclic energy-conservation native residual: `{run.worst_cyclic_energy_conservation_native_residual:.3e}`",
+            f"- worst donor/recipient measure marginal native residuals: `{run.worst_measure_donor_marginal_native_residual:.3e}` / `{run.worst_measure_recipient_marginal_native_residual:.3e}`",
             f"- NS energy-balance residual: `{run.global_energy_balance_relative_residual:.3e}`",
             f"- initial signed-good efficiency: `{run.initial_signed_good_efficiency:.12g}`",
             f"- initial side/child work ratio: `{run.initial_side_to_child_ratio:.12g}`",

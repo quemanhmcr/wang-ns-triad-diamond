@@ -205,10 +205,24 @@ By the root-marked quotient identity,
 
 The second marginal is not a new positive law.  It is exactly the already-certified canonical Hahn-positive edge law.  The new object is only a same-time, same-closed-triad donor provenance kernel over that law.
 
-No capacity measure appears in this construction.
+No capacity measure appears in the mathematical kernel.
 No fresh Hahn split appears.
 No physical time is changed.
 No new recursive event is created.
+
+For the **floating numerical certificate only**, the sum of the three native modal
+capacities is used as an error scale, exactly as the physical edge registrations
+already use native source/capacity scales to judge reconstruction residuals.  It
+is never used as a probability, kernel weight, causal mass, or recurrence currency.
+In particular the code does not divide conservation errors by realized `Q_triangle`,
+which can be arbitrarily small under real phase cancellation.
+
+If the independently registered realized work is at or below the certified native
+floating resolution, the numerical API fails closed: it reports the triad as
+`numerically_unresolved_transport` and mints **no donor atom**.  This is not a
+mathematical zero theorem and does not delete exact continuum work; it only refuses
+to infer a Hahn sign from floating roundoff.  The exact analytic kernel above still
+applies to every nonzero mathematical triad work.
 
 ---
 
@@ -543,6 +557,7 @@ Certification should actively try to break the theorem with:
 - all eight helicity assignments;
 - one-donor and two-donor generic sign patterns;
 - exact zero-work amplitudes;
+- arbitrarily small phase-cancelled work, which must not create floating donor provenance merely because a rounded sign is nonzero;
 - all six permutations of the closed modes;
 - spatial translations of modal phase;
 - global reality negation without quotienting it;
