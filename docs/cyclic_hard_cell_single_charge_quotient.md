@@ -288,7 +288,7 @@ It would **not**:
 - terminate generic HH or mixed genuine-owner recurrence;
 - prove 3D Navier--Stokes global regularity.
 
-That separate between-time theorem is now certified in `helical_mode_set_energy_continuity.md` on exact SHA `a39d502d9312ac3bd6613a780d60b22e88790863`: persistent stock lives on physical helical modes and satisfies exact mode-set stock/boundary-flow/viscosity continuity without FIFO/LIFO matching or a gross-transfer budget.  The next scale-facing specialization is a radial Fourier boundary.
+That separate between-time theorem is now certified in `helical_mode_set_energy_continuity.md` on exact SHA `a39d502d9312ac3bd6613a780d60b22e88790863`: persistent stock lives on physical helical modes and satisfies exact mode-set stock/boundary-flow/viscosity continuity without FIFO/LIFO matching or a gross-transfer budget.  Its radial specialization is now certified in `radial_spectral_crossing_layer_cake.md`: actual donor/recipient radii identify genuine upward/downward spectral crossing and an exact `dR/R` logarithmic layer cake.  The next question is the hard-tail interface, not a temporal matching.
 
 
 ---

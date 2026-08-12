@@ -1,0 +1,12 @@
+{
+  "first_time_sentinel_failures": 0,
+  "geometry_good_marking_promotions": 0,
+  "maximum_coarsened_cancellation_fraction": 1.0,
+  "maximum_coarsened_mixed_good_fraction": 1.0,
+  "minimum_bad_deficit_margin": 0.9999,
+  "minimum_fixed_transfer_margin": 0.9999999999903585,
+  "nonforward_bad_cases": 50000,
+  "samples": 50000,
+  "worst_hard_pushforward_relative": 0.0,
+  "worst_mass_reconstruction_relative": 2.2197019035664715e-16
+}

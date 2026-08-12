@@ -1,6 +1,6 @@
 # Helical mode-set energy continuity
 
-Status: **candidate theorem block; certification requires dedicated, independent adversarial/actual-NS, and full causal-integration GitHub Actions gates.**
+Status: **CERTIFIED** on exact theorem SHA `a39d502d9312ac3bd6613a780d60b22e88790863`; dedicated, independent adversarial/actual-NS, integration, and record-SHA promotion gates are green.
 
 The cyclic donor theorem and its hard-cell single-charge quotient settle a **same-time** question: canonical negative nonlinear work is physical donor work whose positive recipient marginal is the already-canonical `dW+` law.  They deliberately do not manufacture a between-time matching of earlier deposits to later withdrawals.
 
@@ -310,7 +310,7 @@ It would **not**:
 - terminate generic mixed-owner recurrence;
 - prove 3D Navier--Stokes global regularity.
 
-The next question after this theorem should be asked only after seeing what additional rigidity real choices of the mode boundary supply.  In particular, a radial high-frequency set may turn the abstract boundary flux into genuine spectral crossing, but that scale statement must be proved from its own Fourier geometry rather than assumed from the continuity equation.
+That next specialization is now certified in `radial_spectral_crossing_layer_cake.md` on exact SHA `667e687cb740a77df944753c575f581abad14199`: radial high-frequency sets turn the abstract boundary flux into genuine upward/downward Fourier-sphere crossing, and integrating those crossings in `dR/R` gives the exact truncated logarithmic layer cake.  The next question is no longer whether radial direction exists; it is whether the existing hard-tail dissipation/locality route can be driven by **actual low→high boundary supply** after high→high circulation has been removed.
 
 
 ---
@@ -337,4 +337,4 @@ Stored artifact trees:
 
 Failure lineage is part of the certificate.  Initial candidate `8ec1efe924c1a7cabf2499ff232e09f060ced2d8` encoded a universal `5e-8` numerical residual gate inside the exact interval object; the opposite-helicity finite-step audit correctly rejected that category error.  Candidate `e11b3464d437b42e0474da1e016e67a584bcfe92` removed the universal theorem-object tolerance, but its cross-FFT audit still divided each representation gap by the particular realized observable.  Because an opposite-helicity stock/Hahn marginal may vanish by genuine selection or phase cancellation, the 24/28 audit again failed.  Final `a39d502...` measures cross-representation gaps on the already-native physical mode energy-throughput envelope.  That envelope is recorded only as a numerical error scale; it never enters the donor kernel, causal probability, recurrence currency or gross-transfer law.  No PDE case, sample count, sign pattern, or physical threshold was removed.
 
-The theorem closes native **mode-set continuity**, not recurrence.  Its next physically meaningful specialization is a radial Fourier mode boundary, where inward/outward mode-set flow becomes genuine upward/downward spectral crossing.  Any scale direction, layer-cake identity, or recurrence consequence must be derived from that radial geometry itself; it is not supplied by an arbitrary mode-set continuity equation.  No Navier--Stokes global-regularity claim is made.
+The theorem closes native **mode-set continuity**, not recurrence.  Its radial specialization is now independently certified: actual donor/recipient radii produce genuine upward/downward crossing and an exact logarithmic layer cake, while equiradial physical transfer proves that nonlinear transfer itself need not make radial progress.  The next open interface is to combine true low→high boundary supply with the already-certified hard-tail stock/dissipation/locality laws without importing high→high circulation into the supply term.  No Navier--Stokes global-regularity claim is made.

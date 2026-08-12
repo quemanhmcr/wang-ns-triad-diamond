@@ -1,0 +1,33 @@
+{
+  "stress": {
+    "closed_triad_boundary_flux_base": 0.0,
+    "closed_triad_boundary_flux_scaled": 0.0,
+    "closed_triad_internal_flow_base": 0.7127798288310929,
+    "closed_triad_internal_flow_scaled": 712.7798288310928,
+    "full_closed_set_cases": 100000,
+    "gross_transfer_budget_counterexample_passed": true,
+    "maximum_internal_to_boundary_ratio_when_boundary_positive": 23223.71431171093,
+    "mode_sets_checked": 200000,
+    "proper_boundary_cases": 100000,
+    "resolved_cases": 100000,
+    "samples": 100000,
+    "unresolved_cases": 0,
+    "worst_boundary_divergence_native_residual": 2.160101737565117e-16,
+    "worst_donor_decomposition_native_residual": 0.0,
+    "worst_recipient_decomposition_native_residual": 0.0
+  },
+  "theorem": {
+    "between_time_continuity": "E_A(t1)+D_A[s,t1]+Phi_out(A;[s,t1]) = E_A(s)+Phi_in(A;[s,t1])",
+    "capacity_is_causal_law": false,
+    "claims_global_regularity": false,
+    "full_set": "for the full retained mode set, inward=outward=0 and the identity reduces to the ordinary viscous Navier-Stokes energy balance",
+    "gross_transfer_anti_theorem": "a closed triad wholly inside A can carry arbitrarily rescaled positive internal donor/recipient work while Phi_in=Phi_out=0; the energy stock law is not a finite gross-transfer budget",
+    "internal_flow": "F(AxA) is real same-time nonlinear redistribution and cancels exactly from the set divergence; it is neither dissipation nor event depth",
+    "later_hahn_used": false,
+    "same_time_flow": "cyclic donor measure is pushed to physical helical-mode nodes; for mode set A, P_A=I_A+In_A and N_A=I_A+Out_A, hence P_A-N_A=In_A-Out_A",
+    "singleton": "for one helical mode m, E_m(t1)+integral W_m^- + 2 nu |k|^2 integral E_m = E_m(s)+integral W_m^+, using gross canonical edge Hahn work, not Hahn of modal net work",
+    "state_ontology": "persistent state energy lives on physical helical modes; hard product cells remain interaction labels and are not wallets across time",
+    "status": "EXACT_HELICAL_MODE_SET_ENERGY_CONTINUITY__CYCLIC_DONOR_BOUNDARY_FLUX__INTERNAL_FLOW_CANCELLATION__MODEWISE_VISCOUS_STOCK_BALANCE__NO_FIFO_LIFO_OR_GROSS_TRANSFER_BUDGET",
+    "temporal_provenance": "the identity gives aggregate stock/flow balance only; it does not canonically pair an earlier positive deposit with a later withdrawal and uses no FIFO/LIFO rule"
+  }
+}

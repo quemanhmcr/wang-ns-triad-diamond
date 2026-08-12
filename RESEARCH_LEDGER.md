@@ -37,7 +37,7 @@ The current architecture has reached the following point.
 18. Smooth residual-skew `K_phys` relink is now also topologically quotiented without denying its physics: the exact gauge-quotiented `T_ab^{phys}` matrix is antisymmetric same-event flux, every positive relink recipient has finite negative-net donor closure, and relink creates no child recursive event.  A simultaneous `S` branch remains existing strain/deformation ownership.
 19. Consecutive high-strain recurrence now has a native viscous telescope without demoting high strain from genuine ownership: every high-strain event pays `D_j>=D_*`, its actual `D_V|_G` ancestor renews at `N_(j+1)/N_j<=3/16`, and interval restriction plus low-pass contraction gives `D_j<=N_j G_*` for the physical global gradient reservoir `G_*`.  Thus every pure high-strain epoch is finite even under complete time overlap, while mixed-owner recurrence remains open.
 20. Consecutive signed-good generated-HH recurrence now also has a native parabolic physical-time telescope without turning generation into an event-count cost: a raw `|I_HH|` hit is only a locator; after actual `Q^2` energy reentry selects positive HH child-work and the hard parent is certified `3/5<N_p/N_c<5/8`, parent natural lifetimes grow by more than `64/25` and the asynchronous common registration surfaces move backward by at least `(1792/4875)T_j`.  Their cumulative backshift reaches absorbing `t=0` after finite consecutive signed-good generated depth.  Generic/non-signed-good HH remains open.
-21. Actual unordered helical HH interactions now have native same-event registration, canonical positive-edge routing, **and a certified mixed-fate reserved Young/Christ handoff before any generated-ancestry continuation**.  The continuum law is reconstructed signed, `mu=dW`, before its Hahn-positive causal law `mu^+=dW^+` is restricted by native edge efficiency `r_e=(J_e/J_*)c_e`.  Geometry/phase-bad positive work, including every positive nonforward edge with `J_e=0`, terminates through the shared fixed-transfer interface as `TRANSFER_WORK_LOSS` with `first_time=None`; geometry-good work remains only Young-eligible until the full signed hard-cell theorem fires.  Hard cells now carry the three direct pushforwards `pi_#dW`, `pi_#dW^+`, and `pi_#dW^-`.  Writing `T_C=g_C+b_C-n_C`, the reserved deficit `1-(T_C-b_C)/Y_C` is only a certificate, never a new work law, and equals the full signed Young deficit plus `b_C/Y_C`.  Thus a mixed cell may pass Young/Christ exactly when the already-terminal bad-positive contribution fits inside the unused Christ margin; nondegenerate-margin failures are quantitatively dominated by actual terminal bad-positive plus canonical negative work on low-native-deficit blocks.  The local frontier has therefore moved beyond mixed fate and beyond the same-time triad structure of canonical negative work: cyclic closed-triad conservation now disintegrates canonical `dW^-` into the already-existing canonical `dW^+` recipient law with zero added event depth.  The hard-cell single-charge layer is now also closed: restricted `pi_#dW^-` rows push to the already-existing good/bad `pi_#dW^+` recipient charges exactly once, even under overlapping donor support and coarse self-loops, with zero added event depth and no scale progress.  What remains locally is degenerate full-signed Young margin and any separately needed positive coherent kernel.  The strictly separate between-time negative-work ledger is now also registered: cyclic donor flow on physical helical-mode nodes combines with modal energy stock and viscosity to give exact mode-set boundary continuity, with internal nonlinear traffic cancelling from the set divergence and no FIFO/LIFO or gross-transfer budget.  The next negative-work specialization is therefore radial Fourier mode boundaries, where any scale direction must come from actual spectral crossing geometry.
+21. Actual unordered helical HH interactions now have native same-event registration, canonical positive-edge routing, **and a certified mixed-fate reserved Young/Christ handoff before any generated-ancestry continuation**.  The continuum law is reconstructed signed, `mu=dW`, before its Hahn-positive causal law `mu^+=dW^+` is restricted by native edge efficiency `r_e=(J_e/J_*)c_e`.  Geometry/phase-bad positive work, including every positive nonforward edge with `J_e=0`, terminates through the shared fixed-transfer interface as `TRANSFER_WORK_LOSS` with `first_time=None`; geometry-good work remains only Young-eligible until the full signed hard-cell theorem fires.  Hard cells now carry the three direct pushforwards `pi_#dW`, `pi_#dW^+`, and `pi_#dW^-`.  Writing `T_C=g_C+b_C-n_C`, the reserved deficit `1-(T_C-b_C)/Y_C` is only a certificate, never a new work law, and equals the full signed Young deficit plus `b_C/Y_C`.  Thus a mixed cell may pass Young/Christ exactly when the already-terminal bad-positive contribution fits inside the unused Christ margin; nondegenerate-margin failures are quantitatively dominated by actual terminal bad-positive plus canonical negative work on low-native-deficit blocks.  The local frontier has therefore moved beyond mixed fate and beyond the same-time triad structure of canonical negative work: cyclic closed-triad conservation now disintegrates canonical `dW^-` into the already-existing canonical `dW^+` recipient law with zero added event depth.  The hard-cell single-charge layer is now also closed: restricted `pi_#dW^-` rows push to the already-existing good/bad `pi_#dW^+` recipient charges exactly once, even under overlapping donor support and coarse self-loops, with zero added event depth and no scale progress.  What remains locally is degenerate full-signed Young margin and any separately needed positive coherent kernel.  The strictly separate between-time negative-work ledger is now also registered: cyclic donor flow on physical helical-mode nodes combines with modal energy stock and viscosity to give exact mode-set boundary continuity, with internal nonlinear traffic cancelling from the set divergence and no FIFO/LIFO or gross-transfer budget.  Its radial specialization is now certified: Fourier exteriors separate true low→high and high→low crossing from high→high circulation, and integration over `dR/R` gives the exact truncated logarithmic displacement of the same physical donor/recipient atoms.  Equiradial positive transfer supplies zero radial action, so transfer itself has no minimum scale progress.  The next scale-facing seam is the interface between true upward boundary supply and the existing hard-tail dissipation/locality route.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -744,13 +744,15 @@ This theorem is deliberately prior to Young/Christ. Young is a downstream compar
 ## 21.6 Continuum helical edge measure: signed NS work before Hahn
 Put `z=x+y` and `r=x-y`.  Then
 \[
- dx\,dy=rac18dz\,dr,
+ dx\,dy=
+rac18dz\,dr,
 \]
 and parent exchange acts on complete parent mode objects by
 `(r,s_x,s_y)->(-r,s_y,s_x)`.  After the finite parent-order quotient the joint
 outer-child base measure has exact density
 \[
-oxed{d\Lambda_{edge}=rac1{16}\,dz\,dQ_\#(dr\otimes\#_{s_x,s_y})\,d\#_{s_z}.}
+oxed{d\Lambda_{edge}=
+rac1{16}\,dz\,dQ_\#(dr\otimes\#_{s_x,s_y})\,d\#_{s_z}.}
 \]
 Helicity remains attached to its physical wavevector; it is not quotiented away.
 Each regular triad fiber contains exactly the eight distinct helicity assignments,
@@ -1578,7 +1580,8 @@ The certified high-strain descending-epoch telescope now removes one additional 
 \[
 D_*\le D_j\le N_jG_*,
 \qquad
-N_{j+1}\lerac3{16}N_j,
+N_{j+1}\le
+rac3{16}N_j,
 \]
 so every such epoch is finite even if all first-hit histories overlap.  Therefore an infinite event path cannot eventually remain in high strain alone.  If it contains infinitely many high-strain events, it must also contain infinitely many **other genuine owner events** which break the descending epochs.
 
@@ -1723,6 +1726,9 @@ Once a signed physical law has a canonical Hahn decomposition, every downstream 
 
 ### 32.25 Stock continuity is not traffic budget
 Once canonical donor/recipient work is resolved on physical helical modes, Navier--Stokes gives an exact network continuity equation.  Internal nonlinear traffic cancels from the divergence of a mode set, but may itself be arbitrarily large under physical amplitude scaling.  Therefore energy conservation controls stock + viscous loss + net boundary crossing, not gross nonlinear variation.  Persistent stock belongs to physical modes, not interaction cells, and no FIFO/LIFO temporal matching is implied.
+
+### 32.26 Radial crossing is boundary geometry, not a universal cascade step
+For the radial exterior `H_R={|k|>R}`, only donor atoms with `|k_d|<=R<|k_r|` actually enter the tail and only atoms with `|k_r|<=R<|k_d|` actually leave it; high→high traffic remains physical but cancels from tail divergence.  Integrating the same crossing atoms in `dR/R` produces their exact log-radius displacement.  A regular equiradial closed triad can transfer positive energy between distinct modes with zero radial displacement, so nonlinear transfer is not synonymous with scale progress, dyadic ascent, or cascade event count.  Radial displacement also remains distinct from the existing single-edge Young/progress multiplier.
 
 
 ## 33. Certified recent theorem blocks
@@ -2694,7 +2700,69 @@ Stored artifacts:
 
 Failure lineage is retained.  Candidate `8ec1efe924c1a7cabf2499ff232e09f060ced2d8` placed a universal `5e-8` finite-step residual gate inside the exact theorem object; the opposite-helicity zero/tiny-stock fixture exposed that category error.  `e11b3464d437b42e0474da1e016e67a584bcfe92` separated exact continuity from numerical quadrature tolerance, after which the same physical fixture exposed a second audit seam: cross-FFT gaps were divided by the particular realized observable, which can vanish under genuine helicity selection or phase cancellation.  Final `a39d502...` uses the mode's native physical energy-throughput only as an immutable numerical representation-error envelope.  It never enters the cyclic kernel, causal law, event depth, recurrence currency or gross-transfer accounting.  No physical case, sample count, sign pattern or PDE evolution was removed.
 
-This closes between-time **mode-set continuity registration**, not mixed-owner recurrence.  The next native negative-work specialization is a radial Fourier exterior/interior boundary: only there can `Phi_in/Phi_out` be reread as genuine upward/downward spectral crossing.  Any scale-layer identity or recurrence consequence must be proved from that radial geometry, and the resulting spectral flow must remain distinct from the existing single-edge Young/progress multiplier.  No Navier--Stokes global-regularity claim is made.
+This closes between-time **mode-set continuity registration**, not mixed-owner recurrence.  Its radial specialization is now certified in §33.18: `Phi_in/Phi_out` on Fourier exteriors becomes genuine upward/downward spectral crossing and yields an exact logarithmic layer cake, while remaining distinct from the single-edge Young/progress multiplier.  The next seam is the true-upward-supply / hard-tail-dissipation interface.  No Navier--Stokes global-regularity claim is made.
+
+---
+
+### 33.18 Radial spectral crossing layer cake: actual Fourier-sphere flux, not circulation
+Status:
+`EXACT_RADIAL_SPECTRAL_CROSSING_LAYER_CAKE__PHYSICAL_HELICAL_DONOR_RECIPIENT_RADII__TAIL_INWARD_OUTWARD_FLUX__TRUNCATED_LOG_RADIUS_LAYER_CAKE__NO_REHAHN_DYADIC_PROGRESS_OR_GROSS_CROSSING_BUDGET`.
+
+Exact certified implementation/provenance SHA:
+`667e687cb740a77df944753c575f581abad14199`.
+
+For the certified cyclic donor flow on physical helical modes, let `rho_d=|k_d|`, `rho_r=|k_r|` and `H_R={|k|>R}`.  The only atoms that cross the radial boundary are
+\[
+\Phi_\uparrow(R)=\mathcal M\{\rho_d\le R<\rho_r\},
+\qquad
+\Phi_\downarrow(R)=\mathcal M\{\rho_r\le R<\rho_d\}.
+\]
+High→high atoms form internal tail circulation.  Therefore the inherited canonical tail marginals obey
+\[
+W_{>R}^+-W_{>R}^-=\Phi_\uparrow(R)-\Phi_\downarrow(R),
+\]
+and actual Navier--Stokes gives
+\[
+\boxed{
+E_{>R}(t_1)+D_{>R}+\int\Phi_\downarrow\,dt
+=E_{>R}(t_0)+\int\Phi_\uparrow\,dt.
+}
+\]
+No net-tail Hahn law is created; upward/downward crossing are positive restrictions of the already-existing cyclic donor/recipient flow.
+
+For `0<R_0<R_1`, with clipped log potential
+\[
+\phi(\rho)=\log\frac{\min(\max(\rho,R_0),R_1)}{R_0},
+\]
+the same atoms satisfy the exact layer cake
+\[
+\int_{R_0}^{R_1}\Phi_\uparrow(R)\frac{dR}{R}
+=\int[\phi(\rho_r)-\phi(\rho_d)]_+\,d\mathcal M,
+\]
+\[
+\int_{R_0}^{R_1}\Phi_\downarrow(R)\frac{dR}{R}
+=\int[\phi(\rho_d)-\phi(\rho_r)]_+\,d\mathcal M.
+\]
+Subtracting yields the signed log-radius moment of the canonical recipient/donor marginals.  The infinite-range finite-atom identity is also exact; any continuum infinite-range extension requires an explicit finite logarithmic moment and is not inferred from local Radon variation alone.
+
+The anti-theorems are structural.  A regular equiradial physical closed triad carries positive donor work while `|k_d|=|k_r|`, so it crosses no radial sphere and has zero log action.  Thus there is no universal dyadic step or positive minimum radial progress.  Radial donor displacement is also not the one-edge Young/progress quantity `log_+(|k_child|/max|k_parent|)`; they answer different physical questions.
+
+Dedicated run `31606829692` — **success** on the exact SHA.  The full suite passed `884` tests, focused radial tests `11`, donor-flow dependency tests `26`, and focused evolved-NS tests `9`.  Its `75,000`-law stress had `56,351` upward and `56,306` downward cases, `37,657` laws with both directions across sampled radii, worst tail-divergence residual `1.977e-16`, truncated layer-cake residual `3.460e-16`, full-log residual `2.036e-11`, dilation residual `2.731e-11`, and equiradial work/action `0.0777635049765 / 0`.
+
+Its actual cutoff-7 Fourier--Galerkin NS audit on FFT grids `24,28` retained distinct full-tail and selected-triad readings.  At `R=8`, the ordinary `64`-step branch had selected integrated upward/downward crossing `0.00848754122477 / 0` and tail interval residual `3.121e-11`; sign reversal gave `0 / 0.00848518440777` and tail residual `1.006e-11`.  Cross-representation tail residuals stayed below `5.6e-16`; amplitude `0.5` and `2.0` adversaries also passed.
+
+Independent audit `31606829776` — **success**.  Its `100,000`-law stress had `75,047` upward and `74,959` downward cases, `50,006` both-direction laws, worst tail divergence `2.095e-16`, truncated layer cake `3.454e-16`, full-log marginal `3.969e-11`, dilation `5.947e-11`, equiradial work/action `0.0777635049765 / 0`, and `174,972` donor atoms separating radial displacement from edge progress.  The longer actual-NS lane used amplitude `1.3`, `96` steps, duration `0.0012`, cutoff `7`, FFT `24,28`: upward tail `4.0053 -> 4.01741597661` had signed nonlinear work `0.0453411766896`, viscosity `0.0332252003104`, selected upward crossing `0.0223643661196` and interval residual `5.592e-11`; sign reversal produced downward crossing `0.0223546449575`, tail `4.0053 -> 3.92730005969`, signed work `-0.0451218090429`, viscosity `0.0328781311252`, and residual `3.526e-11`.  Radius adversaries `6.5,8,10` remained green.
+
+Full physical-energy causal integration `31606829708` — **success** on the same SHA.  It passed the same `884`-test suite and inserted the `50,000` radial stress directly after mode-set continuity and before complex Young.  The radial step recorded `37,651` upward cases, `37,510` downward cases, `25,161` both-direction laws, worst tail-divergence residual `1.975e-16`, truncated layer-cake residual `3.307e-16`, and the exact equiradial zero-action anti-theorem; the downstream causal spine stayed green.
+
+Stored artifacts:
+- `recorded-results/31606829692/`, tree digest `sha256:66c925e0b9ebafc91e72a9097a943ef437eaed701620ef6d0af7c09ec80299f4`;
+- `recorded-results/31606829776/`, tree digest `sha256:3652cd5834ddd3aa75319408093fc2d2c31a5c3cdace1bdc480a5d95fc9bc174`;
+- `recorded-results/31606829708/`, tree digest `sha256:a4bf0a8377f818f2628e25d9d0d850652c842ad86adc02181b1587ef46197117`.
+
+Failure lineage is retained.  Initial candidate `fb8e95132b9ce8da566e3b338cee0676b6be5dc9` passed the actual-NS radial jobs but failed one focused algebra fixture because its equiradial Waleffe call used `(k_1,k_2,-k_0)` rather than the actually closed triple `(k_1,k_2,k_0)`.  Repair `697bb77d406d28d51efc396af1c92b948bf8930d` changed that one orientation and passed dedicated `31605985715`, audit `31605985621`, and integration `31605985585` with no theorem/PDE change.  Final SHA `667e687...` then made the full-log marginal and dilation residuals hard numerical guards on the total physical log-variation envelope, never on a cancellation-sensitive signed action, and reran the full certification successfully.
+
+This closes **radial spectral-crossing registration and the logarithmic layer cake**, not mixed-owner recurrence.  The next native scale-facing seam is to interface actual low→high boundary supply `Phi_up` with the already-certified hard-tail stock/dissipation/locality route while keeping inherited tail stock, `Phi_down`, high→high circulation and viscosity physically separate.  No Navier--Stokes global-regularity claim is made.
 
 ---
 
@@ -2777,17 +2845,18 @@ Then read the following current-spine documents in order:
 32. `docs/cyclic_helical_triad_donor_kernel.md`
 33. `docs/cyclic_hard_cell_single_charge_quotient.md`
 34. `docs/helical_mode_set_energy_continuity.md`
-35. `docs/physical_pair_weighted_productivity.md`
-36. `docs/common_slice_coefficient_registration.md`
-37. `docs/recursive_physical_witness_constructor.md`
-38. `docs/signed_good_generated_epoch_time_telescope.md`
-39. `docs/joint_causal_stop_projection.md`
-40. `docs/amplitude_entropy_causal_reuse.md`
-41. `docs/weighted_causal_reuse.md`
-42. `docs/renyi_causal_reuse.md`
-43. `docs/physical_branch_compiler.md`
-44. `docs/continuum_master_event_quotient.md`
-45. `docs/master_no_escape.md`
+35. `docs/radial_spectral_crossing_layer_cake.md`
+36. `docs/physical_pair_weighted_productivity.md`
+37. `docs/common_slice_coefficient_registration.md`
+38. `docs/recursive_physical_witness_constructor.md`
+39. `docs/signed_good_generated_epoch_time_telescope.md`
+40. `docs/joint_causal_stop_projection.md`
+41. `docs/amplitude_entropy_causal_reuse.md`
+42. `docs/weighted_causal_reuse.md`
+43. `docs/renyi_causal_reuse.md`
+44. `docs/physical_branch_compiler.md`
+45. `docs/continuum_master_event_quotient.md`
+46. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -2862,7 +2931,7 @@ high-strain events must therefore contain infinitely many other genuine owners
 which break those epochs.
 
 
-At an actual hard HH interaction, one may now descend below Young all the way to the continuum physical edge law.  The unordered helical parent orbit carries exact NS work `T_e`, native modal capacity `A_e=4|z||a_xa_ya_z|`, geometric multiplier `J_e`, and signed phase `c_e`, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`.  In the joint variables `z=x+y`, `r=x-y`, the parent-order quotient has exact density `1/16`; all eight wavevector-bound helicity sectors reconstruct the direct signed Fourier work.  With the unitary factor `C_F`, this gives signed `dW`, reference `dA`, and signed progress `dF`.  Finite Fourier energy makes these weighted measures locally Radon without any parent UV cutoff.  Only after that signed reconstruction is `dW^+` formed.  Its native efficiency routing is also certified: bad positive work, including nonforward work, terminates through the same physical transfer-loss interface, while good positive work is inherited by hard cells and is Young-eligible only.  The mixed-fate terminal-bad-assistance handoff, the same-time cyclic donor provenance of canonical negative work, and its hard-cell single-charge quotient into existing good/bad positive recipient causes are now certified.  Multiple donor cells may overlap one recipient support and coarse donor/recipient labels may self-loop, but the recipient cause is charged once and same-time redistribution adds no event depth or scale progress.  The unresolved HH task is therefore degenerate full-signed Young/Christ margin (plus any genuinely required coherent positive kernel), then recurrence of the surviving genuine owners.  The separate between-time negative-work theorem is now certified: cyclic donor flow on physical helical modes plus modal NS stock/viscosity gives exact mode-set boundary continuity, internal traffic cancels from set divergence, and neither gross-transfer budgets nor deposit/withdrawal matching are created.  The next scale-facing question is a radial Fourier boundary, where spectral crossing direction must be derived from the actual donor/recipient radii.
+At an actual hard HH interaction, one may now descend below Young all the way to the continuum physical edge law.  The unordered helical parent orbit carries exact NS work `T_e`, native modal capacity `A_e=4|z||a_xa_ya_z|`, geometric multiplier `J_e`, and signed phase `c_e`, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`.  In the joint variables `z=x+y`, `r=x-y`, the parent-order quotient has exact density `1/16`; all eight wavevector-bound helicity sectors reconstruct the direct signed Fourier work.  With the unitary factor `C_F`, this gives signed `dW`, reference `dA`, and signed progress `dF`.  Finite Fourier energy makes these weighted measures locally Radon without any parent UV cutoff.  Only after that signed reconstruction is `dW^+` formed.  Its native efficiency routing is also certified: bad positive work, including nonforward work, terminates through the same physical transfer-loss interface, while good positive work is inherited by hard cells and is Young-eligible only.  The mixed-fate terminal-bad-assistance handoff, the same-time cyclic donor provenance of canonical negative work, and its hard-cell single-charge quotient into existing good/bad positive recipient causes are now certified.  Multiple donor cells may overlap one recipient support and coarse donor/recipient labels may self-loop, but the recipient cause is charged once and same-time redistribution adds no event depth or scale progress.  The unresolved HH task is therefore degenerate full-signed Young/Christ margin (plus any genuinely required coherent positive kernel), then recurrence of the surviving genuine owners.  The separate between-time negative-work theorem is now certified: cyclic donor flow on physical helical modes plus modal NS stock/viscosity gives exact mode-set boundary continuity, internal traffic cancels from set divergence, and neither gross-transfer budgets nor deposit/withdrawal matching are created.  The radial specialization is now certified too: low→high and high→low donor atoms are exactly the Fourier-sphere boundary crossings, high→high circulation cancels from tail divergence, and `dR/R` integration gives exact log-radius displacement.  Equiradial positive transfer has zero radial action, so no universal cascade step is inferred.  The next scale-facing question is whether actual upward boundary supply, rather than gross high-tail traffic, can be connected to the existing hard-tail dissipation/locality route.
 
 Signed-good generated HH is also a genuine recursive event, but its finite-depth
 mechanism is different.  A raw `|I_HH|` threshold is only a locator.  After the

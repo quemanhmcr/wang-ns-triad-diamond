@@ -1,8 +1,10 @@
 # Radial spectral crossing layer cake
 
-Status candidate:
+Status: **CERTIFIED**.
 
 `EXACT_RADIAL_SPECTRAL_CROSSING_LAYER_CAKE__PHYSICAL_HELICAL_DONOR_RECIPIENT_RADII__TAIL_INWARD_OUTWARD_FLUX__TRUNCATED_LOG_RADIUS_LAYER_CAKE__NO_REHAHN_DYADIC_PROGRESS_OR_GROSS_CROSSING_BUDGET`
+
+Exact certified implementation/provenance SHA: `667e687cb740a77df944753c575f581abad14199`.
 
 This theorem is downstream of the certified cyclic donor kernel and helical mode-set energy continuity theorem.  It introduces **no new work law**.  It asks one narrower physical question: when the already-existing same-time energy flow goes from one actual helical Fourier mode to another, which Fourier spheres does that energy transfer really cross?
 
@@ -274,8 +276,34 @@ The sign-reversed physical initial condition is retained.  At the canonical radi
 
 ## 10. Scope
 
-If certified, this theorem closes **radial spectral-crossing registration and its logarithmic layer cake**.
+This theorem closes **radial spectral-crossing registration and its logarithmic layer cake**.
 
 It does not prove that total upward crossing is finite over a singular-time history.  It does not prove a positive average radial drift on a recursive lineage.  It does not convert a layer-cake integral into a Bellman clock.  It does not close degenerate Young/Christ margin, generic HH recurrence, mixed-owner recurrence, or Navier–Stokes global regularity.
 
-The physically honest next question after certification would be whether this radial boundary law can be interfaced with the already-certified hard-tail dissipation/locality route so that true upward crossing—not high→high circulation—is the quantity entering ultraviolet continuation.
+The physically honest next question is whether this radial boundary law can be interfaced with the already-certified hard-tail dissipation/locality route so that **true low→high boundary supply**, not high→high circulation, is the quantity entering ultraviolet continuation.  That next theorem must preserve the existing high-tail common causal unit and distinguish incoming crossing, outgoing crossing, inherited tail stock, internal high-frequency circulation, and viscous dissipation before any estimate is attempted.
+
+---
+
+## 11. Certification evidence
+
+Exact certified theorem/provenance SHA: `667e687cb740a77df944753c575f581abad14199`.
+
+Dedicated GitHub Actions run `31606829692` completed successfully.  The full theorem suite passed `884` tests; focused radial tests passed `11`, donor-flow dependency tests passed `26`, and focused evolved-NS tests passed `9`.  The `75,000`-triad physical radial stress recorded `56,351` upward and `56,306` downward crossing cases, with `37,657` laws exhibiting both directions across sampled radii.  Worst radial partition, tail-divergence, truncated layer-cake, full-log-marginal and dilation residuals were respectively `0`, `1.977e-16`, `3.460e-16`, `2.036e-11`, and `2.731e-11` on their native physical work/log-variation scales.  The equiradial anti-theorem carried physical work `0.0777635049765` with exactly zero radial action; `131,168` sampled donor atoms explicitly disagreed with the single-edge Young/progress observable.
+
+The same dedicated run evolved the actual `2/3`-dealiased incompressible Fourier--Galerkin Navier--Stokes system at common cutoff `7` on FFT grids `24,28`.  At `R=8`, the ordinary `64`-step branch had integrated selected upward/downward crossing `0.00848754122477 / 0`, while the sign-reversed branch had `0 / 0.00848518440777`.  Their full-tail stock/work/viscosity interval residuals were `3.121e-11` and `1.006e-11`; cross-FFT tail observables remained below `5.6e-16`.  Amplitude adversaries `0.5` and `2.0` also passed.
+
+Independent audit `31606829776` completed successfully.  Its algebra lane passed `37` focused theorem/dependency tests and ran `100,000` physical radial laws: `75,047` upward cases, `74,959` downward cases, and `50,006` laws carrying both directions across sampled radii.  Worst tail-divergence and truncated layer-cake residuals were `2.095e-16` and `3.454e-16`; full-log-marginal and dilation residuals were `3.969e-11` and `5.947e-11`.  The equiradial work/action remained `0.0777635049765 / 0`, and `174,972` donor atoms separated radial displacement from single-edge progress.
+
+The independent evolved-NS audit used amplitude `1.3`, `96` RK4 steps, duration `0.0012`, common cutoff `7`, and FFT grids `24,28`.  On the upward branch the full tail changed `4.0053 -> 4.01741597661`, with signed tail nonlinear work `0.0453411766896`, viscous loss `0.0332252003104`, interval residual `5.592e-11`, and selected integrated upward crossing `0.0223643661196`.  Under sign reversal the same physical geometry produced downward crossing `0.0223546449575`; the tail changed `4.0053 -> 3.92730005969`, signed nonlinear work was `-0.0451218090429`, viscosity `0.0328781311252`, and interval residual `3.526e-11`.  Radius adversaries `R=6.5,8,10` also passed.  The full-tail reading and selected-triad crossing remained distinct observables throughout.
+
+Full physical-energy causal integration `31606829708` completed successfully on the same SHA.  It passed the same `884`-test suite and ran `50,000` radial laws immediately after mode-set continuity and before complex Young.  The integration stress recorded `37,651` upward cases, `37,510` downward cases, `25,161` both-direction laws, worst tail-divergence residual `1.975e-16`, truncated layer-cake residual `3.307e-16`, and the same equiradial zero-action anti-theorem; the complete downstream causal spine remained green.
+
+Stored artifact trees:
+
+- `recorded-results/31606829692/`, deterministic tree digest `sha256:66c925e0b9ebafc91e72a9097a943ef437eaed701620ef6d0af7c09ec80299f4`;
+- `recorded-results/31606829776/`, deterministic tree digest `sha256:3652cd5834ddd3aa75319408093fc2d2c31a5c3cdace1bdc480a5d95fc9bc174`;
+- `recorded-results/31606829708/`, deterministic tree digest `sha256:a4bf0a8377f818f2628e25d9d0d850652c842ad86adc02181b1587ef46197117`.
+
+Failure lineage is retained.  Initial candidate `fb8e95132b9ce8da566e3b338cee0676b6be5dc9` already passed both dedicated and independent actual-NS radial jobs, but one of `11` focused algebra tests failed before stress: the equiradial physical fixture called the Waleffe coupling with `(k_1,k_2,-k_0)` instead of the actually closed triple `(k_1,k_2,k_0)`.  Repair `697bb77d406d28d51efc396af1c92b948bf8930d` changed that one fixture orientation and then passed dedicated `31605985715`, independent audit `31605985621`, and integration `31605985585` without changing any PDE law or theorem identity.  Final SHA `667e687...` added hard source guards for the finite full-log marginal and dilation covariance on the total physical log-variation envelope; it changed no crossing law, sample count, PDE evolution, threshold semantics, or causal unit, and reran the full three-gate certification successfully.
+
+This theorem does not prove finiteness of total upward crossing over a singular-time history, positive average radial drift, or recurrence termination.  Its next sharp interface is the actual hard-tail energy law: separate low→high supply from high→high circulation and then ask what the existing physical dissipation/locality machinery forces.  No Navier--Stokes global-regularity claim is made.
