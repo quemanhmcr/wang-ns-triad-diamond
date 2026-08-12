@@ -10,6 +10,7 @@ from src.resolved_contact_smooth_binding import (
     canonical_positive_resolved_cutoff,
     coarse_hahn_cancellation_counterexample,
     deep_contact_smooth_repartition,
+    interior_transition_resolved_contact_fixture,
     strict_deep_resolved_mixed_fixture,
     theorem_certificate,
 )
@@ -60,6 +61,21 @@ def test_deep_fixture_positive_cause_repartitions_without_low_low_clone_or_M_rew
         assert bind.cloned_owner_mass is False
         with pytest.raises(ValueError):
             replace(bind, recipient_shell_reweighting_used=True)
+
+
+def test_actual_M4_interior_transition_triad_has_simultaneous_positive_mixed_and_HH_submeasures():
+    _, _, split = interior_transition_resolved_contact_fixture()
+    targets = [a for a in split.atoms if a.recipient_shell_index == 2 and abs(a.donor_radius - 1.0) <= 5e-12]
+    assert targets
+    for atom in targets:
+        bind = deep_contact_smooth_repartition(atom)
+        assert atom.boundary == pytest.approx(2.0**0.5)
+        assert atom.recipient_shell_scale == pytest.approx(4.0 * atom.boundary)
+        assert atom.recipient_shell_scale / 8.0 < atom.donor_radius < atom.recipient_shell_scale / 4.0
+        assert 0.0 < bind.donor_cutoff_value < 1.0
+        assert 0.0 < bind.mixed_vh_bound_mass < atom.physical_work_mass
+        assert 0.0 < bind.transition_hh_bound_mass < atom.physical_work_mass
+        assert bind.mixed_vh_bound_mass + bind.transition_hh_bound_mass == pytest.approx(atom.physical_work_mass)
 
 
 def test_actual_strict_deep_triad_geometry_is_fully_mixed_before_KS_handoff():

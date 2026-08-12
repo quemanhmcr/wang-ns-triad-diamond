@@ -73,13 +73,13 @@ jobs:
       - name: Longer independent M4/M8 Galerkin audit
         run: >-
           python -m src.resolved_contact_smooth_binding_pde_probe
-          --resolutions 24 28 --borderline-cutoff 2 --strict-cutoff 6
+          --resolutions 24 28 --borderline-cutoff 2 --transition-cutoff 3 --strict-cutoff 6
           --steps 36 --duration 0.0003 --viscosity 0.03 --amplitude 1.3
           --outdir audit-resolved-contact-ns/main
       - name: Low-amplitude sign-stability adversary
         run: >-
           python -m src.resolved_contact_smooth_binding_pde_probe
-          --resolutions 24 --borderline-cutoff 2 --strict-cutoff 6
+          --resolutions 24 --borderline-cutoff 2 --transition-cutoff 3 --strict-cutoff 6
           --steps 20 --duration 0.00012 --viscosity 0.05 --amplitude 0.35
           --outdir audit-resolved-contact-ns/low-amplitude
       - name: Summary

@@ -122,14 +122,18 @@ Then
 Use the actual unordered two-parent incompressible Navier--Stokes source on the recipient edge.  Because it is bilinear in the two parent amplitudes and because the other parent is pure `h`, its signed child-energy work satisfies **before any Hahn operation**
 
 \[
- \boxed{
- dW
- =q_d\,dW_{Vh}
- +(1-q_d)\,dW_{hh}.
- }
+ dW_{mix}=q_d\,dW,
+ \qquad
+ dW_{hh}=(1-q_d)\,dW,
 \]
 
-Here the notation means the same physical edge work evaluated with the corresponding parent components.  More explicitly:
+and therefore
+
+\[
+ \boxed{dW=dW_{mix}+dW_{hh}.}
+\]
+
+Here every term is the signed work of the same physical recipient edge with the stated parent components.  More explicitly:
 
 - low-low work is zero on this recipient edge because the other parent has no `V` component;
 - the unordered mixed source `B(V,h)+B(h,V)` is exactly `q_d` times the full unordered source;
@@ -421,9 +425,41 @@ is evolved at `N=1`.  At each snapshot the referee:
 5. verifies the same-edge physical work is entirely HH and has zero mixed mass;
 6. refuses every interface/K/S ownership inference for that canonical atom.
 
-### 10.2 Strict-deep `M=8N` mixed trajectory
+### 10.2 Interior `M=4N` transition trajectory
 
-A second physical closed geometry is fixed:
+A second physical geometry forces the donor into the **open** smooth transition annulus rather than one of its endpoints:
+
+\[
+ (-3,-2,0)+(1,0,0)+(2,2,0)=0,
+ \qquad N=\sqrt2,
+ \qquad M=4\sqrt2.
+\]
+
+The radius-one donor satisfies
+
+\[
+ M/8<1<M/4,
+\]
+
+while the radius-`sqrt(13)` recipient lies strictly above `M/2` and at or below `M`.  Hence
+
+\[
+ 0<q_d<1.
+\]
+
+The evolved referee requires at **every** snapshot that both
+
+\[
+ q_d\,d\mu_{up}>0
+ \quad\text{and}\quad
+ (1-q_d)\,d\mu_{up}>0.
+\]
+
+It separately re-registers the mixed and HH signed edge works, sends only the mixed positive submeasure into the same-edge `K/S` referee, and leaves the HH positive submeasure as HH.  This prevents the implementation from passing merely because the two endpoint fixtures happen to be easy.
+
+### 10.3 Strict-deep `M=8N` mixed trajectory
+
+A third physical closed geometry is fixed:
 
 \[
  (-5,-4,0)+(1,0,0)+(4,4,0)=0.

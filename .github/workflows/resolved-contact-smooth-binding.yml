@@ -80,7 +80,7 @@ jobs:
       - name: Borderline M4 and strict-deep M8 actual NS referee
         run: >-
           python -m src.resolved_contact_smooth_binding_pde_probe
-          --resolutions 24 28 --borderline-cutoff 2 --strict-cutoff 6
+          --resolutions 24 28 --borderline-cutoff 2 --transition-cutoff 3 --strict-cutoff 6
           --steps 24 --duration 0.0002 --viscosity 0.03 --amplitude 1.0
           --outdir results-resolved-contact-ns/main
       - name: Amplitude adversaries
@@ -88,7 +88,7 @@ jobs:
           for a in 0.5 1.5; do
             tag=${a/./p}
             python -m src.resolved_contact_smooth_binding_pde_probe \
-              --resolutions 24 --borderline-cutoff 2 --strict-cutoff 6 \
+              --resolutions 24 --borderline-cutoff 2 --transition-cutoff 3 --strict-cutoff 6 \
               --steps 12 --duration 0.00008 --viscosity 0.03 --amplitude "$a" \
               --outdir "results-resolved-contact-ns/amplitude-$tag"
           done

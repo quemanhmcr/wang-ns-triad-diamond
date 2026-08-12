@@ -340,6 +340,72 @@ def coarse_hahn_cancellation_counterexample() -> dict[str, float | bool]:
     }
 
 
+def interior_transition_resolved_contact_fixture() -> tuple[
+    ClosedHelicalTriadRegistration, CyclicTriadMeasureKernel, HardTailUpwardSupplySplit
+]:
+    """Physical M=4N fixture with the radial donor strictly inside the smooth transition.
+
+    Fix N=sqrt(2), hence M=4sqrt(2), and the closed geometry
+
+        (-3,-2,0) + (1,0,0) + (2,2,0) = 0.
+
+    The radius-one donor satisfies M/8<1<M/4, while the recipient radius
+    sqrt(13) lies strictly in (M/2,M].  A finite helicity/phase search only
+    orients the actual Waleffe work so that this low root donates to the deep
+    recipient; it does not change cutoff geometry.
+    """
+    N = math.sqrt(2.0)
+    wavevectors = (
+        np.asarray((-3.0, -2.0, 0.0)),
+        np.asarray((1.0, 0.0, 0.0)),
+        np.asarray((2.0, 2.0, 0.0)),
+    )
+    phases = (
+        1.0 + 0.0j,
+        -1.0 + 0.0j,
+        0.0 + 1.0j,
+        0.0 - 1.0j,
+        complex(2.0**-0.5, 2.0**-0.5),
+        complex(2.0**-0.5, -2.0**-0.5),
+        complex(-2.0**-0.5, 2.0**-0.5),
+        complex(-2.0**-0.5, -2.0**-0.5),
+    )
+    for s0 in (-1, 1):
+        for s1 in (-1, 1):
+            for s2 in (-1, 1):
+                for phase in phases:
+                    for position in range(3):
+                        amps = [1.0 + 0.0j, 1.0 + 0.0j, 1.0 + 0.0j]
+                        amps[position] = phase
+                        triad = register_closed_helical_triad(
+                            wavevectors=wavevectors,
+                            helicities=(s0, s1, s2),
+                            amplitudes=tuple(amps),
+                        )
+                        kernel = cyclic_triad_measure_kernel(triad, quotient_measure_mass=1.0)
+                        if not kernel.numerically_resolved_transport:
+                            continue
+                        try:
+                            split = hard_tail_upward_supply_split(triad, kernel, boundary=N)
+                        except ValueError:
+                            continue
+                        targets = [
+                            atom
+                            for atom in split.atoms
+                            if atom.recipient_shell_index == 2
+                            and abs(atom.donor_radius - 1.0) <= 5.0e-12
+                        ]
+                        if targets:
+                            for atom in targets:
+                                binding = deep_contact_smooth_repartition(atom)
+                                if not (0.0 < binding.donor_cutoff_value < 1.0):
+                                    raise AssertionError("interior-transition fixture failed 0<q_d<1")
+                                if not (binding.mixed_vh_bound_mass > 0.0 and binding.transition_hh_bound_mass > 0.0):
+                                    raise AssertionError("interior-transition canonical cause did not split into two positive physical pieces")
+                            return triad, kernel, split
+    raise AssertionError("finite physical helicity/phase search found no interior-transition M=4N upward atom")
+
+
 def strict_deep_resolved_mixed_fixture() -> tuple[
     ClosedHelicalTriadRegistration, CyclicTriadMeasureKernel, HardTailUpwardSupplySplit
 ]:
@@ -421,10 +487,31 @@ def boundary_contact_counterexample() -> dict[str, float | bool]:
     }
 
 
+def interior_transition_fixture_observation() -> dict[str, float | bool]:
+    triad, kernel, split = interior_transition_resolved_contact_fixture()
+    del triad, kernel
+    targets = [
+        atom
+        for atom in split.atoms
+        if atom.recipient_shell_index == 2 and abs(atom.donor_radius - 1.0) <= 5.0e-12
+    ]
+    if not targets:
+        raise AssertionError("interior-transition fixture lost its target atom")
+    atom = max(targets, key=lambda a: a.physical_work_mass)
+    binding = deep_contact_smooth_repartition(atom)
+    return {
+        "donor_to_shell_ratio": atom.donor_radius / atom.recipient_shell_scale,
+        "cutoff_value": binding.donor_cutoff_value,
+        "mixed_fraction": binding.mixed_vh_bound_mass / binding.canonical_positive_mass,
+        "hh_fraction": binding.transition_hh_bound_mass / binding.canonical_positive_mass,
+        "both_positive": binding.mixed_vh_bound_mass > 0.0 and binding.transition_hh_bound_mass > 0.0,
+    }
+
+
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
-        "signed_first": "for each deep upward recipient edge, dW = q_d dW|mixed(V,h) + (1-q_d)dW|HH before any new Hahn operation",
+        "signed_first": "for each deep upward recipient edge, dW_mix=q_d dW and dW_HH=(1-q_d)dW, so dW=dW_mix+dW_HH before any new Hahn operation",
         "positive_push": "donor-restricted canonical dW+ is multiplied only by q_d and 1-q_d; the two positive submeasures sum to the original cause",
         "strict_deep": "M>=8N forces donor<=M/8, q_d=1, other parent>M/4, hence the entire canonical upward atom is actual mixed V-h work",
         "borderline": "M=4N is a genuine transition shell; contact at M/4 has q_d=0 and can remain 100% HH; whenever transition-HH mass is nonzero its donor lies in (M/8,M/4] and the other parent lies in (M/4,5M/4], so this HH piece is already comparable",
@@ -453,6 +540,8 @@ class ResolvedContactSmoothBindingStress:
     coarse_hahn_counterexample_gap: float
     boundary_contact_mixed_fraction: float
     boundary_contact_hh_fraction: float
+    interior_transition_mixed_fraction: float
+    interior_transition_hh_fraction: float
 
 
 def stress(samples: int = 50_000, seed: int = 2026081301) -> ResolvedContactSmoothBindingStress:
@@ -499,6 +588,7 @@ def stress(samples: int = 50_000, seed: int = 2026081301) -> ResolvedContactSmoo
 
     coarse = coarse_hahn_cancellation_counterexample()
     boundary = boundary_contact_counterexample()
+    interior = interior_transition_fixture_observation()
     return ResolvedContactSmoothBindingStress(
         status=STATUS,
         samples=count,
@@ -512,6 +602,8 @@ def stress(samples: int = 50_000, seed: int = 2026081301) -> ResolvedContactSmoo
         coarse_hahn_counterexample_gap=float(coarse["canonical_positive_first_atom"] - coarse["coarse_positive_hahn_mass"]),
         boundary_contact_mixed_fraction=float(boundary["mixed_fraction"]),
         boundary_contact_hh_fraction=float(boundary["hh_fraction"]),
+        interior_transition_mixed_fraction=float(interior["mixed_fraction"]),
+        interior_transition_hh_fraction=float(interior["hh_fraction"]),
     )
 
 
@@ -528,6 +620,7 @@ def main() -> None:
         json.dumps({"certificate": cert, "stress": asdict(out)}, indent=2, sort_keys=True) + "\n"
     )
     boundary = boundary_contact_counterexample()
+    interior = interior_transition_fixture_observation()
     coarse = coarse_hahn_cancellation_counterexample()
     md = f"""# Resolved-contact smooth binding\n\nStatus: **{STATUS}**.\n\nThe actual positive cutoff is chosen with `0<=S<=1`, `S=1` on `B_(M/8)`, and `S=0` on and outside `M/4`. For a deep upward atom the cyclic donor is the unique parent at or below `M/4`; the other parent is strictly above `M/4`. Thus before any new Hahn operation,\n\n`dW = S(k_d) dW_mixed + (1-S(k_d)) dW_HH`,\n\nand the donor-restricted canonical `dW+` is pushed by these same two nonnegative weights. No mass is cloned and the common causal unit remains `N dW`.\n\nFor `M>=8N`, the donor lies in `B_(M/8)`, so `S(k_d)=1`: the whole canonical upward atom is actual mixed `V-h` work. The shell `M=4N` is genuinely different. The certified boundary-contact fixture has donor/shell ratio `{boundary['donor_to_shell_ratio']:.12g}`, cutoff value `{boundary['cutoff_value']:.12g}`, mixed fraction `{boundary['mixed_fraction']:.12g}`, and HH fraction `{boundary['hh_fraction']:.12g}`. Hence support contact alone is not interface ownership.\n\nOn an actual mixed atom, first verify the signed identity `I=K+S` from the same resolved operator. Only then bind the already-canonical positive submeasure into positive K/S owner submeasures by domination; their masses sum exactly to the incoming canonical cause. A downstream coarse Hahn is forbidden as the transport map: the fixed cancellation counterexample leaves coarse positive mass `{coarse['coarse_positive_hahn_mass']:.12g}` from an atomic canonical cause `{coarse['canonical_positive_first_atom']:.12g}`.\n\nStress: `{out.samples}` states\n- strict-deep samples: `{out.strict_deep_samples}`\n- borderline samples: `{out.borderline_samples}`\n- maximum smooth partition residual: `{out.maximum_partition_residual:.3e}`\n- maximum strict-deep HH fraction: `{out.maximum_strict_deep_hh_fraction:.3e}`\n- minimum strict-deep mixed fraction: `{out.minimum_strict_deep_mixed_fraction:.12g}`\n- maximum K/S canonical-mass residual: `{out.maximum_ks_mass_residual:.3e}`\n- maximum K/S domination excess: `{out.maximum_ks_domination_excess:.3e}`\n\nNo output-scale causal reweighting, new clock, new event depth, or Navier--Stokes global-regularity claim is made.\n"""
     (args.outdir / "summary.md").write_text(md)

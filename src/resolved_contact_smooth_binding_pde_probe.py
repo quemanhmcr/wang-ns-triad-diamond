@@ -37,6 +37,7 @@ from src.resolved_contact_smooth_binding import (
     bind_canonical_mixed_submeasure_to_ks,
     canonical_positive_resolved_cutoff,
     deep_contact_smooth_repartition,
+    interior_transition_resolved_contact_fixture,
     strict_deep_resolved_mixed_fixture,
 )
 from src.hard_tail_true_upward_supply import deep_upward_resolved_contact_fixture
@@ -221,7 +222,8 @@ class ResolvedContactGalerkinRun:
 @dataclass(frozen=True)
 class ResolvedContactSmoothBindingPDEProbe:
     status: str
-    borderline_runs: tuple[ResolvedContactGalerkinRun, ...]
+    boundary_contact_runs: tuple[ResolvedContactGalerkinRun, ...]
+    interior_transition_runs: tuple[ResolvedContactGalerkinRun, ...]
     strict_deep_runs: tuple[ResolvedContactGalerkinRun, ...]
     maximum_representation_spread: float
 
@@ -367,9 +369,16 @@ def _run_one(
     target_count = len(target_mass)
     if target_count != count + 1:
         raise AssertionError("target canonical upward branch changed sign during the short actual-NS referee")
-    if label == "borderline_M4_transition":
+    if label == "borderline_M4_boundary_HH":
         if max(mixed_fracs) > 5.0e-12 or min(hh_fracs) < 1.0 - 5.0e-12:
             raise AssertionError("M=4N boundary-contact actual PDE fixture was incorrectly promoted to mixed/interface work")
+    elif label == "borderline_M4_interior_transition":
+        if not (min(mixed_fracs) > 1.0e-4 and max(mixed_fracs) < 1.0 - 1.0e-4):
+            raise AssertionError("interior M=4N actual PDE donor failed genuine 0<q_d<1 mixed fraction")
+        if not (min(hh_fracs) > 1.0e-4 and max(hh_fracs) < 1.0 - 1.0e-4):
+            raise AssertionError("interior M=4N actual PDE donor failed genuine 0<1-q_d<1 HH fraction")
+        if not ks_identity:
+            raise AssertionError("interior transition mixed submeasure did not reach its actual K/S referee")
     elif label == "strict_deep_M8_mixed":
         if min(mixed_fracs) < 1.0 - 5.0e-12 or max(hh_fracs) > 5.0e-12:
             raise AssertionError("M>=8N actual PDE fixture failed pure mixed V-h binding")
@@ -436,6 +445,7 @@ def run_probe(
     *,
     resolutions: Sequence[int] = (24, 28),
     borderline_cutoff: int = 2,
+    transition_cutoff: int = 3,
     strict_cutoff: int = 6,
     steps: int = 24,
     duration: float = 2.0e-4,
@@ -443,10 +453,11 @@ def run_probe(
     amplitude: float = 1.0,
 ) -> ResolvedContactSmoothBindingPDEProbe:
     borderline_base, _, _ = deep_upward_resolved_contact_fixture()
+    transition_base, _, _ = interior_transition_resolved_contact_fixture()
     strict_base, _, _ = strict_deep_resolved_mixed_fixture()
     border = tuple(
         _run_one(
-            label="borderline_M4_transition",
+            label="borderline_M4_boundary_HH",
             base=borderline_base,
             expected_shell_index=2,
             resolution=int(n),
@@ -456,6 +467,21 @@ def run_probe(
             viscosity=float(viscosity),
             amplitude=float(amplitude),
             radial_boundary=1.0,
+        )
+        for n in resolutions
+    )
+    transition = tuple(
+        _run_one(
+            label="borderline_M4_interior_transition",
+            base=transition_base,
+            expected_shell_index=2,
+            resolution=int(n),
+            cutoff=int(transition_cutoff),
+            steps=int(steps),
+            duration=float(duration),
+            viscosity=float(viscosity),
+            amplitude=float(amplitude),
+            radial_boundary=math.sqrt(2.0),
         )
         for n in resolutions
     )
@@ -476,15 +502,18 @@ def run_probe(
     )
     spread = max(
         _relative_spread([r.initial_canonical_target_mass for r in border]),
+        _relative_spread([r.initial_canonical_target_mass for r in transition]),
         _relative_spread([r.initial_canonical_target_mass for r in strict]),
         _relative_spread([r.final_canonical_target_mass for r in border]),
+        _relative_spread([r.final_canonical_target_mass for r in transition]),
         _relative_spread([r.final_canonical_target_mass for r in strict]),
     )
     if spread > 5.0e-10:
         raise AssertionError("same six-mode Galerkin physics changed across FFT representations")
     return ResolvedContactSmoothBindingPDEProbe(
         status=STATUS,
-        borderline_runs=border,
+        boundary_contact_runs=border,
+        interior_transition_runs=transition,
         strict_deep_runs=strict,
         maximum_representation_spread=spread,
     )
@@ -494,6 +523,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--resolutions", type=int, nargs="+", default=[24, 28])
     ap.add_argument("--borderline-cutoff", type=int, default=2)
+    ap.add_argument("--transition-cutoff", type=int, default=3)
     ap.add_argument("--strict-cutoff", type=int, default=6)
     ap.add_argument("--steps", type=int, default=24)
     ap.add_argument("--duration", type=float, default=2.0e-4)
@@ -505,6 +535,7 @@ def main() -> None:
     out = run_probe(
         resolutions=args.resolutions,
         borderline_cutoff=args.borderline_cutoff,
+        transition_cutoff=args.transition_cutoff,
         strict_cutoff=args.strict_cutoff,
         steps=args.steps,
         duration=args.duration,
@@ -514,7 +545,7 @@ def main() -> None:
     (args.outdir / "resolved_contact_smooth_binding_pde.json").write_text(
         json.dumps(asdict(out), indent=2, sort_keys=True) + "\n"
     )
-    all_runs = (*out.borderline_runs, *out.strict_deep_runs)
+    all_runs = (*out.boundary_contact_runs, *out.interior_transition_runs, *out.strict_deep_runs)
     md = f"""# Actual Fourier--Galerkin Navier--Stokes referee: resolved-contact smooth binding\n\nStatus: **{STATUS}**.\n\nThe same real divergence-free six-mode data are evolved on FFT representations `{tuple(args.resolutions)}`. At every snapshot the referee reads the actual cyclic donor law, the actual smooth `u=V+h` decomposition, the same-edge helical work, and—on the strict-deep mixed branch—the adjoint `K/S` pair of that same resolved linearized NS operator.\n\n- maximum representation spread: `{out.maximum_representation_spread:.3e}`\n- worst full PDE bilinear repartition residual: `{max(r.worst_whole_pde_bilinear_repartition_relative_residual for r in all_runs):.3e}`\n- worst high-shell low-low leakage: `{max(r.worst_high_shell_low_low_relative_mass for r in all_runs):.3e}`\n- worst same-edge signed V/h repartition residual: `{max(r.worst_same_edge_signed_repartition_native_residual for r in all_runs):.3e}`\n- worst same-edge cutoff scaling residual: `{max(r.worst_same_edge_cutoff_scaling_native_residual for r in all_runs):.3e}`\n- worst K/S signed identity residual: `{max(r.worst_ks_signed_identity_native_residual for r in all_runs):.3e}`\n- worst K skew-pair residual: `{max(r.worst_ks_skew_pair_residual for r in all_runs):.3e}`\n- worst S symmetric-pair residual: `{max(r.worst_ks_strain_pair_residual for r in all_runs):.3e}`\n- worst canonical K/S mass residual: `{max(r.worst_canonical_ks_mass_residual for r in all_runs):.3e}`\n- worst Galerkin energy-balance residual: `{max(r.global_energy_balance_relative_residual for r in all_runs):.3e}`\n\nThe `M=4N` boundary-contact trajectory remains transition-HH rather than being renamed interface work. The `M=8N` trajectory is fully mixed `V-h` and its donor-restricted canonical `dW+` is bound without cloning into existing skew-relink/strain positive laws only after the signed K/S identity is checked.\n"""
     (args.outdir / "summary.md").write_text(md)
     print(json.dumps(asdict(out), indent=2, sort_keys=True))
