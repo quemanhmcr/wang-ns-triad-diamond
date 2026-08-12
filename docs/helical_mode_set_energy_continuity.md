@@ -289,7 +289,7 @@ The audit also runs the sign-reversed divergence-free initial state and the oppo
 
 ## 10. Scope after certification
 
-A successful theorem would close the **between-time native energy-continuity registration** for cyclic donor provenance:
+The certified theorem closes the **between-time native energy-continuity registration** for cyclic donor provenance:
 
 \[
 \text{same-time donor flow on helical modes}
@@ -311,3 +311,30 @@ It would **not**:
 - prove 3D Navier--Stokes global regularity.
 
 The next question after this theorem should be asked only after seeing what additional rigidity real choices of the mode boundary supply.  In particular, a radial high-frequency set may turn the abstract boundary flux into genuine spectral crossing, but that scale statement must be proved from its own Fourier geometry rather than assumed from the continuity equation.
+
+
+---
+
+## 11. Certification evidence
+
+Exact certified theorem/provenance SHA:
+
+`a39d502d9312ac3bd6613a780d60b22e88790863`.
+
+Dedicated GitHub Actions run `31598313644` completed successfully.  The full theorem suite passed `870` tests.  The analytic lane ran `75,000` physical closed triads and checked `150,000` physical mode sets, with worst boundary-divergence native residual `2.138e-16`.  The largest sampled internal/boundary-flow ratio with nonzero boundary flow was `38904.2004084`.  On the physical amplitude-scaling anti-theorem the closed signed-good triad's internal flow increased from `0.712779828831` to `712.779828831` under a tenfold amplitude scaling, exactly the expected cubic factor, while inward and outward boundary flux of the full three-mode set remained zero.
+
+The same run evolved actual `2/3`-dealiased Fourier--Galerkin Navier--Stokes at common cutoff `7` on FFT grids `24` and `28`.  For the selected `+` helicity, the `64`-step interval continuity residual was `1.563e-11`; under global phase/sign reversal it was `2.960e-11`.  The deliberately difficult opposite-helicity mode began at energy about `1e-32`, was nonlinearly born to final energy `1.80191453799e-05`, received integrated gross positive/negative work `1.81542566415e-05` / `9.53908587922e-08`, and had viscous dissipation `3.97413682063e-08`.  Its interval continuity native residual was `1.155e-06`, while the worst 24/28 representation native residual was `4.890e-14`.  Amplitude adversaries `0.5` and `2.0` also passed without changing the physical law.
+
+Independent audit `31598313628` also completed successfully.  Its algebra lane ran `100,000` physical closed triads and `200,000` mode sets, with worst boundary-divergence native residual `2.141e-16`; the companion cyclic donor stress also passed `100,000` states.  Its longer actual-NS lane used amplitude `1.3`, `96` RK4 steps, duration `0.0012`, common cutoff `7`, and FFT representations `24,28`.  The selected/sign-reversed interval residuals were `4.051e-11` / `6.485e-11`.  The longer opposite-helicity branch began at `6.91e-32` / `2.27e-32` on the two representations and ended at `7.38660111133e-05`; integrated positive work was `7.44536161723e-05`, negative work `3.92012387067e-07`, viscosity `1.9564433437e-07`, interval residual `6.939e-07`, and worst cross-FFT native residual `6.444e-14`.
+
+Full physical-energy causal integration `31598313576` completed successfully on the same exact SHA, passed the same `870`-test suite, and ran `50,000` mode-continuity stress states immediately after cyclic donor + hard-cell single-charge provenance and before complex Young.  Its worst boundary-divergence native residual was `2.103e-16`; the entire downstream witness, role, donor-quotient, causal-reuse, branch-compiler and master spine remained green.
+
+Stored artifact trees:
+
+- `recorded-results/31598313644/`, deterministic tree digest `sha256:9b4bff2e5ce26ac1afb4afb7ebe8f25f4bd4f5c9a754b52e1d51812550d3cfae`;
+- `recorded-results/31598313628/`, deterministic tree digest `sha256:7f34ef66faef1e4d132ec59622c10ab04c1eb8d5086318645a28828f83b22f74`;
+- `recorded-results/31598313576/`, deterministic tree digest `sha256:6eb24c013d52c54ef63e4196e5e8df565756859bcae2271f4b014e796c587da7`.
+
+Failure lineage is part of the certificate.  Initial candidate `8ec1efe924c1a7cabf2499ff232e09f060ced2d8` encoded a universal `5e-8` numerical residual gate inside the exact interval object; the opposite-helicity finite-step audit correctly rejected that category error.  Candidate `e11b3464d437b42e0474da1e016e67a584bcfe92` removed the universal theorem-object tolerance, but its cross-FFT audit still divided each representation gap by the particular realized observable.  Because an opposite-helicity stock/Hahn marginal may vanish by genuine selection or phase cancellation, the 24/28 audit again failed.  Final `a39d502...` measures cross-representation gaps on the already-native physical mode energy-throughput envelope.  That envelope is recorded only as a numerical error scale; it never enters the donor kernel, causal probability, recurrence currency or gross-transfer law.  No PDE case, sample count, sign pattern, or physical threshold was removed.
+
+The theorem closes native **mode-set continuity**, not recurrence.  Its next physically meaningful specialization is a radial Fourier mode boundary, where inward/outward mode-set flow becomes genuine upward/downward spectral crossing.  Any scale direction, layer-cake identity, or recurrence consequence must be derived from that radial geometry itself; it is not supplied by an arbitrary mode-set continuity equation.  No Navier--Stokes global-regularity claim is made.

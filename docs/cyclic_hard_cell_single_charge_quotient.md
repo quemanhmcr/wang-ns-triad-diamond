@@ -288,7 +288,7 @@ It would **not**:
 - terminate generic HH or mixed genuine-owner recurrence;
 - prove 3D Navier--Stokes global regularity.
 
-Only after this same-time single-charge quotient is certified should the programme consider the separate between-time modewise energy/dissipation inventory theorem.
+That separate between-time theorem is now certified in `helical_mode_set_energy_continuity.md` on exact SHA `a39d502d9312ac3bd6613a780d60b22e88790863`: persistent stock lives on physical helical modes and satisfies exact mode-set stock/boundary-flow/viscosity continuity without FIFO/LIFO matching or a gross-transfer budget.  The next scale-facing specialization is a radial Fourier boundary.
 
 
 ---

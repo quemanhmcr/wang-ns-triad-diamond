@@ -2531,7 +2531,7 @@ The continuum HH interface now begins from one signed physical Fourier/helicity 
 
 Geometry/phase-good positive work is not automatically a Young theorem.  A deterministic hard Fourier/helicity map inherits `pi_#dW^+`, the original Hahn-negative law `pi_#dW^-`, and signed cell work `pi_#dW` by direct pushforward; no later Hahn split is allowed to replace the master law.  The certified mixed-fate reserved handoff writes `T_C=g_C+b_C-n_C` and uses `T_C-b_C` only as a sufficient-condition scalar, never as a new trilinear work.  For a separately certified Young upper `Y_C`, `delta_res=delta_full+b_C/Y_C`; hence the actual full signed `T_C` may enter Young/Christ in a mixed cell precisely when terminal bad-positive assistance fits inside the unused Christ margin.  Negative work remains inside `T_C` and only makes the gate harder.
 
-Accordingly, generic bad HH routing and terminal-bad assistance in mixed cells are no longer open recursive branches.  On low native-deficit blocks, nondegenerate full-signed Christ-margin failures are quantitatively dominated by actual canonical negative work plus already-terminal bad-positive work through an explicit `dW/dA>19/100` good-core comparison; no capacity probability is made causal.  The cyclic theorem closes the same-time triad structure of canonical negative work, and the hard-cell theorem below now also closes its representation-level single charging into existing positive causes.  The sharp local HH seam is therefore degenerate full-signed Young/Christ margin and any genuinely required coherent positive kernel; between-time modal inventory remains a separate PDE question.  No global-regularity claim is made.
+Accordingly, generic bad HH routing and terminal-bad assistance in mixed cells are no longer open recursive branches.  On low native-deficit blocks, nondegenerate full-signed Christ-margin failures are quantitatively dominated by actual canonical negative work plus already-terminal bad-positive work through an explicit `dW/dA>19/100` good-core comparison; no capacity probability is made causal.  The cyclic theorem closes the same-time triad structure of canonical negative work, the hard-cell theorem closes its representation-level single charging into existing positive causes, and the helical mode-set theorem now separately closes between-time stock/boundary-flow/viscosity registration.  The sharp local HH seam is therefore degenerate full-signed Young/Christ margin and any genuinely required coherent positive kernel; the next negative-work scale question is radial spectral crossing, not a temporal matching.  No global-regularity claim is made.
 
 The native **same-time** structure of that canonical negative work is now also
 certified.  On each closed helical triad, cyclic rerooting gives three actual modal
@@ -2555,8 +2555,8 @@ same-time redistribution with zero recursion depth and no scale progress.  This
 quotient does not say that negative work pays failed good work and does not create
 a between-time deposit/withdrawal matching.
 
-Consequently the next negative-work question is no longer same-time provenance.
-If recurrence needs more information, it must descend into the separate physical
-modewise energy balance with actual positive work, negative work and viscous
-dissipation.  That ledger must not be collapsed with the same-time cyclic kernel
-into a scalar cancellation/telescoping budget.
+That separate physical modewise ledger is now certified.  The cyclic donor flow is read on persistent helical-mode nodes; for any mode set `A`, internal flow cancels from the set divergence and actual Navier--Stokes gives
+
+`E_A(t1)+D_A+Phi_out=E_A(t0)+Phi_in`.
+
+The identity uses the already-canonical gross edge `dW+`/`dW-` marginals and viscosity; it does not Hahn-split modal net work, does not pair prior deposits with later withdrawals, and does not bound gross traffic.  The physical amplitude-scaling anti-theorem keeps a closed triad's full-set boundary flux at zero while internal work scales cubically.  Thus no scalar cancellation/telescoping budget is created.  If recurrence needs scale information, the next native specialization is a radial Fourier mode boundary whose crossing geometry must be proved explicitly.

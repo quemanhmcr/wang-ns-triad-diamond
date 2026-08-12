@@ -1,0 +1,75 @@
+{
+  "child_mode": [
+    7,
+    6,
+    5
+  ],
+  "common_cutoff": 7,
+  "helicity": 1,
+  "maximum_final_energy_representation_native_residual": 3.935663452654725e-16,
+  "maximum_initial_energy_representation_native_residual": 2.62377563510315e-16,
+  "maximum_integrated_negative_work_representation_native_residual": 4.099649429848672e-18,
+  "maximum_integrated_positive_work_representation_native_residual": 7.68684268096626e-19,
+  "maximum_viscous_dissipation_representation_native_residual": 4.099649429848672e-18,
+  "phase_sign": -1,
+  "representation_native_energy_throughput_scale": 1.692557869311123,
+  "runs": [
+    {
+      "amplitude": 1.3,
+      "child_mode": [
+        7,
+        6,
+        5
+      ],
+      "cutoff": 7,
+      "duration": 0.0012,
+      "final_energy": 1.6529287464966973,
+      "global_energy_balance_relative_residual": 6.434767478006915e-12,
+      "helicity": 1,
+      "initial_energy": 1.689999999999999,
+      "integrated_negative_work": 0.026391374822782386,
+      "integrated_positive_work": 0.0025578693111234334,
+      "interval_continuity_native_residual": 6.485107524015405e-11,
+      "maximum_divergence_relative_to_initial_l2": 3.9336754506698876e-16,
+      "maximum_global_nonlinear_work_relative_rate": 1.840074156131628e-18,
+      "native_energy_throughput_scale": 1.6925578693111225,
+      "negative_work_steps": 97,
+      "phase_sign": -1,
+      "positive_work_steps": 97,
+      "resolution": 24,
+      "steps": 96,
+      "viscosity": 0.03,
+      "viscous_dissipation": 0.013237747881878661,
+      "worst_instantaneous_signed_reconstruction_native_residual": 8.8344203184733755e-16
+    },
+    {
+      "amplitude": 1.3,
+      "child_mode": [
+        7,
+        6,
+        5
+      ],
+      "cutoff": 7,
+      "duration": 0.0012,
+      "final_energy": 1.652928746496698,
+      "global_energy_balance_relative_residual": 6.434299629911273e-12,
+      "helicity": 1,
+      "initial_energy": 1.6899999999999995,
+      "integrated_negative_work": 0.02639137482278238,
+      "integrated_positive_work": 0.0025578693111234347,
+      "interval_continuity_native_residual": 6.485094405137227e-11,
+      "maximum_divergence_relative_to_initial_l2": 4.664888670353314e-16,
+      "maximum_global_nonlinear_work_relative_rate": 1.8764156782494536e-18,
+      "native_energy_throughput_scale": 1.692557869311123,
+      "negative_work_steps": 97,
+      "phase_sign": -1,
+      "positive_work_steps": 97,
+      "resolution": 28,
+      "steps": 96,
+      "viscosity": 0.03,
+      "viscous_dissipation": 0.013237747881878668,
+      "worst_instantaneous_signed_reconstruction_native_residual": 1.0331413877465098e-15
+    }
+  ],
+  "status": "EVOLVED_DEALIASED_FOURIER_GALERKIN_NS_HELICAL_MODE_ENERGY_CONTINUITY__GROSS_CANONICAL_EDGE_DW_PLUS_DW_MINUS__MODE_STOCK_PLUS_VISCOSITY__SAME_CUTOFF_CROSS_FFT_REPRESENTATION__NO_REHAHN_OR_TEMPORAL_MATCHING"
+}

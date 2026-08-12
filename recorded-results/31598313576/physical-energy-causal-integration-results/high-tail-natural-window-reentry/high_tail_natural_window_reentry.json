@@ -1,0 +1,27 @@
+{
+  "certificate": {
+    "status": "EXACT_HIGH_TAIL_COMPARABLE_HH_TO_SLIDING_NATURAL_WINDOW__TIME_ORIGIN_AND_UNIT_INVARIANT__SCALE_TIME_CONCENTRATION_TO_CRITICAL_SHELL__NO_PACKET_PERSISTENCE_OR_TIME_BINNING",
+    "upstream": "EXACT_HIGH_TAIL_HH_OUTPUT_SCALE_LAW__ULTRAVIOLET_WORK_TO_PHYSICAL_DTAIL__CONTINUOUS_LOCALITY_RADIUS_MASS_TRADEOFF__COMPARABLE_REMAINDER_BINARY_READY__NO_PAIR_COUNT_OR_COHERENT_LOCALITY_SELECTION",
+    "sliding_measure": "p_t=sup_s mu_comp([s,s+cM^-2])/mu_comp(I); no time bins or chosen bin origin",
+    "attainment": "for smooth NS the positive comparable-work density is continuous, hence the sliding integral is continuous on the compact admissible start interval and attains its maximum",
+    "time_gauge": "translation of time origin and simultaneous rescaling t->lambda t, density->density/lambda, window->lambda window leave p_t unchanged",
+    "refinement_rule": "subdividing a piecewise representation without changing the positive measure leaves the sliding maximum and p_t unchanged",
+    "cutoff_scope": "only |S|<=1 is used, so ||(I-S)u||_2<=2||u||_2; no unregistered nonnegative-cutoff contraction is assumed",
+    "window_capacity": "N W_win <= 12 c sqrt(pi) R N E_global sqrt(mu_win); for R=2 the coefficient is 24 c sqrt(pi)",
+    "native_tradeoff": "sqrt(mu_win)/(p_scale p_time)>=nu D_tail/[48 c sqrt(pi) R N E_global]",
+    "log_coordinate": "equivalently sqrt(mu_win) exp(H_inf^out+H_inf^time)>=nu D_tail/[48 c sqrt(pi) R mathcal_E_N], mathcal_E_N=N E_global",
+    "hard_tail_progress": "selected hard shell M=2^jN with j>=1 gives forward scale ratio>=2 and natural-time ratio<=1/4 independently of signed-good Young geometry",
+    "generic_shell": "the actual window peak is a hard-shell event and enters the existing material-free critical-shell first-stop theorem; own-scale service remains conditional on a full no-hit corridor",
+    "scope": "no packet persistence, fixed time bins, signed-good parent ratio, Young near-extremality, productivity gate, or additive reset is asserted"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_time_translation_invariance_residual": 7.861072903736499e-14,
+    "worst_time_unit_invariance_residual": 1.3600232051658168e-14,
+    "worst_representation_refinement_residual": 1.5126788710517758e-15,
+    "minimum_scale_time_tradeoff_relative_margin": 0.9420496618293226,
+    "minimum_forward_scale_margin": 0.0,
+    "minimum_natural_time_shortening_margin": 0.0,
+    "minimum_full_survivor_service_lower": 9.309745536273158e-17
+  }
+}

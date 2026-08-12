@@ -1,6 +1,6 @@
 # Canonical positive edge-work routing frontier
 
-Status: **CANONICAL ROUTING, MIXED-FATE HANDOFF, CYCLIC NEGATIVE-WORK DONOR KERNEL, AND HARD-CELL SINGLE-CHARGE QUOTIENT CERTIFIED**.  Mixed fate itself is no longer a binary Young obstruction; canonical `dW^-` has exact same-triad donor provenance into the already-fixed canonical `dW^+`, and hard coarsening now preserves those recipient charges exactly once even under overlapping donor support and coarse self-loops.  The remaining local seam is degenerate full-signed Young/Christ margin (plus a positive coherent kernel only if a later representation genuinely requires one); any between-time physical energy inventory is a separate PDE problem, not a continuation of the same-time donor quotient.
+Status: **CANONICAL ROUTING, MIXED-FATE HANDOFF, CYCLIC NEGATIVE-WORK DONOR KERNEL, HARD-CELL SINGLE-CHARGE QUOTIENT, AND HELICAL MODE-SET ENERGY CONTINUITY CERTIFIED**.  Mixed fate itself is no longer a binary Young obstruction; canonical `dW^-` has exact same-triad donor provenance into the already-fixed canonical `dW^+`, hard coarsening preserves those recipient charges exactly once, and the separate between-time PDE ledger now places the same flow on persistent helical-mode stock with exact viscosity/boundary continuity.  The remaining local HH seam is degenerate full-signed Young/Christ margin (plus a positive coherent kernel only if a later representation genuinely requires one); the next negative-work scale question is radial spectral crossing, not temporal matching or a gross-transfer budget.
 
 The continuum helical edge-measure theorem fixes the physical signed law before
 any later representation is introduced.  Let
@@ -90,7 +90,7 @@ while
 \sum_CK(C,D,B)=(\pi_\#dW_B^+)(D).
 \]
 
-Thus overlapping donor cells disintegrate one canonical recipient charge rather than cloning it.  Coarse self-loops are retained as real same-time redistribution with zero event depth and no scale progress.  This does not turn the mixed-fate failure domination `g_C<n_C+(mu^{-1}-1)b_C` into a causal payment map.  Fresh coherent Hahn remains noncausal without a separate positive kernel.  The next negative-work question, if needed for recurrence, must instead start from the separate between-time modewise energy/work/viscous-dissipation balance.
+Thus overlapping donor cells disintegrate one canonical recipient charge rather than cloning it.  Coarse self-loops are retained as real same-time redistribution with zero event depth and no scale progress.  This does not turn the mixed-fate failure domination `g_C<n_C+(mu^{-1}-1)b_C` into a causal payment map.  Fresh coherent Hahn remains noncausal without a separate positive kernel.  The separate between-time theorem `helical_mode_set_energy_continuity.md`, certified on exact SHA `a39d502d9312ac3bd6613a780d60b22e88790863`, now proves `E_A(t1)+D_A+Phi_out=E_A(t0)+Phi_in` on physical helical-mode sets, with internal cyclic flow cancelling from set divergence.  It creates neither a temporal deposit matching nor a gross-transfer budget.  The next negative-work scale question is therefore radial Fourier boundary crossing.
 
 ## 1. The Hahn level is physical and must be fixed before analysis refinement
 
