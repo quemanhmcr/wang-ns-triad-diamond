@@ -77,7 +77,7 @@ class CyclicDonorKernelNSRun:
     viscosity: float
     amplitude: float
     worst_cyclic_energy_conservation_relative: float
-    worst_cyclic_coupling_relative: float
+    worst_cyclic_coupling_native_residual: float
     worst_measure_donor_marginal_relative: float
     worst_measure_recipient_marginal_relative: float
     global_energy_balance_relative_residual: float
@@ -158,7 +158,7 @@ def _run_one(
                 triad, quotient_measure_mass=discrete_triad_qmass
             )
             worst_energy = max(worst_energy, triad.signed_energy_conservation_residual)
-            worst_coupling = max(worst_coupling, triad.cyclic_coupling_residual)
+            worst_coupling = max(worst_coupling, triad.cyclic_coupling_native_residual)
             worst_donor = max(worst_donor, measure.donor_marginal_residual)
             worst_recipient = max(worst_recipient, measure.recipient_marginal_residual)
             total_positive_snapshots.append(measure.total_mass)
@@ -199,7 +199,7 @@ def _run_one(
         viscosity=nu,
         amplitude=amp,
         worst_cyclic_energy_conservation_relative=worst_energy,
-        worst_cyclic_coupling_relative=worst_coupling,
+        worst_cyclic_coupling_native_residual=worst_coupling,
         worst_measure_donor_marginal_relative=worst_donor,
         worst_measure_recipient_marginal_relative=worst_recipient,
         global_energy_balance_relative_residual=balance,

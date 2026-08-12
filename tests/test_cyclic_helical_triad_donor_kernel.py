@@ -78,7 +78,7 @@ def test_three_cyclic_physical_edges_share_one_waleffe_factor_and_conserve_signe
     k, s, a = _generic_data()
     triad = register_closed_helical_triad(wavevectors=k, helicities=s, amplitudes=a)
     assert triad.signed_energy_conservation_residual < 4e-10
-    assert triad.cyclic_coupling_residual < 4e-10
+    assert triad.cyclic_coupling_native_residual < 5e-12
     assert sum(slot.signed_work for slot in triad.slots) == pytest.approx(0.0, abs=2e-11)
     for slot in triad.slots:
         assert slot.signed_work == pytest.approx(slot.expected_signed_work, rel=3e-10, abs=3e-12)

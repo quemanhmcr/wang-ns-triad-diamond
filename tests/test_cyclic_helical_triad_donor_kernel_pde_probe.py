@@ -8,7 +8,7 @@ def test_evolved_actual_galerkin_ns_preserves_cyclic_donor_kernel_and_signed_goo
     assert len(out.runs) == 1
     run = out.runs[0]
     assert run.worst_cyclic_energy_conservation_relative < 4e-8
-    assert run.worst_cyclic_coupling_relative < 4e-8
+    assert run.worst_cyclic_coupling_native_residual < 5e-12
     assert run.worst_measure_donor_marginal_relative < 4e-8
     assert run.worst_measure_recipient_marginal_relative < 4e-8
     assert run.global_energy_balance_relative_residual < 5e-5

@@ -327,7 +327,7 @@ class ClosedHelicalTriadRegistration:
     common_phase_work_factor: float
     slots: tuple[CyclicTriadSlotWork, CyclicTriadSlotWork, CyclicTriadSlotWork]
     signed_energy_conservation_residual: float
-    cyclic_coupling_residual: float
+    cyclic_coupling_native_residual: float
     donor_kernel: CyclicTriadDonorKernel
     parent_permutation_quotiented: bool = True
     reality_negation_quotiented: bool = False
@@ -350,8 +350,8 @@ class ClosedHelicalTriadRegistration:
             raise AssertionError("stored cyclic energy-conservation residual changed")
         if self.signed_energy_conservation_residual > 4.0e-10:
             raise AssertionError("one helical closed triad lost exact nonlinear energy conservation")
-        if self.cyclic_coupling_residual > 4.0e-10:
-            raise AssertionError("cyclic Waleffe triple-product coupling changed with the root")
+        if self.cyclic_coupling_native_residual > 5.0e-12:
+            raise AssertionError("cyclic Waleffe triple-product coupling left its native unit-basis scale")
 
     def slot_for_closed_mode_index(self, index: int) -> CyclicTriadSlotWork:
         for slot in self.slots:
@@ -459,10 +459,16 @@ def register_closed_helical_triad(
         coupling_g(k[2], k[0], k[1], s[2], s[0], s[1]),
         coupling_g(k[0], k[1], k[2], s[0], s[1], s[2]),
     )
-    gscale = max(abs(x) for x in cyclic_g)
-    cyclic_res = 0.0 if gscale == 0.0 else max(abs(x - g0) for x in cyclic_g) / gscale
-    if cyclic_res > 3.0e-10:
-        raise AssertionError("Waleffe coupling is not cyclically invariant on the closed triad")
+    # Cyclic invariance is the exact scalar-triple-product identity.  Do not
+    # normalize its floating audit by |g|: near a genuine coupling zero that
+    # would turn harmless roundoff into an observer-created large defect.  Each
+    # helical basis vector has unit norm, so the native Waleffe coupling bound is
+    # |g|<=1/2.  Normalize the absolute cyclic residual by that immutable
+    # physical/geometric envelope instead.
+    coupling_native_bound = 0.5
+    cyclic_res = max(abs(x - g0) for x in cyclic_g) / coupling_native_bound
+    if cyclic_res > 5.0e-12:
+        raise AssertionError("Waleffe cyclic triple-product identity left its native unit-basis scale")
     common = 4.0 * float(np.real(amps[0] * amps[1] * amps[2] * np.conjugate(g0)))
     slots: list[CyclicTriadSlotWork] = []
     for i in range(3):
@@ -502,7 +508,7 @@ def register_closed_helical_triad(
         common_phase_work_factor=common,
         slots=(slots[0], slots[1], slots[2]),
         signed_energy_conservation_residual=conservation,
-        cyclic_coupling_residual=cyclic_res,
+        cyclic_coupling_native_residual=cyclic_res,
         donor_kernel=kernel,
     )
 
@@ -803,7 +809,7 @@ class CyclicDonorKernelStress:
     two_donor_cases: int
     zero_work_cases: int
     worst_energy_conservation_relative: float
-    worst_cyclic_coupling_relative: float
+    worst_cyclic_coupling_native_residual: float
     worst_donor_marginal_relative: float
     worst_recipient_marginal_relative: float
     worst_measure_donor_marginal_relative: float
@@ -853,7 +859,7 @@ def stress(samples: int = 75_000, seed: int = 2026081203) -> CyclicDonorKernelSt
         )
         kernel = triad.donor_kernel
         we = max(we, triad.signed_energy_conservation_residual)
-        wc = max(wc, triad.cyclic_coupling_residual)
+        wc = max(wc, triad.cyclic_coupling_native_residual)
         wd = max(wd, kernel.donor_marginal_residual)
         wr = max(wr, kernel.recipient_marginal_residual)
         qmass = math.exp(float(rng.uniform(-8.0, 8.0)))
@@ -927,7 +933,7 @@ def stress(samples: int = 75_000, seed: int = 2026081203) -> CyclicDonorKernelSt
         two_donor_cases=two,
         zero_work_cases=zero,
         worst_energy_conservation_relative=we,
-        worst_cyclic_coupling_relative=wc,
+        worst_cyclic_coupling_native_residual=wc,
         worst_donor_marginal_relative=wd,
         worst_recipient_marginal_relative=wr,
         worst_measure_donor_marginal_relative=wmd,
@@ -957,7 +963,7 @@ def main() -> None:
     (args.outdir / "certificate.json").write_text(
         json.dumps({"certificate": cert, "stress": asdict(out)}, indent=2, sort_keys=True) + "\n"
     )
-    summary = f"""# Cyclic helical-triad donor/recipient kernel\n\nStatus: **{STATUS}**.\n\nOne regular closed helical triad is quotient by the full `S3` ordering symmetry.  Marking one of its three physical roots recovers exactly the existing parent-swap edge quotient: `3*(1/48)=1/16`.  The three cyclic root works use the same Waleffe phase factor and satisfy `T0+T1+T2=0` before Hahn.\n\nThe positive same-triad transport `M(i->j)=[-T_i]_+[T_j]_+/Q`, `Q=sum[T]_+=sum[-T]_+`, has donor marginal `dW-` and recipient marginal the already-canonical `dW+`.  On three slots this transport is unique because every nonzero zero-sum sign pattern has a singleton donor or recipient side.  It adds same-time donor provenance; it does not replace causality or create a new event.\n\nStress: `{out.samples}` generic physical closed triads\n- one-donor cases: `{out.one_donor_cases}`\n- two-donor cases: `{out.two_donor_cases}`\n- zero-work cases: `{out.zero_work_cases}`\n- worst cyclic energy-conservation relative residual: `{out.worst_energy_conservation_relative:.3e}`\n- worst cyclic-coupling relative residual: `{out.worst_cyclic_coupling_relative:.3e}`\n- worst density donor/recipient marginal residuals: `{out.worst_donor_marginal_relative:.3e}` / `{out.worst_recipient_marginal_relative:.3e}`\n- worst measure donor/recipient marginal residuals: `{out.worst_measure_donor_marginal_relative:.3e}` / `{out.worst_measure_recipient_marginal_relative:.3e}`\n- worst restricted dW- to canonical dW+ submeasure mass residual: `{out.worst_restricted_negative_mass_residual:.3e}`\n- worst permutation / translation work residuals: `{out.worst_permutation_work_residual:.3e}` / `{out.worst_translation_work_residual:.3e}`\n- worst wavevector / amplitude scaling residuals: `{out.worst_wavevector_scaling_residual:.3e}` / `{out.worst_amplitude_cubic_scaling_residual:.3e}`\n- worst global-reality work-multiset residual: `{out.worst_reality_work_multiset_residual:.3e}`\n\nOn the signed-good integer triad, the interaction parents remain two but exactly one is the energy donor.  The other is a simultaneous positive nonforward side recipient.  The certified work ratios are\n\n`3/10 < W_side+/W_child+ < 1/3`,\n`3/4 < W_child+/W_donor- < 10/13`,\n`3/13 < W_side+/W_donor- < 1/4`.\n\nThe side work is real physical energy redistribution and already lies on the existing positive-nonforward transfer-loss route.  It is not dissipation, a reset budget, or a proof that the good child itself terminates.  No global-regularity claim is made.\n"""
+    summary = f"""# Cyclic helical-triad donor/recipient kernel\n\nStatus: **{STATUS}**.\n\nOne regular closed helical triad is quotient by the full `S3` ordering symmetry.  Marking one of its three physical roots recovers exactly the existing parent-swap edge quotient: `3*(1/48)=1/16`.  The three cyclic root works use the same Waleffe phase factor and satisfy `T0+T1+T2=0` before Hahn.\n\nThe positive same-triad transport `M(i->j)=[-T_i]_+[T_j]_+/Q`, `Q=sum[T]_+=sum[-T]_+`, has donor marginal `dW-` and recipient marginal the already-canonical `dW+`.  On three slots this transport is unique because every nonzero zero-sum sign pattern has a singleton donor or recipient side.  It adds same-time donor provenance; it does not replace causality or create a new event.\n\nStress: `{out.samples}` generic physical closed triads\n- one-donor cases: `{out.one_donor_cases}`\n- two-donor cases: `{out.two_donor_cases}`\n- zero-work cases: `{out.zero_work_cases}`\n- worst cyclic energy-conservation relative residual: `{out.worst_energy_conservation_relative:.3e}`\n- worst cyclic-coupling native residual: `{out.worst_cyclic_coupling_native_residual:.3e}`\n- worst density donor/recipient marginal residuals: `{out.worst_donor_marginal_relative:.3e}` / `{out.worst_recipient_marginal_relative:.3e}`\n- worst measure donor/recipient marginal residuals: `{out.worst_measure_donor_marginal_relative:.3e}` / `{out.worst_measure_recipient_marginal_relative:.3e}`\n- worst restricted dW- to canonical dW+ submeasure mass residual: `{out.worst_restricted_negative_mass_residual:.3e}`\n- worst permutation / translation work residuals: `{out.worst_permutation_work_residual:.3e}` / `{out.worst_translation_work_residual:.3e}`\n- worst wavevector / amplitude scaling residuals: `{out.worst_wavevector_scaling_residual:.3e}` / `{out.worst_amplitude_cubic_scaling_residual:.3e}`\n- worst global-reality work-multiset residual: `{out.worst_reality_work_multiset_residual:.3e}`\n\nOn the signed-good integer triad, the interaction parents remain two but exactly one is the energy donor.  The other is a simultaneous positive nonforward side recipient.  The certified work ratios are\n\n`3/10 < W_side+/W_child+ < 1/3`,\n`3/4 < W_child+/W_donor- < 10/13`,\n`3/13 < W_side+/W_donor- < 1/4`.\n\nThe side work is real physical energy redistribution and already lies on the existing positive-nonforward transfer-loss route.  It is not dissipation, a reset budget, or a proof that the good child itself terminates.  No global-regularity claim is made.\n"""
     (args.outdir / "summary.md").write_text(summary)
     print(summary)
 
