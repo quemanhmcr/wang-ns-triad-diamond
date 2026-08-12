@@ -176,3 +176,17 @@ terminal carrier energy and native interface work must reenter the
 physical-energy gate before inheritance, HH generation, strain or relink becomes
 a causal owner.  Global assembly of the resulting physical owners remains open.
 No global-regularity claim is made.
+
+## Canonical positive edge-work inheritance
+
+When a hard event role is downstream of the continuum helical edge law, the role map is a measurable label map `pi` on already-registered physical Fourier/helicity edges.  Its causal mass is therefore inherited from the fixed Hahn law,
+\[
+\boxed{\nu=\pi_\#(dW^+),}
+\]
+while the signed hard-cell trilinear work is
+\[
+T_C=(\pi_\#dW)(C).
+\]
+These are deliberately different objects.  In general `(pi_#dW)^+ <= pi_#(dW^+)`, with strict inequality when physical cancellation is hidden by the hard cell.  The hard role may expose the signed `T_C` to Young/Christ for saturation diagnostics, but it may not promote `(pi_#dW)^+` into a second causal law.
+
+The certified positive-edge router further separates inherited good and bad positive work.  Geometry-bad positive work has already terminated through the same physical transfer-loss interface.  Geometry-good positive work is only Young-eligible, and the full signed `T_C` may bind it to Young only when the hard cell is fate-pure, i.e. carries zero inherited bad-positive mass.  A mixed-fate hard cell remains an unresolved handoff rather than being refined by observer choice.  Thus event geometry, causal inheritance, signed cancellation and Young marking remain distinct physical layers.

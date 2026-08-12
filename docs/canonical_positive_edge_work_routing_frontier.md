@@ -1,6 +1,6 @@
 # Canonical positive edge-work routing frontier
 
-Status: **NEXT-THEOREM DESIGN CONTRACT — NOT YET A CERTIFIED THEOREM**.
+Status: **DESIGN CONTRACT DISCHARGED THROUGH CANONICAL ROUTING AND DETERMINISTIC HARD PUSHFORWARD**.  The remaining frontier is the fate-pure/mixed-fate signed-cell Young/Christ handoff and, more generally, a positive coherent kernel/disintegration if coherent localization is to inherit canonical causality.
 
 The continuum helical edge-measure theorem fixes the physical signed law before
 any later representation is introduced.  Let
@@ -17,9 +17,7 @@ on the canonical unordered Fourier/helicity edge space.  Its Hahn decomposition
 \mu=\mu^+-\mu^-
 \]
 
-is therefore the canonical positive/negative physical child-work law.  The next
-problem is **routing this already-existing positive law**, not manufacturing a
-new positive law from coherent cells, capacity weights, or theorem labels.
+is therefore the canonical positive/negative physical child-work law.  Routing of this already-existing positive law is now certified by `src/canonical_positive_edge_work_routing.py`; this note is retained as the design contract and as the record of the still-open signed-cell handoff.  No new positive law is manufactured from coherent cells, capacity weights, or theorem labels.
 
 ## 1. The Hahn level is physical and must be fixed before analysis refinement
 
@@ -144,14 +142,12 @@ This scalar inequality is not itself a representation adapter.  The source theor
 \]
 
 This is a **stage-zero fate of the selected block**, not a new first-hit time.
-The canonical joint-stop implementation already records it with
-`first_time=None` and certificate `stage_zero_fixed_transfer_loss`.
-
-A residual representation bug remains in the fine `physical_branch_compiler`:
-its legacy `_first_causal_split()` returns `first_time=0.0` for the same fixed
-block fate.  The next source patch should make this `None`.  PDE time `t=0` must
-remain reserved for the absorbing initial boundary and must never be reused as a
-sentinel for “no event time”.
+The canonical joint-stop implementation and the fine `physical_branch_compiler`
+now both record it with `first_time=None` and certificate
+`stage_zero_fixed_transfer_loss`.  An earlier implementation used
+`first_time=0.0` for the same fixed block fate; that historical sentinel was
+removed because PDE time `t=0` is reserved for the absorbing initial boundary and
+must never be reused as “no event time”.
 
 ## 4. Capacity majority is not causal-work majority
 
@@ -261,9 +257,11 @@ preserving all exact coherent work identities.
 
 ## 7. Required source-level theorem shape
 
-A natural next production module is
+The production module is now
 
-`src/canonical_positive_edge_work_routing.py`.
+`src/canonical_positive_edge_work_routing.py`,
+
+certified on exact SHA `d78a3f4223c16f541548e7628cd73f70e6fdee6c`.
 
 Its input should be the replayable physical fibers/atoms of the certified
 continuum ledger, not caller-supplied masses or deficits.  A minimal typed output
@@ -280,13 +278,11 @@ should record:
 The theorem must fail closed under forged summary fields by replaying the bound
 physical edge identities exactly as the continuum ledger already does.
 
-The first implementation should also align the fine compiler with the preferred
-joint-stop semantics by replacing the fixed-loss sentinel `first_time=0.0` with
-`None`.
+The implementation also aligns the fine compiler with preferred joint-stop semantics: fixed transfer loss has `first_time=None`, while physical `t=0` is reserved for `INITIAL_BOUNDARY`.
 
-## 8. Adversarial regressions required before promotion
+## 8. Adversarial regressions required for certification
 
-The theorem is not ready merely because random states pass.  CI should include:
+These regressions were required and are now present in the dedicated/audit certification lanes:
 
 1. a physical helical counterexample with good-capacity majority but bad-work
    majority;
@@ -304,10 +300,9 @@ The theorem is not ready merely because random states pass.  CI should include:
 10. geometry-good data unable to set `marking_good=True` without a separate
     signed-cell Young certificate.
 
-## 9. Master consequence if this theorem is certified
+## 9. Master consequence after certification
 
-This theorem would not yet close generic HH recurrence.  It would make the
-remaining branch much smaller and more physical:
+The certified theorem does not close generic HH recurrence.  It makes the remaining branch smaller and more physical:
 
 \[
 \boxed{
@@ -319,9 +314,7 @@ remaining branch much smaller and more physical:
 \end{cases}}
 \]
 
-The first branch would no longer recurse.  The second would still require the
-signed-cell Young/Christ handoff and then the already-existing common-slice /
-physical generated-ancestry machinery.
+The first branch no longer recurses.  The second still requires the signed-cell Young/Christ handoff.  Certification exposed the additional fate-purity obstruction: if a hard cell contains both good and already-terminal bad positive causal mass, its good mass stays unresolved Young-eligible rather than being promoted by arbitrary refinement.  Fate-pure cells may pass their full signed work to the existing Young/common-slice/generated-ancestry machinery.
 
 No norm becomes a physical owner.  No capacity mass becomes causal probability.
 No analyst refinement creates positive work.  The entire split is read from the

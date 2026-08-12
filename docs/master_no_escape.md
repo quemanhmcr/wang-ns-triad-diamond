@@ -2524,3 +2524,11 @@ and even there geometry-good is merely **Young-eligible**.  Complex Young/Christ
 must be fed the signed hard-cell trilinear work after physical cancellation, not
 the gross positive edge mass.  No `marking_good` flag is physically justified
 until that signed-cell handoff is proved.
+
+## Current continuum HH routing update: canonical cause is fixed before Young
+
+The continuum HH interface now begins from one signed physical Fourier/helicity edge law `mu=dW` and its single canonical Hahn-positive cause `mu^+=dW^+`.  The certified router restricts this same cause by `r_e=(J_e/J_*)c_e` at `eta_0=10^-4`.  Geometry/phase-bad positive work, including positive nonforward work, has native deficit at least `eta_0` and is bound to the same physical `FixedTransferLossGate`; it terminates stage-zero as `TRANSFER_WORK_LOSS` with `first_time=None`.  Capacity remains only the reference used to certify that deficit.
+
+Geometry/phase-good positive work is not yet a Young theorem.  A deterministic hard Fourier/helicity map inherits causal mass as `pi_#dW^+` and signed cell work as `pi_#dW`; no later Hahn split is allowed to replace the master law.  The full signed cell work can be used by Young/Christ only on fate-pure cells that carry no already-terminal bad-positive mass.  Mixed-fate cells are a genuine unresolved interface: using their full signed work would let terminal bad work assist the good branch, while subtracting only bad positive work would destroy the signed trilinear identity.
+
+Accordingly, generic bad HH routing is no longer an open recursive branch.  The sharp local HH seam is the fate-pure/mixed-fate signed-cell Young/Christ handoff (or a separately proved positive coherent kernel/disintegration), followed by the existing generated-ancestry machinery when Young is genuinely certified.  This sharpens but does not close mixed genuine-owner recurrence and makes no global-regularity claim.

@@ -1,0 +1,20 @@
+{
+  "bad_work_snapshots": 5,
+  "cutoff": 7,
+  "geometry_good_marking_promotions": 0,
+  "maximum_coarsened_cancellation_fraction": 0.2940563870768774,
+  "maximum_coarsened_mixed_good_fraction": 0.0,
+  "maximum_exact_role_mixed_good_fraction": 0.0,
+  "minimum_bad_deficit_margin": 0.7774419621267659,
+  "minimum_bad_fixed_transfer_margin": 0.7775419621171208,
+  "positive_nonforward_snapshots": 5,
+  "positive_work_snapshots": 5,
+  "resolution": 24,
+  "snapshots": 5,
+  "stage_zero_first_time_failures": 0,
+  "status": "ACTUAL_GALERKIN_NS_CANONICAL_POSITIVE_EDGE_ROUTING_AUDIT__SIGNED_EDGE_RECONSTRUCTION__DW_PLUS_FATE__HARD_PUSHFORWARD_NO_REHAHN",
+  "steps": 64,
+  "worst_hard_pushforward_relative": 0.0,
+  "worst_positive_mass_reconstruction_relative": 0.0,
+  "worst_signed_ns_reconstruction_relative": 0.0
+}

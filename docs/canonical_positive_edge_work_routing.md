@@ -1,6 +1,15 @@
 # Canonical positive edge-work routing and signed hard-cell compression
 
-Status: **CANDIDATE THEOREM — CI CERTIFICATION PENDING**.
+Status: **CERTIFIED** — exact implementation/performance SHA `d78a3f4223c16f541548e7628cd73f70e6fdee6c`.
+
+Certification evidence:
+
+- dedicated routing run `31559241272`: **success**, `50,000` stress states;
+- independent audit `31559242700`: **success**, `75,000` adversarial states plus an actual dealiased Fourier--Galerkin Navier--Stokes routing audit at resolution/cutoff `24/7`, `64` RK4 steps and `5` physical snapshots;
+- full physical-energy causal integration `31559248529`: **success** on the same exact SHA;
+- measure-layer compatibility: continuum dedicated `31559244152`, continuum adversarial/actual-NS/multi-child audit `31559245648`, and helical physical-edge run `31559247024`, all **success** on the same SHA.
+
+The dedicated stress had worst `G+B` mass residual `2.2197019035664715e-16`, hard positive pushforward residual `0`, `50,000` retained positive nonforward bad cases, no stage-zero time failures and no geometry-good marking promotions.  The actual-NS audit had signed reconstruction, positive-mass reconstruction and hard pushforward residuals all `0`.  Artifacts are recorded under the matching `recorded-results/<run-id>/` directories.
 
 The physical starting point is already fixed by the continuum helical edge theorem.  On the unordered Fourier/helicity edge space,
 

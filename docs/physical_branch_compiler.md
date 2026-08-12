@@ -386,15 +386,8 @@ The measurable first-hit burden stated above is now supplied at the smooth-SGS l
 
 No global-regularity claim follows from the current theorem stack.
 
-## Master-facing cleanup required by canonical edge-work routing
+## Master-facing stage-zero transfer semantics
 
-A fixed transfer-loss gate is a stage-zero fate of an already-selected physical
-work block.  It has no physical first-hit time.  The preferred joint-stop API
-already records this correctly with `first_time=None` and
-`stage_zero_fixed_transfer_loss`.
+A fixed transfer-loss gate is a stage-zero fate of an already-selected physical work block.  It has no physical first-hit time.  Both the joint-stop API and the fine `_first_causal_split()` path now record fixed transfer loss with `first_time=None`; `stage_zero_fixed_transfer_loss` is the corresponding certificate.  Canonical positive-edge routing binds the same physical bad `dW+` restriction through this interface before the compiler returns `TRANSFER_WORK_LOSS`.
 
-The fine `_first_causal_split()` path still carries a legacy sentinel
-`first_time=0.0` for `fixed_transfer_loss`.  This must not be interpreted as the
-Navier--Stokes initial surface.  The next canonical positive-edge routing theorem
-should remove the sentinel and return `None`, reserving `t=0` exclusively for the
-absorbing `INITIAL_BOUNDARY` event.
+Physical `t=0` is reserved exclusively for the absorbing `INITIAL_BOUNDARY` event.  A `first_time=0.0` fixed-transfer sentinel would therefore be a regression in PDE time semantics.

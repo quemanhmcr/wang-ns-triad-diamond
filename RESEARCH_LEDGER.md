@@ -37,7 +37,7 @@ The current architecture has reached the following point.
 18. Smooth residual-skew `K_phys` relink is now also topologically quotiented without denying its physics: the exact gauge-quotiented `T_ab^{phys}` matrix is antisymmetric same-event flux, every positive relink recipient has finite negative-net donor closure, and relink creates no child recursive event.  A simultaneous `S` branch remains existing strain/deformation ownership.
 19. Consecutive high-strain recurrence now has a native viscous telescope without demoting high strain from genuine ownership: every high-strain event pays `D_j>=D_*`, its actual `D_V|_G` ancestor renews at `N_(j+1)/N_j<=3/16`, and interval restriction plus low-pass contraction gives `D_j<=N_j G_*` for the physical global gradient reservoir `G_*`.  Thus every pure high-strain epoch is finite even under complete time overlap, while mixed-owner recurrence remains open.
 20. Consecutive signed-good generated-HH recurrence now also has a native parabolic physical-time telescope without turning generation into an event-count cost: a raw `|I_HH|` hit is only a locator; after actual `Q^2` energy reentry selects positive HH child-work and the hard parent is certified `3/5<N_p/N_c<5/8`, parent natural lifetimes grow by more than `64/25` and the asynchronous common registration surfaces move backward by at least `(1792/4875)T_j`.  Their cumulative backshift reaches absorbing `t=0` after finite consecutive signed-good generated depth.  Generic/non-signed-good HH remains open.
-21. Actual unordered helical HH interactions now have a native same-event registration before any Young reduction: direct Fourier--Leray/curl NS work equals the repository Waleffe coefficient, the physical factor four is exact, and each edge carries `A_e=4|z||a_xa_ya_z|`, geometric `J_e`, phase/orientation `c_e`, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`. The companion continuum theorem now supplies the signed unitary-Fourier edge measure, joint `1/16` child/unordered-parent Radon quotient, local weighted variation from Fourier energy, and native deficit handoff. Positive child work still does not imply forward progress: nonforward edges have `J_e=0` and remain physical. The open HH seam is now canonical positive-edge routing and the separate signed hard-cell Young/Christ test, not continuum measure existence.
+21. Actual unordered helical HH interactions now have native same-event registration **and canonical positive-edge routing before Young reduction**.  The continuum law is reconstructed signed, `mu=dW`, before its Hahn-positive causal law `mu^+=dW^+` is restricted by native edge efficiency `r_e=(J_e/J_*)c_e`.  Geometry/phase-bad positive work, including every positive nonforward edge with `J_e=0`, is bound to the same physical block and terminates through the shared fixed-transfer interface as `TRANSFER_WORK_LOSS` with `first_time=None`.  Geometry/phase-good positive work is only Young-eligible.  Deterministic hard Fourier/helicity cells inherit `pi_#mu^+` as causal mass while `pi_#dW` supplies the signed cell work; no later re-Hahn is causal.  Only fate-pure good cells may expose the full signed `T_C` to Young/Christ; mixed good/bad positive cells remain explicitly unresolved.  The sharp HH seam is now the mixed-fate signed-cell Young handoff / general positive coherent-kernel problem and its role in mixed genuine-owner recurrence, not edge-measure existence or bad-work routing.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -1300,7 +1300,7 @@ The `50/53..53/50` Radon--Nikodym comparison is conditional on the already-selec
 The edge quantity `r=(J/J_*)c` measures native geometry/phase efficiency.  Sharp Young/Christ saturation measures the signed hard-cell trilinear amplitude/profile relative to the frozen physical multiplier and `L^(3/2)` roles.  Passing the first test only makes physical work Young-eligible.  It does not set `marking_good=True`, and the signed cell work must retain cancellation before the Young ratio is formed.
 
 ### 28.36 A stage-zero transfer fate is not a PDE event at `t=0`
-A fixed transfer-loss block is classified before any first-hit time is needed.  Canonical joint-stop semantics therefore uses `first_time=None`; `t=0` is reserved for the absorbing initial boundary.  The legacy fine compiler sentinel `first_time=0.0` is a representation bug to remove in the next source theorem, not a physical time assignment.
+A fixed transfer-loss block is classified before any first-hit time is needed.  Canonical joint-stop semantics uses `first_time=None`; `t=0` is reserved for the absorbing initial boundary.  Canonical positive-edge routing now binds this same stage-zero semantics through the fine compiler as well.  Any reintroduction of `first_time=0.0` for fixed transfer loss is therefore a regression in physical time semantics, not a harmless sentinel choice.
 
 ## 29. Structural constants worth remembering
 These constants are not all fundamental; many are clean certified envelopes.
@@ -1597,9 +1597,9 @@ Hence a consecutive signed-good generated lineage cannot remain interior forever
 
 The certified helical/continuum edge theorems now resolve the generic HH label one physical level deeper without erasing it.  At an actual Fourier/helicity interaction the native modal capacity, geometric multiplier and signed phase are read from the same NS edge, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`.  The joint child/unordered-parent Radon theorem then reconstructs the full signed unitary-Fourier law before Hahn splitting and produces actual `dW`, reference `dA`, signed progress `dF`, and the native block deficit `epsilon=1-F/(J_*A)`.  Finite Fourier energy supplies local variation of all three weighted measures without a UV parent cutoff.
 
-This is still not a generic-HH recurrence theorem.  The remaining HH seam is now sharper: the **canonical positive edge-work law** must be partitioned by its actual efficiency without substituting capacity mass, and any later hard/coherent label must inherit that positive law rather than manufacture a new Hahn law by analysis refinement.  Geometry/phase-bad positive work should route to the existing fixed transfer-loss fate; only geometry-good surviving work is eligible for the separate signed hard-cell Young/Christ test.  Positive nonforward work remains physical and receives no synthetic scale progress.
+Canonical positive-edge routing is now certified.  With `mu=dW`, `mu^+=dW^+`, `r_e=(J_e/J_*)c_e`, `eta_0=10^-4`, `B={T_e>0,r_e<=1-eta_0}` and `G={T_e>0,r_e>1-eta_0}`, one has `mu^+=mu_B^++mu_G^+` exactly.  Every nonempty bad-work restriction has its own physical capacity and native deficit `epsilon_B>=eta_0`; for every certified `0<tau<=0.1` this dominates the fixed-transfer threshold `tau^2/1036800000`.  Crucially, the implementation binds that **same measurable bad `dW+` restriction** to the shared `FixedTransferLossGate`, so `mu_B^+` terminates stage-zero as `TRANSFER_WORK_LOSS` with `first_time=None`.  Positive nonforward work remains physical and is included in this bad sublaw rather than dropped.
 
-The next theorem is now specified measure-theoretically.  With `mu=dW` and canonical Hahn law `mu^+`, put `r_e=(J_e/J_*)c_e`, `eta_0=10^-4`, `B={T_e>0,r_e<=1-eta_0}` and `G={T_e>0,r_e>1-eta_0}`.  Then `mu^+=mu_B^++mu_G^+` exactly.  Since `|T_e|<=A_e`, every nonempty bad-work sublaw has positive capacity, and its own native deficit obeys `epsilon_B>=eta_0`.  For every certified `0<tau<=0.1`, the coherent fixed-loss threshold `tau^2/1036800000` is `<10^-4`.  After the measurable bad restriction is bound to the same selected physical block interface, `mu_B^+` should terminate as stage-zero `TRANSFER_WORK_LOSS`; the scalar threshold comparison alone is not an adapter to an unrelated block.  Only `mu_G^+` is eligible for the separate signed hard-cell Young test; good geometry alone does not certify Young marking or common-slice continuation.
+The good restriction `mu_G^+` is only Young-eligible.  A deterministic hard Fourier/helicity map carries inherited causal mass `pi_#mu^+` and signed cell work `pi_#mu`; the latter may show cancellation but its Hahn-positive part is never a second causal law.  The full signed hard-cell trilinear work may bind the good branch to Young only on **fate-pure** cells with zero inherited bad-positive mass.  If one hard cell contains both good and already-terminal bad positive work, the good mass remains exactly accounted but unresolved; subtracting only bad positive work would destroy the signed trilinear identity, while using the full mixed cell would let terminal bad work assist Young.  No arbitrary analyst refinement is introduced to hide this obstruction.
 
 Therefore an infinite event path cannot eventually remain only in high strain, and it also cannot eventually remain only in signed-good generated HH.  If either owner occurs infinitely often, other genuine owners or generic HH regimes must break the corresponding finite epochs infinitely often.
 The surviving global frontier is thus genuinely **mixed-owner recurrence**.  Its events may include actual HH generation, existing strain/deformation, source/SGS/viscosity owners, independent service, material/new-ancestry relink, high-tail work, and causal reuse/Bellman endpoints.  Their recurrence must telescope only through the native typed laws they truly supply:
@@ -2198,6 +2198,65 @@ regularity claim is made.
 
 ---
 
+### 33.13 Canonical positive edge-work routing and signed hard-cell handoff
+Status:
+`EXACT_CANONICAL_POSITIVE_EDGE_WORK_ROUTING__ACTUAL_DW_HAHN_RESTRICTION__GEOMETRY_BAD_SAME_LAW_STAGE_ZERO_TRANSFER_LOSS__GEOMETRY_GOOD_ONLY_YOUNG_ELIGIBLE__FATE_PURE_SIGNED_CELL_BINDING_ONLY__MIXED_FATE_CELL_SEAM_EXPOSED__POSITIVE_PUSHFORWARD_NOT_REHAHN`.
+
+Exact certified implementation/performance SHA:
+`d78a3f4223c16f541548e7628cd73f70e6fdee6c`.
+
+The physical theorem is the routing of the already-existing canonical Hahn law, not a new probability construction.  Put
+\[
+\mu=dW,\qquad \mu^+=dW^+,\qquad r_e=(J_e/J_*)c_e,
+\]
+and at `eta_0=10^-4` restrict the same positive edge law to
+\[
+G=\{T_e>0:r_e>1-\eta_0\},\qquad B=\{T_e>0:r_e\le1-\eta_0\}.
+\]
+Then `mu^+=mu_G^++mu_B^+` exactly.  On every nonempty bad restriction,
+\[
+\epsilon_B=1-\frac{F(B)}{J_*A(B)}\ge10^{-4},
+\]
+which is strictly above `delta_tau=tau^2/1036800000` for every certified `0<tau<=0.1`.  The same measurable `mu_B^+` restriction is bound to the shared physical `FixedTransferLossGate` and terminates as `TRANSFER_WORK_LOSS -> TRANSFER_COST`; this stage-zero fate has `first_time=None`.  Positive nonforward work is retained in `B` with no synthetic scale progress.
+
+For downstream hard roles, the causal law is inherited by positive pushforward `pi_#mu^+`, while signed cell work is `pi_#mu`.  Thus `[pi_#mu]^+` is only a cancellation diagnostic and never a second causal Hahn law.  Geometry-good work is not Young-good.  The full signed cell work may be presented to Young/Christ only on fate-pure cells carrying good positive work and zero inherited bad-positive work.  Mixed good/bad cells expose a real obstruction: their good positive mass remains exactly accounted but unresolved Young-eligible, and the theorem refuses arbitrary refinement or nonlinear subtraction of terminal bad work.
+
+Dedicated routing run:
+`31559241272` — **success** on the exact SHA.  Its `50,000`-sample stress recorded:
+- exact `G+B` mass reconstruction worst relative residual `2.2197019035664715e-16`;
+- hard positive pushforward residual `0.0`;
+- `50,000` positive nonforward bad cases retained;
+- minimum bad-deficit margin above `eta_0` `0.9999`;
+- minimum fixed-transfer margin `0.9999999999903585`;
+- maximum deliberate coarsened cancellation fraction `1.0`;
+- maximum deliberate mixed-fate good fraction `1.0`;
+- stage-zero first-time failures `0` and geometry-good marking promotions `0`.
+
+Independent routing audit:
+`31559242700` — **success**.  The adversarial lane ran `75,000` routing states with worst mass reconstruction `2.2202520702993216e-16`, hard pushforward residual `0.0`, all `75,000` positive nonforward cases retained, deliberate mixed-fate fraction `1.0`, and no first-time or marking promotions.  The actual dealiased Fourier--Galerkin Navier--Stokes lane used resolution/cutoff `24/7`, `64` RK4 steps and `5` physical snapshots; all five contained positive work, bad work and positive nonforward work.  Signed NS reconstruction, `dW+` fate reconstruction and hard positive pushforward residuals were all `0.0`; the minimum bad-deficit margin above `eta_0` was `0.7774419621267659`, and stage-zero first-time failures remained `0`.
+
+Full physical-energy causal integration:
+`31559248529` — **success** on the same exact SHA, with canonical edge routing wired immediately after continuum edge registration and before complex Young, then green through the remaining current causal spine.
+
+Measure-layer compatibility gates on the same SHA also remained green:
+- continuum dedicated `31559244152`;
+- independent continuum adversarial + actual-NS + multi-child audit `31559245648`;
+- physical helical edge registration `31559247024`.
+
+Stored artifacts:
+- `recorded-results/31559241272/`, GitHub artifact digest `sha256:b8fa14dcaafd651cbe77ee96580ed86031fbb0c50553eae979740f0a7c277cec`;
+- `recorded-results/31559242700/`, routing audit digests `sha256:050cefbc231a788e797da569b95eeff2c98ea8671794246c95ba37043e948592` and `sha256:dd3710757e0e1ae796e8ad4a63762bf2c01dd8aad8979d533f11f6cdd698567e`;
+- `recorded-results/31559248529/`, integration digest `sha256:a29a607dc048ea0e085318ac0e2771ac74d849a5c4547904f4fb21aec6ba13f3`;
+- `recorded-results/31559244152/`, continuum dedicated digest `sha256:77ab0f18e7c40bf629cde11cfcf0ac0c97c022e94aa845a1dcbbd83d78fd7cf3`;
+- `recorded-results/31559245648/`, continuum audit digests `sha256:4964cf7b74a667ef2128adf138e7f2d39ae1eb16561c45db4cb02a0078c7f04c`, `sha256:195bdf339fded9f3335d4028354c9bd5a2b87f6abbd2bbd850ffe1d106eb5a35`, and `sha256:5c19c88c40ea984a9a3b1fa369c17c43d945522cf525a26958ea1d06c0a5928b`;
+- `recorded-results/31559247024/`, helical dependency digest `sha256:fb7c46759a93933e40c65a4da14d50a48fde612276b3622941b45234c3d23f5d`.
+
+Candidate lineage is intentionally visible.  `1a07a48...` exposed the mixed-fate cell seam; `d622b0a...` changed only workflow time allowances after earlier routing stresses timed out; `ceeb7b9...` removed redundant registration/replay without changing the law; `37c35a7...` generalized the same performance discipline across current and historical theorem modules; `e2071b1...` corrected only a newly-added reference-gauge fixture; and `d78a3f4...` corrected only missing `python-flint` wiring in two full-suite historical workflows.  No correction weakened a physical threshold, random law, sample count, signed-before-Hahn order, causal provenance, or first-time semantics.
+
+This theorem closes generic geometry-bad positive-edge routing and deterministic hard positive pushforward.  It does **not** certify Young saturation of mixed-fate good work, does not identify a general coherent POVM positive law with canonical causality without a positive kernel/disintegration, does not terminate generic HH or mixed-owner recurrence, and makes no Navier--Stokes global-regularity claim.
+
+---
+
 ## 34. Certification discipline
 Serious theorem validation is performed only in GitHub Actions.
 Local work is restricted to:
@@ -2234,6 +2293,8 @@ Optimize representation before language.  Avoid high-overhead array dispatch for
 
 Benchmarking is engineering evidence, not theorem certification.  Record wall time, CPU utilization and peak resident memory so resource use stays visible.  The purpose of speed is to make stronger and more numerous falsification runs affordable on ordinary hardware, not to justify fewer experiments or to hide a slow theorem harness behind parallelism.
 
+The 2026-08-12 global performance pass is the reference example.  Exact candidate `d78a3f4223c16f541548e7628cd73f70e6fdee6c` retained the theorem laws and added exact/reference-equivalence regressions while removing repeated immutable helical geometry, repeated continuum source validation, repeated actual-NS ledger construction, repeated contraction planning, tiny-array framework overhead and other representation costs.  On GitHub Actions, compared with the already-law-equivalent `ceeb7b90399a6e592efee3439694a08c8dce81c1`, the `75,000` adversarial routing stress fell from `308s` to `133s`, actual Galerkin routing from `309s` to `26s`, the integration helical `50,000` stress from `436s` to `65s`, the continuum integration stress from `94s` to `15s`, and the full theorem suite from `311s` to `63s`.  A `22`-workflow exact-SHA referee sweep covering the current causal spine and directly affected historical modules completed `22/22` successfully.  These timings are **engineering evidence only**: the physics remains certified by the dedicated, adversarial, actual-NS and integration gates above.
+
 For representation-sensitive measure/provenance theorems, ordinary dedicated + integration green is not enough by itself.  Add an independent falsification lane which actively challenges native scale covariance, nonfinite arithmetic, replay/provenance forgery, duplicate physical identities, parent/helicity quotienting, actual-PDE reconstruction, and representation invariance of the same finite physical system.  If that audit finds a real seam, every earlier green candidate is superseded and the exact repaired SHA must rerun the full certification sweep.  A numerical convergence demand between genuinely different PDE truncations is not an invariant and must not be smuggled into such an audit.
 
 ---
@@ -2269,18 +2330,19 @@ Then read the following current-spine documents in order:
 26. `docs/high_tail_natural_window_reentry.md`
 27. `docs/helical_physical_edge_registration.md`
 28. `docs/continuum_helical_edge_measure_registration.md`
-29. `docs/canonical_positive_edge_work_routing_frontier.md`
-30. `docs/physical_pair_weighted_productivity.md`
-31. `docs/common_slice_coefficient_registration.md`
-32. `docs/recursive_physical_witness_constructor.md`
-33. `docs/signed_good_generated_epoch_time_telescope.md`
-34. `docs/joint_causal_stop_projection.md`
-35. `docs/amplitude_entropy_causal_reuse.md`
-36. `docs/weighted_causal_reuse.md`
-37. `docs/renyi_causal_reuse.md`
-38. `docs/physical_branch_compiler.md`
-39. `docs/continuum_master_event_quotient.md`
-40. `docs/master_no_escape.md`
+29. `docs/canonical_positive_edge_work_routing.md`
+30. `docs/canonical_positive_edge_work_routing_frontier.md`
+31. `docs/physical_pair_weighted_productivity.md`
+32. `docs/common_slice_coefficient_registration.md`
+33. `docs/recursive_physical_witness_constructor.md`
+34. `docs/signed_good_generated_epoch_time_telescope.md`
+35. `docs/joint_causal_stop_projection.md`
+36. `docs/amplitude_entropy_causal_reuse.md`
+37. `docs/weighted_causal_reuse.md`
+38. `docs/renyi_causal_reuse.md`
+39. `docs/physical_branch_compiler.md`
+40. `docs/continuum_master_event_quotient.md`
+41. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -2293,7 +2355,7 @@ Navier–Stokes gives actual signed nonlinear work.  Positive child-energy work
 defines cause.  Coherent analysis refines that work into physical parent/child
 roles; representation does not create cause.
 
-At generic HH scale, the canonical signed law now lives on the unordered Fourier/helicity edge space.  Its Hahn-positive part is the causal law.  Later coherent or hard-cell labels may inherit that law, but may not Hahn-split themselves into a competing causal measure.  The next native split acts directly on actual `dW^+`: geometry/phase-bad work is a stage-zero transfer-loss sublaw, while geometry/phase-good work is only eligible for a separate signed hard-cell Young/Christ test.  Capacity is a reference law throughout, never the causal probability.
+At generic HH scale, the canonical signed law lives on the unordered Fourier/helicity edge space and its Hahn-positive part is the causal law.  The native `dW^+` efficiency split is now certified: geometry/phase-bad positive work terminates stage-zero through the same physical transfer-loss interface, while geometry/phase-good work is only Young-eligible.  Later hard labels inherit `pi_#dW^+` as causal mass and retain `pi_#dW` as signed cell work; they may not Hahn-split themselves into a competing causal measure.  Only fate-pure good cells may bind their full signed work to Young/Christ.  Mixed good/bad cells remain an explicit handoff seam.  Capacity is a reference law throughout, never the causal probability.
 
 Smooth moving carriers transport roles between physical events.  Their energy is
 `<u,Q^2u>`, not `<u,Qu>`.  Hard interaction projectors are event-anchored and are
@@ -2355,7 +2417,7 @@ high-strain events must therefore contain infinitely many other genuine owners
 which break those epochs.
 
 
-At an actual hard HH interaction, one may now descend below Young all the way to the continuum physical edge law.  The unordered helical parent orbit carries exact NS work `T_e`, native modal capacity `A_e=4|z||a_xa_ya_z|`, geometric multiplier `J_e`, and signed phase `c_e`, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`.  In the joint variables `z=x+y`, `r=x-y`, the parent-order quotient has exact density `1/16`; all eight wavevector-bound helicity sectors reconstruct the direct signed Fourier work.  With the unitary factor `C_F`, this gives signed `dW`, reference `dA`, and signed progress `dF`.  Finite Fourier energy makes these weighted measures locally Radon without any parent UV cutoff.  Only after that signed reconstruction is `dW^+` formed.  Positive child work is still not synonymous with forward progress: nonforward edges remain physical with zero upper-progress multiplier.  The next unresolved HH task is therefore no longer measure existence, but routing the canonical positive edge law without replacing it by capacity mass or by a fresh Hahn split after analysis coarsening, and then proving Young saturation only on the surviving eligible work.
+At an actual hard HH interaction, one may now descend below Young all the way to the continuum physical edge law.  The unordered helical parent orbit carries exact NS work `T_e`, native modal capacity `A_e=4|z||a_xa_ya_z|`, geometric multiplier `J_e`, and signed phase `c_e`, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`.  In the joint variables `z=x+y`, `r=x-y`, the parent-order quotient has exact density `1/16`; all eight wavevector-bound helicity sectors reconstruct the direct signed Fourier work.  With the unitary factor `C_F`, this gives signed `dW`, reference `dA`, and signed progress `dF`.  Finite Fourier energy makes these weighted measures locally Radon without any parent UV cutoff.  Only after that signed reconstruction is `dW^+` formed.  Its native efficiency routing is also certified: bad positive work, including nonforward work, terminates through the same physical transfer-loss interface, while good positive work is inherited by hard cells and is Young-eligible only.  The unresolved HH task is the fate-pure/mixed-fate signed-cell Young/Christ handoff (and any general coherent positive-kernel replacement), then recurrence of the surviving genuine owners.
 
 Signed-good generated HH is also a genuine recursive event, but its finite-depth
 mechanism is different.  A raw `|I_HH|` threshold is only a locator.  After the

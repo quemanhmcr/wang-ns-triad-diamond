@@ -1,0 +1,39 @@
+{
+  "resolution": 24,
+  "spectral_cutoff": 5,
+  "child_modes": [
+    [
+      5,
+      1,
+      0
+    ],
+    [
+      3,
+      4,
+      1
+    ],
+    [
+      1,
+      5,
+      2
+    ]
+  ],
+  "steps": 32,
+  "snapshots": 3,
+  "child_snapshot_registrations": 9,
+  "minimum_unordered_pairs_per_child": 269,
+  "minimum_modal_edges_per_child": 2152,
+  "worst_child_source_residual": 2.8383859470456227e-16,
+  "worst_child_work_residual": 3.953177886935323e-16,
+  "worst_child_progress_residual": 6.956369375916857e-16,
+  "worst_child_hahn_residual": 3.781152765492491e-16,
+  "worst_joint_work_residual": 2.1147492003047945e-16,
+  "worst_joint_modal_work_residual": 1.0573746001523973e-16,
+  "worst_joint_hahn_residual": 1.0573746001523973e-16,
+  "worst_joint_progress_residual": 4.103519935852915e-16,
+  "minimum_joint_positive_dominance_margin": 0.007889694680257776,
+  "positive_nonforward_child_snapshots": 9,
+  "maximum_divergence_relative_to_initial_l2": 4.817156180641034e-17,
+  "global_energy_balance_relative_residual": 6.821637170070782e-10,
+  "maximum_global_nonlinear_work_relative_rate": 7.251629566605137e-18
+}

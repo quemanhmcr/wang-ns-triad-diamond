@@ -8,10 +8,10 @@ This repository **does not claim a proof of global regularity for 3D Navier–St
 
 ## Start here
 
-1. [`RESEARCH_LEDGER.md`](RESEARCH_LEDGER.md) — the current canonical map of the programme (~1,100 lines), organized by physical structure rather than discovery order.
-2. [`docs/high_tail_natural_window_reentry.md`](docs/high_tail_natural_window_reentry.md) — the newest completed high-tail continuation theorem.
-3. [`docs/physical_energy_causal_bridge.md`](docs/physical_energy_causal_bridge.md) — why causal weights are actual positive child-energy work, not normalized Duhamel mass.
-4. [`docs/objective_source_routing_compiler.md`](docs/objective_source_routing_compiler.md) — current source-owner routing.
+1. [`RESEARCH_LEDGER.md`](RESEARCH_LEDGER.md) — the current canonical map of the programme, organized by physical structure rather than discovery order.
+2. [`docs/canonical_positive_edge_work_routing.md`](docs/canonical_positive_edge_work_routing.md) — canonical `dW+` routing, stage-zero bad-work loss, signed hard-cell inheritance, and the mixed-fate Young seam.
+3. [`docs/continuum_helical_edge_measure_registration.md`](docs/continuum_helical_edge_measure_registration.md) — the signed unordered Fourier/helicity NS edge measure that routing inherits.
+4. [`docs/physical_energy_causal_bridge.md`](docs/physical_energy_causal_bridge.md) — why causal weights are actual positive child-energy work, not normalized Duhamel mass.
 5. [`docs/critical_shell_service_reentry.md`](docs/critical_shell_service_reentry.md) — generic critical-shell first-stop / own-scale service reentry.
 6. [`docs/master_no_escape.md`](docs/master_no_escape.md) — the finite-dimensional/master-side no-escape architecture and its continuum interface.
 
@@ -71,13 +71,13 @@ The anti-theorem/forbidden-inference list is maintained in [`RESEARCH_LEDGER.md`
 
 ## Current frontier
 
-The main remaining programme-level task is **final continuum master assembly**: combine the now-certified source, shell, service, material, high-strain, and high-tail supplier routes into one measurable recursive no-escape theorem without double counting physical owners, without a synthetic common clock, and without promoting scale-critical currencies into artificial finite resets.
+The programme-level frontier is **mixed genuine-owner recurrence** after the representation/checkpoint/interface quotients and the finite pure high-strain / signed-good generated-HH epoch theorems.  Generic HH is now resolved one physical layer deeper: canonical bad `dW+` terminates as same-law transfer loss, while good `dW+` is only Young-eligible.  The sharp local HH seam is the fate-pure/mixed-fate signed hard-cell Young/Christ handoff (or a genuinely positive coherent kernel), not construction of a new causal law.
 
-Supplier-specific signed-good geometry and the exact global closure of all recursive routes remain separate issues.  No global-regularity conclusion is claimed.
+The eventual master must combine the surviving physical owners without a synthetic clock, without re-Hahn after analysis coarsening, and without promoting scale-critical quantities into artificial finite resets.  No global-regularity conclusion is claimed.
 
 ## Validation and reproducibility
 
-Serious theorem validation in this project is performed through GitHub Actions.  The latest high-tail natural-window theorem was certified by dedicated run `31354438956` and full causal integration `31354509984`; the promotion containing the refreshed canonical ledger passed the exact-SHA final sweep before becoming `main`.
+Serious theorem validation in this project is performed through GitHub Actions.  Canonical positive edge-work routing was certified on exact SHA `d78a3f4223c16f541548e7628cd73f70e6fdee6c` by dedicated run `31559241272`, independent adversarial/actual-NS audit `31559242700`, and full causal integration `31559248529`, with continuum/helical compatibility gates on the same SHA.  The same SHA also passed a `22/22` directly affected current/historical workflow sweep after the global performance pass.
 
 Key CI artifacts are stored under `recorded-results/<run-id>/`.
 
@@ -87,6 +87,6 @@ The project does **not** trade experimental severity for runtime.  Serious candi
 
 Profile before buying compute.  Separate invariant geometry/provenance from the parameters that genuinely vary, precompute only what is mathematically immutable, remove repeated replay inside one verified transaction, and keep a slow reference path for differential/equivalence checks.  A performance change must not silently change the sampled law, sample count, tolerances, physical units, signed-before-Hahn order, causal provenance, or routing thresholds.  Small fixed-dimensional kernels should not pay large-array framework overhead merely for convenience; use scalar/vectorized/native C++ or Rust kernels only when profiling shows they are the remaining bottleneck, and bind them to the reference implementation by regression tests.
 
-Performance benchmarks measure the research instrument, not the theorem: record wall time, CPU use and peak memory, but keep theorem certification on the same dedicated/adversarial/actual-PDE GitHub Actions gates.  Faster code is valuable because it permits **more** hard experiments and quicker falsification, not because it licenses fewer of them.
+Performance benchmarks measure the research instrument, not the theorem: record wall time, CPU use and peak memory, but keep theorem certification on the same dedicated/adversarial/actual-PDE GitHub Actions gates.  Faster code is valuable because it permits **more** hard experiments and quicker falsification, not because it licenses fewer of them.  The 2026-08-12 global pass is the reference implementation of this rule: it preserved exact/reference equivalence while cutting the Actions actual-Galerkin routing step from `309s` to `26s` and the integration helical `50,000` stress from `436s` to `65s`, without reducing either experiment.
 
 For exploratory historical experiments, see the older modules/workflows and the history ledger.  For current theorem work, follow the workflow described in [`RESEARCH_LEDGER.md`](RESEARCH_LEDGER.md#34-certification-discipline).

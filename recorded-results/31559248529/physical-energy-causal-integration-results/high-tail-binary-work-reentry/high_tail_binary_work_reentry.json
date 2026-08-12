@@ -1,0 +1,46 @@
+{
+  "certificate": {
+    "status": "EXACT_HIGH_TAIL_REGENERATION_COMMON_UNIT_CAUSAL_OWNERS__HH_TO_BINARY_PHYSICAL_WORK_LAW__OWN_SCALE_REWEIGHTING_NOT_CAUSAL__PRODUCTIVITY_AND_LOCALITY_REMAIN_CONDITIONAL",
+    "upstream": "EXACT_SQUARE_LP_HIGH_SERVICE_TO_PHYSICAL_TAIL_ENERGY__INHERITED_CRITICAL_SHELL_OR_PHYSICAL_REGENERATION__NO_RESOLVED_DV_RELABEL",
+    "common_unit": "all cross-shell hard-owner work is kept in the common N times child-energy-work unit; the factor N cancels under representation-level normalization",
+    "owner_cover": "regeneration owner N W_>^+>=nu D_tail; sum_j N W_j^+>=N W_>^+; low-low exclusion gives H_N^+ + I_N^+ >= sum_j N W_j^+",
+    "clean_owner": "HH or resolved interface common-unit work carries at least nu D_tail/2, exact ties joint",
+    "binary_atomization": "for each shell-time HH event, exact coherent work atoms satisfy P-N=W_HH and P>=[W_HH]_+; after integration binary positive common work dominates positive HH common work",
+    "coherent_positive_law": "normalize positive coherent HH Hahn atoms in their common N dW unit only as a representation-level law",
+    "canonical_causal_status": "not identified: master causality is canonical edge dW+ and a general coherent POVM requires a separate positive mass-preserving kernel/disintegration",
+    "anti_reweight": "M_j/N weighting may be used only to read own-scale strength; it must not redefine either inherited canonical dW+ weights or coherent representation probabilities across shells",
+    "scale_diagnostic": "for the common-unit binary law on high shells j>=1, selecting the largest shell atom gives ownscale_selected*exp(H_inf_scale)>=2*binary_positive_common_work; on an HH owner this is >=nu D_tail",
+    "productivity_scope": "no W_HH>=8E1/15 child-energy generation gate is assumed; KL/log-productivity remains conditional on that separate gate",
+    "locality_scope": "no parent/child scale-comparability or Young near-extremality is inferred from generic high-tail HH work; nonlocal K>>M geometry remains a separate physical seam",
+    "interface_continuation": "the resolved-interface owner delegates to the resolved donor/circulation quotient: symmetric work is existing strain/deformation provenance, while skew work is same-event conservative donor tracing with no new recursive generation",
+    "master_rule": "HH common-unit signed work remains a physical owner, but its coherent-Hahn atom probabilities are not a master causal law without the canonical dW+ positive kernel; resolved interface is first quotiented into existing strain/deformation or same-event conservative donor provenance; exact ties remain joint",
+    "counterexample": {
+      "shell_levels": [
+        1,
+        10
+      ],
+      "common_unit_probabilities": [
+        0.5,
+        0.5
+      ],
+      "own_scale_reweighted_probabilities": [
+        0.001949317738791423,
+        0.9980506822612085
+      ],
+      "maximum_probability_distortion": 0.4980506822612086,
+      "lesson": "M_j/N weighting changes representation probabilities across shells; it remains diagnostic and cannot define canonical causal weights"
+    }
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_common_owner_margin": 1.8553227922405027e-06,
+    "minimum_clean_common_owner_margin": 2.4715417668425666e-06,
+    "minimum_atomic_positive_dominance_margin": 3.152898160516616e-07,
+    "worst_binary_probability_residual": 4.440892098500626e-16,
+    "minimum_HH_binary_clean_margin": 2.732047391165381e-05,
+    "minimum_Hinf_ownscale_diagnostic_margin": 5.464094782330762e-05,
+    "worst_common_scale_probability_invariance_residual": 3.3306690738754696e-16,
+    "maximum_joint_owner_count": 2,
+    "scale_reweighting_counterexample_distortion": 0.4980506822612086
+  }
+}

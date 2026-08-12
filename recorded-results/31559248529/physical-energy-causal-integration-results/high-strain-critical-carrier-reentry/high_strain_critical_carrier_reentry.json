@@ -1,0 +1,32 @@
+{
+  "certificate": {
+    "status": "EXACT_HIGH_STRAIN_CRITICAL_DISSIPATION_LAW_TO_OWN_SCALE_SERVICE_REENTRY__NN_NOT_REQUIRED_FOR_RENEWAL_ENTRANCE__UNIVERSAL_SOURCE_RELINK_REMAINS",
+    "positive_input_law": "high strain gives D_V|_G >= D_V/2 on the actual positive resolved-dissipation law; clean endpoint fraction=0.5",
+    "pushforward": "normalize D_V restricted to G and push its deterministic shell-time mark (j,t) to A=3M/4; no heat edge, coherent-cell argmax, or material label is required for this entrance",
+    "critical_seed": "M||P_j u||^2>=mu_*=4.21103121113 gives A||P_j u||^2>=(3/4)mu_*=3.15827340835; Q_A=1 on the whole shell registers that coefficient exactly",
+    "first_stop": "backward over one A-natural window use renewed strain plus role-interface and HH coefficient obstructions; exact ties remain unsplit and coefficient hits only locate physical-energy reentry",
+    "corridor": "if no monitor hits and t=0 is not reached, |z(s)|>=|z(t)|/4 and the clean retained coefficient mass is >=0.197392088022",
+    "service": "the completed full-natural corridor carries its own bounded A-scale increment service: some |r|<=3/A has A||delta_r Q_Au||^2>=Y0=0.000233125086914, and integrated normalized bounded heat service is >=0.000233125086914; this is a same-corridor witness and adds no second recursion edge",
+    "material_order": "material ownership is deliberately deferred: after the renewed positive service exists, exact Moyal assigns its actual endpoints and OO/ON/NN is read from that new law; no child-scale NN witness is propagated as whole-carrier ownership",
+    "architectural_shortcut": "the shortest high-strain renewal entrance no longer requires child-scale heat ownership, old-incident erosion, or NN-intersect-critical selection before a carrier can renew; those theorems remain valid refinements for material capacity/provenance",
+    "causal_scope": "normalized D_V|_G weights are only a positive diagnostic sampling law for the high-strain recursive route; they never replace actual positive HH child-energy work in Shannon/Renyi or transfer causality",
+    "currency": "a renewed high-strain first hit recursively re-enters critical dissipation; interface/HH coefficient hits only locate physical-energy reentry, where actual gauge-quotiented work receives its native owner; none is promoted to a scale-independent additive reset",
+    "scope": "this closes the high-strain route to either an already named recursive stop, the absorbing initial boundary, or a completed full-natural corridor carrying its own coherent-service witness; the service witness adds no event depth. Universal source/SGS and genuine relink slab renewal, and global master closure, remain open"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_seed_mass_margin": 5.808223537684398e-05,
+    "minimum_normalized_weight": 4.4132089495785605e-06,
+    "minimum_survivor_mass_margin": 0.29094626319871836,
+    "minimum_service_threshold": 2.7000218368705095e-13,
+    "worst_duhamel_residual": 4.973799150320701e-14,
+    "order_invariance_failures": 0,
+    "unit_invariance_failures": 0,
+    "maximum_joint_first_stop_count": 1,
+    "branch_counts": {
+      "named_first_stop": 30183,
+      "full_natural_own_scale_service": 9855,
+      "initial_boundary_root": 9962
+    }
+  }
+}

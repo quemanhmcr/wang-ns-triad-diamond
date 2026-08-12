@@ -1,0 +1,19 @@
+{
+  "certificate": {
+    "status": "EXACT_TRANSFER_WEIGHTED_DEFECT_MOAT_GIVEN_PHYSICAL_GOOD_CORE",
+    "physical_mean": "E_phys D <= (106/25) epsilon on epsilon<1/20000 good core",
+    "one_depth": "eta_cross <= 1/M + 2 E_phys[D]/R",
+    "schedule": "M_j=M0(j+2)^2, R_j=R0(j+2)^2",
+    "sum": "sum eta_j <= (13/20)(1/M0+2 Dbar/R0)",
+    "log_xi": "on C_j<=Ccap, sum xi_j <= exp(Ccap) sum eta_j",
+    "percolation": "retained connected components route through exact fresh-or-cycle incidence identity"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_cross_bound_margin": 0.0006916800480272228,
+    "minimum_markov_tail_margin": 7.618304046834711e-05,
+    "minimum_moat_pigeonhole_margin": 0.00037692118700958615,
+    "minimum_schedule_margin": 7.060625095244282e-05,
+    "incidence_checks": 5817
+  }
+}

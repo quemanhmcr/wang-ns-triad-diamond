@@ -1,0 +1,20 @@
+{
+  "certificate": {
+    "status": "EXACT_WEIGHTED_TO_COMPLEX_YOUNG_PARENT_REDUCTION__CHRIST_MODULUS_EXTERNAL",
+    "algebra": "|T_m|>=R m*A3 and |T_m-m0 T1|<=xi m*A3 with |m0|<=m imply |T1|/A3>=R-xi",
+    "pair": "||f*g||_3/A3>=R-xi, so the actual complex parent pair is a Young near-extremizer",
+    "external_input": "Michael Christ, Near Equality in the Young Inequality for Convolution, Theorem 1.1: complex-valued near-extremizing pairs are close in norm to extremizing pairs",
+    "modulus_rule": "choose the physical block deficit plus one normalized symbol-freezing Xi below delta_Christ(epsilon); no numerical Christ modulus is invented",
+    "phase_consequence": "for the parent roles, complex Gaussian modulation/phase comes from the complex Young theorem rather than a new phase-persistence assumption",
+    "single_charge": "the same symbol-freezing discrepancy is Xi; it is not charged again as a phase defect",
+    "countermodel": "magnitude Gaussian proximity alone cannot imply affine phase (e.g. G e^{ix^2}); complex reduction is essential",
+    "continuum_status": "requires the recursive selector to expose a scalar/helical frozen-symbol parent cell triple carrying the stated physical weighted efficiency; transfer-cell/material-label alignment remains separate"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_efficiency_margin": 0.0,
+    "minimum_pair_efficiency_margin": 0.0,
+    "minimum_modulus_gate_margin": 6.1561215014549475e-09,
+    "magnitude_only_counterexample_phase": 1.0
+  }
+}
