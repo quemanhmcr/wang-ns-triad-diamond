@@ -386,7 +386,7 @@ def equiradial_physical_transfer_triad():
     k1 = np.asarray((-0.5, 0.5 * root3, 0.0))
     k2 = -(k0 + k1)
     helicities = (1, 1, -1)
-    g = coupling_g(k1, k2, -k0, helicities[1], helicities[2], helicities[0])
+    g = coupling_g(k1, k2, k0, helicities[1], helicities[2], helicities[0])
     if abs(g) == 0.0:
         raise AssertionError("equiradial physical triad unexpectedly lost Waleffe coupling")
     amplitudes = (1.0, g / abs(g), 1.0)
