@@ -37,7 +37,7 @@ The current architecture has reached the following point.
 18. Smooth residual-skew `K_phys` relink is now also topologically quotiented without denying its physics: the exact gauge-quotiented `T_ab^{phys}` matrix is antisymmetric same-event flux, every positive relink recipient has finite negative-net donor closure, and relink creates no child recursive event.  A simultaneous `S` branch remains existing strain/deformation ownership.
 19. Consecutive high-strain recurrence now has a native viscous telescope without demoting high strain from genuine ownership: every high-strain event pays `D_j>=D_*`, its actual `D_V|_G` ancestor renews at `N_(j+1)/N_j<=3/16`, and interval restriction plus low-pass contraction gives `D_j<=N_j G_*` for the physical global gradient reservoir `G_*`.  Thus every pure high-strain epoch is finite even under complete time overlap, while mixed-owner recurrence remains open.
 20. Consecutive signed-good generated-HH recurrence now also has a native parabolic physical-time telescope without turning generation into an event-count cost: a raw `|I_HH|` hit is only a locator; after actual `Q^2` energy reentry selects positive HH child-work and the hard parent is certified `3/5<N_p/N_c<5/8`, parent natural lifetimes grow by more than `64/25` and the asynchronous common registration surfaces move backward by at least `(1792/4875)T_j`.  Their cumulative backshift reaches absorbing `t=0` after finite consecutive signed-good generated depth.  Generic/non-signed-good HH remains open.
-21. Actual unordered helical HH interactions now have native same-event registration **and canonical positive-edge routing before Young reduction**.  The continuum law is reconstructed signed, `mu=dW`, before its Hahn-positive causal law `mu^+=dW^+` is restricted by native edge efficiency `r_e=(J_e/J_*)c_e`.  Geometry/phase-bad positive work, including every positive nonforward edge with `J_e=0`, is bound to the same physical block and terminates through the shared fixed-transfer interface as `TRANSFER_WORK_LOSS` with `first_time=None`.  Geometry/phase-good positive work is only Young-eligible.  Deterministic hard Fourier/helicity cells inherit `pi_#mu^+` as causal mass while `pi_#dW` supplies the signed cell work; no later re-Hahn is causal.  Only fate-pure good cells may expose the full signed `T_C` to Young/Christ; mixed good/bad positive cells remain explicitly unresolved.  The sharp HH seam is now the mixed-fate signed-cell Young handoff / general positive coherent-kernel problem and its role in mixed genuine-owner recurrence, not edge-measure existence or bad-work routing.
+21. Actual unordered helical HH interactions now have native same-event registration, canonical positive-edge routing, **and a certified mixed-fate reserved Young/Christ handoff before any generated-ancestry continuation**.  The continuum law is reconstructed signed, `mu=dW`, before its Hahn-positive causal law `mu^+=dW^+` is restricted by native edge efficiency `r_e=(J_e/J_*)c_e`.  Geometry/phase-bad positive work, including every positive nonforward edge with `J_e=0`, terminates through the shared fixed-transfer interface as `TRANSFER_WORK_LOSS` with `first_time=None`; geometry-good work remains only Young-eligible until the full signed hard-cell theorem fires.  Hard cells now carry the three direct pushforwards `pi_#dW`, `pi_#dW^+`, and `pi_#dW^-`.  Writing `T_C=g_C+b_C-n_C`, the reserved deficit `1-(T_C-b_C)/Y_C` is only a certificate, never a new work law, and equals the full signed Young deficit plus `b_C/Y_C`.  Thus a mixed cell may pass Young/Christ exactly when the already-terminal bad-positive contribution fits inside the unused Christ margin; nondegenerate-margin failures are quantitatively dominated by actual terminal bad-positive plus canonical negative work on low-native-deficit blocks.  The local frontier has therefore moved from mixed fate itself to degenerate full-signed Young margin, the physical structure/telescoping of canonical negative work, and any separately needed positive coherent kernel.
 There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
 
 ---
@@ -1599,7 +1599,11 @@ The certified helical/continuum edge theorems now resolve the generic HH label o
 
 Canonical positive-edge routing is now certified.  With `mu=dW`, `mu^+=dW^+`, `r_e=(J_e/J_*)c_e`, `eta_0=10^-4`, `B={T_e>0,r_e<=1-eta_0}` and `G={T_e>0,r_e>1-eta_0}`, one has `mu^+=mu_B^++mu_G^+` exactly.  Every nonempty bad-work restriction has its own physical capacity and native deficit `epsilon_B>=eta_0`; for every certified `0<tau<=0.1` this dominates the fixed-transfer threshold `tau^2/1036800000`.  Crucially, the implementation binds that **same measurable bad `dW+` restriction** to the shared `FixedTransferLossGate`, so `mu_B^+` terminates stage-zero as `TRANSFER_WORK_LOSS` with `first_time=None`.  Positive nonforward work remains physical and is included in this bad sublaw rather than dropped.
 
-The good restriction `mu_G^+` is only Young-eligible.  A deterministic hard Fourier/helicity map carries inherited causal mass `pi_#mu^+` and signed cell work `pi_#mu`; the latter may show cancellation but its Hahn-positive part is never a second causal law.  The full signed hard-cell trilinear work may bind the good branch to Young only on **fate-pure** cells with zero inherited bad-positive mass.  If one hard cell contains both good and already-terminal bad positive work, the good mass remains exactly accounted but unresolved; subtracting only bad positive work would destroy the signed trilinear identity, while using the full mixed cell would let terminal bad work assist Young.  No arbitrary analyst refinement is introduced to hide this obstruction.
+The good restriction `mu_G^+` is only Young-eligible until the signed hard-cell criterion is met.  The certified mixed-fate handoff now carries `pi_#dW^-` directly as well as `pi_#dW^+` and `pi_#dW`, so on every hard cell `T_C=g_C+b_C-n_C` with no re-Hahn and no cancellation-sensitive reconstruction of `n_C`.  For any independently certified full-cell Young upper `Y_C`, the scalar `U_C=T_C-b_C=g_C-n_C` is **not** a new trilinear form; it is used only through the exact reservation identity
+\[
+1-\frac{U_C}{Y_C}=\left(1-\frac{T_C}{Y_C}\right)+\frac{b_C}{Y_C}.
+\]
+Young/Christ still receives only the actual full signed `T_C`.  Consequently a mixed-fate cell is admissible without terminal-bad assistance whenever this reserved deficit plus the same symbol-freezing error lies below the external Christ modulus.  On a low-native-deficit block, the capacity reference is converted back to actual work only through the certified pointwise good-core density lower `dW/dA>19/100`, yielding `(B_W+N_W)/G_W <= q/[(19/100)(1-q)]`, `q=epsilon/eta_0`.  If a cell has a fixed positive full-signed Christ safety margin `mu` but still fails reservation, then `g_C<n_C+(mu^{-1}-1)b_C`; failed good mass is therefore dominated by already-existing physical bad-positive/backscatter work rather than declared terminal by a proof label.
 
 Therefore an infinite event path cannot eventually remain only in high strain, and it also cannot eventually remain only in signed-good generated HH.  If either owner occurs infinitely often, other genuine owners or generic HH regimes must break the corresponding finite epochs infinitely often.
 The surviving global frontier is thus genuinely **mixed-owner recurrence**.  Its events may include actual HH generation, existing strain/deformation, source/SGS/viscosity owners, independent service, material/new-ancestry relink, high-tail work, and causal reuse/Bellman endpoints.  Their recurrence must telescope only through the native typed laws they truly supply:
@@ -2255,6 +2259,88 @@ Candidate lineage is intentionally visible.  `1a07a48...` exposed the mixed-fate
 
 This theorem closes generic geometry-bad positive-edge routing and deterministic hard positive pushforward.  It does **not** certify Young saturation of mixed-fate good work, does not identify a general coherent POVM positive law with canonical causality without a positive kernel/disintegration, does not terminate generic HH or mixed-owner recurrence, and makes no Navier--Stokes global-regularity claim.
 
+
+---
+
+### 33.14 Mixed-fate reserved Young/Christ handoff
+Status:
+`EXACT_MIXED_FATE_RESERVED_YOUNG_HANDOFF__CANONICAL_DW_PLUS_INHERITED__FULL_SIGNED_HARD_CELL_ONLY__TERMINAL_BAD_ASSISTANCE_RESERVED_WITHOUT_NEW_TRILINEAR_WORK`.
+
+Exact certified implementation/provenance SHA:
+`2600bcbe7db56f54af58d1e7685d1246ad3d7bee`.
+
+This theorem closes the **mixed-fate assistance** seam without creating a new work law.  On a deterministic hard cell carry the original edge-space Hahn laws by direct linear pushforward,
+\[
+g_C=(\pi_\#dW_G^+)(C),\qquad
+b_C=(\pi_\#dW_B^+)(C),\qquad
+n_C=(\pi_\#dW^-)(C),
+\]
+together with the actual signed trilinear work
+\[
+T_C=(\pi_\#dW)(C)=g_C+b_C-n_C.
+\]
+For a separately certified full-cell Young upper `Y_C`, define only as a scalar certificate
+\[
+U_C=T_C-b_C=g_C-n_C.
+\]
+Then exactly
+\[
+\boxed{
+\delta_C^{res}:=1-U_C/Y_C
+=\delta_C^{full}+b_C/Y_C,
+\qquad
+\delta_C^{full}=1-T_C/Y_C.
+}
+\]
+`U_C` is never passed to Young, Christ, Duhamel, or a causal compiler.  The actual full signed `T_C` remains the sole Young input.  Thus `delta_res+xi<=delta_Christ` certifies that the good inherited `dW+` branch is Young/Christ-good even after reserving every unit of already-terminal bad-positive work from the near-extremality margin.  Fate-pure cells are the exact special case `b_C=0`.
+
+The theorem also gives a native actual-work alternative on low edge-deficit blocks.  At `eta_0=10^-4`, the existing single-edge stability certificate and a new Arb check give the clean pointwise good-core lower
+\[
+\frac{dW}{dA}>\frac{19}{100}.
+\]
+Together with `A(G^c)/A<=q=epsilon/eta_0` and `|dW|<=dA` off the core,
+\[
+\boxed{
+\frac{B_W+N_W}{G_W}
+\le
+\frac{q}{(19/100)(1-q)}.
+}
+\]
+Capacity is only the reference used to locate the complement; the conclusion is a ratio of actual positive/negative physical work.  If a full-signed Young/Christ-good cell has spare margin at least `mu in (0,1)` but fails the reservation gate, then
+\[
+\boxed{g_C<n_C+(\mu^{-1}-1)b_C.}
+\]
+So nondegenerate-margin failure can occur only in the presence of already-existing canonical negative work and/or already-terminal bad-positive work.  No failed good mass is relabelled terminal by this inequality.
+
+Dedicated mixed-fate run:
+`31570465782` — **success** on the exact SHA.  It passed `819` tests.  The analytic/adversarial lane ran `75,000` mixed-fate algebra/scaling states with:
+- `28,621` safe mixed/fate-pure handoffs;
+- `7,195` Christ-margin failure-domination cases;
+- worst reservation identity residual `3.0114092101654833e-16`;
+- worst direct Hahn-pushforward identity residual `1.1597858539831283e-15`;
+- worst positive-scaling deficit residual `4.440892098500626e-15`;
+- the geometry-only role-purification, nonlinear Hahn-subtraction, and fresh coherent-Hahn kernel shortcuts all falsified by their explicit countermodels.
+
+The same dedicated run evolved actual `2/3`-dealiased Fourier--Galerkin incompressible Navier--Stokes on resolution/cutoff `24/7`.  The main orbit used `32` RK4 steps and `5` physical snapshots; amplitude adversaries `0.5` and `2.0` used `24` steps and `4` snapshots each.  Every snapshot retained good positive work, terminal bad-positive work, and negative signed work in the deliberately coarsened mixed cell.  The near-extremal integer triad had signed efficiency `0.999996646308...`; actual signed-NS reconstruction stayed below `8.1e-16`, the hard `T=g+b-n` and reservation identities stayed at about `1e-16`, and there were zero stage-zero first-time inventions or geometry-good marking promotions.  Mixed good work scaled cubically under the amplitude adversaries, as the actual trilinear law requires.
+
+The Arb certificate on the same run proved:
+- exact good-core physical-work/capacity density interval `[0.1980944724 +/- 3.77e-11]`, hence the clean `19/100` lower;
+- integer parent/child ratio `sqrt(41/110)=0.610513941468...`;
+- normalized geometric multiplier `[0.999996646 +/- 4.08e-10] > 9999/10000`.
+
+Compatibility/referee gates on the same exact SHA were also green:
+- canonical positive edge routing `31570465801`, including `819` tests and the unchanged `50,000`-state routing stress;
+- independent canonical routing audit `31570465766`, with both adversarial and evolved actual-NS jobs successful;
+- full physical-energy causal integration `31570465783`, with `819` tests and the `50,000`-state mixed-fate theorem inserted after canonical edge routing and before complex Young.
+
+Stored artifacts:
+- `recorded-results/31570465782/`, analytic digest `sha256:f47a6f806791f98f1ed91d2f48db0b02581f26f41b6baa5a2fedd1b0f718f2ee` and actual-NS digest `sha256:3d49c26028886fae1da1f2ca693637578bc4f798de942819b029d5366b0f7f78`;
+- `recorded-results/31570465783/`, integration digest `sha256:4adb3ffd12c92a0b14353e997a873a9144f7b487b3cc03021b3831c23f311255`.
+
+Failure/correction provenance is physical rather than hidden.  Initial SHA `c2104184d48718c41d5791e32bd888498b90e517` had exactly one focused failure after the rest of the suite passed: reconstructing an extremely small `pi_#dW^-` numerically as `pi_#dW^+ - pi_#dW` lost it to cancellation.  The final SHA does not loosen tolerance or discard the case.  It pushes the original Hahn-negative edge law forward **directly**, in parallel with `dW^+` and signed `dW`, and retains their difference only as an identity check.  The final API also keeps the external Christ modulus in `(0,1)`, a harmless restriction of any valid near-extremal modulus needed by the failure alternative.
+
+The theorem closes terminal-bad assistance as the reason mixed cells were previously forbidden.  It does **not** prove that every geometry-good cell is Young-good, does not invent a numerical Christ modulus, and does not make fresh coherent Hahn causal.  The sharp local HH frontier is now: cells whose full-signed Christ margin degenerates, the native structure/telescoping of canonical negative work that controls the remaining nondegenerate failures, and a separately proved positive coherent kernel only if a later coherent/material representation actually requires one.  Generic HH termination, mixed genuine-owner recurrence, the initial-data interface, and the singular-time conclusion remain open.  No Navier--Stokes global-regularity claim is made.
+
 ---
 
 ## 34. Certification discipline
@@ -2332,17 +2418,18 @@ Then read the following current-spine documents in order:
 28. `docs/continuum_helical_edge_measure_registration.md`
 29. `docs/canonical_positive_edge_work_routing.md`
 30. `docs/canonical_positive_edge_work_routing_frontier.md`
-31. `docs/physical_pair_weighted_productivity.md`
-32. `docs/common_slice_coefficient_registration.md`
-33. `docs/recursive_physical_witness_constructor.md`
-34. `docs/signed_good_generated_epoch_time_telescope.md`
-35. `docs/joint_causal_stop_projection.md`
-36. `docs/amplitude_entropy_causal_reuse.md`
-37. `docs/weighted_causal_reuse.md`
-38. `docs/renyi_causal_reuse.md`
-39. `docs/physical_branch_compiler.md`
-40. `docs/continuum_master_event_quotient.md`
-41. `docs/master_no_escape.md`
+31. `docs/mixed_fate_reserved_young_handoff.md`
+32. `docs/physical_pair_weighted_productivity.md`
+33. `docs/common_slice_coefficient_registration.md`
+34. `docs/recursive_physical_witness_constructor.md`
+35. `docs/signed_good_generated_epoch_time_telescope.md`
+36. `docs/joint_causal_stop_projection.md`
+37. `docs/amplitude_entropy_causal_reuse.md`
+38. `docs/weighted_causal_reuse.md`
+39. `docs/renyi_causal_reuse.md`
+40. `docs/physical_branch_compiler.md`
+41. `docs/continuum_master_event_quotient.md`
+42. `docs/master_no_escape.md`
 For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
 `docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
 
@@ -2355,7 +2442,7 @@ Navier–Stokes gives actual signed nonlinear work.  Positive child-energy work
 defines cause.  Coherent analysis refines that work into physical parent/child
 roles; representation does not create cause.
 
-At generic HH scale, the canonical signed law lives on the unordered Fourier/helicity edge space and its Hahn-positive part is the causal law.  The native `dW^+` efficiency split is now certified: geometry/phase-bad positive work terminates stage-zero through the same physical transfer-loss interface, while geometry/phase-good work is only Young-eligible.  Later hard labels inherit `pi_#dW^+` as causal mass and retain `pi_#dW` as signed cell work; they may not Hahn-split themselves into a competing causal measure.  Only fate-pure good cells may bind their full signed work to Young/Christ.  Mixed good/bad cells remain an explicit handoff seam.  Capacity is a reference law throughout, never the causal probability.
+At generic HH scale, the canonical signed law lives on the unordered Fourier/helicity edge space and its Hahn-positive part is the causal law.  Geometry/phase-bad positive work terminates stage-zero through the same physical transfer-loss interface, while geometry-good work is only Young-eligible until a signed-cell criterion fires.  Later hard labels inherit `pi_#dW^+`, `pi_#dW^-`, and signed `pi_#dW` directly; they may not Hahn-split themselves into a competing causal measure.  In a mixed cell `T_C=g_C+b_C-n_C`, terminal bad-positive work is reserved only in a one-sided certificate: `delta_res=delta_full+b_C/Y_C`, while Young/Christ still sees the full signed `T_C`.  Hence mixed fate itself is no longer a binary obstruction; it passes exactly when bad assistance fits inside the unused Christ margin.  Capacity remains a reference law throughout, never causal probability, and nondegenerate-margin failures are controlled only after an explicit actual-work change-of-measure theorem.
 
 Smooth moving carriers transport roles between physical events.  Their energy is
 `<u,Q^2u>`, not `<u,Qu>`.  Hard interaction projectors are event-anchored and are

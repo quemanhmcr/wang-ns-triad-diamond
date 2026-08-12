@@ -1,0 +1,23 @@
+{
+  "status": "EXACT_RENYI_CAUSAL_REUSE_TO_EXISTING_CURRENCIES",
+  "theorem": {
+    "layer_recurrence": "Q_parent=(1/2)Q_child+R_hidden=(1/2)Q_child(1+theta)",
+    "action_telescope": "sum log(1+theta_j)=L log2+log Q_root",
+    "physical_lower": "action >= L log(48/25)-log(P E_global N_base/eta)",
+    "rich_layer": "depth threshold forces theta_j>1/3",
+    "rich_route": "H2_child>=log2 -> component entropy >=(1/2)log2 or same-ancestry pair >1/5; else hidden parent-slot pair >1/12",
+    "role_baseline": "the factor 1/2 is the exact cost-free two-parent-role baseline"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_recurrence_residual": 2.220446049250313e-16,
+    "worst_action_telescope_residual": 3.552713678800501e-15,
+    "minimum_rich_action_margin": 0.000305142586952023,
+    "branch_counts": {
+      "child_component_Bellman_entropy": 22118,
+      "weighted_parent_slot_reuse_pair": 8704,
+      "child_same_ancestry_pair_cycle": 16772,
+      "not_renyi_reuse_rich": 2406
+    }
+  }
+}

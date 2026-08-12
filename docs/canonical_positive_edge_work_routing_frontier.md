@@ -1,6 +1,6 @@
 # Canonical positive edge-work routing frontier
 
-Status: **DESIGN CONTRACT DISCHARGED THROUGH CANONICAL ROUTING AND DETERMINISTIC HARD PUSHFORWARD**.  The remaining frontier is the fate-pure/mixed-fate signed-cell Young/Christ handoff and, more generally, a positive coherent kernel/disintegration if coherent localization is to inherit canonical causality.
+Status: **CANONICAL ROUTING AND MIXED-FATE TERMINAL-BAD-ASSISTANCE HANDOFF CERTIFIED**.  Mixed fate itself is no longer a binary Young obstruction: the remaining local frontier is degenerate full-signed Young/Christ margin, canonical negative-work structure/telescoping, and—only where a later representation genuinely needs it—a separately proved positive coherent kernel/disintegration.
 
 The continuum helical edge-measure theorem fixes the physical signed law before
 any later representation is introduced.  Let
@@ -18,6 +18,61 @@ on the canonical unordered Fourier/helicity edge space.  Its Hahn decomposition
 \]
 
 is therefore the canonical positive/negative physical child-work law.  Routing of this already-existing positive law is now certified by `src/canonical_positive_edge_work_routing.py`; this note is retained as the design contract and as the record of the still-open signed-cell handoff.  No new positive law is manufactured from coherent cells, capacity weights, or theorem labels.
+
+## 0. Certified downstream mixed-fate update
+
+The downstream theorem `mixed_fate_reserved_young_handoff.md`, certified on exact
+SHA `2600bcbe7db56f54af58d1e7685d1246ad3d7bee`, keeps the same causal law and
+removes the terminal-bad-assistance ambiguity without fate refinement.  The hard
+representation carries all three linear pushforwards
+
+\[
+\pi_\#dW^+,\qquad \pi_\#dW^-,\qquad \pi_\#dW,
+\]
+
+and on one cell writes
+
+\[
+T_C=g_C+b_C-n_C.
+\]
+
+For any separately certified full-cell Young upper `Y_C`, the quantity
+`T_C-b_C` is **not** declared a new work.  It appears only in the exact
+one-sided certificate
+
+\[
+\boxed{
+1-\frac{T_C-b_C}{Y_C}
+=\left(1-\frac{T_C}{Y_C}\right)+\frac{b_C}{Y_C}.
+}
+\]
+
+Therefore Young/Christ still sees the full signed trilinear `T_C`, while the
+reserved gate proves that the same cell would remain near extremal even after
+all already-terminal bad-positive assistance were withheld.  Fate-pure cells are
+the special case `b_C=0`.
+
+On low native-deficit blocks the theorem also converts the capacity reference to
+an **actual-work** comparison using the certified pointwise good-core lower
+`dW/dA>19/100`; it never infers work majority from capacity majority.  If a cell
+has a fixed positive spare full-signed Christ margin `mu` but still fails
+reservation, its good work obeys
+
+\[
+g_C<n_C+(\mu^{-1}-1)b_C.
+\]
+
+Thus the remaining nondegenerate failure is physically supported by canonical
+negative work and/or bad-positive work that has already terminated.  Failed good
+mass is not reclassified by this inequality.
+
+This sharpens the next research question.  One should first understand whether
+`\pi_\#dW^-` has a canonical native donor/recipient structure under the exact
+cyclic three-mode Navier--Stokes energy law before inventing any cancellation
+budget.  A promising route is cyclic re-rooting of one closed helical triad, but
+that continuum positive kernel and its multiplicity/provenance are **not yet a
+certified theorem**.  Fresh coherent Hahn remains noncausal without a separate
+positive kernel.
 
 ## 1. The Hahn level is physical and must be fixed before analysis refinement
 

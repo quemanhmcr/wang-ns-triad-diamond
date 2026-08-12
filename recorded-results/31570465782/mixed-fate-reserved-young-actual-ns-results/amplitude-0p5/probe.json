@@ -1,0 +1,19 @@
+{
+  "cutoff": 7,
+  "geometry_good_marking_promotions": 0,
+  "initial_maximum_good_signed_efficiency": 0.9999966463082315,
+  "initial_mixed_good_work": 1.0638889773362437,
+  "maximum_bad_assistance_fraction_of_total_variation_upper": 0.13865597811866448,
+  "mixed_fate_snapshots": 4,
+  "resolution": 24,
+  "snapshots": 4,
+  "snapshots_with_bad_positive_work": 4,
+  "snapshots_with_good_work": 4,
+  "snapshots_with_negative_work": 4,
+  "stage_zero_first_time_failures": 0,
+  "status": "EVOLVED_DEALIASED_FOURIER_GALERKIN_NS_MIXED_FATE_HARD_CELL_AUDIT__ACTUAL_GOOD_BAD_NEGATIVE_EDGE_WORK__FULL_SIGNED_CELL_RESERVATION_IDENTITIES",
+  "steps": 24,
+  "worst_hahn_pushforward_identity_relative": 1.2118007782162992e-16,
+  "worst_reservation_identity_relative": 1.0098339818469161e-16,
+  "worst_signed_ns_reconstruction_relative": 8.078671854775329e-16
+}

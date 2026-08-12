@@ -1,0 +1,66 @@
+{
+  "certificate": {
+    "arb_clean_constants": {
+      "actual_ns_normalized_geometric_multiplier": "[0.999996646 +/- 4.08e-10]",
+      "actual_ns_parent_child_ratio": "[0.61051394146839327298288100398321374566448038401296632 +/- 3.26e-54]",
+      "canonical_good_threshold": "9999/10000",
+      "certified_clean_good_density_lower": "19/100",
+      "exact_good_density_lower_interval": "[0.1980944724 +/- 3.77e-11]",
+      "gamma_star": "[0.4928152853 +/- 5.33e-11]",
+      "jstar": "[0.1001101759 +/- 5.38e-11]",
+      "rstar": "[0.6109041016 +/- 2.01e-11]"
+    },
+    "cell_hahn_identity": "T_C=g_C+b_C-n_C with g=pi_#dW_G+, b=pi_#dW_B+, n=pi_#dW- pushed forward directly from the single edge-space Hahn decomposition",
+    "claims_global_regularity": false,
+    "coherent_fresh_hahn_no_go": {
+      "canonical_edge_atom_0": 0.0,
+      "canonical_edge_atom_1": 0.0,
+      "canonical_positive_mass": 0.0,
+      "fresh_hahn_can_be_positive_kernel_pushforward_of_zero_canonical_mass": false,
+      "fresh_localized_hahn_positive": 0.5,
+      "non_diagonal_localized_signed_atom": 0.5
+    },
+    "fate_pure_recovery": "b_C=0 gives delta_res=delta_full, exactly recovering the previous fate-pure handoff",
+    "general_coherent_kernel_scope": "the countermodel rules out identifying fresh non-diagonal coherent Hahn atoms with a kernel pushforward; it does not rule out a different separately proved physical positive kernel",
+    "low_deficit_actual_work_bound": "(B+N)/G <= q/[(19/100)(1-q)], q=epsilon/eta0; capacity is reference only and 19/100 is an Arb-certified pointwise physical RN lower",
+    "mode_role_no_go": {
+      "bad_is_bad": true,
+      "bad_phase": 0.9998533531999596,
+      "bad_signed_efficiency": 0.99985,
+      "eta": 0.0001,
+      "good_is_good": true,
+      "good_phase": 1.0,
+      "good_signed_efficiency": 0.9999966463082323,
+      "mode_role_geometry_changed": false,
+      "same_normalized_geometric_multiplier": 0.9999966463082323
+    },
+    "nonlinear_subtraction_no_go": {
+      "b_of_sum": 0.0,
+      "b_of_t1": 1.0,
+      "b_of_t2": 0.0,
+      "positive_part_is_additive": false,
+      "reservation_is_trilinear_work": false,
+      "sum_of_b": 1.0,
+      "t1": 1.0,
+      "t2": -1.0
+    },
+    "reservation_identity": "delta_res=1-(T_C-b_C)/Y_C = (1-T_C/Y_C)+b_C/Y_C = delta_full+bad_assistance",
+    "reserved_failure_mass_bound": "for full-signed Christ safety margin mu in (0,1), failed reservation gives g<n+(1/mu-1)b; therefore G_fail/G <= max(1,1/mu-1) q/[(19/100)(1-q)]",
+    "safe_handoff": "delta_res+xi<=delta_Christ implies delta_full+xi<=delta_Christ and certifies the inherited good dW+ branch without terminal bad-positive assistance",
+    "status": "EXACT_MIXED_FATE_RESERVED_YOUNG_HANDOFF__CANONICAL_DW_PLUS_INHERITED__FULL_SIGNED_HARD_CELL_ONLY__TERMINAL_BAD_ASSISTANCE_RESERVED_WITHOUT_NEW_TRILINEAR_WORK",
+    "young_semantics": "Young/Christ receives only the actual full signed trilinear T_C; T_C-b_C is a sufficient-condition certificate only and is never a work law or causal law"
+  },
+  "stress": {
+    "coherent_fresh_hahn_counterexample_passed": true,
+    "minimum_reserved_implies_full_margin": 0.0003082038413792579,
+    "mixed_fate_cases": 75000,
+    "nonlinear_subtraction_counterexample_passed": true,
+    "phase_role_counterexample_passed": true,
+    "reserved_failure_domination_cases": 7195,
+    "safe_handoff_cases": 28621,
+    "samples": 75000,
+    "worst_hahn_identity_relative": 1.1597858539831283e-15,
+    "worst_positive_scaling_deficit_residual": 4.440892098500626e-15,
+    "worst_reservation_identity_relative": 3.0114092101654833e-16
+  }
+}
