@@ -26,7 +26,7 @@ def test_certificate_keeps_true_upward_supply_distinct_from_circulation_and_inte
 
 
 def test_signed_good_actual_upward_supply_is_pure_uv_first_shell_and_automatically_comparable():
-    triad = signed_good_integer_triad()
+    triad, _ = signed_good_integer_triad()
     kernel = cyclic_triad_measure_kernel(triad, quotient_measure_mass=1.0)
     split = hard_tail_upward_supply_split(triad, kernel, boundary=8.0)
     pure = [a for a in split.atoms if a.pure_uv_hh_by_support]
@@ -97,7 +97,7 @@ def test_exact_tail_identity_selects_inherited_or_true_upward_owner_in_common_N_
 
 
 def test_true_upward_owner_splits_only_into_pure_uv_support_or_resolved_contact_without_new_causal_units():
-    triad = signed_good_integer_triad()
+    triad, _ = signed_good_integer_triad()
     kernel = cyclic_triad_measure_kernel(triad, quotient_measure_mass=1.0)
     split = hard_tail_upward_supply_split(triad, kernel, boundary=8.0)
     alt = upward_owner_support_alternative(split, owner_threshold=0.9*split.upward_common_unit_work)

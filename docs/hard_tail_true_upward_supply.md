@@ -269,7 +269,7 @@ The evolved PDE audit keeps distinct observables distinct.
    \[
    (-2,-1,-1)+(1,0,0)+(1,1,1)=0.
    \]
-   At `N=1`, the high recipient has radius `sqrt(6)` and lies in `M=4`, while the radius-one donor touches `M/4` exactly.  The state is evolved by the repository RK4 Navier--Stokes solver on two FFT representations, and the actual evolving triad is required to begin with positive deep upward work and zero pure-UV classification.
+   At `N=1`, the high recipient has radius `sqrt(6)` and lies in `M=4`, while the radius-one donor touches `M/4` exactly.  The state is evolved by the repository RK4 Navier--Stokes solver on two FFT representations, and the actual evolving law is required to contain a positive **deep resolved-contact upward submeasure**.  A simultaneous first-shell pure-UV submeasure is allowed and recorded separately; the theorem is atomwise and does not force mutually exclusive whole-triad fates.
 3. A second six-mode **orthogonal Fourier--Galerkin Navier--Stokes** audit keeps exactly one closed triad and its reality partner as the retained Galerkin subspace.  At every output time it enumerates both reality-partner closed triples and all eight helicity sectors, reconstructs the **full** cyclic donor boundary law of that finite PDE, and requires
    \[
    \Phi_\uparrow-\Phi_\downarrow

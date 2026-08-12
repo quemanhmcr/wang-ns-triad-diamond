@@ -263,8 +263,8 @@ def _run_deep_contact_one(
     max_div=max(divergence)/math.sqrt(e0)
     if balance>5.0e-5 or max_nonlinear>5.0e-10 or max_div>5.0e-11:
         raise AssertionError("deep-contact Galerkin trajectory lost a native NS invariant")
-    if deep[0]<=0.0 or pure[0]!=0.0:
-        raise AssertionError("engineered actual NS fixture did not begin as deep resolved-contact upward supply")
+    if deep[0]<=0.0:
+        raise AssertionError("engineered actual NS fixture did not begin with a deep resolved-contact upward submeasure")
     if snapshots_with_deep==0:
         raise AssertionError("deep upward supply vanished from every evolved physical snapshot")
     native=max(max(natives),max(up),1.0e-300)
