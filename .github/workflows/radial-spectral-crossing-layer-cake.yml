@@ -1,0 +1,89 @@
+name: Radial spectral crossing layer cake
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/radial_spectral_crossing_layer_cake.py'
+      - 'tests/test_radial_spectral_crossing_layer_cake.py'
+      - 'src/radial_spectral_crossing_layer_cake_pde_probe.py'
+      - 'tests/test_radial_spectral_crossing_layer_cake_pde_probe.py'
+      - 'docs/radial_spectral_crossing_layer_cake.md'
+      - 'src/helical_mode_set_energy_continuity.py'
+      - 'src/cyclic_helical_triad_donor_kernel.py'
+      - 'src/cyclic_helical_triad_donor_kernel_pde_probe.py'
+      - 'src/continuum_helical_edge_measure_registration.py'
+      - 'src/continuum_helical_edge_measure_pde_probe.py'
+      - 'src/helical.py'
+      - '.github/workflows/radial-spectral-crossing-layer-cake.yml'
+      - '.github/workflows/audit-radial-spectral-crossing-layer-cake.yml'
+      - 'requirements.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  analytic-and-adversarial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused radial spectral crossing tests
+        run: pytest -q tests/test_radial_spectral_crossing_layer_cake.py
+      - name: Physical donor-flow dependency tests
+        run: pytest -q tests/test_helical_mode_set_energy_continuity.py tests/test_cyclic_helical_triad_donor_kernel.py
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Physical radial crossing stress
+        run: python -m src.radial_spectral_crossing_layer_cake --samples 75000 --seed 2026081206 --outdir results-radial-crossing/main
+      - name: Mode-continuity dependency stress
+        run: python -m src.helical_mode_set_energy_continuity --samples 75000 --seed 2026081205 --outdir results-radial-crossing/mode-continuity-dependency
+      - name: Summary
+        run: |
+          cat results-radial-crossing/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+          echo >> "$GITHUB_STEP_SUMMARY"
+          cat results-radial-crossing/mode-continuity-dependency/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: radial-spectral-crossing-layer-cake-analytic-results
+          path: results-radial-crossing/
+
+  actual-ns:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused evolved NS radial tests
+        run: pytest -q tests/test_radial_spectral_crossing_layer_cake_pde_probe.py tests/test_helical_mode_set_energy_continuity_pde_probe.py
+      - name: Actual NS upward radial crossing and tail stock
+        run: python -m src.radial_spectral_crossing_layer_cake_pde_probe --resolutions 24 28 --cutoff 7 --steps 64 --duration 0.001 --radius 8 --phase-sign 1 --outdir results-radial-crossing-ns/upward
+      - name: Sign-reversed actual NS downward crossing
+        run: python -m src.radial_spectral_crossing_layer_cake_pde_probe --resolutions 24 28 --cutoff 7 --steps 64 --duration 0.001 --radius 8 --phase-sign -1 --outdir results-radial-crossing-ns/downward
+      - name: Amplitude adversaries
+        run: |
+          for a in 0.5 2.0; do
+            tag=${a/./p}
+            python -m src.radial_spectral_crossing_layer_cake_pde_probe \
+              --resolutions 24 --cutoff 7 --steps 48 --duration 0.00075 --radius 8 --phase-sign 1 --amplitude "$a" \
+              --outdir "results-radial-crossing-ns/amplitude-$tag"
+          done
+      - name: Summary
+        run: |
+          for f in results-radial-crossing-ns/*/summary.md; do
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat "$f" >> "$GITHUB_STEP_SUMMARY"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: radial-spectral-crossing-layer-cake-actual-ns-results
+          path: results-radial-crossing-ns/
