@@ -7,6 +7,7 @@ import math
 from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from fractions import Fraction
+from functools import cached_property
 from pathlib import Path
 
 import numpy as np
@@ -497,7 +498,7 @@ class ContinuumModalEdgeAtom:
         if not self.registration.unordered_parent_orientation:
             raise ValueError("continuum atom must already be parent-orientation quotiented")
 
-    @property
+    @cached_property
     def physical_edge_identity(self) -> ContinuumHelicalEdgeIdentity:
         reg = self.registration
         return continuum_helical_edge_identity(
@@ -509,47 +510,47 @@ class ContinuumModalEdgeAtom:
             reg.child_helicity,
         )
 
-    @property
+    @cached_property
     def base_factor(self) -> float:
         return _edge_positive_product(
             (unitary_fourier_convolution_factor(), float(self.quotient_measure_mass)),
             "continuum quotient base factor",
         )
 
-    @property
+    @cached_property
     def signed_work_mass(self) -> float:
         return _edge_signed_product(
             (self.base_factor, self.registration.signed_child_energy_work),
             "continuum signed work mass",
         )
 
-    @property
+    @cached_property
     def capacity_mass(self) -> float:
         return _edge_positive_product(
             (self.base_factor, self.registration.native_modal_capacity),
             "continuum capacity mass",
         )
 
-    @property
+    @cached_property
     def signed_progress_mass(self) -> float:
         return _edge_signed_product(
             (self.base_factor, self.registration.signed_upper_progress_work),
             "continuum signed progress mass",
         )
 
-    @property
+    @cached_property
     def multiplier(self) -> float:
         return self.registration.normalized_multiplier
 
-    @property
+    @cached_property
     def phase(self) -> float:
         return self.registration.phase_alignment
 
-    @property
+    @cached_property
     def signed_efficiency(self) -> float:
         return self.multiplier * self.phase
 
-    @property
+    @cached_property
     def scale_progress(self) -> float:
         return self.registration.scale_progress
 

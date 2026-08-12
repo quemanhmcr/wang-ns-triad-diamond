@@ -11,6 +11,7 @@ from src.canonical_positive_edge_work_routing import (
     _near_extremal_positive_fiber,
     _nonforward_positive_fiber,
     _pure_helical_fiber,
+    _rescale_registered_fiber_measure,
     compress_signed_edge_work_to_hard_cells,
     exact_mode_role_map,
     route_canonical_positive_edge_work,
@@ -30,6 +31,22 @@ def _dominant_positive_edge(fiber):
     edges = [a for a in fiber.modal_atoms if a.signed_work_mass > 0.0]
     assert edges
     return max(edges, key=lambda a: a.signed_work_mass)
+
+
+@pytest.mark.parametrize("q", [0.125, 1.0, 7.25])
+def test_registered_fiber_measure_rescaling_is_exact_full_reregistration(q):
+    templates_and_fresh = (
+        (_near_extremal_positive_fiber(1.0), _near_extremal_positive_fiber(q)),
+        (_nonforward_positive_fiber(1.0), _nonforward_positive_fiber(q)),
+        (_nonforward_positive_fiber(1.0, phase_sign=-1.0), _nonforward_positive_fiber(q, phase_sign=-1.0)),
+    )
+    for template, fresh in templates_and_fresh:
+        scaled = _rescale_registered_fiber_measure(template, q)
+        assert scaled == fresh
+        assert tuple(atom.physical_edge_identity for atom in scaled.modal_atoms) == tuple(
+            atom.physical_edge_identity for atom in fresh.modal_atoms
+        )
+        assert continuum_edge_measure_ledger((scaled,)) == continuum_edge_measure_ledger((fresh,))
 
 
 def test_actual_causal_law_is_partitioned_exactly_not_capacity_probability():

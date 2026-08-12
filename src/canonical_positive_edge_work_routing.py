@@ -4,7 +4,7 @@ import argparse
 import json
 import math
 from collections.abc import Mapping, Sequence
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 
 import numpy as np
@@ -12,6 +12,7 @@ import numpy as np
 from src.coherent_service_or_flat import FixedTransferLossGate, fixed_transfer_loss_gate
 from src.continuum_helical_edge_measure_registration import (
     ContinuumEdgeMeasureLedger,
+    ContinuumFiberRegistration,
     ContinuumHelicalEdgeIdentity,
     ContinuumModalEdgeAtom,
     HelicalModeIdentity,
@@ -431,6 +432,15 @@ def compress_signed_edge_work_to_hard_cells(
     ledger: ContinuumEdgeMeasureLedger,
     mode_roles: Mapping[HelicalModeIdentity, str],
 ) -> HardCellCompression:
+    """Replay caller provenance once, then compress the verified physical law."""
+    replayed = _replay_physical_ledger(ledger)
+    return _compress_replayed_signed_edge_work_to_hard_cells(replayed, mode_roles)
+
+
+def _compress_replayed_signed_edge_work_to_hard_cells(
+    replayed: ContinuumEdgeMeasureLedger,
+    mode_roles: Mapping[HelicalModeIdentity, str],
+) -> HardCellCompression:
     """Compress the same signed edge law and push forward its already-fixed Hahn law.
 
     The deterministic hard role map is applied to physical Fourier/helicity mode
@@ -443,7 +453,6 @@ def compress_signed_edge_work_to_hard_cells(
     promoted to a second causal law.  This is precisely the signed hard-cell datum
     required before a downstream Young/Christ comparison.
     """
-    replayed = _replay_physical_ledger(ledger)
     roles = _validate_mode_roles(replayed, mode_roles)
     buckets: dict[HardProductCell, list[tuple[float, float, bool]]] = {}
     for _, atom in _flatten_atoms(replayed):
@@ -556,7 +565,7 @@ def route_canonical_positive_edge_work(
             joint_projection=projection,
         )
 
-    compression = compress_signed_edge_work_to_hard_cells(replayed, mode_roles)
+    compression = _compress_replayed_signed_edge_work_to_hard_cells(replayed, mode_roles)
     fate_pure_cells = tuple(
         cell
         for cell in compression.cells
@@ -656,6 +665,25 @@ def _pure_helical_fiber(
     )
 
 
+def _rescale_registered_fiber_measure(
+    template: ContinuumFiberRegistration,
+    quotient_measure_mass: float,
+) -> ContinuumFiberRegistration:
+    """Reuse immutable registered geometry while changing only its Radon quadrature mass.
+
+    The direct/modal work densities, edge registrations, helicity identities and
+    provenance residuals are properties of the already-registered physical fiber.
+    The stress law varies only the positive quotient-measure weight.  Rebuilding
+    helical bases and re-registering all eight sectors for that scalar change is
+    mathematically redundant and dominated the certification runtime.
+    """
+    q = float(quotient_measure_mass)
+    if not math.isfinite(q) or q < 0.0:
+        raise ValueError("nonnegative finite quotient-measure mass required")
+    atoms = tuple(replace(atom, quotient_measure_mass=q) for atom in template.modal_atoms)
+    return replace(template, quotient_measure_mass=q, modal_atoms=atoms)
+
+
 def _near_extremal_positive_fiber(quotient_measure_mass: float) -> object:
     rstar = symmetric_rstar()
     gamma = symmetric_gamma(rstar)
@@ -699,16 +727,26 @@ def stress(samples: int = 50_000, seed: int = 20260812) -> CanonicalPositiveEdge
     marking = 0
     first_time_fail = 0
 
+    # The stress family changes only three positive quadrature masses and tau.
+    # Register the fixed physical geometry once, then reuse the immutable edge
+    # certificates with the new measure weights.  This preserves the exact same
+    # signed work/capacity/progress law while avoiding redundant helical algebra.
+    good_template = _near_extremal_positive_fiber(1.0)
+    bad_template = _nonforward_positive_fiber(1.0)
+    negative_template = _nonforward_positive_fiber(1.0, phase_sign=-1.0)
+    template_ledger = continuum_edge_measure_ledger((good_template, bad_template, negative_template))
+    exact_roles = exact_mode_role_map(template_ledger)
+    coarse_roles = {mode: "all-hard-modes" for mode in exact_roles}
+
     for _ in range(samples):
         qg = float(np.exp(rng.uniform(-2.0, 2.0)))
         qb = float(np.exp(rng.uniform(-2.0, 2.0)))
         qn = float(np.exp(rng.uniform(-3.0, 1.0)))
-        good = _near_extremal_positive_fiber(qg)
-        bad = _nonforward_positive_fiber(qb)
-        negative = _nonforward_positive_fiber(qn, phase_sign=-1.0)
+        good = _rescale_registered_fiber_measure(good_template, qg)
+        bad = _rescale_registered_fiber_measure(bad_template, qb)
+        negative = _rescale_registered_fiber_measure(negative_template, qn)
         ledger = continuum_edge_measure_ledger((good, bad, negative))
         tau = float(np.exp(rng.uniform(math.log(1.0e-5), math.log(MAX_CERTIFIED_TAU))))
-        exact_roles = exact_mode_role_map(ledger)
         out = route_canonical_positive_edge_work(ledger, tau=tau, mode_roles=exact_roles)
         if out.bad_route is None:
             raise AssertionError("physical nonforward positive edge disappeared from bad route")
@@ -726,7 +764,7 @@ def stress(samples: int = 50_000, seed: int = 20260812) -> CanonicalPositiveEdge
         if out.bad_route.transfer_partition.first_time is not None:
             first_time_fail += 1
 
-        coarse = compress_signed_edge_work_to_hard_cells(ledger, single_hard_role_map(ledger))
+        coarse = compress_signed_edge_work_to_hard_cells(ledger, coarse_roles)
         if coarse.inherited_positive_work > 0.0:
             max_cancel = max(max_cancel, coarse.cancellation_gap / coarse.inherited_positive_work)
         if coarse.inherited_good_positive_work > 0.0:
