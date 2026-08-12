@@ -75,6 +75,13 @@ on:
       - 'tests/test_radial_spectral_crossing_layer_cake_pde_probe.py'
       - '.github/workflows/radial-spectral-crossing-layer-cake.yml'
       - '.github/workflows/audit-radial-spectral-crossing-layer-cake.yml'
+      - 'src/hard_tail_true_upward_supply.py'
+      - 'tests/test_hard_tail_true_upward_supply.py'
+      - 'src/hard_tail_true_upward_supply_pde_probe.py'
+      - 'tests/test_hard_tail_true_upward_supply_pde_probe.py'
+      - 'docs/hard_tail_true_upward_supply.md'
+      - '.github/workflows/hard-tail-true-upward-supply.yml'
+      - '.github/workflows/audit-hard-tail-true-upward-supply.yml'
       - 'tests/test_canonical_positive_edge_work_routing_pde_probe.py'
       - '.github/workflows/canonical-positive-edge-work-routing.yml'
       - '.github/workflows/audit-canonical-positive-edge-work-routing.yml'
@@ -159,6 +166,7 @@ jobs:
       - run: python -m src.cyclic_hard_cell_single_charge_quotient --samples 50000 --seed 2026081204 --outdir results-integration/cyclic-hard-cell-single-charge-quotient
       - run: python -m src.helical_mode_set_energy_continuity --samples 50000 --seed 2026081205 --outdir results-integration/helical-mode-set-energy-continuity
       - run: python -m src.radial_spectral_crossing_layer_cake --samples 50000 --seed 2026081206 --outdir results-integration/radial-spectral-crossing-layer-cake
+      - run: python -m src.hard_tail_true_upward_supply --samples 50000 --seed 2026081207 --outdir results-integration/hard-tail-true-upward-supply
       - run: python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young
       - run: python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian
       - run: python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor
