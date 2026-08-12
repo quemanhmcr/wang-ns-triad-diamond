@@ -347,6 +347,8 @@ class FullFiniteRadialLogAction:
             raise ValueError("finite signed full radial log action and log moments required")
         if self.native_log_action_scale <= 0.0 or not self.finite_atom_log_moment or not self.continuum_extension_requires_log_moment:
             raise ValueError("full radial action must remain finite-atom or explicitly log-moment conditioned")
+        if self.signed_marginal_identity_native_residual > 5.0e-8:
+            raise AssertionError("full finite radial log action left its native physical log-variation scale")
 
 
 def finite_radial_log_action(atoms: Sequence[HelicalModeFlowAtom]) -> FullFiniteRadialLogAction:
@@ -539,6 +541,8 @@ def stress(samples: int = 75_000, seed: int = 2026081206) -> RadialSpectralCross
         raise AssertionError("physical equiradial transfer did not falsify minimum radial progress")
     if mismatch == 0:
         raise AssertionError("radial donor displacement was accidentally identified with recipient edge progress")
+    if max(worst_partition, worst_div, worst_layer, worst_full, worst_dilation) > 5.0e-8:
+        raise AssertionError("radial crossing stress left its native physical work/log-action scales")
     return RadialSpectralCrossingStress(
         samples=int(samples),
         resolved_cases=resolved,

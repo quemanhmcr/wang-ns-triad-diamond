@@ -268,6 +268,7 @@ The actual-PDE probe keeps two readings separate on the same evolved Fourier–G
 2. **Selected cyclic crossing reading.**  It reads the actual evolving helical coefficients of the certified closed triad from the same state, reconstructs the three-root cyclic donor law, and restricts those donor atoms by the same radial boundary.
 
 The selected triad is not claimed to exhaust the full tail.  Cross-FFT comparison uses one common Galerkin cutoff represented on grids `24` and `28`; native stock/flow throughputs are numerical error envelopes only.
+The finite full-log marginal identity and uniform-dilation covariance are likewise guarded on the total physical log-variation scale, never on a signed action that may vanish by upward/downward cancellation.
 
 The sign-reversed physical initial condition is retained.  At the canonical radius `R=8`, the ordinary signed-good triad begins low→high, while global sign reversal reverses cubic work and produces high→low crossing on the same geometry.
 
