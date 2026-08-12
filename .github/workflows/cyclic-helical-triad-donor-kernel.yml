@@ -1,0 +1,92 @@
+name: Cyclic helical triad donor kernel
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/cyclic_helical_triad_donor_kernel.py'
+      - 'tests/test_cyclic_helical_triad_donor_kernel.py'
+      - 'src/cyclic_helical_triad_donor_kernel_pde_probe.py'
+      - 'tests/test_cyclic_helical_triad_donor_kernel_pde_probe.py'
+      - 'docs/cyclic_helical_triad_donor_kernel.md'
+      - 'src/helical_physical_edge_registration.py'
+      - 'src/continuum_helical_edge_measure_registration.py'
+      - 'src/canonical_positive_edge_work_routing.py'
+      - 'src/mixed_fate_reserved_young_handoff.py'
+      - 'src/mixed_fate_reserved_young_handoff_pde_probe.py'
+      - 'src/single_edge_certificate.py'
+      - 'src/causal_binary_ancestry.py'
+      - '.github/workflows/cyclic-helical-triad-donor-kernel.yml'
+      - '.github/workflows/audit-cyclic-helical-triad-donor-kernel.yml'
+      - 'requirements.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  analytic-and-adversarial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused cyclic donor theorem tests
+        run: pytest -q tests/test_cyclic_helical_triad_donor_kernel.py
+      - name: Physical edge and canonical-law dependency tests
+        run: pytest -q tests/test_helical_physical_edge_registration.py tests/test_continuum_helical_edge_measure_registration.py tests/test_canonical_positive_edge_work_routing.py tests/test_mixed_fate_reserved_young_handoff.py tests/test_causal_binary_ancestry.py
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Cyclic donor kernel physical-triad stress
+        run: python -m src.cyclic_helical_triad_donor_kernel --samples 75000 --seed 2026081203 --outdir results-cyclic-donor/analytic
+      - name: Physical helical edge dependency stress
+        run: python -m src.helical_physical_edge_registration --samples 50000 --outdir results-cyclic-donor/helical-edge
+      - name: Continuum edge dependency stress
+        run: python -m src.continuum_helical_edge_measure_registration --samples 3000 --core-blocks 100 --outdir results-cyclic-donor/continuum-edge
+      - name: Summary
+        run: |
+          cat results-cyclic-donor/analytic/summary.md >> "$GITHUB_STEP_SUMMARY"
+          echo >> "$GITHUB_STEP_SUMMARY"
+          cat results-cyclic-donor/helical-edge/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cyclic-helical-triad-donor-kernel-analytic-results
+          path: results-cyclic-donor/
+
+  actual-ns:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused evolved Galerkin NS tests
+        run: pytest -q tests/test_cyclic_helical_triad_donor_kernel_pde_probe.py tests/test_mixed_fate_reserved_young_handoff_pde_probe.py tests/test_continuum_helical_edge_measure_pde_probe.py
+      - name: Same cutoff-7 Galerkin NS on two FFT representations
+        run: python -m src.cyclic_helical_triad_donor_kernel_pde_probe --resolutions 24 28 --cutoff 7 --steps 32 --duration 0.001 --snapshots 5 --outdir results-cyclic-donor-ns/main
+      - name: Amplitude adversaries on the same physical Galerkin geometry
+        run: |
+          for a in 0.5 2.0; do
+            tag=${a/./p}
+            python -m src.cyclic_helical_triad_donor_kernel_pde_probe \
+              --resolutions 24 --cutoff 7 --steps 24 --amplitude "$a" --duration 0.00075 --snapshots 4 \
+              --outdir "results-cyclic-donor-ns/amplitude-$tag"
+          done
+      - name: Existing continuum actual-NS dependency
+        run: python -m src.continuum_helical_edge_measure_pde_probe --resolutions 20 24 28 --steps 64 --duration 0.012 --snapshots 5 --outdir results-cyclic-donor-ns/continuum-dependency
+      - name: Summary
+        run: |
+          for f in results-cyclic-donor-ns/*/summary.md; do
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat "$f" >> "$GITHUB_STEP_SUMMARY"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cyclic-helical-triad-donor-kernel-actual-ns-results
+          path: results-cyclic-donor-ns/
