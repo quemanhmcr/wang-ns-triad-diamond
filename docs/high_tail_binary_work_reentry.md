@@ -1,5 +1,8 @@
 # High-tail regeneration: keep the physical work unit, then expose the binary cause
 
+
+> **Current upstream sharpening.** The later `hard_tail_true_upward_supply.md` theorem no longer treats gross `W_>^+` as the final regeneration owner.  Actual UV supply is `Phi_up`; its pure-UV HH restriction is automatically first-shell (`M=2N`) and comparable, while deep upward supply has resolved-scale parent contact.  The binary HH law below applies only after a genuine positive HH submeasure has been selected; it must not absorb the resolved-contact branch or recreate a Hahn law from net tail work.
+
 ## 1. Why the next bridge is not another packet theorem
 
 The certified high-frequency service theorem ends with the exact hard-tail energy alternative
@@ -235,6 +238,6 @@ The resulting clean frontier is therefore:
 \end{cases}
 \]
 
-The next master-facing question is not “how do we invent a packet?”  It is to route canonical edge `dW+` through deterministic hard labels, and only then ask signed-cell triad locality/Young questions.  The coherent binary representation remains useful diagnostically; its positive kernel into material labels is a separate open seam.
+Canonical edge `dW+` routing, mixed-fate handoff, cyclic donor provenance, mode-stock continuity, radial crossing, and hard-tail true-upward supply are now certified downstream.  The binary representation remains useful only on a genuinely selected positive HH submeasure.  The current master-facing questions are to bind the already-comparable pure-UV first-shell submeasure into the natural-window/critical-shell route and to bind resolved-contact supply through the actual smooth `V/h` decomposition without inventing an interface owner or a fresh Hahn law.
 
 No 3D Navier--Stokes global-regularity conclusion is asserted.

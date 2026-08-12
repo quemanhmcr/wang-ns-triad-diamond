@@ -1,6 +1,6 @@
 # Hard-tail true upward supply: radial boundary feeding before UV continuation
 
-Status: **candidate theorem block; certification requires dedicated, independent adversarial/actual-NS, and full causal-integration GitHub Actions gates.**
+Status: **CERTIFIED** on exact theorem SHA `d064bc4d780d9c90d36e64c7b84c3b771b74c896`.
 
 Candidate status string:
 
@@ -260,7 +260,7 @@ Scaling actual amplitudes by `lambda` scales the trilinear internal work by `lam
 
 Hence no amount of high→high positive work proves direct feeding of tail stock.  This is why `Phi_up`, rather than `W_>^+`, is the native input to the sharpened high-tail continuation.
 
-## 10. What actual Navier--Stokes CI must test
+## 10. Actual Navier--Stokes certification design
 
 The evolved PDE audit keeps distinct observables distinct.
 
@@ -282,7 +282,7 @@ The selected triads are sub-observables of the evolved PDE.  They are not substi
 
 ## 11. Scope
 
-This theorem would close the seam
+This theorem closes the seam
 
 `physical hard-tail dissipation -> inherited stock OR gross positive tail regeneration`
 
@@ -290,11 +290,11 @@ into the sharper physical statement
 
 `physical hard-tail dissipation -> inherited stock OR true low-to-high boundary supply`.
 
-On the upward branch it would additionally prove the exact support alternative
+On the upward branch it also proves the exact support alternative
 
 `pure-UV first-shell comparable HH OR resolved-scale parent contact`.
 
-It would **not** yet:
+It does **not**:
 
 - bind resolved-scale contact to the existing smooth `K/S` interface owner;
 - identify the pure-UV submeasure with an aggregate hard-shell Hahn law formed later;
@@ -303,4 +303,14 @@ It would **not** yet:
 - make `D_tail`, `N Phi_up`, or shell mass an additive reset;
 - prove mixed-owner recurrence termination or Navier--Stokes global regularity.
 
-The next question after certification should be decided by which support branch survives actual work routing.  The pure-UV branch is already first-shell and comparable; the resolved-contact branch first needs a type-correct positive interface/repartition binding.  No shortcut should merge those two physical phenomena.
+The next question is decided by which support branch survives actual work routing.  The pure-UV branch is already first-shell and comparable; the resolved-contact branch first needs a type-correct positive interface/repartition binding.  No shortcut should merge those two physical phenomena.
+
+## 12. Certification record
+
+Exact theorem SHA: `d064bc4d780d9c90d36e64c7b84c3b771b74c896`.
+
+Dedicated `31615787742`, independent audit `31615787779`, and full physical-energy causal integration `31615787727` all completed successfully on that exact SHA. Both dedicated and integration full suites passed `892` tests. The dedicated/independent/integration artifact-tree digests are respectively `sha256:95147ccdcd456a1b8362c3c62846b88100574a9710806b7f475f974f01099f59`, `sha256:72dc78c0c7bae44fb3eae5bd5a2dd8875da100dba1b9cb9fb6e93b80f0871d6c`, and `sha256:1c38edfed2b05843bb0eff21629390c923dc45b6ca575bf9aa912cc11033ae3e`.
+
+The independent `100,000`-state support audit checked `100,032` upward atoms: `67,003` pure-UV and `33,029` resolved-contact, with `26,414` deep atoms, zero pure-UV deep violations, and maximum pure-UV parent/shell ratio `1.49628423384 < 3/2`. The evolved deep fixture retained simultaneous deep-contact and first-shell pure upward submeasures. The full six-mode Galerkin referee reconstructed `Phi_up-Phi_down` against direct signed tail work with worst native residual below `5.4e-17`, while nonzero internal high-tail circulation remained separate.
+
+Failure lineage is recorded in `docs/experimental_certification_log.md`. Experimental metrics and run history now live there rather than in the compact research ledger.

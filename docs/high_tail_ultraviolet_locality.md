@@ -1,5 +1,8 @@
 # High-tail HH ultraviolet locality is a dissipation/mass tradeoff
 
+
+> **Current placement.** `hard_tail_true_upward_supply.md` proves that the pure-UV part of actual low→high supply can occur only at `M=2N` and already has comparable parents.  Therefore this locality theorem remains valid and useful for the broader historical HH-output law, but it is no longer needed to *discover* comparability on the pure-UV true-supply submeasure.  Deep true-upward atoms belong instead to the resolved-scale-contact branch.
+
 ## 1. Read locality before coherent refinement
 
 After the common-unit high-tail theorem, suppose HH is a physical regeneration owner.  The relevant scale law is not the positive Hahn atom mass.  It is the actual hard-output-shell work

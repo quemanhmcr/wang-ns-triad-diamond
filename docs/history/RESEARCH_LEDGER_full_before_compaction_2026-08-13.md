@@ -1,0 +1,2976 @@
+# Research Ledger — current canonical architecture for the 3D Navier–Stokes rigidity programme
+> **Purpose.** This file is the compact current-state map of the programme.
+> It is organized by the physical structure of the Navier–Stokes dynamics, not by discovery date.
+> The full chronological research history, including superseded routes, failed fixtures, and detailed CI provenance, is frozen in [`docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`](docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md).
+> The present ledger is intended to let another mathematical physicist understand the proof architecture quickly and identify exactly what is proved, what is conditional, and what remains open.
+
+---
+
+## 0. Executive state
+We study the 3D incompressible Navier–Stokes system
+\[ \partial_tu+\mathbb P\nabla\cdot(u\otimes u)=\nu\Delta u, \qquad \nabla\cdot u=0, \]
+through scale-critical physical observables, exact Fourier/coherent decompositions, material transport, and causal positive-work laws.
+The current architecture has reached the following point.
+1. The physical child-energy cause is actual positive nonlinear work, not a normalized Duhamel amplitude.
+2. Smooth moving roles and event-anchored hard roles have an exact PDE interface.
+3. Objective source terms have been routed to native physical owners: resolved dissipation, coherent SGS service, hard pressure pairs, or viscosity.
+4. Generic critical hard-shell mass has a certified own-scale first-stop/service reentry theorem.
+5. High strain is converted to critical lower-frequency resolved ancestors and then to own-scale service.
+6. Fresh SGS service is quotiented by coherent-cell refinement and converted to an actual hard-shell seed through a canonical LP scale law.
+7. High-frequency coherent service is converted to physical hard-tail energy and then to inherited critical shells or actual regeneration work.
+8. High-tail regeneration now has a complete physical continuation chain:
+   - common-unit causal HH/interface ownership;
+   - resolved interface quotient to same-event conservative donor provenance or existing strain/deformation;
+   - exact binary HH work atomization;
+   - ultraviolet locality paid by physical tail dissipation;
+   - sliding natural-time concentration;
+   - actual critical hard-shell reentry with forward scale progress.
+9. Material labels are a sidecar quotient: pure label/family changes do not create a second carrier impulse.
+10. Exact ties are retained as joint physical cause sets; no lexicographic theorem priority is canonical.
+11. No critical energy or normalized dissipation event is treated as a scale-independent additive reset.
+12. The continuum master now separates physical time from event topology: relay depth is quotiented, bounded-scale no-hit checkpoint continuation hits `t=0` by real corridor time, and full-natural horizon endpoints do not become event vertices merely because one natural window ended. Global termination remains open.
+13. The resolved cross/interface branch is no longer an independent recursive generator: for the actual resolved low--high operator `L_V=K+S`, skew `K` is finite same-event conservative donor flux while symmetric `S` is existing strain/deformation ownership. Pure interface circulation is quotiented before recursion.
+14. The propagated smooth-carrier interface is now type-correct at energy and ownership level: `Q^2` is the carrier energy effect; common affine/Kelvin role motion is quotiented by `dot A+[G,A]=0`; only residual skew `K_phys` is physical relink; raw HH/interface coefficient hits remain first-stop locators until actual energy/work reentry.
+15. A completed full-natural critical-shell corridor carries its own-scale service as a same-interval physical witness; OO/ON/NN rereading adds zero depth, and the endpoint carrier has a same-time two-shell cover at ratios `3/4` or `3/2`, with the actual shell masses deciding the unique/joint witness set.
+16. A complete no-hit natural horizon is an analysis checkpoint, not a carrier lifetime or recursive event.  If no physical stop fires there, the same event-anchored smooth carrier, terminal dual and cumulative native first-hit monitors continue across the horizon; checkpoint hard-shell readings remain state sidecars and cannot reset the filtration.
+17. Checkpoint Zeno is now quotiented as segmentation of one continuous carrier path: at an interior accumulation the cumulative observables either attain an existing closed first-stop face or the same carrier crosses the accumulation.  A geometrically UV-growing checkpoint reading sequence remains a diagnostic counterexample to time-only reasoning, but it is not a physical lineage.  The master frontier is therefore genuine physical-owner recurrence, not a second checkpoint-UV branch.
+18. Smooth residual-skew `K_phys` relink is now also topologically quotiented without denying its physics: the exact gauge-quotiented `T_ab^{phys}` matrix is antisymmetric same-event flux, every positive relink recipient has finite negative-net donor closure, and relink creates no child recursive event.  A simultaneous `S` branch remains existing strain/deformation ownership.
+19. Consecutive high-strain recurrence now has a native viscous telescope without demoting high strain from genuine ownership: every high-strain event pays `D_j>=D_*`, its actual `D_V|_G` ancestor renews at `N_(j+1)/N_j<=3/16`, and interval restriction plus low-pass contraction gives `D_j<=N_j G_*` for the physical global gradient reservoir `G_*`.  Thus every pure high-strain epoch is finite even under complete time overlap, while mixed-owner recurrence remains open.
+20. Consecutive signed-good generated-HH recurrence now also has a native parabolic physical-time telescope without turning generation into an event-count cost: a raw `|I_HH|` hit is only a locator; after actual `Q^2` energy reentry selects positive HH child-work and the hard parent is certified `3/5<N_p/N_c<5/8`, parent natural lifetimes grow by more than `64/25` and the asynchronous common registration surfaces move backward by at least `(1792/4875)T_j`.  Their cumulative backshift reaches absorbing `t=0` after finite consecutive signed-good generated depth.  Generic/non-signed-good HH remains open.
+21. Actual unordered helical HH interactions now have native same-event registration, canonical positive-edge routing, **and a certified mixed-fate reserved Young/Christ handoff before any generated-ancestry continuation**.  The continuum law is reconstructed signed, `mu=dW`, before its Hahn-positive causal law `mu^+=dW^+` is restricted by native edge efficiency `r_e=(J_e/J_*)c_e`.  Geometry/phase-bad positive work, including every positive nonforward edge with `J_e=0`, terminates through the shared fixed-transfer interface as `TRANSFER_WORK_LOSS` with `first_time=None`; geometry-good work remains only Young-eligible until the full signed hard-cell theorem fires.  Hard cells now carry the three direct pushforwards `pi_#dW`, `pi_#dW^+`, and `pi_#dW^-`.  Writing `T_C=g_C+b_C-n_C`, the reserved deficit `1-(T_C-b_C)/Y_C` is only a certificate, never a new work law, and equals the full signed Young deficit plus `b_C/Y_C`.  Thus a mixed cell may pass Young/Christ exactly when the already-terminal bad-positive contribution fits inside the unused Christ margin; nondegenerate-margin failures are quantitatively dominated by actual terminal bad-positive plus canonical negative work on low-native-deficit blocks.  The local frontier has therefore moved beyond mixed fate and beyond the same-time triad structure of canonical negative work: cyclic closed-triad conservation now disintegrates canonical `dW^-` into the already-existing canonical `dW^+` recipient law with zero added event depth.  The hard-cell single-charge layer is now also closed: restricted `pi_#dW^-` rows push to the already-existing good/bad `pi_#dW^+` recipient charges exactly once, even under overlapping donor support and coarse self-loops, with zero added event depth and no scale progress.  What remains locally is degenerate full-signed Young margin and any separately needed positive coherent kernel.  The strictly separate between-time negative-work ledger is now also registered: cyclic donor flow on physical helical-mode nodes combines with modal energy stock and viscosity to give exact mode-set boundary continuity, with internal nonlinear traffic cancelling from the set divergence and no FIFO/LIFO or gross-transfer budget.  Its radial specialization is now certified: Fourier exteriors separate true low→high and high→low crossing from high→high circulation, and integration over `dR/R` gives the exact truncated logarithmic displacement of the same physical donor/recipient atoms.  Equiradial positive transfer supplies zero radial action, so transfer itself has no minimum scale progress.  The next scale-facing seam is the interface between true upward boundary supply and the existing hard-tail dissipation/locality route.
+There is **no claim here of a proof of global regularity for 3D Navier–Stokes**.
+
+---
+
+## 1. Physical normalization and canonical scale variables
+Fix a parent block frequency `N>0`.
+Its natural parabolic time is
+\[ T_N=cN^{-2}, \]
+where `c>0` is a dimensionless lifetime coefficient.
+For a hard shell
+\[ A_M=\{M/2<|\xi|\le M\}, \]
+write
+\[ E_M(t)=\|P_Mu(t)\|_2^2, \qquad \mu_M(t)=M E_M(t). \]
+`mu_M` is the basic scale-critical hard-shell mass.
+For a block-scale resolved transporter
+\[ V=S_{N/4}u, \qquad h=u-V, \]
+use normalized resolved dissipation
+\[ D_V=N\int_I\|\nabla V\|_2^2dt. \]
+For a physical hard tail
+\[ w=P_{>N}u, \]
+use
+\[ D_{tail}=N\int_I\|\nabla w\|_2^2dt. \]
+The conserved/global physical kinetic-energy scale is
+\[ E_{global}=\sup_t\|u(t)\|_2^2. \]
+The scale-critical version at block scale `N` is
+\[ \mathcal E_N=N E_{global}. \]
+This quantity may appear as a denominator in scale-critical capacity inequalities.
+It is **not** a finite reset budget.
+A critical event at frequency `M` costs physical energy on the order `mu/M`, so geometrically increasing frequencies can have summable physical-energy cost.
+Likewise normalized dissipations such as `D_V` have physical viscous cost `nu D_V/N` and are not scale-independent reset currencies.
+The repository therefore distinguishes carefully between:
+- scale-critical event size;
+- physical energy/dissipation cost;
+- causal probability law;
+- deterministic concentration coordinate;
+- representation/interface error;
+- genuinely globally bounded scale-independent resources.
+These objects are never interchangeable merely because they have comparable numerical size.
+
+---
+
+## 2. The governing methodological principle
+The architecture is built around one rule:
+> **Quotient observer freedom before charging physics.**
+A mathematical representation may introduce cells, frames, cutoffs, covariance charts, packet labels, shell orientations, or time coordinates.
+Such choices are not physical owners unless changing them changes an actual Navier–Stokes observable.
+The current canonical quotients are:
+### 2.1 Common affine/Kelvin motion is free
+Common affine motion is a gauge.
+For affine flow `Ldot=A L` and Kelvin covector `kdot=-A^T k`, the intrinsic material coordinate
+\[ \zeta=(L^{-1}X/2,L^Tk) \]
+is invariant.
+No charge is assigned merely because the observer follows the common affine/Kelvin frame.
+### 2.2 Resolved cutoff change is a repartition gauge
+For any resolved field `V`, `h=u-V`, and smooth scalar role `Q`, the cutoff-dependent nonlinear expression
+\[ G_V=-L_V(Qu)+Q B(V,V)-Q B(h,h)+(L_VQ-QL_V)u \]
+satisfies exactly
+\[ G_V=-Q B(u,u). \]
+Changing from `S_{N/4}u` to a renewed cutoff `S_{M/4}u` does not create a new source.
+It repartitions the same nonlinearity between transport, HH source, and interface work.
+### 2.3 Hard interaction roles are event-anchored; hard shell state may also be reread at checkpoints
+Hard Fourier/helical projectors that resolve actual nonlinear interaction roles are used at physical events and are not propagated as packets. A hard shell energy observable may also be reread at a no-hit analysis checkpoint; that state reading does not make the checkpoint an event. Smooth scalar PDE envelopes are the objects propagated through the intervening corridors.
+If `P` is the event hard projector and `Q` is smooth with `QP=P`, then
+\[ \langle Pu,\phi\rangle=\langle Qu,P\phi\rangle. \]
+Hard projection does not need to be differentiated in time.
+The propagated smooth carrier is not a hard projector. Its physical energy is
+\[ \boxed{\|Qu\|_2^2=\langle u,Q^2u\rangle.} \]
+A complete smooth analysis may use a square partition
+\[ \sum_a A_a^2=I. \]
+That identity is analysis bookkeeping, not by itself a physical transfer law.
+Before any moving-window exchange is charged, the common affine/Kelvin transport generator `G` must be identified and the roles must satisfy
+\[ \boxed{\dot A_a+[G,A_a]=0\quad\text{for every }a.} \]
+This common motion is observer gauge and is quotiented. Only residual skew work after that quotient may be called physical relink.
+### 2.4 Material labels are sidecars
+Pure old/new label changes do not create a second carrier impulse when the smooth carrier `Q` and dual `psi` are unchanged.
+The coefficient identity remains
+\[ z(t)=z(s)+I_{HH}+I_{interface}. \]
+OO/ON/NN is reread from actual positive service whenever needed.
+A selected-family change is controlled by its symmetric-difference physical energy.
+### 2.5 Exact ties are joint causes
+If multiple physical causes hit at the same first time, the preferred master stores the unsplit joint cause set.
+There is no theorem-name ordering.
+Fine Radon–Nikodym splitting is optional bookkeeping only.
+### 2.6 `t=0` is absorbing
+Backward recursion stops exactly at the initial surface.
+The initial boundary is not a fresh interior event.
+### 2.7 Only true globally bounded resources may reset additively
+A normalized critical event such as `D_V~1` or `NE~1` is not enough.
+Its physical cost can decay like `1/N` along geometric high-frequency chains.
+An additive reset is permitted only when the resource is genuinely scale-independent and globally bounded in the physical problem.
+### 2.8 Natural horizons are checkpoints unless physics fires
+A theorem may inspect one native parabolic interval without creating an event at its endpoint.
+For a generic shell at incoming frequency `M`, the actual no-hit corridor runs at `A=3M/4` for time `cA^-2`. If no physical first stop occurs and `t=0` is not reached, that elapsed time is real Navier--Stokes evolution but the earlier endpoint is only an analysis checkpoint.
+Hard-shell rereading there is state observation. The actual pair `(mu_A,mu_2A)` decides which endpoint shell is realized; the observer may not choose the `3M/2` cover branch to manufacture UV progress.
+
+
+### 2.9 A natural service horizon is not a carrier lifetime
+Once a physical event has anchored the smooth carrier `Q_A` and terminal dual,
+the exact carrier/adjoint equations continue on the smooth pre-singular interval
+until a native physical stop or `t=0`.  A completed `cA^-2` service horizon does
+not authorize a restart.
+
+Across any inserted no-event checkpoints the canonical monitors remain cumulative
+from the same terminal event:
+\[
+K_A[s,t],\qquad |I_R[s,t]|,\qquad |I_{HH}[s,t]|.
+\]
+`K_A` is a positive strain action and is monotone as the backward interval grows.
+The two coefficient impulses are complex cumulative integrals; their magnitudes
+may decrease by phase cancellation.  Therefore checkpoint segment magnitudes are
+**not** added and are never reinterpreted as work.
+
+If infinitely many analysis horizons accumulate at an interior smooth time, the
+continuous/absolutely-continuous cumulative observables either attain an existing
+closed first-stop face at the limit or retain strict margin and the same carrier
+continues across the accumulation.  Only an actual new physical event may harden
+a new causal role.  `t=0` remains absorbing.
+
+### 2.10 Signed continuum work is reconstructed before Hahn
+For an actual Fourier HH event, quotient representation freedom first and keep the
+nonlinear law signed.  The canonical continuum edge measures are
+\[
+ dW=C_FT_e\,d\Lambda_{edge},\qquad
+ dA=C_FA_e\,d\Lambda_{edge},\qquad
+ dF=J_ec_e\,dA,
+\]
+with `C_F=(2pi)^(-3/2)`.  Here `dW` is signed physical child-energy work, `dA` is
+a positive interaction-capacity **reference** and `dF` is signed upper-progress
+work.  Only after exact signed reconstruction may the Hahn law `dW^+` be formed.
+Never replace `[integral T]_+` by `integral [T]_+`, and never promote `dA` into
+the causal work law.
+
+The quotient base measure being Radon and the weighted physical measures having
+finite variation are separate proof obligations.  The current continuum theorem
+supplies both: the joint child/unordered-parent quotient has density `1/16` in
+`(z,r)=(x+y,x-y)`, while finite Fourier energy gives on every bounded Borel child
+block `B`
+\[
+ A(B)\le4\sqrt2\,C_F E^{3/2}\left(\int_B|z|^2dz
+ight)^{1/2},
+\]
+and hence `|W|(B)<=A(B)` and `|F|(B)<=J_*A(B)`.  This is local measure existence,
+not a scale tax or resource budget.
+
+
+---
+
+## 3. Canonical observables and their meanings
+The following objects play distinct roles.
+### 3.1 Physical positive child-energy work
+For a carrier/coefficient `c` and physical source `F`, the positive work element is
+\[ dT=2[\operatorname{Re}\langle c,F\rangle]_+dt. \]
+This is the canonical causal weight when the event represents actual child-energy generation.
+### 3.2 Signed nonlinear work
+Before taking positive parts, keep the signed work.
+Backscatter is physically real.
+Positive/negative Hahn splitting is applied only after exact signed reconstruction.
+### 3.3 Duhamel amplitudes
+Duhamel identities provide exact support and adjoint transport information.
+They are **not** causal probability laws by themselves.
+The old identification `dGamma=dT` is false.
+### 3.4 Critical shell mass
+\[ \mu_M=M\|P_Mu\|_2^2. \]
+This is a recursive shell-state strength.
+It is not a globally finite event count.
+### 3.5 Coherent increment service
+Square increment/heat service is a positive physical measure useful for SGS routing, high-strain routing, and material ownership.
+Its positive Moyal disintegration may be read by shell, material endpoint, or LP band.
+### 3.6 Deterministic concentration coordinates
+Examples:
+\[ H_\infty^{scale}=-\log p_{max}, \qquad H_2=-\log\sum_jp_j^2. \]
+These are logarithmic coordinates of a specified positive physical measure.
+They are not automatically causal child-energy entropy.
+The measure must always be named.
+### 3.7 Causal Shannon/Rényi information
+Shannon/Rényi reuse applies only to a genuine causal law built from actual physical child-work.
+Do not substitute a source/service concentration law unless a theorem explicitly identifies the two.
+### 3.8 `Xi`
+`Xi` records controlled representation/interface losses that are not native physical generation.
+Common affine motion and exact cutoff repartition do not belong to `Xi`.
+Genuine covariance mismatch, symbol freezing, selected-family switch, or nontrivial role interface may contribute only through certified interfaces.
+### 3.9 Physical owner sets
+A master event may simultaneously own several native causes.
+The code should return the realized set, not the first true branch in source order.
+
+---
+
+## 4. Physical energy causal bridge
+The first decisive correction to the old ancestry picture is that normalized Duhamel mass is not physical child-energy work.
+Let the carried energy satisfy an energy inequality of the form
+\[ E_1\le e^{2K}(E_0+W_{HH}^++W_R^+). \]
+On the low-strain branch
+\[ K\le1/30, \]
+with
+\[ E_0<E_1/5, \qquad W_R^+<E_1/5, \]
+one obtains
+\[ \boxed{W_{HH}^+\ge\frac{8}{15}E_1.} \]
+This theorem has one precise purpose:
+- it compares actual positive HH work with terminal child energy.
+It is **not** required merely to define a causal HH work law.
+This distinction matters later in high-tail regeneration.
+A positive HH law exists before the `8/15` generated-energy gate.
+The gate is needed only when the subsequent theorem requires productivity relative to child energy.
+
+---
+
+## 5. Exact coherent binary work atomization
+Let `A_C` be an exact coherent analysis/synthesis partition resolving identity.
+Bilinearity gives
+\[ \mathcal N(w_1,w_2)=\sum_{C,D}\mathcal N(A_Cw_1,A_Dw_2). \]
+Resolving the child as well gives signed atoms
+\[ W_{CDE} =2\operatorname{Re}\langle A_Ew_3, \mathcal N(A_Cw_1,A_Dw_2)\rangle. \]
+Exactly,
+\[ \sum_{C,D,E}W_{CDE}=W_{HH}. \]
+Define
+\[ P=\sum[W_{CDE}]_+, \qquad N=\sum[-W_{CDE}]_+. \]
+Then
+\[ P-N=W_{HH}, \qquad P\ge[W_{HH}]_+. \]
+Thus every positive HH event admits an exact binary physical parent-work law.
+This atomization does not require:
+- Duhamel pair weights;
+- packet persistence;
+- Young near-extremality;
+- a child-energy gate;
+- a coherent cell mass floor.
+The coherent cells answer **which parent/child roles participate in work**.
+A separate energetic material anchor may later answer **which material reservoir carries a parent role**.
+Do not identify those two questions.
+
+---
+
+## 6. Smooth moving carriers and the exact outer-role PDE
+Set
+\[ V=S_{N/4}u, \qquad h=u-V, \]
+and
+\[ L_Vf=\mathbb P\nabla\cdot(V\otimes f+f\otimes V). \]
+For a time-dependent scalar divergence-free Fourier role
+\[ w=Q(t,D)u, \]
+one has exactly
+\[ (\partial_t+L_V-\nu\Delta)w =Q B(V,V)-Q B(h,h)+(\partial_tQ+[L_V,Q])u. \]
+On the low-strain affine-dual-transport branch, the moving support of `Q` stays above `N/2`.
+Since
+\[ \operatorname{supp}\widehat{B(V,V)}\subset B_{N/2}, \]
+one gets persistent low-low exclusion:
+\[ Q B(V,V)=0. \]
+Therefore
+\[ \boxed{ (\partial_t+L_V-\nu\Delta)w =-Q\mathbb P\nabla\cdot(h\otimes h)+R_Q, } \]
+with
+\[ R_Q=(\partial_tQ+[L_V,Q])u. \]
+The first term is the genuine HH quadratic source.
+The second is an outer-equation forcing term; its work is not the commutator pairing by itself.
+For the smooth carrier, with `eta=Q^2`, the native carrier-energy identity is
+\[ \boxed{\frac d{dt}\|Qu\|_2^2+2\nu\|\nabla Qu\|_2^2
+=\langle u,\partial_t(Q^2)u\rangle-2\operatorname{Re}\langle Q^2u,B(u,u)\rangle.} \]
+The native resolved interface work is
+\[ J_Q=\langle u,\partial_t(Q^2)u\rangle-2\operatorname{Re}\langle Q^2u,L_Vu\rangle, \]
+and the outer-role equation reproduces it exactly only after diagonal resolved work is restored:
+\[ \boxed{J_Q=2\operatorname{Re}\langle Qu,R_Q\rangle-2\operatorname{Re}\langle Qu,L_VQu\rangle.} \]
+There is no separate pressure forcing in this Leray-projected role equation.
+## 7. Exact Egorov structure and coherent deformation
+For convolution kernel `K_N`, after subtracting the affine jet `A=\nabla V(X)`, the exact scalar commutator is
+\[ (\dot Q+[V\cdot\nabla,Q])f(x) = \int K_N(y) [V(x)-V(x-y)-Ay]\cdot\nabla f(x-y)dy. \]
+A center Hessian sampled only at `X` does **not** control all nonaffine effects.
+There are smooth strict-lowpass divergence-free counterexamples with
+\[ V(0)=0, \quad \nabla V(0)=0, \quad \nabla^2V(0)=0, \quad \nabla^3V(0)\ne0. \]
+The correct affine-invariant observable is coherent deformation variance.
+With Gaussian coordinate `z`, define
+\[ F(z)=L^{-1}\nabla V(X+Lz)L, \qquad \bar A=\mathbb E_\gamma F, \]
+and
+\[ K_{coh}^2 = \mathbb E_\gamma\|F-\bar A\|^2. \]
+Common affine flow gives `K_coh=0`.
+Gaussian Poincaré controls it by averaged Hessian information across the coherent eddy.
+The certified Hermite residual bounds include
+\[ \mathbb E|R|^2\le K_{coh}^2/2, \qquad \mathbb E|z|^2|R|^2\le7K_{coh}^2. \]
+The nonaffine interface therefore has physical coherent-deformation provenance.
+It is not arbitrary packet error.
+
+---
+
+## 8. Nonaffine role-interface work
+Write the resolved linear role operator as
+\[ L_V=K+S, \qquad K^*=-K, \quad S^*=S. \]
+For a complete orthogonal **hard event-role** partition, the `K` pair work is antisymmetric conservative same-event flux and the `S` pair work is symmetric strain/deformation. This is the hard donor/circulation theorem.
+For the propagated non-idempotent smooth carrier, do not import hard-projector algebra. Complete the carrier by `sum_a A_a^2=I`, then first quotient the actual common role transport:
+\[ \dot A_a+[G,A_a]=0. \]
+After this has been verified, write
+\[ K=G+K_{phys}. \]
+The moving partition work cancels the common `G` work exactly. Only `K_phys` remains as antisymmetric conservative **physical** relink, while `S` remains the existing strain/deformation work.
+Thus conservation of channel exchange is not enough to make an observer-selected window motion physical. A role change caused only by observer gauge or cutoff repartition is free; residual `K_phys` relink is physical, but the later donor quotient shows that this physical redistribution remains at the same event and adds no recursive generation depth.
+The hard event-role and smooth propagated measures share `K/S` provenance but are not identified as the same measure without an explicit physical-work pushforward.
+## 9. Coherent averaged strain source and service-or-flat gate
+The affine/Kelvin carrier uses a coherent averaged resolved gradient.
+The exact moving-average source equation has the form
+\[ \dot{\bar A} = -\bar A^2 -\langle a^2\rangle -\langle\nabla^2P\rangle -\langle\nabla\operatorname{div}R_{SGS}\rangle +\nu\langle\Delta A\rangle -\langle r\cdot\nabla A\rangle. \]
+The final term is handled exactly by integration by parts.
+The coherent nonaffine error obeys a resolved dissipation bound
+\[ I_K^2\le0.275568824559\,cD_V. \]
+For the canonical `q_max=4.71207563594`, the coherent service functional is
+\[ F_{coh} = \sqrt{E_H^{phys}} +(dT)_{nonconf} +C(q_{max})I_K, \]
+with
+\[ C(q_{max})=5.65481629117. \]
+At `tau=0.01`, sufficiently small `I_K` makes the nonaffine action less than one third of the service tolerance; otherwise the event routes to `D_V`.
+The gate returns **all** realized physical roots.
+It does not choose a lexicographic primary theorem.
+
+---
+
+## 10. Generic critical hard-shell reentry
+This theorem is the central recursive landing zone for many supplier mechanisms.
+Assume at an event time
+\[ M\|P_Mu(t)\|_2^2\ge\mu_0>0. \]
+Set
+\[ A=\frac34M. \]
+Choose a smooth scalar envelope `Q_A` equal to one on the whole hard shell.
+With canonical dual
+\[ \psi=P_Mu/\|P_Mu\|_2, \]
+one has terminal coefficient mass
+\[ A|z(t)|^2\ge\frac34\mu_0. \]
+Run the backward natural first-stop corridor with only native monitors:
+- renewed strain;
+- nonaffine/interface coefficient obstruction;
+- HH coefficient obstruction.
+No material boundary monitor is needed in the generic theorem.
+If a named stop occurs, route to its owner.
+If `t=0` is reached, stop at the initial boundary.
+If the full natural corridor survives, then every prefix satisfies
+\[ A|z(s)|^2\ge\frac{3\mu_0}{64}. \]
+Including registered affine/Kelvin/viscous dual growth `J`,
+\[ A\|Q_Au(s)\|_2^2 \ge \frac{3\mu_0}{64J^2}. \]
+A bounded heat-defect fraction then gives a uniform own-scale increment-service lower.
+The theorem records service only on a full no-hit survivor.
+It does not turn a shell seed into unconditional persistent service.
+Material identity is deferred until actual renewed service is reread.
+
+---
+
+## 11. High-strain route: from resolved strain to critical service
+For the strict transporter `V=S_{N/4}u`, Fourier Cauchy–Schwarz gives a scale-correct estimate of `||grad V||_infty`.
+On `T=cN^-2`,
+\[ K:=\int\|S_V\|_{op}dt \le \frac{\sqrt{cD_V}}{8\sqrt6\pi}. \]
+Hence
+\[ D_V\ge\frac{384\pi^2}{c}K^2. \]
+At the low-strain boundary
+\[ K=1/30, \]
+one obtains
+\[ \boxed{D_V\ge\frac{32\pi^2}{75c}.} \]
+Now decompose `V` into deterministic dyadic resolved annuli
+\[ M_j=(N/4)2^{-j}. \]
+Let
+\[ \mu_j=M_j\|P_ju\|_2^2. \]
+Choose
+\[ \mu_*=\frac{32\pi^2}{75c^2}. \]
+The low-mass portion of actual normalized resolved dissipation is at most half the high-strain lower.
+Therefore at least half of the actual `D_V` law lies on shell-time atoms satisfying
+\[ \mu_j\ge\mu_*. \]
+Every such ancestor has
+\[ M_j\le N/4, \]
+so its natural lifetime is at least `16` parent-block lifetimes.
+This is a resolved critical ancestor law, not a selected transfer parent law.
+The high-strain route can enter generic critical-shell service directly without an NN material entrance.
+
+The certified descending-epoch theorem now uses the **same physical ancestor law** to control repeated high strain.  If the next recursive owner is again high strain, the ancestor scale `M_j<=N_j/4` renews the next smooth carrier at
+\[ N_{j+1}=A_j=\frac34M_j\le\frac3{16}N_j. \]
+Let
+\[ G_*:=\int_0^{t_*}\|\nabla u(t)\|_2^2dt. \]
+No disjointness of the high-strain histories is required.  For every event, interval restriction and low-pass `L^2` contraction give
+\[ D_j\le N_jG_*. \]
+Together with `D_j>=D_*`, this gives the physical frequency floor
+\[ N_j\ge D_*/G_*. \]
+and the complete-overlap capacity
+\[ \sum_jD_j\le G_*\sum_jN_j\le\frac{16}{13}N_0G_*. \]
+Therefore a maximal consecutive high-strain epoch is finite.  This does **not** promote `D_V` to a global additive reset: the bound depends on the epoch root scale and on the actual physical `3/16` descent.  Another genuine owner breaks the epoch.
+
+---
+
+## 12. Heat increment service and material ownership
+The resolved heat-increment observable uses a Gaussian heat kernel at the block scale.
+For `V` supported below `N/4`,
+\[ e^{-1/32}\|\nabla V\|_2^2 \le N^2\int H_N(r)\|\delta_rV\|_2^2dr \le \|\nabla V\|_2^2. \]
+Thus normalized heat service satisfies
+\[ e^{-1/32}D_V\le S_{heat}\le D_V. \]
+The same critical shell-time set retains a fixed positive fraction of this service.
+Material endpoint labels are assigned in intrinsic coordinates.
+For a heat edge with endpoints
+\[ \zeta_0=(L^{-1}X/2,L^Tk), \qquad \zeta_1=(L^{-1}(X-r)/2,L^Tk), \]
+OO/ON/NN is an exact positive partition.
+Common affine/Kelvin transport preserves the labels.
+A membership change under continuous nonaffine evolution requires boundary contact.
+The local heat-edge capacity satisfies
+\[ |e^{-ik\cdot r}A_1-A_0|^2 \le2(|A_0|^2+|A_1|^2). \]
+Material ownership is therefore read from positive physical service, not imposed as a packet decomposition of `u`.
+
+---
+
+## 13. Old-pool erosion and NN critical seeds
+At a first high-strain contact, pre-hit strain remains below the boundary.
+Kelvin frequency growth is therefore bounded.
+On a supplied signed-good epoch, block scales advance by more than `8/5` while reused material frequencies grow only by the low-strain Kelvin factor.
+For old incident heat service, the clean one-generation capacity contraction is
+\[ \rho_{old}<\frac{441}{640}<0.7. \]
+This bound applies to OO plus ON, not only OO.
+Therefore mixed ON service cannot form a neutral infinite regime.
+Eventually a fixed positive fraction of high-strain heat service is NN.
+Combining this with the critical shell-time heat fraction by inclusion–exclusion gives a positive NN-critical heat sublaw.
+Push this law to its deterministic hard shell rather than selecting a largest coherent cell.
+If
+\[ M\|P_Mu(t)\|_2^2\ge\frac{32\pi^2}{75c^2}, \]
+renew at
+\[ A=3M/4. \]
+Then
+\[ A\|P_Mu(t)\|_2^2 \ge \frac{8\pi^2}{25c^2}. \]
+The canonical smooth whole-shell carrier therefore has a scale-independent critical coefficient.
+The NN endpoint mark remains material provenance.
+The whole `u` shell is **not** declared new material.
+
+---
+
+## 14. Fresh SGS service: quotient coherent-cell refinement first
+The coherent SGS service law is positive.
+Coherent-cell entropy depends on observer refinement and therefore is not canonical for renewal entrance.
+The intrinsic fresh/old ownership indicator is material.
+Push fresh positive service only to the fixed canonical LP band index.
+Let `F_j` be the integrated fresh service in band `j` and
+\[ F=\sum_jF_j. \]
+Coherent-cell refinement subdivides the same positive measure and leaves every `F_j` unchanged.
+Use a square-normalized dyadic annular LP frame
+\[ \sum_j\phi_j^2=1, \qquad |\phi_j|\le1, \qquad \operatorname{supp}\phi_j\subset\{M_j/2<|\xi|<2M_j\}. \]
+For one fresh band on scaled lifetime `c`,
+\[ F_j\le4\int M_j\|u_j\|_2^2d\tau_N. \]
+Hence at some time
+\[ M_j\|u_j\|_2^2\ge\frac{F_j}{4c}. \]
+The annular band touches at most two exact hard shells.
+Therefore one actual hard shell satisfies
+\[ \mu_{hard}\ge\frac{F_j}{6c}. \]
+If the total fresh law obeys the certified lower
+\[ F\ge Y/4, \]
+and
+\[ p_j=F_j/F, \qquad p_{max}=e^{-H_\infty^{scale}}, \]
+then
+\[ \boxed{ \mu_{hard}e^{H_\infty^{scale}} \ge \frac{Y}{24c}. } \]
+The collision-entropy corollary follows because `p_max>=sum p_j^2`.
+`H_inf^scale` is a service-scale concentration coordinate.
+It is not a child-energy causal entropy.
+Cell-dominance/ancestry entropy remains optional sideledger metadata only.
+
+---
+
+## 15. Objective source owner compiler
+Large coherent objective variation is grouped by physical source owner:
+\[ local\ D_V + pressure + SGS + viscosity. \]
+If the scaled objective source action is `A_obj`, then
+\[ \Sigma_{local}+\Sigma_P+\Sigma_R+\Sigma_\nu \ge A_{obj}/c. \]
+At least one physical owner carries at least one quarter of that total.
+Exact ties are joint.
+### 15.1 Local resolved owner
+The local coherent quadratic/Reynolds source satisfies
+\[ \Sigma_{local}\le C_{local}D_V. \]
+Thus it routes to resolved dissipation and then generic critical-shell reentry.
+### 15.2 Viscous owner
+The pointwise viscous source estimate has the form
+\[ \rho_\nu\le\nu\sqrt{d_V}/1500. \]
+Integrated source therefore forces a positive resolved dissipation lower and enters the generic shell theorem.
+### 15.3 Direct SGS owner
+The clean objective SGS collision gives
+\[ \|R\|_{3/2}\ge380\rho_R. \]
+Germano exponent `3/2` and coherent square-service exponent `2/3` cancel exactly.
+Thus integrated SGS source yields coherent increment service **linearly** in source weight.
+No packet persistence is needed.
+The resulting service routes jointly to any realized native owners:
+- high-frequency dissipation;
+- old-pool capacity;
+- selected-interface `Xi`;
+- fresh-scale critical shell.
+Source-code branch order has no theorem meaning.
+### 15.4 Pressure owner
+Pressure is handled by direct objective-Hessian pair atomization, not by aggregate low-pass mass.
+The old `mu_V/5700` pressure reservoir inequality remains diagnostic only.
+
+---
+
+## 16. Objective pressure: exact dual split and unordered hard pairs
+Let the actual coherent objective pressure Hessian matrix be `H`.
+Use the measurable Frobenius dual
+\[ Z=H/\|H\|_F \]
+when `H!=0`, otherwise `Z=0`.
+Then
+\[ \rho_P=Z:H. \]
+Split pressure exactly into resolved `V\otimes V` and SGS-pressure parts.
+After positive parts,
+\[ \rho_P \le [r_{SGS}]_+ + \sum_{a\le b}[p_{ab}]_+. \]
+This is source positivity, not a child-energy causal law.
+Decompose only the resolved transporter into hard orthogonal dyadic shells.
+Use **unordered** physical pairs `{a,b}`:
+- diagonal once;
+- off-diagonal with both orientations combined.
+This removes fake observer-orientation entropy.
+The pressure stress-to-Hessian symbol has Frobenius operator norm at most `|xi|^2`.
+No hidden Riesz `L^(3/2)` constant is needed.
+The clean pair capacity is
+\[ |p_{ab}| \le \frac{\kappa_{ab}}5 \left(\frac{M_{max}}N\right)^4 \sqrt{\mu_a\mu_b}, \]
+with
+\[ \kappa_{ab}=1 \]
+on the diagonal and
+\[ \kappa_{ab}=2 \]
+off diagonal.
+The positive pressure owner splits:
+- SGS pressure source at least `Sigma_P/2`, or
+- resolved positive pair source at least `Sigma_P/2`;
+with ties joint.
+For the pair law, its collision entropy `H_2^P` and shell mass obey the continuous relation
+\[ \boxed{ \mu_{child}e^{H_2^P} \ge 320\frac{\Sigma_P}{c}. } \]
+Thus every resolved pressure-pair owner already enters generic critical-shell reentry.
+The familiar quarter split is only a corollary:
+- `q_max>=1/4` gives `mu_child>=80 Sigma_P/c`;
+- `q_max<=1/4` gives `H_2^P>=log 4`.
+There is no separate diffuse-pressure fate.
+The coarse aggregate `mu_V` pressure route is not canonical.
+
+---
+
+## 17. Pressure derivative orders must remain separate
+Objective pressure Hessian and H1 pressure-third terms have different derivative order.
+They must not share one reuse coefficient theorem.
+For a fixed material objective-Hessian pair, the signed-good low-strain generation ratio is bounded by
+\[ (21/20)^5(5/8)^4 = 4084101/20971520 <1/5. \]
+Thus future fixed-pair Hessian capacity is geometrically summable with factor below `1/5`.
+For pressure-third,
+\[ (21/20)^4(5/8)^3 = 194481/655360 <1/3. \]
+The derivative distinction is structural, not bookkeeping.
+The fixed-material reuse theorem is optional after material sidecars are attached.
+It is not the pressure renewal entrance.
+
+---
+
+## 18. High-frequency coherent service to physical hard-tail owners
+The coherent `D_high` observable is a smooth LP quantity.
+It is not identical to physical hard-tail dissipation.
+Use a square-normalized Calderón analysis–synthesis frame
+\[ u_j=\phi_j(D)u, \qquad \sum_j|\phi_j|^2=1. \]
+With high-band lower support `aM_j` and square-Bessel upper `B`, Plancherel gives
+\[ D_{tail}\ge c_{LP}D_{high}, \qquad c_{LP}=a^2/B. \]
+Canonical values `a=1/2`, `B=1` give
+\[ \boxed{D_{tail}\ge D_{high}/4.} \]
+Do not relabel `D_high` as resolved `D_V`.
+For
+\[ w=P_{>N}u, \]
+physical tail energy obeys
+\[ N\|w(s)\|_2^2+NW_>^+ \ge 2\nu D_{tail}. \]
+Thus one of two native owners carries at least `nu D_tail`:
+1. inherited tail energy;
+2. positive nonlinear regeneration.
+### 18.1 Inherited tail energy
+Hard-shell disintegration gives an actual shell `M_j>=2N` satisfying
+\[ M_j\|P_ju(s)\|_2^2 \ge \nu D_{tail}. \]
+This is an immediate generic critical-shell seed.
+### 18.2 Regeneration
+Orthogonal shell work satisfies
+\[ \sum_jW_j^+\ge W_>^+. \]
+At each shell choose `V=S_{M_j/4}u`.
+Low-low output is below the child hard shell.
+Therefore signed shell work is exactly HH plus resolved mixed/interface work.
+Positive parts give
+\[ W_{shell}^+ \le W_{HH}^++W_{interface}^+. \]
+This regeneration owner is **not automatically** the generated-energy productivity branch.
+Actual HH child-work and interface work continue through their own physical routes.
+
+---
+
+## 19. High-tail causal unit: `N dW`, not own-scale reweighting
+For high-tail regeneration, cross-shell causal comparison must use a common physical work unit.
+The canonical unit is
+\[ N\,dW, \]
+where `N` is the parent block scale whose tail energy identity generated the owner.
+From the hard-tail energy branch,
+\[ NW_>^+\ge\nu D_{tail}. \]
+Hard-shell disintegration gives
+\[ \sum_jNW_j^+ \ge NW_>^+. \]
+Low-low exclusion yields
+\[ H_N^++I_N^+ \ge \sum_jNW_j^+. \]
+Hence actual positive HH or interface work carries at least
+\[ \boxed{\nu D_{tail}/2.} \]
+with exact ties joint.
+If HH owns the event, exact coherent Hahn atomization gives a binary positive physical child-work law with total mass at least the same clean lower.
+Do **not** normalize by `M_jdW_j` across shells.
+That changes relative causal probabilities by the observer's scale-dependent unit.
+Own-scale weights `M_jdW_j` may be read only after the common-unit causal law exists, as a strength diagnostic.
+Causality and scale strength are different observables.
+
+---
+
+## 20. High-tail Fourier locality without a local-triad assumption
+Push the actual positive HH common-work law to hard output shell level:
+\[ H_j=N\int[r_{HH,j}(t)]_+dt. \]
+Normalize
+\[ p_j=H_j/H, \qquad H=\sum_jH_j. \]
+Choose the maximal output shell `M=2^jN` and set
+\[ H_\infty^{out}=-\log p_{max}. \]
+This scale law is read **before coherent Hahn refinement**.
+Atomic positive Hahn mass is not a substitute because cancellation can enlarge it and change `p_max`.
+For any field Fourier-supported above `K`,
+\[ \|\widehat f\|_{3/2} \le \left(\frac{4\pi}{3}\right)^{1/6} K^{-1/2}\|\nabla f\|_2. \]
+If one parent feeding child shell `M` lies above `RM`, triad closure forces the other above `(R-1)M`.
+On these UV parent frequencies, the strict transporter `S_{M/4}u` vanishes, so `h=u` exactly.
+Combining both high-pass parent bounds, the child shell bound, and sharp Young collapses the constant to
+\[ \boxed{3\sqrt\pi}. \]
+If
+\[ \mu_{peak}=\max_t M\|P_Mu(t)\|_2^2, \]
+then
+\[ NW_{UV}^{abs} \le \frac{3\sqrt\pi}{\sqrt{R(R-1)}} \sqrt{\mu_{peak}}D_{tail}. \]
+The canonical theorem is the **continuous** locality-radius relation
+\[ \boxed{ \frac{W_{comp,R}e^{H_\infty^{out}}}{D_{tail}} + \frac{3\sqrt\pi}{\sqrt{R(R-1)}} \sqrt{\mu_{peak}}e^{H_\infty^{out}} \ge \frac\nu2. } \]
+`R` is a physical locality-radius parameter, not a stop class.
+For `R=2`, a readable balanced corollary is
+\[ \mu_{peak}e^{2H_\infty^{out}} \ge \frac{\nu^2}{72\pi} \]
+or
+\[ W_{comp,2}e^{H_\infty^{out}} \ge \frac{\nu D_{tail}}4. \]
+The first owner is already a critical shell.
+The second leaves actual positive comparable-parent HH work.
+Only after this Fourier theorem is proved may the comparable source be coherently atomized.
+Locality is a PDE triad property, not a coherent-cell property.
+
+---
+
+## 21. High-tail natural-time concentration and shell reentry
+This closes the current high-tail temporal seam.
+Suppose the certified Fourier locality route carries the clean comparable-HH owner on selected shell
+\[ M=2^jN, \qquad j\ge1. \]
+Then
+\[ T_N=cN^{-2}, \qquad T_M=cM^{-2}=4^{-j}T_N. \]
+Let `mu_comp` be the actual positive comparable-work measure on the parent block.
+Define the sliding natural-window fraction
+\[ \boxed{ p_t = \frac{\sup_s\mu_{comp}([s,s+T_M])} {\mu_{comp}(I)}. } \]
+Set
+\[ H_\infty^{time}=-\log p_t. \]
+There is no fixed time grid.
+For smooth Navier–Stokes the positive comparable-work density is continuous, so the sliding integral is continuous and its maximum is attained on the compact admissible start interval.
+The fraction `p_t` is invariant under:
+- translation of the time origin;
+- simultaneous rescaling of time units and density;
+- subdivision/refinement of a representation of the same positive measure.
+The theorem API requires the concentration window to equal the selected shell's exact `T_M`.
+A concentration number measured on another scale cannot be attached by hand.
+The canonical strict cutoff currently certifies only
+\[ |S|\le1, \]
+hence
+\[ \|h\|_2\le2\|u\|_2. \]
+For comparable parents `<=RM`, sharp physical Young gives
+\[ r_{comp} \le 12\sqrt\pi\,R\,M^2E_{global}\sqrt{\mu_{win}}, \]
+where
+\[ \mu_{win} = \max_{t\in I_*}M\|P_Mu(t)\|_2^2. \]
+Integrating on `T_M=cM^-2` cancels `M^2`:
+\[ W_{win}^{phys} \le 12c\sqrt\pi\,R\,E_{global}\sqrt{\mu_{win}}. \]
+In the high-tail common causal unit,
+\[ NW_{win} \le 12c\sqrt\pi\,R\,N E_{global}\sqrt{\mu_{win}}. \]
+The locality owner gives
+\[ W_{comp}/p_{scale} \ge \nu D_{tail}/4. \]
+Since
+\[ W_{win}=p_tW_{comp}, \]
+one obtains
+\[ \boxed{ \frac{\sqrt{\mu_{win}}}{p_{scale}p_t} \ge \frac{\nu D_{tail}} {48c\sqrt\pi\,R\,N E_{global}}. } \]
+Equivalently,
+\[ \boxed{ \sqrt{\mu_{win}} \exp(H_\infty^{out}+H_\infty^{time}) \ge \frac{\nu D_{tail}} {48c\sqrt\pi\,R\,\mathcal E_N}, \qquad \mathcal E_N=NE_{global}. } \]
+For `R=2`, the denominator is
+\[ 96c\sqrt\pi\,\mathcal E_N. \]
+The peak `mu_win` is an actual hard-shell event and enters generic critical-shell first stopping.
+Hard-tail support also supplies genuine scale geometry:
+\[ M/N=2^j\ge2, \]
+and
+\[ T_M/T_N=4^{-j}\le1/4. \]
+This progress does not use signed-good Young near-extremality.
+Full-survivor own-scale service remains conditional on the generic shell corridor.
+
+---
+
+## 21.5 Native helical physical-edge registration before Young
+For one actual unordered helical parent pair `x,y` feeding `z=x+y`, write
+`u_x=a_x h_(s_x)(x)`, `u_y=a_y h_(s_y)(y)`, `u_z=a_z h_(s_z)(z)`.
+Using the incompressible identity `-P(u.grad u)=P(u x omega)`, the two parent orders form one physical unordered orbit. With the repository Waleffe convention, direct Leray/curl evaluation gives exactly
+\[
+\langle h_z,F_z\rangle=2(s_x|x|-s_y|y|)\overline{g_e}\,a_xa_y.
+\]
+The child-energy convention supplies the second factor two, so
+\[
+\boxed{T_e=4(s_x|x|-s_y|y|)\operatorname{Re}(\overline{a_z}\,\overline{g_e}\,a_xa_y).}
+\]
+The same edge therefore has the native modal interaction capacity
+\[
+\boxed{A_e=4|z|\,|a_xa_ya_z|,}
+\]
+not a Young norm product. Put
+\[
+g_e^{scale}=\log_+\frac{|z|}{\max(|x|,|y|)},
+\qquad
+J_e=g_e^{scale}\frac{|s_x|x|-s_y|y||\,|g_e|}{|z|},
+\]
+and let `c_e` be the signed phase/orientation alignment of the same modal product. Then exactly
+\[
+\boxed{T_e g_e^{scale}=A_eJ_ec_e.}
+\]
+Parent-order exchange, reciprocal helical basis gauge, and uniform wavevector dilation preserve the physical identity in their correct covariant form.
+
+This theorem is deliberately prior to Young/Christ. Young is a downstream comparison theorem for blocks of real edges; it is not the definition of `A_e`. Likewise `T_e>0` does not imply `J_e>0`: positive nonforward child work remains physical but carries zero upper-progress multiplier. The companion continuum theorem now supplies the signed unitary-Fourier edge measure, exact parent/helicity provenance, local Radon variation and native block deficit without changing this one-edge ontology.
+
+## 21.6 Continuum helical edge measure: signed NS work before Hahn
+Put `z=x+y` and `r=x-y`.  Then
+\[
+ dx\,dy=
+rac18dz\,dr,
+\]
+and parent exchange acts on complete parent mode objects by
+`(r,s_x,s_y)->(-r,s_y,s_x)`.  After the finite parent-order quotient the joint
+outer-child base measure has exact density
+\[
+oxed{d\Lambda_{edge}=
+rac1{16}\,dz\,dQ_\#(dr\otimes\#_{s_x,s_y})\,d\#_{s_z}.}
+\]
+Helicity remains attached to its physical wavevector; it is not quotiented away.
+Each regular triad fiber contains exactly the eight distinct helicity assignments,
+and arbitrary divergence-free Fourier vectors reconstruct direct Navier--Stokes
+work by summing those eight physical edges.
+
+With the unitary Fourier factor `C_F=(2pi)^(-3/2)`, define
+\[
+ dW=C_FT_e\,d\Lambda_{edge},\qquad
+ dA=C_FA_e\,d\Lambda_{edge},\qquad
+ dF=g_e^{scale}dW=J_ec_e\,dA.
+\]
+`dW` is signed physical work; `dA` is a positive capacity reference and is not
+causal.  Signed reconstruction precedes Hahn splitting, so edge-positive work may
+strictly exceed the positive part of an aggregated signed fiber/block when phase
+or helicity cancellation occurs.
+
+The one-edge provenance is hardened pointwise: `|T_e|<=A_e` even on nonforward
+backscatter edges, and the typed continuum atom binds helicity to the actual parent
+wavevector.  Duplicate helicity sectors cannot manufacture an eight-edge fiber.
+On bounded child blocks finite Fourier energy yields
+\[
+ A(B)\le4\sqrt2\,C_FE^{3/2}\left(\int_B|z|^2dz
+ight)^{1/2},
+\]
+therefore `dA`, signed `dW` and signed `dF` are locally finite physical Radon
+measures without a UV parent cutoff.
+
+The same law supplies the native block efficiency
+\[
+R_B=F(B)/(J_*A(B)),\qquad \epsilon_B=1-R_B.
+\]
+No caller may inject this deficit.  On the signed-good capacity core
+`(J_e/J_*)c_e>1-10^-4`, the normalized actual positive-work and capacity laws are
+within the certified `50/53..53/50` Radon--Nikodym band, supplying the physical
+transfer-defect moat.  Positive nonforward work remains in `dW^+` with `J_e=0`;
+it is not silently renamed signed-good.
+
+This closes continuum **measure registration**, not generic HH recurrence.  The
+next sharp seam is to route the canonical positive edge law itself: geometry/phase
+bad actual work must enter native transfer loss, geometry-good actual work may
+only become eligible for the separate signed hard-cell Young test, and no later
+analysis coarsening may create a second causal Hahn law.
+
+## 22. Physical pair productivity: what the energy gate is actually for
+When a generated child-energy branch satisfies the physical energy gate, use actual positive child-work as the probability law.
+For one physical pair-work density,
+\[ r_e(t) \le C_Y N a_c a_1a_2. \]
+KL positivity against normalized time × hard pair-cell reference gives
+\[ \mathbb E_{dT}\log(a_1a_2) \ge \mathbb E_{dT}\log a_c + \log\Lambda_j. \]
+This is the correct multiplicative productivity statement.
+It does not identify Duhamel pair weights with physical work weights.
+Amplitude imbalance between the two parents is allowed.
+Only their transfer-weighted logarithmic product matters.
+Common-slice registration and dual-Gaussian marking contribute finite multiplicative constants.
+The energy gate is therefore a **productivity gate**, not a **causality gate**.
+High-tail HH work can be causal before this gate.
+
+---
+
+## 23. Complex Young and dual-Gaussian parent marking
+Near-extremal physical pair work can mark parent roles without asserting absolute parent mass.
+For a frozen selected cell, if weighted transfer is large relative to the normalized parent shape and symbol error is small, complex Young gives a lower bound on the normalized parent transfer coefficient.
+The Christ near-extremizer theorem is used at the modulus/shape level.
+Restoring actual amplitude preserves trilinear homogeneity.
+Therefore:
+- normalized shape rigidity can force a scale-critical coefficient;
+- it cannot force an absolute physical root mass independently of amplitude.
+The dual-Gaussian mark gives a nearby energetic parent identity anchor.
+Bargmann submean plus Moyal yields a physical cell energy proportional to the **square of the actual parent amplitude**.
+The canonical normalized Bargmann cell constant is small but scale independent.
+It is not an absolute root-energy quantum.
+
+---
+
+## 24. Common-slice registration and asynchronous support
+Duhamel remains useful as an exact support/adjoint identity.
+It provides common backward reference slices for generated roles.
+On the signed-good generated lineage, parent/child scale ratios give compatible natural-time windows.
+At a common slice the exact coefficient identity is
+\[ z(t)=z(s)+I_{HH}+I_R. \]
+A triangle split gives the alternatives
+\[ |z(s)|\ge A/4, \]
+or
+\[ |I_R|\ge A/4, \]
+or
+\[ |I_{HH}|\ge A/2. \]
+The first is retained carrier amplitude.
+The second and third are coefficient **first-stop locators**, not physical work owners.
+A large coefficient impulse alone is **not** automatically large physical work.
+At a coefficient hit the same smooth carrier must reenter the actual `Q^2` energy law. For an interface hit, the common observer gauge must additionally be quotiented before gauge-quotiented native work is Hahn-routed to residual physical relink provenance or existing strain; relink then passes through finite same-event donor closure and is excluded from recursive ownership, while any simultaneous strain remains eligible. HH generation is named only when the physical-energy gate selects actual positive HH work.
+Raw coefficient-obstruction labels are forbidden from entering the canonical master physical-owner state directly.
+
+The certified signed-good generated-epoch theorem now closes the **consecutive physical depth** of the HH-generation subroute once those type gates have actually fired.  Restrict the same positive HH child-work law to its physical heavy half-slab.  If the actual hard parent satisfies
+\[
+\frac35<\frac{N_p}{N_c}<\frac58,
+\]
+then `T_p/T_c>64/25`.  For physical parent-work support `H_j=[a_j,b_j]`, put
+\[
+s_j=a_j-\frac25T_j.
+\]
+The heavy-half geometry gives `|H_j|/T_j<=25/128<10/39`, and a consecutive generated lineage requires only `H_(j+1) subset [s_j,b_j]`.  The existing asynchronous support theorem then yields
+\[
+s_j-s_{j+1}\ge\frac{1792}{4875}T_j,
+\qquad
+s_0-s_L\ge\frac{1792}{7605}T_0\left[\left(\frac{64}{25}\right)^L-1\right].
+\]
+Thus at finite physical time the required backward **registration surface** reaches `t=0` after finite signed-good generated depth.  The surfaces `s_j` are not event vertices, and no lower bound is imposed on the separation of the actual HH event times.
+
+## 25. Recursive first stopping and joint master projection
+The recursive physical witness constructor acts on retained **actual positive work** after the relevant physical gate.
+`Xi` is excised once before causal routing.
+At each physical event, the preferred master records the first actual cause set.
+Coefficient threshold debuts are recorded one layer earlier as typed first-stop locators. They are not admitted to the canonical physical-owner set until actual `Q^2` energy/work reentry resolves them.
+Terminal semantics are:
+1. `t=0` → absorbing initial boundary;
+2. fixed multiplicative transfer/reuse cost → `TRANSFER_COST`;
+3. genuine scale-independent globally bounded resource → `ADDITIVE_RESET`;
+4. source/SGS, critical dissipation, new ancestry/material relink, HH regeneration, shell reentry → `RECURSE_CRITICAL`.
+Exact simultaneous causes remain one joint set.
+No lexicographic priority is canonical.
+No dummy RN tie weight may alter the coarse physical fate.
+If a fraction `q` of generated physical work survives all earlier first stops and registration, then the physical productivity constant becomes
+\[ \Lambda_{survivor}=q\Lambda_{full}. \]
+If
+\[ q\ge1/2, \]
+the logarithmic conditioning penalty is at most `log 2`.
+If
+\[ q<1/2, \]
+a majority of actual current work has already stopped through a named cause or entered an earlier HH regeneration.  The latter is not automatically an epoch exit: if physical `Q^2` reentry resolves it as signed-good HH generation, it enters the certified parabolic generated-epoch telescope; otherwise it remains generic HH recursion.
+There is no fourth free continuation branch.
+
+---
+
+## 26. Shannon/Rényi reuse: only under genuine causal weights
+For generated child events, each event has two structural parent slots.
+Under the actual positive child-work law, physical pair productivity gives a recursive lower bound on expected log parent amplitude.
+Bargmann/Moyal gives an energy budget for distinct material anchors proportional to parent amplitude squared.
+The log-sum inequality then bounds root entropy without assuming a uniform root mass floor.
+The old hypothesis
+\[ NE_{root}\ge\eta \]
+for every root is unnecessary and generally incompatible with Young homogeneity.
+The correct entropy bound uses
+\[ H(w_{root})+2\mathbb E\log\alpha_r \le \log\sum_r\alpha_r^2. \]
+The Shannon telescope retains a positive linear depth slope after finite logarithmic productivity losses.
+Because
+\[ H_2\le H_1, \]
+Rényi reuse obtains the same structural lower.
+A rich layer then routes to existing parent-pair, component-entropy, or same-ancestry-cycle structures.
+This machinery applies to a genuine causal law.
+Do not feed it fresh-SGS scale entropy, pressure-pair source entropy, or high-tail output-scale concentration merely because all are written with `H` symbols.
+
+---
+
+## 26.5 Continuum master event quotient: physical time, not theorem depth
+The first final-master assembly theorem is now certified.
+Its central correction is that theorem depth is not recursion depth.
+Same-law owner relays preserve one unsplit physical measure, while certified witness relays may change observable and units without creating a second causal charge.
+Thus source/SGS/pressure/service/shell compiler layers are quotiented before recursive depth is charged.
+The canonical recursive state contains only:
+- actual physical event time;
+- a supplied physical shell/carrier frequency;
+- the named physical owner measure;
+- the unsplit joint physical cause set;
+- optional material or diagnostic sidecars.
+There is no common normalized master clock and no theorem-priority coordinate.
+For any ordered backward physical event or checkpoint times,
+\[ \boxed{\sum_j(t_j-t_{j+1})=t_0-t_L.} \]
+A no-hit physical corridor at its own corridor frequency `M` consumes exactly
+\[ cM^{-2} \]
+of backward Navier--Stokes time unless that corridor reaches `t=0`, which is absorbing.
+An interior no-hit horizon is an analysis checkpoint and contributes zero physical event vertices.
+Hence if a no-hit checkpoint continuation has corridor frequencies bounded by `Mbar`, then after at most
+\[ \boxed{\left\lceil t_*Mbar^2/c\right\rceil} \]
+such physical corridors the initial boundary is forced.
+The checkpoint and same-carrier quotients sharpen the topology: no-hit horizons add zero event vertices and do not restart the event-anchored carrier. Thus any infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events.
+A geometrically growing checkpoint-reading sequence still demonstrates that physical time alone is insufficient, because for diagnostic scales `M_j=M_0r^j`, `r>1`,
+\[ \sum_{j\ge0}cM_j^{-2}=\frac{cM_0^{-2}}{1-r^{-2}}<\infty. \]
+The same-carrier theorem shows that this geometric sequence is a diagnostic observer construction, not a physical lineage.
+Scale progress remains supplier-specific:
+- generated signed-good HH: `3/5<N_next/N<5/8`;
+- resolved `D_V` ancestor: `N_next/N<=1/4`;
+- resolved pressure pair: `N_next/N<=1/4`;
+- high tail: `N_next/N>=2`;
+- fresh SGS: only `N_next/N<=2`, with no directional progress theorem;
+- generic shell, material/reuse, and unresolved HH regeneration: no synthetic scale progress.
+The natural master Bellman object is therefore typed/direct-product rather than scalar.
+Physical time and actual log shell scale telescope kinematically; actual multiplicative transfer cost, work-weighted causal reuse, `Xi`, and each genuinely globally bounded resource telescope only in their own native ledgers.
+Own-scale service generated by a completed no-hit corridor is a same-interval witness and adds zero event depth. Independent source/service/reuse events remain physical owners. No service quantity is promoted to an additive finite resource.
+Fresh/high-tail `H_inf/H2` remain diagnostic concentration coordinates and are forbidden from entering causal Shannon/Rényi action.
+This theorem is an assembly/quotient theorem only; it does not prove global no-escape or Navier–Stokes regularity.
+
+---
+
+## 26.6 Resolved interface is flux/strain, not a third generator
+The resolved cross/interface branch is now structurally quotiented before master recursion.
+At a shell-time event, fix the actual resolved low--high linearized operator on the selected high field and take its adjoint split
+\[
+L_V=K+S,\qquad K^*=-K,\qquad S^*=S.
+\]
+For a complete orthogonal event-role partition `w_a=P_a h`, the signed resolved role work splits exactly as
+\[
+R_a=R_a^K+R_a^S.
+\]
+Hence atom by atom
+\[
+[R]_+\le [R_K]_+ + [R_S]_+.
+\]
+The two pieces have different but already native physical meanings.
+The `S` part is the existing symmetric strain/deformation work and delegates once to the coherent-deformation, high-strain, objective-source, or critical-`D_V` owners.
+The `K` part is conservative role redistribution.  Its pair work satisfies
+\[
+T_{ab}=-T_{ba},\qquad R_a^K=\sum_bT_{ab}.
+\]
+With `F_{b->a}=[T_{ab}]_+`, every role set `C` obeys the exact finite-role divergence identity
+\[
+\boxed{\sum_{a\in C}R_a^K=F_{C^c\to C}-F_{C\to C^c}.}
+\]
+Therefore any role with positive skew gain has a finite backward donor closure containing an actual negative-net donor.  After cycles are deleted, a donor path has at most `#roles-1` edges.
+All such donor tracing occurs at the same physical event time.  Internal role circulation is real redistribution but is neither energy generation nor a new recursive PDE generation; it creates no second causal charge and no scale progress.
+The full resolved mixed-work observable and the moving-projector commutator observable are companion readings of the same `K/S` operator provenance; they are not identified as the same measure.
+On the clean high-tail interface owner, the unchanged common `N dW` law gives
+\[
+W_{interface}^+\ge\nu D_{tail}/2
+\quad\Longrightarrow\quad
+W_K^+\ge\nu D_{tail}/4
+\quad\text{or}\quad
+W_S^+\ge\nu D_{tail}/4,
+\]
+with exact ties joint.
+No `M/N` causal reweighting, new entropy, synthetic clock, or interface reset is introduced.
+This closes resolved interface as an independent recursive-generation loophole; hard skew donor tracing is same-event provenance, while any symmetric strain owner reached afterward still requires its own termination law.
+
+---
+
+## 26.7 Smooth propagated interface: `Q^2` energy and observer-gauge quotient
+The hard event-role donor theorem does not directly apply to the propagated smooth non-idempotent envelope.
+For `w=Qu`, the physical carrier energy is
+\[ \boxed{E_Q=\|Qu\|_2^2=\langle u,Q^2u\rangle.} \]
+A complete smooth analysis uses `eta_a=A_a^2` with
+\[ \sum_a\eta_a=I. \]
+The native smooth-interface row is
+\[ J_a=\langle u,\partial_t\eta_a u\rangle-2\operatorname{Re}\langle\eta_a u,L_Vu\rangle. \]
+It is also exactly the outer Heisenberg work minus the diagonal resolved work, so the commutator is never interpreted alone.
+
+The decisive quotient comes before ownership. Let `G` be the common skew generator of the affine/Kelvin transport actually used to propagate all smooth roles. Require
+\[ \boxed{\dot A_a+[G,A_a]=0\quad\forall a.} \]
+Then
+\[ \langle u,\partial_t\eta_a u\rangle-2\operatorname{Re}\langle\eta_a u,Gu\rangle=0. \]
+Writing the actual skew resolved operator as
+\[ K=G+K_{phys}, \]
+the common observer motion disappears and only
+\[ -2\operatorname{Re}\langle\eta_a u,K_{phys}u\rangle \]
+remains as smooth physical relink. Its synthesis-pair matrix is antisymmetric and has zero total work. The symmetric `S` rows reconstruct the existing resolved strain/deformation work.
+
+The certified smooth-relink donor quotient now sharpens the skew topology.  The same `GaugeQuotientedInterfaceWork` certificate stores
+\[ T_{ab}^{phys}=-2\operatorname{Re}\langle\eta_a u,K_{phys}\eta_bu\rangle, \]
+with `T_ab^{phys}=-T_ba^{phys}` and row sums exactly equal to the signed relink rows.  Thus `F[b->a]=[T_ab^{phys}]_+` is physical same-event flux.  Closing backward under positive inflow from all positive-net relink recipients reaches a negative-net donor in finitely many roles; internal cycles cancel from every subset divergence identity.  Smooth and hard interface measures remain distinct; only the abstract finite antisymmetric-flux lemma is shared.
+
+Consequently `conservative_smooth_role_relink` is physical provenance but not a recursive generation owner.  Pure relink creates no child `RecursiveEventState`; in an exact relink/strain tie, relink is quotiented at the same event while `S` remains the recursive strain/deformation owner.
+
+A square partition whose motion is chosen independently by the observer may still exchange channel energy with zero total. That fact is **not** sufficient for physical ownership. Such motion is rejected unless it satisfies the certified common transport equation above.
+
+The common-slice coefficient thresholds `|I_R|>=A/4` and `|I_HH|>=A/2` are therefore typed first-stop locators only. They cannot enter `RecursiveEventState` or `PhysicalOwnerBundle` as physical owners. The same carrier must first reenter actual `Q^2` energy/work causality. Interface work is owner-eligible only after the observer gauge has been quotiented; HH generation is owner-eligible only after actual positive HH work is selected.
+
+This closes the smooth-envelope/projector mismatch, the arbitrary-moving-window loophole, the coefficient-locator/master type hole, and—after the later donor quotient—smooth conservative-relink recursion depth. It creates no new interface currency and does not prove termination of the remaining genuine physical owners reached afterward.
+
+---
+
+## 26.8 Full-natural service is a corridor witness, not a second event
+A generic critical shell which survives its full backward natural interval has already traversed the physical corridor
+\[
+I=[t-cA^{-2},t],\qquad A=\frac34M.
+\]
+The own-scale bounded heat/increment service proved on that interval is a genuine positive Navier--Stokes observable, but it is supported on the **same completed corridor**. Reading that service does not create another event time, causal charge, or recursion edge.
+
+The same is true of its material reading. Exact Moyal disintegration gives
+\[
+S_{OO}+S_{ON}+S_{NN}=S_{service}.
+\]
+OO/ON/NN are positive submeasures of the same service law. They may certify downstream physical states, but their mere rereading adds zero recursion depth.
+
+The surviving smooth carrier is already present at the earlier corridor endpoint. Its transported support lies inside
+\[
+(A/2,2A).
+\]
+Splitting into the exact hard shells `(A/2,A]` and `(A,2A]`, with
+\[
+\mu_A=A\|P_Au\|_2^2,\qquad \mu_{2A}=2A\|P_{2A}u\|_2^2,
+\]
+gives
+\[
+A\|Q_Au\|_2^2\le \mu_A+\frac12\mu_{2A}
+\le\frac32\max(\mu_A,\mu_{2A}).
+\]
+Hence
+\[
+\boxed{\max(\mu_A,\mu_{2A})\ge\frac23A\|Q_Au\|_2^2.}
+\]
+This is a same-endpoint hard-shell witness set. Relative to the incoming shell `M`, its frequencies are `3M/4` and `3M/2`. This is comparable-scale geometry, not monotone progress. Exact ties remain joint.
+
+Therefore a chain whose apparent extra layers are only
+
+`full natural corridor -> own-scale service -> Moyal/material rereading -> endpoint survivor`
+
+contains one real physical corridor, but if no first stop fires its natural-horizon endpoint contributes zero physical event vertices.  The subsequent checkpoint and same-carrier theorems sharpen this further: the endpoint does not restart the carrier, so repeated service/checkpoint rereading cannot manufacture a new causal corridor chain.
+
+This closes service-theorem depth, endpoint-service attachment, and no-event horizon restart.  Independent source/service/reuse and genuine high-tail work events remain physical; their recurrence is the unresolved problem.
+
+---
+
+## 26.9 Full-natural horizons are analysis checkpoints, not events
+For a generic critical shell at incoming frequency `M`, the actual no-hit theorem runs at the renewal scale
+\[
+A=\frac34M,\qquad T_A=cA^{-2}.
+\]
+A physical first stop before `T_A` remains event-facing after its required routing, and `t=0` remains absorbing. If neither occurs and the whole interval survives, the elapsed `T_A` is genuine Navier--Stokes time but the earlier endpoint was selected only because the theorem chose one natural horizon. It is therefore an **analysis checkpoint**, not a new `RecursiveEventState`.
+
+The endpoint smooth carrier may be reread through the two exact hard shells at `A` and `2A`. Their ratios to the incoming shell are `3/4` and `3/2`, but this is checkpoint-cover provenance rather than high-tail provenance. Production re-registration accepts the actual endpoint critical masses `(mu_A,mu_2A)`, invokes the exact hard-shell realization internally, returns the unique physical maximum or the full exact tie, and never accepts an observer-chosen frequency branch.
+
+Thus the upper `3M/2` witness is a genuine state observable when its mass wins, but its appearance does not by itself prove nonlinear UV generation, directional progress, or a high-tail owner. The independently certified high-tail route keeps its own physical `D_tail`/work provenance.
+
+Checkpoint reading chains telescope their real physical corridor time exactly while adding zero event vertices and zero causal charges.  A geometrically growing sequence of such readings may still have finite total natural-window duration, so physical time alone is insufficient.  The certified same-carrier segmentation theorem supplies the missing type information: without a new physical event, those readings do not replace `Q_A` or reset its cumulative first-hit filtration and therefore are not a physical lineage.
+
+---
+
+## 26.10 Same-carrier checkpoint segmentation: natural horizons do not restart the PDE carrier
+Let a genuine physical shell event at time `t` anchor the smooth carrier `Q_A` and
+its terminal dual.  The exact outer-role/adjoint equations do not contain a
+carrier-expiry clause at the service horizon `cA^-2`.  While no native first-stop
+face has fired, the same carrier continues backward.
+
+The canonical event-to-endpoint monitors are always
+\[
+K_A[s,t],\qquad |I_R[s,t]|,\qquad |I_{HH}[s,t]|,
+\]
+with the **same** terminal coefficient setting the two coefficient thresholds.
+`K_A` is a positive cumulative strain action.  By contrast `I_R` and `I_HH` are
+complex cumulative impulses, so their magnitudes can decrease by phase
+cancellation.  Hence
+\[
+|I[s_2,t]|\neq |I[s_2,s_1]|+|I[s_1,t]|
+\]
+in general.  The master therefore preserves the cumulative event-anchored
+observable and forbids segment-by-segment magnitude addition or checkpoint reset.
+
+Inserting or deleting any finite family of no-event natural-horizon checkpoints
+leaves the first physical stop time and exact joint first-stop set unchanged.  A
+checkpoint may expose hard-shell energy as state sidecar information, but it may
+not replace the carrier, reset the terminal amplitude, reset the cumulative
+monitors, or define a causal scale lineage.
+
+For an infinite sequence of inserted checkpoints accumulating at an interior
+smooth time, continuity/absolute continuity of the native cumulative observables
+gives an exact dichotomy: a closed first-stop face is attained at the limit, or
+all faces retain strict margin and the **same carrier continues through the
+accumulation**.  If maximal no-hit continuation reaches `t=0`, the initial
+boundary absorbs.
+
+Thus the geometric UV checkpoint sum remains only an anti-theorem against a
+physical-time-only proof.  It is not a second physical escape mechanism.  Actual
+UV dynamics remains on the independently certified high-tail dissipation/work
+route when that route's physical hypotheses are genuinely satisfied.
+
+This closes checkpoint Zeno/re-hardening as a master seam.  It does not telescope
+infinitely recurring genuine physical owner events and makes no global
+Navier--Stokes regularity claim.
+
+---
+
+
+## 26.11 Signed-good generated HH is a finite parabolic epoch, not a regeneration counter
+The recursive label `HH_REGENERATION` by itself carries **no** scale progress.  It may have arisen from a coefficient locator or from a generic physical HH event, and neither fact authorizes signed-good geometry.
+
+The canonical typed route is:
+
+`HH coefficient obstruction`
+→ same smooth carrier reenters actual `Q^2` energy law
+→ physical-energy gate selects actual positive HH child-work
+→ restrict that same work law to a physical heavy half-slab
+→ read the same-time hard parent pair
+→ **only if** `3/5<N_p/N_c<5/8`, enter the signed-good generated epoch.
+
+Inside that epoch the parent natural lifetime grows by more than `64/25` per layer and the asynchronous common registration surfaces obey the exact geometric backward-shift law above.  Therefore a consecutive signed-good generated lineage has finite interior depth at finite physical time and terminates when its required registration surface reaches the absorbing initial surface.
+
+This is not a unit cost per generated event.  It is not a Duhamel-weighted causal law.  It does not say every comparable HH event is signed-good, and it says nothing about generic/nonlocal high-tail HH except that those routes must keep their own physical provenance.  Shannon/Rényi remains the native breadth/collision law for the generated ancestry; the present theorem concerns single-lineage parabolic depth.
+
+---
+## 27. Finite-dimensional rigidity modules: supporting geometry, not current PDE bottleneck
+Earlier layers of the programme established a large library of exact or certified finite-dimensional geometric facts.
+They remain important as local rigidity/registration tools but are no longer the main continuum seam.
+The essential surviving modules include:
+### 27.1 Helical triad geometry
+The helical decomposition identifies signed interaction geometry, extremal polarization, and phase constraints.
+Single-edge stability exposes a narrow signed-good region and log-scale progress window.
+### 27.2 Smooth log-scale cocycle
+Signed-good transfer produces controlled forward scale progress and bounded geometric defect.
+This remains the natural scale geometry on near-extremal generated lineages.
+It is distinct from hard-tail support progress `M/N>=2`.
+### 27.3 Scale holonomy and Hodge structure
+Reuse curvature, cycle defects, and Bellman/Hodge formulations quantify how repeated ancestry must either reuse structure or pay physical defects.
+### 27.4 Flat-network erosion
+Flat/cycle countermodels showed why purely combinatorial tree growth is insufficient.
+Spherical erosion, component entropy, multicommodity Hodge routing, and resistance stopping remove several finite-dimensional escape modes.
+### 27.5 Gaussian/affine grain modules
+Affine Gaussian dynamics, critical-grain energy, material phase lock, spin transport, curvature, and sideband structures motivated the later coherent/Kelvin framework.
+The current canonical continuum architecture uses only the pieces that survive exact gauge quotienting and physical ownership tests.
+Historical derivations and superseded packet formulations are preserved in the history note.
+
+---
+
+## 28. Anti-theorems and forbidden inferences
+The following statements are either false or non-canonical and must not silently re-enter the proof.
+### 28.1 Raw Duhamel mass is not physical work
+`dGamma=dT` is false.
+Use Duhamel for support/adjoint identities, physical positive work for causality.
+### 28.2 Large coefficient impulse is not automatically large physical work
+A Duhamel or interface coefficient impulse requires an independent energy/work theorem before being promoted to physical generation.
+### 28.3 Young shape does not create an absolute root mass floor
+Trilinear homogeneity allows arbitrary amplitude scaling.
+Any physical cell-energy quantum scales with the parent amplitude squared.
+### 28.4 Small-parent / large-reservoir is not a new currency
+Amplitude imbalance belongs inside multiplicative productivity or existing reservoir/service routing.
+### 28.5 Center Hessian alone does not close nonaffine transport
+Coherent deformation variance is the correct affine-invariant observable.
+### 28.6 Higher Hermite towers are not the canonical closure mechanism
+Use exact outer-role PDE plus native nonaffine/interface/source ownership.
+Do not create an infinite observer-chosen Hermite hierarchy merely to describe the same physics.
+### 28.7 Frozen packet/profile persistence is not assumed
+The architecture uses event hard roles, smooth moving carriers, first stopping, and sliding physical measures.
+### 28.8 Coherent-cell dominance is not canonical for fresh SGS renewal
+Fresh renewal uses the refinement-invariant LP band pushforward.
+Cell entropy/cycle is ancestry sideledger only.
+### 28.9 Aggregate `mu_V` is not the canonical pressure renewal entrance
+Pressure uses exact Frobenius dual source splitting and unordered hard pairs.
+The coarse `mu_V/5700` estimate is diagnostic only.
+### 28.10 `D_high` is not `D_V`
+Smooth LP high-frequency service must first be compared with physical hard-tail dissipation.
+### 28.11 Own-scale reweighting is not high-tail causal probability
+Across shells, use common `N dW`.
+`M_jdW_j` is a post-causal strength diagnostic.
+### 28.12 Atomic Hahn mass is not the high-tail output-scale law
+Locality is read from aggregate positive HH hard-shell work before coherent refinement.
+### 28.13 A chosen time partition is not natural-time concentration
+Use the sliding physical window `cM^-2`.
+The result must be invariant under time-origin and unit gauges.
+### 28.14 A concentration coordinate is not automatically causal entropy
+Always name the underlying positive measure.
+Pressure `H_2^P`, fresh `H_inf^scale`, high-tail `H_inf^out`, and `H_inf^time` are deterministic source/service/work concentration coordinates.
+Only the work-derived ancestry law is causal Shannon/Rényi input.
+### 28.15 Pure material relabeling is not a carrier impulse
+If `Q` and `psi` are unchanged, label-sidecar changes do not enter the coefficient identity a second time.
+### 28.16 Cutoff changes are not new sources
+The exact cutoff repartition identity forbids a cutoff-switch currency.
+### 28.17 Critical normalized energy/dissipation is not an additive reset
+Physical cost decays with scale.
+Only a globally bounded scale-independent resource may reset additively.
+### 28.18 Exact ties must not be broken by theorem priority
+The first actual physical causal root owns the event.
+Joint ties remain joint.
+### 28.19 Pressure Hessian and pressure-third are not one derivative theorem
+Their scale erosion coefficients differ and must remain separate.
+### 28.20 High-tail comparable work is not automatically productivity-good
+The natural-window theorem creates an actual critical shell from positive comparable work.
+It does not claim the HH work satisfies the generated-energy `8/15` gate.
+### 28.21 Conditional full-survivor service is not unconditional service
+A shell event enters a first-stop corridor.
+Service is recorded only if the full no-hit natural corridor survives.
+### 28.22 A critical shell is not automatically fresh material
+Material provenance is attached only by actual physical service/ownership information.
+
+---
+
+### 28.23 Conservative analysis-window exchange is not automatically physical relink
+A time-dependent square partition can move channel energies while their sum stays fixed even when the Navier–Stokes state is unchanged.
+Before charging relink, prove `dot A_a+[G,A_a]=0` for the common physical transport and quotient that gauge. Only residual `K_phys` work is physical relink.
+### 28.24 A coefficient first-stop locator is not a physical owner
+The labels produced when `|I_R|` or `|I_HH|` crosses its registration face describe where clean coefficient continuation failed.
+They are forbidden from the canonical physical-owner state until actual `Q^2` energy/work reentry resolves a physical owner.
+
+---
+
+### 28.25 A positive observable layer is not automatically a new physical event
+A full-natural own-scale service law is physically real, but when it is proved on the corridor just traversed it is a witness of that interval, not a second recursive event. Moyal/material disintegration of the same service measure likewise adds no event time or causal charge. A downstream theorem must supply an actual new state/time if it creates a new recursion edge.
+
+### 28.26 A theorem horizon and its cover branch are not physical dynamics
+Completing one natural no-hit window does not make its endpoint a physical event. The physical corridor time is retained, but the horizon is an analysis checkpoint unless a first stop or `t=0` occurs. Likewise, exposing hard shells at `A` and `2A` does not allow the analyst to choose a desired scale branch. The actual endpoint masses decide the unique/joint witness set, and checkpoint-cover provenance is not high-tail provenance.
+
+---
+
+### 28.27 A no-event checkpoint is not permission to restart the carrier
+Completing a natural service horizon does not expire `Q_A`, reset the terminal
+dual, or create a new event role.  Hard-shell energy may be reread there as state
+sidecar information, but without a physical stop the canonical event search
+continues on the same smooth carrier.  A checkpoint-generated scale sequence is
+not a causal lineage.
+
+### 28.28 A cumulative impulse magnitude is not an additive segment action
+For the fixed event-anchored dual,
+\[
+I[s_2,t]=I[s_2,s_1]+I[s_1,t],
+\]
+but in general
+\[
+|I[s_2,t]|\neq |I[s_2,s_1]|+|I[s_1,t]|.
+\]
+Phase cancellation is physical.  Never reset or add `|I_R|` / `|I_HH|` across
+analysis checkpoints, and never reinterpret those coefficient magnitudes as
+physical work.
+
+
+### 28.29 A regeneration label is not a signed-good epoch certificate
+`HH_REGENERATION`, a large `|I_HH|`, and actual positive HH work are three different typed objects.  The first is a recursive provenance label, the second is only a coefficient locator, and the third is a physical work law.  Signed-good scale/time geometry may be used only after actual physical HH work has been resolved to a hard parent satisfying `3/5<N_p/N_c<5/8`.  Never infer the parabolic epoch theorem from the word “regeneration” alone.
+
+### 28.30 Hahn splitting does not commute with continuum aggregation
+The physical Fourier law is signed before it is positive.  In general
+\[
+\int[T_e]_+\,d\Lambda\;>\;\left[\int T_e\,d\Lambda
+ight]_+
+\]
+when physical helicity/fiber cancellation is present.  Reconstruct the signed
+Navier--Stokes measure first, then take its Hahn decomposition.  A positive part
+formed after a different analyst aggregation is not automatically the same causal
+measure.
+
+### 28.31 A Radon base measure does not by itself give finite physical weights
+The joint unordered-parent quotient being locally finite Radon is only a statement
+about the geometric base measure.  The weighted capacity/work/progress measures
+need an independent physical variation bound.  Here that bound is supplied by the
+actual Fourier `L^2` energy and cubic Navier--Stokes homogeneity.  Never hide this
+step behind a UV cutoff or a normalized Young profile.
+
+### 28.32 Capacity is a reference law, not child-work causality
+`dA=C_FA_e dLambda` is positive and is the correct reference for multiplier/phase
+deficit.  The causal generation law is the Hahn-positive part of signed physical
+`dW`.  Capacity fractions may be compared to actual positive work only where an
+explicit physical Radon--Nikodym theorem has been proved; outside that domain no
+capacity-majority statement may be read as a causal-work majority.
+
+### 28.33 A later analysis Hahn split is not a second causal law
+Once the canonical signed Fourier/helicity edge law `mu=dW` has been reconstructed and Hahn-split, later hard/coherent/material labels may only inherit `mu^+` by a proved positive pushforward/disintegration.  For a measurable coarsening `pi`, `(pi_#mu)^+ <= pi_#(mu^+)` in general, with strict inequality under physical cancellation.  Re-Hahn splitting after an analyst refinement/coarsening is therefore representation-dependent and cannot replace the master causal law.
+
+### 28.34 Geometry-good capacity is not geometry-good causal-work majority
+The `50/53..53/50` Radon--Nikodym comparison is conditional on the already-selected signed-good core.  Outside that domain, two physical edges may satisfy `A_good>A_bad` while `T_bad^+>T_good^+`.  Therefore the next generic-HH split must restrict the actual `dW^+` law by edge efficiency; it may not infer causal majority from capacity majority.
+
+### 28.35 Geometry-good is not Young-good
+The edge quantity `r=(J/J_*)c` measures native geometry/phase efficiency.  Sharp Young/Christ saturation measures the signed hard-cell trilinear amplitude/profile relative to the frozen physical multiplier and `L^(3/2)` roles.  Passing the first test only makes physical work Young-eligible.  It does not set `marking_good=True`, and the signed cell work must retain cancellation before the Young ratio is formed.
+
+### 28.36 A stage-zero transfer fate is not a PDE event at `t=0`
+A fixed transfer-loss block is classified before any first-hit time is needed.  Canonical joint-stop semantics uses `first_time=None`; `t=0` is reserved for the absorbing initial boundary.  Canonical positive-edge routing now binds this same stage-zero semantics through the fine compiler as well.  Any reintroduction of `first_time=0.0` for fixed transfer loss is therefore a regression in physical time semantics, not a harmless sentinel choice.
+
+## 29. Structural constants worth remembering
+These constants are not all fundamental; many are clean certified envelopes.
+The important point is where each belongs.
+### Low strain
+\[ K_{low}=1/30. \]
+### High-strain normalized dissipation lower
+\[ D_*=\frac{32\pi^2}{75c}. \]
+### High-strain critical ancestor mass
+\[ \mu_*=\frac{32\pi^2}{75c^2}. \]
+### Renewed high-strain shell mass
+\[ \frac{8\pi^2}{25c^2}. \]
+### Energy-generated HH work fraction
+\[ 8/15. \]
+### Signed-good generated parent scale
+`3/5<N_parent/N_child<5/8`, hence `64/25<T_parent/T_child<25/9`.
+### Signed-good asynchronous registration backshift
+`s_j-s_(j+1)>=(1792/4875)T_j`; cumulative lower `(1792/7605)T_0[(64/25)^L-1]`.
+### Common-slice retained coefficient factor
+`1/4` on the clean survivor.
+### Heat-shell lower comparison
+\[ e^{-1/32}D_V\le S_{heat}\le D_V. \]
+### Old-incident heat erosion
+\[ 441/640<0.7. \]
+### Objective SGS clean source coefficient
+`380`.
+### Objective pressure resolved pair coefficient
+\[ \frac{\kappa_{ab}}5(M_{max}/N)^4\sqrt{\mu_a\mu_b}. \]
+### Pressure pair entropy-shell conjugacy
+\[ \mu_{child}e^{H_2^P}\ge320\Sigma_P/c. \]
+### Fresh SGS scale-shell conjugacy
+\[ \mu_{hard}e^{H_\infty^{scale}}\ge Y/(24c). \]
+### Smooth LP high-tail comparison
+\[ D_{tail}\ge D_{high}/4. \]
+### High-tail common-unit HH/interface owner
+\[ \ge\nu D_{tail}/2. \]
+### High-tail resolved-interface K/S component
+\[ \ge\nu D_{tail}/4. \]
+on the clean interface owner, in the same common `N dW` unit.
+### High-tail UV geometric constant
+\[ 3\sqrt\pi. \]
+### High-tail continuous locality theorem
+\[ \frac{W_{comp,R}e^{H_\infty^{out}}}{D_{tail}} + \frac{3\sqrt\pi}{\sqrt{R(R-1)}} \sqrt{\mu_{peak}}e^{H_\infty^{out}} \ge\nu/2. \]
+### Dyadic `R=2` locality corollary
+\[ \mu_{peak}e^{2H_\infty^{out}}\ge\nu^2/(72\pi) \]
+or
+\[ W_{comp,2}e^{H_\infty^{out}}\ge\nu D_{tail}/4. \]
+### High-tail natural-window capacity
+\[ NW_{win} \le12c\sqrt\pi\,R\,NE_{global}\sqrt{\mu_{win}}. \]
+### High-tail scale-time shell conjugacy
+\[ \frac{\sqrt{\mu_{win}}}{p_{scale}p_t} \ge \frac{\nu D_{tail}} {48c\sqrt\pi\,R\,NE_{global}}. \]
+### Hard-tail forward scale geometry
+\[ M/N\ge2, \qquad T_M/T_N\le1/4. \]
+These constants should not be promoted into stop taxonomies unless the theorem explicitly assigns that semantics.
+
+---
+
+## 30. Current canonical route map
+A useful compressed view is:
+### 30.1 Generated physical work route
+`terminal child energy`
+→ physical energy gate
+→ actual positive HH child-work
+→ exact coherent binary parent-work atoms
+→ physical pair productivity when needed
+→ common-slice first stopping
+→ material energy anchors
+→ Shannon/Rényi reuse or named physical stop.
+### 30.2 Objective source route
+`coherent objective variation`
+→ local / pressure / SGS / viscosity owner set
+→ local or viscosity: `D_V`
+→ generic critical shell;
+→ pressure: SGS or unordered hard pair
+→ coherent service or entropy-weighted critical shell;
+→ SGS: coherent increment service
+→ high-tail / old capacity / Xi / fresh scale shell jointly.
+### 30.3 High-strain route
+`renewed high strain at N_j`
+→ actual `D_j>=D_*` resolved dissipation
+→ dissipation-weighted critical resolved ancestor `M_j<=N_j/4`
+→ renewed carrier `N_(j+1)=3M_j/4<=3N_j/16`
+→ if the next owner is again high strain: remain inside the same descending high-strain epoch
+→ `D_j<=N_jG_*` for the global gradient reservoir, so the epoch has a physical frequency floor and finite weighted capacity even with arbitrary time overlap
+→ if another owner occurs: the high-strain epoch ends and recursion continues on that owner's native law
+→ heat increment service / material ownership / generic critical-shell service remain available as certified downstream witnesses.
+High strain remains a genuine recursive owner; only an eventually-pure high-strain tail is excluded.
+### 30.4 Fresh SGS route
+`positive fresh coherent service`
+→ quotient coherent-cell refinement
+→ canonical LP band law
+→ one of two hard shells
+→ critical shell first stopping.
+### 30.5 High-frequency route
+`smooth LP D_high`
+→ physical `D_tail`
+→ inherited hard-tail shell
+or
+→ actual nonlinear regeneration
+→ common-unit HH/interface owner.
+If the interface owner wins, it is immediately quotiented by `L_V=K+S`: `K` is same-event conservative donor provenance and `S` is existing strain/deformation ownership. Only genuine owners reached after that quotient enter recursive depth.
+### 30.6 High-tail HH continuation
+`positive HH common-unit work`
+→ actual positive HH output-shell law
+→ UV dissipation/locality tradeoff
+→ critical shell immediately
+or
+→ comparable HH work
+→ sliding `M`-natural window
+→ actual critical shell
+→ generic first-stop/service reentry.
+This route now supplies its own forward scale progress `M/N>=2`.
+### 30.7 Material route
+`actual positive heat/increment service`
+→ intrinsic endpoint labels
+→ OO/ON/NN positive ownership
+→ old-incident geometric erosion
+→ NN-critical seed when old capacity is exhausted
+→ whole-shell carrier
+→ first stopping.
+Material labels do not alter the smooth carrier coefficient identity by themselves.
+
+---
+
+### 30.8 Smooth propagated carrier route
+`hard physical event P`
+→ exact registration into smooth `Q` with `QP=P`
+→ carrier energy read as `<u,Q^2u>`
+→ common transported gauge `dot A+[G,A]=0` quotiented
+→ coefficient obstruction, if any, remains only a locator
+→ actual physical-energy reentry
+→ inheritance / high strain / actual HH work / gauge-quotiented interface work
+→ interface work only: residual physical relink `K_phys` or existing strain `S`
+→ `K_phys` only: bound antisymmetric pair matrix -> finite same-event negative-donor closure -> zero recursive depth
+→ `S` only or relink/strain tie: `S` remains the recursive strain/deformation owner
+→ canonical physical-owner state.
+No arbitrary motion of the smooth analysis windows and no raw coefficient impulse becomes a recursive generation.
+
+---
+
+### 30.9 Full-natural service corridor route
+`actual critical hard shell at (t,M)`
+→ backward first-stop corridor at `A=3M/4`
+→ named physical stop / absorbing `t=0` / completed full-natural corridor
+→ on the full survivor: own-scale service is attached to that same interval
+→ OO/ON/NN is a same-measure material witness partition
+→ at the same endpoint: hard-shell witness set at `A` or `2A`, with critical mass at least `(2/3)A||Q_Au||_2^2`
+→ only a downstream theorem supplying a genuinely new physical state/time creates another recursion edge.
+The endpoint ratios `3/4` and `3/2` are comparable geometry only; no directional scale progress is inferred.
+
+---
+
+### 30.10 Full-natural checkpoint route
+`actual critical hard shell (t,M)`
+→ run the native corridor at `A=3M/4`
+→ physical first stop, if one occurs, remains event-facing after routing
+→ `t=0`, if reached, absorbs
+→ otherwise complete real corridor time `cA^-2`
+→ endpoint is `full_natural_analysis_checkpoint`, not `RecursiveEventState`
+→ read actual endpoint masses `(mu_A,mu_2A)`
+→ exact realization returns the physical lower-shell witness, upper-shell witness, or joint exact tie
+→ reread endpoint state with zero event depth, zero causal charge, and no directional/high-tail provenance
+→ preserve the same event-anchored `Q_A`, terminal coefficient and cumulative first-hit monitors
+→ continue that same carrier until a genuine physical stop or absorbing `t=0`.
+No observer-selected cover branch or natural-horizon cut can manufacture a new carrier lineage.
+
+---
+
+### 30.11 Same-carrier no-event continuation route
+`physical event anchors Q_A at t`
+→ follow the exact outer-role/adjoint equations backward
+→ monitor cumulative `K_A[s,t]`, `|I_R[s,t]|`, `|I_HH[s,t]|`
+→ any natural service horizon may expose service and checkpoint state sidecars
+→ checkpoint insertion/deletion leaves the same first-stop time and joint stop set
+→ interior accumulation: closed stop face at the limit **or** same carrier crosses
+→ coefficient face: actual `Q^2` physical-energy reentry
+→ strain/other physical face: native physical owner
+→ no face before `t=0`: absorbing initial boundary.
+Checkpoint hard-shell readings never replace the carrier without a new physical
+event.  Actual high-tail events remain on their separately certified physical
+`D_tail`/work route.
+
+---
+
+
+### 30.12 Signed-good generated-HH parabolic epoch route
+`HH coefficient first-stop locator`
+→ same smooth carrier reenters actual `Q^2` physical-energy law
+→ energy gate selects actual positive HH child-work
+→ choose the physical heavy half-slab of that same work law
+→ read the actual same-time hard parent pair
+→ if `3/5<N_p/N_c<5/8`: enter the signed-good generated epoch
+→ parent natural lifetime grows by more than `64/25`
+→ common registration surface `s_j=a_j-(2/5)T_j`
+→ next generated support remains inside `[s_j,b_j]`
+→ `s_j-s_(j+1)>=(1792/4875)T_j`
+→ finite consecutive depth when the required registration surface reaches absorbing `t=0`.
+
+If the physical HH event is not signed-good, it remains on the generic HH/high-tail route and receives no synthetic scale progress.  The common surfaces are not recursive events, and Shannon/Rényi is not used as a clock.
+
+---
+## 31. What remains open
+The programme is no longer missing a generic packet-persistence theorem, a common
+clock, a definition of recursive depth, or a closure for no-event checkpoint
+segmentation.  After quotienting representation and theorem horizons, the master
+frontier is now recurrence of **genuine physical owner events**.
+
+### 31.1 Exhaustive measurable owner assembly
+Every certified supplier must be wired into the quotient event state on smooth
+pre-singular intervals, with each transition proved to be exactly one of:
+- a zero-charge relay/witness map;
+- a same-carrier no-event continuation with optional service/checkpoint sidecars;
+- a named non-free physical owner event;
+- a true terminal cost/resource event; or
+- absorbing `t=0`.
+The wiring must preserve actual owner sets, exact ties, conditional first-stop
+semantics, fixed-carrier cumulative monitor baselines, and no double counting.
+
+### 31.2 Observer-clock, horizon, and restart seams are structurally closed
+The master uses actual Navier--Stokes time.  Supplier natural times remain local
+service horizons and are never normalized into a synthetic common clock.  A
+natural horizon is not a carrier lifetime: if no physical stop fires, the same
+smooth event-anchored carrier and cumulative first-hit filtration continue across
+the checkpoint.  Inserting, deleting, or accumulating observer-chosen horizons
+therefore cannot create a new event, carrier, or scale lineage.
+
+### 31.3 Hard and smooth interface-owner seams are structurally closed
+Resolved mixed/cross-interface work no longer supplies an independent recursive
+owner chain.  For a complete orthogonal hard event-role partition of the actual
+resolved operator `L_V=K+S`, skew `K` is conservative same-event role flux and
+symmetric `S` is existing strain/deformation work.  Internal skew circulation
+cancels and donor traversal adds no recursion depth.
+
+For the propagated smooth envelope, energy is read at `Q^2`; common transported
+role motion satisfying `dot A_a+[G,A_a]=0` is observer gauge; residual
+`K_phys=K-G` is genuine physical skew relink.  Its bound synthesis-pair matrix is
+antisymmetric, so positive relink is finite same-event donor flux and adds zero
+recursive generation depth.  Smooth and hard measures are not identified.  Raw
+HH/interface coefficient first stops remain locators and must pass through actual
+`Q^2` energy/work reentry; after reentry, relink is donor provenance while any
+simultaneous `S` branch remains the recursive strain/deformation owner.
+
+What remains open is termination/telescoping of the genuine owners reached after
+these quotients, not another interface/window/coefficient mechanism.
+
+### 31.4 Full-natural service/checkpoint attachment is structurally closed
+A full no-hit critical-shell interval is one real physical corridor.  Its own-scale
+service is a positive law on that same corridor; Moyal OO/ON/NN is a zero-depth
+witness disintegration.  The endpoint hard-shell cover satisfies
+\[
+\max(\mu_A,\mu_{2A})\ge\frac23A\|Q_Au\|_2^2,
+\]
+but is state observation only.  The endpoint does not restart `Q_A`, the terminal
+coefficient, or cumulative `K_A`, `I_R`, `I_HH`.
+
+Thus service attachment, checkpoint eventhood, checkpoint re-hardening, and
+checkpoint Zeno are all structurally quotiented.  A new event vertex requires an
+actual physical stop/owner law.
+
+### 31.5 Supplier-specific scale geometry is registered, not scalarized
+Hard-tail gives genuine forward ratio at least `2` only when the independent
+physical tail theorem fires.  Signed-good generated transfer gives
+`3/5<N_next/N<5/8`; resolved dissipation and pressure-pair shells give ratios at
+most `1/4`; fresh SGS gives only an upper ratio `<=2` and no directional theorem.
+Generic shell/material/reuse routes and unresolved generic `HH_REGENERATION` receive no invented progress.  The high-strain `D_V|_G` route supplies a genuine **descending** renewal ratio `N_next/N<=3/16` only while the recursion remains consecutively on that physical high-strain ancestor route.
+
+Checkpoint hard-shell ratios `3/4` and `3/2` are diagnostic state geometry, not a
+lineage at all without a new physical event.  The remaining termination argument
+must use each branch exactly as supplied.
+
+### 31.6 Global termination: mixed genuine-owner recurrence is the sharp frontier
+After zero-charge relays, observer gauges, coefficient locators, hard and smooth same-event donor circulation, same-corridor service layers, natural-horizon checkpoints, and same-carrier checkpoint segmentation are quotiented, any infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine non-free physical owner events.
+
+The certified high-strain descending-epoch telescope now removes one additional pure recurrence class without quotienting its physics.  A consecutive high-strain epoch satisfies
+\[
+D_*\le D_j\le N_jG_*,
+\qquad
+N_{j+1}\le
+rac3{16}N_j,
+\]
+so every such epoch is finite even if all first-hit histories overlap.  Therefore an infinite event path cannot eventually remain in high strain alone.  If it contains infinitely many high-strain events, it must also contain infinitely many **other genuine owner events** which break the descending epochs.
+
+
+The signed-good generated-HH theorem removes a second pure recurrence class, by a **different physical law**.  Once an HH locator has passed through actual energy reentry and the physical hard parent is certified signed-good,
+\[
+\frac35<\frac{N_{j+1}}{N_j}<\frac58,
+\qquad
+T_{j+1}>\frac{64}{25}T_j,
+\]
+and the asynchronous common surfaces satisfy
+\[
+s_j-s_{j+1}\ge\frac{1792}{4875}T_j.
+\]
+Hence a consecutive signed-good generated lineage cannot remain interior forever at finite physical time: its required registration surface reaches `t=0` after finite depth.  This does **not** terminate generic `HH_REGENERATION`; the generic label has no scale law until actual physical resolution, and non-signed-good HH/high-tail remains a genuine route.
+
+The certified helical/continuum edge theorems now resolve the generic HH label one physical level deeper without erasing it.  At an actual Fourier/helicity interaction the native modal capacity, geometric multiplier and signed phase are read from the same NS edge, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`.  The joint child/unordered-parent Radon theorem then reconstructs the full signed unitary-Fourier law before Hahn splitting and produces actual `dW`, reference `dA`, signed progress `dF`, and the native block deficit `epsilon=1-F/(J_*A)`.  Finite Fourier energy supplies local variation of all three weighted measures without a UV parent cutoff.
+
+Canonical positive-edge routing is now certified.  With `mu=dW`, `mu^+=dW^+`, `r_e=(J_e/J_*)c_e`, `eta_0=10^-4`, `B={T_e>0,r_e<=1-eta_0}` and `G={T_e>0,r_e>1-eta_0}`, one has `mu^+=mu_B^++mu_G^+` exactly.  Every nonempty bad-work restriction has its own physical capacity and native deficit `epsilon_B>=eta_0`; for every certified `0<tau<=0.1` this dominates the fixed-transfer threshold `tau^2/1036800000`.  Crucially, the implementation binds that **same measurable bad `dW+` restriction** to the shared `FixedTransferLossGate`, so `mu_B^+` terminates stage-zero as `TRANSFER_WORK_LOSS` with `first_time=None`.  Positive nonforward work remains physical and is included in this bad sublaw rather than dropped.
+
+The good restriction `mu_G^+` is only Young-eligible until the signed hard-cell criterion is met.  The certified mixed-fate handoff now carries `pi_#dW^-` directly as well as `pi_#dW^+` and `pi_#dW`, so on every hard cell `T_C=g_C+b_C-n_C` with no re-Hahn and no cancellation-sensitive reconstruction of `n_C`.  For any independently certified full-cell Young upper `Y_C`, the scalar `U_C=T_C-b_C=g_C-n_C` is **not** a new trilinear form; it is used only through the exact reservation identity
+\[
+1-\frac{U_C}{Y_C}=\left(1-\frac{T_C}{Y_C}\right)+\frac{b_C}{Y_C}.
+\]
+Young/Christ still receives only the actual full signed `T_C`.  Consequently a mixed-fate cell is admissible without terminal-bad assistance whenever this reserved deficit plus the same symbol-freezing error lies below the external Christ modulus.  On a low-native-deficit block, the capacity reference is converted back to actual work only through the certified pointwise good-core density lower `dW/dA>19/100`, yielding `(B_W+N_W)/G_W <= q/[(19/100)(1-q)]`, `q=epsilon/eta_0`.  If a cell has a fixed positive full-signed Christ safety margin `mu` but still fails reservation, then `g_C<n_C+(mu^{-1}-1)b_C`; failed good mass is therefore dominated by already-existing physical bad-positive/backscatter work rather than declared terminal by a proof label.
+
+The same-time negative-work provenance now also has its native between-time state law.  The cyclic donor measure lives on physical helical-mode nodes; for every mode set `A`, internal donor traffic cancels exactly and the modal Navier--Stokes equation gives `E_A(t1)+D_A+Phi_out=E_A(t0)+Phi_in`.  This closes stock/flow registration without supplying a gross-transfer budget or temporal deposit matching.  Because an arbitrary `A` has no scale meaning, this theorem by itself does not terminate recurrence; the next scale-facing specialization is a radial Fourier boundary where crossing direction is physical.
+
+Therefore an infinite event path cannot eventually remain only in high strain, and it also cannot eventually remain only in signed-good generated HH.  If either owner occurs infinitely often, other genuine owners or generic HH regimes must break the corresponding finite epochs infinitely often.
+The surviving global frontier is thus genuinely **mixed-owner recurrence**.  Its events may include actual HH generation, existing strain/deformation, source/SGS/viscosity owners, independent service, material/new-ancestry relink, high-tail work, and causal reuse/Bellman endpoints.  Their recurrence must telescope only through the native typed laws they truly supply:
+- signed/positive physical work and multiplicative productivity;
+- the physical global gradient reservoir on descending high-strain epochs;
+- physical parabolic registration-surface backshift on consecutive signed-good generated-HH epochs;
+- work-weighted causal Shannon/Rényi reuse;
+- independent source/service laws;
+- `Xi` where it genuinely measures certified representation loss;
+- genuinely globally bounded, scale-independent resources where available.
+
+No critical `NE`, normalized `D_V`, shell mass, scale-critical service, checkpoint count, checkpoint scale, or coefficient-impulse magnitude may be promoted to a finite additive reset.  The high-strain theorem is not an exception: its bound depends on the epoch root scale and physical `3/16` descent.  The signed-good generated theorem is also not a reset: it uses actual parent natural lifetimes and the absorbing initial surface, not a unit generation count.
+
+The geometric UV checkpoint sum remains an important diagnostic anti-theorem: physical time alone cannot rule out an observer-generated increasing sequence.  The same-carrier theorem shows why that sequence is not a second physical escape branch.  Actual UV dynamics remains fully present on the independently certified high-tail `D_tail`/work route when its physical hypotheses fire.
+
+Closing mixed genuine-owner recurrence — now with pure high-strain and pure signed-good generated-HH tails removed, but generic non-signed-good HH/high-tail still present — then connecting the resulting bound to the initial-data and hypothetical singular-time interfaces, is the present global frontier.
+
+### 31.7 Initial data interface
+Backward causal recursion reaching `t=0` is already absorbing.
+For regular initial data, band-limited root counts/energies have scale-decaying
+bounds.  The eventual complete continuum theorem must state the exact initial-data
+hypothesis and connect it to the existing initial-boundary root estimates.
+
+### 31.8 Singular-time conclusion
+Even after global master termination is proved, one must state precisely what
+contradiction or a priori estimate is obtained as a hypothetical singular time is
+approached.  No such global-regularity conclusion is claimed in the current ledger.
+
+---
+
+## 32. The deepest structural simplifications discovered so far
+Several major reductions repeatedly followed the same pattern.
+### 32.1 Cause before representation
+Physical work exists before coherent atomization.
+The coherent frame refines cause; it does not create it.
+### 32.2 Scale before cells
+Fresh SGS renewal is controlled by canonical LP band pushforward, not coherent-cell dominance.
+High-tail locality is controlled by hard output-shell work, not atomic Hahn mass.
+### 32.3 Natural time before time bins
+High-tail temporal concentration is a sliding measure on `cM^-2`, invariant under clock origin and units.
+### 32.4 Pressure source before reservoir narrative
+Direct Frobenius dual pair atomization exposes hard shell mass without aggregate low-pass reservoir synchronization.
+### 32.5 Material identity as a sidecar
+The same smooth carrier may be relabeled materially without inventing a second PDE impulse.
+### 32.6 Cutoff as gauge
+Changing the resolved transporter repartitions one exact Navier–Stokes interaction.
+It does not create source.
+### 32.7 Energy gate as productivity, not causality
+Positive HH work already defines a physical cause law.
+The child-energy gate is needed only when one wants productivity relative to child energy.
+### 32.8 Nonlocality paid by dissipation
+Instead of assuming local triads, UV high-high→low work is bounded by the physical high-tail dissipation that actually supports it.
+### 32.9 Entropy as logarithmic coordinate of a named measure
+Pressure, fresh service, high-tail scale, high-tail time, and causal ancestry all produce entropy-like quantities.
+They are not one ontology.
+They become meaningful only after the underlying physical measure is fixed.
+### 32.10 Theorem depth is not recursion depth
+A chain of certified source/pressure/service/shell consequence maps does not by itself create new physical generations.
+Same-law relay duplication is quotiented, and different-unit witness relays create state but no second causal charge.
+### 32.11 Physical time is universal; horizon segmentation is not lineage
+Events and checkpoints live in the same Navier--Stokes time coordinate, so physical corridor time telescopes without a synthetic clock.  But a theorem-selected horizon neither becomes an event nor restarts the carrier.  Even a geometrically UV-growing checkpoint-reading sequence is only diagnostic unless a physical event theorem supplies scale provenance; the same carrier filtration continues across no-event cuts.
+### 32.12 Circulation is not generation
+The skew part of resolved low--high interface work is an antisymmetric finite-role flux. Internal role cycles cancel from every subset balance and remain at one physical event time. Quotient those cycles and donor relays before recursion; the symmetric remainder is the already existing strain/deformation work.
+These simplifications are central to the programme's current direction.
+
+---
+
+### 32.13 Conservation of representation is not yet physics
+A decomposition may conserve total energy while merely moving energy between observer-selected channels. Physical ownership begins only after the representation motion is tied to the actual PDE transport and that common gauge has been quotiented.
+### 32.14 First stop is not necessarily first cause
+A measurable coefficient threshold can correctly locate the earliest failure of clean continuation without itself carrying a physical work law. The master stores physical owners only after the required energy/work reentry.
+### 32.15 Observable layer is not event depth
+A physical observable may be discovered after traversing an interval without occurring after that interval in physical time. Full-natural own-scale service and its OO/ON/NN disintegration live on the corridor already counted. Preserve the measure; quotient only the duplicate theorem depth.
+### 32.16 Horizon segmentation is not event topology
+A natural-window endpoint is an analysis checkpoint unless a physical stop fires there. Preserve the real corridor time, but do not create a recursive vertex. At that checkpoint let the actual shell masses determine the hard-shell witness; never choose the upper cover branch to manufacture scale ascent.
+
+### 32.17 Service horizon is not carrier lifetime
+A scale-native interval may be exactly the right horizon for proving uniform
+service without being the lifetime of the transported PDE carrier.  Do not restart
+`Q_A`, its terminal dual, or its first-hit filtration merely because one service
+window ended.
+
+### 32.18 Complex impulse additivity does not imply magnitude additivity
+The complex coefficient impulse is interval-additive, but its absolute value is
+not.  Phase cancellation is physical.  Preserve the event-anchored cumulative
+impulse; never sum checkpoint-segment magnitudes or turn them into work.
+
+### 32.19 Physical redistribution is not recursive generation
+A work law may be completely physical and still create no new generation.  After observer gauge has been removed, smooth `K_phys` relink is actual Navier--Stokes redistribution.  Its antisymmetric pair matrix nevertheless makes every positive recipient trace to finite negative-net donors at the same event.  Preserve the work and donor provenance; quotient only the false event depth.
+
+### 32.20 Physical overlap can telescope through native scale weights
+A physical reservoir need not be partitioned into disjoint event bins before it can control recurrence.  Consecutive high-strain histories may overlap arbitrarily in time; the actual low-pass dissipation still obeys `D_j<=N_jG_*`.  Because the PDE supplies the descending renewal `N_(j+1)<=3N_j/16`, repeated readings of the same viscous spacetime reservoir carry geometrically summable native weights.  Preserve the overlap; telescope the physical weights.  This is not an additive reset for normalized `D_V`.
+
+
+### 32.21 A physical registration surface is not event depth
+A PDE continuation theorem may require a backward surface on which the **same carrier** is registered without any new interaction occurring there.  In signed-good HH generation, the surfaces `s_j=a_j-(2/5)T_j` move backward geometrically because the actual parent natural lifetimes grow.  Their reaching `t=0` terminates the interior continuation gate, but the surfaces themselves are not recursive event vertices and are never charged one unit each.  Physical geometry can close recursion without turning geometry into currency.
+
+
+### 32.22 Signed cause before positive refinement
+For continuum HH, the PDE first supplies one signed Radon work measure on the
+parent-order/helicity quotient.  Hahn positivity is then a property of that fixed
+physical measure, not a license to re-Hahn every later representation.  Capacity,
+coherent labels and material anchors may refine or compare the cause, but they do
+not create a second positive-work law.
+
+### 32.23 Local Radon variation can come directly from physical energy
+Measure existence need not be bought with a parent-frequency cutoff.  Once the
+actual trilinear amplitude is registered, fixed-child Cauchy--Schwarz and the
+unitary Fourier `L^2` energy give the cubic local-variation bound for `dA`, hence
+for signed `dW` and `dF`.  The apparent UV measure problem disappears when the
+correct physical amplitude and quotient measure are kept together.
+
+### 32.24 Push forward cause; do not re-Hahn representation
+Once a signed physical law has a canonical Hahn decomposition, every downstream physical label should inherit the positive cause by restriction or positive pushforward.  A later signed representation may still be essential for cancellation, Young saturation or diagnostics, but taking its positive part again is not a new causal act.  This separates physical cause from the resolution at which an analyst chooses to observe cancellation.
+
+### 32.25 Stock continuity is not traffic budget
+Once canonical donor/recipient work is resolved on physical helical modes, Navier--Stokes gives an exact network continuity equation.  Internal nonlinear traffic cancels from the divergence of a mode set, but may itself be arbitrarily large under physical amplitude scaling.  Therefore energy conservation controls stock + viscous loss + net boundary crossing, not gross nonlinear variation.  Persistent stock belongs to physical modes, not interaction cells, and no FIFO/LIFO temporal matching is implied.
+
+### 32.26 Radial crossing is boundary geometry, not a universal cascade step
+For the radial exterior `H_R={|k|>R}`, only donor atoms with `|k_d|<=R<|k_r|` actually enter the tail and only atoms with `|k_r|<=R<|k_d|` actually leave it; high→high traffic remains physical but cancels from tail divergence.  Integrating the same crossing atoms in `dR/R` produces their exact log-radius displacement.  A regular equiradial closed triad can transfer positive energy between distinct modes with zero radial displacement, so nonlinear transfer is not synonymous with scale progress, dyadic ascent, or cascade event count.  Radial displacement also remains distinct from the existing single-edge Young/progress multiplier.
+
+
+## 33. Certified recent theorem blocks
+### 33.1 High-tail sliding natural-window reentry
+The latest completed high-tail bridge is the high-tail sliding natural-window reentry theorem.
+Status:
+`EXACT_HIGH_TAIL_COMPARABLE_HH_TO_SLIDING_NATURAL_WINDOW__TIME_ORIGIN_AND_UNIT_INVARIANT__SCALE_TIME_CONCENTRATION_TO_CRITICAL_SHELL__NO_PACKET_PERSISTENCE_OR_TIME_BINNING`.
+Dedicated GitHub Actions run:
+`31354438956`.
+Exact theorem SHA:
+`6c42d53f4f3903d141986d85a5b45954c27c18c8`.
+Results:
+- `641` tests passed;
+- `50,000` sliding-measure / scale-time / shell-reentry states;
+- worst time-origin invariance residual `7.861072903736499e-14`;
+- worst time-unit invariance residual `1.3600232051658168e-14`;
+- worst representation-refinement residual `1.5126788710517758e-15`;
+- minimum scale-time tradeoff relative margin `0.942049661829323`;
+- exact sharp boundary `M/N=2` attained in sampled geometry;
+- exact sharp boundary `T_M/T_N=1/4` attained in sampled geometry;
+- minimum conditional full-survivor service lower `9.309745536273158e-17`.
+Stored artifact:
+`recorded-results/31354438956/`.
+Full causal integration:
+`31354509984`.
+It completed successfully on the same exact SHA through:
+- source compiler;
+- pressure pair atomization;
+- fresh SGS reentry;
+- high-frequency tail bridge;
+- common-unit high-tail causality;
+- ultraviolet locality;
+- sliding natural-window reentry;
+- event roles and material relay;
+- physical productivity;
+- recursive witness construction;
+- Shannon reuse;
+- Rényi reuse;
+- physical branch compiler;
+- master episode stress.
+The initial candidate `ea9e89e...` had only two fixture-construction failures after `639` passing tests; no theorem stress ran there and no theorem equation changed in the correction.
+
+### 33.2 Continuum master event quotient
+Status:
+`EXACT_CONTINUUM_MASTER_EVENT_QUOTIENT__ZERO_CHARGE_RELAYS_COLLAPSED__NATIVE_PHYSICAL_TIME_RECURSION__SUPPLIER_SPECIFIC_SCALE_PROGRESS__COMPACT_SCALE_FULL_SURVIVOR_NO_ESCAPE__NO_COMMON_CLOCK_OR_CAUSAL_REWEIGHTING`.
+Dedicated GitHub Actions run:
+`31369437763`.
+Exact theorem SHA:
+`37d43e189de6f8b0294cf7d18f2c672bcb419f87`.
+Results:
+- `652` tests passed;
+- `50,000` quotient/path states;
+- worst zero-charge owner-mass residual `0.0`;
+- worst physical-time telescope residual `0.0`;
+- worst log-scale telescope residual `8.881784197001252e-16`;
+- bounded-scale boundary failures `0`;
+- supplier-scale failures `0`;
+- largest sampled relayed joint-owner set `8`.
+Stored artifact:
+`recorded-results/31369437763/`.
+Full causal integration:
+`31369437677`.
+It completed successfully on the same exact SHA through all source, pressure, material, high-tail, role, joint-stop, causal-reuse, physical-branch, and master-episode stages.
+The theorem does not assert global termination.  It certifies the quotient state and the compact-scale free-survivor no-escape dichotomy, reducing the remaining infinite-path problem to named non-free owner recurrence or UV-unbounded free survival.
+
+
+### 33.3 Resolved interface donor/circulation quotient
+Status:
+`EXACT_RESOLVED_INTERFACE_DONOR_QUOTIENT__POSITIVE_INTERFACE_TO_CONSERVATIVE_SKEW_DONOR_OR_EXISTING_STRAIN__FINITE_SAME_EVENT_DONOR_EXHAUSTION__CIRCULATION_ZERO_RECURSION_DEPTH`.
+Dedicated GitHub Actions run:
+`31398210897`.
+Exact theorem SHA:
+`c51846914109abf9d881d0a4ef5545fa023677f3`.
+Results:
+- `660` tests passed;
+- `50,000` split/flux/donor/high-tail states;
+- worst signed `R=R_K+R_S` residual `8.881784197001252e-16`;
+- minimum sampled positive-cover margin `-1.7763568394002505e-15` (floating roundoff around the exact analytic nonnegative cover);
+- worst role-divergence residual `2.100962885439726e-15`;
+- worst total skew-work residual `2.6968038962353156e-15`;
+- worst donor-closure balance residual `2.7511442661221775e-15`;
+- donor-existence failures `0`;
+- largest sampled shortest donor path `4`;
+- high-tail component failures `0`.
+Stored artifact:
+`recorded-results/31398210897/resolved-interface-donor-quotient-results/`.
+Full causal integration:
+`31398211279`.
+It completed successfully on the same exact SHA through the full source, pressure, material, high-tail, resolved-interface, role, joint-stop, causal-reuse, physical-branch, and master-episode chain.
+The initial implementation SHA `6ae71cba...` had one brittle certificate-wording assertion after `659` passing tests; no theorem identity or physical bound failed.  The assertion was relaxed to test semantics rather than exact prose, and the later notation-only `I_a^K -> R_a^K` cleanup changed no equation or routing.
+The theorem closes resolved interface as an independent recursive-generation loophole.  It does not prove global termination of the donor/strain owners and makes no Navier--Stokes regularity claim.
+
+
+---
+
+### 33.4 Smooth quadratic-carrier observer-gauge quotient
+Status:
+`EXACT_SMOOTH_QUADRATIC_CARRIER_INTERFACE__Q2_ENERGY_LAW__COMMON_GAUGE_QUOTIENT_BEFORE_PHYSICAL_RELINK__SYMMETRIC_WORK_EXISTING_STRAIN__COEFFICIENT_OBSTRUCTION_ENERGY_REENTRY`.
+Dedicated GitHub Actions run:
+`31444417439`.
+Exact implementation SHA:
+`309d6ee83e39a96d8efd2a0ddcfcbf6839d9264b`.
+Results:
+- `676` tests passed;
+- `50,000` transported square-partition/interface/PDE/reentry states;
+- worst quadratic-partition residual `4.583749441582483e-15`;
+- worst differentiated-partition residual `1.669620150224271e-14`;
+- worst common-gauge transport residual `1.594436429147036e-16`;
+- worst gauge-work cancellation residual `1.7157190746562474e-16`;
+- worst native/outer recombination residual `6.010633403939076e-16`;
+- worst physical-relink conservation residual `8.888567800392867e-16`;
+- worst strain reconstruction residual `1.894411407492663e-15`;
+- forbidden linear-complement counterexample defect `1.0`;
+- arbitrary observer-motion rejection count `1`, with no admission;
+- coefficient-obstruction master-barrier failures `0` in the companion `50,000`-state master stress.
+Stored artifact:
+`recorded-results/31444417439/smooth-quadratic-carrier-interface-results/`.
+Full causal integration:
+`31444417546`.
+It completed successfully on the same exact SHA with the same `676`-test suite, all source/pressure/material/high-tail/master/role/reuse/compiler stages, and `20,000` master episode traces with worst margin `0.0`.
+The theorem says neither that every genuine relink/strain/HH owner terminates nor that every UV-unbounded survivor is closed. It makes no Navier–Stokes regularity claim.
+The later smooth-relink donor theorem `8f8cdb2...` supersedes the relink-recursion part of that intermediate scope: `K_phys` remains physical but is now certified same-event donor provenance with zero recursive depth.
+
+
+### 33.5 Full-natural service corridor quotient
+Status:
+`EXACT_FULL_NATURAL_SERVICE_CORRIDOR_QUOTIENT__OWN_SCALE_SERVICE_IS_SAME_INTERVAL_WITNESS_NOT_NEW_EVENT__MATERIAL_DISINTEGRATION_ZERO_RECURSION_DEPTH__ENDPOINT_SMOOTH_CARRIER_HAS_COMPARABLE_HARD_SHELL_WITNESS_SET`.
+Dedicated GitHub Actions run:
+`31448743219`.
+Exact implementation SHA:
+`e351d0d6bef5a6bd6275083e1d2e706acf717a18`.
+Results:
+- `684` tests passed;
+- `50,000` corridor/service/material/endpoint-shell states;
+- worst natural-time identity residual `4.440892098500626e-16`;
+- worst OO/ON/NN same-measure partition residual `1.0658141036401503e-14`;
+- minimum sampled two-hard-shell cover margin `2.840630292262874e-08`;
+- exact joint hard-shell witness tie retained;
+- companion continuum-master service-witness barrier failures `0`.
+Stored artifact:
+`recorded-results/31448743219/full-natural-service-corridor-quotient-results/`.
+GitHub artifact digest:
+`sha256:47a7296117a1dc966c47d325aecaab6754bb73bb9d9f8d59f5fc5b1dd49b0c5e`.
+Full causal integration:
+`31448763557`.
+It completed successfully on the same exact SHA with the same `684`-test suite through source, pressure, material, critical-shell, service-corridor quotient, high-tail, hard/smooth interface, first-stop, causal-reuse, physical-branch, and master stages. The master checked `20,000` episode traces with worst margin `0.0`.
+The initial SHA `4d19bf616c88e634698039c098e2c774be01a669` had only two brittle certificate-wording assertion failures after `682` passing tests; no theorem stress ran there and no theorem equation, physical bound, or routing changed in the correction.
+The theorem removes service-theorem depth and closes endpoint-service attachment. It does not terminate genuine first-hit/work/source/reuse/independent-service recurrence or UV-unbounded full-survivor chains, and makes no Navier--Stokes regularity claim.
+
+
+### 33.6 Full-natural horizon checkpoint quotient
+Status:
+`EXACT_FULL_NATURAL_HORIZON_CHECKPOINT_QUOTIENT__PHYSICAL_CORRIDOR_TIME_WITH_ZERO_EVENT_DEPTH__ENDPOINT_HARD_SHELL_COVER_IS_ANALYSIS_REREGISTRATION_NOT_SCALE_PROGRESS__UV_CHECKPOINT_CONTINUATION_SEPARATED_FROM_RECURSIVE_EVENT_PATH`.
+Dedicated GitHub Actions run:
+`31451492854`.
+Exact implementation SHA:
+`75ceff3481dccc41a9e915ce8c1400638e440820`.
+Results:
+- `696` tests passed;
+- `50,000` checkpoint/corridor/cover states;
+- worst physical-time telescope residual `0.0`;
+- maximum sampled endpoint cover ratio `1.5000000000000002`;
+- checkpoint-to-event failures `0`;
+- cover-to-high-tail misclassification failures `0`;
+- minimum sampled UV checkpoint time beyond the first corridor `8.874718028220728e-06`;
+- companion `50,000`-state continuum-master checkpoint-barrier failures `0`;
+- companion master physical-time telescope residual `0.0`;
+- companion master log-scale telescope residual `8.881784197001252e-16`;
+- the independent physical high-frequency dissipation dependency remained green.
+Stored artifact:
+`recorded-results/31451492854/full-natural-checkpoint-quotient-results/`.
+GitHub artifact digest:
+`sha256:212a85c8d90535c74dc4035b0e8372cfb4d51ca1b4282888a4852ed06d9e07cb`.
+Full causal integration:
+`31451492844`.
+It completed successfully on the same exact SHA with the same `696`-test suite through the full physical-energy, source, material, generic-shell, service-corridor, checkpoint, high-tail, hard/smooth-interface, first-stop, causal-reuse, physical-branch and master chain. The final master checked `20,000` episode traces with worst margin `0.0`. Integration artifact digest:
+`sha256:23cd2a39f9a19006008f4b29a99ef8dce2ee60b7f34952f4225e30b398027b89`.
+At this intermediate stage the theorem removed natural-horizon event depth and observer-selected cover ascent, while the no-event checkpoint-continuation question was still left open.  Section 33.7 later closes that specific seam by preserving the same carrier and cumulative filtration across checkpoints.  This earlier theorem itself made no Navier--Stokes global-regularity claim.
+
+---
+
+### 33.7 Same-carrier checkpoint segmentation quotient
+Status:
+`EXACT_SAME_CARRIER_CHECKPOINT_SEGMENTATION_QUOTIENT__NATURAL_HORIZONS_DO_NOT_RESET_FIRST_HIT__CUMULATIVE_NATIVE_MONITORS_FROM_ONE_PHYSICAL_EVENT__INTERIOR_CHECKPOINT_ZENO_IS_STOP_OR_CONTINUATION__HARDEN_ONLY_AT_A_NEW_PHYSICAL_EVENT`.
+
+Exact certified implementation/wiring SHA:
+`bd404d8fd79336e094015f8a9463bfef761e9d2d`.
+
+Dedicated GitHub Actions run:
+`31454546606` — **success**.
+
+Results:
+- `708` tests passed;
+- `50,000` same-carrier cumulative-path/checkpoint-segmentation states;
+- worst segmentation first-stop time residual `0.0`;
+- segmentation failures `0`;
+- checkpoint reset-barrier failures `0`;
+- `39,915` sampled paths with nonmonotone coefficient-impulse magnitudes, confirming no hidden monotonicity assumption on `|I_R|` or `|I_HH|`;
+- `25,000` interior checkpoint-accumulation states attaining a closed stop face;
+- `25,000` interior accumulation states crossed by the same carrier;
+- maximum `12` inserted checkpoint cuts in the randomized stress;
+- companion continuum-master checkpoint-segmentation barrier failures `0`;
+- companion master physical-time telescope residual `0.0`;
+- companion master log-scale telescope residual `8.881784197001252e-16`;
+- independent physical high-frequency dissipation dependency remained green.
+
+Stored artifact:
+`recorded-results/31454546606/same-carrier-checkpoint-segmentation-results/`.
+
+GitHub artifact digest:
+`sha256:ee8ca26523888e0fbbf1fc034e267643c758e140f8e57ebf8e4f3569d015e41e`.
+
+Full physical-energy causal integration:
+`31454546590` — **success** on the same exact SHA.
+
+It completed with the same `708`-test suite and `56` successful job steps through
+the full physical-energy, source, material, generic-shell, service-corridor,
+checkpoint, same-carrier, physical high-tail, hard/smooth-interface, event-role,
+first-hit, causal-reuse, physical-branch and master chain.  The final master stress
+checked `20,000` episode traces with worst margin `0.0`.
+
+Integration artifact digest:
+`sha256:82f05bfce9b84dca883c56df5472393c19874b274d2d7dfa54972c15f1e818d9`.
+
+Failure/correction provenance:
+- initial theorem SHA `a5e4d9a7bc725b72ac3f64210c85721553a90795` had one brittle certificate-wording assertion after `707` passing tests; no new-theorem stress ran there;
+- `cc955ec2cf9f51ffa3160a97a434172dff5245e5` changed only that fixture;
+- final `bd404d8...` changed only workflow path filters so fixture-only edits automatically retrigger both exact-SHA gates.
+No theorem identity, physical bound, carrier policy, or first-hit routing changed in either correction.
+
+The theorem closes natural-horizon restart and checkpoint-Zeno/re-hardening as
+independent master escape mechanisms.  It does not terminate infinitely recurring
+genuine physical owners and makes no Navier--Stokes global-regularity claim.
+
+---
+
+### 33.8 Smooth physical relink donor quotient
+Status:
+`EXACT_SMOOTH_PHYSICAL_RELINK_DONOR_QUOTIENT__GAUGE_QUOTIENTED_KPHYS_PAIR_FLUX__FINITE_SAME_EVENT_NEGATIVE_DONOR_CLOSURE__SMOOTH_RELINK_ZERO_RECURSION_DEPTH`.
+
+Exact certified implementation/final fixture SHA:
+`8f8cdb2f4ad57bd6f70eafc3043a9bb60ee34d03`.
+
+Dedicated GitHub Actions run:
+`31457786141` — **success**.
+
+Results:
+- `716` tests passed;
+- `50,000` bound smooth `K_phys` relink laws;
+- worst pair antisymmetry residual `0.0`;
+- worst row-binding residual `0.0`;
+- worst total relink residual `1.4210854715202004e-14`;
+- minimum incoming-minus-recipient-gain margin `0.0`;
+- donor-existence failures `0`;
+- maximum sampled shortest donor path `3`;
+- pair-binding rejection failures `0`;
+- companion continuum-master smooth-relink recursion-barrier failures `0`;
+- companion master physical-time telescope residual `0.0`;
+- companion master log-scale telescope residual `8.881784197001252e-16`;
+- hard resolved donor lemma and smooth `Q^2` dependencies remained green.
+
+Stored artifact:
+`recorded-results/31457786141/smooth-relink-donor-quotient-results/`.
+
+GitHub artifact digest:
+`sha256:be54c2dad2836ef6deca51dc69f21b198a81375fad6f9107001536517e071b5c`.
+
+Full physical-energy causal integration:
+`31457786115` — **success** on the same exact SHA.
+It passed the same `716`-test suite and `57` successful job steps through the full causal spine.  The final master stress checked `20,000` episode traces with worst margin `0.0`.
+
+Integration artifact digest:
+`sha256:2bf74da42e08d053fd5348b60892bc511e68795f0c9d016b61751d6af55d3201`.
+
+Reciprocal smooth quadratic-carrier compatibility run `31457786119` was also **success** on the same SHA.
+
+Failure/correction provenance:
+- initial implementation SHA `bc0bc248356e7dc18235532649c4a3c1ccdd5a8d` had one brittle certificate-wording assertion after `715` passing tests; theorem stress did not run;
+- SHA `113133f31bf3852f16bbc80e692dbce26430967a` changed only that fixture and exposed a second brittle substring assertion in the same certificate test, again after `715` passing tests before theorem stress;
+- final `8f8cdb2...` changed only that second fixture assertion to semantic checks.
+No theorem identity, pair law, donor closure, master routing, physical bound, or workflow topology changed in either correction.
+
+The theorem keeps smooth residual relink physical while removing it as an independent recursive-generation mechanism.  Simultaneous strain remains a genuine owner.  It does not terminate HH, strain, source, dissipation, service, material-new-ancestry or reuse recurrence and makes no Navier--Stokes regularity claim.
+
+---
+
+### 33.9 High-strain descending-epoch physical dissipation telescope
+Status:
+`EXACT_HIGH_STRAIN_DESCENDING_EPOCH_TELESCOPE__PHYSICAL_GLOBAL_GRADIENT_RESERVOIR__THREE_SIXTEENTHS_RENEWAL_SCALE_DESCENT__ARBITRARY_TIME_OVERLAP_WEIGHTED_BY_SCALE__NO_EVENT_COUNT_RESET`.
+
+Exact certified implementation SHA:
+`774c702a692e67f5ccdf3a7028c16e437a0c5cc1`.
+
+Dedicated GitHub Actions run:
+`31460525711` — **success**.
+
+Results:
+- `725` tests passed;
+- `50,000` descending high-strain epochs;
+- minimum geometric-frequency capacity margin `0.010872081991569138`;
+- minimum weighted normalized-dissipation capacity margin `0.08466728285959269`;
+- minimum last-scale/frequency-floor margin `1.2235436031599045e-05`;
+- maximum sampled certified epoch count `6`;
+- arbitrary-overlap cases `50,000`;
+- non-consecutive/ascending restart rejections `50,000`;
+- companion continuum-master high-strain epoch telescope failures `0`;
+- companion master physical-time telescope residual `0.0`;
+- companion master log-scale telescope residual `8.881784197001252e-16`.
+
+Stored artifact:
+`recorded-results/31460525711/high-strain-descending-epoch-telescope-results/`.
+
+GitHub artifact digest:
+`sha256:6869f07693605cc5ff1576b74b26a9bca79ff5a7c2dd0057135f17b1b3d41b56`.
+
+Full physical-energy causal integration:
+`31460525687` — **success** on the same exact SHA.
+It passed the same `725`-test suite and `58` successful job steps through the full causal spine.  The final master episode stress checked `20,000` traces with worst margin `0.0`.
+
+Integration artifact digest:
+`sha256:9b16322218e71e464ce0b2f1c69090a260550a1e10550239562c7b63126abd1f`.
+
+The first implementation SHA passed both serious gates; no fixture or theorem-source correction was required.
+
+The theorem keeps high strain as a genuine recursive owner but closes eventually-pure consecutive high-strain recurrence.  It does not terminate mixed recurrence through HH, strain, source/service, material-new-ancestry, high-tail or causal-reuse owners and makes no Navier--Stokes regularity claim.
+
+---
+
+
+### 33.10 Signed-good generated-HH parabolic physical-time epoch telescope
+Status:
+`EXACT_SIGNED_GOOD_GENERATED_HH_PARABOLIC_EPOCH_TELESCOPE__ACTUAL_PHYSICAL_HH_WORK_AFTER_ENERGY_REENTRY_ONLY__ASYNCHRONOUS_COMMON_SLICE_BACKSHIFT_TO_T0__NO_DUHAMEL_WEIGHT_OR_EVENT_COUNT_BUDGET`.
+
+Exact certified implementation/final fixture SHA:
+`72864e407b0f704e6cab2b330d2fb49c78bcf9a4`.
+
+Dedicated GitHub Actions run:
+`31467837283` — **success**.
+
+Results:
+- `738` tests passed;
+- `50,000` signed-good generated physical-work epochs;
+- minimum strict signed-good scale-window margin `0.0030000147542257327`;
+- minimum heavy-half physical-work margin `8.684648789003546e-07`;
+- minimum one-step common-surface backshift margin `7.843254792838327e-05`;
+- minimum cumulative-backshift margin `0.0` (the zero-transition case is exact);
+- maximum sampled certified layer upper bound `14`;
+- raw HH coefficient-obstruction rejections `7143`;
+- non-signed-good HH rejections `4546`;
+- nonconsecutive support-restart rejections `3256`;
+- companion continuum-master signed-good generated-epoch telescope failures `0`;
+- companion master physical-time telescope residual `0.0`;
+- companion master log-scale telescope residual `8.881784197001252e-16`.
+
+The randomized epoch stress deliberately sampled interior room; deterministic theorem tests separately certify that when a required common surface lies at/before `t=0`, no further interior generated layer is admissible.
+
+Stored artifact:
+`recorded-results/31467837283/signed-good-generated-epoch-time-telescope-results/`.
+
+GitHub artifact digest:
+`sha256:f39c93332d801fe2f1812272a55b27d3e1b2319357aff5d65ae2ebdeedab5376`.
+
+Full physical-energy causal integration:
+`31467837226` — **success** on the same exact SHA.
+It passed the same `738`-test suite and `59` successful job steps through physical energy, high strain/service, generic shell, high-tail, continuum master, smooth `Q^2`, recursive witness, the new generated-epoch theorem, joint first stop, Shannon/Rényi, branch compiler, and master episode.  The final master checked `20,000` traces with worst margin `0.0`.
+
+Integration artifact digest:
+`sha256:5bca7887a05aa9ec3ec740f45e570250b85a7ab3f912c807ffb304ee5683b5a6`.
+
+The initial implementation SHA `39c558b541056ae55350ccf35f4b7404203a060b` had one brittle certificate-string assertion after `737` passing tests; neither dedicated nor full integration reached theorem stress on that SHA.  The correction changed only that test assertion into semantic checks.  No theorem identity, physical work gate, scale/support condition, master routing, or workflow topology changed.
+
+The theorem closes eventually-pure **signed-good** generated-HH recurrence.  It does not identify generic `HH_REGENERATION` with signed-good generation, does not close generic/nonlocal high-tail HH, does not replace Shannon/Rényi ancestry reuse, and makes no Navier–Stokes regularity claim.
+
+---
+### 33.11 Helical physical-edge registration: native NS capacity before Young
+Status:
+`EXACT_HELICAL_PHYSICAL_EDGE_REGISTRATION__DIRECT_LERAY_CURL_EQUALS_WALEFFE__UNORDERED_PARENT_PAIR_FACTOR_FOUR__NATIVE_MODAL_CAPACITY__SIGNED_UPPER_PROGRESS_EQUALS_A_J_C`.
+
+Exact certified implementation SHA:
+`6d2b721be579e299c42f4ad370448e5336f3f43c`.
+
+Dedicated GitHub Actions run:
+`31472591138` — **success**.
+
+Results:
+- `748` tests passed;
+- `50,000` random physical helical triads/amplitudes;
+- worst direct-Leray/Waleffe relative residual `3.0472764930177753e-14`;
+- worst Leray-free child-pairing relative residual `1.0359057878235692e-14`;
+- worst exact `T log = A J c` relative residual `1.2645440250480533e-13`;
+- worst unordered-parent swap residual `8.393508110771108e-12`;
+- worst helical gauge residual `1.27675647831893e-15`;
+- worst uniform-wavevector scale residual `3.977623785900164e-12`;
+- maximum sampled `J/J_*` `0.9990427280708386`;
+- positive forward-work samples `16543`;
+- nonforward samples retained with zero upper-progress multiplier `16950`.
+
+Stored artifact:
+`recorded-results/31472591138/helical-physical-edge-registration-results/`.
+
+GitHub artifact digest:
+`sha256:0aa0e684d210dc8af109dc9cfe31b0b312967468fb3a5bd79d4c29a6143fda3a`.
+
+Full physical-energy causal integration:
+`31472591129` — **success** on the same exact SHA.
+It passed the same `748`-test suite and `60` successful steps through continuum master, the new helical edge registration, complex Young, dual/Bargmann/common-slice registration, smooth `Q^2`, event hard roles, physical pair productivity, recursive witness, signed-good generated epoch, Shannon/Renyi reuse, branch compiler and master episode.
+
+Integration artifact digest:
+`sha256:79e9c35a1b4de41830483d15e4fc0f2d26305eb29a2b2ba9239b48a9954ea27d`.
+
+The theorem closes the one-edge physical registration seam only. At the scope of this theorem it did not construct the continuum signed Fourier triad measure, did not commute positive Hahn splitting with triad integration, and did not classify nonforward positive work as signed-good. Companion Section 33.12 now supplies the previously open continuum signed-measure/Radon-registration seam while preserving those one-edge scope boundaries. No Navier--Stokes regularity claim is made.
+
+### 33.12 Continuum helical edge-measure registration: signed NS work before Hahn
+Status:
+`EXACT_CONTINUUM_HELICAL_EDGE_MEASURE_REGISTRATION__UNITARY_FOURIER__UNORDERED_PARENT_QUOTIENT__JOINT_OUTER_CHILD_RADON_PUSHFORWARD__EXACT_HELICITY_RECONSTRUCTION__SIGNED_BEFORE_HAHN__NATIVE_CAPACITY_POLARIZATION__ENERGY_NATIVE_LOCAL_VARIATION__PHYSICAL_GOOD_CORE_CHANGE_OF_MEASURE`.
+
+Exact certified implementation SHA:
+`6bc9099190048a8796b54fb2f4782314b699bd4b`.
+
+This certification used four exact-SHA gates because the independent audit had
+already found real provenance/scale defects that ordinary theorem CI did not expose.
+
+Independent adversarial/actual-NS audit:
+`31494249932` — **success**, `35` successful steps.
+Its `50,000`-fiber / `1,000`-core-block stress recorded worst direct/modal work
+relative residual `1.031e-11`, worst progress residual `3.975e-12`, worst
+polarization residual `5.621e-16`, signed flux range
+`[-0.360319664,0.381444055]`, and `8745` random blocks with positive nonforward
+physical work.  The same audit evolved actual dealiased Fourier--Galerkin
+Navier--Stokes: with one common cutoff embedded on grids `20,24,28`, final child
+energy representation spread was `1.594e-15` and integrated child-work spread
+`1.933e-15`.  A separate same-orbit three-child audit reconstructed every child
+and the outer-child Hahn law with worst joint work/modal/Hahn residual
+`2.115e-16`; its NS energy-balance residual was `6.822e-10`.
+
+Continuum dedicated run:
+`31494250081` — **success**.
+It passed `776` tests, `3,000` arbitrary continuum fibers and `100` near-extremal
+physical core blocks.  Worst helical reconstruction residual was `1.925e-15`,
+parent-quotient and parent-swap residuals were exactly `0`, direct/modal work and
+progress relative residuals were `5.428e-13` and `5.579e-13`, and the good-core
+RN margins remained positive.
+
+Helical one-edge dependency rerun:
+`31494402810` — **success** on the same exact SHA.
+It passed the same `776`-test suite and `50,000` physical helical edges; worst
+direct-Leray/Waleffe residual was `5.025e-16`, `T log=A J c` residual
+`1.300e-11`, and all `16950` sampled nonforward edges were retained rather than
+misclassified signed-good.
+
+Full physical-energy causal integration:
+`31494250037` — **success**, `61` successful steps on the same exact SHA.  The
+continuum measure theorem sits immediately after the physical helical edge and
+before complex Young, then remains green through dual/Bargmann/common-slice,
+smooth `Q^2`, event roles, physical productivity, recursive witness,
+Shannon/Renyi, branch compiler and master episode.
+
+Stored exact-SHA artifacts:
+- `recorded-results/31494249932/`; audit digests
+  `sha256:538e0624e081b4b398fda568372026917012af7e87bbeab51cd21a67b56807d0`,
+  `sha256:9b514e48924483e6b9e536b2828fe48bc9b0fde43d9726431a16301840fa7cd3`,
+  `sha256:82ff62318cf934efcd65872eb5dfb3a3e0ebf22b6c1d90d5ff383c0a726d6137`;
+- `recorded-results/31494250081/`, digest
+  `sha256:1dab5cc8f4817ae351102dddcaa05ac59442cd4358c7bc3bce6ea7b547e1ee42`;
+- `recorded-results/31494402810/`, digest
+  `sha256:49d386a61635391aeeaaf2fc72f417336df7e5e627476efe6263ae0ba75bd434`;
+- `recorded-results/31494250037/`, digest
+  `sha256:0889ad20f55add0df3fa4cc5a50796ba6d70baec5203a3600b281c26f14419f4`.
+
+The audit lineage matters.  Earlier green candidates were deliberately not
+recorded after adversarial checks exposed native-scale floors, forgeable summary
+provenance, nonfinite arithmetic, an unjustified cross-truncation convergence
+gate, missing nonforward capacity domination, duplicate helicity-sector identity,
+and finally the distinction between a Radon base quotient and finite variation of
+the weighted physical measures.  The certified SHA closes those defects rather
+than hiding them behind looser tolerances.
+
+The theorem closes continuum **measure registration** only.  It does not prove
+that capacity majority is causal-work majority, does not authorize re-Hahn after
+analysis coarsening, does not certify Young saturation of the geometry-good work,
+and does not close generic HH or mixed-owner recurrence.  No Navier--Stokes
+regularity claim is made.
+
+---
+
+### 33.13 Canonical positive edge-work routing and signed hard-cell handoff
+Status:
+`EXACT_CANONICAL_POSITIVE_EDGE_WORK_ROUTING__ACTUAL_DW_HAHN_RESTRICTION__GEOMETRY_BAD_SAME_LAW_STAGE_ZERO_TRANSFER_LOSS__GEOMETRY_GOOD_ONLY_YOUNG_ELIGIBLE__FATE_PURE_SIGNED_CELL_BINDING_ONLY__MIXED_FATE_CELL_SEAM_EXPOSED__POSITIVE_PUSHFORWARD_NOT_REHAHN`.
+
+Exact certified implementation/performance SHA:
+`d78a3f4223c16f541548e7628cd73f70e6fdee6c`.
+
+The physical theorem is the routing of the already-existing canonical Hahn law, not a new probability construction.  Put
+\[
+\mu=dW,\qquad \mu^+=dW^+,\qquad r_e=(J_e/J_*)c_e,
+\]
+and at `eta_0=10^-4` restrict the same positive edge law to
+\[
+G=\{T_e>0:r_e>1-\eta_0\},\qquad B=\{T_e>0:r_e\le1-\eta_0\}.
+\]
+Then `mu^+=mu_G^++mu_B^+` exactly.  On every nonempty bad restriction,
+\[
+\epsilon_B=1-\frac{F(B)}{J_*A(B)}\ge10^{-4},
+\]
+which is strictly above `delta_tau=tau^2/1036800000` for every certified `0<tau<=0.1`.  The same measurable `mu_B^+` restriction is bound to the shared physical `FixedTransferLossGate` and terminates as `TRANSFER_WORK_LOSS -> TRANSFER_COST`; this stage-zero fate has `first_time=None`.  Positive nonforward work is retained in `B` with no synthetic scale progress.
+
+For downstream hard roles, the causal law is inherited by positive pushforward `pi_#mu^+`, while signed cell work is `pi_#mu`.  Thus `[pi_#mu]^+` is only a cancellation diagnostic and never a second causal Hahn law.  Geometry-good work is not Young-good.  The full signed cell work may be presented to Young/Christ only on fate-pure cells carrying good positive work and zero inherited bad-positive work.  Mixed good/bad cells expose a real obstruction: their good positive mass remains exactly accounted but unresolved Young-eligible, and the theorem refuses arbitrary refinement or nonlinear subtraction of terminal bad work.
+
+Dedicated routing run:
+`31559241272` — **success** on the exact SHA.  Its `50,000`-sample stress recorded:
+- exact `G+B` mass reconstruction worst relative residual `2.2197019035664715e-16`;
+- hard positive pushforward residual `0.0`;
+- `50,000` positive nonforward bad cases retained;
+- minimum bad-deficit margin above `eta_0` `0.9999`;
+- minimum fixed-transfer margin `0.9999999999903585`;
+- maximum deliberate coarsened cancellation fraction `1.0`;
+- maximum deliberate mixed-fate good fraction `1.0`;
+- stage-zero first-time failures `0` and geometry-good marking promotions `0`.
+
+Independent routing audit:
+`31559242700` — **success**.  The adversarial lane ran `75,000` routing states with worst mass reconstruction `2.2202520702993216e-16`, hard pushforward residual `0.0`, all `75,000` positive nonforward cases retained, deliberate mixed-fate fraction `1.0`, and no first-time or marking promotions.  The actual dealiased Fourier--Galerkin Navier--Stokes lane used resolution/cutoff `24/7`, `64` RK4 steps and `5` physical snapshots; all five contained positive work, bad work and positive nonforward work.  Signed NS reconstruction, `dW+` fate reconstruction and hard positive pushforward residuals were all `0.0`; the minimum bad-deficit margin above `eta_0` was `0.7774419621267659`, and stage-zero first-time failures remained `0`.
+
+Full physical-energy causal integration:
+`31559248529` — **success** on the same exact SHA, with canonical edge routing wired immediately after continuum edge registration and before complex Young, then green through the remaining current causal spine.
+
+Measure-layer compatibility gates on the same SHA also remained green:
+- continuum dedicated `31559244152`;
+- independent continuum adversarial + actual-NS + multi-child audit `31559245648`;
+- physical helical edge registration `31559247024`.
+
+Stored artifacts:
+- `recorded-results/31559241272/`, GitHub artifact digest `sha256:b8fa14dcaafd651cbe77ee96580ed86031fbb0c50553eae979740f0a7c277cec`;
+- `recorded-results/31559242700/`, routing audit digests `sha256:050cefbc231a788e797da569b95eeff2c98ea8671794246c95ba37043e948592` and `sha256:dd3710757e0e1ae796e8ad4a63762bf2c01dd8aad8979d533f11f6cdd698567e`;
+- `recorded-results/31559248529/`, integration digest `sha256:a29a607dc048ea0e085318ac0e2771ac74d849a5c4547904f4fb21aec6ba13f3`;
+- `recorded-results/31559244152/`, continuum dedicated digest `sha256:77ab0f18e7c40bf629cde11cfcf0ac0c97c022e94aa845a1dcbbd83d78fd7cf3`;
+- `recorded-results/31559245648/`, continuum audit digests `sha256:4964cf7b74a667ef2128adf138e7f2d39ae1eb16561c45db4cb02a0078c7f04c`, `sha256:195bdf339fded9f3335d4028354c9bd5a2b87f6abbd2bbd850ffe1d106eb5a35`, and `sha256:5c19c88c40ea984a9a3b1fa369c17c43d945522cf525a26958ea1d06c0a5928b`;
+- `recorded-results/31559247024/`, helical dependency digest `sha256:fb7c46759a93933e40c65a4da14d50a48fde612276b3622941b45234c3d23f5d`.
+
+Candidate lineage is intentionally visible.  `1a07a48...` exposed the mixed-fate cell seam; `d622b0a...` changed only workflow time allowances after earlier routing stresses timed out; `ceeb7b9...` removed redundant registration/replay without changing the law; `37c35a7...` generalized the same performance discipline across current and historical theorem modules; `e2071b1...` corrected only a newly-added reference-gauge fixture; and `d78a3f4...` corrected only missing `python-flint` wiring in two full-suite historical workflows.  No correction weakened a physical threshold, random law, sample count, signed-before-Hahn order, causal provenance, or first-time semantics.
+
+This theorem closes generic geometry-bad positive-edge routing and deterministic hard positive pushforward.  It does **not** certify Young saturation of mixed-fate good work, does not identify a general coherent POVM positive law with canonical causality without a positive kernel/disintegration, does not terminate generic HH or mixed-owner recurrence, and makes no Navier--Stokes global-regularity claim.
+
+
+---
+
+### 33.14 Mixed-fate reserved Young/Christ handoff
+Status:
+`EXACT_MIXED_FATE_RESERVED_YOUNG_HANDOFF__CANONICAL_DW_PLUS_INHERITED__FULL_SIGNED_HARD_CELL_ONLY__TERMINAL_BAD_ASSISTANCE_RESERVED_WITHOUT_NEW_TRILINEAR_WORK`.
+
+Exact certified implementation/provenance SHA:
+`2600bcbe7db56f54af58d1e7685d1246ad3d7bee`.
+
+This theorem closes the **mixed-fate assistance** seam without creating a new work law.  On a deterministic hard cell carry the original edge-space Hahn laws by direct linear pushforward,
+\[
+g_C=(\pi_\#dW_G^+)(C),\qquad
+b_C=(\pi_\#dW_B^+)(C),\qquad
+n_C=(\pi_\#dW^-)(C),
+\]
+together with the actual signed trilinear work
+\[
+T_C=(\pi_\#dW)(C)=g_C+b_C-n_C.
+\]
+For a separately certified full-cell Young upper `Y_C`, define only as a scalar certificate
+\[
+U_C=T_C-b_C=g_C-n_C.
+\]
+Then exactly
+\[
+\boxed{
+\delta_C^{res}:=1-U_C/Y_C
+=\delta_C^{full}+b_C/Y_C,
+\qquad
+\delta_C^{full}=1-T_C/Y_C.
+}
+\]
+`U_C` is never passed to Young, Christ, Duhamel, or a causal compiler.  The actual full signed `T_C` remains the sole Young input.  Thus `delta_res+xi<=delta_Christ` certifies that the good inherited `dW+` branch is Young/Christ-good even after reserving every unit of already-terminal bad-positive work from the near-extremality margin.  Fate-pure cells are the exact special case `b_C=0`.
+
+The theorem also gives a native actual-work alternative on low edge-deficit blocks.  At `eta_0=10^-4`, the existing single-edge stability certificate and a new Arb check give the clean pointwise good-core lower
+\[
+\frac{dW}{dA}>\frac{19}{100}.
+\]
+Together with `A(G^c)/A<=q=epsilon/eta_0` and `|dW|<=dA` off the core,
+\[
+\boxed{
+\frac{B_W+N_W}{G_W}
+\le
+\frac{q}{(19/100)(1-q)}.
+}
+\]
+Capacity is only the reference used to locate the complement; the conclusion is a ratio of actual positive/negative physical work.  If a full-signed Young/Christ-good cell has spare margin at least `mu in (0,1)` but fails the reservation gate, then
+\[
+\boxed{g_C<n_C+(\mu^{-1}-1)b_C.}
+\]
+So nondegenerate-margin failure can occur only in the presence of already-existing canonical negative work and/or already-terminal bad-positive work.  No failed good mass is relabelled terminal by this inequality.
+
+Dedicated mixed-fate run:
+`31570465782` — **success** on the exact SHA.  It passed `819` tests.  The analytic/adversarial lane ran `75,000` mixed-fate algebra/scaling states with:
+- `28,621` safe mixed/fate-pure handoffs;
+- `7,195` Christ-margin failure-domination cases;
+- worst reservation identity residual `3.0114092101654833e-16`;
+- worst direct Hahn-pushforward identity residual `1.1597858539831283e-15`;
+- worst positive-scaling deficit residual `4.440892098500626e-15`;
+- the geometry-only role-purification, nonlinear Hahn-subtraction, and fresh coherent-Hahn kernel shortcuts all falsified by their explicit countermodels.
+
+The same dedicated run evolved actual `2/3`-dealiased Fourier--Galerkin incompressible Navier--Stokes on resolution/cutoff `24/7`.  The main orbit used `32` RK4 steps and `5` physical snapshots; amplitude adversaries `0.5` and `2.0` used `24` steps and `4` snapshots each.  Every snapshot retained good positive work, terminal bad-positive work, and negative signed work in the deliberately coarsened mixed cell.  The near-extremal integer triad had signed efficiency `0.999996646308...`; actual signed-NS reconstruction stayed below `8.1e-16`, the hard `T=g+b-n` and reservation identities stayed at about `1e-16`, and there were zero stage-zero first-time inventions or geometry-good marking promotions.  Mixed good work scaled cubically under the amplitude adversaries, as the actual trilinear law requires.
+
+The Arb certificate on the same run proved:
+- exact good-core physical-work/capacity density interval `[0.1980944724 +/- 3.77e-11]`, hence the clean `19/100` lower;
+- integer parent/child ratio `sqrt(41/110)=0.610513941468...`;
+- normalized geometric multiplier `[0.999996646 +/- 4.08e-10] > 9999/10000`.
+
+Compatibility/referee gates on the same exact SHA were also green:
+- canonical positive edge routing `31570465801`, including `819` tests and the unchanged `50,000`-state routing stress;
+- independent canonical routing audit `31570465766`, with both adversarial and evolved actual-NS jobs successful;
+- full physical-energy causal integration `31570465783`, with `819` tests and the `50,000`-state mixed-fate theorem inserted after canonical edge routing and before complex Young.
+
+Stored artifacts:
+- `recorded-results/31570465782/`, analytic digest `sha256:f47a6f806791f98f1ed91d2f48db0b02581f26f41b6baa5a2fedd1b0f718f2ee` and actual-NS digest `sha256:3d49c26028886fae1da1f2ca693637578bc4f798de942819b029d5366b0f7f78`;
+- `recorded-results/31570465783/`, integration digest `sha256:4adb3ffd12c92a0b14353e997a873a9144f7b487b3cc03021b3831c23f311255`.
+
+Failure/correction provenance is physical rather than hidden.  Initial SHA `c2104184d48718c41d5791e32bd888498b90e517` had exactly one focused failure after the rest of the suite passed: reconstructing an extremely small `pi_#dW^-` numerically as `pi_#dW^+ - pi_#dW` lost it to cancellation.  The final SHA does not loosen tolerance or discard the case.  It pushes the original Hahn-negative edge law forward **directly**, in parallel with `dW^+` and signed `dW`, and retains their difference only as an identity check.  The final API also keeps the external Christ modulus in `(0,1)`, a harmless restriction of any valid near-extremal modulus needed by the failure alternative.
+
+The theorem closes terminal-bad assistance as the reason mixed cells were previously forbidden.  It does **not** prove that every geometry-good cell is Young-good, does not invent a numerical Christ modulus, and does not make fresh coherent Hahn causal.  The sharp local HH frontier is now: cells whose full-signed Christ margin degenerates, the native structure/telescoping of canonical negative work that controls the remaining nondegenerate failures, and a separately proved positive coherent kernel only if a later coherent/material representation actually requires one.  Generic HH termination, mixed genuine-owner recurrence, the initial-data interface, and the singular-time conclusion remain open.  No Navier--Stokes global-regularity claim is made.
+
+---
+
+
+### 33.15 Cyclic helical-triad donor/recipient kernel
+Status:
+`EXACT_CYCLIC_HELICAL_TRIAD_DONOR_KERNEL__FULL_S3_CLOSED_TRIAD_QUOTIENT__THREE_ROOT_SIGNED_NS_ENERGY_CONSERVATION__CANONICAL_DW_MINUS_TO_DW_PLUS_MARGINALS__SIGNED_GOOD_UNIQUE_DONOR_AND_NONFORWARD_SIDE_RECIPIENT`.
+
+Exact certified implementation/provenance SHA:
+`647065ab1562e15da84c97d9be5265c2e43dc84d`.
+
+This theorem follows canonical negative work down to one actual closed Fourier/helicity
+Navier--Stokes triad **before** any new positive split.  For
+`k_0+k_1+k_2=0`, cyclic rooting gives three actual child-energy works with one
+common Waleffe phase factor,
+\[
+T_0=(s_1|k_1|-s_2|k_2|)R_\triangle,\quad
+T_1=(s_2|k_2|-s_0|k_0|)R_\triangle,\quad
+T_2=(s_0|k_0|-s_1|k_1|)R_\triangle,
+\]
+so exactly
+\[
+\boxed{T_0+T_1+T_2=0}
+\]
+**before Hahn**.  With `P_i=[T_i]_+`, `N_i=[-T_i]_+`, and
+`Q=sum_i P_i=sum_i N_i`, the same-triad transport
+\[
+\boxed{M(i\to j)=N_iP_j/Q}
+\]
+has donor marginal canonical `dW^-` and recipient marginal the already-canonical
+`dW^+`.  Because a nonzero zero-sum three-slot sign pattern has a singleton donor
+or recipient side, this transport with those physical marginals is unique.  It is
+provenance, not a replacement causal law: recipient `dW^+` remains the cause and
+same-time donor tracing adds zero event depth.
+
+The quotient constants close without a hidden multiplicity.  The raw ordered
+closed triad is quotiented by full `S_3`, giving factor `1/6`; marking one of its
+three roots gives `3*(1/6)=1/2`, exactly the existing parent-swap edge quotient.
+The inverse `(x,y)<->(z,r)` Jacobian contributes `1/8`, hence one closed-triad
+root chart has density `1/48` and the three roots recover `1/16`.  The cyclic
+reroot map has absolute Jacobian one.  Global reality is covariant but is **not**
+quotiented; both reality partners remain in the physical edge law.
+
+For any donor restriction `D`, the recipient pushforward `nu_D^+` satisfies the
+exact measure statements
+\[
+\boxed{\nu_D^+(\Omega)=dW^-(D),\qquad 0\le \nu_D^+\le dW^+.}
+\]
+Thus a hard-cell negative obstruction is physically donor-side manifestation of
+existing same-time positive recipient work, not a synthetic owner, budget, clock,
+or probability.  This does **not** say the recipient terminates: its already
+canonical good/bad fate still decides its downstream routing.
+
+The generic anti-theorem is essential: a positive child can have **two** energy
+donors.  Unique donor is false in general.  On the signed-good forward integer
+triad, however, the existing `3/5 < parent/child < 5/8` stability and efficiency
+`>1-10^-4` exclude same-helicity parents.  Exactly one interaction parent is then
+the energy donor, namely the parent whose helicity equals the child; the other
+interaction parent is a simultaneous positive recipient.  Writing normalized
+child scale one and donor/side frequency ratios `D,S`, the exact work ratios give
+\[
+\boxed{3/10<W_{side}^+/W_{child}^+<1/3,}
+\]
+\[
+\boxed{3/4<W_{child}^+/W_{donor}^-<10/13,\qquad
+3/13<W_{side}^+/W_{donor}^-<1/4.}
+\]
+The side cyclic edge is nonforward (`J=0`) and therefore lies on the existing
+positive-nonforward `TRANSFER_WORK_LOSS` recursive route.  Its work is nevertheless
+real positive modal energy deposited in a lower mode; it is **not** viscous
+dissipation, a reset, a leakage budget, or a proof that the signed-good child
+terminates.
+
+Floating certification near exact phase cancellation is deliberately fail-closed.
+Native modal capacity appears only as an immutable physical work-error envelope;
+it never enters `M(i->j)`, causal probability, or recurrence currency.  When the
+realized work is below numerical sign resolution, the numerical API mints no donor
+atom.  Exact theorem statements remain statements about all mathematically
+nonzero work.
+
+Dedicated run `31577239181` — **success** on the exact SHA.  The full theorem suite
+passed `838` tests.  The analytic lane ran `75,000` closed-triad states with
+`37,299` one-donor and `37,701` two-donor cases, zero unresolved near-zero cases,
+worst pre-Hahn energy-conservation native residual `1.504848698876444e-16`, worst
+cyclic-coupling native residual `3.433175098891678e-16`, and measure donor/recipient
+marginal residuals at `1.0160171739177665e-16` / `9.039731545015189e-17`.  The
+signed-good sample gave `W_child^+/W_donor^-=0.7581603930876305`,
+`W_side^+/W_donor^-=0.24183960691236916`, and
+`W_side^+/W_child^+=0.31898211660394216`.
+
+The same run evolved the repository's actual `2/3`-dealiased incompressible
+Fourier--Galerkin Navier--Stokes system at common cutoff `7` represented on FFT
+grids `24` and `28`, `32` steps and `5` physical snapshots.  Maximum selected
+root-work and selected positive-work cross-representation native residuals were
+`7.668370993680806e-17` and `5.751278245260604e-17`; the NS energy-balance residual
+was about `2.963e-12`.  The initial signed-good triad had one donor, two recipients,
+side forward ratio `0.6105139414683932`, and side `J=0`.
+
+Independent audit `31577239221` — **success** on the same exact SHA.  Its `100,000`
+closed-triad stress found `50,187` one-donor and `49,813` two-donor cases, with
+worst pre-Hahn energy-conservation native residual `1.844e-16` and cyclic-coupling
+native residual `3.377e-16`.  Its longer actual-NS lane used the same cutoff on
+FFT grids `24,28`, `48` steps and `6` snapshots, with maximum selected root-work
+representation native residual `1.390e-16` and NS energy-balance residual about
+`1.758e-12`.  Full physical-energy causal integration `31577239183` was also
+**success**, passed `838` tests, and ran `50,000` cyclic stress states in the
+current causal spine.
+
+Stored artifact trees:
+- `recorded-results/31577239181/`, deterministic file-tree digest `sha256:38cd808ffc2aec5d79b6817e7b3f78c25b7013b859f633a1a25ef02f6c413137`;
+- `recorded-results/31577239221/`, deterministic file-tree digest `sha256:8a7c8bc21bf2a815d69b731c82d7c68d0cac6a2f1ab6653b26ec1adbb25b2436`;
+- `recorded-results/31577239183/`, deterministic file-tree digest `sha256:037485a73af2009c55649b69817339f38bf5a5f944165ec0d3d27b38650b7b89`.
+
+Failure lineage is retained because the independent audit changed the numerical
+certificate twice without changing the theorem.  `d6ce290fdec673d71298f6e25802a64a00713bde`
+normalized cyclic-coupling equality by the accidentally tiny realized coupling and
+failed.  `83e32db216b7599bc804c84025f238b61b4ac18a` fixed that with the native unit-basis
+Waleffe bound, after which the same independent `100,000`-state lane exposed
+realized-`Q` normalization in pre-Hahn conservation/marginal checks.
+`a09b2bb0e9591afcc89eec7273e44286720f3804` replaced those floating denominators
+by native work-error envelopes, used a symmetric resolved transport denominator,
+and made near-zero sign certification fail closed.  Final
+`647065ab1562e15da84c97d9be5265c2e43dc84d` applied the same native-envelope rule
+to permutation, translation, uniform wavevector scaling, amplitude cubic scaling,
+reality, and cross-FFT representation audits.  No physical threshold, stress
+count, signed identity, or causal law was weakened.
+
+This theorem closes the **same-time closed-triad provenance** of canonical negative
+work.  It does not close degenerate Young/Christ margin, does not provide a
+between-time provenance matching from earlier deposits to later withdrawals, does
+not identify hard-cell coarsening with a progress map, and does not terminate
+generic HH or mixed genuine-owner recurrence.  Coarse donor/recipient roots may
+even map to the same hard cell.  The representation-level question left here—how
+restricted donor hard cells charge overlapping positive recipient support without
+double counting—is now answered by §33.16 below.  Any modewise energy/dissipation
+inventory across time remains a separate physical ledger.  No Navier--Stokes
+global-regularity claim is made.
+
+---
+
+### 33.16 Cyclic hard-cell single-charge quotient
+Status:
+`EXACT_CYCLIC_HARD_CELL_SINGLE_CHARGE_QUOTIENT__RESTRICTED_DW_MINUS_ROWS__CANONICAL_DW_PLUS_GOOD_BAD_COLUMNS__OVERLAPPING_RECIPIENT_SUPPORT_NO_DOUBLE_CHARGE__COARSE_SELF_LOOPS_ZERO_RECURSION_DEPTH`.
+
+Exact certified implementation/provenance SHA:
+`964b72b0a614bb44c88a42d41160f11bd550d97a`.
+
+The cyclic donor theorem fixes the same-time physical measure before hard
+coarsening.  If `M_triangle` is its donor/recipient measure, `pi` is the existing
+deterministic hard Fourier/helicity map, and `phi` is the already-certified
+recipient fate map, define only the positive pushforward
+\[
+K(C,D,F)
+=
+(\pi_{donor},\pi_{recipient},\phi_{recipient})_\#
+\mathcal M_\triangle(C,D,F).
+\]
+No hard-cell Hahn split is introduced.  The donor rows are exactly the inherited
+Hahn-negative hard law,
+\[
+\boxed{\sum_{D,F}K(C,D,F)=(\pi_\#dW^-)(C)=n_C,}
+\]
+while the recipient columns retain the already-canonical positive fate laws,
+\[
+\boxed{\sum_CK(C,D,G)=(\pi_\#dW_G^+)(D)=g_D,\qquad
+\sum_CK(C,D,B)=(\pi_\#dW_B^+)(D)=b_D.}
+\]
+Thus disjoint donor restrictions are positive submeasures of the existing
+recipient cause and recombine to it exactly.  Several donor cells may overlap on
+the same recipient support, and several disjoint closed-triad measure pieces may
+land in the same hard `(cell,fate)` slot, but they are aggregated into **one**
+canonical recipient charge.  Donor provenance disintegrates cause; it does not
+multiply cause.
+
+The generic two-donor anti-theorem remains active.  A positive recipient may have
+two energy donors.  Fine hard cells then carry two positive incoming donor atoms,
+but their sum is the single canonical recipient `dW+` charge.  Conversely, on the
+signed-good forward triad one donor feeds the geometry-good child and the actual
+positive nonforward side recipient.  The former remains only Young-eligible; the
+latter remains on the existing `TRANSFER_WORK_LOSS` stage-zero recursion route.
+That route termination is not viscous dissipation: the side mode retains real
+Navier--Stokes energy and may participate in later PDE interactions.
+
+Hard coarsening may identify physically distinct donor and recipient roots.  Then
+`K(C,C,F)>0` is a real representation-level self-loop.  The theorem keeps this
+mass exactly and proves only the correct ontology: same-time redistribution, zero
+additional event depth, and no supplied scale progress.  In the maximal coarse
+fixture every transported atom is a self-loop and the self-loop mass fraction is
+exactly one.  Therefore cyclic donor provenance cannot itself be used as a scale
+telescope.
+
+This theorem also sharpens the mixed-fate failure statement without overreading
+it.  The existing nondegenerate-margin inequality
+\[
+g_C<n_C+(\mu^{-1}-1)b_C
+\]
+remains a scalar domination theorem only.  Although `n_C` now has exact hard-cell
+donor provenance into existing same-time positive causes, there is **no** theorem
+mapping failed good work in cell `C` to that negative donor mass.  The recipient
+may be good, bad, in another cell, or in the same coarse cell.  “Negative work
+pays failed good work” remains forbidden.
+
+The single-charge theorem is also distinct from the existing
+`physical_branch_compiler`.  That compiler quotients duplicate theorem
+manifestations after a positive causal root has been selected.  The present
+result is upstream: it proves that hard-coarsened cyclic `dW^-` provenance reaches
+the already-selected positive roots without cloning their measure.  The two
+quotients therefore compose without introducing a new owner or recursion depth.
+
+Dedicated run `31582837653` — **success** on the exact SHA.  The full theorem suite
+passed `856` tests; focused single-charge tests passed `14`, and the focused
+physical-provenance dependency set passed `60`.  The `75,000`-triad stress had:
+- `37,492` one-donor and `37,508` two-donor states;
+- `24,156` overlapping-recipient-charge states;
+- `33,286` coarse-self-loop states;
+- zero numerically unresolved states;
+- worst total balance native residual `1.952e-16`;
+- worst donor/recipient marginal residuals `9.902e-17` / `9.760e-17`;
+- worst restricted-donor pushforward residual `9.902e-17`;
+- exact recipient fate-partition residual `0` in the reported stress;
+- signed-good good/bad recipient masses `0.540401435212` / `0.17237839362`;
+- maximal-coarsening self-loop fraction `1`.
+
+The same dedicated run passed `6` focused evolved-PDE tests and evolved the actual
+`2/3`-dealiased incompressible Fourier--Galerkin Navier--Stokes system at common
+cutoff `7` on FFT grids `24` and `28`.  On the ordinary phase branch, the initial
+physical triad had one donor and two recipients with good/bad work
+`8.51111181869` / `2.71489246258`; the worst total-work cross-representation native
+residual was `1.150e-16`, and the NS energy-balance residual was about `2.963e-12`.
+Negating the divergence-free initial field reverses the cubic nonlinear work
+signs without changing the PDE: that branch began with two donors feeding one bad
+recipient of work `11.2260042813`, overlapping-recipient count `1`, worst total
+representation native residual `5.746e-17`, and NS energy-balance residual about
+`2.677e-11`.  Both branches had maximal-coarsening self-loop fraction `1`.  The
+amplitude `0.5` and `2.0` adversaries also passed on the same physical geometry.
+
+Independent audit `31582837613` — **success** on the same exact SHA.  Its focused
+algebra/provenance set passed `74` tests and the independent `100,000`-triad stress
+had `50,346` one-donor and `49,654` two-donor states, `31,762`
+overlapping-recipient states, `44,373` coarse-self-loop states, zero unresolved
+states, worst total balance native residual `1.784e-16`, donor/recipient marginal
+residuals `9.699e-17` / `1.051e-16`, and worst restricted-donor pushforward
+residual `1.075e-16`.  Its actual-NS job passed `5` focused tests and longer
+`48`-step, `6`-snapshot audits on grids `24,28`: the positive branch had maximum
+total/good/bad representation residuals `1.045e-16` / `8.712e-17` / `2.178e-17`
+and NS energy-balance residual about `1.758e-12`; the phase-reversed branch had
+`5.246e-17` / `0` / `5.246e-17` and energy-balance residual about `2.574e-11`.
+The existing mixed-fate actual-NS dependency was green as well.
+
+Full physical-energy causal integration `31582837580` — **success** on the exact
+SHA.  It passed the full `856`-test suite and inserted the new theorem immediately
+after the `50,000`-state cyclic donor kernel and before complex Young.  Its own
+`50,000`-state single-charge run had `25,007` one-donor and `24,993` two-donor
+states, `16,112` overlapping-recipient states, `22,120` coarse-self-loop states,
+zero unresolved states, worst balance native residual `1.586e-16`, worst
+donor/recipient marginal residuals `9.085e-17` / `9.129e-17`, and worst restricted
+pushforward residual `9.522e-17`.  The entire downstream witness, donor-quotient,
+reuse, branch-compiler and master spine completed successfully.
+
+Stored artifact trees:
+- `recorded-results/31582837653/`, deterministic file-tree digest `sha256:0c8e55157ccf4e96667fc4517d1d1e61d193c5c4bc24ddf5694d4f44ba3ed9e3`;
+- `recorded-results/31582837613/`, deterministic file-tree digest `sha256:ad3902bfe50bc9ddb2b6704a5f3eb2e8247e08c5b3c4021310c581599cba5fed`;
+- `recorded-results/31582837580/`, deterministic file-tree digest `sha256:7fd87d1b02aa83bae219cb1371b91484dadedd63121368f013882bd8aa666f93`.
+
+Failure/correction lineage is intentionally retained.  Initial candidate
+`55a54b02f0a7a77a4b7a73b0403e90311cf0eeb8` passed the focused theorem tests and
+both new evolved-NS sign branches, but the independent `100,000`-state audit found
+a floating certification seam: restricted submeasure domination was checked
+relative to an accidentally tiny realized recipient Hahn mass.  The exact
+submeasure theorem was not false; independently reconstructed masses near phase
+cancellation had an ill-conditioned relative comparison.  Final SHA
+`964b72b0a614bb44c88a42d41160f11bd550d97a` certifies that floating domination on
+the predecessor theorem's native work-mass error envelope instead, while keeping
+native capacity completely outside the donor kernel, causal law, probability and
+recurrence currency.  The first audit also exposed one workflow-only mistake: an
+unsupported `--cutoff` argument was passed to the existing mixed-fate dependency
+probe; the final workflow removes only that argument.  No physical threshold,
+sample count, hard map, fate law, signed identity, work transport or causal
+semantics was weakened.
+
+The theorem closes the **same-time hard-cell negative-work single-charge seam**.
+It does not solve degenerate full-signed Young/Christ margin, does not create a
+positive coherent kernel, and does not provide a canonical matching from earlier
+positive modal deposits to later negative withdrawals.  The separate between-time
+modewise energy/work/viscous-dissipation ledger requested here is now certified by
+§33.17 below.  That theorem still creates no FIFO/LIFO matching and no gross-transfer
+budget; its next native specialization is a radial Fourier boundary.  No
+Navier--Stokes global-regularity claim is made.
+
+
+### 33.17 Helical mode-set energy continuity: native stock, boundary flow and viscosity
+Status:
+`EXACT_HELICAL_MODE_SET_ENERGY_CONTINUITY__CYCLIC_DONOR_BOUNDARY_FLUX__INTERNAL_FLOW_CANCELLATION__MODEWISE_VISCOUS_STOCK_BALANCE__NO_FIFO_LIFO_OR_GROSS_TRANSFER_BUDGET`.
+
+Exact certified implementation/provenance SHA:
+`a39d502d9312ac3bd6613a780d60b22e88790863`.
+
+The same-time cyclic donor measure is now pushed to its actual persistent state nodes: physical helical Fourier modes `m=(k,s)`.  For any measurable/finite mode set `A`, write the cyclic donor flow as
+\[
+I_A=\mathcal M(A\times A),\qquad
+\Phi_{in,A}=\mathcal M(A^c\times A),\qquad
+\Phi_{out,A}=\mathcal M(A\times A^c).
+\]
+The canonical gross positive/negative work marginals on `A` satisfy exactly
+\[
+W_A^+=I_A+\Phi_{in,A},\qquad
+W_A^-=I_A+\Phi_{out,A},
+\]
+hence the real internal nonlinear traffic cancels from set divergence,
+\[
+\boxed{W_A^+-W_A^-=\Phi_{in,A}-\Phi_{out,A}.}
+\]
+No later Hahn split is used.  `W_A^+` and `W_A^-` are inherited from the already-canonical edge Hahn laws through the cyclic donor marginals.
+
+For one helical mode, Navier--Stokes itself gives
+\[
+\frac d{dt}E_{k,s}=W_{k,s}^+-W_{k,s}^- -2\nu|k|^2E_{k,s}.
+\]
+Summing on `A` and integrating yields the exact physical continuity law
+\[
+\boxed{
+E_A(t_1)+D_A[t_0,t_1]+\int_{t_0}^{t_1}\Phi_{out,A}\,dt
+=E_A(t_0)+\int_{t_0}^{t_1}\Phi_{in,A}\,dt,
+}
+\]
+with
+\[
+D_A=2\nu\int_{t_0}^{t_1}\sum_{(k,s)\in A}|k|^2E_{k,s}(t)\,dt.
+\]
+Persistent stock lives on physical helical modes, not hard interaction cells.  A hard-cell self-loop is same-time interaction representation and cannot become a wallet across time.
+
+The full-closed-triad anti-theorem is equally physical.  If `A` contains all three helical nodes of one closed triad, its boundary flux is exactly zero while its internal donor/recipient traffic is positive.  Scaling the actual triad amplitudes by `10` scales that internal work by `10^3`: the certified fixture moves from `0.712779828831` to `712.779828831` while both inward and outward full-set boundary flux remain zero.  Thus conservation controls net boundary transport + stock + viscosity, not total gross nonlinear traffic.  Neither `integral W+` nor `integral W-` is a finite reset resource.
+
+The theorem also refuses temporal provenance that Navier--Stokes has not supplied.  The stock identity implies aggregate accounting such as `integral W^- <= E(t_0)+integral W^+`, but does not canonically pair an earlier positive deposit to a later withdrawal.  FIFO, LIFO and proportional deposit matching remain forbidden synthetic couplings.
+
+Dedicated run `31598313644` — **success**.  The full suite passed `870` tests.  Its `75,000` physical closed-triad stress checked `150,000` mode sets, with worst boundary-divergence native residual `2.138e-16`; the largest sampled internal/boundary ratio with nonzero boundary was `38904.2004084`.  Actual cutoff-7 Fourier--Galerkin NS on FFT `24,28` gave selected-helicity and sign-reversed `64`-step interval residuals `1.563e-11` and `2.960e-11`.  The opposite-helicity branch began at energy about `1e-32`, was nonlinearly born to `1.80191453799e-05`, received integrated gross positive/negative work `1.81542566415e-05` / `9.53908587922e-08`, and had worst cross-FFT native residual `4.890e-14`; its interval residual was `1.155e-06`.  Amplitude adversaries `0.5` and `2.0` also passed.
+
+Independent audit `31598313628` — **success**.  Its algebra lane ran `100,000` triads and `200,000` mode sets with worst boundary-divergence residual `2.141e-16`, plus the `100,000`-state cyclic dependency.  Its longer actual-NS lane used amplitude `1.3`, `96` steps, duration `0.0012`, cutoff `7`, FFT `24,28`; selected/sign-reversed interval residuals were `4.051e-11` / `6.485e-11`.  The longer opposite-helicity branch grew from `6.91e-32` / `2.27e-32` to `7.38660111133e-05`, with gross positive/negative work `7.44536161723e-05` / `3.92012387067e-07`, viscous dissipation `1.9564433437e-07`, interval residual `6.939e-07`, and worst cross-FFT native residual `6.444e-14`.
+
+Full physical-energy causal integration `31598313576` — **success** on the same SHA.  It passed the same `870`-test suite and ran `50,000` mode-continuity states immediately after cyclic donor + hard-cell single-charge provenance and before complex Young; worst boundary-divergence native residual was `2.103e-16`, and the downstream causal spine remained green.
+
+Stored artifacts:
+- `recorded-results/31598313644/`, tree digest `sha256:9b4bff2e5ce26ac1afb4afb7ebe8f25f4bd4f5c9a754b52e1d51812550d3cfae`;
+- `recorded-results/31598313628/`, tree digest `sha256:7f34ef66faef1e4d132ec59622c10ab04c1eb8d5086318645a28828f83b22f74`;
+- `recorded-results/31598313576/`, tree digest `sha256:6eb24c013d52c54ef63e4196e5e8df565756859bcae2271f4b014e796c587da7`.
+
+Failure lineage is retained.  Candidate `8ec1efe924c1a7cabf2499ff232e09f060ced2d8` placed a universal `5e-8` finite-step residual gate inside the exact theorem object; the opposite-helicity zero/tiny-stock fixture exposed that category error.  `e11b3464d437b42e0474da1e016e67a584bcfe92` separated exact continuity from numerical quadrature tolerance, after which the same physical fixture exposed a second audit seam: cross-FFT gaps were divided by the particular realized observable, which can vanish under genuine helicity selection or phase cancellation.  Final `a39d502...` uses the mode's native physical energy-throughput only as an immutable numerical representation-error envelope.  It never enters the cyclic kernel, causal law, event depth, recurrence currency or gross-transfer accounting.  No physical case, sample count, sign pattern or PDE evolution was removed.
+
+This closes between-time **mode-set continuity registration**, not mixed-owner recurrence.  Its radial specialization is now certified in §33.18: `Phi_in/Phi_out` on Fourier exteriors becomes genuine upward/downward spectral crossing and yields an exact logarithmic layer cake, while remaining distinct from the single-edge Young/progress multiplier.  The next seam is the true-upward-supply / hard-tail-dissipation interface.  No Navier--Stokes global-regularity claim is made.
+
+---
+
+### 33.18 Radial spectral crossing layer cake: actual Fourier-sphere flux, not circulation
+Status:
+`EXACT_RADIAL_SPECTRAL_CROSSING_LAYER_CAKE__PHYSICAL_HELICAL_DONOR_RECIPIENT_RADII__TAIL_INWARD_OUTWARD_FLUX__TRUNCATED_LOG_RADIUS_LAYER_CAKE__NO_REHAHN_DYADIC_PROGRESS_OR_GROSS_CROSSING_BUDGET`.
+
+Exact certified implementation/provenance SHA:
+`667e687cb740a77df944753c575f581abad14199`.
+
+For the certified cyclic donor flow on physical helical modes, let `rho_d=|k_d|`, `rho_r=|k_r|` and `H_R={|k|>R}`.  The only atoms that cross the radial boundary are
+\[
+\Phi_\uparrow(R)=\mathcal M\{\rho_d\le R<\rho_r\},
+\qquad
+\Phi_\downarrow(R)=\mathcal M\{\rho_r\le R<\rho_d\}.
+\]
+High→high atoms form internal tail circulation.  Therefore the inherited canonical tail marginals obey
+\[
+W_{>R}^+-W_{>R}^-=\Phi_\uparrow(R)-\Phi_\downarrow(R),
+\]
+and actual Navier--Stokes gives
+\[
+\boxed{
+E_{>R}(t_1)+D_{>R}+\int\Phi_\downarrow\,dt
+=E_{>R}(t_0)+\int\Phi_\uparrow\,dt.
+}
+\]
+No net-tail Hahn law is created; upward/downward crossing are positive restrictions of the already-existing cyclic donor/recipient flow.
+
+For `0<R_0<R_1`, with clipped log potential
+\[
+\phi(\rho)=\log\frac{\min(\max(\rho,R_0),R_1)}{R_0},
+\]
+the same atoms satisfy the exact layer cake
+\[
+\int_{R_0}^{R_1}\Phi_\uparrow(R)\frac{dR}{R}
+=\int[\phi(\rho_r)-\phi(\rho_d)]_+\,d\mathcal M,
+\]
+\[
+\int_{R_0}^{R_1}\Phi_\downarrow(R)\frac{dR}{R}
+=\int[\phi(\rho_d)-\phi(\rho_r)]_+\,d\mathcal M.
+\]
+Subtracting yields the signed log-radius moment of the canonical recipient/donor marginals.  The infinite-range finite-atom identity is also exact; any continuum infinite-range extension requires an explicit finite logarithmic moment and is not inferred from local Radon variation alone.
+
+The anti-theorems are structural.  A regular equiradial physical closed triad carries positive donor work while `|k_d|=|k_r|`, so it crosses no radial sphere and has zero log action.  Thus there is no universal dyadic step or positive minimum radial progress.  Radial donor displacement is also not the one-edge Young/progress quantity `log_+(|k_child|/max|k_parent|)`; they answer different physical questions.
+
+Dedicated run `31606829692` — **success** on the exact SHA.  The full suite passed `884` tests, focused radial tests `11`, donor-flow dependency tests `26`, and focused evolved-NS tests `9`.  Its `75,000`-law stress had `56,351` upward and `56,306` downward cases, `37,657` laws with both directions across sampled radii, worst tail-divergence residual `1.977e-16`, truncated layer-cake residual `3.460e-16`, full-log residual `2.036e-11`, dilation residual `2.731e-11`, and equiradial work/action `0.0777635049765 / 0`.
+
+Its actual cutoff-7 Fourier--Galerkin NS audit on FFT grids `24,28` retained distinct full-tail and selected-triad readings.  At `R=8`, the ordinary `64`-step branch had selected integrated upward/downward crossing `0.00848754122477 / 0` and tail interval residual `3.121e-11`; sign reversal gave `0 / 0.00848518440777` and tail residual `1.006e-11`.  Cross-representation tail residuals stayed below `5.6e-16`; amplitude `0.5` and `2.0` adversaries also passed.
+
+Independent audit `31606829776` — **success**.  Its `100,000`-law stress had `75,047` upward and `74,959` downward cases, `50,006` both-direction laws, worst tail divergence `2.095e-16`, truncated layer cake `3.454e-16`, full-log marginal `3.969e-11`, dilation `5.947e-11`, equiradial work/action `0.0777635049765 / 0`, and `174,972` donor atoms separating radial displacement from edge progress.  The longer actual-NS lane used amplitude `1.3`, `96` steps, duration `0.0012`, cutoff `7`, FFT `24,28`: upward tail `4.0053 -> 4.01741597661` had signed nonlinear work `0.0453411766896`, viscosity `0.0332252003104`, selected upward crossing `0.0223643661196` and interval residual `5.592e-11`; sign reversal produced downward crossing `0.0223546449575`, tail `4.0053 -> 3.92730005969`, signed work `-0.0451218090429`, viscosity `0.0328781311252`, and residual `3.526e-11`.  Radius adversaries `6.5,8,10` remained green.
+
+Full physical-energy causal integration `31606829708` — **success** on the same SHA.  It passed the same `884`-test suite and inserted the `50,000` radial stress directly after mode-set continuity and before complex Young.  The radial step recorded `37,651` upward cases, `37,510` downward cases, `25,161` both-direction laws, worst tail-divergence residual `1.975e-16`, truncated layer-cake residual `3.307e-16`, and the exact equiradial zero-action anti-theorem; the downstream causal spine stayed green.
+
+Stored artifacts:
+- `recorded-results/31606829692/`, tree digest `sha256:66c925e0b9ebafc91e72a9097a943ef437eaed701620ef6d0af7c09ec80299f4`;
+- `recorded-results/31606829776/`, tree digest `sha256:3652cd5834ddd3aa75319408093fc2d2c31a5c3cdace1bdc480a5d95fc9bc174`;
+- `recorded-results/31606829708/`, tree digest `sha256:a4bf0a8377f818f2628e25d9d0d850652c842ad86adc02181b1587ef46197117`.
+
+Failure lineage is retained.  Initial candidate `fb8e95132b9ce8da566e3b338cee0676b6be5dc9` passed the actual-NS radial jobs but failed one focused algebra fixture because its equiradial Waleffe call used `(k_1,k_2,-k_0)` rather than the actually closed triple `(k_1,k_2,k_0)`.  Repair `697bb77d406d28d51efc396af1c92b948bf8930d` changed that one orientation and passed dedicated `31605985715`, audit `31605985621`, and integration `31605985585` with no theorem/PDE change.  Final SHA `667e687...` then made the full-log marginal and dilation residuals hard numerical guards on the total physical log-variation envelope, never on a cancellation-sensitive signed action, and reran the full certification successfully.
+
+This closes **radial spectral-crossing registration and the logarithmic layer cake**, not mixed-owner recurrence.  The next native scale-facing seam is to interface actual low→high boundary supply `Phi_up` with the already-certified hard-tail stock/dissipation/locality route while keeping inherited tail stock, `Phi_down`, high→high circulation and viscosity physically separate.  No Navier--Stokes global-regularity claim is made.
+
+---
+
+## 34. Certification discipline
+Serious theorem validation is performed only in GitHub Actions.
+Local work is restricted to:
+- reading;
+- static inspection;
+- editing;
+- `git` operations;
+- viewing/downloading CI results.
+Do not run theorem stress, pytest, numerical experiments, or certificate execution locally.
+For a new theorem:
+1. branch from verified `origin/main`;
+2. read the current ledger;
+3. add source/test/doc/workflow wiring;
+4. static-audit units, semantics, and anti-theorems locally;
+5. push candidate;
+6. run dedicated Actions;
+7. classify failures as fixture/wiring versus theorem failure;
+8. run full causal integration on the exact theorem SHA;
+9. store the key artifact under `recorded-results/<runid>/`;
+10. update history/current architecture only after Actions green;
+11. run exact-SHA promotion validation;
+12. fast-forward `main` only after the promotion sweep is green and `origin/main` is still an ancestor.
+A passing numerical stress is not itself a proof.
+The source module must encode the theorem algebra and guards; CI is regression/certificate evidence around that structure.
+
+### 34.1 Experimental engineering: increase falsification, not hardware waste
+The validation policy is deliberately **experiment-heavy**.  Large randomized stresses, adversarial anti-tests, provenance tampering, representation changes, and actual Navier--Stokes/Galerkin probes should be used whenever they genuinely interrogate the theorem.  Runtime pressure is not a reason to lower sample counts, weaken tolerances, delete physical cases, or replace actual-PDE tests by synthetic surrogates.
+
+The corresponding engineering rule is: spend reasoning before spending cores.  Profile the single-process reference path and identify mathematical invariants before optimizing.  If a stress family varies only a positive measure weight, time parameter, amplitude, or other named coordinate, immutable geometry/provenance may be registered once and reused **only after the invariance is explicit in the theorem data model**.  Do not repeatedly rebuild helical bases, physical identities, quadrature geometry, or verified summaries merely because the original implementation happened to construct them inside the sample loop.  Likewise, within one trusted transaction, replay provenance once and pass the replayed object downward rather than recursively revalidating the same object at every helper boundary.
+
+Every such optimization must retain a simple reference route and an equivalence regression.  Prefer exact/dataclass or bitwise equality when the optimized path is mathematically the same computation; otherwise compare at the native theorem tolerance with the same RNG inputs and full provenance.  Performance-only changes must not alter the random law, sample count, tolerance, units, signed reconstruction before Hahn splitting, physical owner semantics, exact-tie handling, first-time semantics, or any certified threshold.
+
+Optimize representation before language.  Avoid high-overhead array dispatch for tiny fixed-dimensional inner kernels when scalar or preallocated arithmetic is clearer and faster.  Vectorization, specialization, caching and data-layout changes come before a native extension.  C++ or Rust is appropriate when profiling still locates a stable numerical kernel after the mathematical redundancy has been removed; the native kernel must remain differentially checked against the readable reference implementation and must not become a second source of theorem semantics.
+
+Benchmarking is engineering evidence, not theorem certification.  Record wall time, CPU utilization and peak resident memory so resource use stays visible.  The purpose of speed is to make stronger and more numerous falsification runs affordable on ordinary hardware, not to justify fewer experiments or to hide a slow theorem harness behind parallelism.
+
+The 2026-08-12 global performance pass is the reference example.  Exact candidate `d78a3f4223c16f541548e7628cd73f70e6fdee6c` retained the theorem laws and added exact/reference-equivalence regressions while removing repeated immutable helical geometry, repeated continuum source validation, repeated actual-NS ledger construction, repeated contraction planning, tiny-array framework overhead and other representation costs.  On GitHub Actions, compared with the already-law-equivalent `ceeb7b90399a6e592efee3439694a08c8dce81c1`, the `75,000` adversarial routing stress fell from `308s` to `133s`, actual Galerkin routing from `309s` to `26s`, the integration helical `50,000` stress from `436s` to `65s`, the continuum integration stress from `94s` to `15s`, and the full theorem suite from `311s` to `63s`.  A `22`-workflow exact-SHA referee sweep covering the current causal spine and directly affected historical modules completed `22/22` successfully.  These timings are **engineering evidence only**: the physics remains certified by the dedicated, adversarial, actual-NS and integration gates above.
+
+For representation-sensitive measure/provenance theorems, ordinary dedicated + integration green is not enough by itself.  Add an independent falsification lane which actively challenges native scale covariance, nonfinite arithmetic, replay/provenance forgery, duplicate physical identities, parent/helicity quotienting, actual-PDE reconstruction, and representation invariance of the same finite physical system.  If that audit finds a real seam, every earlier green candidate is superseded and the exact repaired SHA must rerun the full certification sweep.  A numerical convergence demand between genuinely different PDE truncations is not an invariant and must not be smuggled into such an audit.
+
+---
+
+## 35. Recommended reading order for a new mathematical physicist
+Start with this ledger.
+Then read the following current-spine documents in order:
+1. `docs/physical_energy_causal_bridge.md`
+2. `docs/recursive_coherent_witness_extraction.md`
+3. `docs/outer_moving_role_extraction.md`
+4. `docs/smooth_quadratic_carrier_interface.md`
+5. `docs/resolved_role_egorov.md`
+6. `docs/nonaffine_role_interface_work.md`
+7. `docs/resolved_interface_donor_quotient.md`
+8. `docs/smooth_relink_donor_quotient.md`
+9. `docs/event_anchored_role_registration.md`
+10. `docs/coherent_service_or_flat.md`
+11. `docs/critical_shell_service_reentry.md`
+12. `docs/full_natural_service_corridor_quotient.md`
+13. `docs/full_natural_checkpoint_quotient.md`
+14. `docs/same_carrier_checkpoint_segmentation_quotient.md`
+15. `docs/high_strain_resolved_ancestor.md`
+16. `docs/high_strain_critical_carrier_reentry.md`
+17. `docs/high_strain_descending_epoch_telescope.md`
+18. `docs/high_strain_heat_increment_service.md`
+19. `docs/material_label_carrier_quotient.md`
+20. `docs/objective_source_routing_compiler.md`
+21. `docs/objective_pressure_pair_atomization.md`
+22. `docs/fresh_service_scale_reentry.md`
+23. `docs/high_frequency_dissipation_reentry.md`
+24. `docs/high_tail_binary_work_reentry.md`
+25. `docs/high_tail_ultraviolet_locality.md`
+26. `docs/high_tail_natural_window_reentry.md`
+27. `docs/helical_physical_edge_registration.md`
+28. `docs/continuum_helical_edge_measure_registration.md`
+29. `docs/canonical_positive_edge_work_routing.md`
+30. `docs/canonical_positive_edge_work_routing_frontier.md`
+31. `docs/mixed_fate_reserved_young_handoff.md`
+32. `docs/cyclic_helical_triad_donor_kernel.md`
+33. `docs/cyclic_hard_cell_single_charge_quotient.md`
+34. `docs/helical_mode_set_energy_continuity.md`
+35. `docs/radial_spectral_crossing_layer_cake.md`
+36. `docs/physical_pair_weighted_productivity.md`
+37. `docs/common_slice_coefficient_registration.md`
+38. `docs/recursive_physical_witness_constructor.md`
+39. `docs/signed_good_generated_epoch_time_telescope.md`
+40. `docs/joint_causal_stop_projection.md`
+41. `docs/amplitude_entropy_causal_reuse.md`
+42. `docs/weighted_causal_reuse.md`
+43. `docs/renyi_causal_reuse.md`
+44. `docs/physical_branch_compiler.md`
+45. `docs/continuum_master_event_quotient.md`
+46. `docs/master_no_escape.md`
+For historical development, finite-dimensional precursor geometry, superseded packet formulations, and detailed CI chronology, read:
+`docs/history/RESEARCH_LEDGER_history_through_2026-08-10.md`.
+
+---
+
+## 36. Compact one-page mental model
+If only one picture is retained, use this one.
+
+Navier–Stokes gives actual signed nonlinear work.  Positive child-energy work
+defines cause.  Coherent analysis refines that work into physical parent/child
+roles; representation does not create cause.
+
+At generic HH scale, the canonical signed law lives on the unordered Fourier/helicity edge space and its Hahn-positive part is the causal law.  Geometry/phase-bad positive work terminates stage-zero through the same physical transfer-loss interface, while geometry-good work is only Young-eligible until a signed-cell criterion fires.  Later hard labels inherit `pi_#dW^+`, `pi_#dW^-`, and signed `pi_#dW` directly; they may not Hahn-split themselves into a competing causal measure.  In a mixed cell `T_C=g_C+b_C-n_C`, terminal bad-positive work is reserved only in a one-sided certificate: `delta_res=delta_full+b_C/Y_C`, while Young/Christ still sees the full signed `T_C`.  Hence mixed fate itself is no longer a binary obstruction; it passes exactly when bad assistance fits inside the unused Christ margin.  Capacity remains a reference law throughout, never causal probability, and nondegenerate-margin failures are controlled only after an explicit actual-work change-of-measure theorem.
+
+Smooth moving carriers transport roles between physical events.  Their energy is
+`<u,Q^2u>`, not `<u,Qu>`.  Hard interaction projectors are event-anchored and are
+not differentiated through the slab.  Hard-shell energy may also be reread at an
+analysis checkpoint as a state observable, but that reading does not create an
+event or a new carrier.
+
+Common affine/Kelvin role transport and resolved-cutoff repartition are gauges.
+For a smooth square partition require `dot A+[G,A]=0` and quotient common observer
+motion before physical routing.  Residual skew `K_phys=K-G` is genuine physical
+relink, while symmetric `S` is existing strain/deformation.  The bound smooth pair
+matrix `T_ab^phys=-2 Re<eta_a u,K_phys eta_b u>` is antisymmetric and reconstructs
+the relink rows, so every positive relink recipient has finite negative-net donor
+provenance at the same event.  Pure smooth relink therefore creates zero recursive
+generation depth; in a relink/strain tie only `S` remains a recursive interface
+owner.  Hard and smooth interface measures stay distinct and share only the finite
+antisymmetric-flux lemma.  Conservative motion of observer-selected channels is
+not itself physics, and conservative physical redistribution is not automatically
+a new generation.
+
+Generic critical shells enter native first-stop corridors at renewal scale
+`A=3M/4`.  A full no-hit natural interval is one real Navier--Stokes corridor and
+already carries its own-scale service as a same-interval witness.  Service/Moyal
+material rereading adds no event depth.
+
+The natural endpoint is an analysis checkpoint, not a carrier lifetime.  The
+actual pair `(mu_A,mu_2A)` may expose lower/upper hard-shell state witnesses or an
+exact joint tie, but ratios `3/4` and `3/2` are checkpoint-cover geometry only.
+They do not define a causal scale lineage.
+
+If no physical stop fires at that horizon, the **same event-anchored smooth
+carrier continues**.  The terminal dual/coefficient is unchanged, and the native
+first-hit observables remain cumulative from the original physical event:
+
+`K_A[s,t]`, `|I_R[s,t]|`, `|I_HH[s,t]|`.
+
+`K_A` is a positive monotone strain action.  The coefficient impulses are complex
+cumulative integrals; their magnitudes may decrease by phase cancellation.  Never
+reset them at checkpoints, never sum checkpoint-segment magnitudes, and never use
+those magnitudes as physical work.
+
+Inserting or deleting finite checkpoint cuts leaves the first physical stop and
+exact joint stop set unchanged.  If infinitely many cuts accumulate at an
+interior smooth time, the cumulative observables either hit an existing closed
+first-stop face at the limit or retain strict margin and the same carrier crosses
+the accumulation.  If no physical stop occurs before `t=0`, the initial boundary
+absorbs.  Therefore checkpoint Zeno/re-hardening is observer segmentation, not a
+second PDE escape route.
+
+High strain is different: it is a genuine recursive event, but its own physical
+route now has a finite descending-epoch telescope.  At scale `N_j`, the event pays
+`D_j>=D_*`; its actual dissipation-weighted ancestor lies at `M_j<=N_j/4`, so the
+renewed carrier satisfies `N_(j+1)<=3N_j/16`.  For the global gradient reservoir
+`G_*=int ||grad u||_2^2dt`, every history—without any disjointness assumption—has
+`D_j<=N_jG_*`.  Thus `N_j>=D_*/G_*` and `sum D_j<=(16/13)N_0G_*` on one consecutive
+high-strain epoch.  `D_V` is still not a global reset; the finiteness comes from
+the actual descending physical lineage.  An infinite path with infinitely many
+high-strain events must therefore contain infinitely many other genuine owners
+which break those epochs.
+
+
+At an actual hard HH interaction, one may now descend below Young all the way to the continuum physical edge law.  The unordered helical parent orbit carries exact NS work `T_e`, native modal capacity `A_e=4|z||a_xa_ya_z|`, geometric multiplier `J_e`, and signed phase `c_e`, with `|T_e|<=A_e` and `T_e log_+(|z|/p_top)=A_eJ_ec_e`.  In the joint variables `z=x+y`, `r=x-y`, the parent-order quotient has exact density `1/16`; all eight wavevector-bound helicity sectors reconstruct the direct signed Fourier work.  With the unitary factor `C_F`, this gives signed `dW`, reference `dA`, and signed progress `dF`.  Finite Fourier energy makes these weighted measures locally Radon without any parent UV cutoff.  Only after that signed reconstruction is `dW^+` formed.  Its native efficiency routing is also certified: bad positive work, including nonforward work, terminates through the same physical transfer-loss interface, while good positive work is inherited by hard cells and is Young-eligible only.  The mixed-fate terminal-bad-assistance handoff, the same-time cyclic donor provenance of canonical negative work, and its hard-cell single-charge quotient into existing good/bad positive recipient causes are now certified.  Multiple donor cells may overlap one recipient support and coarse donor/recipient labels may self-loop, but the recipient cause is charged once and same-time redistribution adds no event depth or scale progress.  The unresolved HH task is therefore degenerate full-signed Young/Christ margin (plus any genuinely required coherent positive kernel), then recurrence of the surviving genuine owners.  The separate between-time negative-work theorem is now certified: cyclic donor flow on physical helical modes plus modal NS stock/viscosity gives exact mode-set boundary continuity, internal traffic cancels from set divergence, and neither gross-transfer budgets nor deposit/withdrawal matching are created.  The radial specialization is now certified too: low→high and high→low donor atoms are exactly the Fourier-sphere boundary crossings, high→high circulation cancels from tail divergence, and `dR/R` integration gives exact log-radius displacement.  Equiradial positive transfer has zero radial action, so no universal cascade step is inferred.  The next scale-facing question is whether actual upward boundary supply, rather than gross high-tail traffic, can be connected to the existing hard-tail dissipation/locality route.
+
+Signed-good generated HH is also a genuine recursive event, but its finite-depth
+mechanism is different.  A raw `|I_HH|` threshold is only a locator.  After the
+same carrier reenters actual `Q^2` energy and physical positive HH work is selected,
+a hard parent satisfying `3/5<N_p/N_c<5/8` has a natural lifetime more than
+`64/25` times the child's.  Its physical heavy-half support admits the common
+registration surface `s_j=a_j-(2/5)T_j`, and consecutive generated support gives
+`s_j-s_(j+1)>=(1792/4875)T_j`.  The cumulative required backshift therefore reaches
+`t=0` after finite signed-good generated depth.  The registration surfaces are not
+events, Duhamel amplitudes are not causal weights, and generic/non-signed-good HH
+remains outside this theorem.  Shannon/Rényi still governs breadth and reuse of the
+actual child-work ancestry rather than serving as a clock.
+This does not remove real ultraviolet dynamics.  High-frequency coherent service
+must still be converted to physical hard-tail dissipation before causal
+conclusions.  Physical high-tail regeneration uses the common causal unit `N dW`;
+its HH part is actual binary work, its nonlocality is paid by `D_tail`, and its
+sliding natural window can create a genuine hard-shell event with `M/N>=2` and
+`T_M/T_N<=1/4`.  Such scale progress exists because a physical theorem supplies
+its provenance, not because an observer reread a shell at a checkpoint.
+
+Material labels remain sidecars to actual service.  Causal Shannon/Rényi reuse is
+reserved for actual positive child-work ancestry.  Source/service concentration
+entropies remain deterministic coordinates of their named physical measures.
+Raw HH/interface coefficient threshold hits remain first-stop locators until
+actual `Q^2` physical-energy/work reentry resolves physical routing.  If that
+routing is pure `K_phys` relink, the work remains as same-event donor provenance
+and creates no child event; actual HH generation, strain/deformation, inheritance,
+high strain, source/service and other genuine branches retain their own owner
+semantics.
+
+After relay depth, observer gauges, hard and smooth donor circulation,
+same-corridor service, checkpoint eventhood, and same-carrier checkpoint
+segmentation are quotiented, an infinite recursive **event** path avoiding `t=0`
+must recur through infinitely many genuine physical owner events.  Their
+recurrence must telescope through the native typed laws they actually supply.  No
+critical `NE`, `D_V`, shell mass, scale-critical service, checkpoint count/scale,
+or coefficient magnitude is a finite additive reset.
+
+The geometric UV checkpoint sum remains a useful warning that physical time alone
+is insufficient, but it is a diagnostic observer sequence, not a physical
+lineage.  The present master frontier is therefore one problem: terminate or control **mixed** genuine-owner recurrence after pure high-strain and pure signed-good generated-HH epochs have been excluded, while generic non-signed-good HH/high-tail remains, then connect that result to the initial-data and hypothetical singular-time interfaces.  `t=0` is absorbing.
+There is no global-regularity claim in the present programme state.

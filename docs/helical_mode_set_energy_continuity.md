@@ -310,7 +310,7 @@ It would **not**:
 - terminate generic mixed-owner recurrence;
 - prove 3D Navier--Stokes global regularity.
 
-That next specialization is now certified in `radial_spectral_crossing_layer_cake.md` on exact SHA `667e687cb740a77df944753c575f581abad14199`: radial high-frequency sets turn the abstract boundary flux into genuine upward/downward Fourier-sphere crossing, and integrating those crossings in `dR/R` gives the exact truncated logarithmic layer cake.  The next question is no longer whether radial direction exists; it is whether the existing hard-tail dissipation/locality route can be driven by **actual low→high boundary supply** after high→high circulation has been removed.
+That specialization is certified in `radial_spectral_crossing_layer_cake.md` on exact SHA `667e687cb740a77df944753c575f581abad14199`.  The subsequent hard-tail interface is now certified in `hard_tail_true_upward_supply.md` on exact SHA `d064bc4d780d9c90d36e64c7b84c3b771b74c896`: the UV feeder is actual low→high `Phi_up`, not high→high circulation.  The remaining question is branch-specific continuation of pure-UV first-shell supply versus resolved-scale parent contact.
 
 
 ---

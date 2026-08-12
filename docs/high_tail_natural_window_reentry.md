@@ -1,5 +1,8 @@
 # High-tail comparable HH work: sliding natural-time concentration
 
+
+> **Current placement.** The pure-UV branch of `hard_tail_true_upward_supply.md` arrives already at the first dyadic shell `M=2N` with comparable interaction parents.  It is therefore geometrically ready for this natural-window mechanism once the exact donor-restricted canonical positive submeasure is bound into the window law.  That binding must preserve the common `N dW` causal unit; the resolved-contact branch remains separate.
+
 ## 1. Time must be read from the same physical work measure
 
 The ultraviolet theorem already selects one hard output shell

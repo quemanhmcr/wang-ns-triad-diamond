@@ -1,5 +1,8 @@
 # High-frequency service dissipation: physical tail energy forces inheritance or regeneration
 
+
+> **Current downstream sharpening.** This certified theorem's `W_>^+` alternative remains a valid coarse consequence of the tail energy identity.  The later theorem `hard_tail_true_upward_supply.md` proves the more physical continuation: internal high→high circulation is removed, and the actual feeder is low→high radial crossing `Phi_up` in the same common parent-scale unit `N dW`.  Read “positive nonlinear regeneration” below as the historical bridge, not as the final causal UV supply observable.
+
 ## Keep the LP observable and the PDE currency distinct
 
 The high-frequency exit in coherent increment service is a **standard Littlewood--Paley normalized-enstrophy observable**.  Write it schematically as
@@ -228,6 +231,6 @@ D_{tail}^{physical}
 
 No branch becomes an additive reset.  No high-frequency enstrophy is relabeled resolved `D_V`.  No smooth LP partition is silently identified with a hard orthogonal projector.  No frozen packet is introduced.
 
-The remaining high-frequency question is continuation of the actual regeneration owner through its own work/energy/interface first-stop logic.  The low-frequency pressure-reservoir lineage is separate.
+That historical continuation question is now sharpened by `hard_tail_true_upward_supply.md`: actual low→high `Phi_up`, not gross positive tail work, is the UV feeder.  Pure-UV supply is already first-shell/comparable; deep supply has resolved-scale parent contact.  The remaining high-frequency questions are the type-correct positive binding of those two submeasures into their respective continuation laws.  The low-frequency pressure-reservoir lineage remains separate.
 
 No 3D Navier--Stokes global-regularity conclusion is asserted.

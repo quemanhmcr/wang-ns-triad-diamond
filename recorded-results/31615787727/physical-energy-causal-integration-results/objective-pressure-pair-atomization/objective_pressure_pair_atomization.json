@@ -1,0 +1,30 @@
+{
+  "certificate": {
+    "status": "EXACT_OBJECTIVE_PRESSURE_HESSIAN_DUAL_PAIR_ATOMIZATION__PAIR_OWNER_ALWAYS_TO_CRITICAL_SHELL_WITH_ENTROPY_TRADEOFF__QUARTER_SPLIT_ONLY_A_COROLLARY__AGGREGATE_MU_V_NOT_CANONICAL",
+    "exact_dual": "Z=H/||H||_F (Z=0 at H=0), rho_P=Z:H=sum unordered resolved pair scalars + SGS scalar",
+    "positive_source_cover": "rho_P <= sum_[a<=b] [p_ab]_+ + [r_SGS]_+; this is source/service positivity, not causal child-energy probability",
+    "hard_pair_registration": "decompose only V=S_(N/4)u into hard orthogonal dyadic shells at the physical pressure event; quotient to one integrated weight per unordered {a,b}, so observer orientation or duplicate records cannot manufacture entropy",
+    "ordered_pair_sharp_clean": "256/1425<1/5",
+    "unordered_pair_clean": "|p_ab|<=(kappa_ab/5)(Mmax/N)^4 sqrt(mu_a mu_b), kappa=1 diagonal, 2 off-diagonal",
+    "source_half_split": "SGS positive pressure source >=Sigma_P/2 OR resolved positive pair source >=Sigma_P/2; ties joint",
+    "entropy_shell_tradeoff": "on every resolved pair owner, the countable positive law has an attained qmax>=exp(-H2); worst off-diagonal Mmax<=N/4 capacity gives mu_child exp(H2_pair)>=320 Sigma_P/c, so the pair owner always enters generic critical-shell reentry",
+    "dominant_pair": "theta=1/4 first gives a resolved V-shell mass >=5 Sigma_P/(16c)(N/Mmax)^4; |S_(N/4)|<=1 transfers the same lower to the u shell, hence >=80 Sigma_P/c because Mmax<=N/4",
+    "absolute_pair_sum": "for canonical M_j=(N/4)2^-j, sum unordered pair capacities <=N||V||_2^2/2560; mu_V appears only as an absolute-convergence budget",
+    "quarter_corollary": "theta=1/4 is optional: qmax>=1/4 gives mu_child>=80 Sigma_P/c; qmax<=1/4 gives H2>=log4; equality gives both, but both are faces of the same unconditional shell route",
+    "material_sidecar": "material reuse is optional after the hard event; a fixed objective-Hessian material pair contracts by 4084101/20971520<1/5 per signed-good low-strain generation",
+    "coarse_muV": "rho_P<=mu_V/5700+||R||_(3/2)/380 remains a valid coarse diagnostic but is not the canonical pressure renewal route"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_dual_scalar_residual": 1.2323475573339238e-14,
+    "minimum_positive_cover_margin": -1.0658141036401503e-14,
+    "worst_unordered_reconstruction_residual": 1.5403719328412456e-14,
+    "minimum_pair_capacity_margin": 8.888621846419652e-19,
+    "minimum_owner_half_margin": 0.00030910324942639254,
+    "minimum_dominant_shell_margin_over_clean": 0.03475630526325607,
+    "minimum_diffuse_entropy_margin": 0.09524555284010194,
+    "minimum_entropy_shell_tradeoff_margin": 0.008584848015692259,
+    "maximum_joint_primary_owner_count": 2,
+    "maximum_quarter_corollary_count": 1
+  }
+}
