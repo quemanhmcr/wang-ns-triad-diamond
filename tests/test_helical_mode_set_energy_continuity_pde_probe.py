@@ -38,11 +38,26 @@ def test_opposite_child_helicity_is_a_real_mode_even_when_initial_stock_is_zero_
 
 def test_same_cutoff_helical_mode_continuity_is_fft_representation_invariant():
     out = run_probe(resolutions=(24, 28), cutoff=7, steps=16, duration=0.0005, helicity=HELICITIES[2])
-    assert out.maximum_initial_energy_representation_relative_residual < 5e-7
-    assert out.maximum_final_energy_representation_relative_residual < 5e-7
-    assert out.maximum_integrated_positive_work_representation_relative_residual < 5e-7
-    assert out.maximum_integrated_negative_work_representation_relative_residual < 5e-7
-    assert out.maximum_viscous_dissipation_representation_relative_residual < 5e-7
+    assert out.maximum_initial_energy_representation_native_residual < 5e-7
+    assert out.maximum_final_energy_representation_native_residual < 5e-7
+    assert out.maximum_integrated_positive_work_representation_native_residual < 5e-7
+    assert out.maximum_integrated_negative_work_representation_native_residual < 5e-7
+    assert out.maximum_viscous_dissipation_representation_native_residual < 5e-7
+
+
+def test_same_cutoff_opposite_helicity_uses_native_throughput_representation_scale():
+    out = run_probe(
+        resolutions=(24, 28), cutoff=7, steps=16, duration=0.0005,
+        helicity=-HELICITIES[2],
+    )
+    run = out.runs[0]
+    assert run.native_energy_throughput_scale > 0.0
+    assert out.representation_native_energy_throughput_scale >= run.native_energy_throughput_scale
+    assert out.maximum_initial_energy_representation_native_residual < 5e-7
+    assert out.maximum_final_energy_representation_native_residual < 5e-7
+    assert out.maximum_integrated_positive_work_representation_native_residual < 5e-7
+    assert out.maximum_integrated_negative_work_representation_native_residual < 5e-7
+    assert out.maximum_viscous_dissipation_representation_native_residual < 5e-7
 
 
 def test_invalid_phase_sign_is_rejected():

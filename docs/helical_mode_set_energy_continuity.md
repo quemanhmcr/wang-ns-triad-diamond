@@ -281,6 +281,8 @@ At **every RK4 output time**, not merely at a few selected snapshots, it:
 
 The exact theorem itself has no numerical tolerance.  In particular, a helicity component whose initial energy is exactly or nearly zero can have a finite-step relative quadrature residual that is much larger than machine epsilon even while the same PDE law converges correctly.  The probe therefore records the residual and enforces its own finite-step threshold on the native energy-throughput scale.
 
+Cross-FFT representation checks use that same physical mode energy-throughput as an immutable numerical envelope.  They do **not** divide by the particular energy/work term being compared, because an opposite-helicity stock or a Hahn marginal can vanish by genuine physical selection/cancellation.  The throughput scale is used only to measure representation error; it is not a causal weight, recurrence currency, or gross-transfer budget.
+
 The audit also runs the sign-reversed divergence-free initial state and the opposite child helicity.  These are real Navier--Stokes states/modes, not synthetic balance fixtures.
 
 ---

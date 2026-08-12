@@ -144,6 +144,7 @@ class HelicalModeContinuityNSRun:
     integrated_negative_work: float
     viscous_dissipation: float
     interval_continuity_native_residual: float
+    native_energy_throughput_scale: float
     worst_instantaneous_signed_reconstruction_native_residual: float
     global_energy_balance_relative_residual: float
     maximum_global_nonlinear_work_relative_rate: float
@@ -160,11 +161,12 @@ class HelicalModeContinuityPDEProbe:
     child_mode: tuple[int, int, int]
     helicity: int
     phase_sign: int
-    maximum_initial_energy_representation_relative_residual: float
-    maximum_final_energy_representation_relative_residual: float
-    maximum_integrated_positive_work_representation_relative_residual: float
-    maximum_integrated_negative_work_representation_relative_residual: float
-    maximum_viscous_dissipation_representation_relative_residual: float
+    representation_native_energy_throughput_scale: float
+    maximum_initial_energy_representation_native_residual: float
+    maximum_final_energy_representation_native_residual: float
+    maximum_integrated_positive_work_representation_native_residual: float
+    maximum_integrated_negative_work_representation_native_residual: float
+    maximum_viscous_dissipation_representation_native_residual: float
 
 
 def _run_one(
@@ -279,6 +281,7 @@ def _run_one(
         integrated_negative_work=n_int,
         viscous_dissipation=visc,
         interval_continuity_native_residual=cert.balance_native_residual,
+        native_energy_throughput_scale=throughput,
         worst_instantaneous_signed_reconstruction_native_residual=max(signed_residuals),
         global_energy_balance_relative_residual=global_balance,
         maximum_global_nonlinear_work_relative_rate=max_nonlin,
@@ -288,8 +291,18 @@ def _run_one(
     )
 
 
-def _spread(values: Sequence[float]) -> float:
-    scale = max(max(abs(v) for v in values), 1.0e-300)
+def _native_spread(values: Sequence[float], native_scale: float) -> float:
+    """Cross-representation gap on one physical mode energy-throughput envelope.
+
+    The realized observable may vanish by helicity selection or phase cancellation.
+    Dividing by that tiny value would turn FFT roundoff into a false physical
+    representation defect.  ``native_scale`` is the actual stock+gross-work
+    throughput already present in the same mode balance; it is an error envelope
+    only and never enters the causal law.
+    """
+    scale = abs(float(native_scale))
+    if not math.isfinite(scale) or scale <= 0.0:
+        raise ValueError("positive finite native representation scale required")
     return (max(values) - min(values)) / scale
 
 
@@ -322,12 +335,13 @@ def run_probe(
         )
         for n in grids
     )
+    representation_native_scale = max(r.native_energy_throughput_scale for r in runs)
     metrics = (
-        _spread([r.initial_energy for r in runs]),
-        _spread([r.final_energy for r in runs]),
-        _spread([r.integrated_positive_work for r in runs]),
-        _spread([r.integrated_negative_work for r in runs]),
-        _spread([r.viscous_dissipation for r in runs]),
+        _native_spread([r.initial_energy for r in runs], representation_native_scale),
+        _native_spread([r.final_energy for r in runs], representation_native_scale),
+        _native_spread([r.integrated_positive_work for r in runs], representation_native_scale),
+        _native_spread([r.integrated_negative_work for r in runs], representation_native_scale),
+        _native_spread([r.viscous_dissipation for r in runs], representation_native_scale),
     )
     if max(metrics) > 5.0e-7:
         raise AssertionError("same cutoff physical helical-mode continuity changed under FFT representation")
@@ -338,11 +352,12 @@ def run_probe(
         child_mode=tuple(int(v) for v in child_mode),
         helicity=int(helicity),
         phase_sign=int(phase_sign),
-        maximum_initial_energy_representation_relative_residual=metrics[0],
-        maximum_final_energy_representation_relative_residual=metrics[1],
-        maximum_integrated_positive_work_representation_relative_residual=metrics[2],
-        maximum_integrated_negative_work_representation_relative_residual=metrics[3],
-        maximum_viscous_dissipation_representation_relative_residual=metrics[4],
+        representation_native_energy_throughput_scale=representation_native_scale,
+        maximum_initial_energy_representation_native_residual=metrics[0],
+        maximum_final_energy_representation_native_residual=metrics[1],
+        maximum_integrated_positive_work_representation_native_residual=metrics[2],
+        maximum_integrated_negative_work_representation_native_residual=metrics[3],
+        maximum_viscous_dissipation_representation_native_residual=metrics[4],
     )
 
 
@@ -381,9 +396,10 @@ def main() -> None:
         f"- child/helicity: `{out.child_mode}` / `{out.helicity:+d}`",
         f"- phase sign: `{out.phase_sign:+d}`",
         f"- FFT representations: `{', '.join(str(r.resolution) for r in out.runs)}`",
-        f"- initial/final energy representation residuals: `{out.maximum_initial_energy_representation_relative_residual:.3e}` / `{out.maximum_final_energy_representation_relative_residual:.3e}`",
-        f"- integrated positive/negative work representation residuals: `{out.maximum_integrated_positive_work_representation_relative_residual:.3e}` / `{out.maximum_integrated_negative_work_representation_relative_residual:.3e}`",
-        f"- viscous dissipation representation residual: `{out.maximum_viscous_dissipation_representation_relative_residual:.3e}`",
+        f"- representation native energy-throughput scale: `{out.representation_native_energy_throughput_scale:.12g}`",
+        f"- initial/final energy representation native residuals: `{out.maximum_initial_energy_representation_native_residual:.3e}` / `{out.maximum_final_energy_representation_native_residual:.3e}`",
+        f"- integrated positive/negative work representation native residuals: `{out.maximum_integrated_positive_work_representation_native_residual:.3e}` / `{out.maximum_integrated_negative_work_representation_native_residual:.3e}`",
+        f"- viscous dissipation representation native residual: `{out.maximum_viscous_dissipation_representation_native_residual:.3e}`",
     ]
     for run in out.runs:
         lines.extend([
