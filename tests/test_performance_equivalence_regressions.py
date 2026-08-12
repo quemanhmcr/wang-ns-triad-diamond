@@ -36,8 +36,9 @@ from src.recursive_coherent_witness_extraction import bilinear_tensor_apply
 
 
 def _reference_helical_basis(k: np.ndarray, s: int) -> np.ndarray:
+    """The exact readable basis implementation from parent SHA ``ceeb7b...``."""
     q = np.asarray(k, dtype=float)
-    norm = float(math.hypot(float(q[0]), float(q[1]), float(q[2])))
+    norm = float(math.hypot(*(float(x) for x in q)))
     if norm == 0.0:
         raise ValueError("zero wavevector")
     sign = 1
@@ -45,14 +46,15 @@ def _reference_helical_basis(k: np.ndarray, s: int) -> np.ndarray:
         if float(value) != 0.0:
             sign = 1 if float(value) > 0.0 else -1
             break
-    kp = sign * q
-    khat = kp / norm
-    axis = np.eye(3)[int(np.argmin(np.abs(khat)))]
-    e1 = axis - np.dot(axis, khat) * khat
-    e1 /= np.linalg.norm(e1)
+    if sign < 0:
+        return np.conjugate(_reference_helical_basis(-q, s))
+    khat = q / norm
+    refs = np.eye(3)
+    ref = refs[int(np.argmin(np.abs(refs @ khat)))]
+    e1 = np.cross(ref, khat)
+    e1 /= float(math.hypot(*(float(x) for x in e1)))
     e2 = np.cross(khat, e1)
-    h = (e1 + 1j * s * e2) / math.sqrt(2.0)
-    return np.conjugate(h) if sign < 0 else h
+    return (e1 + 1j * s * e2) / math.sqrt(2.0)
 
 
 def test_fixed_three_vector_helical_basis_matches_readable_reference_bitwise():
