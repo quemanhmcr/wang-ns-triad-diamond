@@ -81,4 +81,12 @@ Serious theorem validation in this project is performed through GitHub Actions. 
 
 Key CI artifacts are stored under `recorded-results/<run-id>/`.
 
+### Experimental engineering discipline
+
+The project does **not** trade experimental severity for runtime.  Serious candidates should be challenged by large stress ensembles, adversarial fixtures, exact provenance checks, and actual Navier--Stokes/Galerkin probes whenever the theorem calls for them.  The engineering obligation is instead to make those experiments as cheap as the mathematics permits.
+
+Profile before buying compute.  Separate invariant geometry/provenance from the parameters that genuinely vary, precompute only what is mathematically immutable, remove repeated replay inside one verified transaction, and keep a slow reference path for differential/equivalence checks.  A performance change must not silently change the sampled law, sample count, tolerances, physical units, signed-before-Hahn order, causal provenance, or routing thresholds.  Small fixed-dimensional kernels should not pay large-array framework overhead merely for convenience; use scalar/vectorized/native C++ or Rust kernels only when profiling shows they are the remaining bottleneck, and bind them to the reference implementation by regression tests.
+
+Performance benchmarks measure the research instrument, not the theorem: record wall time, CPU use and peak memory, but keep theorem certification on the same dedicated/adversarial/actual-PDE GitHub Actions gates.  Faster code is valuable because it permits **more** hard experiments and quicker falsification, not because it licenses fewer of them.
+
 For exploratory historical experiments, see the older modules/workflows and the history ledger.  For current theorem work, follow the workflow described in [`RESEARCH_LEDGER.md`](RESEARCH_LEDGER.md#34-certification-discipline).

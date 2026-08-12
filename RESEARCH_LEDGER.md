@@ -176,7 +176,8 @@ supplies both: the joint child/unordered-parent quotient has density `1/16` in
 `(z,r)=(x+y,x-y)`, while finite Fourier energy gives on every bounded Borel child
 block `B`
 \[
- A(B)\le4\sqrt2\,C_F E^{3/2}\left(\int_B|z|^2dzight)^{1/2},
+ A(B)\le4\sqrt2\,C_F E^{3/2}\left(\int_B|z|^2dz
+ight)^{1/2},
 \]
 and hence `|W|(B)<=A(B)` and `|F|(B)<=J_*A(B)`.  This is local measure existence,
 not a scale tax or resource budget.
@@ -772,7 +773,8 @@ backscatter edges, and the typed continuum atom binds helicity to the actual par
 wavevector.  Duplicate helicity sectors cannot manufacture an eight-edge fiber.
 On bounded child blocks finite Fourier energy yields
 \[
- A(B)\le4\sqrt2\,C_FE^{3/2}\left(\int_B|z|^2dzight)^{1/2},
+ A(B)\le4\sqrt2\,C_FE^{3/2}\left(\int_B|z|^2dz
+ight)^{1/2},
 \]
 therefore `dA`, signed `dW` and signed `dF` are locally finite physical Radon
 measures without a UV parent cutoff.
@@ -1266,7 +1268,8 @@ physical work.
 ### 28.30 Hahn splitting does not commute with continuum aggregation
 The physical Fourier law is signed before it is positive.  In general
 \[
-\int[T_e]_+\,d\Lambda\;>\;\left[\int T_e\,d\Lambdaight]_+
+\int[T_e]_+\,d\Lambda\;>\;\left[\int T_e\,d\Lambda
+ight]_+
 \]
 when physical helicity/fiber cancellation is present.  Reconstruct the signed
 Navier--Stokes measure first, then take its Hahn decomposition.  A positive part
@@ -2219,6 +2222,17 @@ For a new theorem:
 12. fast-forward `main` only after the promotion sweep is green and `origin/main` is still an ancestor.
 A passing numerical stress is not itself a proof.
 The source module must encode the theorem algebra and guards; CI is regression/certificate evidence around that structure.
+
+### 34.1 Experimental engineering: increase falsification, not hardware waste
+The validation policy is deliberately **experiment-heavy**.  Large randomized stresses, adversarial anti-tests, provenance tampering, representation changes, and actual Navier--Stokes/Galerkin probes should be used whenever they genuinely interrogate the theorem.  Runtime pressure is not a reason to lower sample counts, weaken tolerances, delete physical cases, or replace actual-PDE tests by synthetic surrogates.
+
+The corresponding engineering rule is: spend reasoning before spending cores.  Profile the single-process reference path and identify mathematical invariants before optimizing.  If a stress family varies only a positive measure weight, time parameter, amplitude, or other named coordinate, immutable geometry/provenance may be registered once and reused **only after the invariance is explicit in the theorem data model**.  Do not repeatedly rebuild helical bases, physical identities, quadrature geometry, or verified summaries merely because the original implementation happened to construct them inside the sample loop.  Likewise, within one trusted transaction, replay provenance once and pass the replayed object downward rather than recursively revalidating the same object at every helper boundary.
+
+Every such optimization must retain a simple reference route and an equivalence regression.  Prefer exact/dataclass or bitwise equality when the optimized path is mathematically the same computation; otherwise compare at the native theorem tolerance with the same RNG inputs and full provenance.  Performance-only changes must not alter the random law, sample count, tolerance, units, signed reconstruction before Hahn splitting, physical owner semantics, exact-tie handling, first-time semantics, or any certified threshold.
+
+Optimize representation before language.  Avoid high-overhead array dispatch for tiny fixed-dimensional inner kernels when scalar or preallocated arithmetic is clearer and faster.  Vectorization, specialization, caching and data-layout changes come before a native extension.  C++ or Rust is appropriate when profiling still locates a stable numerical kernel after the mathematical redundancy has been removed; the native kernel must remain differentially checked against the readable reference implementation and must not become a second source of theorem semantics.
+
+Benchmarking is engineering evidence, not theorem certification.  Record wall time, CPU utilization and peak resident memory so resource use stays visible.  The purpose of speed is to make stronger and more numerous falsification runs affordable on ordinary hardware, not to justify fewer experiments or to hide a slow theorem harness behind parallelism.
 
 For representation-sensitive measure/provenance theorems, ordinary dedicated + integration green is not enough by itself.  Add an independent falsification lane which actively challenges native scale covariance, nonfinite arithmetic, replay/provenance forgery, duplicate physical identities, parent/helicity quotienting, actual-PDE reconstruction, and representation invariance of the same finite physical system.  If that audit finds a real seam, every earlier green candidate is superseded and the exact repaired SHA must rerun the full certification sweep.  A numerical convergence demand between genuinely different PDE truncations is not an invariant and must not be smuggled into such an audit.
 
