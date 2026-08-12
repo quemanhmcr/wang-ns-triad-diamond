@@ -1,0 +1,104 @@
+name: Resolved-contact smooth binding
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/resolved_contact_smooth_binding.py'
+      - 'tests/test_resolved_contact_smooth_binding.py'
+      - 'src/resolved_contact_smooth_binding_pde_probe.py'
+      - 'tests/test_resolved_contact_smooth_binding_pde_probe.py'
+      - 'docs/resolved_contact_smooth_binding.md'
+      - 'src/hard_tail_true_upward_supply.py'
+      - 'src/hard_tail_true_upward_supply_pde_probe.py'
+      - 'src/cyclic_helical_triad_donor_kernel.py'
+      - 'src/helical_physical_edge_registration.py'
+      - 'src/resolved_interface_donor_quotient.py'
+      - 'src/smooth_quadratic_carrier_interface.py'
+      - 'src/smooth_relink_donor_quotient.py'
+      - 'src/continuum_helical_edge_measure_pde_probe.py'
+      - '.github/workflows/resolved-contact-smooth-binding.yml'
+      - '.github/workflows/audit-resolved-contact-smooth-binding.yml'
+      - 'requirements.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  analytic-and-adversarial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused signed-first smooth-binding tests
+        run: pytest -q tests/test_resolved_contact_smooth_binding.py
+      - name: Physical dependency tests
+        run: >-
+          pytest -q
+          tests/test_hard_tail_true_upward_supply.py
+          tests/test_cyclic_helical_triad_donor_kernel.py
+          tests/test_helical_physical_edge_registration.py
+          tests/test_resolved_interface_donor_quotient.py
+          tests/test_smooth_quadratic_carrier_interface.py
+          tests/test_smooth_relink_donor_quotient.py
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Resolved-contact positive-binding stress
+        run: python -m src.resolved_contact_smooth_binding --samples 75000 --seed 2026081301 --outdir results-resolved-contact/main
+      - name: Existing hard-tail dependency stress
+        run: python -m src.hard_tail_true_upward_supply --samples 50000 --seed 2026081207 --outdir results-resolved-contact/hard-tail
+      - name: Existing resolved-interface dependency stress
+        run: python -m src.resolved_interface_donor_quotient --samples 50000 --outdir results-resolved-contact/resolved-interface
+      - name: Summary
+        run: |
+          for f in results-resolved-contact/*/summary.md; do
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat "$f" >> "$GITHUB_STEP_SUMMARY"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resolved-contact-smooth-binding-analytic-results
+          path: results-resolved-contact/
+
+  actual-ns-referee:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused actual Fourier-Galerkin referee test
+        run: pytest -q tests/test_resolved_contact_smooth_binding_pde_probe.py
+      - name: Borderline M4 and strict-deep M8 actual NS referee
+        run: >-
+          python -m src.resolved_contact_smooth_binding_pde_probe
+          --resolutions 24 28 --borderline-cutoff 2 --strict-cutoff 6
+          --steps 24 --duration 0.0002 --viscosity 0.03 --amplitude 1.0
+          --outdir results-resolved-contact-ns/main
+      - name: Amplitude adversaries
+        run: |
+          for a in 0.5 1.5; do
+            tag=${a/./p}
+            python -m src.resolved_contact_smooth_binding_pde_probe \
+              --resolutions 24 --borderline-cutoff 2 --strict-cutoff 6 \
+              --steps 12 --duration 0.00008 --viscosity 0.03 --amplitude "$a" \
+              --outdir "results-resolved-contact-ns/amplitude-$tag"
+          done
+      - name: Summary
+        run: |
+          for f in results-resolved-contact-ns/*/summary.md; do
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat "$f" >> "$GITHUB_STEP_SUMMARY"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resolved-contact-smooth-binding-actual-ns-results
+          path: results-resolved-contact-ns/

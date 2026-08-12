@@ -1,0 +1,94 @@
+name: Audit resolved-contact smooth binding
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/resolved_contact_smooth_binding.py'
+      - 'tests/test_resolved_contact_smooth_binding.py'
+      - 'src/resolved_contact_smooth_binding_pde_probe.py'
+      - 'tests/test_resolved_contact_smooth_binding_pde_probe.py'
+      - 'docs/resolved_contact_smooth_binding.md'
+      - 'src/hard_tail_true_upward_supply.py'
+      - 'src/hard_tail_true_upward_supply_pde_probe.py'
+      - 'src/cyclic_helical_triad_donor_kernel.py'
+      - 'src/helical_physical_edge_registration.py'
+      - 'src/resolved_interface_donor_quotient.py'
+      - 'src/smooth_quadratic_carrier_interface.py'
+      - 'src/smooth_relink_donor_quotient.py'
+      - 'src/continuum_helical_edge_measure_pde_probe.py'
+      - '.github/workflows/audit-resolved-contact-smooth-binding.yml'
+      - '.github/workflows/resolved-contact-smooth-binding.yml'
+      - 'requirements.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  independent-signed-support-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused theorem and anti-theorem tests
+        run: >-
+          pytest -q
+          tests/test_resolved_contact_smooth_binding.py
+          tests/test_hard_tail_true_upward_supply.py
+          tests/test_resolved_interface_donor_quotient.py
+          tests/test_smooth_quadratic_carrier_interface.py
+          tests/test_smooth_relink_donor_quotient.py
+      - name: Independent 100k smooth-binding stress
+        run: python -m src.resolved_contact_smooth_binding --samples 100000 --seed 2026081391 --outdir audit-resolved-contact/analytic
+      - name: Independent cyclic donor dependency stress
+        run: python -m src.cyclic_helical_triad_donor_kernel --samples 75000 --seed 2026081392 --outdir audit-resolved-contact/cyclic
+      - name: Summary
+        run: |
+          for f in audit-resolved-contact/*/summary.md; do
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat "$f" >> "$GITHUB_STEP_SUMMARY"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-resolved-contact-smooth-binding-analytic-results
+          path: audit-resolved-contact/
+
+  independent-actual-ns-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused actual NS referee test
+        run: pytest -q tests/test_resolved_contact_smooth_binding_pde_probe.py
+      - name: Longer independent M4/M8 Galerkin audit
+        run: >-
+          python -m src.resolved_contact_smooth_binding_pde_probe
+          --resolutions 24 28 --borderline-cutoff 2 --strict-cutoff 6
+          --steps 36 --duration 0.0003 --viscosity 0.03 --amplitude 1.3
+          --outdir audit-resolved-contact-ns/main
+      - name: Low-amplitude sign-stability adversary
+        run: >-
+          python -m src.resolved_contact_smooth_binding_pde_probe
+          --resolutions 24 --borderline-cutoff 2 --strict-cutoff 6
+          --steps 20 --duration 0.00012 --viscosity 0.05 --amplitude 0.35
+          --outdir audit-resolved-contact-ns/low-amplitude
+      - name: Summary
+        run: |
+          for f in audit-resolved-contact-ns/*/summary.md; do
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat "$f" >> "$GITHUB_STEP_SUMMARY"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-resolved-contact-smooth-binding-actual-ns-results
+          path: audit-resolved-contact-ns/
