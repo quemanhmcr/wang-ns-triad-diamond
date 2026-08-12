@@ -27,7 +27,8 @@ def bilinear_tensor_apply(B: np.ndarray, f: np.ndarray, g: np.ndarray) -> np.nda
     n = B.shape[0]
     if f.shape != (n,) or g.shape != (n,):
         raise ValueError("parent vectors have wrong dimension")
-    return np.einsum("kij,i,j->k", B, f, g, optimize=True)
+    tmp = np.einsum("i,kij->jk", f, B, optimize=False)
+    return np.tensordot(tmp, g, axes=((0,), (0,)))
 
 
 def _validate_localization_partition(ops: Sequence[np.ndarray], n: int, tol: float = 5e-11) -> tuple[np.ndarray, ...]:

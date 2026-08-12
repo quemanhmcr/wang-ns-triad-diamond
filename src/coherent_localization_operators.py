@@ -41,7 +41,9 @@ def synthesis_piece_energy(A: np.ndarray, f: np.ndarray) -> float:
 
 def trilinear_tensor_value(T: np.ndarray, f: np.ndarray, g: np.ndarray, h: np.ndarray) -> complex:
     T=np.asarray(T,complex); f=np.asarray(f,complex); g=np.asarray(g,complex); h=np.asarray(h,complex)
-    return np.einsum('ijk,i,j,k->',T,f,g,h,optimize=True)
+    a = np.tensordot(f, T, axes=((0,), (0,)))
+    b = np.tensordot(a, g, axes=((0,), (0,)))
+    return complex(np.tensordot(b, h, axes=((0,), (0,))))
 
 
 def trilinear_partition_sum(T: np.ndarray, f: np.ndarray, g: np.ndarray, h: np.ndarray, Af: Sequence[np.ndarray], Ag: Sequence[np.ndarray], Ah: Sequence[np.ndarray]) -> complex:

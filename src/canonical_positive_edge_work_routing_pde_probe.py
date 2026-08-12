@@ -21,7 +21,7 @@ from src.continuum_helical_edge_measure_pde_probe import (
     _pair_orbits_for_child,
     _rk4_step,
     _series_coefficient,
-    _snapshot,
+    _snapshot_with_ledger,
     _spectral_geometry,
 )
 from src.continuum_helical_edge_measure_registration import (
@@ -124,8 +124,9 @@ def run_probe(
     for step in range(count + 1):
         nonlinear = _nonlinear_term(state, k, k2, dealias)
         if step in sample_indices:
-            row = _snapshot(state, k, k2, dealias, cutoff, nonlinear_hat=nonlinear)
-            ledger = _ledger_from_actual_state(state, cutoff=cutoff)
+            row, ledger = _snapshot_with_ledger(
+                state, k, k2, dealias, cutoff, nonlinear_hat=nonlinear
+            )
             exact_roles = exact_mode_role_map(ledger)
             route = route_canonical_positive_edge_work(ledger, tau=tau, mode_roles=exact_roles)
             coarse = compress_signed_edge_work_to_hard_cells(ledger, single_hard_role_map(ledger))

@@ -13,6 +13,7 @@ from src.continuum_helical_edge_measure_registration import (
     continuum_edge_measure_ledger,
     ordered_parent_curl_source,
     register_continuum_triad_fiber,
+    _register_continuum_triad_fiber_with_source,
     unitary_fourier_convolution_factor,
     unordered_parent_curl_source_vector,
 )
@@ -254,7 +255,7 @@ def _divergence_norm(state_hat: np.ndarray, k: np.ndarray, resolution: int) -> f
     return math.sqrt(max(0.0, float(np.vdot(divergence_hat, divergence_hat).real / float(resolution**6))))
 
 
-def _snapshot(
+def _snapshot_with_ledger(
     state_hat: np.ndarray,
     k: np.ndarray,
     k2: np.ndarray,
@@ -307,12 +308,7 @@ def _snapshot(
     for x, y in _pair_orbits_for_child(child, cutoff):
         ux = _series_coefficient(state_hat, x)
         uy = _series_coefficient(state_hat, y)
-        pair_source = unordered_parent_curl_source_vector(
-            np.asarray(x, float), np.asarray(y, float), z, ux, uy
-        )
-        unordered_source += pair_source
-        unordered_source_scale += _norm3(pair_source)
-        fiber = register_continuum_triad_fiber(
+        fiber, pair_source = _register_continuum_triad_fiber_with_source(
             x=np.asarray(x, float),
             y=np.asarray(y, float),
             z=z,
@@ -321,6 +317,8 @@ def _snapshot(
             uz=uz,
             quotient_measure_mass=discrete_qmass,
         )
+        unordered_source += pair_source
+        unordered_source_scale += _norm3(pair_source)
         fibers.append(fiber)
         direct_pair_work_scale += abs(fiber.direct_signed_work_density)
         direct_progress += fiber.direct_signed_progress_density
@@ -336,7 +334,7 @@ def _snapshot(
     global_gradient = _gradient_energy(state_hat, k2, n)
     global_nonlinear_work = -2.0 * _spectral_average_inner(state_hat, nonlinear, n)
 
-    return {
+    row = {
         "unordered_pairs": float(len(fibers)),
         "modal_edges": float(ledger.modal_edges),
         "actual_source_norm": _norm3(actual_source),
@@ -370,6 +368,35 @@ def _snapshot(
         "divergence_norm": _divergence_norm(state_hat, k, n),
         "child_energy": float(np.vdot(uz, uz).real),
     }
+    return row, ledger
+
+
+def _snapshot(
+    state_hat: np.ndarray,
+    k: np.ndarray,
+    k2: np.ndarray,
+    dealias: np.ndarray,
+    cutoff: int,
+    *,
+    child_mode: tuple[int, int, int] = CHILD_MODE,
+    nonlinear_hat: np.ndarray | None = None,
+) -> dict[str, float]:
+    """Compatibility reading of the snapshot row only.
+
+    The companion ``_snapshot_with_ledger`` lets a downstream audit reuse the
+    exact already-verified edge ledger from the same physical state instead of
+    registering the same unordered parent fibers twice.
+    """
+    row, _ledger = _snapshot_with_ledger(
+        state_hat,
+        k,
+        k2,
+        dealias,
+        cutoff,
+        child_mode=child_mode,
+        nonlinear_hat=nonlinear_hat,
+    )
+    return row
 
 
 @dataclass(frozen=True)

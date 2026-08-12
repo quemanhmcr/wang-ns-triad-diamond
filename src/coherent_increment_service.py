@@ -52,13 +52,13 @@ def discrete_cell_increment_energies(f: np.ndarray, g: np.ndarray, shift: int, l
     if labels.shape!=A.shape or np.any(labels<0): raise ValueError('bad labels')
     mmax=int(labels.max())+1
     inc=np.zeros(mmax); here=np.zeros(mmax); shifted=np.zeros(mmax)
+    # The neighboring coherent energy depends on (m,k) and shift, not on the
+    # cell label.  Build it once before restricting to each cell.
+    nbr=np.abs(np.roll(A, shift, axis=0))**2
     for a in range(mmax):
         mask=(labels==a)
         inc[a]=float(np.sum(np.abs(D[mask])**2)/n)
         here[a]=float(np.sum(np.abs(A[mask])**2)/n)
-        # sum |A[m-shift,k]|^2 over (m,k) in the current cell
-        nbr=np.empty_like(A.real)
-        for m in range(n): nbr[m]=np.abs(A[(m-shift)%n])**2
         shifted[a]=float(np.sum(nbr[mask])/n)
     return inc,here,shifted
 

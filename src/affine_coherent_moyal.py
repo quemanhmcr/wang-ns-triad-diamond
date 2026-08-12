@@ -51,10 +51,9 @@ def periodic_discrete_stft(f: np.ndarray, g: np.ndarray) -> np.ndarray:
     if f.ndim != 1 or g.shape != f.shape:
         raise ValueError('same 1D shape required')
     n = len(f)
-    out = np.empty((n, n), complex)
-    for m in range(n):
-        out[m] = np.fft.fft(f * np.conj(np.roll(g, m)))
-    return out
+    positions = np.arange(n, dtype=np.intp)
+    rolled = g[(positions[None, :] - positions[:, None]) % n]
+    return np.fft.fft(f[None, :] * np.conj(rolled), axis=1)
 
 
 def discrete_moyal_residual(f: np.ndarray, g: np.ndarray) -> float:

@@ -112,14 +112,15 @@ def stress(samples:int=20_000,seed:int=20260807)->HermiteHelicityStress:
     rng=np.random.default_rng(seed)
     wp=wn=wh1=we=0.0
     pts6,ws6=gauss_hermite_standard_normal(6)
+    h36=tuple(h3_tensor(z) for z in pts6)
     pts4,ws4=gauss_hermite_standard_normal(4)
     for _ in range(samples):
         T=sym3(rng.normal(size=(3,3,3)))
         c0=float(rng.normal()); c1=rng.normal(size=3); C2=rng.normal(size=(3,3)); C2=.5*(C2+C2.T)
         # Reuse precomputed quadrature for speed.
         proj=0.0; qnorm=0.0
-        for z,w in zip(pts6,ws6):
-            h=third_hermite_polynomial(T,z)
+        for z,w,h3 in zip(pts6,ws6,h36):
+            h=float(np.einsum('abc,abc',T,h3))
             p=c0+np.dot(c1,z)+z@C2@z
             proj += w*h*p; qnorm += w*h*h
         wp=max(wp,abs(proj))

@@ -89,11 +89,16 @@ def gaussian_laplacian_multiplier(G: np.ndarray, k: np.ndarray, y: np.ndarray) -
     return complex(y @ (G @ G) @ y - 2j*(k @ G @ y) - np.dot(k,k) - np.trace(G))
 
 
+def _third_hermite_value_with_trace(T: np.ndarray, trace_T: np.ndarray, z: np.ndarray) -> float:
+    """Evaluate the same H3 polynomial with the tensor trace already computed."""
+    p = float(np.einsum("abc,a,b,c", T, z, z, z))
+    return p - 3.0 * float(np.dot(trace_T, z))
+
+
 def third_hermite_value(T: np.ndarray, z: np.ndarray) -> float:
     T = np.asarray(T, float)
     z = np.asarray(z, float)
-    p = float(np.einsum("abc,a,b,c", T, z, z, z))
-    return p - 3.0 * float(np.dot(cubic_trace(T), z))
+    return _third_hermite_value_with_trace(T, cubic_trace(T), z)
 
 
 def transform_hessian(S: np.ndarray, H: np.ndarray) -> np.ndarray:
@@ -160,9 +165,10 @@ def stress(samples: int = 50_000, seed: int = 20260807) -> ForcingStress:
 
         if n < hermite_checks:
             T = symmetrize_rank3(B)
-            # Small Monte Carlo check of the Wick/Hermite identity.
+            trace_T = cubic_trace(T)
+            # Same 3000-point Monte Carlo check; only the T-invariant trace is hoisted.
             zz = rng.normal(size=(3000, 3))
-            vals = np.array([third_hermite_value(T, z) for z in zz])
+            vals = np.array([_third_hermite_value_with_trace(T, trace_T, z) for z in zz])
             empirical = float(np.mean(vals * vals))
             analytic = 6.0 * float(np.sum(T * T))
             if analytic > 1e-12:

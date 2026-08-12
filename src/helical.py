@@ -12,48 +12,84 @@ Array = np.ndarray
 
 def _wavevector(k: Array, name: str = "wavevector") -> Array:
     q = np.asarray(k, dtype=float)
-    if q.shape != (3,) or np.any(~np.isfinite(q)):
+    if q.shape != (3,):
+        raise ValueError(f"{name} must be a finite three-vector")
+    x, y, z = (float(q[0]), float(q[1]), float(q[2]))
+    if not (math.isfinite(x) and math.isfinite(y) and math.isfinite(z)):
         raise ValueError(f"{name} must be a finite three-vector")
     return q
 
 
+def _norm3_validated(q: Array) -> float:
+    return float(math.hypot(float(q[0]), float(q[1]), float(q[2])))
+
+
 def stable_norm3(k: Array) -> float:
     """Euclidean norm without squaring away tiny or overflowing large modes."""
-    q = _wavevector(k)
-    return float(math.hypot(*(float(x) for x in q)))
+    return _norm3_validated(_wavevector(k))
+
+
+def _canonical_sign_validated(q: Array) -> int:
+    for value in q:
+        x = float(value)
+        if x != 0.0:
+            return 1 if x > 0.0 else -1
+    raise ValueError("zero wavevector")
 
 
 def _canonical_sign(k: Array) -> int:
     """Return +1 if the first nonzero component is positive, else -1."""
-    for x in _wavevector(k):
-        if float(x) != 0.0:
-            return 1 if x > 0 else -1
-    raise ValueError("zero wavevector")
+    return _canonical_sign_validated(_wavevector(k))
+
+
+def _helical_basis_validated(q: Array, s: int) -> Array:
+    """Fixed-three-vector helical basis after public validation.
+
+    This is the same canonical-axis construction as ``helical_basis`` but avoids
+    tiny-array ``eye/matmul/cross/moveaxis`` dispatch.  The first-minimum tie rule
+    matches ``np.argmin`` exactly and negative wavevectors still use the required
+    ``h_s(-k)=conj(h_s(k))`` gauge.
+    """
+    norm = _norm3_validated(q)
+    if norm == 0.0:
+        raise ValueError("zero wavevector")
+    sign = _canonical_sign_validated(q)
+    x, y, z = (float(q[0]), float(q[1]), float(q[2]))
+    if sign < 0:
+        x, y, z = -x, -y, -z
+    a, b, c = x / norm, y / norm, z / norm
+
+    aa, bb, cc = abs(a), abs(b), abs(c)
+    if aa <= bb and aa <= cc:
+        e10, e11, e12 = 0.0, -c, b
+    elif bb <= cc:
+        e10, e11, e12 = c, 0.0, -a
+    else:
+        e10, e11, e12 = -b, a, 0.0
+    e1norm = math.hypot(e10, e11, e12)
+    e10, e11, e12 = e10 / e1norm, e11 / e1norm, e12 / e1norm
+
+    e20 = b * e12 - c * e11
+    e21 = c * e10 - a * e12
+    e22 = a * e11 - b * e10
+    inv_sqrt2 = 1.0 / math.sqrt(2.0)
+    h = np.array(
+        (
+            (e10 + 1j * s * e20) * inv_sqrt2,
+            (e11 + 1j * s * e21) * inv_sqrt2,
+            (e12 + 1j * s * e22) * inv_sqrt2,
+        ),
+        dtype=complex,
+    )
+    return np.conjugate(h) if sign < 0 else h
 
 
 def helical_basis(k: Array, s: int) -> Array:
     """A deterministic unit helical vector with h_s(-k)=conj(h_s(k))."""
-    k = _wavevector(k)
+    q = _wavevector(k)
     if s not in (-1, 1):
         raise ValueError("helicity must be ±1")
-    norm = stable_norm3(k)
-    if norm == 0:
-        raise ValueError("zero wavevector")
-
-    sign = _canonical_sign(k)
-    if sign < 0:
-        return np.conjugate(helical_basis(-k, s))
-
-    khat = k / norm
-    refs = np.eye(3)
-    ref = refs[np.argmin(np.abs(refs @ khat))]
-    e1 = np.cross(ref, khat)
-    e1 /= stable_norm3(e1)
-    e2 = np.cross(khat, e1)
-    # i k × h = s |k| h
-    h = (e1 + 1j * s * e2) / math.sqrt(2.0)
-    return h
-
+    return _helical_basis_validated(q, s)
 
 def check_helical_eigenvector(k: Array, s: int, atol: float = 1e-10) -> bool:
     h = helical_basis(k, s)
@@ -67,16 +103,26 @@ def coupling_g(k: Array, p: Array, q: Array, sk: int, sp: int, sq: int) -> compl
     k = _wavevector(k, "k")
     p = _wavevector(p, "p")
     q = _wavevector(q, "q")
-    scale = max(stable_norm3(k), stable_norm3(p), stable_norm3(q))
+    nk, np_, nq = _norm3_validated(k), _norm3_validated(p), _norm3_validated(q)
+    scale = max(nk, np_, nq)
     if scale == 0.0:
         raise ValueError("zero wavevector")
-    if stable_norm3(k + p + q) > 2e-12 * scale:
+    closure = math.hypot(
+        float(k[0]) + float(p[0]) + float(q[0]),
+        float(k[1]) + float(p[1]) + float(q[1]),
+        float(k[2]) + float(p[2]) + float(q[2]),
+    )
+    if closure > 2e-12 * scale:
         raise ValueError("triad does not close")
-    hk = helical_basis(k, sk)
-    hp = helical_basis(p, sp)
-    hq = helical_basis(q, sq)
-    return -0.5 * np.dot(np.cross(np.conjugate(hp), np.conjugate(hq)), np.conjugate(hk))
-
+    if sk not in (-1, 1) or sp not in (-1, 1) or sq not in (-1, 1):
+        raise ValueError("helicity must be ±1")
+    hk = _helical_basis_validated(k, sk)
+    hp = _helical_basis_validated(p, sp)
+    hq = _helical_basis_validated(q, sq)
+    return -0.5 * np.dot(
+        np.cross(np.conjugate(hp), np.conjugate(hq)),
+        np.conjugate(hk),
+    )
 
 def triangle_area(k: float, p: float, q: float) -> float:
     x = (k + p + q) * (-k + p + q) * (k - p + q) * (k + p - q)

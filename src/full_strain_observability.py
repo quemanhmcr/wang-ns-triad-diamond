@@ -11,11 +11,18 @@ import numpy as np
 
 RSTAR_LO = Fraction(61090410158, 100_000_000_000)
 RSTAR_HI = Fraction(61090410160, 100_000_000_000)
+_I2 = np.eye(2)
+_I2.setflags(write=False)
 
 
 def tracefree_2x2(M: np.ndarray) -> np.ndarray:
     M = np.asarray(M, dtype=float)
-    return M - 0.5 * np.trace(M) * np.eye(2)
+    tr = 0.5 * (float(M[0, 0]) + float(M[1, 1]))
+    return np.array(
+        [[float(M[0, 0]) - tr, float(M[0, 1])],
+         [float(M[1, 0]), float(M[1, 1]) - tr]],
+        dtype=float,
+    )
 
 
 def extremal_parent_directions(rstar: float) -> tuple[np.ndarray, np.ndarray]:

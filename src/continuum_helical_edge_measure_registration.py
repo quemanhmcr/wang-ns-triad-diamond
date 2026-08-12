@@ -7,7 +7,7 @@ import math
 from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from fractions import Fraction
-from functools import cached_property
+from functools import cached_property, lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -24,6 +24,7 @@ from src.helical_physical_edge_registration import (
     HelicalPhysicalEdgeRegistration,
     leray_project,
     register_helical_physical_edge,
+    _register_helical_physical_edge_from_precomputed,
 )
 from src.helical_physical_edge_registration import (
     _positive_product as _edge_positive_product,
@@ -340,6 +341,25 @@ def helical_coefficients(k: np.ndarray, value: np.ndarray) -> dict[int, complex]
     return {s: complex(np.vdot(helical_basis(q, s), v)) for s in (-1, 1)}
 
 
+def _helical_coordinates_from_validated(
+    q: np.ndarray,
+    v: np.ndarray,
+) -> tuple[dict[int, complex], float, dict[int, np.ndarray]]:
+    """Two-sector coordinates/reconstruction with each physical basis built once."""
+    bases = {s: helical_basis(q, s) for s in (-1, 1)}
+    coeff = {s: complex(np.vdot(bases[s], v)) for s in (-1, 1)}
+    reconstructed = sum(
+        (coeff[s] * bases[s] for s in (-1, 1)),
+        np.zeros(3, complex),
+    )
+    nv = _complex_norm3(v)
+    gap = _complex_norm3(reconstructed - v)
+    residual = 0.0 if nv == 0.0 and gap == 0.0 else (math.inf if nv == 0.0 else gap / nv)
+    if residual > 3e-10:
+        raise AssertionError("helical sectors failed to reconstruct a divergence-free Fourier vector")
+    return coeff, residual, bases
+
+
 def helical_reconstruction(k: np.ndarray, value: np.ndarray) -> tuple[np.ndarray, float]:
     q = _vec3(k, "wavevector")
     v = _require_divergence_free(q, value, "Fourier vector")
@@ -351,6 +371,30 @@ def helical_reconstruction(k: np.ndarray, value: np.ndarray) -> tuple[np.ndarray
     if residual > 3e-10:
         raise AssertionError("helical sectors failed to reconstruct a divergence-free Fourier vector")
     return reconstructed, residual
+
+
+def _ordered_parent_curl_source_validated(
+    x: np.ndarray,
+    y: np.ndarray,
+    z: np.ndarray,
+    ux: np.ndarray,
+    uy: np.ndarray,
+) -> np.ndarray:
+    """One ordered source after mode/triad/divergence provenance was validated."""
+    omega_y = 1j * np.cross(y, uy)
+    return leray_project(z, np.cross(ux, omega_y))
+
+
+def _unordered_parent_curl_source_vector_validated(
+    x: np.ndarray,
+    y: np.ndarray,
+    z: np.ndarray,
+    ux: np.ndarray,
+    uy: np.ndarray,
+) -> np.ndarray:
+    xy = _ordered_parent_curl_source_validated(x, y, z, ux, uy)
+    yx = _ordered_parent_curl_source_validated(y, x, z, uy, ux)
+    return xy + yx
 
 
 def ordered_parent_curl_source(
@@ -367,8 +411,7 @@ def ordered_parent_curl_source(
     ux = _require_divergence_free(x, ux, "ux")
     uy = _require_divergence_free(y, uy, "uy")
     _physical_triad(x, y, z)
-    omega_y = 1j * np.cross(y, uy)
-    return leray_project(z, np.cross(ux, omega_y))
+    return _ordered_parent_curl_source_validated(x, y, z, ux, uy)
 
 
 def unordered_parent_curl_source_vector(
@@ -384,10 +427,13 @@ def unordered_parent_curl_source_vector(
     Its orbit integrand is the sum of the two ordered parent terms.  No
     lexicographic representative is selected.
     """
-    xy = ordered_parent_curl_source(x, y, z, ux, uy)
-    yx = ordered_parent_curl_source(y, x, z, uy, ux)
-    return xy + yx
-
+    x = _vec3(x, "x")
+    y = _vec3(y, "y")
+    z = _vec3(z, "z")
+    ux = _require_divergence_free(x, ux, "ux")
+    uy = _require_divergence_free(y, uy, "uy")
+    _physical_triad(x, y, z)
+    return _unordered_parent_curl_source_vector_validated(x, y, z, ux, uy)
 
 def direct_vector_child_work(
     x: np.ndarray,
@@ -459,6 +505,22 @@ class ContinuumHelicalEdgeIdentity:
         return (self.parents[0].helicity, self.parents[1].helicity, self.child.helicity)
 
 
+@lru_cache(maxsize=512)
+def _cached_continuum_helical_edge_identity(
+    xx: tuple[float, float, float],
+    yy: tuple[float, float, float],
+    zz: tuple[float, float, float],
+    sx: int,
+    sy: int,
+    sz: int,
+) -> ContinuumHelicalEdgeIdentity:
+    """Cache one immutable physical edge identity, never work/capacity data."""
+    return ContinuumHelicalEdgeIdentity(
+        parents=(HelicalModeIdentity(xx, sx), HelicalModeIdentity(yy, sy)),
+        child=HelicalModeIdentity(zz, sz),
+    )
+
+
 def continuum_helical_edge_identity(
     x: np.ndarray,
     y: np.ndarray,
@@ -467,14 +529,16 @@ def continuum_helical_edge_identity(
     sy: int,
     sz: int,
 ) -> ContinuumHelicalEdgeIdentity:
-    """Build the exact parent-swap quotient with signs bound to wavevectors."""
+    """Build the exact parent-swap quotient with signs bound to wavevectors.
+
+    The public boundary still validates each supplied three-vector before lookup.
+    Only the resulting immutable identity object is cached, with a bounded cache;
+    signed work, capacity, measure mass and any causal quantity are never cached.
+    """
     xx = tuple(float(value) for value in _vec3(x, "edge identity parent x"))
     yy = tuple(float(value) for value in _vec3(y, "edge identity parent y"))
     zz = tuple(float(value) for value in _vec3(z, "edge identity child z"))
-    return ContinuumHelicalEdgeIdentity(
-        parents=(HelicalModeIdentity(xx, sx), HelicalModeIdentity(yy, sy)),
-        child=HelicalModeIdentity(zz, sz),
-    )
+    return _cached_continuum_helical_edge_identity(xx, yy, zz, int(sx), int(sy), int(sz))
 
 
 @dataclass(frozen=True)
@@ -660,7 +724,7 @@ class ContinuumFiberRegistration:
         )
 
 
-def register_continuum_triad_fiber(
+def _register_continuum_triad_fiber_with_source(
     *,
     x: np.ndarray,
     y: np.ndarray,
@@ -669,8 +733,8 @@ def register_continuum_triad_fiber(
     uy: np.ndarray,
     uz: np.ndarray,
     quotient_measure_mass: float,
-) -> ContinuumFiberRegistration:
-    """Resolve one arbitrary divergence-free continuum triad fiber into 8 physical helical edges."""
+) -> tuple[ContinuumFiberRegistration, np.ndarray]:
+    """Verified fiber plus its already-computed unordered physical source."""
     x = _vec3(x, "x")
     y = _vec3(y, "y")
     z = _vec3(z, "z")
@@ -682,30 +746,27 @@ def register_continuum_triad_fiber(
         raise ValueError("nonnegative finite quotient-measure mass required")
     nx, ny, nz = _physical_triad(x, y, z)
 
-    _, rx = helical_reconstruction(x, ux)
-    _, ry = helical_reconstruction(y, uy)
-    _, rz = helical_reconstruction(z, uz)
+    cx, rx, bx = _helical_coordinates_from_validated(x, ux)
+    cy, ry, by = _helical_coordinates_from_validated(y, uy)
+    cz, rz, bz = _helical_coordinates_from_validated(z, uz)
     hres = max(rx, ry, rz)
 
-    source_xy = ordered_parent_curl_source(x, y, z, ux, uy)
-    source_yx = ordered_parent_curl_source(y, x, z, uy, ux)
-    source_unordered = unordered_parent_curl_source_vector(x, y, z, ux, uy)
+    source_xy = _ordered_parent_curl_source_validated(x, y, z, ux, uy)
+    source_yx = _ordered_parent_curl_source_validated(y, x, z, uy, ux)
+    source_unordered = _unordered_parent_curl_source_vector_validated(x, y, z, ux, uy)
     source_scale = max(_complex_norm3(source_unordered), _complex_norm3(source_xy) + _complex_norm3(source_yx))
     source_res = _relative_vector_gap(source_unordered, source_xy + source_yx, scale=source_scale)
     if source_res > 3e-11:
         raise AssertionError("unordered quotient orbit failed ordered convolution reconstruction")
 
-    swapped = unordered_parent_curl_source_vector(y, x, z, uy, ux)
+    swapped = _unordered_parent_curl_source_vector_validated(y, x, z, uy, ux)
     swap_res = _relative_vector_gap(swapped, source_unordered)
     if swap_res > 3e-11:
         raise AssertionError("unordered parent quotient depended on parent orientation")
 
-    cx = helical_coefficients(x, ux)
-    cy = helical_coefficients(y, uy)
-    cz = helical_coefficients(z, uz)
     atoms: list[ContinuumModalEdgeAtom] = []
     for sx, sy, sz in itertools.product((-1, 1), repeat=3):
-        reg = register_helical_physical_edge(
+        reg = _register_helical_physical_edge_from_precomputed(
             x=x,
             y=y,
             z=z,
@@ -715,6 +776,12 @@ def register_continuum_triad_fiber(
             ax=cx[sx],
             ay=cy[sy],
             az=cz[sz],
+            nx=nx,
+            ny=ny,
+            nz=nz,
+            hx=bx[sx],
+            hy=by[sy],
+            hz=bz[sz],
         )
         atoms.append(ContinuumModalEdgeAtom(reg, qmass))
 
@@ -746,7 +813,7 @@ def register_continuum_triad_fiber(
         relative_tolerance=5e-10,
     )
 
-    return ContinuumFiberRegistration(
+    fiber = ContinuumFiberRegistration(
         quotient_measure_mass=qmass,
         direct_signed_work_density=direct_work,
         modal_signed_work_density=modal_work,
@@ -759,6 +826,30 @@ def register_continuum_triad_fiber(
         signed_progress_reconstruction_residual=progress_res,
         modal_atoms=tuple(atoms),
     )
+    return fiber, source_unordered
+
+
+def register_continuum_triad_fiber(
+    *,
+    x: np.ndarray,
+    y: np.ndarray,
+    z: np.ndarray,
+    ux: np.ndarray,
+    uy: np.ndarray,
+    uz: np.ndarray,
+    quotient_measure_mass: float,
+) -> ContinuumFiberRegistration:
+    """Resolve one arbitrary divergence-free continuum triad fiber into 8 physical helical edges."""
+    fiber, _source = _register_continuum_triad_fiber_with_source(
+        x=x,
+        y=y,
+        z=z,
+        ux=ux,
+        uy=uy,
+        uz=uz,
+        quotient_measure_mass=quotient_measure_mass,
+    )
+    return fiber
 
 
 @dataclass(frozen=True)

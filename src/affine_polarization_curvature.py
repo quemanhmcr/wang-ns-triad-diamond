@@ -7,7 +7,11 @@ from pathlib import Path
 
 import numpy as np
 
-from src.extremal_helicity_symplectic import transfer_relevant_strain_observability
+from src.extremal_helicity_symplectic import (
+    _transfer_relevant_strain_observability_validated,
+    _transfer_relevant_strain_observability_validated_batch,
+    transfer_relevant_strain_observability,
+)
 from src.quadratic_swirl_kernel import swirl_tensor
 
 
@@ -64,12 +68,13 @@ def stress(samples:int=50_000,seed:int=20260807)->CurvatureStress:
         if n<monte:
             C=physical_strain_gradient(H,L)
             zz=rng.normal(size=(4000,3))
-            vals=[]; norms=[]
-            for z in zz:
-                S=np.einsum("ijc,c->ij",C,z)
-                qx,nx=transfer_relevant_strain_observability(S)
-                vals.append(qx);norms.append(nx)
-            we=max(we,abs(float(np.mean(vals))-qv)/max(1.,qv),abs(float(np.mean(norms))-nv)/max(1.,nv))
+            # The three C_c slices were already validated through qv above. Keep
+            # all 4000 Gaussian draws, but evaluate the identical projection algebra
+            # in one NumPy batch. Differential tests require bitwise equality with
+            # the scalar per-z path before this optimization is accepted.
+            S_batch=np.einsum("ijc,nc->nij",C,zz)
+            q_batch,n_batch=_transfer_relevant_strain_observability_validated_batch(S_batch)
+            we=max(we,abs(float(np.mean(q_batch))-qv)/max(1.,qv),abs(float(np.mean(n_batch))-nv)/max(1.,nv))
 
         # Explicit scalar-forcing kernel transformed through an affine grain.
         X=rng.normal(size=(3,3));M=.5*(X+X.T);M-=np.trace(M)/3*np.eye(3)

@@ -547,7 +547,28 @@ class HelicalPhysicalEdgeRegistration:
             raise AssertionError("positive-forward-work flag disagrees with physical work")
 
 
-def register_helical_physical_edge(
+def _coupling_from_physical_bases(
+    hx: np.ndarray,
+    hy: np.ndarray,
+    hz: np.ndarray,
+) -> complex:
+    """Waleffe ``g(x,y,-z)`` from already-registered physical bases.
+
+    The canonical frame obeys ``h_s(-z)=conj(h_s(z))`` exactly, so this is
+    algebraically the same triple product as ``coupling_g(x,y,-z,...)`` without
+    rebuilding the three helical bases.  It is private: callers must already
+    have obtained ``hx,hy,hz`` from ``helical_basis`` for the same physical edge.
+    """
+    return complex(
+        -0.5
+        * np.dot(
+            np.cross(np.conjugate(hy), hz),
+            np.conjugate(hx),
+        )
+    )
+
+
+def _register_helical_physical_edge_from_precomputed(
     *,
     x: np.ndarray,
     y: np.ndarray,
@@ -558,22 +579,25 @@ def register_helical_physical_edge(
     ax: complex,
     ay: complex,
     az: complex,
+    nx: float,
+    ny: float,
+    nz: float,
+    hx: np.ndarray,
+    hy: np.ndarray,
+    hz: np.ndarray,
 ) -> HelicalPhysicalEdgeRegistration:
-    """Register one actual unordered helical parent pair on its native edge law."""
-    x = _vec3(x, "x")
-    y = _vec3(y, "y")
-    z = _vec3(z, "z")
-    sx = _helicity(sx, "sx")
-    sy = _helicity(sy, "sy")
-    sz = _helicity(sz, "sz")
+    """Internal verified edge kernel with immutable geometry already computed.
+
+    Public validation remains in ``register_helical_physical_edge`` and the
+    returned frozen registration independently replays physical provenance in
+    ``__post_init__``.  This helper removes only duplicate construction of the
+    same bases/geometry inside one trusted registration transaction.
+    """
     ax = _complex_scalar(ax, "ax")
     ay = _complex_scalar(ay, "ay")
     az = _complex_scalar(az, "az")
-    nx, ny, nz = _physical_parent_pair(x, y, z)
 
     ax_abs, ay_abs, az_abs = abs(ax), abs(ay), abs(az)
-    # Establish representability before evaluating products in an order that
-    # could silently erase a nonzero physical interaction.
     capacity = _positive_product(
         (4.0, nz, ax_abs, ay_abs, az_abs),
         "native modal capacity",
@@ -584,32 +608,33 @@ def register_helical_physical_edge(
         "native source coefficient scale",
     )
 
-    direct = _complex_scalar(
-        direct_child_source_coefficient(x, y, z, sx, sy, sz, ax, ay),
-        "direct child source coefficient",
-    )
+    ux = ax * hx
+    uy = ay * hy
+    raw = np.cross(ux, sy * ny * uy) + np.cross(uy, sx * nx * ux)
+    if np.any(~np.isfinite(raw.real)) or np.any(~np.isfinite(raw.imag)):
+        raise ValueError("unordered curl source left the finite native range")
+    qhat = z / nz
+    projected = raw - qhat * np.dot(qhat, raw)
+    direct = _complex_scalar(np.vdot(hz, projected), "direct child source coefficient")
+
+    g = _complex_scalar(_coupling_from_physical_bases(hx, hy, hz), "coupling")
+    signed_frequency = sx * nx - sy * ny
     waleffe = _complex_scalar(
-        waleffe_child_source_coefficient(x, y, z, sx, sy, sz, ax, ay),
+        _complex_product(
+            (2.0, signed_frequency, np.conjugate(g), ax, ay),
+            "Waleffe child source coefficient",
+        ),
         "Waleffe child source coefficient",
     )
     coeff_res = abs(direct - waleffe)
     if _relative_gap(direct, waleffe, scale=source_scale) > 2e-10:
         raise AssertionError("direct Leray/curl source disagrees with Waleffe helical coefficient")
 
-    # Pairing a divergence-free child helical vector makes Leray projection free.
-    hx = helical_basis(x, sx)
-    hy = helical_basis(y, sy)
-    ux = ax * hx
-    uy = ay * hy
-    raw = np.cross(ux, sy * ny * uy) + np.cross(uy, sx * nx * ux)
-    hz = helical_basis(z, sz)
     unprojected = _complex_scalar(np.vdot(hz, raw), "unprojected child pairing")
     leray_res = abs(unprojected - direct)
     if _relative_gap(unprojected, direct, scale=source_scale) > 2e-10:
         raise AssertionError("Leray projection changed a divergence-free child helical pairing")
 
-    g = coupling_g(x, y, -z, sx, sy, sz)
-    signed_frequency = sx * nx - sy * ny
     work_pairing = _complex_product(
         (2.0, np.conjugate(az), waleffe),
         "child-energy work pairing",
@@ -620,11 +645,8 @@ def register_helical_physical_edge(
     progress = max(0.0, math.log(forward_ratio))
     upper = _signed_product((work, progress), "signed upper-progress work")
 
-    # This is the native modal interaction capacity of the same physical edge.
-    # Factor 2: the two parent orders in the unordered convolution orbit.
-    # Factor 2: physical child energy derivative 2 Re(conj(a_z) F_z).
-    metrics = edge_metrics(x, y, z, sx, sy, sz)
-    J = float(metrics.efficiency)
+    raw_prefactor = abs(signed_frequency) * abs(g) / nz
+    J = float(progress * raw_prefactor)
     jstar = float_jstar()
     c = phase_alignment(signed_frequency, g, ax, ay, az)
     registered = _signed_product(
@@ -674,6 +696,50 @@ def register_helical_physical_edge(
         positive_forward_work=(progress > 0.0 and work > 0.0),
     )
 
+
+def register_helical_physical_edge(
+    *,
+    x: np.ndarray,
+    y: np.ndarray,
+    z: np.ndarray,
+    sx: int,
+    sy: int,
+    sz: int,
+    ax: complex,
+    ay: complex,
+    az: complex,
+) -> HelicalPhysicalEdgeRegistration:
+    """Register one actual unordered helical parent pair on its native edge law."""
+    x = _vec3(x, "x")
+    y = _vec3(y, "y")
+    z = _vec3(z, "z")
+    sx = _helicity(sx, "sx")
+    sy = _helicity(sy, "sy")
+    sz = _helicity(sz, "sz")
+    ax = _complex_scalar(ax, "ax")
+    ay = _complex_scalar(ay, "ay")
+    az = _complex_scalar(az, "az")
+    nx, ny, nz = _physical_parent_pair(x, y, z)
+    hx = helical_basis(x, sx)
+    hy = helical_basis(y, sy)
+    hz = helical_basis(z, sz)
+    return _register_helical_physical_edge_from_precomputed(
+        x=x,
+        y=y,
+        z=z,
+        sx=sx,
+        sy=sy,
+        sz=sz,
+        ax=ax,
+        ay=ay,
+        az=az,
+        nx=nx,
+        ny=ny,
+        nz=nz,
+        hx=hx,
+        hy=hy,
+        hz=hz,
+    )
 
 def gauge_transform_modal_data(
     coupling: complex,

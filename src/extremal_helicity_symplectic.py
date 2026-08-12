@@ -5,6 +5,7 @@ import json
 import math
 from dataclasses import dataclass
 from fractions import Fraction
+from functools import lru_cache
 from pathlib import Path
 
 import numpy as np
@@ -76,20 +77,61 @@ def relative_matrix_formula(u: np.ndarray, v: np.ndarray, M1: np.ndarray, M2: np
     return complex(np.asarray(u, complex).T @ J2 @ R @ np.asarray(v, complex))
 
 
+@lru_cache(maxsize=32)
+def _transfer_observability_frames(rstar: float) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Immutable transverse frames for one fixed physical parent ratio."""
+    k1, k2 = extremal_parent_directions(float(rstar))
+    Epi = np.array([[1.0, 0.0], [0.0, 1.0], [0.0, 0.0]])
+    E1 = transverse_frame(k1)
+    E2 = transverse_frame(k2)
+    E3 = transverse_frame(np.array([1.0, 0.0, 0.0]))
+    for E in (Epi, E1, E2, E3):
+        E.setflags(write=False)
+    return Epi, E1, E2, E3
+
+
+def _transfer_relevant_strain_observability_validated(
+    S: np.ndarray, rstar: float = 0.610904101586766
+) -> tuple[float, float]:
+    """Evaluate Q_rel after symmetry/trace provenance was already validated."""
+    Epi, E1, E2, E3 = _transfer_observability_frames(float(rstar))
+    Dp = tracefree_2x2(Epi.T @ S @ Epi)
+    D1 = tracefree_2x2(E1.T @ S @ E1)
+    D2 = tracefree_2x2(E2.T @ S @ E2)
+    D3 = tracefree_2x2(E3.T @ S @ E3)
+    Q = float(np.sum(Dp * Dp) + np.sum((D1 - D2) ** 2) + np.sum(D3 * D3))
+    return Q, float(np.sum(S * S))
+
+
+def _transfer_relevant_strain_observability_validated_batch(
+    S: np.ndarray, rstar: float = 0.610904101586766
+) -> tuple[np.ndarray, np.ndarray]:
+    """Bitwise-equivalent batched Q_rel on already-validated trace-free strains."""
+    Epi, E1, E2, E3 = _transfer_observability_frames(float(rstar))
+    Ds = []
+    for E in (Epi, E1, E2, E3):
+        M = np.matmul(np.matmul(E.T, S), E)
+        tr = 0.5 * (M[:, 0, 0] + M[:, 1, 1])
+        D = M.copy()
+        D[:, 0, 0] -= tr
+        D[:, 1, 1] -= tr
+        Ds.append(D)
+    Dp, D1, D2, D3 = Ds
+    Q = (
+        np.sum(Dp * Dp, axis=(1, 2))
+        + np.sum((D1 - D2) ** 2, axis=(1, 2))
+        + np.sum(D3 * D3, axis=(1, 2))
+    )
+    N = np.sum(S * S, axis=(1, 2))
+    return Q, N
+
+
 def transfer_relevant_strain_observability(S: np.ndarray, rstar: float = 0.610904101586766) -> tuple[float, float]:
     """Q_rel=||D_Pi||^2+||D1-D2||^2+||D_child||^2 and ||S||^2."""
     S = np.asarray(S, dtype=float)
     if np.linalg.norm(S - S.T) > 1e-10 or abs(float(np.trace(S))) > 1e-10:
         raise ValueError("S must be symmetric trace free")
-    k1, k2 = extremal_parent_directions(rstar)
-    Epi = np.array([[1.0, 0.0], [0.0, 1.0], [0.0, 0.0]])
-    E3 = transverse_frame(np.array([1.0, 0.0, 0.0]))
-    Dp = tracefree_2x2(Epi.T @ S @ Epi)
-    D1 = tracefree_2x2(transverse_frame(k1).T @ S @ transverse_frame(k1))
-    D2 = tracefree_2x2(transverse_frame(k2).T @ S @ transverse_frame(k2))
-    D3 = tracefree_2x2(E3.T @ S @ E3)
-    Q = float(np.sum(Dp * Dp) + np.sum((D1 - D2) ** 2) + np.sum(D3 * D3))
-    return Q, float(np.sum(S * S))
+    return _transfer_relevant_strain_observability_validated(S, rstar)
 
 
 def arb_transfer_relevant_observability_certificate() -> dict[str, str]:

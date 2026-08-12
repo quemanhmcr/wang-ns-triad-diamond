@@ -76,22 +76,22 @@ def diamond_holonomy_from_edges(edges: Mapping[str, Mapping[str, float]]) -> tup
     return geom, target, wrap_angle(geom - target)
 
 
-def diamond_incidence_spin_holonomy(a: Array, b: Array, c: Array, signs: Sequence[int]) -> tuple[float, float]:
-    """Reconstruct geometric coupling holonomy from constant edge phases + spin dihedrals.
-
-    Each physical mode occurs in two incident triads.  The difference of their
-    triad-normal gauge phases is exactly the spin-1 transition phase
-    -s*psi.  The returned pair is (direct geometric holonomy, spin reconstruction).
-    """
+def _diamond_incidence_spin_holonomy_from_edges(
+    a: Array,
+    b: Array,
+    c: Array,
+    signs: Sequence[int],
+    edges: Mapping[str, Mapping[str, float]],
+) -> tuple[float, float]:
+    """Same incidence law with the immutable edge registration supplied."""
     sa, sb, sc, sm, sn, sd = (int(x) for x in signs)
     a = np.asarray(a, float); b = np.asarray(b, float); c = np.asarray(c, float)
     m, n, d = a + b, b + c, a + b + c
-    e = diamond_edge_data(a, b, c, signs)
     n1 = triad_normal(a, b)
     n2 = triad_normal(m, c)
     n3 = triad_normal(b, c)
     n4 = triad_normal(a, n)
-    gamma = e["ab_m"]["normal_phase"] + e["mc_d"]["normal_phase"] - e["bc_n"]["normal_phase"] - e["an_d"]["normal_phase"]
+    gamma = edges["ab_m"]["normal_phase"] + edges["mc_d"]["normal_phase"] - edges["bc_n"]["normal_phase"] - edges["an_d"]["normal_phase"]
     spin = (
         normal_transition_phase(a, sa, n4, n1)
         + normal_transition_phase(b, sb, n3, n1)
@@ -100,8 +100,33 @@ def diamond_incidence_spin_holonomy(a: Array, b: Array, c: Array, signs: Sequenc
         + normal_transition_phase(n, sn, n4, n3)
         + normal_transition_phase(d, sd, n2, n4)
     )
-    direct, _, _ = diamond_holonomy_from_edges(e)
+    direct, _, _ = diamond_holonomy_from_edges(edges)
     return direct, wrap_angle(gamma + spin)
+
+
+def diamond_incidence_spin_holonomy(a: Array, b: Array, c: Array, signs: Sequence[int]) -> tuple[float, float]:
+    """Reconstruct geometric coupling holonomy from constant edge phases + spin dihedrals.
+
+    Each physical mode occurs in two incident triads.  The difference of their
+    triad-normal gauge phases is exactly the spin-1 transition phase
+    -s*psi.  The returned pair is (direct geometric holonomy, spin reconstruction).
+    """
+    aa = np.asarray(a, float); bb = np.asarray(b, float); cc = np.asarray(c, float)
+    edges = diamond_edge_data(aa, bb, cc, signs)
+    return _diamond_incidence_spin_holonomy_from_edges(aa, bb, cc, signs, edges)
+
+
+def _diamond_phase_residuals_from_edges(
+    edges: Mapping[str, Mapping[str, float]],
+    modal_phases: Mapping[str, float],
+) -> dict[str, float]:
+    th = modal_phases
+    return {
+        "ab_m": wrap_angle(edges["ab_m"]["global_phase"] - th["a"] - th["b"] + th["m"] - edges["ab_m"]["target_phase"]),
+        "mc_d": wrap_angle(edges["mc_d"]["global_phase"] - th["m"] - th["c"] + th["d"] - edges["mc_d"]["target_phase"]),
+        "bc_n": wrap_angle(edges["bc_n"]["global_phase"] - th["b"] - th["c"] + th["n"] - edges["bc_n"]["target_phase"]),
+        "an_d": wrap_angle(edges["an_d"]["global_phase"] - th["a"] - th["n"] + th["d"] - edges["an_d"]["target_phase"]),
+    }
 
 
 def diamond_phase_residuals(
@@ -116,14 +141,7 @@ def diamond_phase_residuals(
     delta_e=arg g_e - theta_parent1 - theta_parent2 + theta_child - target_e.
     The signed sum of the four deltas is independent of all six modal phases.
     """
-    edges = diamond_edge_data(a, b, c, signs)
-    th = modal_phases
-    return {
-        "ab_m": wrap_angle(edges["ab_m"]["global_phase"] - th["a"] - th["b"] + th["m"] - edges["ab_m"]["target_phase"]),
-        "mc_d": wrap_angle(edges["mc_d"]["global_phase"] - th["m"] - th["c"] + th["d"] - edges["mc_d"]["target_phase"]),
-        "bc_n": wrap_angle(edges["bc_n"]["global_phase"] - th["b"] - th["c"] + th["n"] - edges["bc_n"]["target_phase"]),
-        "an_d": wrap_angle(edges["an_d"]["global_phase"] - th["a"] - th["n"] + th["d"] - edges["an_d"]["target_phase"]),
-    }
+    return _diamond_phase_residuals_from_edges(diamond_edge_data(a, b, c, signs), modal_phases)
 
 
 def residual_holonomy(residuals: Mapping[str, float]) -> float:
@@ -217,11 +235,11 @@ def stress(samples: int = 50_000, seed: int = 20260807) -> HolonomyStress:
         for e in edges.values():
             worst_recon = max(worst_recon, abs(wrap_angle(e["global_phase"] - e["reconstructed_phase"])))
         geom, target, H = diamond_holonomy_from_edges(edges)
-        direct_spin, reconstructed_spin = diamond_incidence_spin_holonomy(a, b, c, signs)
+        direct_spin, reconstructed_spin = _diamond_incidence_spin_holonomy_from_edges(a, b, c, signs, edges)
         worst_spin = max(worst_spin, abs(wrap_angle(direct_spin - reconstructed_spin)))
 
         phases = {name: float(rng.uniform(-math.pi, math.pi)) for name in ("a", "b", "c", "m", "n", "d")}
-        residuals = diamond_phase_residuals(a, b, c, signs, phases)
+        residuals = _diamond_phase_residuals_from_edges(edges, phases)
         worst_cancel = max(worst_cancel, abs(wrap_angle(residual_holonomy(residuals) - H)))
 
         # Rigid rotation may cross deterministic basis charts, but the diamond
