@@ -1,0 +1,88 @@
+name: Cyclic hard-cell single-charge quotient
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'src/cyclic_hard_cell_single_charge_quotient.py'
+      - 'tests/test_cyclic_hard_cell_single_charge_quotient.py'
+      - 'src/cyclic_hard_cell_single_charge_quotient_pde_probe.py'
+      - 'tests/test_cyclic_hard_cell_single_charge_quotient_pde_probe.py'
+      - 'docs/cyclic_hard_cell_single_charge_quotient.md'
+      - 'src/cyclic_helical_triad_donor_kernel.py'
+      - 'src/cyclic_helical_triad_donor_kernel_pde_probe.py'
+      - 'src/canonical_positive_edge_work_routing.py'
+      - 'src/mixed_fate_reserved_young_handoff.py'
+      - 'src/physical_branch_compiler.py'
+      - '.github/workflows/cyclic-hard-cell-single-charge-quotient.yml'
+      - '.github/workflows/audit-cyclic-hard-cell-single-charge-quotient.yml'
+      - 'requirements.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  analytic-and-adversarial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused hard-cell single-charge tests
+        run: pytest -q tests/test_cyclic_hard_cell_single_charge_quotient.py
+      - name: Physical provenance dependency tests
+        run: pytest -q tests/test_cyclic_helical_triad_donor_kernel.py tests/test_canonical_positive_edge_work_routing.py tests/test_mixed_fate_reserved_young_handoff.py tests/test_physical_branch_compiler.py
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Hard-cell single-charge physical-triad stress
+        run: python -m src.cyclic_hard_cell_single_charge_quotient --samples 75000 --seed 2026081204 --outdir results-hard-cell-single-charge/main
+      - name: Cyclic donor dependency stress
+        run: python -m src.cyclic_helical_triad_donor_kernel --samples 75000 --seed 2026081203 --outdir results-hard-cell-single-charge/cyclic-dependency
+      - name: Summary
+        run: |
+          cat results-hard-cell-single-charge/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+          echo >> "$GITHUB_STEP_SUMMARY"
+          cat results-hard-cell-single-charge/cyclic-dependency/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cyclic-hard-cell-single-charge-analytic-results
+          path: results-hard-cell-single-charge/
+
+  actual-ns:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused actual-NS single-charge tests
+        run: pytest -q tests/test_cyclic_hard_cell_single_charge_quotient_pde_probe.py tests/test_cyclic_helical_triad_donor_kernel_pde_probe.py tests/test_mixed_fate_reserved_young_handoff_pde_probe.py
+      - name: One-donor two-recipient actual NS on two FFT representations
+        run: python -m src.cyclic_hard_cell_single_charge_quotient_pde_probe --resolutions 24 28 --cutoff 7 --steps 32 --duration 0.001 --snapshots 5 --phase-sign 1 --outdir results-hard-cell-single-charge-ns/positive-phase
+      - name: Two-donor one-recipient phase-reversed actual NS
+        run: python -m src.cyclic_hard_cell_single_charge_quotient_pde_probe --resolutions 24 28 --cutoff 7 --steps 32 --duration 0.001 --snapshots 5 --phase-sign -1 --outdir results-hard-cell-single-charge-ns/negative-phase
+      - name: Amplitude cubic adversaries
+        run: |
+          for a in 0.5 2.0; do
+            tag=${a/./p}
+            python -m src.cyclic_hard_cell_single_charge_quotient_pde_probe \
+              --resolutions 24 --cutoff 7 --steps 24 --amplitude "$a" --duration 0.00075 --snapshots 4 --phase-sign 1 \
+              --outdir "results-hard-cell-single-charge-ns/amplitude-$tag"
+          done
+      - name: Summary
+        run: |
+          for f in results-hard-cell-single-charge-ns/*/summary.md; do
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat "$f" >> "$GITHUB_STEP_SUMMARY"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cyclic-hard-cell-single-charge-actual-ns-results
+          path: results-hard-cell-single-charge-ns/
