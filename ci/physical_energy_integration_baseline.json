@@ -1,6 +1,6 @@
 {
-  "artifact_root": "recorded-results/31666880569/physical-energy-causal-integration-v2-results/results-integration",
-  "integration_run_id": 31666880569,
+  "artifact_root": "recorded-results/31678801395/physical-energy-causal-integration-v2-results/results-integration",
+  "integration_run_id": 31678801395,
   "nodes": {
     "amplitude_entropy_causal_reuse": {
       "command": "python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy",
@@ -52,7 +52,7 @@
     },
     "continuum_master_event_quotient": {
       "command": "python -m src.continuum_master_event_quotient --samples 50000 --outdir results-integration/continuum-master-event-quotient",
-      "fingerprint": "fd7353295271ea805a24658083aaac28a3898c1dc600473ea0a2916bd18c9d6d",
+      "fingerprint": "20a85093df459ab18ac665736b492624100addfdac49eda1e928789c084b416e",
       "outdir": "results-integration/continuum-master-event-quotient",
       "output_digest": "0415aea427c6482287e82166cf5b25d3903e513b31f98be94132b4f30a651a47"
     },
@@ -200,6 +200,12 @@
       "outdir": "results-integration/material-label-carrier-quotient",
       "output_digest": "05529c0b721d42e409a20fb90bd5a03b0503d2708471ecccd282d0dca0beed99"
     },
+    "material_sidecar_stock_owner_decomposition": {
+      "command": "python -m src.material_sidecar_stock_owner_decomposition --samples 50000 --seed 2026081305 --outdir results-integration/material-sidecar-stock-owner-decomposition",
+      "fingerprint": "25d21a6d7c41d1e7637bc682bef7d1054578580674de2ee37c6296a59f32c28f",
+      "outdir": "results-integration/material-sidecar-stock-owner-decomposition",
+      "output_digest": "fa667bfbbd66cc2b694297c094d4ca54deda7a5c8255958ca3866bbded7f5f0e"
+    },
     "mixed_fate_reserved_young_handoff": {
       "command": "python -m src.mixed_fate_reserved_young_handoff --samples 50000 --seed 2026081202 --outdir results-integration/mixed-fate-reserved-young-handoff",
       "fingerprint": "a0b8e0e4c999be218695f2b1f504b37022a95613a4d34b3f6cebefb7067fa12f",
@@ -322,9 +328,9 @@
     },
     "same_carrier_inherited_energy_relay": {
       "command": "python -m src.same_carrier_inherited_energy_relay --samples 50000 --seed 2026081304 --outdir results-integration/same-carrier-inherited-energy-relay",
-      "fingerprint": "8c321e023729c059476a98b258ce42cc55ca2e07e66522312d2cc719170e19d2",
+      "fingerprint": "fe81c5c1b4c931de594b6855be869d85340f541c853c929d6c57143e32a270c2",
       "outdir": "results-integration/same-carrier-inherited-energy-relay",
-      "output_digest": "13d63ee1ccf03f336acc772206c63f26e9f7eade2d82f33afaaaf143b0ae5524"
+      "output_digest": "45abcc0e513195526f285230e352049a023fb7972757e6cca037e80b22c8de82"
     },
     "signed_good_generated_epoch_time_telescope": {
       "command": "python -m src.signed_good_generated_epoch_time_telescope --samples 50000 --outdir results-integration/signed-good-generated-epoch-time-telescope",
@@ -363,8 +369,8 @@
       "output_digest": "fe77e09613763429741d9d90d5e964c1fb13711d92e80baf9f01859f4e30f5c1"
     }
   },
-  "record_sha": "65b119a85c15a1b34140eccf6937bd196120c7bb",
+  "record_sha": "5e719a40f9b67ef07e560df177cecc33f3f79565",
   "runtime_id": "ubuntu-24.04|python=3.11.15|numpy=2.2.6|scipy=1.15.3|pytest=8.4.1|python-flint=0.9.0",
   "schema": 1,
-  "theorem_sha": "077ec27dc55fafb62049b7753859f23a4cc61ff7"
+  "theorem_sha": "c39f70ed3e9f4edfc08e23b996ba872d91c63ed6"
 }
