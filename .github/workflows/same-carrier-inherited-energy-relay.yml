@@ -1,0 +1,65 @@
+name: Same-carrier inherited energy relay
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'theorem/mixed-genuine-owner-renewal'
+
+permissions:
+  contents: read
+
+jobs:
+  analytic-and-master-boundary:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Focused inherited-stock theorem and anti-theorems
+        run: pytest -q tests/test_same_carrier_inherited_energy_relay.py
+      - name: Physical dependency boundary tests
+        run: >-
+          pytest -q
+          tests/test_physical_energy_causal_bridge.py
+          tests/test_same_carrier_checkpoint_segmentation_quotient.py
+          tests/test_material_label_carrier_quotient.py
+          tests/test_continuum_master_event_quotient.py
+          tests/test_helical_mode_set_energy_continuity.py
+      - name: 75k exact same-carrier inheritance stress
+        run: >-
+          python -m src.same_carrier_inherited_energy_relay
+          --samples 75000 --seed 2026081304
+          --outdir results-same-carrier-inherited-energy-relay/analytic
+      - run: cat results-same-carrier-inherited-energy-relay/analytic/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: same-carrier-inherited-energy-relay-analytic-results
+          path: results-same-carrier-inherited-energy-relay/
+
+  actual-ns-stock-referee:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Focused actual Galerkin NS stock test
+        run: pytest -q tests/test_same_carrier_inherited_energy_relay_pde_probe.py
+      - name: Two-representation actual NS stock referee
+        run: >-
+          python -m src.same_carrier_inherited_energy_relay_pde_probe
+          --resolutions 24 28 --steps 32 --duration 0.001
+          --outdir results-same-carrier-inherited-energy-relay-ns/main
+      - run: cat results-same-carrier-inherited-energy-relay-ns/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: same-carrier-inherited-energy-relay-actual-ns-results
+          path: results-same-carrier-inherited-energy-relay-ns/

@@ -1,0 +1,61 @@
+name: Audit same-carrier inherited energy relay
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'theorem/mixed-genuine-owner-renewal'
+
+permissions:
+  contents: read
+
+jobs:
+  independent-algebra-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Focused theorem plus independent master dependencies
+        run: >-
+          pytest -q
+          tests/test_same_carrier_inherited_energy_relay.py
+          tests/test_continuum_master_event_quotient.py
+          tests/test_smooth_relink_donor_quotient.py
+          tests/test_material_label_carrier_quotient.py
+      - name: Independent 100k inheritance stress
+        run: >-
+          python -m src.same_carrier_inherited_energy_relay
+          --samples 100000 --seed 2026081314
+          --outdir audit-same-carrier-inherited-energy-relay/analytic
+      - run: cat audit-same-carrier-inherited-energy-relay/analytic/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-same-carrier-inherited-energy-relay-analytic-results
+          path: audit-same-carrier-inherited-energy-relay/
+
+  independent-actual-ns-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Lower-amplitude opposite-phase actual NS stock audit
+        run: >-
+          python -m src.same_carrier_inherited_energy_relay_pde_probe
+          --resolutions 24 28 --steps 48 --duration 0.0015
+          --amplitude 0.5 --phase-sign -1
+          --outdir audit-same-carrier-inherited-energy-relay-ns/main
+      - run: cat audit-same-carrier-inherited-energy-relay-ns/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-same-carrier-inherited-energy-relay-actual-ns-results
+          path: audit-same-carrier-inherited-energy-relay-ns/
