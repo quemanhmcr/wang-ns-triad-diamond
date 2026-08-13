@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Iterable, Sequence
 
+from src.heat_edge_material_ownership import partition_positive_edge_measure
 from src.material_sidecar_stock_owner_decomposition import (
     MEMBERSHIP_PROVENANCE_CURRENCY,
     SELECTED_FAMILY_MOYAL_CURRENCY,
@@ -167,19 +168,40 @@ def factor_positive_service_by_material(
     if total <= 0.0:
         raise ValueError("positive total physical service required")
 
-    oo = tuple(atom for atom in atoms if atom.material_class is MaterialEdgeClass.OO)
-    on = tuple(atom for atom in atoms if atom.material_class is MaterialEdgeClass.ON)
-    nn = tuple(atom for atom in atoms if atom.material_class is MaterialEdgeClass.NN)
+    # Bind the candidate factorization to the already-certified native material
+    # partition rather than reimplementing OO/ON/NN arithmetic locally.
+    certified_partition = partition_positive_edge_measure(
+        [atom.weight for atom in atoms],
+        [atom.old_here for atom in atoms],
+        [atom.old_neighbor for atom in atoms],
+    )
+    oo_mass = float(certified_partition["old_old"])
+    on_mass = float(certified_partition["old_new_interface"])
+    nn_mass = float(certified_partition["new_new"])
+    partition_residual = _relative_residual(
+        total, oo_mass + on_mass + nn_mass
+    )
 
     owner_total = _sorted_mass_map((atom.native_owner, atom.weight) for atom in atoms if atom.weight > 0.0)
-    owner_oo = _sorted_mass_map((atom.native_owner, atom.weight) for atom in oo if atom.weight > 0.0)
-    owner_on = _sorted_mass_map((atom.native_owner, atom.weight) for atom in on if atom.weight > 0.0)
-    owner_nn = _sorted_mass_map((atom.native_owner, atom.weight) for atom in nn if atom.weight > 0.0)
-
-    oo_mass = float(sum(atom.weight for atom in oo))
-    on_mass = float(sum(atom.weight for atom in on))
-    nn_mass = float(sum(atom.weight for atom in nn))
-    partition_residual = _relative_residual(total, oo_mass + on_mass + nn_mass)
+    owner_oo_items: list[tuple[str, float]] = []
+    owner_on_items: list[tuple[str, float]] = []
+    owner_nn_items: list[tuple[str, float]] = []
+    for owner, _ in owner_total:
+        owner_atoms = tuple(atom for atom in atoms if atom.native_owner == owner)
+        part = partition_positive_edge_measure(
+            [atom.weight for atom in owner_atoms],
+            [atom.old_here for atom in owner_atoms],
+            [atom.old_neighbor for atom in owner_atoms],
+        )
+        if part["old_old"] > 0.0:
+            owner_oo_items.append((owner, float(part["old_old"])))
+        if part["old_new_interface"] > 0.0:
+            owner_on_items.append((owner, float(part["old_new_interface"])))
+        if part["new_new"] > 0.0:
+            owner_nn_items.append((owner, float(part["new_new"])))
+    owner_oo = tuple(sorted(owner_oo_items))
+    owner_on = tuple(sorted(owner_on_items))
+    owner_nn = tuple(sorted(owner_nn_items))
 
     by_material_then_owner: dict[str, float] = {}
     for table in (owner_oo, owner_on, owner_nn):
@@ -305,7 +327,7 @@ def project_material_recurrence_to_native_owners(
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
-        "measure_identity": "for an already-positive owner law sigma=sum_r sigma_r and material class C, chi_C sigma=sum_r chi_C sigma_r; material restriction commutes with native-owner disintegration",
+        "measure_identity": "for an already-positive owner law sigma=sum_r sigma_r and material class C, chi_C sigma=sum_r chi_C sigma_r; executable OO/ON/NN restriction is delegated to the certified heat_edge_material_ownership partition",
         "hahn_rule": "positivity is established before material classification; OO/ON/NN is positive restriction only and never a later Hahn split",
         "membership": "same-carrier material membership rereading is zero-charge provenance and creates no service/work/event vertex",
         "selected_family": "R_switch remains selected-family Moyal boundary currency with zero generation depth; it is not dW, stock, K_phys, or a causal stop",

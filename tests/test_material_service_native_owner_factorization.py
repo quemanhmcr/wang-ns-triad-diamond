@@ -143,3 +143,23 @@ def test_candidate_certificate_states_narrow_scope_and_no_regularity_claim():
     assert cert["status"].startswith("DRAFT_")
     assert "material/new-ancestry labels do not form an independent letter" in cert["master_consequence"]
     assert "no global-regularity claim" in cert["scope"]
+
+
+def test_factorization_is_bound_to_certified_heat_edge_material_partition():
+    from src.heat_edge_material_ownership import partition_positive_edge_measure
+
+    atoms = (
+        NativePositiveServiceAtom(1.25, "resolved_source_or_sgs_service", True, True),
+        NativePositiveServiceAtom(2.5, "resolved_source_or_sgs_service", True, False),
+        NativePositiveServiceAtom(4.0, "actual_positive_hh_child_energy_work", False, False),
+    )
+    out = factor_positive_service_by_material(atoms)
+    native = partition_positive_edge_measure(
+        [a.weight for a in atoms],
+        [a.old_here for a in atoms],
+        [a.old_neighbor for a in atoms],
+    )
+    assert out.total_service == native["total"]
+    assert out.oo_service == native["old_old"]
+    assert out.on_service == native["old_new_interface"]
+    assert out.nn_service == native["new_new"]
