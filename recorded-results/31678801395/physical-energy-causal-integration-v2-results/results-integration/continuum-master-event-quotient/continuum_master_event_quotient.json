@@ -1,0 +1,118 @@
+{
+  "certificate": {
+    "status": "EXACT_CONTINUUM_MASTER_EVENT_QUOTIENT__ZERO_CHARGE_RELAYS_COLLAPSED__NATIVE_PHYSICAL_TIME_RECURSION__SUPPLIER_SPECIFIC_SCALE_PROGRESS__NATURAL_HORIZON_CHECKPOINTS_ZERO_EVENT_DEPTH__SAME_CARRIER_FIRST_HIT_NOT_RESET_BY_CHECKPOINTS__SMOOTH_RELINK_SAME_EVENT_DONOR_ZERO_DEPTH__SAME_CARRIER_INHERITED_STOCK_ZERO_GENERATION_DEPTH__CONSECUTIVE_HIGH_STRAIN_EPOCHS_FINITE_BY_PHYSICAL_DISSIPATION__SIGNED_GOOD_GENERATED_HH_EPOCHS_FINITE_BY_PARABOLIC_TIME__CHECKPOINT_ZENO_NOT_CANONICAL_LINEAGE__NO_COMMON_CLOCK_OR_CAUSAL_REWEIGHTING",
+    "canonical_state": "one physical event time, one supplied physical shell/carrier frequency, one named physical measure, an unsplit joint physical-owner set after any required coefficient-energy reentry, and optional sidecars; no theorem-depth counter or common normalized clock",
+    "relay_quotient": "same-law owner relays preserve one unsplit physical mass; certified witness relays may change units/observable (for example source work to shell mass) but create no second causal charge. Inserting/removing either relay cannot manufacture causal entropy",
+    "joint_owners": "exact ties and multiple certified downstream owner names remain a set-valued provenance mark on one unsplit physical mass; no lexicographic priority and no heterogeneous RN tie normalization",
+    "coefficient_obstruction_barrier": "Duhamel HH/interface coefficient threshold hits are first-stop locators, not physical owners; actual Q^2 energy/work reentry may return inheritance, high strain, HH generation, or smooth interface work; smooth K_phys relink is then quotiented to same-event donor provenance while simultaneous strain remains a recursive owner. A typed sidecar-free same-carrier inheritance certificate may quotient only the inherited-stock component after its certified endpoint/residual-work guards; untyped or sidecar-bearing inheritance remains event-facing",
+    "full_natural_service_barrier": "full_natural_own_scale_service is a positive witness carried by the already-completed natural corridor, not a second recursive owner event; canonical owner states reject this classification label as an owner",
+    "full_natural_checkpoint_barrier": "a complete no-hit natural horizon consumes actual physical corridor time but is only an analysis checkpoint; RecursiveEventState rejects both the checkpoint label and the legacy full-natural-survivor disposition",
+    "same_carrier_checkpoint_segmentation": "a no-event checkpoint cannot replace the event-anchored smooth carrier or reset its terminal coefficient, cumulative strain action, or cumulative coefficient-impulse monitors; hard-shell readings there are state sidecars until a new physical event hardens a role",
+    "smooth_relink_donor_quotient": "gauge-quotiented K_phys relink is a finite antisymmetric same-event role flux; the master rejects conservative_smooth_role_relink as a recursive owner, preserves its donor certificate as zero-depth provenance, and retains any simultaneous existing strain as the recursive owner",
+    "same_carrier_inherited_stock_quotient": "certified sidecar-free material_energy_inheritance on the same no-first-stop carrier is between-time physical stock continuation and adds zero generation depth. The master binds its stock mass to E0 and also binds the exact E0/E1 gate value, threshold and classified residual work to the certificate. Any material sidecar, absent certificate, residual-owner case, role/probe change or genuine earlier endpoint event remains on the existing event-facing route",
+    "high_strain_descending_epoch": "high strain remains a genuine recursive owner, but consecutive high-strain renewal cannot persist indefinitely: every step pays D_V>=D_*, renews to N_next/N<=3/16 through an actual critical resolved ancestor, and obeys D_j<=N_j G_* for the physical global gradient reservoir G_* even under arbitrary interval overlap; hence every pure high-strain epoch is finite without promoting D_V to a global reset",
+    "signed_good_generated_epoch": "signed-good HH generation remains a genuine recursive owner, but a coefficient obstruction enters this epoch only after actual Q^2/physical-energy reentry selects positive HH child-energy work. A physical heavy-half parent support has width <=25/128 of its parent natural lifetime; strict 3/5<N_parent/N_child<5/8 gives T_next/T>64/25, and H_next subset [s,b] gives s_j-s_(j+1)>=(1792/4875)T_j. Thus required common registration surfaces reach absorbing t=0 after finite consecutive signed-good generated depth. Common surfaces are not event vertices, Duhamel weights are not causal probabilities, and generic non-signed-good HH is not claimed",
+    "universal_time_identity": "sum_j (t_j-t_(j+1)) = t_0-t_L on any ordered physical event or checkpoint times; event counting is a separate ontology",
+    "natural_survivor": "a no-hit full-natural corridor consumes its theorem-supplied physical duration, but its horizon endpoint is an analysis checkpoint unless a first stop or t=0 occurs",
+    "compact_scale_no_escape": "bounded-scale checkpoint segmentation still reaches t=0 by physical time, but the stronger same-carrier quotient makes checkpoint scale paths noncanonical regardless of boundedness: checkpoints do not restart the causal carrier",
+    "infinite_escape_dichotomy": "after zero-charge relays, hard/smooth conservative donor relays, same-corridor service witnesses, natural-horizon checkpoints, same-carrier checkpoint segmentation, and certified sidecar-free inherited-stock continuation are quotiented, any infinite recursive EVENT path avoiding t=0 must contain infinitely many genuine named non-free physical owner events; sidecar-bearing or untyped inheritance remains event-facing; the physical 3/16 high-strain descent plus the global gradient reservoir additionally forbids the path from eventually consisting only of high-strain critical-dissipation renewals, while signed-good actual HH generation has a separate parabolic common-surface telescope which forbids an eventually-pure signed-good generated tail",
+    "uv_obstruction": "time alone still allows a geometrically UV-growing sequence of checkpoint state readings with finite total natural-window duration, but after the same-carrier segmentation quotient that sequence is not a canonical physical lineage or master obstruction; genuine UV progression requires independently certified physical tail work/dissipation provenance",
+    "scale_progress": {
+      "generated_signed_good_hh_parent": {
+        "supplier": "generated_signed_good_hh_parent",
+        "ratio_lower": 0.6,
+        "ratio_upper": 0.625,
+        "lower_strict": true,
+        "upper_strict": true,
+        "directional_progress": "strictly_to_lower_frequency",
+        "physical_meaning": "actual signed-good HH parent role; T_parent/T_child is in (64/25,25/9)"
+      },
+      "resolved_dissipation_ancestor": {
+        "supplier": "resolved_dissipation_ancestor",
+        "ratio_lower": null,
+        "ratio_upper": 0.25,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "to_lower_frequency",
+        "physical_meaning": "actual resolved D_V shell satisfies M<=N/4; natural lifetime is at least 16 times longer"
+      },
+      "resolved_pressure_pair_shell": {
+        "supplier": "resolved_pressure_pair_shell",
+        "ratio_lower": null,
+        "ratio_upper": 0.25,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "to_lower_frequency",
+        "physical_meaning": "actual resolved pressure pair lies inside V=S_(N/4)u and supplies a u hard shell M<=N/4"
+      },
+      "fresh_sgs_scale_shell": {
+        "supplier": "fresh_sgs_scale_shell",
+        "ratio_lower": null,
+        "ratio_upper": 2.0,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "no_directional_progress_supplied",
+        "physical_meaning": "refinement-invariant low/base LP pushforward gives one of two hard shells with M<=2N; no lower ratio is certified"
+      },
+      "high_tail_hard_shell": {
+        "supplier": "high_tail_hard_shell",
+        "ratio_lower": 2.0,
+        "ratio_upper": null,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "to_higher_frequency",
+        "physical_meaning": "hard-tail support gives M/N>=2 and T_M/T_N<=1/4"
+      },
+      "generic_critical_shell_corridor": {
+        "supplier": "generic_critical_shell_corridor",
+        "ratio_lower": null,
+        "ratio_upper": null,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "no_supplier_relative_scale_progress",
+        "physical_meaning": "generic shell theorem gives named first stop / t=0 / full own-scale service; A=3M/4 is analysis registration, not master scale progress"
+      },
+      "material_reuse_or_service": {
+        "supplier": "material_reuse_or_service",
+        "ratio_lower": null,
+        "ratio_upper": null,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "no_scale_progress_without_external_epoch_geometry",
+        "physical_meaning": "full-natural own-scale service is a same-corridor witness; genuinely independent material reuse or source-service ownership is physical ancestry routing. No scale progress is inferred without a separate PDE theorem"
+      },
+      "hh_regeneration_owner": {
+        "supplier": "hh_regeneration_owner",
+        "ratio_lower": null,
+        "ratio_upper": null,
+        "lower_strict": false,
+        "upper_strict": false,
+        "directional_progress": "no_scale_progress_until_physical_HH_owner_is_resolved",
+        "physical_meaning": "coefficient regeneration is only an earlier-generation obstruction until re-entered through actual positive HH work"
+      }
+    },
+    "bellman_coordinate": "there is no canonical scalar exchange rate between log scale, physical work, service/reuse and global resources; the natural master ledger is typed/direct-product. Physical time and actual log shell scale telescope kinematically, while transfer cost, causal reuse and each genuinely global resource telescope only on their own physical laws",
+    "service_semantics": "own-scale service produced by a completed full-natural shell corridor is a same-interval physical witness and adds zero recursion depth; material rereading of that same law is also a witness relay. Independent source/service/reuse events remain physical owners. No service observable is promoted to an additive globally bounded currency",
+    "diagnostic_separation": "fresh-scale H_inf/H2 and high-tail scale/time concentration coordinates remain conjugate lower-bound diagnostics; they are not causal Shannon/Renyi action and cannot be inserted into the causal ledger",
+    "boundary": "t=0 is absorbing",
+    "scope": "this is a continuum master assembly/quotient theorem, not a global no-escape or Navier-Stokes regularity proof; checkpoint segmentation, eventually-pure high-strain recurrence, and eventually-pure signed-good generated-HH recurrence are no longer independent escape seams, while mixed recurrence and generic non-signed-good HH/high-tail recurrence remain open"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_owner_mass_residual": 0.0,
+    "worst_time_telescope_residual": 1.7763568394002505e-15,
+    "worst_scale_telescope_residual": 1.7763568394002505e-15,
+    "bounded_scale_boundary_failures": 0,
+    "supplier_scale_failures": 0,
+    "coefficient_obstruction_barrier_failures": 0,
+    "service_witness_barrier_failures": 0,
+    "checkpoint_barrier_failures": 0,
+    "checkpoint_segmentation_barrier_failures": 0,
+    "smooth_relink_recursion_barrier_failures": 0,
+    "inherited_stock_recursion_barrier_failures": 0,
+    "high_strain_epoch_telescope_failures": 0,
+    "signed_good_generated_epoch_telescope_failures": 0,
+    "maximum_relay_owner_count": 8,
+    "minimum_uv_time_gap_to_naive_infinite_sum": 4.3197628809686856e-05
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "executed": [
+    {
+      "command": "python -m src.same_carrier_inherited_energy_relay --samples 50000 --seed 2026081304 --outdir results-integration/same-carrier-inherited-energy-relay",
+      "fingerprint": "fe81c5c1b4c931de594b6855be869d85340f541c853c929d6c57143e32a270c2",
+      "node_id": "same_carrier_inherited_energy_relay"
+    },
+    {
+      "command": "python -m src.material_sidecar_stock_owner_decomposition --samples 50000 --seed 2026081305 --outdir results-integration/material-sidecar-stock-owner-decomposition",
+      "fingerprint": "25d21a6d7c41d1e7637bc682bef7d1054578580674de2ee37c6296a59f32c28f",
+      "node_id": "material_sidecar_stock_owner_decomposition"
+    }
+  ],
+  "schema": 1,
+  "shard": 5
+}

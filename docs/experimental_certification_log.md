@@ -18,6 +18,7 @@ Historical detail through the radial theorem is preserved verbatim in `docs/hist
 - resolved-contact native binding: `476760236e197d614d5bb211b438e49701652f67`
 - pure-UV true-upward natural-window binding: `e7b302f3590bbddb83b3d9bd9e8c213b5ada8b4e`
 - same-carrier inherited-energy relay: `ae13f9c838878f50c496b9a3e8b22d680ab789e3`
+- material-sidecar / inherited-stock owner decomposition: `c39f70ed3e9f4edfc08e23b996ba872d91c63ed6`
 
 For complete historical run IDs and metrics of the earlier entries, use the archived full ledger above.
 
@@ -142,4 +143,33 @@ Stored trees:
 The master route is deliberately conservative: no certificate -> legacy inheritance owner; any material sidecar -> legacy event-facing route; sidecar-free typed certificate -> between-time stock relay with zero generation depth.  Central wiring additionally binds the master stock mass to certified `E0`, and the theorem projection binds gate value/threshold and classified residual work.  The stock label cannot enter `PhysicalOwnerBundle`.
 
 Failure lineage: initial wiring `ba12982e959db751bbb8c88fe68c1d8c399cde90` suppressed nine legacy push watchers via `[skip ci]` and was manually dispatched.  Dedicated succeeded, but audit/v2 were canceled after post-gate review found the missing master-mass=`E0` binding.  Repair `077ec27...` only strengthened that charge identity; no physical threshold, PDE equation, sample count, numerical PDE tolerance, sidecar rule or event rule was relaxed.
+
+## Material-sidecar / inherited-stock owner decomposition — exact certification
+
+Exact theorem SHA: `c39f70ed3e9f4edfc08e23b996ba872d91c63ed6`.
+
+Serious gates on that exact SHA:
+
+- dedicated `31678779916` — **success**; focused theorem/dependency tests, `75,000` exact sidecar/stock registrations, and two-representation actual Fourier--Galerkin NS referee;
+- independent audit `31678779930` — **success**; `100,000` exact registrations and opposite-phase lower-amplitude actual NS audit;
+- physical-energy causal integration v2 `31678801395` — **success**; `948` tests; master `20,000` traces with worst margin `0.0`; planner `61` nodes = `58` exact-content reuse + `3` execute on shards `4,5`; all `61` results present and all `58` reused outputs byte/digest verified.
+
+Stored exact-SHA artifact trees and deterministic digests:
+
+- `recorded-results/31678779916/` — `sha256:3c0d9fa503c0b588540c30d0c7361952beb4e17b70c6a426ffc554bbb1919a90`;
+- `recorded-results/31678779930/` — `sha256:91859b2d5dbeeea0e4151f6749c28c98f560c4b9f192a4d9207f0c473071007f`;
+- `recorded-results/31678801395/` — `sha256:1ff70668c4d1b0af01e6ad8800f8db30d34690091a2ca8a46c09449a784e0f06`.
+
+GitHub aggregate v2 artifact digest was `sha256:e3a3a6163983b89a764ac57633f8c882cc27abccaed149d2a8834c12e5444100`; the aggregate directory's deterministic unpacked tree digest is `sha256:765d3e0349ab6b26a67c6c0180cfd2c7481f1f69294be02f85c5b681039235cc`.
+
+Dedicated `75,000` states: membership / selected-family / mixed `50,000 / 50,000 / 25,000`; selected-family `relink_symmetric_difference` service branches `25,000`; positive-charge same-state switches `50,000`; zero membership-charge violations; Moyal-charge, inherited-stock-mass and same-state-increment native residuals all exactly `0`; smooth `K_phys` identifications `0`.  Independent `100,000` states: corresponding counts `66,667 / 66,666 / 33,333`, service branches `33,333`, positive same-state switches `66,666`, and the same zero residual/identification results.
+
+The actual NS lanes deliberately reuse the physical same-carrier Fourier--Galerkin solver rather than inventing a material PDE.  Dedicated amplitude-1 on physical carrier `(7,6,5), s=+1` gave stock `1 -> 1.00240956249`, gross nonlinear work `0.0100088487847 / 0.000991283878665`, viscous loss `0.00660800248318`, modal continuity residual `6.253e-11`, and global energy residual `2.963e-12`.  Independent amplitude-0.5 opposite-phase gave `0.25 -> 0.245853600709`, work `0.000182591040316 / 0.00187455879673`, viscosity `0.00245443154604`, residuals `4.761e-11 / 2.614e-11`.
+
+Failure/correction lineage:
+
+- candidate `43dc6b22ae7920d19ca14bffafab512934496308` referenced a nonexistent `coherent_ledger` helper.  CI failed at import/collection.  The repair removed that artificial abstraction entirely: the anti-theorem now compares two literally identical coherent states, computes zero cell increments before any sign split, and reconstructs `R_switch` directly from the exact Moyal symmetric-difference energy.
+- candidate `3e5ffdef7d2c31ca1489d044f1678a35e8900fce` passed focused tests but the random stress found a downstream representation mismatch at tiny `R_switch`: the consumer had replaced the source theorem's floating tolerance `3e-13*max(1,R,|jump|)` by an `R`-relative check.  Final `c39f70e...` revalidates the source certificate with its native tolerance and margin identity, then still exact-binds the stored sidecar charge to `R_switch`.  No source theorem tolerance, PDE equation, sample count, Hahn law, causal unit, or owner threshold was weakened.
+
+The theorem-level conclusion is intentionally narrow: intrinsic membership is zero-charge provenance; selected-family `R_switch` is a positive Moyal selected-service boundary currency which can be positive while the physical state has zero increment, so the boundary charge itself has zero generation depth.  It is not `dW`, stock `E0`, a second coefficient impulse, or smooth `K_phys`.  Genuine material/source recurrence still requires independent physical service/source evidence.  No global-regularity claim is made.
 
