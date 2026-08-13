@@ -248,8 +248,17 @@ def material_sidecar_stock_decomposition(
                 float(selected_family_switch_certificate.get("symmetric_difference_energy", math.nan)),
                 "exact Moyal symmetric-difference energy",
             )
+            jump = float(selected_family_switch_certificate.get("selection_energy_jump", math.nan))
             margin = float(selected_family_switch_certificate.get("jump_bound_margin", math.nan))
-            if not changed or not math.isfinite(margin) or margin < -5.0e-13 * max(exact, 1.0e-300):
+            source_tol = 3.0e-13 * max(1.0, exact, abs(jump))
+            identity_tol = 5.0e-13 * max(1.0, exact, abs(jump))
+            if (
+                not changed
+                or not math.isfinite(jump)
+                or not math.isfinite(margin)
+                or margin < -source_tol
+                or abs(margin - (exact - abs(jump))) > identity_tol
+            ):
                 raise TypeError("selected-family Moyal certificate is not an admissible changed-family charge")
             if not _relative_match(exact, family_energy):
                 raise TypeError("inherited-stock certificate lost the exact selected-family Moyal charge")

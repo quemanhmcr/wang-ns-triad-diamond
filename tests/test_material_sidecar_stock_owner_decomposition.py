@@ -126,6 +126,24 @@ def test_selected_family_without_exact_switch_certificate_and_charge_transplant_
         material_sidecar_stock_decomposition(stock, selected_family_switch_certificate=other)
 
 
+def test_tiny_selected_family_charge_uses_the_source_moyal_roundoff_semantics():
+    # The source theorem certifies |jump| <= R_switch with an absolute floating
+    # tolerance 3e-13*max(1,R,|jump|).  Downstream must not silently replace
+    # that by an R-relative tolerance when R is tiny.
+    R = 1.0e-18
+    stock = _stock(_registration(membership=False, family=True, switch_energy=R))
+    jump = R + 2.0e-16
+    switch = {
+        "selected_family_changed": True,
+        "symmetric_difference_energy": R,
+        "selection_energy_jump": jump,
+        "jump_bound_margin": R - abs(jump),
+    }
+    out = material_sidecar_stock_decomposition(stock, selected_family_switch_certificate=switch)
+    assert out.selected_family_switch_energy == pytest.approx(R)
+    assert out.family_switch_moyal_certificate_bound
+
+
 def test_positive_moyal_switch_charge_can_exist_with_identical_coherent_state_and_zero_increments():
     energies = [0.4, 1.1, 2.3, 0.7]
     anti = same_state_selected_family_switch_anti_theorem(energies, {0, 1}, {1, 2, 3})
