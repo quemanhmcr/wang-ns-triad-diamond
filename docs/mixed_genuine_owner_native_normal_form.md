@@ -82,3 +82,9 @@ No lexicographic branch is chosen. For an actual source stop:
 Thus a coarse source stop which is purely local/viscous does **not** survive as an independent source root in the native normal form. A pressure/SGS owner is deliberately not erased merely because a symbolic compiler exists. Exact local/SGS or viscous/pressure ties retain both native classes.
 
 This is a refinement of the owner of the **same first-stop event**. The source compiler, the generated critical shell, and any same-corridor service witness do not create additional recursion vertices.
+
+## Dominant pressure-pair source is an eventually-pure closed subepoch
+
+The companion draft `dominant_pressure_pair_descending_epoch_telescope.md` uses the certified pressure-pair supplier ratio `N_next/N<=1/4` together with the actual quarter-dominant hard-shell lower `mu_child>=80 Sigma_P/c`. Under the uniform objective pressure-owner floor and global kinetic-energy upper, every selected child frequency has a positive physical lower. Hence a **consecutive quarter-dominant resolved pressure-pair epoch is finite**.
+
+This does not remove the coarse source/service root from the mixed normal form: diffuse pressure-pair renewal and fresh SGS scale renewal remain source-service mechanisms, and pressure `H2` is not promoted to a terminal cost.
