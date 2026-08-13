@@ -463,10 +463,10 @@ def stress(samples: int = 75_000, seed: int = 2026081303) -> PureUVNaturalWindow
             rr = mode_radius(flow.recipient_child_mode)
             if rr <= rd:
                 continue
+            recipient_slot = triad.slot_for_closed_mode_index(flow.recipient_closed_mode_index)
             parent_radii = tuple(
-                mode_radius(mode)
-                for mode in triad.modes
-                if mode != flow.recipient_child_mode
+                mode_radius(triad.modes[index])
+                for index in recipient_slot.parent_closed_indices
             )
             if len(parent_radii) != 2:
                 raise AssertionError("closed-triad recipient lost its two interaction parents")
