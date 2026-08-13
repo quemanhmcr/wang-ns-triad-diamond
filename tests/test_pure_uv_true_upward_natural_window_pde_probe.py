@@ -17,5 +17,7 @@ def test_actual_galerkin_pure_uv_law_is_first_shell_single_charged_and_represent
     assert out.minimum_cutoff_support_margin > 0.0
     assert out.maximum_scale_probability_residual == 0.0
     assert out.coexistence_with_resolved_contact_observed
+    assert out.minimum_initial_deep_contact_work > 0.0
+    assert out.minimum_initial_coexisting_pure_uv_work > 0.0
     assert all(o.recipient_shell_index == 1 and o.p_scale == 1.0 for o in out.observations)
     assert out.upstream_probe.maximum_pure_support_work_representation_native_residual <= 5e-8

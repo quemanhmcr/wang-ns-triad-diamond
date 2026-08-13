@@ -75,6 +75,8 @@ class PureUVNaturalWindowPDEProbe:
     minimum_cutoff_support_margin: float
     maximum_scale_probability_residual: float
     coexistence_with_resolved_contact_observed: bool
+    minimum_initial_deep_contact_work: float
+    minimum_initial_coexisting_pure_uv_work: float
 
     def __post_init__(self) -> None:
         if self.status != STATUS or self.theorem_status != THEOREM_STATUS:
@@ -89,6 +91,8 @@ class PureUVNaturalWindowPDEProbe:
             raise AssertionError("pure-UV actual PDE law acquired p_scale != 1")
         if not self.coexistence_with_resolved_contact_observed:
             raise AssertionError("actual NS fixture lost simultaneous pure-UV/contact upward phenomena")
+        if self.minimum_initial_deep_contact_work <= 0.0 or self.minimum_initial_coexisting_pure_uv_work <= 0.0:
+            raise AssertionError("actual deep-contact NS trajectory lost one side of the coexisting upward support phenomena")
 
 
 def _actual_law_observation(*, resolution: int, cutoff: int, amplitude: float, radial_boundary: float) -> ActualPureUVLawObservation:
@@ -170,7 +174,13 @@ def run_probe(
     spread = _relative_spread([o.pure_uv_common_work for o in obs])
     min_margin = min(o.minimum_parent_above_quarter_shell_margin for o in obs)
     p_residual = max(abs(o.p_scale - 1.0) for o in obs)
-    coexist = all(o.pure_uv_work > 0.0 and o.resolved_contact_work > 0.0 for o in upstream.selected_pure_support)
+    # Coexistence is an atomwise phenomenon of the certified deep six-mode
+    # trajectory, not a requirement on the separate selected pure-support
+    # observation.  Read it from the physical run where both branches are known
+    # to occur simultaneously.
+    minimum_deep = min(r.initial_deep_upward_work for r in upstream.deep_contact_runs)
+    minimum_coexisting_pure = min(r.initial_pure_uv_work for r in upstream.deep_contact_runs)
+    coexist = minimum_deep > 0.0 and minimum_coexisting_pure > 0.0
     return PureUVNaturalWindowPDEProbe(
         status=STATUS,
         theorem_status=THEOREM_STATUS,
@@ -180,6 +190,8 @@ def run_probe(
         minimum_cutoff_support_margin=min_margin,
         maximum_scale_probability_residual=p_residual,
         coexistence_with_resolved_contact_observed=coexist,
+        minimum_initial_deep_contact_work=minimum_deep,
+        minimum_initial_coexisting_pure_uv_work=minimum_coexisting_pure,
     )
 
 
@@ -230,6 +242,7 @@ def main() -> None:
         f"- minimum physical parent margin above M/4: `{out.minimum_cutoff_support_margin:.12g}`",
         f"- maximum p_scale residual: `{out.maximum_scale_probability_residual:.3e}`",
         f"- pure/contact coexistence observed: `{out.coexistence_with_resolved_contact_observed}`",
+        f"- minimum initial deep-contact / coexisting pure-UV work: `{out.minimum_initial_deep_contact_work:.12g}` / `{out.minimum_initial_coexisting_pure_uv_work:.12g}`",
         f"- upstream pure-support representation residual: `{out.upstream_probe.maximum_pure_support_work_representation_native_residual:.3e}`",
     ]
     for o in out.observations:
