@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 'theorem/resolved-contact-native-binding'
+      - 'theorem/resolved-contact-native-binding-tv'
 
 permissions:
   contents: read
@@ -25,6 +25,7 @@ jobs:
           pytest -q
           tests/test_resolved_contact_native_binding.py
           tests/test_hard_tail_true_upward_supply.py
+          tests/test_continuum_helical_edge_measure_registration.py
           tests/test_resolved_interface_donor_quotient.py
           tests/test_high_tail_natural_window_reentry.py
       - name: Independent 100k native-binding stress

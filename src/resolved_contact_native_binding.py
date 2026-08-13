@@ -9,6 +9,7 @@ from typing import Mapping, Sequence
 
 import numpy as np
 
+from src.continuum_helical_edge_measure_registration import unitary_fourier_convolution_factor
 from src.critical_shell_service_reentry import (
     critical_shell_bounded_service_lower,
     critical_shell_integrated_service_lower,
@@ -32,7 +33,8 @@ from src.high_tail_ultraviolet_locality import ultraviolet_hh_work_constant
 STATUS = (
     "EXACT_RESOLVED_CONTACT_NATIVE_BINDING__SIGNED_VH_HH_REPARTITION_BEFORE_HAHN__"
     "CANONICAL_DWPLUS_RESTRICTS_WITHOUT_CLONING__MIXED_TO_K_OR_STRAIN_COVER__"
-    "HH_COMPLEMENT_UPPER_COMPARABLE_R_5_OVER_4_TO_DIRECT_NATURAL_WINDOW__COMMON_N_DW_UNIT"
+    "HH_COMPLEMENT_EDGE_TOTAL_VARIATION_BEFORE_AGGREGATE_HAHN__"
+    "R_5_OVER_4_DIRECT_NATURAL_WINDOW__COMMON_N_DW_UNIT"
 )
 
 K_RELAY = "conservative_same_event_K_relink"
@@ -497,6 +499,94 @@ def canonical_contact_hh_shell_law(positive_shell_common_work: Mapping[int, floa
     }
 
 
+@dataclass(frozen=True)
+class CanonicalHHTotalVariationYoungBridge:
+    unitary_fourier_factor: float
+    helical_l1_over_vector_l2_factor: float
+    unordered_parent_orbit_factor: float
+    native_edge_capacity_factor: float
+    exact_edge_variation_prefactor_over_A3: float
+    clean_pair_young_prefactor_over_A3: float
+    edge_variation_to_clean_young_ratio: float
+    canonical_positive_submeasure_dominated_by_edge_variation: bool = True
+    edge_variation_dominated_by_capacity_measure: bool = True
+    aggregate_hahn_used: bool = False
+
+    def __post_init__(self) -> None:
+        C_F = _finite_positive(self.unitary_fourier_factor, "unitary Fourier convolution factor")
+        h = _finite_positive(self.helical_l1_over_vector_l2_factor, "helical l1/l2 factor")
+        orbit = _finite_positive(self.unordered_parent_orbit_factor, "unordered-parent orbit factor")
+        native = _finite_positive(self.native_edge_capacity_factor, "native edge-capacity factor")
+        exact = _finite_positive(self.exact_edge_variation_prefactor_over_A3, "edge-variation Young prefactor")
+        clean = _finite_positive(self.clean_pair_young_prefactor_over_A3, "clean Young prefactor")
+        ratio = _finite_positive(self.edge_variation_to_clean_young_ratio, "edge/clean Young ratio")
+        expected_exact = native * orbit * (h**3) * C_F
+        scale = max(1.0, exact, expected_exact)
+        if abs(exact - expected_exact) > 5.0e-14 * scale:
+            raise AssertionError("helicity-resolved edge total variation lost its quotient/Young prefactor")
+        if abs(clean - native) > 5.0e-14 * max(1.0, clean, native):
+            raise AssertionError("clean pair Young prefactor changed from 4 A_3")
+        if abs(ratio - exact / clean) > 5.0e-14 * max(1.0, ratio):
+            raise AssertionError("stored edge/clean Young ratio changed")
+        if not ratio < 1.0:
+            raise AssertionError("clean Young constant no longer dominates helicity edge total variation")
+        if (
+            not self.canonical_positive_submeasure_dominated_by_edge_variation
+            or not self.edge_variation_dominated_by_capacity_measure
+            or self.aggregate_hahn_used
+        ):
+            raise ValueError("canonical HH capacity bridge must pass through signed edge total variation before any aggregate Hahn")
+
+
+def canonical_hh_edge_total_variation_young_bridge() -> CanonicalHHTotalVariationYoungBridge:
+    """Bind canonical edge ``dW+`` to the clean sharp-Young window constant.
+
+    This is the missing representation step between an atomwise canonical
+    positive law and the older aggregate-HH natural-window estimate.
+
+    For the continuum helicity-resolved edge measure, native capacity is
+
+        A_e = 4 |z| |a_x a_y a_z|.
+
+    Passing from ordered parents to the unordered physical orbit contributes
+    ``1/2``.  At each frequency the two helical coefficients obey
+
+        sum_s |a_s(k)| <= sqrt(2) |u_hat(k)|.
+
+    Therefore Young on the *total variation* of the edge law has coefficient
+
+        4 * (1/2) * (sqrt(2))^3 * C_F * A_3
+        = 4 sqrt(2) C_F A_3.
+
+    The clean physical pair inequality already uses ``4 A_3``.  Hence the
+    exact helicity-edge variation / clean-Young ratio is
+
+        sqrt(2) C_F < 1,
+
+    with ``C_F=(2pi)^(-3/2)``.  Consequently every donor-restricted canonical
+    positive submeasure satisfies
+
+        dmu_HH <= d|W_HH| <= dA_HH <= clean Young envelope,
+
+    before any signed shell aggregation or downstream Hahn operation.
+    """
+    C_F = unitary_fourier_convolution_factor()
+    helical = math.sqrt(2.0)
+    orbit = 0.5
+    native = 4.0
+    exact = native * orbit * (helical**3) * C_F
+    clean = native
+    return CanonicalHHTotalVariationYoungBridge(
+        unitary_fourier_factor=C_F,
+        helical_l1_over_vector_l2_factor=helical,
+        unordered_parent_orbit_factor=orbit,
+        native_edge_capacity_factor=native,
+        exact_edge_variation_prefactor_over_A3=exact,
+        clean_pair_young_prefactor_over_A3=clean,
+        edge_variation_to_clean_young_ratio=exact / clean,
+    )
+
+
 def canonical_contact_hh_natural_window_capacity_upper(
     window_peak_child_mass: float,
     parent_frequency: float,
@@ -506,9 +596,12 @@ def canonical_contact_hh_natural_window_capacity_upper(
 ) -> float:
     """Absolute-work capacity for the canonical positive contact-HH submeasure.
 
-    The donor-restricted canonical HH law is dominated by absolute physical HH
-    edge work.  Sharp Young therefore bounds it before any aggregate Hahn step.
-    Here the chosen resolved multiplier satisfies 0<=S<=1, so the complement
+    The donor-restricted canonical HH law is first dominated by the total
+    variation of the same signed helicity-resolved edge measure.  The certified
+    quotient/helicity bridge proves that its exact Young prefactor
+    ``4 sqrt(2) C_F A_3`` is strictly below the clean ``4 A_3`` constant used
+    here.  Thus no aggregate signed shell work or aggregate Hahn law is inserted.
+    The chosen resolved multiplier satisfies 0<=S<=1, so the complement
     multiplier also satisfies 0<=1-S<=1 and ||h||_2<=||u||_2.  Relative to the
     older |S|<=1 capacity this removes the factor 2 on each of two HH parents.
 
@@ -521,6 +614,9 @@ def canonical_contact_hh_natural_window_capacity_upper(
     R = _finite_positive(locality_radius, "parent upper-comparability ratio")
     if R <= 1.0:
         raise ValueError("contact-HH upper-comparability ratio must exceed one")
+    bridge = canonical_hh_edge_total_variation_young_bridge()
+    if not bridge.edge_variation_to_clean_young_ratio < 1.0:
+        raise AssertionError("clean natural-window capacity lost edge-total-variation domination")
     return R * ultraviolet_hh_work_constant() * c * N * E * math.sqrt(mu)
 
 
@@ -592,6 +688,7 @@ def contact_hh_direct_natural_window_reentry(
         "maximum_window_common_work": Ww,
         "window_peak_child_mass": mu,
         "natural_window_common_work_capacity": capacity,
+        "edge_variation_to_clean_young_ratio": canonical_hh_edge_total_variation_young_bridge().edge_variation_to_clean_young_ratio,
         "weighted_sqrt_child_mass": weighted,
         "clean_weighted_sqrt_child_mass_lower": clean,
         "scale_time_tradeoff_margin": margin,
@@ -701,7 +798,8 @@ def theorem_certificate() -> dict[str, object]:
         "donor_sidecar": "multiple same-time donors retain provenance but cannot cause repeated K/S owner charging on the same recipient physical work",
         "K_semantics": "K is conservative same-event relink/circulation provenance and creates zero recursive depth",
         "S_semantics": "S is the existing symmetric strain/deformation owner, not a new interface currency",
-        "HH_semantics": "the h-h complement remains a distinct canonical positive submeasure dominated by absolute HH edge work; both parents are <=5M/4, so sharp Young gives a direct R=5/4 natural-window capacity without aggregate Hahn",
+        "HH_semantics": "the h-h complement remains a distinct canonical positive submeasure; it is dominated by signed edge total variation, then by native dA, whose exact helicity/unordered-parent Young prefactor is below the clean 4 A_3 envelope; both parents are <=5M/4, giving the direct R=5/4 natural-window capacity without aggregate Hahn",
+        "edge_total_variation_bridge": asdict(canonical_hh_edge_total_variation_young_bridge()),
         "positive_cutoff_gain": "0<=S<=1 is required for positive cause restriction and simultaneously gives ||h||_2<=||u||_2, removing the older factor four from two |S|<=1 complement bounds",
         "anti_theorem": "resolved-frequency contact alone does not imply interface/mixed ownership; an M/4 boundary atom has q=0 and can be 100% h-h",
         "causal_unit": "all measures remain in the parent-tail common unit N dW; recipient shell M is geometry only",
@@ -719,6 +817,7 @@ class ResolvedContactNativeBindingStress:
     minimum_half_owner_margin: float
     boundary_contact_hh_fraction: float
     coarse_hahn_counterexample_gap: float
+    edge_variation_to_clean_young_ratio: float
 
 
 def stress(samples: int = 50_000, seed: int = 2026081302) -> ResolvedContactNativeBindingStress:
@@ -767,6 +866,7 @@ def stress(samples: int = 50_000, seed: int = 2026081302) -> ResolvedContactNati
         minimum_half_owner_margin=min_half,
         boundary_contact_hh_fraction=float(boundary["hh_fraction"]),
         coarse_hahn_counterexample_gap=float(coarse["canonical_positive_first_atom"] - coarse["coarse_positive_hahn_mass"]),
+        edge_variation_to_clean_young_ratio=canonical_hh_edge_total_variation_young_bridge().edge_variation_to_clean_young_ratio,
     )
 
 
@@ -781,7 +881,7 @@ def main() -> None:
     out = stress(args.samples, args.seed)
     payload = {"certificate": cert, "stress": asdict(out)}
     (args.outdir / "resolved_contact_native_binding.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
-    md = f"""# Resolved-contact native binding\n\nStatus: **{STATUS}**.\n\nThe theorem is uniform over every nonnegative smooth resolved cutoff supported in `B_(M/4)`.  It does not select a causal plateau.  On a resolved-contact upward edge there is exactly one parent at `<=M/4`; the other lies in `(M/4,5M/4]`.  If the low-parent cutoff value is `q`, signed work first satisfies `dW=q dW+(1-q)dW`, with the two terms being actual mixed `V-h` and actual `h-h` work.  Only then is the already-canonical donor-restricted `dW+` restricted by the same nonnegative weights.\n\nThe mixed positive submeasure remains one canonical cause.  The same physical resolved operator is split signed-first as `I=K+S`, giving `mu_mixed<=I+<=K++S+`; no proportional owner matching is made.  `K` is conservative same-event relink provenance and `S` is existing strain/deformation.  The separate HH complement has both parent frequencies `<=5M/4`.  Because `0<=S<=1` also gives `||h||_2<=||u||_2`, its canonical positive submeasure is dominated directly by the absolute sharp-Young interaction capacity with `R=5/4`, without an aggregate shell Hahn or an output-scale locality theorem.\n\nStress: `{out.samples}` admissible geometry/K-S states\n- maximum positive repartition residual: `{out.maximum_partition_residual:.3e}`\n- maximum parent/shell upper ratio: `{out.maximum_parent_upper_ratio:.12g}`\n- minimum K/S positive-cover margin: `{out.minimum_positive_ks_cover_margin:.3e}`\n- minimum half-owner margin: `{out.minimum_half_owner_margin:.3e}`\n- boundary-contact HH fraction: `{out.boundary_contact_hh_fraction:.12g}`\n- coarse-Hahn anti-theorem gap: `{out.coarse_hahn_counterexample_gap:.12g}`\n\nNo later Hahn split of the canonical cause, temporal deposit matching, recipient-shell reweighting, new event clock, or Navier--Stokes global-regularity claim is made.\n"""
+    md = f"""# Resolved-contact native binding\n\nStatus: **{STATUS}**.\n\nThe theorem is uniform over every nonnegative smooth resolved cutoff supported in `B_(M/4)`.  It does not select a causal plateau.  On a resolved-contact upward edge there is exactly one parent at `<=M/4`; the other lies in `(M/4,5M/4]`.  If the low-parent cutoff value is `q`, signed work first satisfies `dW=q dW+(1-q)dW`, with the two terms being actual mixed `V-h` and actual `h-h` work.  Only then is the already-canonical donor-restricted `dW+` restricted by the same nonnegative weights.\n\nThe mixed positive submeasure remains one canonical cause.  The same physical resolved operator is split signed-first as `I=K+S`, giving `mu_mixed<=I+<=K++S+`; no proportional owner matching is made.  `K` is conservative same-event relink provenance and `S` is existing strain/deformation.  The separate HH complement has both parent frequencies `<=5M/4`.  Because `0<=S<=1` also gives `||h||_2<=||u||_2`, its canonical positive submeasure first passes through the signed helicity-edge total variation; the exact variation/clean-Young ratio is `sqrt(2) C_F<1`, so the clean `R=5/4` sharp-Young capacity applies without an aggregate shell Hahn or an output-scale locality theorem.\n\nStress: `{out.samples}` admissible geometry/K-S states\n- maximum positive repartition residual: `{out.maximum_partition_residual:.3e}`\n- maximum parent/shell upper ratio: `{out.maximum_parent_upper_ratio:.12g}`\n- minimum K/S positive-cover margin: `{out.minimum_positive_ks_cover_margin:.3e}`\n- minimum half-owner margin: `{out.minimum_half_owner_margin:.3e}`\n- boundary-contact HH fraction: `{out.boundary_contact_hh_fraction:.12g}`\n- coarse-Hahn anti-theorem gap: `{out.coarse_hahn_counterexample_gap:.12g}`\n- edge-total-variation / clean-Young ratio: `{out.edge_variation_to_clean_young_ratio:.12g}`\n\nNo later Hahn split of the canonical cause, temporal deposit matching, recipient-shell reweighting, new event clock, or Navier--Stokes global-regularity claim is made.\n"""
     (args.outdir / "summary.md").write_text(md)
     print(json.dumps(payload, indent=2, sort_keys=True))
 

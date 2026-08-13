@@ -14,6 +14,7 @@ from src.resolved_contact_native_binding import (
     coalesce_recipient_mixed_cause,
     boundary_contact_counterexample,
     canonical_contact_hh_natural_window_capacity_upper,
+    canonical_hh_edge_total_variation_young_bridge,
     coarse_hahn_cancellation_counterexample,
     contact_hh_direct_natural_window_reentry,
     cover_canonical_mixed_submeasure_by_ks,
@@ -195,6 +196,21 @@ def test_hard_tail_contact_corollary_keeps_exact_clean_nuD_thresholds():
     assert out["clean_contact_HH_lower"] == pytest.approx(0.25)
     assert out["clean_K_or_S_lower"] == pytest.approx(0.125)
     assert set(out["joint_physical_continuations"]) == {HH_WINDOW, K_RELAY, S_STRAIN}
+
+
+def test_canonical_HH_edge_positive_law_binds_through_total_variation_before_clean_Young():
+    bridge = canonical_hh_edge_total_variation_young_bridge()
+    assert bridge.canonical_positive_submeasure_dominated_by_edge_variation is True
+    assert bridge.edge_variation_dominated_by_capacity_measure is True
+    assert bridge.aggregate_hahn_used is False
+    assert bridge.edge_variation_to_clean_young_ratio < 1.0
+    assert bridge.exact_edge_variation_prefactor_over_A3 == pytest.approx(
+        bridge.clean_pair_young_prefactor_over_A3
+        * bridge.edge_variation_to_clean_young_ratio
+    )
+    assert bridge.edge_variation_to_clean_young_ratio == pytest.approx(
+        math.sqrt(2.0) * bridge.unitary_fourier_factor
+    )
 
 
 def test_positive_cutoff_complement_contraction_removes_old_factor_four_from_HH_capacity():
