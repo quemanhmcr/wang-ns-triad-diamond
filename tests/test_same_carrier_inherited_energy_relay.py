@@ -2,7 +2,7 @@ from dataclasses import replace
 
 import pytest
 
-from src.continuum_master_event_quotient import energy_reentry_master_route
+from src.continuum_master_event_quotient import canonical_owner_bundle, energy_reentry_master_route
 from src.material_label_carrier_quotient import carrier_registration_with_material_sidecars
 from src.physical_energy_causal_bridge import route_physical_energy_causality
 from src.same_carrier_checkpoint_segmentation_quotient import partition_same_carrier_path
@@ -55,6 +55,37 @@ def _relay():
         material_registration=_material(),
         initial_endpoint_is_non_event_carrier_slice=True,
     )
+
+
+def _sidecar_free_relay():
+    return same_carrier_inherited_energy_relay(
+        _segments(),
+        initial_time=1.6,
+        terminal_time=2.0,
+        initial_energy=0.31,
+        terminal_energy=1.0,
+        residual_positive_work=0.12,
+        strain_action=0.02,
+        initial_endpoint_is_non_event_carrier_slice=True,
+    )
+
+
+def _inheritance_reentry(cert=None, *, residual_work=0.12):
+    gate = route_physical_energy_causality(
+        terminal_energy=1.0,
+        initial_energy=0.31,
+        residual_positive_work=residual_work,
+        strain_action=0.02,
+    )
+    out = {
+        **gate,
+        "coefficient_impulse_used_as_physical_work": False,
+        "observer_partition_motion_charged_as_physics": False,
+        "classified_residual_positive_work": residual_work,
+    }
+    if cert is not None:
+        out["same_carrier_inherited_energy_relay_certificate"] = cert
+    return out
 
 
 def test_certificate_states_stock_not_generation_and_no_temporal_matching():
@@ -147,24 +178,12 @@ def test_named_first_stop_role_change_and_noninheritance_all_fail_closed():
         )
 
 
-def test_typed_master_projection_makes_stock_zero_depth_while_legacy_master_stays_fail_closed():
+def test_typed_master_projection_preserves_sidecars_separately_from_stock():
     cert = _relay()
-    gate = route_physical_energy_causality(
-        terminal_energy=1.0,
-        initial_energy=0.31,
-        residual_positive_work=0.12,
-        strain_action=0.02,
-    )
-    assert gate["branch"] == "material_energy_inheritance"
     projection = same_carrier_inheritance_master_projection(
         "same smooth carrier energy stock",
         0.31,
-        {
-            **gate,
-            "coefficient_impulse_used_as_physical_work": False,
-            "observer_partition_motion_charged_as_physics": False,
-            "classified_residual_positive_work": 0.12,
-        },
+        _inheritance_reentry(residual_work=0.12),
         cert,
     )
     assert projection.between_time_stock_relays == (SAME_CARRIER_INHERITED_STOCK_RELAY,)
@@ -173,20 +192,50 @@ def test_typed_master_projection_makes_stock_zero_depth_while_legacy_master_stay
     assert not projection.stock_recursive_event_created
     assert not projection.sidecars_quotiented_as_stock
 
-    # Until the second-phase central-master wiring is certified, the old API is
-    # deliberately fail-closed and retains untyped inheritance as an owner.
-    legacy = energy_reentry_master_route(
+
+def test_central_master_collapses_only_sidecar_free_typed_inheritance_to_stock_zero_depth():
+    cert = _sidecar_free_relay()
+    route = energy_reentry_master_route(
+        "same smooth carrier inherited stock",
+        0.31,
+        _inheritance_reentry(cert, residual_work=0.12),
+    )
+    assert route.owner_bundle is None
+    assert route.recursive_event_created is False
+    assert route.same_event_relays == ()
+    assert route.between_time_stock_relays == (SAME_CARRIER_INHERITED_STOCK_RELAY,)
+    assert route.same_carrier_inherited_energy_certificate is cert
+
+
+def test_central_master_keeps_sidecar_bearing_typed_inheritance_event_facing_fail_closed():
+    cert = _relay()
+    route = energy_reentry_master_route(
+        "sidecar-bearing inherited carrier branch",
+        0.31,
+        _inheritance_reentry(cert, residual_work=0.12),
+    )
+    assert route.owner_bundle is not None
+    assert route.owner_bundle.owners == ("material_energy_inheritance",)
+    assert route.recursive_event_created is True
+    assert route.between_time_stock_relays == ()
+    assert route.same_carrier_inherited_energy_certificate is None
+
+
+def test_central_master_keeps_untyped_inheritance_event_facing():
+    route = energy_reentry_master_route(
         "untyped inherited carrier energy",
         0.31,
-        {
-            **gate,
-            "coefficient_impulse_used_as_physical_work": False,
-            "observer_partition_motion_charged_as_physics": False,
-        },
+        _inheritance_reentry(),
     )
-    assert legacy.recursive_event_created
-    assert legacy.owner_bundle is not None
-    assert legacy.owner_bundle.owners == ("material_energy_inheritance",)
+    assert route.owner_bundle is not None
+    assert route.owner_bundle.owners == ("material_energy_inheritance",)
+    assert route.recursive_event_created is True
+    assert route.between_time_stock_relays == ()
+
+
+def test_stock_relay_label_cannot_reenter_recursive_owner_bundle():
+    with pytest.raises(TypeError, match="between-time physical stock continuation"):
+        canonical_owner_bundle("bad stock promotion", 0.31, (SAME_CARRIER_INHERITED_STOCK_RELAY,))
 
 def test_genuine_physical_event_at_earlier_endpoint_cannot_be_erased_into_stock_relay():
     with pytest.raises(TypeError):
@@ -235,6 +284,16 @@ def test_stock_projection_rejects_same_endpoint_certificate_from_a_different_res
                 "classified_residual_positive_work": 0.05,
             },
             cert,
+        )
+
+
+def test_central_master_rejects_sidecar_free_certificate_transplanted_to_different_residual_work():
+    cert = _sidecar_free_relay()
+    with pytest.raises(TypeError, match="classified residual physical-work law"):
+        energy_reentry_master_route(
+            "mismatched stock certificate",
+            0.31,
+            _inheritance_reentry(cert, residual_work=0.05),
         )
 
 

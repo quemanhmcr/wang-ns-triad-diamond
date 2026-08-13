@@ -23,6 +23,11 @@ from src.signed_good_generated_epoch_time_telescope import (
 from src.full_natural_checkpoint_quotient import FULL_NATURAL_CHECKPOINT
 from src.full_natural_service_corridor_quotient import FULL_NATURAL_SERVICE_WITNESS
 from src.same_carrier_checkpoint_segmentation_quotient import checkpoint_continuation_policy
+from src.same_carrier_inherited_energy_relay import (
+    SAME_CARRIER_INHERITED_STOCK_RELAY,
+    SameCarrierInheritedEnergyRelayCertificate,
+    same_carrier_inheritance_master_projection,
+)
 from src.smooth_quadratic_carrier_interface import RELINK_OWNER, STRAIN_OWNER, GaugeQuotientedInterfaceWork
 from src.smooth_relink_donor_quotient import (
     SMOOTH_RELINK_SAME_EVENT_RELAY,
@@ -41,6 +46,7 @@ STATUS = (
     "NATURAL_HORIZON_CHECKPOINTS_ZERO_EVENT_DEPTH__"
     "SAME_CARRIER_FIRST_HIT_NOT_RESET_BY_CHECKPOINTS__"
     "SMOOTH_RELINK_SAME_EVENT_DONOR_ZERO_DEPTH__"
+    "SAME_CARRIER_INHERITED_STOCK_ZERO_GENERATION_DEPTH__"
     "CONSECUTIVE_HIGH_STRAIN_EPOCHS_FINITE_BY_PHYSICAL_DISSIPATION__"
     "SIGNED_GOOD_GENERATED_HH_EPOCHS_FINITE_BY_PARABOLIC_TIME__"
     "CHECKPOINT_ZENO_NOT_CANONICAL_LINEAGE__NO_COMMON_CLOCK_OR_CAUSAL_REWEIGHTING"
@@ -54,6 +60,7 @@ COEFFICIENT_OBSTRUCTION_LABELS = frozenset(
 NON_EVENT_CORRIDOR_WITNESS_LABELS = frozenset({FULL_NATURAL_SERVICE_WITNESS})
 NON_EVENT_CHECKPOINT_LABELS = frozenset({FULL_NATURAL_CHECKPOINT})
 NON_EVENT_SAME_EVENT_RELAY_LABELS = frozenset({RELINK_OWNER})
+NON_EVENT_BETWEEN_TIME_STOCK_RELAY_LABELS = frozenset({SAME_CARRIER_INHERITED_STOCK_RELAY})
 
 
 def require_routed_physical_owner_labels(labels: Iterable[str]) -> tuple[str, ...]:
@@ -89,6 +96,12 @@ def require_routed_physical_owner_labels(labels: Iterable[str]) -> tuple[str, ..
             "conservative smooth physical relink is a finite same-event donor relay, not a recursive generation owner: "
             + ", ".join(relay_bad)
         )
+    stock_bad = tuple(sorted(set(out).intersection(NON_EVENT_BETWEEN_TIME_STOCK_RELAY_LABELS)))
+    if stock_bad:
+        raise TypeError(
+            "certified same-carrier inherited energy is between-time physical stock continuation, not a recursive generation owner: "
+            + ", ".join(stock_bad)
+        )
     return out
 
 
@@ -99,14 +112,15 @@ def owner_bundle_from_energy_reentry(
 ) -> "PhysicalOwnerBundle":
     """Compatibility wrapper for energy reentries that leave a recursive owner.
 
-    The canonical API is :func:`energy_reentry_master_route`.  A pure smooth
-    relink reentry is intentionally not representable as a PhysicalOwnerBundle,
-    because its K_phys work is finite same-event donor provenance.
+    The canonical API is :func:`energy_reentry_master_route`.  Pure smooth
+    relink and certified sidecar-free same-carrier inherited stock are intentionally
+    not representable as PhysicalOwnerBundle objects: the first is finite same-event
+    donor provenance and the second is between-time stock continuity.
     """
     route = energy_reentry_master_route(physical_measure, mass, reentry)
     if route.owner_bundle is None:
         raise TypeError(
-            "energy reentry resolves only conservative smooth relink; use energy_reentry_master_route for its same-event donor relay"
+            "energy reentry resolves only a non-event relay; use energy_reentry_master_route for its same-event donor relay or between-time inherited-stock relay"
         )
     return route.owner_bundle
 
@@ -216,19 +230,35 @@ class EnergyReentryMasterRoute:
     mass: float
     owner_bundle: PhysicalOwnerBundle | None
     same_event_relays: tuple[str, ...] = ()
+    between_time_stock_relays: tuple[str, ...] = ()
     smooth_relink_donor_certificate: SmoothRelinkDonorCertificate | None = None
+    same_carrier_inherited_energy_certificate: SameCarrierInheritedEnergyRelayCertificate | None = None
 
     def __post_init__(self) -> None:
         if not self.physical_measure or not math.isfinite(self.mass) or self.mass < 0:
             raise ValueError("valid physical reentry measure and mass required")
         if tuple(sorted(set(self.same_event_relays))) != self.same_event_relays:
             raise ValueError("same-event relay set must be sorted and quotiented")
+        if tuple(sorted(set(self.between_time_stock_relays))) != self.between_time_stock_relays:
+            raise ValueError("between-time stock relay set must be sorted and quotiented")
         if SMOOTH_RELINK_SAME_EVENT_RELAY in self.same_event_relays:
             cert = self.smooth_relink_donor_certificate
             if cert is None or cert.recursive_generation_created or cert.new_causal_charge_created:
                 raise ValueError("smooth relink relay requires a zero-depth donor certificate")
         elif self.smooth_relink_donor_certificate is not None:
             raise ValueError("smooth relink donor certificate supplied without its relay label")
+        if SAME_CARRIER_INHERITED_STOCK_RELAY in self.between_time_stock_relays:
+            if self.owner_bundle is not None:
+                raise ValueError("between-time inherited stock relay may not simultaneously mint a recursive owner bundle")
+            cert = self.same_carrier_inherited_energy_certificate
+            if cert is None:
+                raise ValueError("same-carrier inherited stock relay requires its typed continuity certificate")
+            if cert.material_sidecars:
+                raise ValueError("central stock relay may not erase material sidecars; sidecar-bearing inheritance remains event-facing")
+            if cert.recursive_generation_created or cert.new_causal_charge_created:
+                raise ValueError("same-carrier inherited stock certificate lost zero-generation semantics")
+        elif self.same_carrier_inherited_energy_certificate is not None:
+            raise ValueError("same-carrier inherited-energy certificate supplied without its stock-relay label")
 
     @property
     def recursive_event_created(self) -> bool:
@@ -248,7 +278,9 @@ def energy_reentry_master_route(
 
     branch = str(reentry.get("branch", ""))
     relays: tuple[str, ...] = ()
+    stock_relays: tuple[str, ...] = ()
     donor_cert: SmoothRelinkDonorCertificate | None = None
+    inherited_cert: SameCarrierInheritedEnergyRelayCertificate | None = None
     if branch == "smooth_interface_physical_work":
         owners = tuple(str(x) for x in reentry.get("joint_interface_owners", ()))
         if not owners:
@@ -269,8 +301,34 @@ def energy_reentry_master_route(
                 "unrecognized smooth-interface recursive owner after relink quotient: "
                 + ", ".join(unknown)
             )
+    elif branch == "material_energy_inheritance":
+        candidate = reentry.get("same_carrier_inherited_energy_relay_certificate")
+        if candidate is None:
+            # Backward-compatible fail-closed route: untyped inheritance remains
+            # event-facing until a certified same-carrier stock relay is attached.
+            owners = (branch,)
+        else:
+            if not isinstance(candidate, SameCarrierInheritedEnergyRelayCertificate):
+                raise TypeError("same-carrier inheritance quotient requires its typed relay certificate")
+            if candidate.material_sidecars:
+                # The stock theorem preserves these sidecars, but the central
+                # master does not yet expose a typed downstream ancestry/relink
+                # slot for them.  Keep the whole branch event-facing rather than
+                # silently erasing physical provenance.
+                owners = (branch,)
+            else:
+                projection = same_carrier_inheritance_master_projection(
+                    physical_measure,
+                    mass,
+                    reentry,
+                    candidate,
+                )
+                if projection.sidecar_events:
+                    raise AssertionError("sidecar-free central stock projection unexpectedly acquired sidecars")
+                inherited_cert = candidate
+                stock_relays = projection.between_time_stock_relays
+                owners = ()
     elif branch in {
-        "material_energy_inheritance",
         "high_strain_critical_dissipation",
         "physical_high_high_transfer_generation",
     }:
@@ -280,7 +338,13 @@ def energy_reentry_master_route(
 
     bundle = canonical_owner_bundle(physical_measure, mass, owners) if owners else None
     return EnergyReentryMasterRoute(
-        str(physical_measure), float(mass), bundle, tuple(sorted(relays)), donor_cert
+        physical_measure=str(physical_measure),
+        mass=float(mass),
+        owner_bundle=bundle,
+        same_event_relays=tuple(sorted(relays)),
+        between_time_stock_relays=tuple(sorted(stock_relays)),
+        smooth_relink_donor_certificate=donor_cert,
+        same_carrier_inherited_energy_certificate=inherited_cert,
     )
 
 
@@ -606,7 +670,7 @@ def master_escape_dichotomy() -> dict[str, str]:
     """Analytic infinite-event consequence after checkpoint segmentation is quotiented."""
     return {
         "statement": (
-            "after zero-charge relays, hard/smooth conservative donor relays, same-corridor service witnesses, natural-horizon checkpoints, and same-carrier checkpoint segmentation are quotiented, any infinite recursive EVENT path avoiding t=0 must contain infinitely many genuine named non-free physical owner events; the physical 3/16 high-strain descent plus the global gradient reservoir additionally forbids the path from eventually consisting only of high-strain critical-dissipation renewals, while signed-good actual HH generation has a separate parabolic common-surface telescope which forbids an eventually-pure signed-good generated tail"
+            "after zero-charge relays, hard/smooth conservative donor relays, same-corridor service witnesses, natural-horizon checkpoints, same-carrier checkpoint segmentation, and certified sidecar-free inherited-stock continuation are quotiented, any infinite recursive EVENT path avoiding t=0 must contain infinitely many genuine named non-free physical owner events; sidecar-bearing or untyped inheritance remains event-facing; the physical 3/16 high-strain descent plus the global gradient reservoir additionally forbids the path from eventually consisting only of high-strain critical-dissipation renewals, while signed-good actual HH generation has a separate parabolic common-surface telescope which forbids an eventually-pure signed-good generated tail"
         ),
         "proof": (
             "a no-event natural horizon cannot replace the event-anchored smooth carrier or reset its cumulative strain/coefficient first-hit monitors. Inserting checkpoints therefore leaves the same first stop. At an interior accumulation of such horizons, continuity/AC gives either the existing first-stop face at the limit or continuation of the same carrier across the accumulation; if no stop occurs before t=0, the initial boundary absorbs. Separately, on every consecutive high-strain epoch one has D_*<=D_j<=N_j G_* and N_(j+1)<=3N_j/16. On every consecutive signed-good generated-HH epoch, only actual positive HH work after physical-energy reentry is admitted; 3/5<N_parent/N_child<5/8 makes parent natural lifetimes grow by more than 64/25, and the asynchronous common registration surfaces satisfy s_j-s_(j+1)>=(1792/4875)T_j, so their cumulative physical backshift reaches the absorbing initial surface after finite generated depth"
@@ -631,7 +695,7 @@ def theorem_certificate() -> dict[str, object]:
             "exact ties and multiple certified downstream owner names remain a set-valued provenance mark on one unsplit physical mass; no lexicographic priority and no heterogeneous RN tie normalization"
         ),
         "coefficient_obstruction_barrier": (
-            "Duhamel HH/interface coefficient threshold hits are first-stop locators, not physical owners; actual Q^2 energy/work reentry may return inheritance, high strain, HH generation, or smooth interface work; smooth K_phys relink is then quotiented to same-event donor provenance while simultaneous strain remains a recursive owner"
+            "Duhamel HH/interface coefficient threshold hits are first-stop locators, not physical owners; actual Q^2 energy/work reentry may return inheritance, high strain, HH generation, or smooth interface work; smooth K_phys relink is then quotiented to same-event donor provenance while simultaneous strain remains a recursive owner. A typed sidecar-free same-carrier inheritance certificate may quotient only the inherited-stock component after its certified endpoint/residual-work guards; untyped or sidecar-bearing inheritance remains event-facing"
         ),
         "full_natural_service_barrier": (
             "full_natural_own_scale_service is a positive witness carried by the already-completed natural corridor, not a second recursive owner event; canonical owner states reject this classification label as an owner"
@@ -644,6 +708,9 @@ def theorem_certificate() -> dict[str, object]:
         ),
         "smooth_relink_donor_quotient": (
             "gauge-quotiented K_phys relink is a finite antisymmetric same-event role flux; the master rejects conservative_smooth_role_relink as a recursive owner, preserves its donor certificate as zero-depth provenance, and retains any simultaneous existing strain as the recursive owner"
+        ),
+        "same_carrier_inherited_stock_quotient": (
+            "certified sidecar-free material_energy_inheritance on the same no-first-stop carrier is between-time physical stock continuation and adds zero generation depth. The master binds the exact E0/E1 gate value, threshold and classified residual work to the certificate. Any material sidecar, absent certificate, residual-owner case, role/probe change or genuine earlier endpoint event remains on the existing event-facing route"
         ),
         "high_strain_descending_epoch": (
             "high strain remains a genuine recursive owner, but consecutive high-strain renewal cannot persist indefinitely: every step pays D_V>=D_*, renews to N_next/N<=3/16 through an actual critical resolved ancestor, and obeys D_j<=N_j G_* for the physical global gradient reservoir G_* even under arbitrary interval overlap; hence every pure high-strain epoch is finite without promoting D_V to a global reset"
@@ -690,6 +757,7 @@ class QuotientStress:
     checkpoint_barrier_failures: int
     checkpoint_segmentation_barrier_failures: int
     smooth_relink_recursion_barrier_failures: int
+    inherited_stock_recursion_barrier_failures: int
     high_strain_epoch_telescope_failures: int
     signed_good_generated_epoch_telescope_failures: int
     maximum_relay_owner_count: int
@@ -699,7 +767,7 @@ class QuotientStress:
 def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
     rng = random.Random(seed)
     wom = wtime = wscale = 0.0
-    boundary_fail = supplier_fail = obstruction_fail = service_witness_fail = checkpoint_fail = segmentation_fail = relink_fail = high_strain_epoch_fail = generated_epoch_fail = 0
+    boundary_fail = supplier_fail = obstruction_fail = service_witness_fail = checkpoint_fail = segmentation_fail = relink_fail = inherited_stock_fail = high_strain_epoch_fail = generated_epoch_fail = 0
     maxowners = 0
     uv_gap = math.inf
 
@@ -791,6 +859,18 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
     else:
         relink_fail += 1
         raise AssertionError("smooth conservative relink crossed the recursive-owner boundary")
+
+    try:
+        canonical_owner_bundle(
+            "same-carrier inherited stock rereading",
+            1.0,
+            (SAME_CARRIER_INHERITED_STOCK_RELAY,),
+        )
+    except TypeError:
+        pass
+    else:
+        inherited_stock_fail += 1
+        raise AssertionError("same-carrier inherited stock crossed the canonical recursive-owner boundary")
 
     relink_work = GaugeQuotientedInterfaceWork(
         (2.0, -1.0, -1.0),
@@ -998,7 +1078,24 @@ def stress(samples: int = 50_000, seed: int = 20260810) -> QuotientStress:
         if not (uv > first and math.isfinite(uv)):
             raise AssertionError("UV geometric natural-time obstruction disappeared")
 
-    return QuotientStress(samples, wom, wtime, wscale, boundary_fail, supplier_fail, obstruction_fail, service_witness_fail, checkpoint_fail, segmentation_fail, relink_fail, high_strain_epoch_fail, generated_epoch_fail, maxowners, uv_gap)
+    return QuotientStress(
+        samples=samples,
+        worst_owner_mass_residual=wom,
+        worst_time_telescope_residual=wtime,
+        worst_scale_telescope_residual=wscale,
+        bounded_scale_boundary_failures=boundary_fail,
+        supplier_scale_failures=supplier_fail,
+        coefficient_obstruction_barrier_failures=obstruction_fail,
+        service_witness_barrier_failures=service_witness_fail,
+        checkpoint_barrier_failures=checkpoint_fail,
+        checkpoint_segmentation_barrier_failures=segmentation_fail,
+        smooth_relink_recursion_barrier_failures=relink_fail,
+        inherited_stock_recursion_barrier_failures=inherited_stock_fail,
+        high_strain_epoch_telescope_failures=high_strain_epoch_fail,
+        signed_good_generated_epoch_telescope_failures=generated_epoch_fail,
+        maximum_relay_owner_count=maxowners,
+        minimum_uv_time_gap_to_naive_infinite_sum=uv_gap,
+    )
 
 
 def main() -> None:
@@ -1015,7 +1112,7 @@ def main() -> None:
 
 Status: **{cert['status']}**.
 
-The canonical recursive state contains physical event vertices only.  Raw HH/interface coefficient thresholds are interval locators until actual `Q^2` energy/work reentry; `full_natural_own_scale_service` is a same-corridor witness; and a complete no-hit natural horizon is an **analysis checkpoint**, not a recursive event.
+The canonical recursive state contains physical event vertices only.  Raw HH/interface coefficient thresholds are interval locators until actual `Q^2` energy/work reentry; `full_natural_own_scale_service` is a same-corridor witness; a complete no-hit natural horizon is an **analysis checkpoint**; and certified sidecar-free same-carrier inherited energy is between-time stock continuation rather than a new recursive event.
 
 Physical time remains exact.  If checkpoint times are `t_0>=...>=t_L`, then `sum_j(t_j-t_(j+1))=t_0-t_L` whether or not any event occurs there.  More strongly, a no-event natural horizon does not restart the event-anchored smooth carrier: its fixed terminal coefficient and cumulative native first-hit monitors continue across every inserted checkpoint.  Checkpoint segmentation therefore cannot manufacture a second continuation branch.
 
@@ -1025,7 +1122,7 @@ High strain remains a genuine physical owner, but it now has a native path teles
 
 Signed-good generated HH has a different native telescope.  A raw `|I_HH|` coefficient hit is rejected until actual `Q^2`/physical-energy reentry selects positive HH child-energy work.  On the signed-good parent support, `3/5<N_parent/N_child<5/8`, so natural lifetimes grow by more than `64/25`; the actual heavy-half support lies inside the asynchronous cone and its common registration surfaces obey `s_j-s_(j+1)>=(1792/4875)T_j`.  Their cumulative physical backshift grows geometrically and reaches the absorbing initial surface after finite consecutive signed-good generated depth.  The common surfaces are not recursive events and Duhamel amplitude is not a causal law.
 
-Thus, after zero-charge relays, observer gauges, coefficient locators, hard and smooth same-event donor circulation, same-corridor service layers, natural-horizon checkpoints and checkpoint segmentation are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events.  A geometrically UV-growing sequence obtained only by checkpoint rereading remains a diagnostic state-reading sequence, not a master lineage.  Genuine UV progression still enters only through independently certified physical tail work/dissipation or another actual physical event.
+Thus, after zero-charge relays, observer gauges, coefficient locators, hard and smooth same-event donor circulation, same-corridor service layers, natural-horizon checkpoints, checkpoint segmentation, and certified sidecar-free inherited-stock continuation are quotiented, an infinite recursive **event** path avoiding `t=0` must contain infinitely many genuine physical owner events.  Sidecar-bearing or untyped inheritance is deliberately not removed by this quotient.  A geometrically UV-growing sequence obtained only by checkpoint rereading remains a diagnostic state-reading sequence, not a master lineage.  Genuine UV progression still enters only through independently certified physical tail work/dissipation or another actual physical event.
 
 Stress: `{out.samples}` quotient/path states
 - worst zero-charge owner-mass residual: `{out.worst_owner_mass_residual:.3e}`
@@ -1038,12 +1135,13 @@ Stress: `{out.samples}` quotient/path states
 - full-natural checkpoint barrier failures: `{out.checkpoint_barrier_failures}`
 - same-carrier checkpoint-segmentation barrier failures: `{out.checkpoint_segmentation_barrier_failures}`
 - smooth-relink recursion-barrier failures: `{out.smooth_relink_recursion_barrier_failures}`
+- inherited-stock recursion-barrier failures: `{out.inherited_stock_recursion_barrier_failures}`
 - high-strain descending-epoch telescope failures: `{out.high_strain_epoch_telescope_failures}`
 - signed-good generated-HH epoch telescope failures: `{out.signed_good_generated_epoch_telescope_failures}`
 - largest relayed joint-owner set sampled: `{out.maximum_relay_owner_count}`
 - minimum sampled UV checkpoint time beyond its first natural window: `{out.minimum_uv_time_gap_to_naive_infinite_sum:.3e}`
 
-This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes no-event checkpoint segmentation and conservative smooth-relink donor depth from physical lineage and proves that a recursive path cannot eventually remain forever in high strain alone or in signed-good generated HH alone. Mixed recurrence and generic non-signed-good HH/high-tail recurrence remain open.
+This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes no-event checkpoint segmentation, conservative smooth-relink donor depth, and certified sidecar-free same-carrier inherited-stock continuation from generation lineage.  It proves that a recursive path cannot eventually remain forever in high strain alone or in signed-good generated HH alone. Sidecar-bearing inheritance, mixed recurrence and generic non-signed-good HH/high-tail recurrence remain open.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
