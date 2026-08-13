@@ -287,6 +287,16 @@ def test_stock_projection_rejects_same_endpoint_certificate_from_a_different_res
         )
 
 
+def test_central_master_rejects_inherited_stock_certificate_with_a_different_master_mass():
+    cert = _sidecar_free_relay()
+    with pytest.raises(TypeError, match="mass must equal"):
+        energy_reentry_master_route(
+            "wrongly reweighted inherited stock",
+            0.62,
+            _inheritance_reentry(cert, residual_work=0.12),
+        )
+
+
 def test_central_master_rejects_sidecar_free_certificate_transplanted_to_different_residual_work():
     cert = _sidecar_free_relay()
     with pytest.raises(TypeError, match="classified residual physical-work law"):

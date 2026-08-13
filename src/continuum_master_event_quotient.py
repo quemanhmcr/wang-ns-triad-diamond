@@ -317,9 +317,13 @@ def energy_reentry_master_route(
                 # silently erasing physical provenance.
                 owners = (branch,)
             else:
+                stock_mass = float(mass)
+                stock_tol = 2.0e-11 * max(abs(stock_mass), candidate.initial_energy, 1.0e-300)
+                if abs(stock_mass - candidate.initial_energy) > stock_tol:
+                    raise TypeError("central inherited-stock relay mass must equal the certified earlier carrier energy E0")
                 projection = same_carrier_inheritance_master_projection(
                     physical_measure,
-                    mass,
+                    stock_mass,
                     reentry,
                     candidate,
                 )
@@ -710,7 +714,7 @@ def theorem_certificate() -> dict[str, object]:
             "gauge-quotiented K_phys relink is a finite antisymmetric same-event role flux; the master rejects conservative_smooth_role_relink as a recursive owner, preserves its donor certificate as zero-depth provenance, and retains any simultaneous existing strain as the recursive owner"
         ),
         "same_carrier_inherited_stock_quotient": (
-            "certified sidecar-free material_energy_inheritance on the same no-first-stop carrier is between-time physical stock continuation and adds zero generation depth. The master binds the exact E0/E1 gate value, threshold and classified residual work to the certificate. Any material sidecar, absent certificate, residual-owner case, role/probe change or genuine earlier endpoint event remains on the existing event-facing route"
+            "certified sidecar-free material_energy_inheritance on the same no-first-stop carrier is between-time physical stock continuation and adds zero generation depth. The master binds its stock mass to E0 and also binds the exact E0/E1 gate value, threshold and classified residual work to the certificate. Any material sidecar, absent certificate, residual-owner case, role/probe change or genuine earlier endpoint event remains on the existing event-facing route"
         ),
         "high_strain_descending_epoch": (
             "high strain remains a genuine recursive owner, but consecutive high-strain renewal cannot persist indefinitely: every step pays D_V>=D_*, renews to N_next/N<=3/16 through an actual critical resolved ancestor, and obeys D_j<=N_j G_* for the physical global gradient reservoir G_* even under arbitrary interval overlap; hence every pure high-strain epoch is finite without promoting D_V to a global reset"
