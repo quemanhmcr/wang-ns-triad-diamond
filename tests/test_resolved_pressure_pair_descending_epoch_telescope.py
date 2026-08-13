@@ -14,7 +14,7 @@ from src.resolved_pressure_pair_descending_epoch_telescope import (
 def _owner(N: float, *, sigma: float = 1.0, c: float = 1.0, atoms: int = 5):
     # Equal positive pair atoms make qmax=1/atoms.  atoms=5 is diffuse (<1/4),
     # demonstrating that the theorem does not use the quarter cut.
-    weights = [sigma / atoms] * atoms
+    weights = [(sigma / 2.0) / atoms] * atoms
     indices = [(j, j) for j in range(atoms)]
     freqs = [(N / 4.0, N / 4.0)] * atoms
     return certify_resolved_pressure_pair_owner(

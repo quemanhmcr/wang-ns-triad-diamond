@@ -199,3 +199,15 @@ Together with the existing source compiler and pressure-pair telescope, this rem
 - **fresh SGS itself now has no infinite eventually-pure first-stop tail on a compact pre-singular interval.**
 
 What remains is the genuinely mixed cross-family problem: source descendants can still alternate with strain/dissipation and actual HH/high-tail work, and any old-reservoir/capacity route must be kept in its correct inherited/reuse ledger rather than promoted to a causal reset.  This note makes no global-regularity claim.
+
+## Native source binding
+
+The executable native entry is `pure_fresh_sgs_native_source_binding.py`.  It refuses an arbitrary positive source scalar: the `FreshSGSScaleOwnerCertificate` must satisfy the certified compiler identity
+
+`Y = objective_sgs_integrated_square_service_lower(Sigma_R) = C_Y Sigma_R`
+
+for the same typed SGS owner before the pre-singular exhaustion theorem is called.  A fixed objective first-stop action floor `A_*` and slab bound `c<=c_*` give the uniform pair of floors
+
+`Sigma_* = A_*/(4c_*)`,  `Y_* = C_Y Sigma_*`.
+
+Thus the positive time lower is attached to the same local NS source law that generated the fresh service; it cannot be manufactured by attaching an unrelated scalar after the fact.

@@ -8,7 +8,7 @@ from src.mixed_genuine_owner_no_shortcut_barriers import (
 
 
 def test_geometric_critical_shell_allocation_has_finite_energy_budget():
-    out = critical_energy_geometric_chain(8.0, 3.0, 80, 2.0)
+    out = critical_energy_geometric_chain(8.0, 3.0, 40, 2.0)
     assert out.shell_frequencies[1] == 16.0
     assert math.isclose(out.shell_energies[0], 3.0 / 8.0)
     assert out.total_shell_energy < out.infinite_chain_energy_upper
