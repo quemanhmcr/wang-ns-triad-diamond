@@ -1,0 +1,36 @@
+{
+  "certificate": {
+    "status": "EXACT_OUTER_MOVING_ROLE_IDENTITY_AND_PERSISTENT_LOWLOW_EXCLUSION__INTERFACE_PROVENANCE_SUPPLIED",
+    "identity": "(dt+L_V-nuDelta)(Q u)=Q B(V,V)-Q B(h,h)+(dtQ+[L_V,Q])u, with h=u-V and [Q,Delta]=0 for scalar Fourier roles",
+    "support": "on K<=1/30 an anchor |xi|>=3N/5 stays above (3/5)e^(-1/30)N>N/2; clean dimensionless gap 0.0803296602892",
+    "low_low": "supp Vhat subset B_(N/4) implies supp B(V,V) subset B_(N/2), hence Q B(V,V)=0 for the entire low-strain role interval",
+    "high_high": "the sole nonlinear source after low-low exclusion is -Q P div(h tensor h); its coherent Hahn disintegration is the existing physical binary causal work law",
+    "affine_gauge": "choose the scalar role symbol by dual affine transport; the affine part of dtQ+[V.grad,Q] is exactly zero, while constant affine stretching commutes with scalar Q",
+    "egorov": "the remaining Heisenberg defect is exactly nonaffine resolved low-high role-interface work and vanishes for a genuinely affine transporter",
+    "pressure": "Leray is applied before role extraction; no pressure forcing is introduced",
+    "viscosity": "scalar Fourier Q commutes exactly with Delta; viscosity remains in the propagator and creates no role-interface source",
+    "normalization": "Q is anchored to the already selected frozen physical transfer cell at the event time, so evolving the role does not alter that event's physical transfer normalization",
+    "continuum_status": "the outer moving-role PDE and persistent low-low exclusion are exact; the smooth quadratic-carrier theorem recombines commutator and diagonal role work at Q^2, then quotients the certified common affine/Kelvin gauge before any residual skew work is called physical relink; the hard-projector theorem remains the event specialization"
+  },
+  "arb": {
+    "anchored_role_lower": "3/5",
+    "strain_action_upper": "1/30",
+    "transport_cut": "1/4",
+    "low_low_output_upper": "1/2",
+    "moving_role_lower": "[0.58032966028920354122458386560497611641360390358435369 +/- 5.54e-54]",
+    "status": "CERTIFIED_PERSISTENT_LOWLOW_EXCLUSION"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_role_identity_residual": 5.245019581251485e-15,
+    "worst_viscosity_commutator": 0.0,
+    "worst_affine_heisenberg_residual": 0.0,
+    "worst_egorov_identity_residual": 5.994685838697808e-16,
+    "minimum_support_gap": 0.08608316792132453
+  },
+  "sources": [
+    "physical_high_high_quadratic_source_-Q_P_div_h_tensor_h",
+    "nonaffine_heisenberg_role_interface_(dtQ+[L_V,Q])u",
+    "bulk_viscosity_inside_propagator"
+  ]
+}

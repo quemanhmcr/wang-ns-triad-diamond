@@ -19,6 +19,7 @@ Historical detail through the radial theorem is preserved verbatim in `docs/hist
 - pure-UV true-upward natural-window binding: `e7b302f3590bbddb83b3d9bd9e8c213b5ada8b4e`
 - same-carrier inherited-energy relay: `ae13f9c838878f50c496b9a3e8b22d680ab789e3`
 - material-sidecar / inherited-stock owner decomposition: `c39f70ed3e9f4edfc08e23b996ba872d91c63ed6`
+- material-sidecar inherited-stock central/joint routing: `376fd52e1c891c774b70cf339b192bea7045107f`
 
 For complete historical run IDs and metrics of the earlier entries, use the archived full ledger above.
 
@@ -172,4 +173,32 @@ Failure/correction lineage:
 - candidate `3e5ffdef7d2c31ca1489d044f1678a35e8900fce` passed focused tests but the random stress found a downstream representation mismatch at tiny `R_switch`: the consumer had replaced the source theorem's floating tolerance `3e-13*max(1,R,|jump|)` by an `R`-relative check.  Final `c39f70e...` revalidates the source certificate with its native tolerance and margin identity, then still exact-binds the stored sidecar charge to `R_switch`.  No source theorem tolerance, PDE equation, sample count, Hahn law, causal unit, or owner threshold was weakened.
 
 The theorem-level conclusion is intentionally narrow: intrinsic membership is zero-charge provenance; selected-family `R_switch` is a positive Moyal selected-service boundary currency which can be positive while the physical state has zero increment, so the boundary charge itself has zero generation depth.  It is not `dW`, stock `E0`, a second coefficient impulse, or smooth `K_phys`.  Genuine material/source recurrence still requires independent physical service/source evidence.  No global-regularity claim is made.
+
+## Material-sidecar inherited-stock central/joint routing — exact certification
+
+Exact theorem SHA: `376fd52e1c891c774b70cf339b192bea7045107f`.
+
+Serious gates on that exact SHA:
+
+- dedicated `31682060268` — **success**; `60` focused/dependency tests + `17` physical-cause/witness regressions, `75,000` typed central/joint sidecar-stock states, and two-representation actual Fourier--Galerkin NS referee;
+- independent audit `31682060264` — **success**; `41` independent tests, `100,000` typed states, and opposite-phase lower-amplitude actual NS audit;
+- physical-energy causal integration v2 `31682128984` — **success**; `956` tests; master `20,000` traces with worst margin `0.0`; planner `62` nodes = `60` exact-content reuse + `2` execute (`continuum_master_event_quotient`, new `material_sidecar_stock_central_routing`) on shards `4,5`; all `62` outputs present and all `60` reused outputs byte/digest verified.
+
+Stored exact-SHA artifact trees and deterministic digests:
+
+- `recorded-results/31682060268/` — `sha256:fc587d1f562ffc2bdafb9bb0e4c32f634f1a747ab81dbd494d8825902b12db0f`;
+- `recorded-results/31682060264/` — `sha256:ba320a73196e1441c694cd1d5f6e6e589ca6a316fceec0cd1b08d23ecf31b435`;
+- `recorded-results/31682128984/` — `sha256:556356dd5134054888c278dd1d301945670366cff0b566e3561d0be66af4c06f`.
+
+GitHub aggregate v2 artifact digest was `sha256:0112e3f9d0c8207152442e538d356998238df413017602ada7d4e0a6dcea3969`; deterministic unpacked aggregate tree digest is `sha256:079767370439fa535ea95f2e1a28a52613654e4413e697b1b6748ab0065da864`.
+
+Dedicated `75,000` states: membership / selected-family / mixed `50,000 / 50,000 / 25,000`; positive Moyal boundary `50,000`; transplant rejections `6,819`; recursive-generation creations, sidecar-to-physical-hit promotions, and stock-clone violations all `0`; `75,000` physical joint stops preserved with sidecars attached only afterward; `4,412` sidecar-only attempts correctly produced no causal stop; `15,000` independently witnessed physical `MATERIAL_RELINK` hits remained recursive.  Independent `100,000` audit: corresponding counts `66,667 / 66,666 / 33,333`, positive boundaries `66,666`, transplant rejections `9,091`, all three violation counts `0`, `100,000` joint projections, `5,883` sidecar-only no-stop rejections, and `20,000` preserved genuine material-service hits.
+
+The joint-stop core was deliberately not modified.  `material_sidecar_joint_stop_projection` calls the already-certified core law using only physical/internal hits and attaches the typed non-event material sidecar only after first time, exact physical tie set, currencies and disposition have been computed.  Consequently positive `R_switch` cannot mint a stop or enter a physical tie.  An independently witnessed `PhysicalCause.MATERIAL_RELINK` remains a distinct recursive physical hit.  Missing Phase-A sidecar decomposition remains event-facing fail-closed in the central master.
+
+The actual NS lanes reuse the physical same-carrier Fourier--Galerkin solver rather than inventing a material PDE.  Dedicated amplitude-1 on physical carrier `(7,6,5), s=+1` gave stock `1 -> 1.00240956249`, gross nonlinear work `0.0100088487847 / 0.000991283878665`, viscous loss `0.00660800248318`, modal continuity residual `6.253e-11`, and global energy residual `2.963e-12`.  Independent amplitude-0.5 opposite-phase gave `0.25 -> 0.245853600709`, work `0.000182591040316 / 0.00187455879673`, viscosity `0.00245443154604`, residuals `4.761e-11 / 2.614e-11`.
+
+CI-economy lineage: an initial static Phase-B design modified the core joint-stop module and would have invalidated `13` DAG nodes.  Before candidate commit it was refactored to the typed post-physical wrapper, leaving core joint-stop byte-for-byte unchanged and reducing the exact valid blast radius to `2` nodes.  Pushing the actual central-source candidate nevertheless triggered nine legacy path workflows; those redundant runs were immediately cancelled, leaving the dedicated/audit/v2 gates above.  No theorem condition, sample count, PDE equation, tolerance, Hahn law, owner threshold or causal unit was weakened.
+
+No global-regularity claim is made.
 

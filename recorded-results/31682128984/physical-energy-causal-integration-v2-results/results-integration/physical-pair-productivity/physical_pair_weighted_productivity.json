@@ -1,0 +1,22 @@
+{
+  "certificate": {
+    "status": "EXACT_PHYSICAL_TRANSFER_WEIGHTED_LOG_PRODUCTIVITY__NO_DUHAMEL_PAIR_WEIGHT_IDENTIFICATION",
+    "work_density": "for each hard parent-pair cell, actual positive child-energy work density satisfies r_e<=C_Y N a_c a_1 a_2 by the same sharp Young trilinear bound",
+    "kl_step": "normalize dT/W and compare with uniform normalized physical time x finite pair-cell reference; KL>=0 converts the physical work density directly into E_dT log(a_1 a_2)",
+    "energy_sup": "on K<=1/30, E0,W_R<=E1/5 and W_HH>=8E1/15 imply sup E <= C_E W_HH with C_E=1.87064343506<2",
+    "shell": "finite selected Fourier shell gives a_c(t)<=C_Omega sqrt(N E(t)) by Holder; no adjoint Gaussian persistence is used",
+    "registered_law": "after dual-Gaussian event marking and 1/4 common-slice registration per parent, E_dT log(alpha_p1 alpha_p2)>=log(alpha_c)+log Lambda_M",
+    "default_one_pair_constant": "for c=1 and default shell constants, Lambda_(M=1)=0.00185770938993; for M cells Lambda_M=Lambda_1/M",
+    "conditioning": "if a first-stop/Young-good survivor set carries fraction q of physical HH work, conditioning costs exactly log q: Lambda_survivor=q Lambda_full; q>=1/2 loses at most log2",
+    "refinement": "if M_j<=M0(j+3)^p, the binary recursion pays at most log M0+p log 6 in its entire geometrically discounted cell-count offset",
+    "causal_weights": "all expectations are under actual positive physical child-energy work dT; Duhamel is not used to select or reweight parent pairs",
+    "continuum_status": "the remaining PDE assembly is to verify the sharp-Young work-density premise on the retained signed-good hard event cells and apply the existing first-stop rules to any event that fails complex Young/common-slice registration; no dGamma-to-dT pair bridge remains"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_kl_margin": 0.00011612232876111791,
+    "minimum_log_product_margin": 1.6651664834860762,
+    "minimum_variable_recursion_margin": -1.0658141036401503e-14,
+    "maximum_tempered_penalty_ratio": 0.9999446592328333
+  }
+}

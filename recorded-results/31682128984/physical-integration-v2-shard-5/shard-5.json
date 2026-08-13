@@ -1,0 +1,11 @@
+{
+  "executed": [
+    {
+      "command": "python -m src.material_sidecar_stock_central_routing --samples 50000 --seed 2026081306 --outdir results-integration/material-sidecar-stock-central-routing",
+      "fingerprint": "21c574385f5dedf619a3dbd2877777f58a2791d3597f88f01d7d7010e19b0c4a",
+      "node_id": "material_sidecar_stock_central_routing"
+    }
+  ],
+  "schema": 1,
+  "shard": 5
+}
