@@ -1,0 +1,35 @@
+{
+  "stress": {
+    "cases_with_coarse_self_loop": 22120,
+    "cases_with_overlapping_recipient_charge": 16112,
+    "generic_two_donor_single_recipient_charge_verified": true,
+    "numerically_unresolved_cases": 0,
+    "one_donor_cases": 25007,
+    "resolved_cases": 50000,
+    "samples": 50000,
+    "signed_good_bad_recipient_mass": 0.17237839361957738,
+    "signed_good_coarse_self_loop_fraction": 1.0000000000000002,
+    "signed_good_good_recipient_mass": 0.5404014352115156,
+    "two_donor_cases": 24993,
+    "worst_balance_native_residual": 1.581233172583289e-16,
+    "worst_donor_marginal_native_residual": 1.0300232701277025e-16,
+    "worst_fate_partition_native_residual": 0.0,
+    "worst_recipient_marginal_native_residual": 8.938573463174445e-17,
+    "worst_restricted_pushforward_native_residual": 1.0300232701277025e-16
+  },
+  "theorem": {
+    "bad_recipient": "geometry-bad recipient remains on the existing TRANSFER_WORK_LOSS stage-zero route with first_time=None",
+    "capacity_is_causal_law": false,
+    "claims_global_regularity": false,
+    "coarse_self_loop": "pi(donor)=pi(recipient) is allowed; it is same-time physical redistribution with zero event depth and no scale progress",
+    "column_fate_marginal": "sum_C K(C,D,G)= (pi_# dW_G+)(D) and sum_C K(C,D,B)= (pi_# dW_B+)(D)",
+    "failure_anti_shortcut": "the theorem does not infer that n_C pays failed good work g_C; domination inequalities are not causal maps",
+    "good_recipient": "geometry-good recipient remains on the existing Young-eligible route; donor provenance does not certify Young/Christ",
+    "hard_cell_kernel": "K(C,D,F)=M_triangle(donor root in C, recipient root in D with inherited canonical fate F)",
+    "later_hahn_used": false,
+    "row_marginal": "sum_{D,F} K(C,D,F) = (pi_# dW-)(C) on the closed-triad donor restriction",
+    "single_charge": "incoming donor atoms disintegrate one already-canonical recipient charge; overlapping donor support and multiple closed-triad measure pieces aggregate to one (cell,fate) charge rather than creating another dW+ cause",
+    "status": "EXACT_CYCLIC_HARD_CELL_SINGLE_CHARGE_QUOTIENT__RESTRICTED_DW_MINUS_ROWS__CANONICAL_DW_PLUS_GOOD_BAD_COLUMNS__OVERLAPPING_RECIPIENT_SUPPORT_NO_DOUBLE_CHARGE__COARSE_SELF_LOOPS_ZERO_RECURSION_DEPTH",
+    "time_anti_shortcut": "same-time cyclic provenance is not a between-time matching of earlier deposits to later withdrawals; no FIFO/LIFO or modal inventory matching is introduced"
+  }
+}

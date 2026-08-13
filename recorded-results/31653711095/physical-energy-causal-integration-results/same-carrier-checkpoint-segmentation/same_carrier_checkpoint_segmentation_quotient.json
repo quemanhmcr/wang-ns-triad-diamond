@@ -1,0 +1,24 @@
+{
+  "certificate": {
+    "status": "EXACT_SAME_CARRIER_CHECKPOINT_SEGMENTATION_QUOTIENT__NATURAL_HORIZONS_DO_NOT_RESET_FIRST_HIT__CUMULATIVE_NATIVE_MONITORS_FROM_ONE_PHYSICAL_EVENT__INTERIOR_CHECKPOINT_ZENO_IS_STOP_OR_CONTINUATION__HARDEN_ONLY_AT_A_NEW_PHYSICAL_EVENT",
+    "fixed_carrier": "between genuine physical events the canonical object is the same smooth event-anchored carrier Q and terminal dual; a theorem horizon does not create a replacement carrier",
+    "cumulative_monitors": "K_A[s,t], |I_role-interface[s,t]| and |I_HH[s,t]| are always read cumulatively from the same terminal event; K is monotone while impulse magnitudes may cancel and are therefore never summed segment-by-segment",
+    "segmentation": "inserting or deleting any finite set of natural-horizon checkpoints leaves the first physical stop time and complete joint first-stop set unchanged",
+    "checkpoint_policy": "hard-shell witnesses exposed at a no-event checkpoint are legitimate state sidecars only; they cannot reset terminal amplitude, monitor baselines, or harden into a new causal carrier without a new physical event",
+    "long_horizon": "the exact outer-role/adjoint equations do not expire after one natural service window; the same carrier continues while cumulative support/strain and coefficient obstruction faces remain unhit",
+    "interior_accumulation": "on a smooth pre-singular interval an interior accumulation of analysis checkpoints is either a closed physical first-stop/energy-reentry face at the limit or is crossed by the same carrier; checkpoint Zeno count and checkpoint scale path are not PDE obstructions",
+    "boundary": "if the maximal same-carrier no-hit continuation reaches t=0, the initial boundary absorbs",
+    "high_tail_separation": "this does not deny physical UV dynamics: actual high-tail dissipation/work remains a separate event theorem; only UV scale motion manufactured by re-hardening at no-event checkpoints is removed from canonical lineage",
+    "scope": "this closes natural-horizon segmentation as a continuation obstruction for a fixed event-anchored carrier; it does not telescope infinitely recurring genuine physical owner events and does not prove Navier-Stokes global regularity"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_segmentation_first_time_residual": 0.0,
+    "segmentation_failures": 0,
+    "reset_barrier_failures": 0,
+    "nonmonotone_impulse_paths": 39915,
+    "accumulation_stop_cases": 25000,
+    "accumulation_continue_cases": 25000,
+    "maximum_checkpoint_count": 12
+  }
+}

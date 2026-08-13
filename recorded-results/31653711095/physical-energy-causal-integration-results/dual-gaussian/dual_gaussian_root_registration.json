@@ -1,0 +1,26 @@
+{
+  "certificate": {
+    "status": "EXACT_DUAL_GAUSSIAN_ANALYSIS_ROOT_QUANTUM__EVENT_TRANSFER_ROLE_REGISTERED",
+    "duality": "||f-G||_(3/2)<=eps and L3-normalized Gaussian dual h imply |<f,h>|>=<G,h>-eps",
+    "covariance_pairing": "d_log<=0.4 gives Gaussian primal-dual pairing >=0.97266240464",
+    "normalized_root_quantum": "for ||f||_(3/2)=1, eps=1/100 and N r_g>2/3, quantized dual probe gives N|<f,phi>|^2>=0.207034423405>1/5",
+    "physical_scaling": "for an actual role, the lower bound is eta_norm * ||f||_(3/2)^2; shape near-extremality alone gives no absolute energy quantum",
+    "leray": "for divergence-free u, replacing a vector Gaussian probe by its Leray projection preserves the coefficient exactly",
+    "covariance_cover": "inside one log-scale bin, transition-aspect 2/3<Nr_g<=4 covariances rescaled by the bin reference need at most 49876112440099344 affine-log-SPD bins of radius 0.4",
+    "scale_coloring": "log-scale bins of width 2/25 split into 4 colors; same-color outer shell projectors are frequency-disjoint and hence orthogonal",
+    "phase_space_coloring": "within each scale/covariance representative, unit cells in that dual-probe phase coordinate split into 5^6 colors; one color is 4-separated for the Bessel budget only",
+    "bessel": "within one scale bin/covariance/color the equal-covariance analysis budget is 25/4; orthogonality across same-color scale bins makes the total uniform P_eff=1.94828564219e+22",
+    "causal_effect": "P_eff enters only the finite logarithmic root offset; physical pair-work/KL controls the transfer-weighted amplitude product without imposing an absolute per-root amplitude floor",
+    "important_scope": "this is an actual analysis coefficient of the selected orthogonal Fourier/helical role; project the dual probe by the same outer role projector so no other field component can cancel it. It is not a synthesis coefficient or an L2-closeness claim",
+    "continuum_status": "hard event transfer roles are now registered exactly to the smooth PDE envelope; remaining use is conditional only on the complex-Young/phase-good event, while failed events route to existing transfer/backscatter/relink causes"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_pairing_margin": 0.0007007227009424577,
+    "minimum_root_mass_margin_over_one_fifth": 9.589976022642e-05,
+    "minimum_cover_margin": -1.1102230246251565e-16,
+    "worst_projection_pairing_residual": 1.4458497151625688e-14,
+    "covariance_bins": 49876112440099344,
+    "effective_frame_budget": 1.9482856421913803e+22
+  }
+}

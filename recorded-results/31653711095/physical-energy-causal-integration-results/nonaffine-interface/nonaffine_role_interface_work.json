@@ -1,0 +1,21 @@
+{
+  "certificate": {
+    "status": "EXACT_NONAFFINE_ROLE_INTERFACE_SPLIT__SKEW_TRANSFER_CONSERVATIVE__SYMMETRIC_WORK_IS_STRAIN_PROVENANCE",
+    "operator_split": "L_nonaff=K+S with K*=-K and S*=S; for incompressible resolved transport K is advection+rotation and S is the symmetric deformation operator",
+    "skew": "T_ab=-2 Re<w_a,K w_b> is antisymmetric; its row sums are role-interface works and total skew interface work is exactly zero",
+    "symmetric": "D_ab=-2 Re<w_a,S w_b> is symmetric; its row sums are the symmetric interface works",
+    "global_strain_identity": "sum interface_S = 2 sum_a Re<w_a,S w_a> - 2 Re<u,S u>; interface_S is exactly off-diagonal strain work",
+    "single_charge": "skew interface is conservative role relinking/redistribution, while symmetric interface delegates to the already existing strain/coherent-deformation cause; neither is a new source currency and neither is representation Xi",
+    "continuum_status": "this is the exact hard-projector/event-role interface lemma; a non-idempotent smooth PDE envelope must instead use the quadratic Q^2 carrier-energy theorem before quantitative K_coh/strain/D_V or material-relink routing"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_binary_residual": 5.56367116233114e-16,
+    "worst_skew_antisymmetry_residual": 1.2754053462202797e-16,
+    "worst_symmetric_symmetry_residual": 1.4787715069602114e-16,
+    "worst_skew_row_sum_residual": 6.40007904143489e-16,
+    "worst_symmetric_row_sum_residual": 4.733633948647463e-16,
+    "worst_total_skew_interface": 7.398847447558994e-16,
+    "worst_symmetric_global_balance_residual": 1.3079987298663985e-15
+  }
+}

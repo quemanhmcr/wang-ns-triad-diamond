@@ -1,0 +1,26 @@
+{
+  "certificate": {
+    "status": "EXACT_RESOLVED_CUTOFF_REPARTITION_GAUGE_AND_PARENT_SCALE_RENEWAL__GENERATED_SURVIVOR_REENTRY_NO_NEW_INTERFACE",
+    "cutoff_identity": "-L_V(Q u)+Q B(V,V)-Q B(u-V,u-V)+(L_V Q-Q L_V)u = -Q B(u,u), independently of the resolved cutoff V",
+    "meaning": "changing S_(N/4)u to S_(Np/4)u redistributes the same interaction between transport, HH source and Heisenberg interface; it creates no boundary forcing/currency",
+    "renewed_support": "from envelope 11N/20, two low-strain transports and Np/N<=5/8 give |xi|/Np >= (22/25)e^(-1/15)>1/2; clean gap 0.323246146828",
+    "renewed_low_low": "with Vp=S_(Np/4)u, B(Vp,Vp) is supported below Np/2 and is still excluded by the relayed carrier",
+    "lifetime": "3/5<Np/N<5/8 implies 64/25<Tp/T<25/9 for T~N^-2; the existing asynchronous parabolic geometry is unchanged",
+    "relay": "the common-slice material carrier may therefore be re-anchored at parent scale and the resolved cutoff changed without manufacturing a hard packet or a cutoff-switch stop",
+    "scope": "this closes the algebra/support part of generated-survivor scale renewal; actual renewed slabs must still route failures of efficiency/moat/service/strain/material hypotheses through the existing physical first-stop system"
+  },
+  "arb": {
+    "renewed_relative_lower": "[0.82324614682782360920278173664926844898524738707318328 +/- 7.44e-54]",
+    "renewed_low_low_target": "1/2",
+    "parent_child_scale": "3/5 < Np/N < 5/8",
+    "parent_child_lifetime": "64/25 < Tp/T < 25/9",
+    "status": "CERTIFIED_SCALE_RENEWAL_SUPPORT_AND_PARABOLIC_LIFETIME_WINDOW"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_old_new_residual": 1.114026891124639e-14,
+    "worst_full_ns_residual": 9.010694967878424e-15,
+    "minimum_renewed_low_low_gap": 0.32425662839223457,
+    "minimum_lifetime_margin": 5.370700692619579e-06
+  }
+}

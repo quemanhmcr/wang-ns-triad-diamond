@@ -15,6 +15,7 @@ Historical detail through the radial theorem is preserved verbatim in `docs/hist
 - helical mode-set energy continuity: `a39d502d9312ac3bd6613a780d60b22e88790863`
 - radial spectral crossing layer cake: `667e687cb740a77df944753c575f581abad14199`
 - hard-tail true-upward supply: `d064bc4d780d9c90d36e64c7b84c3b771b74c896`
+- resolved-contact native binding: `9d615568640e39c49acc7295a996ed97e04110e6`
 
 For complete historical run IDs and metrics of the earlier entries, use the archived full ledger above.
 
@@ -45,3 +46,31 @@ Failure lineage: initial candidate `dd3e7c730e9973eecd0d9a7168db10094abd0f0d` ha
 ## Logging rule going forward
 
 When a theorem is certified, record here: exact theorem SHA; dedicated/audit/integration runs; artifact digests; only the few metrics that could falsify the theorem; and failure lineage that changed understanding or certification. Keep theorem statements, owner semantics, and the current frontier in `RESEARCH_LEDGER.md`. Do not duplicate large CI transcripts into the root ledger.
+
+## Resolved-contact native binding — exact certification
+
+Exact theorem SHA: `9d615568640e39c49acc7295a996ed97e04110e6`.
+
+Serious gates on that exact SHA:
+
+- dedicated `31653626691` — **success**; full suite `906` tests; `75,000` native-binding stress states; actual six-mode Fourier--Galerkin NS referee on FFT representations `24,28`;
+- independent audit `31653626677` — **success**; `100,000` analytic states; longer two-representation actual-NS audit plus amplitude adversary;
+- physical-energy causal integration `31653711095` — **success** on the same exact SHA; full suite `906` tests; all `68` job steps green; master episode stress `20,000` traces with worst margin `0.0`.
+
+Stored candidate artifact trees and deterministic digests:
+
+- `recorded-results/31653626691/` — `sha256:3a6d8ddb8d28908c5ab90f34a7f2f6ea021134022f388863d56be9aa1a4c0c2f`
+- `recorded-results/31653626677/` — `sha256:472d0c80b82fc90ac562bc68d496341d75c682fd54a86a4a135fa016ea17156e`
+- `recorded-results/31653711095/` — `sha256:349ed3bbc4f81f55928521e2409141267924bdbdffb4d450af196f555f39553e`
+
+Dedicated `75,000`-state stress: maximum positive V/h partition residual `2.18314328098e-16`; minimum K/S positive-cover margin `0`; minimum sampled half-owner margin `1.02313882790e-4`; boundary-contact HH fraction exactly `1`; coarse downstream-Hahn anti-example gap `0.9`. Independent `100,000`-state audit: maximum partition residual `2.087e-16`, maximum sampled contact parent/shell ratio `1.22522851885 < 5/4`, boundary-contact HH fraction `1`, coarse-Hahn gap `0.9`.
+
+The independent actual-NS audit evolved the same real six-mode Galerkin trajectory while reading two different admissible smooth cutoffs. Worst full PDE V/h repartition residual was `3.359e-16`; cutoff-repartition gauge residual `3.231e-16`; high-shell low-low leakage exactly `0`; same-edge signed V/h work residual `3.863e-17`; K/S identity residual `1.288e-17`; K antisymmetric-pair residual `1.610e-18`; S symmetric-pair residual `6.439e-18`; canonical K/S positive-cover defect `1.288e-17`; energy-balance residual `8.560e-16`; maximum FFT-representation spread `9.843e-16`. The amplitude-`0.5` adversary retained the same identities with representation spread exactly `0`.
+
+Failure/correction lineage:
+
+- first implementation branch `theorem/resolved-contact-smooth-binding`, SHA `a9561fd2150fdf47eebe33618e888030e5554c22`, was abandoned before certification. Engineering-wise it modified the central integration workflow, which seven legacy workflows watched, causing an unnecessary CI fan-out; all resulting branch runs were canceled. The replacement workflows are branch-scoped and touch no central integration file.
+- physically, the first draft privileged a convenient cutoff with an `M/8` plateau and tried to infer a fully resolved deep branch from that profile. Static PDE inspection showed that the invariant statement is instead cutoff-uniform: for every nonnegative smooth cutoff supported in `B_(M/4)`, write only `q=S(p_low)`. The exact signed work splits as `q dW+(1-q)dW`, while the support-boundary case forces `q=0` and supplies a real 100%-HH counterexample to “contact = interface”. This correction changed the theorem statement rather than weakening a test or tolerance.
+- a second code review caught a type hazard before the candidate commit: a positive recipient can carry multiple donor sidecars, but its K/S physical work may be charged only once. The production API was changed from a caller-supplied boolean assertion to a typed `SingleChargedRecipientMixedCause` created only after donor-provenance coalescence.
+
+No theorem/test/PDE execution used Linux Cloud; all execution evidence above came from GitHub Actions on the exact SHA.

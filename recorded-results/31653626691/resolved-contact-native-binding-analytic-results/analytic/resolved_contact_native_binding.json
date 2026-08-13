@@ -1,0 +1,29 @@
+{
+  "certificate": {
+    "HH_semantics": "the h-h complement remains a distinct canonical positive submeasure dominated by absolute HH edge work; both parents are <=5M/4, so sharp Young gives a direct R=5/4 natural-window capacity without aggregate Hahn",
+    "K_semantics": "K is conservative same-event relink/circulation provenance and creates zero recursive depth",
+    "S_semantics": "S is the existing symmetric strain/deformation owner, not a new interface currency",
+    "anti_theorem": "resolved-frequency contact alone does not imply interface/mixed ownership; an M/4 boundary atom has q=0 and can be 100% h-h",
+    "canonical_positive_push": "the donor-restricted canonical dW+ atom is restricted by q and 1-q; its same-time donor provenance is retained on both labels and total mass is unchanged",
+    "causal_unit": "all measures remain in the parent-tail common unit N dW; recipient shell M is geometry only",
+    "claims_global_regularity": false,
+    "contact_geometry": "for every resolved-contact upward shell j>=1, |z|>M/2 and one parent<=M/4 force the other parent into (M/4,5M/4]; low-low work cannot feed the recipient shell",
+    "cutoff_uniformity": "the theorem uses only 0<=q<=1 for the resolved parent and S=0 on the >M/4 parent; no plateau radius or transition profile is part of the causal law",
+    "donor_sidecar": "multiple same-time donors retain provenance but cannot cause repeated K/S owner charging on the same recipient physical work",
+    "hard_tail_corollary": "if the certified contact owner carries at least nu D_tail/2, then contact HH carries nu D_tail/4 or existing K+ relink / S+ strain carries nu D_tail/8",
+    "mixed_owner": "after donor provenance is coalesced to one single-charged recipient submeasure, the same resolved operator is split signed-first as I=K+S; canonical mixed dW+ is covered once by existing K+ and strain S+ without fraction matching",
+    "positive_cutoff_gain": "0<=S<=1 is required for positive cause restriction and simultaneously gives ||h||_2<=||u||_2, removing the older factor four from two |S|<=1 complement bounds",
+    "signed_first": "on each resolved-contact edge, dW=dW_mixed+dW_HH with dW_mixed=q dW and dW_HH=(1-q)dW before any new Hahn operation",
+    "status": "EXACT_RESOLVED_CONTACT_NATIVE_BINDING__SIGNED_VH_HH_REPARTITION_BEFORE_HAHN__CANONICAL_DWPLUS_RESTRICTS_WITHOUT_CLONING__MIXED_TO_K_OR_STRAIN_COVER__HH_COMPLEMENT_UPPER_COMPARABLE_R_5_OVER_4_TO_DIRECT_NATURAL_WINDOW__COMMON_N_DW_UNIT"
+  },
+  "stress": {
+    "boundary_contact_hh_fraction": 1.0,
+    "coarse_hahn_counterexample_gap": 0.9,
+    "maximum_parent_upper_ratio": 1.2192866925648356,
+    "maximum_partition_residual": 2.1831432809798926e-16,
+    "minimum_half_owner_margin": 0.00010231388279033967,
+    "minimum_positive_ks_cover_margin": 0.0,
+    "samples": 75000,
+    "status": "EXACT_RESOLVED_CONTACT_NATIVE_BINDING__SIGNED_VH_HH_REPARTITION_BEFORE_HAHN__CANONICAL_DWPLUS_RESTRICTS_WITHOUT_CLONING__MIXED_TO_K_OR_STRAIN_COVER__HH_COMPLEMENT_UPPER_COMPARABLE_R_5_OVER_4_TO_DIRECT_NATURAL_WINDOW__COMMON_N_DW_UNIT"
+  }
+}
