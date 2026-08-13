@@ -152,6 +152,16 @@ def test_certificate_states_exact_remaining_escape_dichotomy_without_regularity_
     assert "continuation of the same carrier" in dich["proof"]
 
 
+def test_raw_material_state_locator_cannot_enter_canonical_master_state():
+    from src.physical_branch_compiler import PhysicalCause
+
+    for raw in (PhysicalCause.MATERIAL_RELINK.value, PhysicalCause.NEW_COHERENT_ANCESTRY.value):
+        with pytest.raises(TypeError, match="not an independent Navier-Stokes generation owner"):
+            RecursiveEventState(0.6, 4.0, "unresolved material-state locator", (raw,))
+        with pytest.raises(TypeError, match="not an independent Navier-Stokes generation owner"):
+            canonical_owner_bundle("unresolved material-state locator", 1.0, (raw,))
+
+
 def test_unrouted_coefficient_obstruction_cannot_enter_canonical_master_state():
     from src.common_slice_coefficient_registration import ROLE_INTERFACE_COEFFICIENT_OBSTRUCTION
 

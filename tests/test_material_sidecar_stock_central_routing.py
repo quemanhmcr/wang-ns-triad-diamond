@@ -120,35 +120,31 @@ def test_real_source_stop_keeps_moyal_boundary_as_non_event_provenance_only():
     assert out.selected_family_boundary_energy == pytest.approx(0.23)
 
 
-def test_genuine_material_service_hit_remains_recursive_even_with_same_time_moyal_boundary_sidecar():
+def test_raw_material_state_locator_cannot_be_promoted_by_moyal_boundary_sidecar():
     cert = _inherited(SELECTED_FAMILY_EVENT, boundary=0.23)
     route = energy_reentry_master_route("same carrier inherited energy", 0.31, _reentry(cert, _decomposition(cert)))
     relay = route.material_sidecar_stock_relay_certificate
     assert relay is not None
-    out = material_sidecar_joint_stop_projection(
-        relay,
-        physical_hits=(CauseHit(0.4, PhysicalCause.MATERIAL_RELINK, 3.0, "independent material service"),),
-    )
-    assert out.joint_physical_causes == (PhysicalCause.MATERIAL_RELINK.value,)
-    assert out.master_disposition == MasterDisposition.RECURSE_CRITICAL.value
-    assert out.selected_family_boundary_energy == pytest.approx(0.23)
+    with pytest.raises(TypeError, match="carrier/material-state locator"):
+        material_sidecar_joint_stop_projection(
+            relay,
+            physical_hits=(CauseHit(0.4, PhysicalCause.MATERIAL_RELINK, 3.0, "unresolved material-state exit"),),
+        )
 
 
-def test_exact_source_strain_material_tie_is_not_fractionalized_or_erased_by_boundary_sidecar():
+def test_exact_source_strain_tie_is_not_fractionalized_or_erased_by_material_sidecars():
     cert = _inherited(MATERIAL_MEMBERSHIP_EVENT, SELECTED_FAMILY_EVENT, boundary=0.23)
     route = energy_reentry_master_route("same carrier inherited energy", 0.31, _reentry(cert, _decomposition(cert)))
     relay = route.material_sidecar_stock_relay_certificate
     hits = (
         CauseHit(0.4, PhysicalCause.RESOLVED_SOURCE, 1e-12),
         CauseHit(0.4, PhysicalCause.HIGH_STRAIN_DISSIPATION, 1e12),
-        CauseHit(0.4, PhysicalCause.MATERIAL_RELINK, 3.0),
     )
     out = material_sidecar_joint_stop_projection(relay, physical_hits=hits)
     assert out.master_disposition == MasterDisposition.RECURSE_CRITICAL.value
     assert set(out.joint_physical_causes) == {
         PhysicalCause.RESOLVED_SOURCE.value,
         PhysicalCause.HIGH_STRAIN_DISSIPATION.value,
-        PhysicalCause.MATERIAL_RELINK.value,
     }
     assert not out.fine_rn_split_required
     assert out.non_event_material_sidecar_events == cert.material_sidecars

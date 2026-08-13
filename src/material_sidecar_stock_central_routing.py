@@ -11,6 +11,7 @@ from typing import Mapping
 from src.joint_causal_stop_projection import InternalHit, JointStopProjection, joint_stop_master_projection
 from src.physical_branch_compiler import CauseHit, MasterDisposition, PhysicalCause, UniformResourceCertificate
 from src.material_label_carrier_quotient import MATERIAL_MEMBERSHIP_EVENT, SELECTED_FAMILY_EVENT
+from src.native_material_service_causal_quotient import require_native_service_cause_hits
 from src.material_sidecar_stock_owner_decomposition import (
     MEMBERSHIP_PROVENANCE_CURRENCY,
     SELECTED_FAMILY_MOYAL_CURRENCY,
@@ -215,8 +216,9 @@ def material_sidecar_joint_stop_projection(
     """
     if not isinstance(relay_certificate, MaterialSidecarStockCentralRelayCertificate):
         raise TypeError("typed non-event material-sidecar relay required")
+    routed_physical_hits = require_native_service_cause_hits(physical_hits)
     physical = joint_stop_master_projection(
-        physical_hits=physical_hits,
+        physical_hits=routed_physical_hits,
         internal_hits=internal_hits,
         fixed_transfer_loss=fixed_transfer_loss,
         kelvin_flat_certified=kelvin_flat_certified,
@@ -237,7 +239,7 @@ def theorem_certificate() -> dict[str, object]:
         "stock": "the physical inherited E0 remains exactly one between-time carrier-stock charge",
         "membership": "intrinsic membership rereading is retained beside stock as zero-charge provenance and never becomes a physical CauseHit",
         "selected_family": "the exact Phase-A R_switch is retained beside stock as non-event Moyal selected-service boundary currency; positive R_switch alone cannot create a first stop or recursive child",
-        "genuine_material_service": "an independently certified physical material/source service event is a different object and remains eligible for the existing recursive physical-cause route",
+        "genuine_material_service": "a material-state exit must first resolve to conservative K_phys boundary flux or to an independently certified native source/service owner; raw material_relink/new_ancestry labels are not admitted as generation owners",
         "joint_stop": "the wrapper never converts a material sidecar to CauseHit: the certified core joint-stop law runs first on independently witnessed physical/internal hits, then the sidecar is preserved beside that result; therefore it cannot alter first time, tie ownership, or disposition",
         "currency_separation": "no stock cloning, no dW addition, no smooth K_phys identification, no later Hahn split",
         "claims_global_regularity": False,
@@ -257,7 +259,7 @@ class MaterialSidecarCentralStress:
     stock_clone_violations: int
     joint_sidecar_projections: int
     sidecar_only_stop_rejections: int
-    genuine_material_service_preserved: int
+    native_source_service_preserved: int
     maximum_boundary_energy: float
 
 
@@ -321,18 +323,13 @@ def stress(samples: int = 50_000, seed: int = 2026081306) -> MaterialSidecarCent
         clone += int(out.stock_charge_count != 1 or out.decomposition.stock_cloned_per_sidecar)
 
         # The sidecar is carried beside a real stop, never injected into its cause set.
-        cause = (
-            PhysicalCause.MATERIAL_RELINK
-            if j % 5 == 0
-            else (PhysicalCause.HIGH_STRAIN_DISSIPATION if j % 5 == 1 else PhysicalCause.RESOLVED_SOURCE)
-        )
+        cause = PhysicalCause.HIGH_STRAIN_DISSIPATION if j % 3 == 0 else PhysicalCause.RESOLVED_SOURCE
         physical_hits = (CauseHit(0.4, cause, 10.0 ** rng.uniform(-9.0, 9.0), "independent physical witness"),)
         joint = material_sidecar_joint_stop_projection(out, physical_hits=physical_hits)
         joint_count += 1
         if joint.joint_physical_causes != (cause.value,) or joint.master_disposition != MasterDisposition.RECURSE_CRITICAL.value:
             raise AssertionError("material boundary sidecar changed the independently witnessed physical joint stop")
-        if cause is PhysicalCause.MATERIAL_RELINK:
-            genuine_material_preserved += int(joint.joint_physical_causes == (PhysicalCause.MATERIAL_RELINK.value,))
+        genuine_material_preserved += int(joint.joint_physical_causes == (cause.value,))
 
         # A positive/zero boundary sidecar by itself cannot manufacture a stop.
         if j % 17 == 0:
@@ -366,7 +363,7 @@ def stress(samples: int = 50_000, seed: int = 2026081306) -> MaterialSidecarCent
         stock_clone_violations=clone,
         joint_sidecar_projections=joint_count,
         sidecar_only_stop_rejections=sidecar_only_rejected,
-        genuine_material_service_preserved=genuine_material_preserved,
+        native_source_service_preserved=genuine_material_preserved,
         maximum_boundary_energy=max_boundary,
     )
 
@@ -384,7 +381,7 @@ def main() -> None:
     (args.outdir / "material_sidecar_stock_central_routing.json").write_text(
         json.dumps(payload, indent=2), encoding="utf-8"
     )
-    md = f"""# Material-sidecar inherited-stock central routing\n\nStatus: **{STATUS}**.\n\nOne inherited carrier stock charge survives. Membership rereading is zero-charge provenance. Selected-family `R_switch` survives as non-event Moyal boundary currency and is never promoted into `dW`, smooth `K_phys`, or a physical first-stop hit. Independently evidenced material/source service remains a separate physical cause.\n\nStress: `{out.samples}` typed sidecar-bearing stock relays\n- membership / selected-family / mixed: `{out.membership_cases}` / `{out.selected_family_cases}` / `{out.mixed_cases}`\n- positive Moyal-boundary cases: `{out.positive_boundary_cases}`\n- transplanted-decomposition rejections: `{out.transplant_rejections}`\n- recursive-generation events created: `{out.recursive_generation_events_created}`\n- sidecars promoted to physical hits: `{out.physical_hits_promoted}`\n- stock-clone violations: `{out.stock_clone_violations}`\n- joint stops carrying sidecars after physical classification: `{out.joint_sidecar_projections}`\n- sidecar-only no-stop rejections: `{out.sidecar_only_stop_rejections}`\n- genuine material-service hits preserved: `{out.genuine_material_service_preserved}`\n- maximum sampled boundary energy: `{out.maximum_boundary_energy:.12e}`\n\nNo global-regularity claim is made.\n"""
+    md = f"""# Material-sidecar inherited-stock central routing\n\nStatus: **{STATUS}**.\n\nOne inherited carrier stock charge survives. Membership rereading is zero-charge provenance. Selected-family `R_switch` survives as non-event Moyal boundary currency and is never promoted into `dW`, smooth `K_phys`, or a physical first-stop hit. A genuine material-state exit must resolve to conservative `K_phys` boundary flux or to an independently evidenced native source/service owner; the material name itself is not another cause.\n\nStress: `{out.samples}` typed sidecar-bearing stock relays\n- membership / selected-family / mixed: `{out.membership_cases}` / `{out.selected_family_cases}` / `{out.mixed_cases}`\n- positive Moyal-boundary cases: `{out.positive_boundary_cases}`\n- transplanted-decomposition rejections: `{out.transplant_rejections}`\n- recursive-generation events created: `{out.recursive_generation_events_created}`\n- sidecars promoted to physical hits: `{out.physical_hits_promoted}`\n- stock-clone violations: `{out.stock_clone_violations}`\n- joint stops carrying sidecars after physical classification: `{out.joint_sidecar_projections}`\n- sidecar-only no-stop rejections: `{out.sidecar_only_stop_rejections}`\n- native physical source/service hits preserved: `{out.native_source_service_preserved}`\n- maximum sampled boundary energy: `{out.maximum_boundary_energy:.12e}`\n\nNo global-regularity claim is made.\n"""
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)
 

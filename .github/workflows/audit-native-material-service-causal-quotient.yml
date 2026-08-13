@@ -1,0 +1,67 @@
+name: Audit native material-service causal quotient
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'theorem/genuine-material-source-service-recurrence'
+
+permissions:
+  contents: read
+
+jobs:
+  independent-material-law-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Independent theorem/dependency tests
+        run: >-
+          pytest -q
+          tests/test_native_material_service_causal_quotient.py
+          tests/test_smooth_relink_donor_quotient.py
+          tests/test_heat_edge_material_ownership.py
+          tests/test_coherent_increment_service.py
+          tests/test_fresh_service_scale_reentry.py
+          tests/test_physical_branch_compiler.py
+          tests/test_recursive_physical_witness_constructor.py
+          tests/test_joint_causal_stop_projection.py
+          tests/test_material_sidecar_stock_central_routing.py
+          tests/test_continuum_master_event_quotient.py
+      - name: Independent 100k material/service quotient stress
+        run: >-
+          python -m src.native_material_service_causal_quotient
+          --samples 100000 --seed 2026081317
+          --outdir audit-native-material-service-causal-quotient/analytic
+      - run: cat audit-native-material-service-causal-quotient/analytic/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-native-material-service-causal-quotient-analytic-results
+          path: audit-native-material-service-causal-quotient/
+
+  independent-actual-ns-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Opposite-phase lower-amplitude actual NS material-reading audit
+        run: >-
+          python -m src.native_material_service_causal_quotient_pde_probe
+          --resolutions 24 28 --cutoff 7 --steps 48
+          --viscosity 0.03 --amplitude 0.5 --duration 0.0015 --phase-sign -1
+          --outdir audit-native-material-service-causal-quotient-ns/main
+      - run: cat audit-native-material-service-causal-quotient-ns/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-native-material-service-causal-quotient-actual-ns-results
+          path: audit-native-material-service-causal-quotient-ns/
