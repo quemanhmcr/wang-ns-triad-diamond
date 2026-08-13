@@ -16,6 +16,7 @@ Historical detail through the radial theorem is preserved verbatim in `docs/hist
 - radial spectral crossing layer cake: `667e687cb740a77df944753c575f581abad14199`
 - hard-tail true-upward supply: `d064bc4d780d9c90d36e64c7b84c3b771b74c896`
 - resolved-contact native binding: `476760236e197d614d5bb211b438e49701652f67`
+- pure-UV true-upward natural-window binding: `e7b302f3590bbddb83b3d9bd9e8c213b5ada8b4e`
 
 For complete historical run IDs and metrics of the earlier entries, use the archived full ledger above.
 
@@ -90,3 +91,21 @@ The measured legacy exact-SHA integration `31655796159` ran from `00:50:55Z` to 
 The five full-compute shard loads were selected from the measured legacy runtime profile, approximately `309,310,310,308,308` module-seconds.  This gives the full-compute speedup without reducing experiments.  Exact-content reuse is stricter: node identity includes exact command, pinned runtime, requirements and transitive local source-import closure; dynamic imports fail closed.  Baseline artifacts additionally carry per-node output digests, checked before materialization and again against current outputs.  A tamper regression and a runtime-contract regression are part of the `914`-test suite.
 
 Two independent historical full-integration runs had already produced exactly the same deterministic legacy artifact tree digest, `sha256:1c38edfed2b05843bb0eff21629390c923dc45b6ca575bf9aa912cc11033ae3e`, despite intervening theorem additions.  V2 turns that observed determinism into an explicit, typed provenance rule rather than repeatedly spending ~30 minutes rediscovering unchanged outputs.
+
+
+## Pure-UV true-upward natural-window binding — exact certification
+
+Exact theorem SHA: `e7b302f3590bbddb83b3d9bd9e8c213b5ada8b4e`.
+
+Serious gates: dedicated `31661573466` **success**; independent audit `31661573459` **success**; physical-energy causal integration v2 `31661727711` **success** (`923` tests, master `20,000` traces with worst margin `0.0`, planner `58` reuse + `1` execute, all `59` results present).
+
+Stored trees:
+- `recorded-results/31661573466/` — `sha256:11236c12f4cffb02b5318aba6a4f04d9c4646ce6dbc5ebbf71857d39188265da`;
+- `recorded-results/31661573459/` — `sha256:94a14e023562cfcbc5901e909afbe4d82ba9d9de522a0b074bb798a9faf8ab14`;
+- `recorded-results/31661727711/` — `sha256:5c2b52e74529ecdbe80be2b5d457c4a5395b9beefab033a943e1473aef7e65d2`.
+
+Strengthened `75k/100k` physical-triad stresses covered donor/shell ratios down to `0.250001213172 / 0.250000116655` and up to `0.499998716333 / 0.499999635558`; `83,990 / 111,688` atoms lay below `0.49`; maximum parent/shell ratios `1.43535063102 / 1.43955108032`; coalescing and `p_scale` residuals `0`.
+
+Actual NS: dedicated cross-FFT pure common-work spread `2.087e-16`, independent amplitude-0.5 spread `0`, strict parent margin above `M/4` `2.40312423743`, and simultaneous deep-contact/pure work remained positive (`0.0748690219794 / 0.039721764731` dedicated; `0.00935862774742 / 0.00496522059137` audit).
+
+Failure lineage: `28b4fde...` incorrectly required coexistence in the separate selected-pure fixture; actual NS forced the check onto the deep six-mode trajectory.  `b28e33e...` then passed theorem-specific gates, but artifact review showed the random stress only sampled the endpoint donor ratio `1/2`; the experiment was strengthened to sweep the exact admissible tail-boundary interval.  `ec72ac0...` exposed an orientation-object mistake in stress parent lookup; final `e7b302f...` uses canonical closed-mode parent indices.  These repairs changed neither theorem law nor PDE/tolerance/sample/owner constants.

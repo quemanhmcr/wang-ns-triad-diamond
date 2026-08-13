@@ -1,0 +1,17 @@
+{
+  "bad_deficit": "epsilon_B=1-F(B)/(J*A(B))>=1e-4 on the same measurable bad dW+ restriction",
+  "bad_fate": "same dW+ restriction -> shared physical FixedTransferLossGate -> fixed_transfer_loss -> TRANSFER_WORK_LOSS -> TRANSFER_COST; first_time=None",
+  "canonical_causal_law": "Hahn-positive part dW+ of the already reconstructed signed unordered Fourier/helicity NS edge measure",
+  "capacity_is_causal_law": false,
+  "claims_global_regularity": false,
+  "coherent_povm_scope": "general positive coherent localization remains an exact signed-work representation; no causal Hahn identification is made without a positive mass-preserving kernel from dW+",
+  "eta0": 0.0001,
+  "fixed_transfer_threshold": "delta_tau=tau^2/1036800000, 0<tau<=0.1, hence delta_tau<1e-4",
+  "good_fate": "Young-eligible only; marking_good=False and generated continuation remain unproved",
+  "hard_cell_handoff": "deterministic hard Fourier/helicity map carries pi_#dW+ as inherited cause and pi_#dW as signed cell work; no later Hahn is causal",
+  "later_hahn": "(pi_#dW)^+ is a cancellation diagnostic and never a second causal law; (pi_#dW)^+ <= pi_#dW+",
+  "mixed_fate_seam": "if one hard cell contains both good and bad dW+ mass, using full T_C would let already-terminal bad work assist Young while subtracting only bad positive work destroys trilinear identity; such good mass stays unresolved Young-eligible and no arbitrary refinement is introduced",
+  "routing_partition": "G={T_e>0,(J_e/J*)c_e>1-1e-4}; B={T_e>0,(J_e/J*)c_e<=1-1e-4}",
+  "status": "EXACT_CANONICAL_POSITIVE_EDGE_WORK_ROUTING__ACTUAL_DW_HAHN_RESTRICTION__GEOMETRY_BAD_SAME_LAW_STAGE_ZERO_TRANSFER_LOSS__GEOMETRY_GOOD_ONLY_YOUNG_ELIGIBLE__FATE_PURE_SIGNED_CELL_BINDING_ONLY__MIXED_FATE_CELL_SEAM_EXPOSED__POSITIVE_PUSHFORWARD_NOT_REHAHN",
+  "young_input": "full signed T_C=(pi_#dW)(C), not gross (pi_#dW+)(C), may bind the good branch only on fate-pure cells with zero inherited bad-positive mass"
+}

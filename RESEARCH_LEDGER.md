@@ -1,6 +1,6 @@
 # RESEARCH LEDGER — current theorem architecture
 
-Status: current through the certified **resolved-contact native binding** theorem, exact theorem SHA `476760236e197d614d5bb211b438e49701652f67`. This file is deliberately theorem-facing and compact. CI runs, stress counts, residuals, artifact digests, and failure lineage live in `docs/experimental_certification_log.md`; the pre-compaction full ledger is archived under `docs/history/`.
+Status: current through the certified **pure-UV true-upward natural-window binding** theorem, exact theorem SHA `e7b302f3590bbddb83b3d9bd9e8c213b5ada8b4e`. This file is deliberately theorem-facing and compact. CI runs, stress counts, residuals, artifact digests, and failure lineage live in `docs/experimental_certification_log.md`; the pre-compaction full ledger is archived under `docs/history/`.
 
 ## 1. Non-negotiable physical rules
 
@@ -75,6 +75,12 @@ If the resolved-contact owner carries `nu D_tail/2`, then either contact HH carr
 
 `sqrt(mu_win)/(p_scale p_time) >= nu D_tail/(15 c sqrt(pi) N E_global)`.
 
+The pure-UV branch is now native as well.  Pure support forces the **unique** first shell `M=2N`, donor radius in `(M/4,M/2]`, and both parents in `(M/4,3M/2]`.  Hence every admissible resolved cutoff vanishes on both parents and `h=u` exactly; there is no mixed/interface repartition.  Donor sidecars are coalesced to one recipient canonical `dW+` charge before capacity.  Because all pure mass is already on one shell, `p_scale=1` and output-scale entropy is exactly zero.  The same signed-edge variation bridge `dmu<=d|W|<=dA`, followed by `R=3/2` clean Young on the physical shell-natural window, gives on the pure-owner branch
+
+`sqrt(mu_win)/p_time >= nu D_tail/(9 c sqrt(pi) N E_global)`.
+
+Thus both true-upward support phenomena are now routed without re-Hahn and without changing the common `N dW` unit: resolved contact goes to K/S or contact-HH natural time; pure UV goes directly to first-shell natural time.
+
 ## 5. Other certified recurrence controls
 
 - Smooth physical relink is conservative same-event redistribution; symmetric strain/deformation remains a genuine recursive owner.
@@ -85,10 +91,9 @@ If the resolved-contact owner carries `nu D_tail/2`, then either contact HH carr
 
 ## 6. Current frontier
 
-1. **Pure-UV branch:** it is already first-shell `M=2N`, comparable, and `h=u` on both parents. Test whether its donor-restricted canonical positive submeasure goes directly into absolute-work sliding natural-window / critical-shell continuation with `R=3/2`, without output-scale Hahn/locality machinery.
-2. **Mixed genuine-owner recurrence:** resolved contact no longer forms an independent owner, but repeated strain/service/reuse/source/material branches still need universal physical renewal/exhaustion.
-3. Local HH retains the degenerate full-signed Young/Christ-margin seam and, only if a future representation truly needs it, a separately proved coherent positive kernel.
-4. The initial-data and hypothetical singular-time interfaces remain open. There is **no 3D Navier–Stokes global-regularity claim**.
+1. **Mixed genuine-owner recurrence:** the hard-tail true-upward support split is now fully routed, so the next native question is universal physical renewal/exhaustion across genuine recursive owners: strain, critical-shell service, source/material service, and their already-certified reuse laws.  Conservative K/relink remains same-event redistribution and must not be counted as recursive depth.
+2. Local HH retains the degenerate full-signed Young/Christ-margin seam and, only if a future representation truly needs it, a separately proved coherent positive kernel.
+3. The initial-data and hypothetical singular-time interfaces remain open. There is **no 3D Navier–Stokes global-regularity claim**.
 
 ## 7. Working discipline and reading order
 
@@ -97,4 +102,4 @@ Before every new theorem branch: fetch/verify `origin/main`, read this file in f
 Full causal integration now uses a certified content-addressed execution layer. Reuse is allowed only when exact command/runtime/transitive `src` closure and the stored per-node output digest match; new, changed, dynamic-import or unproven nodes execute fail-closed. Full pytest and master-episode stress still run every invocation, and `force_full` remains available for differential sweeps. This is CI provenance only, never a physical causal law.
 
 Current reading spine:
-`physical_energy_causal_bridge.md` → `high_frequency_dissipation_reentry.md` → `helical_physical_edge_registration.md` → `continuum_helical_edge_measure_registration.md` → `canonical_positive_edge_work_routing.md` → `cyclic_helical_triad_donor_kernel.md` → `helical_mode_set_energy_continuity.md` → `radial_spectral_crossing_layer_cake.md` → `hard_tail_true_upward_supply.md` → `resolved_contact_native_binding.md` → `master_no_escape.md`.
+`physical_energy_causal_bridge.md` → `high_frequency_dissipation_reentry.md` → `helical_physical_edge_registration.md` → `continuum_helical_edge_measure_registration.md` → `canonical_positive_edge_work_routing.md` → `cyclic_helical_triad_donor_kernel.md` → `helical_mode_set_energy_continuity.md` → `radial_spectral_crossing_layer_cake.md` → `hard_tail_true_upward_supply.md` → `resolved_contact_native_binding.md` → `pure_uv_true_upward_natural_window.md` → `master_no_escape.md`.

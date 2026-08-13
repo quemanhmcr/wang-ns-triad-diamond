@@ -1,0 +1,30 @@
+{
+  "certificate": {
+    "status": "EXACT_RESOLVED_INTERFACE_DONOR_QUOTIENT__POSITIVE_INTERFACE_TO_CONSERVATIVE_SKEW_DONOR_OR_EXISTING_STRAIN__FINITE_SAME_EVENT_DONOR_EXHAUSTION__CIRCULATION_ZERO_RECURSION_DEPTH",
+    "operator_bridge": "full high-tail resolved mixed work uses the actual linearized low-high operator L_V on the event role partition; the moving-projector commutator is a companion observable with the same K/S provenance, not an identified measure",
+    "signed_split": "for the actual resolved linearized low-high operator L=K+S with K*=-K and S*=S, every signed work atom satisfies R=R_K+R_S, hence [R]_+<=[R_K]_+ + [R_S]_+",
+    "positive_owner_split": "positive resolved cross/interface work is covered by conservative skew redistribution and existing symmetric strain/deformation work; one carries at least half, exact ties joint",
+    "skew_divergence": "for the signed resolved-work convention T_ab=-T_ba and R_a^K=sum_b T_ab; with F[b->a]=[T_ab]_+, R_a^K=inflow_a-outflow_a and sum_a R_a^K=0; an overall PDE sign only reverses edge orientation",
+    "subset_identity": "for every role set C, sum_(a in C) R_a^K equals positive boundary inflow minus positive boundary outflow; all internal circulation cancels exactly",
+    "donor_exhaustion": "the backward closure of any positive-gain role under positive incoming skew flux contains a negative-net donor; otherwise it has positive net gain but no positive external inflow, contradicting the subset identity",
+    "finite_same_event": "after removing cycles, a donor path has at most (#roles-1) edges and stays at the same physical event time; role-transfer depth is not recursive PDE depth",
+    "symmetric_semantics": "the S-branch is the existing physical symmetric strain/deformation work; the moving-commutator interface is its off-diagonal specialization; delegate once to coherent-deformation/high-strain/objective-source/critical-D_V owners, never to a new source currency",
+    "skew_semantics": "the K-branch is conservative donor tracing; it creates neither energy nor a second causal charge, and internal role circulation is quotiented before master recursion",
+    "high_tail": "a clean high-tail interface owner >=nu D_tail/2 therefore gives conservative skew donor work or existing symmetric strain work >=nu D_tail/4 in the same common N dW unit",
+    "anti_reweight": "no role index, theorem name, shell-dependent M/N factor, or normalized interface fraction is allowed to redefine the physical causal law",
+    "scale": "same-event interface donor tracing supplies no scale progress; any later scale motion must come from the physical owner reached after the quotient",
+    "scope": "this closes resolved interface as an independent recursive-generation loophole; it does not prove that the reached donor/strain owner terminates globally and it makes no Navier-Stokes regularity claim"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_signed_split_residual": 8.881784197001252e-16,
+    "minimum_positive_cover_margin": -1.7763568394002505e-15,
+    "worst_role_divergence_residual": 2.100962885439726e-15,
+    "worst_total_skew_residual": 2.6968038962353156e-15,
+    "worst_closure_balance_residual": 2.7511442661221775e-15,
+    "minimum_recipient_incoming_margin": 0.0,
+    "donor_existence_failures": 0,
+    "maximum_shortest_donor_path_length": 4,
+    "high_tail_component_failures": 0
+  }
+}

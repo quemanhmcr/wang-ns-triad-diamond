@@ -1,0 +1,15 @@
+{
+  "anti_theorem": "positive high-to-high/internal tail circulation may be arbitrarily large while true upward supply is zero",
+  "claims_global_regularity": false,
+  "common_unit": "all upward recipient shells remain in the parent-tail common N dW unit; no M_j/N causal reweighting",
+  "deep_upward": "every upward recipient shell M>=4N has an interaction parent at or below M/4 and therefore is not in the pure-UV HH support region",
+  "fifo_lifo_used": false,
+  "interface_scope": "resolved-scale parent contact is a support fact only; without a separate positive binding through the smooth cutoff it is not called an interface owner",
+  "later_hahn_used": false,
+  "owner_cover": "N E_>(t0) >= nu D_tail OR N Phi_up >= nu D_tail; exact ties remain joint",
+  "pure_uv_rigidity": "because the energy donor is itself one recipient interaction parent and |k_d|<=N, pure-UV upward supply forces M=2N; both parents then lie in (M/4,3M/2] by triad closure",
+  "status": "EXACT_HARD_TAIL_TRUE_UPWARD_SUPPLY__RADIAL_BOUNDARY_STOCK_FLOW_VISCOSITY__CANONICAL_LOW_TO_HIGH_SUPPLY_IN_COMMON_N_DW_UNIT__PURE_UV_HH_ONLY_FIRST_DYADIC_SHELL__DEEP_UPWARD_HAS_RESOLVED_SCALE_PARENT_CONTACT__NO_INTERNAL_CIRCULATION_REENTRY_OR_INTERFACE_OVERCLAIM",
+  "support_split": "each true upward atom is either pure-UV HH-by-support (both recipient interaction parents > M/4) or has resolved-scale parent contact (at least one <= M/4)",
+  "tail_identity": "N E_>(t1) + 2 nu D_tail + N Phi_down = N E_>(t0) + N Phi_up",
+  "upward_measure": "Phi_up is the already-certified low-to-high restriction of cyclic dW-/dW+ donor flow; high-to-high circulation is excluded before the owner split"
+}
