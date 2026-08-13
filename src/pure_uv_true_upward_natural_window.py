@@ -420,6 +420,7 @@ class PureUVNaturalWindowStress:
     maximum_parent_to_shell_ratio: float
     minimum_donor_to_shell_ratio: float
     maximum_donor_to_shell_ratio: float
+    interior_donor_ratio_atoms: int
     maximum_coalescing_native_residual: float
     minimum_natural_window_margin: float
     maximum_scale_probability_residual: float
@@ -445,7 +446,7 @@ def stress(samples: int = 75_000, seed: int = 2026081303) -> PureUVNaturalWindow
     if count <= 0:
         raise ValueError("positive stress sample count required")
     rng = np.random.default_rng(int(seed))
-    resolved = pure_checked = causes_checked = 0
+    resolved = pure_checked = causes_checked = interior_donor_ratio_atoms = 0
     max_parent = max_donor = max_coalesce = max_p_scale = 0.0
     min_donor = math.inf
     min_margin = math.inf
@@ -462,7 +463,27 @@ def stress(samples: int = 75_000, seed: int = 2026081303) -> PureUVNaturalWindow
             rr = mode_radius(flow.recipient_child_mode)
             if rr <= rd:
                 continue
-            split = hard_tail_upward_supply_split(triad, kernel, boundary=rd)
+            parent_radii = tuple(
+                mode_radius(mode)
+                for mode in triad.modes
+                if mode != flow.recipient_child_mode
+            )
+            if len(parent_radii) != 2:
+                raise AssertionError("closed-triad recipient lost its two interaction parents")
+            # Choose a real tail boundary N from the full admissible pure-UV
+            # corridor, not merely N=|k_d|.  For the selected donor->recipient
+            # flow we need
+            #   |k_d| <= N < |k_r| <= 2N
+            # and both recipient parents > N/2.  These are exactly
+            #   N >= max(|k_d|, |k_r|/2),
+            #   N < min(|k_r|, 2 min(parent radii)).
+            lower = max(rd, 0.5 * rr)
+            upper = min(rr, 2.0 * min(parent_radii))
+            if upper <= lower * (1.0 + 2.0e-12):
+                continue
+            frac = float(rng.uniform(0.02, 0.98))
+            boundary = lower + frac * (upper - lower)
+            split = hard_tail_upward_supply_split(triad, kernel, boundary=boundary)
             pure = tuple(atom for atom in split.atoms if atom.pure_uv_hh_by_support)
             if not pure:
                 continue
@@ -477,6 +498,7 @@ def stress(samples: int = 75_000, seed: int = 2026081303) -> PureUVNaturalWindow
                 ratio = atom.donor_radius / M
                 min_donor = min(min_donor, ratio)
                 max_donor = max(max_donor, ratio)
+                interior_donor_ratio_atoms += int(ratio < 0.49)
 
             H = law.total_common_unit_work
             threshold = 0.9 * min(split.upward_common_unit_work, 2.0 * H)
@@ -502,6 +524,10 @@ def stress(samples: int = 75_000, seed: int = 2026081303) -> PureUVNaturalWindow
             min_margin = min(min_margin, float(out["scale_time_tradeoff_margin"]))
     if resolved == 0 or pure_checked == 0 or causes_checked == 0:
         raise AssertionError("random physical stress did not exercise pure-UV upward recipient causes")
+    if interior_donor_ratio_atoms == 0 or min_donor >= 0.49:
+        raise AssertionError("pure-UV stress failed to enter the physical donor corridor below the N=|k_d| endpoint")
+    if min_donor <= 0.25 or max_donor > 0.5 + 5.0e-12:
+        raise AssertionError("pure-UV stress donor/shell ratios escaped the exact (1/4,1/2] corridor")
     bridge = canonical_hh_edge_total_variation_young_bridge()
     return PureUVNaturalWindowStress(
         status=STATUS,
@@ -512,6 +538,7 @@ def stress(samples: int = 75_000, seed: int = 2026081303) -> PureUVNaturalWindow
         maximum_parent_to_shell_ratio=max_parent,
         minimum_donor_to_shell_ratio=min_donor,
         maximum_donor_to_shell_ratio=max_donor,
+        interior_donor_ratio_atoms=interior_donor_ratio_atoms,
         maximum_coalescing_native_residual=max_coalesce,
         minimum_natural_window_margin=min_margin,
         maximum_scale_probability_residual=max_p_scale,
@@ -544,6 +571,7 @@ Stress: `{out.samples}` random physical closed-triad draws
 - pure-UV donor atoms / coalesced recipient causes: `{out.pure_uv_atoms_checked}` / `{out.recipient_causes_checked}`
 - maximum parent/shell ratio: `{out.maximum_parent_to_shell_ratio:.12g}`
 - donor/shell range: `{out.minimum_donor_to_shell_ratio:.12g}` / `{out.maximum_donor_to_shell_ratio:.12g}`
+- interior donor-ratio atoms (`|k_d|/M<0.49`): `{out.interior_donor_ratio_atoms}`
 - maximum coalescing residual: `{out.maximum_coalescing_native_residual:.3e}`
 - minimum natural-window margin: `{out.minimum_natural_window_margin:.3e}`
 - p_scale residual: `{out.maximum_scale_probability_residual:.3e}`
