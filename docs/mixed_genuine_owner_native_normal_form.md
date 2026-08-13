@@ -88,3 +88,9 @@ This is a refinement of the owner of the **same first-stop event**. The source c
 The companion draft `dominant_pressure_pair_descending_epoch_telescope.md` uses the certified pressure-pair supplier ratio `N_next/N<=1/4` together with the actual quarter-dominant hard-shell lower `mu_child>=80 Sigma_P/c`. Under the uniform objective pressure-owner floor and global kinetic-energy upper, every selected child frequency has a positive physical lower. Hence a **consecutive quarter-dominant resolved pressure-pair epoch is finite**.
 
 This does not remove the coarse source/service root from the mixed normal form: diffuse pressure-pair renewal and fresh SGS scale renewal remain source-service mechanisms, and pressure `H2` is not promoted to a terminal cost.
+
+## All resolved pressure-pair source epochs admit a stronger local-capacity telescope
+
+The companion draft `resolved_pressure_pair_descending_epoch_telescope.md` supersedes the quarter-dominant restriction at the eventually-pure level. On every resolved pressure-pair owner the actual positive pair source satisfies `R_pair>=Sigma_P/2`, while the certified pointwise absolute pair envelope gives `R_pair<=c N E_global/2560`. This forces a parent-frequency floor `N>=1280 Sigma_P/(cE_global)`. Combined with the same supplier's actual `N_next<=N/4` hard-shell geometry, **every consecutive resolved pressure-pair epoch is finite, including diffuse pair laws**.
+
+Pressure `H2` remains diagnostic/conjugate and is not used as a cost. Capacity remains a local upper envelope and is never promoted to causal or reset currency.
