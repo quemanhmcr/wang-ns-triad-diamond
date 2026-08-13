@@ -1,0 +1,64 @@
+name: PDE-native material source-service normal form
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'draft/pde-native-material-owner-normal-form'
+    paths:
+      - 'src/material_source_service_native_normal_form.py'
+      - 'tests/test_material_source_service_native_normal_form.py'
+      - 'docs/material_source_service_native_normal_form.md'
+      - '.github/workflows/material-source-service-native-normal-form.yml'
+
+permissions:
+  contents: read
+jobs:
+  native-normal-form:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Focused native normal-form theorem
+        run: >-
+          pytest -q
+          tests/test_material_source_service_native_normal_form.py
+          tests/test_material_sidecar_stock_central_routing.py
+          tests/test_smooth_relink_donor_quotient.py
+          tests/test_fresh_service_scale_reentry.py
+          tests/test_objective_source_routing_compiler.py
+          tests/test_joint_causal_stop_projection.py
+          tests/test_critical_shell_service_reentry.py
+      - name: 75k fail-closed owner-topology stress
+        run: >-
+          python -m src.material_source_service_native_normal_form
+          --samples 75000 --seed 2026081307
+          --outdir results-material-source-service-native-normal-form/main
+      - run: cat results-material-source-service-native-normal-form/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: material-source-service-native-normal-form-results
+          path: results-material-source-service-native-normal-form/
+
+  dependency-pde-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: PDE-facing dependency regression
+        run: >-
+          pytest -q
+          tests/test_same_carrier_inherited_energy_relay_pde_probe.py
+          tests/test_smooth_quadratic_carrier_interface.py
+          tests/test_hard_tail_true_upward_supply_pde_probe.py
+          tests/test_canonical_positive_edge_work_routing_pde_probe.py

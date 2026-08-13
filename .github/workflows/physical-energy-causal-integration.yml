@@ -19,6 +19,9 @@ on:
       - 'tests/test_high_strain_descending_epoch_telescope.py'
       - 'src/critical_shell_service_reentry.py'
       - 'src/material_label_carrier_quotient.py'
+      - 'src/material_source_service_native_normal_form.py'
+      - 'tests/test_material_source_service_native_normal_form.py'
+      - '.github/workflows/material-source-service-native-normal-form.yml'
       - 'src/objective_source_routing_compiler.py'
       - 'src/objective_pressure_pair_atomization.py'
       - 'src/coherent_increment_service.py'
@@ -148,6 +151,7 @@ jobs:
       - run: python -m src.full_natural_checkpoint_quotient --samples 50000 --outdir results-integration/full-natural-checkpoint-quotient
       - run: python -m src.same_carrier_checkpoint_segmentation_quotient --samples 50000 --outdir results-integration/same-carrier-checkpoint-segmentation
       - run: python -m src.material_label_carrier_quotient --samples 50000 --outdir results-integration/material-label-carrier-quotient
+      - run: python -m src.material_source_service_native_normal_form --samples 50000 --seed 2026081307 --outdir results-integration/material-source-service-native-normal-form
       - run: python -m src.objective_source_routing_compiler --samples 50000 --outdir results-integration/objective-source-routing-compiler
       - run: python -m src.objective_pressure_pair_atomization --samples 50000 --outdir results-integration/objective-pressure-pair-atomization
       - run: python -m src.coherent_increment_service --samples 50000 --outdir results-integration/coherent-increment-service
