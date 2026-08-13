@@ -94,3 +94,9 @@ This does not remove the coarse source/service root from the mixed normal form: 
 The companion draft `resolved_pressure_pair_descending_epoch_telescope.md` supersedes the quarter-dominant restriction at the eventually-pure level. On every resolved pressure-pair owner the actual positive pair source satisfies `R_pair>=Sigma_P/2`, while the certified pointwise absolute pair envelope gives `R_pair<=c N E_global/2560`. This forces a parent-frequency floor `N>=1280 Sigma_P/(cE_global)`. Combined with the same supplier's actual `N_next<=N/4` hard-shell geometry, **every consecutive resolved pressure-pair epoch is finite, including diffuse pair laws**.
 
 Pressure `H2` remains diagnostic/conjugate and is not used as a cost. Capacity remains a local upper envelope and is never promoted to causal or reset currency.
+
+## Strictly descending fresh-SGS subepochs are also finite
+
+The companion draft `descending_fresh_sgs_scale_epoch_telescope.md` uses square-normalization of the canonical annular frame to obtain the local envelope `F_fresh<=4c N E_global`. Since the actual fresh owner has `F_fresh>=Y/4`, every fresh-source parent has `N>=Y/(16cE_global)`. Therefore any consecutive fresh-SGS subepoch whose selected physical child satisfies `N_next<=N/2` is finite by half-scale descent.
+
+The remaining fresh source-service difficulty is consequently concentrated in top/comparable-band renewal (`j=0`, or the non-descending upper selection at `j=-1`). No scale entropy or material-freshness label is promoted to cost to dispose of that survivor.
