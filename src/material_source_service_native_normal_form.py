@@ -26,6 +26,7 @@ from src.smooth_relink_donor_quotient import (
     SMOOTH_RELINK_SAME_EVENT_RELAY,
     SmoothRelinkDonorCertificate,
 )
+from src.smooth_quadratic_carrier_interface import RELINK_OWNER
 
 
 STATUS = (
@@ -254,7 +255,7 @@ def _stress_smooth_relink_certificate(scale: float) -> SmoothRelinkDonorCertific
     if not math.isfinite(x) or x <= 0:
         raise ValueError("positive finite relink stress scale required")
     return SmoothRelinkDonorCertificate(
-        relink_owner="smooth_physical_conservative_relink",
+        relink_owner=RELINK_OWNER,
         recipient_roles=(0,),
         terminal_negative_net_donor_roles=(1,),
         maximum_shortest_donor_path_length=1,
