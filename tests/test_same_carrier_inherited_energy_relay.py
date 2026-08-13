@@ -220,6 +220,7 @@ def test_central_master_keeps_sidecar_bearing_typed_inheritance_event_facing_fai
     assert route.recursive_event_created is True
     assert route.between_time_stock_relays == ()
     assert route.same_carrier_inherited_energy_certificate is None
+    assert route.material_sidecar_stock_relay_certificate is None
 
 
 def test_central_master_keeps_untyped_inheritance_event_facing():

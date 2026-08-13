@@ -1,0 +1,63 @@
+name: Audit material-sidecar stock central routing
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'theorem/material-sidecar-stock-central-routing'
+
+permissions:
+  contents: read
+
+jobs:
+  independent-central-joint-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Independent theorem/dependency tests
+        run: >-
+          pytest -q
+          tests/test_material_sidecar_stock_central_routing.py
+          tests/test_joint_causal_stop_projection.py
+          tests/test_material_sidecar_stock_owner_decomposition.py
+          tests/test_material_label_carrier_quotient.py
+          tests/test_physical_branch_compiler.py
+      - name: Independent 100k central sidecar-stock stress
+        run: >-
+          python -m src.material_sidecar_stock_central_routing
+          --samples 100000 --seed 2026081316
+          --outdir audit-material-sidecar-stock-central-routing/central
+      - run: |
+          cat audit-material-sidecar-stock-central-routing/central/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-material-sidecar-stock-central-routing-analytic-results
+          path: audit-material-sidecar-stock-central-routing/
+
+  independent-actual-ns-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Opposite-phase lower-amplitude actual NS carrier audit
+        run: >-
+          python -m src.same_carrier_inherited_energy_relay_pde_probe
+          --resolutions 24 28 --steps 48 --duration 0.0015
+          --amplitude 0.5 --phase-sign -1
+          --outdir audit-material-sidecar-stock-central-routing-ns/main
+      - run: cat audit-material-sidecar-stock-central-routing-ns/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-material-sidecar-stock-central-routing-actual-ns-results
+          path: audit-material-sidecar-stock-central-routing-ns/

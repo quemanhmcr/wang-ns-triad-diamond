@@ -1,0 +1,66 @@
+name: Material-sidecar stock central routing
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'theorem/material-sidecar-stock-central-routing'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-central-and-joint-law:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Focused central/joint material-boundary theorem
+        run: >-
+          pytest -q
+          tests/test_material_sidecar_stock_central_routing.py
+          tests/test_joint_causal_stop_projection.py
+          tests/test_same_carrier_inherited_energy_relay.py
+          tests/test_material_sidecar_stock_owner_decomposition.py
+          tests/test_continuum_master_event_quotient.py
+      - name: Physical cause compiler regression
+        run: pytest -q tests/test_physical_branch_compiler.py tests/test_recursive_physical_witness_constructor.py
+      - name: 75k typed central sidecar-stock stress
+        run: >-
+          python -m src.material_sidecar_stock_central_routing
+          --samples 75000 --seed 2026081306
+          --outdir results-material-sidecar-stock-central-routing/central
+      - run: |
+          cat results-material-sidecar-stock-central-routing/central/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: material-sidecar-stock-central-routing-analytic-results
+          path: results-material-sidecar-stock-central-routing/
+
+  actual-ns-carrier-referee:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Actual Galerkin same-carrier stock regression
+        run: pytest -q tests/test_same_carrier_inherited_energy_relay_pde_probe.py
+      - name: Two-representation actual NS carrier referee
+        run: >-
+          python -m src.same_carrier_inherited_energy_relay_pde_probe
+          --resolutions 24 28 --steps 32 --duration 0.001
+          --outdir results-material-sidecar-stock-central-routing-ns/main
+      - run: cat results-material-sidecar-stock-central-routing-ns/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: material-sidecar-stock-central-routing-actual-ns-results
+          path: results-material-sidecar-stock-central-routing-ns/
