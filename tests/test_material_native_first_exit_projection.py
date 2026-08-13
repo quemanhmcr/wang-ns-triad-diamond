@@ -21,7 +21,7 @@ def _monitor(label: str, values=(0.0, 1.0), threshold=0.5):
         label=label,
         values=values,
         threshold=threshold,
-        topology=ThresholdTopology.CLOSED_HIT,
+        topology=ThresholdTopology.CLOSED,
     )
 
 
