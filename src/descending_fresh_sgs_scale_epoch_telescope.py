@@ -161,7 +161,7 @@ def certify_fresh_sgs_scale_owner(
         parent_frequency=float(parent_frequency),
         forced_square_service_threshold=float(forced_square_service_threshold),
         fresh_service=float(route["fresh_service"]),
-        selected_band_index=int(route["selected_band_index"]),
+        selected_band_index=int(route["selected_band"]),
         selected_band_service=float(route["selected_band_service"]),
         hard_shell_candidates=(candidates[0], candidates[1]),
         selected_hard_shell_mass_lower=float(route["hard_shell_mass_lower"]),
