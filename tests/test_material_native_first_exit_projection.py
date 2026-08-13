@@ -18,9 +18,9 @@ def _material():
 
 def _monitor(label: str, values=(0.0, 1.0), threshold=0.5):
     return PhysicalPathMonitor(
-        label=label,
-        values=values,
+        cause=label,
         threshold=threshold,
+        values=tuple(values),
         topology=ThresholdTopology.CLOSED,
     )
 
