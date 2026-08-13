@@ -1,0 +1,11 @@
+{
+  "executed": [
+    {
+      "command": "python -m src.continuum_master_event_quotient --samples 50000 --outdir results-integration/continuum-master-event-quotient",
+      "fingerprint": "75e2aff812f47048e88ce571a8f7fef45c9ad920a8a1ffea295d7ec31891ef37",
+      "node_id": "continuum_master_event_quotient"
+    }
+  ],
+  "schema": 1,
+  "shard": 4
+}

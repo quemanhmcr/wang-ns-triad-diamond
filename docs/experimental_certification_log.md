@@ -20,6 +20,7 @@ Historical detail through the radial theorem is preserved verbatim in `docs/hist
 - same-carrier inherited-energy relay: `ae13f9c838878f50c496b9a3e8b22d680ab789e3`
 - material-sidecar / inherited-stock owner decomposition: `c39f70ed3e9f4edfc08e23b996ba872d91c63ed6`
 - material-sidecar inherited-stock central/joint routing: `376fd52e1c891c774b70cf339b192bea7045107f`
+- native material-service causal quotient: `d6ee03d5b9b7a82d11a2259c5dc0b8ae2ac945ab`
 
 For complete historical run IDs and metrics of the earlier entries, use the archived full ledger above.
 
@@ -202,3 +203,32 @@ CI-economy lineage: an initial static Phase-B design modified the core joint-sto
 
 No global-regularity claim is made.
 
+
+
+## Native material-service causal quotient — exact certification
+
+Exact theorem SHA: `d6ee03d5b9b7a82d11a2259c5dc0b8ae2ac945ab`.
+
+Serious gates on that exact SHA:
+
+- dedicated `31687889719` — **success**; `92` focused/dependency tests, `75,000` analytic quotient states, and two-representation amplitude-1 actual Fourier--Galerkin NS anti-theorem;
+- independent audit `31687889469` — **success**; `90` independent tests, `100,000` analytic states, and opposite-phase amplitude-0.5 actual NS audit;
+- physical-energy causal integration v2 `31687918903` — **success**; `968` tests; master `20,000` traces with worst margin `0.0`; planner `63` nodes = `60` exact-content reuse + `3` execute on shards `4,5`; all results present and all `60` baseline-matched outputs byte-compared.
+
+The three v2 non-reuse nodes were exactly `continuum_master_event_quotient` (transitive source change, shard 4), `material_sidecar_stock_central_routing` (transitive source change, shard 5), and new `native_material_service_causal_quotient` (shard 5).
+
+Recorded exact-SHA artifact-tree digests:
+
+- `recorded-results/31687889719/` — `sha256:90326a6fe682f42053be29038bcc2aaad82b3eb0b38e8453ea2764c5d2e0f358`;
+- `recorded-results/31687889469/` — `sha256:10ca49423266cc4eaba3d335d2f41fe585ab237d3511cd06e4de67bedf82eea4`;
+- `recorded-results/31687918903/` — `sha256:b9293e104a0008102b35b853269ed8e35eccbb6e95bf313a2ca2b5b4f1c5b69f`.
+
+GitHub artifact digests: dedicated analytic `sha256:f89cd539127680688b52ffa501f85cc5b559dc6e31f5be7db5f410345c105f29`; dedicated NS `sha256:e945264050aa30d3ebf611de6f68d6f779de2dc52078e4990ae2543ae88d6039`; audit analytic `sha256:d6a816b2f69f8a9716e914dcf4ef9900224085f93c66c2162358438f5e67639e`; audit NS `sha256:c01da5760eb14fefbc3e0d9b5fca5f505fbae08f5f3f32062e3e9907dddae886`; v2 aggregate `sha256:703af79847b3b74bcde8d4b23f21961fb7430bf9ed9997573ce34efdfe90a334`; v2 plan `sha256:e769289b4d847f09971e279d13086ddec7e51adf123d166ff16b68d9cc17899c`.
+
+Dedicated analytic stress: maximum certified smooth-role `K_phys` subset-divergence residual `1.421e-14`; pair antisymmetry residual `0`; positive-service OO/ON/NN partition residual `1.137e-13`; `74,929` material rereadings changed the partition; `21,430` raw material-owner attempts were rejected; recursive generations created by the quotient `0`. Audit values were `1.421e-14`, `0`, `8.527e-14`, `99,879`, `28,572`, and `0`, respectively.
+
+The amplitude-1 actual NS anti-theorem held one trajectory and the positive law `|u(x-(pi/2,0,0))-u(x)|^2` fixed while changing only geometric material reading. Cross-FFT total-service residual was `2.065e-16`, minimum OO/ON/NN partition-change fraction `1`, global energy-balance residual `2.963e-12`, maximum global nonlinear-work relative rate `1.174e-18`, and divergence relative to initial L2 `4.664e-16`. At `t=0`, total service `17.24`, x-slab ON service `8.62`, y-slab ON service `0`; the same qualitative separation persisted along the trajectory. Opposite-phase amplitude-0.5 audit gave cross-FFT residual `2.074e-16`, partition-change fraction `1`, energy-balance residual `2.614e-11`, nonlinear-work relative rate below `1.0e-18`, and divergence below `4.5e-16`.
+
+Failure/correction lineage: first candidate `ea3ea535ad40eac7b3bb3c127edb06b22c95fcef` was green in its dedicated/audit workflows but review found a physical over-identification: its wording treated arbitrary intrinsic material crossing as a boundary of the smooth `eta_a` synthesis-role partition. The PDE had not proved that identification. Repair `d6ee03d...` made the non-identification explicit and narrowed the flux theorem to separately certified smooth `K_phys` roles; unresolved material exits now fail closed until native interface/source/service evidence exists. No sample count, PDE equation, invariant, or tolerance was weakened.
+
+The theorem-level conclusion is structural: raw material names are not independent NS generation sources. A certified smooth `K_phys` relink is conservative same-event smooth-role flux; OO/ON/NN are restrictions of an already-existing positive law; any recursive continuation must retain or acquire its independently proved native PDE owner. No global-regularity claim is made.

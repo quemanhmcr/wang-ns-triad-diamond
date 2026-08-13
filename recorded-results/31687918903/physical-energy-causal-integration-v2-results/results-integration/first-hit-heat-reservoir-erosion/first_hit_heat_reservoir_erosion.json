@@ -1,0 +1,25 @@
+{
+  "certificate": {
+    "status": "EXACT_FIRST_HIT_HEAT_RESERVOIR_EROSION__CLEAN_OO_RATIO_441_640__FINITE_NON_OO_FORCE_ON_SUPPLIED_SIGNED_GOOD_EPOCH",
+    "first_hit": "a first high-strain contact occurs at K=1/30 with K(t)<=1/30 on its entire closed pre-hit history, so Kelvin growth is <=exp(1/30)",
+    "band_heat_capacity": "for deterministic supp fhat subset B_M and T=cN^-2, N^3 int_I E_H||delta_r f||_2^2 dt <= c M^2 sup_I||f||_2^2/N",
+    "positive_submeasure": "apply the band estimate shellwise to the already-existing positive heat/Moyal law; OO is a positive material submeasure, so no old/new velocity-field decomposition is introduced",
+    "epoch_geometry": "on a supplied signed-good material epoch, material frequencies grow by <=exp(1/30) per first-hit block while N grows by >8/5",
+    "physical_ratio": "rho_phys <= (5/8)exp(1/15)=0.668086941092",
+    "clean_ratio": "rho_phys < 441/640 < 7/10",
+    "total_old_budget": "sum_q C_OO(q) <= (640/199) C_OO(0) < (13/4) C_OO(0)",
+    "high_strain_threshold": "every first high-strain contact has S_heat>=S_*=4.08147140125 for the fixed natural-lifetime coefficient c=1",
+    "finite_force": "after the first q with C_OO(q)<=(1-f)S_*, exact ownership forces S_ON+S_NN>=f S_*",
+    "scope": "this closes repeated-OO heat capacity only after the PDE has supplied a signed-good material recursive epoch with the canonical T(N)=cN^-2; it does not prove universal slab renewal or the final ON versus NN destination"
+  },
+  "stress": {
+    "samples": 50000,
+    "maximum_spectral_capacity_ratio": 0.9751427691399471,
+    "maximum_physical_epoch_ratio": 0.667120651004042,
+    "minimum_clean_ratio_margin": 0.02194184899595797,
+    "minimum_first_hit_growth_margin": 0.016105081861056858,
+    "minimum_forced_generation_margin": 3.576763565882324e-08,
+    "minimum_previous_generation_margin": 0.0,
+    "minimum_non_oo_margin": 0.0011307154630627175
+  }
+}

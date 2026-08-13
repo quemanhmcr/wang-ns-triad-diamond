@@ -2,6 +2,8 @@
 
 Exact theorem SHA: `376fd52e1c891c774b70cf339b192bea7045107f`.
 
+> **Later certified refinement (`d6ee03d5b9b7a82d11a2259c5dc0b8ae2ac945ab`):** this Phase-B theorem correctly proved that `R_switch` is a non-event sidecar, but its compatibility statement that an independently inserted raw `PhysicalCause.MATERIAL_RELINK` remains recursive was only a placeholder for unresolved native physics.  The native material-service causal quotient now requires independent PDE evidence before such a material-state locator can enter canonical recursion; a bound smooth `K_phys` component is conservative smooth-role flux, while source/service/strain/actual-work/role-change owners retain their own identities.
+
 ## The physical seam
 
 The inherited-energy theorem says that, on one certified no-first-stop physical Fourier--helical carrier, the earlier energy `E0` can be between-time stock rather than newly generated work.  Phase A then separated material sidecars from that stock:

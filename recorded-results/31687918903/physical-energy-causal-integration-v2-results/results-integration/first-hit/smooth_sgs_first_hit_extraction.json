@@ -1,0 +1,26 @@
+{
+  "certificate": {
+    "status": "EXACT_SMOOTH_SGS_MEASURABLE_FIRST_EXIT_AND_LOCAL_NO_HIT_EXHAUSTION__RECURSIVE_REENTRY_REMAINS",
+    "causal_filtration": "event/support selection (Xi and fixed transfer cost); smooth slab observables; physical HH-work measure; backward common-slice registration; only then ancestry/reuse information",
+    "closed_hit_measurability": "for f in C([a,b]), tau_ge=inf{t:f(t)>=theta} is Borel because {tau_ge<=q}={sup_[a,q] f>=theta} and the sup functional is continuous in the uniform norm",
+    "strict_exit_measurability": "tau_>=inf{t:f(t)>theta} is Borel by rational-time sup sets; if f starts safe and tau_> is finite, continuity gives f(tau_>)=theta and the open-superlevel crossing germ is the physical state exit",
+    "joint_ties": "for finitely many native observables, tau=min_r tau_r and J={r:tau_r=tau} are measurable; J is retained as an unsplit first-stop set with no theorem-name priority or common-unit weights; coefficient members require physical-energy routing before they become causes",
+    "unit_invariance": "each stopping set is unchanged under its own strictly increasing continuous change of physical units; heterogeneous observables are never added or normalized against one another",
+    "smooth_sgs_regularities": "on every pre-singular smooth interval, strict-lowpass resolved fields are smooth; coherent X,L ODEs are C1; strain/deformation/source/work integrals are AC; singular-value/aspect/radius states are continuous",
+    "material_cell": "anchor a measurable coherent cell in intrinsic zeta=(L^-1 X/2,L^T k), which common affine transport fixes; E_C(t)=||1_C V_{g(t)}u(t)||_2^2 is AC with |E_C'|<=2 sqrt(E_C)(||g|| ||u_t||+||g_t|| ||u||)",
+    "cell_boundaries": "Moyal energy/work have phase-space densities, so dyadic cell boundaries are null; representation-cell boundary motion carries no physical relink mass",
+    "phase": "use the branch-free S1 geodesic holonomy acos(Re h) rather than a chosen arg branch, eliminating artificial phase jumps",
+    "generated_no_hit": "backward adjoint impulses are AC in the backward endpoint; if no role-interface coefficient, HH coefficient, material-relink, or t=0 boundary obstruction hits, the exact triangle identity registers the generated coefficient with the existing 1/4 lower factor; a coefficient hit only locates Q^2 physical-energy reentry",
+    "flat_no_hit": "on the retained low-transfer block, absence of the already-certified strain/source/deformation/aspect/radius/phase service exits leaves exactly the existing coherent Kelvin-flat alternative",
+    "scope": "this proves local measurable first-hit extraction for any recursively selected smooth-SGS block once that block is supplied; it does not yet prove that every routed source/dissipation/relink/HH-generation re-entry again satisfies the selector hypotheses"
+  },
+  "stress": {
+    "samples": 50000,
+    "order_invariance_failures": 0,
+    "unit_rescaling_failures": 0,
+    "maximum_joint_first_stop_count": 2,
+    "minimum_moyal_rate_margin": 4.0391747724299876e-09,
+    "worst_phase_branch_cut_gap": 0.0,
+    "minimum_registered_fraction_margin": 0.0
+  }
+}

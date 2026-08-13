@@ -1,0 +1,16 @@
+{
+  "executed": [
+    {
+      "command": "python -m src.material_sidecar_stock_central_routing --samples 50000 --seed 2026081306 --outdir results-integration/material-sidecar-stock-central-routing",
+      "fingerprint": "d6afc6637875432ddf5b458a275f323ebe8f28349e0842073d12d92da4cd1050",
+      "node_id": "material_sidecar_stock_central_routing"
+    },
+    {
+      "command": "python -m src.native_material_service_causal_quotient --samples 50000 --seed 2026081307 --outdir results-integration/native-material-service-causal-quotient",
+      "fingerprint": "dbd37ac9b0cedd4e9f377000a5e2f5b7d6bf79ade5c4b881aaeabe0ef4dbc27e",
+      "node_id": "native_material_service_causal_quotient"
+    }
+  ],
+  "schema": 1,
+  "shard": 5
+}
