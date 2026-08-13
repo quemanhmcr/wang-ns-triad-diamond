@@ -82,9 +82,9 @@ def test_fixed_filter_energy_envelope_gives_positive_source_time_floor():
 def test_mixed_down_same_up_fresh_word_is_physically_exhausted_on_smooth_interval():
     # Use deliberately long slabs so only topology/scale/source guards are tested.
     # Geometry: 4 -> 2 (j=-1 lower), 2 -> 2 (j=0 lower), 2 -> 4 (j=0 upper).
-    a = _step(4.0, -1, 2.0, 2.0, 3.0)
-    b = _step(2.0, 0, 2.0, 1.0, 2.0)
-    c = _step(2.0, 0, 4.0, 0.0, 1.0)
+    a = _step(4.0, -1, 2.0, 200.0, 300.0)
+    b = _step(2.0, 0, 2.0, 100.0, 200.0)
+    c = _step(2.0, 0, 4.0, 0.0, 100.0)
     out = pure_fresh_sgs_pre_singular_exhaustion(
         (a, b, c),
         global_energy_upper=8.0,
@@ -100,8 +100,8 @@ def test_mixed_down_same_up_fresh_word_is_physically_exhausted_on_smooth_interva
 
 
 def test_nonconsecutive_observer_bins_cannot_masquerade_as_recursive_first_stop_word():
-    a = _step(4.0, -1, 2.0, 2.0, 3.0)
-    b = _step(2.0, 0, 2.0, 0.5, 1.5)
+    a = _step(4.0, -1, 2.0, 200.0, 300.0)
+    b = _step(2.0, 0, 2.0, 50.0, 150.0)
     with pytest.raises(ValueError, match="meet at their physical endpoint"):
         pure_fresh_sgs_pre_singular_exhaustion(
             (a, b),
