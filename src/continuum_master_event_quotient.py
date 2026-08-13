@@ -79,8 +79,9 @@ def require_routed_physical_owner_labels(labels: Iterable[str]) -> tuple[str, ..
     """
     out = tuple(str(x) for x in labels if str(x))
     # A material-state/address exit is a legitimate carrier-chart locator, but it
-    # is not an independent NS generation owner.  Resolve it first to conservative
-    # K_phys boundary flux or to the native source/service owner.
+    # is not an independent NS generation owner.  It needs independently certified
+    # interface/source/service evidence before canonical ownership; an existing
+    # K_phys certificate applies only to its own smooth eta_a role partition.
     require_native_service_owner_labels(out)
     bad = tuple(sorted(set(out).intersection(COEFFICIENT_OBSTRUCTION_LABELS)))
     if bad:
@@ -473,7 +474,7 @@ def supplier_scale_certificate(supplier: SupplierKind) -> SupplierScaleCertifica
     if supplier is SupplierKind.MATERIAL_REUSE:
         return SupplierScaleCertificate(
             supplier, None, None, False, False, "no_scale_progress_without_external_epoch_geometry",
-            "full-natural own-scale service is a same-corridor witness; material-state exits and OO/ON/NN provenance do not supply an independent owner. Any recursive renewed service keeps the independently certified native source/dissipation/actual-work/shell owner. No scale progress is inferred without that separate PDE theorem",
+            "full-natural own-scale service is a same-corridor witness; material-state exits and OO/ON/NN provenance do not supply an independent owner. A genuine role/interface change needs its own native certificate; any recursive renewed service keeps the independently certified native source/dissipation/actual-work/shell owner. No scale progress is inferred without that separate PDE theorem",
         )
     if supplier is SupplierKind.HH_REGENERATION:
         return SupplierScaleCertificate(
@@ -773,7 +774,7 @@ def theorem_certificate() -> dict[str, object]:
             "there is no canonical scalar exchange rate between log scale, physical work, service/reuse and global resources; the natural master ledger is typed/direct-product. Physical time and actual log shell scale telescope kinematically, while transfer cost, causal reuse and each genuinely global resource telescope only on their own physical laws"
         ),
         "service_semantics": (
-            "own-scale service produced by a completed full-natural shell corridor is a same-interval physical witness and adds zero recursion depth; material rereading of any fixed positive law is downstream provenance only. Raw material_relink/new_coherent_ancestry labels cannot enter the canonical owner state: K_phys crossing is same-event boundary flux, while genuinely renewed service retains its independently certified native source/dissipation/actual-work/shell owner. No service observable is promoted to an additive globally bounded currency"
+            "own-scale service produced by a completed full-natural shell corridor is a same-interval physical witness and adds zero recursion depth; material rereading of any fixed positive law is downstream provenance only. Raw material_relink/new_coherent_ancestry labels cannot enter the canonical owner state. A separately certified K_phys relink is same-event conservative flux among smooth roles, without identifying those roles with arbitrary intrinsic material sets; genuinely renewed service retains its independently certified native source/dissipation/actual-work/shell owner. No service observable is promoted to an additive globally bounded currency"
         ),
         "diagnostic_separation": (
             "fresh-scale H_inf/H2 and high-tail scale/time concentration coordinates remain conjugate lower-bound diagnostics; they are not causal Shannon/Renyi action and cannot be inserted into the causal ledger"
@@ -1182,7 +1183,7 @@ Stress: `{out.samples}` quotient/path states
 - largest relayed joint-owner set sampled: `{out.maximum_relay_owner_count}`
 - minimum sampled UV checkpoint time beyond its first natural window: `{out.minimum_uv_time_gap_to_naive_infinite_sum:.3e}`
 
-This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes no-event checkpoint segmentation, conservative smooth-relink donor depth, and certified typed same-carrier inherited-stock continuation from generation lineage.  It proves that a recursive path cannot eventually remain forever in high strain alone or in signed-good generated HH alone. The formerly independent raw material-generation branch is removed by the native material-service causal quotient: material-state exit must resolve to same-event `K_phys` boundary flux or to an independently certified native service supplier. Mixed native-source recurrence and generic non-signed-good HH/high-tail recurrence remain open.
+This theorem does **not** prove global no-escape or Navier--Stokes regularity.  It removes no-event checkpoint segmentation, conservative smooth-relink donor depth, and certified typed same-carrier inherited-stock continuation from generation lineage.  It proves that a recursive path cannot eventually remain forever in high strain alone or in signed-good generated HH alone. The formerly independent raw material-generation branch is removed by the native material-service causal quotient: material-state exit must acquire an independently certified native resolution: a bound smooth-interface `K_phys`/strain decomposition when that is the actual event, or an independently certified service/source/actual-work/role-change supplier. Unresolved genuine role/probe-change recurrence, mixed native-source recurrence, and generic non-signed-good HH/high-tail recurrence remain open.
 """
     (args.outdir / "summary.md").write_text(md, encoding="utf-8")
     print(md)

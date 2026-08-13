@@ -7,7 +7,7 @@ from src.native_material_service_causal_quotient import (
     MATERIAL_FRESH_SERVICE_PROVENANCE,
     MATERIAL_INTERFACE_SERVICE_PROVENANCE,
     RAW_MATERIAL_CAUSE_LABELS,
-    material_boundary_flux_from_smooth_relink,
+    smooth_role_subset_flux_from_kphys_relink,
     material_ownership_rereading_anti_theorem,
     positive_material_service_causal_quotient,
     require_native_service_cause_hits,
@@ -30,7 +30,7 @@ def _exact_relink_work(T: np.ndarray) -> GaugeQuotientedInterfaceWork:
     )
 
 
-def test_kphys_material_subset_work_is_exact_boundary_flux_not_source():
+def test_kphys_smooth_role_subset_work_is_exact_boundary_flux_not_source():
     T = np.array(
         [
             [0.0, 2.0, -5.0, 1.0],
@@ -39,7 +39,7 @@ def test_kphys_material_subset_work_is_exact_boundary_flux_not_source():
             [-1.0, -4.0, 7.0, 0.0],
         ]
     )
-    out = material_boundary_flux_from_smooth_relink(_exact_relink_work(T), (0, 1))
+    out = smooth_role_subset_flux_from_kphys_relink(_exact_relink_work(T), (0, 1))
     assert out.selected_signed_relink_work == pytest.approx(out.signed_boundary_flux_into_selected)
     assert out.signed_boundary_flux_into_selected == pytest.approx(
         out.positive_boundary_inflow - out.positive_boundary_outflow
@@ -51,7 +51,7 @@ def test_kphys_material_subset_work_is_exact_boundary_flux_not_source():
     assert out.physical_source_created is False
 
 
-def test_material_boundary_flux_rejects_interface_certificate_that_breaks_native_relink_strain_split():
+def test_smooth_role_subset_flux_rejects_interface_certificate_that_breaks_native_relink_strain_split():
     T = np.array([[0.0, 2.0], [-2.0, 0.0]])
     bad = GaugeQuotientedInterfaceWork(
         signed_native_interface_atoms=(3.0, -2.0),
@@ -62,11 +62,11 @@ def test_material_boundary_flux_rejects_interface_certificate_that_breaks_native
         signed_physical_relink_pair_matrix=((0.0, 2.0), (-2.0, 0.0)),
     )
     with pytest.raises(ValueError, match=r"native=relink\+strain"):
-        material_boundary_flux_from_smooth_relink(bad, (0,))
+        smooth_role_subset_flux_from_kphys_relink(bad, (0,))
 
 
 
-def test_internal_kphys_circulation_cancels_inside_material_subset():
+def test_internal_kphys_circulation_cancels_inside_smooth_role_subset():
     # The very large 0<->1 circulation is internal to O={0,1}; it must disappear
     # from the subset balance. Only O--O^c pair flux may remain.
     T = np.array(
@@ -76,7 +76,7 @@ def test_internal_kphys_circulation_cancels_inside_material_subset():
             [-3.0, 2.0, 0.0],
         ]
     )
-    out = material_boundary_flux_from_smooth_relink(_exact_relink_work(T), (0, 1))
+    out = smooth_role_subset_flux_from_kphys_relink(_exact_relink_work(T), (0, 1))
     assert out.signed_boundary_flux_into_selected == pytest.approx(1.0)
     assert out.selected_signed_relink_work == pytest.approx(1.0)
     assert out.recursive_generation_created is False

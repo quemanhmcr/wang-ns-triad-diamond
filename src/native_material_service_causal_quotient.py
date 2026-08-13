@@ -16,7 +16,7 @@ from src.smooth_quadratic_carrier_interface import GaugeQuotientedInterfaceWork
 
 STATUS = (
     "EXACT_NATIVE_MATERIAL_SERVICE_CAUSAL_QUOTIENT__"
-    "KPHYS_MATERIAL_CROSSING_IS_SUBSET_BOUNDARY_FLUX__"
+    "KPHYS_SMOOTH_ROLE_RELINK_IS_SUBSET_BOUNDARY_FLUX__"
     "POSITIVE_SERVICE_OO_ON_NN_ARE_POST_SERVICE_RESTRICTIONS__"
     "RAW_MATERIAL_RELINK_AND_NEW_ANCESTRY_ARE_PREOWNER_LOCATORS"
 )
@@ -48,7 +48,7 @@ def require_native_service_owner_labels(labels: Iterable[str]) -> tuple[str, ...
     if bad:
         raise TypeError(
             "raw material relink/new-ancestry is a carrier/material-state locator, not an independent Navier-Stokes generation owner; "
-            "resolve it first to conservative K_phys boundary flux or to the native physical source/service owner: "
+            "resolve it through independently certified physical evidence (for example a bound smooth-interface K_phys/strain certificate or a native source/service owner), otherwise keep it unresolved: "
             + ", ".join(bad)
         )
     return out
@@ -62,8 +62,12 @@ def require_native_service_cause_hits(hits: Sequence[CauseHit]) -> tuple[CauseHi
 
 
 @dataclass(frozen=True)
-class MaterialBoundaryFluxCertificate:
-    """Exact subset-divergence law for gauge-quotiented smooth K_phys work."""
+class SmoothRoleSubsetFluxCertificate:
+    """Exact subset-divergence law for gauge-quotiented smooth K_phys role work.
+
+    This certificate is deliberately about the transported smooth ``eta_a`` roles.
+    It does not identify an intrinsic material old/new set with that role partition.
+    """
 
     selected_roles: tuple[int, ...]
     complement_roles: tuple[int, ...]
@@ -93,30 +97,33 @@ class MaterialBoundaryFluxCertificate:
             self.native_relink_strain_split_residual,
         )
         if any(not math.isfinite(float(v)) or float(v) < 0.0 for v in vals):
-            raise ValueError("finite nonnegative material-boundary flux diagnostics required")
+            raise ValueError("finite nonnegative smooth-role boundary-flux diagnostics required")
         if not math.isfinite(self.selected_signed_relink_work) or not math.isfinite(self.signed_boundary_flux_into_selected):
-            raise ValueError("finite signed material-boundary flux required")
+            raise ValueError("finite signed smooth-role boundary flux required")
         if not self.same_physical_event or self.recursive_generation_created or self.physical_source_created:
-            raise ValueError("conservative material boundary flux cannot create source or recursion depth")
+            raise ValueError("conservative smooth-role subset flux cannot create source or recursion depth")
 
 
-def material_boundary_flux_from_smooth_relink(
+def smooth_role_subset_flux_from_kphys_relink(
     interface_work: GaugeQuotientedInterfaceWork,
     selected_roles: Sequence[int],
-) -> MaterialBoundaryFluxCertificate:
-    """Turn smooth material-role relink into its exact boundary-flux identity.
+) -> SmoothRoleSubsetFluxCertificate:
+    """Turn certified smooth-role K_phys relink into its subset-flux identity.
 
     For the already gauge-quotiented skew operator K_phys, the role-pair law is
 
         T_ab = -2 Re <eta_a u, K_phys eta_b u>,  T_ab=-T_ba,
         R_a = sum_b T_ab.
 
-    Therefore for any proper material subset O,
+    Therefore for any proper subset O of these certified smooth roles,
 
         sum_{a in O} R_a = sum_{a in O, b notin O} T_ab.
 
-    All O--O terms cancel pairwise.  The material crossing is thus a signed
+    All O--O terms cancel pairwise.  This smooth-role relink is thus a signed
     boundary flux of one same-time conservative interaction, not a new source.
+    No claim is made here that an arbitrary intrinsic material-address crossing is
+    itself one of these smooth-role boundaries; that requires its own interface
+    certificate and otherwise remains unresolved.
     """
     if not isinstance(interface_work, GaugeQuotientedInterfaceWork):
         raise TypeError("typed gauge-quotiented smooth-interface work required")
@@ -158,11 +165,11 @@ def material_boundary_flux_from_smooth_relink(
     outflow = float(np.maximum(-cross, 0.0).sum())
     subset_residual = abs(selected_work - boundary)
     if subset_residual > 8e-11 * relink_scale:
-        raise AssertionError("K_phys material subset work failed exact boundary-flux cancellation")
+        raise AssertionError("K_phys smooth-role subset work failed exact boundary-flux cancellation")
     if abs(boundary - (inflow - outflow)) > 8e-11 * relink_scale:
-        raise AssertionError("signed material boundary flux failed positive inflow/outflow reconstruction")
+        raise AssertionError("signed smooth-role boundary flux failed positive inflow/outflow reconstruction")
 
-    return MaterialBoundaryFluxCertificate(
+    return SmoothRoleSubsetFluxCertificate(
         selected_roles=selected,
         complement_roles=complement,
         selected_signed_relink_work=selected_work,
@@ -314,14 +321,16 @@ def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
         "pde_subset_flux": (
-            "after exact affine/Kelvin gauge quotient, K_phys is skew-adjoint; its role matrix T_ab is antisymmetric, so for every proper subset O of the certified smooth roles, "
+            "after exact affine/Kelvin gauge quotient, K_phys is skew-adjoint; its smooth-role matrix T_ab is antisymmetric, so for every proper subset O of the certified smooth roles, "
             "sum_{a in O} R_a equals the signed O^c->O boundary flux and all O--O circulation cancels"
         ),
-        "relink_semantics": "smooth K_phys material crossing is same-event conservative boundary flux: signed redistribution remains visible, but it creates no new net source/work charge, recursion depth, or scale progress",
+        "relink_semantics": "a separately certified smooth-interface K_phys relink is same-event conservative smooth-role boundary flux: signed redistribution remains visible, but it creates no new net source/work charge, recursion depth, or scale progress",
+        "nonidentification": "intrinsic material old/new membership, selected-family bookkeeping, and the smooth eta_a role partition are distinct objects; this theorem never identifies an arbitrary material-address crossing with a K_phys role boundary",
+        "role_change_semantics": "if Q or the registered analysis probe genuinely changes, that is an interface/role event requiring its native certificate; the word material does not supply its energy owner",
         "positive_service_order": "the positive physical law must exist before coherent endpoints are restricted into OO/ON/NN; a native causal supplier is carried only when an upstream PDE theorem has independently certified one",
         "material_service_semantics": "ON and NN are provenance/restrictions of that already-existing positive law, not additional service, work, or causal generation; the quotient itself never infers a supplier",
         "anti_theorem": "holding the positive service weights fixed while changing only material ownership can change ON/NN strictly while total service and any independently supplied native owner stay fixed",
-        "master_boundary": "raw material_relink/new_coherent_ancestry labels are unresolved carrier/material-state locators; they must resolve to conservative K_phys flux or an independently typed native physical owner before canonical recursion",
+        "master_boundary": "raw material_relink/new_coherent_ancestry labels are unresolved carrier/material-state locators; before canonical recursion they need an independently typed native physical resolution (smooth-interface K_phys/strain when actually certified, source/service/actual work/shell ownership, or another explicit role-change certificate)",
         "native_owners": "source/SGS, strain or critical dissipation, actual nonlinear work, and already-certified physical shell/service suppliers retain their own causal ownership; material provenance does not replace or duplicate them",
         "claims_global_regularity": False,
     }
@@ -363,7 +372,7 @@ def stress(samples: int = 50_000, seed: int = 2026081307) -> NativeMaterialServi
             mask[0] = False
         if not bool(mask.any()):
             mask[0] = True
-        flux = material_boundary_flux_from_smooth_relink(work, np.flatnonzero(mask).tolist())
+        flux = smooth_role_subset_flux_from_kphys_relink(work, np.flatnonzero(mask).tolist())
         w_subset = max(w_subset, flux.subset_divergence_residual)
         w_skew = max(w_skew, flux.pair_antisymmetry_residual)
         recursive += int(flux.recursive_generation_created or flux.physical_source_created)
@@ -430,10 +439,10 @@ def main() -> None:
 
 Status: **{STATUS}**.
 
-After common affine/Kelvin gauge motion is removed, smooth `K_phys` material crossing is an exact subset boundary flux: internal role circulation cancels by antisymmetry. Separately, OO/ON/NN material ownership is read only after a positive service law already exists, so those restrictions preserve the native supplier and mint neither work nor recursion depth. Raw `material_relink` / `new_coherent_ancestry` names are therefore carrier/material-state locators until resolved to this conservative flux or to an independently witnessed native PDE owner.
+After common affine/Kelvin gauge motion is removed, a separately certified smooth `K_phys` relink is an exact **smooth-role** subset boundary flux: internal role circulation cancels by antisymmetry. This does not identify intrinsic material old/new sets with the smooth `eta_a` roles. Separately, OO/ON/NN material ownership is read only after a positive physical law already exists, so those restrictions preserve any independently supplied native owner and mint neither work nor recursion depth. Raw `material_relink` / `new_coherent_ancestry` names are therefore carrier/material-state locators until independently resolved by the actual PDE interface/source/service mechanism.
 
 Stress: `{out.samples}` states
-- maximum K_phys subset-divergence residual: `{out.maximum_subset_divergence_residual:.3e}`
+- maximum K_phys smooth-role subset-divergence residual: `{out.maximum_subset_divergence_residual:.3e}`
 - maximum K_phys pair-antisymmetry residual: `{out.maximum_pair_antisymmetry_residual:.3e}`
 - maximum positive-service partition residual: `{out.maximum_service_partition_residual:.3e}`
 - material rereadings that changed OO/ON/NN: `{out.rereadings_with_changed_material_partition}`
