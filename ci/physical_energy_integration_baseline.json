@@ -1,6 +1,6 @@
 {
-  "artifact_root": "recorded-results/31682128984/physical-energy-causal-integration-v2-results/results-integration",
-  "integration_run_id": 31682128984,
+  "artifact_root": "recorded-results/31687918903/physical-energy-causal-integration-v2-results/results-integration",
+  "integration_run_id": 31687918903,
   "nodes": {
     "amplitude_entropy_causal_reuse": {
       "command": "python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy",
@@ -52,9 +52,9 @@
     },
     "continuum_master_event_quotient": {
       "command": "python -m src.continuum_master_event_quotient --samples 50000 --outdir results-integration/continuum-master-event-quotient",
-      "fingerprint": "217b4424d920e06a4b3cfc20d1c71a023c38cc721eae557d5e8ffa36bb6ea0ae",
+      "fingerprint": "75e2aff812f47048e88ce571a8f7fef45c9ad920a8a1ffea295d7ec31891ef37",
       "outdir": "results-integration/continuum-master-event-quotient",
-      "output_digest": "56a67d4840d369c375b962f3e524b62a28056252cc44a9dc71fa79b2a87d30a2"
+      "output_digest": "8976d6d76c01a69ddfaaff1a6e6b9a5ede6d217c4347e7d5596a000ac31af3ec"
     },
     "critical_annular_carrier_service_reentry": {
       "command": "python -m src.critical_annular_carrier_service_reentry --samples 50000 --outdir results-integration/critical-annular-carrier-service-reentry",
@@ -202,9 +202,9 @@
     },
     "material_sidecar_stock_central_routing": {
       "command": "python -m src.material_sidecar_stock_central_routing --samples 50000 --seed 2026081306 --outdir results-integration/material-sidecar-stock-central-routing",
-      "fingerprint": "21c574385f5dedf619a3dbd2877777f58a2791d3597f88f01d7d7010e19b0c4a",
+      "fingerprint": "d6afc6637875432ddf5b458a275f323ebe8f28349e0842073d12d92da4cd1050",
       "outdir": "results-integration/material-sidecar-stock-central-routing",
-      "output_digest": "2545646a3833f2cc452700bf70ea2f74fc03ab374e88b37cca905423f182420d"
+      "output_digest": "be774e34798e8fb56d9d1c374aa7e56962a1f0b505032ef575ef78b3d71a354e"
     },
     "material_sidecar_stock_owner_decomposition": {
       "command": "python -m src.material_sidecar_stock_owner_decomposition --samples 50000 --seed 2026081305 --outdir results-integration/material-sidecar-stock-owner-decomposition",
@@ -217,6 +217,12 @@
       "fingerprint": "a0b8e0e4c999be218695f2b1f504b37022a95613a4d34b3f6cebefb7067fa12f",
       "outdir": "results-integration/mixed-fate-reserved-young-handoff",
       "output_digest": "f0f618a4434415260017e9efbc53317f12526c532866533b70370aaba337ec5a"
+    },
+    "native_material_service_causal_quotient": {
+      "command": "python -m src.native_material_service_causal_quotient --samples 50000 --seed 2026081307 --outdir results-integration/native-material-service-causal-quotient",
+      "fingerprint": "dbd37ac9b0cedd4e9f377000a5e2f5b7d6bf79ade5c4b881aaeabe0ef4dbc27e",
+      "outdir": "results-integration/native-material-service-causal-quotient",
+      "output_digest": "cc0ac788bed73b34fb0bb1748696488c9532bd7eedda635056e0e3212444f913"
     },
     "nn_critical_heat_carrier_seed": {
       "command": "python -m src.nn_critical_heat_carrier_seed --samples 50000 --outdir results-integration/nn-critical-heat-carrier-seed",
@@ -375,8 +381,8 @@
       "output_digest": "fe77e09613763429741d9d90d5e964c1fb13711d92e80baf9f01859f4e30f5c1"
     }
   },
-  "record_sha": "e5de1ac5a0f3283c3b6970392bec5056af647676",
+  "record_sha": "7b9182854d956b2514d994ac35f4f75adef3815e",
   "runtime_id": "ubuntu-24.04|python=3.11.15|numpy=2.2.6|scipy=1.15.3|pytest=8.4.1|python-flint=0.9.0",
   "schema": 1,
-  "theorem_sha": "376fd52e1c891c774b70cf339b192bea7045107f"
+  "theorem_sha": "d6ee03d5b9b7a82d11a2259c5dc0b8ae2ac945ab"
 }
