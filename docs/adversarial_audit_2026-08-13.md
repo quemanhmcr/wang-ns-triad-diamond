@@ -1,6 +1,6 @@
 # Adversarial audit — unresolved findings
 
-Audited against main `5e719a4`.  Keep each finding in this Draft PR until the corresponding theorem is repaired and independently re-audited; findings are cumulative rather than replacement notes.
+Audited against main `5e719a4`.  Re-audited against latest main `94cd837` (whose only delta from `5e719a4` is `ci/physical_energy_integration_baseline.json`); both findings below remain unresolved.  Keep each finding in this Draft PR until the corresponding theorem is repaired and independently re-audited; findings are cumulative rather than replacement notes.
 
 ## 1. Same-carrier stock-only projection can erase simultaneous positive HH work
 
