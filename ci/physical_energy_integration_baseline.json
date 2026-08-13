@@ -5,292 +5,350 @@
     "amplitude_entropy_causal_reuse": {
       "command": "python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy",
       "fingerprint": "42f3dfcfb08a5e23c7a99019b70e7ef9e092559100506f8aa415d3d6b324d090",
-      "outdir": "results-integration/amplitude-entropy"
+      "outdir": "results-integration/amplitude-entropy",
+      "output_digest": "222268804f1c0e63a3244e72fb6291ffe2adcaa9b701fce5bec51cc708adefb8"
     },
     "bargmann_root_cell_registration": {
       "command": "python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor",
       "fingerprint": "2958e66ac5ce170279e635ef2c6fadf76d2c057d6a9c6a720535999e8cb8fd86",
-      "outdir": "results-integration/bargmann-anchor"
+      "outdir": "results-integration/bargmann-anchor",
+      "output_digest": "fc0f6ffc6d76b045c13bc3829912a41f030a1065c0a0ced5aa9f09689dd6e202"
     },
     "canonical_positive_edge_work_routing": {
       "command": "python -m src.canonical_positive_edge_work_routing --samples 50000 --outdir results-integration/canonical-positive-edge-work-routing",
       "fingerprint": "abbea829285fa2141e93894bf3f93c1e2c0676241848b067749ecaaff98eeb22",
-      "outdir": "results-integration/canonical-positive-edge-work-routing"
+      "outdir": "results-integration/canonical-positive-edge-work-routing",
+      "output_digest": "f228ce36443fcc893e1f46a21939fbddb207f193f0c3739551db583f22f8fd80"
     },
     "coherent_increment_service": {
       "command": "python -m src.coherent_increment_service --samples 50000 --outdir results-integration/coherent-increment-service",
       "fingerprint": "2113972dece76b07bd539bfdbfd4f19dc65d5f41fee2e45192fb3ab6088991ee",
-      "outdir": "results-integration/coherent-increment-service"
+      "outdir": "results-integration/coherent-increment-service",
+      "output_digest": "6f7ddfbb52d9f835300ba0ab9a87d47ef78401da907677085a75386a5e743526"
     },
     "coherent_service_or_flat": {
       "command": "python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat",
       "fingerprint": "bd3ac4c5c9f0dc80d9a097adcd8725cf96a95a52c24930b51a87c112bf7e79c1",
-      "outdir": "results-integration/service-flat"
+      "outdir": "results-integration/service-flat",
+      "output_digest": "936a67d9514f7f64d570da919979b15eefd61a3bc36566b7cfe55927902d075e"
     },
     "common_slice_coefficient_registration": {
       "command": "python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice",
       "fingerprint": "d3f7b8424c2537072c3334bbc2837ec10cdbf20f992f04b2fb89f1d767bf2d27",
-      "outdir": "results-integration/common-slice"
+      "outdir": "results-integration/common-slice",
+      "output_digest": "19ca60abbdf9172aa5def6faab7c0c7b3d86f8ce889d2348c09af138d35cc7d6"
     },
     "complex_young_parent_marking": {
       "command": "python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young",
       "fingerprint": "43f255e08276d563f79d1f43540779f65ca055e27663f496ec33d152402336fb",
-      "outdir": "results-integration/complex-young"
+      "outdir": "results-integration/complex-young",
+      "output_digest": "5b571825f095368e49c29d7aaaebc1d511e6942049bd4a94799eaff57638539e"
     },
     "continuum_helical_edge_measure_registration": {
       "command": "python -m src.continuum_helical_edge_measure_registration --samples 3000 --core-blocks 100 --outdir results-integration/continuum-helical-edge-measure-registration",
       "fingerprint": "0a543cd11ba729bb3bfe3ef026f1a6639604687020bf34d723266a6d8ff73a60",
-      "outdir": "results-integration/continuum-helical-edge-measure-registration"
+      "outdir": "results-integration/continuum-helical-edge-measure-registration",
+      "output_digest": "fedc79990b2864a567823da1d97958bc011e6143181fd6f880dc02bf89f5e9fd"
     },
     "continuum_master_event_quotient": {
       "command": "python -m src.continuum_master_event_quotient --samples 50000 --outdir results-integration/continuum-master-event-quotient",
       "fingerprint": "fcd9af300ebf88c5803220f962f4bbbb99a1f6d710f591682fbc14de7ec2541c",
-      "outdir": "results-integration/continuum-master-event-quotient"
+      "outdir": "results-integration/continuum-master-event-quotient",
+      "output_digest": "68ab765a501e5d6e6cccdf42b040260070391886813ddc71d79ac1051bbeb4da"
     },
     "critical_annular_carrier_service_reentry": {
       "command": "python -m src.critical_annular_carrier_service_reentry --samples 50000 --outdir results-integration/critical-annular-carrier-service-reentry",
       "fingerprint": "7b505b2b14eb90105409e4282c60f62dc0f1683cd0ed93f72c8c6abdaa1224ca",
-      "outdir": "results-integration/critical-annular-carrier-service-reentry"
+      "outdir": "results-integration/critical-annular-carrier-service-reentry",
+      "output_digest": "7efe05b837b336737122fe256414c265d23a8b7c3857000fc30d83f512753b89"
     },
     "critical_shell_service_reentry": {
       "command": "python -m src.critical_shell_service_reentry --samples 50000 --outdir results-integration/critical-shell-service-reentry",
       "fingerprint": "ae2f58b237d469557b82f13794e0b9d431d2e2650e65c27ea4257602381bcef4",
-      "outdir": "results-integration/critical-shell-service-reentry"
+      "outdir": "results-integration/critical-shell-service-reentry",
+      "output_digest": "62e7019efa7718be9e8e5b9dc7eb020c632a5cd3d9713615c20d5c099621166d"
     },
     "cyclic_hard_cell_single_charge_quotient": {
       "command": "python -m src.cyclic_hard_cell_single_charge_quotient --samples 50000 --seed 2026081204 --outdir results-integration/cyclic-hard-cell-single-charge-quotient",
       "fingerprint": "b2801ac6c968e3407d47743b613fef1c303854969e8aac63dd682a8a84227e46",
-      "outdir": "results-integration/cyclic-hard-cell-single-charge-quotient"
+      "outdir": "results-integration/cyclic-hard-cell-single-charge-quotient",
+      "output_digest": "406b2c74eef48ea0a6a5f054dfe1df4a461746cfffd10a84375df32008757daf"
     },
     "cyclic_helical_triad_donor_kernel": {
       "command": "python -m src.cyclic_helical_triad_donor_kernel --samples 50000 --seed 2026081203 --outdir results-integration/cyclic-helical-triad-donor-kernel",
       "fingerprint": "7cad6d4c04bf8d1ec3c618ab488f5e0e3b7385bd466431cc42e109f0620af74e",
-      "outdir": "results-integration/cyclic-helical-triad-donor-kernel"
+      "outdir": "results-integration/cyclic-helical-triad-donor-kernel",
+      "output_digest": "1c0b65746cdae80f91f9e67b83241bfa2ebdaf05df52fab586318c343c837f8d"
     },
     "dual_gaussian_root_registration": {
       "command": "python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian",
       "fingerprint": "09014fc2e938756436eb96ed2d5c31de94170a48783d67fe0cc4e45d856347bc",
-      "outdir": "results-integration/dual-gaussian"
+      "outdir": "results-integration/dual-gaussian",
+      "output_digest": "663b1e5797b8f638dc1833948cb244a37880eba08b97d47ea2d0bcf5f3838986"
     },
     "event_anchored_role_registration": {
       "command": "python -m src.event_anchored_role_registration --samples 50000 --outdir results-integration/event-role",
       "fingerprint": "c94d24c4e5386930e04d536d50ffcd45f6af2c51e84536d172be2d13ed628c23",
-      "outdir": "results-integration/event-role"
+      "outdir": "results-integration/event-role",
+      "output_digest": "736481befba12250118f0cd78312c249face96d7c1ae3d9e890a31b844d5c250"
     },
     "first_hit_heat_reservoir_erosion": {
       "command": "python -m src.first_hit_heat_reservoir_erosion --samples 50000 --outdir results-integration/first-hit-heat-reservoir-erosion",
       "fingerprint": "d08a7534a845772c87344efbe7ca10cb1e696985d83c07a4943686526fbdc531",
-      "outdir": "results-integration/first-hit-heat-reservoir-erosion"
+      "outdir": "results-integration/first-hit-heat-reservoir-erosion",
+      "output_digest": "1627f175fe84854f53242fad1b70fad55817db1e7f97aba6052ea2022de17ea3"
     },
     "fresh_service_scale_reentry": {
       "command": "python -m src.fresh_service_scale_reentry --samples 50000 --outdir results-integration/fresh-service-scale-reentry",
       "fingerprint": "9a7b253454e12b59bfc48f8434dec64dd15c649ad7c154c2e6c40c86f92898a2",
-      "outdir": "results-integration/fresh-service-scale-reentry"
+      "outdir": "results-integration/fresh-service-scale-reentry",
+      "output_digest": "ff70433f77f259ad7587cbc4c4eceefe5497f0e8b41d5bcaf9440613c5fd2963"
     },
     "full_natural_checkpoint_quotient": {
       "command": "python -m src.full_natural_checkpoint_quotient --samples 50000 --outdir results-integration/full-natural-checkpoint-quotient",
       "fingerprint": "81d661daa328726ec70ddcfc4b0f8ecb882d739d2b853f39b9e888c6be6c270e",
-      "outdir": "results-integration/full-natural-checkpoint-quotient"
+      "outdir": "results-integration/full-natural-checkpoint-quotient",
+      "output_digest": "18514b014a7f7554fd6252866cd7da5f646f433fd7c8c9ed9abe11b930c99191"
     },
     "full_natural_service_corridor_quotient": {
       "command": "python -m src.full_natural_service_corridor_quotient --samples 50000 --outdir results-integration/full-natural-service-corridor-quotient",
       "fingerprint": "947b51dce868af73ae9c4ac6a47a1cc4ef879930b1fe3254b41704de393af923",
-      "outdir": "results-integration/full-natural-service-corridor-quotient"
+      "outdir": "results-integration/full-natural-service-corridor-quotient",
+      "output_digest": "f9ec0566cf8fd288cbc21768953420626680c9208cfa722e148dbdad09bd5740"
     },
     "hard_tail_true_upward_supply": {
       "command": "python -m src.hard_tail_true_upward_supply --samples 50000 --seed 2026081207 --outdir results-integration/hard-tail-true-upward-supply",
       "fingerprint": "6d66a2406decb90865e6f5f6f33ea35693f1669b6fa70d73235be7e5482c55e8",
-      "outdir": "results-integration/hard-tail-true-upward-supply"
+      "outdir": "results-integration/hard-tail-true-upward-supply",
+      "output_digest": "2488025a9660bccd23b50ef7a4b399773603203e8a4bddfd8ff931b956f49ffc"
     },
     "heat_edge_material_ownership": {
       "command": "python -m src.heat_edge_material_ownership --samples 50000 --outdir results-integration/heat-edge-material-ownership",
       "fingerprint": "519c5f4c7f5983d44f8b3cf4a96b3ad71654e5d8f6b11c5e4bd3e13f6e7e3017",
-      "outdir": "results-integration/heat-edge-material-ownership"
+      "outdir": "results-integration/heat-edge-material-ownership",
+      "output_digest": "f5243fb2b2c8233792cf2f56b4f5c0e29f26a607233ca31998d23b5338d3e56d"
     },
     "helical_mode_set_energy_continuity": {
       "command": "python -m src.helical_mode_set_energy_continuity --samples 50000 --seed 2026081205 --outdir results-integration/helical-mode-set-energy-continuity",
       "fingerprint": "0580e0820dc6c1de777697cf7b17f88eda067716c296f36198da55df206475fd",
-      "outdir": "results-integration/helical-mode-set-energy-continuity"
+      "outdir": "results-integration/helical-mode-set-energy-continuity",
+      "output_digest": "c4e930cd616074c37085ac1f7f9ee769d215af4cd29246369146903d809a9e9e"
     },
     "helical_physical_edge_registration": {
       "command": "python -m src.helical_physical_edge_registration --samples 50000 --outdir results-integration/helical-physical-edge-registration",
       "fingerprint": "e5716960ca7126127c978a0d4d3d7efe44d78eae4e14c0beffba00f79addd750",
-      "outdir": "results-integration/helical-physical-edge-registration"
+      "outdir": "results-integration/helical-physical-edge-registration",
+      "output_digest": "0da27596480322eae0898d51f8cef3591d60b7ea8798da8535ff955c97912e40"
     },
     "high_frequency_dissipation_reentry": {
       "command": "python -m src.high_frequency_dissipation_reentry --samples 50000 --outdir results-integration/high-frequency-dissipation-reentry",
       "fingerprint": "a865ce3de93ff839d48182e9b94fb4fe2d04a274fa9e81f4ee793e6778b2d101",
-      "outdir": "results-integration/high-frequency-dissipation-reentry"
+      "outdir": "results-integration/high-frequency-dissipation-reentry",
+      "output_digest": "fc6c05c087ac3871afad449e26fa0c13cc38b176115f93b2b7de224cfc3aa1f8"
     },
     "high_strain_critical_carrier_reentry": {
       "command": "python -m src.high_strain_critical_carrier_reentry --samples 50000 --outdir results-integration/high-strain-critical-carrier-reentry",
       "fingerprint": "d36a8bced068e5afc63e47fb877216581c04743f8ea427aa009f9eebf921ec84",
-      "outdir": "results-integration/high-strain-critical-carrier-reentry"
+      "outdir": "results-integration/high-strain-critical-carrier-reentry",
+      "output_digest": "7edbec60ad015680bf6c5b06930a54dccd7a6115361ec0e9361980195bfc48bc"
     },
     "high_strain_descending_epoch_telescope": {
       "command": "python -m src.high_strain_descending_epoch_telescope --samples 50000 --outdir results-integration/high-strain-descending-epoch-telescope",
       "fingerprint": "2a40c2ab6e554ed2c20b1b2c10d23b224739dd1a40f49fed7e7bac18ba7d04a8",
-      "outdir": "results-integration/high-strain-descending-epoch-telescope"
+      "outdir": "results-integration/high-strain-descending-epoch-telescope",
+      "output_digest": "6c0de27f03c35ef3abc27080c7600328287cb99e98e88972b8d1798df92dbd63"
     },
     "high_strain_heat_increment_service": {
       "command": "python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-integration/high-strain-heat-service",
       "fingerprint": "29b04903bd9f119164d403b9a7b17865178426a3941faeed5e7323d07f17d5dc",
-      "outdir": "results-integration/high-strain-heat-service"
+      "outdir": "results-integration/high-strain-heat-service",
+      "output_digest": "822fccf59e7c48de01213e3fa5816b42da049c613ee67b6f9e4ebcf18f4838d2"
     },
     "high_strain_resolved_ancestor": {
       "command": "python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-integration/high-strain-resolved-ancestor",
       "fingerprint": "5396461f099e416765c52be542cfd8362786072b2057a99b5e276a87ab063555",
-      "outdir": "results-integration/high-strain-resolved-ancestor"
+      "outdir": "results-integration/high-strain-resolved-ancestor",
+      "output_digest": "bd437a4529f280b6ae313b86b39e44fbe04bb30ddb96ac6f72fba96fee3ea219"
     },
     "high_tail_binary_work_reentry": {
       "command": "python -m src.high_tail_binary_work_reentry --samples 50000 --outdir results-integration/high-tail-binary-work-reentry",
       "fingerprint": "acdc31d7aa0c70cac266daf7155bdb013ceeb3a95a136b474496affa18d0cc33",
-      "outdir": "results-integration/high-tail-binary-work-reentry"
+      "outdir": "results-integration/high-tail-binary-work-reentry",
+      "output_digest": "5de0238608712a0d912385017223b7401545d80f749be521cc02d527556ee8e2"
     },
     "high_tail_natural_window_reentry": {
       "command": "python -m src.high_tail_natural_window_reentry --samples 50000 --outdir results-integration/high-tail-natural-window-reentry",
       "fingerprint": "60d78f47fce981888a1756cfc3825b8dc0bcc1c3c2fec1af4c5e30dd3d1e4f90",
-      "outdir": "results-integration/high-tail-natural-window-reentry"
+      "outdir": "results-integration/high-tail-natural-window-reentry",
+      "output_digest": "e1c1c04ba9de0f1cbfa9b081fcc58e45c57065b49a466c564ad3a53fa9593cbc"
     },
     "high_tail_ultraviolet_locality": {
       "command": "python -m src.high_tail_ultraviolet_locality --samples 50000 --outdir results-integration/high-tail-ultraviolet-locality",
       "fingerprint": "68c1533eae9ff7031c762e46e2247c701568983bc30b7cfb149b7e32068a09a6",
-      "outdir": "results-integration/high-tail-ultraviolet-locality"
+      "outdir": "results-integration/high-tail-ultraviolet-locality",
+      "output_digest": "195e09b0f80da5847a73ea2710e65d3625792cb52f5c31e6362f11adf48309c8"
     },
     "joint_causal_stop_projection": {
       "command": "python -m src.joint_causal_stop_projection --samples 50000 --outdir results-integration/joint-stop",
       "fingerprint": "c7aa2e7e15cdf86207a2d0a3da260876588b3ebd9fa7b3bd919fa920bc9b1280",
-      "outdir": "results-integration/joint-stop"
+      "outdir": "results-integration/joint-stop",
+      "output_digest": "4f60855c1bcdfa408462e5a5c560241374479f25999bd68358bb88e420305e80"
     },
     "material_label_carrier_quotient": {
       "command": "python -m src.material_label_carrier_quotient --samples 50000 --outdir results-integration/material-label-carrier-quotient",
       "fingerprint": "ef776421582595b2a784dc5e5fd50bd930731559fe8933d4d8b4fe0277aa552c",
-      "outdir": "results-integration/material-label-carrier-quotient"
+      "outdir": "results-integration/material-label-carrier-quotient",
+      "output_digest": "05529c0b721d42e409a20fb90bd5a03b0503d2708471ecccd282d0dca0beed99"
     },
     "mixed_fate_reserved_young_handoff": {
       "command": "python -m src.mixed_fate_reserved_young_handoff --samples 50000 --seed 2026081202 --outdir results-integration/mixed-fate-reserved-young-handoff",
       "fingerprint": "a0b8e0e4c999be218695f2b1f504b37022a95613a4d34b3f6cebefb7067fa12f",
-      "outdir": "results-integration/mixed-fate-reserved-young-handoff"
+      "outdir": "results-integration/mixed-fate-reserved-young-handoff",
+      "output_digest": "f0f618a4434415260017e9efbc53317f12526c532866533b70370aaba337ec5a"
     },
     "nn_critical_heat_carrier_seed": {
       "command": "python -m src.nn_critical_heat_carrier_seed --samples 50000 --outdir results-integration/nn-critical-heat-carrier-seed",
       "fingerprint": "91586f73eaf65cfe76cf7a4ea2b8cb7aee10ea86857c54c1f35f521b91280201",
-      "outdir": "results-integration/nn-critical-heat-carrier-seed"
+      "outdir": "results-integration/nn-critical-heat-carrier-seed",
+      "output_digest": "5226cc2f54542d0ad81c754364ab69cf97d2e51197ab607a70e2191b64eae982"
     },
     "nn_seed_temporal_first_stop": {
       "command": "python -m src.nn_seed_temporal_first_stop --samples 50000 --outdir results-integration/nn-seed-temporal-first-stop",
       "fingerprint": "f324f4a57d950ebb953b98a6f3ebf41d08e626a1848e599d45edc31d3fdaeaac",
-      "outdir": "results-integration/nn-seed-temporal-first-stop"
+      "outdir": "results-integration/nn-seed-temporal-first-stop",
+      "output_digest": "bb46605c304ac0b6e99112e5417cd5d1ee8ed5093f0ff37f6421492287262eb5"
     },
     "nonaffine_role_interface_work": {
       "command": "python -m src.nonaffine_role_interface_work --samples 50000 --outdir results-integration/nonaffine-interface",
       "fingerprint": "9e7144cb062c0bf195722498cf1ad694460dd59bb9bd24268d61c3fa5c35bb0d",
-      "outdir": "results-integration/nonaffine-interface"
+      "outdir": "results-integration/nonaffine-interface",
+      "output_digest": "8e417a10e59ed5cb93364360e646dca3b4a295ef2f70c1c08818ff32ee0caa76"
     },
     "objective_pressure_pair_atomization": {
       "command": "python -m src.objective_pressure_pair_atomization --samples 50000 --outdir results-integration/objective-pressure-pair-atomization",
       "fingerprint": "f79fe3eeb5ef37d05149219922fee1eab6951998c864111e3dd59885ef5fb3ba",
-      "outdir": "results-integration/objective-pressure-pair-atomization"
+      "outdir": "results-integration/objective-pressure-pair-atomization",
+      "output_digest": "2b0c217ba0cfbd2228ac476aff56843a1e73804e9c3a0f6a1e5e2f85019b6de3"
     },
     "objective_source_routing_compiler": {
       "command": "python -m src.objective_source_routing_compiler --samples 50000 --outdir results-integration/objective-source-routing-compiler",
       "fingerprint": "37f95ec63db6eaa91fc0f95565980901a050c13a53eff40ba1e857e508417718",
-      "outdir": "results-integration/objective-source-routing-compiler"
+      "outdir": "results-integration/objective-source-routing-compiler",
+      "output_digest": "e9d64780bb0214ff90ec02e172c5462dc9866eadc4ce99593ce287034d44f781"
     },
     "old_incident_heat_erosion": {
       "command": "python -m src.old_incident_heat_erosion --samples 50000 --outdir results-integration/old-incident-heat-erosion",
       "fingerprint": "cc691dd0218bddb91032fbc672c77ffd1c8a8453007db6b9db01fb08a772111e",
-      "outdir": "results-integration/old-incident-heat-erosion"
+      "outdir": "results-integration/old-incident-heat-erosion",
+      "output_digest": "c71bc47523b878a0501915af9c72bee6ba109ad6e869b29782721ba112198b29"
     },
     "outer_moving_role_extraction": {
       "command": "python -m src.outer_moving_role_extraction --samples 50000 --outdir results-integration/outer-role",
       "fingerprint": "9b72958aa53133a5e56a54f1ecfd343c451008e1e3600539cde5009f9c82044f",
-      "outdir": "results-integration/outer-role"
+      "outdir": "results-integration/outer-role",
+      "output_digest": "06ac46dcb79d12d77fd4cbef7264b503f185d82edb26b5ec9bdf2df0bf1aa6ef"
     },
     "physical_branch_compiler": {
       "command": "python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler",
       "fingerprint": "2b71f286abc7529a9a0752ee73abe48c420303d7b40dead65db116578c85430d",
-      "outdir": "results-integration/branch-compiler"
+      "outdir": "results-integration/branch-compiler",
+      "output_digest": "70215d774eb8101ee67127d56a321071067d8f4079e99180c1b590dc319b8fb8"
     },
     "physical_energy_causal_bridge": {
       "command": "python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy",
       "fingerprint": "5906687e44924ba179051531704efe08c3e53c6422fe0cf3a6fdfa8a225f2d3d",
-      "outdir": "results-integration/physical-energy"
+      "outdir": "results-integration/physical-energy",
+      "output_digest": "d85ee88b9bf7fec952f76d3e3e460e4ec71b3ae8860eda420de29a81a22976cd"
     },
     "physical_pair_weighted_productivity": {
       "command": "python -m src.physical_pair_weighted_productivity --samples 50000 --outdir results-integration/physical-pair-productivity",
       "fingerprint": "332bcd172a7790d5dc393f1daa102a39a6faac902c1250a3005b5e2c90b2e307",
-      "outdir": "results-integration/physical-pair-productivity"
+      "outdir": "results-integration/physical-pair-productivity",
+      "output_digest": "1ed2fa1f9a04e87ea85e7bdcd6543d1d77aa9401268db618e0f51633f9ef1c6e"
     },
     "radial_spectral_crossing_layer_cake": {
       "command": "python -m src.radial_spectral_crossing_layer_cake --samples 50000 --seed 2026081206 --outdir results-integration/radial-spectral-crossing-layer-cake",
       "fingerprint": "ae439bca8a3288f6ed4fcbc70e4981f67e4e7a85eede53fb9e74bf6fb6fdf746",
-      "outdir": "results-integration/radial-spectral-crossing-layer-cake"
+      "outdir": "results-integration/radial-spectral-crossing-layer-cake",
+      "output_digest": "33916c9364a92af1539cdaa57bfcb6a0a5d13319ae47b2c87464485379b0f472"
     },
     "recursive_coherent_witness_extraction": {
       "command": "python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness",
       "fingerprint": "22915c556b6cc26866a3d45aca091ccf9f242a4f58c68a3c5a9b95e92f66b5b8",
-      "outdir": "results-integration/coherent-witness"
+      "outdir": "results-integration/coherent-witness",
+      "output_digest": "c1cf47e991365c6f44eb8f640211f95dc055aa7debc29e764559bd63e3f379e5"
     },
     "recursive_physical_witness_constructor": {
       "command": "python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-integration/recursive-witness",
       "fingerprint": "3ca0dc47957495b3c8b3f70f8f49b7b8e5161175ca4a156b41d05b7dbdbecf55",
-      "outdir": "results-integration/recursive-witness"
+      "outdir": "results-integration/recursive-witness",
+      "output_digest": "f96530b0f0674e4003cd8cff8123e50dd5bcf58b118900029675b0382096ddd7"
     },
     "renyi_causal_reuse": {
       "command": "python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse",
       "fingerprint": "11beb4027a9811d0d7ed44a8b15455fca79a0a8a5a2df47bc392ce60fe541aa9",
-      "outdir": "results-integration/renyi-reuse"
+      "outdir": "results-integration/renyi-reuse",
+      "output_digest": "2f775da62ec6acad7e6dc5adbac0244e3cf33fdf028aa51a0dffcaa641535587"
     },
     "resolved_contact_native_binding": {
       "command": "python -m src.resolved_contact_native_binding --samples 50000 --seed 2026081302 --outdir results-integration/resolved-contact-native-binding",
       "fingerprint": "17e8c68a555695f87673f423ee4afb8d6833d47f7ccaa759e2d8bf7140603e49",
-      "outdir": "results-integration/resolved-contact-native-binding"
+      "outdir": "results-integration/resolved-contact-native-binding",
+      "output_digest": "deaf66f18b6e228f389c528204059bc3d6047ab5d89956a8a49f1efb2d05a302"
     },
     "resolved_cutoff_repartition_relay": {
       "command": "python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-integration/cutoff-repartition-relay",
       "fingerprint": "f5b366ff1a375b8537ce5161fdcc1b68e8b297d33336365fd1e183cef44bc86c",
-      "outdir": "results-integration/cutoff-repartition-relay"
+      "outdir": "results-integration/cutoff-repartition-relay",
+      "output_digest": "26f954af4dc93de7561945c1ed58536c242a00901eef91ad81266bbceb908212"
     },
     "resolved_interface_donor_quotient": {
       "command": "python -m src.resolved_interface_donor_quotient --samples 50000 --outdir results-integration/resolved-interface-donor-quotient",
       "fingerprint": "20245216beef39301f64b1d80fbd6888a59a78067a0c8d96772f307bb672aed1",
-      "outdir": "results-integration/resolved-interface-donor-quotient"
+      "outdir": "results-integration/resolved-interface-donor-quotient",
+      "output_digest": "febd56a002a9a91029998f781d8be07255e4ceee57f6043a3b31ed5af5ca644f"
     },
     "same_carrier_checkpoint_segmentation_quotient": {
       "command": "python -m src.same_carrier_checkpoint_segmentation_quotient --samples 50000 --outdir results-integration/same-carrier-checkpoint-segmentation",
       "fingerprint": "69ed237de19633706acc5155f21978bb4d4dbeb8ec7e96c81cbf3076ead5e59a",
-      "outdir": "results-integration/same-carrier-checkpoint-segmentation"
+      "outdir": "results-integration/same-carrier-checkpoint-segmentation",
+      "output_digest": "ed9c39cda8ef2cf829ff1bf1ad5528bb3f218a30c2b53f3aca50f8449c70014c"
     },
     "signed_good_generated_epoch_time_telescope": {
       "command": "python -m src.signed_good_generated_epoch_time_telescope --samples 50000 --outdir results-integration/signed-good-generated-epoch-time-telescope",
       "fingerprint": "9ccaad9aa52bdc1ec3db1db853972d43aaec5066c8e4eb508d75676598f8ce0e",
-      "outdir": "results-integration/signed-good-generated-epoch-time-telescope"
+      "outdir": "results-integration/signed-good-generated-epoch-time-telescope",
+      "output_digest": "3f2d35db8b6133262a066a3d4a4f83a2c7d36af32da6c5ee2acd6b48b7bbe9f0"
     },
     "smooth_material_carrier_relay": {
       "command": "python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-integration/material-carrier-relay",
       "fingerprint": "7d96cda3a210755dce1345634e9217ad8d7488587b16b9c6aa102037aa4b41c3",
-      "outdir": "results-integration/material-carrier-relay"
+      "outdir": "results-integration/material-carrier-relay",
+      "output_digest": "6c17976ad0ec4cf931ad554ecb316584926d2eeca8ef823a4c5af48b54e2169b"
     },
     "smooth_quadratic_carrier_interface": {
       "command": "python -m src.smooth_quadratic_carrier_interface --samples 50000 --outdir results-integration/smooth-quadratic-carrier-interface",
       "fingerprint": "f3f98e285c3e2e6d3a2ac6a303e0cdc515b573c9340b772e0d088bad36c05279",
-      "outdir": "results-integration/smooth-quadratic-carrier-interface"
+      "outdir": "results-integration/smooth-quadratic-carrier-interface",
+      "output_digest": "f3d87decf9eaaa0f388afc61da381c0f9e5f33804e5ad1c681301523cc76a71b"
     },
     "smooth_relink_donor_quotient": {
       "command": "python -m src.smooth_relink_donor_quotient --samples 50000 --outdir results-integration/smooth-relink-donor-quotient",
       "fingerprint": "e8c5df2b137e00636087eb540ef4a2cc4cadd87a2fbe307ae7f1f1d8f372c8ad",
-      "outdir": "results-integration/smooth-relink-donor-quotient"
+      "outdir": "results-integration/smooth-relink-donor-quotient",
+      "output_digest": "50665129ba2f90d1b4f2e02fafd6f4cf13dfa3aa1867f3dbb21889fdc6419d13"
     },
     "smooth_sgs_first_hit_extraction": {
       "command": "python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-integration/first-hit",
       "fingerprint": "6eeb5333db6d28e5fa3a9898f768d50ffab25d877effa56d1ab915f375e9d258",
-      "outdir": "results-integration/first-hit"
+      "outdir": "results-integration/first-hit",
+      "output_digest": "fc268e43c0e5ab42a55179a9b65866916b751614d6416477d0a7ab0677915548"
     },
     "weighted_causal_reuse": {
       "command": "python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse",
       "fingerprint": "70d97b211e24edd0b6416c454d2a688350b61e6f88e6b40d5a0ce0dee6225602",
-      "outdir": "results-integration/shannon-reuse"
+      "outdir": "results-integration/shannon-reuse",
+      "output_digest": "fe77e09613763429741d9d90d5e964c1fb13711d92e80baf9f01859f4e30f5c1"
     }
   },
   "record_sha": "0796f8950fc0421a5c49d776bb8a073360b4be11",

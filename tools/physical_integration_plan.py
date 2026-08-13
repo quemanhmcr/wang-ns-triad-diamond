@@ -134,6 +134,27 @@ def source_closure(repo: Path, module: str) -> tuple[tuple[str, ...], bool]:
     return tuple(sorted(files)), dynamic
 
 
+def output_tree_digest(root: Path) -> str:
+    """Deterministic content digest of one certified node-output directory.
+
+    Paths are hashed relative to the node root, followed by file bytes.  The
+    digest intentionally ignores mtimes, ownership and filesystem enumeration
+    order so an artifact can move between GitHub storage and the repository
+    without changing identity.
+    """
+    base = Path(root)
+    if not base.is_dir():
+        raise FileNotFoundError(f"certified node-output directory missing: {base}")
+    files = sorted(p for p in base.rglob('*') if p.is_file())
+    if not files:
+        raise ValueError(f"certified node-output directory is empty: {base}")
+    h = hashlib.sha256()
+    for path in files:
+        rel = path.relative_to(base).as_posix()
+        h.update(rel.encode() + b'\0' + path.read_bytes() + b'\0')
+    return h.hexdigest()
+
+
 def node_fingerprint(repo: Path, node: dict, closure: Iterable[str]) -> str:
     h = hashlib.sha256()
     h.update(("runtime\0" + RUNTIME_ID + "\0").encode())
@@ -159,6 +180,7 @@ def make_baseline(repo: Path, manifest: dict, *, theorem_sha: str, record_sha: s
             raise AssertionError(f"baseline node {node['id']} uses dynamic imports and is not reusable")
         rows[str(node["id"])] = {
             "fingerprint": node_fingerprint(repo, node, closure),
+            "output_digest": output_tree_digest(baseline_root / rel),
             "command": str(node["command"]),
             "outdir": str(node["outdir"]),
         }
@@ -185,6 +207,8 @@ def make_plan(repo: Path, manifest: dict, baseline: dict, *, force_full: bool = 
         baseline_match = bool(
             not dynamic
             and base is not None
+            and isinstance(base.get("output_digest"), str)
+            and len(base.get("output_digest")) == 64
             and base.get("command") == node["command"]
             and base.get("outdir") == node["outdir"]
             and base.get("fingerprint") == fp
@@ -195,6 +219,8 @@ def make_plan(repo: Path, manifest: dict, baseline: dict, *, force_full: bool = 
             action, reason = "execute", "dynamic_import_fails_closed"
         elif base is None:
             action, reason = "execute", "new_integration_node"
+        elif not isinstance(base.get("output_digest"), str) or len(base.get("output_digest", "")) != 64:
+            action, reason = "execute", "certified_output_digest_missing"
         elif not baseline_match:
             action, reason = "execute", "transitive_source_runtime_or_command_changed"
         else:
@@ -232,6 +258,12 @@ def materialize_reusable(repo: Path, plan: dict, baseline: dict, result_root: Pa
         dst = result_root / rel
         if not src.is_dir():
             raise FileNotFoundError(f"certified baseline result missing for {node['node_id']}: {src}")
+        expected = baseline["nodes"][node["node_id"]].get("output_digest")
+        actual = output_tree_digest(src)
+        if actual != expected:
+            raise AssertionError(
+                f"certified baseline output digest mismatch for {node['node_id']}: {actual} != {expected}"
+            )
         if dst.exists():
             shutil.rmtree(dst)
         dst.parent.mkdir(parents=True, exist_ok=True)
@@ -261,9 +293,20 @@ def verify_result_set(repo: Path, manifest: dict, plan: dict, baseline: dict, re
             continue
         if compare_reused and node.get("baseline_match"):
             base = baseline_root / rel
+            expected = baseline["nodes"][node["node_id"]].get("output_digest")
+            base_digest = output_tree_digest(base)
+            current_digest = output_tree_digest(current)
+            if base_digest != expected:
+                raise AssertionError(
+                    f"stored certified output for {node['node_id']} failed its baseline digest: {base_digest} != {expected}"
+                )
+            if current_digest != expected:
+                raise AssertionError(
+                    f"integration output for {node['node_id']} differs from certified digest: {current_digest} != {expected}"
+                )
             proc = subprocess.run(["diff", "-qr", str(base), str(current)], text=True, capture_output=True)
             if proc.returncode != 0:
-                raise AssertionError(f"reused node {node['node_id']} differs from certified baseline:\n{proc.stdout}{proc.stderr}")
+                raise AssertionError(f"baseline-matched node {node['node_id']} differs from certified baseline:\n{proc.stdout}{proc.stderr}")
             compared += 1
     if missing:
         raise AssertionError(f"integration result set missing nodes: {missing}")

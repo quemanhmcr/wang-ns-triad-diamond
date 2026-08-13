@@ -11,6 +11,7 @@ from tools.physical_integration_plan import (
     make_plan,
     materialize_reusable,
     node_fingerprint,
+    output_tree_digest,
     source_closure,
     verify_legacy_coverage,
 )
@@ -58,7 +59,8 @@ def test_exact_fingerprint_reuses_but_new_node_executes(tmp_path: Path):
     manifest = {'shard_count': 1, 'nodes': [node]}
     closure, _ = source_closure(tmp_path, 'src.a')
     fp = node_fingerprint(tmp_path, node, closure)
-    baseline = {'runtime_id': RUNTIME_ID, 'record_sha': 'base', 'integration_run_id': 1, 'artifact_root': 'baseline', 'nodes': {'a': {'fingerprint': fp, 'command': node['command'], 'outdir': node['outdir']}}}
+    baseline_dir = tmp_path / 'baseline/a'; baseline_dir.mkdir(parents=True); (baseline_dir/'summary.md').write_text('certified\n')
+    baseline = {'runtime_id': RUNTIME_ID, 'record_sha': 'base', 'integration_run_id': 1, 'artifact_root': 'baseline', 'nodes': {'a': {'fingerprint': fp, 'output_digest': output_tree_digest(baseline_dir), 'command': node['command'], 'outdir': node['outdir']}}}
     plan = make_plan(tmp_path, manifest, baseline)
     assert plan['reuse_count'] == 1 and plan['execute_count'] == 0
     manifest2 = {'shard_count': 1, 'nodes': [node, {'id':'new','module':'src.b','command':'python -m src.b --outdir results-integration/new','outdir':'results-integration/new','shard':1}]}
@@ -70,11 +72,23 @@ def test_exact_fingerprint_reuses_but_new_node_executes(tmp_path: Path):
 def test_materialize_reusable_copies_only_certified_directory(tmp_path: Path):
     _write_repo(tmp_path)
     baseline_root = tmp_path / 'baseline/a'; baseline_root.mkdir(parents=True); (baseline_root/'summary.md').write_text('certified\n')
+    digest = output_tree_digest(baseline_root)
     plan = {'reuse_count':1,'nodes':[{'node_id':'a','action':'reuse','outdir':'results-integration/a'}]}
-    baseline = {'artifact_root':'baseline'}
+    baseline = {'artifact_root':'baseline','nodes':{'a':{'output_digest':digest}}}
     result = tmp_path / 'results-integration'
     materialize_reusable(tmp_path, plan, baseline, result)
     assert (result/'a/summary.md').read_text() == 'certified\n'
+
+
+def test_materialize_reusable_rejects_tampered_certified_output(tmp_path: Path):
+    _write_repo(tmp_path)
+    baseline_root = tmp_path / 'baseline/a'; baseline_root.mkdir(parents=True); (baseline_root/'summary.md').write_text('certified\n')
+    digest = output_tree_digest(baseline_root)
+    (baseline_root/'summary.md').write_text('tampered\n')
+    plan = {'reuse_count':1,'nodes':[{'node_id':'a','action':'reuse','outdir':'results-integration/a'}]}
+    baseline = {'artifact_root':'baseline','nodes':{'a':{'output_digest':digest}}}
+    with pytest.raises(AssertionError):
+        materialize_reusable(tmp_path, plan, baseline, tmp_path/'results-integration')
 
 
 def test_repository_manifest_never_drops_a_legacy_command():
@@ -83,3 +97,17 @@ def test_repository_manifest_never_drops_a_legacy_command():
     out = verify_legacy_coverage(manifest, repo / '.github/workflows/physical-energy-causal-integration.yml')
     assert out['legacy_command_count'] == 57
     assert out['manifest_command_count'] >= out['legacy_command_count']
+
+
+def test_v2_runtime_contract_matches_fingerprint_identity():
+    repo = Path(__file__).resolve().parents[1]
+    workflow = (repo / '.github/workflows/physical-energy-causal-integration-v2.yml').read_text()
+    requirements = (repo / 'requirements.txt').read_text().splitlines()
+    assert 'runs-on: ubuntu-24.04' in workflow
+    assert "python-version: '3.11.15'" in workflow
+    assert 'pip install -r requirements.txt python-flint==0.9.0' in workflow
+    assert requirements == ['numpy==2.2.6', 'scipy==1.15.3', 'pytest==8.4.1']
+    assert RUNTIME_ID == (
+        'ubuntu-24.04|python=3.11.15|numpy=2.2.6|scipy=1.15.3|'
+        'pytest=8.4.1|python-flint=0.9.0'
+    )
