@@ -1,6 +1,6 @@
 {
-  "artifact_root": "recorded-results/31661727711/results-integration",
-  "integration_run_id": 31661727711,
+  "artifact_root": "recorded-results/31666880569/physical-energy-causal-integration-v2-results/results-integration",
+  "integration_run_id": 31666880569,
   "nodes": {
     "amplitude_entropy_causal_reuse": {
       "command": "python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy",
@@ -52,9 +52,9 @@
     },
     "continuum_master_event_quotient": {
       "command": "python -m src.continuum_master_event_quotient --samples 50000 --outdir results-integration/continuum-master-event-quotient",
-      "fingerprint": "fcd9af300ebf88c5803220f962f4bbbb99a1f6d710f591682fbc14de7ec2541c",
+      "fingerprint": "fd7353295271ea805a24658083aaac28a3898c1dc600473ea0a2916bd18c9d6d",
       "outdir": "results-integration/continuum-master-event-quotient",
-      "output_digest": "68ab765a501e5d6e6cccdf42b040260070391886813ddc71d79ac1051bbeb4da"
+      "output_digest": "0415aea427c6482287e82166cf5b25d3903e513b31f98be94132b4f30a651a47"
     },
     "critical_annular_carrier_service_reentry": {
       "command": "python -m src.critical_annular_carrier_service_reentry --samples 50000 --outdir results-integration/critical-annular-carrier-service-reentry",
@@ -320,6 +320,12 @@
       "outdir": "results-integration/same-carrier-checkpoint-segmentation",
       "output_digest": "ed9c39cda8ef2cf829ff1bf1ad5528bb3f218a30c2b53f3aca50f8449c70014c"
     },
+    "same_carrier_inherited_energy_relay": {
+      "command": "python -m src.same_carrier_inherited_energy_relay --samples 50000 --seed 2026081304 --outdir results-integration/same-carrier-inherited-energy-relay",
+      "fingerprint": "8c321e023729c059476a98b258ce42cc55ca2e07e66522312d2cc719170e19d2",
+      "outdir": "results-integration/same-carrier-inherited-energy-relay",
+      "output_digest": "13d63ee1ccf03f336acc772206c63f26e9f7eade2d82f33afaaaf143b0ae5524"
+    },
     "signed_good_generated_epoch_time_telescope": {
       "command": "python -m src.signed_good_generated_epoch_time_telescope --samples 50000 --outdir results-integration/signed-good-generated-epoch-time-telescope",
       "fingerprint": "9ccaad9aa52bdc1ec3db1db853972d43aaec5066c8e4eb508d75676598f8ce0e",
@@ -357,8 +363,8 @@
       "output_digest": "fe77e09613763429741d9d90d5e964c1fb13711d92e80baf9f01859f4e30f5c1"
     }
   },
-  "record_sha": "3c3ee1ee74c464bdf1c4501aa52b2c853f1fea6c",
+  "record_sha": "65b119a85c15a1b34140eccf6937bd196120c7bb",
   "runtime_id": "ubuntu-24.04|python=3.11.15|numpy=2.2.6|scipy=1.15.3|pytest=8.4.1|python-flint=0.9.0",
   "schema": 1,
-  "theorem_sha": "e7b302f3590bbddb83b3d9bd9e8c213b5ada8b4e"
+  "theorem_sha": "077ec27dc55fafb62049b7753859f23a4cc61ff7"
 }
