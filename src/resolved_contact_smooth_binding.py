@@ -67,11 +67,21 @@ def canonical_positive_resolved_cutoff(radius: float, shell_scale: float) -> flo
     if r >= outer:
         return 0.0
     t = (r - core) / (outer - core)
-    a = math.exp(-1.0 / t)
-    b = math.exp(-1.0 / (1.0 - t))
-    q = b / (a + b)
-    if not (0.0 < q < 1.0):
-        raise AssertionError("canonical transition cutoff left (0,1)")
+    # Mathematically the flat C-infinity step is strictly between zero and one
+    # on the open annulus.  In IEEE arithmetic one exponential can underflow
+    # arbitrarily close to an endpoint, saturating the numerical representative
+    # to exactly 0 or 1.  That saturation is a numerical envelope only.
+    log_a = -1.0 / t
+    log_b = -1.0 / (1.0 - t)
+    delta = log_a - log_b
+    if delta >= 0.0:
+        e = math.exp(-delta)
+        q = e / (1.0 + e)
+    else:
+        e = math.exp(delta)
+        q = 1.0 / (1.0 + e)
+    if not (math.isfinite(q) and 0.0 <= q <= 1.0):
+        raise AssertionError("canonical transition cutoff left numerical [0,1]")
     return q
 
 
@@ -561,6 +571,7 @@ class ResolvedContactSmoothBindingStress:
     boundary_contact_hh_fraction: float
     interior_transition_mixed_fraction: float
     interior_transition_hh_fraction: float
+    numerically_saturated_transition_samples: int
 
 
 def stress(samples: int = 50_000, seed: int = 2026081301) -> ResolvedContactSmoothBindingStress:
@@ -574,12 +585,15 @@ def stress(samples: int = 50_000, seed: int = 2026081301) -> ResolvedContactSmoo
     min_strict_mixed = 1.0
     max_ks_mass = 0.0
     max_domination = 0.0
+    saturated_transition = 0
     for _ in range(count):
         N = float(2.0 ** rng.uniform(-4.0, 4.0))
         j = int(rng.integers(2, 7))
         M = (2.0 ** j) * N
         rd = float(rng.uniform(0.02, 1.0)) * N
         q = canonical_positive_resolved_cutoff(rd, M)
+        if 0.125 * M < rd < 0.25 * M and q in (0.0, 1.0):
+            saturated_transition += 1
         m = float(10.0 ** rng.uniform(-6.0, 3.0))
         mixed = q * m
         hh = (1.0 - q) * m
@@ -623,6 +637,7 @@ def stress(samples: int = 50_000, seed: int = 2026081301) -> ResolvedContactSmoo
         boundary_contact_hh_fraction=float(boundary["hh_fraction"]),
         interior_transition_mixed_fraction=float(interior["mixed_fraction"]),
         interior_transition_hh_fraction=float(interior["hh_fraction"]),
+        numerically_saturated_transition_samples=saturated_transition,
     )
 
 
@@ -641,7 +656,7 @@ def main() -> None:
     boundary = boundary_contact_counterexample()
     interior = interior_transition_fixture_observation()
     coarse = coarse_hahn_cancellation_counterexample()
-    md = f"""# Resolved-contact smooth binding\n\nStatus: **{STATUS}**.\n\nThe actual positive cutoff is chosen with `0<=S<=1`, `S=1` on `B_(M/8)`, and `S=0` on and outside `M/4`. For a deep upward atom the cyclic donor is the unique parent at or below `M/4`; the other parent is strictly above `M/4`. Thus before any new Hahn operation,\n\n`dW = S(k_d) dW_mixed + (1-S(k_d)) dW_HH`,\n\nand the donor-restricted canonical `dW+` is pushed by these same two nonnegative weights. No mass is cloned and the common causal unit remains `N dW`.\n\nFor `M>=8N`, the donor lies in `B_(M/8)`, so `S(k_d)=1`: the whole canonical upward atom is actual mixed `V-h` work. The shell `M=4N` is genuinely different. The certified boundary-contact fixture has donor/shell ratio `{boundary['donor_to_shell_ratio']:.12g}`, cutoff value `{boundary['cutoff_value']:.12g}`, mixed fraction `{boundary['mixed_fraction']:.12g}`, and HH fraction `{boundary['hh_fraction']:.12g}`. Hence support contact alone is not interface ownership.\n\nOn an actual mixed atom, first verify the signed identity `I=K+S` from the same resolved operator. Only then bind the already-canonical positive submeasure into positive K/S owner submeasures by domination; their masses sum exactly to the incoming canonical cause. A downstream coarse Hahn is forbidden as the transport map: the fixed cancellation counterexample leaves coarse positive mass `{coarse['coarse_positive_hahn_mass']:.12g}` from an atomic canonical cause `{coarse['canonical_positive_first_atom']:.12g}`.\n\nStress: `{out.samples}` states\n- strict-deep samples: `{out.strict_deep_samples}`\n- borderline samples: `{out.borderline_samples}`\n- maximum smooth partition residual: `{out.maximum_partition_residual:.3e}`\n- maximum strict-deep HH fraction: `{out.maximum_strict_deep_hh_fraction:.3e}`\n- minimum strict-deep mixed fraction: `{out.minimum_strict_deep_mixed_fraction:.12g}`\n- maximum K/S canonical-mass residual: `{out.maximum_ks_mass_residual:.3e}`\n- maximum K/S domination excess: `{out.maximum_ks_domination_excess:.3e}`\n\nNo output-scale causal reweighting, new clock, new event depth, or Navier--Stokes global-regularity claim is made.\n"""
+    md = f"""# Resolved-contact smooth binding\n\nStatus: **{STATUS}**.\n\nThe actual positive cutoff is chosen with `0<=S<=1`, `S=1` on `B_(M/8)`, and `S=0` on and outside `M/4`. For a deep upward atom the cyclic donor is the unique parent at or below `M/4`; the other parent is strictly above `M/4`. Thus before any new Hahn operation,\n\n`dW_mixed = S(k_d) dW`, `dW_HH = (1-S(k_d)) dW`, hence `dW=dW_mixed+dW_HH`,\n\nand the donor-restricted canonical `dW+` is pushed by these same two nonnegative weights. No mass is cloned and the common causal unit remains `N dW`.\n\nFor `M>=8N`, the donor lies in `B_(M/8)`, so `S(k_d)=1`: the whole canonical upward atom is actual mixed `V-h` work. The shell `M=4N` is genuinely different. The certified boundary-contact fixture has donor/shell ratio `{boundary['donor_to_shell_ratio']:.12g}`, cutoff value `{boundary['cutoff_value']:.12g}`, mixed fraction `{boundary['mixed_fraction']:.12g}`, and HH fraction `{boundary['hh_fraction']:.12g}`. Hence support contact alone is not interface ownership.\n\nOn an actual mixed atom, first verify the signed identity `I=K+S` from the same resolved operator. Only then bind the already-canonical positive submeasure into positive K/S owner submeasures by domination; their masses sum exactly to the incoming canonical cause. A downstream coarse Hahn is forbidden as the transport map: the fixed cancellation counterexample leaves coarse positive mass `{coarse['coarse_positive_hahn_mass']:.12g}` from an atomic canonical cause `{coarse['canonical_positive_first_atom']:.12g}`.\n\nStress: `{out.samples}` states\n- strict-deep samples: `{out.strict_deep_samples}`\n- borderline samples: `{out.borderline_samples}`\n- maximum smooth partition residual: `{out.maximum_partition_residual:.3e}`\n- maximum strict-deep HH fraction: `{out.maximum_strict_deep_hh_fraction:.3e}`\n- minimum strict-deep mixed fraction: `{out.minimum_strict_deep_mixed_fraction:.12g}`\n- maximum K/S canonical-mass residual: `{out.maximum_ks_mass_residual:.3e}`\n- maximum K/S domination excess: `{out.maximum_ks_domination_excess:.3e}`\n- numerically saturated open-transition samples: `{out.numerically_saturated_transition_samples}` (IEEE endpoint saturation only)\n\nNo output-scale causal reweighting, new clock, new event depth, or Navier--Stokes global-regularity claim is made.\n"""
     (args.outdir / "summary.md").write_text(md)
     print(json.dumps(asdict(out), indent=2, sort_keys=True))
 

@@ -35,6 +35,8 @@ def test_canonical_cutoff_is_positive_core_plateau_transition_and_zero_at_suppor
     assert canonical_positive_resolved_cutoff(M / 8.0, M) == 1.0
     q = canonical_positive_resolved_cutoff(3.0 * M / 16.0, M)
     assert 0.0 < q < 1.0
+    q_near_outer = canonical_positive_resolved_cutoff((M / 4.0) * (1.0 - 1.0e-15), M)
+    assert 0.0 <= q_near_outer <= 1.0
     assert canonical_positive_resolved_cutoff(M / 4.0, M) == 0.0
     assert canonical_positive_resolved_cutoff(M, M) == 0.0
 

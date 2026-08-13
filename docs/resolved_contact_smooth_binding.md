@@ -86,7 +86,7 @@ and
  \sigma_M(\xi)=0\quad\text{for }|\xi|\ge M/4.
 \]
 
-Between `M/8` and `M/4` use any fixed smooth monotone transition; the implementation uses the standard flat `C^infinity` step.  Put
+Between `M/8` and `M/4` use any fixed smooth monotone transition; the implementation uses the standard flat `C^infinity` step.  Mathematically its value lies strictly in `(0,1)` on the open annulus.  The floating-point evaluator is allowed to saturate to `0` or `1` within machine range arbitrarily close to an endpoint; that is recorded as a numerical envelope only and never used to infer a different physical branch.  The interior-transition PDE fixture stays a fixed distance from both endpoints and therefore still requires strict `0<q_d<1`.  Put
 
 \[
  V=\sigma_M(D)u,
