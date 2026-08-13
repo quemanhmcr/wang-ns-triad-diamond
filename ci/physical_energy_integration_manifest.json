@@ -1,0 +1,413 @@
+{
+  "schema": 1,
+  "source_profile_run": 31655796159,
+  "shard_count": 5,
+  "nodes": [
+    {
+      "id": "radial_spectral_crossing_layer_cake",
+      "module": "src.radial_spectral_crossing_layer_cake",
+      "command": "python -m src.radial_spectral_crossing_layer_cake --samples 50000 --seed 2026081206 --outdir results-integration/radial-spectral-crossing-layer-cake",
+      "outdir": "results-integration/radial-spectral-crossing-layer-cake",
+      "shard": 1
+    },
+    {
+      "id": "renyi_causal_reuse",
+      "module": "src.renyi_causal_reuse",
+      "command": "python -m src.renyi_causal_reuse --samples 50000 --outdir results-integration/renyi-reuse",
+      "outdir": "results-integration/renyi-reuse",
+      "shard": 1
+    },
+    {
+      "id": "recursive_coherent_witness_extraction",
+      "module": "src.recursive_coherent_witness_extraction",
+      "command": "python -m src.recursive_coherent_witness_extraction --samples 20000 --outdir results-integration/coherent-witness",
+      "outdir": "results-integration/coherent-witness",
+      "shard": 1
+    },
+    {
+      "id": "smooth_relink_donor_quotient",
+      "module": "src.smooth_relink_donor_quotient",
+      "command": "python -m src.smooth_relink_donor_quotient --samples 50000 --outdir results-integration/smooth-relink-donor-quotient",
+      "outdir": "results-integration/smooth-relink-donor-quotient",
+      "shard": 1
+    },
+    {
+      "id": "objective_pressure_pair_atomization",
+      "module": "src.objective_pressure_pair_atomization",
+      "command": "python -m src.objective_pressure_pair_atomization --samples 50000 --outdir results-integration/objective-pressure-pair-atomization",
+      "outdir": "results-integration/objective-pressure-pair-atomization",
+      "shard": 1
+    },
+    {
+      "id": "resolved_cutoff_repartition_relay",
+      "module": "src.resolved_cutoff_repartition_relay",
+      "command": "python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-integration/cutoff-repartition-relay",
+      "outdir": "results-integration/cutoff-repartition-relay",
+      "shard": 1
+    },
+    {
+      "id": "material_label_carrier_quotient",
+      "module": "src.material_label_carrier_quotient",
+      "command": "python -m src.material_label_carrier_quotient --samples 50000 --outdir results-integration/material-label-carrier-quotient",
+      "outdir": "results-integration/material-label-carrier-quotient",
+      "shard": 1
+    },
+    {
+      "id": "signed_good_generated_epoch_time_telescope",
+      "module": "src.signed_good_generated_epoch_time_telescope",
+      "command": "python -m src.signed_good_generated_epoch_time_telescope --samples 50000 --outdir results-integration/signed-good-generated-epoch-time-telescope",
+      "outdir": "results-integration/signed-good-generated-epoch-time-telescope",
+      "shard": 1
+    },
+    {
+      "id": "bargmann_root_cell_registration",
+      "module": "src.bargmann_root_cell_registration",
+      "command": "python -m src.bargmann_root_cell_registration --samples 50000 --outdir results-integration/bargmann-anchor",
+      "outdir": "results-integration/bargmann-anchor",
+      "shard": 1
+    },
+    {
+      "id": "full_natural_checkpoint_quotient",
+      "module": "src.full_natural_checkpoint_quotient",
+      "command": "python -m src.full_natural_checkpoint_quotient --samples 50000 --outdir results-integration/full-natural-checkpoint-quotient",
+      "outdir": "results-integration/full-natural-checkpoint-quotient",
+      "shard": 1
+    },
+    {
+      "id": "canonical_positive_edge_work_routing",
+      "module": "src.canonical_positive_edge_work_routing",
+      "command": "python -m src.canonical_positive_edge_work_routing --samples 50000 --outdir results-integration/canonical-positive-edge-work-routing",
+      "outdir": "results-integration/canonical-positive-edge-work-routing",
+      "shard": 2
+    },
+    {
+      "id": "helical_physical_edge_registration",
+      "module": "src.helical_physical_edge_registration",
+      "command": "python -m src.helical_physical_edge_registration --samples 50000 --outdir results-integration/helical-physical-edge-registration",
+      "outdir": "results-integration/helical-physical-edge-registration",
+      "shard": 2
+    },
+    {
+      "id": "high_tail_natural_window_reentry",
+      "module": "src.high_tail_natural_window_reentry",
+      "command": "python -m src.high_tail_natural_window_reentry --samples 50000 --outdir results-integration/high-tail-natural-window-reentry",
+      "outdir": "results-integration/high-tail-natural-window-reentry",
+      "shard": 2
+    },
+    {
+      "id": "amplitude_entropy_causal_reuse",
+      "module": "src.amplitude_entropy_causal_reuse",
+      "command": "python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy",
+      "outdir": "results-integration/amplitude-entropy",
+      "shard": 2
+    },
+    {
+      "id": "heat_edge_material_ownership",
+      "module": "src.heat_edge_material_ownership",
+      "command": "python -m src.heat_edge_material_ownership --samples 50000 --outdir results-integration/heat-edge-material-ownership",
+      "outdir": "results-integration/heat-edge-material-ownership",
+      "shard": 2
+    },
+    {
+      "id": "smooth_sgs_first_hit_extraction",
+      "module": "src.smooth_sgs_first_hit_extraction",
+      "command": "python -m src.smooth_sgs_first_hit_extraction --samples 50000 --outdir results-integration/first-hit",
+      "outdir": "results-integration/first-hit",
+      "shard": 2
+    },
+    {
+      "id": "objective_source_routing_compiler",
+      "module": "src.objective_source_routing_compiler",
+      "command": "python -m src.objective_source_routing_compiler --samples 50000 --outdir results-integration/objective-source-routing-compiler",
+      "outdir": "results-integration/objective-source-routing-compiler",
+      "shard": 2
+    },
+    {
+      "id": "dual_gaussian_root_registration",
+      "module": "src.dual_gaussian_root_registration",
+      "command": "python -m src.dual_gaussian_root_registration --samples 50000 --outdir results-integration/dual-gaussian",
+      "outdir": "results-integration/dual-gaussian",
+      "shard": 2
+    },
+    {
+      "id": "critical_annular_carrier_service_reentry",
+      "module": "src.critical_annular_carrier_service_reentry",
+      "command": "python -m src.critical_annular_carrier_service_reentry --samples 50000 --outdir results-integration/critical-annular-carrier-service-reentry",
+      "outdir": "results-integration/critical-annular-carrier-service-reentry",
+      "shard": 2
+    },
+    {
+      "id": "old_incident_heat_erosion",
+      "module": "src.old_incident_heat_erosion",
+      "command": "python -m src.old_incident_heat_erosion --samples 50000 --outdir results-integration/old-incident-heat-erosion",
+      "outdir": "results-integration/old-incident-heat-erosion",
+      "shard": 2
+    },
+    {
+      "id": "physical_branch_compiler",
+      "module": "src.physical_branch_compiler",
+      "command": "python -m src.physical_branch_compiler --samples 50000 --outdir results-integration/branch-compiler",
+      "outdir": "results-integration/branch-compiler",
+      "shard": 2
+    },
+    {
+      "id": "common_slice_coefficient_registration",
+      "module": "src.common_slice_coefficient_registration",
+      "command": "python -m src.common_slice_coefficient_registration --samples 50000 --outdir results-integration/common-slice",
+      "outdir": "results-integration/common-slice",
+      "shard": 2
+    },
+    {
+      "id": "cyclic_helical_triad_donor_kernel",
+      "module": "src.cyclic_helical_triad_donor_kernel",
+      "command": "python -m src.cyclic_helical_triad_donor_kernel --samples 50000 --seed 2026081203 --outdir results-integration/cyclic-helical-triad-donor-kernel",
+      "outdir": "results-integration/cyclic-helical-triad-donor-kernel",
+      "shard": 3
+    },
+    {
+      "id": "smooth_quadratic_carrier_interface",
+      "module": "src.smooth_quadratic_carrier_interface",
+      "command": "python -m src.smooth_quadratic_carrier_interface --samples 50000 --outdir results-integration/smooth-quadratic-carrier-interface",
+      "outdir": "results-integration/smooth-quadratic-carrier-interface",
+      "shard": 3
+    },
+    {
+      "id": "recursive_physical_witness_constructor",
+      "module": "src.recursive_physical_witness_constructor",
+      "command": "python -m src.recursive_physical_witness_constructor --samples 50000 --outdir results-integration/recursive-witness",
+      "outdir": "results-integration/recursive-witness",
+      "shard": 3
+    },
+    {
+      "id": "high_strain_critical_carrier_reentry",
+      "module": "src.high_strain_critical_carrier_reentry",
+      "command": "python -m src.high_strain_critical_carrier_reentry --samples 50000 --outdir results-integration/high-strain-critical-carrier-reentry",
+      "outdir": "results-integration/high-strain-critical-carrier-reentry",
+      "shard": 3
+    },
+    {
+      "id": "smooth_material_carrier_relay",
+      "module": "src.smooth_material_carrier_relay",
+      "command": "python -m src.smooth_material_carrier_relay --samples 50000 --outdir results-integration/material-carrier-relay",
+      "outdir": "results-integration/material-carrier-relay",
+      "shard": 3
+    },
+    {
+      "id": "nonaffine_role_interface_work",
+      "module": "src.nonaffine_role_interface_work",
+      "command": "python -m src.nonaffine_role_interface_work --samples 50000 --outdir results-integration/nonaffine-interface",
+      "outdir": "results-integration/nonaffine-interface",
+      "shard": 3
+    },
+    {
+      "id": "high_frequency_dissipation_reentry",
+      "module": "src.high_frequency_dissipation_reentry",
+      "command": "python -m src.high_frequency_dissipation_reentry --samples 50000 --outdir results-integration/high-frequency-dissipation-reentry",
+      "outdir": "results-integration/high-frequency-dissipation-reentry",
+      "shard": 3
+    },
+    {
+      "id": "high_strain_resolved_ancestor",
+      "module": "src.high_strain_resolved_ancestor",
+      "command": "python -m src.high_strain_resolved_ancestor --samples 50000 --outdir results-integration/high-strain-resolved-ancestor",
+      "outdir": "results-integration/high-strain-resolved-ancestor",
+      "shard": 3
+    },
+    {
+      "id": "physical_energy_causal_bridge",
+      "module": "src.physical_energy_causal_bridge",
+      "command": "python -m src.physical_energy_causal_bridge --samples 50000 --outdir results-integration/physical-energy",
+      "outdir": "results-integration/physical-energy",
+      "shard": 3
+    },
+    {
+      "id": "high_strain_heat_increment_service",
+      "module": "src.high_strain_heat_increment_service",
+      "command": "python -m src.high_strain_heat_increment_service --samples 50000 --outdir results-integration/high-strain-heat-service",
+      "outdir": "results-integration/high-strain-heat-service",
+      "shard": 3
+    },
+    {
+      "id": "high_strain_descending_epoch_telescope",
+      "module": "src.high_strain_descending_epoch_telescope",
+      "command": "python -m src.high_strain_descending_epoch_telescope --samples 50000 --outdir results-integration/high-strain-descending-epoch-telescope",
+      "outdir": "results-integration/high-strain-descending-epoch-telescope",
+      "shard": 3
+    },
+    {
+      "id": "coherent_service_or_flat",
+      "module": "src.coherent_service_or_flat",
+      "command": "python -m src.coherent_service_or_flat --samples 50000 --outdir results-integration/service-flat",
+      "outdir": "results-integration/service-flat",
+      "shard": 3
+    },
+    {
+      "id": "cyclic_hard_cell_single_charge_quotient",
+      "module": "src.cyclic_hard_cell_single_charge_quotient",
+      "command": "python -m src.cyclic_hard_cell_single_charge_quotient --samples 50000 --seed 2026081204 --outdir results-integration/cyclic-hard-cell-single-charge-quotient",
+      "outdir": "results-integration/cyclic-hard-cell-single-charge-quotient",
+      "shard": 4
+    },
+    {
+      "id": "event_anchored_role_registration",
+      "module": "src.event_anchored_role_registration",
+      "command": "python -m src.event_anchored_role_registration --samples 50000 --outdir results-integration/event-role",
+      "outdir": "results-integration/event-role",
+      "shard": 4
+    },
+    {
+      "id": "outer_moving_role_extraction",
+      "module": "src.outer_moving_role_extraction",
+      "command": "python -m src.outer_moving_role_extraction --samples 50000 --outdir results-integration/outer-role",
+      "outdir": "results-integration/outer-role",
+      "shard": 4
+    },
+    {
+      "id": "same_carrier_checkpoint_segmentation_quotient",
+      "module": "src.same_carrier_checkpoint_segmentation_quotient",
+      "command": "python -m src.same_carrier_checkpoint_segmentation_quotient --samples 50000 --outdir results-integration/same-carrier-checkpoint-segmentation",
+      "outdir": "results-integration/same-carrier-checkpoint-segmentation",
+      "shard": 4
+    },
+    {
+      "id": "critical_shell_service_reentry",
+      "module": "src.critical_shell_service_reentry",
+      "command": "python -m src.critical_shell_service_reentry --samples 50000 --outdir results-integration/critical-shell-service-reentry",
+      "outdir": "results-integration/critical-shell-service-reentry",
+      "shard": 4
+    },
+    {
+      "id": "resolved_interface_donor_quotient",
+      "module": "src.resolved_interface_donor_quotient",
+      "command": "python -m src.resolved_interface_donor_quotient --samples 50000 --outdir results-integration/resolved-interface-donor-quotient",
+      "outdir": "results-integration/resolved-interface-donor-quotient",
+      "shard": 4
+    },
+    {
+      "id": "high_tail_ultraviolet_locality",
+      "module": "src.high_tail_ultraviolet_locality",
+      "command": "python -m src.high_tail_ultraviolet_locality --samples 50000 --outdir results-integration/high-tail-ultraviolet-locality",
+      "outdir": "results-integration/high-tail-ultraviolet-locality",
+      "shard": 4
+    },
+    {
+      "id": "physical_pair_weighted_productivity",
+      "module": "src.physical_pair_weighted_productivity",
+      "command": "python -m src.physical_pair_weighted_productivity --samples 50000 --outdir results-integration/physical-pair-productivity",
+      "outdir": "results-integration/physical-pair-productivity",
+      "shard": 4
+    },
+    {
+      "id": "continuum_master_event_quotient",
+      "module": "src.continuum_master_event_quotient",
+      "command": "python -m src.continuum_master_event_quotient --samples 50000 --outdir results-integration/continuum-master-event-quotient",
+      "outdir": "results-integration/continuum-master-event-quotient",
+      "shard": 4
+    },
+    {
+      "id": "mixed_fate_reserved_young_handoff",
+      "module": "src.mixed_fate_reserved_young_handoff",
+      "command": "python -m src.mixed_fate_reserved_young_handoff --samples 50000 --seed 2026081202 --outdir results-integration/mixed-fate-reserved-young-handoff",
+      "outdir": "results-integration/mixed-fate-reserved-young-handoff",
+      "shard": 4
+    },
+    {
+      "id": "first_hit_heat_reservoir_erosion",
+      "module": "src.first_hit_heat_reservoir_erosion",
+      "command": "python -m src.first_hit_heat_reservoir_erosion --samples 50000 --outdir results-integration/first-hit-heat-reservoir-erosion",
+      "outdir": "results-integration/first-hit-heat-reservoir-erosion",
+      "shard": 4
+    },
+    {
+      "id": "complex_young_parent_marking",
+      "module": "src.complex_young_parent_marking",
+      "command": "python -m src.complex_young_parent_marking --samples 50000 --outdir results-integration/complex-young",
+      "outdir": "results-integration/complex-young",
+      "shard": 4
+    },
+    {
+      "id": "hard_tail_true_upward_supply",
+      "module": "src.hard_tail_true_upward_supply",
+      "command": "python -m src.hard_tail_true_upward_supply --samples 50000 --seed 2026081207 --outdir results-integration/hard-tail-true-upward-supply",
+      "outdir": "results-integration/hard-tail-true-upward-supply",
+      "shard": 5
+    },
+    {
+      "id": "helical_mode_set_energy_continuity",
+      "module": "src.helical_mode_set_energy_continuity",
+      "command": "python -m src.helical_mode_set_energy_continuity --samples 50000 --seed 2026081205 --outdir results-integration/helical-mode-set-energy-continuity",
+      "outdir": "results-integration/helical-mode-set-energy-continuity",
+      "shard": 5
+    },
+    {
+      "id": "weighted_causal_reuse",
+      "module": "src.weighted_causal_reuse",
+      "command": "python -m src.weighted_causal_reuse --samples 50000 --outdir results-integration/shannon-reuse",
+      "outdir": "results-integration/shannon-reuse",
+      "shard": 5
+    },
+    {
+      "id": "high_tail_binary_work_reentry",
+      "module": "src.high_tail_binary_work_reentry",
+      "command": "python -m src.high_tail_binary_work_reentry --samples 50000 --outdir results-integration/high-tail-binary-work-reentry",
+      "outdir": "results-integration/high-tail-binary-work-reentry",
+      "shard": 5
+    },
+    {
+      "id": "nn_seed_temporal_first_stop",
+      "module": "src.nn_seed_temporal_first_stop",
+      "command": "python -m src.nn_seed_temporal_first_stop --samples 50000 --outdir results-integration/nn-seed-temporal-first-stop",
+      "outdir": "results-integration/nn-seed-temporal-first-stop",
+      "shard": 5
+    },
+    {
+      "id": "continuum_helical_edge_measure_registration",
+      "module": "src.continuum_helical_edge_measure_registration",
+      "command": "python -m src.continuum_helical_edge_measure_registration --samples 3000 --core-blocks 100 --outdir results-integration/continuum-helical-edge-measure-registration",
+      "outdir": "results-integration/continuum-helical-edge-measure-registration",
+      "shard": 5
+    },
+    {
+      "id": "nn_critical_heat_carrier_seed",
+      "module": "src.nn_critical_heat_carrier_seed",
+      "command": "python -m src.nn_critical_heat_carrier_seed --samples 50000 --outdir results-integration/nn-critical-heat-carrier-seed",
+      "outdir": "results-integration/nn-critical-heat-carrier-seed",
+      "shard": 5
+    },
+    {
+      "id": "fresh_service_scale_reentry",
+      "module": "src.fresh_service_scale_reentry",
+      "command": "python -m src.fresh_service_scale_reentry --samples 50000 --outdir results-integration/fresh-service-scale-reentry",
+      "outdir": "results-integration/fresh-service-scale-reentry",
+      "shard": 5
+    },
+    {
+      "id": "joint_causal_stop_projection",
+      "module": "src.joint_causal_stop_projection",
+      "command": "python -m src.joint_causal_stop_projection --samples 50000 --outdir results-integration/joint-stop",
+      "outdir": "results-integration/joint-stop",
+      "shard": 5
+    },
+    {
+      "id": "full_natural_service_corridor_quotient",
+      "module": "src.full_natural_service_corridor_quotient",
+      "command": "python -m src.full_natural_service_corridor_quotient --samples 50000 --outdir results-integration/full-natural-service-corridor-quotient",
+      "outdir": "results-integration/full-natural-service-corridor-quotient",
+      "shard": 5
+    },
+    {
+      "id": "coherent_increment_service",
+      "module": "src.coherent_increment_service",
+      "command": "python -m src.coherent_increment_service --samples 50000 --outdir results-integration/coherent-increment-service",
+      "outdir": "results-integration/coherent-increment-service",
+      "shard": 5
+    },
+    {
+      "id": "resolved_contact_native_binding",
+      "module": "src.resolved_contact_native_binding",
+      "command": "python -m src.resolved_contact_native_binding --samples 50000 --seed 2026081302 --outdir results-integration/resolved-contact-native-binding",
+      "outdir": "results-integration/resolved-contact-native-binding",
+      "shard": 5
+    }
+  ]
+}

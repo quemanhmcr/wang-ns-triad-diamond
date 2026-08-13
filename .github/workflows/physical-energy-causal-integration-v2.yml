@@ -1,0 +1,214 @@
+name: Physical energy causal integration v2
+
+on:
+  workflow_dispatch:
+    inputs:
+      force_full:
+        description: 'Execute every integration node instead of reusing exact-content baseline nodes'
+        required: false
+        default: false
+        type: boolean
+  push:
+    branches:
+      - 'research/physical-integration-v2'
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    outputs:
+      shards: ${{ steps.plan.outputs.shards }}
+      execute_count: ${{ steps.plan.outputs.execute_count }}
+      reuse_count: ${{ steps.plan.outputs.reuse_count }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+      - name: Verify v2 contains every legacy integration command
+        run: >-
+          python tools/physical_integration_plan.py verify
+          --manifest ci/physical_energy_integration_manifest.json
+          --legacy-workflow .github/workflows/physical-energy-causal-integration.yml
+      - id: plan
+        name: Build exact-content execution plan
+        shell: bash
+        run: |
+          force=""
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            if [[ "$(python -c 'import json; print(str(json.load(open("ci/physical_energy_integration_policy.json"))["force_full"]).lower())')" == "true" ]]; then
+              force="--force-full"
+            fi
+          elif [[ "${{ inputs.force_full }}" == "true" ]]; then
+            force="--force-full"
+          fi
+          python tools/physical_integration_plan.py plan \
+            --manifest ci/physical_energy_integration_manifest.json \
+            --baseline ci/physical_energy_integration_baseline.json \
+            $force --out integration-plan.json
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          p=json.load(open('integration-plan.json'))
+          print('shards='+json.dumps(p['execution_shards'],separators=(',',':')))
+          print('execute_count='+str(p['execute_count']))
+          print('reuse_count='+str(p['reuse_count']))
+          PY
+          cat integration-plan.json >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: physical-integration-v2-plan
+          path: integration-plan.json
+
+  global-suite-and-master:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Master episode stress
+        run: |
+          python - <<'PY'
+          import json, math, random
+          from src.master_no_escape import MasterStep, master_lower_bound, verify_episode_trace
+          rng = random.Random(20260809)
+          worst = 1e9
+          checked = 0
+          for _ in range(20000):
+              c0 = 0.04
+              kappa = rng.uniform(0.12, 0.30)
+              reset = rng.uniform(kappa, 1.4)
+              episodes = []
+              all_steps = []
+              for e in range(rng.randint(1, 12)):
+                  p = reset
+                  ep = []
+                  for _j in range(rng.randint(0, 20)):
+                      z = rng.uniform(0.0, 0.015)
+                      if p - kappa + z < 0:
+                          break
+                      p = p - kappa + z
+                      s = MasterStep(1.0, 0.0, 0.0, True, z)
+                      ep.append(s)
+                      all_steps.append(s)
+                  episodes.append(ep)
+                  if e + 1 < len(episodes):
+                      pass
+              # Rebuild separators after episode count is known.
+              all_steps = []
+              for e, ep in enumerate(episodes):
+                  all_steps.extend(ep)
+                  if e + 1 < len(episodes):
+                      cost = rng.uniform(c0, 0.5)
+                      eta = rng.uniform(0.0, 0.002)
+                      eff = min(1.0, math.exp(-cost) + eta)
+                      all_steps.append(MasterStep(eff, cost, eta, False))
+              epcheck = verify_episode_trace(episodes, c0=c0, kappa0=kappa, potential_reset=reset)
+              if not epcheck['admissible']:
+                  raise SystemExit('generated inadmissible episode trace')
+              out = master_lower_bound(all_steps, c0=c0, kappa0=kappa, potential_reset=reset)
+              actual = sum(-math.log(min(1.0, s.efficiency)) for s in all_steps)
+              margin = actual - float(out['log_efficiency_lower_bound'])
+              worst = min(worst, margin)
+              checked += 1
+          result = {'checked': checked, 'worst_margin': worst}
+          print(json.dumps(result, indent=2))
+          if worst < -1e-10:
+              raise SystemExit(1)
+          PY
+
+  integration-shards:
+    needs: preflight
+    if: ${{ needs.preflight.outputs.execute_count != '0' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.preflight.outputs.shards) }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - uses: actions/download-artifact@v4
+        with:
+          name: physical-integration-v2-plan
+      - name: Execute only fingerprint-invalid/new nodes in shard ${{ matrix.shard }}
+        run: >-
+          python tools/physical_integration_plan.py execute
+          --manifest ci/physical_energy_integration_manifest.json
+          --baseline ci/physical_energy_integration_baseline.json
+          --plan integration-plan.json
+          --shard ${{ matrix.shard }}
+          --out shard-${{ matrix.shard }}.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: physical-integration-v2-shard-${{ matrix.shard }}
+          path: |
+            results-integration/
+            shard-${{ matrix.shard }}.json
+
+  aggregate:
+    needs: [preflight, global-suite-and-master, integration-shards]
+    if: >-
+      ${{ always() && needs.preflight.result == 'success' &&
+          needs.global-suite-and-master.result == 'success' &&
+          (needs.integration-shards.result == 'success' || needs.integration-shards.result == 'skipped') }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: physical-integration-v2-plan
+      - name: Materialize exact-content reusable certified outputs
+        run: >-
+          python tools/physical_integration_plan.py materialize
+          --manifest ci/physical_energy_integration_manifest.json
+          --baseline ci/physical_energy_integration_baseline.json
+          --plan integration-plan.json
+          --result-root results-integration
+      - if: ${{ needs.preflight.outputs.execute_count != '0' }}
+        uses: actions/download-artifact@v4
+        with:
+          pattern: physical-integration-v2-shard-*
+          path: shard-download
+      - name: Merge executed shard outputs
+        if: ${{ needs.preflight.outputs.execute_count != '0' }}
+        run: |
+          find shard-download -type f -path '*/results-integration/*' -print0 | while IFS= read -r -d '' f; do
+            rel="${f#*/results-integration/}"
+            mkdir -p "results-integration/$(dirname "$rel")"
+            cp "$f" "results-integration/$rel"
+          done
+      - name: Verify complete result set and byte-equivalence of baseline-matched nodes
+        run: >-
+          python tools/physical_integration_plan.py verify-results
+          --manifest ci/physical_energy_integration_manifest.json
+          --baseline ci/physical_energy_integration_baseline.json
+          --plan integration-plan.json
+          --result-root results-integration
+          --out integration-v2-verification.json
+      - name: Integration summary
+        run: |
+          cat integration-v2-verification.json >> "$GITHUB_STEP_SUMMARY"
+          for f in results-integration/*/summary.md; do
+            echo >> "$GITHUB_STEP_SUMMARY"
+            cat "$f" >> "$GITHUB_STEP_SUMMARY"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: physical-energy-causal-integration-v2-results
+          path: |
+            results-integration/
+            integration-plan.json
+            integration-v2-verification.json
