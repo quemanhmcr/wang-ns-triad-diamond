@@ -1,6 +1,6 @@
 # RESEARCH LEDGER — current theorem architecture
 
-Status: current through the certified **hard-tail true-upward supply** theorem, exact theorem SHA `d064bc4d780d9c90d36e64c7b84c3b771b74c896`. This file is deliberately theorem-facing and compact. CI runs, stress counts, residuals, artifact digests, and failure lineage live in `docs/experimental_certification_log.md`; the pre-compaction full ledger is archived under `docs/history/`.
+Status: current through the certified **resolved-contact native binding** theorem, exact theorem SHA `476760236e197d614d5bb211b438e49701652f67`. This file is deliberately theorem-facing and compact. CI runs, stress counts, residuals, artifact digests, and failure lineage live in `docs/experimental_certification_log.md`; the pre-compaction full ledger is archived under `docs/history/`.
 
 ## 1. Non-negotiable physical rules
 
@@ -8,6 +8,7 @@ Start from actual Navier–Stokes/PDE quantities and preserve their type.
 
 - Reconstruct signed nonlinear work `dW` **before Hahn**. The canonical cause is `dW+`; `dW-` may acquire donor provenance but never replaces the positive cause.
 - After a canonical Hahn split, downstream labels inherit cause by restriction or positive pushforward. Do not re-Hahn a coarsened signed representation.
+- Multiple same-time donors are provenance sidecars. Coalesce them to one recipient physical charge before downstream ownership; never clone an owner once per donor.
 - Native capacity is a reference/error envelope, never causal probability, work currency, reset resource, or recurrence budget.
 - Persistent energy stock belongs to physical Fourier–helical modes. Hard interaction cells are same-time labels, not wallets.
 - Same-time donor provenance is distinct from between-time stock continuity. No FIFO/LIFO/proportional matching of earlier deposits to later withdrawals.
@@ -16,87 +17,82 @@ Start from actual Navier–Stokes/PDE quantities and preserve their type.
 
 ## 2. Current physical spine
 
-### Signed work and hard routing
-For an unordered helical edge, direct Leray/Fourier work equals the Waleffe registration. The continuum edge law is signed and locally Radon; only afterward is `dW+` formed. Geometry/phase-bad positive work, including positive nonforward work, follows the existing stage-zero `TRANSFER_WORK_LOSS` route. Geometry-good work is merely Young-eligible.
+### Signed work, hard routing, donor provenance
+For an unordered helical edge, direct Leray/Fourier work equals the Waleffe registration. The continuum edge law is signed and locally Radon; only afterward is `dW+` formed. Geometry/phase-bad positive work follows stage-zero `TRANSFER_WORK_LOSS`; geometry-good work is merely Young-eligible.
 
-Hard cells inherit three direct laws: signed `pi_#dW`, positive `pi_#dW+`, and negative `pi_#dW-`. In a mixed cell
+Hard cells inherit signed `pi_#dW`, positive `pi_#dW+`, and negative `pi_#dW-`. In a mixed cell `T_C=g_C+b_C-n_C`; Young still sees full signed `T_C`. Low-deficit good-core work satisfies `dW/dA>19/100`. Reservation failure is domination by existing `n_C,b_C`, never a causal payment map.
 
-`T_C = g_C + b_C - n_C`.
-
-Terminal bad-positive assistance is reserved only in the scalar Young/Christ certificate; Young still sees the full signed `T_C`. On the certified low-deficit good core, actual work satisfies `dW/dA > 19/100`. Nondegenerate reservation failure is a domination statement involving existing `n_C` and `b_C`, never a causal payment map.
-
-### Cyclic donor provenance and single charging
-For one closed helical triad, the three cyclic modal works satisfy `T0+T1+T2=0` before Hahn. With `P_i=[T_i]+`, `N_i=[-T_i]+`, `Q=sum P=sum N`,
+For one closed helical triad, `T0+T1+T2=0` before Hahn. With `P_i=[T_i]+`, `N_i=[-T_i]+`, `Q=sum P=sum N`,
 
 `M(i→j)=N_i P_j/Q`
 
-has canonical `dW-` donor marginal and canonical `dW+` recipient marginal. Generic positive recipients may have two donors. Hard-cell pushforward aggregates overlapping donor provenance into each recipient charge exactly once; coarse self-loops are retained as same-time redistribution with zero added depth and no scale progress.
+has canonical `dW-` donor marginal and canonical `dW+` recipient marginal. Generic recipients may have two donors; recipient charging remains single.
 
 ## 3. Between-time energy and radial transport
 
-For any physical helical-mode set `A`, internal cyclic traffic cancels from divergence:
+For a physical helical-mode set `A`, internal cyclic traffic cancels:
 
-`W_A+ - W_A- = Phi_in,A - Phi_out,A`.
+`W_A+ - W_A- = Phi_in,A - Phi_out,A`,
 
-Navier–Stokes gives
+and Navier–Stokes gives
 
-`E_A(t1) + D_A + ∫Phi_out = E_A(t0) + ∫Phi_in`.
+`E_A(t1)+D_A+∫Phi_out = E_A(t0)+∫Phi_in`.
 
-This is stock + viscosity + boundary flow, not a bound on gross nonlinear traffic.
+For `H_R={|k|>R}` this becomes the exact tail stock/viscosity/boundary-flow law with `Phi_up` and `Phi_down`. High→high circulation is real internal work, not tail supply. Integrating radial crossings in `dR/R` gives clipped logarithmic displacement; equiradial transfer has zero radial action, so no minimum dyadic step or event clock follows.
 
-For the radial exterior `H_R={|k|>R}`,
+## 4. Hard-tail supply and resolved-contact binding
 
-`Phi_up(R)=M{|k_d|≤R<|k_r|}`,
-`Phi_down(R)=M{|k_r|≤R<|k_d|}`,
+At parent-tail scale `N`,
 
-and
+`N E_>N(t0) + N∫Phi_up >= 2 nu D_tail`.
 
-`E_>R(t1)+D_>R+∫Phi_down = E_>R(t0)+∫Phi_up`.
+Thus hard-tail dissipation is owned by inherited physical tail stock or actual low→high supply. The common causal unit remains `N dW`; recipient shell `M` is geometry only.
 
-High→high circulation is real but internal. Integrating crossings in `dR/R` gives exact clipped logarithmic donor→recipient displacement. Equiradial positive transfer has zero radial action, so nonlinear transfer itself supplies neither a minimum dyadic step nor an event count.
+Disintegrating true upward atoms by recipient shell gives two distinct support phenomena.
 
-## 4. Hard-tail true-upward supply
+- **Pure-UV HH:** both interaction parents are `>M/4`; necessarily `M=2N`, and both parents lie in `(M/4,3M/2]`.
+- **Resolved contact:** one interaction parent is `<=M/4`. Since the recipient satisfies `|z|>M/2`, exactly one parent is resolved and the other lies in `(M/4,5M/4]`; low-low cannot feed the shell.
 
-The old hard-tail inequality using gross positive tail work remains a valid coarse bridge, but the native feeder is now known exactly. Multiplying radial continuity at parent-tail scale `N` gives the owner cover
+For resolved contact choose any real smooth cutoff `0<=S_M<=1`, `supp S_M subset B_(M/4)`, using the certified cutoff-repartition gauge, and write `u=V+h`. If `q=S_M(p_low)`, the actual signed recipient edge obeys **before Hahn**
 
-`N E_>N(t0) + N∫Phi_up ≥ 2 nu D_tail`,
+`dW = q dW + (1-q)dW = dW_mixed + dW_HH`.
 
-hence at least one of
+The already-canonical upward cause is then positively restricted:
 
-`N E_>N(t0) ≥ nu D_tail`,
-`N∫Phi_up ≥ nu D_tail`.
+`dmu_mixed=q dmu`, `dmu_HH=(1-q)dmu`.
 
-So high-tail dissipation is supported by **inherited tail stock or actual low→high boundary supply**, never by internal high→high circulation.
+No mass is cloned and no new Hahn law appears. At boundary contact `|p_low|=M/4`, smooth support forces `q=0`; contact can therefore be 100% HH and is not synonymous with interface work.
 
-Disintegrate each upward atom by the recipient shell `M=2^j N`. The physical energy donor is one recipient interaction parent.
+For the mixed part, coalesce all selected donor sidecars of one recipient first. The same resolved operator splits signed-first as `I=K+S`, hence
 
-- **Pure-UV HH by support:** both recipient interaction parents are `>M/4`. Since the donor is also `≤N`, this forces `j=1`, hence `M=2N`. Triad closure then puts both parents in the comparable range `(M/4, 3M/2]`. Pure-UV true supply is therefore automatically first-shell and comparable; no locality norm estimate is needed to discover that fact.
-- **Deep upward crossing:** if `M≥4N`, the donor satisfies `|k_d|≤N≤M/4`; therefore the atom has resolved-scale parent contact and cannot be pure-UV by support.
+`mu_mixed <= I+ <= K+ + S+`.
 
-These are **atomwise** alternatives. One closed-triad law may carry first-shell pure-UV and deep-contact upward submeasures simultaneously. Resolved-scale contact is only a Fourier-support fact; it is not yet called a smooth-interface owner.
+No proportional K/S matching is used. Fixed-event `K` is existing conservative same-time redistribution with zero recursive depth; `S` is existing symmetric strain/deformation. This does not identify fixed-event `K` with smooth moving-carrier `K_phys`, whose observer gauge is separately quotiented.
 
-The causal unit remains the parent-block unit `N dW`. Recipient-shell scale `M` is geometry, not a new causal reweighting.
+The HH complement remains distinct from pure-UV support, but both physical parents are `<=5M/4`. Because `0<=S<=1` also gives `||h||_2<=||u||_2`, its parent-energy factor improves by four. Crucially, canonical edge-positive mass first passes through physical total variation: `dmu_HH<=d|W_HH|<=dA_HH`. The exact unordered-parent/helicity Young prefactor is `4 sqrt(2) C_F A_3`, strictly below the clean vector constant `4 A_3` because `sqrt(2) C_F<1`. Thus it enters sliding natural time directly with `R=5/4` without aggregate shell re-Hahn or output-scale locality.
+
+If the resolved-contact owner carries `nu D_tail/2`, then either contact HH carries `nu D_tail/4`, or existing `K+`/`S+` carries `nu D_tail/8`. On the HH alternative,
+
+`sqrt(mu_win)/(p_scale p_time) >= nu D_tail/(15 c sqrt(pi) N E_global)`.
 
 ## 5. Other certified recurrence controls
 
-- Smooth physical relink is conservative same-event redistribution; only the symmetric strain/deformation part remains a recursive owner.
+- Smooth physical relink is conservative same-event redistribution; symmetric strain/deformation remains a genuine recursive owner.
 - Same-carrier checkpoint segmentation cannot reset cumulative first-hit monitors or create Zeno re-hardening.
 - Eventually-pure consecutive high-strain recurrence has a descending physical-scale/dissipation telescope.
-- Eventually-pure **signed-good generated-HH** recurrence has a finite physical-time backshift telescope. Generic/non-signed-good HH remains outside that theorem.
-- Material labels are sidecars to actual service/work. Shannon/Rényi laws govern breadth/reuse of actual positive ancestry, not time.
+- Eventually-pure signed-good generated-HH recurrence has a finite physical-time backshift telescope; generic HH remains outside that theorem.
+- Material labels are sidecars to actual service/work. Shannon/Rényi describe breadth/reuse of actual positive ancestry, not time.
 
 ## 6. Current frontier
 
-The next work must keep the two true-upward support branches separate.
-
-1. **Resolved-contact branch:** prove a positive, type-correct binding through the actual smooth decomposition `u=V+h` before assigning interface/relink/strain ownership. Frequency contact alone is insufficient.
-2. **Pure-UV branch:** exploit the already-rigid `M=2N` comparable geometry and bind the donor-restricted canonical positive submeasure into the existing natural-window/critical-shell continuation without re-Hahn or changing the common `N dW` unit.
-3. Local HH still has the degenerate full-signed Young/Christ-margin seam and, only if a future representation truly needs it, a separately proved coherent positive kernel.
-4. Globally, mixed genuine-owner recurrence, the initial-data interface, and the hypothetical singular-time interface remain open. There is **no 3D Navier–Stokes global-regularity claim**.
+1. **Pure-UV branch:** it is already first-shell `M=2N`, comparable, and `h=u` on both parents. Test whether its donor-restricted canonical positive submeasure goes directly into absolute-work sliding natural-window / critical-shell continuation with `R=3/2`, without output-scale Hahn/locality machinery.
+2. **Mixed genuine-owner recurrence:** resolved contact no longer forms an independent owner, but repeated strain/service/reuse/source/material branches still need universal physical renewal/exhaustion.
+3. Local HH retains the degenerate full-signed Young/Christ-margin seam and, only if a future representation truly needs it, a separately proved coherent positive kernel.
+4. The initial-data and hypothetical singular-time interfaces remain open. There is **no 3D Navier–Stokes global-regularity claim**.
 
 ## 7. Working discipline and reading order
 
-Before every new theorem branch: fetch/verify `origin/main`, read this file in full, then branch. Theorem/test/numerical/PDE execution belongs in GitHub Actions; local/cloud shell work is for reading, static inspection, editing, git, and artifact/log handling.
+Before every new theorem branch: fetch/verify `origin/main`, read this file in full, then branch. Theorem/test/numerical/PDE execution belongs in GitHub Actions; cloud shell work is for reading, static inspection, editing, git, and artifact/log handling.
 
 Current reading spine:
-`physical_energy_causal_bridge.md` → `high_frequency_dissipation_reentry.md` → `helical_physical_edge_registration.md` → `continuum_helical_edge_measure_registration.md` → `canonical_positive_edge_work_routing.md` → `mixed_fate_reserved_young_handoff.md` → `cyclic_helical_triad_donor_kernel.md` → `cyclic_hard_cell_single_charge_quotient.md` → `helical_mode_set_energy_continuity.md` → `radial_spectral_crossing_layer_cake.md` → `hard_tail_true_upward_supply.md` → `master_no_escape.md`.
+`physical_energy_causal_bridge.md` → `high_frequency_dissipation_reentry.md` → `helical_physical_edge_registration.md` → `continuum_helical_edge_measure_registration.md` → `canonical_positive_edge_work_routing.md` → `cyclic_helical_triad_donor_kernel.md` → `helical_mode_set_energy_continuity.md` → `radial_spectral_crossing_layer_cake.md` → `hard_tail_true_upward_supply.md` → `resolved_contact_native_binding.md` → `master_no_escape.md`.

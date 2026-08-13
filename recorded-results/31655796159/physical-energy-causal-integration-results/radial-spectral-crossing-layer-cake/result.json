@@ -1,0 +1,34 @@
+{
+  "certificate": {
+    "causal_semantics": "Phi_up and Phi_down are positive restrictions of the already-certified cyclic donor disintegration of canonical dW-/dW+; no tail-net Hahn law is minted",
+    "claims_global_regularity": false,
+    "crossing_semantics": "crossing direction is real Fourier-radius geometry; it adds no event depth and does not imply a minimum dyadic or positive logarithmic step",
+    "equiradial_anti_theorem": "a regular closed helical triad can carry nonzero donor-recipient energy flow between distinct equal-radius modes, so physical transfer can have exactly zero radial displacement",
+    "finite_full_layer_cake": "for finite physical flow atoms, integral_0^infty (Phi_up-Phi_down)dR/R = sum M(d->r) log(|k_r|/|k_d|); a continuum infinite-range version requires an explicit finite log moment",
+    "gross_crossing_budget": false,
+    "hard_shell_reweighting_used": false,
+    "later_hahn_used": false,
+    "radial_exterior": "H_R={(k,s):|k|>R}; existing cyclic donor flow restricted low->high is Phi_up(R), high->low is Phi_down(R), and W_HR^+-W_HR^-=Phi_up-Phi_down with high->high traffic cancelling exactly",
+    "status": "EXACT_RADIAL_SPECTRAL_CROSSING_LAYER_CAKE__PHYSICAL_HELICAL_DONOR_RECIPIENT_RADII__TAIL_INWARD_OUTWARD_FLUX__TRUNCATED_LOG_RADIUS_LAYER_CAKE__NO_REHAHN_DYADIC_PROGRESS_OR_GROSS_CROSSING_BUDGET",
+    "tail_continuity": "E_>R(t1)+D_>R+integral Phi_down = E_>R(t0)+integral Phi_up, inherited from the certified mode-set NS continuity law",
+    "truncated_layer_cake": "for 0<R0<R1, integral_R0^R1 Phi_up(R)dR/R equals the existing donor-flow mass weighted by the positive clipped log-radius displacement; downward is the negative displacement, and signed action is recipient clipped-log moment minus donor clipped-log moment",
+    "young_progress_distinction": "donor-recipient log-radius displacement is not the one-edge quantity log_+(|child|/max(|parent1|,|parent2|)) and is never identified with J_e or Young/Christ saturation"
+  },
+  "stress": {
+    "both_direction_cases_across_sampled_radii": 25161,
+    "downward_crossing_cases": 37510,
+    "equiradial_full_radial_log_action": 0.0,
+    "equiradial_internal_transfer": 0.07776350497646631,
+    "equiradial_zero_progress_counterexample_passed": true,
+    "radial_vs_edge_progress_mismatch_cases": 87388,
+    "resolved_cases": 50000,
+    "samples": 50000,
+    "unresolved_cases": 0,
+    "upward_crossing_cases": 37651,
+    "worst_full_log_marginal_native_residual": 2.0360728182653087e-11,
+    "worst_partition_native_residual": 0.0,
+    "worst_tail_divergence_native_residual": 1.9746813782186205e-16,
+    "worst_truncated_layer_cake_native_residual": 3.3069428243361334e-16,
+    "worst_uniform_dilation_normalized_action_residual": 2.7305414242209366e-11
+  }
+}

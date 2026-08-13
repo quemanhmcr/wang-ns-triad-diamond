@@ -15,6 +15,7 @@ Historical detail through the radial theorem is preserved verbatim in `docs/hist
 - helical mode-set energy continuity: `a39d502d9312ac3bd6613a780d60b22e88790863`
 - radial spectral crossing layer cake: `667e687cb740a77df944753c575f581abad14199`
 - hard-tail true-upward supply: `d064bc4d780d9c90d36e64c7b84c3b771b74c896`
+- resolved-contact native binding: `476760236e197d614d5bb211b438e49701652f67`
 
 For complete historical run IDs and metrics of the earlier entries, use the archived full ledger above.
 
@@ -45,3 +46,32 @@ Failure lineage: initial candidate `dd3e7c730e9973eecd0d9a7168db10094abd0f0d` ha
 ## Logging rule going forward
 
 When a theorem is certified, record here: exact theorem SHA; dedicated/audit/integration runs; artifact digests; only the few metrics that could falsify the theorem; and failure lineage that changed understanding or certification. Keep theorem statements, owner semantics, and the current frontier in `RESEARCH_LEDGER.md`. Do not duplicate large CI transcripts into the root ledger.
+
+## Resolved-contact native binding — exact certification
+
+Exact theorem SHA: `476760236e197d614d5bb211b438e49701652f67`.
+
+Serious gates on that exact SHA:
+
+- dedicated `31655720916` — **success**; full suite `907` tests; `75,000` native-binding stress states; actual six-mode Fourier--Galerkin NS referee on FFT representations `24,28`;
+- independent audit `31655720898` — **success**; `100,000` analytic states; longer two-representation actual-NS audit plus amplitude adversary;
+- physical-energy causal integration `31655796159` — **success** on the same exact SHA; full suite `907` tests; all `68` job steps green; master episode stress `20,000` traces with worst margin `0.0`.
+
+Stored exact-SHA artifact trees and deterministic digests:
+
+- `recorded-results/31655720916/` — `sha256:9a73a2dbbe717369ef41ab067dfd17c6481ae3ebd751b42e8aed7f2f0775ba08`
+- `recorded-results/31655720898/` — `sha256:48dbe6b233cddb351040ffff4af9e973020cc000c81a2d7416f0da2e316be4e5`
+- `recorded-results/31655796159/` — `sha256:1c38edfed2b05843bb0eff21629390c923dc45b6ca575bf9aa912cc11033ae3e`
+
+Dedicated `75,000`-state stress: maximum positive V/h partition residual `2.18314328098e-16`; minimum K/S positive-cover margin `0`; minimum sampled half-owner margin `1.02313882790e-4`; boundary-contact HH fraction exactly `1`; coarse downstream-Hahn anti-example gap `0.9`; exact helicity-edge total-variation / clean-Young ratio `0.0897935610625833`. Independent `100,000`-state audit: maximum partition residual `2.087e-16`, maximum sampled contact parent/shell ratio `1.22522851885 < 5/4`, boundary-contact HH fraction `1`, coarse-Hahn gap `0.9`, and the same exact total-variation ratio.
+
+The independent actual-NS audit evolved the same real six-mode Galerkin trajectory while reading two different admissible smooth cutoffs. Worst full PDE V/h repartition residual was `3.359e-16`; cutoff-repartition gauge residual `3.231e-16`; high-shell low-low leakage exactly `0`; same-edge signed V/h work residual `3.863e-17`; K/S identity residual `1.288e-17`; K antisymmetric-pair residual `1.610e-18`; S symmetric-pair residual `6.439e-18`; canonical K/S positive-cover defect `1.288e-17`; energy-balance residual `8.560e-16`; maximum FFT-representation spread `9.843e-16`.
+
+Failure/correction lineage:
+
+- first implementation branch `theorem/resolved-contact-smooth-binding`, SHA `a9561fd2150fdf47eebe33618e888030e5554c22`, was abandoned before certification. It modified the central integration workflow, which seven legacy workflows watched, causing unnecessary CI fan-out; those runs were canceled. The replacement theorem workflows are branch-scoped and do not touch the central integration file.
+- physically, the first draft privileged a convenient cutoff with an `M/8` plateau. Static PDE inspection replaced that with the invariant law `q=S(p_low)` for every nonnegative smooth cutoff supported in `B_(M/4)`; the boundary case forces `q=0` and gives a real 100%-HH anti-theorem to “contact = interface”.
+- donor provenance initially risked double owner charging. The production API now requires a typed `SingleChargedRecipientMixedCause` formed only after same-recipient donor sidecars are coalesced.
+- candidate `9d615568640e39c49acc7295a996ed97e04110e6` passed dedicated/audit/integration, but a post-CI theorem review found a genuine missing proof seam: the existing aggregate HH natural-window theorem explicitly cannot control a donor-restricted canonical edge-positive law because aggregate Hahn cancellation may be smaller than gross positive edge mass. Promotion was stopped. The repair encoded the missing continuum measure chain `dmu_HH<=d|W_HH|<=dA_HH` and replayed the exact unordered-parent/helicity Young prefactor `4 sqrt(2) C_F A_3`; since `sqrt(2) C_F=0.0897935610625833<1`, the existing clean `4 A_3` physical-work constant controls gross edge total variation. No sample count, tolerance, PDE equation, owner threshold or causal unit was weakened.
+
+No theorem/test/PDE execution used Linux Cloud; all execution evidence above came from GitHub Actions on the exact SHA.
