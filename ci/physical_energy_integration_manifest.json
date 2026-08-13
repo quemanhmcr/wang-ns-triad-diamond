@@ -408,6 +408,13 @@
       "command": "python -m src.resolved_contact_native_binding --samples 50000 --seed 2026081302 --outdir results-integration/resolved-contact-native-binding",
       "outdir": "results-integration/resolved-contact-native-binding",
       "shard": 5
+    },
+    {
+      "id": "pure_uv_true_upward_natural_window",
+      "module": "src.pure_uv_true_upward_natural_window",
+      "command": "python -m src.pure_uv_true_upward_natural_window --samples 50000 --seed 2026081303 --outdir results-integration/pure-uv-true-upward-natural-window",
+      "outdir": "results-integration/pure-uv-true-upward-natural-window",
+      "shard": 5
     }
   ]
 }

@@ -1,0 +1,65 @@
+name: Audit pure-UV true-upward natural-window binding
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'theorem/pure-uv-true-upward-natural-window'
+
+permissions:
+  contents: read
+
+jobs:
+  independent-algebra-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Focused theorem plus donor single-charge dependencies
+        run: >-
+          pytest -q
+          tests/test_pure_uv_true_upward_natural_window.py
+          tests/test_cyclic_helical_triad_donor_kernel.py
+          tests/test_cyclic_hard_cell_single_charge_quotient.py
+          tests/test_hard_tail_true_upward_supply.py
+      - name: Independent 100k physical-triad stress
+        run: >-
+          python -m src.pure_uv_true_upward_natural_window
+          --samples 100000 --seed 2026081313
+          --outdir audit-pure-uv-natural-window/analytic
+      - run: cat audit-pure-uv-natural-window/analytic/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-pure-uv-true-upward-natural-window-analytic-results
+          path: audit-pure-uv-natural-window/
+
+  independent-actual-ns-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Longer lower-amplitude two-representation NS audit
+        run: >-
+          python -m src.pure_uv_true_upward_natural_window_pde_probe
+          --main-resolutions 24 28 --deep-resolutions 20 24
+          --main-steps 64 --deep-steps 24
+          --main-duration 0.0012 --deep-duration 0.0003
+          --closed-tail-resolutions 20 24 --closed-tail-steps 32
+          --closed-tail-duration 0.0004
+          --amplitude 0.5
+          --outdir audit-pure-uv-natural-window/actual-ns
+      - run: cat audit-pure-uv-natural-window/actual-ns/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-pure-uv-true-upward-natural-window-actual-ns-results
+          path: audit-pure-uv-natural-window/

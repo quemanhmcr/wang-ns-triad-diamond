@@ -1,0 +1,66 @@
+name: Pure-UV true-upward natural-window binding
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'theorem/pure-uv-true-upward-natural-window'
+
+permissions:
+  contents: read
+
+jobs:
+  analytic-and-adversarial:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Focused pure-UV theorem and anti-theorems
+        run: pytest -q tests/test_pure_uv_true_upward_natural_window.py
+      - name: Physical dependency tests
+        run: >-
+          pytest -q
+          tests/test_hard_tail_true_upward_supply.py
+          tests/test_resolved_contact_native_binding.py
+          tests/test_continuum_helical_edge_measure_registration.py
+          tests/test_high_tail_natural_window_reentry.py
+      - name: 75k physical-triad pure-UV stress
+        run: >-
+          python -m src.pure_uv_true_upward_natural_window
+          --samples 75000 --seed 2026081303
+          --outdir results-pure-uv-natural-window/analytic
+      - run: cat results-pure-uv-natural-window/analytic/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pure-uv-true-upward-natural-window-analytic-results
+          path: results-pure-uv-natural-window/
+
+  actual-ns-referee:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Focused actual Fourier-Galerkin NS test
+        run: pytest -q tests/test_pure_uv_true_upward_natural_window_pde_probe.py
+      - name: Two-representation actual NS referee
+        run: >-
+          python -m src.pure_uv_true_upward_natural_window_pde_probe
+          --main-resolutions 24 28 --deep-resolutions 20 24
+          --main-steps 48 --deep-steps 16
+          --closed-tail-resolutions 20 24 --closed-tail-steps 24
+          --outdir results-pure-uv-natural-window-ns/main
+      - run: cat results-pure-uv-natural-window-ns/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pure-uv-true-upward-natural-window-actual-ns-results
+          path: results-pure-uv-natural-window-ns/
