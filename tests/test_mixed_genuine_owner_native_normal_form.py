@@ -3,6 +3,7 @@ import pytest
 from src.material_service_native_owner_factorization import project_material_recurrence_to_native_owners
 from src.mixed_genuine_owner_native_normal_form import (
     NativeEventRoot,
+    certified_objective_source_normal_form,
     certified_resolved_contact_normal_form,
     native_owner_normal_form,
     theorem_certificate,
@@ -104,3 +105,42 @@ def test_candidate_scope_keeps_surviving_three_root_mixed_problem_open():
         NativeEventRoot.ACTUAL_HH_OR_HARD_TAIL.value,
     }
     assert "not yet proved finite" in cert["scope"]
+
+
+def _source_normal_form(weights):
+    return certified_objective_source_normal_form(
+        objective_variation_action=1.0,
+        scaled_lifetime=1.0,
+        owner_weights=weights,
+        viscosity=1.0,
+        filter_l1=1.0,
+        lp_constant=1.0,
+        bernstein_constant=1.0,
+    )
+
+
+def test_local_objective_source_owner_refines_to_existing_strain_dissipation_root():
+    out = _source_normal_form({"local_dv": 1.0, "pressure": 0.0, "sgs": 0.0, "viscous": 0.0})
+    assert out.recursive_core_roots == (NativeEventRoot.STRAIN_DISSIPATION.value,)
+
+
+def test_viscous_objective_source_owner_refines_to_existing_strain_dissipation_root():
+    out = _source_normal_form({"local_dv": 0.0, "pressure": 0.0, "sgs": 0.0, "viscous": 1.0})
+    assert out.recursive_core_roots == (NativeEventRoot.STRAIN_DISSIPATION.value,)
+
+
+def test_pressure_and_sgs_stay_source_service_without_realized_positive_law_route():
+    for weights in (
+        {"local_dv": 0.0, "pressure": 1.0, "sgs": 0.0, "viscous": 0.0},
+        {"local_dv": 0.0, "pressure": 0.0, "sgs": 1.0, "viscous": 0.0},
+    ):
+        out = _source_normal_form(weights)
+        assert out.recursive_core_roots == (NativeEventRoot.RESOLVED_SOURCE.value,)
+
+
+def test_exact_local_sgs_owner_tie_keeps_both_native_classes_without_priority():
+    out = _source_normal_form({"local_dv": 0.5, "pressure": 0.0, "sgs": 0.5, "viscous": 0.0})
+    assert set(out.recursive_core_roots) == {
+        NativeEventRoot.RESOLVED_SOURCE.value,
+        NativeEventRoot.STRAIN_DISSIPATION.value,
+    }

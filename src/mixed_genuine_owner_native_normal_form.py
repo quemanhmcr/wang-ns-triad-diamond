@@ -6,6 +6,7 @@ from typing import Sequence
 
 from src.joint_causal_stop_projection import InternalRecursiveCause
 from src.material_service_native_owner_factorization import MaterialRecurrenceProjection
+from src.objective_source_routing_compiler import compile_objective_source_owners
 from src.physical_branch_compiler import PhysicalCause
 from src.resolved_contact_native_binding import (
     HH_WINDOW,
@@ -212,6 +213,63 @@ def certified_resolved_contact_normal_form(
     )
 
 
+def certified_objective_source_normal_form(
+    *,
+    objective_variation_action: float,
+    scaled_lifetime: float,
+    owner_weights: dict[str, float],
+    viscosity: float,
+    filter_l1: float,
+    lp_constant: float,
+    bernstein_constant: float,
+    material_projection: MaterialRecurrenceProjection | None = None,
+) -> NativeOwnerNormalForm:
+    """Refine one coarse objective-source stop by its certified physical owners.
+
+    The source compiler proves a non-lexicographic four-owner cover.  Local
+    quadratic and viscous owners already pass through resolved D_V and therefore
+    enter the existing strain/critical-dissipation class.  Pressure and SGS
+    retain source/service ownership unless a later typed realized-route theorem
+    resolves them further.  Exact owner ties remain joint.
+
+    This function changes the *owner normal form* of the same source first stop;
+    it does not create another event vertex for the compiler or critical shell.
+    """
+    compiled = compile_objective_source_owners(
+        objective_variation_action,
+        scaled_lifetime,
+        owner_weights,
+        viscosity=viscosity,
+        filter_l1=filter_l1,
+        lp_constant=lp_constant,
+        bernstein_constant=bernstein_constant,
+    )
+    if compiled.get("additive_reset_created") is not False:
+        raise ValueError("objective source compiler created an illicit additive reset")
+    if compiled.get("packet_synchronization_created") is not False:
+        raise ValueError("objective source compiler created an illicit packet synchronization interface")
+    owners = compiled.get("joint_owners")
+    if not isinstance(owners, tuple) or not owners:
+        raise TypeError("certified source compiler returned no joint physical owners")
+    known = {"local_dv", "pressure", "sgs", "viscous"}
+    if any(owner not in known for owner in owners):
+        raise ValueError("unknown certified objective-source owner")
+
+    causes: list[PhysicalCause] = []
+    # local_dv/viscous are already bound by the compiler to D_V -> critical shell.
+    if any(owner in {"local_dv", "viscous"} for owner in owners):
+        causes.append(PhysicalCause.HIGH_STRAIN_DISSIPATION)
+    # pressure/SGS remain source/service roots until a realized positive-law route
+    # supplies a stronger typed descendant.
+    if any(owner in {"pressure", "sgs"} for owner in owners):
+        causes.append(PhysicalCause.RESOLVED_SOURCE)
+
+    return native_owner_normal_form(
+        physical_causes=tuple(causes),
+        material_projection=material_projection,
+    )
+
+
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
@@ -220,7 +278,7 @@ def theorem_certificate() -> dict[str, object]:
         "resolved_contact": "resolved contact fails closed as a primitive root; the certified u=V+h signed-before-Hahn theorem supplies only existing K/S/HH continuations",
         "recursive_core": tuple(sorted(r.value for r in RECURSIVE_CORE_ROOTS)),
         "terminal_roots": tuple(sorted(r.value for r in TERMINAL_ROOTS)),
-        "source_rule": "resolved source/independent service deliberately remains a native recursive root until its event carries a typed source-owner certificate; no compiler-name reduction is used as a recurrence proof",
+        "source_rule": "typed objective-source ownership refines local_DV/viscous owners into the existing strain/dissipation root; pressure/SGS remain source/service until a realized positive-law certificate resolves them further; no untyped compiler-name reduction is used",
         "hh_rule": "generic actual HH/hard-tail remains one native recursive root; signed-good and high-tail subroutes retain their own certified supplier-specific telescopes/continuations and are not conflated",
         "scope": "normal-form/ontology reduction only; the surviving mixed three-root recursive core is not yet proved finite, and no Navier-Stokes global-regularity claim is made",
     }

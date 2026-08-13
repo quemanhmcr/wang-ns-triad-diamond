@@ -61,3 +61,24 @@ The mixed genuine-owner problem is therefore not “many unrelated owner labels 
 Any next theorem should attack this three-root interaction directly. It must not introduce an exchange rate between source weight, `D_V`, shell mass, physical work, or time. A valid closure must come from a common local Navier--Stokes identity or from a typed transition theorem showing that one root necessarily creates a native cost/geometry in another root's ledger.
 
 No claim is made here that this three-root recurrence is already finite. No Navier--Stokes global-regularity claim is made.
+
+## Typed refinement inside the source class
+
+The coarse `RESOLVED_SOURCE` label is itself reducible when the certified objective-source owner cover is available. The exact resolved strain equation groups the source action into the joint physical owners
+
+\[
+\text{local quadratic }D_V,
+\quad \text{pressure},
+\quad \text{SGS},
+\quad \text{viscosity}.
+\]
+
+No lexicographic branch is chosen. For an actual source stop:
+
+- a qualifying local-quadratic owner already satisfies the certified `Sigma_local <= C_local D_V` route and therefore belongs to the existing strain/critical-dissipation root;
+- a qualifying viscous owner already satisfies the certified Cauchy lower for `D_V` and belongs to the same strain/critical-dissipation root;
+- pressure and SGS remain source/service roots unless their **realized positive source laws** are supplied to the downstream pressure/SGS owner theorems.
+
+Thus a coarse source stop which is purely local/viscous does **not** survive as an independent source root in the native normal form. A pressure/SGS owner is deliberately not erased merely because a symbolic compiler exists. Exact local/SGS or viscous/pressure ties retain both native classes.
+
+This is a refinement of the owner of the **same first-stop event**. The source compiler, the generated critical shell, and any same-corridor service witness do not create additional recursion vertices.
