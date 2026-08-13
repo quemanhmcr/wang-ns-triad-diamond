@@ -21,7 +21,7 @@ def _owner(N: float, *, sigma: float = 1.0, c: float = 1.0, atoms: int = 5):
         sigma,
         c,
         N,
-        sgs_positive_source_weight=0.0,
+        sgs_positive_source_weight=sigma / 2.0,
         pair_positive_weights=weights,
         pair_shell_indices=indices,
         pair_frequencies=freqs,
