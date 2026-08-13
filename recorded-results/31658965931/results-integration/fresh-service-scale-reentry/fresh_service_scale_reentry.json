@@ -1,0 +1,34 @@
+{
+  "certificate": {
+    "status": "EXACT_FRESH_MATERIAL_SERVICE_TO_REFINEMENT_INVARIANT_SCALE_LAW__CANONICAL_ANNULAR_LP_TO_TWO_HARD_SHELLS__NO_COHERENT_CELL_DOMINANCE_REQUIRED",
+    "material_quotient": "fresh NN is the pointwise indicator 1_Oc(z0)1_Oc(z1) on the positive coherent edge measure; pushforward to band j is invariant under coherent-cell refinement",
+    "canonical_frame": {
+      "support_lower_ratio": 0.5,
+      "support_upper_ratio": 2.0,
+      "square_partition": "sum_j phi_j(xi)^2=1 for xi!=0",
+      "calderon_reconstruction": "u=sum_j phi_j(D)[phi_j(D)u]",
+      "pointwise_multiplier_bound": "|phi_j|<=1",
+      "construction": "square-normalize one smooth dyadic annular cover q_j with supp q_j subset (M_j/2,2M_j)"
+    },
+    "band_capacity": "F_j<=M_j int||delta_r u_j||_2^2 d tau<=4 int M_j||u_j||_2^2 d tau",
+    "two_hard_shell_cover": "supp phi_j subset (M_j/2,2M_j), |phi_j|<=1 => M_j||u_j||_2^2<=mu_M+(1/2)mu_2M<=(3/2)max(mu_M,mu_2M)",
+    "native_tradeoff": "fresh F>=Y/4 => mu_hard>=pmax Y/(24c), equivalently mu_hard exp(H_inf_scale)>=Y/(24c)",
+    "renyi2_corollary": "because pmax>=sum p_j^2, mu_hard exp(H2_scale)>=Y/(24c)",
+    "hard_shell_selection": "at the witness time choose the larger of the two exact hard-shell masses at M_j and 2M_j; this finite measurable selection is physical scale selection, not a coherent-cell argmax",
+    "generic_shell": "every fresh scale law enters the existing material-free critical-shell first-stop theorem; full-survivor service inherits the same H_inf weighting by linearity",
+    "no_cell_dominance": "coherent-cell quarter dominance/entropy/cycle may remain useful fine ancestry accounting, but it is not required for fresh-service renewal entrance",
+    "material_scope": "fresh edge provenance is not promoted to whole-shell freshness; material OO/ON/NN is reread only from subsequent actual renewed service",
+    "scale_scope": "for j<=0 the two candidate hard-shell frequencies are M_j and 2M_j<=2N; supplier-specific signed-good scale progress is not asserted",
+    "master_rule": "H_inf/H2 here are deterministic scale-concentration coordinates, not causal Shannon/Renyi probabilities and not additive resets"
+  },
+  "stress": {
+    "samples": 50000,
+    "worst_refinement_pushforward_residual": 3.552713678800501e-15,
+    "minimum_two_hard_shell_margin": 5.850819889821005e-05,
+    "minimum_clean_hard_shell_margin": 7.630908369603284e-09,
+    "minimum_Hinf_tradeoff_margin": 4.156243524344738e-08,
+    "minimum_H2_tradeoff_margin": 1.1122861516188378e-06,
+    "minimum_full_survivor_service_conjugacy_margin": 1.1078456262078893e-139,
+    "maximum_candidate_shell_over_block_scale": 2.0
+  }
+}

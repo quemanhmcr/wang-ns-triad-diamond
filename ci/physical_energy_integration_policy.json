@@ -1,5 +1,5 @@
 {
-  "schema": 1,
-  "force_full": true,
-  "purpose": "first v2 shadow certification: execute every node, then byte-compare all baseline-matched outputs"
+  "force_full": false,
+  "purpose": "exact-content incremental integration after successful 58-node shadow-full differential certification",
+  "schema": 1
 }

@@ -1,6 +1,6 @@
 {
-  "artifact_root": "recorded-results/31655796159/physical-energy-causal-integration-results",
-  "integration_run_id": 31655796159,
+  "artifact_root": "recorded-results/31658965931/results-integration",
+  "integration_run_id": 31658965931,
   "nodes": {
     "amplitude_entropy_causal_reuse": {
       "command": "python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy",
@@ -242,6 +242,11 @@
       "fingerprint": "11beb4027a9811d0d7ed44a8b15455fca79a0a8a5a2df47bc392ce60fe541aa9",
       "outdir": "results-integration/renyi-reuse"
     },
+    "resolved_contact_native_binding": {
+      "command": "python -m src.resolved_contact_native_binding --samples 50000 --seed 2026081302 --outdir results-integration/resolved-contact-native-binding",
+      "fingerprint": "17e8c68a555695f87673f423ee4afb8d6833d47f7ccaa759e2d8bf7140603e49",
+      "outdir": "results-integration/resolved-contact-native-binding"
+    },
     "resolved_cutoff_repartition_relay": {
       "command": "python -m src.resolved_cutoff_repartition_relay --samples 50000 --outdir results-integration/cutoff-repartition-relay",
       "fingerprint": "f5b366ff1a375b8537ce5161fdcc1b68e8b297d33336365fd1e183cef44bc86c",
@@ -288,8 +293,8 @@
       "outdir": "results-integration/shannon-reuse"
     }
   },
-  "record_sha": "f17e6c0fade61f524790eb13a240b7db08f98e66",
+  "record_sha": "0796f8950fc0421a5c49d776bb8a073360b4be11",
   "runtime_id": "ubuntu-24.04|python=3.11.15|numpy=2.2.6|scipy=1.15.3|pytest=8.4.1|python-flint=0.9.0",
   "schema": 1,
-  "theorem_sha": "476760236e197d614d5bb211b438e49701652f67"
+  "theorem_sha": "0796f8950fc0421a5c49d776bb8a073360b4be11"
 }
