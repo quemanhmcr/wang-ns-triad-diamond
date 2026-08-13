@@ -422,6 +422,13 @@
       "command": "python -m src.same_carrier_inherited_energy_relay --samples 50000 --seed 2026081304 --outdir results-integration/same-carrier-inherited-energy-relay",
       "outdir": "results-integration/same-carrier-inherited-energy-relay",
       "shard": 5
+    },
+    {
+      "id": "material_sidecar_stock_owner_decomposition",
+      "module": "src.material_sidecar_stock_owner_decomposition",
+      "command": "python -m src.material_sidecar_stock_owner_decomposition --samples 50000 --seed 2026081305 --outdir results-integration/material-sidecar-stock-owner-decomposition",
+      "outdir": "results-integration/material-sidecar-stock-owner-decomposition",
+      "shard": 5
     }
   ]
 }

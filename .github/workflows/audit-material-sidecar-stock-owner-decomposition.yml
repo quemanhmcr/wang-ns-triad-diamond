@@ -1,0 +1,61 @@
+name: Audit material-sidecar stock owner decomposition
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'theorem/material-sidecar-stock-owner-decomposition'
+
+permissions:
+  contents: read
+
+jobs:
+  independent-sidecar-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Independent theorem/dependency tests
+        run: >-
+          pytest -q
+          tests/test_material_sidecar_stock_owner_decomposition.py
+          tests/test_material_label_carrier_quotient.py
+          tests/test_coherent_transfer_cells.py
+          tests/test_smooth_relink_donor_quotient.py
+      - name: Independent 100k Moyal-sidecar / stock stress
+        run: >-
+          python -m src.material_sidecar_stock_owner_decomposition
+          --samples 100000 --seed 2026081315
+          --outdir audit-material-sidecar-stock-owner-decomposition/analytic
+      - run: cat audit-material-sidecar-stock-owner-decomposition/analytic/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-material-sidecar-stock-owner-decomposition-analytic-results
+          path: audit-material-sidecar-stock-owner-decomposition/
+
+  independent-actual-ns-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Opposite-phase lower-amplitude actual NS carrier audit
+        run: >-
+          python -m src.same_carrier_inherited_energy_relay_pde_probe
+          --resolutions 24 28 --steps 48 --duration 0.0015
+          --amplitude 0.5 --phase-sign -1
+          --outdir audit-material-sidecar-stock-owner-decomposition-ns/main
+      - run: cat audit-material-sidecar-stock-owner-decomposition-ns/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audit-material-sidecar-stock-owner-decomposition-actual-ns-results
+          path: audit-material-sidecar-stock-owner-decomposition-ns/

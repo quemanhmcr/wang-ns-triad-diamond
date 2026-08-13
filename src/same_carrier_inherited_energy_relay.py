@@ -8,7 +8,10 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Mapping, Sequence
 
-from src.material_label_carrier_quotient import carrier_registration_with_material_sidecars
+from src.material_label_carrier_quotient import (
+    SELECTED_FAMILY_EVENT,
+    carrier_registration_with_material_sidecars,
+)
 from src.physical_energy_causal_bridge import INHERIT_ENERGY_FRACTION, route_physical_energy_causality
 from src.same_carrier_checkpoint_segmentation_quotient import (
     SameCarrierMonitorSegment,
@@ -20,7 +23,7 @@ from src.same_carrier_checkpoint_segmentation_quotient import (
 STATUS = (
     "EXACT_SAME_CARRIER_INHERITED_ENERGY_RELAY__"
     "PHYSICAL_STOCK_CONTINUATION_NOT_GENERATION__"
-    "NO_EVENT_CHECKPOINT_AND_MATERIAL_SIDECARS_ZERO_DEPTH__"
+    "NO_EVENT_CHECKPOINT__MATERIAL_SIDECARS_PRESERVED_SEPARATELY__"
     "ROLE_OR_PROBE_CHANGE_FAILS_CLOSED__NO_TEMPORAL_DEPOSIT_MATCHING"
 )
 
@@ -52,6 +55,7 @@ class SameCarrierInheritedEnergyRelayCertificate:
     analysis_segments: int
     inserted_checkpoint_boundaries: int
     material_sidecars: tuple[str, ...] = ()
+    selected_family_switch_energy: float = 0.0
     initial_endpoint_is_non_event_carrier_slice: bool = True
     relay_label: str = SAME_CARRIER_INHERITED_STOCK_RELAY
     recursive_generation_created: bool = False
@@ -95,6 +99,10 @@ class SameCarrierInheritedEnergyRelayCertificate:
             raise ValueError("checkpoint count changed from one fixed-carrier path segmentation")
         if tuple(sorted(set(self.material_sidecars))) != self.material_sidecars:
             raise ValueError("material sidecars must be a sorted quotiented set")
+        switch_energy = _finite_nonnegative(self.selected_family_switch_energy, "selected-family Moyal switch energy")
+        has_family_switch = SELECTED_FAMILY_EVENT in self.material_sidecars
+        if not has_family_switch and switch_energy > 5.0e-15 * max(e0, e1, 1.0e-300):
+            raise ValueError("selected-family switch energy requires the selected-family sidecar label")
         if not self.initial_endpoint_is_non_event_carrier_slice:
             raise TypeError("a genuine physical event at the earlier endpoint cannot be erased into inherited stock")
         if self.relay_label != SAME_CARRIER_INHERITED_STOCK_RELAY:
@@ -174,6 +182,7 @@ def same_carrier_inherited_energy_relay(
         raise AssertionError("inheritance gate value changed from initial carrier energy")
 
     sidecars: tuple[str, ...] = ()
+    switch_energy = 0.0
     if material_registration is not None:
         if not bool(material_registration.get("quotient_applicable", False)):
             raise TypeError("role/probe-changing material registration cannot be quotiented as same-carrier stock")
@@ -184,6 +193,10 @@ def same_carrier_inherited_energy_relay(
         if not bool(material_registration.get("same_carrier_reusable_after_sidecar", False)):
             raise TypeError("material sidecar did not preserve the same PDE carrier")
         sidecars = tuple(sorted(set(str(x) for x in material_registration.get("sidecar_events", ()) if str(x))))
+        switch_energy = _finite_nonnegative(
+            float(material_registration.get("selected_family_switch_energy", 0.0)),
+            "registered selected-family switch energy",
+        )
 
     s = _finite_nonnegative(initial_time, "initial physical time")
     t = _finite_nonnegative(terminal_time, "terminal physical time")
@@ -206,6 +219,7 @@ def same_carrier_inherited_energy_relay(
         analysis_segments=int(exit_record["analysis_segments"]),
         inserted_checkpoint_boundaries=int(exit_record["inserted_checkpoint_boundaries"]),
         material_sidecars=sidecars,
+        selected_family_switch_energy=switch_energy,
         initial_endpoint_is_non_event_carrier_slice=True,
     )
 

@@ -108,6 +108,7 @@ def test_same_carrier_inheritance_survives_checkpoints_and_material_sidecars_wit
     assert cert.analysis_segments == 2
     assert cert.inserted_checkpoint_boundaries == 1
     assert cert.material_sidecars
+    assert cert.selected_family_switch_energy == pytest.approx(0.01)
     assert not cert.recursive_generation_created
     assert not cert.new_causal_charge_created
     assert not cert.between_time_deposit_matching_used

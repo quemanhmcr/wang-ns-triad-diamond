@@ -1,0 +1,64 @@
+name: Material-sidecar stock owner decomposition
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'theorem/material-sidecar-stock-owner-decomposition'
+
+permissions:
+  contents: read
+
+jobs:
+  exact-sidecar-and-stock-law:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Focused sidecar currency theorem and anti-theorems
+        run: pytest -q tests/test_material_sidecar_stock_owner_decomposition.py
+      - name: Physical representation dependencies
+        run: >-
+          pytest -q
+          tests/test_material_label_carrier_quotient.py
+          tests/test_same_carrier_inherited_energy_relay.py
+          tests/test_coherent_transfer_cells.py
+          tests/test_continuum_master_event_quotient.py
+      - name: 75k exact Moyal-sidecar / stock stress
+        run: >-
+          python -m src.material_sidecar_stock_owner_decomposition
+          --samples 75000 --seed 2026081305
+          --outdir results-material-sidecar-stock-owner-decomposition/analytic
+      - run: cat results-material-sidecar-stock-owner-decomposition/analytic/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: material-sidecar-stock-owner-decomposition-analytic-results
+          path: results-material-sidecar-stock-owner-decomposition/
+
+  actual-ns-carrier-referee:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.15'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint==0.9.0
+      - name: Actual Galerkin same-carrier stock regression
+        run: pytest -q tests/test_same_carrier_inherited_energy_relay_pde_probe.py
+      - name: Two-representation actual NS carrier referee
+        run: >-
+          python -m src.same_carrier_inherited_energy_relay_pde_probe
+          --resolutions 24 28 --steps 32 --duration 0.001
+          --outdir results-material-sidecar-stock-owner-decomposition-ns/main
+      - run: cat results-material-sidecar-stock-owner-decomposition-ns/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: material-sidecar-stock-owner-decomposition-actual-ns-results
+          path: results-material-sidecar-stock-owner-decomposition-ns/
