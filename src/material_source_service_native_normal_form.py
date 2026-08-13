@@ -1,6 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+import argparse
+import json
+import math
+import random
+from dataclasses import asdict, dataclass
+from pathlib import Path
 from typing import Mapping
 
 from src.continuum_master_event_quotient import SupplierKind
@@ -226,3 +231,226 @@ def theorem_certificate() -> dict[str, object]:
         "claims_mixed_owner_termination": False,
         "claims_global_regularity": False,
     }
+
+
+@dataclass(frozen=True)
+class NativeNormalFormStress:
+    samples: int
+    naked_material_rejections: int
+    naked_new_ancestry_rejections: int
+    unbound_source_rejections: int
+    source_supplier_routes: int
+    conservative_relink_zero_depth_routes: int
+    hh_routes: int
+    source_strain_hh_ties: int
+    fresh_service_shell_relays: int
+    primitive_material_generators_created: int
+    conservative_relink_recursions_created: int
+    maximum_fresh_shell_mass_lower: float
+
+
+def _stress_smooth_relink_certificate(scale: float) -> SmoothRelinkDonorCertificate:
+    x = float(scale)
+    if not math.isfinite(x) or x <= 0:
+        raise ValueError("positive finite relink stress scale required")
+    return SmoothRelinkDonorCertificate(
+        relink_owner="smooth_physical_conservative_relink",
+        recipient_roles=(0,),
+        terminal_negative_net_donor_roles=(1,),
+        maximum_shortest_donor_path_length=1,
+        role_count=2,
+        positive_relink_work=x,
+        recipient_positive_incoming_flux=x,
+        pair_antisymmetry_residual=0.0,
+        row_binding_residual=0.0,
+        total_relink_work_residual=0.0,
+    )
+
+
+def stress(samples: int = 50_000, seed: int = 2026081307) -> NativeNormalFormStress:
+    """Randomized topology/refinement referee for the exact normal-form guards.
+
+    This is regression evidence only.  It deliberately samples the already-proved
+    routing identities; it does not replace their analytic PDE proofs.
+    """
+    from src.fresh_service_scale_reentry import fresh_service_scale_route as make_fresh_route
+
+    count = int(samples)
+    if count <= 0:
+        raise ValueError("positive stress sample count required")
+    rng = random.Random(int(seed))
+    material_reject = ancestry_reject = source_reject = 0
+    source_routes = relink_routes = hh_routes = ties = fresh_routes = 0
+    primitive = relink_recursive = 0
+    max_fresh_mass = 0.0
+
+    supplier_pool = (
+        SupplierKind.RESOLVED_DISSIPATION,
+        SupplierKind.PRESSURE_PAIR,
+        SupplierKind.FRESH_SGS_SCALE,
+        SupplierKind.HIGH_TAIL,
+        SupplierKind.GENERIC_CRITICAL_SHELL,
+        SupplierKind.MATERIAL_REUSE,
+    )
+
+    for j in range(count):
+        mode = j % 7
+        t = rng.uniform(1.0e-8, 3.0)
+        weight = 10.0 ** rng.uniform(-9.0, 6.0)
+
+        if mode == 0:
+            try:
+                pde_native_material_source_service_projection(
+                    physical_hits=(CauseHit(t, PhysicalCause.MATERIAL_RELINK, weight),)
+                )
+            except TypeError:
+                material_reject += 1
+            else:
+                primitive += 1
+                raise AssertionError("naked MATERIAL_RELINK escaped the native provenance barrier")
+            continue
+
+        if mode == 1:
+            try:
+                pde_native_material_source_service_projection(
+                    physical_hits=(CauseHit(t, PhysicalCause.NEW_COHERENT_ANCESTRY, weight),)
+                )
+            except TypeError:
+                ancestry_reject += 1
+            else:
+                primitive += 1
+                raise AssertionError("naked NEW_COHERENT_ANCESTRY escaped the native provenance barrier")
+            continue
+
+        if mode == 2:
+            try:
+                pde_native_material_source_service_projection(
+                    physical_hits=(CauseHit(t, PhysicalCause.RESOLVED_SOURCE, weight),)
+                )
+            except TypeError:
+                source_reject += 1
+            else:
+                raise AssertionError("unbound resolved source escaped the native supplier barrier")
+            continue
+
+        if mode == 3:
+            supplier = supplier_pool[j % len(supplier_pool)]
+            out = pde_native_material_source_service_projection(
+                physical_hits=(CauseHit(t, PhysicalCause.RESOLVED_SOURCE, weight, "native source"),),
+                source_supplier_kinds=(supplier,),
+            )
+            if out.recursive_physical_causes != (PhysicalCause.RESOLVED_SOURCE.value,):
+                raise AssertionError("native source supplier changed the independently witnessed source owner")
+            source_routes += 1
+
+        elif mode == 4:
+            cert = _stress_smooth_relink_certificate(weight)
+            out = pde_native_material_source_service_projection(smooth_relink_certificate=cert)
+            if out.projection is not None or out.recursive_physical_causes or out.recursive_internal_causes:
+                relink_recursive += 1
+                raise AssertionError("conservative K_phys relink manufactured recursive depth")
+            if SMOOTH_RELINK_SAME_EVENT_RELAY not in out.zero_depth_relays:
+                raise AssertionError("conservative K_phys donor provenance was lost")
+            relink_routes += 1
+
+        elif mode == 5:
+            out = pde_native_material_source_service_projection(
+                internal_hits=(InternalHit(t),)
+            )
+            if not out.recursive_internal_causes:
+                raise AssertionError("actual HH regeneration owner was lost")
+            hh_routes += 1
+
+        else:
+            supplier = supplier_pool[j % len(supplier_pool)]
+            out = pde_native_material_source_service_projection(
+                physical_hits=(
+                    CauseHit(t, PhysicalCause.RESOLVED_SOURCE, weight, "source"),
+                    CauseHit(t, PhysicalCause.HIGH_STRAIN_DISSIPATION, weight * rng.uniform(0.2, 5.0), "strain"),
+                ),
+                internal_hits=(InternalHit(t),),
+                source_supplier_kinds=(supplier,),
+            )
+            if set(out.recursive_physical_causes) != {
+                PhysicalCause.RESOLVED_SOURCE.value,
+                PhysicalCause.HIGH_STRAIN_DISSIPATION.value,
+            } or not out.recursive_internal_causes:
+                raise AssertionError("exact heterogeneous physical tie was split or prioritized")
+            ties += 1
+
+        # Independently exercise the fresh-service supplier relay on a sparse
+        # deterministic subsequence so the stress covers the real scale theorem,
+        # not a forged dictionary fixture.
+        if j % 23 == 0:
+            Y = 10.0 ** rng.uniform(-6.0, 2.0)
+            c = 10.0 ** rng.uniform(-2.0, 0.5)
+            N = 10.0 ** rng.uniform(-1.0, 4.0)
+            fresh = rng.uniform(0.25, 0.95) * Y
+            route = make_fresh_route(Y, c, N, {0: fresh})
+            fresh_out = pde_native_material_source_service_projection(fresh_service_scale_route=route)
+            if fresh_out.projection is not None or fresh_out.recursive_physical_causes:
+                raise AssertionError("fresh service supplier relay minted a material first stop")
+            if FRESH_SERVICE_SHELL_RELAY not in fresh_out.zero_depth_relays:
+                raise AssertionError("fresh service lost its hard-shell supplier relay")
+            max_fresh_mass = max(max_fresh_mass, float(route["hard_shell_mass_lower"]))
+            fresh_routes += 1
+
+        primitive += int(out.primitive_material_generator_created)
+        relink_recursive += int(out.conservative_relink_promoted_to_recursion)
+
+    if primitive or relink_recursive:
+        raise AssertionError("native material normal form created forbidden recursive topology")
+
+    return NativeNormalFormStress(
+        samples=count,
+        naked_material_rejections=material_reject,
+        naked_new_ancestry_rejections=ancestry_reject,
+        unbound_source_rejections=source_reject,
+        source_supplier_routes=source_routes,
+        conservative_relink_zero_depth_routes=relink_routes,
+        hh_routes=hh_routes,
+        source_strain_hh_ties=ties,
+        fresh_service_shell_relays=fresh_routes,
+        primitive_material_generators_created=primitive,
+        conservative_relink_recursions_created=relink_recursive,
+        maximum_fresh_shell_mass_lower=max_fresh_mass,
+    )
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(description=STATUS)
+    ap.add_argument("--samples", type=int, default=50_000)
+    ap.add_argument("--seed", type=int, default=2026081307)
+    ap.add_argument("--outdir", type=Path, default=Path("results-material-source-service-native-normal-form"))
+    args = ap.parse_args()
+    args.outdir.mkdir(parents=True, exist_ok=True)
+    result = stress(args.samples, args.seed)
+    payload = {"certificate": theorem_certificate(), "stress": asdict(result)}
+    (args.outdir / "material_source_service_native_normal_form.json").write_text(
+        json.dumps(payload, indent=2), encoding="utf-8"
+    )
+    summary = f"""# PDE-native material/source-service normal form
+
+Status: **{STATUS}**.
+
+This is a draft composition/refinement theorem.  It does not claim mixed-owner termination or Navier--Stokes regularity.
+
+Stress: `{result.samples}` routed/rejected topology states
+- naked MATERIAL_RELINK rejections: `{result.naked_material_rejections}`
+- naked NEW_COHERENT_ANCESTRY rejections: `{result.naked_new_ancestry_rejections}`
+- unbound source rejections: `{result.unbound_source_rejections}`
+- source + native supplier routes: `{result.source_supplier_routes}`
+- conservative K_phys zero-depth routes: `{result.conservative_relink_zero_depth_routes}`
+- actual HH routes: `{result.hh_routes}`
+- exact source/strain/HH ties: `{result.source_strain_hh_ties}`
+- fresh-service hard-shell relays: `{result.fresh_service_shell_relays}`
+- primitive material generators created: `{result.primitive_material_generators_created}`
+- conservative relinks promoted to recursion: `{result.conservative_relink_recursions_created}`
+- maximum sampled certified fresh-shell mass lower: `{result.maximum_fresh_shell_mass_lower:.12e}`
+"""
+    (args.outdir / "summary.md").write_text(summary, encoding="utf-8")
+    print(summary)
+
+
+if __name__ == "__main__":
+    main()

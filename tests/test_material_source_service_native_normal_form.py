@@ -136,3 +136,18 @@ def test_draft_certificate_does_not_overclaim_mixed_termination_or_regularity():
     }
     assert cert["claims_mixed_owner_termination"] is False
     assert cert["claims_global_regularity"] is False
+
+
+def test_stress_harness_small_sample_has_no_forbidden_topology():
+    from src.material_source_service_native_normal_form import stress
+
+    out = stress(70, 2026081307)
+    assert out.primitive_material_generators_created == 0
+    assert out.conservative_relink_recursions_created == 0
+    assert out.naked_material_rejections > 0
+    assert out.naked_new_ancestry_rejections > 0
+    assert out.unbound_source_rejections > 0
+    assert out.source_supplier_routes > 0
+    assert out.conservative_relink_zero_depth_routes > 0
+    assert out.hh_routes > 0
+    assert out.source_strain_hh_ties > 0
