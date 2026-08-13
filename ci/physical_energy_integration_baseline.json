@@ -1,6 +1,6 @@
 {
-  "artifact_root": "recorded-results/31678801395/physical-energy-causal-integration-v2-results/results-integration",
-  "integration_run_id": 31678801395,
+  "artifact_root": "recorded-results/31682128984/physical-energy-causal-integration-v2-results/results-integration",
+  "integration_run_id": 31682128984,
   "nodes": {
     "amplitude_entropy_causal_reuse": {
       "command": "python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy",
@@ -52,9 +52,9 @@
     },
     "continuum_master_event_quotient": {
       "command": "python -m src.continuum_master_event_quotient --samples 50000 --outdir results-integration/continuum-master-event-quotient",
-      "fingerprint": "20a85093df459ab18ac665736b492624100addfdac49eda1e928789c084b416e",
+      "fingerprint": "217b4424d920e06a4b3cfc20d1c71a023c38cc721eae557d5e8ffa36bb6ea0ae",
       "outdir": "results-integration/continuum-master-event-quotient",
-      "output_digest": "0415aea427c6482287e82166cf5b25d3903e513b31f98be94132b4f30a651a47"
+      "output_digest": "56a67d4840d369c375b962f3e524b62a28056252cc44a9dc71fa79b2a87d30a2"
     },
     "critical_annular_carrier_service_reentry": {
       "command": "python -m src.critical_annular_carrier_service_reentry --samples 50000 --outdir results-integration/critical-annular-carrier-service-reentry",
@@ -199,6 +199,12 @@
       "fingerprint": "ef776421582595b2a784dc5e5fd50bd930731559fe8933d4d8b4fe0277aa552c",
       "outdir": "results-integration/material-label-carrier-quotient",
       "output_digest": "05529c0b721d42e409a20fb90bd5a03b0503d2708471ecccd282d0dca0beed99"
+    },
+    "material_sidecar_stock_central_routing": {
+      "command": "python -m src.material_sidecar_stock_central_routing --samples 50000 --seed 2026081306 --outdir results-integration/material-sidecar-stock-central-routing",
+      "fingerprint": "21c574385f5dedf619a3dbd2877777f58a2791d3597f88f01d7d7010e19b0c4a",
+      "outdir": "results-integration/material-sidecar-stock-central-routing",
+      "output_digest": "2545646a3833f2cc452700bf70ea2f74fc03ab374e88b37cca905423f182420d"
     },
     "material_sidecar_stock_owner_decomposition": {
       "command": "python -m src.material_sidecar_stock_owner_decomposition --samples 50000 --seed 2026081305 --outdir results-integration/material-sidecar-stock-owner-decomposition",
@@ -369,8 +375,8 @@
       "output_digest": "fe77e09613763429741d9d90d5e964c1fb13711d92e80baf9f01859f4e30f5c1"
     }
   },
-  "record_sha": "5e719a40f9b67ef07e560df177cecc33f3f79565",
+  "record_sha": "e5de1ac5a0f3283c3b6970392bec5056af647676",
   "runtime_id": "ubuntu-24.04|python=3.11.15|numpy=2.2.6|scipy=1.15.3|pytest=8.4.1|python-flint=0.9.0",
   "schema": 1,
-  "theorem_sha": "c39f70ed3e9f4edfc08e23b996ba872d91c63ed6"
+  "theorem_sha": "376fd52e1c891c774b70cf339b192bea7045107f"
 }
