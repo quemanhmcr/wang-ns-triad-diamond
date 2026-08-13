@@ -1,0 +1,11 @@
+{
+  "executed": [
+    {
+      "command": "python -m src.same_carrier_inherited_energy_relay --samples 50000 --seed 2026081304 --outdir results-integration/same-carrier-inherited-energy-relay",
+      "fingerprint": "8c321e023729c059476a98b258ce42cc55ca2e07e66522312d2cc719170e19d2",
+      "node_id": "same_carrier_inherited_energy_relay"
+    }
+  ],
+  "schema": 1,
+  "shard": 5
+}

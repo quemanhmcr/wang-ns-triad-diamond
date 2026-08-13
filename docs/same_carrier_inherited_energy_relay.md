@@ -43,3 +43,21 @@ Initial theorem SHA `30f1ceee6a38a73f6771b381c7d5f10aeab8d837` passed its local 
 Repair SHA `b7e0da7d358674b302ce2b5a7ec965d5927f087e` encoded those stronger conditions, but its first algebra run failed because a fixture-only edit accidentally passed the new endpoint keyword to `route_physical_energy_causality`, an API that does not accept it.  Final SHA `ae13f9c...` removed only those three erroneous fixture arguments; no theorem threshold, PDE equation, numerical tolerance, sample count, sidecar requirement, or causal rule was weakened.
 
 No global-regularity claim is made.
+
+## Central-master wiring certification
+
+Final wiring SHA: `077ec27dc55fafb62049b7753859f23a4cc61ff7`.  This is integration of the already-certified physical theorem, not a new PDE estimate.
+
+The central `material_energy_inheritance` route is intentionally three-way.  Untyped inheritance remains the legacy recursive owner.  A typed certificate carrying any material ancestry/relink sidecar also remains event-facing because the master does not yet expose a complete typed downstream sidecar slot.  Only a typed **sidecar-free** certificate is projected to `same_carrier_inherited_energy_stock_relay`, with no owner bundle and zero recursive event depth.
+
+For that sidecar-free route, central wiring binds the master stock mass itself to the certified earlier carrier energy `E0`, then reuses the theorem projection to bind the energy-gate value/threshold and classified residual physical work.  The owner boundary rejects the stock-relay label as a recursive owner.  Thus the wiring cannot erase simultaneous residual-work owners, reweight inherited stock, erase material sidecars, cross role/probe changes, or erase a genuine earlier-endpoint event.
+
+Exact-SHA gates on `077ec27...`: dedicated `31666877790` **success**; independent audit `31666879191` **success**; physical-energy causal integration v2 `31666880569` **success** with `939` tests, master `20,000` traces/worst margin `0.0`, and planner `58` reusable + `2` executed nodes (`continuum_master_event_quotient`, `same_carrier_inherited_energy_relay`).  All `60` results were present and all `58` baseline-matched nodes were byte-compared.
+
+Wiring artifact-tree digests:
+- `recorded-results/31666877790/` — `sha256:f0f40411f399edbe3726c97cea522ac43c98f5884012087ff0c8016e89b4b1b6`;
+- `recorded-results/31666879191/` — `sha256:d4e50bc2613ef83a8e50c2324cdfbe22453926a95d2344006b921f859200b9a5`;
+- `recorded-results/31666880569/` — `sha256:fda6ead0a073d9fd1392a63f8c06496c367830f7c2c4de23120bcaac015ca816`.
+
+Wiring failure lineage: initial SHA `ba12982e959db751bbb8c88fe68c1d8c399cde90` was manually gated with legacy push CI suppressed; dedicated succeeded, but audit/v2 were deliberately canceled during post-gate review when a real charge-binding seam was found.  The certificate was bound to `E0`, threshold and residual work, but central master mass itself was not forced to equal `E0`.  Repair `077ec27...` adds only that mass binding and its anti-transplant test, using a tolerance relative to the actual stock magnitudes rather than a unit-scale absolute floor.  No theorem threshold, PDE equation, sample count, PDE tolerance, sidecar rule, residual-owner rule, or event-boundary rule was weakened.
+

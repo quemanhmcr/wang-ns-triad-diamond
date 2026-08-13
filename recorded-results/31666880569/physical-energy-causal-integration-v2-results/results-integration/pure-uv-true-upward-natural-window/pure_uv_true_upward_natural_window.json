@@ -1,0 +1,31 @@
+{
+  "certificate": {
+    "canonical_cause": "selected same-time donor sidecars are coalesced by recipient before capacity; the result is a positive submeasure of the existing canonical dW+ and is never re-Hahn-split",
+    "causal_unit": "all work remains in parent-tail N dW; M=2N is geometry only and never a causal reweighting",
+    "claims_global_regularity": false,
+    "edge_variation_to_clean_young_ratio": 0.0897935610625833,
+    "hard_tail_corollary": "if pure-UV wins the support split, H_pure>=nu D_tail/2 and sqrt(mu_win)/p_time>=nu D_tail/(9 c sqrt(pi) N E_global)",
+    "natural_window": "with R=3/2 and h=u on both parents, N W_win <= (9/2)c sqrt(pi) N E_global sqrt(mu_win)",
+    "not_used": "no output-shell Hahn/locality selection, K/S interface ownership, packet persistence, temporal deposit matching, or event-depth clock",
+    "scale_law": "every pure-UV atom is already on the unique first shell M=2N, so p_scale=1 and H_inf_output_scale=0 exactly",
+    "smooth_cutoff": "every admissible resolved cutoff is supported in B_(M/4), hence vanishes on both strict pure-UV parents and h=u exactly there",
+    "status": "EXACT_PURE_UV_TRUE_UPWARD_FIRST_SHELL_NATURAL_WINDOW__CANONICAL_RECIPIENT_SUBMEASURE_SINGLE_CHARGED__H_EQUALS_U_ON_BOTH_PARENTS__P_SCALE_ONE__EDGE_TOTAL_VARIATION_BEFORE_YOUNG__COMMON_N_DW_UNIT",
+    "support_geometry": "pure-UV true-upward means both recipient parents>M/4; donor<=N then forces j=1, M=2N, donor in (M/4,M/2], and both parents<=3M/2",
+    "variation_bridge": "canonical positive submeasure <= physical edge total variation <= dA; exact helicity-edge variation/clean-Young ratio sqrt(2) C_F is strictly below one"
+  },
+  "stress": {
+    "edge_variation_to_clean_young_ratio": 0.0897935610625833,
+    "interior_donor_ratio_atoms": 56138,
+    "maximum_coalescing_native_residual": 0.0,
+    "maximum_donor_to_shell_ratio": 0.4999987163331738,
+    "maximum_parent_to_shell_ratio": 1.4353506310234994,
+    "maximum_scale_probability_residual": 0.0,
+    "minimum_donor_to_shell_ratio": 0.250001213172103,
+    "minimum_natural_window_margin": 1.7311503770772096e-10,
+    "pure_uv_atoms_checked": 61827,
+    "recipient_causes_checked": 61827,
+    "resolved_triads": 50000,
+    "samples": 50000,
+    "status": "EXACT_PURE_UV_TRUE_UPWARD_FIRST_SHELL_NATURAL_WINDOW__CANONICAL_RECIPIENT_SUBMEASURE_SINGLE_CHARGED__H_EQUALS_U_ON_BOTH_PARENTS__P_SCALE_ONE__EDGE_TOTAL_VARIATION_BEFORE_YOUNG__COMMON_N_DW_UNIT"
+  }
+}

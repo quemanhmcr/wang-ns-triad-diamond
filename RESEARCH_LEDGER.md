@@ -89,10 +89,11 @@ Thus both true-upward support phenomena are now routed without re-Hahn and witho
 - Eventually-pure signed-good generated-HH recurrence has a finite physical-time backshift telescope; generic HH remains outside that theorem.
 - Material labels are sidecars to actual service/work. Shannon/Rényi describe breadth/reuse of actual positive ancestry, not time.
 - On a fixed same-carrier/no-first-stop interval whose earlier endpoint is a certified non-event slice, if `E0>=E1/5` while classified residual positive work stays strictly below its own `E1/5` owner face, the inherited-energy **component** is persistent between-time carrier stock with zero generation depth.  This does not erase material ancestry/relink sidecars, simultaneous physical-work owners, role/probe changes, or genuine endpoint events; those remain separately routed.
+- Central master wiring now realizes that quotient for **sidecar-free** certified inheritance only: master stock mass is bound to the same `E0`, the certificate/gate/residual-work identities are rechecked, and the stock-relay label is forbidden as a recursive owner.  Untyped or sidecar-bearing inheritance remains event-facing fail-closed.
 
 ## 6. Current frontier
 
-1. **Mixed genuine-owner recurrence:** same-carrier inherited stock has now been separated from generation depth.  The immediate integration seam is to wire the certified **sidecar-free** stock relay into the central event quotient without waking legacy CI fan-out; inheritance carrying material ancestry/relink sidecars remains fail-closed until that sidecar routing is typed there.  Beyond that, the native recurrence problem is reduced to genuine strain, critical-shell service, source/material service and already-certified reuse laws.
+1. **Mixed genuine-owner recurrence:** same-carrier inherited stock is now separated from generation depth **and** wired into the central master for sidecar-free certified cases.  The remaining inheritance seam is specifically sidecar-bearing ancestry/relink routing; until typed, it stays event-facing fail-closed.  Beyond that, the native recurrence problem is reduced to genuine strain, critical-shell service, source/material service and already-certified reuse laws.
 2. Local HH retains the degenerate full-signed Young/Christ-margin seam and, only if a future representation truly needs it, a separately proved coherent positive kernel.
 3. The initial-data and hypothetical singular-time interfaces remain open. There is **no 3D Navier–Stokes global-regularity claim**.
 

@@ -127,3 +127,19 @@ Dedicated/independent exact-path stresses checked `75,000 / 100,000` same-carrie
 Actual dealiased Fourier--Galerkin NS followed the same physical helical mode `(7,6,5), s=+1` across FFT representations `24,28`.  Dedicated amplitude-1 stock was `1 -> 1.00240956249` with gross positive/negative nonlinear work `0.0100088487847 / 0.000991283878665` and viscous loss `0.00660800248318`; modal continuity residual `6.253e-11`, global energy-balance residual `2.963e-12`.  Independent amplitude-0.5 opposite-phase stock was `0.25 -> 0.245853600709` with gross positive/negative work `0.000182591040316 / 0.00187455879673` and viscous loss `0.00245443154604`; residuals `4.761e-11 / 2.614e-11`.  Thus inherited stock coexists with genuine nonlinear exchange and viscosity; the theorem is an ontology of endpoint stock, not a frozen-flow surrogate.
 
 Failure lineage: initial SHA `30f1ceee6a38a73f6771b381c7d5f10aeab8d837` passed theorem-specific lanes, but post-gate physical review caught a genuine lexicographic-owner overclaim: `E0>=E1/5` can coexist with classified residual work at its own owner face, so the whole block cannot be erased into stock.  The repair also preserved material sidecars separately and required the earlier endpoint to be a certified non-event carrier slice.  SHA `b7e0da7d...` encoded those stronger conditions but its first algebra run exposed a fixture-only keyword accidentally passed to the old energy-gate API.  Final `ae13f9c...` removed only those three bad fixture arguments; no theorem threshold, PDE equation, tolerance, sample count, sidecar rule or causal rule was weakened.
+
+## Same-carrier inherited-stock central-master wiring — exact certification
+
+Physical theorem SHA remains `ae13f9c838878f50c496b9a3e8b22d680ab789e3`; final wiring SHA is `077ec27dc55fafb62049b7753859f23a4cc61ff7`.
+
+Exact-SHA gates: dedicated `31666877790` **success**; independent audit `31666879191` **success**; physical-energy causal integration v2 `31666880569` **success**.  V2 ran `939` tests in `305.45 s`, master `20,000` traces with worst margin `0.0`, and executed exactly two of `60` integration nodes: the changed central master and the same-carrier relay node absent from the older baseline.  The other `58` nodes were reused by exact fingerprint, all `60` results were present, and all `58` baseline-matched nodes were byte-compared.
+
+Stored trees:
+- `recorded-results/31666877790/` — `sha256:f0f40411f399edbe3726c97cea522ac43c98f5884012087ff0c8016e89b4b1b6`;
+- `recorded-results/31666879191/` — `sha256:d4e50bc2613ef83a8e50c2324cdfbe22453926a95d2344006b921f859200b9a5`;
+- `recorded-results/31666880569/` — `sha256:fda6ead0a073d9fd1392a63f8c06496c367830f7c2c4de23120bcaac015ca816`.
+
+The master route is deliberately conservative: no certificate -> legacy inheritance owner; any material sidecar -> legacy event-facing route; sidecar-free typed certificate -> between-time stock relay with zero generation depth.  Central wiring additionally binds the master stock mass to certified `E0`, and the theorem projection binds gate value/threshold and classified residual work.  The stock label cannot enter `PhysicalOwnerBundle`.
+
+Failure lineage: initial wiring `ba12982e959db751bbb8c88fe68c1d8c399cde90` suppressed nine legacy push watchers via `[skip ci]` and was manually dispatched.  Dedicated succeeded, but audit/v2 were canceled after post-gate review found the missing master-mass=`E0` binding.  Repair `077ec27...` only strengthened that charge identity; no physical threshold, PDE equation, sample count, numerical PDE tolerance, sidecar rule or event rule was relaxed.
+

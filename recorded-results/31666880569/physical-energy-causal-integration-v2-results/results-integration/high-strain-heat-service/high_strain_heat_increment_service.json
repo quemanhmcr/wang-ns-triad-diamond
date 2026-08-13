@@ -1,0 +1,22 @@
+{
+  "certificate": {
+    "status": "EXACT_HIGH_STRAIN_TO_HEAT_INCREMENT_COHERENT_SERVICE__CRITICAL_RESOLVED_ANCESTOR_FRACTION_RETAINED__OLD_POOL_ROUTING_REMAINS",
+    "heat_probe": "H_N is the NS heat kernel at theta_N=1/(2N^2), with Fourier characteristic exp(-|xi|^2/(2N^2))",
+    "exact_increment_identity": "int H_N(r)||delta_r V||_2^2 dr = int 2(1-exp(-|xi|^2/(2N^2)))|Vhat(xi)|^2 dxi",
+    "support_comparison": "on supp Vhat subset B_(N/4), exp(-1/32)||grad V||_2^2 <= N^2 E_H||delta_r V||_2^2 <= ||grad V||_2^2; lower=0.969233234476",
+    "integrated_service": "S_heat=N^3 int dt E_H||delta_r V||_2^2 >= exp(-1/32)D_V; high strain gives S_heat>=4.08147140125",
+    "critical_ancestor_fraction": "combining D_V(good)>=D_V/2 with pointwise heat/dissipation comparison puts at least exp(-1/32)/2=0.484616617238 of total heat-increment service on shell-time atoms with mu_j>=mu_*=4.21103121113",
+    "moyal": "for every r and normalized coherent window, Moyal disintegrates ||delta_r P_j V||_2^2 into positive phase-space cell energy exactly",
+    "translation": "V_g(delta_r f)(X,k)=exp(-ik.r)V_g f(X-r,k)-V_g f(X,k), so each cell atom is an actual coherent spatial edge separated by the physical heat displacement r",
+    "causal_role": "heat increments are a positive diagnostic/service law dominated by and comparable to resolved dissipation; they do not replace HH transfer law or create a reset currency",
+    "scope": "this supplies spatial/coherent disintegration for the high-strain ancestor route; old/new material pool routing and universal slab renewal remain"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_spectral_lower_margin": 2.1672799122674455e-08,
+    "minimum_spectral_upper_margin": 2.9773103312719126e-12,
+    "minimum_retained_fraction_margin": 6.352598244885321e-06,
+    "worst_discrete_moyal_relative_residual": 6.277801662678722e-16,
+    "worst_increment_covariance_residual": 8.015666781219174e-15
+  }
+}
