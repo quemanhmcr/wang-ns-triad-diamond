@@ -100,3 +100,15 @@ Pressure `H2` remains diagnostic/conjugate and is not used as a cost. Capacity r
 The companion draft `descending_fresh_sgs_scale_epoch_telescope.md` uses square-normalization of the canonical annular frame to obtain the local envelope `F_fresh<=4c N E_global`. Since the actual fresh owner has `F_fresh>=Y/4`, every fresh-source parent has `N>=Y/(16cE_global)`. Therefore any consecutive fresh-SGS subepoch whose selected physical child satisfies `N_next<=N/2` is finite by half-scale descent.
 
 The remaining fresh source-service difficulty is consequently concentrated in top/comparable-band renewal (`j=0`, or the non-descending upper selection at `j=-1`). No scale entropy or material-freshness label is promoted to cost to dispose of that survivor.
+
+## Draft update: pure fresh-SGS tails are no longer a free source-only survivor
+
+The companion draft `pure_fresh_sgs_pre_singular_exhaustion.md` goes beyond the strictly-descending fresh-scale subepoch.  The actual fresh band law satisfies the weighted moment
+
+`sum_(j<=0) 2^(-j) F_j <= 4 c N E_global`.
+
+Hence, from `F>=Y/4`, its max scale atom has the deterministic lower `p_max>=1/[2 ceil(log_2(32cNE_global/Y))]`.  A genuine scale increase can only be the `j=0` child `2N`, so the physical hard-shell lower is `gtrsim 1/log N`.  On any fixed compact pre-singular interval, the classical `H^1` bound gives the same hard shell an upper `O(1/N)`.  Therefore fresh doubling is impossible above a finite scale.
+
+At bounded scale, the fixed smooth resolved filter gives `||R||_1<=(C_S+1)E_global`, a fixed reproducing kernel gives `||R||_(3/2)<=C_rep N||R||_1`, and the certified order-two source estimate yields `rho_R<=C_2 C_rep(C_S+1)N E_global`.  A genuine SGS source owner with `Sigma_R>=sigma_*>0` consequently needs a **derived** positive physical duration `Delta t>=sigma_*/[C_2 C_rep(C_S+1)N^3E_global]`.  Consecutive physical first-stop slabs are disjoint except for endpoints.  Once the doubling ceiling bounds `N`, only finitely many fresh source stops fit in a finite pre-singular interval.
+
+This does **not** turn `H_inf^scale` into cost, assume a global `H^1` bound up to a hypothetical singular time, sum critical service as a reset budget, or postulate an event gap.  It removes an eventually-pure fresh-SGS tail from the hard source frontier.  Mixed alternation among native source descendants, strain/dissipation, and actual HH/high-tail work remains the central recurrence problem.
