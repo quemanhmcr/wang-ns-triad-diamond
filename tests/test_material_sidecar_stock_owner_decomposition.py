@@ -130,7 +130,7 @@ def test_positive_moyal_switch_charge_can_exist_with_identical_coherent_state_an
     energies = [0.4, 1.1, 2.3, 0.7]
     anti = same_state_selected_family_switch_anti_theorem(energies, {0, 1}, {1, 2, 3})
     assert anti.symmetric_difference_energy > 0.0
-    assert anti.coherent_ledger_relink_energy == pytest.approx(anti.symmetric_difference_energy)
+    assert anti.direct_moyal_boundary_energy == pytest.approx(anti.symmetric_difference_energy)
     assert anti.positive_increment_work == 0.0
     assert anti.negative_increment_work == 0.0
     assert anti.identical_state_energy_residual == 0.0

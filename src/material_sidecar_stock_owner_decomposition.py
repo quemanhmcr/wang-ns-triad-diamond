@@ -8,7 +8,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Mapping, Sequence
 
-from src.coherent_transfer_cells import coherent_ledger, service_no_escape
+from src.coherent_transfer_cells import service_no_escape, symmetric_difference_energy
 from src.material_label_carrier_quotient import (
     MATERIAL_MEMBERSHIP_EVENT,
     SELECTED_FAMILY_EVENT,
@@ -130,7 +130,7 @@ class MaterialSidecarStockDecomposition:
 @dataclass(frozen=True)
 class SameStateSelectedFamilySwitchAntiTheorem:
     symmetric_difference_energy: float
-    coherent_ledger_relink_energy: float
+    direct_moyal_boundary_energy: float
     positive_increment_work: float
     negative_increment_work: float
     identical_state_energy_residual: float
@@ -139,12 +139,12 @@ class SameStateSelectedFamilySwitchAntiTheorem:
 
     def __post_init__(self) -> None:
         R = _finite_nonnegative(self.symmetric_difference_energy, "Moyal symmetric-difference energy")
-        LR = _finite_nonnegative(self.coherent_ledger_relink_energy, "coherent-ledger relink energy")
+        LR = _finite_nonnegative(self.direct_moyal_boundary_energy, "direct Moyal symmetric-difference energy")
         pp = _finite_nonnegative(self.positive_increment_work, "positive coherent increment")
         pm = _finite_nonnegative(self.negative_increment_work, "negative coherent increment")
         residual = _finite_nonnegative(self.identical_state_energy_residual, "identical-state energy residual")
         if not _relative_match(R, LR, 2.0e-13):
-            raise AssertionError("material sidecar and coherent ledger disagree on selected-family Moyal charge")
+            raise AssertionError("material sidecar and direct Moyal symmetric-difference sum disagree")
         if pp > 2.0e-13 * max(R, 1.0e-300) or pm > 2.0e-13 * max(R, 1.0e-300) or residual > 2.0e-13 * max(R, 1.0e-300):
             raise AssertionError("same-state selected-family switch unexpectedly created coherent evolution/work")
         if self.generation_event_inferred or self.physical_work_inferred:
@@ -159,16 +159,23 @@ def same_state_selected_family_switch_anti_theorem(
     energies = tuple(_finite_nonnegative(x, "cell energy") for x in cell_energies)
     switch = selected_family_switch_sidecar(energies, old_selected, new_selected)
     # Use real amplitudes sqrt(E_C) at two identical observations.  The coherent
-    # state is literally unchanged; only the selected family is reread.
-    state = tuple(complex(math.sqrt(E), 0.0) for E in energies)
-    ledger = coherent_ledger((state, state), (tuple(old_selected), tuple(new_selected)))
-    initial = math.fsum(abs(z) ** 2 for z in state)
-    final = math.fsum(abs(z) ** 2 for z in state)
+    # state is literally unchanged; only the selected family is reread.  Hence
+    # every cell energy increment is exactly zero before any positive/negative
+    # split.  Reconstruct the boundary currency directly from the exact Moyal
+    # cell energies rather than inventing an evolution ledger for a non-evolution.
+    state0 = tuple(complex(math.sqrt(E), 0.0) for E in energies)
+    state1 = tuple(state0)
+    cell_increments = tuple(abs(z1) ** 2 - abs(z0) ** 2 for z0, z1 in zip(state0, state1))
+    positive_increment = math.fsum(max(x, 0.0) for x in cell_increments)
+    negative_increment = math.fsum(max(-x, 0.0) for x in cell_increments)
+    direct_boundary = symmetric_difference_energy(energies, old_selected, new_selected)
+    initial = math.fsum(abs(z) ** 2 for z in state0)
+    final = math.fsum(abs(z) ** 2 for z in state1)
     return SameStateSelectedFamilySwitchAntiTheorem(
         symmetric_difference_energy=float(switch["symmetric_difference_energy"]),
-        coherent_ledger_relink_energy=float(ledger.relink_energy),
-        positive_increment_work=float(ledger.positive_work),
-        negative_increment_work=float(ledger.negative_work),
+        direct_moyal_boundary_energy=float(direct_boundary),
+        positive_increment_work=float(positive_increment),
+        negative_increment_work=float(negative_increment),
         identical_state_energy_residual=abs(final - initial),
     )
 
