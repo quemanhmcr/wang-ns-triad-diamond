@@ -46,10 +46,13 @@ class SameCarrierInheritedEnergyRelayCertificate:
     initial_energy: float
     terminal_energy: float
     inherited_fraction: float
+    residual_positive_work: float
+    residual_owner_threshold: float
     observed_elapsed: float
     analysis_segments: int
     inserted_checkpoint_boundaries: int
     material_sidecars: tuple[str, ...] = ()
+    initial_endpoint_is_non_event_carrier_slice: bool = True
     relay_label: str = SAME_CARRIER_INHERITED_STOCK_RELAY
     recursive_generation_created: bool = False
     new_causal_charge_created: bool = False
@@ -72,8 +75,19 @@ class SameCarrierInheritedEnergyRelayCertificate:
         frac = _finite_nonnegative(self.inherited_fraction, "inherited energy fraction")
         if abs(frac - e0 / e1) > _tol(frac, e0 / e1):
             raise AssertionError("stored inherited fraction changed from physical carrier energies")
-        if e0 + _tol(e0, e1) < float(INHERIT_ENERGY_FRACTION) * e1:
+        inherit_threshold = float(INHERIT_ENERGY_FRACTION) * e1
+        if e0 + _tol(e0, e1) < inherit_threshold:
             raise AssertionError("same-carrier relay does not satisfy the physical inherited-energy gate")
+        wr = _finite_nonnegative(self.residual_positive_work, "classified residual positive work")
+        wr_face = _finite_nonnegative(self.residual_owner_threshold, "classified residual owner threshold")
+        if abs(wr_face - inherit_threshold) > _tol(wr_face, inherit_threshold):
+            raise AssertionError("residual owner threshold changed from E1/5")
+        # The stock relay is a one-component quotient, not a lexicographic erasure
+        # of simultaneous physical work.  If classified residual work reaches its
+        # own E1/5 face, preserve that event-facing owner instead of declaring the
+        # whole block to be only inherited stock.  Near ties fail closed.
+        if wr + _tol(wr, wr_face, e1) >= wr_face:
+            raise TypeError("classified residual physical work reaches its owner face; stock-only quotient is inapplicable")
         elapsed = _finite_nonnegative(self.observed_elapsed, "observed elapsed time")
         if abs(elapsed - (t - s)) > _tol(elapsed, t - s):
             raise AssertionError("same-carrier monitor interval changed physical elapsed time")
@@ -81,6 +95,8 @@ class SameCarrierInheritedEnergyRelayCertificate:
             raise ValueError("checkpoint count changed from one fixed-carrier path segmentation")
         if tuple(sorted(set(self.material_sidecars))) != self.material_sidecars:
             raise ValueError("material sidecars must be a sorted quotiented set")
+        if not self.initial_endpoint_is_non_event_carrier_slice:
+            raise TypeError("a genuine physical event at the earlier endpoint cannot be erased into inherited stock")
         if self.relay_label != SAME_CARRIER_INHERITED_STOCK_RELAY:
             raise ValueError("same-carrier inherited relay label changed")
         if (
@@ -106,6 +122,7 @@ def same_carrier_inherited_energy_relay(
     residual_positive_work: float,
     strain_action: float,
     material_registration: Mapping[str, object] | None = None,
+    initial_endpoint_is_non_event_carrier_slice: bool,
 ) -> SameCarrierInheritedEnergyRelayCertificate:
     """Quotient a same-carrier inheritance branch into between-time stock continuity.
 
@@ -117,10 +134,13 @@ def same_carrier_inherited_energy_relay(
     certifies that the same smooth role and analysis probe continue.
 
     The conclusion is not that inherited energy is free.  It is persistent
-    physical stock at the earlier endpoint of the same carrier.  The relay adds
-    zero recursive generation depth and performs no FIFO/LIFO matching of earlier
-    deposits to later withdrawals.
+    physical stock at the earlier endpoint of the same carrier.  The stock
+    component adds zero recursive generation depth and performs no FIFO/LIFO
+    matching of earlier deposits to later withdrawals.  Any material sidecars
+    remain explicit and require their existing ancestry/relink routing.
     """
+    if not bool(initial_endpoint_is_non_event_carrier_slice):
+        raise TypeError("same-carrier stock relay requires a certified non-event earlier endpoint")
     path = join_same_carrier_segments(segments)
     exit_record = same_carrier_first_exit(segments)
     if exit_record["classification"] != "same_carrier_no_hit_continuation":
@@ -137,10 +157,15 @@ def same_carrier_inherited_energy_relay(
     if abs(K - path_K) > _tol(K, path_K):
         raise TypeError("energy-gate strain action must be the same cumulative carrier monitor")
 
+    e1_for_face = _finite_nonnegative(terminal_energy, "terminal carrier energy")
+    wr = _finite_nonnegative(residual_positive_work, "classified residual positive work")
+    residual_face = float(INHERIT_ENERGY_FRACTION) * e1_for_face
+    if wr + _tol(wr, residual_face, e1_for_face) >= residual_face:
+        raise TypeError("classified residual physical work is a simultaneous owner; do not quotient the block to stock only")
     gate = route_physical_energy_causality(
-        terminal_energy=float(terminal_energy),
+        terminal_energy=e1_for_face,
         initial_energy=float(initial_energy),
-        residual_positive_work=float(residual_positive_work),
+        residual_positive_work=wr,
         strain_action=K,
     )
     if gate.get("branch") != "material_energy_inheritance":
@@ -175,10 +200,13 @@ def same_carrier_inherited_energy_relay(
         initial_energy=e0,
         terminal_energy=e1,
         inherited_fraction=e0 / e1,
+        residual_positive_work=wr,
+        residual_owner_threshold=float(INHERIT_ENERGY_FRACTION) * e1,
         observed_elapsed=observed,
         analysis_segments=int(exit_record["analysis_segments"]),
         inserted_checkpoint_boundaries=int(exit_record["inserted_checkpoint_boundaries"]),
         material_sidecars=sidecars,
+        initial_endpoint_is_non_event_carrier_slice=True,
     )
 
 
@@ -187,18 +215,23 @@ class SameCarrierInheritanceMasterProjection:
     physical_measure: str
     mass: float
     certificate: SameCarrierInheritedEnergyRelayCertificate
+    sidecar_events: tuple[str, ...]
     between_time_stock_relays: tuple[str, ...] = (SAME_CARRIER_INHERITED_STOCK_RELAY,)
-    owner_bundle_created: bool = False
-    recursive_event_created: bool = False
-    same_event_relink_created: bool = False
+    stock_owner_bundle_created: bool = False
+    stock_recursive_event_created: bool = False
+    sidecars_quotiented_as_stock: bool = False
 
     def __post_init__(self) -> None:
         if not self.physical_measure or not math.isfinite(float(self.mass)) or float(self.mass) < 0.0:
             raise ValueError("valid physical stock measure and mass required")
         if self.between_time_stock_relays != (SAME_CARRIER_INHERITED_STOCK_RELAY,):
             raise ValueError("same-carrier inheritance master projection lost its stock-relay type")
-        if self.owner_bundle_created or self.recursive_event_created or self.same_event_relink_created:
-            raise ValueError("between-time inherited stock may not be projected as generation owner or same-event relink")
+        if self.sidecar_events != self.certificate.material_sidecars:
+            raise ValueError("master projection must preserve every material sidecar separately from stock")
+        if self.stock_owner_bundle_created or self.stock_recursive_event_created:
+            raise ValueError("between-time inherited stock may not be projected as a generation owner")
+        if self.sidecars_quotiented_as_stock:
+            raise ValueError("material ancestry/relink sidecars may not be erased by the stock quotient")
 
 
 def same_carrier_inheritance_master_projection(
@@ -222,16 +255,22 @@ def same_carrier_inheritance_master_projection(
         raise TypeError("observer partition motion may not be charged as inherited physical stock")
     value = float(reentry.get("value", math.nan))
     threshold = float(reentry.get("threshold", math.nan))
-    tol = _tol(value, threshold, certificate.initial_energy, certificate.terminal_energy)
-    if not math.isfinite(value) or abs(value - certificate.initial_energy) > tol:
+    residual = float(reentry.get("classified_residual_positive_work", math.nan))
+    if not all(math.isfinite(v) for v in (value, threshold, residual)):
+        raise TypeError("same-carrier stock projection requires finite gate value, threshold and actual classified residual work")
+    tol = _tol(value, threshold, residual, certificate.initial_energy, certificate.terminal_energy)
+    if abs(value - certificate.initial_energy) > tol:
         raise TypeError("relay certificate does not belong to this physical inheritance-gate value")
     expected = float(INHERIT_ENERGY_FRACTION) * certificate.terminal_energy
-    if not math.isfinite(threshold) or abs(threshold - expected) > tol:
+    if abs(threshold - expected) > tol:
         raise TypeError("relay certificate does not belong to this physical inheritance-gate threshold")
+    if abs(residual - certificate.residual_positive_work) > tol:
+        raise TypeError("relay certificate does not belong to this classified residual physical-work law")
     return SameCarrierInheritanceMasterProjection(
         physical_measure=str(physical_measure),
         mass=float(mass),
         certificate=certificate,
+        sidecar_events=certificate.material_sidecars,
     )
 
 
@@ -239,11 +278,11 @@ def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
         "physical_gate": "on one fixed low-strain carrier, E1<=exp(2K)(E0+W_HH+W_R); the branch E0>=E1/5 is earlier physical carrier stock, not a new positive work law",
-        "same_carrier_requirement": "Q/psi identity and cumulative first-hit monitors must survive all analysis checkpoints; any role/probe change or named first stop fails closed",
-        "material_sidecars": "intrinsic membership and selected-family sidecars may be reread only through the certified same-Q/same-psi quotient; they do not create a second coefficient impulse or carrier",
-        "master_ontology": "same-carrier material_energy_inheritance is a between-time stock relay with zero recursive generation depth; legacy/untyped inheritance remains a recursive owner until this certificate is supplied",
+        "same_carrier_requirement": "Q/psi identity and cumulative carrier-first-hit monitors must survive all analysis checkpoints; any role/probe change or named carrier first stop fails closed",
+        "material_sidecars": "intrinsic membership and selected-family sidecars may be reread only through the certified same-Q/same-psi quotient; they do not create a second coefficient impulse or carrier, but their ancestry/relink currency is preserved for separate routing",
+        "master_ontology": "the same-carrier inherited-stock component is a between-time relay with zero generation depth only when classified residual work stays strictly below its E1/5 owner face; material sidecars remain separately routed, and legacy/untyped inheritance remains event-facing until this certificate is supplied",
         "temporal_provenance": "the theorem uses endpoint stock continuity only and performs no FIFO/LIFO/proportional matching of earlier deposits to later withdrawals",
-        "event_boundary": "if the earlier endpoint is itself a new physical interaction or the carrier role/probe changes, this quotient is inapplicable and the existing physical-event route must be used",
+        "event_boundary": "the earlier endpoint must be certified as a non-event slice of the continuing carrier; if it is a new physical interaction, or the carrier role/probe changes, this quotient is inapplicable and the existing physical-event route must be used",
         "later_hahn_used": False,
         "claims_global_regularity": False,
     }
@@ -257,7 +296,7 @@ class SameCarrierInheritanceStress:
     maximum_checkpoint_count: int
     minimum_inheritance_margin: float
     maximum_elapsed_residual: float
-    recursive_events_created: int
+    stock_recursive_events_created: int
 
 
 def stress(samples: int = 50_000, seed: int = 2026081304) -> SameCarrierInheritanceStress:
@@ -328,6 +367,7 @@ def stress(samples: int = 50_000, seed: int = 2026081304) -> SameCarrierInherita
             residual_positive_work=wR,
             strain_action=K_end,
             material_registration=material,
+            initial_endpoint_is_non_event_carrier_slice=True,
         )
         checked += 1
         sidecars += int(bool(cert.material_sidecars))
@@ -344,7 +384,7 @@ def stress(samples: int = 50_000, seed: int = 2026081304) -> SameCarrierInherita
         maximum_checkpoint_count=max_checkpoints,
         minimum_inheritance_margin=min_margin,
         maximum_elapsed_residual=max_elapsed,
-        recursive_events_created=recursive,
+        stock_recursive_events_created=recursive,
     )
 
 
@@ -364,15 +404,15 @@ def main() -> None:
 
 Status: **{STATUS}**.
 
-On a fixed no-hit carrier interval the physical energy gate branch `E0>=E1/5` is earlier carrier stock, not new positive generation work.  Checkpoint cuts leave cumulative monitors unchanged; same-Q/same-psi material sidecars may be reread without replacing the carrier.  The typed relay creates zero recursive event depth and performs no temporal deposit matching.
+On a fixed no-hit carrier interval, if `E0>=E1/5` while classified residual physical work stays strictly below its own `E1/5` owner face, the earlier endpoint is carrier stock rather than a new generation charge.  Checkpoint cuts leave cumulative monitors unchanged.  Same-Q/same-psi material sidecars may be reread without replacing the carrier, but remain separately routed ancestry/relink currency.  Only the stock component has zero recursive generation depth; no temporal deposit matching is performed.
 
 Stress: `{out.samples}` exact same-carrier paths
 - relays checked: `{out.relays_checked}`
-- relays carrying material sidecars: `{out.sidecar_relays}`
+- stock relays carrying material sidecars preserved for separate routing: `{out.sidecar_relays}`
 - maximum inserted checkpoints: `{out.maximum_checkpoint_count}`
 - minimum inheritance-gate margin: `{out.minimum_inheritance_margin:.3e}`
 - maximum physical elapsed-time residual: `{out.maximum_elapsed_residual:.3e}`
-- recursive events created: `{out.recursive_events_created}`
+- recursive events created by the stock component: `{out.stock_recursive_events_created}`
 
 Untyped inheritance, role/probe change, or any named physical first stop remains on the existing event route.  No global-regularity claim is made.
 """
