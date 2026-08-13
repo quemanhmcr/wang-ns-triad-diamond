@@ -1,0 +1,29 @@
+{
+  "certificate": {
+    "status": "EXACT_AMPLITUDE_ENTROPY_REUSE_TELESCOPE__PHYSICAL_TRANSFER_WEIGHTED_PRODUCTIVITY_SUPPLIED",
+    "productivity": "preferred premise is E_dT log(alpha_p1 alpha_p2)>=E_dT log(alpha_child)+log Lambda_j under actual positive child-energy work; no pointwise pair law is required",
+    "default_productivity": "physical pair-work/KL theorem gives Lambda_1=0.00185770938993 at one retained pair cell; Lambda_j may vary with finite cell refinement",
+    "log_recursion": "ell_parent >= (1/2)log Lambda_j+(1/2)ell_child under the same physical transfer law",
+    "depth_solution": "variable Lambda_j enter with geometric weights 2^(-j-1); polynomial pair-cell refinement therefore changes only a finite offset",
+    "anchor": "Bargmann/Moyal gives N E_anchor >= beta alpha^2 with beta=1.43386756899e-05",
+    "entropy": "H(root)+2 E_root log alpha <= log(sum alpha^2) <= log(P E_global N_max/beta)",
+    "shannon": "sum R_j=L log2-H(root) retains the linear log(48/25) slope without a per-root mass floor",
+    "renyi": "H2(root)<=H1(root), so the Renyi action has the same lower bound and routes a rich layer to existing pair/entropy/cycle currencies",
+    "amplitude_imbalance": "arbitrarily unbalanced parent amplitudes are absorbed by transfer-weighted logarithmic productivity; no small/large-parent currency is introduced",
+    "duhamel_role": "Duhamel remains an exact support/adjoint identity only; parent productivity is derived directly from physical work by sharp Young plus KL positivity",
+    "physical_weights": "all layer expectations are under actual positive child-energy work dT",
+    "continuum_status": "outer moving roles and hard-event/smooth-envelope registration are supplied by companion theorems; the remaining continuum task is the recursive first-stop assembly that retains physical Young-good cells and routes every failed phase/registration/source event once to an existing cause"
+  },
+  "stress": {
+    "samples": 20000,
+    "worst_layer_log_margin": 1.7763568394002505e-15,
+    "minimum_logsum_margin": -3.552713678800501e-15,
+    "minimum_shannon_lower_margin": 0.19576905828612123,
+    "minimum_renyi_lower_margin": 0.19576905828612123,
+    "maximum_amplitude_ratio": 792188764425101.9,
+    "branch_counts": {
+      "depth_not_yet_forced": 19999,
+      "amplitude_entropy_reuse_forced": 1
+    }
+  }
+}

@@ -1,6 +1,6 @@
 # RESEARCH LEDGER — current theorem architecture
 
-Status: current through the certified **pure-UV true-upward natural-window binding** theorem, exact theorem SHA `e7b302f3590bbddb83b3d9bd9e8c213b5ada8b4e`. This file is deliberately theorem-facing and compact. CI runs, stress counts, residuals, artifact digests, and failure lineage live in `docs/experimental_certification_log.md`; the pre-compaction full ledger is archived under `docs/history/`.
+Status: current through the certified **same-carrier inherited-energy relay** theorem, exact theorem SHA `ae13f9c838878f50c496b9a3e8b22d680ab789e3`. This file is deliberately theorem-facing and compact. CI runs, stress counts, residuals, artifact digests, and failure lineage live in `docs/experimental_certification_log.md`; the pre-compaction full ledger is archived under `docs/history/`.
 
 ## 1. Non-negotiable physical rules
 
@@ -88,10 +88,11 @@ Thus both true-upward support phenomena are now routed without re-Hahn and witho
 - Eventually-pure consecutive high-strain recurrence has a descending physical-scale/dissipation telescope.
 - Eventually-pure signed-good generated-HH recurrence has a finite physical-time backshift telescope; generic HH remains outside that theorem.
 - Material labels are sidecars to actual service/work. Shannon/Rényi describe breadth/reuse of actual positive ancestry, not time.
+- On a fixed same-carrier/no-first-stop interval whose earlier endpoint is a certified non-event slice, if `E0>=E1/5` while classified residual positive work stays strictly below its own `E1/5` owner face, the inherited-energy **component** is persistent between-time carrier stock with zero generation depth.  This does not erase material ancestry/relink sidecars, simultaneous physical-work owners, role/probe changes, or genuine endpoint events; those remain separately routed.
 
 ## 6. Current frontier
 
-1. **Mixed genuine-owner recurrence:** the hard-tail true-upward support split is now fully routed, so the next native question is universal physical renewal/exhaustion across genuine recursive owners: strain, critical-shell service, source/material service, and their already-certified reuse laws.  Conservative K/relink remains same-event redistribution and must not be counted as recursive depth.
+1. **Mixed genuine-owner recurrence:** same-carrier inherited stock has now been separated from generation depth.  The immediate integration seam is to wire the certified **sidecar-free** stock relay into the central event quotient without waking legacy CI fan-out; inheritance carrying material ancestry/relink sidecars remains fail-closed until that sidecar routing is typed there.  Beyond that, the native recurrence problem is reduced to genuine strain, critical-shell service, source/material service and already-certified reuse laws.
 2. Local HH retains the degenerate full-signed Young/Christ-margin seam and, only if a future representation truly needs it, a separately proved coherent positive kernel.
 3. The initial-data and hypothetical singular-time interfaces remain open. There is **no 3D Navier–Stokes global-regularity claim**.
 
@@ -102,4 +103,4 @@ Before every new theorem branch: fetch/verify `origin/main`, read this file in f
 Full causal integration now uses a certified content-addressed execution layer. Reuse is allowed only when exact command/runtime/transitive `src` closure and the stored per-node output digest match; new, changed, dynamic-import or unproven nodes execute fail-closed. Full pytest and master-episode stress still run every invocation, and `force_full` remains available for differential sweeps. This is CI provenance only, never a physical causal law.
 
 Current reading spine:
-`physical_energy_causal_bridge.md` → `high_frequency_dissipation_reentry.md` → `helical_physical_edge_registration.md` → `continuum_helical_edge_measure_registration.md` → `canonical_positive_edge_work_routing.md` → `cyclic_helical_triad_donor_kernel.md` → `helical_mode_set_energy_continuity.md` → `radial_spectral_crossing_layer_cake.md` → `hard_tail_true_upward_supply.md` → `resolved_contact_native_binding.md` → `pure_uv_true_upward_natural_window.md` → `master_no_escape.md`.
+`physical_energy_causal_bridge.md` → `high_frequency_dissipation_reentry.md` → `helical_physical_edge_registration.md` → `continuum_helical_edge_measure_registration.md` → `canonical_positive_edge_work_routing.md` → `cyclic_helical_triad_donor_kernel.md` → `helical_mode_set_energy_continuity.md` → `radial_spectral_crossing_layer_cake.md` → `hard_tail_true_upward_supply.md` → `resolved_contact_native_binding.md` → `pure_uv_true_upward_natural_window.md` → `same_carrier_inherited_energy_relay.md` → `master_no_escape.md`.

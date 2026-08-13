@@ -17,6 +17,7 @@ Historical detail through the radial theorem is preserved verbatim in `docs/hist
 - hard-tail true-upward supply: `d064bc4d780d9c90d36e64c7b84c3b771b74c896`
 - resolved-contact native binding: `476760236e197d614d5bb211b438e49701652f67`
 - pure-UV true-upward natural-window binding: `e7b302f3590bbddb83b3d9bd9e8c213b5ada8b4e`
+- same-carrier inherited-energy relay: `ae13f9c838878f50c496b9a3e8b22d680ab789e3`
 
 For complete historical run IDs and metrics of the earlier entries, use the archived full ledger above.
 
@@ -109,3 +110,20 @@ Strengthened `75k/100k` physical-triad stresses covered donor/shell ratios down 
 Actual NS: dedicated cross-FFT pure common-work spread `2.087e-16`, independent amplitude-0.5 spread `0`, strict parent margin above `M/4` `2.40312423743`, and simultaneous deep-contact/pure work remained positive (`0.0748690219794 / 0.039721764731` dedicated; `0.00935862774742 / 0.00496522059137` audit).
 
 Failure lineage: `28b4fde...` incorrectly required coexistence in the separate selected-pure fixture; actual NS forced the check onto the deep six-mode trajectory.  `b28e33e...` then passed theorem-specific gates, but artifact review showed the random stress only sampled the endpoint donor ratio `1/2`; the experiment was strengthened to sweep the exact admissible tail-boundary interval.  `ec72ac0...` exposed an orientation-object mistake in stress parent lookup; final `e7b302f...` uses canonical closed-mode parent indices.  These repairs changed neither theorem law nor PDE/tolerance/sample/owner constants.
+
+## Same-carrier inherited-energy relay — exact certification
+
+Exact theorem SHA: `ae13f9c838878f50c496b9a3e8b22d680ab789e3`.
+
+Serious gates: dedicated `31665217019` **success**; independent audit `31665217001` **success**; physical-energy causal integration v2 `31665386705` **success** (`933` tests, master `20,000` traces with worst margin `0.0`, planner `59` reuse + `1` execute, all `60` results present and `59` baseline nodes byte-compared).
+
+Stored trees:
+- `recorded-results/31665217019/` — `sha256:4fd24737192a29b235ad5c201b1f8769ea9e47423bc015f9368b2f2e4c6bd213`;
+- `recorded-results/31665217001/` — `sha256:d4e50bc2613ef83a8e50c2324cdfbe22453926a95d2344006b921f859200b9a5`;
+- `recorded-results/31665386705/` — `sha256:16e92eba439135fb57ea780e8f8bb0d26af97af23e53ce4723d422c0cd9954dc`.
+
+Dedicated/independent exact-path stresses checked `75,000 / 100,000` same-carrier relays, including `37,500 / 50,000` paths with material sidecars preserved for separate routing, up to three inserted checkpoints, physical elapsed-time residual `1.388e-17`, and zero recursive events created by the inherited-stock component.  Minimum sampled inheritance-face margins were `6.973e-07 / 7.521e-07`.
+
+Actual dealiased Fourier--Galerkin NS followed the same physical helical mode `(7,6,5), s=+1` across FFT representations `24,28`.  Dedicated amplitude-1 stock was `1 -> 1.00240956249` with gross positive/negative nonlinear work `0.0100088487847 / 0.000991283878665` and viscous loss `0.00660800248318`; modal continuity residual `6.253e-11`, global energy-balance residual `2.963e-12`.  Independent amplitude-0.5 opposite-phase stock was `0.25 -> 0.245853600709` with gross positive/negative work `0.000182591040316 / 0.00187455879673` and viscous loss `0.00245443154604`; residuals `4.761e-11 / 2.614e-11`.  Thus inherited stock coexists with genuine nonlinear exchange and viscosity; the theorem is an ontology of endpoint stock, not a frozen-flow surrogate.
+
+Failure lineage: initial SHA `30f1ceee6a38a73f6771b381c7d5f10aeab8d837` passed theorem-specific lanes, but post-gate physical review caught a genuine lexicographic-owner overclaim: `E0>=E1/5` can coexist with classified residual work at its own owner face, so the whole block cannot be erased into stock.  The repair also preserved material sidecars separately and required the earlier endpoint to be a certified non-event carrier slice.  SHA `b7e0da7d...` encoded those stronger conditions but its first algebra run exposed a fixture-only keyword accidentally passed to the old energy-gate API.  Final `ae13f9c...` removed only those three bad fixture arguments; no theorem threshold, PDE equation, tolerance, sample count, sidecar rule or causal rule was weakened.
