@@ -94,5 +94,7 @@ If the resolved-contact owner carries `nu D_tail/2`, then either contact HH carr
 
 Before every new theorem branch: fetch/verify `origin/main`, read this file in full, then branch. Theorem/test/numerical/PDE execution belongs in GitHub Actions; cloud shell work is for reading, static inspection, editing, git, and artifact/log handling.
 
+Full causal integration now uses a certified content-addressed execution layer. Reuse is allowed only when exact command/runtime/transitive `src` closure and the stored per-node output digest match; new, changed, dynamic-import or unproven nodes execute fail-closed. Full pytest and master-episode stress still run every invocation, and `force_full` remains available for differential sweeps. This is CI provenance only, never a physical causal law.
+
 Current reading spine:
 `physical_energy_causal_bridge.md` → `high_frequency_dissipation_reentry.md` → `helical_physical_edge_registration.md` → `continuum_helical_edge_measure_registration.md` → `canonical_positive_edge_work_routing.md` → `cyclic_helical_triad_donor_kernel.md` → `helical_mode_set_energy_continuity.md` → `radial_spectral_crossing_layer_cake.md` → `hard_tail_true_upward_supply.md` → `resolved_contact_native_binding.md` → `master_no_escape.md`.

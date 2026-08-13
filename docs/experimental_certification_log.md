@@ -75,3 +75,18 @@ Failure/correction lineage:
 - candidate `9d615568640e39c49acc7295a996ed97e04110e6` passed dedicated/audit/integration, but a post-CI theorem review found a genuine missing proof seam: the existing aggregate HH natural-window theorem explicitly cannot control a donor-restricted canonical edge-positive law because aggregate Hahn cancellation may be smaller than gross positive edge mass. Promotion was stopped. The repair encoded the missing continuum measure chain `dmu_HH<=d|W_HH|<=dA_HH` and replayed the exact unordered-parent/helicity Young prefactor `4 sqrt(2) C_F A_3`; since `sqrt(2) C_F=0.0897935610625833<1`, the existing clean `4 A_3` physical-work constant controls gross edge total variation. No sample count, tolerance, PDE equation, owner threshold or causal unit was weakened.
 
 No theorem/test/PDE execution used Linux Cloud; all execution evidence above came from GitHub Actions on the exact SHA.
+
+
+## Physical-energy causal integration v2 — certified engineering evidence
+
+Implementation SHA: `026b49337083433fbcf9764ab145ca5f7066f4a2`.  This is an experiment-engineering layer, not a new Navier--Stokes theorem.  It preserves every legacy integration command, sample count, seed and tolerance; global pytest and the exact `20,000`-episode master stress still run every invocation.
+
+The measured legacy exact-SHA integration `31655796159` ran from `00:50:55Z` to `01:21:49Z`, i.e. `30m54s`.  Step profiling attributed about `1545s` to `57` module stress commands executed sequentially.
+
+- shadow-full v2 `31658965931`, SHA `0796f8950fc0421a5c49d776bb8a073360b4be11` — **success** in `6m03s`; all `58` nodes executed in five measured-runtime shards; full suite `912` tests; master worst margin `0.0`; all results present; all `57` legacy baseline-matched outputs byte-identical.  Stored tree `recorded-results/31658965931/`, deterministic digest `sha256:ea1a8a015fa67656b919e35d7060ca152ed8bf83f45dfb7c0d3a6c82b55ce539`.
+- exact-content run `31659354320`, SHA `1156637a7198df7c21fc717bed16ff70df999483` — **success** in `5m21s`; planner `58 reuse / 0 execute`; integration shards skipped; full suite `912` tests; master worst margin `0.0`; `58/58` baseline outputs byte-compared successfully.
+- integrity-hardened run `31659688199`, SHA `026b49337083433fbcf9764ab145ca5f7066f4a2` — **success** in `3m28s`; `58 reuse / 0 execute`; full suite `914` tests; master worst margin `0.0`; `58/58` outputs verified after per-node certified-output digest checks.  Stored tree `recorded-results/31659688199/`, deterministic digest `sha256:f0db9076a2ea26efa13600f48e5b71a862067d3168bf28737cd2a20e1db7d937`; GitHub aggregate artifact digest `sha256:55edc783cc26fd7cf254f41f575e387477e26866169e879aab10629a9d092312`.
+
+The five full-compute shard loads were selected from the measured legacy runtime profile, approximately `309,310,310,308,308` module-seconds.  This gives the full-compute speedup without reducing experiments.  Exact-content reuse is stricter: node identity includes exact command, pinned runtime, requirements and transitive local source-import closure; dynamic imports fail closed.  Baseline artifacts additionally carry per-node output digests, checked before materialization and again against current outputs.  A tamper regression and a runtime-contract regression are part of the `914`-test suite.
+
+Two independent historical full-integration runs had already produced exactly the same deterministic legacy artifact tree digest, `sha256:1c38edfed2b05843bb0eff21629390c923dc45b6ca575bf9aa912cc11033ae3e`, despite intervening theorem additions.  V2 turns that observed determinism into an explicit, typed provenance rule rather than repeatedly spending ~30 minutes rediscovering unchanged outputs.

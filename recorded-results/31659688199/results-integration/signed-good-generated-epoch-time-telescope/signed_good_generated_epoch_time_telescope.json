@@ -1,0 +1,28 @@
+{
+  "certificate": {
+    "status": "EXACT_SIGNED_GOOD_GENERATED_HH_PARABOLIC_EPOCH_TELESCOPE__ACTUAL_PHYSICAL_HH_WORK_AFTER_ENERGY_REENTRY_ONLY__ASYNCHRONOUS_COMMON_SLICE_BACKSHIFT_TO_T0__NO_DUHAMEL_WEIGHT_OR_EVENT_COUNT_BUDGET",
+    "physical_input": "only an energy reentry which selects actual positive HH child-energy work may enter; the raw |I_HH| coefficient obstruction is an interval locator and is rejected",
+    "signed_good_geometry": "each actual generated parent satisfies strict 3/5<N_parent/N_child<5/8, hence its natural lifetime grows by more than 64/25 backward",
+    "physical_support": "the positive HH work law is restricted to an actual heavy half-slab; same-time parent-pair support then occupies at most 25/128 of the parent natural lifetime",
+    "common_surface": "for H_j=[a_j,b_j], s_j=a_j-(2/5)T_j is a physical registration surface for the same parent carrier, not a recursive event or checkpoint currency",
+    "asynchronous_backshift": "H_(j+1) subset [s_j,b_j] and alpha_j<=10/39 imply s_j-s_(j+1)>=(1792/4875)T_j even when the next generated support begins anywhere in the previous common interval",
+    "time_telescope": "Delta s_L>=(1792/7605)T_0[(64/25)^L-1], so at finite physical time a consecutive signed-good generated ancestry reaches the absorbing t=0 registration boundary after finite depth",
+    "causal_weights": "all generation masses are actual positive child-energy HH work; raw Duhamel/adjoint amplitude weights are not used as a causal probability law",
+    "reuse_relation": "Shannon/Renyi remains the native breadth/collision law of the generated ancestry; it is not needed to manufacture a scalar time cost for single-lineage depth",
+    "master_consequence": "an infinite recursive event path cannot eventually consist only of consecutive signed-good generated HH renewals; generic HH/high-tail events not certified signed-good remain outside this theorem",
+    "anti_count": "the finite-depth conclusion comes from physical parabolic lifetimes and the absorbing initial surface, not from charging one unit per event or from a normalized global reset",
+    "scope": "this closes eventually-pure signed-good generated-HH recurrence only; mixed recurrence and generic non-signed-good HH/source/material/high-tail routes remain open, and no Navier-Stokes global-regularity claim is made"
+  },
+  "stress": {
+    "samples": 50000,
+    "minimum_scale_window_margin": 0.0030000147542257327,
+    "minimum_heavy_half_work_margin": 8.684648789003546e-07,
+    "minimum_reference_backshift_margin": 7.843254792838327e-05,
+    "minimum_cumulative_backshift_margin": 0.0,
+    "maximum_certified_layer_upper": 14,
+    "boundary_forced_samples": 0,
+    "raw_coefficient_reentry_rejections": 7143,
+    "nonsigned_good_rejections": 4546,
+    "invalid_support_restart_rejections": 3256
+  }
+}
