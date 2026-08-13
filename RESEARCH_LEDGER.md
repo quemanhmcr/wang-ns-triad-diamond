@@ -94,6 +94,8 @@ Thus both true-upward support phenomena are now routed without re-Hahn and witho
 ## 6. Current frontier
 
 1. **Mixed genuine-owner recurrence:** same-carrier inherited stock is now separated from generation depth **and** wired into the central master for sidecar-free certified cases.  The remaining inheritance seam is specifically sidecar-bearing ancestry/relink routing; until typed, it stays event-facing fail-closed.  Beyond that, the native recurrence problem is reduced to genuine strain, critical-shell service, source/material service and already-certified reuse laws.
+
+**Handoff:** inherited-stock master wiring is closed; continue from mixed genuine-owner recurrence, with sidecar-bearing inheritance kept fail-closed until its ancestry/relink route is typed.
 2. Local HH retains the degenerate full-signed Young/Christ-margin seam and, only if a future representation truly needs it, a separately proved coherent positive kernel.
 3. The initial-data and hypothetical singular-time interfaces remain open. There is **no 3D Navier–Stokes global-regularity claim**.
 
