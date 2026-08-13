@@ -154,7 +154,6 @@ def test_typed_master_projection_makes_stock_zero_depth_while_legacy_master_stay
         initial_energy=0.31,
         residual_positive_work=0.12,
         strain_action=0.02,
-        initial_endpoint_is_non_event_carrier_slice=True,
     )
     assert gate["branch"] == "material_energy_inheritance"
     projection = same_carrier_inheritance_master_projection(
@@ -224,7 +223,6 @@ def test_stock_projection_rejects_same_endpoint_certificate_from_a_different_res
         initial_energy=0.31,
         residual_positive_work=0.05,
         strain_action=0.02,
-        initial_endpoint_is_non_event_carrier_slice=True,
     )
     with pytest.raises(TypeError):
         same_carrier_inheritance_master_projection(
@@ -250,7 +248,6 @@ def test_stock_projection_rejects_tampered_or_mismatched_energy_gate():
         initial_energy=0.50,
         residual_positive_work=0.1,
         strain_action=0.02,
-        initial_endpoint_is_non_event_carrier_slice=True,
     )
     with pytest.raises(TypeError):
         same_carrier_inheritance_master_projection(
