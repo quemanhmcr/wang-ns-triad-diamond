@@ -1,6 +1,6 @@
 {
-  "artifact_root": "recorded-results/31658965931/results-integration",
-  "integration_run_id": 31658965931,
+  "artifact_root": "recorded-results/31661727711/results-integration",
+  "integration_run_id": 31661727711,
   "nodes": {
     "amplitude_entropy_causal_reuse": {
       "command": "python -m src.amplitude_entropy_causal_reuse --samples 20000 --outdir results-integration/amplitude-entropy",
@@ -266,6 +266,12 @@
       "outdir": "results-integration/physical-pair-productivity",
       "output_digest": "1ed2fa1f9a04e87ea85e7bdcd6543d1d77aa9401268db618e0f51633f9ef1c6e"
     },
+    "pure_uv_true_upward_natural_window": {
+      "command": "python -m src.pure_uv_true_upward_natural_window --samples 50000 --seed 2026081303 --outdir results-integration/pure-uv-true-upward-natural-window",
+      "fingerprint": "3ecc55b7df0380769f4a7afeadd09e81ff2acb8f9534723ad9966576a49bdad0",
+      "outdir": "results-integration/pure-uv-true-upward-natural-window",
+      "output_digest": "dd16716386b3364449e1e5fc95b7c7831bffeff8e0a2821415486a81cd759c32"
+    },
     "radial_spectral_crossing_layer_cake": {
       "command": "python -m src.radial_spectral_crossing_layer_cake --samples 50000 --seed 2026081206 --outdir results-integration/radial-spectral-crossing-layer-cake",
       "fingerprint": "ae439bca8a3288f6ed4fcbc70e4981f67e4e7a85eede53fb9e74bf6fb6fdf746",
@@ -351,8 +357,8 @@
       "output_digest": "fe77e09613763429741d9d90d5e964c1fb13711d92e80baf9f01859f4e30f5c1"
     }
   },
-  "record_sha": "0796f8950fc0421a5c49d776bb8a073360b4be11",
+  "record_sha": "3c3ee1ee74c464bdf1c4501aa52b2c853f1fea6c",
   "runtime_id": "ubuntu-24.04|python=3.11.15|numpy=2.2.6|scipy=1.15.3|pytest=8.4.1|python-flint=0.9.0",
   "schema": 1,
-  "theorem_sha": "0796f8950fc0421a5c49d776bb8a073360b4be11"
+  "theorem_sha": "e7b302f3590bbddb83b3d9bd9e8c213b5ada8b4e"
 }
