@@ -3,6 +3,7 @@ from dataclasses import replace
 import pytest
 
 from src.hard_tail_true_upward_supply import deep_upward_resolved_contact_fixture
+from src.resolved_interface_donor_quotient import SKEW_OWNER, SYMMETRIC_OWNER
 from src.resolved_contact_smooth_binding import (
     SignedResolvedKSAtom,
     bind_canonical_mixed_submeasure_to_ks,
@@ -100,6 +101,11 @@ def test_same_atom_signed_KS_identity_binds_canonical_submeasure_without_cloning
     assert bind.strain_bound_mass == 0.0
     assert bind.common_unit_scale == 7.0
     assert bind.owner_mass_cloned is False
+    assert bind.existing_component_cover_verified is True
+    assert bind.skew_owner_name == SKEW_OWNER
+    assert bind.symmetric_owner_name == SYMMETRIC_OWNER
+    with pytest.raises(ValueError):
+        replace(bind, existing_component_cover_verified=False)
 
 
 def test_KS_binding_rejects_wrong_signed_identity_unquotiented_gauge_and_overlarge_cause():

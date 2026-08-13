@@ -20,6 +20,11 @@ from src.hard_tail_true_upward_supply import (
     deep_upward_resolved_contact_fixture,
     hard_tail_upward_supply_split,
 )
+from src.resolved_interface_donor_quotient import (
+    SKEW_OWNER,
+    SYMMETRIC_OWNER,
+    positive_interface_component_split,
+)
 
 STATUS = (
     "EXACT_RESOLVED_CONTACT_SMOOTH_BINDING__POSITIVE_CORE_CUTOFF_BEFORE_CAUSAL_PUSH__"
@@ -250,6 +255,9 @@ class PositiveKSSubmeasureBinding:
     later_hahn_on_canonical_cause: bool = False
     owner_mass_cloned: bool = False
     own_shell_reweighting_used: bool = False
+    existing_component_cover_verified: bool = True
+    skew_owner_name: str = SKEW_OWNER
+    symmetric_owner_name: str = SYMMETRIC_OWNER
 
     def __post_init__(self) -> None:
         mu = _finite_nonnegative(self.canonical_mixed_submeasure_mass, "canonical mixed submeasure mass")
@@ -271,6 +279,10 @@ class PositiveKSSubmeasureBinding:
             raise AssertionError("K/S binding left the signed physical identity")
         if self.canonical_cause_replaced or self.later_hahn_on_canonical_cause or self.owner_mass_cloned or self.own_shell_reweighting_used:
             raise ValueError("K/S provenance may not replace, re-Hahn, clone, or M-reweight canonical dW+")
+        if not self.existing_component_cover_verified:
+            raise ValueError("K/S binding must reuse the certified resolved-interface component law")
+        if self.skew_owner_name != SKEW_OWNER or self.symmetric_owner_name != SYMMETRIC_OWNER:
+            raise ValueError("K/S binding changed the existing owner ontology")
 
 
 def bind_canonical_mixed_submeasure_to_ks(
@@ -292,9 +304,13 @@ def bind_canonical_mixed_submeasure_to_ks(
     I = float(signed_atom.signed_mixed_work)
     K = float(signed_atom.signed_skew_work)
     S = float(signed_atom.signed_strain_work)
-    ip = max(I, 0.0)
-    kp = max(K, 0.0)
-    sp = max(S, 0.0)
+    # Reuse the already-certified resolved-interface component law.  The
+    # canonical cause itself is not Hahn-split here: this call only reads the
+    # existing positive K/S cover of the same signed physical atom I=K+S.
+    cover = positive_interface_component_split((I,), (K,), (S,))
+    ip = float(cover["positive_interface_work"])
+    kp = float(cover["positive_skew_redistribution_work"])
+    sp = float(cover["positive_symmetric_strain_work"])
     scale = max(1.0, abs(I), abs(K), abs(S), mu)
     if mu > ip + 8e-12 * scale:
         raise ValueError("canonical mixed submeasure is not dominated by same-atom mixed dW+")
@@ -323,6 +339,9 @@ def bind_canonical_mixed_submeasure_to_ks(
         signed_identity_residual=identity_residual,
         canonical_mass_residual=mass_residual,
         maximum_domination_excess=domination_excess,
+        existing_component_cover_verified=True,
+        skew_owner_name=SKEW_OWNER,
+        symmetric_owner_name=SYMMETRIC_OWNER,
     )
 
 
@@ -515,7 +534,7 @@ def theorem_certificate() -> dict[str, object]:
         "positive_push": "donor-restricted canonical dW+ is multiplied only by q_d and 1-q_d; the two positive submeasures sum to the original cause",
         "strict_deep": "M>=8N forces donor<=M/8, q_d=1, other parent>M/4, hence the entire canonical upward atom is actual mixed V-h work",
         "borderline": "M=4N is a genuine transition shell; contact at M/4 has q_d=0 and can remain 100% HH; whenever transition-HH mass is nonzero its donor lies in (M/8,M/4] and the other parent lies in (M/4,5M/4], so this HH piece is already comparable",
-        "ks_binding": "only after same-atom signed I=K+S is verified does a non-cloning positive domination bind canonical mixed dW+ into existing K+/S+ owner laws",
+        "ks_binding": "after same-atom signed I=K+S is verified, reuse the certified resolved-interface K+/S+ cover; a non-cloning dominated partition binds canonical mixed dW+ into its existing conservative-skew and symmetric-strain owner laws",
         "coarse_hahn_forbidden": "canonical atomic dW+ is bound before downstream aggregation; a later coarse Hahn mass may be smaller by cancellation and cannot receive the cause",
         "common_unit": "all bound masses retain N dW; recipient M is geometry only",
         "cutoff": "choose a canonical smooth real radial cutoff 0<=S<=1, S=1 on B_(M/8), S=0 on and outside M/4",

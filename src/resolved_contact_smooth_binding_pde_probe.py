@@ -32,6 +32,12 @@ from src.helical_physical_edge_registration import (
     direct_child_source_coefficient,
     register_helical_physical_edge,
 )
+from src.resolved_interface_donor_quotient import (
+    SKEW_OWNER,
+    SYMMETRIC_OWNER,
+    resolved_role_work_decomposition,
+    skew_donor_closure,
+)
 from src.resolved_contact_smooth_binding import (
     SignedResolvedKSAtom,
     bind_canonical_mixed_submeasure_to_ks,
@@ -46,7 +52,7 @@ from src.hard_tail_true_upward_supply import deep_upward_resolved_contact_fixtur
 STATUS = (
     "ORTHOGONAL_FOURIER_GALERKIN_NS_RESOLVED_CONTACT_SMOOTH_BINDING__"
     "ACTUAL_U_EQUALS_V_PLUS_H_BILINEAR_REPARTITION__BORDERLINE_M4_TRANSITION_HH__"
-    "STRICT_DEEP_M8_MIXED_VH__SAME_EDGE_KS_ADJOINT_REFEREE__CANONICAL_DWPLUS_NONCLONING"
+    "STRICT_DEEP_M8_MIXED_VH__EXISTING_RESOLVED_OWNER_KS_REFEREE__CANONICAL_DWPLUS_NONCLONING"
 )
 
 
@@ -149,8 +155,8 @@ def _scaled_recipient_edge_work(triad, atom, donor_factor: float, other_factor: 
     )
 
 
-def _same_pair_ks_work(triad, atom, donor_cutoff_value: float) -> tuple[float, float, float, float, float]:
-    """Actual two-high-mode block of the resolved linearized NS RHS operator."""
+def _same_pair_existing_owner_referee(triad, atom, donor_cutoff_value: float):
+    """Instantiate the certified resolved-interface K/S law on the actual two-high-mode block."""
     r = atom.recipient_closed_mode_index
     d = atom.donor_closed_mode_index
     slot = triad.slot_for_closed_mode_index(r)
@@ -166,25 +172,23 @@ def _same_pair_ks_work(triad, atom, donor_cutoff_value: float) -> tuple[float, f
     a_o = triad.amplitudes[o]
     a_z = np.conjugate(triad.amplitudes[r])
 
-    # L_{z,o}: one fixed resolved mode kd acts on the high mode ko.
-    L_zo = direct_child_source_coefficient(
-        kd, ko, z, sd, so, sz, ad_v, 1.0 + 0.0j
-    )
-    # The adjoint partner L_{o,z} uses the reality partner -kd of the same V.
-    L_oz = direct_child_source_coefficient(
-        -kd, z, ko, sd, sz, so, np.conjugate(ad_v), 1.0 + 0.0j
-    )
-    K_zo = 0.5 * (L_zo - np.conjugate(L_oz))
-    S_zo = 0.5 * (L_zo + np.conjugate(L_oz))
-    K_oz = 0.5 * (L_oz - np.conjugate(L_zo))
-    S_oz = 0.5 * (L_oz + np.conjugate(L_zo))
-
-    mixed = 2.0 * float(np.real(np.conjugate(a_z) * L_zo * a_o))
-    skew = 2.0 * float(np.real(np.conjugate(a_z) * K_zo * a_o))
-    strain = 2.0 * float(np.real(np.conjugate(a_z) * S_zo * a_o))
-    reverse_skew = 2.0 * float(np.real(np.conjugate(a_o) * K_oz * a_z))
-    reverse_strain = 2.0 * float(np.real(np.conjugate(a_o) * S_oz * a_z))
-    return mixed, skew, strain, reverse_skew, reverse_strain
+    L_zo = direct_child_source_coefficient(kd, ko, z, sd, so, sz, ad_v, 1.0 + 0.0j)
+    L_oz = direct_child_source_coefficient(-kd, z, ko, sd, sz, so, np.conjugate(ad_v), 1.0 + 0.0j)
+    L = np.asarray(((0.0 + 0.0j, L_oz), (L_zo, 0.0 + 0.0j)), dtype=complex)
+    state = np.asarray((a_o, a_z), dtype=complex)
+    P_other = np.asarray(((1.0, 0.0), (0.0, 0.0)), dtype=complex)
+    P_recipient = np.asarray(((0.0, 0.0), (0.0, 1.0)), dtype=complex)
+    decomp = resolved_role_work_decomposition((P_other, P_recipient), L, state)
+    total = np.asarray(decomp["signed_resolved_role_work"], dtype=float)
+    skew = np.asarray(decomp["signed_skew_role_work"], dtype=float)
+    strain = np.asarray(decomp["signed_symmetric_strain_work"], dtype=float)
+    if total.shape != (2,) or skew.shape != (2,) or strain.shape != (2,):
+        raise AssertionError("existing resolved-interface theorem changed two-role output type")
+    if decomp.get("symmetric_is_existing_strain_provenance") is not True:
+        raise AssertionError("existing resolved-interface theorem lost strain provenance")
+    if decomp.get("new_interface_source_created") is not False:
+        raise AssertionError("existing resolved-interface theorem created a new source currency")
+    return float(total[1]), float(skew[1]), float(strain[1]), float(skew[0]), float(strain[0]), decomp
 
 
 @dataclass(frozen=True)
@@ -215,6 +219,13 @@ class ResolvedContactGalerkinRun:
     worst_ks_strain_pair_residual: float
     worst_canonical_ks_mass_residual: float
     worst_canonical_ks_domination_excess: float
+    worst_existing_owner_work_split_native_residual: float
+    worst_existing_skew_antisymmetry_native_residual: float
+    worst_existing_strain_symmetry_native_residual: float
+    worst_existing_skew_closure_balance_native_residual: float
+    maximum_existing_skew_donor_path_length: int
+    skew_bound_snapshots: int
+    strain_bound_snapshots: int
     global_energy_balance_relative_residual: float
     maximum_divergence_relative_to_initial_l2: float
 
@@ -277,6 +288,13 @@ def _run_one(
     ks_strain: list[float] = []
     ks_mass: list[float] = []
     ks_dom: list[float] = []
+    existing_split: list[float] = []
+    existing_skew_anti: list[float] = []
+    existing_strain_sym: list[float] = []
+    existing_closure_balance: list[float] = []
+    existing_donor_paths: list[int] = []
+    skew_bound_count = 0
+    strain_bound_count = 0
 
     for step in range(count + 1):
         weighted = np.sqrt(k2)[None, ...] * state
@@ -345,18 +363,51 @@ def _run_one(
             )
 
             if binding.mixed_vh_bound_mass > 0.0:
-                I, K, S, Krev, Srev = _same_pair_ks_work(triad, atom, binding.donor_cutoff_value)
+                I, K, S, Krev, Srev, decomp = _same_pair_existing_owner_referee(
+                    triad, atom, binding.donor_cutoff_value
+                )
                 work_scale = max(native, abs(I), abs(K), abs(S), 1.0e-300)
                 ks_edge.append(abs(I - mixed_reg.signed_child_energy_work) / work_scale)
                 ks_identity.append(abs(I - K - S) / work_scale)
                 ks_skew.append(abs(K + Krev) / work_scale)
                 ks_strain.append(abs(S - Srev) / work_scale)
+                existing_split.append(float(decomp["work_split_residual"]) / work_scale)
+                existing_skew_anti.append(float(decomp["skew_antisymmetry_residual"]) / work_scale)
+                existing_strain_sym.append(float(decomp["symmetric_symmetry_residual"]) / work_scale)
                 same = SignedResolvedKSAtom(I, K, S)
                 owner = bind_canonical_mixed_submeasure_to_ks(
                     binding.mixed_vh_bound_mass, same, common_unit_scale=N
                 )
+                if not owner.existing_component_cover_verified:
+                    raise AssertionError("canonical mixed cause did not use the existing resolved-interface component cover")
+                if owner.skew_owner_name != SKEW_OWNER or owner.symmetric_owner_name != SYMMETRIC_OWNER:
+                    raise AssertionError("canonical mixed cause changed existing resolved-interface owner names")
                 ks_mass.append(owner.canonical_mass_residual)
                 ks_dom.append(owner.maximum_domination_excess / work_scale)
+                owner_tol = 8.0e-12 * max(1.0, binding.mixed_vh_bound_mass, abs(K), abs(S))
+                if owner.skew_bound_mass > owner_tol:
+                    skew_bound_count += 1
+                    closure = skew_donor_closure(
+                        np.asarray(decomp["skew_pair_matrix"], dtype=float), (1,)
+                    )
+                    if not (
+                        closure.get("same_physical_event") is True
+                        and closure.get("same_physical_time") is True
+                        and closure.get("new_causal_charge_created") is False
+                        and closure.get("recursive_generation_created") is False
+                        and closure.get("scale_progress_created") is False
+                    ):
+                        raise AssertionError("existing skew donor closure changed causal ontology")
+                    if not tuple(closure["terminal_negative_net_donor_roles"]):
+                        raise AssertionError("positive skew-bound canonical mass has no existing same-event donor")
+                    existing_donor_paths.append(int(closure["maximum_shortest_donor_path_length"]))
+                    existing_closure_balance.append(
+                        abs(float(closure["closure_balance_residual"])) / work_scale
+                    )
+                if owner.strain_bound_mass > owner_tol:
+                    strain_bound_count += 1
+                    if decomp.get("symmetric_is_existing_strain_provenance") is not True:
+                        raise AssertionError("positive strain-bound canonical mass lost existing strain provenance")
 
         if step < count:
             state = _triad_subspace_rk4_step(state, dt, nu, k, k2, dealias, subspace)
@@ -398,6 +449,14 @@ def _run_one(
         raise AssertionError("actual resolved mixed operator lost K/S adjoint structure")
     if max(ks_mass, default=0.0) > 5.0e-10 or max(ks_dom, default=0.0) > 5.0e-10:
         raise AssertionError("canonical mixed dW+ failed non-cloning K/S positive binding")
+    if max(existing_split, default=0.0) > 5.0e-10:
+        raise AssertionError("existing resolved-interface theorem failed its same-block work split")
+    if max(existing_skew_anti, default=0.0) > 5.0e-10 or max(existing_strain_sym, default=0.0) > 5.0e-10:
+        raise AssertionError("existing resolved-interface owner matrices lost K/S adjoint symmetry")
+    if max(existing_closure_balance, default=0.0) > 5.0e-10:
+        raise AssertionError("existing conservative-skew donor closure lost its same-event balance")
+    if max(existing_donor_paths, default=0) > 1:
+        raise AssertionError("two-role physical K block exceeded its one-edge donor closure")
     if balance > 8.0e-5 or max_div > 5.0e-11:
         raise AssertionError("orthogonal Galerkin referee lost native NS energy/divergence invariants")
 
@@ -428,6 +487,13 @@ def _run_one(
         worst_ks_strain_pair_residual=max(ks_strain, default=0.0),
         worst_canonical_ks_mass_residual=max(ks_mass, default=0.0),
         worst_canonical_ks_domination_excess=max(ks_dom, default=0.0),
+        worst_existing_owner_work_split_native_residual=max(existing_split, default=0.0),
+        worst_existing_skew_antisymmetry_native_residual=max(existing_skew_anti, default=0.0),
+        worst_existing_strain_symmetry_native_residual=max(existing_strain_sym, default=0.0),
+        worst_existing_skew_closure_balance_native_residual=max(existing_closure_balance, default=0.0),
+        maximum_existing_skew_donor_path_length=max(existing_donor_paths, default=0),
+        skew_bound_snapshots=skew_bound_count,
+        strain_bound_snapshots=strain_bound_count,
         global_energy_balance_relative_residual=balance,
         maximum_divergence_relative_to_initial_l2=max_div,
     )
@@ -546,7 +612,7 @@ def main() -> None:
         json.dumps(asdict(out), indent=2, sort_keys=True) + "\n"
     )
     all_runs = (*out.boundary_contact_runs, *out.interior_transition_runs, *out.strict_deep_runs)
-    md = f"""# Actual Fourier--Galerkin Navier--Stokes referee: resolved-contact smooth binding\n\nStatus: **{STATUS}**.\n\nThe same real divergence-free six-mode data are evolved on FFT representations `{tuple(args.resolutions)}`. At every snapshot the referee reads the actual cyclic donor law, the actual smooth `u=V+h` decomposition, the same-edge helical work, and—on the strict-deep mixed branch—the adjoint `K/S` pair of that same resolved linearized NS operator.\n\n- maximum representation spread: `{out.maximum_representation_spread:.3e}`\n- worst full PDE bilinear repartition residual: `{max(r.worst_whole_pde_bilinear_repartition_relative_residual for r in all_runs):.3e}`\n- worst high-shell low-low leakage: `{max(r.worst_high_shell_low_low_relative_mass for r in all_runs):.3e}`\n- worst same-edge signed V/h repartition residual: `{max(r.worst_same_edge_signed_repartition_native_residual for r in all_runs):.3e}`\n- worst same-edge cutoff scaling residual: `{max(r.worst_same_edge_cutoff_scaling_native_residual for r in all_runs):.3e}`\n- worst K/S signed identity residual: `{max(r.worst_ks_signed_identity_native_residual for r in all_runs):.3e}`\n- worst K skew-pair residual: `{max(r.worst_ks_skew_pair_residual for r in all_runs):.3e}`\n- worst S symmetric-pair residual: `{max(r.worst_ks_strain_pair_residual for r in all_runs):.3e}`\n- worst canonical K/S mass residual: `{max(r.worst_canonical_ks_mass_residual for r in all_runs):.3e}`\n- worst Galerkin energy-balance residual: `{max(r.global_energy_balance_relative_residual for r in all_runs):.3e}`\n\nThe `M=4N` boundary-contact trajectory remains transition-HH rather than being renamed interface work. The `M=8N` trajectory is fully mixed `V-h` and its donor-restricted canonical `dW+` is bound without cloning into existing skew-relink/strain positive laws only after the signed K/S identity is checked.\n"""
+    md = f"""# Actual Fourier--Galerkin Navier--Stokes referee: resolved-contact smooth binding\n\nStatus: **{STATUS}**.\n\nThe same real divergence-free six-mode data are evolved on FFT representations `{tuple(args.resolutions)}`. At every snapshot the referee reads the actual cyclic donor law, the actual smooth `u=V+h` decomposition, and the same-edge helical work. Every nonzero mixed piece is then inserted into the already-certified resolved-interface `K/S` owner law on the actual two-high-mode block; positive skew-bound mass is traced by its existing same-event donor closure.\n\n- maximum representation spread: `{out.maximum_representation_spread:.3e}`\n- worst full PDE bilinear repartition residual: `{max(r.worst_whole_pde_bilinear_repartition_relative_residual for r in all_runs):.3e}`\n- worst high-shell low-low leakage: `{max(r.worst_high_shell_low_low_relative_mass for r in all_runs):.3e}`\n- worst same-edge signed V/h repartition residual: `{max(r.worst_same_edge_signed_repartition_native_residual for r in all_runs):.3e}`\n- worst same-edge cutoff scaling residual: `{max(r.worst_same_edge_cutoff_scaling_native_residual for r in all_runs):.3e}`\n- worst K/S signed identity residual: `{max(r.worst_ks_signed_identity_native_residual for r in all_runs):.3e}`\n- worst K skew-pair residual: `{max(r.worst_ks_skew_pair_residual for r in all_runs):.3e}`\n- worst S symmetric-pair residual: `{max(r.worst_ks_strain_pair_residual for r in all_runs):.3e}`\n- worst canonical K/S mass residual: `{max(r.worst_canonical_ks_mass_residual for r in all_runs):.3e}`\n- worst existing-owner work-split residual: `{max(r.worst_existing_owner_work_split_native_residual for r in all_runs):.3e}`\n- worst existing-skew antisymmetry residual: `{max(r.worst_existing_skew_antisymmetry_native_residual for r in all_runs):.3e}`\n- worst existing-strain symmetry residual: `{max(r.worst_existing_strain_symmetry_native_residual for r in all_runs):.3e}`\n- worst existing-skew donor-closure balance residual: `{max(r.worst_existing_skew_closure_balance_native_residual for r in all_runs):.3e}`\n- maximum existing-skew donor path length: `{max(r.maximum_existing_skew_donor_path_length for r in all_runs)}`\n- total skew-bound snapshots: `{sum(r.skew_bound_snapshots for r in all_runs)}`\n- total strain-bound snapshots: `{sum(r.strain_bound_snapshots for r in all_runs)}`\n- worst Galerkin energy-balance residual: `{max(r.global_energy_balance_relative_residual for r in all_runs):.3e}`\n\nThe `M=4N` boundary-contact trajectory remains pure transition-HH rather than being renamed interface work. The interior `M=4N` trajectory carries simultaneous positive mixed and HH canonical submeasures. The `M=8N` trajectory is fully mixed `V-h`. Every mixed canonical submeasure is bound without cloning through the existing resolved-interface component law; skew provenance stays same-event donor flux and strain provenance stays the existing symmetric deformation work.\n"""
     (args.outdir / "summary.md").write_text(md)
     print(json.dumps(asdict(out), indent=2, sort_keys=True))
 

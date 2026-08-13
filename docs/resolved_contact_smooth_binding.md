@@ -371,7 +371,9 @@ and because `d\mu_mix/c<=1`,
 
 Thus the canonical cause is **not cloned** into two full owners.  It is partitioned into two positive submeasures, each dominated by an already-existing physical component positive law.
 
-The `K` part is conservative same-event relink/role redistribution and enters the already-certified finite donor/circulation quotient.  The `S` part is the existing symmetric strain/deformation work.  Neither is a new causal currency.
+Crucially, this theorem does not introduce a parallel `K/S` positive API.  It calls the already-certified `resolved_interface_donor_quotient.positive_interface_component_split` on the same signed atom.  The owner names therefore remain exactly `conservative_skew_role_redistribution` and `existing_symmetric_strain_deformation`.
+
+The `K` part enters the already-certified finite same-event donor/circulation quotient.  Whenever the bound canonical `K` submeasure is nonzero, the actual skew pair matrix is handed to `skew_donor_closure`; its terminal donor is same-time provenance, creates no new causal charge, no recursive generation, and no scale progress.  The `S` part retains the existing symmetric strain/deformation provenance.  Neither is a new causal currency.
 
 ## 9. Why binding must occur before a downstream coarse Hahn law
 
@@ -406,7 +408,7 @@ This is why the theorem binds at the **same refined physical edge/time/helicity 
 
 The dedicated PDE referee evolves real divergence-free six-mode orthogonal Fourier--Galerkin Navier--Stokes systems with viscosity using the repository RK4 solver.  It does not substitute a selected algebraic triad for the finite PDE evolution: the state is genuinely evolved by the projected nonlinear PDE and checked for energy and divergence consistency.
 
-Two distinct trajectories are retained.
+Three distinct trajectories are retained.
 
 ### 10.1 Borderline `M=4N` transition trajectory
 
@@ -473,9 +475,9 @@ At each evolved snapshot the referee verifies:
 2. `q_d=1` and the other parent has cutoff value zero;
 3. the entire donor-restricted canonical mass is mixed `V-h` work;
 4. direct re-registration of the scaled parent edge gives exactly the expected mixed and HH signed works;
-5. the actual two-high-mode block of `L_V` reconstructed from direct Leray/Waleffe source coefficients satisfies its adjoint `K/S` split;
-6. `K` pair work is antisymmetric and `S` pair work is symmetric;
-7. the canonical mixed submeasure binds without cloning into the positive `K/S` component laws.
+5. the actual two-high-mode block of `L_V` is inserted into the **existing certified** `resolved_role_work_decomposition` with the two coordinate role projectors;
+6. that theorem reproduces the same mixed physical edge work, its `K` pair matrix is antisymmetric, and its `S` pair matrix is symmetric with existing strain provenance;
+7. the canonical mixed submeasure binds without cloning through the existing positive component cover; any positive bound `K` piece is then passed through the existing `skew_donor_closure` on that same two-role block.
 
 The same six-mode physics is run on multiple FFT representations.  Representation comparisons are normalized by native physical work/energy scales only.
 
@@ -495,10 +497,11 @@ After this binding theorem, the second phrase is no longer primitive.  Its physi
 
 The old pure-UV branch `M=2N` remains separate and still has its sharper `(M/4,3M/2]` support theorem.  Nothing here identifies the pure-UV and transition-HH phenomena; they merely share that both are actual HH work and are geometrically comparable.
 
-The next continuation question is therefore no longer “is contact interface?”  It is the physically sharper pair:
+Static type inspection already answers the first naive continuation negatively.  The current ultraviolet/natural-window route begins from the **coarse signed output-shell HH law** `H_j=N∫[r_HH,j]_+dt`; its own theorem explicitly refuses coherent/atomic positive mass because refined positive atoms can exceed `H_j` after cancellation.  The coarse-Hahn counterexample in Section 9 therefore forbids pushing the canonical donor-restricted HH cause directly into that object.
 
-1. can the donor-restricted comparable HH submeasures (pure-UV first-shell and transition-HH second-shell) enter the existing sliding natural-window law directly, without a new output-scale locality theorem?;
-2. after the mixed branch reaches physical `K` relink or `S` strain, do the already-certified same-event donor quotient and strain/service continuations exhaust recurrence without creating a new owner?
+The next HH frontier is consequently an **atomic-positive natural-window bridge** (or an equivalent signed refinement performed before output-shell aggregation), not a verbal reuse of `H_j`.  The pure-UV `M=2N` and smooth-transition `M=4N` phenomena must remain physically distinct at input, even if a later theorem discovers one common comparable-HH window mechanism for their already-positive canonical submeasures.
+
+For the mixed branch, this theorem now reaches the existing resolved-interface owner API exactly: a positive bound `K` piece enters its finite same-event donor closure, while a positive bound `S` piece retains existing strain provenance.  The remaining continuation question there is whether those already-certified donor/strain service laws exhaust recurrence without introducing a new owner.
 
 ## 12. Scope and ontology guards
 

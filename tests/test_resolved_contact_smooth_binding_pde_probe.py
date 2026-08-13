@@ -17,6 +17,11 @@ def test_actual_galerkin_ns_referee_keeps_borderline_and_strict_deep_physics_dis
     assert 1e-4 < transition.minimum_transition_hh_fraction < 1.0 - 1e-4
     assert transition.worst_ks_to_mixed_edge_native_residual <= 5e-10
     assert transition.worst_ks_signed_identity_native_residual <= 5e-10
+    assert transition.worst_existing_owner_work_split_native_residual <= 5e-10
+    assert transition.worst_existing_skew_antisymmetry_native_residual <= 5e-10
+    assert transition.worst_existing_strain_symmetry_native_residual <= 5e-10
+    assert transition.worst_existing_skew_closure_balance_native_residual <= 5e-10
+    assert transition.maximum_existing_skew_donor_path_length <= 1
     assert strict.target_snapshots == strict.total_snapshots
     assert strict.minimum_mixed_fraction >= 1.0 - 5e-12
     assert strict.maximum_transition_hh_fraction <= 5e-12
@@ -25,4 +30,11 @@ def test_actual_galerkin_ns_referee_keeps_borderline_and_strict_deep_physics_dis
     assert strict.worst_ks_skew_pair_residual <= 5e-10
     assert strict.worst_ks_strain_pair_residual <= 5e-10
     assert strict.worst_canonical_ks_mass_residual <= 5e-10
+    assert strict.worst_existing_owner_work_split_native_residual <= 5e-10
+    assert strict.worst_existing_skew_antisymmetry_native_residual <= 5e-10
+    assert strict.worst_existing_strain_symmetry_native_residual <= 5e-10
+    assert strict.worst_existing_skew_closure_balance_native_residual <= 5e-10
+    assert strict.maximum_existing_skew_donor_path_length <= 1
+    assert (transition.skew_bound_snapshots + transition.strain_bound_snapshots) > 0
+    assert (strict.skew_bound_snapshots + strict.strain_bound_snapshots) > 0
     assert out.maximum_representation_spread <= 5e-10
