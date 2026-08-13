@@ -1,0 +1,67 @@
+name: Resolved-contact native binding
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'theorem/resolved-contact-native-binding'
+
+permissions:
+  contents: read
+
+jobs:
+  analytic-and-adversarial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused signed-first binding tests
+        run: pytest -q tests/test_resolved_contact_native_binding.py
+      - name: Physical dependency tests
+        run: >-
+          pytest -q
+          tests/test_hard_tail_true_upward_supply.py
+          tests/test_resolved_interface_donor_quotient.py
+          tests/test_smooth_quadratic_carrier_interface.py
+          tests/test_smooth_relink_donor_quotient.py
+          tests/test_high_tail_natural_window_reentry.py
+      - name: Full theorem suite
+        run: pytest -q
+      - name: Native binding stress
+        run: python -m src.resolved_contact_native_binding --samples 75000 --seed 2026081302 --outdir results-resolved-contact-native/analytic
+      - name: Summary
+        run: cat results-resolved-contact-native/analytic/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resolved-contact-native-binding-analytic-results
+          path: results-resolved-contact-native/
+
+  actual-ns-referee:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt python-flint
+      - name: Focused actual NS referee test
+        run: pytest -q tests/test_resolved_contact_native_binding_pde_probe.py
+      - name: Two-cutoff Fourier-Galerkin NS referee
+        run: >-
+          python -m src.resolved_contact_native_binding_pde_probe
+          --resolutions 24 28 --boundary-cutoff 2 --interior-cutoff 3
+          --steps 24 --duration 0.0002 --viscosity 0.05 --amplitude 1.0
+          --outdir results-resolved-contact-native-ns/main
+      - name: Summary
+        run: cat results-resolved-contact-native-ns/main/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: resolved-contact-native-binding-actual-ns-results
+          path: results-resolved-contact-native-ns/
