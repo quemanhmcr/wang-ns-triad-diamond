@@ -5,6 +5,9 @@ import pytest
 
 from src.native_material_vorticity_heat_law import (
     accumulated_transverse_heat_memory,
+    canonical_maxwell_extension_spectral_law,
+    canonical_poisson_scale_overlap,
+    maxwell_duality_stress_algebra,
     material_hminus2_reset_identity,
     material_hodge_speed_ladder,
     material_log_distortion_energy_bound,
@@ -253,3 +256,35 @@ def test_certificate_records_local_current_noether_and_all_scale_lock_without_ov
     assert "div T_beta" in cert["stress_current_noether"]
     assert "cross-product skewness" in cert["enstrophy_derivative_null"]
     assert cert["global_regularity_claimed"] is False
+
+
+
+def test_canonical_curl_operator_is_csimons_maxwell_critical_extension():
+    rng=np.random.default_rng(2026081511)
+    for _ in range(2000):
+        n=int(rng.integers(1,30)); a=rng.uniform(-10,10,n); a[np.abs(a)<.25]+=0.5
+        e=np.exp(rng.uniform(-7,3,n))
+        out=canonical_maxwell_extension_spectral_law(a,e)
+        assert out["critical_maxwell_energy"] == pytest.approx(out["self_dual_energy"]+out["anti_self_dual_energy"],rel=2e-12)
+        assert out["helicity_chern_simons"] == pytest.approx(out["self_dual_energy"]-out["anti_self_dual_energy"],rel=2e-12,abs=2e-12)
+        assert out["boundary_maxwell_energy_density"] == pytest.approx(2*out["enstrophy"])
+        assert out["negative_quarter_boundary_profile_derivative"] == pytest.approx(out["critical_viscous_bulk_gradient"])
+
+
+def test_poisson_depth_overlap_is_exact_critical_sech_filter():
+    rng=np.random.default_rng(2026081512)
+    for _ in range(3000):
+        r=10.0**rng.uniform(-8,8); s=10.0**rng.uniform(-8,8)
+        out=canonical_poisson_scale_overlap(r,s)
+        assert out["poisson_overlap"] == pytest.approx(out["log_scale_sech"],rel=2e-13,abs=2e-13)
+        assert 0.0 < out["poisson_overlap"] <= 1.0+1e-14
+
+
+def test_maxwell_stress_is_pure_cross_duality_and_bps_sectors_are_stressless():
+    rng=np.random.default_rng(2026081513)
+    for _ in range(3000):
+        m=rng.normal(size=(4,4)); f=m-m.T
+        out=maxwell_duality_stress_algebra(f)
+        assert out["maxwell_stress_norm_squared"] == pytest.approx(out["cross_duality_product_times_four"],rel=3e-11,abs=3e-11)
+        assert out["pure_self_dual_stress_norm"] <= 2e-10*max(1.0,out["field_energy_density"])
+        assert out["pure_anti_self_dual_stress_norm"] <= 2e-10*max(1.0,out["field_energy_density"])
