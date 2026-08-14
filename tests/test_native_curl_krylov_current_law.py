@@ -3,7 +3,18 @@ import random
 
 import pytest
 
+from src.helical import coupling_magnitude_closed
+
 from src.native_curl_krylov_current_law import (
+    critical_boost_logistic_bound,
+    critical_hilbert_square_balance,
+    fixed_curl_cocycle_rhs,
+    sharp_helicity_flip_boost_geometry,
+    radial_fitness_selection_balance,
+    parabolic_energy_clock_from_endpoints,
+    self_return_operator_geometry,
+    curl_spectral_bundle_base_velocity,
+    canonical_spectral_triple_source,
     critical_beltrami_split,
     critical_determinant_log_rate,
     critical_determinant_live_balance,
@@ -509,3 +520,263 @@ def test_krylov_impedance_is_exact_productive_coordinate_balance():
     direct = critical_determinant_log_rate(st, strain, 0.14)["log_delta_rate"]
     N2 = st.enstrophy / st.energy
     assert out["normalized_log_delta_rate"] == pytest.approx(direct / (2.0 * 0.14 * N2))
+
+
+
+def test_canonical_full_pde_triple_current_is_barycentric_and_affine_null():
+    a, m, b, tau = -2.3, 0.4, 3.1, 0.73
+    out = canonical_spectral_triple_source(a, m, b, tau)
+    assert out["energy_residual"] == pytest.approx(0.0, abs=1.0e-13)
+    assert out["helicity_residual"] == pytest.approx(0.0, abs=1.0e-13)
+    donor = tau * (b - a)
+    assert out["median_source"] == pytest.approx(-donor)
+    assert out["left_source"] == pytest.approx(donor * (b - m) / (b - a))
+    assert out["right_source"] == pytest.approx(donor * (m - a) / (b - a))
+
+
+def test_curl_spectral_bundle_base_law_preserves_euler_energy_and_helicity_levels():
+    a = (-2.1, -0.3, 1.2, 3.4)
+    raw_q = (0.5, 0.7, 0.9, 0.4)
+    norm = math.sqrt(sum(x * x for x in raw_q))
+    q = tuple(x / norm for x in raw_q)
+    triples = (
+        (0, 1, 2, 0.31),
+        (0, 1, 3, -0.17),
+        (0, 2, 3, 0.23),
+        (1, 2, 3, -0.41),
+    )
+    out = curl_spectral_bundle_base_velocity(a, q, triples, viscosity=0.19)
+    assert out["euler_energy_tangent_residual"] == pytest.approx(0.0, abs=1.0e-13)
+    assert out["euler_helicity_tangent_residual"] == pytest.approx(0.0, abs=1.0e-13)
+    assert out["normalized_mass_residual"] == pytest.approx(0.0, abs=1.0e-13)
+    N2 = sum(ai * ai * qi * qi for ai, qi in zip(a, q))
+    assert out["rms_curl_squared"] == pytest.approx(N2)
+    assert out["viscous_velocity"] == pytest.approx(
+        tuple(-0.19 * (ai * ai - N2) * qi for ai, qi in zip(a, q))
+    )
+
+
+def test_one_bundle_triple_matches_canonical_energy_source_exactly():
+    a = (-1.8, 0.5, 2.7)
+    raw_q = (0.6, 0.9, 0.7)
+    norm = math.sqrt(sum(x * x for x in raw_q))
+    q = tuple(x / norm for x in raw_q)
+    E = 2.4
+    chi = -0.37
+    bundle = curl_spectral_bundle_base_velocity(a, q, ((0, 1, 2, chi),))
+    rates = tuple(2.0 * E * qi * vi for qi, vi in zip(q, bundle["euler_velocity"]))
+    tau = 2.0 * E * q[0] * q[1] * q[2] * chi
+    src = canonical_spectral_triple_source(a[0], a[1], a[2], tau)
+    assert rates == pytest.approx((src["left_source"], src["median_source"], src["right_source"]))
+
+
+def test_self_return_operator_form_is_exactly_the_existing_interaction_volume_and_reynolds():
+    st = curl_krylov_state((-2.4, -0.6, 1.0, 3.1), (0.8, 1.2, 0.7, 0.4))
+    A = 0.91
+    nu = 0.16
+    old = intrinsic_spectral_reynolds_barrier(st, A, nu)
+    g2 = A / st.critical_determinant
+    N = math.sqrt(st.enstrophy / st.energy)
+    new = self_return_operator_geometry(st.energy, N, g2, nu)
+    assert new["interaction_volume"] == pytest.approx(old["interaction_volume"])
+    assert new["spectral_reynolds"] == pytest.approx(old["spectral_reynolds"])
+    assert new["intrinsic_critical_mass"] == pytest.approx(old["intrinsic_critical_mass"])
+
+
+
+def test_energy_law_supplies_exact_parabolic_clock_without_event_counting():
+    E0, E1, nu = 3.7, 1.4, 0.23
+    clock = parabolic_energy_clock_from_endpoints(E0, E1, nu)
+    assert 2.0 * nu * clock == pytest.approx(math.log(E0 / E1))
+
+
+def test_critical_log_rate_is_exact_live_factor_on_energy_parabolic_clock():
+    a = (-3.0, -0.7, 0.8, 2.6, 4.2)
+    e = (0.7, 1.0, 0.8, 0.6, 0.3)
+    raw = [0.7, -0.2, 0.5, -0.8, 0.1]
+    n=len(a); S0=sum(raw); S1=sum(ai*si for ai,si in zip(a,raw)); A1=sum(a); A2=sum(ai*ai for ai in a); det=n*A2-A1*A1
+    x0=(S0*A2-S1*A1)/det; x1=(S1*n-S0*A1)/det
+    rates=tuple(si-x0-x1*ai for ai,si in zip(a,raw))
+    nu=0.11
+    out=critical_escape_balance(a,e,rates,nu)
+    K=out["critical_stock"]
+    direct=out["total_critical_rate"] / K
+    E=sum(e); Z=sum(ai*ai*ei for ai,ei in zip(a,e)); N2=Z/E
+    assert out["normalized_log_critical_rate_per_parabolic_clock"] == pytest.approx(
+        direct/(2.0*nu*N2)
+    )
+
+
+
+def test_radial_geometry_optimizes_out_to_one_productive_l2_score():
+    rng = random.Random(2026081416)
+    for _ in range(400):
+        a = tuple(sorted(rng.uniform(-4.0, 4.0) for _ in range(5)))
+        if min(a[i+1]-a[i] for i in range(4)) < 1.0e-4:
+            continue
+        e = tuple(math.exp(rng.uniform(-2.0, 2.0)) for _ in a)
+        raw = [rng.uniform(-1.0, 1.0) for _ in a]
+        n=len(a); S0=sum(raw); S1=sum(ai*si for ai,si in zip(a,raw)); A1=sum(a); A2=sum(ai*ai for ai in a); det=n*A2-A1*A1
+        if abs(det)<1.0e-10: continue
+        x0=(S0*A2-S1*A1)/det; x1=(S1*n-S0*A1)/det
+        rates=tuple(si-x0-x1*ai for ai,si in zip(a,raw))
+        out=critical_escape_balance(a,e,rates,viscosity=0.17)
+        lhs=out["normalized_log_critical_rate_per_parabolic_clock"]
+        if math.isfinite(lhs):
+            assert lhs <= out["radial_optimized_log_critical_upper"] + 2.0e-9
+            assert out["energy_clock_mean_abs_curl_log_upper"] == pytest.approx(
+                out["radial_optimized_log_critical_upper"] + 1.0
+            )
+
+
+
+def test_radial_fitness_selection_is_exact_forced_gradient_balance():
+    rng = random.Random(2026081417)
+    for _ in range(500):
+        a = tuple(sorted(rng.uniform(-5.0, 5.0) for _ in range(6)))
+        if min(a[i+1]-a[i] for i in range(5)) < 1.0e-4:
+            continue
+        e = tuple(math.exp(rng.uniform(-2.0, 2.0)) for _ in a)
+        raw = [rng.uniform(-1.0, 1.0) for _ in a]
+        n=len(a); S0=sum(raw); S1=sum(ai*si for ai,si in zip(a,raw)); A1=sum(a); A2=sum(ai*ai for ai in a); det=n*A2-A1*A1
+        if abs(det)<1.0e-10: continue
+        x0=(S0*A2-S1*A1)/det; x1=(S1*n-S0*A1)/det
+        rates=tuple(si-x0-x1*ai for ai,si in zip(a,raw))
+        out=radial_fitness_selection_balance(a,e,rates,viscosity=0.13)
+        assert out["viscous_radial_selection"] + 1.0e-11 >= out["viscous_selection_lower"]
+        assert out["normalized_log_mean_curl_rate"] <= out["moment_upper"] + 1.0e-10
+        assert out["moment_upper"] <= out["quadratic_upper"] + 1.0e-10
+        assert out["direct_normalized_log_mean_curl_rate"] == pytest.approx(
+            out["normalized_log_mean_curl_rate"], rel=5.0e-9, abs=5.0e-9
+        )
+
+
+def test_homochiral_radial_fitness_is_exact_affine_null_boundary():
+    a=(-4.0,-2.5,-1.1,-0.4);e=(0.7,1.0,0.5,0.9)
+    # Any energy/helicity-null source also annihilates |a|=-a.
+    rates=(0.3,-0.6,0.45,-0.15)
+    # project exactly off 1,a for the fixture
+    n=len(a);S0=sum(rates);S1=sum(ai*si for ai,si in zip(a,rates));A1=sum(a);A2=sum(ai*ai for ai in a);det=n*A2-A1*A1
+    x0=(S0*A2-S1*A1)/det;x1=(S1*n-S0*A1)/det
+    rates=tuple(si-x0-x1*ai for ai,si in zip(a,rates))
+    out=radial_fitness_selection_balance(a,e,rates,viscosity=0.21)
+    assert out["direct_normalized_log_mean_curl_rate"] == pytest.approx(
+        -out["viscous_radial_selection"] + 0.0, abs=2.0e-12
+    )
+
+
+
+def test_normalized_curvature_height_is_the_same_single_productive_score():
+    a=(-3.0,-0.8,0.5,2.7,4.1);e=(0.6,1.1,0.9,0.7,0.4)
+    raw=[0.8,-0.3,0.6,-0.7,0.2];n=len(a);S0=sum(raw);S1=sum(ai*si for ai,si in zip(a,raw));A1=sum(a);A2=sum(ai*ai for ai in a);det=n*A2-A1*A1
+    x0=(S0*A2-S1*A1)/det;x1=(S1*n-S0*A1)/det;rates=tuple(si-x0-x1*ai for ai,si in zip(a,raw))
+    out=radial_fitness_selection_balance(a,e,rates,viscosity=0.17)
+    assert out["normalized_curvature_height_score"] == pytest.approx(out["productive_fitness_score"])
+    assert 2.0*out["curvature_height"] == pytest.approx(out["nonlinear_critical_rate"])
+
+
+def test_sharp_helicity_flip_boost_has_uniform_galilean_derivative_bound():
+    rng=random.Random(2026081419)
+    c=3.0*math.sqrt(6.0)/16.0
+    for _ in range(20000):
+        q=10**rng.uniform(-5.0,3.0);l=10**rng.uniform(-5.0,3.0)
+        lo=abs(l-q)+1.0e-10*max(l,q);hi=l+q-1.0e-10*max(l,q)
+        if lo>=hi: continue
+        k=rng.uniform(lo,hi)
+        out=sharp_helicity_flip_boost_geometry(q,l,k)
+        assert out["max_helicity_flip_boost"] <= c*q + 2.0e-11*max(1.0,q)
+        assert out["sharp_constant"] == pytest.approx(c)
+
+
+def test_sharp_helicity_flip_constant_is_approached_by_low_high_difference_ratio_half():
+    q=1.0
+    c=3.0*math.sqrt(6.0)/16.0
+    # k-l=q/2 and k+l >> q approach the exact supremum.
+    for m in (100.0,1000.0,10000.0):
+        k=0.5*(m+0.5);l=0.5*(m-0.5)
+        out=sharp_helicity_flip_boost_geometry(q,l,k)
+        assert out["normalized_boost"] < c + 1.0e-12
+    out=sharp_helicity_flip_boost_geometry(q,0.5*(10000.0-0.5),0.5*(10000.0+0.5))
+    assert out["normalized_boost"] == pytest.approx(c,rel=2.0e-8)
+
+
+
+def test_sharp_galilean_boost_bound_majorizes_actual_opposite_helicity_waleffe_matrix_element():
+    rng=random.Random(2026081420)
+    for _ in range(8000):
+        q=10**rng.uniform(-4.0,2.0);l=10**rng.uniform(-4.0,2.0)
+        lo=abs(l-q)+1.0e-9*max(l,q);hi=l+q-1.0e-9*max(l,q)
+        if lo>=hi: continue
+        k=rng.uniform(lo,hi)
+        bound=sharp_helicity_flip_boost_geometry(q,l,k)
+        s=rng.choice((-1,1));out_s=-s
+        for low_s in (-1,1):
+            g=coupling_magnitude_closed(q,l,k,low_s,s,out_s)
+            actual=2.0*math.sqrt(k*l)*g
+            assert actual <= bound["max_helicity_flip_boost"] + 2.0e-11*max(1.0,q)
+            assert actual <= bound["sharp_upper"] + 2.0e-11*max(1.0,q)
+
+
+
+def test_fixed_cartan_tensor_rhs_is_energy_helicity_null_and_heat_contracting():
+    lam=(-3.1,-1.0,0.4,2.2,4.0);z=(0.7,-1.1,0.5,0.9,-0.4)
+    triples=((0,1,2,0.31),(0,1,4,-0.27),(0,3,4,0.18),(1,2,3,-0.42),(2,3,4,0.23))
+    nu=0.17
+    out=fixed_curl_cocycle_rhs(lam,z,triples,viscosity=nu)
+    assert out["euler_energy_rate"] == pytest.approx(0.0,abs=1.0e-13)
+    assert out["euler_helicity_rate"] == pytest.approx(0.0,abs=1.0e-13)
+    assert out["euler_phase_space_divergence"] == 0.0
+    assert out["phase_space_divergence"] == pytest.approx(-nu*sum(x*x for x in lam))
+
+
+def test_one_fixed_cartan_triple_reconstructs_same_canonical_spectral_energy_source():
+    lam=(-2.0,0.6,3.1);z=(0.8,-0.5,1.2);f=0.37
+    out=fixed_curl_cocycle_rhs(lam,z,((0,1,2,f),))
+    rates=tuple(2.0*zi*fi for zi,fi in zip(z,out["euler_rhs"]))
+    tau=-2.0*f*z[0]*z[1]*z[2]
+    src=canonical_spectral_triple_source(lam[0],lam[1],lam[2],tau)
+    assert rates == pytest.approx((src["left_source"],src["median_source"],src["right_source"]))
+
+
+
+def test_critical_hilbert_square_completion_is_exact_and_norm_threshold_only_necessary():
+    nu=0.17;M3=4.2;Q=3.7;kap=-0.8
+    out=critical_hilbert_square_balance(kap,M3,Q,nu)
+    assert out["critical_rate"] == pytest.approx(2*kap-2*nu*M3)
+    assert out["represented_rate"] == pytest.approx(out["critical_rate"])
+    assert out["critical_rate"] <= out["radial_companion_upper"]
+    # A large companion norm can coexist with negative rate because orientation matters.
+    assert out["companion_to_viscous_norm_ratio"] > 1.0
+    assert out["critical_rate"] < 0.0
+
+
+def test_critical_boost_must_beat_quadratic_mean_curl_heat_when_stock_grows():
+    E=2.0;K=1.4;nu=0.1;lower=K**3/E**2
+    # Pick M3 just above Jensen and kappa large enough for positive growth.
+    M3=1.05*lower;kap=nu*M3+0.2
+    out=critical_boost_logistic_bound(E,K,kap,M3,nu)
+    assert out["critical_rate"] > 0.0
+    assert out["boost_rayleigh_rate"] > out["quadratic_heat_rate"]
+    assert out["critical_rate"] <= out["logistic_upper"] + 1.0e-12
+
+
+
+def test_productive_curvature_action_is_exact_radial_fisher_regression_and_below_total_action():
+    rng=random.Random(2026081421)
+    for _ in range(400):
+        a=tuple(sorted(rng.uniform(-5.0,5.0) for _ in range(6)))
+        if min(a[i+1]-a[i] for i in range(5))<1e-4:continue
+        e=tuple(math.exp(rng.uniform(-2.0,2.0)) for _ in a)
+        raw=[rng.uniform(-1.0,1.0) for _ in a];n=len(a);S0=sum(raw);S1=sum(ai*si for ai,si in zip(a,raw));A1=sum(a);A2=sum(ai*ai for ai in a);det=n*A2-A1*A1
+        if abs(det)<1e-10:continue
+        x0=(S0*A2-S1*A1)/det;x1=(S1*n-S0*A1)/det;rates=tuple(si-x0-x1*ai for ai,si in zip(a,raw))
+        nu=0.19;out=radial_fitness_selection_balance(a,e,rates,nu)
+        assert out["productive_fisher_action"] <= out["total_euler_fitness_variance"] + 1e-10
+        assert 0.0 <= out["productive_fisher_fraction"] <= 1.0 + 1e-10
+        N2=out["rms_curl_squared"]
+        assert out["physical_log_mean_curl_upper"] == pytest.approx(
+            out["productive_fisher_action"]/(2.0*nu*N2)
+        )
+        # The exact rate must lie below the physical-time productive-action upper.
+        exact_physical=out["normalized_log_mean_curl_rate"]*(2.0*nu*N2)
+        assert exact_physical <= out["physical_log_mean_curl_upper"] + 2e-9

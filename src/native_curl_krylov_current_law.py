@@ -1254,6 +1254,13 @@ def critical_escape_balance(
     N = math.sqrt(max(0.0, N2))
     M3 = math.fsum(abs(ai) ** 3 * ei for ai, ei in zip(a, e))
     K_nl = math.fsum(abs(ai) * si for ai, si in zip(a, rates))
+    # On either exact intrinsic boundary, |a| is affine on the occupied law:
+    # one helicity sign gives |a|=+/-a, while zero radial variance gives
+    # |a|=constant.  Euler annihilates both affine observables exactly.  Use
+    # the positive spectral geometry rather than dividing two roundoff-scale
+    # numbers to manufacture a spurious alignment cosine.
+    if split["helicity_coexistence_component"] == 0.0 or radial == 0.0:
+        K_nl = 0.0
     K_total = K_nl - 2.0 * nu * M3
 
     if B <= 0.0 or Z <= 0.0 or delta <= 0.0 or N <= 0.0:
@@ -1300,12 +1307,21 @@ def critical_escape_balance(
     radial_cv = math.inf if eta >= 1.0 else math.sqrt(max(0.0, eta / max(1.0e-300, 1.0 - eta)))
     effective_drive = gamma * re_spec * math.sqrt(max(0.0, theta * decor))
     radial_threshold = math.inf if radial_cv == 0.0 or not math.isfinite(radial_cv) else radial_cv + 1.0 / radial_cv
+    radial_optimized_log_upper = 0.25 * effective_drive * effective_drive - 1.0
 
     live = gamma * re_spec * math.sqrt(max(0.0, theta * eta * decor))
     normalized = K_total / (2.0 * nu * E * N**3)
     represented = live - mu3
+    one_minus_eta = max(0.0, 1.0 - eta)
+    log_critical_per_parabolic_clock = (
+        -math.inf if K <= 0.0 or one_minus_eta <= 0.0
+        else normalized / math.sqrt(one_minus_eta)
+    )
     if abs(normalized - represented) > 3.0e-9 * max(1.0, abs(normalized), abs(represented)):
         raise AssertionError("critical live-number factorization failed")
+    if math.isfinite(log_critical_per_parabolic_clock):
+        if log_critical_per_parabolic_clock > radial_optimized_log_upper + 5.0e-10 * max(1.0, abs(log_critical_per_parabolic_clock), abs(radial_optimized_log_upper)):
+            raise AssertionError("radial-optimized critical log upper bound failed")
 
     return {
         "critical_stock": K,
@@ -1326,9 +1342,551 @@ def critical_escape_balance(
         "cubic_viscous_lower_from_radial_variance": impedance_lower,
         "effective_phase_geometry_drive": effective_drive,
         "radial_impedance_threshold": radial_threshold,
+        "radial_optimized_log_critical_upper": radial_optimized_log_upper,
+        "energy_clock_mean_abs_curl_log_upper": 0.25 * effective_drive * effective_drive,
         "live_escape_number": live,
         "normalized_critical_rate": normalized,
+        "normalized_log_critical_rate_per_parabolic_clock": log_critical_per_parabolic_clock,
         "critical_growth_requires_reynolds_above_two": True,
+    }
+
+
+
+
+
+
+
+
+def critical_hilbert_square_balance(
+    curvature_height: float,
+    cubic_viscous_moment: float,
+    radial_companion_norm_squared: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Scalar audit of the exact critical Hilbert square completion.
+
+    The operator identity uses
+
+        A=|C|^(1/2) omega,
+        B=|C|^(-1/2) P(u x |C|u),
+        <A,B>=-kappa(0).
+
+    Hence ``||A||^2=M3``, ``||B||^2=Q`` and
+
+        K' = 2 kappa - 2 nu M3
+           = -2nu ||A+B/(2nu)||^2 + Q/(2nu).
+
+    This helper records only the scalar Gram data and refuses inputs which
+    violate the Hilbert Cauchy constraint ``kappa^2<=M3 Q``.
+    """
+
+    kap, M3, Q, nu = map(
+        float, (curvature_height, cubic_viscous_moment, radial_companion_norm_squared, viscosity)
+    )
+    if not all(math.isfinite(x) for x in (kap, M3, Q, nu)):
+        raise ValueError("finite critical square data required")
+    if M3 < 0.0 or Q < 0.0 or nu <= 0.0:
+        raise ValueError("nonnegative square norms and positive viscosity required")
+    if kap * kap > M3 * Q + 3.0e-12 * max(1.0, kap * kap, M3 * Q):
+        raise ValueError("critical square data violate Hilbert Cauchy")
+    square = M3 - kap / nu + Q / (4.0 * nu * nu)
+    if square < -4.0e-12 * max(1.0, M3, abs(kap / nu), Q / (nu * nu)):
+        raise AssertionError("completed critical Hilbert square became negative")
+    square = max(0.0, square)
+    direct = 2.0 * kap - 2.0 * nu * M3
+    represented = -2.0 * nu * square + Q / (2.0 * nu)
+    if abs(direct - represented) > 5.0e-12 * max(1.0, abs(direct), abs(represented)):
+        raise AssertionError("critical Hilbert square completion failed")
+    necessary_ratio = 0.0 if M3 == 0.0 else math.sqrt(Q / M3) / nu
+    if direct > 0.0 and necessary_ratio <= 1.0:
+        raise AssertionError("positive critical growth violated companion-norm necessity")
+    return {
+        "critical_rate": direct,
+        "completed_square_norm_squared": square,
+        "represented_rate": represented,
+        "radial_companion_upper": Q / (2.0 * nu),
+        "companion_to_viscous_norm_ratio": necessary_ratio,
+    }
+
+
+def critical_boost_logistic_bound(
+    energy: float,
+    critical_stock: float,
+    curvature_height: float,
+    cubic_viscous_moment: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Exact critical rate plus its Jensen/Krein logistic upper.
+
+    ``M3>=K^3/E^2`` and ``kappa=<y,S_u y>`` give
+
+        K' <= 2 K (kappa/K - nu (K/E)^2).
+
+    Consequently ``K'>0`` forces the actual critical boost Rayleigh rate
+    ``kappa/K`` above ``nu (K/E)^2``.  No operator-norm replacement is made.
+    """
+
+    E, K, kap, M3, nu = map(
+        float, (energy, critical_stock, curvature_height, cubic_viscous_moment, viscosity)
+    )
+    if not all(math.isfinite(x) for x in (E, K, kap, M3, nu)):
+        raise ValueError("finite critical boost data required")
+    if E <= 0.0 or K <= 0.0 or M3 < 0.0 or nu <= 0.0:
+        raise ValueError("positive E,K,nu and nonnegative M3 required")
+    lower = K**3 / (E * E)
+    if M3 + 4.0e-12 * max(1.0, M3, lower) < lower:
+        raise ValueError("cubic moment violates Jensen lower bound")
+    direct = 2.0 * kap - 2.0 * nu * M3
+    boost_rate = kap / K
+    heat_rate = nu * (K / E) ** 2
+    upper = 2.0 * K * (boost_rate - heat_rate)
+    if direct > upper + 5.0e-12 * max(1.0, abs(direct), abs(upper)):
+        raise AssertionError("critical boost logistic upper failed")
+    return {
+        "critical_rate": direct,
+        "cubic_moment_lower": lower,
+        "boost_rayleigh_rate": boost_rate,
+        "quadratic_heat_rate": heat_rate,
+        "logistic_upper": upper,
+        "positive_growth_requires_boost_above_heat": direct <= 0.0 or boost_rate > heat_rate,
+    }
+
+
+def fixed_curl_cocycle_rhs(
+    curl_eigenvalues: Sequence[float],
+    amplitudes: Sequence[float],
+    structure_triples: Sequence[tuple[int, int, int, float]],
+    *,
+    viscosity: float = 0.0,
+) -> dict[str, object]:
+    """Fixed-basis Cartan-tensor form of a finite curl-spectral NS system.
+
+    In one real orthonormal curl eigenbasis ``Ce_i=lambda_i e_i`` put
+    ``f_ijk=Omega(e_i,e_j,e_k)`` for ``i<j<k``.  The Euler RHS from one triple is
+
+        F_i += -(lambda_k-lambda_j) f_ijk z_j z_k,
+        F_j += +(lambda_k-lambda_i) f_ijk z_i z_k,
+        F_k += -(lambda_j-lambda_i) f_ijk z_i z_j.
+
+    This is exactly the contraction of the fixed alternating Cartan tensor with
+    the signed-curl gaps.  Viscosity adds ``-nu lambda_i^2 z_i``.  The helper
+    audits the two Euler affine invariants; Jacobi is an additional constraint
+    on physical structure triples and is not manufactured here.
+    """
+
+    lam = tuple(float(x) for x in curl_eigenvalues)
+    z = tuple(float(x) for x in amplitudes)
+    if len(lam) != len(z) or not lam:
+        raise ValueError("matching nonempty curl eigenvalues/amplitudes required")
+    if not all(math.isfinite(x) for x in lam + z):
+        raise ValueError("finite curl eigenvalues/amplitudes required")
+    nu = float(viscosity)
+    if not math.isfinite(nu) or nu < 0.0:
+        raise ValueError("finite nonnegative viscosity required")
+    n = len(z)
+    euler = [0.0] * n
+    for row in structure_triples:
+        if len(row) != 4:
+            raise ValueError("structure triple must be (i,j,k,f_ijk)")
+        i, j, k, raw = row
+        if not isinstance(i, int) or not isinstance(j, int) or not isinstance(k, int):
+            raise ValueError("structure indices must be integers")
+        if not (0 <= i < j < k < n):
+            raise ValueError("structure indices must satisfy 0<=i<j<k<n")
+        f = float(raw)
+        if not math.isfinite(f):
+            raise ValueError("finite Cartan structure coefficient required")
+        li, lj, lk = lam[i], lam[j], lam[k]
+        zi, zj, zk = z[i], z[j], z[k]
+        euler[i] -= (lk - lj) * f * zj * zk
+        euler[j] += (lk - li) * f * zi * zk
+        euler[k] -= (lj - li) * f * zi * zj
+    energy_rate = 2.0 * math.fsum(zi * fi for zi, fi in zip(z, euler))
+    helicity_rate = 2.0 * math.fsum(li * zi * fi for li, zi, fi in zip(lam, z, euler))
+    scale = max(1.0, math.sqrt(math.fsum(x * x for x in euler)))
+    if abs(energy_rate) > 4.0e-12 * scale:
+        raise AssertionError("fixed Cartan Euler RHS lost energy conservation")
+    if abs(helicity_rate) > 4.0e-12 * max(scale, *(abs(x) for x in lam)):
+        raise AssertionError("fixed Cartan Euler RHS lost helicity conservation")
+    viscous = tuple(-nu * li * li * zi for li, zi in zip(lam, z))
+    full = tuple(fi + vi for fi, vi in zip(euler, viscous))
+    phase_divergence = -nu * math.fsum(li * li for li in lam)
+    return {
+        "euler_rhs": tuple(euler),
+        "viscous_rhs": viscous,
+        "full_rhs": full,
+        "euler_energy_rate": energy_rate,
+        "euler_helicity_rate": helicity_rate,
+        "phase_space_divergence": phase_divergence,
+        "euler_phase_space_divergence": 0.0,
+    }
+
+
+def sharp_helicity_flip_boost_geometry(
+    advecting_radius: float, input_radius: float, output_radius: float
+) -> dict[str, float]:
+    """Sharp geometry bound for one critical helicity-flip commutator matrix element.
+
+    Let ``q+l-k=0`` be one Fourier triangle.  In the critical coordinate
+    ``y=|C|^(1/2)u``, the symmetric/Krein-boost matrix element from an input
+    helicity ``s`` to output helicity ``-s`` generated by a unit helical velocity
+    mode at radius ``q`` has magnitude at most
+
+        2 sqrt(k l) |g|,
+
+    with the low-mode helicity chosen for the larger Waleffe coupling.  Exact
+    triangle geometry gives
+
+        2 sqrt(k l)|g| <= (3 sqrt(6)/16) q.
+
+    Same-helicity input/output is absent from the symmetric critical generator.
+    """
+
+    q, l, k = map(float, (advecting_radius, input_radius, output_radius))
+    if not all(math.isfinite(x) for x in (q, l, k)) or min(q, l, k) <= 0.0:
+        raise ValueError("positive finite Fourier radii required")
+    if not (abs(l - k) < q < l + k):
+        raise ValueError("strict nondegenerate Fourier triangle required")
+    # Sum/difference coordinates are the numerically native positive chart.
+    # Direct Heron factors catastrophically subtract when q << k,l.
+    m = (k + l) / q
+    x = (k - l) / q
+    if abs(x) >= 1.0:
+        raise AssertionError("strict triangle left |difference ratio|<1")
+    area = 0.25 * q * q * math.sqrt(max(0.0, (m * m - 1.0) * (1.0 - x * x)))
+    boost = (
+        q
+        * (1.0 + abs(x))
+        * math.sqrt(max(0.0, (m * m - 1.0) * (1.0 - x * x) / (m * m - x * x)))
+        / (2.0 * math.sqrt(2.0))
+    )
+    sharp_constant = 3.0 * math.sqrt(6.0) / 16.0
+    upper = sharp_constant * q
+    scale = max(1.0e-300, boost, upper)
+    if boost > upper + 2.0e-12 * scale:
+        raise AssertionError("critical helicity-flip Galilean null bound failed")
+    return {
+        "triangle_area": area,
+        "sum_ratio": m,
+        "difference_ratio": x,
+        "max_helicity_flip_boost": boost,
+        "sharp_upper": upper,
+        "sharp_constant": sharp_constant,
+        "normalized_boost": boost / q,
+    }
+
+
+def radial_fitness_selection_balance(
+    signed_frequencies: Sequence[float],
+    modal_energies: Sequence[float],
+    modal_energy_rates: Sequence[float],
+    viscosity: float,
+) -> dict[str, float]:
+    """Exact normalized mean-|curl| balance as Euler selection versus heat selection.
+
+    Put ``p_a=E_a/E``, ``r_a=|a|``, ``m=E_p r=K/E`` and let
+    ``f_a=S_a/(2E_a)`` be the actual Euler fitness on occupied curl levels.
+    Then on the energy-loss clock ``d tau_E=2 nu N^2 dt``,
+
+        d log m / d tau_E = R*x - I,
+
+    where ``x=std_p(r)/m``, ``R=Cov_p(r,f)/(nu N^2 std_p(r))`` and
+    ``I=Cov_p(r,r^2)/(N^2 m)``.  The positive moment inequality
+    ``(E r^2)^2 <= (E r)(E r^3)`` gives ``I>=x^2`` and hence
+
+        d log m / d tau_E <= R*x-x^2 <= R^2/4.
+
+    This is an exact state/current law; ``R`` is not a new owner or event score.
+    """
+
+    a, e = _spectral_data(signed_frequencies, modal_energies)
+    if len(modal_energy_rates) != len(a):
+        raise ValueError("one Euler energy rate per signed-curl node required")
+    rates = tuple(float(x) for x in modal_energy_rates)
+    if not all(math.isfinite(x) for x in rates):
+        raise ValueError("finite Euler energy rates required")
+    nu = float(viscosity)
+    if not math.isfinite(nu) or nu <= 0.0:
+        raise ValueError("positive finite viscosity required")
+    E = math.fsum(e)
+    p = tuple(x / E for x in e)
+    r = tuple(abs(x) for x in a)
+    m = math.fsum(pi * ri for pi, ri in zip(p, r))
+    N2 = math.fsum(pi * ri * ri for pi, ri in zip(p, r))
+    if m <= 0.0 or N2 <= 0.0:
+        return {
+            "mean_absolute_curl": 0.0,
+            "rms_curl_squared": N2,
+            "radial_variance": 0.0,
+            "radial_coefficient_of_variation": 0.0,
+            "productive_fitness_score": 0.0,
+            "viscous_radial_selection": 0.0,
+            "normalized_log_mean_curl_rate": -math.inf,
+            "quadratic_upper": 0.0,
+        }
+    # Exact Euler affine-null laws.  They are audited by spectral_source_action.
+    spectral_source_action(a, e, rates)
+    f = tuple(0.0 if ei == 0.0 else si / (2.0 * ei) for ei, si in zip(e, rates))
+    fmean = math.fsum(pi * fi for pi, fi in zip(p, f))
+    # Occupied zero-energy nodes have zero p and do not affect any covariance.
+    var = math.fsum(pi * (ri - m) ** 2 for pi, ri in zip(p, r))
+    sigma = math.sqrt(max(0.0, var))
+    cov_rf = math.fsum(pi * (ri - m) * (fi - fmean) for pi, ri, fi in zip(p, r, f))
+    M3 = math.fsum(pi * ri**3 for pi, ri in zip(p, r))
+    cov_r_r2 = M3 - m * N2
+    x = sigma / m
+    R = 0.0 if sigma == 0.0 else cov_rf / (nu * N2 * sigma)
+    I = cov_r_r2 / (N2 * m)
+    lower = x * x
+    scale = max(1.0, abs(I), abs(lower))
+    if I + 3.0e-12 * scale < lower:
+        raise AssertionError("quadratic radial viscous selection lower bound failed")
+    exact = R * x - I
+    first_upper = R * x - x * x
+    quadratic_upper = 0.25 * R * R
+    if exact > first_upper + 3.0e-12 * max(1.0, abs(exact), abs(first_upper)):
+        raise AssertionError("radial selection exact rate exceeded moment upper")
+    if first_upper > quadratic_upper + 3.0e-12 * max(1.0, abs(first_upper), abs(quadratic_upper)):
+        raise AssertionError("completed-square radial selection upper failed")
+    # Direct NS reconstruction for m=K/E.
+    K_nl = math.fsum(ri * si for ri, si in zip(r, rates))
+    if all(ai >= 0.0 for ai in a) or all(ai <= 0.0 for ai in a) or sigma == 0.0:
+        # |a| is affine on the occupied support; remove roundoff from the exact null.
+        K_nl = 0.0
+    K = E * m
+    Z = E * N2
+    radial_delta = E * E * var
+    curvature_height = 0.5 * K_nl
+    curvature_score = 0.0 if radial_delta == 0.0 else curvature_height / (nu * N2 * math.sqrt(radial_delta))
+    if abs(curvature_score - R) > 8.0e-10 * max(1.0, abs(curvature_score), abs(R)):
+        raise AssertionError("productive fitness score disagrees with normalized curvature height")
+    fisher_variance = math.fsum(pi * (fi - fmean) ** 2 for pi, fi in zip(p, f))
+    productive_action = 0.0 if var == 0.0 else cov_rf * cov_rf / var
+    curvature_action = 0.0 if radial_delta == 0.0 else curvature_height * curvature_height / radial_delta
+    if abs(productive_action - curvature_action) > 8.0e-10 * max(1.0, productive_action, curvature_action):
+        raise AssertionError("productive Fisher action disagrees with curvature-action quotient")
+    if productive_action > fisher_variance + 5.0e-12 * max(1.0, productive_action, fisher_variance):
+        raise AssertionError("radial productive Fisher action exceeded total Euler fitness variance")
+    productivity_fraction = 0.0 if fisher_variance == 0.0 else productive_action / fisher_variance
+    physical_log_upper = productive_action / (2.0 * nu * N2)
+    Kdot = K_nl - 2.0 * nu * E * M3
+    Edot = -2.0 * nu * Z
+    direct = (Kdot / K - Edot / E) / (2.0 * nu * N2)
+    if abs(direct - exact) > 8.0e-10 * max(1.0, abs(direct), abs(exact)):
+        raise AssertionError("mean absolute curl selection balance reconstruction failed")
+    return {
+        "mean_absolute_curl": m,
+        "rms_curl_squared": N2,
+        "radial_variance": var,
+        "radial_coefficient_of_variation": x,
+        "euler_fitness_mean": fmean,
+        "euler_radial_fitness_covariance": cov_rf,
+        "nonlinear_critical_rate": K_nl,
+        "curvature_height": curvature_height,
+        "radial_critical_determinant": radial_delta,
+        "productive_fitness_score": R,
+        "normalized_curvature_height_score": curvature_score,
+        "total_euler_fitness_variance": fisher_variance,
+        "productive_fisher_action": productive_action,
+        "productive_fisher_fraction": productivity_fraction,
+        "physical_log_mean_curl_upper": physical_log_upper,
+        "viscous_radial_selection": I,
+        "viscous_selection_lower": lower,
+        "normalized_log_mean_curl_rate": exact,
+        "moment_upper": first_upper,
+        "quadratic_upper": quadratic_upper,
+        "direct_normalized_log_mean_curl_rate": direct,
+    }
+
+
+def parabolic_energy_clock_from_endpoints(
+    initial_energy: float, final_energy: float, viscosity: float
+) -> float:
+    """Exact ``int N(t)^2 dt`` implied by the Navier--Stokes energy law.
+
+    With ``N^2=Z/E`` and ``E'=-2 nu Z``, every interval on which both endpoint
+    energies are positive satisfies
+
+        int N^2 dt = log(E_initial/E_final)/(2 nu).
+
+    This helper records the endpoint value; it does not manufacture a clock from
+    an analysis partition.
+    """
+
+    E0, E1, nu = map(float, (initial_energy, final_energy, viscosity))
+    if not all(math.isfinite(x) for x in (E0, E1, nu)):
+        raise ValueError("finite energy endpoints and viscosity required")
+    if E0 <= 0.0 or E1 <= 0.0 or E1 > E0 or nu <= 0.0:
+        raise ValueError("require 0<E_final<=E_initial and positive viscosity")
+    return math.log(E0 / E1) / (2.0 * nu)
+
+
+def canonical_spectral_triple_source(
+    left_frequency: float,
+    median_frequency: float,
+    right_frequency: float,
+    triple_current: float,
+) -> dict[str, float]:
+    """One canonical curl-spectral three-current before any Fourier-edge split.
+
+    For ordered signed-curl nodes ``a<m<b`` and the alternating physical current
+    ``tau``, the induced Euler energy source is
+
+        tau * (b-m, a-b, m-a).
+
+    It annihilates the affine observables ``1`` and ``lambda`` identically.  If
+    ``tau>0`` the median is the donor and the same vector is the barycentric
+    martingale spread with donor mass ``tau*(b-a)``.
+    """
+
+    a, m, b, tau = map(
+        float, (left_frequency, median_frequency, right_frequency, triple_current)
+    )
+    if not all(math.isfinite(x) for x in (a, m, b, tau)):
+        raise ValueError("finite ordered curl nodes and triple current required")
+    if not (a < m < b):
+        raise ValueError("strictly ordered signed-curl nodes a<m<b required")
+    source = (tau * (b - m), tau * (a - b), tau * (m - a))
+    energy_residual = math.fsum(source)
+    helicity_residual = math.fsum(x * y for x, y in zip((a, m, b), source))
+    scale = max(1.0, *(abs(x) for x in source))
+    if abs(energy_residual) > 4.0e-14 * scale:
+        raise AssertionError("canonical triple source lost energy conservation")
+    if abs(helicity_residual) > 4.0e-14 * max(scale, abs(a), abs(m), abs(b)):
+        raise AssertionError("canonical triple source lost helicity conservation")
+    donor = tau * (b - a)
+    return {
+        "left_source": source[0],
+        "median_source": source[1],
+        "right_source": source[2],
+        "energy_residual": energy_residual,
+        "helicity_residual": helicity_residual,
+        "median_donor_mass": donor,
+        "left_recipient_fraction": (b - m) / (b - a),
+        "right_recipient_fraction": (m - a) / (b - a),
+    }
+
+
+def curl_spectral_bundle_base_velocity(
+    signed_frequencies: Sequence[float],
+    hellinger_amplitudes: Sequence[float],
+    triple_coherences: Sequence[tuple[int, int, int, float]],
+    *,
+    viscosity: float = 0.0,
+) -> dict[str, object]:
+    """Exact base equation of the curl-spectral energy bundle.
+
+    Write ``u=sqrt(E) sum_a q_a n_a`` with one unit state direction ``n_a`` in
+    every occupied curl eigenspace and ``sum q_a^2=1``.  The supplied alternating
+    coefficient on ``i<j<k`` is
+
+        chi_ijk = sqrt(E) int n_i . (n_j x n_k).
+
+    Holding the fiber directions fixed at the instant, Euler gives
+
+        qdot_i += chi_ijk (a_k-a_j) q_j q_k,
+        qdot_j += chi_ijk (a_i-a_k) q_i q_k,
+        qdot_k += chi_ijk (a_j-a_i) q_i q_j.
+
+    Viscosity adds exactly ``-nu(a_i^2-N^2)q_i`` after total-energy
+    normalization.  No shell, packet, owner, or temporal matching is present.
+    """
+
+    a = tuple(float(x) for x in signed_frequencies)
+    q = tuple(float(x) for x in hellinger_amplitudes)
+    if len(a) != len(q) or not a:
+        raise ValueError("matching nonempty curl/Hellinger coordinates required")
+    if not all(math.isfinite(x) for x in a + q) or any(x < 0.0 for x in q):
+        raise ValueError("finite curl nodes and nonnegative Hellinger amplitudes required")
+    qnorm2 = math.fsum(x * x for x in q)
+    if abs(qnorm2 - 1.0) > 2.0e-11:
+        raise ValueError("Hellinger amplitudes must have unit squared norm")
+    nu = float(viscosity)
+    if not math.isfinite(nu) or nu < 0.0:
+        raise ValueError("finite nonnegative viscosity required")
+
+    euler = [0.0 for _ in q]
+    n = len(q)
+    for row in triple_coherences:
+        if len(row) != 4:
+            raise ValueError("each triple coherence must be (i,j,k,chi)")
+        i, j, k, raw = row
+        if not isinstance(i, int) or not isinstance(j, int) or not isinstance(k, int):
+            raise ValueError("triple indices must be integers")
+        if not (0 <= i < j < k < n):
+            raise ValueError("triple indices must satisfy 0<=i<j<k<n")
+        chi = float(raw)
+        if not math.isfinite(chi):
+            raise ValueError("finite triple coherence required")
+        ai, aj, ak = a[i], a[j], a[k]
+        qi, qj, qk = q[i], q[j], q[k]
+        euler[i] += chi * (ak - aj) * qj * qk
+        euler[j] += chi * (ai - ak) * qi * qk
+        euler[k] += chi * (aj - ai) * qi * qj
+
+    euler_energy_tangent = math.fsum(qi * vi for qi, vi in zip(q, euler))
+    euler_helicity_tangent = math.fsum(ai * qi * vi for ai, qi, vi in zip(a, q, euler))
+    escale = max(1.0, math.sqrt(math.fsum(x * x for x in euler)))
+    if abs(euler_energy_tangent) > 3.0e-12 * escale:
+        raise AssertionError("bundle Euler velocity left the energy sphere")
+    if abs(euler_helicity_tangent) > 3.0e-12 * max(escale, *(abs(x) for x in a)):
+        raise AssertionError("bundle Euler velocity left the helicity level")
+
+    N2 = math.fsum(ai * ai * qi * qi for ai, qi in zip(a, q))
+    viscous = [-nu * (ai * ai - N2) * qi for ai, qi in zip(a, q)]
+    full = [x + y for x, y in zip(euler, viscous)]
+    sphere_residual = math.fsum(qi * vi for qi, vi in zip(q, full))
+    if abs(sphere_residual) > 3.0e-12 * max(1.0, math.sqrt(math.fsum(x * x for x in full))):
+        raise AssertionError("normalized NS bundle velocity left the Hellinger sphere")
+    return {
+        "rms_curl_squared": N2,
+        "euler_velocity": tuple(euler),
+        "viscous_velocity": tuple(viscous),
+        "full_velocity": tuple(full),
+        "euler_hilbert_speed_squared": math.fsum(x * x for x in euler),
+        "viscous_hilbert_speed_squared": math.fsum(x * x for x in viscous),
+        "full_hilbert_speed_squared": math.fsum(x * x for x in full),
+        "euler_energy_tangent_residual": euler_energy_tangent,
+        "euler_helicity_tangent_residual": euler_helicity_tangent,
+        "normalized_mass_residual": sphere_residual,
+    }
+
+
+def self_return_operator_geometry(
+    energy: float,
+    rms_curl_scale: float,
+    horizontal_normalized_lamb_norm_squared: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Operator form of the PDE-defined interaction volume and Reynolds number.
+
+    For ``q0=u/sqrt(E)``, ``q1=(C-lambda)u/sqrt(B)`` and the curl-cyclic
+    subspace ``K_u=closure{p(C)u}``, put
+
+        g = P_K P(q0 x q1) = -C^{-1} P_K [q0,q1].
+
+    The input ``horizontal_normalized_lamb_norm_squared`` is ``||g||_2^2``.
+    Then exactly ``V_spec^{-1}=||g||^2`` and
+
+        Re_spec = sqrt(E)||g||/(nu N).
+    """
+
+    E = float(energy)
+    N = float(rms_curl_scale)
+    g2 = float(horizontal_normalized_lamb_norm_squared)
+    nu = float(viscosity)
+    if not all(math.isfinite(x) for x in (E, N, g2, nu)):
+        raise ValueError("finite self-return geometry required")
+    if E <= 0.0 or N <= 0.0 or g2 < 0.0 or nu <= 0.0:
+        raise ValueError("positive energy/scale/viscosity and nonnegative self-return norm required")
+    V = math.inf if g2 == 0.0 else 1.0 / g2
+    re = math.sqrt(E * g2) / (nu * N)
+    return {
+        "interaction_volume": V,
+        "inverse_interaction_volume": g2,
+        "spectral_reynolds": re,
+        "spectral_reynolds_squared": re * re,
+        "intrinsic_critical_mass": E * g2 / (N * N),
     }
 
 def theorem_certificate() -> dict[str, object]:
@@ -1358,6 +1916,22 @@ def theorem_certificate() -> dict[str, object]:
         "uv_curvature": "for every strict heterochiral UV spread, M^2 times true high-child log progress is <= the same positive Nijenhuis/enstrophy quadratic-variation current; constant 1 is sharp only at the degenerate boundary",
         "lamb_participation": "V_spec>=Delta/||u x curl u||_2^2>=||u x curl u||_1^2/||u x curl u||_2^2, so collapse of the PDE interaction volume requires physical concentration of the one Lamb activity field",
         "spectral_monotonicity_guard": "fixed curl-energy magnitudes with a pi triad-phase reversal flip every non-affine observable current; no spectral-only monotone beyond affine energy/helicity can contain the missing mechanism",
+        "spectral_three_current": "before any Fourier-triad split, tau_abc=-2 Omega(u_a,u_b,u_c) reconstructs the full signed-curl node source tau(c-b,a-c,b-a); every spectral observable is its determinant/divided-difference readout",
+        "spectral_bundle": "u=sqrt(E) sum q_a n_a gives qdot_a=sum chi_abc(c-b)q_bq_c-nu(a^2-N^2)q_a; the fiber direction uses the orthogonal remainder of the same projected cross product and viscosity does not rotate a curl eigenspace direction",
+        "self_return_operator": "for q0=u/sqrt(E), q1=(C-lambda)u/sqrt(B), ell=P(q0 x q1)=-C^-1[q0,q1] and K_u=closure{p(C)u}, V_spec^-1=||P_K ell||^2 and Re_spec=sqrt(E)||P_K ell||/(nu N)",
+        "cartan_jacobi": "B(x,y)=<C^-1x,y> is ad-invariant, Omega(x,y,z)=B(x,[y,z]) is a closed 3-cocycle, and the reduced K_u Jacobiator is exactly supplied by the vertical closure defect Q[x,y]",
+        "lax_material_heat": "Euler obeys d/dt ad_omega=[ad_omega,ad_u]; after material pullback the NS vorticity 2-form obeys pure heat partial_t Phi^*varpi=nu Delta_(Phi^*g) Phi^*varpi while partial_t(Phi^*g)=2 Phi^*S and det(Phi^*g)=1",
+        "parabolic_energy_clock": "-E'/E=2nuN^2, so int N^2 dt=log(E_initial/E_final)/(2nu) on positive-energy intervals; critical escape therefore requires unbounded persistence of the dimensionless productive self-return factor, not an event count",
+        "master_commutator": "for every spectral observable M_phi=<u,phi(C)u>, M_phi'_NL=2<u,[phi(C),J_u]Cu>; spectrally [phi(C),J_u] is the divided-difference functional calculus of the one primitive commutator [C,J_u]",
+        "critical_krein_boost": "with y=|C|^(1/2)u and J=sgn(C), L_u=|C|^(1/2)J_u J|C|^(1/2) is J-skew; its skew J-even part only rotates sectors, its self-adjoint J-odd part S_u=(1/2)|C|^(1/2)[J_u,J]|C|^(1/2) alone gives kappa(0)=<y,S_uy>",
+        "normalized_curvature_score": "R_*=kappa(0)/(nu N^2 sqrt(EZ-K^2))=Cov_p(|a|,f)/(nu N^2 Std_p(|a|)); d log(K/E)/d tau_E=R_*x-I_r <=R_*x-x^2<=R_*^2/4",
+        "galilean_null": "one helicity-flip critical boost matrix element obeys 2sqrt(k l)|g(q,l,-k)| <= (3sqrt(6)/16)|q| sharply; uniform/near-uniform sweeping therefore loses critical boost linearly in its advecting wave number",
+        "critical_hilbert_square": "with R_u=P(u x |C|u), A=|C|^(1/2)curl u and B=|C|^(-1/2)R_u, K'=-2nu||A+B/(2nu)||^2+||B||^2/(2nu); the companion norm threshold is necessary only, while its Hilbert angle remains decisive",
+        "critical_boost_logistic": "kappa(0)=<y,S_uy> and M3>=K^3/E^2 give K'<=2K(kappa(0)/K-nu(K/E)^2); any instant of positive K growth therefore requires the actual Krein boost Rayleigh rate above the quadratic mean-curl heat rate",
+        "fixed_cartan_ode": "in one fixed curl eigenbasis the full Euler RHS is zI'=-(1/2)sum_JK(lambdaK-lambdaJ)f_IJK zJ zK with one time-independent alternating Cartan tensor f=Omega; NS adds only -nu lambdaI^2 zI and finite Galerkin Euler is phase-space divergence free",
+        "productive_fisher_action": "A_prod=kappa(0)^2/(EZ-K^2)=Cov_p(|a|,f)^2/Var_p(|a|)<=A_spec/E; d log(K/E)/dt<=A_prod/(2nuN^2), so critical mean-curl escape requires divergence of the single curvature/Fisher action integral",
+        "persistence_monotonicity_guard": "neither higher Krylov volumes nor the normalized curvature score R_* are universal monotones; explicit spectral and Galerkin falsifications force the remaining theorem to control persistence/action rather than instantaneous sign",
+        "formalism_guard": "the physical alternating Euler triple generator is exact, but a direct-sum counterexample rejects promoting it to an unrestricted Nambu-Poisson bracket; Cartan/Jacobi compatibility is used instead",
         "global_extension_guard": "isolated triads are self-contained martingale/phase systems, but the full PDE can reorient a high-dimensional fitness through shape motion and spatial concentration; persistence of productive Lamb/fitness alignment while V_spec collapses is the remaining constitutive problem",
         "symmetric_transport_note": "the amplitude-reduced heterochiral symmetric slice has stationary ratio near 0.5981296, but global symmetry of the two-parent optimizer is not claimed here",
         "case_taxonomy_used": False,
