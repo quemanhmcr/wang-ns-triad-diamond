@@ -54,3 +54,12 @@ def test_theorem_certificate_is_explicitly_local_not_master_closed():
     assert "not between-time stock" in cert["forbidden_interpretation"]
     assert "still requires a theorem" in cert["open_master_seam"]
     assert cert["global_regularity_claimed"] is False
+
+
+def test_certificate_places_closed_triad_current_below_power_owner_language():
+    cert = theorem_certificate()
+    assert "manifestation of a smaller closed-triad current law" in cert["primitive_below_power"]
+    assert "same one-dimensional triad current" in cert["two_null_laws_one_current"]
+    assert "hard-cell" in cert["downstream_restriction_scope"]
+    assert "not load-bearing" in cert["hard_cell_young_status"]
+    assert "not a transfer cost" in cert["helicity_guard"]

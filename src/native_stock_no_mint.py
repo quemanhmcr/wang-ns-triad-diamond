@@ -31,10 +31,13 @@ def stock_telescope(steps: Sequence[StockStep]):
 def theorem_certificate():
     return {
       'status':STATUS,
+      'primitive_below_stock':'STOCK is a recurrence manifestation of physical mode-set continuity; nonlinearity transfers stock, viscosity sinks it, and owner labels add no reset term',
+      'mode_stock_continuity':'for every physical helical-mode set A: E_A(t1)+D_A+Phi_out=E_A(t0)+Phi_in',
       'carrier_law':'eta=Q^2: dE_Q/dt+D_Q=<u,dot eta u>-2 Re<eta u,B(u,u)>',
       'quadratic_partition':'sum A_a^2=I: channel energies reconstruct full kinetic energy; differentiated partition motion has zero total energy work',
       'cutoff_invariance':'-L_V(Qu)+QB(V,V)-QB(u-V,u-V)+(L_VQ-QL_V)u=-QB(u,u), independent of V',
       'relink':'after common transported-gauge quotient, K_phys pair work is antisymmetric and has zero total work',
       'no_mint':'source/strain/HH may change event ontology but cannot reset physical stock ancestry; fresh stock requires inherited energy or actual signed physical work',
+      'same_time_guard':'cyclic dW- is same-time donor provenance and cannot be promoted to a between-time stock wallet or temporal matching rule',
       'scope':'does not rule out conservative circulation and makes no global-regularity claim',
     }

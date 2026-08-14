@@ -226,13 +226,18 @@ def weighted_signed_good_restriction(
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
+        "primitive_below_power": "canonical nonlinear POWER is a manifestation of a smaller closed-triad current law, not a primitive HH-event currency",
         "closed_triad_current": "T0=(a1-a2)R, T1=(a2-a0)R, T2=(a0-a1)R with a_i=s_i|k_i|; therefore sum T_i=0 and sum a_i T_i=0",
+        "two_null_laws_one_current": "energy conservation and signed-helicity conservation are simultaneous null directions of the same one-dimensional triad current",
         "signed_good_branching": "for every positive forward signed-good root, the unique donor loss splits at the same event as D=G+B, with G/D<10/13 and B/D>3/13",
         "same_weight_radon_restriction": "any common measurable q>=0 on the lifted closed-triad family preserves D_q=G_q+B_q, G_q<=10 D_q/13, B_q>=3 D_q/13",
+        "downstream_restriction_scope": "the same-event law survives allowed time, hard-cell, resolved-contact and donor restrictions exactly when the same positive physical weight is inherited before coarsening and canonical dW+ is not re-Hahn split",
+        "hard_cell_young_status": "hard-cell compression and Young/Christ are downstream bookkeeping and are not load-bearing for the native POWER branching cost",
         "side_fate": "B_q is real positive canonical work on the nonforward J=0 sibling and is already TRANSFER_WORK_LOSS; it is not dissipation or a reset budget",
         "native_local_power_cost": f"C_cyc=-log(G_q/D_q) >= log(13/10)={POWER_LOG_COST_LOWER:.15g}",
         "single_charge": "if C_cyc is used as the POWER continuation cost, the same side sibling is not separately charged; canonical dW+ remains the cause and no later Hahn split is introduced",
         "forbidden_interpretation": "dW- is same-time donor provenance, not between-time stock; no FIFO/LIFO/proportional temporal matching or Markov ancestry is asserted",
+        "helicity_guard": "signed helicity enters only as the second null law of the same closed-triad current; absolute-helicity magnitude is not a transfer cost or finite reset budget",
         "open_master_seam": "the local ratio is exact, but composition across arbitrary recursive depth still requires a theorem identifying the master's continuation variable on which these same-event attenuations compose",
         "global_regularity_claimed": False,
     }

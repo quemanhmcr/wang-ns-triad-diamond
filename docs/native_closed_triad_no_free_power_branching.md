@@ -2,7 +2,7 @@
 
 Status: **DRAFT THEOREM CANDIDATE — local physical law certified here; arbitrary master-depth composition is deliberately not claimed.**
 
-The purpose of this note is to expose a smaller law underneath the existing owner language.  A regular closed helical triad does not carry three independent nonlinear energy exchanges.  Writing
+The purpose of this note is to expose the primitive **beneath nonlinear POWER itself**, not merely beneath the old HH/owner labels.  `POWER` is a recurrence manifestation; the smaller physical object is the closed-triad current.  A regular closed helical triad does not carry three independent nonlinear energy exchanges.  Writing
 
 \[
 a_i=s_i|k_i|,
@@ -89,6 +89,8 @@ or equivalently the local cost
 \]
 
 This cost is intrinsic to the closed-triad branching itself.  If it is used as the POWER continuation charge, the side sibling must **not** be charged again by Young, entropy, or another representation mechanism for the same mass.  The canonical \(dW^+\) good-child law remains the physical cause.
+
+Because the law is imposed on the lifted closed-triad occurrence before coarsening, hard-cell compression and Young/Christ are downstream bookkeeping rather than load-bearing mechanisms for this POWER attenuation.  Signed helicity is used only as the second null law of the one-dimensional current; absolute-helicity magnitude is not promoted to a transfer budget or recurrence cost.
 
 ## What this theorem does not do
 
