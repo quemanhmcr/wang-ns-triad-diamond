@@ -227,6 +227,75 @@ def accumulated_transverse_heat_memory(
 
 
 
+
+def moving_polarization_memory_bound(
+    deformations: Sequence[np.ndarray],
+    material_vorticities: Sequence[Sequence[float]],
+    time_weights: Sequence[float],
+) -> dict[str, float]:
+    """Exact memory--reset inequality for a heat-moving material polarization.
+
+    Let ``omega_j=F_j q_j`` and anchor the history at the final material
+    polarization ``q_T``.  Minkowski determinant memory applies to this fixed
+    direction, while the triangle inequality gives
+
+        sum dt |F_j q_j|
+        <= |q_T| sqrt(det sum dt g_j^-1|_{q_T^perp})
+           + sum dt |F_j(q_j-q_T)|.
+
+    The second term is the *only* way the actual material-vorticity history can
+    evade the fixed-plane heat memory.  In Navier--Stokes ``q_t`` changes only
+    through ``beta_t=-nu L_g beta``.  This helper is purely geometric and does
+    not insert a reset threshold or event count.
+    """
+    n=len(deformations)
+    if n==0 or len(material_vorticities)!=n or len(time_weights)!=n:
+        raise ValueError("matching nonempty deformation, polarization and time histories required")
+    fs=[]
+    for raw in deformations:
+        f=np.asarray(raw,dtype=float)
+        if f.shape!=(3,3) or not np.all(np.isfinite(f)):
+            raise ValueError("finite 3x3 deformation gradients required")
+        det=float(np.linalg.det(f))
+        if det<=0.0 or abs(det-1.0)>3.0e-9*max(1.0,abs(det)):
+            raise ValueError("incompressible deformation gradients must lie in SL(3)")
+        fs.append(f)
+    qs=[np.asarray(tuple(float(x) for x in q),dtype=float) for q in material_vorticities]
+    if any(q.shape!=(3,) or not np.all(np.isfinite(q)) for q in qs):
+        raise ValueError("finite material vorticity vectors required")
+    qT=qs[-1]; nT=float(np.linalg.norm(qT))
+    if nT<=0.0:
+        raise ValueError("final material polarization must be nonzero")
+    p=_transverse_frame(qT)
+    H=np.zeros((2,2),dtype=float)
+    actual=0.0; reset=0.0; fixed_amp=0.0
+    for f,q,raw_dt in zip(fs,qs,time_weights):
+        dt=float(raw_dt)
+        if not math.isfinite(dt) or dt<=0.0:
+            raise ValueError("strictly positive finite time weights required")
+        g=f.T@f
+        A=p.T@np.linalg.inv(g)@p
+        H += dt*A
+        actual += dt*float(np.linalg.norm(f@q))
+        reset += dt*float(np.linalg.norm(f@(q-qT)))
+        fixed_amp += dt*float(np.linalg.norm(f@qT))
+    memory=nT*math.sqrt(max(0.0,float(np.linalg.det(H))))
+    # Fixed-direction Minkowski memory dominates the exact fixed-direction
+    # amplitude integral; the actual history then differs only by reset motion.
+    if fixed_amp > memory + 3.0e-8*max(1.0,fixed_amp,memory):
+        raise AssertionError("fixed-polarization amplitude exceeded transverse heat memory")
+    upper=memory+reset
+    if actual > upper + 4.0e-8*max(1.0,actual,upper):
+        raise AssertionError("moving-polarization memory/reset inequality failed")
+    return {
+        "actual_vorticity_amplitude_history": actual,
+        "final_plane_heat_memory": memory,
+        "fixed_final_polarization_history": fixed_amp,
+        "heat_only_reset_remainder": reset,
+        "memory_reset_upper": upper,
+        "inequality_margin": max(0.0,upper-actual),
+    }
+
 def pair_direction_mismatch_decomposition(
     deformation_a: np.ndarray,
     deformation_b: np.ndarray,
@@ -394,6 +463,7 @@ def theorem_certificate() -> dict[str, object]:
         "transverse_determinant": "for beta=i_q da, det(g^-1|q^perp)=q.g.q/|q|^2=|Fq|^2/|q|^2; vortex amplification is exactly transverse heat-symbol determinant",
         "transverse_area": "for xi,eta perpendicular q, det Gram_g^-1(xi,eta)=(|Fq|^2/|q|^2)|xi wedge eta|^2",
         "history_memory": "Euler freezes material beta, and Minkowski determinant gives sqrt(det int g^-1|qperp dt)>=int |Fq|/|q| dt; rotating anisotropy cannot reset accumulated transverse heat area",
+        "moving_polarization_memory": "for full NS, int|F q(t)|dt <= |q(T)| sqrt(det int g^-1|q(T)^perp dt)+int|F(q(t)-q(T))|dt; the only escape from fixed-plane heat memory is actual heat-driven rewriting of beta",
         "heat_only_reset": "Euler has no beta_t term in material coordinates; viscosity alone changes beta and ||beta_t||_H^-2_g^2=nu^2||beta||_g^2, so integrated reset action divided by nu equals half the physical velocity-energy loss",
         "rank_one_null": "a one-direction incompressible gradient a tensor xi has omega=xi cross a and S omega=0; self-stretching is absent at rank one",
         "flat_hodge_dirichlet": "because every g=Phi^*g0 is flat, <beta,L_g beta>_g=||nabla^g beta||_2^2; material spatial non-affinity and vorticity magnitude/direction variation are already part of the same heat Dirichlet form, not a separate escape channel",

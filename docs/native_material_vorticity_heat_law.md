@@ -305,7 +305,45 @@ inhomogeneous NS theorem.  Its significance is that time-dependent rotation of t
 weak diffusion direction does **not** defeat accumulated diffusion even in the most
 adversarial affine history.
 
-## 4. Euler cannot reset the material vorticity; heat is the only reset mechanism
+## 4. Full NS has one exact memory--reset inequality
+
+The Euler history law used a fixed material polarization.  In full Navier--Stokes the
+material two-form is rewritten by heat, so its vector representative `q(t)` can move.
+This does not create a new mechanism.  Anchor the history at the final polarization
+`q_T=q(T)`.  Applying the fixed-plane Minkowski law to `q_T` and then only the triangle
+inequality gives
+
+\[
+\boxed{
+\int_0^T|F_tq_t|\,dt
+\le
+|q_T|
+\sqrt{\det\!\left(\int_0^Tg_t^{-1}|_{q_T^\perp}dt\right)}
++\int_0^T|F_t(q_t-q_T)|\,dt.
+}
+\]
+
+The first term is the transverse heat-area memory of a fixed material plane.  The
+second is the **only** remainder by which the actual vorticity history can leave that
+plane.  But
+
+\[
+q_t-q_T=-\int_t^T\partial_sq_s\,ds,
+\]
+
+and `partial_s q_s` is precisely the vector representative of
+`partial_s beta=-nu L_g beta`.  Thus the same heat operator appears on both sides of
+the attempted escape: it creates the accumulated covariance and it is the only agent
+allowed to move the polarization out of that memory.
+
+This is the first direct coupling of persistence and reset in the primitive grammar.
+It is still not a global coercive estimate because the reset remainder is pointwise
+and the global energy law controls its natural `H^-2_g` action rather than this
+strong material norm.  The remaining gap is therefore no longer qualitative: one must
+convert the heat-only reset path into enough of this remainder at critical
+concentration, or prove that it cannot do so.
+
+## 5. Euler cannot reset the material vorticity; heat is the only reset mechanism
 
 The material equation already says this in its shortest form:
 
@@ -369,7 +407,7 @@ regularity problem.  Its role is conceptual and structural: **nonlinearity can o
 accumulate deformation memory; every material reset is viscous and globally billed by
 physical energy loss.**
 
-## 5. Physical directional mismatch has exactly two material sources
+## 6. Physical directional mismatch has exactly two material sources
 
 The Biot--Savart stretching kernel needs a cross product between vorticity
 directions.  In material variables that cross product has an exact decomposition,
@@ -428,7 +466,7 @@ already contains the factor `xi(x) cross xi(y)`.  The covariant variation requir
 for nonlinear directional stretching is therefore the **same covariant derivative
 which Hodge heat squares in its Dirichlet form**.
 
-## 6. Spatial turnover is already inside the same heat operator
+## 7. Spatial turnover is already inside the same heat operator
 
 There is one important loophole to a same-label memory statement: Euler could move
 the region of strongest deformation to fresh material labels without rewriting the
@@ -509,7 +547,7 @@ heat-only-reset laws, the only possible escape is a jointly concentrated process
 which the material two-form uses viscous rewriting on ever smaller sets quickly enough
 to evade a heat covariance that remembers all Euler stretching.
 
-## 7. Critical scaling separates memory from reset counting
+## 8. Critical scaling separates memory from reset counting
 
 The exact `H^-2` reset identity must not be misread as a finite reset-count theorem.
 NS scaling itself rules that out.  A critical concentration at frequency `N` may have
@@ -546,7 +584,7 @@ This scale observation is not a proof that the two costs cannot cooperate on a
 concentrating set.  It explains why a correct final theorem, if it exists in this
 grammar, has to couple **memory and covariant turnover**, not count reset events.
 
-## 8. Falsification guard: the primitive critical vorticity norm is not monotone
+## 9. Falsification guard: the primitive critical vorticity norm is not monotone
 
 It is tempting, after reaching the material two-form grammar, to hope that the
 scale-critical primitive norm `int |omega|^(3/2)` is the missing scalar Lyapunov
@@ -560,7 +598,7 @@ states.  Its methodological use is clear: the remaining mechanism is genuinely
 historical/covariant.  The proof core should not return to searching for a scalar
 critical monotone unless it is forced directly by the material equations.
 
-## 9. What remains
+## 10. What remains
 
 The new primitive reduction is
 

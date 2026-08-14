@@ -7,6 +7,7 @@ from src.native_material_vorticity_heat_law import (
     accumulated_transverse_heat_memory,
     material_hminus2_reset_identity,
     material_log_distortion_energy_bound,
+    moving_polarization_memory_bound,
     pair_direction_mismatch_decomposition,
     rank_one_incompressible_stretch_null,
     theorem_certificate,
@@ -155,3 +156,33 @@ def test_pair_directional_mismatch_is_only_material_mismatch_plus_nonaffinity():
         same=pair_direction_mismatch_decomposition(fa,fa,qa,qb)
         assert same["nonaffinity_term_norm"] == pytest.approx(0.0,abs=2e-12)
         assert same["physical_cross_norm"] == pytest.approx(same["material_heat_covector_norm"],rel=2e-8,abs=2e-8)
+
+
+def test_moving_polarization_history_is_memory_plus_heat_reset_remainder():
+    rng=np.random.default_rng(2026081508)
+    for _ in range(1000):
+        n=int(rng.integers(2,16)); fs=[]; qs=[]; ws=[]
+        for j in range(n):
+            while True:
+                f=rng.normal(size=(3,3)); d=np.linalg.det(f)
+                if abs(d)>.15: break
+            if d<0: f[:,0]*=-1; d=-d
+            f=f/d**(1.0/3.0); fs.append(f)
+            qs.append(rng.normal(size=3)+np.array([.4,-.2,.3]))
+            ws.append(float(np.exp(rng.uniform(-4,0))))
+        if np.linalg.norm(qs[-1])<1e-4: qs[-1]+=np.array([1.,0.,0.])
+        out=moving_polarization_memory_bound(fs,qs,ws)
+        assert out["actual_vorticity_amplitude_history"] <= out["memory_reset_upper"]+2e-7
+        assert out["fixed_final_polarization_history"] <= out["final_plane_heat_memory"]+2e-7
+
+
+def test_moving_polarization_reduces_to_pure_memory_when_heat_does_not_rewrite_beta():
+    rng=np.random.default_rng(2026081509); q=np.array([.7,-.4,1.2]);fs=[];ws=[]
+    for _ in range(12):
+        while True:
+            f=rng.normal(size=(3,3));d=np.linalg.det(f)
+            if abs(d)>.2:break
+        if d<0:f[:,0]*=-1;d=-d
+        fs.append(f/d**(1.0/3.0));ws.append(.1)
+    out=moving_polarization_memory_bound(fs,[q.copy() for _ in fs],ws)
+    assert out["heat_only_reset_remainder"] == pytest.approx(0.0,abs=1e-13)
