@@ -1932,9 +1932,748 @@ def theorem_certificate() -> dict[str, object]:
         "productive_fisher_action": "A_prod=kappa(0)^2/(EZ-K^2)=Cov_p(|a|,f)^2/Var_p(|a|)<=A_spec/E; d log(K/E)/dt<=A_prod/(2nuN^2), so critical mean-curl escape requires divergence of the single curvature/Fisher action integral",
         "persistence_monotonicity_guard": "neither higher Krylov volumes nor the normalized curvature score R_* are universal monotones; explicit spectral and Galerkin falsifications force the remaining theorem to control persistence/action rather than instantaneous sign",
         "formalism_guard": "the physical alternating Euler triple generator is exact, but a direct-sum counterexample rejects promoting it to an unrestricted Nambu-Poisson bracket; Cartan/Jacobi compatibility is used instead",
+        "hminus1_cartan_gradient": "in the curl H^-1 metric the Euler Cartan motion is exactly orthogonal to grad(E/2)=C^2u; ||u_t||_-1^2=||F_E||_-1^2+nu^2 Z and E/2 descends only through heat",
+        "master_sobolev_strain_transfer": "for G_s=|C|^s J_u C |C|^-s and A=P S=(1/2)[C,J_u], Sym G_s is the hyperbolic functional calculus sinh((s-1/2)D)/sinh(D/2) on helicity-even A and -cosh((s-1/2)D)/cosh(D/2) on helicity-odd A, D=ad_log|C|",
+        "critical_sech_strain": "at the unique midpoint s=1/2, all helicity-even strain vanishes and Sym G_1/2=-sech((1/2)ad_log|C|) A_odd; equivalently it is the two-sided Poisson/Sylvester average of physical odd strain",
+        "critical_loggap_locality": "the critical sech map is a contraction and a cross block separated by log gap L obeys the dimension-free bound min(1,csch(L/2)); deep signed-curl separation is therefore continuously suppressed without shell thresholds",
+        "poisson_scale_law": "dmu(t)=2||exp(-t|C|)|C|u||^2 dt/K is a canonical probability scale law with mean E/(2K)=1/(2 mean|curl|); the critical boost Rayleigh rate is the mu-average of Poisson-smoothed odd-strain Rayleigh quotients",
+        "poisson_heat_subordination": "exp(-t|C|)=t/(2sqrt(pi)) int s^(-3/2) exp(-t^2/(4s)) exp(-sC^2) ds, so the scale filter intrinsic to critical Euler growth is subordinate to the same quadratic heat generator used by viscosity",
+        "radial_resolvent_square": "for m=K/E and s_m=(|C|-m)u, m'=2/E(<s_m,F_spec>-nu<(s_m),(|C|+m)s_m>); completing the exact (|C|+m) Hilbert square gives a sharper resolvent productive-action upper than the variance-only Fisher bound",
+        "viscous_orientation_guard": "pure viscosity rescales each curl eigenspace amplitude but does not rotate its normalized direction, so normalized Cartan triple orientation has zero viscous derivative; no proof may rely on fictitious heat dephasing",
+        "resolvent_gap_guard": "the weighted radial resolvent Cauchy fraction has no universal gap below one; closed three-node currents can approach saturation on extreme amplitude states",
+        "critical_operator_heat": "because the midpoint strain operator Sigma_c(u) is linear and translation covariant, its full NS evolution is Sigma_c,t=Sigma_c(F_E)-nu sum_j[D_j,[D_j,Sigma_c]]; the operator heat semigroup is Gaussian averaging by translation conjugations and is norm-contractive",
+        "helicity_polar_modulus": "C=J|C| is the polar decomposition of the conserved helicity form; K=<u,|C|u> is its canonical positive modulus, frozen Euler G_u=J_uC is C-skew, and the critical cocycle is J-pseudo-unitary with reciprocal singular-value pairs in finite Galerkin dimension",
+        "material_strain_metric": "on divergence-free L2, Sym(ad_u)=-P S(u); physical strain is exactly the metric-deformation part of material Lie transport, and the master Sobolev law is this same deformation read in interpolating curl metrics",
+        "uniform_sweeping_conjugation": "for constant U, Sigma_c(-(U.grad)u)=-i[U.D,Sigma_c(u)]; uniform sweeping only unitarily conjugates the dangerous midpoint operator and cannot regenerate its norm",
+        "objective_strain_regeneration": "Sigma_c(F_E) is the fixed midpoint filter of -(u.grad S+S^2+Omega^2+Hess p); pressure/corotation reorient strain but satisfy int S:Hess p=0 and S:[S,Omega]=0, while global strain amplitude obeys the Betchov cubic law",
+        "critical_enstrophy_sign_guard": "actual dealiased Galerkin states realize all four sign quadrants of (K'_NL,Z'_NL), so curvature height kappa(0) and curvature area/int enstrophy current cannot be substituted for one another",
+        "critical_spectral_hminus_half_action": "with F_spec the actual curl-spectral Euler velocity, the K balance completes an exact |C|^-1/2 spectral Hilbert square; critical blow-up therefore requires divergence of the Galilean-clean critical probability action E_pi[(f/|a|)^2]",
+        "master_sobolev_hilbert_square": "for every s, C^2u is grad(K_s/2) in the shifted H^(s-1) metric and K_s completes the exact square with B_s=|C|^(s-1)F_spec; the normalized action is always E_pi_s[(f/|a|)^2], so the whole Sobolev hierarchy uses one local escape currency",
+        "isolated_triad_scale_free_action": "every physical closed triad obeys the sharp root law 8|g|^2(a_j-a_k)^2<=(r_i)(r_j+r_k), hence |||C|^-1/2 F_spec,tri||^2 <= (1/2)E_tri K_tri and (log K_tri) <= E_tri/(4nu) independently of absolute Fourier scale; only coherent cross-triad action can evade this isolated ceiling",
+        "critical_productive_volume": "Vprod=E K M3/(2 kappa(0)^2) is a representation-free productive physical volume, Vnu=E K/(2 nu^2 M3) is the matching viscous volume, and exactly K'/(2nuM3)=sgn(kappa)sqrt(Vnu/Vprod)-1; positive critical growth is precisely the race Vprod<Vnu",
+        "critical_volume_scaling": "under NS dilation all of V_action, Vprod and Vnu scale as lambda^-3 while sqrt(Vnu/Vprod)=|kappa|/(nu M3) is invariant; finite-time critical escape requires divergence of the scale-invariant action integral int E/Vprod dt",
+        "critical_volume_heat_guard": "neither total nor productive critical action volume is a heat Lyapunov scalar; pure heat can increase or decrease normalized productivity through amplitude reweighting even though the midpoint operator carrier itself obeys contractive operator heat",
+        "critical_reynolds_operator": "with z=|C|^(3/2)u and Rc=nu^-1 |C|^-1 Sigma_c |C|^-1, Rc is self-adjoint/helicity-odd and the exact critical balance is 2nu times the Rc-minus-identity Rayleigh form; heat is identity in this critical dissipation coordinate",
+        "reynolds_helicity_neutrality": "every nonzero eigenvector of the self-adjoint helicity-odd critical Reynolds operator has zero dissipation-coordinate helicity; the actual Rayleigh quotient is bounded by ||Rc|| sqrt(1-(H3/M3)^2)",
+        "reynolds_heat_dirichlet": "at a top eigenvector v, <v,Delta_op Rc v>=2 sum_j <D_jv,(lambda_max I-Rc)D_jv>>=0; operator heat erodes the upper Reynolds edge exactly by translation leakage out of its top eigenspace",
+        "continuum_midpoint_hs_isometry": "on continuum R3 with the repository unitary Fourier convention, Qc=|C|^-1 Sigma_c |C|^-1 is exactly a 1/8 Hilbert-Schmidt isometric embedding of Hdot^1/2: ||Qc(u)||_HS^2=K/64; it intertwines C^2 with Delta_op, so M3/64 is the operator Dirichlet form and kappa(0)/64 is the HS pairing with Qc(F_E)",
+        "reynolds_spectral_capacity": "on continuum R3, K=128 nu^2 sum_{lambda_j>0} lambda_j(Rc)^2; hence ||Rc||op<=sqrt(K)/(8sqrt(2)nu), the number of positive eigenvalues above one is <=K/(128nu^2), and K<128nu^2 is an invariant no-critical-growth radius on smooth intervals",
+        "continuum_midpoint_lossless": "the continuum midpoint transform T:u->Qc(u) satisfies T* T=(1/64)|C| and is injective on mean-zero critical states, so u=64|C|^-1 T*Qc; physical heat and nonlinear source preserve its Hilbert-Schmidt image",
+        "midpoint_spectral_polynomial_guard": "Qc is self-adjoint/helicity-odd, hence every defined odd spectral trace Tr Qc^(2m+1) vanishes; kappa(0) is generally nonzero, so critical regeneration cannot be reduced to eigenvalues or a cubic Riccati trace of Qc alone",
+        "continuum_midpoint_sobolev_scale": "the continuum midpoint transform intertwines |C|^alpha with Delta_op^(alpha/2), giving ||u||_Hdot^s^2=64||Delta_op^(s/2-1/4)Qc(u)||_HS^2; s=1/2 is uniquely the plain HS energy level, with E and Z at symmetric operator powers -1/4 and +1/4",
         "global_extension_guard": "isolated triads are self-contained martingale/phase systems, but the full PDE can reorient a high-dimensional fitness through shape motion and spatial concentration; persistence of productive Lamb/fitness alignment while V_spec collapses is the remaining constitutive problem",
         "symmetric_transport_note": "the amplitude-reduced heterochiral symmetric slice has stationary ratio near 0.5981296, but global symmetry of the two-parent optimizer is not claimed here",
         "case_taxonomy_used": False,
         "temporal_matching_used": False,
         "global_regularity_claimed": False,
+    }
+
+
+def cartan_hminus1_gradient_split(
+    signed_frequencies: Sequence[float],
+    modal_amplitudes: Sequence[complex],
+    euler_sources: Sequence[complex],
+    viscosity: float,
+) -> dict[str, float]:
+    """Exact H^{-1}_curl orthogonality of Euler motion and energy-gradient heat.
+
+    On a nonzero curl eigenmode ``C e_i=a_i e_i``, the metric is
+    ``||v||_{-1,C}^2=sum |v_i|^2/a_i^2``.  The H^{-1}_C gradient of E/2 is
+    ``C^2 u``.  Euler energy conservation is exactly the metric orthogonality
+    between its source and this gradient, hence the full NS speed satisfies a
+    Pythagorean identity before any estimate.
+    """
+    if not (
+        len(signed_frequencies) == len(modal_amplitudes) == len(euler_sources)
+        and signed_frequencies
+    ):
+        raise ValueError("matching nonempty curl/amplitude/source data required")
+    a = tuple(float(x) for x in signed_frequencies)
+    z = tuple(complex(x) for x in modal_amplitudes)
+    f = tuple(complex(x) for x in euler_sources)
+    nu = float(viscosity)
+    if not all(math.isfinite(x) and x != 0.0 for x in a):
+        raise ValueError("finite nonzero curl eigenvalues required")
+    if not all(math.isfinite(w.real) and math.isfinite(w.imag) for w in z + f):
+        raise ValueError("finite complex modal data required")
+    if not math.isfinite(nu) or nu < 0.0:
+        raise ValueError("finite nonnegative viscosity required")
+
+    energy = math.fsum(abs(zi) ** 2 for zi in z)
+    enstrophy = math.fsum(ai * ai * abs(zi) ** 2 for ai, zi in zip(a, z))
+    euler_energy_half_rate = math.fsum((zi.conjugate() * fi).real for zi, fi in zip(z, f))
+    escale = max(1.0, math.sqrt(max(0.0, energy * math.fsum(abs(fi) ** 2 for fi in f))))
+    if abs(euler_energy_half_rate) > 2.0e-11 * escale:
+        raise ValueError("Euler source must be energy tangent")
+
+    euler_action = math.fsum(abs(fi) ** 2 / (ai * ai) for ai, fi in zip(a, f))
+    heat_action = enstrophy
+    metric_cross = euler_energy_half_rate
+    ns = tuple(fi - nu * ai * ai * zi for ai, zi, fi in zip(a, z, f))
+    ns_action = math.fsum(abs(gi) ** 2 / (ai * ai) for ai, gi in zip(a, ns))
+    represented = euler_action + nu * nu * heat_action
+    scale = max(1.0, ns_action, represented)
+    if abs(ns_action - represented) > 4.0e-11 * scale:
+        raise AssertionError("H^-1 Cartan/gradient Pythagorean identity failed")
+    return {
+        "energy": energy,
+        "enstrophy": enstrophy,
+        "euler_hminus1_action": euler_action,
+        "energy_gradient_hminus1_action": heat_action,
+        "cartan_gradient_metric_cross": metric_cross,
+        "ns_hminus1_action": ns_action,
+        "represented_ns_hminus1_action": represented,
+        "viscous_hminus1_action": nu * nu * heat_action,
+    }
+
+
+def normalized_triple_orientation_heat_law(
+    curl_radii: Sequence[float],
+    modal_energies: Sequence[float],
+    triple_current: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Heat damps raw Cartan current but leaves normalized triple orientation fixed.
+
+    For one curl-spectral triple, ``tau`` is trilinear in the three state
+    components.  Pure viscosity therefore gives
+    ``tau'=-nu(r0^2+r1^2+r2^2)tau``.  Since each ``sqrt(E_i)`` has exactly the
+    same individual heat rate ``-nu r_i^2``, the normalized orientation
+    ``chi=tau/sqrt(E0 E1 E2)`` has zero viscous derivative.  Only Euler fiber
+    motion can reorient it.
+    """
+    if len(curl_radii) != 3 or len(modal_energies) != 3:
+        raise ValueError("exactly three radii and energies required")
+    r = tuple(float(x) for x in curl_radii)
+    e = tuple(float(x) for x in modal_energies)
+    tau = float(triple_current)
+    nu = float(viscosity)
+    if not all(math.isfinite(x) and x > 0.0 for x in r + e):
+        raise ValueError("positive finite triple radii/energies required")
+    if not math.isfinite(tau) or not math.isfinite(nu) or nu < 0.0:
+        raise ValueError("finite current and nonnegative viscosity required")
+    root = math.sqrt(math.prod(e))
+    chi = tau / root
+    sigma2 = math.fsum(x * x for x in r)
+    tau_dot_heat = -nu * sigma2 * tau
+    root_dot_heat = -nu * sigma2 * root
+    chi_dot_heat = (tau_dot_heat * root - tau * root_dot_heat) / (root * root)
+    scale = max(1.0, abs(chi), abs(tau_dot_heat / root))
+    if abs(chi_dot_heat) > 5.0e-14 * scale:
+        raise AssertionError("normalized Cartan orientation acquired a viscous rotation")
+    return {
+        "normalized_orientation": chi,
+        "raw_current_heat_rate": tau_dot_heat,
+        "amplitude_root_heat_rate": root_dot_heat,
+        "normalized_orientation_heat_rate": chi_dot_heat,
+        "triple_heat_rate": nu * sigma2,
+    }
+
+
+def radial_mean_resolvent_balance(
+    signed_frequencies: Sequence[float],
+    modal_energies: Sequence[float],
+    euler_energy_rates: Sequence[float],
+    viscosity: float,
+) -> dict[str, float]:
+    """Exact radial-mean heat metric and resolvent Fisher-action upper.
+
+    Put ``m=E_p |a|=K/E`` and ``s=(|C|-m)u``.  The normalized heat drift has the
+    exact positive factor
+
+        <s,|C|^2 u> = <s,(|C|+m)s>.
+
+    The curl-spectral Euler velocity at level ``a`` is ``f(a)u_a`` with
+    ``f=S/(2E_a)``.  Therefore the one radial cross term admits the exact
+    weighted square in the metric ``|C|+m`` and the sharp Cauchy upper
+
+        m' <= ||(|C|+m)^(-1/2) F_spec||^2 / (2 nu E).
+
+    No shell/window is inserted; the inverse is the resolvent of the physical
+    absolute-curl operator at its current mean scale.
+    """
+    a, e = _spectral_data(signed_frequencies, modal_energies)
+    if len(euler_energy_rates) != len(a):
+        raise ValueError("one Euler rate per curl node required")
+    rates = tuple(float(x) for x in euler_energy_rates)
+    if not all(math.isfinite(x) for x in rates):
+        raise ValueError("finite Euler rates required")
+    nu = float(viscosity)
+    if not math.isfinite(nu) or nu <= 0.0:
+        raise ValueError("positive finite viscosity required")
+    spectral_source_action(a, e, rates)
+
+    E = math.fsum(e)
+    r = tuple(abs(x) for x in a)
+    K = math.fsum(ri * ei for ri, ei in zip(r, e))
+    if K <= 0.0:
+        raise ValueError("positive mean absolute curl required")
+    m = K / E
+    Z = math.fsum(ri * ri * ei for ri, ei in zip(r, e))
+    M3 = math.fsum(ri**3 * ei for ri, ei in zip(r, e))
+    kappa = 0.5 * math.fsum(ri * si for ri, si in zip(r, rates))
+    radial_metric = math.fsum(ei * (ri - m) ** 2 * (ri + m) for ri, ei in zip(r, e))
+    direct_metric = M3 - m * Z
+    mscale = max(1.0, radial_metric, abs(direct_metric))
+    if abs(radial_metric - direct_metric) > 8.0e-11 * mscale:
+        raise AssertionError("radial heat metric factorization failed")
+
+    weighted_action_terms = []
+    for ri, ei, si in zip(r, e, rates):
+        if ei <= 0.0:
+            if abs(si) > 5.0e-12 * max(1.0, *(abs(x) for x in rates)):
+                raise ValueError("zero-energy node cannot carry interior spectral fitness")
+            continue
+        fi = si / (2.0 * ei)
+        weighted_action_terms.append(ei * fi * fi / (ri + m))
+    weighted_action = math.fsum(weighted_action_terms)
+
+    cauchy_fraction = 0.0
+    if radial_metric > 0.0 and weighted_action > 0.0:
+        cauchy_fraction = kappa * kappa / (radial_metric * weighted_action)
+        if cauchy_fraction > 1.0 + 8.0e-10:
+            raise AssertionError("radial resolvent weighted Cauchy law failed")
+        cauchy_fraction = min(1.0, max(0.0, cauchy_fraction))
+    elif abs(kappa) > 8.0e-11 * max(1.0, abs(kappa)):
+        raise AssertionError("radial current survived zero heat/action metric")
+
+    direct_rate = (2.0 / E) * (kappa - nu * radial_metric)
+    square_norm = radial_metric - kappa / nu + weighted_action / (4.0 * nu * nu)
+    if square_norm < -8.0e-11 * max(1.0, radial_metric, weighted_action / (nu * nu)):
+        raise AssertionError("radial resolvent square lost nonnegativity")
+    square_norm = max(0.0, square_norm)
+    represented_rate = -2.0 * nu * square_norm / E + weighted_action / (2.0 * nu * E)
+    if abs(direct_rate - represented_rate) > 8.0e-10 * max(1.0, abs(direct_rate), abs(represented_rate)):
+        raise AssertionError("radial resolvent Hilbert square failed")
+
+    weighted_upper = weighted_action / (2.0 * nu * E)
+    optimal_upper = 0.0
+    if radial_metric > 0.0:
+        optimal_upper = kappa * kappa / (2.0 * nu * E * radial_metric)
+    if direct_rate > optimal_upper + 8.0e-10 * max(1.0, abs(direct_rate), optimal_upper):
+        raise AssertionError("optimal radial scalar square upper failed")
+    if optimal_upper > weighted_upper + 8.0e-10 * max(1.0, optimal_upper, weighted_upper):
+        raise AssertionError("optimal radial upper exceeded resolvent action upper")
+
+    return {
+        "energy": E,
+        "critical_stock": K,
+        "mean_absolute_curl": m,
+        "enstrophy": Z,
+        "third_absolute_curl_moment": M3,
+        "curvature_height": kappa,
+        "radial_heat_metric": radial_metric,
+        "resolvent_weighted_spectral_action": weighted_action,
+        "weighted_cauchy_fraction": cauchy_fraction,
+        "mean_curl_rate": direct_rate,
+        "represented_mean_curl_rate": represented_rate,
+        "mean_curl_resolvent_upper": weighted_upper,
+        "mean_curl_optimal_upper": optimal_upper,
+        "log_mean_curl_resolvent_upper": weighted_upper / m,
+        "log_mean_curl_optimal_upper": optimal_upper / m,
+    }
+
+
+def sobolev_strain_transfer_multiplier(
+    sobolev_exponent: float,
+    output_radius: float,
+    input_radius: float,
+    *,
+    same_helicity: bool,
+) -> dict[str, float]:
+    """Exact scalar block multiplier in the master Sobolev strain-transfer law.
+
+    Put ``Lambda=|C|``, ``J=sgn(C)``, ``X=J_u`` and
+    ``A=(1/2)[C,X]=P S(u)`` on divergence-free fields.  For
+
+        G_s = Lambda^s X C Lambda^{-s},
+
+    the symmetric part of ``G_s`` is obtained from the J-even and J-odd blocks
+    of ``A`` by the hyperbolic multipliers returned here.  If ``D`` denotes the
+    log-curl commutator, the operator formula is
+
+        Sym G_s = sinh((s-1/2)D)/sinh(D/2) A_even
+                  - cosh((s-1/2)D)/cosh(D/2) A_odd.
+
+    The removable same-radius limit on the even block is ``2s-1``.  At the
+    critical midpoint ``s=1/2`` the even multiplier is exactly zero while the
+    odd multiplier is ``-sech(log(r_out/r_in)/2)``.
+    """
+
+    s = float(sobolev_exponent)
+    ro = float(output_radius)
+    ri = float(input_radius)
+    if not all(math.isfinite(x) for x in (s, ro, ri)) or min(ro, ri) <= 0.0:
+        raise ValueError("finite exponent and positive finite curl radii required")
+    x = math.log(ro / ri)
+    if same_helicity:
+        if abs(x) <= 1.0e-10:
+            multiplier = 2.0 * s - 1.0
+        else:
+            multiplier = math.sinh((s - 0.5) * x) / math.sinh(0.5 * x)
+    else:
+        multiplier = -math.cosh((s - 0.5) * x) / math.cosh(0.5 * x)
+    midpoint = 0.0 if same_helicity else -1.0 / math.cosh(0.5 * x)
+    return {
+        "sobolev_exponent": s,
+        "log_radius_ratio": x,
+        "same_helicity": bool(same_helicity),
+        "strain_multiplier": multiplier,
+        "critical_midpoint_multiplier": midpoint,
+        "energy_endpoint_multiplier": -1.0,
+        "enstrophy_endpoint_multiplier": 1.0 if same_helicity else -1.0,
+    }
+
+
+def critical_logscale_strain_kernel(output_radius: float, input_radius: float) -> dict[str, float]:
+    """Critical sech/Sylvester kernel relating physical odd strain to H^{1/2} boost.
+
+    For radii ``r,s>0`` the critical midpoint multiplier is
+
+        sech( (log r-log s)/2 ) = 2 sqrt(rs)/(r+s).
+
+    Relative to the primitive master commutator ``[C,J_u]=2 P S(u)`` the
+    multiplier is half as large, ``sqrt(rs)/(r+s)``.  The kernel is one on the
+    diagonal and decays exponentially in log-scale separation.
+    """
+
+    r = float(output_radius)
+    s = float(input_radius)
+    if not all(math.isfinite(x) and x > 0.0 for x in (r, s)):
+        raise ValueError("positive finite curl radii required")
+    x = math.log(r / s)
+    sech = 1.0 / math.cosh(0.5 * x)
+    sylvester = 2.0 * math.sqrt(r * s) / (r + s)
+    scale = max(1.0, abs(sech), abs(sylvester))
+    if abs(sech - sylvester) > 8.0e-13 * scale:
+        raise AssertionError("critical sech/Sylvester kernel identity failed")
+    return {
+        "log_radius_gap": abs(x),
+        "strain_to_critical_multiplier": sech,
+        "master_commutator_to_critical_multiplier": 0.5 * sech,
+        "sylvester_multiplier": sylvester,
+        "critical_strain_sign": -1.0,
+    }
+
+
+def critical_loggap_collective_bound(log_scale_gap: float) -> dict[str, float]:
+    """Dimension-free cross-block bound for the critical log-scale strain filter.
+
+    If one radius block lies below ``R`` and the other above ``exp(L)R``, the
+    critical sech Schur/Sylvester map obeys
+
+        ||B_cross|| <= min(1,csch(L/2)) ||A_odd,cross||.
+
+    The ``1`` is the global contraction coming from the positive-definite sech
+    kernel.  The ``csch`` term follows from the Neumann expansion in the
+    separated block, and gives exponential decay for large log gap.  This is an
+    operator-block statement rather than a per-edge shell threshold.
+    """
+
+    L = float(log_scale_gap)
+    if not math.isfinite(L) or L < 0.0:
+        raise ValueError("finite nonnegative log-scale gap required")
+    if L == 0.0:
+        separated = math.inf
+        bound = 1.0
+    else:
+        separated = 1.0 / math.sinh(0.5 * L)
+        bound = min(1.0, separated)
+    return {
+        "log_scale_gap": L,
+        "global_contraction_bound": 1.0,
+        "separated_block_bound": separated,
+        "collective_multiplier_bound": bound,
+    }
+
+
+def poisson_critical_scale_measure_moments(
+    signed_frequencies: Sequence[float], modal_energies: Sequence[float]
+) -> dict[str, float]:
+    """Canonical Poisson-scale probability attached to the critical stock.
+
+    With ``Lambda=|C|`` and ``K=<u,Lambda u>``, put
+
+        w_t = exp(-t Lambda) Lambda u,
+        dmu(t) = 2 ||w_t||_2^2 dt / K.
+
+    The measure is a probability.  It is equivalently obtained by first
+    selecting a curl radius ``r`` with critical weight ``r E_r/K`` and then an
+    exponential Poisson scale of rate ``2r``.  Consequently
+
+        E_mu t = E/(2K) = 1/(2m),  m=K/E,
+        E_mu t^2 = (sum E_r/r)/(2K).
+
+    Thus the state itself supplies a cutoff-free scale law whose mean is exactly
+    half the inverse mean absolute curl.
+    """
+
+    a, e = _spectral_data(signed_frequencies, modal_energies)
+    r = tuple(abs(x) for x in a)
+    if any(x <= 0.0 for x in r):
+        raise ValueError("nonzero curl radii required for Poisson-scale moments")
+    E = math.fsum(e)
+    K = math.fsum(ri * ei for ri, ei in zip(r, e))
+    if K <= 0.0:
+        raise ValueError("positive critical stock required")
+    m = K / E
+    mass = math.fsum((ri * ei / K) for ri, ei in zip(r, e))
+    mean_t = math.fsum((ri * ei / K) * (1.0 / (2.0 * ri)) for ri, ei in zip(r, e))
+    second_t = math.fsum((ri * ei / K) * (1.0 / (2.0 * ri * ri)) for ri, ei in zip(r, e))
+    represented_mean = 1.0 / (2.0 * m)
+    represented_second = math.fsum(ei / ri for ri, ei in zip(r, e)) / (2.0 * K)
+    scale = max(1.0, abs(mean_t), abs(represented_mean), abs(second_t), abs(represented_second))
+    if abs(mass - 1.0) > 5.0e-13:
+        raise AssertionError("Poisson critical scale lost unit mass")
+    if abs(mean_t - represented_mean) > 5.0e-13 * scale:
+        raise AssertionError("Poisson critical mean scale identity failed")
+    if abs(second_t - represented_second) > 5.0e-13 * scale:
+        raise AssertionError("Poisson critical second moment identity failed")
+    return {
+        "energy": E,
+        "critical_stock": K,
+        "mean_absolute_curl": m,
+        "probability_mass": mass,
+        "mean_poisson_scale": mean_t,
+        "mean_poisson_scale_from_mean_curl": represented_mean,
+        "second_poisson_scale_moment": second_t,
+        "poisson_scale_variance": max(0.0, second_t - mean_t * mean_t),
+    }
+
+
+def critical_spectral_hminus_half_square(
+    signed_frequencies: Sequence[float],
+    modal_energies: Sequence[float],
+    modal_energy_rates: Sequence[float],
+    viscosity: float,
+) -> dict[str, float]:
+    """Exact critical Hilbert square using the actual curl-spectral Euler velocity.
+
+    At an occupied signed-curl level ``a`` with energy ``E_a`` and nonlinear
+    energy rate ``S_a``, the radial/curl-spectral Euler velocity has amplitude
+    ``S_a/(2 sqrt(E_a))``.  Put ``r=|a|``.  Then
+
+        A = Lambda^(3/2) u,
+        B = Lambda^(-1/2) F_spec,
+
+    satisfy ``<A,B>=kappa(0)`` and ``||A||^2=M3``.  Hence
+
+        K' = -2 nu ||A-B/(2nu)||^2 + ||B||^2/(2nu).
+
+    This quotient has already removed isospectral phase/shape motion and is
+    therefore sharper than a square built from the full Lamb companion field.
+    """
+
+    a, e = _spectral_data(signed_frequencies, modal_energies)
+    if len(modal_energy_rates) != len(a):
+        raise ValueError("one nonlinear energy rate per curl level required")
+    rates = tuple(float(x) for x in modal_energy_rates)
+    if not all(math.isfinite(x) for x in rates):
+        raise ValueError("finite nonlinear energy rates required")
+    nu = float(viscosity)
+    if not math.isfinite(nu) or nu <= 0.0:
+        raise ValueError("positive finite viscosity required")
+    spectral_source_action(a, e, rates)
+    r = tuple(abs(x) for x in a)
+    if any(x <= 0.0 for x in r):
+        raise ValueError("nonzero curl radii required")
+
+    E = math.fsum(e)
+    K = math.fsum(ri * ei for ri, ei in zip(r, e))
+    M3 = math.fsum(ri**3 * ei for ri, ei in zip(r, e))
+    kappa = 0.5 * math.fsum(ri * si for ri, si in zip(r, rates))
+    b2_terms = []
+    for ri, ei, si in zip(r, e, rates):
+        if ei <= 0.0:
+            if abs(si) > 5.0e-12 * max(1.0, *(abs(x) for x in rates)):
+                raise ValueError("zero-energy node cannot carry interior spectral velocity")
+            continue
+        b2_terms.append(si * si / (4.0 * ri * ei))
+    B2 = math.fsum(b2_terms)
+    cauchy = 0.0
+    if M3 > 0.0 and B2 > 0.0:
+        cauchy = kappa * kappa / (M3 * B2)
+        if cauchy > 1.0 + 8.0e-10:
+            raise AssertionError("critical spectral H^-1/2 Cauchy law failed")
+        cauchy = min(1.0, max(0.0, cauchy))
+    elif abs(kappa) > 8.0e-11 * max(1.0, abs(kappa)):
+        raise AssertionError("critical current survived zero critical action")
+
+    # The represented square norm is ||A-B/(2nu)||^2.
+    square = M3 - kappa / nu + B2 / (4.0 * nu * nu)
+    if square < -8.0e-10 * max(1.0, M3, B2 / (nu * nu)):
+        raise AssertionError("critical spectral H^-1/2 square lost nonnegativity")
+    square = max(0.0, square)
+    K_rate = 2.0 * kappa - 2.0 * nu * M3
+    represented = -2.0 * nu * square + B2 / (2.0 * nu)
+    if abs(K_rate - represented) > 8.0e-10 * max(1.0, abs(K_rate), abs(represented)):
+        raise AssertionError("critical spectral H^-1/2 square failed")
+
+    log_upper = math.inf if K <= 0.0 else B2 / (2.0 * nu * K)
+    scalar_optimal = 0.0 if M3 <= 0.0 else kappa * kappa / (2.0 * nu * M3)
+    if K_rate > scalar_optimal + 8.0e-10 * max(1.0, abs(K_rate), scalar_optimal):
+        raise AssertionError("critical scalar-optimal square upper failed")
+    if scalar_optimal > B2 / (2.0 * nu) + 8.0e-10 * max(1.0, scalar_optimal, B2 / (2.0 * nu)):
+        raise AssertionError("critical scalar action exceeded spectral action upper")
+
+    # Two scale-covariant physical volumes.  The productive volume uses only the
+    # current component aligned with the actual critical heat direction; the
+    # broader action volume uses the whole curl-spectral Euler velocity.
+    productive_action = 0.0 if M3 <= 0.0 else kappa * kappa / M3
+    action_volume = math.inf if B2 <= 0.0 else E * K / (2.0 * B2)
+    productive_volume = math.inf if productive_action <= 0.0 else E * K / (2.0 * productive_action)
+    viscous_volume = math.inf if M3 <= 0.0 else E * K / (2.0 * nu * nu * M3)
+    productive_reynolds = 0.0 if M3 <= 0.0 else abs(kappa) / (nu * M3)
+    if math.isfinite(productive_volume) and math.isfinite(viscous_volume):
+        volume_ratio = viscous_volume / productive_volume
+        if abs(volume_ratio - productive_reynolds * productive_reynolds) > 2.0e-9 * max(1.0, volume_ratio):
+            raise AssertionError("productive/viscous volume Reynolds identity failed")
+    else:
+        volume_ratio = 0.0
+
+    # Critical probability pi_a=r E_a/K: B2/K=E_pi[(f/r)^2].
+    critical_fitness_action = 0.0 if K <= 0.0 else B2 / K
+    return {
+        "energy": E,
+        "critical_stock": K,
+        "third_absolute_curl_moment": M3,
+        "curvature_height": kappa,
+        "critical_rate": K_rate,
+        "spectral_hminus_half_action": B2,
+        "critical_cauchy_fraction": cauchy,
+        "represented_critical_rate": represented,
+        "square_norm": square,
+        "critical_rate_upper": B2 / (2.0 * nu),
+        "critical_scalar_optimal_upper": scalar_optimal,
+        "log_critical_upper": log_upper,
+        "critical_probability_fitness_action": critical_fitness_action,
+        "productive_critical_action": productive_action,
+        "critical_action_volume": action_volume,
+        "productive_action_volume": productive_volume,
+        "critical_viscous_volume": viscous_volume,
+        "productive_reynolds": productive_reynolds,
+        "viscous_to_productive_volume_ratio": volume_ratio,
+        "productive_growth_sign": 0.0 if kappa == 0.0 else math.copysign(1.0, kappa),
+    }
+
+
+def sobolev_spectral_hilbert_square(
+    signed_frequencies: Sequence[float],
+    modal_energies: Sequence[float],
+    modal_energy_rates: Sequence[float],
+    sobolev_exponent: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Master Sobolev Hilbert square for one curl-spectral Euler velocity.
+
+    For ``K_s=sum |a|^(2s) E_a`` and the physical Euler spectral velocity
+    ``F_spec``, put
+
+        A_s=|C|^(s+1)u,  B_s=|C|^(s-1)F_spec.
+
+    Then the full NS rate obeys exactly
+
+        K_s'=-2nu||A_s-B_s/(2nu)||^2+||B_s||^2/(2nu).
+
+    The same heat operator is the gradient of ``K_s/2`` in the shifted
+    ``H^(s-1)`` metric for every s.  Moreover ``||B_s||^2/K_s`` is the
+    ``|a|^(2s)E``-weighted expectation of the single local score ``(f/|a|)^2``.
+    """
+
+    a, e = _spectral_data(signed_frequencies, modal_energies)
+    if len(modal_energy_rates) != len(a):
+        raise ValueError("one nonlinear energy rate per curl level required")
+    rates = tuple(float(x) for x in modal_energy_rates)
+    s = float(sobolev_exponent)
+    nu = float(viscosity)
+    if not all(math.isfinite(x) for x in rates + (s, nu)) or nu <= 0.0:
+        raise ValueError("finite rates/exponent and positive viscosity required")
+    spectral_source_action(a, e, rates)
+    r = tuple(abs(x) for x in a)
+    if any(x <= 0.0 for x in r):
+        raise ValueError("nonzero curl radii required")
+
+    K_s = math.fsum((ri ** (2.0 * s)) * ei for ri, ei in zip(r, e))
+    D_s = math.fsum((ri ** (2.0 * s + 2.0)) * ei for ri, ei in zip(r, e))
+    cross = 0.5 * math.fsum((ri ** (2.0 * s)) * si for ri, si in zip(r, rates))
+    B2_terms = []
+    for ri, ei, si in zip(r, e, rates):
+        if ei <= 0.0:
+            if abs(si) > 5.0e-12 * max(1.0, *(abs(x) for x in rates)):
+                raise ValueError("zero-energy node cannot carry interior spectral velocity")
+            continue
+        B2_terms.append(0.25 * si * si * (ri ** (2.0 * s - 2.0)) / ei)
+    B2 = math.fsum(B2_terms)
+    square = D_s - cross / nu + B2 / (4.0 * nu * nu)
+    if square < -1.0e-9 * max(1.0, D_s, B2 / (nu * nu)):
+        raise AssertionError("master Sobolev square lost nonnegativity")
+    square = max(0.0, square)
+    rate = 2.0 * cross - 2.0 * nu * D_s
+    represented = -2.0 * nu * square + B2 / (2.0 * nu)
+    if abs(rate - represented) > 1.0e-9 * max(1.0, abs(rate), abs(represented)):
+        raise AssertionError("master Sobolev Hilbert square failed")
+
+    local_score = 0.0 if K_s <= 0.0 else B2 / K_s
+    expected = 0.0
+    if K_s > 0.0:
+        for ri, ei, si in zip(r, e, rates):
+            if ei <= 0.0:
+                continue
+            f = si / (2.0 * ei)
+            pi = (ri ** (2.0 * s)) * ei / K_s
+            expected += pi * (f / ri) ** 2
+    if abs(local_score - expected) > 1.0e-10 * max(1.0, abs(local_score), abs(expected)):
+        raise AssertionError("Sobolev local fitness expectation identity failed")
+    return {
+        "sobolev_exponent": s,
+        "sobolev_stock": K_s,
+        "sobolev_heat_moment": D_s,
+        "nonlinear_half_rate": cross,
+        "full_rate": rate,
+        "spectral_shifted_action": B2,
+        "square_norm": square,
+        "represented_rate": represented,
+        "rate_upper": B2 / (2.0 * nu),
+        "log_rate_upper": math.inf if K_s <= 0.0 else B2 / (2.0 * nu * K_s),
+        "sobolev_probability_local_fitness_action": local_score,
+    }
+
+
+def closed_triad_critical_action_bound(
+    signed_frequencies: Sequence[float],
+    modal_energies: Sequence[float],
+    *,
+    phase_cosine_abs: float = 1.0,
+) -> dict[str, float | tuple[float, float, float]]:
+    """Sharp scale-free H^-1/2 spectral-action bound for one physical closed triad.
+
+    For three signed curl eigenvalues ``a_i=s_i r_i`` whose positive radii form
+    a strict Fourier triangle, use the exact Waleffe magnitude determined by the
+    three radii/helicity signs.  If the common physical phase has cosine ``c``,
+    the closed-triad nonlinear energy rates are
+
+        T_i = 4 |g| c sqrt(e0 e1 e2) (a_j-a_k)
+
+    up to one common orientation sign.  The critical shifted action satisfies
+
+        ||Lambda^-1/2 F_spec,tri||^2 <= (1/2) E_tri K_tri,
+
+    and the constant 1/2 is a sharp supremum at the degenerate low-high-high
+    boundary.  The theorem is independent of the absolute Fourier scale.
+    """
+
+    a, e = _spectral_data(signed_frequencies, modal_energies)
+    if len(a) != 3 or any(x <= 0.0 for x in e):
+        raise ValueError("three distinct occupied triad nodes required")
+    r = tuple(abs(x) for x in a)
+    scale = max(r)
+    if not (r[0] + r[1] > r[2] and r[1] + r[2] > r[0] and r[2] + r[0] > r[1]):
+        raise ValueError("strict physical Fourier triangle required")
+    signs = tuple(1 if x > 0.0 else -1 for x in a)
+    if any(x == 0.0 for x in a):
+        raise ValueError("nonzero signed curl nodes required")
+    from .helical import coupling_magnitude_closed
+
+    g = coupling_magnitude_closed(r[0], r[1], r[2], signs[0], signs[1], signs[2])
+    pc = abs(float(phase_cosine_abs))
+    if not math.isfinite(pc) or pc > 1.0 + 1.0e-12:
+        raise ValueError("absolute phase cosine must lie in [0,1]")
+    pc = min(1.0, pc)
+    common = 4.0 * g * pc * math.sqrt(e[0] * e[1] * e[2])
+    rates = (
+        common * (a[1] - a[2]),
+        common * (a[2] - a[0]),
+        common * (a[0] - a[1]),
+    )
+    # Affine conservation is exact algebraically; the generic helper also checks it.
+    square = critical_spectral_hminus_half_square(a, e, rates, viscosity=1.0)
+    B2 = square["spectral_hminus_half_action"]
+    E = math.fsum(e)
+    K = math.fsum(ri * ei for ri, ei in zip(r, e))
+    ratio = B2 / (E * K)
+
+    root_ratios = []
+    pairs = ((1, 2), (2, 0), (0, 1))
+    for i, (j, k) in enumerate(pairs):
+        d = a[j] - a[k]
+        root = 8.0 * g * g * d * d / (r[i] * (r[j] + r[k]))
+        # Extreme near-degenerate triangles can lose a few ulps in Heron; this
+        # guard is deliberately looser than theorem tests at conditioned states.
+        if root > 1.0 + 2.0e-8:
+            raise AssertionError("physical root action coefficient exceeded sharp unit bound")
+        root_ratios.append(min(1.0, max(0.0, root)))
+    if ratio > 0.5 + 2.0e-8:
+        raise AssertionError("closed-triad critical action exceeded sharp one-half bound")
+    return {
+        "total_energy": E,
+        "critical_stock": K,
+        "waleffe_magnitude": g,
+        "phase_cosine_abs": pc,
+        "critical_shifted_action": B2,
+        "action_to_energy_critical_ratio": min(0.5, max(0.0, ratio)),
+        "sharp_action_ratio_upper": 0.5,
+        "root_geometric_ratios": (root_ratios[0], root_ratios[1], root_ratios[2]),
+        "log_critical_rate_upper_at_viscosity_one": B2 / (2.0 * K),
+        "scale_free_log_rate_upper_at_viscosity_one": E / 4.0,
+    }
+
+
+def continuum_critical_operator_isometry_constant() -> dict[str, float]:
+    """Exact R^3 unitary-Fourier constant for the critical midpoint HS isometry.
+
+    For the viscosity-free operator
+
+        Q_c(u)=|C|^-1 Sigma_c(u) |C|^-1
+              =(1/2)|C|^-1/2 [J_u,sgn C] |C|^-1/2,
+
+    the continuum helical kernel calculation gives
+
+        ||Q_c(u)||_{HS}^2 = (1/64) ||u||_{Hdot^(1/2)}^2.
+
+    The raw fixed-unit-wavevector geometric integral is ``pi^3/8`` and the
+    repository unitary Fourier product contributes ``C_F^2=(2pi)^-3``.  Their
+    product is exactly ``1/64``.  This is a continuum R^3 identity; discrete
+    torus/lattice truncations have boundary/lattice weights and must not use the
+    constant as an exact finite-cutoff equality.
+    """
+
+    raw = math.pi**3 / 8.0
+    cf2 = (2.0 * math.pi) ** -3
+    coeff = raw * cf2
+    if abs(coeff - 1.0 / 64.0) > 5.0e-15:
+        raise AssertionError("continuum critical operator isometry constant lost 1/64")
+    return {
+        "raw_fixed_wavevector_integral": raw,
+        "unitary_fourier_factor_squared": cf2,
+        "hilbert_schmidt_norm_squared_coefficient": coeff,
+        "critical_norm_to_hs_isometry_factor": 8.0,
+        "reynolds_hs_coefficient": coeff,
+    }
+
+
+def continuum_midpoint_operator_sobolev_dictionary(sobolev_exponent: float) -> dict[str, float]:
+    """Exponent dictionary for the continuum midpoint Hilbert-scale isometry.
+
+    If ``T u=Q_c(u)`` is the continuum midpoint transform, then
+
+        T(|C|^alpha u)=Delta_op^(alpha/2) T(u)
+
+    and therefore
+
+        ||u||_{Hdot^s}^2
+        =64 ||Delta_op^(s/2-1/4) Q_c(u)||_{HS}^2.
+
+    This helper records only the exact exponent/normalization.  It does not
+    discretize the continuum operator or claim the 1/64 identity for a hard
+    torus/Galerkin cutoff.
+    """
+
+    s = float(sobolev_exponent)
+    if not math.isfinite(s):
+        raise ValueError("finite Sobolev exponent required")
+    return {
+        "physical_sobolev_exponent": s,
+        "operator_laplacian_power": 0.5 * s - 0.25,
+        "operator_norm_squared_multiplier": 64.0,
+        "critical_midpoint_exponent": 0.5,
     }

@@ -6,6 +6,18 @@ import pytest
 from src.helical import coupling_magnitude_closed
 
 from src.native_curl_krylov_current_law import (
+    continuum_midpoint_operator_sobolev_dictionary,
+    continuum_critical_operator_isometry_constant,
+    closed_triad_critical_action_bound,
+    sobolev_spectral_hilbert_square,
+    critical_spectral_hminus_half_square,
+    poisson_critical_scale_measure_moments,
+    critical_loggap_collective_bound,
+    critical_logscale_strain_kernel,
+    sobolev_strain_transfer_multiplier,
+    radial_mean_resolvent_balance,
+    normalized_triple_orientation_heat_law,
+    cartan_hminus1_gradient_split,
     critical_boost_logistic_bound,
     critical_hilbert_square_balance,
     fixed_curl_cocycle_rhs,
@@ -780,3 +792,324 @@ def test_productive_curvature_action_is_exact_radial_fisher_regression_and_below
         # The exact rate must lie below the physical-time productive-action upper.
         exact_physical=out["normalized_log_mean_curl_rate"]*(2.0*nu*N2)
         assert exact_physical <= out["physical_log_mean_curl_upper"] + 2e-9
+
+
+def test_hminus1_cartan_motion_is_orthogonal_to_energy_gradient_heat():
+    a=(-3.0,-1.2,0.7,2.4)
+    z=(0.8+0.2j,-0.6+0.5j,0.9-0.3j,-0.4-0.7j)
+    raw=(0.3-0.4j,-0.2+0.7j,0.5+0.1j,-0.8+0.2j)
+    # Remove the single real energy-radial component from the arbitrary source.
+    E=sum(abs(x)**2 for x in z)
+    c=sum((zi.conjugate()*fi).real for zi,fi in zip(z,raw))/E
+    f=tuple(fi-c*zi for zi,fi in zip(z,raw))
+    nu=0.19
+    out=cartan_hminus1_gradient_split(a,z,f,nu)
+    assert out["cartan_gradient_metric_cross"] == pytest.approx(0.0,abs=1e-12)
+    assert out["ns_hminus1_action"] == pytest.approx(
+        out["euler_hminus1_action"]+out["viscous_hminus1_action"]
+    )
+
+
+def test_normalized_cartan_triple_orientation_is_viscosity_invariant():
+    out=normalized_triple_orientation_heat_law((0.7,2.1,4.3),(0.8,1.4,0.5),-0.37,0.23)
+    assert out["raw_current_heat_rate"] != 0.0
+    assert out["amplitude_root_heat_rate"] != 0.0
+    assert out["normalized_orientation_heat_rate"] == pytest.approx(0.0,abs=1e-14)
+
+
+def test_radial_mean_resolvent_square_is_exact_and_sharper_than_full_weighted_action():
+    rng=random.Random(2026081423)
+    for _ in range(800):
+        a=tuple(rng.choice((-1,1))*10**rng.uniform(-2,2) for _ in range(6))
+        e=tuple(10**rng.uniform(-3,3) for _ in a)
+        p=[x/sum(e) for x in e]
+        raw=[rng.uniform(-1,1) for _ in a]
+        A01=sum(pi*ai for pi,ai in zip(p,a));A11=sum(pi*ai*ai for pi,ai in zip(p,a))
+        b0=sum(pi*x for pi,x in zip(p,raw));b1=sum(pi*ai*x for pi,ai,x in zip(p,a,raw));det=A11-A01*A01
+        if det<1e-14:continue
+        c1=(b1-A01*b0)/det;c0=b0-c1*A01
+        # Convert a weighted fitness to physical energy rates S=2 E f.
+        rates=tuple(2.0*ei*(fi-c0-c1*ai) for ai,ei,fi in zip(a,e,raw))
+        out=radial_mean_resolvent_balance(a,e,rates,0.17)
+        assert out["mean_curl_rate"] == pytest.approx(out["represented_mean_curl_rate"],rel=2e-9,abs=2e-9)
+        assert out["mean_curl_rate"] <= out["mean_curl_optimal_upper"] + 2e-9
+        assert out["mean_curl_optimal_upper"] <= out["mean_curl_resolvent_upper"] + 2e-9
+        assert 0.0 <= out["weighted_cauchy_fraction"] <= 1.0 + 1e-10
+
+
+def test_master_sobolev_strain_transfer_has_energy_enstrophy_endpoints_and_critical_midpoint():
+    rng=random.Random(2026081426)
+    for _ in range(3000):
+        r=10**rng.uniform(-6,6);s=10**rng.uniform(-6,6)
+        for same in (False,True):
+            e0=sobolev_strain_transfer_multiplier(0.0,r,s,same_helicity=same)
+            em=sobolev_strain_transfer_multiplier(0.5,r,s,same_helicity=same)
+            e1=sobolev_strain_transfer_multiplier(1.0,r,s,same_helicity=same)
+            assert e0["strain_multiplier"] == pytest.approx(-1.0,abs=2e-12)
+            assert e1["strain_multiplier"] == pytest.approx(1.0 if same else -1.0,abs=2e-12)
+            if same:
+                assert em["strain_multiplier"] == pytest.approx(0.0,abs=2e-12)
+            else:
+                ker=critical_logscale_strain_kernel(r,s)
+                assert em["strain_multiplier"] == pytest.approx(-ker["strain_to_critical_multiplier"],rel=2e-12,abs=2e-12)
+
+
+def test_critical_sech_kernel_is_sylvester_multiplier_and_loggap_collective_bound_decays():
+    rng=random.Random(2026081427)
+    for _ in range(5000):
+        r=10**rng.uniform(-8,8);s=10**rng.uniform(-8,8)
+        out=critical_logscale_strain_kernel(r,s)
+        assert out["strain_to_critical_multiplier"] == pytest.approx(
+            2.0*math.sqrt(r*s)/(r+s),rel=3e-12,abs=3e-12
+        )
+        assert 0.0 < out["strain_to_critical_multiplier"] <= 1.0 + 1e-12
+    b2=critical_loggap_collective_bound(2.0)
+    b5=critical_loggap_collective_bound(5.0)
+    assert 0.0 < b5["collective_multiplier_bound"] < b2["collective_multiplier_bound"] <= 1.0
+    assert b5["collective_multiplier_bound"] == pytest.approx(1.0/math.sinh(2.5))
+
+
+def test_poisson_critical_scale_measure_is_probability_with_mean_inverse_mean_curl():
+    rng=random.Random(2026081428)
+    for _ in range(1000):
+        a=tuple(rng.choice((-1,1))*10**rng.uniform(-3,3) for _ in range(7))
+        e=tuple(10**rng.uniform(-4,4) for _ in a)
+        out=poisson_critical_scale_measure_moments(a,e)
+        assert out["probability_mass"] == pytest.approx(1.0,abs=2e-12)
+        assert out["mean_poisson_scale"] == pytest.approx(
+            1.0/(2.0*out["mean_absolute_curl"]),rel=2e-12,abs=2e-12
+        )
+        assert out["poisson_scale_variance"] >= -1e-12
+
+
+def test_resolvent_mean_curl_action_is_never_weaker_than_previous_productive_fisher_upper():
+    rng=random.Random(2026081429)
+    for _ in range(1200):
+        a=tuple(rng.choice((-1,1))*10**rng.uniform(-2,2) for _ in range(6))
+        e=tuple(10**rng.uniform(-3,3) for _ in a)
+        p=[x/sum(e) for x in e]
+        raw=[rng.uniform(-1,1) for _ in a]
+        A01=sum(pi*ai for pi,ai in zip(p,a));A11=sum(pi*ai*ai for pi,ai in zip(p,a))
+        b0=sum(pi*x for pi,x in zip(p,raw));b1=sum(pi*ai*x for pi,ai,x in zip(p,a,raw));det=A11-A01*A01
+        if det<1e-14:continue
+        c1=(b1-A01*b0)/det;c0=b0-c1*A01
+        rates=tuple(2.0*ei*(fi-c0-c1*ai) for ai,ei,fi in zip(a,e,raw))
+        nu=0.23
+        newer=radial_mean_resolvent_balance(a,e,rates,nu)
+        older=radial_fitness_selection_balance(a,e,rates,nu)
+        assert newer["log_mean_curl_optimal_upper"] <= older["physical_log_mean_curl_upper"] + 2e-8
+
+
+def test_critical_midpoint_uniquely_minimizes_blockwise_symmetric_euler_growth_on_zero_to_one():
+    rng=random.Random(2026081430)
+    for _ in range(10000):
+        r=10**rng.uniform(-7,7);q=10**rng.uniform(-7,7);s=rng.random()
+        for same in (False,True):
+            cur=sobolev_strain_transfer_multiplier(s,r,q,same_helicity=same)["strain_multiplier"]
+            mid=sobolev_strain_transfer_multiplier(0.5,r,q,same_helicity=same)["strain_multiplier"]
+            assert abs(mid) <= abs(cur) + 2e-12
+            if same:
+                assert mid == pytest.approx(0.0,abs=1e-13)
+
+
+def test_helicity_polar_krein_generator_has_reciprocal_pseudounitary_singular_values():
+    import numpy as np
+    import scipy.linalg as la
+    rng=np.random.default_rng(2026081433)
+    for n in (4,8,12):
+        signs=np.array(([1,-1]*(n//2)),float)
+        J=np.diag(signs)
+        # Build the general J-skew form: skew J-even compact part plus selfadjoint J-odd boost.
+        R=rng.normal(size=(n,n))+1j*rng.normal(size=(n,n))
+        A=(R-R.conj().T)/2
+        A=(A+J@A@J)/2
+        Q=rng.normal(size=(n,n))+1j*rng.normal(size=(n,n))
+        S=(Q+Q.conj().T)/2
+        S=(S-J@S@J)/2
+        L=A+S
+        assert np.linalg.norm(L.conj().T@J+J@L) <= 2e-12*max(1.0,np.linalg.norm(L))
+        U=la.expm(0.17*L)
+        assert np.linalg.norm(U.conj().T@J@U-J) <= 2e-11*max(1.0,np.linalg.norm(U)**2)
+        sv=np.linalg.svd(U,compute_uv=False)
+        assert np.max(np.abs(sv*sv[::-1]-1.0)) <= 2e-10
+
+
+def test_critical_spectral_hminus_half_square_is_exact_and_critical_probability_action():
+    rng=random.Random(2026081434)
+    for _ in range(1200):
+        a=tuple(rng.choice((-1,1))*10**rng.uniform(-2,2) for _ in range(6))
+        e=tuple(10**rng.uniform(-3,3) for _ in a)
+        # Produce a legitimate tangent fitness by removing its weighted affine part.
+        E=sum(e);p=[x/E for x in e];raw=[rng.uniform(-1,1) for _ in a]
+        A01=sum(pi*ai for pi,ai in zip(p,a));A11=sum(pi*ai*ai for pi,ai in zip(p,a))
+        b0=sum(pi*x for pi,x in zip(p,raw));b1=sum(pi*ai*x for pi,ai,x in zip(p,a,raw));det=A11-A01*A01
+        if det<1e-14:continue
+        c1=(b1-A01*b0)/det;c0=b0-c1*A01
+        f=tuple(fi-c0-c1*ai for ai,fi in zip(a,raw))
+        rates=tuple(2.0*ei*fi for ei,fi in zip(e,f))
+        nu=0.17
+        out=critical_spectral_hminus_half_square(a,e,rates,nu)
+        assert out["critical_rate"] == pytest.approx(out["represented_critical_rate"],rel=2e-9,abs=2e-9)
+        assert out["critical_rate"] <= out["critical_scalar_optimal_upper"] + 2e-9
+        assert out["critical_scalar_optimal_upper"] <= out["critical_rate_upper"] + 2e-9
+        assert 0.0 <= out["critical_cauchy_fraction"] <= 1.0 + 1e-10
+        K=sum(abs(ai)*ei for ai,ei in zip(a,e))
+        pi=[abs(ai)*ei/K for ai,ei in zip(a,e)]
+        expected=sum(pii*(fi/abs(ai))**2 for pii,fi,ai in zip(pi,f,a))
+        assert out["critical_probability_fitness_action"] == pytest.approx(expected,rel=2e-10,abs=2e-10)
+
+
+def test_master_sobolev_hilbert_square_uses_one_local_fitness_currency_for_all_s():
+    rng=random.Random(2026081435)
+    for _ in range(500):
+        a=tuple(rng.choice((-1,1))*10**rng.uniform(-2,2) for _ in range(6))
+        e=tuple(10**rng.uniform(-2,2) for _ in a)
+        E=sum(e);p=[x/E for x in e];raw=[rng.uniform(-1,1) for _ in a]
+        A01=sum(pi*ai for pi,ai in zip(p,a));A11=sum(pi*ai*ai for pi,ai in zip(p,a))
+        b0=sum(pi*x for pi,x in zip(p,raw));b1=sum(pi*ai*x for pi,ai,x in zip(p,a,raw));det=A11-A01*A01
+        if det<1e-14:continue
+        c1=(b1-A01*b0)/det;c0=b0-c1*A01
+        rates=tuple(2.0*ei*(fi-c0-c1*ai) for ai,ei,fi in zip(a,e,raw))
+        for s in (0.0,0.25,0.5,0.73,1.0,1.4):
+            out=sobolev_spectral_hilbert_square(a,e,rates,s,0.19)
+            assert out["full_rate"] == pytest.approx(out["represented_rate"],rel=2e-9,abs=2e-9)
+            assert out["full_rate"] <= out["rate_upper"] + 2e-9
+            assert out["sobolev_probability_local_fitness_action"] >= -1e-12
+        # s=0 nonlinear cross vanishes exactly by energy conservation.
+        e0=sobolev_spectral_hilbert_square(a,e,rates,0.0,0.19)
+        assert e0["nonlinear_half_rate"] == pytest.approx(0.0,abs=2e-10)
+        # s=1/2 reproduces the dedicated critical spectral square.
+        mid=sobolev_spectral_hilbert_square(a,e,rates,0.5,0.19)
+        crit=critical_spectral_hminus_half_square(a,e,rates,0.19)
+        assert mid["sobolev_stock"] == pytest.approx(crit["critical_stock"])
+        assert mid["spectral_shifted_action"] == pytest.approx(crit["spectral_hminus_half_action"])
+
+
+def test_closed_triad_critical_hminus_half_action_is_sharply_scale_free_by_energy():
+    rng=random.Random(2026081440)
+    for _ in range(5000):
+        r0=10**rng.uniform(-2,2);r1=10**rng.uniform(-2,2);theta=rng.uniform(0.01,math.pi-0.01)
+        r2=math.sqrt(r0*r0+r1*r1+2*r0*r1*math.cos(theta))
+        signs=tuple(rng.choice((-1,1)) for _ in range(3))
+        a=tuple(si*ri for si,ri in zip(signs,(r0,r1,r2)))
+        e=tuple(10**rng.uniform(-4,4) for _ in range(3))
+        out=closed_triad_critical_action_bound(a,e,phase_cosine_abs=rng.random())
+        assert out["action_to_energy_critical_ratio"] <= 0.5 + 2e-10
+        assert max(out["root_geometric_ratios"]) <= 1.0 + 2e-10
+        assert out["log_critical_rate_upper_at_viscosity_one"] <= out["scale_free_log_rate_upper_at_viscosity_one"] + 2e-8
+
+
+def test_closed_triad_one_half_action_constant_is_approached_at_low_high_high_boundary():
+    # Homochiral radii (1,eps,1), with eps << delta << 1 in the modal energies,
+    # approach the sharp root geometry and make the positive diagonal part of E*K negligible.
+    vals=[]
+    for eps,delta in ((1e-3,3e-2),(1e-5,3e-3),(1e-7,3e-4)):
+        out=closed_triad_critical_action_bound((1.0,eps,1.0),(1e-12,1.0,delta))
+        vals.append(out["action_to_energy_critical_ratio"])
+    assert vals[0] < vals[1] < vals[2] < 0.5 + 1e-10
+    assert vals[-1] > 0.49
+
+
+def test_productive_and_viscous_volumes_give_exact_critical_reynolds_race_and_ns_scaling():
+    # Start from one exact tangent spectral source.
+    a=(-2.4,-0.7,1.1,3.2)
+    e=(0.8,1.3,0.9,0.5)
+    raw=(0.7,-0.4,0.5,-0.8)
+    E=sum(e);p=[x/E for x in e];A01=sum(pi*ai for pi,ai in zip(p,a));A11=sum(pi*ai*ai for pi,ai in zip(p,a));b0=sum(pi*x for pi,x in zip(p,raw));b1=sum(pi*ai*x for pi,ai,x in zip(p,a,raw));det=A11-A01*A01;c1=(b1-A01*b0)/det;c0=b0-c1*A01
+    rates=tuple(2.0*ei*(fi-c0-c1*ai) for ai,ei,fi in zip(a,e,raw))
+    nu=0.23
+    base=critical_spectral_hminus_half_square(a,e,rates,nu)
+    assert base["productive_reynolds"]**2 == pytest.approx(base["viscous_to_productive_volume_ratio"])
+    exact_normalized=base["critical_rate"]/(2.0*nu*base["third_absolute_curl_moment"])
+    represented=base["productive_growth_sign"]*base["productive_reynolds"]-1.0
+    assert exact_normalized == pytest.approx(represented)
+    assert base["productive_action_volume"] + 1e-12 >= base["critical_action_volume"]
+
+    # Exact Navier--Stokes dilation at one time: a->lambda a, e->lambda^-1 e,
+    # Euler energy rate S->lambda S.  Both intrinsic volumes scale lambda^-3.
+    for lam in (0.17,0.8,2.5,11.0):
+        aa=tuple(lam*x for x in a);ee=tuple(x/lam for x in e);ss=tuple(lam*x for x in rates)
+        out=critical_spectral_hminus_half_square(aa,ee,ss,nu)
+        assert out["critical_action_volume"] == pytest.approx(base["critical_action_volume"]/lam**3,rel=3e-10,abs=3e-10)
+        assert out["productive_action_volume"] == pytest.approx(base["productive_action_volume"]/lam**3,rel=3e-10,abs=3e-10)
+        assert out["critical_viscous_volume"] == pytest.approx(base["critical_viscous_volume"]/lam**3,rel=3e-10,abs=3e-10)
+        assert out["productive_reynolds"] == pytest.approx(base["productive_reynolds"],rel=3e-10,abs=3e-10)
+
+
+def test_dimensionless_critical_reynolds_operator_is_selfadjoint_odd_and_exactly_competes_with_identity_heat():
+    import numpy as np
+    rng=np.random.default_rng(2026081444)
+    for n in (4,8,12):
+        r=np.exp(rng.uniform(-3,3,n));sgn=np.array(([1,-1]*(n//2)),float);J=np.diag(sgn);Lam=np.diag(r)
+        M=rng.normal(size=(n,n))+1j*rng.normal(size=(n,n));X=M-M.conj().T
+        Sigma=.5*np.diag(np.sqrt(r))@(X@J-J@X)@np.diag(np.sqrt(r))
+        nu=.37
+        R=(np.diag(1/r)@Sigma@np.diag(1/r))/nu
+        assert np.linalg.norm(R-R.conj().T) <= 2e-12*max(1.0,np.linalg.norm(R))
+        assert np.linalg.norm(R@J+J@R) <= 2e-12*max(1.0,np.linalg.norm(R))
+        y=rng.normal(size=n)+1j*rng.normal(size=n);z=Lam@y
+        kappa=np.vdot(y,Sigma@y).real;M3=np.vdot(z,z).real
+        direct=2*kappa-2*nu*M3
+        represented=2*nu*np.vdot(z,(R-np.eye(n))@z).real
+        assert direct == pytest.approx(represented,rel=2e-11,abs=2e-11)
+        ray=np.vdot(z,R@z).real/M3
+        assert ray == pytest.approx(kappa/(nu*M3),rel=2e-11,abs=2e-11)
+        ev=np.linalg.eigvalsh(R)
+        assert np.max(np.abs(ev+ev[::-1])) <= 3e-10*max(1.0,np.max(np.abs(ev)))
+
+
+def test_helicity_odd_reynolds_eigenvectors_are_neutral_and_top_heat_is_dirichlet_nonnegative():
+    import numpy as np
+    rng=np.random.default_rng(2026081446)
+    for n in (6,10,14):
+        J=np.diag(np.array(([1,-1]*(n//2)),float))
+        Q=rng.normal(size=(n,n))+1j*rng.normal(size=(n,n));R=(Q+Q.conj().T)/2;R=(R-J@R@J)/2
+        ev,V=np.linalg.eigh(R);lam=ev[-1];v=V[:,-1]
+        if abs(lam)>1e-10:
+            assert abs(np.vdot(v,J@v)) <= 3e-10
+        # Three arbitrary commuting momentum generators (diagonal in a Fourier basis).
+        Dvals=rng.integers(-4,5,size=(n,3)).astype(float)
+        lap=np.zeros_like(R)
+        rhs=0.0
+        for j in range(3):
+            D=np.diag(Dvals[:,j]);lap += D@(D@R-R@D)-(D@R-R@D)@D
+            Dv=D@v;rhs += 2*np.vdot(Dv,(lam*np.eye(n)-R)@Dv).real
+        lhs=np.vdot(v,lap@v).real
+        assert lhs == pytest.approx(rhs,rel=3e-10,abs=3e-10)
+        assert lhs >= -3e-10
+
+
+def test_continuum_critical_operator_hilbert_schmidt_constant_is_exact_one_over_64():
+    out=continuum_critical_operator_isometry_constant()
+    assert out["raw_fixed_wavevector_integral"] == pytest.approx(math.pi**3/8.0,rel=1e-15)
+    assert out["unitary_fourier_factor_squared"] == pytest.approx((2*math.pi)**-3,rel=1e-15)
+    assert out["hilbert_schmidt_norm_squared_coefficient"] == pytest.approx(1.0/64.0,rel=2e-15)
+    assert out["critical_norm_to_hs_isometry_factor"] == pytest.approx(8.0)
+
+
+def test_continuum_hs_isometry_implies_paired_reynolds_capacity_and_small_data_radius():
+    # Pure algebraic consequence of a self-adjoint J-odd Hilbert--Schmidt operator.
+    import numpy as np
+    rng=np.random.default_rng(2026081448);nu=.41
+    for n in (6,10,16):
+        J=np.diag(np.array(([1,-1]*(n//2)),float))
+        Q=rng.normal(size=(n,n))+1j*rng.normal(size=(n,n));Qc=(Q+Q.conj().T)/2;Qc=(Qc-J@Qc@J)/2
+        K=64.0*np.vdot(Qc,Qc).real
+        R=Qc/nu;ev=np.linalg.eigvalsh(R)
+        pos=ev[ev>1e-10]
+        assert K == pytest.approx(128.0*nu*nu*np.sum(pos*pos),rel=3e-10,abs=3e-10)
+        assert np.linalg.norm(R,2) <= math.sqrt(K)/(8.0*math.sqrt(2.0)*nu)+3e-10
+        assert int(np.sum(pos>1.0)) <= K/(128.0*nu*nu)+1e-10
+
+
+def test_continuum_midpoint_operator_sobolev_scale_places_critical_stock_at_plain_hs_energy():
+    expected={0.0:-0.25,0.5:0.0,1.0:0.25,1.5:0.5,2.0:0.75}
+    for s,pow_ in expected.items():
+        out=continuum_midpoint_operator_sobolev_dictionary(s)
+        assert out["operator_laplacian_power"] == pytest.approx(pow_)
+        assert out["operator_norm_squared_multiplier"] == pytest.approx(64.0)
+    # Reflection around s=1/2 becomes opposite operator Sobolev powers.
+    for delta in (0.1,0.35,0.8):
+        lo=continuum_midpoint_operator_sobolev_dictionary(0.5-delta)["operator_laplacian_power"]
+        hi=continuum_midpoint_operator_sobolev_dictionary(0.5+delta)["operator_laplacian_power"]
+        assert hi == pytest.approx(-lo)
