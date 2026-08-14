@@ -6,8 +6,10 @@ import pytest
 from src.native_material_vorticity_heat_law import (
     accumulated_transverse_heat_memory,
     material_hminus2_reset_identity,
+    material_hodge_speed_ladder,
     material_log_distortion_energy_bound,
     material_state_speed_lock,
+    primitive_material_current_fourier_law,
     moving_polarization_memory_bound,
     pair_direction_mismatch_decomposition,
     rank_one_incompressible_stretch_null,
@@ -15,6 +17,7 @@ from src.native_material_vorticity_heat_law import (
     transverse_heat_determinant,
     transverse_heat_log_rate,
     transverse_two_covector_area_identity,
+    vorticity_stress_current_algebra,
 )
 
 
@@ -198,3 +201,55 @@ def test_primitive_material_metric_and_beta_reset_speeds_are_exactly_locked():
         assert out["hminus2_beta_reset_speed_squared"] == pytest.approx(nu*nu*b)
         assert out["positive_energy_decay_rate"] == pytest.approx(nu*out["metric_affine_speed_squared"])
         assert out["positive_energy_decay_rate"] == pytest.approx(2*out["hminus2_beta_reset_speed_squared"]/nu)
+
+
+
+def test_primitive_current_is_divergence_of_metric_speed_and_obeys_flux_continuity():
+    rng=np.random.default_rng(2026081511)
+    for _ in range(5000):
+        k=rng.integers(-20,21,3).astype(float)
+        if np.dot(k,k)==0: continue
+        u=rng.normal(size=3)+1j*rng.normal(size=3)
+        u-=k*np.dot(k,u)/np.dot(k,k)
+        out=primitive_material_current_fourier_law(k,u,10.0**rng.uniform(-5,2))
+        assert out["codifferential_divergence_residual"] <= 2e-9
+        assert out["laplacian_factorization_residual"] <= 2e-9
+        assert out["vorticity_flux_continuity_residual"] <= 2e-9
+        # h=g_t has exactly twice the intrinsic two-form norm squared.
+        assert out["metric_speed_norm_squared"] == pytest.approx(
+            2*out["beta_norm_squared_matrix_convention"],rel=3e-11,abs=3e-11
+        )
+
+
+def test_all_hodge_scales_lock_reset_current_and_metric_speed():
+    rng=np.random.default_rng(2026081512)
+    for s in (-2.0,-1.5,-1.0,-.5,0.0,.5,1.0,2.0,3.0):
+        for _ in range(80):
+            lam=np.exp(rng.uniform(-7,7,30)); b=rng.normal(size=30)+1j*rng.normal(size=30)
+            nu=10.0**rng.uniform(-5,2)
+            out=material_hodge_speed_ladder(lam,b,nu,s)
+            assert out["beta_reset_hs_minus_two_squared"] == pytest.approx(
+                out["viscous_current_hs_minus_one_squared"],rel=3e-12,abs=3e-12
+            )
+            assert out["beta_reset_hs_minus_two_squared"] == pytest.approx(
+                .5*nu*nu*out["metric_speed_hs_squared"],rel=3e-12,abs=3e-12
+            )
+
+
+def test_vorticity_stress_metric_work_and_current_cyclic_work_are_same_algebra():
+    rng=np.random.default_rng(2026081513)
+    for _ in range(5000):
+        u=rng.normal(size=3); w=rng.normal(size=3); c=rng.normal(size=3)
+        A=rng.normal(size=(3,3));S=.5*(A+A.T);S-=np.trace(S)/3*np.eye(3)
+        out=vorticity_stress_current_algebra(u,w,c,S)
+        assert out["stress_metric_work_density"] == pytest.approx(out["stretching_density"],rel=2e-12,abs=2e-12)
+        assert out["velocity_stress_divergence_work_density"] == pytest.approx(out["current_cyclic_work_density"],rel=2e-12,abs=2e-12)
+
+
+def test_certificate_records_local_current_noether_and_all_scale_lock_without_overclaim():
+    cert=theorem_certificate()
+    assert "beta_t+d j=0" in cert["primitive_current_law"]
+    assert "every real s" in cert["all_scale_speed_ladder"]
+    assert "div T_beta" in cert["stress_current_noether"]
+    assert "cross-product skewness" in cert["enstrophy_derivative_null"]
+    assert cert["global_regularity_claimed"] is False
