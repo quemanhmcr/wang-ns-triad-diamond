@@ -7,6 +7,7 @@ from src.native_material_vorticity_heat_law import (
     accumulated_transverse_heat_memory,
     material_hminus2_reset_identity,
     material_log_distortion_energy_bound,
+    material_state_speed_lock,
     moving_polarization_memory_bound,
     pair_direction_mismatch_decomposition,
     rank_one_incompressible_stretch_null,
@@ -186,3 +187,14 @@ def test_moving_polarization_reduces_to_pure_memory_when_heat_does_not_rewrite_b
         fs.append(f/d**(1.0/3.0));ws.append(.1)
     out=moving_polarization_memory_bound(fs,[q.copy() for _ in fs],ws)
     assert out["heat_only_reset_remainder"] == pytest.approx(0.0,abs=1e-13)
+
+
+def test_primitive_material_metric_and_beta_reset_speeds_are_exactly_locked():
+    rng=np.random.default_rng(2026081510)
+    for _ in range(2000):
+        b=10.0**rng.uniform(-10,10);nu=10.0**rng.uniform(-6,3)
+        out=material_state_speed_lock(b,nu)
+        assert out["metric_affine_speed_squared"] == pytest.approx(2*b)
+        assert out["hminus2_beta_reset_speed_squared"] == pytest.approx(nu*nu*b)
+        assert out["positive_energy_decay_rate"] == pytest.approx(nu*out["metric_affine_speed_squared"])
+        assert out["positive_energy_decay_rate"] == pytest.approx(2*out["hminus2_beta_reset_speed_squared"]/nu)

@@ -429,6 +429,43 @@ def rank_one_incompressible_stretch_null(amplitude: Sequence[float], covector: S
     }
 
 
+
+def material_state_speed_lock(beta_l2_squared: float, viscosity: float) -> dict[str, float]:
+    """Exact global speed lock of the two primitive material state fields.
+
+    With the affine-invariant metric speed
+
+        ||g_t||_M^2 = int tr[(g^-1 g_t)^2] da,
+
+    ``g_t=2 Phi^*S`` gives ``||g_t||_M^2=4||S||_2^2``.  Global
+    incompressibility gives ``||omega||_2^2=2||S||_2^2=||beta||_g^2``.
+    Together with ``beta_t=-nu L_g beta`` this yields
+
+        ||g_t||_M^2 = 2||beta||_g^2,
+        ||beta_t||_H^-2_g^2 = (nu^2/2)||g_t||_M^2,
+        -E' = nu ||g_t||_M^2 = (2/nu)||beta_t||_H^-2_g^2.
+
+    Thus material metric deformation and heat rewriting are not independent
+    state velocities; NS locks them to the same enstrophy.
+    """
+    b=float(beta_l2_squared); nu=float(viscosity)
+    if not math.isfinite(b) or b<0.0 or not math.isfinite(nu) or nu<=0.0:
+        raise ValueError("nonnegative finite beta L2 squared and positive viscosity required")
+    metric_speed2=2.0*b
+    reset_speed2=nu*nu*b
+    energy_decay=2.0*nu*b
+    if abs(reset_speed2-0.5*nu*nu*metric_speed2)>2e-13*max(1.0,reset_speed2):
+        raise AssertionError("material state speed lock failed")
+    if abs(energy_decay-nu*metric_speed2)>2e-13*max(1.0,energy_decay):
+        raise AssertionError("metric speed lost physical energy law")
+    return {
+        "beta_l2_squared": b,
+        "metric_affine_speed_squared": metric_speed2,
+        "hminus2_beta_reset_speed_squared": reset_speed2,
+        "positive_energy_decay_rate": energy_decay,
+        "reset_to_metric_speed_squared_ratio": 0.5*nu*nu,
+    }
+
 def material_log_distortion_energy_bound(time_horizon: float, energy_loss: float, viscosity: float) -> dict[str, float]:
     """Global material-label L2 bound for accumulated deformation log-stretch.
 
@@ -465,6 +502,7 @@ def theorem_certificate() -> dict[str, object]:
         "history_memory": "Euler freezes material beta, and Minkowski determinant gives sqrt(det int g^-1|qperp dt)>=int |Fq|/|q| dt; rotating anisotropy cannot reset accumulated transverse heat area",
         "moving_polarization_memory": "for full NS, int|F q(t)|dt <= |q(T)| sqrt(det int g^-1|q(T)^perp dt)+int|F(q(t)-q(T))|dt; the only escape from fixed-plane heat memory is actual heat-driven rewriting of beta",
         "heat_only_reset": "Euler has no beta_t term in material coordinates; viscosity alone changes beta and ||beta_t||_H^-2_g^2=nu^2||beta||_g^2, so integrated reset action divided by nu equals half the physical velocity-energy loss",
+        "primitive_state_speed_lock": "with ||g_t||_M^2=int tr[(g^-1 g_t)^2], NS gives ||g_t||_M^2=2||beta||_g^2 and ||beta_t||_H^-2_g^2=(nu^2/2)||g_t||_M^2; equivalently -E'=nu||g_t||_M^2=(2/nu)||beta_t||_H^-2_g^2",
         "rank_one_null": "a one-direction incompressible gradient a tensor xi has omega=xi cross a and S omega=0; self-stretching is absent at rank one",
         "flat_hodge_dirichlet": "because every g=Phi^*g0 is flat, <beta,L_g beta>_g=||nabla^g beta||_2^2; material spatial non-affinity and vorticity magnitude/direction variation are already part of the same heat Dirichlet form, not a separate escape channel",
         "pair_mismatch_collapse": "omega_a cross omega_b=F_a^-T(q_a cross q_b)+(F_a q_a) cross((F_b-F_a)q_b); these are coordinate pieces of one covariant material-two-form variation, whose intrinsic norm is the same nabla^g beta squared by Hodge heat",

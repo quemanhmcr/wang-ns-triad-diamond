@@ -407,7 +407,68 @@ regularity problem.  Its role is conceptual and structural: **nonlinearity can o
 accumulate deformation memory; every material reset is viscous and globally billed by
 physical energy loss.**
 
-## 6. Physical directional mismatch has exactly two material sources
+## 6. The two primitive state velocities are exactly locked
+
+The material formulation contains two moving fields, but Navier--Stokes does not let
+them move independently.  Equip the determinant-one metric manifold with its native
+affine-invariant speed
+
+\[
+\|\dot g\|_{\mathcal M,g}^2
+:=\int\operatorname{tr}[(g^{-1}\dot g)^2]\,da.
+\]
+
+Since `g_t=2 F^T S F`, similarity invariance of trace gives
+
+\[
+\|\dot g\|_{\mathcal M,g}^2=4\|S\|_2^2.
+\]
+
+For an incompressible field on `R^3` or the periodic box,
+
+\[
+\|\omega\|_2^2=2\|S\|_2^2=\|\beta\|_{L^2_g}^2.
+\]
+
+Therefore
+
+\[
+\boxed{
+\|\dot g\|_{\mathcal M,g}^2
+=2\|\beta\|_{L^2_g}^2.
+}
+\]
+
+Together with the heat-only reset identity,
+
+\[
+\boxed{
+\|\dot\beta\|_{\dot H^{-2}_g}^2
+=\frac{\nu^2}{2}\|\dot g\|_{\mathcal M,g}^2.
+}
+\]
+
+And the physical energy law becomes the single speed identity
+
+\[
+\boxed{
+-\dot E
+=\nu\|\dot g\|_{\mathcal M,g}^2
+=\frac2\nu\|\dot\beta\|_{\dot H^{-2}_g}^2.
+}
+\]
+
+Thus the two apparent ways of changing the primitive state are not independent
+controls.  The same enstrophy fixes both the Euler-generated metric speed and the
+viscous material-vorticity reset speed.  In particular, using heat to move the
+polarization out of its accumulated transverse memory is inseparable from the same
+state amplitude that is deforming the metric and writing new memory.
+
+This speed lock is global in space; it does not yet convert the weak `H^-2` reset norm
+into the pointwise reset remainder of the previous section.  That norm conversion is
+one precise form of the remaining critical gap.
+
+## 7. Physical directional mismatch has exactly two material sources
 
 The Biot--Savart stretching kernel needs a cross product between vorticity
 directions.  In material variables that cross product has an exact decomposition,
@@ -466,7 +527,7 @@ already contains the factor `xi(x) cross xi(y)`.  The covariant variation requir
 for nonlinear directional stretching is therefore the **same covariant derivative
 which Hodge heat squares in its Dirichlet form**.
 
-## 7. Spatial turnover is already inside the same heat operator
+## 8. Spatial turnover is already inside the same heat operator
 
 There is one important loophole to a same-label memory statement: Euler could move
 the region of strongest deformation to fresh material labels without rewriting the
@@ -547,7 +608,7 @@ heat-only-reset laws, the only possible escape is a jointly concentrated process
 which the material two-form uses viscous rewriting on ever smaller sets quickly enough
 to evade a heat covariance that remembers all Euler stretching.
 
-## 8. Critical scaling separates memory from reset counting
+## 9. Critical scaling separates memory from reset counting
 
 The exact `H^-2` reset identity must not be misread as a finite reset-count theorem.
 NS scaling itself rules that out.  A critical concentration at frequency `N` may have
@@ -584,7 +645,7 @@ This scale observation is not a proof that the two costs cannot cooperate on a
 concentrating set.  It explains why a correct final theorem, if it exists in this
 grammar, has to couple **memory and covariant turnover**, not count reset events.
 
-## 9. Falsification guard: the primitive critical vorticity norm is not monotone
+## 10. Falsification guard: the primitive critical vorticity norm is not monotone
 
 It is tempting, after reaching the material two-form grammar, to hope that the
 scale-critical primitive norm `int |omega|^(3/2)` is the missing scalar Lyapunov
@@ -598,7 +659,7 @@ states.  Its methodological use is clear: the remaining mechanism is genuinely
 historical/covariant.  The proof core should not return to searching for a scalar
 critical monotone unless it is forced directly by the material equations.
 
-## 10. What remains
+## 11. What remains
 
 The new primitive reduction is
 
