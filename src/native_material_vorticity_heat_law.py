@@ -759,7 +759,8 @@ def maxwell_duality_stress_algebra(field_strength: np.ndarray) -> dict[str, floa
     def T(X): return X@X.T-.25*np.eye(4)*float(np.sum(X*X))
     tf=T(F);tp=T(fp);tm=T(fm)
     lhs=float(np.sum(tf*tf)); rhs=4.0*n2(fp)*n2(fm)
-    residual=max(abs(lhs-rhs),np.linalg.norm(tp),np.linalg.norm(tm))
+    square_res=float(np.linalg.norm(tf@tf-.25*lhs*np.eye(4)))
+    residual=max(abs(lhs-rhs),np.linalg.norm(tp),np.linalg.norm(tm),square_res)
     if residual>2e-10*max(1.0,lhs,rhs,n2(F)):
         raise AssertionError("Maxwell self-duality/stress identity failed")
     return {
@@ -770,7 +771,130 @@ def maxwell_duality_stress_algebra(field_strength: np.ndarray) -> dict[str, floa
         "cross_duality_product_times_four":rhs,
         "pure_self_dual_stress_norm":float(np.linalg.norm(tp)),
         "pure_anti_self_dual_stress_norm":float(np.linalg.norm(tm)),
+        "stress_square_scalar_residual":square_res,
         "identity_residual":residual,
+    }
+
+
+
+def primitive_spacetime_gauge_algebra(
+    velocity: Sequence[float],
+    vorticity: Sequence[float],
+    vorticity_current: Sequence[float],
+    viscosity: float,
+) -> dict[str, float]:
+    """Pointwise algebra of the exact spacetime vorticity curvature.
+
+    With ``alpha=u^flat``, ``beta=d alpha`` and ``c=delta beta`` the rotational
+    Navier--Stokes equation is
+
+        alpha_t + d(p+|u|^2/2) = - i_u beta - nu c.
+
+    Hence the Abelian spacetime connection ``A4=alpha-(p+|u|^2/2)dt`` has
+
+        F4 = beta - dt wedge e,       e=i_u beta+nu c.
+
+    In vector representatives ``i_u beta=-u cross omega``.  The Bianchi identity
+    ``d_4 F4=0`` is exactly the vorticity equation.  Algebraically,
+
+        e.omega = nu c.omega
+        -e.c = (u cross omega).c - nu |c|^2.
+
+    The first identity is the pointwise Euler Chern--Simons null; the second is
+    the local Joule density in the enstrophy Poynting law.  Pressure occurs only
+    as the temporal gauge potential and is not an independent curvature source.
+    """
+    u=np.asarray(tuple(float(x) for x in velocity),dtype=float)
+    w=np.asarray(tuple(float(x) for x in vorticity),dtype=float)
+    c=np.asarray(tuple(float(x) for x in vorticity_current),dtype=float)
+    nu=float(viscosity)
+    if u.shape!=(3,) or w.shape!=(3,) or c.shape!=(3,) or not np.all(np.isfinite(u)) or not np.all(np.isfinite(w)) or not np.all(np.isfinite(c)):
+        raise ValueError("finite velocity/vorticity/current three-vectors required")
+    if not math.isfinite(nu) or nu<0.0:
+        raise ValueError("finite nonnegative viscosity required")
+    uxw=np.cross(u,w)
+    i_u_beta=-uxw
+    e=i_u_beta+nu*c
+    top=float(np.dot(e,w)); visc_top=nu*float(np.dot(c,w))
+    stretch=float(np.dot(uxw,c)); joule=-float(np.dot(e,c)); represented=stretch-nu*float(np.dot(c,c))
+    null=float(np.dot(i_u_beta,w))
+    residual=max(abs(top-visc_top),abs(joule-represented),abs(null))
+    if residual>3e-12*max(1.0,abs(top),abs(visc_top),abs(joule),abs(represented),np.linalg.norm(u)*np.linalg.norm(w)*max(1.0,np.linalg.norm(c))):
+        raise AssertionError("primitive spacetime curvature algebra failed")
+    return {
+        "euler_emotive_norm":float(np.linalg.norm(i_u_beta)),
+        "total_emotive_norm":float(np.linalg.norm(e)),
+        "euler_topological_null":null,
+        "chern_simons_density_rate_half":top,
+        "viscous_chern_simons_density_rate_half":visc_top,
+        "euler_stretching_work_density":stretch,
+        "negative_joule_work_density":joule,
+        "stretch_minus_ohmic_density":represented,
+        "identity_residual":residual,
+    }
+
+
+def so33_exterior_square_algebra(generator: np.ndarray) -> dict[str, float]:
+    """Exterior-square ``sl(4)->so(3,3)`` law on two-forms.
+
+    The wedge form on ``Lambda^2 R^4`` has signature ``(3,3)``.  A trace-free
+    four-dimensional infinitesimal volume-preserving deformation ``A`` acts on
+    covariant two-forms by
+
+        rho(A)F=A^T F+F A.
+
+    In a wedge-orthonormal basis, ``rho(A)^T J+J rho(A)=0``.  The skew part of A
+    acts compactly: it is Euclidean-skew and commutes with the Hodge involution J.
+    The symmetric trace-free part acts as a noncompact boost: it is
+    Euclidean-symmetric and anticommutes with J.  Moreover
+
+        ||rho(S)||_HS^2 = 2 ||S||_F^2.
+
+    Thus strain is literally the duality-mixing tangent of the primitive
+    ``SO(3,3)`` geometry; rotation cannot mix the two Hodge sectors.
+    """
+    A=np.asarray(generator,dtype=float)
+    if A.shape!=(4,4) or not np.all(np.isfinite(A)):
+        raise ValueError("finite 4x4 generator required")
+    tr=float(np.trace(A))
+    if abs(tr)>3e-10*max(1.0,np.linalg.norm(A)):
+        raise ValueError("volume-preserving generator must be trace-free")
+    pairs=((0,1),(0,2),(0,3),(2,3),(3,1),(1,2))
+    basis=[]
+    for a,b in pairs:
+        F=np.zeros((4,4));F[a,b]=1.0;F[b,a]=-1.0;basis.append(F)
+    eps=np.zeros((4,4,4,4),dtype=float)
+    import itertools
+    for perm in itertools.permutations(range(4)):
+        inv=sum(perm[i]>perm[j] for i in range(4) for j in range(i+1,4))
+        eps[perm]=(-1.0)**inv
+    def inn(F,G): return .5*float(np.sum(F*G))
+    def star(F): return .5*np.einsum('abcd,cd->ab',eps,F)
+    J=np.array([[inn(bi,star(bj)) for bj in basis] for bi in basis])
+    def rep(B):
+        R=np.zeros((6,6))
+        for j,F in enumerate(basis):
+            RF=B.T@F+F@B
+            for i,bi in enumerate(basis):R[i,j]=inn(bi,RF)
+        return R
+    R=rep(A); K=.5*(A-A.T); S=.5*(A+A.T); S-=np.trace(S)/4.0*np.eye(4)
+    RK=rep(K); RS=rep(S)
+    so_res=float(np.linalg.norm(R.T@J+J@R))
+    rot_res=max(float(np.linalg.norm(RK+RK.T)),float(np.linalg.norm(RK@J-J@RK)))
+    boost_res=max(float(np.linalg.norm(RS-RS.T)),float(np.linalg.norm(RS@J+J@RS)))
+    lhs=float(np.sum(RS*RS));rhs=2.0*float(np.sum(S*S)); norm_res=abs(lhs-rhs)
+    scale=max(1.0,np.linalg.norm(R),lhs,rhs)
+    if max(so_res,rot_res,boost_res,norm_res)>2e-10*scale:
+        raise AssertionError("exterior-square SO(3,3) algebra failed")
+    return {
+        "wedge_signature_positive":3.0,
+        "wedge_signature_negative":3.0,
+        "so33_residual":so_res,
+        "rotation_compact_residual":rot_res,
+        "strain_boost_residual":boost_res,
+        "strain_exterior_hs_squared":lhs,
+        "twice_strain_frobenius_squared":rhs,
+        "boost_speed_identity_residual":norm_res,
     }
 
 def theorem_certificate() -> dict[str, object]:
@@ -790,6 +914,9 @@ def theorem_certificate() -> dict[str, object]:
         "chern_simons_maxwell_extension": "curl C=*d is simultaneously the Hessian of helicity/Chern-Simons, its modulus |C| gives the critical stock, and C^2 is Hodge heat; the canonical extension A(y)=exp(-y|C|)u has source-free Maxwell curvature F4 with int|F4|^2=K and topological charge H",
         "maxwell_duality_stress": "the 4D Maxwell extension splits into self-dual/anti-self-dual energies (K+H)/2 and (K-H)/2; each pure duality has zero stress and |T|^2=4|F+|^2|F-|^2, so critical Euler work is intrinsically cross-duality stress",
         "poisson_sech_origin": "unit critical Maxwell depth profiles sqrt(2r)e^-ry have overlap 2sqrt(rs)/(r+s)=sech((log r-log s)/2); critical log-scale locality is harmonic-depth overlap, not a shell cutoff",
+        "primitive_spacetime_curvature": "with alpha=u^flat, beta=d alpha, c=delta beta and Bernoulli B=p+|u|^2/2, the Abelian spacetime connection A4=alpha-B dt has curvature F4=beta-dt wedge(i_u beta+nu c); d_4F4=0 is exactly the vorticity equation, Euler obeys (i_u beta) wedge beta=0 pointwise, and F4 wedge F4 is purely viscous",
+        "primitive_poynting_joule": "put e=i_u beta+nu c; the exact local law is partial_t |omega|^2/2+div(e cross omega)=-e.c, with -e.c=(u cross omega).c-nu|c|^2, so stretching and palinstrophy are one electromotive-current work law",
+        "so33_duality_group": "volume-preserving four-dimensional deformation acts on two-forms through sl(4)->so(3,3); rotations commute with Hodge duality while trace-free strain anticommutes and is the unique noncompact duality-mixing boost, with ||rho(S)||_HS^2=2||S||^2",
         "enstrophy_derivative_null": "integrating <curl omega,u cross omega> by parts gives sum_j <partial_j omega, partial_j u cross u>; the derivative-on-u self term vanishes pointwise by cross-product skewness, so nonlinear enstrophy production necessarily uses the same first vorticity derivative squared by Hodge heat",
         "rank_one_null": "a one-direction incompressible gradient a tensor xi has omega=xi cross a and S omega=0; self-stretching is absent at rank one",
         "flat_hodge_dirichlet": "because every g=Phi^*g0 is flat, <beta,L_g beta>_g=||nabla^g beta||_2^2; material spatial non-affinity and vorticity magnitude/direction variation are already part of the same heat Dirichlet form, not a separate escape channel",

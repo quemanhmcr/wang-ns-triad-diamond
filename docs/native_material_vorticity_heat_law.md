@@ -898,6 +898,215 @@ simply the overlap of the canonical Maxwell fields in the scale-depth coordinate
 Comparable curl radii occupy the same harmonic depth; widely separated radii do not.
 No shell threshold, packet lineage or scale case is needed to state this locality.
 
+
+## 17. Full Navier--Stokes is a closed spacetime curvature law
+
+The material Hodge equation is not the only gauge in which the primitive current is
+visible.  Return to physical spacetime and put
+
+\[
+\alpha=u^\flat,\qquad \beta=d\alpha,\qquad c=\delta\beta,
+\qquad B=p+\frac12|u|^2.
+\]
+
+Rotational Navier--Stokes is exactly
+
+\[
+\alpha_t+dB=-\iota_u\beta-\nu c.
+\]
+
+Consequently the real Abelian spacetime connection
+
+\[
+\boxed{\mathbb A=\alpha-B\,dt}
+\]
+
+has curvature
+
+\[
+\boxed{
+\mathbb F=d_4\mathbb A
+=\beta-dt\wedge e,
+\qquad e:=\iota_u\beta+\nu c.
+}
+\]
+
+Its Bianchi identity is not an analogy:
+
+\[
+\boxed{d_4\mathbb F=0
+\quad\Longleftrightarrow\quad
+\beta_t+d e=0.}
+\]
+
+Together with
+
+\[
+\boxed{c=\delta\beta,\qquad
+u e_{\rm visc}=\nu c,\qquad
+u e_{\rm Euler}=\iota_u\beta,\qquad
+u u=(\delta L^{-1}\beta)^\sharp}
+\]
+
+(with the obvious correction that only the viscous term carries the coefficient
+`nu`), this is a closed vorticity formulation of NS; the Bernoulli/pressure scalar is
+the temporal gauge potential needed to reconstruct the velocity one-form equation.
+No pressure source appears in the curvature equation.
+
+The key pointwise topological null is
+
+\[
+\boxed{(\iota_u\beta)\wedge\beta=0.}
+\]
+
+In vector language this is only `(u cross omega).omega=0`, but in the spacetime
+curvature it has a stronger consequence.  Chern--Simons transgression gives
+
+\[
+d_4(\mathbb A\wedge\mathbb F)=\mathbb F\wedge\mathbb F,
+\]
+
+while
+
+\[
+\boxed{
+\mathbb F\wedge\mathbb F
+=-2\nu\,dt\wedge c\wedge\beta.
+}
+\]
+
+Thus Euler has **zero bulk topological source pointwise**.  Helicity is changed only
+by the Hodge current used by viscosity.  This is the local gauge form of the usual
+Euler helicity conservation and viscous helicity decay law.
+
+A direct dealiased Fourier referee on three independent smooth states gave Bianchi
+residuals `4.0e-16`, `3.0e-16`, `3.0e-16`; the Euler wedge null was at
+`1e-24--1e-26`; the transgression-density residual was `1e-20` or smaller.
+
+## 18. Enstrophy obeys an exact Poynting--Joule law
+
+The same curvature gives a local balance without introducing a new energy currency.
+In vector representatives let `e=-u cross omega+nu curl omega` and
+`c=curl omega`.  From `omega_t+curl e=0`,
+
+\[
+\boxed{
+\partial_t\frac{|\omega|^2}{2}
++\operatorname{div}(e\times\omega)
+=-e\cdot c.
+}
+\]
+
+But
+
+\[
+\boxed{
+-e\cdot c
+=(u\times\omega)\cdot c-\nu|c|^2.
+}
+\]
+
+Therefore Euler stretching and viscous palinstrophy are not two independent source
+channels.  They are the reversible and Ohmic pieces of **one electromotive--current
+work law** for the same closed spacetime curvature.  After spatial integration the
+flux term disappears and this is exactly the enstrophy balance.
+
+The pointwise Cauchy alignment in this work law can be arbitrarily close to saturation
+at the jet level; no local angle gap is claimed.  The missing regularity mechanism is
+therefore historical/geometric, not a stronger pointwise Joule inequality.
+
+## 19. The hidden deformation group is `SO(3,3)` on two-forms
+
+On an oriented four-dimensional vector space the wedge product gives `Lambda^2` a
+nondegenerate bilinear form of signature `(3,3)`.  If `A in sl(4)` is an infinitesimal
+volume-preserving deformation, its natural action on covariant two-forms is
+
+\[
+\rho(A)F=A^TF+FA.
+\]
+
+Wedge invariance is exactly
+
+\[
+\boxed{\rho(A)^TJ+J\rho(A)=0,}
+\]
+
+so the exterior-square action lands in `so(3,3)`.  The Hodge star is the involution
+whose `+1` and `-1` eigenspaces are the two three-dimensional duality sectors.
+
+The Cartan split of the physical deformation now has no extra ontology:
+
+* if `A` is skew, `rho(A)` is Euclidean-skew and commutes with `J`; it is compact
+  rotation and cannot mix dualities;
+* if `A=S` is symmetric trace-free, `rho(S)` is Euclidean-symmetric and
+  anticommutes with `J`; it is the noncompact boost which **only** mixes opposite
+  dualities.
+
+Moreover
+
+\[
+\boxed{\|\rho(S)\|_{HS(\Lambda^2)}^2=2|S|^2.}
+\]
+
+Equivalently, for a trace-free metric variation `h`,
+
+\[
+\boxed{
+\{\dot *,*\}=0,
+\qquad
+\|\dot *\|_{HS}^2=2|h|^2.
+}
+\]
+
+For the material NS metric this gives
+
+\[
+\boxed{
+\int_M\|\partial_t *_4\|_{HS}^2=4Z,
+\qquad
+-E'(t)=\frac\nu2\int_M\|\partial_t *_4\|_{HS}^2.
+}
+\]
+
+So the speed of the self-dual/anti-self-dual splitting itself is exactly billed by
+the physical energy law.  The earlier Krein compact/boost split is therefore a shadow
+of the elementary exterior-square representation of volume-preserving deformation.
+
+The Maxwell stress has matching rigidity.  Besides being trace-free,
+
+\[
+\boxed{
+T^2=\frac{|T|^2}{4}I_4,
+}
+\]
+
+so its principal values are always `(+sigma,+sigma,-sigma,-sigma)`.  The stress is not
+an arbitrary symmetric tensor that an adversarial proof architecture may orient at
+will; it is the rank-one cross-duality moment of the same `(3,3)` geometry.
+
+The numerical exterior-square referee over `20,000` random trace-free generators gave
+`so(3,3)` residual `2.54e-15`, compact-rotation residual `0`, boost residual
+`1.54e-15`, and the exact boost-speed constant to `5.65e-16` relative error.
+
+## 20. Guard: Maxwell depth is canonical, but naive depth transport is false
+
+The harmonic coordinate `y` localizes `|curl|`, but it must not be promoted to a fake
+cascade time.  A direct Galerkin referee tested the tempting equation
+
+\[
+Q_t+\partial_y J_{\rm Poynting}=0
+\]
+
+for the depth energy profile `Q(y)=int |F(y)|^2`.  Even after optimizing one global
+normalization of the proposed Poynting flux, the local profile residual was about
+`0.115`.  Thus the **Poynting-only local depth continuity law is false**: Poisson
+extension does not commute with the nonlinear product.
+
+What is exact is the integrated Maxwell stress work giving `K'_Euler` at the physical
+boundary and the harmonic-overlap/sech identities.  Any future five-dimensional or
+depth-local law must include the actual field-variation current; it may not be inferred
+from stress alone.
+
 ## Numerical PDE referee
 
 A smooth nonvanishing 3D vorticity state was checked directly in a `24^3`

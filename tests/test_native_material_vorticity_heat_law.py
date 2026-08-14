@@ -8,6 +8,8 @@ from src.native_material_vorticity_heat_law import (
     canonical_maxwell_extension_spectral_law,
     canonical_poisson_scale_overlap,
     maxwell_duality_stress_algebra,
+    primitive_spacetime_gauge_algebra,
+    so33_exterior_square_algebra,
     material_hminus2_reset_identity,
     material_hodge_speed_ladder,
     material_log_distortion_energy_bound,
@@ -288,3 +290,33 @@ def test_maxwell_stress_is_pure_cross_duality_and_bps_sectors_are_stressless():
         assert out["maxwell_stress_norm_squared"] == pytest.approx(out["cross_duality_product_times_four"],rel=3e-11,abs=3e-11)
         assert out["pure_self_dual_stress_norm"] <= 2e-10*max(1.0,out["field_energy_density"])
         assert out["pure_anti_self_dual_stress_norm"] <= 2e-10*max(1.0,out["field_energy_density"])
+
+
+
+def test_physical_spacetime_curvature_has_euler_topological_null_and_joule_work():
+    rng=np.random.default_rng(2026081514)
+    for _ in range(5000):
+        u=rng.normal(size=3); w=rng.normal(size=3); c=rng.normal(size=3); nu=10.0**rng.uniform(-5,2)
+        out=primitive_spacetime_gauge_algebra(u,w,c,nu)
+        assert out["euler_topological_null"] == pytest.approx(0.0,abs=2e-12)
+        assert out["chern_simons_density_rate_half"] == pytest.approx(out["viscous_chern_simons_density_rate_half"],rel=3e-12,abs=3e-12)
+        assert out["negative_joule_work_density"] == pytest.approx(out["stretch_minus_ohmic_density"],rel=3e-12,abs=3e-12)
+
+
+def test_exterior_square_of_volume_preserving_4d_deformation_is_so33_rotation_plus_boost():
+    rng=np.random.default_rng(2026081515)
+    for _ in range(2000):
+        A=rng.normal(size=(4,4));A-=np.trace(A)/4.0*np.eye(4)
+        out=so33_exterior_square_algebra(A)
+        assert out["so33_residual"] <= 3e-10*max(1.0,out["strain_exterior_hs_squared"])
+        assert out["rotation_compact_residual"] <= 3e-10*max(1.0,out["strain_exterior_hs_squared"])
+        assert out["strain_boost_residual"] <= 3e-10*max(1.0,out["strain_exterior_hs_squared"])
+        assert out["strain_exterior_hs_squared"] == pytest.approx(out["twice_strain_frobenius_squared"],rel=3e-12,abs=3e-12)
+
+
+def test_maxwell_stress_has_only_two_equal_positive_and_two_equal_negative_principal_values():
+    rng=np.random.default_rng(2026081516)
+    for _ in range(2000):
+        m=rng.normal(size=(4,4));f=m-m.T
+        out=maxwell_duality_stress_algebra(f)
+        assert out["stress_square_scalar_residual"] <= 3e-10*max(1.0,out["maxwell_stress_norm_squared"])
