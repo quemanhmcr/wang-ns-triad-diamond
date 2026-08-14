@@ -86,7 +86,10 @@ def test_certificate_keeps_the_claim_native_and_draft():
     assert "actual viscous energy dissipation" in cert["energy"]
     assert "Beltrami" in cert["nonlinear_force"]
     assert "variance production" in cert["interpretation"]
+    assert "not a master scalar" in cert["defect_role_guard"]
+    assert "raw-power extremizer" in cert["transport_geometry_guard"]
+    assert "phase/current geometry" in cert["open_question"]
+    assert "without assuming the exact r_* value" in cert["open_question"]
     assert cert["temporal_matching_used"] is False
     assert cert["owner_bookkeeping_used"] is False
     assert cert["global_regularity_claimed"] is False
-    assert "r_*" in cert["open_question"]

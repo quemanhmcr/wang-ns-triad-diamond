@@ -310,23 +310,106 @@ blocks.  It is a candidate intrinsic self-control principle that must next be
 connected to the canonical positive true-upward spectral crossing law without
 introducing analyst clocks or temporal matching.
 
-## 8. The next research question
+## 8. Falsification experiments and the correction they force
+
+Before building further theory, the curl-centered reading was stressed as a
+physical hypothesis rather than treated as a proof architecture.  These are
+**exploratory numerical falsification checks**, not theorem certificates.
+
+A multi-mode exact Beltrami field gave \(B=0\) and zero projected Lamb force to
+machine precision.  Perturbing it by amplitude \(\varepsilon\) in a different
+curl eigenspace produced
+
+\[
+B\sim\varepsilon^2,
+\qquad
+\|\mathbb P(u\times\omega)\|_2\sim\varepsilon,
+\]
+
+with \(\|\mathbb P(u\times\omega)\|_2/\sqrt B\) essentially constant across
+several decades.  On full random three-dimensional divergence-free snapshots,
+three independent evaluations of
+
+\[
+\left.\frac{dB}{dt}\right|_{NL},
+\qquad
+2\langle Cr,u\times r\rangle,
+\qquad
+\text{nonlinear enstrophy/vortex-stretching production}
+\]
+
+agreed to floating-point precision, including both positive and negative
+production.
+
+The important negative test held \(E,H,B\) fixed while changing only Fourier
+phases.  The nonlinear force changed substantially and the sign of
+\((dB/dt)_{NL}\) flipped across the ensemble.  Therefore
+
+\[
+\boxed{
+B\text{ is nonlinear capacity/exposure, not a master scalar determining the dynamics.}
+}
+\]
+
+Phase/current geometry remains an intrinsic degree of freedom deciding whether
+the available defect convexifies or contracts the signed-curl spectrum.
+
+A second negative test corrected the interpretation of the old
+\(r_*\approx0.61090410159\).  Maximizing raw positive child power per
+\(E\sqrt B\) drives the optimizer toward a nearly degenerate, nearly
+identity-scale geometry, so \(r_*\) is **not** a universal extremizer of
+"defect to nonlinear power."  By contrast, maximizing genuine upward
+log-scale crossing per \(E\sqrt B\) returns an interior nearly symmetric
+geometry near
+
+\[
+x\simeq y\simeq0.59813,
+\]
+
+close to but detectably different from \(r_*\).  The robust observation is
+therefore weaker and more physical:
+
+\[
+\boxed{
+\text{efficient genuine scale transport selects an interior geometry near }0.6,
+\text{ while raw nonlinear power need not.}
+}
+\]
+
+The exact preferred constant must be derived from the native physical
+normalization being studied; it is not promoted to a universal constant by
+analogy with the earlier Mellin extremizer.
+
+Finally, scaling the same near-Beltrami shape by \(k\mapsto nk\) numerically
+showed the expected operator orders
+
+\[
+\|\mathbb P(u\times\omega)\|\sim n,
+\qquad
+\|\nu C^2u\|\sim n^2,
+\]
+
+so the nonlinear-to-viscous ratio decays like \(n^{-1}\) for that fixed shape.
+This is a sanity check on the curl-versus-curl-squared reading, not a global
+regularity estimate.
+
+## 9. The next research question
 
 The next target is deliberately not another owner/case closure:
 
 \[
 \boxed{
-\text{What is the sharp intrinsic conversion law from }
-B=\|(C-\lambda)u\|_2^2
-\text{ into genuine positive upward spectral transfer?}
+\text{What is the sharp intrinsic conversion law from Beltrami defect plus}
+\text{ phase/current geometry into genuine positive upward spectral transfer?}
 }
 \]
 
-The strongest possibility is that the previously certified near-extremal
-scale geometry \(r_*\approx0.61090410159\) is not merely an extremizer of a
-chosen Mellin functional but the genuine geometry that most efficiently
-converts Beltrami defect into canonical true-upward Navier--Stokes transport.
-That identification is **open** in this draft.
+The experiments now forbid two shortcuts: \(B\) alone does not determine the
+nonlinear current, and the exact value \(r_*\) must not be assumed to be the
+universal defect-normalized transport optimizer.  What remains compelling is
+the intrinsic separation between raw nonlinear activity and genuine movement
+through scale, together with the persistent interior transport geometry near
+ratio \(0.6\).
 
 No FIFO/LIFO/proportional temporal matching is used here.  Same-time triad work
 is not promoted to between-time stock.  No owner label, packet partition, or

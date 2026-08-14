@@ -205,8 +205,10 @@ def theorem_certificate() -> dict[str, object]:
         "triad_curvature": "for distinct a_i, sum Phi(a_i)T_i=Q_Delta Phi[a0,a1,a2], Q_Delta=sum a_i^2 T_i; degenerate nodes follow by confluent continuity",
         "quadratic_case": "Phi(a)=a^2 has second divided difference 1, so Q_Delta is the nonlinear enstrophy/vortex-stretching current",
         "interpretation": "vortex stretching is signed-curl spectral variance production; viscosity reads the same defect through C^2",
+        "defect_role_guard": "B is intrinsic nonlinear capacity/exposure, not a master scalar: fixed E,H,B can have phase-dependent nonlinear force and either sign of nonlinear variance production",
+        "transport_geometry_guard": "exploratory defect-normalized stress rejects r_* as a universal raw-power extremizer; genuine log-scale transport still selects an interior geometry near 0.6, while the exact defect-normalized optimum is not asserted to equal r_*",
         "temporal_matching_used": False,
         "owner_bookkeeping_used": False,
         "global_regularity_claimed": False,
-        "open_question": "identify the sharp intrinsic conversion law from Beltrami defect into canonical positive true-upward spectral transfer, and test whether the r_* geometry is its genuine extremizer",
+        "open_question": "identify the sharp intrinsic conversion law from Beltrami defect plus phase/current geometry into canonical positive true-upward spectral transfer; determine the intrinsic interior scale-transport geometry without assuming the exact r_* value",
     }
