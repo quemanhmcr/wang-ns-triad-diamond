@@ -412,14 +412,86 @@ def heterochiral_frontier_progress_side_bound(
     upper = 2.0 * side
     if progress > upper + 5.0e-13 * max(1.0, progress, upper):
         raise AssertionError("physical log-progress exceeded twice the compulsory side work")
+    curvature = side * donor * child
+    if progress > curvature + 8.0e-13 * max(1.0, progress, curvature):
+        raise AssertionError("UV log progress exceeded signed-curl quadratic variation")
     return {
         "donor_work_per_common_current": donor,
         "child_work_per_common_current": child,
         "side_work_per_common_current": side,
         "child_log_progress_per_common_current": progress,
         "progress_upper_from_side": upper,
+        "signed_curl_curvature_per_common_current_at_unit_child_radius": curvature,
+        "log_progress_upper_from_curvature": curvature,
         "high_child_retained_fraction": child / donor,
         "side_fraction": side / donor,
+    }
+
+
+def modal_euler_action_decomposition(
+    signed_frequencies: Sequence[float],
+    modal_amplitudes: Sequence[complex],
+    modal_sources: Sequence[complex],
+) -> dict[str, object]:
+    """Exact Pythagorean split of one complex Euler velocity.
+
+    For ``z=sqrt(e) exp(i theta)`` and ``f=zdot``, each occupied helical mode obeys
+    ``|f|^2=edot^2/(4e)+e*thetadot^2``.  Grouping the radial part by equal signed
+    curl eigenvalue gives a second orthogonal split into total curl-spectral
+    energy motion and redistribution inside a degenerate curl eigenspace.  An
+    exactly zero amplitude carrying nonzero source is recorded as birth action.
+    """
+    if len(signed_frequencies) != len(modal_amplitudes) or len(modal_amplitudes) != len(modal_sources):
+        raise ValueError("matching signed-frequency/amplitude/source data required")
+    if not signed_frequencies:
+        raise ValueError("nonempty modal data required")
+    a = tuple(float(x) for x in signed_frequencies)
+    z = tuple(complex(x) for x in modal_amplitudes)
+    f = tuple(complex(x) for x in modal_sources)
+    if not all(math.isfinite(x) for x in a):
+        raise ValueError("finite signed frequencies required")
+    if not all(math.isfinite(w.real) and math.isfinite(w.imag) for w in z + f):
+        raise ValueError("finite complex amplitudes/sources required")
+
+    total = math.fsum(abs(fi) ** 2 for fi in f)
+    radial = 0.0
+    phase = 0.0
+    birth = 0.0
+    groups: dict[float, list[float]] = {}
+    for ai, zi, fi in zip(a, z, f):
+        ei = abs(zi) ** 2
+        if ei == 0.0:
+            birth += abs(fi) ** 2
+            continue
+        q = zi.conjugate() * fi
+        radial += q.real * q.real / ei
+        phase += q.imag * q.imag / ei
+        row = groups.setdefault(ai, [0.0, 0.0])
+        row[0] += ei
+        row[1] += 2.0 * q.real
+
+    spectral = math.fsum(S * S / (4.0 * E) for E, S in groups.values() if E > 0.0)
+    within = radial - spectral
+    scale = max(1.0, total, radial, phase, birth, spectral, abs(within))
+    if within < -2.0e-11 * scale:
+        raise AssertionError("within-curl-eigenspace radial action lost nonnegativity")
+    within = max(0.0, within)
+    represented = spectral + within + phase + birth
+    if abs(total - represented) > 3.0e-11 * scale:
+        raise AssertionError("modal Euler Pythagorean action decomposition failed")
+    keys = tuple(sorted(groups))
+    return {
+        "total_euler_action": total,
+        "curl_spectral_action": spectral,
+        "within_eigenspace_radial_action": within,
+        "phase_rotation_action": phase,
+        "new_amplitude_birth_action": birth,
+        "represented_total_action": represented,
+        "curl_spectral_fraction": 0.0 if total == 0.0 else spectral / total,
+        "vertical_reconfiguration_action": within + phase + birth,
+        "grouped_signed_frequencies": keys,
+        "grouped_energies": tuple(groups[x][0] for x in keys),
+        "grouped_energy_rates": tuple(groups[x][1] for x in keys),
     }
 
 def observable_tangent_gram(
@@ -569,6 +641,71 @@ def spectral_source_action(
     }
 
 
+
+def spectral_fitness_replicator_law(
+    signed_frequencies: Sequence[float],
+    modal_energies: Sequence[float],
+    euler_energy_rates: Sequence[float],
+    viscosity: float = 0.0,
+) -> dict[str, object]:
+    """One-scalar fitness form of the signed-curl energy law.
+
+    On every occupied curl level ``a``, put ``f(a)=S_a/(2E_a)`` where ``S_a``
+    is the actual Euler energy rate.  The two Euler null laws become
+    ``int f d rho=int a f d rho=0`` and the Fisher action is ``int f^2 d rho``.
+    Adding viscosity gives the exact unnormalized score ``2(f-nu a^2)`` and,
+    after normalizing by total energy, the replicator score
+    ``2(f-nu(a^2-N^2))``.
+    """
+    a, e = _spectral_data(signed_frequencies, modal_energies)
+    if len(euler_energy_rates) != len(a):
+        raise ValueError("one Euler energy rate per signed curl node required")
+    rates = tuple(float(x) for x in euler_energy_rates)
+    if not all(math.isfinite(x) for x in rates):
+        raise ValueError("finite Euler energy rates required")
+    nu = float(viscosity)
+    if not math.isfinite(nu) or nu < 0.0:
+        raise ValueError("finite nonnegative viscosity required")
+    action = spectral_source_action(a, e, rates)["spectral_velocity_norm_squared"]
+    E = math.fsum(e)
+    Z = math.fsum(ai * ai * ei for ai, ei in zip(a, e))
+    N2 = Z / E
+    fit: list[float] = []
+    raw: list[float] = []
+    normalized: list[float] = []
+    for ai, ei, si in zip(a, e, rates):
+        if ei <= 0.0:
+            if abs(si) > 5.0e-12 * max(1.0, *(abs(x) for x in rates)):
+                raise ValueError("zero-energy node cannot carry first-order Euler energy rate")
+            fi = 0.0
+        else:
+            fi = si / (2.0 * ei)
+        fit.append(fi)
+        raw.append(2.0 * (fi - nu * ai * ai))
+        normalized.append(2.0 * (fi - nu * (ai * ai - N2)))
+    mean_f = math.fsum(fi * ei for fi, ei in zip(fit, e))
+    mean_af = math.fsum(ai * fi * ei for ai, fi, ei in zip(a, fit, e))
+    scale = max(1.0, math.sqrt(max(0.0, action * E)), abs(mean_f), abs(mean_af))
+    if abs(mean_f) > 8.0e-11 * scale or abs(mean_af) > 8.0e-11 * scale:
+        raise AssertionError("Euler fitness lost the affine null laws")
+    action_from_fit = math.fsum(ei * fi * fi for ei, fi in zip(e, fit))
+    if abs(action-action_from_fit) > 5.0e-11 * max(1.0, action, action_from_fit):
+        raise AssertionError("Euler fitness L2 norm lost Fisher action")
+    normalized_mass_residual = math.fsum(ei * gi for ei, gi in zip(e, normalized)) / E
+    if abs(normalized_mass_residual) > 8.0e-11 * max(1.0, *(abs(x) for x in normalized)):
+        raise AssertionError("normalized spectral replicator lost unit mass")
+    return {
+        "fitness": tuple(fit),
+        "unnormalized_log_energy_rates": tuple(raw),
+        "normalized_log_probability_rates": tuple(normalized),
+        "spectral_action": action,
+        "fitness_action": action_from_fit,
+        "fitness_energy_mean": mean_f,
+        "fitness_helicity_mean": mean_af,
+        "rms_curl_scale_squared": N2,
+        "normalized_mass_residual": normalized_mass_residual,
+    }
+
 def observable_source_speed_bound(
     signed_frequencies: Sequence[float],
     modal_energies: Sequence[float],
@@ -684,15 +821,94 @@ def intrinsic_spectral_reynolds_barrier(
         raise AssertionError("completed-square determinant upper bound failed")
     # Since center^2+2 beta1^2+alpha1^2 >= N^2, relaxed positivity
     # forces A/(nu^2 N^2 B)>4.  This is a necessary, not sufficient, condition.
+    theta = state.beta1**2 / N2
+    skew = state.alpha1**2 / N2
+    sharp_threshold = 2.0 * math.sqrt(1.0 + theta + skew)
     return {
         "interaction_volume": V,
         "spectral_reynolds": math.sqrt(max(0.0, re2)),
         "spectral_reynolds_squared": max(0.0, re2),
         "fixed_state_log_delta_upper": fixed,
         "relaxed_log_delta_upper": relaxed,
+        "defect_fraction": theta,
+        "defect_skew_fraction": skew,
+        "state_sharp_reynolds_threshold": sharp_threshold,
         "growth_requires_reynolds_above_two": True,
         "intrinsic_critical_mass": A / (N2 * B),
         "critical_mass_threshold": 4.0 * nu * nu,
+    }
+
+
+def critical_determinant_live_balance(
+    state: CurlKrylovState,
+    defect_strain_inner: float,
+    spectral_velocity_norm_squared: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Exact Krylov-impedance form of the critical determinant balance.
+
+    ``defect_strain_inner=<h,F_E>`` is the actual productive Euler pairing and
+    ``A_spec`` is the squared norm of the whole spectral Euler velocity.  Writing
+    its q2 coefficient as ``c2`` exposes the exact dimensionless law
+
+        (log Delta)'/(2 nu N^2)
+          = gamma2 Re_spec y - (1+theta+chi+y^2),
+
+    where ``y=beta2/N``.  Thus too little next-Krylov opening gives no nonlinear
+    leverage, while too much is quadratically visible to viscosity.
+    """
+    s = float(defect_strain_inner)
+    A = float(spectral_velocity_norm_squared)
+    nu = float(viscosity)
+    if not all(math.isfinite(x) for x in (s, A, nu)) or A < 0.0 or nu <= 0.0:
+        raise ValueError("finite strain/action and positive viscosity required")
+    if state.energy <= 0.0 or state.enstrophy <= 0.0 or state.defect_energy <= 0.0:
+        return {
+            "normalized_log_delta_rate": -math.inf,
+            "q2_alignment": 0.0,
+            "spectral_reynolds": 0.0,
+            "krylov_opening": 0.0,
+            "krylov_impedance": math.inf,
+            "effective_drive": 0.0,
+        }
+    B = state.defect_energy
+    N2 = state.enstrophy / state.energy
+    N = math.sqrt(N2)
+    beta2 = state.beta2
+    hnorm = math.sqrt(B) * beta2
+    if beta2 <= 0.0:
+        if abs(s) > 5.0e-11 * max(1.0, abs(s)):
+            raise ValueError("nonzero productive pairing with zero q2 Krylov opening")
+        c2 = 0.0
+    else:
+        c2 = s / hnorm
+    rootA = math.sqrt(A)
+    gamma2 = 0.0 if rootA == 0.0 else c2 / rootA
+    if abs(gamma2) > 1.0 + 3.0e-9:
+        raise ValueError("productive q2 coefficient exceeds total spectral action")
+    gamma2 = max(-1.0, min(1.0, gamma2))
+    re_spec = rootA / (nu * N * math.sqrt(B))
+    theta = state.beta1**2 / N2
+    chi = state.alpha1**2 / N2
+    y = beta2 / N
+    baseline = 1.0 + theta + chi
+    normalized = gamma2 * re_spec * y - (baseline + y * y)
+    direct = critical_determinant_log_rate(state, s, nu)["log_delta_rate"] / (2.0 * nu * N2)
+    if abs(normalized-direct) > 3.0e-10 * max(1.0, abs(normalized), abs(direct)):
+        raise AssertionError("Krylov impedance factorization failed")
+    impedance = math.inf if y <= 0.0 else y + baseline / y
+    return {
+        "normalized_log_delta_rate": normalized,
+        "q2_coefficient": c2,
+        "q2_alignment": gamma2,
+        "spectral_reynolds": re_spec,
+        "defect_fraction": theta,
+        "defect_skew_fraction": chi,
+        "krylov_opening": y,
+        "krylov_impedance": impedance,
+        "minimum_krylov_impedance": 2.0 * math.sqrt(baseline),
+        "effective_drive": gamma2 * re_spec,
+        "spectral_reconfiguration_action": max(0.0, A - c2 * c2),
     }
 
 def critical_beltrami_split(
@@ -953,6 +1169,168 @@ def symmetric_heterochiral_stationarity_residual(radius_ratio: float) -> float:
     )
 
 
+
+def curl_nijenhuis_torsion_eigenfactor(
+    parent_a: float, parent_b: float, child_c: float
+) -> float:
+    """Eigenvalue factor of the curl Nijenhuis torsion on one bracket output.
+
+    If ``Cu=a u`` and ``Cv=b v``, then
+
+        T_C(u,v)=[Cu,Cv]-C([Cu,v]+[u,Cv])+C^2[u,v]
+               =(C-a)(C-b)[u,v].
+
+    Hence the component at a child curl eigenvalue ``c`` carries exactly the
+    factor returned here.  This is zero precisely when the bracket output stays
+    on one of the two parent curl levels.
+    """
+    a, b, c = map(float, (parent_a, parent_b, child_c))
+    if not all(math.isfinite(x) for x in (a, b, c)):
+        raise ValueError("finite curl eigenvalues required")
+    return (c - a) * (c - b)
+
+
+def nijenhuis_curvature_from_root_work(
+    parent_a: float,
+    parent_b: float,
+    child_c: float,
+    child_energy_work: float,
+) -> float:
+    """Recover the full three-node quadratic-curvature current from one root.
+
+    For the repository cyclic convention ``T_c=(a-b)R`` and
+
+        Q=sum lambda_i^2 T_i,
+
+    exact interpolation gives
+
+        Q=(c-a)(c-b) T_c.
+
+    The multiplier is exactly the child component of the curl Nijenhuis torsion.
+    """
+    t = float(child_energy_work)
+    if not math.isfinite(t):
+        raise ValueError("finite physical child work required")
+    return curl_nijenhuis_torsion_eigenfactor(parent_a, parent_b, child_c) * t
+
+
+def critical_escape_balance(
+    signed_frequencies: Sequence[float],
+    modal_energies: Sequence[float],
+    modal_energy_rates: Sequence[float],
+    viscosity: float,
+) -> dict[str, float]:
+    """Exact one-current balance for the critical ``K=sum |a|e`` stock.
+
+    ``modal_energy_rates`` is the actual Euler signed-curl energy source and must
+    satisfy the two affine null laws.  The source is compared with the one
+    Fisher--Rao spectral speed, the tangent geometry of ``|a|``, and the exact
+    cubic viscous moment.  No shell, owner, packet clock or temporal matching is
+    introduced.
+    """
+    a, e = _spectral_data(signed_frequencies, modal_energies)
+    if len(modal_energy_rates) != len(a):
+        raise ValueError("one modal-energy rate per signed curl node required")
+    rates = tuple(float(x) for x in modal_energy_rates)
+    if not all(math.isfinite(x) for x in rates):
+        raise ValueError("finite modal-energy rates required")
+    nu = float(viscosity)
+    if not math.isfinite(nu) or nu <= 0.0:
+        raise ValueError("positive finite viscosity required")
+
+    action = spectral_source_action(a, e, rates)["spectral_velocity_norm_squared"]
+    split = critical_beltrami_split(a, e)
+    corr = critical_tangent_correlation_geometry(a, e)
+    gram = observable_tangent_gram(a, e, tuple(abs(ai) for ai in a))
+
+    E = math.fsum(e)
+    H = math.fsum(ai * ei for ai, ei in zip(a, e))
+    Z = math.fsum(ai * ai * ei for ai, ei in zip(a, e))
+    K = split["critical_stock"]
+    B = Z - H * H / E
+    delta = split["critical_determinant"]
+    radial = split["radial_variance_component"]
+    N2 = Z / E
+    N = math.sqrt(max(0.0, N2))
+    M3 = math.fsum(abs(ai) ** 3 * ei for ai, ei in zip(a, e))
+    K_nl = math.fsum(abs(ai) * si for ai, si in zip(a, rates))
+    K_total = K_nl - 2.0 * nu * M3
+
+    if B <= 0.0 or Z <= 0.0 or delta <= 0.0 or N <= 0.0:
+        return {
+            "critical_stock": K,
+            "nonlinear_critical_rate": K_nl,
+            "viscous_critical_rate": -2.0 * nu * M3,
+            "total_critical_rate": K_total,
+            "spectral_action": action,
+            "spectral_reynolds": 0.0,
+            "critical_alignment": 0.0,
+            "defect_fraction": 0.0,
+            "radial_variance_fraction": 0.0,
+            "radial_coefficient_of_variation": 0.0,
+            "decorrelation_factor": 0.0,
+            "cubic_viscous_factor": math.inf,
+            "live_escape_number": 0.0,
+            "normalized_critical_rate": -math.inf,
+            "radial_impedance_threshold": math.inf,
+        }
+
+    tangent_norm2 = gram["gram_determinant"] / delta
+    source_envelope = 2.0 * math.sqrt(max(0.0, tangent_norm2 * action))
+    if source_envelope == 0.0:
+        gamma = 0.0
+        if abs(K_nl) > 5.0e-10 * max(1.0, abs(K_nl)):
+            raise AssertionError("critical source survived zero tangent/source envelope")
+    else:
+        gamma = K_nl / source_envelope
+        if abs(gamma) > 1.0 + 2.0e-9:
+            raise AssertionError("critical source alignment left the Hilbert cosine range")
+        gamma = max(-1.0, min(1.0, gamma))
+
+    theta = B / Z
+    eta = radial / (E * Z)
+    eta = max(0.0, min(1.0, eta))
+    decor = corr["decorrelation_factor"]
+    re_spec = math.sqrt(action) / (nu * N * math.sqrt(B))
+    mu3 = M3 / (E * N**3)
+    # Z^2 <= K M3, equivalently mu3 >= 1/sqrt(1-eta).
+    impedance_lower = math.inf if eta >= 1.0 else 1.0 / math.sqrt(max(1.0e-300, 1.0 - eta))
+    if mu3 + 2.0e-10 * max(1.0, mu3, impedance_lower) < impedance_lower:
+        raise AssertionError("radial log-convex viscous impedance failed")
+    radial_cv = math.inf if eta >= 1.0 else math.sqrt(max(0.0, eta / max(1.0e-300, 1.0 - eta)))
+    effective_drive = gamma * re_spec * math.sqrt(max(0.0, theta * decor))
+    radial_threshold = math.inf if radial_cv == 0.0 or not math.isfinite(radial_cv) else radial_cv + 1.0 / radial_cv
+
+    live = gamma * re_spec * math.sqrt(max(0.0, theta * eta * decor))
+    normalized = K_total / (2.0 * nu * E * N**3)
+    represented = live - mu3
+    if abs(normalized - represented) > 3.0e-9 * max(1.0, abs(normalized), abs(represented)):
+        raise AssertionError("critical live-number factorization failed")
+
+    return {
+        "critical_stock": K,
+        "nonlinear_critical_rate": K_nl,
+        "nonlinear_source_envelope": source_envelope,
+        "viscous_critical_rate": -2.0 * nu * M3,
+        "total_critical_rate": K_total,
+        "spectral_action": action,
+        "critical_growth_action": gamma * gamma * action,
+        "spectral_orthogonal_reconfiguration_action": max(0.0, (1.0 - gamma * gamma) * action),
+        "spectral_reynolds": re_spec,
+        "critical_alignment": gamma,
+        "defect_fraction": theta,
+        "radial_variance_fraction": eta,
+        "radial_coefficient_of_variation": radial_cv,
+        "decorrelation_factor": decor,
+        "cubic_viscous_factor": mu3,
+        "cubic_viscous_lower_from_radial_variance": impedance_lower,
+        "effective_phase_geometry_drive": effective_drive,
+        "radial_impedance_threshold": radial_threshold,
+        "live_escape_number": live,
+        "normalized_critical_rate": normalized,
+        "critical_growth_requires_reynolds_above_two": True,
+    }
+
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
@@ -963,16 +1341,24 @@ def theorem_certificate() -> dict[str, object]:
         "tangent_gradient": "h is the tangent projection of C^2u (equivalently of (C-lambda)^2u) to the common E,H level set",
         "commutator": "B'_NL=<r,[C,J_u]r>=2<Cr,u x r>=2 int r.S r",
         "critical_log_law": "(log Delta)'=2 int r.S r/B-2nu(Z/E+||Cr||^2/B)",
+        "krylov_impedance": "exactly (log Delta)'/(2nuN^2)=gamma2 Re_spec y-(1+theta+chi+y^2); Delta growth requires gamma2 Re_spec>y+(1+theta+chi)/y>=2sqrt(1+theta+chi)",
         "three_point_curvature": "on one closed three-node helical triad, |Q_curv|=4|g||cos Phi| sqrt(D2) <= 2 sqrt(D2)",
         "three_point_gross": "same-triad gross energy current is <=2|g| E sqrt(B)<=E sqrt(B), sharply over amplitudes; equality places one half of energy on the median signed-curl node",
         "hankel_meaning": "Dn is the squared curl-Krylov volume and equals a Vandermonde-squared average over n+1 signed-curl samples",
         "universal_observable_law": "for every spectral phi, production is the pairing of one Euler spectral velocity with the tangent residual of phi(C)u; on a three-node triad |M_phi'|=4|g||cosPhi|sqrt(det Gram(u,Cu,phi(C)u))",
         "martingale_grammar": "positive three-node spread is the unique signed-curl martingale transport; defect/enstrophy production is its quadratic variation and |C| production is its Tanaka reading",
         "fisher_speed": "the full curl-spectral Euler speed is A_spec=(1/4) sum S_a^2/E_a; on one triad A_spec=4|g|^2 cos^2(Phi) Delta",
+        "spectral_fitness": "on occupied curl levels f(a)=S_a/(2E_a), so rho_t=2(f-nu a^2)rho, int f d rho=int a f d rho=0 and A_spec=int f^2 d rho",
+        "lamb_ontology": "L=u x curl u is the one nonlinear activity field: Helmholtz projection gives pressure reaction plus Euler velocity; the latter splits into curl-spectral and isospectral shape motion, while curl L=-[u,curl u] and curl Nijenhuis curvature gives vortex stretching",
         "phase_circle": "isolated triad total complex-amplitude speed is 4|g|^2 Delta and phase rotates it exactly between radial energy motion and quadrature shape motion; Im(A0 A1 A2 conj(g)) is invariant",
         "critical_correlation": "the |C| tangent volume equals Delta*Delta_rad*(1-rho(a,|a|)^2)/E; critical growth needs radial diversity and sign-radius decorrelation",
-        "interaction_volume": "V_spec=Delta/A_spec is a PDE-defined physical-volume scale; Delta growth requires Re_spec=sqrt(A_spec)/(nu N sqrt(B))>2",
-        "global_extension_guard": "isolated triads are self-contained one-dimensional martingale/phase systems, but the full PDE can coherently reorient overlapping triads through vertical shape motion; sustained collapse of V_spec is the remaining constitutive problem",
+        "interaction_volume": "V_spec=Delta/A_spec is a PDE-defined physical-volume scale; Delta growth requires Re_spec>2 and, state-sharply, Re_spec>2sqrt(1+theta+chi)",
+        "nijenhuis_curvature": "with the divergence-free Lie bracket, C J_u v=-[u,v]; curl Nijenhuis torsion is T_C, K_C(x,y)=T_C(Cx,y)-T_C(x,Cy), and Z'_NL=B'_NL=(1/3)<C^-1 u,K_C(u,u)>=2 int r.Sr",
+        "critical_live_balance": "for K=int|a|d rho, K'/(2nu E N^3)=gamma Re_spec sqrt(theta eta d)-mu3, with mu3>=1/sqrt(1-eta); hence K'>0 requires gamma Re_spec sqrt(theta d)>x+1/x>=2 where x=sqrt(eta/(1-eta))",
+        "uv_curvature": "for every strict heterochiral UV spread, M^2 times true high-child log progress is <= the same positive Nijenhuis/enstrophy quadratic-variation current; constant 1 is sharp only at the degenerate boundary",
+        "lamb_participation": "V_spec>=Delta/||u x curl u||_2^2>=||u x curl u||_1^2/||u x curl u||_2^2, so collapse of the PDE interaction volume requires physical concentration of the one Lamb activity field",
+        "spectral_monotonicity_guard": "fixed curl-energy magnitudes with a pi triad-phase reversal flip every non-affine observable current; no spectral-only monotone beyond affine energy/helicity can contain the missing mechanism",
+        "global_extension_guard": "isolated triads are self-contained martingale/phase systems, but the full PDE can reorient a high-dimensional fitness through shape motion and spatial concentration; persistence of productive Lamb/fitness alignment while V_spec collapses is the remaining constitutive problem",
         "symmetric_transport_note": "the amplitude-reduced heterochiral symmetric slice has stationary ratio near 0.5981296, but global symmetry of the two-parent optimizer is not claimed here",
         "case_taxonomy_used": False,
         "temporal_matching_used": False,

@@ -1195,3 +1195,606 @@ The global no-escape question has therefore compressed to a single dynamical iss
 > **Can a Navier--Stokes trajectory keep its intrinsic spectral Reynolds number above the critical value while the PDE-defined interaction volume repeatedly collapses toward zero, despite the same curl geometry feeding quadratic viscous killing and despite isolated triad currents being self-contained martingale/phase systems?**
 
 No additional owner type is needed to state the remaining problem.
+
+## 19. Curl Nijenhuis curvature is the full-field source behind the three-frequency law
+
+The scalar signed-curl picture has an operator origin.  Let
+
+\[
+[u,v]=(u\cdot\nabla)v-(v\cdot\nabla)u
+\]
+
+be the Lie bracket of mean-zero divergence-free vector fields and keep
+
+\[
+C=\operatorname{curl},\qquad J_u v=\mathbb P(u\times v).
+\]
+
+Then, before any spectral decomposition,
+
+\[
+\boxed{C J_u v=-[u,v].}
+\]
+
+Thus the Euler interaction is the inverse-curl image of the native Lie-algebra noncommutativity.  The object which detects whether this bracket really opens a new curl level is the Nijenhuis torsion of `C`,
+
+\[
+T_C(u,v)
+=[Cu,Cv]-C([Cu,v]+[u,Cv])+C^2[u,v].
+\]
+
+If `Cu=a u` and `Cv=b v`, then exactly
+
+\[
+\boxed{T_C(u,v)=(C-a)(C-b)[u,v].}
+\]
+
+Consequently its component at a child curl eigenvalue `c` is
+
+\[
+\boxed{P_cT_C(u,v)=(c-a)(c-b)P_c[u,v].}
+\]
+
+The torsion vanishes when the bracket output stays on either parent curl level.  Such a degenerate interaction can still rotate physical state inside an existing curl eigenspace, but it cannot create first-order signed-curl spectral curvature.  A genuinely third curl level is exactly a torsionful event.
+
+The symmetric curvature obtained from this antisymmetric torsion is
+
+\[
+\boxed{
+\mathscr K_C(x,y)=T_C(Cx,y)-T_C(x,Cy).
+}
+\]
+
+On a pair of parent eigenfields its child-`c` component carries
+
+\[
+(a-b)(c-a)(c-b),
+\]
+
+the same three-frequency Vandermonde factor already found in the closed-triad curvature current.  In particular, if `T_c` is the physical energy work at one root of a closed triad, then
+
+\[
+\boxed{
+Q_\triangle=(c-a)(c-b)T_c.
+}
+\]
+
+So the old scalar identity is exactly the root-wise Nijenhuis torsion multiplier.
+
+There is a full-field identity, not merely a triad formula.  Define
+
+\[
+\Omega(x,y,z)=\langle C^{-1}x,[y,z]\rangle.
+\]
+
+Because `CJ_yz=-[y,z]`,
+
+\[
+\Omega(x,y,z)=-\int x\cdot(y\times z)\,dx,
+\]
+
+so `Omega` is totally alternating.  Expanding `T_C(Cu,u)` and using only this alternating three-form gives
+
+\[
+\begin{aligned}
+\langle C^{-1}u,\mathscr K_C(u,u)\rangle
+&=2\langle C^{-1}u,T_C(Cu,u)\rangle\\
+&=6\Omega(C^2u,Cu,u).
+\end{aligned}
+\]
+
+But Euler vorticity obeys `omega_t=[omega,u]`, hence
+
+\[
+\dot Z_{NL}=2\Omega(C^2u,Cu,u).
+\]
+
+Therefore
+
+\[
+\boxed{
+\dot Z_{NL}
+=\dot B_{NL}
+=\frac13\langle C^{-1}u,\mathscr K_C(u,u)\rangle
+=2\int r\cdot S r\,dx.
+}
+\]
+
+This is the exact collapse sought here: **physical-space strain stretching, signed-curl curvature production, three-frequency Waleffe Vandermonde geometry, and the failure of curl eigenspaces to close under the divergence-free Lie bracket are one and the same nonlinear curvature.**
+
+The Fourier-Galerkin referee checked the global Nijenhuis pairing on several independent smooth states/resolutions; the ratio
+`<C^-1 u,K_C(u,u)> / Z'_NL` was `3` to relative residual below `1.1e-15`.  These numerical checks are evidence for the implementation convention; the displayed operator proof is the theorem-level reason.
+
+## 20. Exact critical live balance and the radial impedance law
+
+Let
+
+\[
+K=\int |a|\,d\rho
+\]
+
+be the critical `H^{1/2}` stock.  The one full spectral Euler velocity has squared speed `A_spec`.  Let `g_K` be the tangent projection of `|C|u` off the affine invariant plane `span{u,Cu}` and write
+
+\[
+\gamma
+=\frac{\langle g_K,F_{spec}\rangle}
+{\|g_K\|\,\|F_{spec}\|}
+\in[-1,1].
+\]
+
+This is not a new phase variable: it is simply the Hilbert angle between the actual spectral current and the unique instantaneous direction which increases `K` most rapidly.
+
+Use the dimensionless state factors
+
+\[
+\theta=\frac{B}{Z},
+\qquad
+\eta=1-\frac{K^2}{EZ}
+=\frac{\Delta_{rad}}{EZ},
+\qquad
+d=1-\varrho^2.
+\]
+
+Then the tangent-volume identity gives exactly
+
+\[
+\left.\dot K\right|_{NL}
+=2\gamma\sqrt{\theta\eta d\,B}\,\sqrt{\mathcal A_{spec}}.
+\]
+
+For viscosity put
+
+\[
+M_3=\int |a|^3\,d\rho,
+\qquad
+\mu_3=\frac{M_3}{EN^3}.
+\]
+
+The exact full critical balance is therefore
+
+\[
+\boxed{
+\frac{\dot K}{2\nu EN^3}
+=\gamma\,\mathrm{Re}_{spec}\sqrt{\theta\eta d}-\mu_3.
+}
+\]
+
+The radial moments themselves now supply a second intrinsic constraint.  Log-convexity
+
+\[
+Z^2\le K M_3
+\]
+
+gives
+
+\[
+\boxed{
+\mu_3\ge\frac1{\sqrt{1-\eta}}.
+}
+\]
+
+Introduce the radial coefficient of variation
+
+\[
+x=\sqrt{\frac{\eta}{1-\eta}}.
+\]
+
+Then any positive critical growth must satisfy
+
+\[
+\boxed{
+\gamma\,\mathrm{Re}_{spec}\sqrt{\theta d}
+>x+\frac1x
+\ge2.
+}
+\]
+
+This is a single continuous **radial impedance law**.  A nearly monochromatic radial state has `x<<1`: it has too little radial tangent geometry to grow `K`.  An excessively broad radial state has `x>>1`: its cubic viscous moment is too large.  The least expensive geometry is the balanced point `x=1`, equivalently `eta=1/2`, and even there the effective spectral Reynolds drive must exceed `2`.
+
+Thus
+
+\[
+\boxed{
+\dot K>0\quad\Longrightarrow\quad \mathrm{Re}_{spec}>2.
+}
+\]
+
+The threshold is outer-sharp at the level of positive moment geometry: equality in `Z^2<=KM_3` is approached by a radial law supported near zero and one high radius, with half the energy on each radial level.  Simultaneous saturation of the Navier--Stokes Waleffe geometry is a stricter constitutive question and is **not** asserted.
+
+The same refinement sharpens the determinant barrier.  With
+
+\[
+\chi=\frac{\alpha_1^2}{N^2},
+\]
+
+completing the square in the exact Lanczos law gives the state-dependent necessary condition
+
+\[
+\boxed{
+\dot\Delta>0
+\quad\Longrightarrow\quad
+\mathrm{Re}_{spec}>2\sqrt{1+\theta+\chi},
+}
+\]
+
+before any further alignment loss is used.
+
+## 21. The remaining question is now a cooperative-alignment problem, not an owner problem
+
+At this stage the dangerous instantaneous state has to satisfy all of the following **multiplicatively in one law**, not as a list of branches:
+
+\[
+\text{non-Beltrami defect}
+\times
+\text{radial diversity}
+\times
+\text{sign--radius decorrelation}
+\times
+\text{spectral-current alignment}
+\times
+\text{coherent interaction concentration}
+\]
+
+strong enough to beat the cubic/quadratic viscous moments of the same curl distribution.
+
+A Galerkin NS snapshot illustrates why `Re_spec>2` alone is not the mechanism.  One tested state at `nu=0.002` had
+
+`Re_spec ~= 2.62`, `theta ~= 0.904`, `eta ~= 0.128`, `d ~= 0.974`, `gamma ~= 0.32`,
+
+but its live nonlinear factor was only about `0.28` against `mu3 ~= 1.206`, so the critical stock was still decreasing.  Lowering viscosity eventually reverses the sign exactly where the displayed live balance predicts.
+
+The global question has therefore become sharper:
+
+> **Can the vertical/ispectral Euler motion of overlapping triads continually rotate the one spectral current so that its critical alignment stays strong, while at the same time maintaining the defect/radial/decorrelation geometry and the shrinking PDE-defined interaction volume required by `Re_spec>2`, for infinitely many increasingly small scales?**
+
+The next step should attack that cooperative alignment directly.  It should not reintroduce source/strain/HH cases: those have already collapsed into the Nijenhuis/Fisher/current geometry above.
+
+## 22. The curl spectrum is an exact replicator law driven by one nonlinear fitness
+
+The Fisher formulation can be written without any geometric metaphor.  At an occupied signed-curl level `a`, let
+
+\[
+E_a=\|P_a u\|_2^2,
+\qquad
+S_a=2\operatorname{Re}\langle P_a u,P_aF_E\rangle,
+\]
+
+and define the actual Euler fitness
+
+\[
+\boxed{f(a)=\frac{S_a}{2E_a}.}
+\]
+
+Then the complete first-order nonlinear spectral law is simply
+
+\[
+\boxed{\partial_t\rho\big|_{NL}=2f\rho.}
+\]
+
+Energy and helicity conservation are exactly
+
+\[
+\boxed{\int f\,d\rho=0,\qquad \int a f\,d\rho=0,}
+\]
+
+and the native Fisher action is
+
+\[
+\boxed{\mathcal A_{spec}=\int f^2\,d\rho.}
+\]
+
+Viscosity is not another spectral mechanism.  It adds the universal quadratic negative fitness
+
+\[
+\boxed{\partial_t\rho=2(f(a)-\nu a^2)\rho.}
+\]
+
+For the normalized energy probability `p=rho/E`,
+
+\[
+\boxed{
+\partial_t p
+=2\bigl(f(a)-\nu(a^2-N^2)\bigr)p.
+}
+\]
+
+Thus the exact relative selection law is
+
+\[
+\boxed{
+\frac12\frac d{dt}\log\frac{p(a)}{p(b)}
+=f(a)-f(b)-\nu(a^2-b^2).
+}
+\]
+
+A high-curl population can outrun a lower one only if the **actual nonlinear fitness advantage** beats a quadratic viscous disadvantage.  The open constitutive question is therefore not whether diffusion is strong at high frequency; it is how the Lie/Waleffe dynamics can manufacture and maintain such a fitness advantage.
+
+Expand `f` in the orthonormal curl--Krylov polynomials for the current physical measure,
+
+\[
+f=\sum_{n\ge2}c_np_n.
+\]
+
+The first two coefficients vanish by the two affine null laws, and
+
+\[
+\boxed{\mathcal A_{spec}=\sum_{n\ge2}c_n^2.}
+\]
+
+Because `a^2` belongs to `span{p_0,p_1,p_2}`, the nonlinear enstrophy/Nijenhuis current sees **only `c_2`**.  All `c_{n>=3}` are spectral reconfiguration directions: they alter the shape of the curl distribution and hence future `c_2`, but they do not change enstrophy at first order.  Viscosity, whose fitness is exactly `-nu a^2`, also lives in the first three Krylov directions.
+
+Actual Galerkin states falsify a tempting finite-dimensional shortcut: in three tested smooth states, `c_2^2/A_spec` was only about `9--10%`, `c_3^2/A_spec` about `15--19%`, and between roughly `22%` and `68%` of the Fisher action remained beyond Krylov level `24`.  The full PDE genuinely uses a high-dimensional reconfiguration score.  No low-order closure is asserted.
+
+The curvature potential is the Green-potential form of the same score.  Since the signed source `2f rho` annihilates `1` and `a`,
+
+\[
+\boxed{
+\kappa(x)=\int |x-a|\,f(a)\,d\rho(a)
+}
+\]
+
+(up to the already-fixed normalization convention), and `partial_x^2 kappa=2f rho`.  Hence the curvature equation and the replicator equation are the same physical law in additive and multiplicative coordinates.
+
+## 23. One Lamb field, then orthogonal projections
+
+There is an even shorter physical ontology before the curl spectrum is read.  Put
+
+\[
+\boxed{L=u\times\omega,\qquad \omega=Cu.}
+\]
+
+The rotational Navier--Stokes equation is
+
+\[
+u_t=\mathbb P L-\nu C^2u.
+\]
+
+The raw Lamb field has the exact Helmholtz split
+
+\[
+\boxed{
+L=(I-\mathbb P)L+F_E,
+\qquad
+\|L\|_2^2=\|(I-\mathbb P)L\|_2^2+\|F_E\|_2^2.
+}
+\]
+
+The gradient term is the Bernoulli/pressure reaction required by incompressibility; it is not an independent nonlinear source.  The solenoidal term is the one Euler velocity.  Its helical modal action then splits exactly as
+
+\[
+\boxed{
+\|F_E\|_2^2
+=A_{spec}+A_{within}+A_{phase}+A_{birth}.
+}
+\]
+
+Here `A_spec` changes total energy on existing curl eigenspaces, `A_within` redistributes amplitude among modes with the same signed curl eigenvalue, `A_phase` rotates occupied complex amplitudes, and `A_birth` creates first-order amplitude at currently zero coordinates.  This is a Pythagorean identity, not a classification of physical owners.
+
+The same Lamb field also satisfies
+
+\[
+\boxed{\nabla\times L=-[u,\omega],}
+\]
+
+so its curl is the Lie transport of vorticity.  Applying the curl Nijenhuis construction to this bracket yields the spectral curvature identity of Section 19.  Pressure, Lie transport, phase/shape motion, Fisher spectral motion and vortex stretching are therefore successive projections or derivatives of **one nonlinear field `u x omega`**.
+
+Finally the critical Gram determinant controls the `L^1` size of this field.  With the global Beltrami defect `r=(C-lambda)u`,
+
+\[
+|L|=|u\times r|,
+\]
+
+and Cauchy gives
+
+\[
+\boxed{
+\|L\|_1^2\le E\|r\|_2^2=\Delta.
+}
+\]
+
+Since `A_spec<=||F_E||_2^2<=||L||_2^2`, the PDE-defined interaction volume obeys the packet-free lower chain
+
+\[
+\boxed{
+V_{spec}=\frac{\Delta}{A_{spec}}
+\ge\frac{\Delta}{\|L\|_2^2}
+\ge\frac{\|L\|_1^2}{\|L\|_2^2}.
+}
+\]
+
+The last quotient is the participation volume of the actual Lamb activity.  Thus collapse of `V_spec` necessarily entails **physical-space concentration of the one nonlinear field itself**.  This identifies the remaining obstacle without choosing a packet, cell or shell.
+
+## 24. No spectral-only monotone can contain the missing mechanism
+
+The previous reduction also gives a useful impossibility theorem.  Fix one physical nondegenerate closed triad, its wavevectors/helicities and all three modal energies.  The cyclic current is proportional to the real phase quadrature.  Shifting the common physical triad phase by `pi` reverses that current while preserving the whole signed-curl energy measure.
+
+For every spectral observable `phi`,
+
+\[
+\dot M_\phi=Q_\triangle\,\phi[a_0,a_1,a_2].
+\]
+
+Therefore, whenever the second divided difference is nonzero, the same spectral state admits both signs of instantaneous Euler production through two physical phase orientations.  Only affine `phi`, whose second divided difference vanishes identically, are protected for every state.
+
+So there is no universal monotone scalar depending only on `rho` beyond the affine energy/helicity invariants.  Any no-escape theorem must retain the **orientation/current dynamics** which `rho` alone forgets.  This rules out replacing the remaining constitutive problem by an invented spectral entropy.
+
+## 25. UV log progress is bounded by the same Nijenhuis quadratic variation
+
+For the strict heterochiral UV spread of Section 15, restore the child radius `M` and use signed curl levels
+
+\[
+-SM<DM<M,
+\qquad 0<D,S<1,\qquad D+S>1.
+\]
+
+Per common positive current `R`, conservation gives
+
+\[
+W_d=(1+S)R,
+\qquad
+W_c=(D+S)R,
+\qquad
+W_s=(1-D)R.
+\]
+
+The positive nonlinear enstrophy/Nijenhuis curvature of this same martingale spread factorizes exactly:
+
+\[
+\boxed{
+Q_\triangle
+=M^2(1-D)(1+S)(D+S)R.
+}
+\]
+
+The actual high-child log progress is
+
+\[
+F_{log}=(D+S)R\log\frac1{\max(D,S)}.
+\]
+
+On the entire strict physical triangle,
+
+\[
+\boxed{M^2F_{log}\le Q_\triangle.}
+\]
+
+The proof is one-dimensional.  If `D>=S`, then `D>1/2`, `S>1-D`, and
+
+\[
+-\log D\le(1-D)(2-D)< (1-D)(1+S).
+\]
+
+If `S>=D`, then `S>1/2` and
+
+\[
+-\log S\le1-S^2\le(1-D)(1+S).
+\]
+
+The constant `1` is sharp at the degenerate boundary `D->1`, `S->0` approached from `D+S>1`.  Thus no uniform strict loss is hidden here.  What is exact is deeper: **every unit of genuine UV log displacement is dominated by quadratic variation of the same signed-curl martingale current.**
+
+## 26. One impedance grammar appears in two independent escape observables
+
+The determinant and critical-stock balances are not merely analogous.  After their native variables are used they have the same algebraic shape.
+
+For the determinant, write the Euler spectral velocity in the curl--Lanczos frame.  Only its `q2` coefficient `c2` contributes to `Delta` growth.  Put
+
+\[
+\gamma_2=\frac{c_2}{\sqrt{\mathcal A_{spec}}},
+\qquad
+y=\frac{\beta_2}{N},
+\qquad
+\theta=\frac{\beta_1^2}{N^2},
+\qquad
+\chi=\frac{\alpha_1^2}{N^2}.
+\]
+
+The exact determinant law becomes
+
+\[
+\boxed{
+\frac{(\log\Delta)'}{2\nu N^2}
+=\gamma_2\,\mathrm{Re}_{spec}\,y
+-\bigl(1+\theta+\chi+y^2\bigr).
+}
+\]
+
+Hence positive determinant growth requires
+
+\[
+\boxed{
+\gamma_2\,\mathrm{Re}_{spec}
+>y+\frac{1+\theta+\chi}{y}
+\ge2\sqrt{1+\theta+\chi}.
+}
+\]
+
+The geometric opening `y` is simultaneously the lever that lets the Euler current leave the first two curl--Krylov directions and a square appearing in viscous killing.  Sending `y` to zero turns off nonlinear leverage; sending it to infinity makes the viscous term dominant.  The least expensive state is an interior balance.
+
+For the critical stock, Section 20 gives independently
+
+\[
+\boxed{
+\gamma_K\,\mathrm{Re}_{spec}\sqrt{\theta d}
+>x+\frac1x,
+\qquad
+x=\sqrt{\frac{\eta}{1-\eta}}.
+}
+\]
+
+Again too little opening (`x->0`) removes the radial geometry needed for critical growth, while too much (`x->infinity`) raises the cubic viscous moment.  Its optimal impedance is the interior value `2`.
+
+This repeated structure suggests a native principle rather than two estimates:
+
+> **The same geometric degree of freedom which opens a non-affine Euler response enters viscous exposure at the next power.  Nonlinear gain is linear in the opening; viscous impedance is convex in it.**
+
+The statement above is theorem-level for `Delta` and `K`; a universal theorem for every observable is not claimed.  The repetition is nevertheless important because the two derivations use different native objects: Lanczos opening for `Delta`, radial moment log-convexity for `K`.
+
+## 27. Adversarial guards: three tempting shortcuts are false
+
+The reduction above was deliberately stress-tested against several attractive but non-native conclusions.
+
+### Holonomy alone is not a three-dimensional tax
+
+A search over genuine additive diamonds found noncoplanar states with normalized scalar triple volume as large as about `0.96` and gauge-invariant helical phase holonomy below `1e-9` for suitable helicity assignments.  Therefore
+
+`genuinely 3D => uniformly positive phase holonomy`
+
+is false.  The older phase-holonomy theorem remains correct on a supplied diamond with supplied holonomy; it must not be promoted to a universal 3D obstruction.
+
+When all four diamond routes were additionally required to remain genuinely forward and moderately efficient, constrained optimization showed a different pattern: driving holonomy toward zero forced the normalized triple volume toward zero in the tested sign sector.  At holonomy about `2.8e-6`, the best sampled all-forward configuration with roughly `0.77` of the old single-edge productivity had triple volume about `1.1e-6`.  This is **exploratory evidence for a compatibility law**, not a theorem; no quantitative gap is used above.
+
+### Pressure projection is not a universal nonlinear tax
+
+The Helmholtz split in Section 23 is an ontology statement, not a lower-loss theorem.  A random helical parent-pair stress found the Leray/raw-source action fraction ranging from about `2.3e-5` to `0.999999999999`.  Thus pressure can remove almost all or almost none of one raw interaction depending on geometry.  No fixed pressure fraction is available for no-escape.
+
+### The nonlinear fitness is not low Krylov rank
+
+Actual dealiased Galerkin states put substantial Fisher action arbitrarily far down the finite curl--Lanczos chain.  The first productive coefficient `c2` was only about ten percent of action in the sampled states and large tails remained past level `24`.  Hence a closure `f approximately c2 p2+c3 p3` is false even for smooth moderate states.
+
+### Reynolds above two is necessary, not sufficient
+
+One actual state at `nu=0.002` had `Re_spec` about `2.62` while its critical stock still decreased.  Its alignment/radial factors reduced the live drive to about `0.28`, below the actual cubic viscous factor about `1.21`.  The scalar `Re_spec` is therefore only the outer concentration shell.  The true instantaneous object is the live product in Section 20.
+
+These failures all point in the same direction: the missing theorem cannot be recovered by adding a static branch or a new scalar threshold.  It must constrain the **persistence of the coupled Lamb/fitness orientation**.
+
+## 28. Current frontier: persistence of a concentrated productive Lamb score
+
+The chain of exact reductions now reads
+
+\[
+\boxed{
+L=u\times\omega
+\longrightarrow
+F_E=\mathbb P L
+\longrightarrow
+f(a)
+\longrightarrow
+\kappa
+\longrightarrow
+\{\dot\Delta,\dot K,\text{radial flux},\ldots\}.
+}
+\]
+
+Every arrow is a projection, conditional score or functional-calculus readout; none creates a new physical owner.
+
+The viscosity side is equally short:
+
+\[
+\boxed{-\nu C^2u\quad\Longleftrightarrow\quad -\nu a^2\text{ fitness}.}
+\]
+
+Consequently a hypothetical critical escape must maintain, at increasingly large curl scale, all of the following properties of **one and the same Lamb field**:
+
+1. enough physical-space concentration to keep `V_spec` small and `Re_spec` large;
+2. enough non-Beltrami/curl-spread geometry to make the desired tangent direction exist;
+3. enough sign--radius decorrelation for the critical kink `|a|` to be non-affine;
+4. enough alignment of the high-dimensional Euler fitness with the productive tangent coordinate rather than reconfiguration coordinates;
+5. enough temporal persistence to repeat this after the state has changed under the current itself and under quadratic viscous selection.
+
+The first four are now measured by exact dimensionless factors.  The fifth is the genuinely unresolved piece.  Neither a static spectral functional, an isolated-triad estimate, a phase-holonomy threshold nor a packet taxonomy can supply it.
+
+The next research question is therefore narrow:
+
+> **What intrinsic evolution law prevents a concentrated Lamb field from keeping its curl-spectral fitness aligned with the productive Nijenhuis direction for an infinite sequence of shrinking interaction volumes?**
+
+A successful answer should act directly on the current/score dynamics.  If it instead reintroduces a list of source/strain/HH/reuse cases, it has moved upward in representation rather than downward toward the PDE mechanism.

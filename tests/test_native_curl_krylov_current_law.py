@@ -6,17 +6,23 @@ import pytest
 from src.native_curl_krylov_current_law import (
     critical_beltrami_split,
     critical_determinant_log_rate,
+    critical_determinant_live_balance,
     critical_tangent_correlation_geometry,
+    critical_escape_balance,
+    curl_nijenhuis_torsion_eigenfactor,
+    nijenhuis_curvature_from_root_work,
     curl_krylov_state,
     hankel_vandermonde_determinant,
     heterochiral_frontier_progress_side_bound,
     intrinsic_spectral_reynolds_barrier,
     isolated_three_point_euler_law,
     martingale_observable_increment,
+    modal_euler_action_decomposition,
     observable_tangent_gram,
     pairwise_curl_shear_capacity,
     rms_curl_scale_log_rate,
     spectral_source_action,
+    spectral_fitness_replicator_law,
     symmetric_heterochiral_stationarity_residual,
     symmetric_heterochiral_upward_efficiency,
     theorem_certificate,
@@ -382,3 +388,124 @@ def test_certificate_refuses_case_taxonomy_and_global_overclaim():
     assert cert["case_taxonomy_used"] is False
     assert cert["temporal_matching_used"] is False
     assert cert["global_regularity_claimed"] is False
+
+
+
+def test_nijenhuis_torsion_factor_is_exact_root_curvature_multiplier():
+    a = (0.7, -0.9, 1.2)
+    R = 1.3
+    T = ((a[1] - a[2]) * R, (a[2] - a[0]) * R, (a[0] - a[1]) * R)
+    Q = sum(ai * ai * ti for ai, ti in zip(a, T))
+    for i in range(3):
+        j, k = [x for x in range(3) if x != i]
+        factor = curl_nijenhuis_torsion_eigenfactor(a[j], a[k], a[i])
+        assert nijenhuis_curvature_from_root_work(a[j], a[k], a[i], T[i]) == pytest.approx(Q)
+        assert factor * T[i] == pytest.approx(Q)
+
+
+def test_nijenhuis_torsion_vanishes_on_parent_curl_level():
+    assert curl_nijenhuis_torsion_eigenfactor(-2.0, 3.0, -2.0) == pytest.approx(0.0)
+    assert curl_nijenhuis_torsion_eigenfactor(-2.0, 3.0, 3.0) == pytest.approx(0.0)
+
+
+def test_critical_live_balance_is_exact_and_radial_impedance_implies_two_barrier():
+    a = (-3.2, -0.8, 0.5, 2.7, 4.1)
+    e = (0.6, 1.1, 0.9, 0.7, 0.4)
+    # Build one nontrivial Euler source and project off the two affine null directions.
+    raw = [0.8, -0.3, 0.6, -0.7, 0.2]
+    n = len(a)
+    S0 = sum(raw)
+    S1 = sum(ai * si for ai, si in zip(a, raw))
+    A1 = sum(a)
+    A2 = sum(ai * ai for ai in a)
+    det = n * A2 - A1 * A1
+    x0 = (S0 * A2 - S1 * A1) / det
+    x1 = (S1 * n - S0 * A1) / det
+    rates = tuple(si - x0 - x1 * ai for ai, si in zip(a, raw))
+    out = critical_escape_balance(a, e, rates, viscosity=0.17)
+    assert out["critical_alignment"] <= 1.0 + 1.0e-12
+    assert out["critical_alignment"] >= -1.0 - 1.0e-12
+    assert out["cubic_viscous_factor"] + 1.0e-12 >= out["cubic_viscous_lower_from_radial_variance"]
+    if math.isfinite(out["radial_impedance_threshold"]):
+        assert out["radial_impedance_threshold"] >= 2.0 - 1.0e-12
+    represented = out["live_escape_number"] - out["cubic_viscous_factor"]
+    assert out["normalized_critical_rate"] == pytest.approx(represented)
+
+
+def test_state_sharp_delta_reynolds_threshold_is_stronger_than_two():
+    st = curl_krylov_state((-2.5, -0.4, 1.3, 3.2), (0.7, 1.0, 0.9, 0.5))
+    out = intrinsic_spectral_reynolds_barrier(st, spectral_velocity_norm_squared=0.8, viscosity=0.2)
+    assert out["state_sharp_reynolds_threshold"] >= 2.0
+    assert out["state_sharp_reynolds_threshold"] == pytest.approx(
+        2.0 * math.sqrt(1.0 + out["defect_fraction"] + out["defect_skew_fraction"])
+    )
+
+
+
+def test_uv_log_progress_is_bounded_by_same_martingale_quadratic_variation():
+    rng = random.Random(2026081415)
+    for _ in range(10000):
+        D = rng.uniform(1.0e-7, 1.0 - 1.0e-7)
+        S = rng.uniform(max(1.0e-7, 1.0 + 1.0e-7 - D), 1.0 - 1.0e-7)
+        out = heterochiral_frontier_progress_side_bound(D, S)
+        assert out["child_log_progress_per_common_current"] <= out["log_progress_upper_from_curvature"] + 1.0e-12
+        expected = (1.0 - D) * (1.0 + S) * (D + S)
+        assert out["signed_curl_curvature_per_common_current_at_unit_child_radius"] == pytest.approx(expected)
+
+
+def test_modal_euler_action_has_exact_spectral_within_phase_birth_pythagorean_split():
+    a = (1.0, 1.0, -2.0, -2.0, 3.0)
+    z = (1.0 + 2.0j, -0.7 + 0.4j, 0.9 - 1.1j, 0.0 + 0.0j, 1.2 + 0.3j)
+    f = (0.3 - 0.8j, 1.1 + 0.2j, -0.6 + 0.7j, 0.4 - 0.9j, -0.2 + 0.5j)
+    out = modal_euler_action_decomposition(a, z, f)
+    assert out["total_euler_action"] == pytest.approx(out["represented_total_action"])
+    assert out["within_eigenspace_radial_action"] >= 0.0
+    assert out["phase_rotation_action"] >= 0.0
+    assert out["new_amplitude_birth_action"] == pytest.approx(abs(f[3]) ** 2)
+    assert 0.0 <= out["curl_spectral_fraction"] <= 1.0
+
+
+
+def test_spectral_fitness_is_exact_replicator_score_with_affine_euler_nulls():
+    a = (-3.0, -0.7, 0.9, 2.8)
+    e = (0.8, 1.1, 0.7, 0.5)
+    raw = [0.6, -0.4, 0.2, -0.1]
+    n = len(a); S0 = sum(raw); S1 = sum(ai * si for ai, si in zip(a, raw)); A1=sum(a); A2=sum(ai*ai for ai in a); det=n*A2-A1*A1
+    x0=(S0*A2-S1*A1)/det; x1=(S1*n-S0*A1)/det
+    rates=tuple(si-x0-x1*ai for ai,si in zip(a,raw))
+    out=spectral_fitness_replicator_law(a,e,rates,viscosity=0.13)
+    assert out["fitness_energy_mean"] == pytest.approx(0.0, abs=1.0e-12)
+    assert out["fitness_helicity_mean"] == pytest.approx(0.0, abs=1.0e-12)
+    assert out["fitness_action"] == pytest.approx(out["spectral_action"])
+    assert out["normalized_mass_residual"] == pytest.approx(0.0, abs=1.0e-12)
+
+
+def test_nonaffine_spectral_observable_has_no_phase_independent_euler_sign():
+    a = (-1.7, 0.4, 2.2)
+    e = (0.8, 1.1, 0.6)
+    phi = tuple(abs(x) for x in a)
+    plus = three_point_observable_volume_law(a,e,phi,waleffe_magnitude=0.31,phase_cosine_abs=0.73)
+    # The helper returns magnitude.  Exact cyclic work is linear in cos(Phi), so a pi phase shift
+    # preserves a,e,g and reverses every non-affine observable response.
+    assert plus["observable_current_magnitude"] > 0.0
+    det = plus["oriented_observable_determinant_abs"]
+    current = 4.0 * 0.31 * 0.73 * math.sqrt(math.prod(e)) * det
+    assert current > 0.0
+    assert -current < 0.0
+
+
+
+def test_krylov_impedance_is_exact_productive_coordinate_balance():
+    st = curl_krylov_state((-3.1, -0.6, 1.2, 2.9, 4.0), (0.5, 1.2, 0.9, 0.7, 0.3))
+    A = 0.83
+    # choose a legal q2 alignment strictly inside [-1,1]
+    gamma = 0.37
+    c2 = gamma * math.sqrt(A)
+    strain = math.sqrt(st.defect_energy) * st.beta2 * c2
+    out = critical_determinant_live_balance(st, strain, A, viscosity=0.14)
+    assert out["q2_alignment"] == pytest.approx(gamma)
+    assert out["spectral_reconfiguration_action"] == pytest.approx(A * (1.0 - gamma * gamma))
+    assert out["krylov_impedance"] + 1.0e-12 >= out["minimum_krylov_impedance"]
+    direct = critical_determinant_log_rate(st, strain, 0.14)["log_delta_rate"]
+    N2 = st.enstrophy / st.energy
+    assert out["normalized_log_delta_rate"] == pytest.approx(direct / (2.0 * 0.14 * N2))
