@@ -1330,8 +1330,9 @@ def test_certificate_collapses_gauss_source_to_intrinsic_positive_critical_metri
     assert "omega^T Gamma_u omega" in cert["primitive_critical_vorticity_metric"]
     assert "Loewner-positive" in cert["primitive_critical_metric_heat_law"]
     assert "finite-energy R3 has only vacuum" in cert["primitive_critical_rank_persistence"]
-    assert "candidate" in cert["primitive_critical_stretching_bridge_guard"]
-    assert "unproved" in cert["primitive_critical_stretching_bridge_guard"]
+    assert "static Hdot^-1/2 bridge is withdrawn" in cert["primitive_critical_stretching_bridge_guard"]
+    assert "near-parallel two-mode" in cert["primitive_critical_stretching_bridge_guard"]
+    assert "endogenous Gamma_u heat/turning history" in cert["primitive_critical_stretching_bridge_guard"]
     assert cert["global_regularity_claimed"] is False
 
 

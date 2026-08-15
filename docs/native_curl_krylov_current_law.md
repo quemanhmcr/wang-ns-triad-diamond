@@ -1966,18 +1966,23 @@ On the exact critical null geometry `S omega=0`, so enstrophy also becomes one-w
 \to \text{a stronger one-way law}.}
 \]
 
-A natural stronger estimate suggested by the tangent identity is
+The tangent identity does **not** supply a static coercive shortcut.  The tempting estimate
 
 \[
-\boxed{
-\|S\omega\|_{\dot H^{-1/2}}^2
-\stackrel{?}{\le} C\int\omega^T\Gamma_u\omega\,dx.}
+\|S\omega\|_{\dot H^{-1/2}}^2\lesssim\int\omega^T\Gamma_u\omega
 \]
 
-This inequality is **not proved and is not used**.  Even if true, the remaining historical bridge
-would still be to pass from persistent small `mathcal G_c`, which controls the source in the native
-negative six-dimensional Schrödinger metric, to sufficient time-integrated control of the stronger
-carre-du-champ source above.  The positive tensor heat law is the native place to seek that history.
+is withdrawn after a near-parallel two-mode Fourier referee: take `k_N=(N,0,0)`,
+`ell_N=(N,1,0)`, `u_k=(1-i)(0,1,1)` and
+`u_ell=(1+i)(-(N^2+1)^(-1/2),N(N^2+1)^(-1/2),1)`, plus conjugates.  Exact mode algebra gives
+scale-growing ratios (about `6.89, 13.56, 53.56` at `N=20,40,160`).  Localized projected wave
+packets retain the same low-beat mechanism.  No closure below uses this static estimate.
+
+This failure is structural rather than a reason to add a compensating analyst norm: near-parallel
+high carriers can make the instantaneous carre-du-champ frustration small while leaving an `O(1)`
+low-frequency stretching beat.  The remaining bridge is therefore genuinely historical: persistent
+small `mathcal G_c` in its native pair-space metric must be coupled to the **endogenous tensor heat
+law and turning of `Gamma_u`**, not replaced by a stronger externally imposed static inequality.
 
 ---
 
