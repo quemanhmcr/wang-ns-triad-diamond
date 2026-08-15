@@ -1576,6 +1576,12 @@ def test_poisson_covariance_stress_two_reservoir_heat_and_fisher_laws_are_exact(
     def grad_scalar(a):
         ah=fft(a)
         return np.stack([ifft(1j*kx*ah),ifft(1j*ky*ah),ifft(1j*kz*ah)])
+    def grad_vector(a):
+        ah=fft(a)
+        return np.stack([np.stack([ifft(1j*kj*ah[i]) for i in range(3)]) for kj in (kx,ky,kz)])
+    def div_vector(a):
+        ah=fft(a)
+        return ifft(1j*(kx*ah[0]+ky*ah[1]+kz*ah[2]))
     def div_tensor(a):
         ah=fft(a)
         return ifft(1j*(kx*ah[:,0]+ky*ah[:,1]+kz*ah[:,2]))
@@ -1591,6 +1597,32 @@ def test_poisson_covariance_stress_two_reservoir_heat_and_fisher_laws_are_exact(
     v=py(u,y); wy=py(omega,y)
     tau=py(tensor(u,u),y)-tensor(v,v)
     trtau=np.trace(tau,axis1=0,axis2=1)
+
+    # The canonical Poisson lift is a local harmonic half-space system.
+    vy=-lam(v); vyy=lap(v)
+    assert np.linalg.norm(vyy-lap(v)) <= 2e-13*max(1.0,np.linalg.norm(vyy))
+    tauyy=py(lap(tensor(u,u)),y)-tensor(vyy,v)-2.0*tensor(vy,vy)-tensor(v,vyy)
+    minus_delta4_tau=lap(tau)-tauyy
+    gv=grad_vector(v)
+    dirichlet_source=tensor(vy,vy)
+    for j in range(3):
+        dirichlet_source += tensor(gv[j],gv[j])
+    assert np.linalg.norm(minus_delta4_tau-2.0*dirichlet_source) <= 8e-12*max(1.0,np.linalg.norm(dirichlet_source))
+    source_eigs=np.linalg.eigvalsh(np.moveaxis(minus_delta4_tau,(0,1),(-2,-1)))
+    assert float(source_eigs.min()) >= -3e-12
+
+    source_C=np.eye(3)[:,:,None,None,None]*np.trace(minus_delta4_tau,axis1=0,axis2=1)-minus_delta4_tau
+    direct_C=np.zeros_like(source_C)
+    for g in (vy,gv[0],gv[1],gv[2]):
+        g2=np.sum(g*g,axis=0)
+        direct_C += 2.0*(np.eye(3)[:,:,None,None,None]*g2-tensor(g,g))
+    assert np.linalg.norm(source_C-direct_C) <= 8e-12*max(1.0,np.linalg.norm(direct_C))
+    axis=np.array([0.4,-0.7,1.1]); axis/=np.linalg.norm(axis)
+    contracted=np.einsum("i,ij...,j->...",axis,source_C,axis)
+    cross_source=np.zeros_like(contracted)
+    for g in (vy,gv[0],gv[1],gv[2]):
+        cross_source += 2.0*np.sum(np.cross(axis[:,None,None,None],g,axisa=0,axisb=0,axisc=0)**2,axis=0)
+    assert np.max(np.abs(contracted-cross_source)) <= 8e-12*max(1.0,float(np.max(np.abs(cross_source))))
 
     # Positive Markov covariance and exact two-depth Germano cocycle.
     eig=np.linalg.eigvalsh(np.moveaxis(tau,(0,1),(-2,-1)))
@@ -1613,6 +1645,16 @@ def test_poisson_covariance_stress_two_reservoir_heat_and_fisher_laws_are_exact(
     filtered=py(leray(lamb),y)
     stress_rhs=leray(cross(v,curl(v)))-leray(div_tensor(tau))
     assert np.linalg.norm(filtered-stress_rhs) <= 5e-12*max(1.0,np.linalg.norm(filtered))
+
+    # The pressure version removes Leray from the bulk equation.
+    raw0=-div_tensor(tensor(u,u))
+    div_raw0_h=fft(div_vector(raw0))
+    p0_h=np.where(k2>0.0,-div_raw0_h/den,0.0)
+    p0=ifft(p0_h); pi=py(p0,y)
+    m=tau+tensor(v,v)
+    local_euler=-div_tensor(m)-grad_scalar(pi)
+    assert np.linalg.norm(local_euler-filtered) <= 7e-12*max(1.0,np.linalg.norm(filtered))
+    assert lap(pi) == pytest.approx(div_vector(div_tensor(m)),rel=8e-12,abs=8e-12)
 
     # Exactly two scalar reservoirs and a genuinely nonzero reversible exchange.
     E=inner(u,u); U=inner(v,v); V=float(np.mean(trtau))
@@ -1714,6 +1756,14 @@ def test_poisson_covariance_stress_two_reservoir_heat_and_fisher_laws_are_exact(
     trgamma=np.trace(gamma_u,axis1=0,axis2=1)
     assert np.linalg.norm(gamma_x-(0.5*grad_scalar(trgamma)-div_tensor(gamma_u))) <= 6e-12*max(1.0,np.linalg.norm(gamma_x))
     M3=inner(omega,lam(omega))
+
+    # Full half-space Dirichlet and Hessian energies have constants K and 2 M3.
+    modal=np.sum(np.abs(fft(u))**2,axis=0)/(n**6)
+    K_fourier=float(np.sum(radius*modal))
+    M3_fourier=float(np.sum((radius**3)*modal))
+    assert K_fourier == pytest.approx(inner(u,lam(u)),rel=3e-13,abs=3e-13)
+    assert 2.0*M3_fourier == pytest.approx(2.0*M3,rel=3e-13,abs=3e-13)
+
     boundary_ratio=np.zeros_like(trgamma); live=trgamma>1e-13
     boundary_ratio[live]=np.sum(gamma_x*gamma_x,axis=0)[live]/trgamma[live]
     boundary_fisher=float(np.mean(boundary_ratio))
@@ -1922,6 +1972,10 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "physical boundary action" in cert["primitive_poisson_hankel_escape"]
     assert "fake scalar profile" in cert["primitive_poisson_realizability_guard"]
     assert "positive covariance-stress lift" in cert["primitive_poisson_covariance_stress"]
+    assert "Delta4 v=0" in cert["primitive_harmonic_halfspace_normal_form"]
+    assert "-Delta4 tau=2 sum_A" in cert["primitive_harmonic_covariance_source"]
+    assert "int_R4+ |grad_4 v|^2=K" in cert["primitive_harmonic_critical_energy"]
+    assert "dynamical no-concentration theorem remains unproved" in cert["primitive_harmonic_concentration_guard"]
     assert "tau_(y+z)(u)=P_z tau_y(u)+tau_z(P_yu)" in cert["primitive_poisson_germano_cocycle"]
     assert "(1/2) partial_y V|_0=K" in cert["primitive_poisson_two_reservoir_exchange"]
     assert "stress-energy tensor" in cert["primitive_poisson_stress_divergence"]

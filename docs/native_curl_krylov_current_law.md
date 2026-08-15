@@ -889,7 +889,62 @@ literal covariance matrix under the Poisson kernel:
 \]
 
 It is not a modeled SGS tensor.  It is generated canonically by the same `Lambda=|C|` already fixed
-by Navier--Stokes.  Differentiating in depth gives the exact matrix carré-du-champ equation
+by Navier--Stokes.  In fact the Poisson lift removes the remaining pseudodifferential appearance in
+the bulk.  Since `Lambda^2=-Delta_x`, with `Delta_4=partial_y^2+Delta_x`,
+
+\[
+\boxed{\Delta_4v=0,\qquad \nabla_x\cdot v=0.}
+\]
+
+Put `m_y=P_y(u tensor u)=tau_y+v tensor v`.  Both `m_y` and `v` are harmonic, so the ordinary product
+rule gives the local covariance source law
+
+\[
+\boxed{
+-\Delta_4\tau_y
+=2\sum_{A=1}^4\partial_Av\otimes\partial_Av\succeq0.}
+\]
+
+Thus the canonical covariance is a Dirichlet-generated potential of the same harmonic velocity.  The
+Poisson-depth asymptotic is part of this statement; on a torus the zero spatial mode of `m_y` can leave
+a finite covariance as `y->infinity`, so the boundary condition `tau_0=0` alone is not asserted to
+characterize the lift.
+
+The transverse covariance is local as well.  If
+
+\[
+q_y=\operatorname{tr}\tau_y,
+\qquad
+C_y=q_yI-\tau_y,
+\]
+
+then
+
+\[
+\boxed{
+-\Delta_4C_y
+=2\sum_A\left(|\partial_Av|^2I-\partial_Av\otimes\partial_Av\right)\succeq0,}
+\]
+
+and for every constant `a in R^3`,
+
+\[
+\boxed{
+-\Delta_4(a^TC_ya)=2\sum_A|a\times\partial_Av|^2.}
+\]
+
+The critical stock and critical heat are half-space energies of this same field.  On continuum `R^3`
+(with the analogous periodic identity on `T^3 x R_+`), and with the full Frobenius norm of the
+four-dimensional Hessian,
+
+\[
+\boxed{
+\int_{\mathbb R^3\times\mathbb R_+}|\nabla_4v|^2\,dx\,dy=K,
+\qquad
+\int_{\mathbb R^3\times\mathbb R_+}|\nabla_4^2v|^2\,dx\,dy=2M_3.}
+\]
+
+The first-order depth equation remains useful and is exactly equivalent to this canonical lift:
 
 \[
 \boxed{
@@ -901,17 +956,33 @@ by Navier--Stokes.  Differentiating in depth gives the exact matrix carré-du-ch
 where `Lambda` acts componentwise and `Gamma(f,g)=f Lambda g+g Lambda f-Lambda(fg)`.  In particular
 `Gamma_v(x)\succeq0` by the same increment-kernel representation used later for `Gamma_u`.
 
-The filtered velocity equation is equally exact.  Since `C`, `Lambda`, Leray projection and `P_y`
-commute,
+There is also a genuinely local pressure form of the filtered dynamics.  Let `pi=P_y p`, where `p` is
+the ordinary Navier--Stokes pressure.  Then `pi` is harmonic in the half-space and
 
 \[
 \boxed{
-\partial_tv
-=\mathbb P(v\times Cv)-\mathbb P\operatorname{div}\tau_y-\nu\Lambda^2v.}
+\partial_tv+(v\cdot\nabla_x)v+\operatorname{div}_x\tau_y+\nabla_x\pi
+=-\nu\,\partial_y^2v,}
 \]
 
-At `y=0`, `tau_0=0`, so this loses no information and returns the original projected
-Navier--Stokes equation.
+with the local pressure constraint
+
+\[
+\boxed{
+-\Delta_x\pi=\partial_i\partial_j(v_iv_j+\tau_{ij}).}
+\]
+
+At `y=0`, `v=u`, `tau_0=0`, `pi=p`, and `-v_{yy}=Delta_xu`, so this is exactly the original
+Navier--Stokes equation.  Projecting away `pi` recovers the equivalent form
+
+\[
+\partial_tv
+=\mathbb P(v\times Cv)-\mathbb P\operatorname{div}\tau_y-\nu\Lambda^2v.
+\]
+
+This is the local half-space normal form of the **canonical Poisson lift**; no claim is made that an
+arbitrary solution of only the displayed boundary data, without the canonical depth condition, is a
+new autonomous formulation.
 
 The covariance has the exact semigroup/Germano cocycle
 
@@ -951,17 +1022,22 @@ There are exactly two energy reservoirs:
 \boxed{\mathscr U(y)+\mathscr V(y)=E.}
 \]
 
-At the physical boundary,
+At the physical boundary the whole critical hierarchy is a covariance jet:
 
 \[
 \boxed{
 \mathscr V(0)=0,
 \qquad
-\frac12\partial_y\mathscr V(0)=K.}
+\mathscr V_y(0)=2K,
+\qquad
+\mathscr V_{yy}(0)=-4Z,
+\qquad
+\mathscr V_{yyy}(0)=8M_3.}
 \]
 
 Thus the critical stock is exactly the first normal slope with which the positive unresolved
-covariance reservoir rises away from zero; no high-frequency shell is needed to state that fact.
+covariance reservoir rises away from zero, while enstrophy and critical heat are its next two normal
+jets.  No high-frequency shell is needed to state that hierarchy.
 
 Splitting the time derivative into Euler and viscous pieces gives the literal reversible/irreversible
 roads
@@ -1230,17 +1306,29 @@ Consequently, on continuum `R^3` for smooth finite-energy states,
 \lesssim K^2.}
 \]
 
-This is only a canonical **depth** area at one time.  Under the NS dilation,
+This is only a canonical **depth** area at one time.  On continuum `R^3`, under the NS dilation,
 
 \[
 \boxed{
-\mathscr A_{u_\lambda}(y,t)
-=\lambda\,\mathscr A_u(\lambda y,\lambda^2t),}
+v_{u_\lambda}(x,y,t)=\lambda v_u(\lambda x,\lambda y,\lambda^2t),
+\qquad
+\mathscr A_{u_\lambda}(y,t)=\lambda\,\mathscr A_u(\lambda y,\lambda^2t).}
 \]
 
-so its depth area is invariant while `mathscr A'_0` scales like `lambda^2` and the depth width scales
-like `lambda^-1`.  Therefore no static area bound rules out concentration of this nonnegative depth
-profile toward `y=0`; no unimodality is claimed.
+Because the half-space has dimension four,
+
+\[
+\boxed{
+\int_{\mathbb R^4_+}|\nabla_4v_{u_\lambda}|^2
+=\int_{\mathbb R^4_+}|\nabla_4v_u|^2=K.}
+\]
+
+Thus the harmonic extension is exactly energy-critical: the depth area of `mathscr A` is invariant,
+`mathscr A'_0` scales like `lambda^2`, and the depth width scales like `lambda^-1`.  A fixed-time
+coercive argument whose only anti-concentration mechanism is growth of `K` or of this depth area
+therefore cannot exclude the canonical dilation.  This does **not** rule out every possible
+instantaneous identity; it says the remaining theorem must use additional state structure or the
+physical-time coupling.  No unimodality is claimed.
 
 The Germano cocycle also splits transverse activity into two nonnegative depth contributions.  Put
 `w=P_zv_y=v_{y+z}`.  Linearity of `tau -> (tr tau)I-tau` gives
@@ -3638,38 +3726,44 @@ The separate material theorem adds the transverse determinant and Minkowski memo
 13. **No single-angle telescope.**  `-tan(theta) theta'_E=2kappa/K-P/Z`, and actual Galerkin states show that the two productions have independent signs.
 14. **No scalar zero-net closure without stress realizability.**  The Poisson covariance stress obeys a sharp Fisher budget, but arbitrary zero-net depth currents are still too large; the unresolved positive factor is the transverse covariance activity `A_y`.
 15. **No crude `L^infinity` closure for the transverse activity.**  `A_y<=||P_yu||_infinity^2 V_y` only returns to external BKM/Serrin control and is not used as the primitive boundary-stress theorem.
-16. **No fixed-time depth-area closure.**  `int_0^infinity A_y dy lesssim K^2` is scale invariant; the profile may narrow toward `y=0` while its boundary slope grows, so no unimodality or no-concentration theorem is assumed.
+16. **No fixed-time depth-area closure.**  `int_0^infinity A_y dy lesssim K^2` and the 4D Dirichlet energy `int|grad_4 v|^2=K` are scale invariant; the profile may narrow toward `y=0` while its boundary slope grows, so no unimodality or no-concentration theorem is assumed.
 
 ---
 
 ## 17. Minimal ontology and the remaining primitive theorem
 
-For the **critical escape question**, the lowest current formulation is the canonical Poisson lift
-and its positive covariance stress
+For the **critical escape question**, the lowest current formulation is the canonical half-space lift
 
 \[
 \boxed{
-v_y=P_yu,
+v=P_yu,
 \qquad
-\tau_y=P_y(u\otimes u)-v_y\otimes v_y\succeq0.}
+\tau=P_y(u\otimes u)-v\otimes v\succeq0.}
 \]
 
-They obey the closed field identities
+Writing `pi=P_y p`, its bulk normal form is local:
 
 \[
 \boxed{
-\partial_yv=-\Lambda v,
+\Delta_4v=0,
 \qquad
-(\partial_y+\Lambda)\tau=\Gamma_v,}
+-\Delta_4\tau=2\sum_A\partial_Av\otimes\partial_Av,}
 \]
 
 \[
 \boxed{
-\partial_tv
-=\mathbb P(v\times Cv)-\mathbb P\operatorname{div}\tau-\nu\Lambda^2v,}
+\partial_tv+(v\cdot\nabla_x)v+\operatorname{div}_x\tau+\nabla_x\pi
+=-\nu v_{yy},
+\qquad \nabla_x\cdot v=0.}
 \]
 
-and the product defect is exactly the covariance stress divergence
+The pressure is the usual local incompressibility multiplier, with
+`-Delta_x pi=partial_i partial_j(v_i v_j+tau_ij)`; the canonical `pi=P_y p` is harmonic in the same
+half-space.  At `y=0`, `tau=0`, so the boundary equation is exactly Navier--Stokes.  The equivalent
+first-order depth identities `partial_y v=-Lambda v` and `(partial_y+Lambda)tau=Gamma_v`, and the
+projected form of the time equation, are compressed readings of this same canonical lift.
+
+The product defect is exactly the covariance stress divergence
 
 \[
 \boxed{
@@ -3726,10 +3820,12 @@ with
 Thus the old pair-area capacity is the boundary slope of the transverse covariance activity, while
 the finite-depth Pythagoras splits the unresolved vorticity bill into productive, axis-misalignment and
 non-rotational parts.  The remaining theorem is a historical **no boundary-concentration** estimate on
-`mathscr A_y` strong enough to imply finite normalized boundary action.  Its fixed-time depth area is
-finite but scale invariant, so the profile can in principle narrow while `mathscr A'_0` grows; the
-affine-core guard likewise shows this cannot be read off from `-E'=2nu Z` alone.  No unimodality is
-assumed.  This concentration theorem is **not proved**.
+`mathscr A_y` strong enough to imply finite normalized boundary action.  The local normal form makes
+the obstruction sharper: `K=int_{R4+}|grad_4 v|^2` is exactly invariant under the joint `(x,y)`
+dilation, and the fixed-time activity depth area is scale invariant too.  Hence ordinary static
+coercivity that would charge concentration by increasing either quantity cannot close the argument;
+the physical-time coupling (or an additional exact state constraint) must break the recurrence.  No
+unimodality is assumed.  This dynamical concentration theorem is **not proved**.
 
 The previously exposed lossless tangent coordinate remains exact but is now a compressed boundary
 reading:
