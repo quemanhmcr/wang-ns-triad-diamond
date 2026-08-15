@@ -827,6 +827,60 @@ def test_euler_acceleration_normals_and_critical_leaf_turning_decomposition_are_
     assert direct == pytest.approx(represented,abs=3e-14)
 
 
+def test_normalized_projector_lax_krein_radial_flatness_and_covariant_orientation_are_exact():
+    def J(x):
+        x=np.asarray(x); return np.array(((0.,-x[2],x[1]),(x[2],0.,-x[0]),(-x[1],x[0],0.)))
+
+    C=np.diag((0.8,-1.7,3.1));L=np.diag((0.8,1.7,3.1));L2=L@L;nu=0.19
+    u=np.array((0.7,-1.1,0.6));E=float(u@u);e=u/math.sqrt(E);P=np.outer(e,e)
+    F=J(u)@(C@u);f=F/math.sqrt(E);N2=float((C@u)@(C@u))/E
+    v=f-nu*(L2@e-N2*e);Pt=np.outer(v,e)+np.outer(e,v)
+    Ae=math.sqrt(E)*(J(e)@C+C@J(e))
+    assert np.linalg.norm(Ae+Ae.T)<2e-14 and np.linalg.norm(Ae@e-f)<2e-14
+    Aeminus=math.sqrt(E)*(J(-e)@C+C@J(-e))
+    assert np.linalg.norm(Aeminus+Ae)<2e-14  # same P, opposite Euler orientation generator
+    comm=Ae@P-P@Ae;PL=P@L2-L2@P;double=P@PL-PL@P
+    assert np.linalg.norm(Pt-comm+nu*double)<3e-14
+    heat=-2*nu*float(((L2-N2*np.eye(3))@e)@((L2-N2*np.eye(3))@e))
+    assert 2*float((-nu*(L2-N2*np.eye(3))@e)@(L2@e)) == pytest.approx(heat,abs=3e-14)
+
+    # Jacobi/Lax plus operator heat intertwining in the finite cross-product Lie algebra.
+    omega=np.array((0.4,-0.8,1.2));adv=np.array((-0.5,0.3,0.9))
+    assert np.linalg.norm(J(np.cross(omega,adv))-(J(omega)@J(adv)-J(adv)@J(omega)))<3e-14
+    basis=np.eye(3);Ds=[-1j*J(q) for q in basis];B=J(omega).astype(complex)
+    dop=sum((D@(D@B-B@D)-(D@B-B@D)@D) for D in Ds)
+    assert np.linalg.norm(dop-2*B)<4e-14
+
+    # B-invariance implies the positive-metric Krein adjoint formula.
+    Js=np.diag((1.,1.,-1.,-1.));G=np.diag((0.7,1.3,2.1,3.4));Bmet=G@Js
+    K=np.array(((0.,1.,-2.,.5),(-1.,0.,.3,.8),(2.,-.3,0.,-1.1),(-.5,-.8,1.1,0.)))
+    U=np.linalg.solve(Bmet,K);Udag=np.linalg.solve(G,U.T@G)
+    assert np.linalg.norm(U.T@Bmet+Bmet@U)<2e-14
+    assert np.linalg.norm(Udag+Js@U@Js)<3e-14
+
+    # Canonical radial exponential-tilt generators commute as vector fields.
+    r=np.array((0.6,1.1,2.3,4.0));p0=np.array((.1,.2,.3,.4))
+    def V(g): return 2*(g-float(p0@g))*p0
+    def DV(g,q): return 2*((g-float(p0@g))*q-p0*float(g@q))
+    Vr,Vq=V(r),V(r*r)
+    assert np.linalg.norm(DV(r*r,Vr)-DV(r,Vq))<2e-14
+
+    # Full normalized NS uses the same absolute-curl Krylov frame and closes D_t w exactly.
+    m=float(e@(L@e));delta=math.sqrt(float(e@(L2@e))-m*m);n=(L@e-m*e)/delta
+    a=float(n@f);w=f-a*n;alpha=float(n@(L@n));h=L@n-delta*e-alpha*n
+    A=a-nu*delta*(m+alpha);W=w-nu*delta*h;Pp=np.eye(3)-np.outer(e,e)-np.outer(n,n)
+    assert np.linalg.norm((L2-N2*np.eye(3))@e-delta*(m+alpha)*n-delta*h)<3e-14
+    assert np.linalg.norm(v-A*n-W)<3e-14
+    md=2*float((L@e)@v);dd=(float((L2@e)@v)-m*md)/delta
+    nd=((L-m*np.eye(3))@v-md*e)/delta-(dd/delta)*n
+    nperp=(A*h+Pp@((L-m*np.eye(3))@W))/delta
+    assert np.linalg.norm(Pp@nd-nperp)<5e-14
+    ft=-nu*N2*f+math.sqrt(E)*(J(v)@(C@e)+J(e)@(C@v))
+    Dtw=Pp@ft-a*nperp
+    wrhs=math.sqrt(E)*Pp@(J(v)@(C@e)+J(e)@(C@v))-nu*N2*w-a*nperp
+    assert np.linalg.norm(Dtw-wrhs)<5e-14
+
+
 def test_absolute_curl_productive_frame_turning_helicity_toda_and_two_radius_rigidity():
     r=np.array((0.7,1.1,1.9,2.4,3.3,4.2));sgn=np.array((1.,-1.,1.,-1.,1.,-1.));C=sgn*r
     e=np.array((0.31,-0.27,0.44,0.18,-0.53,0.39));e=e/np.linalg.norm(e)
@@ -2254,6 +2308,10 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "A_escape=kappa^2/[N^2(EZ-K^2)]" in cert["primitive_scalar_triple_escape"]
     assert "only the first term has fixed sign" in cert["primitive_euler_kappa_derivative"]
     assert "remaining freedom is tangent turning" in cert["primitive_euler_acceleration_leaf"]
+    assert "P_t=[A_e,P]-nu[P,[P,Lambda^2]]" in cert["primitive_normalized_projector_two_road"]
+    assert "K'_E=2(omega,Sym_G U omega)_G=2kappa" in cert["primitive_krein_lax_boost"]
+    assert "[V_r,V_(r^2)]=0" in cert["primitive_radial_tilt_commutation"]
+    assert "D_t w=" in cert["primitive_orientation_covariant_law"]
     assert "A_escape=a^2/N^2" in cert["primitive_absolute_curl_productive_frame"]
     assert "self-turning" in cert["primitive_absolute_curl_self_turning"]
     assert "no 0/0 quotient" in cert["primitive_helicity_side_motion"]

@@ -628,7 +628,7 @@ Navier--Stokes adds only
 Thus every triad phase, spectral current and reorientation is a contraction of one fixed Cartan
 tensor, while viscosity is diagonal quadratic heat.  The network is not a changing rulebook.
 
-### 2.5 One-step freedom, constrained acceleration and non-free continuation
+### 2.5 Projector/Lax two-road law and the orientation remainder
 
 Put
 
@@ -639,6 +639,47 @@ F:=F_E=J_uCu,
 \qquad
 F':=DF_E(u)[F].
 \]
+
+Normalize `e=u/sqrt(E)`, `P=e tensor e`, and set
+
+\[
+\boxed{
+\mathcal A_e:=\sqrt E(J_eC+CJ_e),\quad
+\mathcal A_e^*=-\mathcal A_e,\quad
+\mathcal A_e e=F_E/\sqrt E,\quad
+P_t=[\mathcal A_e,P]-\nu[P,[P,\Lambda^2]],\quad \Lambda^2=C^2.}
+\]
+
+Thus Euler is a reversible commutator while viscosity is one-way double-bracket sorting.  This is not
+autonomous in `P` alone: `e->-e` fixes `P` but reverses `mathcal A_e` and the Euler commutator, so the
+state-generated orientation has not been quotiented away.  With `N^2=<e,Lambda^2 e>`,
+
+\[
+\boxed{\frac d{dt}\langle e,\Lambda^2e\rangle\big|_\nu
+=-2\nu\|(\Lambda^2-N^2)e\|_2^2\le0.}
+\]
+
+The same grammar appears in the vorticity Lie algebra.  For `D_j=-i partial_j` and
+`Delta_op B=sum_j[D_j,[D_j,B]]`, derivation of the bracket gives
+`[D_j,ad_omega]=ad_(D_j omega)` and `Delta_op ad_omega=ad_(C^2 omega)`, hence
+
+\[
+\boxed{(\operatorname{ad}_\omega)_t
+=[\operatorname{ad}_\omega,\operatorname{ad}_u]-\nu\Delta_{op}\operatorname{ad}_\omega.}
+\]
+
+So Euler is Lax conjugation and viscosity is positive operator heat (`Delta_op>=0`).  On the smooth
+curl-invertible range put `(x,y)_G=<Lambda^-1 x,y>`, `mathsf J=sgn C` and
+`mathcal U=-ad_u`.  Since helicity `B(x,y)=(mathsf Jx,y)_G=<C^-1x,y>` is ad-invariant,
+
+\[
+\boxed{\mathcal U_G^\dagger=-\mathsf J\mathcal U\mathsf J,\quad
+\operatorname{Sym}_G\mathcal U=\tfrac12(\mathcal U-\mathsf J\mathcal U\mathsf J),\quad
+K'_E=2(\omega,\operatorname{Sym}_G\mathcal U\,\omega)_G=2\kappa.}
+\]
+
+The critical boost is therefore the helicity-odd, `G`-symmetric/noncompact part of the same signed Euler
+isometry, not a second source.
 
 Along Euler, bilinearity of `J_uCu` gives
 
@@ -695,11 +736,10 @@ Even `kappa/[N sqrt(EZ-K^2)]` can be positive and increasing.  There is therefor
 **sign** theorem.  There is, however, an exact one-step law for the direction in which critical
 productivity is measured.
 
-Normalize on the Euler energy sphere and assume `delta>0`:
+In the same normalized state, assume `delta>0` and put
 
 \[
 \boxed{
- e=\frac{u}{\sqrt E},\quad
  m=\langle e,\Lambda e\rangle=\frac KE,\quad
  \delta^2=\|(\Lambda-m)e\|_2^2=\frac{EZ-K^2}{E^2},\quad
  n=\frac{(\Lambda-m)e}{\delta}.}
@@ -769,8 +809,18 @@ After the endogenous time change `ds/dt=a/delta`, this is the first Toda spectra
 \boxed{m'_E=2a\delta,\qquad \delta'_E=a(\alpha_1-m).}
 \]
 
-This is an instantaneous saturation identity, not a global integrable reduction of NS.  The Krylov
-recurrence
+This is a saturation identity, not a global integrable reduction.  On the normalized radial simplex
+let `V_g(p)=2(g-E_p g)p`.  Productive radial tilt is `V_r`, normalized heat is `-nu V_(r^2)`, and
+
+\[
+\boxed{[V_r,V_{r^2}]=0.}
+\]
+
+So the canonical radial generators contain no hidden noncommutative self-turning.  The endogenous
+physical speed `a/delta` still depends on orientation; complete physical-time commutation and a blanket
+no-go for every radial estimate are **not** claimed.
+
+The Krylov recurrence
 
 \[
 \Lambda e=me+\delta n,\qquad \Lambda n=\delta e+\alpha_1n+h
@@ -799,9 +849,32 @@ a^2\|h\|_2^2\le2\delta^2\|\Theta\|_2^2+2\|R_w\|_2^2.}
 
 This is an exact productivity--turning/reconfiguration law, not yet an `a^2` action bound: no lower
 bound on `||h||/delta` is known, `h=0` is the two-radius face, and `R_w` carries one extra `|C|` weight.
-The existing material lock `-E'=nu||g_t||_{L_g^2}^2`,
-`M3=(1/2)||g_t||_{Hdot_g^(1/2)}^2` shows why finite energy loss does not automatically pay that
-higher-frequency cost.  No crude interpolation is inserted.
+
+Full NS closes the same remainder.  Since
+`(Lambda^2-N^2)e=delta(m+alpha_1)n+delta h`, define
+
+\[
+A=a-\nu\delta(m+\alpha_1),\qquad W=w-\nu\delta h,\qquad
+v=e_t=An+W,\qquad P_\perp=I-e\otimes e-n\otimes n.
+\]
+
+Then
+
+\[
+\boxed{P_\perp n_t=\delta^{-1}[Ah+P_\perp(\Lambda-m)W],}
+\]
+
+and, because `f=sqrt(E)J_eCe` with
+`f_t=-nu N^2 f+sqrt(E)(J_vCe+J_eCv)`, the covariant derivative `D_tw:=P_perp w_t` obeys
+
+\[
+\boxed{D_tw=\sqrt E P_\perp(J_vCe+J_eCv)-\nu N^2w
+-\frac a\delta[Ah+P_\perp(\Lambda-m)W].}
+\]
+
+This is the exact orientation equation left after removing the commuting radial generators, not a
+Lyapunov estimate.  The material lock shows its extra `|C|` weight is not automatically paid by finite
+energy loss; no crude interpolation is inserted.
 
 The interaction-network structure below is a higher reading of how this turning/reconfiguration can be
 realized.  In the fixed curl basis, one nested path
@@ -3855,13 +3928,11 @@ scale-free factor grow beyond `5e4`.  The exact low-frequency Galilean catalyst 
 does not close many-mode coherence, because multiple admissible contributions may add before the
 square.  These are **guards**, not theorem inputs: they remove static shortcuts and leave persistence.
 
-The same necessity now has the lower physical reading
-`int A_escape dt=infinity`, with
-`A_escape=|<omegahat,shat cross u>|^2`.  Thus the remaining theorem is not a separate statement about
-`nu_E`: it is finite normalized angular action of the actual Euler tangent motion.  Equality rigidity
-still explains why exact perfect productivity collapses genuine 3D geometry, while the spacetime
-electric critical component records the compatible turning of the same current.  Converting that
-compatibility into `int A_escape dt<infinity` is unproved.  No global-regularity claim is made here.
+The same necessity has the lower physical reading `int A_escape dt=infinity`, with
+`A_escape=|<omegahat,shat cross u>|^2`.  This is the same orientation action now exposed directly by
+the projector/Lax--Krein law, not a separate theorem about `nu_E`.  Equality rigidity and the
+spacetime electric component remain higher readings of the same turning.  Finite action is still
+unproved; no global-regularity claim is made here.
 
 ---
 
@@ -4205,42 +4276,53 @@ The separate material theorem adds the transverse determinant and Minkowski memo
 18. **No pair-area heat monotonicity shortcut.**  No sign is assumed for the absolute pair-area history under heat; differentiating the singular pair kernel does not supply a proved pure negative-square law, so this route is not used.
 19. **No scalar-`mathfrak q` orientation closure.**  A physical closed-triad `pi` phase reversal leaves the whole radial Dirichlet profile fixed while reversing `j_E` and `kappa`; the positive scalar ledger cannot determine nonlinear direction.
 20. **No transport-action lower shortcut.**  Physical Waleffe triads violate `A_escape <= int j_E^2/mathfrak q dy` by large factors; scalar depth motion is not a compulsory payment comparable to normalized boundary productivity.
-21. **No one-step turning theorem.**  The exact Euler derivative of `kappa` contains tangent turning not fixed by the two invariant normal accelerations, and one fixed physical triad realizes all four `(sign kappa, sign kappa'_E)` quadrants.
+21. **No one-step sign-decay theorem.**  The exact Euler derivative of `kappa` contains tangent turning not fixed by the two invariant normal accelerations, and one fixed physical triad realizes all four `(sign kappa, sign kappa'_E)` quadrants; this does not contradict the separate exact `h`-weighted frame-turning identity.
 22. **No full-Euler companion theorem from Jacobi alone.**  Weighted Jacobi controls bracket compositions `sum lambda_M f f`; actual nested Euler coefficients carry additional signed-curl gaps `(lambda_M-lambda_I)`, and a physical helical witness has one nonzero full continuation with both cyclic full companions zero.
 23. **No global fixed-loss `10/13` law.**  That ceiling belongs to the signed-good `3/5--5/8` window.  On the full strict UV triangle `(D+S)/(1+S)->1`; the primitive replacement is the sharp continuous law `M^2 F_log<=Q_triangle`, with retained fraction tending one only as log progress tends zero.
-24. **No gross positive curvature budget.**  `Q_triangle>=0` is occurrence-wise; summing positive triad curvatures creates a representation-dependent traffic quantity.  The full Nijenhuis curvature is representation-free but signed, so this network reading does not close the lower Krylov-history frontier.
+24. **No gross positive curvature budget.**  `Q_triangle>=0` is occurrence-wise; summing positive triad curvatures creates a representation-dependent traffic quantity.  The full Nijenhuis curvature is representation-free but signed, so this network reading does not close the lower orientation-history frontier.
 25. **No uniform productivity-to-turning gap.**  Under `w=0`, intrinsic turning is `(a/delta)h`, but `h` can vanish exactly on the two-radius radial face; no positive lower bound for `||h||/delta` is assumed.
 26. **No global Toda reduction.**  The first Toda spectral-measure law is exact only on the instantaneous saturation branch `w=0`, after the endogenous time change `ds/dt=a/delta`; generic Euler motion has side reconfiguration and helicity compatibility.
 27. **No derivative-lowering shortcut.**  `R_w=P_perp(Lambda-m)w` carries an extra absolute-curl weight.  Finite energy loss pays the `Z`/material-`L2` level, so no crude Cauchy or interpolation is used to manufacture the missing historical action.
+28. **No hidden radial commutator closure.**  The canonical normalized tilt generators satisfy `[V_r,V_(r^2)]=0`; this kills a radial noncommutative self-turning mechanism, but the endogenous scalar speed `a/delta` prevents promoting that fact to commutation of the complete physical-time dynamics.
+29. **No projector-only or norm-only closure.**  `P=e tensor e` is not autonomous: `e->-e` leaves `P` fixed but reverses `mathcal A_e` and the Euler commutator.  The double bracket gives exact viscous sorting, while the unresolved information is self-generated Lax/Krein orientation; no claim is made that the algebra excludes every radial inequality.
 
 ---
 
 ## 17. Minimal ontology and the remaining primitive theorem
 
-For the **critical escape question**, the lowest dynamics must retain the orientation carried by the
-actual skew Euler current.  With the already fixed centered curl defect
+For the **critical escape question**, the lowest normalized law is already the rank-one two-road
+operator equation
 
 \[
 \boxed{
-r=(C-H/E)u,
+P_t=[\mathcal A_e,P]-\nu[P,[P,\Lambda^2]],
 \qquad
-u_t=J_ur-\nu C^2u,
+\mathcal A_e=\sqrt E(J_eC+CJ_e),
 \qquad
-J_u^*=-J_u,
-\qquad
-C^2\succeq0.}
+\mathcal A_e^*=-\mathcal A_e.}
 \]
 
-These are the irreducible two roads: `J_u r` is the signed/reversible rotation generated by the state,
-while `-nu C^2u` is the one-way positive heat.  There is no third mechanism.  If
-`s=(Lambda-K/E)u` is the unique critical-uphill tangent, then energy tangency gives
+Euler is the self-generated reversible commutator and viscosity is one-way double-bracket sorting.
+The equivalent vorticity reading is Lax conjugation plus positive operator heat,
 
 \[
-\boxed{\kappa=\langle s,J_ur\rangle.}
+\boxed{(\operatorname{ad}_\omega)_t
+=[\operatorname{ad}_\omega,\operatorname{ad}_u]-\nu\Delta_{op}\operatorname{ad}_\omega.}
 \]
 
-Thus critical growth is exactly the orientation of the skew Euler road against the uphill tangent.
-The canonical Dirichlet law remains the sharpest scalar ledger of these roads,
+On the curl-invertible range the critical source is not additional ontology: for
+`mathcal U=-ad_u`, `mathsf J=sgn C` and `(x,y)_G=<Lambda^-1 x,y>`,
+
+\[
+\boxed{
+\operatorname{Sym}_G\mathcal U=\tfrac12(\mathcal U-\mathsf J\mathcal U\mathsf J),
+\qquad
+K'_E=2(\omega,\operatorname{Sym}_G\mathcal U\,\omega)_G=2\kappa.}
+\]
+
+Thus the missing information is orientation of the self-generated noncompact/Krein part against
+operator heat, not another radial stock.  The canonical Dirichlet law remains the sharpest scalar
+ledger of these roads,
 
 \[
 \boxed{
@@ -4272,36 +4354,32 @@ quantity: an exact physical triad violates the proposed lower comparison by more
 magnitude.  Nor is there a one-step orientation monotone: on one fixed physical triad, `kappa` and its
 Euler derivative realize all four sign quadrants.
 
-The lowest historical statement can now be made before any triad decomposition.  In the normalized
-absolute-curl frame above,
+The canonical radial generators themselves are flat: `[V_r,V_(r^2)]=0`.  The lowest noncommuting
+remainder is therefore the self-generated orientation equation recorded above.  In the absolute-curl
+frame,
 
 \[
 \boxed{\mathcal A_{escape}=a^2/N^2,\qquad
-\delta\Theta=a h+R_w.}
+D_tw=\sqrt E P_\perp(J_vCe+J_eCv)-\nu N^2w
+-\frac a\delta[Ah+P_\perp(\Lambda-m)W].}
 \]
 
-Hence persistent productive action must negotiate only endogenous alternatives: nontrivial Krylov
-opening `h` turns the productive direction, helicity can force side motion `w`, while suppressing both
-pushes the radial state toward the rigid two-radius face `h=0`.  None of these alternatives currently
-has a proved finite energy-paid historical action: `R_w` is one `|C|` weight higher, and no quantitative
-near-two-radius persistence theorem is assumed.
+Its saturation shadow is `delta Theta=a h+R_w`: nonzero `h` rotates the productive frame, helicity may
+force side motion `w`, and suppressing both approaches the rigid two-radius face.  Cartan/Jacobi,
+Nijenhuis, Poisson and material laws remain exact readings of how this same orientation dynamics is
+realized; they are not extra mechanisms or gross positive traffic budgets.
 
-The Cartan/Jacobi/Nijenhuis continuation laws remain exact **network readings** of this same
-reconfiguration.  They show how many-mode continuation can realize `w` and frame turning, but they are
-no longer needed to state the lowest frontier.  In particular, one may not close history by summing
-`Q_triangle^+`; that would be an analyst-created gross traffic budget.
-
-The remaining theorem is therefore a **Krylov-turning/reconfiguration history theorem**: finite smooth
+The remaining theorem is therefore an **orientation/Lax--Krein history theorem**: finite smooth
 energy-loss histories must make
 
 \[
 \boxed{\int_0^T\frac{a(t)^2}{N(t)^2}\,dt<\infty,}
 \]
 
-using only the exact turning identity, helicity compatibility, two-radius rigidity and physical heat,
-without losing the extra `|C|` weight.  This is precisely the old escape action, so critical escape
-would force the same integral to diverge.  The required derivative-preserving historical bridge is
-**not proved**.
+using the exact self-generated orientation/Lax equation and physical operator heat, without replacing
+them by a radial norm closure or losing the extra `|C|` weight.  This is precisely the old escape
+action, so critical escape would force the same integral to diverge.  The required exact historical
+transgression/return law for the noncompact boost is **not proved**.
 
 The previously exposed lossless tangent coordinate remains exact but is now a compressed boundary
 reading:
@@ -4408,15 +4486,14 @@ negative heat are not enough.  The covariance lift now sharpens the realizabilit
 `D_y` is the divergence of a positive stress, its weighted divergence Fisher cost is bounded by the
 same unresolved heat sink `Z-Z_y`, and the only uncovered positive work factor is the transverse
 covariance activity `mathscr A_y`.  A finite-history estimate for that factor from the Germano cocycle,
-Loewner heat law and stress-divergence identity is the remaining boundary-stress theorem.  The
-spacetime Hom--Bianchi law remains an exact compatibility reading of the same current, but does not
-supply that positive budget by itself.
+Loewner heat law and stress-divergence identity would be a higher boundary-stress realization of the
+same orientation-history problem.  The spacetime Hom--Bianchi law remains an exact compatibility
+reading, but does not supply the missing return law by itself.
 
-In the primitive grammar: **Euler exchanges energy through a positive covariance stress; viscosity
-erases both reservoirs, and pays the stress-divergence Fisher cost.  Critical escape would still
-require infinite regeneration of the transverse covariance activity near the physical boundary.**
-Showing that this cannot produce infinite normalized boundary action on a finite smooth history is
-the remaining theorem.  It is **not proved**, and no global-regularity claim is made.
+In that higher covariance reading: **Euler exchanges energy through a positive covariance stress;
+viscosity erases both reservoirs and pays the stress-divergence Fisher cost.**  Preventing infinite
+normalized boundary action remains equivalent to the lower orientation/Lax--Krein history problem;
+it is **not proved**, and no global-regularity claim is made.
 
 Material Hodge turnover remains the natural history gauge through
 
