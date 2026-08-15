@@ -1333,6 +1333,128 @@ def two_level_curl_geometry_algebra(
         "identity_residual":res,
     }
 
+
+
+def sl3_cartan_casimir_algebra(velocity_gradient: np.ndarray) -> dict[str, float]:
+    """Fundamental quadratic/cubic Cartan decomposition of one ``sl(3)`` generator.
+
+    For a trace-free velocity gradient ``A=P+Q`` with ``P`` symmetric and ``Q``
+    skew,
+
+        tr A^2 = tr P^2 + tr Q^2,
+        tr A^3 = tr P^3 + 3 tr(P Q^2),
+        tr A^3 = 3 det A.
+
+    In three dimensions the degree-two and degree-three polynomials are the two
+    fundamental invariant-polynomial generators of ``sl(3)``.  For an actual
+    periodic/decaying incompressible gradient their spatial integrals vanish by
+    exactness/Piola, producing the quadratic strain--rotation and cubic
+    strain--vorticity Betchov locks as coefficients of one finite degree law.
+    """
+    A=np.asarray(velocity_gradient,dtype=float)
+    if A.shape!=(3,3) or not np.all(np.isfinite(A)):
+        raise ValueError("finite 3x3 velocity gradient required")
+    tr=float(np.trace(A))
+    if abs(tr)>3e-10*max(1.0,np.linalg.norm(A)):
+        raise ValueError("incompressible velocity gradient must be trace-free")
+    P=.5*(A+A.T);Q=.5*(A-A.T)
+    q2=float(np.trace(A@A)); q2rep=float(np.trace(P@P)+np.trace(Q@Q))
+    q3=float(np.trace(A@A@A)); q3rep=float(np.trace(P@P@P)+3*np.trace(P@Q@Q))
+    det=float(np.linalg.det(A));res=max(abs(q2-q2rep),abs(q3-q3rep),abs(q3-3*det))
+    if res>2e-10*max(1.0,np.linalg.norm(A)**3,abs(q2),abs(q3)):
+        raise AssertionError("sl3 Cartan Casimir decomposition failed")
+    return {
+        "quadratic_casimir":q2,
+        "quadratic_cartan_split":q2rep,
+        "cubic_casimir":q3,
+        "cubic_cartan_split":q3rep,
+        "determinant":det,
+        "identity_residual":res,
+    }
+
+
+def sl3_tangent_chord_degree_algebra(velocity_gradient: np.ndarray, chord_parameter: float) -> dict[str, float]:
+    """Finite characteristic polynomial of the incompressible tangent chord.
+
+    For trace-free ``A`` and real ``s``,
+
+        det(I+sA)=1-(s^2/2)tr A^2+s^3 det A.
+
+    If ``A=grad u`` on a periodic/decaying domain, the two nonconstant
+    coefficients are spatial divergences and integrate to zero.  Equivalently
+    ``x -> x+s u(x)`` is degree one, so its signed Jacobian integrates to the
+    original volume for every ``s``.  This helper checks only the exact local
+    characteristic polynomial; the degree statement uses the global gradient
+    topology.
+    """
+    A=np.asarray(velocity_gradient,dtype=float);q=sl3_cartan_casimir_algebra(A);ss=float(chord_parameter)
+    if not math.isfinite(ss):raise ValueError("finite chord parameter required")
+    direct=float(np.linalg.det(np.eye(3)+ss*A))
+    represented=1.0-.5*ss*ss*q["quadratic_casimir"]+ss**3*q["determinant"]
+    res=abs(direct-represented)
+    if res>3e-10*max(1.0,abs(direct),abs(represented)):
+        raise AssertionError("sl3 tangent-chord characteristic polynomial failed")
+    return {"chord_jacobian":direct,"characteristic_polynomial":represented,"identity_residual":res}
+
+
+def symmetric_metric_cartan_balance(
+    metric_speed_l2_squared: float,
+    metric_cubic_integral: float,
+    metric_gradient_l2_squared: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Primitive global enstrophy law in the ``SL(3)/SO(3)`` metric velocity.
+
+    Put ``K=g^-1 g_t``.  For an actual smooth incompressible NS state,
+
+        Z=(1/2) int tr K^2,
+        Z'_Euler=-int det K,
+        int |nabla^g K|^2=2 int |curl omega|^2.
+
+    Therefore
+
+        (1/2) d/dt int tr K^2
+        = -int det K - nu int |nabla^g K|^2.
+
+    This helper returns the represented derivative from the three intrinsic
+    scalar readings.  It does not assert those inputs arise from an arbitrary
+    symmetric tensor field; compatibility with a flat material metric is part of
+    the PDE theorem.
+    """
+    q=float(metric_speed_l2_squared);cub=float(metric_cubic_integral);grad=float(metric_gradient_l2_squared);nu=float(viscosity)
+    if not all(math.isfinite(x) for x in (q,cub,grad,nu)) or q<0 or grad<0 or nu<0:
+        raise ValueError("finite nonnegative quadratic/gradient data and viscosity required")
+    zp=-cub-nu*grad
+    return {"enstrophy":.5*q,"enstrophy_derivative":zp,"euler_cubic_source":-cub,"viscous_dirichlet_sink":-nu*grad}
+
+
+def affine_local_blowup_guard(time_to_pole: float, vorticity_scale: float=1.0) -> dict[str, float]:
+    """Exact infinite-energy affine Euler/NS countermodel to any purely local closure.
+
+    On ``R^3`` take ``u=A(t)x`` with
+
+        S=diag(a,a,-2a),   omega=b e1,
+        a=1/(T-t),         b=b0/(T-t).
+
+    Choosing the skew part of ``A`` with this vorticity gives
+    ``Omega_t+S Omega+Omega S=0``, so ``A_t+A^2`` is symmetric and can be
+    absorbed by a quadratic pressure.  Since ``Delta u=0``, the same field solves
+    NS for every viscosity.  It blows up locally but has unbounded velocity and
+    infinite energy, so it is a falsification guard only: no pointwise/local
+    ``SL(3)`` law can prove finite-energy regularity by itself.
+    """
+    tau=float(time_to_pole);b0=float(vorticity_scale)
+    if not math.isfinite(tau) or tau<=0 or not math.isfinite(b0):raise ValueError("positive finite time-to-pole and finite vorticity scale required")
+    a=1.0/tau;b=b0/tau
+    S=np.diag((a,a,-2*a));w=np.array((b,0.,0.));C=np.array([[0.,-w[2],w[1]],[w[2],0.,-w[0]],[-w[1],w[0],0.]])
+    A=S+.5*C
+    ap=1.0/(tau*tau);bp=b0/(tau*tau);St=np.diag((ap,ap,-2*ap));wt=np.array((bp,0.,0.));Ct=np.array([[0.,-wt[2],wt[1]],[wt[2],0.,-wt[0]],[-wt[1],wt[0],0.]])
+    At=St+.5*Ct;acc=At+A@A;skew=.5*(acc-acc.T);vort=np.array((A[2,1]-A[1,2],A[0,2]-A[2,0],A[1,0]-A[0,1]))
+    veq=wt-A@w
+    res=max(np.linalg.norm(skew),np.linalg.norm(vort-w),np.linalg.norm(veq))
+    if res>3e-9*max(1.0,np.linalg.norm(A)**2):raise AssertionError("affine local blowup compatibility failed")
+    return {"strain_rate":a,"vorticity_magnitude":abs(b),"velocity_gradient_norm":float(np.linalg.norm(A)),"compatibility_residual":float(res),"finite_energy":False}
+
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
@@ -1380,6 +1502,12 @@ def theorem_certificate() -> dict[str, object]:
         "symmetric_space_path_action": "g(a,t) lies in SL(3)/SO(3) and int path_length(a)^2 da <= t(E0-Et)/nu; hence the material metric has finite total affine path length for almost every label on every finite smooth interval, while concentration on a null label set remains open",
         "kelvin_current_parent": "the pulled-back velocity one-form obeys alpha_t+d pi=-nu delta_g d alpha, so d/dt circulation(gamma)=-nu integral_gamma delta_g beta; beta_t+nu d delta_g beta=0 is the exterior derivative of one Kelvin-current law",
         "lagrangian_geodesic_acceleration": "for X_t=u(X,t), full NS gives X_tt=(-grad p+nu Delta u)(X,t) and F_tt=(-Hess p+nu grad Delta u)(X,t)F; the explicit quadratic A^2 self-stretch cancels from material acceleration, and for Euler D_t^2 omega=-(Hess p)omega along a frozen material vorticity vector",
+        "symmetric_space_cubic_law": "with K=g^-1 g_t in the tangent of SL(3)/SO(3), Z=(1/2)int tr K^2 and the exact full law is (1/2)d_t int tr K^2+nu int|nabla^g K|^2=-int det K; the Euler source is the unique cubic Cartan invariant of the metric velocity",
+        "sl3_fundamental_casimir_null": "for B=F^-1 F_t=P+Q in sl(3), tr B^2=tr P^2+tr Q^2 and tr B^3=tr P^3+3tr(PQ^2); because B comes from an actual incompressible gradient, the spatial integrals of both fundamental sl(3) invariant polynomials vanish",
+        "finite_sdiff_chord_degree": "for every real s, the tangent chord X+s X_t has degree one and int det(F+s F_t)=volume; equivalently int det(I+sB)=volume.  The quadratic and cubic Betchov locks are exactly the s^2 and s^3 coefficients of this one finite degree law",
+        "local_degree_transgression": "for A=grad u, det(I+sA)-1=div[-(s^2/2)(u.grad)u+(s^3/3)(cof A)^T u]; more generally det(F+sG)-det F is the integral in r of cof(F+rG):G, giving the local Piola transgression of the tangent chord",
+        "affine_local_blowup_guard": "there are exact infinite-energy affine NS/Euler fields u=A(t)x with axisymmetric S=diag(a,a,-2a), a=1/(T-t), and omega proportional (T-t)^-1 e1; pressure supplies the symmetric material acceleration and Delta u=0, proving that no purely local finite-dimensional group law can close finite-energy regularity",
+        "cofactor_force_falsification": "although int det K and vorticity Noether work agree after the correct pairings, P div(cof K)=3P(omega cross curl omega) is false; direct periodic referees gave Leray residual about 0.65-0.68, so the two local force densities must not be collapsed modulo pressure",
         "global_regularity_claimed": False,
         "case_taxonomy_used": False,
         "analysis_cutoff_used": False,

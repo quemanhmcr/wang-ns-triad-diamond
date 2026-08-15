@@ -2122,3 +2122,203 @@ without any auxiliary ontology: can the Cartan part of this one current sustain
 unbounded negative Joule work against its own Hodge-adjoint part on a finite
 energy-loss history, despite Klein tangency, Hodge isospectrality and the global
 self-return identities forced by `d^*=delta`?
+
+
+## 30. The material metric speed obeys the cubic Cartan law of `SL(3)/SO(3)`
+
+The material metric has a still more intrinsic global balance.  Put
+
+\[
+K:=g^{-1}g_t.
+\]
+
+It is self-adjoint with respect to `g`, trace free, and similar to `2S`.  Hence it
+is precisely a tangent vector of the symmetric space
+
+\[
+SL(3)/SO(3).
+\]
+
+The primitive speed lock and Betchov/Piola identities become
+
+\[
+\boxed{
+Z=\frac12\int\operatorname{tr}K^2,
+\qquad
+Z'_E=-\int\det K,
+\qquad
+\int|\nabla^gK|^2=2\int|\operatorname{curl}\omega|^2.
+}
+\]
+
+Therefore full Navier--Stokes satisfies the one-line metric-speed law
+
+\[
+\boxed{
+\frac12\frac d{dt}\int\operatorname{tr}K^2
++\nu\int|\nabla^gK|^2
+=-\int\det K.
+}
+\]
+
+The quadratic form is the canonical metric on the symmetric-space tangent, while
+`det K=(1/3)tr K^3` is its unique independent cubic invariant.  Pointwise
+
+\[
+|\det K|\le\frac{|K|^3}{3\sqrt6},
+\]
+
+with equality at the Weyl-wall eigenvalue ratio `(1,1,-2)` up to scale/sign.
+There is no improved pointwise constant from flatness: an affine incompressible
+strain realizes every trace-free symmetric tangent at one point.  The missing
+regularity mechanism must therefore be spatial/historical.
+
+## 31. Both fundamental `sl(3)` Casimirs are globally null for a genuine gradient
+
+Let the full deformation generator be
+
+\[
+B=F^{-1}F_t=P+Q\in\mathfrak{sl}(3),
+\]
+
+with Cartan decomposition `P^*=P`, `Q^*=-Q`; `K=2P`.  Pointwise,
+
+\[
+\boxed{
+\operatorname{tr}B^2
+=\operatorname{tr}P^2+\operatorname{tr}Q^2,
+}
+\]
+
+and
+
+\[
+\boxed{
+\operatorname{tr}B^3
+=\operatorname{tr}P^3+3\operatorname{tr}(PQ^2).
+}
+\]
+
+For `sl(3)` these degree-two and degree-three polynomials generate the invariant
+polynomial algebra.  But `B` is similar to the actual gradient `A=grad u`, and
+periodic/decaying exactness gives
+
+\[
+\boxed{
+\int\operatorname{tr}B^2=0,
+\qquad
+\int\operatorname{tr}B^3=0.
+}
+\]
+
+Thus the familiar quadratic strain--rotation equality and cubic Betchov
+strain--vorticity identity are not two unrelated statistical facts.  They exhaust
+the fundamental invariant-polynomial content of the local `SL(3)` generator, and
+both are globally null because the generator is an exact velocity gradient.
+
+## 32. The two Casimir nulls are coefficients of one finite degree-one chord law
+
+The previous two identities collapse again.  At fixed time define
+
+\[
+\Psi_s(x)=x+s u(x).
+\]
+
+On the periodic box this map is homotopic to the identity.  Its signed Jacobian
+therefore has degree one:
+
+\[
+\boxed{
+\int\det(I+s\nabla u)dx=|\mathbb T^3|
+\qquad\text{for every real }s.
+}
+\]
+
+Since `tr A=0`,
+
+\[
+\det(I+sA)
+=1-\frac{s^2}{2}\operatorname{tr}A^2+s^3\det A.
+\]
+
+The quadratic and cubic Betchov laws are exactly the two nonconstant
+coefficients of this single finite identity.
+
+There is a local transgression form as well:
+
+\[
+\boxed{
+\det(I+sA)-1
+=\nabla\cdot\left[
+-\frac{s^2}{2}(u\cdot\nabla)u
++\frac{s^3}{3}(\operatorname{cof}A)^Tu
+\right].
+}
+\]
+
+For the actual material flow the coordinate-free finite version is obtained from
+
+\[
+Y_s(a,t)=X(a,t)+sX_t(a,t).
+\]
+
+Writing `F=D_aX`, differentiation of the determinant along the chord gives
+
+\[
+\boxed{
+\det D_aY_s-\det F
+=\operatorname{div}_a
+\int_0^s
+(\operatorname{cof}D_aY_r)^T X_t\,dr.
+}
+\]
+
+Since `det F=1`, local tangent-chord volume defect is always a boundary flux; its
+spatial integral is zero.  Strong local Cartan cubic production cannot be a
+closed source inside the full `SL(3)` deformation geometry.
+
+A tempting stronger collapse is false.  Direct periodic referees show that the
+Leray projection of `div(cof K)-3 omega cross curl omega` is not zero; the
+relative residual was about `0.65--0.68`.  The metric cubic variation and
+vorticity Noether stress agree in the correct global pairings, not as the same
+local force modulo pressure.
+
+## 33. Guard: local `SL(3)` algebra alone permits exact blowup
+
+The need for the global degree/finite-energy structure can be falsified sharply.
+On `R^3`, take
+
+\[
+u(x,t)=A(t)x,
+\]
+
+with
+
+\[
+S=\operatorname{diag}(a,a,-2a),
+\qquad
+\omega=b e_1.
+\]
+
+The skew part can be chosen so that
+
+\[
+\Omega_t+S\Omega+\Omega S=0
+\iff b'=ab.
+\]
+
+For
+
+\[
+a=(T-t)^{-1},
+\qquad b=b_0(T-t)^{-1},
+\]
+
+`A_t+A^2` is symmetric and is exactly absorbed by a quadratic pressure.  Since
+`Delta u=0`, this is simultaneously an Euler and Navier--Stokes solution for any
+viscosity, with local gradient/vorticity blowup.  It has unbounded velocity and
+infinite energy, so it is **not** a counterexample to the finite-energy regularity
+problem.  It proves something methodological instead: no pointwise or purely
+finite-dimensional `SL(3)`, `SO(3,3)` or curl-line algebra can be the missing
+regularizer by itself.  The final theorem, if it exists in this grammar, must use
+the global exactness/degree/finite-energy history that this affine field violates.

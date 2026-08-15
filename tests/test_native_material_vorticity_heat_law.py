@@ -5,6 +5,7 @@ import pytest
 
 from src.native_material_vorticity_heat_law import (
     accumulated_transverse_heat_memory,
+    affine_local_blowup_guard,
     canonical_maxwell_extension_spectral_law,
     klein_spacetime_vortex_worldsheet_algebra,
     canonical_poisson_scale_overlap,
@@ -13,6 +14,8 @@ from src.native_material_vorticity_heat_law import (
     maxwell_duality_stress_algebra,
     primitive_spacetime_gauge_algebra,
     so33_exterior_square_algebra,
+    sl3_cartan_casimir_algebra,
+    sl3_tangent_chord_degree_algebra,
     material_hminus2_reset_identity,
     material_hodge_speed_ladder,
     material_log_distortion_energy_bound,
@@ -25,6 +28,7 @@ from src.native_material_vorticity_heat_law import (
     rank_one_incompressible_stretch_null,
     theorem_certificate,
     transverse_heat_determinant,
+    symmetric_metric_cartan_balance,
     transverse_heat_log_rate,
     transverse_two_covector_area_identity,
     two_level_curl_geometry_algebra,
@@ -564,4 +568,49 @@ def test_certificate_places_one_field_cartan_hodge_law_above_representations():
     assert "one autonomous closed-two-form law" in cert["primitive_one_field_cartan_hodge"]
     assert "same current" in cert["single_current_balance_ladder"]
     assert "Cartan exterior algebra" in cert["exterior_algebra_euler_null"]
+    assert cert["global_regularity_claimed"] is False
+
+
+
+def test_sl3_fundamental_casimirs_split_into_cartan_strain_and_rotation_pieces():
+    rng=np.random.default_rng(202608152901)
+    for _ in range(5000):
+        A=rng.normal(size=(3,3));A-=np.trace(A)/3*np.eye(3)
+        out=sl3_cartan_casimir_algebra(A)
+        assert out["quadratic_casimir"] == pytest.approx(out["quadratic_cartan_split"],rel=2e-12,abs=2e-12)
+        assert out["cubic_casimir"] == pytest.approx(out["cubic_cartan_split"],rel=2e-12,abs=2e-12)
+        assert out["cubic_casimir"] == pytest.approx(3*out["determinant"],rel=2e-12,abs=2e-12)
+
+
+def test_finite_sl3_tangent_chord_characteristic_polynomial_is_exact():
+    rng=np.random.default_rng(202608152902)
+    for _ in range(5000):
+        A=rng.normal(size=(3,3));A-=np.trace(A)/3*np.eye(3);s=float(rng.uniform(-5,5))
+        out=sl3_tangent_chord_degree_algebra(A,s)
+        assert out["chord_jacobian"] == pytest.approx(out["characteristic_polynomial"],rel=2e-11,abs=2e-11)
+
+
+def test_symmetric_space_metric_speed_balance_has_cubic_cartan_source_and_dirichlet_sink():
+    out=symmetric_metric_cartan_balance(12.0,-3.0,5.0,.4)
+    assert out["enstrophy"] == pytest.approx(6.0)
+    assert out["enstrophy_derivative"] == pytest.approx(1.0)
+    assert out["euler_cubic_source"] == pytest.approx(3.0)
+    assert out["viscous_dirichlet_sink"] == pytest.approx(-2.0)
+
+
+def test_affine_local_blowup_guard_proves_local_group_algebra_cannot_be_global_regularizer():
+    for tau in (1.0,.2,.03,.005):
+        out=affine_local_blowup_guard(tau,2.0)
+        assert out["compatibility_residual"] <= 2e-8*max(1.0,out["velocity_gradient_norm"]**2)
+        assert out["finite_energy"] is False
+        assert out["strain_rate"] == pytest.approx(1/tau)
+
+
+def test_certificate_records_finite_sl3_degree_law_and_local_blowup_guard_without_overclaim():
+    cert=theorem_certificate()
+    assert "unique cubic Cartan invariant" in cert["symmetric_space_cubic_law"]
+    assert "fundamental sl(3) invariant polynomials" in cert["sl3_fundamental_casimir_null"]
+    assert "degree one" in cert["finite_sdiff_chord_degree"]
+    assert "no purely local finite-dimensional group law" in cert["affine_local_blowup_guard"]
+    assert "is false" in cert["cofactor_force_falsification"]
     assert cert["global_regularity_claimed"] is False
