@@ -1961,6 +1961,13 @@ def theorem_certificate() -> dict[str, object]:
         "continuum_midpoint_lossless": "the continuum midpoint transform T:u->Qc(u) satisfies T* T=(1/64)|C| and is injective on mean-zero critical states, so u=64|C|^-1 T*Qc; physical heat and nonlinear source preserve its Hilbert-Schmidt image",
         "midpoint_spectral_polynomial_guard": "Qc is self-adjoint/helicity-odd, hence every defined odd spectral trace Tr Qc^(2m+1) vanishes; kappa(0) is generally nonzero, so critical regeneration cannot be reduced to eigenvalues or a cubic Riccati trace of Qc alone",
         "continuum_midpoint_sobolev_scale": "the continuum midpoint transform intertwines |C|^alpha with Delta_op^(alpha/2), giving ||u||_Hdot^s^2=64||Delta_op^(s/2-1/4)Qc(u)||_HS^2; s=1/2 is uniquely the plain HS energy level, with E and Z at symmetric operator powers -1/4 and +1/4",
+        "primitive_vacuum_state_chain": "the scalar unit is a canonical basepoint: Q*1=alpha and (Q*)^2 1=nu beta; with H=QQ*+Q*Q, [H,Q*]1=nu Q beta=nu e, so projected NS is partial_t(Q*1)=-(1/nu)P[H,Q*]1",
+        "primitive_metric_current_law": "for every positive curl functional metric G=f(C), one-half d<alpha,G alpha>/dt=-(1/nu)||G^(1/2)(Q*)^2 1||^2-(1/nu)<[Q*,G]Q*1,(Q*)^2 1>; energy is one-way because [Q*,I]=0, while every two-way Sobolev motion is exactly the current/metric commutator",
+        "primitive_critical_two_way_channel": "with Lambda=|C|, A=[Lambda^-1,Q*] is the normalized critical two-way channel and [Q*,Lambda]=Lambda A Lambda; its anticommutator with the same current creator is {A,Q*}=nu B, B=[Lambda^-1,beta wedge]",
+        "primitive_critical_channel_isometry": "on continuum R3 with unitary Fourier convention and the full graded exterior HS norm, ||A||^2=(2/pi^2)K and ||B||^2=(1/pi^2)M3; both come from the exact raw translation integral 4pi with exterior creation multiplicities 4 and 2",
+        "primitive_critical_channel_derivative": "B=i sum_j (dx^j wedge)[D_j,A], hence sum_j||[D_j,A]||^2=2||B||^2=(2/nu^2)||{A,Q*}||^2; critical heat is exactly the squared current-incompatibility derivative of the two-way channel",
+        "primitive_critical_channel_rigidity": "{A,Q*}=0 forces B=0 and therefore M3=0 by the exact continuum isometry; on mean-zero/decaying states this implies u=0.  This is zero-self-frustration rigidity, not a uniform instantaneous gap",
+        "primitive_critical_channel_dynamics": "A is linear and translation covariant, so A_t=A(F_E)-nu Delta_op A and one-half d||A||^2/dt=(2/pi^2)kappa(0)-2nu||B||^2=(2/pi^2)kappa(0)-(2/nu)||{A,Q*}||^2",
         "primitive_actual_current_operator": "the endogenous state operator is Q=nu delta+i_u with Q*=nu d+u^flat wedge; the physical electromotive current is e=Q beta, the projected momentum law is u_t=-P(Q beta), and therefore Q_t=-i_{P(Q beta)}",
         "primitive_current_curvature_square": "exterior Leibniz gives {delta,i_u}=(beta wedge)^*, hence Q^2=nu(beta wedge)^* on the whole graded exterior algebra and Q^2 beta=nu|beta|^2; vorticity is the failure of nilpotence of the actual NS current operator",
         "primitive_current_nilpotent_chords": "Q(u)-Q(v)=i_{u-v}, every chord/tangent contraction squares to zero, and any two contractions anticommute; the non-nilpotence of Q comes only from interaction of fixed delta with the physical contraction, not from nonlinear state-space chords",
@@ -1968,7 +1975,7 @@ def theorem_certificate() -> dict[str, object]:
         "primitive_intertwining_lamb": "for every closed eta=*b^flat, H^(1)(Q eta)-Q(H^(2)eta)=[Q*,Q^2]eta=nu^2 d(omega.b)+nu[b cross (u cross omega)]^flat; at b=omega the non-exact term locally reconstructs the Lamb field away from omega=0",
         "primitive_finite_current_chains": "Q* alpha=nu beta gives alpha -> nu beta -> nu e -> nu^2|beta|^2 ->0 and energy dissipation is adjointness of its first two arrows; on top degree dV -> *alpha -> nu omega^flat -> nu(u.omega) ->0 and Q^4=0 in three dimensions",
         "primitive_midpoint_status": "M=nu delta+(1/2)i_u is the canonical midpoint between pure Hodge heat and the actual operator Q, selected by the critical/Poynting reflection; it is a reading rather than the fundamental state operator and satisfies M(M beta)=(nu/2)|beta|^2",
-        "primitive_turning_frontier": "the exact graded turning operator [H,Q]=Q*Q^2-Q^2Q* has Lamb regeneration as its non-exact degree-2-to-degree-1 component; the unresolved theorem is whether persistent critical near-kernel of projected M forces non-summable objective graded turning which material Hodge-frame/memory laws cannot sustain",
+        "primitive_turning_frontier": "the previous representation-level frontier remains persistent critical near-kernel of the projected midpoint current versus objective graded turning [H,Q]; the lower formulation now asks whether infinite productive regeneration of A=[Lambda^-1,Q*] necessarily forces infinite ||{A,Q*}||^2 action, which then must be coupled to material Hodge-frame/memory turnover",
         "graded_current_strain_parent": "with q=nu delta+(1/2)i_u, the positive Hodge-Dirac square q^*q+qq^* is (-nu^2 Delta+|u|^2/4)I+nu S on one-forms and the same scalar part minus nu S on two-forms; physical strain, hence the critical sech/Reynolds operator, is the degree imbalance of one midpoint current complex",
         "critical_gram_self_frustration": "for G_u b=u cross b-2nu curl b, the polarized Poynting law gives 4nu(PS)_odd=[P(U_u^*U_u-G_u^*G_u)P]_odd; the dangerous critical block is exactly a helicity-odd Gram imbalance, but odd projection destroys simple positivity so no free negative-square contraction follows",
         "critical_curvature_floor": "the mixed Gauss law (div-u/(2nu).)G_u b=omega.b implies G_u^*G_u>=M_omega^*(-Delta+|u|^2/(4nu^2))^-1M_omega in quadratic-form order; a persistent expanding Reynolds direction must continually avoid this state-generated curvature floor at the intrinsic Poisson depths",
@@ -2662,6 +2669,58 @@ def continuum_critical_operator_isometry_constant() -> dict[str, float]:
         "hilbert_schmidt_norm_squared_coefficient": coeff,
         "critical_norm_to_hs_isometry_factor": 8.0,
         "reynolds_hs_coefficient": coeff,
+    }
+
+
+def continuum_primitive_critical_channel_constants() -> dict[str, float]:
+    """Exact continuum constants for the primitive critical two-way channel.
+
+    On the full graded exterior algebra over R^3 define
+
+        A=[|C|^-1,Q*]=[|C|^-1,u^flat wedge],
+        B=(1/nu)[|C|^-1,(Q*)^2]=[|C|^-1,beta wedge].
+
+    With the repository unitary Fourier convention, both kernels use the raw
+    translation integral
+
+        int_R3 (|p+e|^-1-|p|^-1)^2 dp = 4*pi.
+
+    Exterior creation by a one-form has full graded Hilbert--Schmidt
+    multiplicity 4, while creation by a two-form has multiplicity 2.  Hence
+
+        ||A||_HS,gr^2 = (2/pi^2) ||u||_Hdot^(1/2)^2,
+        ||B||_HS,gr^2 = (1/pi^2) ||u||_Hdot^(3/2)^2.
+
+    Since B=i sum_j (dx^j wedge)[D_j,A], the exact constants also give
+
+        sum_j ||[D_j,A]||_HS,gr^2 = 2 ||B||_HS,gr^2.
+
+    Algebraically {A,Q*}=nu B.  The function records normalization only; it
+    does not discretize the continuum operator or assert a finite-cutoff
+    equality.
+    """
+
+    raw = 4.0 * math.pi
+    cf2 = (2.0 * math.pi) ** -3
+    one_form_creation_multiplicity = 4.0
+    two_form_creation_multiplicity = 2.0
+    channel = one_form_creation_multiplicity * cf2 * raw
+    curvature = two_form_creation_multiplicity * cf2 * raw
+    if abs(channel - 2.0 / math.pi**2) > 5.0e-15:
+        raise AssertionError("primitive critical-channel constant lost 2/pi^2")
+    if abs(curvature - 1.0 / math.pi**2) > 5.0e-15:
+        raise AssertionError("primitive curvature-channel constant lost 1/pi^2")
+    if abs(channel - 2.0 * curvature) > 5.0e-15:
+        raise AssertionError("primitive channel Dirichlet/curvature ratio lost factor two")
+    return {
+        "raw_translation_integral": raw,
+        "unitary_fourier_factor_squared": cf2,
+        "one_form_creation_graded_multiplicity": one_form_creation_multiplicity,
+        "two_form_creation_graded_multiplicity": two_form_creation_multiplicity,
+        "critical_channel_hs_coefficient": channel,
+        "curvature_channel_hs_coefficient": curvature,
+        "translation_dirichlet_hs_coefficient": channel,
+        "dirichlet_to_curvature_hs_ratio": channel / curvature,
     }
 
 

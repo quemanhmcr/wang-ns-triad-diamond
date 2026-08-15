@@ -1296,325 +1296,394 @@ one.
 
 ---
 
-## 10. On `R^3`, the critical midpoint transform is lossless
+## 10. The helicity-odd midpoint transform is a compressed critical representation
 
-Remove viscosity from the Reynolds normalization and define
+The Reynolds/Krein operator remains exact, but it is no longer the lowest ontology.  Define
 
 \[
 \boxed{
 \mathcal Q_c(u)
 :=\Lambda^{-1}\Sigma_c(u)\Lambda^{-1}
-=\frac12\Lambda^{-1/2}[J_u,\mathsf J]\Lambda^{-1/2}.
-}
-\]
-
-Then
-
-\[
+=\frac12\Lambda^{-1/2}[J_u,\mathsf J]\Lambda^{-1/2},
+\qquad
 \mathscr R_c=\nu^{-1}\mathcal Q_c.
-\]
-
-With the unitary Fourier convention
-
-\[
-\widehat f(k)
-=(2\pi)^{-3/2}\int e^{-ix\cdot k}f(x)dx,
-\]
-
-the continuum map is an exact scaled Hilbert--Schmidt isometry:
-
-\[
-\boxed{
-\|\mathcal Q_c(u)\|_{HS}^2
-=\frac1{64}\|u\|_{\dot H^{1/2}}^2
-=\frac K{64}.
 }
 \]
 
-Polarization gives
+On continuum `R^3`, with the unitary Fourier convention,
 
 \[
 \boxed{
+\|\mathcal Q_c(u)\|_{HS}^2=\frac K{64},
+\qquad
 \langle\mathcal Q_c(u),\mathcal Q_c(v)\rangle_{HS}
 =\frac1{64}\langle u,\Lambda v\rangle.
 }
 \]
 
-The map intertwines physical heat and operator heat:
+The transform intertwines physical and operator heat,
 
 \[
 \boxed{
-\mathcal Q_c(C^2u)
-=\Delta_{op}\mathcal Q_c(u).
+\mathcal Q_c(C^2u)=\Delta_{op}\mathcal Q_c(u),
+\qquad
+\sum_j\|[D_j,\mathcal Q_c(u)]\|_{HS}^2=\frac{M_3}{64}.
 }
 \]
 
-Therefore
-
-\[
-\boxed{
-\sum_j\|[D_j,\mathcal Q_c(u)]\|_{HS}^2
-=\frac{M_3}{64},
-}
-\]
-
-and
-
-\[
-\boxed{
-\langle\mathcal Q_c(u),\mathcal Q_c(F_E(u))\rangle_{HS}
-=\frac{\kappa(0)}{64}.
-}
-\]
-
-The critical NS balance is literally the Hilbert--Schmidt energy law
+Hence its Hilbert--Schmidt energy balance is exactly the critical Navier--Stokes balance:
 
 \[
 \boxed{
 \partial_t\mathcal Q_c
 =\mathcal Q_c(F_E)-\nu\Delta_{op}\mathcal Q_c,
-}
-\]
-
-\[
-\boxed{
+\qquad
 \frac12\frac d{dt}\|\mathcal Q_c\|_{HS}^2
-=
-\langle\mathcal Q_c,\mathcal Q_c(F_E)\rangle_{HS}
--
-\nu\sum_j\|[D_j,\mathcal Q_c]\|_{HS}^2.
+=\frac{\kappa(0)}{64}-\nu\frac{M_3}{64}.
 }
 \]
 
-Multiplying by `64` gives
+If the positive eigenvalues of `mathscr R_c` are `lambda_j`, helicity oddness gives paired
+spectrum and
 
 \[
-\frac12K'=\kappa(0)-\nu M_3.
-\]
-
-### 10.1 Spectral capacity
-
-Since `Q_c` is self-adjoint and helicity-odd, its nonzero eigenvalues occur in pairs.
-If the positive eigenvalues of `mathscr R_c` are `lambda_j>0`, then
-
-\[
-\boxed{
-K=128\nu^2\sum_j\lambda_j^2.
-}
-\]
-
-Hence
-
-\[
-\boxed{
-\|\mathscr R_c\|_{op}
-\le
-\frac{\sqrt K}{8\sqrt2\,\nu},
-}
-\]
-
-and
-
-\[
-\boxed{
-N_{>1}^+
-\le
-\frac{K}{128\nu^2}.
-}
-\]
-
-In particular,
-
-\[
-\boxed{
-K<128\nu^2
-\Longrightarrow
-\|\mathscr R_c\|<1
-\Longrightarrow
-K'\le0
-}
-\]
-
-on every smooth continuum interval where the identities apply.
-
-This is a small-critical-data operator regime, not a large-data regularity theorem.
-
-### 10.2 Lossless state representation, but no eigenvalue-only closure
-
-For `T:u\mapsto\mathcal Q_c(u)`, polarization gives
-
-\[
-\boxed{T^*T=\frac1{64}\Lambda.}
-\]
-
-Hence on mean-zero critical states
-
-\[
-\boxed{u=64\Lambda^{-1}T^*\mathcal Q_c(u).}
-\]
-
-The transform is injective.  But every image operator is self-adjoint and helicity-odd, so
-
-\[
-\boxed{\operatorname{Tr}Q^{2m+1}=0}
-\]
-
-whenever defined.  Since `\kappa(0)` is generally nonzero, critical regeneration cannot be an
-eigenvalue-only cubic Riccati law.
-
-### 10.3 One operator Hilbert scale contains all Sobolev stocks
-
-Functional calculus gives
-
-\[
-\boxed{T(\Lambda^\alpha u)=\Delta_{op}^{\alpha/2}T(u).}
+\boxed{K=128\nu^2\sum_j\lambda_j^2.}
 \]
 
 Therefore
 
 \[
 \boxed{
+\|\mathscr R_c\|_{op}\le\frac{\sqrt K}{8\sqrt2\,\nu},
+\qquad
+N_{>1}^+\le\frac{K}{128\nu^2}.
+}
+\]
+
+In particular `K<128 nu^2` implies `||mathscr R_c||<1` and `K'<=0` on every smooth continuum
+interval where the identities apply.  This is a small-critical-data radius, not a large-data
+regularity theorem.
+
+For `T:u\mapsto\mathcal Q_c(u)`, polarization gives
+
+\[
+\boxed{T^*T=\frac1{64}\Lambda,\qquad
+u=64\Lambda^{-1}T^*\mathcal Q_c(u).}
+\]
+
+Thus the transform is lossless on the mean-zero critical state, but its eigenvalues are not:
+self-adjoint helicity-odd image operators have vanishing odd spectral traces, while `kappa(0)` is
+generally nonzero.  No eigenvalue-only cubic Riccati closure exists.
+
+Finally,
+
+\[
+\boxed{
+T(\Lambda^\alpha u)=\Delta_{op}^{\alpha/2}T(u),
+\qquad
 \|u\|_{\dot H^s}^2
 =64\|\Delta_{op}^{s/2-1/4}\mathcal Q_c(u)\|_{HS}^2.
 }
 \]
 
-The main stocks are simply
-
-\[
-\boxed{
-(E,K,Z,M_3)
-=64\bigl(
-\|\Delta_{op}^{-1/4}Q_c\|_{HS}^2,
-\|Q_c\|_{HS}^2,
-\|\Delta_{op}^{1/4}Q_c\|_{HS}^2,
-\|\Delta_{op}^{1/2}Q_c\|_{HS}^2
-\bigr).
-}
-\]
-
-Hence `H^{1/2}` is the unique physical Sobolev level which becomes plain operator `L^2`
-energy.  Moment inequalities such as
-
-\[
-\boxed{K^3\le E^2M_3,}
-\qquad
-\boxed{Z^2\le KM_3}
-\]
-
-are ordinary interpolation in this one operator heat scale.
-
+So the entire Sobolev hierarchy is one operator heat scale and `H^{1/2}` is its plain HS energy
+level.  Section 11 now identifies a still lower full-graded current representation from which the
+critical two-way channel itself is generated.
 
 ---
 
-## 11. The primitive NS object is the actual current operator
+## 11. One scalar unit, one current creator, one curvature and one critical channel
 
 Put
 
 \[
-\alpha=u^\flat,\qquad \beta=d\alpha,\qquad d\beta=0,
+\alpha=u^\flat,
+\qquad
+\beta=d\alpha,
+\qquad
+\boxed{Q=\nu\delta+\iota_u,\quad Q^*=\nu d+\alpha\wedge.}
 \]
 
-and define the actual graded current operator
+The scalar unit is a canonical basepoint of the graded algebra:
 
 \[
-\boxed{Q:=\nu\delta+\iota_u,\qquad Q^*=\nu d+\alpha\wedge.}
+\boxed{Q^*1=\alpha,\qquad (Q^*)^21=\nu\beta.}
 \]
 
-This is not auxiliary notation: the physical electromotive current and rotational momentum law are
-
-\[
-\boxed{e=Q\beta,\qquad \alpha_t+dB=-Q\beta,}
-\]
-
-hence, after Leray projection,
-
-\[
-\boxed{u_t=-P(Q\beta)^\sharp,\qquad Q_t=\iota_{u_t}=-\iota_{P(Q\beta)^\sharp}.}
-\]
-
-The current made by `Q` is therefore the velocity of the state variable which determines `Q`.
-
-### 11.1 Curvature is the failure of nilpotence
-
-Exterior Leibniz and adjointness give
-
-\[
-\{d,\alpha\wedge\}=\beta\wedge,\qquad
-\boxed{\{\delta,\iota_u\}=(\beta\wedge)^*.}
-\]
-
-Since `delta^2=i_u^2=0`, on the whole graded exterior algebra
-
-\[
-\boxed{Q^2=\nu(\beta\wedge)^*.}
-\]
-
-Thus vorticity curvature is the obstruction to nilpotence of the actual NS current differential.  In particular
-
-\[
-\boxed{Q^2\beta=\nu|\beta|^2.}
-\]
-
-Cartan's formula gives the vorticity generator
-
-\[
-\boxed{\{d,Q\}=\mathcal L_u+\nu L,\qquad \beta_t=-dQ\beta=-\{d,Q\}\beta,}
-\]
-
-and associativity gives, because `d beta=0`,
-
-\[
-\boxed{[\mathcal L_u+\nu L,Q]\beta=\nu d|\beta|^2.}
-\]
-
-Concentration therefore forces noncommutation between the current and the generator made by that current.
-
-### 11.2 Nilpotent chords and finite native chains
-
-The state dependence is affine:
-
-\[
-\boxed{Q(u)-Q(v)=\iota_{u-v},\qquad (Q(u)-Q(v))^2=0.}
-\]
-
-Every tangent is likewise square-zero and any two tangents anticommute,
-
-\[
-\boxed{Q_t^2=0,\qquad \iota_a\iota_b+\iota_b\iota_a=0.}
-\]
-
-So non-nilpotence comes only from the interaction of the fixed codifferential with physical contraction, not from nonlinear chords in state space.  This does not by itself control frequency concentration.
-
-Two finite chains expose the same point.  Since `Q^* alpha=nu beta`,
+Thus state and curvature are successive applications of one operation.  Exterior Leibniz gives
 
 \[
 \boxed{
-\alpha\xrightarrow{Q^*}\nu\beta\xrightarrow{Q}\nu e
-\xrightarrow{Q}\nu^2|\beta|^2\xrightarrow{Q}0.
+Q^2=\nu(\beta\wedge)^*,
+\qquad
+(Q^*)^2=\nu\beta\wedge.
 }
 \]
 
-Adjointness of the first two arrows is exactly
+Curvature is therefore both
 
 \[
 \boxed{
-\frac12E'=-\langle Q\beta,\alpha\rangle
-=-\langle\beta,Q^*\alpha\rangle
+\beta=\frac1\nu(Q^*)^21,
+\qquad
+Q^2=\nu(\beta\wedge)^*.
+}
+\]
+
+### 11.1 Current and motion are the next step of the same chain
+
+Let
+
+\[
+\mathbb H=QQ^*+Q^*Q.
+\]
+
+Since `Q1=0`,
+
+\[
+\boxed{
+[\mathbb H,Q^*]1
+=Q(Q^*)^21
+=\nu Q\beta
+=\nu e.
+}
+\]
+
+The rotational momentum law `alpha_t+dB=-e` therefore becomes, after Leray projection,
+
+\[
+\boxed{
+\partial_t(Q^*1)
+=-\frac1\nu P[\mathbb H,Q^*]1,
+\qquad
+Q_t=\iota_{u_t}=-\iota_{P(Q\beta)^\sharp}.
+}
+\]
+
+State, curvature, current and motion of the current operator are one chain; no second forcing
+object is required.
+
+Energy is the simplest one-way reading.  Because `alpha` is divergence-free, the pressure
+projection disappears in the pairing and
+
+\[
+\boxed{
+\frac12E'
+=-\frac1\nu\langle Q^*1,[\mathbb H,Q^*]1\rangle
+=-\frac1\nu\|(Q^*)^21\|_2^2
 =-\nu\|\beta\|_2^2.
 }
 \]
 
-With the orientation convention of this note,
+The monotone direction is therefore adjointness inside the current chain, not an external damping
+principle.
+
+### 11.2 Master one-way / two-way metric law
+
+Let `G=f(C)>=0` be a positive curl functional metric on divergence-free one-forms, extended to
+vorticity two-forms by the same Hodge functional calculus, and put
+
+\[
+K_G=\langle\alpha,G\alpha\rangle.
+\]
+
+The exact NS identity is
+
+\[
+\boxed{
+\frac12K_G'
+=-\frac1\nu\|G^{1/2}(Q^*)^21\|_2^2
+-\frac1\nu
+\left\langle
+[Q^*,G]Q^*1,(Q^*)^21
+\right\rangle.
+}
+\]
+
+The first term is the one-way curvature loss.  Every possibility of motion against that loss is
+contained in the single metric/current commutator.  For `G=I` it vanishes.  At criticality
+`G=Lambda=|C|`, the entire two-way channel is `[Q^*,Lambda]`.  The contrast with helicity is
+primitive: Euler preserves the signed operator `C`, while the positive modulus `|C|` can fail to
+commute with current creation.
+
+### 11.3 The normalized critical channel creates its own curvature derivative
+
+Extend
+
+\[
+\Lambda=|D|=(-\Delta)^{1/2}
+\]
+
+coefficientwise to the full exterior algebra; on divergence-free one-forms it equals `|C|`.
+Define
+
+\[
+\boxed{
+\mathcal A:=[\Lambda^{-1},Q^*]
+=[\Lambda^{-1},\alpha\wedge],
+\qquad
+[Q^*,\Lambda]=\Lambda\mathcal A\Lambda.
+}
+\]
+
+This is the normalized failure of the actual current creator to respect critical curl polarity.
+Since `(Q*)^2=nu beta wedge`, put
+
+\[
+\boxed{
+\mathcal B
+:=\frac1\nu[\Lambda^{-1},(Q^*)^2]
+=[\Lambda^{-1},\beta\wedge].
+}
+\]
+
+The commutator Leibniz rule gives immediately
+
+\[
+\boxed{\{\mathcal A,Q^*\}=\nu\mathcal B.}
+\]
+
+Thus one more application of the same creator turns the two-way critical channel into a curvature
+commutator.
+
+On continuum `R^3`, use the full graded Hilbert--Schmidt norm on exterior forms.  The common raw
+translation integral is
+
+\[
+\boxed{
+\int_{\mathbb R^3}
+\left(\frac1{|p+e|}-\frac1{|p|}\right)^2dp
+=4\pi.
+}
+\]
+
+For completeness, angular integration reduces `I(1)/(2pi)` to
+
+\[
+\int_0^1\!\left[r\log\frac{1+r}{1-r}-4r+2\right]dr
++\int_1^\infty\!\left[r\log\frac{r+1}{r-1}-2\right]dr=1+1.
+\]
+
+The second integral follows from the antiderivative
+`((r^2-1)/2) log((r+1)/(r-1))-r`; the first is elementary by the same expansion/integration by
+parts.  Thus the constant is analytic, not a fitted quadrature value.
+
+With `C_F^2=(2pi)^-3`, exterior creation by a one-form has graded multiplicity `4`, while creation
+by a two-form has multiplicity `2`.  Therefore
+
+\[
+\boxed{
+\|\mathcal A\|_{HS,gr}^2=\frac{2}{\pi^2}K,
+\qquad
+\|\mathcal B\|_{HS,gr}^2=\frac1{\pi^2}M_3.
+}
+\]
+
+These are continuum identities; a hard periodic/Galerkin cutoff carries boundary weights and is
+not assigned these constants exactly.
+
+Let `D_j=-i partial_j` and `epsilon_j=dx^j wedge`.  In the translation variable `q=k-l`,
+`beta_q=i q wedge alpha_q`, hence
+
+\[
+\boxed{
+\mathcal B
+=i\sum_{j=1}^3\epsilon_j[D_j,\mathcal A].
+}
+\]
+
+The exact constants sharpen this to the Dirichlet identity
+
+\[
+\boxed{
+\sum_j\|[D_j,\mathcal A]\|_{HS,gr}^2
+=2\|\mathcal B\|_{HS,gr}^2
+=\frac{2}{\nu^2}\|\{\mathcal A,Q^*\}\|_{HS,gr}^2.
+}
+\]
+
+So **heat erosion of the critical two-way channel is exactly the square of its incompatibility
+with its own NS current creator.**  The escape channel carries the derivative through which heat
+acts on it.
+
+### 11.4 Dynamics, rigidity and the historical gap
+
+Because `mathcal A` is linear in `u` and translation-covariant,
+
+\[
+\boxed{
+\mathcal A_t
+=\mathcal A(F_E)-\nu\Delta_{op}\mathcal A.
+}
+\]
+
+Polarizing the isometry gives the exact critical energy law
+
+\[
+\boxed{
+\frac12\frac d{dt}\|\mathcal A\|_{HS,gr}^2
+=\frac{2}{\pi^2}\kappa(0)
+-2\nu\|\mathcal B\|_{HS,gr}^2
+=\frac{2}{\pi^2}\kappa(0)
+-\frac2\nu\|\{\mathcal A,Q^*\}\|_{HS,gr}^2.
+}
+\]
+
+Zero self-frustration is rigid:
+
+\[
+\boxed{
+\{\mathcal A,Q^*\}=0
+\Longrightarrow
+\mathcal B=0
+\Longrightarrow
+M_3=0
+\Longrightarrow
+u=0
+}
+\]
+
+for mean-zero/decaying states.  This is an exact zero-set theorem, not a uniform instantaneous
+gap.
+
+The state dependence itself remains exceptionally flat:
+
+\[
+\boxed{
+Q(u)-Q(v)=\iota_{u-v},
+\qquad
+(Q(u)-Q(v))^2=0,
+\qquad
+Q_t^2=0.
+}
+\]
+
+Any two tangent contractions anticommute.  Non-nilpotence comes from the interaction of fixed
+`delta` with physical contraction, not from nonlinear chords in operator state space.
+
+Two finite chains remain useful summaries:
+
+\[
+\boxed{
+\alpha\xrightarrow{Q^*}\nu\beta\xrightarrow{Q}\nu e
+\xrightarrow{Q}\nu^2|\beta|^2\xrightarrow{Q}0,
+}
+\]
+
+and, in three dimensions,
 
 \[
 \boxed{
  dV\xrightarrow{Q}\star\alpha\xrightarrow{Q}\nu\omega^\flat
-\xrightarrow{Q}\nu(u\cdot\omega)\xrightarrow{Q}0,\qquad Q^4=0.
+\xrightarrow{Q}\nu(u\cdot\omega)\xrightarrow{Q}0,
+\qquad Q^4=0.
 }
 \]
 
-Velocity, vorticity, helicity density and energy dissipation are readings of one lowering operator.
+The unresolved issue is no longer whether heat sees the channel: it does so exactly through
+`{mathcal A,Q*}`.  The remaining question is whether Euler can regenerate `mathcal A` productively
+for the infinite action required by critical escape without forcing an equally non-summable
+self-incompatibility history.
 
 ---
 
@@ -1947,112 +2016,177 @@ The separate material theorem adds the transverse determinant and Minkowski memo
 7. **No spectral-only monotone beyond energy/helicity**, no low-Krylov closure and no automatic viscous dephasing.
 8. **No eigenvalue-only Riccati law** and no unrestricted Nambu--Poisson theorem; the surviving structure is lossless Cartan/Jacobi current geometry.
 9. **No local finite-dimensional closure.**  The missing theorem must couple full spatial current persistence to material Hodge memory.
+10. **No uniform gap from the new rigidity.**  `{mathcal A,Q*}=0 => u=0` is an exact zero-set statement; it does not bound the ratio between regeneration and incompatibility away from saturation on arbitrary large states.
 
 ---
 
 ## 17. Minimal ontology and the remaining primitive theorem
 
-The deepest state-dependent object reached here is
+The deepest state-dependent object reached here is still
 
 \[
 \boxed{Q=\nu\delta+\iota_u,\qquad Q^*=\nu d+u^\flat\wedge.}
 \]
 
-Its core closure laws are
+The scalar unit generates the physical state and curvature,
 
 \[
-\boxed{Q^2=\nu(\beta\wedge)^*,\qquad
-\alpha_t+dB=-Q\beta,\qquad
-Q_t=-\iota_{P(Q\beta)^\sharp},}
+\boxed{1\xrightarrow{Q^*}\alpha\xrightarrow{Q^*}\nu\beta,}
 \]
+
+while the same algebra gives
 
 \[
 \boxed{
-\mathbb H=Q^*Q+QQ^*,\qquad
-\mathbb H^{(1)}-\star^{-1}\mathbb H^{(2)}\star=4\nu S,
+Q^2=\nu(\beta\wedge)^*,
+\qquad
+[\mathbb H,Q^*]1=\nu e,
+\qquad
+\partial_t(Q^*1)=-\frac1\nu P[\mathbb H,Q^*]1.
 }
 \]
 
-and, for closed `eta=star b^flat`,
+Thus
+
+\[
+\boxed{
+\text{state}\to\text{curvature}\to\text{current}\to\text{motion of state}
+}
+\]
+
+is one `Q,Q*` chain.  The adjacent-degree identity
 
 \[
 \boxed{
 \mathbb H^{(1)}(Q\eta)-Q(\mathbb H^{(2)}\eta)
-=\nu^2d(\omega\cdot b)+\nu[\,b\times(u\times\omega)\,]^\flat.
+=\nu^2d(\omega\cdot b)+\nu[b\times(u\times\omega)]^\flat
 }
 \]
 
-So one endogenous operation closes the loop
+for closed `eta=star b^flat` shows that Lamb regeneration is the non-exact failure of this same
+curved current algebra to intertwine its Hodge degrees.
+
+The critical two-way channel is even lower than the Reynolds eigenspace picture:
 
 \[
 \boxed{
-\text{operation}\to\text{curvature}\to\text{degree imbalance}
-\to\text{self-force}\to\text{operation}.
+\mathcal A=[\Lambda^{-1},Q^*],
+\qquad
+\{\mathcal A,Q^*\}=\nu\mathcal B,
+\qquad
+\mathcal B=[\Lambda^{-1},\beta\wedge].
 }
 \]
 
-The midpoint
-
-\[
-M=\nu\delta+\frac12\iota_u
-\]
-
-is the canonical critical/Poynting reading of `Q`, not a second fundamental operator, and
-
-\[
-\boxed{M(M\beta)=\frac\nu2|\beta|^2.}
-\]
-
-Sections 4--10 show that the Krein/sech/Poisson/Reynolds/HS language is a higher representation of this same strain/current law.  Critical escape still requires
+On continuum `R^3`,
 
 \[
 \boxed{
-\int^T\frac{\kappa(0,t)^2}{N(t)^2[E(t)Z(t)-K(t)^2]}
+\|\mathcal A\|_{HS,gr}^2=\frac{2}{\pi^2}K,
+\qquad
+\|\mathcal B\|_{HS,gr}^2=\frac1{\pi^2}M_3,
+}
+\]
+
+and
+
+\[
+\boxed{
+\sum_j\|[D_j,\mathcal A]\|_{HS,gr}^2
+=\frac{2}{\nu^2}\|\{\mathcal A,Q^*\}\|_{HS,gr}^2.
+}
+\]
+
+Hence the escape channel does not merely coexist with heat: **it creates the curvature
+incompatibility which is exactly its operator heat derivative.**  The corresponding critical
+balance is
+
+\[
+\boxed{
+\frac12\frac d{dt}\|\mathcal A\|_{HS,gr}^2
+=\frac{2}{\pi^2}\kappa(0)
+-\frac2\nu\|\{\mathcal A,Q^*\}\|_{HS,gr}^2.
+}
+\]
+
+The midpoint `M`, the sech/Poisson strain transform, `mathcal Q_c` and the Reynolds operator remain
+exact higher representations of this same current/curvature grammar; none is promoted back to a
+second ontology.
+
+Critical escape still requires the productive Fisher divergence
+
+\[
+\boxed{
+\int^T
+\frac{\kappa(0,t)^2}{N(t)^2[E(t)Z(t)-K(t)^2]}
 \,dt=\infty.
 }
 \]
 
-The primitive persistence question is lower than a moving eigenspace: can the **projected** midpoint current `P(M beta)` remain near-null in the shifted critical metric while the unprojected current satisfies
+The new algebra settles the static part of the question: there is no nonzero perfectly compatible
+critical channel, because
 
 \[
-M(M\beta)=\frac\nu2|\beta|^2
+\{\mathcal A,Q^*\}=0\Longrightarrow u=0.
 \]
 
-and the actual current continuously changes the differential through `Q_t`?
-
-The exact candidate turning operator is already present:
-
-\[
-\boxed{[\mathbb H,Q]=Q^*Q^2-Q^2Q^*.}
-\]
-
-Its degree-two-to-degree-one non-exact component is the curvature-transverse Lamb interaction, from which the Lamb field is locally reconstructed when `omega != 0`.  The next theorem should therefore be sought in the form
+What remains is purely historical.  The missing theorem should have the form
 
 \[
 \boxed{
-\text{persistent critical near-kernel of }P M
+\text{infinite productive regeneration of }\mathcal A
 \Longrightarrow
-\text{non-summable objective graded turning generated by }[\mathbb H,Q].
+\int^T\|\{\mathcal A,Q^*\}\|_{HS,gr}^2dt=\infty
 }
 \]
 
-That implication is **not proved**.  To close regularity it must be quantitatively coupled to
-
-\[
-\partial_tL_g=[\mathcal L_v,L_g],\qquad
-\partial_t\Gamma=D_\Gamma B,\qquad
-\|D_\Gamma B\|_{L^2_g}^2=\|\delta_g\widetilde\beta\|_{L^2_g}^2
-\]
-
-and the transverse heat-memory law, so that the turnover forced by critical persistence cannot be sustained on the relevant finite positive-energy history.  Establishing that bridge is the remaining theorem, not an already available action bound.
-
-The methodological rule is now:
+with the correct intrinsic time/weight needed to contradict critical escape.  This implication is
+**not proved**.  The regeneration is itself endogenous because
 
 \[
 \boxed{
-\text{do not add an object unless it is generated by }Q,Q^*,Q^2
+\mathcal A_t=[\Lambda^{-1},Q_t^*]
+=\mathcal A(F_E)-\nu\Delta_{op}\mathcal A,
+}
+\]
+
+and `Q_t` is generated by the current `Q beta`.
+
+To close regularity, this operator-history implication must then be coupled to the already exact
+material laws
+
+\[
+\partial_tL_g=[\mathcal L_v,L_g],
+\qquad
+\partial_t\Gamma=D_\Gamma B,
+\qquad
+\|D_\Gamma B\|_{L^2_g}^2=\|\delta_g\widetilde\beta\|_{L^2_g}^2
+\]
+
+and the transverse heat-memory inequality.  The intended contradiction is therefore
+
+\[
+\boxed{
+\text{critical escape}
+\Rightarrow
+\text{infinite productive regeneration}
+\Rightarrow
+\text{infinite self-incompatibility / material turnover cost},
+}
+\]
+
+while the same NS history would have to keep that cost admissible on a finite positive-energy
+interval.  The last quantitative bridge is the theorem still missing.
+
+The methodological rule is now even stricter:
+
+\[
+\boxed{
+\text{do not add an object unless it is generated by }Q,Q^*,Q^2,
+\ [\Lambda^{-1},Q^*],
 \text{ or by their natural material pullback.}
 }
 \]
 
-No shell, owner, packet, moving projector, entropy budget or analyst clock is needed to state the remaining problem.
+No shell, owner, packet, moving projector, entropy budget or analyst clock is needed to state the
+remaining problem.

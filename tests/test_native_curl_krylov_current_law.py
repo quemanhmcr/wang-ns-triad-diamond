@@ -7,6 +7,7 @@ from src.helical import coupling_magnitude_closed
 
 from src.native_curl_krylov_current_law import (
     continuum_midpoint_operator_sobolev_dictionary,
+    continuum_primitive_critical_channel_constants,
     continuum_critical_operator_isometry_constant,
     closed_triad_critical_action_bound,
     sobolev_spectral_hilbert_square,
@@ -1208,3 +1209,72 @@ def test_primitive_Q_state_chords_are_square_zero_and_tangents_anticommute():
     assert np.linalg.norm(Iv@Iv) < 1e-14
     assert np.linalg.norm(Iw@Iw) < 1e-14
     assert np.linalg.norm(Iv@Iw+Iw@Iv) < 1e-14
+
+
+
+def test_primitive_critical_channel_exact_continuum_constants_and_factor_two_heat_identity():
+    out=continuum_primitive_critical_channel_constants()
+    assert out["raw_translation_integral"] == pytest.approx(4.0*math.pi,rel=0,abs=1e-14)
+    assert out["one_form_creation_graded_multiplicity"] == pytest.approx(4.0)
+    assert out["two_form_creation_graded_multiplicity"] == pytest.approx(2.0)
+    assert out["critical_channel_hs_coefficient"] == pytest.approx(2.0/math.pi**2,rel=1e-14)
+    assert out["curvature_channel_hs_coefficient"] == pytest.approx(1.0/math.pi**2,rel=1e-14)
+    assert out["translation_dirichlet_hs_coefficient"] == pytest.approx(2.0/math.pi**2,rel=1e-14)
+    assert out["dirichlet_to_curvature_hs_ratio"] == pytest.approx(2.0)
+
+
+def test_primitive_critical_channel_anticommutator_and_operator_derivative_are_exact():
+    import numpy as np
+    rng=np.random.default_rng(2026081551)
+    # The universal algebra: A=[L,Q*] implies {A,Q*}=[L,(Q*)^2].
+    for n in (4,7,11):
+        lam=np.exp(rng.uniform(-2,2,n))
+        L=np.diag(1.0/lam)
+        Qs=rng.normal(size=(n,n))+1j*rng.normal(size=(n,n))
+        A=L@Qs-Qs@L
+        lhs=A@Qs+Qs@A
+        rhs=L@(Qs@Qs)-(Qs@Qs)@L
+        assert np.linalg.norm(lhs-rhs) <= 3e-12*max(1.0,np.linalg.norm(rhs))
+
+    # One translation block on the 3D exterior algebra checks
+    # B=i sum_j (dx^j wedge)[D_j,A] with beta_q=i q wedge alpha_q.
+    basis=[tuple(i for i in range(3) if mask>>i&1) for mask in range(8)]
+    index={b:i for i,b in enumerate(basis)}
+    def wedge1(a):
+        W=np.zeros((8,8),complex)
+        for col,b in enumerate(basis):
+            for i,ai in enumerate(a):
+                if i in b: continue
+                sign=(-1)**sum(x<i for x in b)
+                W[index[tuple(sorted((i,)+b))],col]+=sign*ai
+        return W
+    e=[np.eye(3)[j] for j in range(3)]
+    E=[wedge1(x) for x in e]
+    for _ in range(40):
+        q=rng.normal(size=3)
+        alpha=rng.normal(size=3)+1j*rng.normal(size=3)
+        # incompressible velocity coefficient
+        alpha=alpha-q*np.vdot(q,alpha)/(np.dot(q,q))
+        ell=rng.normal(size=3)
+        if np.linalg.norm(ell)<0.3: ell[0]+=1.0
+        k=ell+q
+        if np.linalg.norm(k)<0.3: k[1]+=1.0
+        diff=1.0/np.linalg.norm(k)-1.0/np.linalg.norm(ell)
+        Ablock=diff*wedge1(alpha)
+        beta=1j*sum(q[j]*(E[j]@wedge1(alpha)) for j in range(3))
+        Bblock=diff*beta
+        derived=1j*sum(E[j]@(q[j]*Ablock) for j in range(3))
+        assert np.linalg.norm(Bblock-derived) <= 4e-12*max(1.0,np.linalg.norm(Bblock))
+
+
+def test_certificate_records_primitive_critical_channel_as_self_dissipative_derivative_without_closure_claim():
+    cert=theorem_certificate()
+    assert "Q*1=alpha" in cert["primitive_vacuum_state_chain"]
+    assert "current/metric commutator" in cert["primitive_metric_current_law"]
+    assert "A=[Lambda^-1,Q*]" in cert["primitive_critical_two_way_channel"]
+    assert "2/pi^2" in cert["primitive_critical_channel_isometry"]
+    assert "{A,Q*}" in cert["primitive_critical_channel_derivative"]
+    assert "not a uniform instantaneous gap" in cert["primitive_critical_channel_rigidity"]
+    assert "A_t=A(F_E)-nu Delta_op A" in cert["primitive_critical_channel_dynamics"]
+    assert "infinite productive regeneration" in cert["primitive_turning_frontier"]
+    assert cert["global_regularity_claimed"] is False
