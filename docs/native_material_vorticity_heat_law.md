@@ -2895,3 +2895,74 @@ problem for a sourced Gauss field**, not an unconstrained phase-alignment proble
 To make `G` small while `|omega|^2` is large, NS must create spatial variation on
 the exact drift-divergence scale dictated by `u/(2nu)`.  This is precisely the
 kind of spatial persistence cost invisible to every pointwise alignment test.
+
+
+## 43. The Gauss residual is one universal identity of the primitive curl operator
+
+The preceding residual equation is not a special accident of the NS velocity.
+For every smooth divergence-free vector field `v`, define
+
+\[
+\boxed{
+\mathfrak G_\nu[v]
+:=v\times Cv-2\nu C^2v.
+}
+\]
+
+The elementary Green/self-return identity for `curl` gives
+
+\[
+\boxed{
+\left(\nabla\cdot-\frac{v}{2\nu}\cdot\right)
+\mathfrak G_\nu[v]
+=|Cv|^2.
+}
+\]
+
+Indeed `div C^2v=0`,
+`div(v cross Cv)=|Cv|^2-v.C^2v`, and
+`v.G_nu[v]=-2nu v.C^2v`.  Nothing else enters.  The Poynting equality residual is
+simply the member `G=G_nu[u]` selected by the actual NS state.
+
+For this member, the original rotational equation
+
+\[
+u_t=P(u\times Cu)-\nu C^2u
+\]
+
+can be reflected exactly as
+
+\[
+\boxed{
+u_t=\nu C^2u+P G,}
+\]
+
+while simultaneously
+
+\[
+\boxed{
+\left(\nabla\cdot-\frac{u}{2\nu}\cdot\right)G=|Cu|^2.
+}
+\]
+
+The first formula should not be misread as a second physical dynamics or a new
+anti-diffusive mechanism.  It is the exact reflection of the same equation about
+the viscous current.  Its value is structural: the field which must oppose the
+formal backward-heat direction is not freely orientable or arbitrarily small;
+it is constrained at that same instant by a positive-source first-order Gauss
+law.
+
+There is a corresponding historical consequence of the local vortex-flux gauge.
+Where the two characteristic gauge equations produce a smooth divergence-free
+`w`,
+
+\[
+\partial_t\beta+\mathcal L_w\beta=0,
+\qquad \det D\Phi_w=1.
+\]
+
+Thus the *full viscous* vorticity two-form has exactly the same transported-two-form
+cofactor law and Minkowski transverse-memory inequality along `w` trajectories as
+the Euler-frozen material form.  Local viscosity supplies no independent reset of
+that memory; the remaining failures are globalization of the flux gauge, zeros of
+vorticity, or concentration of the vortex-flux deformation itself.

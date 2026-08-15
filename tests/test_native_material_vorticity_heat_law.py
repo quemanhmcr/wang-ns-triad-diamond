@@ -38,6 +38,7 @@ from src.native_material_vorticity_heat_law import (
     transverse_two_covector_area_identity,
     twist_free_leaf_residual_circulation,
     two_level_curl_geometry_algebra,
+    universal_curl_gauss_residual,
     transported_twoform_transverse_determinant,
     vortex_slip_twist_algebra,
     vortex_productivity_frustration_algebra,
@@ -722,3 +723,20 @@ def test_certificate_collapses_poynting_twist_residual_into_one_sourced_gauss_fi
     assert "zero-frequency shadow" in cert["poynting_residual_zero_mode"]
     assert "not separate mechanisms" in cert["poynting_residual_polar_collapse"]
     assert "no uniform strict gap" in cert["schrodinger_gap_guard"]
+
+
+
+def test_universal_curl_gauss_identity_is_not_special_to_velocity_level():
+    rng=np.random.default_rng(202608153601)
+    for _ in range(5000):
+        v=rng.normal(size=3);w=rng.normal(size=3);c=rng.normal(size=3);nu=10.0**rng.uniform(-4,2)
+        divG=np.dot(w,w)-np.dot(v,c)
+        out=universal_curl_gauss_residual(v,w,c,divG,nu)
+        assert out["gauss_residual"] <= 2e-11*max(1.0,out["curl_energy_density"])
+
+
+def test_certificate_puts_poynting_gauss_law_inside_one_universal_curl_operator_identity():
+    cert=theorem_certificate()
+    assert "every divergence-free v" in cert["universal_curl_gauss_operator"]
+    assert "reflection form" in cert["antiheat_reflection_form"]
+    assert "same exact transverse determinant/Minkowski heat-memory law" in cert["local_flux_memory_recovery"]

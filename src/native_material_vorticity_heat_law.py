@@ -1756,6 +1756,39 @@ def covariant_divergence_test_coercivity(
     lower=0.0 if denominator==0.0 and pair==0.0 else (math.inf if denominator==0.0 else pair*pair/denominator)
     return {"covariant_test_denominator":denominator,"residual_l2_squared_lower":lower,"source_pairing_squared":pair*pair}
 
+
+
+def universal_curl_gauss_residual(
+    field: Sequence[float],
+    curl_field: Sequence[float],
+    second_curl_field: Sequence[float],
+    divergence_of_residual: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Universal first-order Gauss identity of one divergence-free curl chain.
+
+    For any smooth divergence-free vector field ``v`` put
+
+        G_nu[v]=v cross Cv-2nu C^2v.
+
+    Since ``div C^2v=0`` and
+
+        div(v cross Cv)=|Cv|^2-v.C^2v,
+        v.G_nu[v]=-2nu v.C^2v,
+
+    exactly
+
+        (div-v/(2nu).) G_nu[v]=|Cv|^2.
+
+    Navier--Stokes uses the case ``v=u`` as its Poynting equality residual.  The
+    identity itself is a primitive curl law and needs no spectral decomposition.
+    """
+    v=np.asarray(tuple(float(x) for x in field),float);w=np.asarray(tuple(float(x) for x in curl_field),float);c=np.asarray(tuple(float(x) for x in second_curl_field),float);d=float(divergence_of_residual);nu=float(viscosity)
+    if any(x.shape!=(3,) for x in (v,w,c)) or not all(np.all(np.isfinite(x)) for x in (v,w,c)) or not math.isfinite(d) or not math.isfinite(nu) or nu<=0:
+        raise ValueError("finite curl-chain vectors/divergence and positive viscosity required")
+    G=np.cross(v,w)-2*nu*c;source=float(np.dot(w,w));rep=d-float(np.dot(v,G))/(2*nu);res=abs(source-rep)
+    return {"curl_energy_density":source,"represented_source":rep,"gauss_residual":res,"residual_squared":float(np.dot(G,G))}
+
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
@@ -1796,6 +1829,9 @@ def theorem_certificate() -> dict[str, object]:
         "flux_disintegrated_enstrophy": "in a nonvanishing vortex flow-box dV=(1/m) dPhi ds, so Z=int dPhi int m ds and palinstrophy=int dPhi int m(|A_omega|^2+tau_omega^2)ds; Euler stretching=-int dPhi int m u_perp.A_omega ds.  Poynting-Joule is therefore flux-weighted work against the same line-length gradient plus twist",
         "line_gradient_flow_guard": "the first variation delta int m ds=-int m A_omega.V ds is an instantaneous shape variation with m frozen as background; full NS also evolves m and the flux chart, so v_slip=nu A_omega must not be promoted to an autonomous curve-shortening theorem",
         "poynting_residual_gauss_law": "with G=u cross omega-2nu curl omega, the exact self-return identities collapse to |omega|^2=div G-(u/(2nu)).G; the same G is the completed-square equality residual, so perfect productive geometry is a sourced covariant-divergence field rather than a free alignment variable",
+        "universal_curl_gauss_operator": "for every divergence-free v, G_nu[v]=v cross Cv-2nu C^2v obeys (div-v/(2nu).)G_nu[v]=|Cv|^2; the Poynting residual is the v=u member of one universal primitive curl identity",
+        "antiheat_reflection_form": "with G=G_nu[u], rotational NS is exactly u_t=nu C^2u+P G while the Gauss law forces (div-u/(2nu).)G=|Cu|^2; this is only a reflection form of the same PDE, showing that the residual needed to oppose the formal backward-heat direction is positively sourced by vorticity",
+        "local_flux_memory_recovery": "where the local divergence-free vortex-flux velocity w exists, beta_t+Lie_w beta=0 and det D Phi_w=1, so the full viscous two-form inherits the same exact transverse determinant/Minkowski heat-memory law along w-trajectories as an Euler-frozen two-form; local viscosity does not supply an independent memory reset",
         "poynting_residual_covariant_coercivity": "for every scalar phi, <|omega|^2,phi>=-<G,grad phi+u phi/(2nu)> and incompressibility gives ||grad phi+u phi/(2nu)||^2=||grad phi||^2+||u phi||^2/(4nu^2); hence ||G||^2 is bounded below by the canonical Schrödinger dual norm with operator -Delta+|u|^2/(4nu^2)",
         "poynting_residual_zero_mode": "choosing phi=1 in the residual Gauss law gives ||G||^2>=4nu^2 Z^2/E, showing the earlier Euler-invariant normal-current tax is only the constant-test/zero-frequency shadow of the full covariant-divergence coercivity",
         "poynting_residual_polar_collapse": "in vortex-line variables G=-m xi cross R-2nu m tau xi and |G|^2=m^2|R|^2+4nu^2m^2tau^2; the residual R and Frobenius twist are transverse/longitudinal components of one primitive G, not separate mechanisms",
