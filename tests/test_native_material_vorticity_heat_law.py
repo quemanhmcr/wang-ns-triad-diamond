@@ -5,6 +5,7 @@ import pytest
 
 from src.native_material_vorticity_heat_law import (
     accumulated_transverse_heat_memory,
+    actual_ns_current_gauss_algebra,
     affine_local_blowup_guard,
     canonical_maxwell_extension_spectral_law,
     klein_spacetime_vortex_worldsheet_algebra,
@@ -14,6 +15,8 @@ from src.native_material_vorticity_heat_law import (
     curl_line_geometry_algebra,
     covariant_divergence_test_coercivity,
     maxwell_duality_stress_algebra,
+    mixed_curl_gauss_direction_algebra,
+    mixed_strain_poynting_factorization,
     primitive_spacetime_gauge_algebra,
     so33_exterior_square_algebra,
     sl3_cartan_casimir_algebra,
@@ -29,7 +32,9 @@ from src.native_material_vorticity_heat_law import (
     primitive_material_current_fourier_law,
     moving_polarization_memory_bound,
     pair_direction_mismatch_decomposition,
+    endpoint_current_parallelogram,
     poynting_equality_residual_gauss_algebra,
+    critical_projected_current_tax,
     rank_one_incompressible_stretch_null,
     theorem_certificate,
     transverse_heat_determinant,
@@ -740,3 +745,79 @@ def test_certificate_puts_poynting_gauss_law_inside_one_universal_curl_operator_
     assert "every divergence-free v" in cert["universal_curl_gauss_operator"]
     assert "reflection form" in cert["antiheat_reflection_form"]
     assert "same exact transverse determinant/Minkowski heat-memory law" in cert["local_flux_memory_recovery"]
+
+
+
+def test_actual_ns_current_itself_obeys_positive_curvature_gauss_law():
+    rng=np.random.default_rng(202608154401)
+    for _ in range(5000):
+        u=rng.normal(size=3);om=rng.normal(size=3);c=rng.normal(size=3);nu=10.0**rng.uniform(-4,2)
+        # div e = -div(u cross omega) = -|omega|^2+u.c because div curl omega=0.
+        div_e=-np.dot(om,om)+np.dot(u,c)
+        out=actual_ns_current_gauss_algebra(u,om,c,div_e,nu)
+        assert out["gauss_residual"] <= 2e-11*max(1.0,out["vorticity_squared"])
+
+
+def test_mixed_gauss_law_polarizes_to_arbitrary_test_direction_without_div_b_assumption():
+    rng=np.random.default_rng(202608154402)
+    for _ in range(5000):
+        u=rng.normal(size=3);om=rng.normal(size=3);b=rng.normal(size=3);cb=rng.normal(size=3);nu=10.0**rng.uniform(-4,2)
+        G=np.cross(u,b)-2*nu*cb
+        # The vector identity fixes div G = omega.b-u.curl b.
+        divG=np.dot(om,b)-np.dot(u,cb)
+        out=mixed_curl_gauss_direction_algebra(u,om,b,cb,divG,nu)
+        assert out["gauss_residual"] <= 2e-11*max(1.0,abs(out["curvature_pairing"]))
+
+
+def test_midpoint_hodge_square_has_opposite_strain_signs_and_poynting_factorization():
+    rng=np.random.default_rng(202608154403)
+    n=16;nu=.37;theta=.5
+    k1=np.fft.fftfreq(n,1/n)
+    K=np.stack(np.meshgrid(k1,k1,k1,indexing='ij'),-1);K2=np.sum(K*K,-1);nz=K2>0
+    def divfree_field():
+        x=rng.normal(size=(n,n,n,3));xh=np.fft.fftn(x,axes=(0,1,2))
+        dot=np.sum(K*xh,axis=-1);xh[nz]-=K[nz]*(dot[nz]/K2[nz])[:,None];xh[~nz]=0
+        xh*=((np.max(np.abs(K),axis=-1)<=n//8)[...,None])
+        return xh,np.fft.ifftn(xh,axes=(0,1,2)).real
+    uh,u=divfree_field();bh,b=divfree_field()
+    cbh=1j*np.cross(K,bh);cb=np.fft.ifftn(cbh,axes=(0,1,2)).real
+    grad=np.empty((n,n,n,3,3),float)
+    for i in range(3):
+        for j in range(3):
+            grad[...,i,j]=np.fft.ifftn(1j*K[...,j]*uh[...,i],axes=(0,1,2)).real
+    S=.5*(grad+np.swapaxes(grad,-1,-2));Sb=np.einsum('...ij,...j->...i',S,b)
+    cross=np.cross(u,b);dotub=np.sum(u*b,axis=-1)
+    mean=lambda z: float(np.mean(z))
+    strain=mean(np.sum(b*Sb,axis=-1));curl2=mean(np.sum(cb*cb,axis=-1));cross2=mean(np.sum(cross*cross,axis=-1));ub2=mean(dotub*dotub)
+    base=nu*nu*curl2+theta*theta*(cross2+ub2)
+    plus=mean(np.sum((nu*cb+theta*cross)**2,axis=-1))+theta*theta*ub2
+    minus=mean(np.sum((nu*cb-theta*cross)**2,axis=-1))+theta*theta*ub2
+    assert plus == pytest.approx(base+2*theta*nu*strain,rel=3e-10,abs=3e-10)
+    assert minus == pytest.approx(base-2*theta*nu*strain,rel=3e-10,abs=3e-10)
+    G=cross-2*nu*cb;g2=mean(np.sum(G*G,axis=-1))
+    out=mixed_strain_poynting_factorization(strain,curl2,cross2,g2,nu)
+    assert out["factorization_residual"] <= 4e-10*max(1.0,abs(out["strain_work"]))
+
+
+def test_every_sobolev_square_is_the_parallelogram_of_heat_and_actual_currents():
+    rng=np.random.default_rng(202608154404)
+    for _ in range(1000):
+        j0=rng.normal(size=(17,3));j1=rng.normal(size=(17,3));nu=10.0**rng.uniform(-4,2)
+        out=endpoint_current_parallelogram(j0,j1,nu)
+        assert out["sobolev_rate_from_inner_product"] == pytest.approx(out["sobolev_rate_from_parallelogram"],rel=2e-12,abs=2e-12)
+    out=critical_projected_current_tax(7.0,3.0,.4)
+    assert out["critical_projected_residual_lower"] == pytest.approx(4*.4*.4*9/7)
+
+
+def test_certificate_records_graded_current_collapse_and_preserves_the_persistence_guard():
+    cert=theorem_certificate()
+    assert "non-nilpotence curvature" in cert["primitive_current_square"]
+    assert "actual NS acceleration" in cert["actual_acceleration_gauss"]
+    assert "Schrödinger" in cert["midpoint_graded_hodge_square"]
+    assert "every smooth b" in cert["mixed_gauss_polarization"]
+    assert "same critical H^-1/2 metric" in cert["critical_projected_current_tax"]
+    assert "intrinsic Gram plane" in cert["two_null_projected_current_tax"]
+    assert "pressure sector" in cert["leray_gauss_scalar_no_go"]
+    assert "odd projection does not preserve Gram positivity" in cert["helicity_odd_gram_guard"]
+    assert "remaining large-data theorem is dynamical" in cert["graded_current_persistence_frontier"]
+    assert cert["global_regularity_claimed"] is False

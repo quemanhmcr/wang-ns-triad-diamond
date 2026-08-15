@@ -1113,3 +1113,15 @@ def test_continuum_midpoint_operator_sobolev_scale_places_critical_stock_at_plai
         lo=continuum_midpoint_operator_sobolev_dictionary(0.5-delta)["operator_laplacian_power"]
         hi=continuum_midpoint_operator_sobolev_dictionary(0.5+delta)["operator_laplacian_power"]
         assert hi == pytest.approx(-lo)
+
+
+
+def test_certificate_connects_critical_reynolds_operator_to_the_graded_current_parent_without_overclaim():
+    cert=theorem_certificate()
+    assert "degree imbalance" in cert["graded_current_strain_parent"]
+    assert "helicity-odd Gram imbalance" in cert["critical_gram_self_frustration"]
+    assert "curvature floor" in cert["critical_curvature_floor"]
+    assert "same critical metric" in cert["critical_projected_gauss_tax"]
+    assert "two-by-two Gram projection" in cert["critical_two_null_gauss_tax"]
+    assert "does not prove large-data regularity" in cert["graded_current_persistence_guard"]
+    assert cert["global_regularity_claimed"] is False

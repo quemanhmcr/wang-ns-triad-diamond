@@ -1789,6 +1789,163 @@ def universal_curl_gauss_residual(
     G=np.cross(v,w)-2*nu*c;source=float(np.dot(w,w));rep=d-float(np.dot(v,G))/(2*nu);res=abs(source-rep)
     return {"curl_energy_density":source,"represented_source":rep,"gauss_residual":res,"residual_squared":float(np.dot(G,G))}
 
+
+
+def actual_ns_current_gauss_algebra(
+    velocity: Sequence[float],
+    vorticity: Sequence[float],
+    vorticity_current: Sequence[float],
+    divergence_of_current: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Gauss self-return law for the *actual* NS electromotive current.
+
+    With ``omega=curl u``, ``c=curl omega`` and the one-form/vector current
+
+        e = -u cross omega + nu c,
+
+    the primitive Cartan--Hodge square ``q_1^2 beta=nu |beta|^2`` reads
+
+        -div e + (u/nu).e = |omega|^2.
+
+    This is the uncompleted physical acceleration current: rotational momentum is
+    ``u_t+grad B=-e``.  The helper is a local algebra referee and does not assume
+    a global regularity conclusion.
+    """
+    u=np.asarray(tuple(float(x) for x in velocity),float)
+    om=np.asarray(tuple(float(x) for x in vorticity),float)
+    c=np.asarray(tuple(float(x) for x in vorticity_current),float)
+    d=float(divergence_of_current);nu=float(viscosity)
+    if any(x.shape!=(3,) for x in (u,om,c)) or not all(np.all(np.isfinite(x)) for x in (u,om,c)) or not math.isfinite(d) or not math.isfinite(nu) or nu<=0:
+        raise ValueError("finite three-vectors/divergence and positive viscosity required")
+    e=-np.cross(u,om)+nu*c
+    source=float(np.dot(om,om))
+    represented=-d+float(np.dot(u,e))/nu
+    return {
+        "vorticity_squared":source,
+        "represented_source":represented,
+        "gauss_residual":abs(source-represented),
+        "current_squared":float(np.dot(e,e)),
+    }
+
+
+def mixed_curl_gauss_direction_algebra(
+    velocity: Sequence[float],
+    vorticity: Sequence[float],
+    test_field: Sequence[float],
+    curl_test_field: Sequence[float],
+    divergence_of_residual: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Polarized Gauss law for every strain test direction.
+
+    For fixed NS state ``u`` with ``omega=curl u`` and arbitrary smooth ``b``, put
+
+        G_nu[u;b] = u cross b - 2 nu curl b.
+
+    Pure vector calculus gives, without requiring ``div b=0``,
+
+        (div-u/(2nu).) G_nu[u;b] = omega.b.
+
+    The diagonal member ``b=omega`` is the Poynting/Gauss field of Sections 41--43.
+    """
+    u=np.asarray(tuple(float(x) for x in velocity),float)
+    om=np.asarray(tuple(float(x) for x in vorticity),float)
+    b=np.asarray(tuple(float(x) for x in test_field),float)
+    cb=np.asarray(tuple(float(x) for x in curl_test_field),float)
+    d=float(divergence_of_residual);nu=float(viscosity)
+    if any(x.shape!=(3,) for x in (u,om,b,cb)) or not all(np.all(np.isfinite(x)) for x in (u,om,b,cb)) or not math.isfinite(d) or not math.isfinite(nu) or nu<=0:
+        raise ValueError("finite three-vectors/divergence and positive viscosity required")
+    G=np.cross(u,b)-2*nu*cb
+    source=float(np.dot(om,b))
+    represented=d-float(np.dot(u,G))/(2*nu)
+    return {
+        "curvature_pairing":source,
+        "represented_pairing":represented,
+        "gauss_residual":abs(source-represented),
+        "reflected_current_squared":float(np.dot(G,G)),
+    }
+
+
+def mixed_strain_poynting_factorization(
+    strain_pairing: float,
+    curl_test_l2_squared: float,
+    lamb_test_l2_squared: float,
+    reflected_current_l2_squared: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Integrated quadratic-form reading of the polarized Poynting factorization.
+
+    For divergence-free ``b`` the exact identity is
+
+        nu <b,Sb>
+          = nu^2 ||curl b||^2
+            + (1/4)||u cross b||^2
+            - (1/4)||G_nu[u;b]||^2.
+
+    The inputs are the already integrated scalar readings.  This helper records
+    the equality and its numerical residual; the Fourier referee in the tests
+    independently constructs the fields and derivatives.
+    """
+    sp=float(strain_pairing);c2=float(curl_test_l2_squared);l2=float(lamb_test_l2_squared);g2=float(reflected_current_l2_squared);nu=float(viscosity)
+    if not all(math.isfinite(x) for x in (sp,c2,l2,g2,nu)) or c2<0 or l2<0 or g2<0 or nu<=0:
+        raise ValueError("finite pairing, nonnegative squared norms and positive viscosity required")
+    lhs=nu*sp
+    rhs=nu*nu*c2+0.25*l2-0.25*g2
+    return {"strain_work":lhs,"represented_strain_work":rhs,"factorization_residual":abs(lhs-rhs)}
+
+
+def endpoint_current_parallelogram(
+    pure_heat_current: Sequence[float],
+    actual_ns_current: Sequence[float],
+    viscosity: float,
+) -> dict[str, float]:
+    """One finite-dimensional reading of the master Sobolev current-angle law.
+
+    The caller may first apply any common Sobolev weight ``Lambda^(s-1)``.  With
+    the weighted endpoint currents ``j0`` and ``j1`` one has
+
+        K_s' = -(2/nu)<j0,j1>
+             = (||j0-j1||^2-||j0+j1||^2)/(2nu).
+
+    Thus positive Sobolev growth means the actual NS current is obtuse to the pure
+    heat current in the naturally shifted metric.
+    """
+    j0=np.asarray(pure_heat_current,float)
+    j1=np.asarray(actual_ns_current,float)
+    nu=float(viscosity)
+    if j0.shape!=j1.shape or j0.size==0 or not np.all(np.isfinite(j0)) or not np.all(np.isfinite(j1)) or not math.isfinite(nu) or nu<=0:
+        raise ValueError("same-shape finite currents and positive viscosity required")
+    inner=float(np.vdot(j0,j1).real)
+    difference=float(np.vdot(j0-j1,j0-j1).real)
+    total=float(np.vdot(j0+j1,j0+j1).real)
+    rate_inner=-2.0*inner/nu
+    rate_parallel=(difference-total)/(2.0*nu)
+    return {
+        "endpoint_inner_product":inner,
+        "sobolev_rate_from_inner_product":rate_inner,
+        "sobolev_rate_from_parallelogram":rate_parallel,
+        "difference_squared":difference,
+        "sum_squared":total,
+    }
+
+
+def critical_projected_current_tax(critical_stock: float, enstrophy: float, viscosity: float) -> dict[str, float]:
+    """Pressure-free critical lower tax forced by the Euler energy null.
+
+    For ``K=||Lambda^(1/2)u||^2`` and ``Z=||Cu||^2``, the projected midpoint
+    residual satisfies
+
+        ||Lambda^(-1/2) P G||^2 >= 4 nu^2 Z^2 / K.
+
+    This is a necessary critical current cost, not an upper bound on the coherent
+    Euler action and therefore not a regularity theorem.
+    """
+    K=float(critical_stock);Z=float(enstrophy);nu=float(viscosity)
+    if not all(math.isfinite(x) for x in (K,Z,nu)) or K<=0 or Z<0 or nu<=0:
+        raise ValueError("positive critical stock/viscosity and nonnegative enstrophy required")
+    return {"critical_projected_residual_lower":4.0*nu*nu*Z*Z/K,"critical_stock":K,"enstrophy":Z}
+
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
@@ -1865,6 +2022,20 @@ def theorem_certificate() -> dict[str, object]:
         "local_degree_transgression": "for A=grad u, det(I+sA)-1=div[-(s^2/2)(u.grad)u+(s^3/3)(cof A)^T u]; more generally det(F+sG)-det F is the integral in r of cof(F+rG):G, giving the local Piola transgression of the tangent chord",
         "affine_local_blowup_guard": "there are exact infinite-energy affine NS/Euler fields u=A(t)x with axisymmetric S=diag(a,a,-2a), a=1/(T-t), and omega proportional (T-t)^-1 e1; pressure supplies the symmetric material acceleration and Delta u=0, proving that no purely local finite-dimensional group law can close finite-energy regularity",
         "cofactor_force_falsification": "although int det K and vorticity Noether work agree after the correct pairings, P div(cof K)=3P(omega cross curl omega) is false; direct periodic referees gave Leray residual about 0.65-0.68, so the two local force densities must not be collapsed modulo pressure",
+        "primitive_current_square": "with alpha=u^flat, beta=d alpha and q_theta=nu delta+theta i_u, exterior Leibniz gives q_theta^2=theta nu (beta wedge)^*; the actual NS current is e=q_1 beta and beta_t=-d q_1 beta, so vorticity is literally the non-nilpotence curvature of the same current operator that evolves it",
+        "current_generator_frustration": "{d,q_1}=Lie_u+nu L is the full vorticity generator and [{d,q_1},q_1] beta=nu d|beta|^2 on d beta=0; spatial curvature concentration is compulsory current/generator noncommutation rather than an imposed depletion estimate",
+        "actual_acceleration_gauss": "the uncompleted physical current e=-u cross omega+nu curl omega obeys -div e+(u/nu).e=|omega|^2, equivalently (div-u/nu.)(u_t+grad B)=|omega|^2; the actual NS acceleration itself is a positive-curvature-sourced current",
+        "midpoint_graded_hodge_square": "for q=nu delta+(1/2)i_u, qq^* on scalars is -nu^2 Delta+|u|^2/4 while q^*q+qq^* is that same Schrödinger operator plus nu S on one-forms and minus nu S on two-forms; Poynting, Gauss, Schrödinger and strain are graded readings of one midpoint current complex",
+        "mixed_gauss_polarization": "for every smooth b, G_nu[u;b]=u cross b-2nu curl b obeys (div-u/(2nu).)G_nu[u;b]=omega.b; the diagonal b=omega Poynting field is one member of a polarized curvature/current law constraining every strain direction",
+        "strain_current_gram_factorization": "on divergence-free b, nu<b,Sb>=nu^2||curl b||^2+(1/4)||u cross b||^2-(1/4)||G_nu[u;b]||^2; after Leray compression this polarizes to 4nu P S P=P(4nu^2 C^2+U_u^*U_u-G_u^*G_u)P",
+        "mixed_gauss_operator_floor": "the polarized equation D_u G_u=M_omega with M_omega b=omega.b gives G_u^*G_u>=M_omega^*(-Delta+|u|^2/(4nu^2))^-1 M_omega in quadratic-form order whenever the inverse is defined; every dangerous direction with curvature overlap carries a canonical sourced-current floor",
+        "sobolev_endpoint_current_angle": "with j0=nu C^2u and j1=nu C^2u-F_E=-u_t, every Sobolev stock satisfies K_s'/2=-(1/nu)<j0,j1>_{H^(s-1)} and K_s'=(||Lambda^(s-1)F_E||^2-||Lambda^(s-1)PG||^2)/(2nu); growth is obtuse alignment of actual NS current against pure heat",
+        "critical_projected_current_tax": "at s=1/2, <u,PG>=-2nu Z implies ||Lambda^-1/2 P G||^2>=4nu^2 Z^2/K, so the compulsory residual tax and positive Euler action live in the same critical H^-1/2 metric",
+        "two_null_projected_current_tax": "energy and helicity nulls fix the two pairings of R_s with Lambda^(1-s)u and Lambda^(1-s)Cu; projecting onto that intrinsic Gram plane gives ||R_s||^2 >= [K_(2-s) Z^2-2 H_(3-2s) Z H3+K_(1-s) H3^2]/[K_(1-s)K_(2-s)-H_(3-2s)^2], with the pseudoinverse reading on degenerate states",
+        "leray_gauss_scalar_no_go": "q_theta^* phi=nu d phi+theta u^flat phi is divergence-free only if nu Delta phi+theta u.grad phi=0; on a periodic/decaying incompressible domain the energy identity forces phi constant, so nonconstant static Schrödinger tests necessarily see the exact/pressure sector and cannot alone close the projected gap",
+        "helicity_odd_gram_guard": "on opposite helicities the even C^2 term drops and 4nu(PS)_odd=[P(U_u^*U_u-G_u^*G_u)P]_odd; odd projection does not preserve Gram positivity, so there is no free negative square and no direct conclusion ||R_c||<=1",
+        "graded_current_reynolds_collapse": "the critical Reynolds operator is the intrinsic sech/Poisson helicity-odd reading of the degree-one/degree-two midpoint Hodge-square imbalance; Gauss, Schrödinger, Poynting, strain and critical Reynolds geometry are representations of one state-generated graded current algebra",
+        "graded_current_persistence_frontier": "the remaining large-data theorem is dynamical: rule out infinite productive critical backward-heat alignment by proving compulsory current turning/curvature-memory cost from the same graded current, Cartan reorientation and material heat geometry; no owner, shell, cutoff or external closure principle is supplied",
         "global_regularity_claimed": False,
         "case_taxonomy_used": False,
         "analysis_cutoff_used": False,
