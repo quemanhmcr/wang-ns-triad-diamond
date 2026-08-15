@@ -1770,6 +1770,62 @@ def test_poisson_covariance_stress_two_reservoir_heat_and_fisher_laws_are_exact(
     assert boundary_fisher <= 2.0*M3+2e-12
 
     FE=leray(lamb); kappa=inner(lam(u),FE)
+
+    # The whole critical hierarchy collapses to one scalar Dirichlet-depth continuity law.
+    Fy=py(FE,y)
+    Lv=lam(v); L2v=lam(Lv)
+    qdir=2.0*inner(Lv,Lv)
+    qdir_y=-4.0*inner(Lv,L2v)
+    qdir_yy=8.0*inner(L2v,L2v)
+    jE=2.0*inner(Lv,Fy)
+    jE_y=-4.0*inner(L2v,Fy)
+    jnu=0.5*nu*qdir_y
+    vt_full=Fy-nu*lap(v)
+    qdir_t=4.0*inner(Lv,lam(vt_full))
+    assert qdir_t+jE_y+0.5*nu*qdir_yy == pytest.approx(0.0,abs=6e-12)
+    assert qdir_y <= 1e-13
+    assert 2.0*inner(lam(u),FE) == pytest.approx(2.0*kappa,rel=3e-14,abs=3e-14)
+    assert -2.0*nu*M3 == pytest.approx(0.5*nu*(-4.0*M3),rel=3e-14,abs=3e-14)
+    assert inner(u,FE) == pytest.approx(0.0,abs=5e-13)  # int_0^infinity j_E dy
+
+    M0dir=inner(u,lam(u)); M1dir=0.5*E; q0dir=2.0*Z
+    defect=M1dir*q0dir-M0dir*M0dir
+    assert M0dir == pytest.approx(K_fourier,rel=3e-13,abs=3e-13)
+    assert q0dir == pytest.approx(2.0*Z,rel=3e-14,abs=3e-14)
+    assert defect == pytest.approx(E*Z-M0dir*M0dir,rel=3e-14,abs=3e-14)
+    N2=Z/E
+    escape=kappa*kappa/(N2*(E*Z-M0dir*M0dir))
+    flux_escape=(2.0*kappa)**2*M1dir/(q0dir*defect)
+    assert flux_escape == pytest.approx(escape,rel=3e-13,abs=3e-13)
+
+    # Local parent rho_t+div_4 J=0; its integrated normal current is j_E+j_nu.
+    vh=fft(v); vth=fft(vt_full)
+    grad_v=[ifft(1j*kx*vh),ifft(1j*ky*vh),ifft(1j*kz*vh),-lam(v)]
+    grad_vt=[ifft(1j*kx*vth),ifft(1j*ky*vth),ifft(1j*kz*vth),-lam(vt_full)]
+    rho_t=2.0*sum(np.sum(a0*b0,axis=0) for a0,b0 in zip(grad_v,grad_vt))
+    lap4v=ifft(-k2*vh)+lap(v)
+    divJ=(-2.0*sum(np.sum(a0*b0,axis=0) for a0,b0 in zip(grad_vt,grad_v))
+          -2.0*np.sum(vt_full*lap4v,axis=0))
+    assert np.linalg.norm(rho_t+divJ) <= 7e-12*max(1.0,np.linalg.norm(rho_t))
+    Jy=float(np.mean(np.sum(-2.0*vt_full*(-lam(v)),axis=0)))
+    assert Jy == pytest.approx(jE+jnu,rel=4e-12,abs=4e-12)
+
+    # Natural Euler transport action returns to the critical H^{-1/2} action.
+    point_action=jE*jE/qdir if qdir>1e-30 else 0.0
+    assert point_action <= 2.0*inner(Fy,Fy)+2e-12
+    Fh=fft(FE); inv_radius=np.zeros_like(radius); live_radius=radius>1e-13; inv_radius[live_radius]=1.0/radius[live_radius]
+    hminus_half=float(np.sum(np.sum(np.abs(Fh)**2,axis=0)*inv_radius)/(n**6))
+    assert hminus_half >= point_action-2e-12
+
+    # Modewise depth integration gives the exact moments and zero-integral Euler current.
+    modal_u=np.sum(np.abs(fft(u))**2,axis=0)/(n**6)
+    M0_modes=float(np.sum(radius*modal_u))
+    M1_modes=0.5*float(np.sum(modal_u[live_radius]))
+    assert M0_modes == pytest.approx(M0dir,rel=3e-13,abs=3e-13)
+    assert M1_modes == pytest.approx(M1dir,rel=3e-13,abs=3e-13)
+    current_depth_exact=float(np.mean(np.sum(u*FE,axis=0)))
+    assert current_depth_exact == pytest.approx(0.0,abs=5e-13)
+
     boundary_work=inner(u,gamma_x)
     gamma_strain=tensor_inner(gamma_u,strain(u))
     assert boundary_work == pytest.approx(gamma_strain,rel=5e-12,abs=5e-12)
@@ -1968,8 +2024,8 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "whole critical hierarchy is one boundary jet" in cert["primitive_poisson_energy_profile"]
     assert "P_y(fg)-P_yf P_yg" in cert["primitive_poisson_product_defect"]
     assert "R'_E(0)=-4kappa" in cert["primitive_poisson_boundary_critical_law"]
-    assert "zero-net two-way depth redistribution" in cert["primitive_poisson_depth_two_road"]
-    assert "physical boundary action" in cert["primitive_poisson_hankel_escape"]
+    assert "zero-depth-integral return current" in cert["primitive_poisson_depth_two_road"]
+    assert "M1 q(0)-M0^2=EZ-K^2" in cert["primitive_poisson_hankel_escape"]
     assert "fake scalar profile" in cert["primitive_poisson_realizability_guard"]
     assert "positive covariance-stress lift" in cert["primitive_poisson_covariance_stress"]
     assert "Delta4 v=0" in cert["primitive_harmonic_halfspace_normal_form"]
@@ -1982,6 +2038,9 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "constant 1" in cert["primitive_poisson_covariance_heat_fisher"]
     assert "<=2M3" in cert["primitive_poisson_covariance_boundary"]
     assert "A_(y+z)=A_z(P_yu)" in cert["primitive_poisson_transverse_activity"]
+    assert "rho_t+div_4 J=0" in cert["primitive_poisson_dirichlet_local_current"]
+    assert "M0=int mathfrak q dy=K" in cert["primitive_poisson_dirichlet_moments"]
+    assert "int j_E(y)^2/mathfrak q(y) dy" in cert["primitive_poisson_transport_action_guard"]
     assert "R_E^2/(4A_y)+R_align+R_reg" in cert["primitive_poisson_covariance_pythagoras"]
     assert "V_t=A_y/(2nu)" in cert["primitive_poisson_relative_completed_square"]
     assert "rank changes of the pseudoinverse" in cert["primitive_poisson_axis_gradient_guard"]

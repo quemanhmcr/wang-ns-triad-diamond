@@ -1351,7 +1351,7 @@ shrink toward `y=0`, to force the normalized boundary action to be integrable.  
 route and is not used.  The open theorem must exploit the endogenous cocycle, Loewner heat law and
 stress-divergence realization above.  This is the remaining boundary-stress problem, not a QED.
 
-#### Scalar boundary shadow
+#### Scalar Dirichlet transport shadow
 
 Now define
 
@@ -1438,9 +1438,10 @@ so, using Leray orthogonality,
 \mathscr R_E(y)=2\langle P_yu,\mathbb P D_y\rangle.}
 \]
 
-This says exactly what the earlier Poisson-depth guard required: Euler changes the scale profile only
-through the failure of the canonical Poisson semigroup to be multiplicative.  No Poynting-only local
-depth continuity law is asserted.
+This says exactly what the earlier Poisson-depth guard required: Euler changes the scalar energy
+profile only through failure of the canonical Poisson semigroup to be multiplicative.  That profile
+itself is not being assigned a Poynting-only local law; the genuinely local conserved density is the
+four-dimensional Dirichlet density `rho=|grad_4 v|^2` identified below.
 
 At the physical boundary `D_0=0`, hence
 
@@ -1467,128 +1468,197 @@ K'=2\kappa(0)-2\nu M_3.}
 
 Equivalently, the critical law is exactly `-1/2 partial_y` of the Poisson energy law at `y=0`.
 
-Define the positive critical-depth profile
-
-\[
-\boxed{\mathscr K(y,t):=-\frac12\mathscr E_y(y,t)\ge0.}
-\]
-
-On finite-energy `R^3` (and on mean-zero periodic states),
+Define instead the integrated four-dimensional Dirichlet density (denoted `q` in the shortest
+transport statement, and `mathfrak q` here to avoid collision with `q_y=tr tau_y` above)
 
 \[
 \boxed{
-\mathscr K(0)=K,
+\mathfrak q(y,t)
+:=\int_{\mathbb R^3}|\nabla_4v(x,y,t)|^2\,dx
+=2\|\Lambda P_yu\|_2^2
+=\frac12\mathscr E_{yy}(y,t)\ge0.}
+\]
+
+Its Euler and viscous depth currents are
+
+\[
+\boxed{
+j_E(y,t):=2\langle \Lambda P_yu,P_yF_E\rangle
+=-\frac12\mathscr R_{E,y}(y,t),
 \qquad
-\int_0^\infty\mathscr K(y,t)\,dy=\frac E2.}
+j_\nu(y,t):=\frac\nu2\mathfrak q_y(y,t).}
 \]
 
-If a periodic zero-curl atom is retained, the right side is one half of the nonzero-curl energy
-instead.  With
+Since
 
 \[
-\mathscr J_E:=-\frac12\mathscr R'_E,
+\mathfrak q_y=-4\|\Lambda^{3/2}P_yu\|_2^2\le0,
 \]
 
-one has
+the viscous current has one sign.  Taking two normal derivatives of the scalar Poisson energy law,
+or differentiating directly, gives the exact conservation law
 
 \[
 \boxed{
-\mathscr K_t
-=\mathscr J_E-\frac\nu2\mathscr K_{yy},
+\mathfrak q_t+\partial_y(j_E+j_\nu)=0.}
+\]
+
+At the physical boundary,
+
+\[
+\boxed{
+j_E(0)=2\kappa(0),
 \qquad
-\int_0^\infty\mathscr J_E\,dy=0,}
+j_\nu(0)=-2\nu M_3,}
 \]
 
-while `mathscr K_yy>=0`.  Thus Euler is literally a zero-net two-way redistribution in canonical
-curl depth, whereas viscosity is a pointwise one-way sink.  At the boundary
+and, on finite-energy `R^3` or mean-zero periodic states,
 
 \[
 \boxed{
-\mathscr J_E(0)=2\kappa(0),
+j_E(\infty)=j_\nu(\infty)=0,
 \qquad
--\frac\nu2\mathscr K_{yy}(0)=-2\nu M_3.}
+\int_0^\infty j_E(y)\,dy
+=\langle u,F_E\rangle=0.}
 \]
 
-The remaining escape action is also boundary geometry of this same profile.  Log-convexity gives
+Thus Euler is a zero-depth-integral return current: if it is nonzero it cannot keep one sign through
+all depths.  Viscosity has no return branch.  This is the scalar conservation-law form of the same
+two-way/one-way split already encoded by the covariance reservoirs.
+
+The first two depth moments and the boundary value are exactly
 
 \[
 \boxed{
-\mathscr E(0)\mathscr E_{yy}(0)-\mathscr E_y(0)^2
-=4(EZ-K^2)\ge0.}
+M_0:=\int_0^\infty\mathfrak q\,dy=K,
+\qquad
+M_1:=\int_0^\infty y\mathfrak q\,dy=\frac E2,
+\qquad
+\mathfrak q(0)=2Z.}
 \]
 
-On the strict positive-determinant continuum states used by the escape theorem,
+Consequently
+
+\[
+\boxed{\bar y:=\frac{M_1}{M_0}=\frac{E}{2K}.}
+\]
+
+Critical escape `K/E -> infinity` is therefore exactly concentration of the mean Dirichlet depth
+toward the physical boundary.  Integrating the conservation law also recovers the physical balances
 
 \[
 \boxed{
-\frac{\kappa(0)^2}{N^2(EZ-K^2)}
+M_0'=j_E(0)+j_\nu(0)=2\kappa-2\nu M_3=K',}
+\]
+
+\[
+\boxed{
+M_1'=\int_0^\infty(j_E+j_\nu)\,dy=-\nu Z=\frac12E',}
+\]
+
+where the Euler contribution to `M_1'` is exactly zero.
+
+The determinant is now the scalar endpoint/moment Hankel defect
+
+\[
+\boxed{
+EZ-K^2=M_1\mathfrak q(0)-M_0^2\ge0.}
+\]
+
+Equality means the absolute-curl spectral measure is supported on one radius (the corresponding
+`mathfrak q` is a pure exponential depth profile).  The already proved physical tangent identity then
+forces `kappa=0`, hence
+
+\[
+\boxed{M_1\mathfrak q(0)-M_0^2=0\quad\Longrightarrow\quad j_E(0)=0.}
+\]
+
+So complete loss of radial diversity simultaneously removes productive Euler boundary flux.  This is
+the realizability obstruction missed by arbitrary scalar zero-net currents.
+
+On strict positive-determinant states the escape action has the exact scalar boundary-flux form
+
+\[
+\boxed{
+\frac{\kappa^2}{N^2(EZ-K^2)}
 =
 \frac{
-\mathscr E(0)|\mathscr R'_E(0)|^2
+j_E(0)^2M_1
 }{
-\mathscr E_{yy}(0)
-[\mathscr E(0)\mathscr E_{yy}(0)-\mathscr E_y(0)^2]
+\mathfrak q(0)[M_1\mathfrak q(0)-M_0^2]
 }.}
 \]
 
-So critical escape requires infinite normalized normal derivative of the **physical reversible
-Poisson product-defect current at the boundary**.
-
-There is an important realizability guard.  Positivity, finite depth area, zero-net reversible source
-and negative heat do not suffice by themselves.  For `tau=T-t`, choose
+There is also an exact local parent before integrating in `x`.  With
 
 \[
-m(t)=\tau^{-\alpha},\qquad 0<\alpha<\frac12,
-\]
-
-and the scalar profile
-
-\[
-\mathscr K_{fake}(y,t)=E(t)m(t)e^{-2m(t)y},
+\rho(x,y,t):=|\nabla_4v|^2,
 \qquad
-E'=-2\nu m^2E.
+J_A:=-2v_t\cdot\partial_Av,
 \]
 
-Then `int^T m^2dt<infinity`, so `E(T-)>0`, while
-`K_fake(t)=E(t)m(t)->infinity`.  Defining
-`J_fake=partial_t K_fake+(nu/2)partial_y^2 K_fake` makes the depth equation exact and gives
-`int_0^infinity J_fake dy=0`.  Thus the scalar one-way/two-way ledger alone permits critical escape.
-
-But the profile is one-radius:
+harmonicity `Delta_4 v=0` gives
 
 \[
-EZ-K^2=0.
+\boxed{\rho_t+\operatorname{div}_4J=0.}
 \]
 
-For an actual state this means `(Lambda-m)u=0`, hence the exact physical identity forces
+The integrated normal current is precisely
 
 \[
-\boxed{\kappa(0)=0.}
+\int_{\mathbb R^3}J_y\,dx=j_E+j_\nu.
 \]
 
-The fake scalar source instead has `J_fake(0)=E m'` and would require a nonzero productive boundary
-current when `m'>0`.  It therefore cannot be realized by the physical `D_y` above.  This is not an NS
-counterexample; it isolates the remaining issue as **realizability of the reversible Poisson
-product-defect current**, not another scalar budget.
+Thus there is no bulk creation term for critical Dirichlet energy: the physical dynamics only move it
+through the half-space and remove it through the viscous boundary current.
 
-Consequently the final open theorem can be written entirely in this one profile:
+A natural transport-action estimate is sharp enough to expose, but not close, the remaining history
+problem.  With the quotient defined as zero on `{mathfrak q=0}` (where `j_E=0`), Cauchy gives
+
+\[
+\frac{j_E(y)^2}{\mathfrak q(y)}
+\le2\|P_yF_E\|_2^2,
+\]
+
+hence
+
+\[
+\boxed{
+\int_0^\infty\frac{j_E(y)^2}{\mathfrak q(y)}\,dy
+\le\|\Lambda^{-1/2}F_E\|_2^2.}
+\]
+
+The right side is exactly a scale-critical Euler action and has no known finite physical-time budget
+from the energy law.  On continuum `R^3`, the NS dilation gives
+
+\[
+\boxed{
+\mathfrak q_{u_\lambda}(y,t)=\lambda\mathfrak q_u(\lambda y,\lambda^2t),
+\qquad
+j_{E,u_\lambda}(y,t)=\lambda^2j_{E,u}(\lambda y,\lambda^2t).}
+\]
+
+Hence `int dt int dy j_E^2/mathfrak q` is invariant.  The zero-depth-integral property of `j_E` and
+the finite first moment `M_1=E/2` therefore do not prevent its positive and return lobes from narrowing
+together toward `y=0` under the critical dilation.
+
+Therefore the final open theorem can be written using this one scalar conservation law:
 
 \[
 \boxed{
 \int_0^T
 \frac{
-\mathscr E(0,t)|\mathscr R'_E(0,t)|^2
+j_E(0,t)^2M_1(t)
 }{
-\mathscr E_{yy}(0,t)
-[\mathscr E(0,t)\mathscr E_{yy}(0,t)-\mathscr E_y(0,t)^2]
-}
-\,dt<\infty.}
+\mathfrak q(0,t)[M_1(t)\mathfrak q(0,t)-M_0(t)^2]
+}\,dt<\infty.}
 \]
 
-Its integrand is exactly the already proved escape action.  What remains unproved is that the
-**physical** product-defect realization of `mathscr R_E`, rather than an arbitrary zero-net depth
-source, enforces this finite action on every finite smooth positive-energy history.  No regularity
-claim is inserted here.
+Its integrand is exactly the already proved escape action.  Escape would force the same integral to
+diverge.  What remains unproved is a dynamical **no-infinitely-thin-return** law for the *physical*
+Euler current `j_E`, strong enough to give this finite action.  The covariance, Pythagoras and local
+half-space identities above are now realizability constraints on that current, not additional
+ontologies.  No regularity claim is inserted here.
 
 ### 6.2 Galilean null
 
@@ -3727,105 +3797,78 @@ The separate material theorem adds the transverse determinant and Minkowski memo
 14. **No scalar zero-net closure without stress realizability.**  The Poisson covariance stress obeys a sharp Fisher budget, but arbitrary zero-net depth currents are still too large; the unresolved positive factor is the transverse covariance activity `A_y`.
 15. **No crude `L^infinity` closure for the transverse activity.**  `A_y<=||P_yu||_infinity^2 V_y` only returns to external BKM/Serrin control and is not used as the primitive boundary-stress theorem.
 16. **No fixed-time depth-area closure.**  `int_0^infinity A_y dy lesssim K^2` and the 4D Dirichlet energy `int|grad_4 v|^2=K` are scale invariant; the profile may narrow toward `y=0` while its boundary slope grows, so no unimodality or no-concentration theorem is assumed.
+17. **No zero-current/moment closure.**  `int j_E dy=0` and `int y mathfrak q dy=E/2` do not prevent injection and return lobes from narrowing together near `y=0`; the natural cost `int j_E^2/mathfrak q dy` only returns to `||Lambda^-1/2 F_E||^2`, with no proved finite time budget.
+18. **No pair-area heat monotonicity shortcut.**  No sign is assumed for the absolute pair-area history under heat; differentiating the singular pair kernel does not supply a proved pure negative-square law, so this route is not used.
 
 ---
 
 ## 17. Minimal ontology and the remaining primitive theorem
 
-For the **critical escape question**, the lowest current formulation is the canonical half-space lift
+For the **critical escape question**, the lowest current formulation is now the scalar Dirichlet
+transport law generated by the canonical harmonic lift `v=P_yu`:
 
 \[
 \boxed{
-v=P_yu,
+\mathfrak q=\int|\nabla_4v|^2dx=2\|\Lambda P_yu\|_2^2,
 \qquad
-\tau=P_y(u\otimes u)-v\otimes v\succeq0.}
+\mathfrak q_t+\partial_y\!\left(j_E+\frac\nu2\mathfrak q_y\right)=0,}
 \]
-
-Writing `pi=P_y p`, its bulk normal form is local:
 
 \[
 \boxed{
-\Delta_4v=0,
+j_E=2\langle\Lambda P_yu,P_yF_E\rangle,
 \qquad
--\Delta_4\tau=2\sum_A\partial_Av\otimes\partial_Av,}
-\]
-
-\[
-\boxed{
-\partial_tv+(v\cdot\nabla_x)v+\operatorname{div}_x\tau+\nabla_x\pi
-=-\nu v_{yy},
-\qquad \nabla_x\cdot v=0.}
-\]
-
-The pressure is the usual local incompressibility multiplier, with
-`-Delta_x pi=partial_i partial_j(v_i v_j+tau_ij)`; the canonical `pi=P_y p` is harmonic in the same
-half-space.  At `y=0`, `tau=0`, so the boundary equation is exactly Navier--Stokes.  The equivalent
-first-order depth identities `partial_y v=-Lambda v` and `(partial_y+Lambda)tau=Gamma_v`, and the
-projected form of the time equation, are compressed readings of this same canonical lift.
-
-The product defect is exactly the covariance stress divergence
-
-\[
-\boxed{
-D_y=P_y(u\times\omega)-v\times Cv
-=-\operatorname{div}\!\left(\tau_y-\tfrac12(\operatorname{tr}\tau_y)I\right).}
-\]
-
-The two scalar reservoirs
-
-\[
-\boxed{
-\mathscr U=\|v\|_2^2,
+\int_0^\infty j_E\,dy=0,
 \qquad
-\mathscr V=\int\operatorname{tr}\tau,
-\qquad
-\mathscr U+\mathscr V=E}
+\frac\nu2\mathfrak q_y\le0.}
 \]
 
-have exact opposite Euler exchange and simultaneous one-way viscous loss.  The same stress satisfies
-both the Germano cocycle and the sharp endogenous Fisher budget
+Its complete critical bookkeeping is
 
 \[
 \boxed{
-\tau_{y+z}(u)=P_z\tau_y(u)+\tau_z(P_yu),
+\int\mathfrak q\,dy=K,
 \qquad
-\int\frac{|D_y|^2}{\operatorname{tr}\tau_y}\le Z-Z_y.}
+\int y\mathfrak q\,dy=\frac E2,
+\qquad
+\mathfrak q(0)=2Z,
+\qquad
+j_E(0)=2\kappa.}
 \]
 
-The scalar Poisson energy profile of the previous commit is now the trace/boundary shadow
+Thus `K/E -> infinity` means the mean depth `E/(2K)` tends to zero.  The variance-like obstruction is
+only
 
 \[
-\mathscr E(y,t)=\mathscr U(y,t)=\|e^{-y\Lambda}u(t)\|_2^2.
+\boxed{M_1\mathfrak q(0)-M_0^2=EZ-K^2,}
 \]
 
-Its first four boundary jets are `E,K,Z,M3`, and its Euler source is the work of the same stress.  In
-particular the critical law remains the first normal derivative of the energy law.  The only positive
-factor not yet supplied with a finite-history budget is
+and the exact escape density is
 
 \[
 \boxed{
-\mathscr A_y
-=\int v^T[(\operatorname{tr}\tau_y)I-\tau_y]v\,dx,}
+\mathcal A_{escape}
+=\frac{j_E(0)^2M_1}
+{\mathfrak q(0)[M_1\mathfrak q(0)-M_0^2]}.}
 \]
 
-with
+The local harmonic/covariance system, stress Fisher law and finite-depth Pythagoras proved above do not
+constitute extra mechanisms; they constrain which zero-integral currents `j_E` are physically
+realizable.  In particular the zero-spread/equiradial case forces `j_E(0)=0`.
+
+The remaining theorem is therefore a historical **no-infinitely-thin-return** estimate for this
+physical Euler current.  The elementary depth action
 
 \[
-\boxed{
-|\mathscr R_E(y)|^2\le4\mathscr A_y(Z-Z_y),
-\qquad
-\mathscr A'_0=2\|A_u\|_{pair}^2\quad(\mathbb R^3\text{ continuum normalization}).}
+\int_0^\infty\frac{j_E^2}{\mathfrak q}\,dy
+\le\|\Lambda^{-1/2}F_E\|_2^2
 \]
 
-Thus the old pair-area capacity is the boundary slope of the transverse covariance activity, while
-the finite-depth Pythagoras splits the unresolved vorticity bill into productive, axis-misalignment and
-non-rotational parts.  The remaining theorem is a historical **no boundary-concentration** estimate on
-`mathscr A_y` strong enough to imply finite normalized boundary action.  The local normal form makes
-the obstruction sharper: `K=int_{R4+}|grad_4 v|^2` is exactly invariant under the joint `(x,y)`
-dilation, and the fixed-time activity depth area is scale invariant too.  Hence ordinary static
-coercivity that would charge concentration by increasing either quantity cannot close the argument;
-the physical-time coupling (or an additional exact state constraint) must break the recurrence.  No
-unimodality is assumed.  This dynamical concentration theorem is **not proved**.
+returns exactly to a scale-critical Euler quantity without a known finite time budget.  Likewise the
+zero depth integral of `j_E`, finite first moment `E/2`, scale-invariant 4D Dirichlet energy and
+covariance depth-area bounds do not exclude simultaneous narrowing of injection and return lobes near
+`y=0`.  No sign relation with enstrophy production is assumed, and no static harmonic monotonicity or
+pair-area heat monotonicity is used.  The finite boundary-flux action theorem is **not proved**.
 
 The previously exposed lossless tangent coordinate remains exact but is now a compressed boundary
 reading:
