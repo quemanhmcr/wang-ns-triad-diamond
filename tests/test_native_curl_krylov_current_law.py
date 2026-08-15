@@ -8,6 +8,7 @@ from src.helical import coupling_magnitude_closed
 from src.native_curl_krylov_current_law import (
     continuum_midpoint_operator_sobolev_dictionary,
     continuum_primitive_critical_channel_constants,
+    continuum_critical_gauss_bianchi_constants,
     continuum_critical_operator_isometry_constant,
     closed_triad_critical_action_bound,
     sobolev_spectral_hilbert_square,
@@ -1278,3 +1279,145 @@ def test_certificate_records_primitive_critical_channel_as_self_dissipative_deri
     assert "A_t=A(F_E)-nu Delta_op A" in cert["primitive_critical_channel_dynamics"]
     assert "infinite productive regeneration" in cert["primitive_turning_frontier"]
     assert cert["global_regularity_claimed"] is False
+
+
+def test_primitive_critical_gauss_bianchi_continuum_constants_are_exact():
+    out=continuum_critical_gauss_bianchi_constants()
+    assert out["riesz_kernel_coefficient"] == pytest.approx(1.0/(2.0*math.pi**2),rel=1e-15)
+    assert out["pair_area_hs_raw_coefficient"] == pytest.approx(1.0/(2.0*math.pi**4),rel=1e-15)
+    assert out["gauss_source_hs_raw_coefficient"] == pytest.approx(1.0/(4.0*math.pi**4),rel=1e-15)
+    assert out["operator_to_pair_norm_squared_factor"] == pytest.approx(1.0/math.pi**2,rel=1e-15)
+    assert out["critical_square_hs_prefactor_times_viscosity"] == pytest.approx(math.pi**2/2.0,rel=1e-15)
+    assert out["top_channel_normal_potential_coefficient"] == pytest.approx(0.25,rel=1e-15)
+
+
+def test_primitive_critical_gauss_bianchi_is_exact_hom_connection_algebra():
+    import numpy as np
+
+    # Full exterior algebra on R^3, represented by bit masks 0,...,7.
+    def wedge_basis(j):
+        W=np.zeros((8,8),complex)
+        bit=1<<j
+        for mask in range(8):
+            if mask & bit:
+                continue
+            swaps=sum(1 for k in range(j) if mask & (1<<k))
+            W[mask|bit,mask]=(-1.0)**swaps
+        return W
+
+    W=[wedge_basis(j) for j in range(3)]
+    n=7
+    x=2*math.pi*np.arange(n)/n
+    kk=np.fft.fftfreq(n,1.0/n)
+    Fm=np.exp(2j*math.pi*np.outer(np.arange(n),np.arange(n))/n)/math.sqrt(n)
+    D=Fm@np.diag(1j*kk)@Fm.conj().T
+    rr=np.zeros(n,float)
+    nz=np.abs(kk)>1e-12
+    rr[nz]=1.0/np.abs(kk[nz])
+    Rsp=Fm@np.diag(rr)@Fm.conj().T
+    I8=np.eye(8)
+    d=np.kron(D,W[0])
+    R=np.kron(Rsp,I8)
+
+    alpha=np.stack([np.zeros(n),np.sin(x)+0.17*np.cos(2*x),0.31*np.sin(2*x)],axis=1)
+    E=np.zeros((8*n,8*n),complex)
+    for i,a in enumerate(alpha):
+        block=sum(a[j]*W[j] for j in range(3))
+        E[8*i:8*(i+1),8*i:8*(i+1)]=block
+    F=d@E+E@d
+    A=R@E-E@R
+    B=R@F-F@R
+    V=E@R@E
+    nu=0.37
+    D0=nu*d
+    Dh=nu*d+0.5*E
+    G=V+2.0*nu*B
+
+    scale=max(1.0,np.linalg.norm(G),np.linalg.norm(nu*F@A))
+    assert np.linalg.norm(d@A+A@d-B) <= 3e-11*scale
+    assert np.linalg.norm(A@E+E@A) <= 3e-11*scale
+    assert np.linalg.norm(E@A-V) <= 3e-11*scale
+    nabla_A=Dh@A+A@D0  # degree(A)=1
+    assert np.linalg.norm(2.0*nabla_A-G) <= 4e-11*scale
+    nabla_G=Dh@G-G@D0  # degree(G)=2
+    assert np.linalg.norm(nabla_G-nu*F@A) <= 5e-11*scale
+
+
+def test_critical_gauss_null_source_contains_2d_and_shear_but_not_generic_3d_geometry():
+    import numpy as np
+
+    # Embedded 2D example: omega is vertical while all velocity differences are horizontal.
+    pts=[(0.2,0.4,0.7),(1.1,0.6,2.0),(2.2,1.4,0.3)]
+    def u2(p):
+        x,y,z=p
+        return np.array([math.sin(y),math.sin(x),0.0])
+    def w2(p):
+        x,y,z=p
+        return np.array([0.0,0.0,math.cos(x)-math.cos(y)])
+    for p0 in pts:
+        for p1 in pts:
+            assert abs(float(w2(p0)@(u2(p1)-u2(p0)))) <= 2e-14
+
+    # One-direction shear: u=phi(y)e1, (u.grad)u=0 and the same source vanishes.
+    def us(p):
+        x,y,z=p
+        return np.array([math.sin(y),0.0,0.0])
+    def ws(p):
+        x,y,z=p
+        return np.array([0.0,0.0,-math.cos(y)])
+    for p0 in pts:
+        for p1 in pts:
+            assert abs(float(ws(p0)@(us(p1)-us(p0)))) <= 2e-14
+
+    # ABC flow is genuinely 3D and Beltrami; one generic pair has nonzero source.
+    def u3(p):
+        x,y,z=p
+        return np.array([math.sin(z)+math.cos(y),math.sin(x)+math.cos(z),math.sin(y)+math.cos(x)])
+    p0,p1=pts[0],pts[1]
+    source=float(u3(p0)@(u3(p1)-u3(p0)))  # omega=u for A=B=C=1 ABC
+    assert abs(source) > 1e-3
+
+
+def test_certificate_records_critical_gauss_bianchi_residual_without_stability_overclaim():
+    cert=theorem_certificate()
+    assert "kappa(0)=-pi^2" in cert["primitive_critical_pair_area_loop"]
+    assert "Gc=V+2nu B" in cert["primitive_critical_gauss_residual"]
+    assert "nabla Gc=nu(beta wedge)A" in cert["primitive_critical_gauss_bianchi"]
+    assert "embedded 2D" in cert["primitive_critical_gauss_null_geometry"]
+    assert "L6=-nu^2(Delta_x+Delta_y)+|u(x)|^2/4" in cert["primitive_critical_six_dimensional_gauss_floor"]
+    assert "separate stability/compactness theorem" in cert["primitive_critical_gauss_stability_guard"]
+    assert "quantitative stability/history" in cert["primitive_turning_frontier"]
+    assert cert["global_regularity_claimed"] is False
+
+
+
+def test_critical_six_dimensional_gauss_normal_form_has_no_hidden_drift_cross_term():
+    import numpy as np
+
+    # Smooth periodic divergence-free ABC velocity.  A separable low-mode top-form
+    # test phi(x,y)=f(x)g(y) makes the 6D quadratic form inexpensive to referee.
+    n=10
+    grid=2*math.pi*np.arange(n)/n
+    X=np.stack(np.meshgrid(grid,grid,grid,indexing="ij"),axis=-1)
+    x,y,z=X[...,0],X[...,1],X[...,2]
+    u=np.stack([np.sin(z)+np.cos(y),np.sin(x)+np.cos(z),np.sin(y)+np.cos(x)],axis=-1)
+    f=1.0+0.21*np.cos(x)+0.17*np.sin(y)+0.13*np.cos(z)
+    gradf=np.stack([-0.21*np.sin(x),0.17*np.cos(y),-0.13*np.sin(z)],axis=-1)
+    g=1.0+0.19*np.sin(x)-0.11*np.cos(y)+0.07*np.sin(z)
+    gradg=np.stack([0.19*np.cos(x),0.11*np.sin(y),0.07*np.cos(z)],axis=-1)
+    nu=0.43
+
+    # Product averages factor in y.  The output top->2 channel is Hodge-equivalent
+    # to nu grad_x(phi)+(1/2)u phi; the input channel is nu grad_y(phi), and the
+    # two Hom channels are orthogonal.
+    mean_g2=float(np.mean(g*g))
+    mean_gradg2=float(np.mean(np.sum(gradg*gradg,axis=-1)))
+    out_vec=nu*gradf+0.5*u*f[...,None]
+    lhs=mean_g2*float(np.mean(np.sum(out_vec*out_vec,axis=-1))) \
+        +nu*nu*float(np.mean(f*f))*mean_gradg2
+    rhs=nu*nu*(mean_g2*float(np.mean(np.sum(gradf*gradf,axis=-1)))
+               +float(np.mean(f*f))*mean_gradg2) \
+        +0.25*mean_g2*float(np.mean(np.sum(u*u,axis=-1)*(f*f)))
+    cross=float(np.mean(np.sum(u*gradf,axis=-1)*f))
+    assert abs(cross) <= 2e-15
+    assert lhs == pytest.approx(rhs,rel=3e-14,abs=3e-14)

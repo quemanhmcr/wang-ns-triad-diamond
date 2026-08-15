@@ -1606,84 +1606,261 @@ So **heat erosion of the critical two-way channel is exactly the square of its i
 with its own NS current creator.**  The escape channel carries the derivative through which heat
 acts on it.
 
-### 11.4 Dynamics, rigidity and the historical gap
+### 11.4 Pair-area closes the Euler loop and produces the exact critical residual
 
-Because `mathcal A` is linear in `u` and translation-covariant,
+Write
+
+\[
+\mathsf E:=\alpha\wedge,
+\qquad R:=\Lambda^{-1},
+\qquad
+\boxed{\mathcal V:=\mathsf E R\mathsf E.}
+\]
+
+Since `mathsf E^2=0`,
+
+\[
+\boxed{\{\mathcal A,\mathsf E\}=0,
+\qquad
+\mathsf E\mathcal A=\mathcal V,
+\qquad
+\mathcal A\mathsf E=-\mathcal V.}
+\]
+
+On continuum `R^3`, the Riesz kernel of `R` is `(2 pi^2 |x-y|^2)^-1`, so
 
 \[
 \boxed{
-\mathcal A_t
-=\mathcal A(F_E)-\nu\Delta_{op}\mathcal A.
-}
+\|\mathcal V\|_{HS,gr}^2
+=\frac1{2\pi^4}
+\iint\frac{|u(x)\times u(y)|^2}{|x-y|^4}\,dx\,dy.}
 \]
 
-Polarizing the isometry gives the exact critical energy law
+With
+
+\[
+\langle X,Y\rangle_{pair}
+:=\frac1{2\pi^2}
+\iint\frac{X\cdot Y}{|x-y|^4},
+\quad
+A_u=u(x)\times u(y),
+\quad
+D\omega=\omega(x)-\omega(y),
+\]
+
+fractional-Laplacian polarization gives
+
+\[
+\boxed{
+\kappa(0)=\langle A_u,D\omega\rangle_{pair},
+\qquad
+M_3=\|D\omega\|_{pair}^2.}
+\]
+
+The kernels of `mathcal V` and `mathcal B` represent `A_u` and `-D omega`; hence
+
+\[
+\boxed{
+\|\mathcal V\|_{HS,gr}^2=\frac1{\pi^2}\|A_u\|_{pair}^2,
+\qquad
+\kappa(0)=-\pi^2\Re\langle\mathcal B,\mathcal V\rangle_{HS,gr}.}
+\]
+
+Since `mathcal V^*=mathcal A^* i_u`, the second identity is also
+
+\[
+\boxed{
+\kappa(0)=-\pi^2\Re\operatorname{Tr}
+(\mathcal B\mathcal A^*\iota_u).}
+\]
+
+Thus the missing critical cubic is an orientation/current loop, not an eigenvalue-only trace.
+The exact critical balance becomes
+
+\[
+\boxed{
+K'=\frac{\pi^2}{2\nu}
+\left(\|\mathcal V\|_{HS,gr}^2-\|\mathcal G_c\|_{HS,gr}^2\right),
+\qquad
+\mathcal G_c:=\mathcal V+2\nu\mathcal B,}
+\]
+
+or equivalently
+
+\[
+\boxed{
+K'=\frac1{2\nu}
+\left(\|A_u\|_{pair}^2-\|A_u-2\nu D\omega\|_{pair}^2\right).}
+\]
+
+So `K'>0` exactly when the curvature increment shortens the velocity pair-area in the intrinsic
+`|D|` pair metric.
+
+### 11.5 The residual deciding `K'` is itself a curved current
+
+Use only the two connections already present in NS,
+
+\[
+D_0:=\nu d,
+\qquad
+D_{1/2}:=\nu d+\frac12\mathsf E,
+\]
+
+and their natural Hom connection
+
+\[
+\boxed{\nabla T:=D_{1/2}T-(-1)^{\deg T}TD_0.}
+\]
+
+Because `{d,mathcal A}=mathcal B` and `mathsf E mathcal A=mathcal V`,
+
+\[
+\boxed{
+\nabla\mathcal A=\nu\mathcal B+\frac12\mathcal V,
+\qquad
+\mathcal G_c=2\nabla\mathcal A.}
+\]
+
+Thus the negative residual in the critical square is the covariant current of the critical state.
+Moreover
+
+\[
+D_{1/2}^2=\frac\nu2\mathsf F,
+\qquad
+D_0^2=0,
+\qquad
+\mathsf F:=\beta\wedge,
+\]
+
+so
+
+\[
+\boxed{
+\nabla^2\mathcal A=\frac\nu2\mathsf F\mathcal A,
+\qquad
+\nabla\mathcal G_c=\nu\mathsf F\mathcal A.}
+\]
+
+This is the critical Gauss--Bianchi law on **the exact residual which decides `K'`**:
+
+\[
+\boxed{
+\mathcal A\xrightarrow{\nabla}\mathcal G_c
+\xrightarrow{\nabla}\nu(\beta\wedge)\mathcal A.}
+\]
+
+The kernels are explicit,
+
+\[
+\boxed{
+\mathcal A(x,y)
+=\frac{[u(y)-u(x)]^\flat\wedge}{2\pi^2|x-y|^2},}
+\]
+
+\[
+\boxed{
+(\mathsf F\mathcal A)(x,y)
+=\frac{\omega(x)\cdot[u(y)-u(x)]}{2\pi^2|x-y|^2}\,dV,}
+\]
+
+and therefore
+
+\[
+\boxed{
+\|\mathsf F\mathcal A\|_{HS}^2
+=\frac1{4\pi^4}
+\iint\frac{|\omega(x)\cdot[u(y)-u(x)]|^2}{|x-y|^4}\,dx\,dy.}
+\]
+
+The source is precisely local vorticity piercing the affine geometry of the velocity values.
+
+### 11.6 Null geometry, six-dimensional coercivity and the sharpened gap
+
+If `mathsf F mathcal A=0`, then
+
+\[
+\boxed{\omega(x)\cdot[u(y)-u(x)]=0\quad\forall x,y.}
+\]
+
+Let `V_u=span{u(y)-u(x)}`.  Modulo a constant velocity, `u` takes values in `V_u` and
+`omega(x) in V_u^perp`.  Hence:
+
+- `dim V_u=3` forces `omega=0`;
+- `dim V_u=2` forces an embedded 2D flow after rotation;
+- `dim V_u=1` gives `u=phi b`, `b dot grad phi=0`, hence `(u dot grad)u=0`;
+- `dim V_u=0` is uniform flow.
+
+This is the exact algebraic null geometry.  Fully decaying finite-energy `R^3` may exclude some
+nonzero lower-dimensional representatives.
+
+For a top Hom test `Phi=phi(x,y)dV`,
+
+\[
+\langle\nu\mathsf F\mathcal A,\Phi\rangle
+=\langle\mathcal G_c,\nabla^*\Phi\rangle.
+\]
+
+The two pieces of `nabla*` lie in orthogonal Hodge channels; incompressibility removes the
+integrated drift cross term.  Thus, in quadratic-form sense,
+
+\[
+\boxed{
+\mathcal L_u^{(6)}:=\nabla\nabla^*
+=-\nu^2(\Delta_x+\Delta_y)+\frac{|u(x)|^2}{4}.}
+\]
+
+Whenever the inverse is defined,
+
+\[
+\boxed{
+\|\mathcal G_c\|_{HS,gr}^2
+\ge
+\left\langle
+\nu\mathsf F\mathcal A,
+(\mathcal L_u^{(6)})^{-1}\nu\mathsf F\mathcal A
+\right\rangle.}
+\]
+
+The six variables are only the two physical points already forced by `|D|`.  Combining this with
+the critical square gives
+
+\[
+\boxed{
+K'\le\frac{\pi^2}{2\nu}
+\left[
+\|\mathcal V\|_{HS,gr}^2
+-
+\langle\nu\mathsf F\mathcal A,
+(\mathcal L_u^{(6)})^{-1}\nu\mathsf F\mathcal A\rangle
+\right].}
+\]
+
+The earlier self-derivative law remains exact,
 
 \[
 \boxed{
 \frac12\frac d{dt}\|\mathcal A\|_{HS,gr}^2
 =\frac{2}{\pi^2}\kappa(0)
--2\nu\|\mathcal B\|_{HS,gr}^2
-=\frac{2}{\pi^2}\kappa(0)
--\frac2\nu\|\{\mathcal A,Q^*\}\|_{HS,gr}^2.
-}
+-\frac2\nu\|\{\mathcal A,Q^*\}\|_{HS,gr}^2,}
 \]
 
-Zero self-frustration is rigid:
+with zero-set rigidity
 
 \[
-\boxed{
-\{\mathcal A,Q^*\}=0
+\boxed{\{\mathcal A,Q^*\}=0\Longrightarrow M_3=0\Longrightarrow u=0.}
+\]
+
+What is **not** automatic is quantitative stability:
+
+\[
+\|\mathsf F\mathcal A\|_{(\mathcal L_u^{(6)})^{-1}}\ll1
 \Longrightarrow
-\mathcal B=0
-\Longrightarrow
-M_3=0
-\Longrightarrow
-u=0
-}
+u\ \text{near the intrinsic 2D/shear/null manifold}.
 \]
 
-for mean-zero/decaying states.  This is an exact zero-set theorem, not a uniform instantaneous
-gap.
-
-The state dependence itself remains exceptionally flat:
-
-\[
-\boxed{
-Q(u)-Q(v)=\iota_{u-v},
-\qquad
-(Q(u)-Q(v))^2=0,
-\qquad
-Q_t^2=0.
-}
-\]
-
-Any two tangent contractions anticommute.  Non-nilpotence comes from the interaction of fixed
-`delta` with physical contraction, not from nonlinear chords in operator state space.
-
-Two finite chains remain useful summaries:
-
-\[
-\boxed{
-\alpha\xrightarrow{Q^*}\nu\beta\xrightarrow{Q}\nu e
-\xrightarrow{Q}\nu^2|\beta|^2\xrightarrow{Q}0,
-}
-\]
-
-and, in three dimensions,
-
-\[
-\boxed{
- dV\xrightarrow{Q}\star\alpha\xrightarrow{Q}\nu\omega^\flat
-\xrightarrow{Q}\nu(u\cdot\omega)\xrightarrow{Q}0,
-\qquad Q^4=0.
-}
-\]
-
-The unresolved issue is no longer whether heat sees the channel: it does so exactly through
-`{mathcal A,Q*}`.  The remaining question is whether Euler can regenerate `mathcal A` productively
-for the infinite action required by critical escape without forcing an equally non-summable
-self-incompatibility history.
+That implication is a separate stability/compactness theorem.  The historical gap is then to show
+that a genuinely 3D trajectory cannot stay close enough to this null geometry for the infinite
+productive critical action required by escape while still regenerating `mathcal A` nonintegrably.
 
 ---
 
@@ -2022,171 +2199,108 @@ The separate material theorem adds the transverse determinant and Minkowski memo
 
 ## 17. Minimal ontology and the remaining primitive theorem
 
-The deepest state-dependent object reached here is still
+The primitive state algebra is
 
 \[
-\boxed{Q=\nu\delta+\iota_u,\qquad Q^*=\nu d+u^\flat\wedge.}
+\boxed{Q=\nu\delta+\iota_u,
+\qquad Q^*=\nu d+u^\flat\wedge,}
 \]
-
-The scalar unit generates the physical state and curvature,
-
-\[
-\boxed{1\xrightarrow{Q^*}\alpha\xrightarrow{Q^*}\nu\beta,}
-\]
-
-while the same algebra gives
 
 \[
 \boxed{
+1\xrightarrow{Q^*}\alpha\xrightarrow{Q^*}\nu\beta,
+\qquad
 Q^2=\nu(\beta\wedge)^*,
 \qquad
-[\mathbb H,Q^*]1=\nu e,
+[\mathbb H,Q^*]1=\nu e.}
+\]
+
+Criticality applies only the canonical inverse modulus `R=Lambda^-1`:
+
+\[
+\boxed{
+\mathcal A=[R,\alpha\wedge],
+\quad
+\mathcal B=[R,\beta\wedge],
+\quad
+\mathcal V=(\alpha\wedge)R(\alpha\wedge).}
+\]
+
+The pure-heat/midpoint Hom connection then gives
+
+\[
+\boxed{
+\mathcal G_c=\mathcal V+2\nu\mathcal B=2\nabla\mathcal A,
 \qquad
-\partial_t(Q^*1)=-\frac1\nu P[\mathbb H,Q^*]1.
-}
+\nabla\mathcal G_c=\nu(\beta\wedge)\mathcal A,}
 \]
 
-Thus
+while the exact critical balance is
 
 \[
 \boxed{
-\text{state}\to\text{curvature}\to\text{current}\to\text{motion of state}
-}
+K'=\frac{\pi^2}{2\nu}
+(\|\mathcal V\|^2-\|\mathcal G_c\|^2).}
 \]
 
-is one `Q,Q*` chain.  The adjacent-degree identity
+Thus the critical state creates its own residual current, and that residual is sourced by the
+vorticity/velocity-span quantity
+
+\[
+\boxed{\omega(x)\cdot[u(y)-u(x)].}
+\]
+
+Exact vanishing of this source is lower-dimensional: irrotational, embedded 2D, shear, or uniform.
+The same law gives the native Gauss floor
 
 \[
 \boxed{
-\mathbb H^{(1)}(Q\eta)-Q(\mathbb H^{(2)}\eta)
-=\nu^2d(\omega\cdot b)+\nu[b\times(u\times\omega)]^\flat
-}
+\|\mathcal G_c\|_{HS,gr}^2
+\ge
+\langle
+\nu(\beta\wedge)\mathcal A,
+[-\nu^2(\Delta_x+\Delta_y)+|u(x)|^2/4]^{-1}
+\nu(\beta\wedge)\mathcal A
+\rangle.}
 \]
 
-for closed `eta=star b^flat` shows that Lamb regeneration is the non-exact failure of this same
-curved current algebra to intertwine its Hodge degrees.
-
-The critical two-way channel is even lower than the Reynolds eigenspace picture:
-
-\[
-\boxed{
-\mathcal A=[\Lambda^{-1},Q^*],
-\qquad
-\{\mathcal A,Q^*\}=\nu\mathcal B,
-\qquad
-\mathcal B=[\Lambda^{-1},\beta\wedge].
-}
-\]
-
-On continuum `R^3`,
-
-\[
-\boxed{
-\|\mathcal A\|_{HS,gr}^2=\frac{2}{\pi^2}K,
-\qquad
-\|\mathcal B\|_{HS,gr}^2=\frac1{\pi^2}M_3,
-}
-\]
-
-and
-
-\[
-\boxed{
-\sum_j\|[D_j,\mathcal A]\|_{HS,gr}^2
-=\frac{2}{\nu^2}\|\{\mathcal A,Q^*\}\|_{HS,gr}^2.
-}
-\]
-
-Hence the escape channel does not merely coexist with heat: **it creates the curvature
-incompatibility which is exactly its operator heat derivative.**  The corresponding critical
-balance is
-
-\[
-\boxed{
-\frac12\frac d{dt}\|\mathcal A\|_{HS,gr}^2
-=\frac{2}{\pi^2}\kappa(0)
--\frac2\nu\|\{\mathcal A,Q^*\}\|_{HS,gr}^2.
-}
-\]
-
-The midpoint `M`, the sech/Poisson strain transform, `mathcal Q_c` and the Reynolds operator remain
-exact higher representations of this same current/curvature grammar; none is promoted back to a
-second ontology.
-
-Critical escape still requires the productive Fisher divergence
+Critical escape still requires
 
 \[
 \boxed{
 \int^T
-\frac{\kappa(0,t)^2}{N(t)^2[E(t)Z(t)-K(t)^2]}
-\,dt=\infty.
-}
+\frac{\kappa(0,t)^2}{N(t)^2[E(t)Z(t)-K(t)^2]}\,dt=\infty.}
 \]
 
-The new algebra settles the static part of the question: there is no nonzero perfectly compatible
-critical channel, because
-
-\[
-\{\mathcal A,Q^*\}=0\Longrightarrow u=0.
-\]
-
-What remains is purely historical.  The missing theorem should have the form
+The remaining theorem is now a stability/history statement:
 
 \[
 \boxed{
-\text{infinite productive regeneration of }\mathcal A
-\Longrightarrow
-\int^T\|\{\mathcal A,Q^*\}\|_{HS,gr}^2dt=\infty
-}
+\begin{gathered}
+\mathcal G_c\ \text{small for enough productive critical action}
+\\\Downarrow\\
+(\beta\wedge)\mathcal A\ \text{small in }(\mathcal L_u^{(6)})^{-1}
+\\\Downarrow\\
+u\ \text{quantitatively approaches the intrinsic lower-dimensional null geometry}
+\\\Downarrow\\
+\text{Euler critical regeneration becomes integrable}.
+\end{gathered}}
 \]
 
-with the correct intrinsic time/weight needed to contradict critical escape.  This implication is
-**not proved**.  The regeneration is itself endogenous because
+Only the first arrow is presently exact.  The zero case of the second is classified, but its
+quantitative stability version and the final historical integrability implication are **not
+proved**.  No global-regularity claim is made.
 
-\[
-\boxed{
-\mathcal A_t=[\Lambda^{-1},Q_t^*]
-=\mathcal A(F_E)-\nu\Delta_{op}\mathcal A,
-}
-\]
-
-and `Q_t` is generated by the current `Q beta`.
-
-To close regularity, this operator-history implication must then be coupled to the already exact
-material laws
+Material Hodge turnover remains the natural history gauge through
 
 \[
 \partial_tL_g=[\mathcal L_v,L_g],
 \qquad
 \partial_t\Gamma=D_\Gamma B,
 \qquad
-\|D_\Gamma B\|_{L^2_g}^2=\|\delta_g\widetilde\beta\|_{L^2_g}^2
+\|D_\Gamma B\|_{L^2_g}^2=\|\delta_g\widetilde\beta\|_{L^2_g}^2.
 \]
 
-and the transverse heat-memory inequality.  The intended contradiction is therefore
-
-\[
-\boxed{
-\text{critical escape}
-\Rightarrow
-\text{infinite productive regeneration}
-\Rightarrow
-\text{infinite self-incompatibility / material turnover cost},
-}
-\]
-
-while the same NS history would have to keep that cost admissible on a finite positive-energy
-interval.  The last quantitative bridge is the theorem still missing.
-
-The methodological rule is now even stricter:
-
-\[
-\boxed{
-\text{do not add an object unless it is generated by }Q,Q^*,Q^2,
-\ [\Lambda^{-1},Q^*],
-\text{ or by their natural material pullback.}
-}
-\]
-
-No shell, owner, packet, moving projector, entropy budget or analyst clock is needed to state the
-remaining problem.
+Reynolds, Krein, Poisson, midpoint and Hilbert--Schmidt formulations remain exact compressed
+readings above this lower Gauss--Bianchi law.  No shell, owner, packet, moving projector or analyst
+clock is needed to state the remaining problem.

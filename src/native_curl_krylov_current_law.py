@@ -1968,6 +1968,12 @@ def theorem_certificate() -> dict[str, object]:
         "primitive_critical_channel_derivative": "B=i sum_j (dx^j wedge)[D_j,A], hence sum_j||[D_j,A]||^2=2||B||^2=(2/nu^2)||{A,Q*}||^2; critical heat is exactly the squared current-incompatibility derivative of the two-way channel",
         "primitive_critical_channel_rigidity": "{A,Q*}=0 forces B=0 and therefore M3=0 by the exact continuum isometry; on mean-zero/decaying states this implies u=0.  This is zero-self-frustration rigidity, not a uniform instantaneous gap",
         "primitive_critical_channel_dynamics": "A is linear and translation covariant, so A_t=A(F_E)-nu Delta_op A and one-half d||A||^2/dt=(2/pi^2)kappa(0)-2nu||B||^2=(2/pi^2)kappa(0)-(2/nu)||{A,Q*}||^2",
+        "primitive_critical_pair_area_loop": "with E=alpha wedge and R=Lambda^-1, V=E R E is forced by E^2=0 and {A,E}=0; on continuum R3 ||V||_HS,gr^2=pi^-2||u(x) cross u(y)||_pair^2 and kappa(0)=-pi^2 Re<B,V>, equivalently the nonlinear critical work is one orientation/current cubic loop rather than an eigenvalue-only trace",
+        "primitive_critical_gauss_residual": "Gc=V+2nu B is exactly twice the Hom-connection current nabla A between D0=nu d and D1/2=nu d+(1/2)E; K'=pi^2(||V||^2-||Gc||^2)/(2nu), equivalently K'=(||u(x) cross u(y)||_pair^2-||u(x) cross u(y)-2nu(omega(x)-omega(y))||_pair^2)/(2nu)",
+        "primitive_critical_gauss_bianchi": "the Hom curvature is nabla^2 A=(nu/2)(beta wedge)A, hence the exact residual deciding K' obeys nabla Gc=nu(beta wedge)A; its physical kernel is omega(x).(u(y)-u(x))/(2pi^2|x-y|^2)",
+        "primitive_critical_gauss_null_geometry": "exact vanishing of (beta wedge)A means omega(x) is orthogonal to the affine velocity-value span for every x; span dimension 3 is irrotational, dimension 2 is embedded 2D, dimension 1 is a shear u=phi b with (u.grad)u=0, and dimension 0 is uniform flow",
+        "primitive_critical_six_dimensional_gauss_floor": "top-degree Hom tests give the quadratic-form normal operator L6=-nu^2(Delta_x+Delta_y)+|u(x)|^2/4 and ||Gc||^2>=<nu(beta wedge)A,L6^-1 nu(beta wedge)A>; the six variables are the two points already forced by |D|, not extra physical dimensions",
+        "primitive_critical_gauss_stability_guard": "the Gauss floor gives exact control of the source in its native L6^-1 metric and the exact zero source is lower-dimensional, but quantitative near-zero proximity to the 2D/shear/null manifold is a separate stability/compactness theorem and is not assumed",
         "primitive_actual_current_operator": "the endogenous state operator is Q=nu delta+i_u with Q*=nu d+u^flat wedge; the physical electromotive current is e=Q beta, the projected momentum law is u_t=-P(Q beta), and therefore Q_t=-i_{P(Q beta)}",
         "primitive_current_curvature_square": "exterior Leibniz gives {delta,i_u}=(beta wedge)^*, hence Q^2=nu(beta wedge)^* on the whole graded exterior algebra and Q^2 beta=nu|beta|^2; vorticity is the failure of nilpotence of the actual NS current operator",
         "primitive_current_nilpotent_chords": "Q(u)-Q(v)=i_{u-v}, every chord/tangent contraction squares to zero, and any two contractions anticommute; the non-nilpotence of Q comes only from interaction of fixed delta with the physical contraction, not from nonlinear state-space chords",
@@ -1975,7 +1981,7 @@ def theorem_certificate() -> dict[str, object]:
         "primitive_intertwining_lamb": "for every closed eta=*b^flat, H^(1)(Q eta)-Q(H^(2)eta)=[Q*,Q^2]eta=nu^2 d(omega.b)+nu[b cross (u cross omega)]^flat; at b=omega the non-exact term locally reconstructs the Lamb field away from omega=0",
         "primitive_finite_current_chains": "Q* alpha=nu beta gives alpha -> nu beta -> nu e -> nu^2|beta|^2 ->0 and energy dissipation is adjointness of its first two arrows; on top degree dV -> *alpha -> nu omega^flat -> nu(u.omega) ->0 and Q^4=0 in three dimensions",
         "primitive_midpoint_status": "M=nu delta+(1/2)i_u is the canonical midpoint between pure Hodge heat and the actual operator Q, selected by the critical/Poynting reflection; it is a reading rather than the fundamental state operator and satisfies M(M beta)=(nu/2)|beta|^2",
-        "primitive_turning_frontier": "the previous representation-level frontier remains persistent critical near-kernel of the projected midpoint current versus objective graded turning [H,Q]; the lower formulation now asks whether infinite productive regeneration of A=[Lambda^-1,Q*] necessarily forces infinite ||{A,Q*}||^2 action, which then must be coupled to material Hodge-frame/memory turnover",
+        "primitive_turning_frontier": "the previous persistent critical near-kernel/graded-turning frontier is now sharpened by the exact current Gc=2 nabla A and Gauss-Bianchi law nabla Gc=nu(beta wedge)A; infinite productive regeneration must keep the native Gauss source near the lower-dimensional null geometry long enough to escape, and the unproved step is quantitative stability/history leading to integrable Euler regeneration",
         "graded_current_strain_parent": "with q=nu delta+(1/2)i_u, the positive Hodge-Dirac square q^*q+qq^* is (-nu^2 Delta+|u|^2/4)I+nu S on one-forms and the same scalar part minus nu S on two-forms; physical strain, hence the critical sech/Reynolds operator, is the degree imbalance of one midpoint current complex",
         "critical_gram_self_frustration": "for G_u b=u cross b-2nu curl b, the polarized Poynting law gives 4nu(PS)_odd=[P(U_u^*U_u-G_u^*G_u)P]_odd; the dangerous critical block is exactly a helicity-odd Gram imbalance, but odd projection destroys simple positivity so no free negative-square contraction follows",
         "critical_curvature_floor": "the mixed Gauss law (div-u/(2nu).)G_u b=omega.b implies G_u^*G_u>=M_omega^*(-Delta+|u|^2/(4nu^2))^-1M_omega in quadratic-form order; a persistent expanding Reynolds direction must continually avoid this state-generated curvature floor at the intrinsic Poisson depths",
@@ -2723,6 +2729,53 @@ def continuum_primitive_critical_channel_constants() -> dict[str, float]:
         "dirichlet_to_curvature_hs_ratio": channel / curvature,
     }
 
+
+
+def continuum_critical_gauss_bianchi_constants() -> dict[str, float]:
+    """Exact continuum kernel constants for the primitive critical Gauss--Bianchi law.
+
+    On R^3, R=|D|^-1 has kernel ``(2*pi^2*|x-y|^2)^-1``.  For
+
+        E=alpha wedge,  F=beta wedge,
+        A=[R,E], B=[R,F], V=E R E, Gc=V+2 nu B,
+
+    full graded Hilbert--Schmidt multiplication by a two-form has multiplicity two,
+    while the top-form source ``F A`` has multiplicity one.  Therefore
+
+        ||V||_HS,gr^2
+          = (1/(2*pi^4)) int int |u(x) cross u(y)|^2/|x-y|^4,
+
+        ||F A||_HS^2
+          = (1/(4*pi^4)) int int
+              |omega(x).(u(y)-u(x))|^2/|x-y|^4.
+
+    With the canonical pair weight ``1/(2*pi^2)``, the operator/pair norm factor is
+    exactly ``1/pi^2``.  The Hom connection between ``D0=nu d`` and
+    ``D1/2=nu d+(1/2)E`` has top-channel normal potential coefficient ``1/4``.
+    These are continuum constants only; no hard-cutoff exactness is claimed.
+    """
+
+    riesz = 1.0 / (2.0 * math.pi**2)
+    pair_weight = 1.0 / (2.0 * math.pi**2)
+    pair_area_hs_raw = 2.0 * riesz * riesz
+    gauss_source_hs_raw = riesz * riesz
+    operator_to_pair = pair_area_hs_raw / pair_weight
+    if abs(pair_area_hs_raw - 1.0 / (2.0 * math.pi**4)) > 5.0e-16:
+        raise AssertionError("critical pair-area HS kernel constant changed")
+    if abs(gauss_source_hs_raw - 1.0 / (4.0 * math.pi**4)) > 5.0e-16:
+        raise AssertionError("critical Gauss source HS kernel constant changed")
+    if abs(operator_to_pair - 1.0 / math.pi**2) > 5.0e-16:
+        raise AssertionError("critical operator/pair normalization lost pi^-2")
+    return {
+        "riesz_kernel_coefficient": riesz,
+        "canonical_pair_weight": pair_weight,
+        "pair_area_hs_raw_coefficient": pair_area_hs_raw,
+        "gauss_source_hs_raw_coefficient": gauss_source_hs_raw,
+        "operator_to_pair_norm_squared_factor": operator_to_pair,
+        "critical_square_hs_prefactor_times_viscosity": 0.5 * math.pi**2,
+        "hom_midpoint_connection_coefficient": 0.5,
+        "top_channel_normal_potential_coefficient": 0.25,
+    }
 
 def continuum_midpoint_operator_sobolev_dictionary(sobolev_exponent: float) -> dict[str, float]:
     """Exponent dictionary for the continuum midpoint Hilbert-scale isometry.
