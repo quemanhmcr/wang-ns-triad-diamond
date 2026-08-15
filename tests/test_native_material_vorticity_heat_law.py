@@ -6,13 +6,16 @@ import pytest
 from src.native_material_vorticity_heat_law import (
     accumulated_transverse_heat_memory,
     canonical_maxwell_extension_spectral_law,
+    klein_spacetime_vortex_worldsheet_algebra,
     canonical_poisson_scale_overlap,
+    closed_vortex_line_period_cost,
     maxwell_duality_stress_algebra,
     primitive_spacetime_gauge_algebra,
     so33_exterior_square_algebra,
     material_hminus2_reset_identity,
     material_hodge_speed_ladder,
     material_log_distortion_energy_bound,
+    local_flux_velocity_gauge_algebra,
     material_metric_path_action_bound,
     material_state_speed_lock,
     primitive_material_current_fourier_law,
@@ -438,4 +441,46 @@ def test_certificate_records_lax_zero_curvature_and_geodesic_acceleration_withou
     assert "pure-gauge SL(3) connection" in cert["maurer_cartan_zero_curvature"]
     assert "same derivative-order activity" in cert["connection_current_lock"]
     assert "quadratic A^2 self-stretch cancels" in cert["lagrangian_geodesic_acceleration"]
+    assert cert["global_regularity_claimed"] is False
+
+
+
+def test_klein_quadric_splits_growth_tangent_current_from_dissipative_normal_current():
+    rng=np.random.default_rng(202608151801)
+    for _ in range(5000):
+        u=rng.normal(size=3);om=rng.normal(size=3)
+        if np.linalg.norm(om)<.05: om[0]+=.2
+        c=rng.normal(size=3);nu=10.0**rng.uniform(-5,1)
+        out=klein_spacetime_vortex_worldsheet_algebra(u,om,c,nu)
+        assert out["projected_klein_pfaffian"] == pytest.approx(0.0,abs=2e-10)
+        assert out["fixed_beta_klein_distance_squared"] == pytest.approx(out["viscosity_squared_parallel_current"],rel=2e-11,abs=2e-11)
+        assert out["twist_dissipation_density"] >= 0.0
+
+
+def test_local_faraday_field_always_has_flux_velocity_gauge_away_from_vorticity_zeros():
+    rng=np.random.default_rng(202608151802)
+    for _ in range(5000):
+        u=rng.normal(size=3);om=rng.normal(size=3)
+        if np.linalg.norm(om)<.05:om[1]+=.2
+        e=rng.normal(size=3)
+        out=local_flux_velocity_gauge_algebra(u,om,e)
+        assert out["identity_residual"] <= 3e-11
+
+
+def test_closed_vortex_line_nonideal_period_has_sharp_twist_dissipation_cost():
+    out=closed_vortex_line_period_cost(3.0,2.0,.5)
+    assert out["minimum_twist_dissipation"] == pytest.approx(8.0/3.0)
+    # Equality is attained by constant m*tau along the line.
+    L=3.;nu=.5;q=2./(nu*L)
+    D=nu*L*q*q
+    assert (nu*L*q)**2 == pytest.approx(nu*L*D)
+
+
+def test_certificate_distinguishes_klein_curvature_from_true_leafwise_topology_obstruction():
+    cert=theorem_certificate()
+    assert "vortex worldsheets" in cert["klein_vortex_worldsheet"]
+    assert "tangentially" in cert["klein_tangent_normal_current"]
+    assert "not a local reconnection obstruction" in cert["local_flux_velocity_gauge"]
+    assert "leafwise cohomology" in cert["leafwise_period_obstruction"]
+    assert "not by itself a reconnection theorem" in cert["klein_topology_guard"]
     assert cert["global_regularity_claimed"] is False

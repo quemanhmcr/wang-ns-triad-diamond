@@ -1061,6 +1061,157 @@ def material_metric_path_action_bound(time_horizon: float, energy_loss: float, v
         "log_max_stretch_l2_squared_upper":0.25*t*action,
     }
 
+
+
+def klein_spacetime_vortex_worldsheet_algebra(
+    velocity: Sequence[float],
+    vorticity: Sequence[float],
+    vorticity_current: Sequence[float],
+    viscosity: float,
+) -> dict[str, float]:
+    """Klein-quadric decomposition of the physical spacetime vorticity curvature.
+
+    With ``e=-u cross omega+nu c`` the physical curvature is
+    ``F=beta-dt wedge e``.  In four dimensions a nonzero two-form is simple/rank
+    two exactly when its Pfaffian, equivalently ``F wedge F``, vanishes.  Here
+
+        Pf(F)=-e.omega=-nu c.omega  (for the orientation convention used below).
+
+    At fixed spatial ``beta``, the Klein slice is the plane ``e.omega=0``.
+    Orthogonal projection onto it removes only ``e_parallel=nu c_parallel``.
+    The projected curvature is simple and its kernel contains the vortex-line
+    spacetime directions ``(1,w)`` and ``(0,omega)``, where
+
+        w=u-nu(omega cross c)/|omega|^2.
+
+    The fixed-beta distance squared to the Klein slice is
+    ``nu^2 |c_parallel|^2``.  Dividing by nu gives exactly the twist part of the
+    palinstrophy density.  This is an algebraic/fiberwise statement; physical
+    off-Klein curvature is not by itself a reconnection theorem.
+    """
+    u=np.asarray(tuple(float(x) for x in velocity),float)
+    om=np.asarray(tuple(float(x) for x in vorticity),float)
+    c=np.asarray(tuple(float(x) for x in vorticity_current),float)
+    nu=float(viscosity)
+    if u.shape!=(3,) or om.shape!=(3,) or c.shape!=(3,) or not np.all(np.isfinite(u)) or not np.all(np.isfinite(om)) or not np.all(np.isfinite(c)):
+        raise ValueError("finite velocity/vorticity/current three-vectors required")
+    if not math.isfinite(nu) or nu<0.0:
+        raise ValueError("finite nonnegative viscosity required")
+    m=float(np.linalg.norm(om))
+    if m<=1e-12:
+        raise ValueError("nonzero vorticity required")
+    xi=om/m; cpar=xi*float(np.dot(c,xi)); cperp=c-cpar
+    e=-np.cross(u,om)+nu*c
+    eperp=e-xi*float(np.dot(e,xi)); epar=e-eperp
+    w=u-nu*np.cross(om,c)/(m*m)
+    # skew-matrix convention with Pfaffian = e.omega
+    F=np.zeros((4,4)); F[0,1:]=-e; F[1:,0]=e
+    X=np.array([[0,-om[2],om[1]],[om[2],0,-om[0]],[-om[1],om[0],0]])
+    F[1:,1:]=-X
+    FT=np.zeros((4,4));FT[0,1:]=-eperp;FT[1:,0]=eperp;FT[1:,1:]=-X
+    pf=F[0,1]*F[2,3]-F[0,2]*F[1,3]+F[0,3]*F[1,2]
+    pfT=FT[0,1]*FT[2,3]-FT[0,2]*FT[1,3]+FT[0,3]*FT[1,2]
+    k1=np.r_[1.0,w]; k2=np.r_[0.0,om]
+    kernel=max(float(np.linalg.norm(FT@k1)),float(np.linalg.norm(FT@k2)))
+    dist2=float(np.dot(epar,epar)); represented=nu*nu*float(np.dot(cpar,cpar))
+    twist_cost=(dist2/nu if nu>0 else 0.0)
+    top=-nu*float(np.dot(c,om))
+    scale=max(1.0,np.linalg.norm(F),np.linalg.norm(FT),abs(pf),abs(top),dist2,represented)
+    res=max(abs(pf-top),abs(pfT),kernel,abs(dist2-represented),abs(np.linalg.det(F)-pf*pf))
+    if res>2e-10*scale:
+        raise AssertionError("Klein spacetime curvature algebra failed")
+    return {
+        "physical_pfaffian":float(pf),
+        "viscous_pfaffian":top,
+        "projected_klein_pfaffian":float(pfT),
+        "projected_worldsheet_kernel_residual":kernel,
+        "fixed_beta_klein_distance_squared":dist2,
+        "viscosity_squared_parallel_current":represented,
+        "twist_dissipation_density":twist_cost,
+        "identity_residual":res,
+    }
+
+
+def local_flux_velocity_gauge_algebra(
+    velocity: Sequence[float],
+    vorticity: Sequence[float],
+    electromotive: Sequence[float],
+) -> dict[str, float]:
+    """Local transport-gauge decomposition of Faraday's law away from omega=0.
+
+    Given ``beta_t+d e=0``, pure Lie transport by some local velocity ``w`` is
+    equivalent to finding ``psi`` with
+
+        e-i_w beta=d psi.
+
+    Pointwise choose the directional derivative of psi so that
+
+        omega.grad psi=e.omega.
+
+    The remainder ``e-d psi`` is transverse to omega and is therefore exactly
+    ``i_w beta`` for a suitable transverse ``w``.  The function returns one
+    pointwise representative.  Along an actual vortex line this is a first-order
+    ODE for psi and is locally solvable.  A global single-valued psi can fail on
+    closed/recurrent lines; that global leafwise cohomology is not decided by this
+    pointwise algebra.
+    """
+    u=np.asarray(tuple(float(x) for x in velocity),float)
+    om=np.asarray(tuple(float(x) for x in vorticity),float)
+    e=np.asarray(tuple(float(x) for x in electromotive),float)
+    if u.shape!=(3,) or om.shape!=(3,) or e.shape!=(3,) or not np.all(np.isfinite(u)) or not np.all(np.isfinite(om)) or not np.all(np.isfinite(e)):
+        raise ValueError("finite velocity/vorticity/electromotive three-vectors required")
+    m2=float(np.dot(om,om))
+    if m2<=1e-24:
+        raise ValueError("nonzero vorticity required")
+    gradpsi=om*float(np.dot(e,om))/m2
+    et=e-gradpsi
+    wperp=-np.cross(om,et)/m2
+    w=wperp+om*float(np.dot(u,om))/m2
+    represented=-np.cross(w,om)+gradpsi
+    residual=float(np.linalg.norm(e-represented))
+    if residual>2e-11*max(1.0,np.linalg.norm(e),np.linalg.norm(represented)):
+        raise AssertionError("local flux-velocity gauge decomposition failed")
+    return {
+        "directional_gauge_derivative":float(np.dot(gradpsi,om)/math.sqrt(m2)),
+        "transport_velocity_norm":float(np.linalg.norm(w)),
+        "transverse_emotive_norm":float(np.linalg.norm(et)),
+        "parallel_emotive_norm":float(np.linalg.norm(gradpsi)),
+        "identity_residual":residual,
+    }
+
+
+def closed_vortex_line_period_cost(
+    line_length: float,
+    electromotive_period: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Sharp Cauchy cost of a gauge-invariant non-ideal period on a closed vortex line.
+
+    Along a closed vortex line the ideal one-form ``i_u beta`` vanishes on the
+    tangent, so the Faraday/transport obstruction is
+
+        E_gamma = integral_gamma e = nu integral_gamma c^flat.
+
+    If ``D_twist,gamma=nu integral_gamma m^2 tau^2 ds`` is the linewise twist
+    dissipation, then
+
+        |E_gamma|^2 <= nu L_gamma D_twist,gamma.
+
+    This helper returns the *minimum* linewise twist dissipation compatible with
+    the supplied period.  It does not claim that all vortex lines are closed or
+    that linewise cost has already been converted into a volume budget.
+    """
+    L=float(line_length); P=float(electromotive_period); nu=float(viscosity)
+    if not all(math.isfinite(x) for x in (L,P,nu)) or L<=0.0 or nu<=0.0:
+        raise ValueError("positive finite line length/viscosity and finite period required")
+    lower=P*P/(nu*L)
+    return {
+        "line_length":L,
+        "electromotive_period":P,
+        "minimum_twist_dissipation":lower,
+        "period_squared":P*P,
+    }
+
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
@@ -1084,6 +1235,11 @@ def theorem_certificate() -> dict[str, object]:
         "slip_twist_pythagoras": "v_slip=nu[(xi.grad)xi-grad_perp log m] and nu|c|^2=(m^2/nu)|v_slip|^2+nu m^2 tau^2; the Poynting-Joule density completes the same slip square plus the pure twist sink",
         "vortex_line_topology_guard": "pointwise c_parallel is only the possible non-Lie remainder, not itself a reconnection theorem: exact-gradient pieces are gauge and only d(c_parallel^flat) rewrites beta in the vortex-line frame",
         "general_twoform_cofactor": "for any orientation-preserving transport F with J=det F, det((F^T F)^-1|q^perp)=|Fq|^2/(J^2|q|^2), exactly the squared amplification of a transported two-form vector; the transverse determinant law is not restricted to incompressible fluid labels",
+        "klein_vortex_worldsheet": "Euler spacetime curvature is a closed simple rank-two two-form on the Klein quadric; its characteristic kernel is spanned by partial_t+u and omega and is automatically integrable, so frozen vortex lines are literal spacetime vortex worldsheets",
+        "klein_tangent_normal_current": "at fixed beta, the Klein slice is e.omega=0; c_perp moves the electromotive field tangentially inside this slice, while the orthogonal departure is e_parallel=nu c_parallel with squared fiber distance nu^2|c_parallel|^2 and dissipation distance^2/nu",
+        "local_flux_velocity_gauge": "away from omega=0, Faraday beta_t+d e=0 is locally pure Lie transport after solving omega.grad psi=e.omega and writing e-d psi=i_w beta; pointwise twist/Pfaffian is therefore not a local reconnection obstruction",
+        "leafwise_period_obstruction": "a global single-valued flux velocity can fail through the leafwise cohomology of e along vortex lines; on a closed vortex line gamma the gauge-invariant period is integral_gamma e=nu integral_gamma c, and period^2<=nu L_gamma times the linewise twist dissipation",
+        "klein_topology_guard": "physical F wedge F or c.omega measures off-Klein spacetime curvature but is not by itself a reconnection theorem: exact transport gauges can remove local parallel electromotive fields, and global topology requires leafwise period/cohomology information",
         "primitive_poynting_joule": "put e=i_u beta+nu c; the exact local law is partial_t |omega|^2/2+div(e cross omega)=-e.c, with -e.c=(u cross omega).c-nu|c|^2, so stretching and palinstrophy are one electromotive-current work law",
         "so33_duality_group": "volume-preserving four-dimensional deformation acts on two-forms through sl(4)->so(3,3); rotations commute with Hodge duality while trace-free strain anticommutes and is the unique noncompact duality-mixing boost, with ||rho(S)||_HS^2=2||S||^2",
         "enstrophy_derivative_null": "integrating <curl omega,u cross omega> by parts gives sum_j <partial_j omega, partial_j u cross u>; the derivative-on-u self term vanishes pointwise by cross-product skewness, so nonlinear enstrophy production necessarily uses the same first vorticity derivative squared by Hodge heat",

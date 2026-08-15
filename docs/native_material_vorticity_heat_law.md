@@ -1761,3 +1761,132 @@ so every material loop obeys
 Taking one exterior derivative recovers `beta_t+nu d delta_g beta=0`.  The
 vorticity-flux continuity law is therefore the derivative of one primitive
 Kelvin-current law, not a separate reset mechanism.
+
+
+## 26. The Klein quadric is the primitive vortex-worldsheet manifold
+
+The physical spacetime curvature
+
+\[
+\mathbb F=\beta-dt\wedge e
+\]
+
+lives in the six-dimensional space `Lambda^2 R^4`, whose wedge quadratic form has
+signature `(3,3)`.  A nonzero four-dimensional two-form is decomposable/rank two
+exactly when
+
+\[
+\boxed{\mathbb F\wedge\mathbb F=0.}
+\]
+
+Projectively this null cone is the Klein quadric `Gr(2,4)`.  For Euler,
+`e=i_u beta`, so the algebraic null `(i_u beta) wedge beta=0` puts the physical
+curvature identically on the Klein quadric.  Since `d_4 mathbb F=0`, the kernel of
+this rank-two form is involutive.  It contains exactly the primitive directions
+
+\[
+\boxed{\partial_t+u,\qquad \omega.}
+\]
+
+Thus Helmholtz/Kelvin freezing is a literal integrable **vortex-worldsheet**
+distribution in spacetime.  No material lineage is selected by an observer.
+
+For viscous NS, at fixed spatial `beta` the Klein condition is simply
+`e.omega=0`.  Write `c=c_perp+c_parallel`.  The ideal term and `nu c_perp` are
+transverse to `omega`, so
+
+\[
+e_T=\iota_u\beta+\nu c_\perp
+\]
+
+remains on the fixed-`beta` Klein slice, whereas
+
+\[
+e_N=\nu c_\parallel
+\]
+
+is its orthogonal departure.  Consequently
+
+\[
+\boxed{
+\operatorname{dist}_{\beta\ {
+m fixed}}(\mathbb F,\mathrm{Klein})^2
+=\nu^2|c_\parallel|^2,
+}
+\]
+
+and the normal cost is exactly
+
+\[
+\boxed{
+\nu|c_\parallel|^2
+=\frac1\nu
+\operatorname{dist}_{\beta\ {
+m fixed}}(\mathbb F,\mathrm{Klein})^2.
+}
+\]
+
+The nonlinear Poynting--Joule production sees only `c_perp`.  Hence all positive
+enstrophy work is tangent to the ideal vortex-worldsheet slice; the fiber-normal
+current is purely dissipative.  This is an orthogonal decomposition of the one
+Hodge current, not a case taxonomy.
+
+## 27. Pointwise off-Klein curvature is not the true flux-freezing obstruction
+
+There is an important gauge correction.  Faraday only contains `d e`.  To freeze
+the same spatial two-form with another local velocity `w`, it is enough to find a
+scalar `psi` such that
+
+\[
+\boxed{e-\iota_w\beta=d\psi.}
+\]
+
+The contraction term annihilates `omega`, so `psi` is determined along vortex
+lines by
+
+\[
+\boxed{
+\omega\cdot\nabla\psi=e\cdot\omega=\nu c\cdot\omega.
+}
+\]
+
+Away from a vorticity zero this is a first-order ODE along a one-dimensional
+characteristic and is locally solvable.  After solving it, `e-d psi` is transverse
+to `omega` and therefore equals `i_w beta` for a suitable local flux velocity.
+Thus pointwise `c_parallel`, the Pfaffian of the physical spacetime curvature, or
+`F wedge F` is **not** by itself a local reconnection theorem.
+
+The genuine obstruction is global/leafwise.  On a closed vortex line `gamma`, a
+single-valued `psi` requires
+
+\[
+\boxed{
+\mathcal E_\gamma:=\oint_\gamma e
+=\nu\oint_\gamma c^\flat=0.
+}
+\]
+
+The ideal one-form contributes nothing on the vortex tangent.  A nonzero period is
+therefore a gauge-invariant obstruction to a global flux velocity along that
+closed leaf.  More generally the obstruction belongs to the leafwise cohomology
+of the vortex-line foliation; closed periods are the cleanest directly visible
+part of it.
+
+This global obstruction is not free.  With arclength `s`,
+`c.tangent=m tau`, so Cauchy gives
+
+\[
+\boxed{
+|\mathcal E_\gamma|^2
+\le
+\nu^2L_\gamma\oint_\gamma m^2\tau^2ds
+=
+\nu L_\gamma D_{{\rm twist},\gamma}.
+}
+\]
+
+Thus true failure of a single-valued flux-transport gauge on a closed vortex line
+has a direct cost in the sign-definite twist dissipation already present in the
+Poynting--Joule law.  What is *not* yet proved is a conversion of these linewise
+costs into a global volume no-escape budget; closed vortex lines can be sparse,
+long, or organized in concentrating tubes.
