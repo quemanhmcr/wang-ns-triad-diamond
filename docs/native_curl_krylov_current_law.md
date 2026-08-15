@@ -640,46 +640,89 @@ F:=F_E=J_uCu,
 F':=DF_E(u)[F].
 \]
 
-Normalize `e=u/sqrt(E)`, `P=e tensor e`, and set
+Define the canonical state-generated skew generator
 
 \[
 \boxed{
-\mathcal A_e:=\sqrt E(J_eC+CJ_e),\quad
-\mathcal A_e^*=-\mathcal A_e,\quad
-\mathcal A_e e=F_E/\sqrt E,\quad
-P_t=[\mathcal A_e,P]-\nu[P,[P,\Lambda^2]],\quad \Lambda^2=C^2.}
+\mathscr A(u):=J_uC+CJ_u,
+\qquad
+\mathscr A(u)^*=-\mathscr A(u),
+\qquad
+\mathscr A(u)u=F_E.}
 \]
 
-Thus Euler is a reversible commutator while viscosity is one-way double-bracket sorting.  This is not
-autonomous in `P` alone: `e->-e` fixes `P` but reverses `mathcal A_e` and the Euler commutator, so the
-state-generated orientation has not been quotiented away.  With `N^2=<e,Lambda^2 e>`,
+Thus Navier--Stokes itself is already the two-road law
 
 \[
-\boxed{\frac d{dt}\langle e,\Lambda^2e\rangle\big|_\nu
+\boxed{u_t=\mathscr A(u)u-\nu\Lambda^2u,\qquad \Lambda=|C|.}
+\]
+
+Let the Euler frame solve
+
+\[
+(U_E)_t=\mathscr A(u)U_E,
+\qquad U_E(0)=I.
+\]
+
+Since `mathscr A` is skew, `U_E` is unitary.  With
+
+\[
+\widetilde u=U_E^*u,
+\qquad
+\widetilde\Lambda=U_E^*\Lambda U_E,
+\qquad
+\widetilde{\mathscr A}=U_E^*\mathscr A U_E,
+\]
+
+direct differentiation cancels Euler from the state equation:
+
+\[
+\boxed{
+\widetilde u_t=-\nu\widetilde\Lambda^2\widetilde u,
+\qquad
+\widetilde\Lambda_t=[\widetilde\Lambda,\widetilde{\mathscr A}].}
+\]
+
+So NS is **heat of the state in a self-rotating isospectral curl frame**.  This is not a fixed
+heat semigroup: all nonlinear information has moved into the motion of `widetilde Lambda`.
+The material Hodge normal form in Section 15 has the identical grammar.
+
+The normalized projector law is the rank-one shadow.  For `e=u/sqrt(E)`, `P=e tensor e`,
+`mathscr A=sqrt(E)(J_eC+CJ_e)` and `N^2=<e,Lambda^2e>`,
+
+\[
+\boxed{
+P_t=[\mathscr A,P]-\nu[P,[P,\Lambda^2]],
+\qquad
+\frac d{dt}\langle e,\Lambda^2e\rangle\Big|_\nu
 =-2\nu\|(\Lambda^2-N^2)e\|_2^2\le0.}
 \]
 
-The same grammar appears in the vorticity Lie algebra.  For `D_j=-i partial_j` and
-`Delta_op B=sum_j[D_j,[D_j,B]]`, derivation of the bracket gives
-`[D_j,ad_omega]=ad_(D_j omega)` and `Delta_op ad_omega=ad_(C^2 omega)`, hence
+This is not autonomous in `P` alone: `e->-e` fixes `P` but reverses the Euler orientation generator.
+
+The same grammar appears in the vorticity Lie algebra.  With
+`Delta_op B=sum_j[D_j,[D_j,B]]>=0`,
 
 \[
 \boxed{(\operatorname{ad}_\omega)_t
-=[\operatorname{ad}_\omega,\operatorname{ad}_u]-\nu\Delta_{op}\operatorname{ad}_\omega.}
+=[\operatorname{ad}_\omega,\operatorname{ad}_u]
+-\nu\Delta_{op}\operatorname{ad}_\omega.}
 \]
 
-So Euler is Lax conjugation and viscosity is positive operator heat (`Delta_op>=0`).  On the smooth
-curl-invertible range put `(x,y)_G=<Lambda^-1 x,y>`, `mathsf J=sgn C` and
-`mathcal U=-ad_u`.  Since helicity `B(x,y)=(mathsf Jx,y)_G=<C^-1x,y>` is ad-invariant,
+On the smooth curl-invertible range put `(x,y)_G=<Lambda^-1x,y>`, `mathsf J=sgn C` and
+`mathcal U=-ad_u`.  Helicity ad-invariance gives
 
 \[
-\boxed{\mathcal U_G^\dagger=-\mathsf J\mathcal U\mathsf J,\quad
-\operatorname{Sym}_G\mathcal U=\tfrac12(\mathcal U-\mathsf J\mathcal U\mathsf J),\quad
+\boxed{
+\mathcal U_G^\dagger=-\mathsf J\mathcal U\mathsf J,
+\qquad
+\operatorname{Sym}_G\mathcal U=\tfrac12(\mathcal U-\mathsf J\mathcal U\mathsf J),
+\qquad
 K'_E=2(\omega,\operatorname{Sym}_G\mathcal U\,\omega)_G=2\kappa.}
 \]
 
-The critical boost is therefore the helicity-odd, `G`-symmetric/noncompact part of the same signed Euler
-isometry, not a second source.
+Thus the critical boost is the noncompact/helicity-odd part of the same Lax generator, not a second
+source.
 
 Along Euler, bilinearity of `J_uCu` gives
 
@@ -740,39 +783,65 @@ In the same normalized state, assume `delta>0` and put
 
 \[
 \boxed{
- m=\langle e,\Lambda e\rangle=\frac KE,\quad
- \delta^2=\|(\Lambda-m)e\|_2^2=\frac{EZ-K^2}{E^2},\quad
+ m=\langle e,\Lambda e\rangle=\frac KE,
+\quad
+ \delta^2=\|(\Lambda-m)e\|_2^2=\frac{EZ-K^2}{E^2},
+\quad
  n=\frac{(\Lambda-m)e}{\delta}.}
 \]
 
-Euler energy tangency gives `f=F_E/sqrt(E)=a n+w` with `w perpendicular e,n`, and
+Write `f=F_E/sqrt(E)=a n+w`, `w perpendicular e,n`, so
+
+\[
+\boxed{a=\frac{\kappa}{\sqrt{EZ-K^2}},\qquad \mathcal A_{escape}=\frac{a^2}{N^2}.}
+\]
+
+Now introduce only the frame commutator already forced by the normal form,
+
+\[
+\boxed{\mathcal B:=[\Lambda,\mathscr A],\qquad \mathcal B^*=\mathcal B.}
+\]
+
+Along Euler, the whole radial/turning response is one vector `mathcal B e`:
 
 \[
 \boxed{
-a=\langle n,f\rangle=\frac{\kappa}{\sqrt{EZ-K^2}},\qquad
-\mathcal A_{escape}=\frac{a^2}{N^2}.}
+ m'_E=\langle e,\mathcal B e\rangle=2a\delta,
+\qquad
+ \delta'_E=\langle n,\mathcal B e\rangle,}
 \]
-
-Put `alpha_1=<n,Lambda n>` and `h=P_{\{e,n\}^perp} Lambda n`.  Direct Euler differentiation gives
 
 \[
 \boxed{
-\begin{aligned}
-m'_E&=2a\delta,\\
-\delta'_E&=a(\alpha_1-m)+\langle h,w\rangle,\\
-n'_E&=-ae+\delta^{-1}\!\left[a h+P_{\{e,n\}^\perp}(\Lambda-m)w\right].
-\end{aligned}}
+ n'_E-\mathscr A n
+=\delta^{-1}P_{\{e,n\}^\perp}\mathcal B e,}
 \]
 
-So the failure of a one-step **sign** theorem does not make the productive frame static.  On the
-saturation branch `w=0`,
+hence
 
 \[
-\boxed{P_{\{e,n\}^\perp}n'_E=\frac a\delta h.}
+\boxed{
+\mathcal B e
+=m'_E e+\delta'_E n+\delta(n'_E-\mathscr A n).}
 \]
 
-Productivity couples to self-turning through the endogenous next absolute-curl Krylov opening `h`;
-there is no uniform turning gap because `h` may vanish.
+There are not separate scale-growth, spread and turning mechanisms: they are the three orthogonal
+projections of one self-generated commutator current.  If
+`alpha_1=<n,Lambda n>` and `h=P_{\{e,n\}^perp}Lambda n`, expanding `mathcal B e` recovers
+
+\[
+\delta'_E=a(\alpha_1-m)+\langle h,w\rangle,
+\qquad
+n'_E=-ae+\delta^{-1}[a h+P_{\{e,n\}^\perp}(\Lambda-m)w].
+\]
+
+In particular, on the saturation branch `w=0`,
+
+\[
+\boxed{P_{\{e,n\}^\perp}n'_E=\frac a\delta h,}
+\]
+
+with no uniform turning gap because `h` may vanish.
 
 Helicity supplies a separate exact compatibility.  With
 
@@ -819,6 +888,19 @@ let `V_g(p)=2(g-E_p g)p`.  Productive radial tilt is `V_r`, normalized heat is `
 So the canonical radial generators contain no hidden noncommutative self-turning.  The endogenous
 physical speed `a/delta` still depends on orientation; complete physical-time commutation and a blanket
 no-go for every radial estimate are **not** claimed.
+
+In the co-rotating frame this separation is literal.  With
+`widetilde e=widetilde u/sqrt(E)` and `m=<widetilde e,widetilde Lambda widetilde e>`,
+
+\[
+\boxed{
+ m_t=\langle\widetilde e,[\widetilde\Lambda,\widetilde{\mathscr A}]\widetilde e\rangle
+ -2\nu\bigl(\langle\widetilde e,\widetilde\Lambda^3\widetilde e\rangle
+ -m\langle\widetilde e,\widetilde\Lambda^2\widetilde e\rangle\bigr).}
+\]
+
+The second term is `-2 nu Cov(r,r^2)<=0`.  Positive mean-scale growth can therefore come only from
+rotation of the heat frame.
 
 The Krylov recurrence
 
@@ -1700,8 +1782,8 @@ Thus the harmonic extension is exactly energy-critical: the depth area of `maths
 `mathscr A'_0` scales like `lambda^2`, and the depth width scales like `lambda^-1`.  A fixed-time
 coercive argument whose only anti-concentration mechanism is growth of `K` or of this depth area
 therefore cannot exclude the canonical dilation.  This does **not** rule out every possible
-instantaneous identity; it says the remaining theorem must use additional state structure or the
-physical-time coupling.  No unimodality is claimed.
+instantaneous identity; it says this covariance reading can constrain closure only through additional
+state structure or physical-time coupling.  No unimodality is claimed.
 
 The Germano cocycle also splits transverse activity into two nonnegative depth contributions.  Put
 `w=P_zv_y=v_{y+z}`.  Linearity of `tau -> (tr tau)I-tau` gives
@@ -3288,6 +3370,25 @@ and
 K'=-\int_XT:\dot G-\nu\int_X|\nabla_4\mathcal F|^2,
 \]
 
+The material Maxwell stress has `T^2=(|T|^2/4)I_4`, so its eigenvalues are
+`(+sigma,+sigma,-sigma,-sigma)`.  In a material orthonormal frame the metric velocity extends as
+`(s_1,s_2,s_3,0)` with `s_1+s_2+s_3=0`.  Von Neumann's trace inequality and the trace-free constraint
+give the sharp pointwise frustration
+
+\[
+\boxed{|T:\dot G|\le\sqrt{\frac23}\,|T|\,|\dot G|.}
+\]
+
+Equality requires `(s_1,s_2,s_3)` proportional to `(2,-1,-1)` up to sign/permutation.  The same
+Weyl-wall geometry is exactly the equality case of
+
+\[
+\boxed{|\det K|\le\frac{|K|^3}{3\sqrt6}.}
+\]
+
+Thus perfect Maxwell work is algebraically impossible, but the extremal cubic has no fixed sign; this
+is a genuine self-frustration, not a monotonicity theorem.
+
 but these do **not** imply `int ||mathcal E_c||^2 dt<infinity`.  The spacetime Bianchi law is
 compatibility, not coercivity.  The missing implication is precisely whether this same endogenous
 spacetime compatibility, together with the already positive Maxwell/heat structure, forces
@@ -4264,7 +4365,7 @@ The separate material theorem adds the transverse determinant and Minkowski memo
 6. **No higher-Sobolev control from `Q_t^2=0`.**  Nilpotent tangents do not prevent high-frequency concentration.
 7. **No spectral-only monotone beyond energy/helicity**, no low-Krylov closure and no automatic viscous dephasing.
 8. **No eigenvalue-only Riccati law** and no unrestricted Nambu--Poisson theorem; the surviving structure is lossless Cartan/Jacobi current geometry.
-9. **No local finite-dimensional closure.**  The missing theorem must couple full spatial current persistence to material Hodge memory.
+9. **No local finite-dimensional closure.**  Local current/Hodge algebra is a higher constraint on the no-Zeno heat-frame history problem, not an autonomous regularity mechanism.
 10. **No uniform gap from the new rigidity.**  `{mathcal A,Q*}=0 => u=0` is an exact zero-set statement; it does not bound the ratio between regeneration and incompatibility away from saturation on arbitrary large states.
 11. **No positive spacetime telescope from Bianchi alone.**  `G4^2` in the exact transgression is a signed graded/Chern--Weil product, not `||G4||^2`; the temporal electric component has no proved finite `L_t^2` budget.
 12. **No local conformation law for `Gamma_u`.**  Its Euler material derivative keeps endpoint-`y` gradients and separation flux; `det Gamma_u` is not a material invariant.
@@ -4290,38 +4391,33 @@ The separate material theorem adds the transverse determinant and Minkowski memo
 
 ## 17. Minimal ontology and the remaining primitive theorem
 
-For the **critical escape question**, the lowest normalized law is already the rank-one two-road
-operator equation
+For the **critical escape question**, the lowest normal form is now the co-rotating pair
 
 \[
 \boxed{
-P_t=[\mathcal A_e,P]-\nu[P,[P,\Lambda^2]],
+\widetilde u_t=-\nu\widetilde\Lambda^2\widetilde u,
 \qquad
-\mathcal A_e=\sqrt E(J_eC+CJ_e),
-\qquad
-\mathcal A_e^*=-\mathcal A_e.}
+\widetilde\Lambda_t=[\widetilde\Lambda,\widetilde{\mathscr A}].}
 \]
 
-Euler is the self-generated reversible commutator and viscosity is one-way double-bracket sorting.
-The equivalent vorticity reading is Lax conjugation plus positive operator heat,
+The state has only the one-way heat road; Euler appears only as reversible isospectral motion of the
+heat landscape.  The projector double bracket, vorticity Lax law and material Hodge law are exact
+shadows of this same pair.  Critical growth is the positive-metric/noncompact part of that frame
+motion, equivalently
 
 \[
-\boxed{(\operatorname{ad}_\omega)_t
-=[\operatorname{ad}_\omega,\operatorname{ad}_u]-\nu\Delta_{op}\operatorname{ad}_\omega.}
+\boxed{K'_E=2(\omega,\operatorname{Sym}_G\mathcal U\,\omega)_G=2\kappa.}
 \]
 
-On the curl-invertible range the critical source is not additional ontology: for
-`mathcal U=-ad_u`, `mathsf J=sgn C` and `(x,y)_G=<Lambda^-1 x,y>`,
+The frame commutator `mathcal B=[Lambda,mathscr A]` is orientation-complete at the first radial Krylov
+level:
 
 \[
-\boxed{
-\operatorname{Sym}_G\mathcal U=\tfrac12(\mathcal U-\mathsf J\mathcal U\mathsf J),
-\qquad
-K'_E=2(\omega,\operatorname{Sym}_G\mathcal U\,\omega)_G=2\kappa.}
+\boxed{\mathcal B e
+=m'_E e+\delta'_E n+\delta(n'_E-\mathscr A n).}
 \]
 
-Thus the missing information is orientation of the self-generated noncompact/Krein part against
-operator heat, not another radial stock.  The canonical Dirichlet law remains the sharpest scalar
+The canonical Dirichlet law remains the sharpest scalar
 ledger of these roads,
 
 \[
@@ -4354,32 +4450,29 @@ quantity: an exact physical triad violates the proposed lower comparison by more
 magnitude.  Nor is there a one-step orientation monotone: on one fixed physical triad, `kappa` and its
 Euler derivative realize all four sign quadrants.
 
-The canonical radial generators themselves are flat: `[V_r,V_(r^2)]=0`.  The lowest noncommuting
-remainder is therefore the self-generated orientation equation recorded above.  In the absolute-curl
-frame,
+The canonical radial generators are flat, `[V_r,V_(r^2)]=0`; there is no hidden radial
+noncommutative antagonism to discover by choosing a more elaborate radial norm.  This does not rule out
+radial estimates as auxiliary tools, because the physical Euler speed remains orientation-dependent.
+
+In the co-rotating frame the heat contribution to `m=K/E` is one-way, so critical escape can only be
+fed by repeated productive rotation of `widetilde Lambda`.  The already proved escape theorem says
 
 \[
-\boxed{\mathcal A_{escape}=a^2/N^2,\qquad
-D_tw=\sqrt E P_\perp(J_vCe+J_eCv)-\nu N^2w
--\frac a\delta[Ah+P_\perp(\Lambda-m)W].}
+\boxed{K/E\to\infty\Longrightarrow
+\int_0^T\mathcal A_{escape}(t)\,dt
+=\int_0^T\frac{a(t)^2}{N(t)^2}\,dt=\infty.}
 \]
 
-Its saturation shadow is `delta Theta=a h+R_w`: nonzero `h` rotates the productive frame, helicity may
-force side motion `w`, and suppressing both approaches the rigid two-radius face.  Cartan/Jacobi,
-Nijenhuis, Poisson and material laws remain exact readings of how this same orientation dynamics is
-realized; they are not extra mechanisms or gross positive traffic budgets.
+The remaining theorem is therefore a **no-Zeno theorem for the self-generated heat frame**: show from
+`widetilde Lambda_t=[widetilde Lambda,widetilde mathscr A]` and the fact that `widetilde mathscr A`
+comes from the heat-damped state that finite smooth time cannot carry infinite normalized productive
+frame action.  No equivalence with an operator-norm path length of `U_E` is assumed.  The exact
+orientation equation for `w`, Cartan/Jacobi, Maxwell/Weyl-wall frustration, Poisson and material Hodge
+laws are compatible readings of this same frame motion.
 
-The remaining theorem is therefore an **orientation/Lax--Krein history theorem**: finite smooth
-energy-loss histories must make
-
-\[
-\boxed{\int_0^T\frac{a(t)^2}{N(t)^2}\,dt<\infty,}
-\]
-
-using the exact self-generated orientation/Lax equation and physical operator heat, without replacing
-them by a radial norm closure or losing the extra `|C|` weight.  This is precisely the old escape
-action, so critical escape would force the same integral to diverge.  The required exact historical
-transgression/return law for the noncompact boost is **not proved**.
+No such historical transgression/return identity is proved.  The four-quadrant physical-triad
+falsifier also rules out replacing it by a second-derivative concavity argument.  Hence there is still
+**no QED and no global-regularity claim**.
 
 The previously exposed lossless tangent coordinate remains exact but is now a compressed boundary
 reading:
@@ -4492,7 +4585,7 @@ reading, but does not supply the missing return law by itself.
 
 In that higher covariance reading: **Euler exchanges energy through a positive covariance stress;
 viscosity erases both reservoirs and pays the stress-divergence Fisher cost.**  Preventing infinite
-normalized boundary action remains equivalent to the lower orientation/Lax--Krein history problem;
+normalized boundary action remains a higher realization of the no-Zeno heat-frame history problem;
 it is **not proved**, and no global-regularity claim is made.
 
 Material Hodge turnover remains the natural history gauge through
@@ -4506,5 +4599,5 @@ Material Hodge turnover remains the natural history gauge through
 \]
 
 Reynolds, Krein, Poisson, midpoint, Hilbert--Schmidt and Gauss--Bianchi formulations remain exact
-compressed readings above this lower Poisson energy/product-defect law.  No shell, owner, packet, moving
-projector or analyst clock is needed to state the remaining problem.
+compressed readings above the co-rotating heat-frame normal form.  No shell, owner, packet, moving
+projector or analyst clock is needed to state the no-Zeno problem.

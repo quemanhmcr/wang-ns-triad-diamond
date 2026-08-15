@@ -347,6 +347,19 @@ def test_maxwell_stress_has_only_two_equal_positive_and_two_equal_negative_princ
         assert out["stress_square_scalar_residual"] <= 3e-10*max(1.0,out["maxwell_stress_norm_squared"])
 
 
+def test_maxwell_material_alignment_has_sharp_sqrt_two_thirds_weyl_wall_gap():
+    rng=np.random.default_rng(202608154602);bound=math.sqrt(2.0/3.0)
+    for _ in range(5000):
+        s=rng.normal(size=3);s-=s.mean();K=np.diag((*s,0.0))
+        if np.linalg.norm(K)<1e-13: continue
+        q,_=np.linalg.qr(rng.normal(size=(4,4)));T=q@np.diag((1.,1.,-1.,-1.))@q.T
+        assert abs(float(np.sum(T*K))) <= bound*np.linalg.norm(T)*np.linalg.norm(K)+3e-13
+        assert abs(float(np.prod(s))) <= np.linalg.norm(s)**3/(3*math.sqrt(6))+3e-13
+    s=np.array((2.,-1.,-1.));K=np.diag((*s,0.));T=np.diag((1.,-1.,-1.,1.))
+    assert abs(float(np.sum(T*K)))/(np.linalg.norm(T)*np.linalg.norm(K)) == pytest.approx(bound,abs=2e-15)
+    assert abs(float(np.prod(s)))/np.linalg.norm(s)**3 == pytest.approx(1/(3*math.sqrt(6)),abs=2e-15)
+
+
 
 def test_general_transport_cofactor_reads_twoform_amplification_without_incompressibility():
     rng=np.random.default_rng(202608151101)
@@ -622,6 +635,7 @@ def test_affine_local_blowup_guard_proves_local_group_algebra_cannot_be_global_r
 def test_certificate_records_finite_sl3_degree_law_and_local_blowup_guard_without_overclaim():
     cert=theorem_certificate()
     assert "unique cubic Cartan invariant" in cert["symmetric_space_cubic_law"]
+    assert "sqrt(2/3)" in cert["maxwell_metric_alignment_gap"]
     assert "fundamental sl(3) invariant polynomials" in cert["sl3_fundamental_casimir_null"]
     assert "degree one" in cert["finite_sdiff_chord_degree"]
     assert "no purely local finite-dimensional group law" in cert["affine_local_blowup_guard"]

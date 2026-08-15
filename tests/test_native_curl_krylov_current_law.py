@@ -844,6 +844,12 @@ def test_normalized_projector_lax_krein_radial_flatness_and_covariant_orientatio
     heat=-2*nu*float(((L2-N2*np.eye(3))@e)@((L2-N2*np.eye(3))@e))
     assert 2*float((-nu*(L2-N2*np.eye(3))@e)@(L2@e)) == pytest.approx(heat,abs=3e-14)
 
+    # Euler co-rotating frame: at U=I the connection cancels Euler exactly and only heat remains.
+    du=Ae@u-nu*L2@u
+    assert np.linalg.norm(-Ae@u+du+nu*L2@u)<3e-14
+    Bframe=L@Ae-Ae@L
+    assert np.linalg.norm((-Ae@L+L@Ae)-Bframe)<3e-14
+
     # Jacobi/Lax plus operator heat intertwining in the finite cross-product Lie algebra.
     omega=np.array((0.4,-0.8,1.2));adv=np.array((-0.5,0.3,0.9))
     assert np.linalg.norm(J(np.cross(omega,adv))-(J(omega)@J(adv)-J(adv)@J(omega)))<3e-14
@@ -868,6 +874,14 @@ def test_normalized_projector_lax_krein_radial_flatness_and_covariant_orientatio
     # Full normalized NS uses the same absolute-curl Krylov frame and closes D_t w exactly.
     m=float(e@(L@e));delta=math.sqrt(float(e@(L2@e))-m*m);n=(L@e-m*e)/delta
     a=float(n@f);w=f-a*n;alpha=float(n@(L@n));h=L@n-delta*e-alpha*n
+
+    # One self-adjoint frame commutator carries scale growth, spread and turning.
+    mE=float(e@Bframe@e);dE=float(n@Bframe@e)
+    nE=Ae@n+(Bframe@e-mE*e-dE*n)/delta
+    assert mE == pytest.approx(2*a*delta,abs=3e-14)
+    assert np.linalg.norm(Bframe@e-mE*e-dE*n-delta*(nE-Ae@n))<4e-14
+    heat_m=-2*nu*(float(e@(L@L@L@e))-m*float(e@(L2@e)))
+    assert heat_m <= 2e-14
     A=a-nu*delta*(m+alpha);W=w-nu*delta*h;Pp=np.eye(3)-np.outer(e,e)-np.outer(n,n)
     assert np.linalg.norm((L2-N2*np.eye(3))@e-delta*(m+alpha)*n-delta*h)<3e-14
     assert np.linalg.norm(v-A*n-W)<3e-14
@@ -2312,6 +2326,8 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "K'_E=2(omega,Sym_G U omega)_G=2kappa" in cert["primitive_krein_lax_boost"]
     assert "[V_r,V_(r^2)]=0" in cert["primitive_radial_tilt_commutation"]
     assert "D_t w=" in cert["primitive_orientation_covariant_law"]
+    assert "self-rotating isospectral curl frame" in cert["primitive_corotating_heat_frame"]
+    assert "scale growth, spread and turning" in cert["primitive_frame_commutator_current"]
     assert "A_escape=a^2/N^2" in cert["primitive_absolute_curl_productive_frame"]
     assert "self-turning" in cert["primitive_absolute_curl_self_turning"]
     assert "no 0/0 quotient" in cert["primitive_helicity_side_motion"]
