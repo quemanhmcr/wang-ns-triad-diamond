@@ -13,6 +13,7 @@ from src.native_material_vorticity_heat_law import (
     material_hminus2_reset_identity,
     material_hodge_speed_ladder,
     material_log_distortion_energy_bound,
+    material_metric_path_action_bound,
     material_state_speed_lock,
     primitive_material_current_fourier_law,
     moving_polarization_memory_bound,
@@ -374,4 +375,67 @@ def test_certificate_records_vortex_line_gauge_without_reconnection_overclaim():
     assert "perpendicular viscous current" in cert["vortex_line_slip_gauge"]
     assert "Frobenius obstruction" in cert["frobenius_twist_current"]
     assert "not itself a reconnection theorem" in cert["vortex_line_topology_guard"]
+    assert cert["global_regularity_claimed"] is False
+
+
+
+def test_hodge_motion_is_lax_isospectral_and_current_frame_lock_is_modewise_exact():
+    rng=np.random.default_rng(202608151201)
+    # Similarity/Lax law: L(t)=U(t)L0U(t)^-1 has L_t=[A,L] and fixed spectrum.
+    for n in (4,7,11):
+        L0=np.diag(np.exp(rng.uniform(-2,2,n)))
+        U=rng.normal(size=(n,n))
+        while abs(np.linalg.det(U))<.05: U=rng.normal(size=(n,n))
+        A=rng.normal(size=(n,n))
+        L=U@L0@np.linalg.inv(U)
+        Lt=A@L-L@A
+        assert np.trace(Lt) == pytest.approx(0.0,abs=2e-10)
+        assert np.sort_complex(np.linalg.eigvals(L)) == pytest.approx(np.sort_complex(np.linalg.eigvals(L0)),rel=2e-10,abs=2e-10)
+        assert Lt == pytest.approx(A@L-L@A,rel=1e-13,abs=1e-13)
+    # One exact Fourier fiber of c=-div h and |grad grad v|^2=|c|^2.
+    for _ in range(5000):
+        k=rng.normal(size=3);r=np.linalg.norm(k)
+        if r<.05: continue
+        v=rng.normal(size=3)+1j*rng.normal(size=3);v-=k*np.dot(k,v)/(r*r)
+        h=1j*(np.outer(k,v)+np.outer(v,k))
+        beta=1j*(np.outer(k,v)-np.outer(v,k))
+        c=-1j*np.einsum('i,ij->j',k,beta)
+        divh=1j*np.einsum('i,ij->j',k,h)
+        A=1j*np.outer(v,k)
+        assert c == pytest.approx(-divh,rel=2e-11,abs=2e-11)
+        assert r*r*np.vdot(A,A).real == pytest.approx(np.vdot(c,c).real,rel=2e-11,abs=2e-11)
+        assert r*r*np.vdot(h,h).real == pytest.approx(2*np.vdot(c,c).real,rel=2e-11,abs=2e-11)
+
+
+def test_material_symmetric_space_path_action_is_exact_energy_normalization():
+    out=material_metric_path_action_bound(.8,3.2,.4)
+    assert out["metric_speed_spacetime_l2_squared"] == pytest.approx(8.0)
+    assert out["material_path_length_l2_squared_upper"] == pytest.approx(6.4)
+    assert out["affine_distance_l2_squared_upper"] == pytest.approx(6.4)
+    assert out["log_max_stretch_l2_squared_upper"] == pytest.approx(1.6)
+
+
+def test_material_acceleration_cancels_explicit_velocity_gradient_square():
+    rng=np.random.default_rng(202608151202)
+    for _ in range(5000):
+        A=rng.normal(size=(3,3));A-=np.trace(A)/3*np.eye(3)
+        P=rng.normal(size=(3,3));P=.5*(P+P.T)
+        V=rng.normal(size=(3,3))
+        DtA=-(A@A)-P+V
+        F=rng.normal(size=(3,3))
+        Fdot=A@F
+        Fdd=DtA@F+A@Fdot
+        assert Fdd == pytest.approx((-P+V)@F,rel=2e-11,abs=2e-11)
+        omega=rng.normal(size=3)
+        euler_DtA=-(A@A)-P
+        wdd=euler_DtA@omega+A@(A@omega)
+        assert wdd == pytest.approx(-P@omega,rel=2e-11,abs=2e-11)
+
+
+def test_certificate_records_lax_zero_curvature_and_geodesic_acceleration_without_overclaim():
+    cert=theorem_certificate()
+    assert "does not create or destroy heat eigenvalues" in cert["hodge_lax_isospectral"]
+    assert "pure-gauge SL(3) connection" in cert["maurer_cartan_zero_curvature"]
+    assert "same derivative-order activity" in cert["connection_current_lock"]
+    assert "quadratic A^2 self-stretch cancels" in cert["lagrangian_geodesic_acceleration"]
     assert cert["global_regularity_claimed"] is False

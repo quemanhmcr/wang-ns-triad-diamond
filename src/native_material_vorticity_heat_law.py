@@ -1028,6 +1028,39 @@ def vortex_slip_twist_algebra(
         "identity_residual":res,
     }
 
+
+
+def material_metric_path_action_bound(time_horizon: float, energy_loss: float, viscosity: float) -> dict[str, float]:
+    """Finite affine-invariant path action of the material metric.
+
+    Pointwise ``g(a,t)`` lies in the canonical symmetric space
+    ``SPD_1(3)=SL(3)/SO(3)`` with speed
+
+        |g_t|_g^2=tr[(g^-1 g_t)^2].
+
+    The primitive speed lock and velocity-energy law give
+
+        int_0^t int |g_s|_g^2 da ds = (E(0)-E(t))/nu.
+
+    Hence the total path length ``ell(a)=int_0^t |g_s(a)|_g ds`` satisfies
+
+        int ell(a)^2 da <= t (E(0)-E(t))/nu,
+
+    and so does the squared affine distance from the identity.  On any finite
+    smooth interval, the metric path therefore has finite length for almost every
+    material label.  No supremum or global-regularity conclusion follows.
+    """
+    t=float(time_horizon); loss=float(energy_loss); nu=float(viscosity)
+    if not all(math.isfinite(x) for x in (t,loss,nu)) or t<0.0 or loss<0.0 or nu<=0.0:
+        raise ValueError("nonnegative finite time/loss and positive viscosity required")
+    action=loss/nu
+    return {
+        "metric_speed_spacetime_l2_squared":action,
+        "material_path_length_l2_squared_upper":t*action,
+        "affine_distance_l2_squared_upper":t*action,
+        "log_max_stretch_l2_squared_upper":0.25*t*action,
+    }
+
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
@@ -1058,6 +1091,13 @@ def theorem_certificate() -> dict[str, object]:
         "flat_hodge_dirichlet": "because every g=Phi^*g0 is flat, <beta,L_g beta>_g=||nabla^g beta||_2^2; material spatial non-affinity and vorticity magnitude/direction variation are already part of the same heat Dirichlet form, not a separate escape channel",
         "pair_mismatch_collapse": "omega_a cross omega_b=F_a^-T(q_a cross q_b)+(F_a q_a) cross((F_b-F_a)q_b); these are coordinate pieces of one covariant material-two-form variation, whose intrinsic norm is the same nabla^g beta squared by Hodge heat",
         "distortion_budget": "int [log sigma_max F]_+^2 da <= t(E0-Et)/(4nu); extreme material distortion is globally L2-log sparse but a supremum is not controlled",
+        "hodge_lax_isospectral": "naturality gives partial_t L_g=[Lie_v,L_g] and partial_t delta_g=[Lie_v,delta_g]; every material Hodge operator is conjugate to the fixed Euclidean one, so Euler moves its frame but does not create or destroy heat eigenvalues",
+        "current_forced_heat": "with c=delta_g beta and beta_t=-nu L_g beta, c_t=[Lie_v,delta_g]beta-nu L_g^(1)c; Euler can regenerate the viscous current only by motion of the same Hodge frame that it creates through g_t",
+        "maurer_cartan_zero_curvature": "for F=D_a Phi, Gamma=F^-1 dF and B=F^-1 F_t obey dGamma+Gamma wedge Gamma=0 and Gamma_t=D_Gamma B; deformation-frame turnover is a pure-gauge SL(3) connection, not an independent phase field",
+        "connection_current_lock": "flatness and incompressibility give ||D_Gamma B||_L2^2=||delta_g beta||_L2^2 and ||nabla g_t||_L2^2=2||delta_g beta||_L2^2; frame turnover and Hodge current are the same derivative-order activity",
+        "symmetric_space_path_action": "g(a,t) lies in SL(3)/SO(3) and int path_length(a)^2 da <= t(E0-Et)/nu; hence the material metric has finite total affine path length for almost every label on every finite smooth interval, while concentration on a null label set remains open",
+        "kelvin_current_parent": "the pulled-back velocity one-form obeys alpha_t+d pi=-nu delta_g d alpha, so d/dt circulation(gamma)=-nu integral_gamma delta_g beta; beta_t+nu d delta_g beta=0 is the exterior derivative of one Kelvin-current law",
+        "lagrangian_geodesic_acceleration": "for X_t=u(X,t), full NS gives X_tt=(-grad p+nu Delta u)(X,t) and F_tt=(-Hess p+nu grad Delta u)(X,t)F; the explicit quadratic A^2 self-stretch cancels from material acceleration, and for Euler D_t^2 omega=-(Hess p)omega along a frozen material vorticity vector",
         "global_regularity_claimed": False,
         "case_taxonomy_used": False,
         "analysis_cutoff_used": False,
