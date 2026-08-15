@@ -628,17 +628,19 @@ Navier--Stokes adds only
 Thus every triad phase, spectral current and reorientation is a contraction of one fixed Cartan
 tensor, while viscosity is diagonal quadratic heat.  The network is not a changing rulebook.
 
-### 2.5 One-step productivity is not self-turning; continuation is Jacobi-coupled
+### 2.5 One-step freedom, constrained acceleration and non-free continuation
 
 Put
 
 \[
 F:=F_E=J_uCu,
 \qquad
-\kappa=\langle\Lambda u,F\rangle.
+\kappa=\langle\Lambda u,F\rangle,
+\qquad
+F':=DF_E(u)[F].
 \]
 
-Along the Euler part alone, bilinearity of `J_u C u` gives the exact derivative
+Along Euler, bilinearity of `J_uCu` gives
 
 \[
 \boxed{
@@ -648,27 +650,77 @@ Along the Euler part alone, bilinearity of `J_u C u` gives the exact derivative
 +\langle\Lambda u,J_uCF\rangle.}
 \]
 
-The first term is positive, but the last two terms are the complete orientation/Jacobi feedback and
-have no fixed sign.  This is not merely a formal warning.  On one fixed physical Fourier triangle
-`k=(1,0,0)`, `p=(0,1,0)`, `q=(-1,-1,0)`, with one fixed helicity assignment `(+,-,+)` and its fixed
-Waleffe coefficient, changing only the complex amplitudes realizes all four sign pairs
+The first term is positive, but the last two orientation/Jacobi feedback terms have no fixed sign.
+The two Euler invariants nevertheless fix the **normal acceleration** exactly.  Differentiating
+`<u,F>=0` and `<Cu,F>=0` along the Euler orbit gives
+
+\[
+\boxed{
+\langle u,F'\rangle=-\|F\|_2^2,
+\qquad
+\langle Cu,F'\rangle=-\langle CF,F\rangle.}
+\]
+
+Where `u` and `Cu` are independent, write the orthogonal normal projection of the critical gradient as
+
+\[
+P_{\operatorname{span}\{u,Cu\}}\Lambda u=a\,u+b\,Cu,
+\qquad
+g_K:=\Lambda u-a\,u-b\,Cu=P_T\Lambda u.
+\]
+
+Then the remaining freedom is exactly tangent turning:
+
+\[
+\boxed{
+\kappa'_E
+=\langle F,(\Lambda-a-bC)F\rangle
++\langle g_K,P_TF'\rangle.}
+\]
+
+At a degenerate energy--helicity normal span this is read directly through the orthogonal projection,
+not by inverting a singular two-by-two Gram matrix.  Thus the invariants determine the two normal
+components of Euler acceleration, but they do not determine `P_TF'`.
+
+This distinction is physical.  On one fixed Fourier triangle `k=(1,0,0)`, `p=(0,1,0)`,
+`q=(-1,-1,0)`, with one fixed helicity assignment `(+,-,+)` and one fixed Waleffe coefficient,
+changing only the complex amplitudes realizes all four sign pairs
 
 \[
 \boxed{(\operatorname{sgn}\kappa,\operatorname{sgn}\kappa'_E)
 =(+,+),(+,-),(-,+),(-,-).}
 \]
 
-Even the normalized signed productive amplitude
-`kappa/[N sqrt(EZ-K^2)]` can be positive and increasing under Euler.  Therefore there is no
-one-step turning theorem: instantaneous productivity does not force its own immediate decay.
+Even `kappa/[N sqrt(EZ-K^2)]` can be positive and increasing.  There is therefore no one-step
+self-turning theorem.
 
-The first compulsory compatibility appears when an interaction is **continued**.  Let
-`c_(IJK)=<e_I,[e_J,e_K]>`.  Since
+The first new structure appears only when an interaction is **continued**.  In the fixed curl basis,
+one nested path
 
 \[
- f_{IJK}=\langle C^{-1}e_I,[e_J,e_K]\rangle,
+(J,K)\to M,
 \qquad
- c_{IJK}=\lambda_I f_{IJK},
+(I,M)\to L
+\]
+
+contributes to the Euler acceleration with the exact signed-curl-gap coefficient
+
+\[
+\boxed{
+(\lambda_K-\lambda_J)(\lambda_M-\lambda_I)
+ f_{MJK}f_{LIM}.}
+\]
+
+Thus Biot--Savart does not erase the intermediate scale completely: the actual velocity continuation
+retains the difference `lambda_M-lambda_I`.  Equal-signed-curl/degenerate continuations can therefore
+vanish exactly.
+
+At the underlying bracket level, let `c_(IJK)=<e_I,[e_J,e_K]>`.  Since
+
+\[
+f_{IJK}=\langle C^{-1}e_I,[e_J,e_K]\rangle,
+\qquad
+c_{IJK}=\lambda_I f_{IJK},
 \]
 
 ordinary Lie Jacobi gives, for fixed outer modes `I,J,K,L`,
@@ -677,7 +729,7 @@ ordinary Lie Jacobi gives, for fixed outer modes `I,J,K,L`,
 \boxed{A+B+C=0,}
 \]
 
-where
+with
 
 \[
 A=\sum_M\lambda_M f_{MJK}f_{LIM},\qquad
@@ -688,23 +740,82 @@ C=\sum_M\lambda_M f_{MIJ}f_{LKM}.
 Hence
 
 \[
-\boxed{|A|^2\le2(|B|^2+|C|^2),\qquad
+\boxed{|A|^2\le2(|B|^2+|C|^2),
+\qquad
 \max(|B|,|C|)\ge\frac{|A|}{2}.}
 \]
 
-Multiplying all three terms by the same actual outer amplitude `z_I z_J z_K z_L` preserves the
-identity and bounds.  Thus a quartic two-interaction coefficient cannot continue in isolation: a
-large continuation coefficient forces a companion coefficient with the same four outer modes.
-This is a coefficient-level historical self-frustration, not a snapshot angle gap and not yet a
-positive-work estimate.
+Multiplying by the common outer amplitude `z_I z_J z_K z_L` preserves this **bracket-level**
+compatibility.  It must not be promoted to a comparable-companion theorem for the full Euler nested
+coefficients.  A physical helical witness with
 
-There is one decisive guard.  The Jacobi coefficient carries the intermediate factor `lambda_M`
-because `c_(MJK)=lambda_M f_(MJK)`.  If that intermediate vorticity carrier is reused as a velocity
-parent, Biot--Savart contributes `C^-1`, hence a reciprocal `1/lambda_M`.  These factors may cancel.
-The Galilean null suppresses the true interaction as `lambda_M -> 0`, and heat kills mode `M` at rate
-`nu |lambda_M|^2`, but no state-weighted inequality presently converts the Jacobi companion into a
-summable heat-visible carrier bill.  **Production may be productive for one step; continuation is not
-solitary, but its compulsory companion is not yet a proved dissipation cost.**
+`i=(2,2,-1)`, `j=(0,0,3)`, `k=(-2,-2,2)`, `ell=(0,0,4)` and helicities `(+,+,-,-)`
+
+has a nonzero first full continuation while both cyclic full companions vanish, even though weighted
+Jacobi remains exact.  The signed-curl gap factors, not a failure of Jacobi, produce this cancellation.
+So **Jacobi forbids a solitary bracket composition; it does not by itself forbid a solitary full Euler
+continuation coefficient.**
+
+Fourier closure supplies a separate, exact carrier constraint.  For
+
+\[
+m_1=j+k,\qquad m_2=k+i,\qquad m_3=i+j,\qquad \ell=i+j+k,
+\]
+
+one has
+
+\[
+\boxed{m_1+m_2+m_3=2\ell,}
+\qquad
+\boxed{\max_r|m_r|\ge\frac23|\ell|.}
+\]
+
+Thus a diamond reaching `ell` cannot place **all three intermediate locations** at negligible
+frequency.  This is only location geometry: it does not assert that the comparable-scale carrier has
+nonzero companion work.  Low-frequency interaction is separately suppressed by the Galilean null,
+while every nonzero carrier is killed by heat at rate `nu |m|^2`.
+
+The strict heterochiral UV triangle gives a continuous one-step law with no analyst-selected window.
+Normalize the forward-child radius to `M`, write the donor and side ratios as `D,S` with
+`0<D,S<1` and `D+S>1`, and let `R>0` be the common physical current.  Then
+
+\[
+F_{\log}=(D+S)R\log\frac1{\max(D,S)},
+\]
+
+while the same three-frequency Nijenhuis/quadratic-variation weight is
+
+\[
+Q_\triangle=M^2(1-D)(1+S)(D+S)R.
+\]
+
+On the entire strict physical triangle,
+
+\[
+\boxed{M^2F_{\log}\le Q_\triangle.}
+\]
+
+The constant `1` is sharp.  Along `D=1-epsilon^2`, `S=epsilon`,
+
+\[
+\frac{D+S}{1+S}\longrightarrow1,
+\qquad
+F_{\log}\longrightarrow0,
+\qquad
+\frac{M^2F_{\log}}{Q_\triangle}\longrightarrow1.
+\]
+
+Hence the signed-good `10/13` retained-work ceiling is a valid local window theorem, not a primitive
+global law: on the full physical triangle the retained fraction can approach one.  The window-free
+statement is instead continuous: **near-perfect retention is permitted only with vanishing logarithmic
+scale displacement.**
+
+This still does not close history.  `Q_triangle` is positive for one oriented triad occurrence, but a
+sum of positive occurrence-wise curvatures is a representation-dependent gross-traffic quantity.  The
+full Nijenhuis curvature is representation-free but signed and can contain coherent cancellation.
+No positive global composition law is obtained by summing `Q_triangle^+`.  The remaining theorem must
+compose actual Cartan gaps, Jacobi compatibility, carrier geometry, Galilean nullity and diagonal heat
+without inventing such a gross budget.
 
 
 ---
@@ -1836,12 +1947,13 @@ j_E(0,t)^2M_1(t)
 
 Its integrand is exactly the already proved escape action.  Escape would force the same integral to
 diverge.  What remains unproved is therefore not a scalar-`mathfrak q` closure and not a one-step
-orientation sign law.  Productive history must be continued through the fixed Cartan network; weighted
-Jacobi then forces companion two-interaction coefficients.  The missing theorem is the state-weighted
-bridge from that compulsory continuation companion to heat-visible carrier cost despite the
-intermediate `lambda_M`/`C^-1` cancellation.  The covariance, Pythagoras and local half-space identities
-remain realizability constraints/readings of that current, not additional mechanisms.  No regularity
-claim is inserted here.
+orientation sign law.  Productive history must continue through the fixed Cartan network.  Weighted
+Jacobi constrains the underlying bracket compositions, but signed-curl gaps can erase the corresponding
+full Euler companions.  The missing theorem is a representation-free positive composition law that
+turns actual nontrivial logarithmic continuation into heat-visible carrier cost without summing an
+analyst-chosen gross positive triad variation.  The covariance, Pythagoras and local half-space
+identities remain realizability constraints/readings of that current, not additional mechanisms.  No
+regularity claim is inserted here.
 
 ### 6.2 Galilean null
 
@@ -3984,8 +4096,10 @@ The separate material theorem adds the transverse determinant and Minkowski memo
 18. **No pair-area heat monotonicity shortcut.**  No sign is assumed for the absolute pair-area history under heat; differentiating the singular pair kernel does not supply a proved pure negative-square law, so this route is not used.
 19. **No scalar-`mathfrak q` orientation closure.**  A physical closed-triad `pi` phase reversal leaves the whole radial Dirichlet profile fixed while reversing `j_E` and `kappa`; the positive scalar ledger cannot determine nonlinear direction.
 20. **No transport-action lower shortcut.**  Physical Waleffe triads violate `A_escape <= int j_E^2/mathfrak q dy` by large factors; scalar depth motion is not a compulsory payment comparable to normalized boundary productivity.
-21. **No one-step turning theorem.**  The exact Euler derivative of `kappa` contains two sign-indefinite orientation/Jacobi feedback terms, and one fixed physical triad realizes all four `(sign kappa, sign kappa'_E)` quadrants.
-22. **No Jacobi-to-heat shortcut.**  Weighted Jacobi forces companion two-step coefficients, but the intermediate `lambda_M` can cancel against the `1/lambda_M` from Biot--Savart when that carrier is reused as velocity; no state-weighted heat bill is inferred from coefficient companionship alone.
+21. **No one-step turning theorem.**  The exact Euler derivative of `kappa` contains tangent turning not fixed by the two invariant normal accelerations, and one fixed physical triad realizes all four `(sign kappa, sign kappa'_E)` quadrants.
+22. **No full-Euler companion theorem from Jacobi alone.**  Weighted Jacobi controls bracket compositions `sum lambda_M f f`; actual nested Euler coefficients carry additional signed-curl gaps `(lambda_M-lambda_I)`, and a physical helical witness has one nonzero full continuation with both cyclic full companions zero.
+23. **No global fixed-loss `10/13` law.**  That ceiling belongs to the signed-good `3/5--5/8` window.  On the full strict UV triangle `(D+S)/(1+S)->1`; the primitive replacement is the sharp continuous law `M^2 F_log<=Q_triangle`, with retained fraction tending one only as log progress tends zero.
+24. **No gross positive curvature budget.**  `Q_triangle>=0` is occurrence-wise; summing positive triad curvatures creates a representation-dependent traffic quantity.  The full Nijenhuis curvature is representation-free but signed, so a positive composition theorem is still required.
 
 ---
 
@@ -4046,14 +4160,19 @@ quantity: an exact physical triad violates the proposed lower comparison by more
 magnitude.  Nor is there a one-step orientation monotone: on one fixed physical triad, `kappa` and its
 Euler derivative realize all four sign quadrants.
 
-The sharper historical statement begins only when productive motion is **continued**.  The fixed
-Cartan tensor forces every two-interaction coefficient into a weighted Jacobi triple `A+B+C=0`, so a
-continuation coefficient cannot be solitary.  The remaining theorem must turn this compulsory
-companion activity into a non-summable **heat-visible carrier cost** strongly enough to make the exact
-normalized escape action finite on every finite smooth interval.  The unresolved seam is the exact
-`lambda_M` versus Biot--Savart `1/lambda_M` cancellation at the intermediate carrier.  Galilean nullity
-and `nu|lambda_M|^2` heat are available endpoints, but the required state-weighted bridge between them
-is **not proved**.
+The sharper historical statement begins only when productive motion is **continued**.  Actual nested
+Euler paths carry signed-curl gaps `(lambda_K-lambda_J)(lambda_M-lambda_I)`.  Weighted Jacobi forces
+companion compositions only at the underlying bracket level; it does not force comparable full Euler
+companions after those gaps are restored.  Fourier diamonds separately guarantee that at least one of
+the three intermediate locations has radius at least `2|ell|/3`, and the global strict-UV law says that
+near-perfect one-step retention is possible only with vanishing logarithmic scale progress.
+
+The remaining theorem is therefore a **representation-free positive composition theorem**: persistent
+nontrivial logarithmic escape must force enough actual, non-cancelling Cartan/Nijenhuis carrier activity
+at heat-visible frequencies to make the exact normalized escape action finite on every finite smooth
+interval.  One may not prove this by summing `Q_triangle^+`; that would be an analyst-created gross
+traffic budget.  Galilean nullity and `nu|m|^2` heat are exact endpoint constraints, but the positive
+composition bridge through coherent many-triad cancellation is **not proved**.
 
 The previously exposed lossless tangent coordinate remains exact but is now a compressed boundary
 reading:

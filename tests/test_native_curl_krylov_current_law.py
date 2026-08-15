@@ -487,6 +487,14 @@ def test_uv_log_progress_is_bounded_by_same_martingale_quadratic_variation():
         expected = (1.0 - D) * (1.0 + S) * (D + S)
         assert out["signed_curl_curvature_per_common_current_at_unit_child_radius"] == pytest.approx(expected)
 
+    ratios=[]
+    for eps in (1e-2,1e-3,1e-4):
+        out=heterochiral_frontier_progress_side_bound(1-eps*eps,eps)
+        assert out["high_child_retained_fraction"] > 10.0/13.0
+        assert out["child_log_progress_per_common_current"] < 1.02*eps*eps
+        ratios.append(out["child_log_progress_per_common_current"]/out["log_progress_upper_from_curvature"])
+    assert ratios[-1] > 0.9998 and ratios == sorted(ratios)
+
 
 def test_modal_euler_action_has_exact_spectral_within_phase_birth_pythagorean_split():
     a = (1.0, 1.0, -2.0, -2.0, 3.0)
@@ -799,6 +807,26 @@ def test_fixed_cartan_tensor_rhs_is_energy_helicity_null_and_heat_contracting():
     assert out["phase_space_divergence"] == pytest.approx(-nu*sum(x*x for x in lam))
 
 
+def test_euler_acceleration_normals_and_critical_leaf_turning_decomposition_are_exact():
+    lam=np.array((-3.1,-1.0,0.4,2.2,4.0));z=np.array((0.7,-1.1,0.5,0.9,-0.4))
+    triples=((0,1,2,0.31),(0,1,4,-0.27),(0,3,4,0.18),(1,2,3,-0.42),(2,3,4,0.23))
+    def Q(x): return np.array(fixed_curl_cocycle_rhs(lam,x,triples)["euler_rhs"])
+    F=Q(z);Fp=Q(z+F)-Q(z)-Q(F)  # exact polarization of the quadratic Euler field
+    assert float(z@Fp) == pytest.approx(-float(F@F),abs=3e-14)
+    assert float((lam*z)@Fp) == pytest.approx(-float((lam*F)@F),abs=3e-14)
+
+    abs_lam=np.abs(lam);E=float(z@z);H=float(z@(lam*z));Z=float((lam*z)@(lam*z))
+    K=float(z@(abs_lam*z));X=float((lam*z)@(abs_lam*z));G=np.array(((E,H),(H,Z)))
+    a,b=np.linalg.solve(G,np.array((K,X)));g=abs_lam*z-a*z-b*lam*z
+    assert float(g@z) == pytest.approx(0.0,abs=2e-14)
+    assert float(g@(lam*z)) == pytest.approx(0.0,abs=2e-14)
+    c,d=np.linalg.solve(G,np.array((float(z@Fp),float((lam*z)@Fp))))
+    PT=Fp-c*z-d*lam*z
+    direct=float(F@(abs_lam*F)+(abs_lam*z)@Fp)
+    represented=float(F@((abs_lam-a-b*lam)*F)+g@PT)
+    assert direct == pytest.approx(represented,abs=3e-14)
+
+
 def test_one_fixed_cartan_triple_reconstructs_same_canonical_spectral_energy_source():
     lam=(-2.0,0.6,3.1);z=(0.8,-0.5,1.2);f=0.37
     out=fixed_curl_cocycle_rhs(lam,z,((0,1,2,f),))
@@ -842,7 +870,7 @@ def test_one_fixed_physical_triad_has_no_one_step_productive_turning_sign_law():
     assert eta>0.04 and etad>0.02
 
 
-def test_weighted_jacobi_forces_companion_two_step_coefficients_on_physical_helical_modes():
+def test_weighted_jacobi_is_bracket_level_and_full_euler_companions_can_vanish():
     def mode(k,s): return (np.asarray(k,float),int(s))
     def lam(m): return m[1]*float(np.linalg.norm(m[0]))
     def ccoef(out,a,b):
@@ -851,17 +879,35 @@ def test_weighted_jacobi_forces_companion_two_step_coefficients_on_physical_heli
         ho,ha,hb=helical_basis(ko,so),helical_basis(ka,sa),helical_basis(kb,sb)
         return np.vdot(ho,1j*(np.dot(ha,kb)*hb-np.dot(hb,ka)*ha))
     def fcoef(out,a,b): return ccoef(out,a,b)/lam(out)
-    I,J,K,L=mode((1,0,0),1),mode((0,1,0),-1),mode((0,0,1),1),mode((1,1,1),-1)
-    def term(a,b,c):
+    def weighted(final,a,b,c):
         km=a[0]+b[0]
-        return sum(lam(M:=mode(km,sm))*fcoef(M,a,b)*fcoef(L,c,M) for sm in (-1,1))
-    A,B,C=term(J,K,I),term(K,I,J),term(I,J,K)
+        return sum(lam(M:=mode(km,sm))*fcoef(M,a,b)*fcoef(final,c,M) for sm in (-1,1))
+    def full(final,a,b,c):
+        km=a[0]+b[0]
+        return sum((lam(b)-lam(a))*(lam(M:=mode(km,sm))-lam(c))*fcoef(M,a,b)*fcoef(final,c,M) for sm in (-1,1))
+
+    I,J,K,L=mode((1,0,0),1),mode((0,1,0),-1),mode((0,0,1),1),mode((1,1,1),-1)
+    A,B,C=weighted(L,J,K,I),weighted(L,K,I,J),weighted(L,I,J,K)
     scale=max(abs(A),abs(B),abs(C))
     assert abs(A+B+C)<=8e-15*scale
     assert abs(A)**2<=2*(abs(B)**2+abs(C)**2)+1e-14
     assert max(abs(B),abs(C))+1e-14>=abs(A)/2
     outer=(0.7-0.2j)*(-0.4+0.6j)*(1.1+0.3j)*(0.5-0.8j)
     assert abs(outer*(A+B+C))<=8e-15*abs(outer)*scale
+
+    # Restoring the actual Euler signed-curl gaps destroys any universal companion lower bound.
+    I,J,K,L=mode((2,2,-1),1),mode((0,0,3),1),mode((-2,-2,2),-1),mode((0,0,4),-1)
+    Aw,Bw,Cw=weighted(L,J,K,I),weighted(L,K,I,J),weighted(L,I,J,K)
+    Af,Bf,Cf=full(L,J,K,I),full(L,K,I,J),full(L,I,J,K)
+    assert abs(Aw+Bw+Cw)<=3e-15*max(abs(Aw),abs(Bw),abs(Cw))
+    assert abs(Af)>5.0
+    assert abs(Bf)<2e-14 and abs(Cf)<2e-14
+    assert abs(Cw)>0.25  # the bracket companion exists; a curl gap kills its full Euler path
+
+    m1=J[0]+K[0];m2=K[0]+I[0];m3=I[0]+J[0];ell=L[0]
+    assert np.linalg.norm(m1+m2+m3-2*ell)<1e-14
+    assert max(np.linalg.norm(m1),np.linalg.norm(m2),np.linalg.norm(m3))+1e-14 >= 2*np.linalg.norm(ell)/3
+    assert np.linalg.norm(m3)>=2*np.linalg.norm(ell)/3 and abs(Cf)<2e-14
 
 
 
@@ -2168,9 +2214,16 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "tangent Rayleigh-gradient direction" in cert["primitive_critical_uphill_projection"]
     assert "A_escape=kappa^2/[N^2(EZ-K^2)]" in cert["primitive_scalar_triple_escape"]
     assert "only the first term has fixed sign" in cert["primitive_euler_kappa_derivative"]
+    assert "remaining freedom is tangent turning" in cert["primitive_euler_acceleration_leaf"]
     assert "all four sign quadrants" in cert["primitive_one_step_turning_guard"]
-    assert "A+B+C=0" in cert["primitive_weighted_jacobi_continuation"]
-    assert "1/lambda_M from C^-1" in cert["primitive_jacobi_biot_savart_seam"]
+    assert "(lambda_M-lambda_I)" in cert["primitive_full_two_step_gap"]
+    assert "bracket-level A+B+C=0" in cert["primitive_weighted_jacobi_continuation"]
+    assert "both cyclic full companions vanish" in cert["primitive_full_continuation_companion_guard"]
+    assert "max |m_r|>=2|ell|/3" in cert["primitive_fourier_diamond_carrier_guard"]
+    assert "representation-free positive composition bridge is unproved" in cert["primitive_jacobi_biot_savart_seam"]
+    assert "retained child/donor work tends 1" in cert["uv_curvature"]
+    assert "10/13" in cert["primitive_fixed_loss_window_guard"]
+    assert "gross-traffic budget" in cert["primitive_positive_curvature_composition_guard"]
     assert "whole critical hierarchy is one boundary jet" in cert["primitive_poisson_energy_profile"]
     assert "P_y(fg)-P_yf P_yg" in cert["primitive_poisson_product_defect"]
     assert "R'_E(0)=-4kappa" in cert["primitive_poisson_boundary_critical_law"]
