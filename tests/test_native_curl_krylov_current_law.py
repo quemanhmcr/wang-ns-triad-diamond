@@ -1757,3 +1757,136 @@ def test_critical_six_dimensional_gauss_normal_form_has_no_hidden_drift_cross_te
     cross=float(np.mean(np.sum(u*gradf,axis=-1)*f))
     assert abs(cross) <= 2e-15
     assert lhs == pytest.approx(rhs,rel=3e-14,abs=3e-14)
+
+
+def test_critical_increment_stress_work_angle_and_nonlocal_transport_referee():
+    import numpy as np
+
+    n=16
+    rng=np.random.default_rng(7341)
+    kk=np.fft.fftfreq(n,1.0/n)
+    kx,ky,kz=np.meshgrid(kk,kk,kk,indexing="ij")
+    ks=(kx,ky,kz)
+    k2=kx*kx+ky*ky+kz*kz
+    kmag=np.sqrt(k2)
+    kvec=np.stack(ks)
+
+    def fft(a):
+        return np.fft.fftn(a,axes=tuple(range(a.ndim-3,a.ndim)))
+
+    def ifft(a):
+        return np.fft.ifftn(a,axes=tuple(range(a.ndim-3,a.ndim))).real
+
+    def leray(vh):
+        dot=np.sum(kvec*vh,axis=0)
+        return vh-kvec*dot[None]/np.where(k2==0.0,1.0,k2)[None]
+
+    def curlh(vh):
+        return 1j*np.stack([
+            ky*vh[2]-kz*vh[1],
+            kz*vh[0]-kx*vh[2],
+            kx*vh[1]-ky*vh[0],
+        ])
+
+    def lambda_h(h):
+        return kmag*h if h.ndim==3 else kmag[None]*h
+
+    def cross(a,b):
+        return np.cross(a,b,axisa=0,axisb=0,axisc=0)
+
+    # Low support <=2 leaves room for every product used below, so this is an
+    # exact finite Fourier referee rather than a wrap-around aliasing artifact.
+    uh=fft(rng.normal(size=(3,n,n,n)))
+    uh*=((kmag<=2.0)&(kmag>0.0))
+    uh=leray(uh)
+    uh[:,k2==0.0]=0.0
+    u=ifft(uh)
+    uh=leray(fft(u))
+    omega_h=curlh(uh)
+    omega=ifft(omega_h)
+    lambda_u_h=lambda_h(uh)
+    lambda_u=ifft(lambda_u_h)
+    lambda_omega=ifft(lambda_h(omega_h))
+    fe_h=leray(fft(cross(u,omega)))
+    fe=ifft(fe_h)
+    lambda_fe_h=lambda_h(fe_h)
+
+    def gamma_tensor(a,b):
+        la=ifft(lambda_h(fft(a)))
+        lb=ifft(lambda_h(fft(b)))
+        out=np.empty((3,3,n,n,n))
+        for i in range(3):
+            for j in range(3):
+                out[i,j]=(a[i]*lb[j]+b[j]*la[i]
+                          -ifft(lambda_h(fft(a[i]*b[j]))))
+        return out
+
+    gamma=gamma_tensor(u,u)
+    div_gamma_h=np.zeros_like(uh)
+    for i in range(3):
+        for j in range(3):
+            div_gamma_h[i]+=1j*ks[j]*fft(gamma[i,j])
+    p_div_gamma_h=leray(div_gamma_h)
+    u_cross_lambda_omega_h=leray(fft(cross(u,lambda_omega)))
+    lambda_u_cross_omega_h=leray(fft(cross(lambda_u,omega)))
+    corrected=(lambda_fe_h-u_cross_lambda_omega_h-lambda_u_cross_omega_h)
+
+    def rel(a,b):
+        return float(np.linalg.norm(a-b)/max(1.0e-30,np.linalg.norm(a),np.linalg.norm(b)))
+
+    assert rel(p_div_gamma_h,corrected) < 2.0e-12
+    # Two tempting simplifications are genuinely false on this actual state.
+    assert rel(p_div_gamma_h,lambda_fe_h) > 1.0e-2
+    assert rel(lambda_fe_h,u_cross_lambda_omega_h-lambda_u_cross_omega_h) > 1.0e-2
+
+    grad_u=np.empty((3,3,n,n,n))
+    for i in range(3):
+        for j in range(3):
+            grad_u[i,j]=ifft(1j*ks[j]*uh[i])
+    strain=0.5*(grad_u+np.swapaxes(grad_u,0,1))
+    div_gamma=ifft(div_gamma_h)
+    kappa=float(np.mean(np.sum(lambda_u*fe,axis=0)))
+    u_div_gamma=float(np.mean(np.sum(u*div_gamma,axis=0)))
+    gamma_strain=float(np.mean(np.sum(gamma*strain,axis=(0,1))))
+    scale=max(1.0,abs(kappa),abs(u_div_gamma),abs(gamma_strain))
+    assert abs(u_div_gamma-2.0*kappa) < 3.0e-12*scale
+    assert abs(gamma_strain+2.0*kappa) < 3.0e-12*scale
+
+    # Exact Euler material derivative of Gamma from the operator law.  The
+    # local upper-convected candidate has an order-one residual.
+    gamma_t=gamma_tensor(fe,u)+gamma_tensor(u,fe)
+    adv_gamma=np.empty_like(gamma)
+    for i in range(3):
+        for j in range(3):
+            gh=fft(gamma[i,j])
+            adv_gamma[i,j]=sum(u[a]*ifft(1j*ks[a]*gh) for a in range(3))
+    material_gamma=gamma_t+adv_gamma
+    gamma_grad=np.einsum('ik...,kj...->ij...',gamma,grad_u)
+    grad_t_gamma=np.einsum('ki...,kj...->ij...',grad_u,gamma)
+    upper_residual=material_gamma+gamma_grad+grad_t_gamma
+    rms=lambda a: float(np.sqrt(np.mean(np.abs(a)**2)))
+    assert rms(upper_residual) > 0.5*rms(material_gamma)
+
+    # The single angle cos(theta)=K/sqrt(EZ) also does not telescope: its
+    # exact Euler derivative contains both kappa and vortex-stretch work P.
+    E=float(np.mean(np.sum(u*u,axis=0)))
+    K=float(np.mean(np.sum(u*lambda_u,axis=0)))
+    Z=float(np.mean(np.sum(omega*omega,axis=0)))
+    stretch=float(np.mean(np.sum(omega*np.einsum('ij...,j...->i...',strain,omega),axis=0)))
+    cosine=K/math.sqrt(E*Z)
+    assert 0.0 < cosine < 1.0
+    theta=math.acos(cosine)
+    rhs=2.0*kappa/K-stretch/Z
+    theta_dot=-rhs/math.tan(theta)
+    assert theta_dot/(-1.0/math.tan(theta)) == pytest.approx(rhs,rel=2e-14,abs=2e-14)
+
+
+def test_certificate_records_increment_stress_and_rejects_fake_persistence_shortcuts():
+    cert=theorem_certificate()
+    assert "P div Gamma_u=Lambda F_E-P(u cross Lambda omega)-P((Lambda u) cross omega)" in cert["primitive_critical_increment_stress_work"]
+    assert "kappa=-(1/2) int Gamma_u:S" in cert["primitive_critical_increment_stress_work"]
+    assert "not a local conformation tensor" in cert["primitive_critical_increment_transport_guard"]
+    assert "det Gamma is not a material invariant" in cert["primitive_critical_increment_transport_guard"]
+    assert "-tan(theta) theta'_E=2kappa/K-P/Z" in cert["primitive_single_angle_guard"]
+    assert "one-angle monotone or telescope" in cert["primitive_single_angle_guard"]
+    assert cert["global_regularity_claimed"] is False
