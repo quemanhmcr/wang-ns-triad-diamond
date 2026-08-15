@@ -2067,11 +2067,67 @@ Finally, `K^2<=EZ` and `-E'=2 nu Z` give a genuine finite-time history law:
 \left[\frac{E(0)-E(T)}{2\nu}\right]^{1/4}.}
 \]
 
-This is finite Hilbert path length, **not** a bound on endpoint velocity and not regularity.  The
-remaining loophole is relay: inward `r`-transport may move to fresh center/material labels.  There
-is no third pair coordinate.  The unresolved primitive seam is therefore to couple exact inward
-separation flux to the already intrinsic material Hodge/deformation turnover cost, rather than add
-a static analyst inequality.
+This is finite Hilbert path length, **not** a bound on endpoint velocity and not regularity.
+
+### 11.9 Incompressibility fixes the radial/transverse critical split
+
+The separation itself supplies the only further split.  Write
+
+\[
+n=\frac r{|r|},\qquad \delta u=a n+b,\qquad b\perp n.
+\]
+
+With the same critical kernel define
+
+\[
+K_\parallel=\frac1{2\pi^2}\iint\frac{a^2}{|r|^4},\qquad
+K_\perp=\frac1{2\pi^2}\iint\frac{|b|^2}{|r|^4}.
+\]
+
+Plancherel plus `k dot u_hat(k)=0` gives the exact continuum identity
+
+\[
+\boxed{K_\parallel=\frac14K,\qquad K_\perp=\frac34K.}
+\]
+
+Indeed the radial `|r|` integration leaves the angular weight `|khat dot n|`; for a transverse
+Fourier polarization the longitudinal angular fraction is exactly `1/4`.  Thus incompressible 3D
+critical motion cannot be pure pair collapse.  The relative velocity is itself separation-space
+incompressible,
+
+\[
+\boxed{\nabla_r\cdot\delta u=\tfrac12\operatorname{div}u(x)+\tfrac12\operatorname{div}u(y)=0.}
+\]
+
+Put
+
+\[
+A_3:=\iint\frac{a^3}{|r|^5},\qquad
+B_3:=\iint\frac{a|b|^2}{|r|^5}.
+\]
+
+Then `kappa(0)=-pi^-2(A_3+B_3)`.  Since the `1:3` split holds at every time,
+`K'_{parallel,E}=kappa(0)/2`.  Differentiating `a^2|r|^-4` along the material pair law gives the
+exact pressure exchange
+
+\[
+\boxed{
+P_\parallel=\frac{3}{2\pi^2}(A_3-B_3),\qquad
+P_\perp=-P_\parallel.}
+\]
+
+There is no conflict with the preceding center-road law: pressure has no direct `r`-flux for the
+total pair energy, but inside the critical kinetic metric it can convert radial and transverse
+motion with zero net critical work.  Under inversion the same split is literal kinetic geometry,
+since `D mathcal I(r)` only reflects the radial direction and multiplies both channels by `|r|^-2`.
+
+The primitive grammar is therefore shorter: relative advection supplies the two-way inward/outward
+critical work; pressure is a radial/transverse converter; viscosity removes total critical kinetic
+energy one way.  The remaining loophole is historical relay.  Exact `K_perp=3K_parallel` gives a
+compulsory transverse **stock**, but converting infinite inward `r`-flux into infinite transverse
+time-action is still unproved.  The unresolved seam is to identify that endogenous transverse
+history with the already intrinsic material Hodge/deformation heat action, not to add a static
+analyst inequality.
 
 ---
 
@@ -2485,22 +2541,14 @@ K=\pi^{-2}\int Q(r)|r|^{-4}dr,\qquad
 \kappa(0)=-2\pi^{-2}\int J(r)\cdot r\,|r|^{-6}dr.}
 \]
 
-Critical growth is therefore weighted inward `r`-flux of relative kinetic energy, while pressure
-has only the common `c` road.  The
-inverted material-pair configuration has finite Hilbert path length on every finite interval, so
-the unresolved escape mechanism is a relay between active center/material labels.  Schematically,
-
-\[
-\boxed{
-\text{infinite inward separation flux}
-\Longrightarrow
-\text{fixed-pair compression or center-label turnover}.}
-\]
-
-The fixed-pair side has the exact inversion-history bound; the turnover side is not free because
-material deformation already obeys the Hodge/current history law below.  Proving that these two
-exact histories exclude infinite productive regeneration is the remaining **quantitative
-stability/history** theorem.  It is not proved, and no global-regularity claim is made.
+Critical growth is therefore weighted inward `r`-flux.  Incompressibility additionally fixes
+`K_parallel=K/4`, `K_perp=3K/4` and `div_r delta u=0`; pressure only exchanges the two channels and
+has zero total critical work.  The inverted pair configuration has finite Hilbert path length, so
+any escape history must combine inward separation transport with center/material relay while
+carrying compulsory transverse critical stock.  The missing theorem is precisely to promote that
+instantaneous `1:3` geometry to a time-action statement and identify its transverse history with
+the material Hodge/deformation heat action.  This **quantitative stability/history** bridge is not
+proved, and no global-regularity claim is made.
 
 Material Hodge turnover remains the natural history gauge through
 

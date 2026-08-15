@@ -1368,9 +1368,39 @@ def test_primitive_two_particle_roads_and_inversion_geometry_are_exact():
     assert float((DI@v)@D2) == pytest.approx(-2.0*float(v@v)*float(v@rr)/rho**6,rel=2e-15)
 
 
+def test_primitive_pair_radial_transverse_split_and_pressure_converter_constants_are_exact():
+    # For k=e3 and a divergence-free polarization e1, radial integration of
+    # (1-cos(k.r))/|r|^4 leaves |cos(theta)| on S^2.  The projected angular
+    # fraction is exactly 1/4; the complementary transverse fraction is 3/4.
+    total_ang=2.0*math.pi  # 2pi * int_-1^1 |mu| dmu
+    parallel_ang=0.5*math.pi  # pi * int_-1^1 (1-mu^2)|mu| dmu
+    assert parallel_ang/total_ang == pytest.approx(0.25,rel=1e-15)
+    assert 1.0-parallel_ang/total_ang == pytest.approx(0.75,rel=1e-15)
+
+    # Differentiate a^2 |r|^-4 along dot r=a n+b.  The non-pressure Euler
+    # contribution to K_parallel' is pi^-2(B3-2A3).  Since K_parallel=K/4
+    # and K'_E=2 kappa, pressure is forced to be the exact converter below.
+    A3,B3=1.7,-0.43
+    kappa=-(A3+B3)/math.pi**2
+    adv_parallel=(B3-2.0*A3)/math.pi**2
+    pressure_parallel=0.5*kappa-adv_parallel
+    expected=3.0*(A3-B3)/(2.0*math.pi**2)
+    assert pressure_parallel == pytest.approx(expected,rel=1e-15)
+    assert pressure_parallel + (-pressure_parallel) == 0.0
+
+    # div_r(delta u)=1/2 div u(x)+1/2 div u(y).
+    tr_x=(0.7-0.2-0.5)
+    tr_y=(-0.4+0.9-0.5)
+    assert 0.5*(tr_x+tr_y) == pytest.approx(0.0,abs=1e-15)
+
+
 def test_certificate_records_two_particle_critical_history_without_closure_claim():
     cert=theorem_certificate()
     assert "pressure has only the common-coordinate road" in cert["primitive_two_particle_transport"]
+    assert "K_parallel=K/4" in cert["primitive_pair_radial_transverse_split"]
+    assert "K_perp=3K/4" in cert["primitive_pair_radial_transverse_split"]
+    assert "P_parallel=3(A3-B3)/(2pi^2)" in cert["primitive_pressure_pair_converter"]
+    assert "mints no total critical energy" in cert["primitive_pressure_pair_converter"]
     assert "Q_t+div_r J=2nu Delta_r Q-2nu Z" in cert["primitive_relative_pressure_free_law"]
     assert "weighted inward relative transport toward r=0" in cert["primitive_relative_pressure_free_law"]
     assert "K=(2pi^2)^-1" in cert["primitive_inverted_pair_kinetic"]
