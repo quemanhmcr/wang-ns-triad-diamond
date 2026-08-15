@@ -1978,59 +1978,137 @@ Put
 
 \[
 x=c+\frac r2,\qquad y=c-\frac r2,\qquad
-\delta u=u(x)-u(y),\qquad \bar u=\frac{u(x)+u(y)}2,
+U:=\frac{u(x)+u(y)}2,\qquad v:=u(x)-u(y),
+\]
+
+and `pbar=(p(x)+p(y))/2`, `delta p=p(x)-p(y)`.  These are the common and relative
+motions of the two actual endpoints.  At fixed physical separation `r`, NS itself splits exactly as
+
+\[
+\boxed{
+\partial_tU+(U\cdot\nabla_c)U+\frac14(v\cdot\nabla_c)v+\nabla_c\bar p
+=\nu\Delta_cU,}
 \]
 
 \[
-\boxed{q(c,r,t):=\frac12|\delta u|^2.}
+\boxed{
+\partial_tv+(U\cdot\nabla_c)v+(v\cdot\nabla_c)U+\nabla_c\delta p
+=\nu\Delta_cv.}
 \]
 
-Here `c` is common motion and `r` is physical separation; neither is an analyst-selected scale.
-Subtracting the two NS equations and using incompressibility gives the exact local law
+The endpoint origin forces the compatibility identities
+
+\[
+\boxed{
+\nabla_rv=\nabla_cU,\qquad
+4\nabla_rU=\nabla_cv,\qquad
+\Delta_cv=4\Delta_rv.}
+\]
+
+Thus center motion and separation motion do not carry independent heat operators.  If
+`D_pair=partial_t+U dot nabla_c+v dot nabla_r`, then the second equation is equivalently
+`D_pair v+nabla_c delta p=nu Delta_c v`.
+
+Translation invariance gives, for every fixed `r`,
+
+\[
+\boxed{\langle U,v\rangle_{L^2_c}=0,\qquad
+\|U\|_2^2+\frac14\|v\|_2^2=E.}
+\]
+
+Writing
+
+\[
+T(r):=\int (v\otimes v):S_U\,dc,
+\]
+
+the two roads have the exact energy exchange
+
+\[
+\boxed{
+\frac12\frac d{dt}\|v\|_2^2=-T(r)-\nu\|\nabla_cv\|_2^2,
+\qquad
+\frac12\frac d{dt}\|U\|_2^2=\frac14T(r)-\nu\|\nabla_cU\|_2^2.}
+\]
+
+Euler only exchanges common and relative endpoint energy; heat only removes it.
+
+For the relative density `q=|v|^2/2`, subtracting the endpoint equations also gives the exact local
+pair conservation law
 
 \[
 \boxed{
 \partial_tq
-+\nabla_c\!\cdot(q\bar u+\delta p\,\delta u)
-+\nabla_r\!\cdot(q\delta u)
++\nabla_c\!\cdot(qU+\delta p\,v)
++\nabla_r\!\cdot(qv)
 =\nu\left(\frac12\Delta_c+2\Delta_r\right)q
 -\nu\big(|\nabla u(x)|^2+|\nabla u(y)|^2\big).}
 \]
 
-Pressure occurs only in the **common-coordinate** flux `div_c(delta p delta u)`: it can relocate
-which pair is active but has no direct `r`-flux.  After integrating the common coordinate, define
+Pressure therefore has only the **common-coordinate** flux in total pair energy.  After integrating
+`c`, define
 
 \[
 Q(r,t):=\int q(c,r,t)\,dc,\qquad
-J(r,t):=\int q(c,r,t)\,\delta u(c,r,t)\,dc.
+J(r,t):=\int q(c,r,t)v(c,r,t)\,dc.
 \]
 
-Then pressure disappears and the relative road closes:
+Then pressure disappears:
 
 \[
 \boxed{\partial_tQ+\nabla_r\cdot J=2\nu\Delta_rQ-2\nu Z.}
 \]
 
-On continuum `R^3`, the critical stock and Euler critical work are moments of this same density/current,
+On continuum `R^3`, critical stock, critical heat and Euler work are all readings of this same
+relative field.  Put
+
+\[
+\boxed{W(c,r,t):=\frac{v(c,r,t)}{|r|^2}.}
+\]
+
+Then
 
 \[
 \boxed{
-K=\frac1{\pi^2}\int\frac{Q(r)}{|r|^4}\,dr,\qquad
+K=\frac1{2\pi^2}\|W\|_{L^2_{c,r}}^2,
+\qquad
+M_3=\frac1{2\pi^2}\|\nabla_cW\|_{L^2_{c,r}}^2,}
+\]
+
+while
+
+\[
+\boxed{
+K=\frac1{\pi^2}\int\frac{Q(r)}{|r|^4}\,dr,
+\qquad
 \kappa(0)=-\frac2{\pi^2}\int\frac{J(r)\cdot r}{|r|^6}\,dr.}
 \]
 
-Thus positive `kappa(0)` is weighted **net inward relative transport toward the collision diagonal
-`r=0`**, not merely a spectral transfer metaphor.
-
-On the same continuum geometry there is an equally intrinsic Lagrangian reading.  For material labels `a,b`, let
-`r_ab=Phi_t(a)-Phi_t(b)` and use inversion
+Thus positive `kappa(0)` is weighted net inward relative transport toward `r=0`.  If
+`lambda=-(v dot r)/|r|^2` is logarithmic pair compression, the material-pair equation becomes
 
 \[
-\mathcal I(r)=\frac r{|r|^2},\qquad
-D\mathcal I(r)=|r|^{-2}(I-2\hat r\otimes\hat r).
+\boxed{
+D_{pair}W
+=2\lambda W-\frac{\nabla_c\delta p}{|r|^2}+\nu\Delta_cW.}
 \]
 
-The parenthesis is an orthogonal reflection, so incompressibility gives the exact kinetic identity
+Pair advection and pressure have zero global `L^2` work, so this single field gives directly
+
+\[
+\boxed{
+\frac12\frac d{dt}\|W\|_2^2
+=2\iint\lambda|W|^2-\nu\|\nabla_cW\|_2^2,}
+\]
+
+which is exactly `K'=2 kappa(0)-2 nu M_3`.  Thus critical heat is the **center-Dirichlet cost of the
+inverted-pair velocity**; `D I(r)` differs from `W` only by the radial reflection
+`I-2 nhat tensor nhat`.
+
+For `mathcal I(r)=r/|r|^2`,
+`D mathcal I=|r|^-2(I-2 nhat tensor nhat)` is a scaled reflection and
+`D mathcal I(r)v dot D^2 mathcal I(r)[v,v]=-2|v|^2(v dot r)/|r|^6`; its pressure work integrates to
+zero.  Hence material labels `a,b`, `r_ab=Phi_t(a)-Phi_t(b)`, give exactly
 
 \[
 \boxed{
@@ -2038,27 +2116,7 @@ K(t)=\frac1{2\pi^2}\iint
 \left|\frac d{dt}\mathcal I(r_{ab}(t))\right|^2\,da\,db.}
 \]
 
-The inversion geometry itself produces the Euler cubic.  For `v=dot r`,
-
-\[
-\boxed{
-|D^2\mathcal I(r)[v,v]|=\frac{2|v|^2}{|r|^3},\qquad
-D\mathcal I(r)v\cdot D^2\mathcal I(r)[v,v]
-=-\frac{2|v|^2(v\cdot r)}{|r|^6}.}
-\]
-
-The pressure part of material pair acceleration is orthogonal in this kinetic metric:
-
-\[
-\boxed{
-\iint D\mathcal I(r)\dot r\cdot D\mathcal I(r)(-\delta\nabla p)\,da\,db
-=-\iint\frac{\delta u\cdot\delta\nabla p}{|r|^4}\,dx\,dy=0.}
-\]
-
-Hence pressure may turn/relay the actor but cannot directly mint critical kinetic energy; the
-critical balance remains `K'=2 kappa(0)-2 nu M_3`.
-
-Finally, `K^2<=EZ` and `-E'=2 nu Z` give a genuine finite-time history law:
+Moreover `K^2<=EZ` and `-E'=2 nu Z` imply the genuine finite-time history bound
 
 \[
 \boxed{
@@ -2067,7 +2125,7 @@ Finally, `K^2<=EZ` and `-E'=2 nu Z` give a genuine finite-time history law:
 \left[\frac{E(0)-E(T)}{2\nu}\right]^{1/4}.}
 \]
 
-This is finite Hilbert path length, **not** a bound on endpoint velocity and not regularity.
+This is finite Hilbert path length, **not** endpoint-velocity control or regularity.
 
 ### 11.9 Incompressibility fixes the radial/transverse critical split
 
@@ -2123,11 +2181,84 @@ since `D mathcal I(r)` only reflects the radial direction and multiplies both ch
 
 The primitive grammar is therefore shorter: relative advection supplies the two-way inward/outward
 critical work; pressure is a radial/transverse converter; viscosity removes total critical kinetic
-energy one way.  The remaining loophole is historical relay.  Exact `K_perp=3K_parallel` gives a
-compulsory transverse **stock**, but converting infinite inward `r`-flux into infinite transverse
-time-action is still unproved.  The unresolved seam is to identify that endogenous transverse
-history with the already intrinsic material Hodge/deformation heat action, not to add a static
-analyst inequality.
+energy one way.  Exact `K_perp=3K_parallel` is a compulsory transverse **stock** identity, not yet a
+time-action theorem.
+
+### 11.10 Affine defect and the collision boundary
+
+The common/relative system already contains its own relay variable as a derivative, not a new
+state.  Put
+
+\[
+A:=\nabla_cU=\frac{\nabla u(x)+\nabla u(y)}2,
+\qquad
+\boxed{C:=\nabla_cv=\nabla u(x)-\nabla u(y).}
+\]
+
+Thus `C` is exactly center non-affinity of the relative field and
+
+\[
+\boxed{M_3=\frac1{2\pi^2}\iint\frac{|C(c,r)|^2}{|r|^4}\,dc\,dr.}
+\]
+
+Subtract the two gradient-NS equations.  Since
+`tr[(A+C/2)^2]-tr[(A-C/2)^2]=2 tr(AC)` and
+`-Delta p=tr((nabla u)^2)`, with
+`R_c:=nabla_c^2(-Delta_c)^-1`, one obtains
+
+\[
+\boxed{
+D_{pair}C+AC+CA+2\mathcal R_c[\operatorname{tr}(AC)]
+=\nu\Delta_cC.}
+\]
+
+The whole equation is homogeneous in `C`: pressure can redistribute affine defect but has no source
+independent of it.  Global `C=0` means `nabla u(x)=nabla u(y)` for every pair, hence `u=Ax+b`.
+Nontrivial such fields have infinite energy on `R^3`; the affine blowup countermodel is therefore the
+exact finite-dimensional null geometry that the finite-energy problem must leave by paying `C`.
+
+There is also no fixed-separation escape.  The exact road energy gives
+`||v(.,r)||_2^2<=4E`, hence for every `R>0`
+
+\[
+\boxed{K_{|r|\ge R}\le\frac{8E}{\pi R}.}
+\]
+
+Consequently, if `K(t_n)->infinity`, then for every fixed `R>0`
+
+\[
+\boxed{\frac{K_{|r|\ge R}(t_n)}{K(t_n)}\longrightarrow0.}
+\]
+
+The normalized critical mass must concentrate on the physical collision diagonal `r=0`; no shell
+selector is needed.  For smooth flow define its radial density by
+
+\[
+\mathfrak k(\rho,t):=\frac1{2\pi^2\rho^2}
+\int_{S^2}\!\int |v(c,\rho n,t)|^2\,dc\,d\Omega,
+\qquad K=\int_0^\infty\mathfrak k(\rho,t)\,d\rho.
+\]
+
+The symmetric endpoint expansion `v(c,r)=nabla u(c) r+O(|r|^3)` yields
+
+\[
+\boxed{\mathfrak k(0,t)=\frac{2}{3\pi}Z(t),}
+\]
+
+and therefore the boundary evolution is exactly the enstrophy law,
+
+\[
+\boxed{
+\partial_t\mathfrak k(0,t)
+=\frac{4}{3\pi}\int\omega\cdot S\omega
+-\frac{4\nu}{3\pi}\|\operatorname{curl}\omega\|_2^2.}
+\]
+
+Thus critical transport toward `r=0` does not enter an unknown boundary dynamics.  It lands on the
+existing vortex-stretching/heat law.  What remains unproved is the **no shrinking affine front**
+statement: a finite-energy trajectory cannot drive relative critical mass into `r=0` indefinitely
+while the homogeneous `C` equation regenerates just enough center non-affinity to offset its exact
+`-nu M_3` bill.
 
 ---
 
@@ -2482,56 +2613,19 @@ Q^2=\nu(\beta\wedge)^*,
 [\mathbb H,Q^*]1=\nu e.}
 \]
 
-Criticality applies only the canonical inverse modulus `R=Lambda^-1`:
+The critical operator layer from Sections 11.4--11.7 remains exact but is now a compressed reading,
+not extra ontology.  With `R=Lambda^-1`, `A=[R,alpha wedge]`, `B=[R,beta wedge]` and
+`V=(alpha wedge)R(alpha wedge)`, one has
 
 \[
-\boxed{
-\mathcal A=[R,\alpha\wedge],
-\quad
-\mathcal B=[R,\beta\wedge],
-\quad
-\mathcal V=(\alpha\wedge)R(\alpha\wedge).}
+\boxed{\mathcal G_c=\mathcal V+2\nu\mathcal B=2\nabla\mathcal A,
+\qquad \nabla\mathcal G_c=\nu(\beta\wedge)\mathcal A,
+\qquad K'=\frac{\pi^2}{2\nu}(\|\mathcal V\|^2-\|\mathcal G_c\|^2).}
 \]
 
-The pure-heat/midpoint Hom connection then gives
-
-\[
-\boxed{
-\mathcal G_c=\mathcal V+2\nu\mathcal B=2\nabla\mathcal A,
-\qquad
-\nabla\mathcal G_c=\nu(\beta\wedge)\mathcal A,}
-\]
-
-while the exact critical balance is
-
-\[
-\boxed{
-K'=\frac{\pi^2}{2\nu}
-(\|\mathcal V\|^2-\|\mathcal G_c\|^2).}
-\]
-
-Thus the critical state creates its own residual current, sourced by
-
-\[
-\boxed{\omega(x)\cdot[u(y)-u(x)].}
-\]
-
-Equivalently, the same `Lambda` that defines criticality generates the positive carre-du-champ
-`Gamma_u`: its trace integrates to `2K`, while
-`||F A||_HS^2=(4 pi^2)^-1 int omega^T Gamma_u omega`.  Its rank selects the intrinsic 3D/2D/shear
-geometry without an auxiliary plane or scale.
-The same law gives the native Gauss floor
-
-\[
-\boxed{
-\|\mathcal G_c\|_{HS,gr}^2
-\ge
-\langle
-\nu(\beta\wedge)\mathcal A,
-[-\nu^2(\Delta_x+\Delta_y)+|u(x)|^2/4]^{-1}
-\nu(\beta\wedge)\mathcal A
-\rangle.}
-\]
+The same `Lambda` generates the positive `Gamma_u`, whose trace is `2K` and whose vorticity
+contraction is the Gauss source.  The detailed Gauss floor and null/rank geometry remain in those
+sections; they are not repeated in the minimal ontology.
 
 Beneath these operator readings, Section 11.8 gives the lower physical transport statement
 
@@ -2541,14 +2635,33 @@ K=\pi^{-2}\int Q(r)|r|^{-4}dr,\qquad
 \kappa(0)=-2\pi^{-2}\int J(r)\cdot r\,|r|^{-6}dr.}
 \]
 
-Critical growth is therefore weighted inward `r`-flux.  Incompressibility additionally fixes
-`K_parallel=K/4`, `K_perp=3K/4` and `div_r delta u=0`; pressure only exchanges the two channels and
-has zero total critical work.  The inverted pair configuration has finite Hilbert path length, so
-any escape history must combine inward separation transport with center/material relay while
-carrying compulsory transverse critical stock.  The missing theorem is precisely to promote that
-instantaneous `1:3` geometry to a time-action statement and identify its transverse history with
-the material Hodge/deformation heat action.  This **quantitative stability/history** bridge is not
-proved, and no global-regularity claim is made.
+At every fixed separation, Euler can only exchange common and relative endpoint energy, while heat
+only removes it.  The relative critical field `W=v/|r|^2` satisfies
+
+\[
+\boxed{K=(2\pi^2)^{-1}\|W\|_2^2,\qquad
+M_3=(2\pi^2)^{-1}\|\nabla_cW\|_2^2.}
+\]
+
+The same endpoint compatibility gives `Delta_c v=4 Delta_r v`; center relay and separation motion
+do not carry independent heat bills.  Incompressibility additionally fixes `K_parallel:K_perp=1:3`,
+while the affine defect `C=nabla_c v` obeys a homogeneous pressure-coupled equation.  Since
+`K_{|r|>=R}<=8E/(pi R)`, any critical escape must concentrate at the collision diagonal, whose
+smooth boundary law is exactly the enstrophy stretching/heat balance.
+
+The material all-scale speed lock already proved in the companion law identifies the same two
+critical endpoints of the metric velocity,
+
+\[
+\boxed{K=\frac12\|g_t\|_{\dot H_g^{-1/2}}^2,\qquad
+M_3=\frac12\|g_t\|_{\dot H_g^{1/2}}^2,}
+\]
+
+with `-E'=nu ||g_t||_g^2` at the middle rung.  The remaining theorem is therefore no longer a search
+for another mechanism: it is the **no shrinking affine front at finite energy** statement, excluding
+arbitrarily fast concentration of the common-relative exchange at `r=0` while the same state
+regenerates the non-affinity `C` needed to keep the front finite-energy.  This historical
+anti-concentration theorem is **not proved**, and no global-regularity claim is made.
 
 Material Hodge turnover remains the natural history gauge through
 

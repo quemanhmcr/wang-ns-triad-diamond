@@ -1367,6 +1367,21 @@ def test_primitive_two_particle_roads_and_inversion_geometry_are_exact():
     assert float(np.linalg.norm(D2)) == pytest.approx(2.0*float(v@v)/rho**3,rel=2e-15)
     assert float((DI@v)@D2) == pytest.approx(-2.0*float(v@v)*float(v@rr)/rho**6,rel=2e-15)
 
+    # Common/relative endpoint algebra has no third energy reservoir.
+    up=np.array([1.2,-0.4,0.7]); um=np.array([-0.3,0.9,0.2])
+    U=0.5*(up+um); vv=up-um
+    assert float(U@vv) == pytest.approx(0.5*(float(up@up)-float(um@um)),rel=2e-15)
+    assert float(U@U)+0.25*float(vv@vv) == pytest.approx(0.5*(float(up@up)+float(um@um)),rel=2e-15)
+
+    # Endpoint chain rule: A=(Ax+Ay)/2, C=Ax-Ay and the square/pressure source
+    # differences are homogeneous in the affine defect C.
+    Ax=np.array([[0.4,0.2,-0.1],[-0.3,-0.1,0.5],[0.2,-0.4,-0.3]])
+    Ay=np.array([[-0.2,0.1,0.3],[0.4,0.2,-0.1],[-0.5,0.2,0.0]])
+    assert abs(np.trace(Ax)) < 1e-15 and abs(np.trace(Ay)) < 1e-15
+    AA=0.5*(Ax+Ay); C=Ax-Ay
+    assert np.max(np.abs((Ax@Ax-Ay@Ay)-(AA@C+C@AA))) <= 3e-16
+    assert np.trace(Ax@Ax)-np.trace(Ay@Ay) == pytest.approx(2.0*np.trace(AA@C),abs=3e-16)
+
 
 def test_primitive_pair_radial_transverse_split_and_pressure_converter_constants_are_exact():
     # For k=e3 and a divergence-free polarization e1, radial integration of
@@ -1397,6 +1412,9 @@ def test_primitive_pair_radial_transverse_split_and_pressure_converter_constants
 def test_certificate_records_two_particle_critical_history_without_closure_claim():
     cert=theorem_certificate()
     assert "pressure has only the common-coordinate road" in cert["primitive_two_particle_transport"]
+    assert "Euler only exchanging their energies" in cert["primitive_common_relative_pair_law"]
+    assert "Delta_c v=4 Delta_r v" in cert["primitive_pair_endpoint_compatibility"]
+    assert "center-Dirichlet cost of inverted-pair velocity" in cert["primitive_pair_critical_field"]
     assert "K_parallel=K/4" in cert["primitive_pair_radial_transverse_split"]
     assert "K_perp=3K/4" in cert["primitive_pair_radial_transverse_split"]
     assert "P_parallel=3(A3-B3)/(2pi^2)" in cert["primitive_pressure_pair_converter"]
@@ -1406,7 +1424,11 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "K=(2pi^2)^-1" in cert["primitive_inverted_pair_kinetic"]
     assert "finite Hilbert path length" in cert["primitive_inverted_pair_history"]
     assert "not endpoint-velocity control or regularity" in cert["primitive_inverted_pair_history"]
-    assert "center-label turnover" in cert["primitive_two_road_frontier"]
+    assert "homogeneous in C" in cert["primitive_pair_affine_defect"]
+    assert "8E/(pi R)" in cert["primitive_pair_collision_concentration"]
+    assert "exactly the enstrophy boundary law" in cert["primitive_pair_collision_boundary"]
+    assert "pair critical stock, physical energy-loss speed and critical heat" in cert["primitive_pair_material_scale_lock"]
+    assert "shrinking affine-like relative-energy front" in cert["primitive_two_road_frontier"]
     assert "unproved" in cert["primitive_two_road_frontier"]
     assert cert["global_regularity_claimed"] is False
 
