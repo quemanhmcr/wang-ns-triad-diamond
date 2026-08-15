@@ -7,6 +7,8 @@ from src.helical import coupling_magnitude_closed
 
 from src.native_curl_krylov_current_law import (
     continuum_midpoint_operator_sobolev_dictionary,
+    critical_energy_sphere_escape_geometry,
+    spacetime_critical_hom_coefficients,
     endogenous_euler_pair_projection,
     continuum_primitive_critical_channel_constants,
     continuum_critical_carre_du_champ_constants,
@@ -1435,6 +1437,118 @@ def test_endogenous_euler_coefficient_pair_projection_and_static_cancellation_ar
     assert np.max(np.abs(lhs-rhs)) <= 4e-16
 
 
+def test_lossless_energy_sphere_projection_collapses_productive_action_exactly():
+    import numpy as np
+    rng=np.random.default_rng(2026081556)
+    for n in (4,7,11):
+        ell=np.exp(rng.uniform(-1.2,1.4,n))
+        X=rng.normal(size=n)
+        Y0=rng.normal(size=n)
+        Y=Y0-X*float(X@Y0)/float(X@X)  # exact Euler tangent direction
+        LX=ell*X
+        E=64.0*float(X@X)
+        K=64.0*float(X@LX)
+        Z=64.0*float(LX@LX)
+        m=K/E
+        g=(ell-m)*X
+        kappa=64.0*float(g@Y)
+        out=critical_energy_sphere_escape_geometry(E,K,Z,kappa)
+        assert abs(float(X@Y)) <= 3e-15*max(1.0,float(np.linalg.norm(X)*np.linalg.norm(Y)))
+        assert out["x_norm_squared"] == pytest.approx(float(X@X),rel=3e-14)
+        assert out["x_Lx_pairing"] == pytest.approx(float(X@LX),rel=3e-14)
+        assert out["Lx_norm_squared"] == pytest.approx(float(LX@LX),rel=3e-14)
+        assert out["uphill_tangent_norm_squared"] == pytest.approx(float(g@g),rel=3e-13,abs=3e-13)
+        assert out["uphill_euler_pairing"] == pytest.approx(float(g@Y),rel=3e-13,abs=3e-13)
+        direct=(float((g/np.linalg.norm(g))@Y)**2)/float(LX@LX)
+        assert out["escape_action"] == pytest.approx(direct,rel=5e-13,abs=5e-13)
+
+
+def test_physical_scalar_triple_product_is_exact_global_L2_escape_angle():
+    import numpy as np
+    rng=np.random.default_rng(2026081557)
+    u=rng.normal(size=(19,3))
+    Lambda_u=rng.normal(size=(19,3))
+    omega=rng.normal(size=(19,3))
+    m=0.73
+    s=Lambda_u-m*u
+    kappa=float(np.sum(s*np.cross(u,omega)))
+    cyclic=float(np.sum(omega*np.cross(s,u)))
+    assert kappa == pytest.approx(cyclic,rel=2e-15,abs=2e-15)
+    assert np.max(np.abs(np.cross(s,u)-np.cross(Lambda_u,u))) <= 8e-16
+    shat=s/np.linalg.norm(s)
+    omegahat=omega/np.linalg.norm(omega)
+    action=float(np.sum(omegahat*np.cross(shat,u)))**2
+    expected=kappa*kappa/(float(np.sum(omega*omega))*float(np.sum(s*s)))
+    assert action == pytest.approx(expected,rel=3e-15,abs=3e-15)
+
+
+def test_spacetime_critical_hom_bianchi_electric_split_and_transgression_are_exact():
+    import numpy as np
+
+    def wedge_basis(j):
+        W=np.zeros((16,16),complex)
+        bit=1<<j
+        for mask in range(16):
+            if mask & bit:
+                continue
+            swaps=sum(1 for k in range(j) if mask & (1<<k))
+            W[mask|bit,mask]=(-1.0)**swaps
+        return W
+
+    W=[wedge_basis(j) for j in range(4)]  # dt, dx, dy, dz
+    n=7
+    x=2*math.pi*np.arange(n)/n
+    kk=np.fft.fftfreq(n,1.0/n)
+    Fm=np.exp(2j*math.pi*np.outer(np.arange(n),np.arange(n))/n)/math.sqrt(n)
+    D=Fm@np.diag(1j*kk)@Fm.conj().T
+    rr=np.zeros(n,float); nz=np.abs(kk)>1e-12; rr[nz]=1.0/np.abs(kk[nz])
+    Rsp=Fm@np.diag(rr)@Fm.conj().T
+    I16=np.eye(16); In=np.eye(n)
+    d=np.kron(D,W[1])
+    R=np.kron(Rsp,I16)
+    Wt=np.kron(In,W[0])
+
+    alpha=np.stack([np.sin(x)+0.11*np.cos(2*x),0.23*np.sin(2*x),0.19*np.cos(x)],axis=1)
+    Ealpha=np.zeros((16*n,16*n),complex)
+    for i,a in enumerate(alpha):
+        Ealpha[16*i:16*(i+1),16*i:16*(i+1)]=a[0]*W[1]+a[1]*W[2]+a[2]*W[3]
+    Bvals=0.37*np.cos(x)+0.13*np.sin(2*x)
+    MB=np.kron(np.diag(Bvals),I16)
+    E4=Ealpha-MB@Wt  # mathbb A wedge = alpha wedge - B dt wedge
+    F4=d@E4+E4@d
+    A4=R@E4-E4@R
+    nu=0.31
+    coeff=spacetime_critical_hom_coefficients(nu)
+    G4=coeff["curvature_commutator_coefficient"]*(R@F4-F4@R)+E4@A4
+    DL=nu*d+0.5*E4; DR=nu*d
+    nabla_A4=DL@A4+A4@DR
+    nabla_G4=DL@G4-G4@DR
+    scale=max(1.0,float(np.linalg.norm(G4)),float(np.linalg.norm(nu*F4@A4)))
+    assert np.linalg.norm(2.0*nabla_A4-G4) <= 5e-11*scale
+    assert np.linalg.norm(nabla_G4-nu*F4@A4) <= 5e-11*scale
+
+    # Freeze alpha in time.  Then e=-(d B), enough to referee every electric sign.
+    Fsp=d@Ealpha+Ealpha@d
+    Asp=R@Ealpha-Ealpha@R
+    Gsp=2.0*nu*(R@Fsp-Fsp@R)+Ealpha@Asp
+    Gtemp=G4-Gsp
+    CRB=R@MB-MB@R
+    eop=-(d@MB-MB@d)
+    predicted=Wt@(
+        -2.0*nu*(R@eop-eop@R)
+        +Ealpha@CRB
+        -MB@Asp
+    )
+    assert np.linalg.norm(Gtemp-predicted) <= 6e-11*max(1.0,float(np.linalg.norm(Gtemp)))
+
+    # Graded transgression: nabla(A4 G4)=(nabla A4)G4-A4(nabla G4).
+    trans=nabla_A4@G4-A4@nabla_G4
+    rhs=0.5*(G4@G4)-nu*A4@F4@A4
+    assert np.linalg.norm(trans-rhs) <= 8e-11*max(1.0,float(np.linalg.norm(rhs)))
+    assert coeff["electric_e_commutator_coefficient"] == pytest.approx(-2.0*nu)
+    assert coeff["transgression_square_coefficient"] == pytest.approx(0.5)
+
+
 def test_affine_core_budget_falsifier_exponents_leave_only_dynamic_compatibility():
     # This is a scaling countergeometry, explicitly not an NS solution.
     for alpha in (0.4,0.43,0.49):
@@ -1472,6 +1586,12 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "Delta_c v=4 Delta_r v" in cert["primitive_pair_endpoint_compatibility"]
     assert "center-Dirichlet cost of inverted-pair velocity" in cert["primitive_pair_critical_field"]
     assert "nu_E=kappa/M3" in cert["endogenous_euler_coefficient"]
+    assert "X_t=Y-nu L^2 X" in cert["primitive_energy_sphere_dynamics"]
+    assert "tangent Rayleigh-gradient direction" in cert["primitive_critical_uphill_projection"]
+    assert "A_escape=kappa^2/[N^2(EZ-K^2)]" in cert["primitive_scalar_triple_escape"]
+    assert "G4=2 nabla_4 A4" in cert["primitive_spacetime_critical_bianchi"]
+    assert "Ec=-2nu[R,e wedge]" in cert["primitive_spacetime_critical_electric"]
+    assert "not supply int||Ec||^2 dt" in cert["primitive_spacetime_transgression_guard"]
     assert "argmin_lambda" in cert["primitive_productive_pair_projection"]
     assert "affine line" in cert["primitive_productive_alignment_rigidity"]
     assert "J_lambda=V+lambda B" in cert["primitive_hom_current_lambda_family"]

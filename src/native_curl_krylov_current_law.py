@@ -1930,6 +1930,9 @@ def theorem_certificate() -> dict[str, object]:
         "critical_boost_logistic": "kappa(0)=<y,S_uy> and M3>=K^3/E^2 give K'<=2K(kappa(0)/K-nu(K/E)^2); any instant of positive K growth therefore requires the actual Krein boost Rayleigh rate above the quadratic mean-curl heat rate",
         "fixed_cartan_ode": "in one fixed curl eigenbasis the full Euler RHS is zI'=-(1/2)sum_JK(lambdaK-lambdaJ)f_IJK zJ zK with one time-independent alternating Cartan tensor f=Omega; NS adds only -nu lambdaI^2 zI and finite Galerkin Euler is phase-space divergence free",
         "productive_fisher_action": "A_prod=kappa(0)^2/(EZ-K^2)=Cov_p(|a|,f)^2/Var_p(|a|)<=A_spec/E; d log(K/E)/dt<=A_prod/(2nuN^2), so critical mean-curl escape requires divergence of the single curvature/Fisher action integral",
+        "primitive_energy_sphere_dynamics": "with the lossless midpoint transform T, X=Delta_op^-1/4 Tu, Y=Delta_op^-1/4 T(F_E) and L=Delta_op^1/2 obey X_t=Y-nu L^2 X and <X,Y>=0; exactly E=64||X||^2, K=64<X,LX>, Z=64||LX||^2, so Euler is tangent to the energy sphere and heat is the one-way L^2 descent",
+        "primitive_critical_uphill_projection": "with m=K/E and g=(L-m)X, g is the tangent Rayleigh-gradient direction, kappa=64<g,Y>, ||g||^2=(EZ-K^2)/(64E), and kappa^2/[N^2(EZ-K^2)]=|<ghat,Y>|^2/||LX||^2; Fisher covariance is only a spectral coordinate reading of this projection",
+        "primitive_scalar_triple_escape": "with s=(Lambda-K/E)u, shat=s/||s||_2 and omegahat=omega/||omega||_2, ||s||^2=(EZ-K^2)/E and kappa=<s,F_E>=<omega,s cross u>; hence A_escape=kappa^2/[N^2(EZ-K^2)]=|<omegahat,shat cross u>|^2 and K/E escape forces int A_escape dt=infinity",
         "persistence_monotonicity_guard": "neither higher Krylov volumes nor the normalized curvature score R_* are universal monotones; explicit spectral and Galerkin falsifications force the remaining theorem to control persistence/action rather than instantaneous sign",
         "formalism_guard": "the physical alternating Euler triple generator is exact, but a direct-sum counterexample rejects promoting it to an unrestricted Nambu-Poisson bracket; Cartan/Jacobi compatibility is used instead",
         "hminus1_cartan_gradient": "in the curl H^-1 metric the Euler Cartan motion is exactly orthogonal to grad(E/2)=C^2u; ||u_t||_-1^2=||F_E||_-1^2+nu^2 Z and E/2 descends only through heat",
@@ -1976,6 +1979,9 @@ def theorem_certificate() -> dict[str, object]:
         "primitive_static_reconfiguration_cancellation": "the 3D reconfiguration road C_perp is necessary away from exact line/shear geometry but cancels exactly from instantaneous K'; any use of C_perp for closure must be historical turning/persistence rather than a static norm gap",
         "primitive_critical_gauss_residual": "Gc=V+2nu B is exactly twice the Hom-connection current nabla A between D0=nu d and D1/2=nu d+(1/2)E; K'=pi^2(||V||^2-||Gc||^2)/(2nu), equivalently K'=(||u(x) cross u(y)||_pair^2-||u(x) cross u(y)-2nu(omega(x)-omega(y))||_pair^2)/(2nu)",
         "primitive_critical_gauss_bianchi": "the Hom curvature is nabla^2 A=(nu/2)(beta wedge)A, hence the exact residual deciding K' obeys nabla Gc=nu(beta wedge)A; its physical kernel is omega(x).(u(y)-u(x))/(2pi^2|x-y|^2)",
+        "primitive_spacetime_critical_bianchi": "the already physical spacetime connection mathbb A=alpha-B_Bern dt with mathbb F=beta-dt wedge e forces A4=[R,mathbb A wedge], G4=2 nabla_4 A4=2nu[R,mathbb F wedge]+mathbb A wedge A4 and nabla_4 G4=nu mathbb F wedge A4; its spatial component is exactly Gc",
+        "primitive_spacetime_critical_electric": "writing G4=Gc+dt wedge Ec gives Ec=-2nu[R,e wedge]+alpha wedge[R,B_Bern]-B_Bern[R,alpha wedge]; Bernoulli/pressure enters only as the temporal gauge potential of the same spacetime connection, so Ec is the canonical temporal carrier of critical turning rather than an independent source",
+        "primitive_spacetime_transgression_guard": "graded Leibniz gives nabla_4(A4 G4)=(1/2)G4^2-nu A4(mathbb F wedge)A4, but G4^2 is signed/Chern-Weil-type rather than ||G4||^2; Maxwell identities int|F|^2=K and int|nabla_4 F|^2=2M3 therefore do not supply int||Ec||^2 dt or a positive telescope",
         "primitive_critical_gauss_null_geometry": "exact vanishing of (beta wedge)A means omega(x) is orthogonal to the affine velocity-value span for every x; span dimension 3 is irrotational, dimension 2 is embedded 2D, dimension 1 is a shear u=phi b with (u.grad)u=0, and dimension 0 is uniform flow",
         "primitive_critical_six_dimensional_gauss_floor": "top-degree Hom tests give the quadratic-form normal operator L6=-nu^2(Delta_x+Delta_y)+|u(x)|^2/4 and ||Gc||^2>=<nu(beta wedge)A,L6^-1 nu(beta wedge)A>; the six variables are the two points already forced by |D|, not extra physical dimensions",
         "primitive_critical_gauss_stability_guard": "the Gauss floor gives exact control of the source in its native L6^-1 metric and the exact zero source is lower-dimensional, but quantitative near-zero proximity to the 2D/shear/null manifold is a separate stability/compactness theorem and is not assumed",
@@ -1998,10 +2004,10 @@ def theorem_certificate() -> dict[str, object]:
         "primitive_pair_collision_boundary": "for radial critical density k(rho)=(2pi^2 rho^2)^-1 int_S2 int_c |v(c,rho n)|^2, smoothness gives k(0)=2Z/(3pi) and k_t(0)=4 int omega.Somega/(3pi)-4nu||curl omega||^2/(3pi), exactly the enstrophy boundary law",
         "primitive_pair_scale_neutrality": "under NS dilation u_lambda=lambda u(lambda x,lambda^2 t), E->lambda^-1 E, Z->lambda Z, K->K, M3->lambda^2 M3 and kappa->lambda^2 kappa; shrinking a fixed critical profile moves it toward r=0 without increasing K, so escape requires regeneration/accumulation of critical mass rather than scale motion alone",
         "primitive_pair_material_scale_lock": "the companion material Hodge speed law gives K=(1/2)||g_t||_Hdot_g^-1/2^2, Z=(1/2)||g_t||_L2_g^2 and M3=(1/2)||g_t||_Hdot_g^1/2^2; pair critical stock, physical energy-loss speed and critical heat are one metric-velocity scale",
-        "primitive_regeneration_persistence": "with nu_E=kappa/M3, K'=2M3(nu_E-nu) so K escape requires int (M3/K)(nu_E-nu)_+ dt=infinity; the sharper scale-invariant necessity is int kappa^2/[N^2(EZ-K^2)] dt=infinity, and proving its finiteness on every finite smooth history is the remaining persistence theorem",
+        "primitive_regeneration_persistence": "the nu_E=kappa/M3 reading remains exact, but the sharper frontier collapses further: A_escape=kappa^2/[N^2(EZ-K^2)]=|<omegahat,shat cross u>|^2, equivalently the old necessity int kappa^2/[N^2(EZ-K^2)] dt=infinity; K/E escape forces int A_escape dt=infinity, and proving finite A_escape action on every finite smooth positive-energy history is the remaining persistence theorem",
         "primitive_affine_core_budget_falsifier": "a hypothetical non-solution core with tau=T-t, |grad u|~tau^-1 and R~tau^alpha has E~tau^(-2+5alpha), K~tau^(-2+4alpha), Z~tau^(-2+3alpha), M3~tau^(-2+2alpha), kappa~tau^(-3+4alpha); for 2/5<=alpha<1/2 energy and int Z stay finite while K and kappa/(nu M3) diverge, so budgets plus instantaneous rigidity alone cannot close NS",
         "primitive_regeneration_shortcut_guard": "no static shortcut is used: the factor-1/2 stretching/Gamma bridge is numerically false, factor 1 is unproved, a numerical referee rejects A(F_E)=-2 d_op^* V with order-one residual, and differentiating C only climbs the Sobolev ladder",
-        "primitive_two_road_frontier": "the exact common-relative pair law leaves one escape after scale neutrality: critical mass must be successfully regenerated/accumulated infinitely often, equivalently the state-generated signed coefficient nu_E must return above nu with infinite successful persistence while mass concentrates toward r=0; perfect pair alignment collapses to null geometry, but excluding arbitrarily near-perfect productive returns infinitely often is unproved",
+        "primitive_two_road_frontier": "the former successfully regenerated/accumulated infinitely often and nu_E persistence language now has one lower scalar form: Euler must accumulate infinite normalized turning A_escape=|<omegahat,shat cross u>|^2 in finite time; the spacetime electric critical component is the endogenous compatibility carrier, but finite action is unproved",
         "primitive_actual_current_operator": "the endogenous state operator is Q=nu delta+i_u with Q*=nu d+u^flat wedge; the physical electromotive current is e=Q beta, the projected momentum law is u_t=-P(Q beta), and therefore Q_t=-i_{P(Q beta)}",
         "primitive_current_curvature_square": "exterior Leibniz gives {delta,i_u}=(beta wedge)^*, hence Q^2=nu(beta wedge)^* on the whole graded exterior algebra and Q^2 beta=nu|beta|^2; vorticity is the failure of nilpotence of the actual NS current operator",
         "primitive_current_nilpotent_chords": "Q(u)-Q(v)=i_{u-v}, every chord/tangent contraction squares to zero, and any two contractions anticommute; the non-nilpotence of Q comes only from interaction of fixed delta with the physical contraction, not from nonlinear state-space chords",
@@ -2009,7 +2015,7 @@ def theorem_certificate() -> dict[str, object]:
         "primitive_intertwining_lamb": "for every closed eta=*b^flat, H^(1)(Q eta)-Q(H^(2)eta)=[Q*,Q^2]eta=nu^2 d(omega.b)+nu[b cross (u cross omega)]^flat; at b=omega the non-exact term locally reconstructs the Lamb field away from omega=0",
         "primitive_finite_current_chains": "Q* alpha=nu beta gives alpha -> nu beta -> nu e -> nu^2|beta|^2 ->0 and energy dissipation is adjointness of its first two arrows; on top degree dV -> *alpha -> nu omega^flat -> nu(u.omega) ->0 and Q^4=0 in three dimensions",
         "primitive_midpoint_status": "M=nu delta+(1/2)i_u is the canonical midpoint between pure Hodge heat and the actual operator Q, selected by the critical/Poynting reflection; it is a reading rather than the fundamental state operator and satisfies M(M beta)=(nu/2)|beta|^2",
-        "primitive_turning_frontier": "the previous persistent critical near-kernel problem and infinite productive regeneration frontier are now one finite-persistence problem for nu_E=kappa/M3: exact perfect productivity destroys genuine 3D geometry, but C_perp cancels from instantaneous K', so the unproved quantitative stability/history theorem is precisely finiteness of the scale-invariant productive-action integral against infinitely many near-aligned returns",
+        "primitive_turning_frontier": "the previous persistent critical near-kernel and infinite productive regeneration problems collapse to one angular statement: finite-time escape requires infinite L_t^2 action of <omegahat,shat cross u>; exact spacetime Hom-Bianchi identifies the temporal carrier Ec, but the unproved quantitative stability/history step is converting compatibility plus Maxwell/heat positivity into the required finite-action theorem",
         "graded_current_strain_parent": "with q=nu delta+(1/2)i_u, the positive Hodge-Dirac square q^*q+qq^* is (-nu^2 Delta+|u|^2/4)I+nu S on one-forms and the same scalar part minus nu S on two-forms; physical strain, hence the critical sech/Reynolds operator, is the degree imbalance of one midpoint current complex",
         "critical_gram_self_frustration": "for G_u b=u cross b-2nu curl b, the polarized Poynting law gives 4nu(PS)_odd=[P(U_u^*U_u-G_u^*G_u)P]_odd; the dangerous critical block is exactly a helicity-odd Gram imbalance, but odd projection destroys simple positivity so no free negative-square contraction follows",
         "critical_curvature_floor": "the mixed Gauss law (div-u/(2nu).)G_u b=omega.b implies G_u^*G_u>=M_omega^*(-Delta+|u|^2/(4nu^2))^-1M_omega in quadratic-form order; a persistent expanding Reynolds direction must continually avoid this state-generated curvature floor at the intrinsic Poisson depths",
@@ -2393,6 +2399,91 @@ def poisson_critical_scale_measure_moments(
         "mean_poisson_scale_from_mean_curl": represented_mean,
         "second_poisson_scale_moment": second_t,
         "poisson_scale_variance": max(0.0, second_t - mean_t * mean_t),
+    }
+
+
+def critical_energy_sphere_escape_geometry(
+    energy: float,
+    critical_stock: float,
+    enstrophy: float,
+    curvature_height: float,
+) -> dict[str, float]:
+    """Exact scalar audit of the lossless energy-sphere escape geometry.
+
+    For ``T* T=Lambda/64`` set ``X=Delta_op^-1/4 T u``, ``L=Delta_op^1/2``
+    and ``g=(L-K/E)X``.  Then
+
+        E=64||X||^2, K=64<X,LX>, Z=64||LX||^2,
+        ||g||^2=(EZ-K^2)/(64E), <g,Y>=kappa/64,
+
+    and the sharpened escape density is simultaneously
+
+        kappa^2/[N^2(EZ-K^2)] = |<ghat,Y>|^2/||LX||^2.
+
+    The helper audits constants only.  It does not assert time-integrability.
+    """
+    E=float(energy); K=float(critical_stock); Z=float(enstrophy); kap=float(curvature_height)
+    if not all(math.isfinite(x) for x in (E,K,Z,kap)):
+        raise ValueError("finite energy-sphere data required")
+    if E <= 0.0 or Z <= 0.0:
+        raise ValueError("positive energy and enstrophy required")
+    det=E*Z-K*K
+    if det <= 0.0:
+        raise ValueError("strict positive critical determinant required")
+    N2=Z/E
+    x2=E/64.0
+    lx2=Z/64.0
+    xlx=K/64.0
+    g2=det/(64.0*E)
+    gy=kap/64.0
+    tangent_projection2=gy*gy/g2
+    operator_action=tangent_projection2/lx2
+    escape_action=kap*kap/(N2*det)
+    if abs(operator_action-escape_action) > 3.0e-12*max(1.0,abs(operator_action),abs(escape_action)):
+        raise AssertionError("energy-sphere tangent projection lost escape normalization")
+    return {
+        "mean_absolute_curl":K/E,
+        "critical_determinant":det,
+        "rms_curl_squared":N2,
+        "x_norm_squared":x2,
+        "x_Lx_pairing":xlx,
+        "Lx_norm_squared":lx2,
+        "uphill_tangent_norm_squared":g2,
+        "uphill_euler_pairing":gy,
+        "unit_uphill_euler_projection_squared":tangent_projection2,
+        "operator_escape_action":operator_action,
+        "physical_defect_norm_squared":det/E,
+        "escape_action":escape_action,
+    }
+
+
+def spacetime_critical_hom_coefficients(viscosity: float) -> dict[str, float]:
+    """Coefficients of the exact spacetime critical Hom--Bianchi decomposition.
+
+    With ``A4=[R,mathbb A wedge]``, ``mathbb A=alpha-B dt`` and
+    ``mathbb F=beta-dt wedge e``, the induced midpoint Hom connection gives
+
+        G4 = 2 nu [R,mathbb F wedge] + mathbb A wedge A4,
+        nabla_4 G4 = nu mathbb F wedge A4,
+
+    and ``G4=Gc+dt wedge Ec`` with
+
+        Ec=-2nu[R,e wedge]+alpha wedge[R,B]-B[R,alpha wedge].
+
+    These are algebraic coefficients, not a positive spacetime estimate.
+    """
+    nu=float(viscosity)
+    if not math.isfinite(nu) or nu <= 0.0:
+        raise ValueError("positive finite viscosity required")
+    return {
+        "curvature_commutator_coefficient":2.0*nu,
+        "connection_product_coefficient":1.0,
+        "bianchi_curvature_coefficient":nu,
+        "electric_e_commutator_coefficient":-2.0*nu,
+        "electric_alpha_bernoulli_commutator_coefficient":1.0,
+        "electric_bernoulli_spatial_channel_coefficient":-1.0,
+        "transgression_square_coefficient":0.5,
+        "transgression_curvature_coefficient":-nu,
     }
 
 

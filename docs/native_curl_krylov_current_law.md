@@ -889,111 +889,170 @@ norm or eigenvalues.
 
 ---
 
-## 7. Productive Fisher action is the remaining scalar escape cost
+## 7. The remaining scalar escape cost is one energy-sphere tangent projection
+
+The Fisher/regression formulation is exact, but it is not the lowest ontology.  Use the lossless
+midpoint transform `T` proved in Section 10 and put
+
+\[
+\boxed{
+X:=\Delta_{op}^{-1/4}Tu,
+\qquad
+Y:=\Delta_{op}^{-1/4}T(F_E),
+\qquad
+L:=\Delta_{op}^{1/2}.}
+\]
+
+Because `T(Lambda^alpha u)=Delta_op^(alpha/2)T(u)` and `T* T=Lambda/64`, Navier--Stokes itself is
+exactly
+
+\[
+\boxed{X_t=Y-\nu L^2X,\qquad \langle X,Y\rangle=0.}
+\]
+
+Thus Euler is literally tangent to the physical energy sphere in this lossless coordinate, while
+viscosity is the one-way `-L^2` descent.  The three physical quadratic stocks are
+
+\[
+\boxed{
+E=64\|X\|^2,
+\qquad
+K=64\langle X,LX\rangle,
+\qquad
+Z=64\|LX\|^2.}
+\]
 
 Let
 
 \[
-p_a=E_a/E,
+m:=\frac KE=\frac{\langle X,LX\rangle}{\|X\|^2},
 \qquad
-r_a=|a|,
+\boxed{g:=(L-m)X.}
+\]
+
+Up to the positive scalar `2/||X||^2`, `g` is exactly the tangent gradient of the Rayleigh quotient
+`<X,LX>/||X||^2` on the energy sphere.  There is no second productive direction.  Since Euler is
+tangent,
+
+\[
+\boxed{
+\kappa(0)=64\langle g,Y\rangle,}
+\]
+
+while
+
+\[
+\boxed{
+\|g\|^2=\frac{EZ-K^2}{64E},
 \qquad
-m=\mathbb E_p r=K/E.
+EZ-K^2=4096\|X\|^2\|g\|^2.}
 \]
 
-The Euler fitness satisfies `E_p f=0`.  The critical curvature height is
+Therefore the sharpened productive-action density already present in the escape theorem collapses to
+one normalized angular projection,
 
 \[
 \boxed{
-\kappa(0)=E\operatorname{Cov}_p(r,f).
-}
+\frac{\kappa(0)^2}{N^2(EZ-K^2)}
+=
+\frac{|\langle \widehat g,Y\rangle|^2}{\|LX\|^2},
+\qquad N^2=Z/E.}
 \]
 
-Since
+No probability law is needed to state it.  The old Fisher covariance is only its curl-spectral
+coordinate representation.
 
-\[
-EZ-K^2
-=E^2\operatorname{Var}_p(r),
-\]
-
-define the productive Fisher action
+The operator notation can be removed as well.  Put
 
 \[
 \boxed{
-\mathcal A_{prod}
-:=\frac{\kappa(0)^2}{EZ-K^2}
-=\frac{\operatorname{Cov}_p(r,f)^2}{\operatorname{Var}_p(r)}.
-}
-\]
-
-It is exactly the squared regression component of the full spectral fitness which points in the
-absolute-curl direction.  Cauchy gives
-
-\[
-\boxed{
-0\le\mathcal A_{prod}\le\mathcal A_{spec}/E.
-}
-\]
-
-The physical energy-loss clock is
-
-\[
-\boxed{
-d\tau_E=-d\log E=2\nu N^2dt,
+s:=(\Lambda-K/E)u,
 \qquad
-N^2=Z/E.
-}
+\widehat s:=s/\|s\|_2,
+\qquad
+\widehat\omega:=\omega/\|\omega\|_2.}
 \]
 
-On every positive-energy interval,
+Here hats mean **global `L^2` normalization**, not pointwise direction.  On positive-energy
+finite-energy `R^3`, strict Cauchy excludes a nonzero one-radius `L^2` state, so the normalized defect
+is defined.  One has exactly
 
 \[
 \boxed{
-\int_{t_0}^{t_1}N^2dt
-=\frac1{2\nu}
-\log\frac{E(t_0)}{E(t_1)}.
-}
+\|s\|_2^2=\frac{EZ-K^2}{E},
+\qquad
+\kappa(0)=\langle s,F_E\rangle.}
 \]
 
-The critical mean-curl scale obeys
+Because `s` is divergence-free, Leray drops out of the pairing, and cyclicity of the scalar triple
+product gives
+
+\[
+\langle s,F_E\rangle
+=\langle s,u\times\omega\rangle
+=\langle \omega,s\times u\rangle,
+\qquad
+s\times u=(\Lambda u)\times u.
+\]
+
+Hence the entire escape action is the state-generated scalar triple product
+
+\[
+\boxed{
+\mathcal A_{escape}(u)
+:=
+\frac{\kappa(0)^2}{N^2(EZ-K^2)}
+=
+\left|
+\left\langle
+\widehat\omega,
+\widehat s\times u
+\right\rangle
+\right|^2.}
+\]
+
+The previously proved completed-square estimate is therefore simply
 
 \[
 \boxed{
 \frac d{dt}\log\frac KE
 \le
-\frac{\mathcal A_{prod}}{2\nu N^2}.
-}
+\frac1{2\nu}\,\mathcal A_{escape}(u).}
 \]
 
-Therefore
-
-\[
-\boxed{
-\log\frac{(K/E)(t)}{(K/E)(t_0)}
-\le
-\frac1{2\nu}
-\int_{t_0}^t
-\frac{\kappa(0,s)^2}
-{N(s)^2[E(s)Z(s)-K(s)^2]}
-\,ds.
-}
-\]
-
-A critical mean-curl escape requires
+Consequently
 
 \[
 \boxed{
 K/E\to\infty
-\Longrightarrow
-\int^T
-\frac{\kappa(0,t)^2}
-{N(t)^2[E(t)Z(t)-K(t)^2]}
-\,dt
-=\infty.
-}
+\quad\Longrightarrow\quad
+\int_0^T\mathcal A_{escape}(u(t))\,dt=\infty.}
 \]
 
-This is a persistence requirement, not an event count.
+This is the shortest exact escape statement currently available: finite-time critical escape
+requires infinite normalized Euler turning in the unique critical-uphill direction.  The opposite
+statement
+
+\[
+\boxed{
+\int_0^T\mathcal A_{escape}(u(t))\,dt<\infty}
+\]
+
+for every finite smooth positive-energy Navier--Stokes interval is the remaining persistence theorem;
+it is **not proved**.
+
+For reference only, in curl-spectral coordinates the same geometry reads
+
+\[
+\mathcal A_{prod}
+:=\frac{\kappa(0)^2}{EZ-K^2}
+=\frac{\operatorname{Cov}_p(r,f)^2}{\operatorname{Var}_p(r)},
+\qquad
+\mathcal A_{escape}=\mathcal A_{prod}/N^2.
+\]
+
+Thus Fisher probability, the energy-loss clock and the Reynolds quotient remain exact diagnostics,
+but none is needed to state the primitive escape law.
 
 ### 7.1 Exact critical Hilbert square
 
@@ -1827,6 +1886,116 @@ and therefore
 
 The source is precisely local vorticity piercing the affine geometry of the velocity values.
 
+#### Spacetime extension: the same critical current has an electric component
+
+The companion material law already proves the physical spacetime connection
+
+\[
+\boxed{
+\mathbb A=\alpha-B_{\rm Bern}\,dt,
+\qquad
+\mathbb F=d_4\mathbb A=\beta-dt\wedge e,
+\qquad
+B_{\rm Bern}=p+\frac12|u|^2.}
+\]
+
+No new operator is needed.  Keep the same `R=Lambda^-1` and define the forced spacetime critical
+commutator
+
+\[
+\boxed{\mathcal A_4:=[R,\mathbb A\wedge].}
+\]
+
+Use the two connections generated by the same physical spacetime potential,
+
+\[
+D_L:=\nu d_4+\frac12\mathbb A\wedge,
+\qquad
+D_R:=\nu d_4,
+\]
+
+and their Hom differential `nabla_4`.  Since `R` commutes with `d_4`, exterior Leibniz gives
+
+\[
+\boxed{
+\mathcal G_4:=2\nabla_4\mathcal A_4
+=2\nu[R,\mathbb F\wedge]
++\mathbb A\wedge\mathcal A_4.}
+\]
+
+The Hom curvature is forced as well:
+
+\[
+\boxed{
+\nabla_4\mathcal G_4
+=\nu\,\mathbb F\wedge\mathcal A_4.}
+\]
+
+This is the spacetime critical Bianchi law.  It is an extension of the same spatial residual, not a
+new persistence variable.  Indeed
+
+\[
+\boxed{
+\mathcal G_4=\mathcal G_c+dt\wedge\mathcal E_c,}
+\]
+
+with
+
+\[
+\boxed{
+\mathcal E_c
+=-2\nu[R,e\wedge]
++\alpha\wedge[R,B_{\rm Bern}]
+-B_{\rm Bern}[R,\alpha\wedge].}
+\]
+
+Thus
+
+\[
+\boxed{(\mathcal G_4)_{spatial}=\mathcal G_c.}
+\]
+
+The temporal component `mathcal E_c` is therefore the canonical place in the same current where
+critical turning/persistence can enter.  Bernoulli/pressure is not an independent source: it appears
+only through the temporal gauge potential already required by the physical spacetime connection.
+This identifies the **carrier** of the persistence question; it does not yet control its size.
+
+The graded derivation also gives the exact transgression
+
+\[
+\boxed{
+\nabla_4(\mathcal A_4\mathcal G_4)
+=\frac12\mathcal G_4^2
+-\nu\mathcal A_4(\mathbb F\wedge)\mathcal A_4.}
+\]
+
+This is not a positive telescope.  The quadratic term is the signed/Chern--Weil-type product
+`mathcal G_4^2`, not `||mathcal G_4||^2`; inserting a Hodge star to make a positive norm reintroduces
+metric variation.  Likewise, the canonical harmonic-depth Maxwell extension from the companion law
+has the exact positive identities
+
+\[
+\int_X|\mathcal F|^2=K,
+\qquad
+\int_X|\nabla_4\mathcal F|^2=2M_3,
+\]
+
+and
+
+\[
+K'=-\int_XT:\dot G-\nu\int_X|\nabla_4\mathcal F|^2,
+\]
+
+but these do **not** imply `int ||mathcal E_c||^2 dt<infinity`.  The spacetime Bianchi law is
+compatibility, not coercivity.  The missing implication is precisely whether this same endogenous
+spacetime compatibility, together with the already positive Maxwell/heat structure, forces
+
+\[
+\boxed{\int_0^T\mathcal A_{escape}(u(t))\,dt<\infty.}
+\]
+
+No such theorem is claimed here.
+
 ### 11.6 Null geometry, six-dimensional coercivity and the sharpened gap
 
 If `mathsf F mathcal A=0`, then
@@ -2394,11 +2563,13 @@ scale-free factor grow beyond `5e4`.  The exact low-frequency Galilean catalyst 
 does not close many-mode coherence, because multiple admissible contributions may add before the
 square.  These are **guards**, not theorem inputs: they remove static shortcuts and leave persistence.
 
-The remaining theorem is therefore the finite-persistence statement that the actual NS current
-cannot regenerate `nu_E` productively often enough to make the scale-invariant action diverge.  The
-exact equality rigidity says perfect productivity destroys genuine 3D geometry; the open step is to
-exclude arbitrarily near-perfect productive returns **infinitely often** on finite physical history.
-No global-regularity claim is made here.
+The same necessity now has the lower physical reading
+`int A_escape dt=infinity`, with
+`A_escape=|<omegahat,shat cross u>|^2`.  Thus the remaining theorem is not a separate statement about
+`nu_E`: it is finite normalized angular action of the actual Euler tangent motion.  Equality rigidity
+still explains why exact perfect productivity collapses genuine 3D geometry, while the spacetime
+electric critical component records the compatible turning of the same current.  Converting that
+compatibility into `int A_escape dt<infinity` is unproved.  No global-regularity claim is made here.
 
 ---
 
@@ -2732,102 +2903,126 @@ The separate material theorem adds the transverse determinant and Minkowski memo
 8. **No eigenvalue-only Riccati law** and no unrestricted Nambu--Poisson theorem; the surviving structure is lossless Cartan/Jacobi current geometry.
 9. **No local finite-dimensional closure.**  The missing theorem must couple full spatial current persistence to material Hodge memory.
 10. **No uniform gap from the new rigidity.**  `{mathcal A,Q*}=0 => u=0` is an exact zero-set statement; it does not bound the ratio between regeneration and incompatibility away from saturation on arbitrary large states.
+11. **No positive spacetime telescope from Bianchi alone.**  `G4^2` in the exact transgression is a signed graded/Chern--Weil product, not `||G4||^2`; the temporal electric component has no proved finite `L_t^2` budget.
 
 ---
 
 ## 17. Minimal ontology and the remaining primitive theorem
 
-The primitive state algebra is
-
-\[
-\boxed{Q=\nu\delta+\iota_u,
-\qquad Q^*=\nu d+u^\flat\wedge,}
-\]
+For the **critical escape question**, the lowest lossless dynamical sentence is now
 
 \[
 \boxed{
-1\xrightarrow{Q^*}\alpha\xrightarrow{Q^*}\nu\beta,
+X_t=Y-\nu L^2X,
 \qquad
-Q^2=\nu(\beta\wedge)^*,
-\qquad
-[\mathbb H,Q^*]1=\nu e.}
+\langle X,Y\rangle=0.}
 \]
 
-The critical operator layer from Sections 11.4--11.7 remains exact but is now a compressed reading,
-not extra ontology.  With `R=Lambda^-1`, `A=[R,alpha wedge]`, `B=[R,beta wedge]` and
-`V=(alpha wedge)R(alpha wedge)`, one has
+with
 
 \[
-\boxed{\mathcal G_c=\mathcal V+2\nu\mathcal B=2\nabla\mathcal A,
-\qquad \nabla\mathcal G_c=\nu(\beta\wedge)\mathcal A,
-\qquad K'=\frac{\pi^2}{2\nu}(\|\mathcal V\|^2-\|\mathcal G_c\|^2).}
+E=64\|X\|^2,
+\qquad
+K=64\langle X,LX\rangle,
+\qquad
+Z=64\|LX\|^2.
 \]
 
-The same `Lambda` generates the positive `Gamma_u`, whose trace is `2K` and whose vorticity
-contraction is the Gauss source.  The detailed Gauss floor and null/rank geometry remain in those
-sections; they are not repeated in the minimal ontology.
-
-Beneath these operator readings, Section 11.8 gives the lower physical transport statement
+Euler therefore moves tangentially on the energy sphere; viscosity is the only term with a one-way
+inward energy component (the vector `-L^2X` need not be purely radial).  If `m=K/E`, the unique critical-uphill tangent direction is `g=(L-m)X`.  Eliminating the
+lossless coordinate gives the purely physical form
 
 \[
 \boxed{
-K=\pi^{-2}\int Q(r)|r|^{-4}dr,\qquad
-\kappa(0)=-2\pi^{-2}\int J(r)\cdot r\,|r|^{-6}dr.}
+\mathcal A_{escape}(u)
+=
+\left|\left\langle
+\widehat\omega,
+\widehat{(\Lambda-K/E)u}\times u
+\right\rangle\right|^2.}
 \]
 
-At every fixed separation, Euler can only exchange common and relative endpoint energy, while heat
-only removes it.  The relative critical field `W=v/|r|^2` satisfies
+The exact necessary escape statement is
 
 \[
-\boxed{K=(2\pi^2)^{-1}\|W\|_2^2,\qquad
-M_3=(2\pi^2)^{-1}\|\nabla_cW\|_2^2.}
+\boxed{
+K/E\to\infty
+\Longrightarrow
+\int_0^T\mathcal A_{escape}(u(t))\,dt=\infty.}
 \]
 
-The same endpoint compatibility gives `Delta_c v=4 Delta_r v`; center relay and separation motion
-do not carry independent heat bills.  Incompressibility additionally fixes `K_parallel:K_perp=1:3`,
-while the affine defect `C=nabla_c v` obeys a homogeneous pressure-coupled equation.  Since
-`K_{|r|>=R}<=8E/(pi R)`, any critical escape must concentrate at the collision diagonal, whose
-smooth boundary law is exactly the enstrophy stretching/heat balance.
+Everything below is an exact representation of this same state/current geometry, not another escape
+mechanism.
 
-The material all-scale speed lock already proved in the companion law identifies the same two
-critical endpoints of the metric velocity,
+The previously exposed state/current languages remain exact **readings** of this same law.  In
+particular,
 
 \[
-\boxed{K=\frac12\|g_t\|_{\dot H_g^{-1/2}}^2,\qquad
-M_3=\frac12\|g_t\|_{\dot H_g^{1/2}}^2,}
+Q=\nu\delta+\iota_u,
+\qquad
+K=\frac1{2\pi^2}\|v/|r|^2\|_{L^2_{c,r}}^2,
+\qquad
+M_3=\frac1{2\pi^2}\|\nabla_c(v/|r|^2)\|_{L^2_{c,r}}^2,
 \]
 
-with `-E'=nu ||g_t||_g^2` at the middle rung.  Scale motion itself is neutral at criticality:
-`K_lambda=K`, whereas `M3_lambda=lambda^2 M3` and the parabolic clock scales `lambda^-2`.
+and the material lock
 
-The remaining scalar race can now be written without a new scale or owner.  For `M3>0`,
+\[
+K=\frac12\|g_t\|_{\dot H_g^{-1/2}}^2,
+\qquad
+Z=\frac12\|g_t\|_{L_g^2}^2,
+\qquad
+M_3=\frac12\|g_t\|_{\dot H_g^{1/2}}^2
+\]
+
+are unchanged.  Pair concentration, affine-defect rigidity, `Gamma_u`, Reynolds/Krein, Gauss and
+Hom-current formulas still explain how the state realizes or frustrates the tangent motion; none is
+needed to *define* the escape currency.  The spacetime extension is likewise the same current, not
+additional ontology:
+
+\[
+\mathcal G_4=\mathcal G_c+dt\wedge\mathcal E_c,
+\qquad
+\nabla_4\mathcal G_4=\nu\,\mathbb F\wedge\mathcal A_4.
+\]
+
+The previous state-selected coefficient remains an exact compressed reading,
 
 \[
 \boxed{
 \nu_E:=\frac{\kappa}{M_3},
 \qquad
-K'=2M_3(\nu_E-\nu).}
+K'=2M_3(\nu_E-\nu),}
 \]
 
-The same `nu_E` is the pair least-squares coefficient of `A_u` onto `D omega` and the actual-state
-Rayleigh quotient of the lossless critical Euler operator.  Its orthogonal remainder `C_perp` is
-exactly the 3D reconfiguration road: `C_perp=0` collapses the velocity image to affine-line/shear
-geometry, yet `||C_perp||^2` cancels identically from the instantaneous `K'` square.  Equality
-rigidity is therefore not a static coercive gap; it is information for persistence.
-
-The exact closure target remains
+and its pair least-squares/equality rigidity remains useful.  But neither `nu_E`, Fisher probability,
+Reynolds eigenvalues, `Gamma_u`, nor the pair current is needed to state the final scalar frontier.
+They all collapse to
 
 \[
 \boxed{
-\int^T\frac{\kappa(0,t)^2}
-{N(t)^2[E(t)Z(t)-K(t)^2]}\,dt<\infty,}
+\int_0^T\mathcal A_{escape}(u(t))\,dt
+=
+\int_0^T
+\left|
+\left\langle
+\widehat\omega,
+\widehat{(\Lambda-K/E)u}\times u
+\right\rangle
+\right|^2dt
+<\infty.}
 \]
 
-which would contradict the already proved necessary divergence for critical escape.  In the
-primitive grammar: **Euler chooses the signed two-way coefficient `nu_E`; heat supplies the fixed
-one-way coefficient `nu`; a proof must show that NS cannot return `nu_E` productively with infinite
-successful persistence on finite history.**  This theorem is **not proved**, and no global-regularity
-claim is made.
+This would contradict the already proved necessary divergence for critical escape.  The physical
+spacetime connection extends the same critical current to `mathcal G_4=mathcal G_c+dt wedge
+mathcal E_c` with `nabla_4 mathcal G_4=nu mathbb F wedge mathcal A_4`, so the persistence question now
+has an endogenous spacetime carrier.  What remains unproved is the single implication from that
+compatibility plus the existing Maxwell/heat positivity to finite `L_t^2` angular action.
+
+In the primitive grammar: **Euler does not create energy; it only turns the state.  Heat only erases.
+Critical escape requires infinite normalized turning in the unique critical-uphill direction.**
+Showing that this cannot occur on finite smooth history is the remaining theorem.  It is **not
+proved**, and no global-regularity claim is made.
 
 Material Hodge turnover remains the natural history gauge through
 
@@ -2840,5 +3035,5 @@ Material Hodge turnover remains the natural history gauge through
 \]
 
 Reynolds, Krein, Poisson, midpoint, Hilbert--Schmidt and Gauss--Bianchi formulations remain exact
-compressed readings above this lower pair/current law.  No shell, owner, packet, moving projector or analyst
-clock is needed to state the remaining problem.
+compressed readings above this lower lossless tangent/current law.  No shell, owner, packet, moving
+projector or analyst clock is needed to state the remaining problem.
