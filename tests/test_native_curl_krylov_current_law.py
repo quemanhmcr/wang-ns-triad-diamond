@@ -1,9 +1,10 @@
 import math
 import random
 
+import numpy as np
 import pytest
 
-from src.helical import coupling_magnitude_closed
+from src.helical import coupling_g, coupling_magnitude_closed, helical_basis
 
 from src.native_curl_krylov_current_law import (
     continuum_midpoint_operator_sobolev_dictionary,
@@ -805,6 +806,62 @@ def test_one_fixed_cartan_triple_reconstructs_same_canonical_spectral_energy_sou
     tau=-2.0*f*z[0]*z[1]*z[2]
     src=canonical_spectral_triple_source(lam[0],lam[1],lam[2],tau)
     assert rates == pytest.approx((src["left_source"],src["median_source"],src["right_source"]))
+
+
+def test_one_fixed_physical_triad_has_no_one_step_productive_turning_sign_law():
+    k=np.array((1.0,0.0,0.0));p=np.array((0.0,1.0,0.0));q=-(k+p);signs=(1,-1,1)
+    g=coupling_g(k,p,q,*signs);r=tuple(float(np.linalg.norm(x)) for x in (k,p,q));a=tuple(s*ri for s,ri in zip(signs,r))
+    witnesses=(
+        ((-0.8279616875058876+0.3946891248953539j),(1.5792101934448373+0.9842738001575556j),(-0.8004144025010349+0.6368837919875677j)),
+        ((-0.8443800889130898+1.3788468817563762j),(1.2550724935537503+0.9000320968569572j),(-1.383873821313951+0.7176558245071815j)),
+        ((-0.5271256718618944-0.28732080739415755j),(-0.8791133630368287-2.193513141320069j),(0.23100288463833551-0.5310286435217219j)),
+        ((0.11754085029501977-0.6626806610393868j),(-0.44037096703025486+0.2573129155878022j),(0.17955721141905312-0.30347351520429744j)),
+    )
+    quadrants=set()
+    for A in witnesses:
+        out=isolated_three_point_euler_law(a,A,g);F=out["rhs"];d=(a[1]-a[2],a[2]-a[0],a[0]-a[1])
+        Fdot=(2*d[0]*g*(F[1]*A[2]+A[1]*F[2]).conjugate(),2*d[1]*g*(F[2]*A[0]+A[2]*F[0]).conjugate(),2*d[2]*g*(F[0]*A[1]+A[0]*F[1]).conjugate())
+        kap=sum(ri*(Ai.conjugate()*Fi).real for ri,Ai,Fi in zip(r,A,F))
+        kdot=sum(ri*(abs(Fi)**2+(Ai.conjugate()*Fdi).real) for ri,Ai,Fi,Fdi in zip(r,A,F,Fdot))
+        h=2e-7
+        def kap_at(B):
+            G=isolated_three_point_euler_law(a,B,g)["rhs"]
+            return sum(ri*(Bi.conjugate()*Gi).real for ri,Bi,Gi in zip(r,B,G))
+        fd=(kap_at(tuple(Ai+h*Fi for Ai,Fi in zip(A,F)))-kap_at(tuple(Ai-h*Fi for Ai,Fi in zip(A,F))))/(2*h)
+        assert kdot == pytest.approx(fd,rel=2e-7,abs=2e-8)
+        quadrants.add((1 if kap>0 else -1,1 if kdot>0 else -1))
+    assert quadrants == {(-1,-1),(-1,1),(1,-1),(1,1)}
+
+    A=((-0.386654644603378-0.40492849999157815j),(-0.10954380694909455-0.33416886975520926j),(-0.11456682205321557-0.4793283181315438j))
+    out=isolated_three_point_euler_law(a,A,g);F=out["rhs"];d=(a[1]-a[2],a[2]-a[0],a[0]-a[1])
+    Fdot=(2*d[0]*g*(F[1]*A[2]+A[1]*F[2]).conjugate(),2*d[1]*g*(F[2]*A[0]+A[2]*F[0]).conjugate(),2*d[2]*g*(F[0]*A[1]+A[0]*F[1]).conjugate())
+    E=sum(abs(x)**2 for x in A);K=sum(ri*abs(x)**2 for ri,x in zip(r,A));Z=sum(ri*ri*abs(x)**2 for ri,x in zip(r,A));D=E*Z-K*K
+    kap=sum(ri*(x.conjugate()*f).real for ri,x,f in zip(r,A,F));kdot=sum(ri*(abs(f)**2+(x.conjugate()*fd).real) for ri,x,f,fd in zip(r,A,F,Fdot))
+    Zdot=2*sum(ri*ri*(x.conjugate()*f).real for ri,x,f in zip(r,A,F));Ddot=E*Zdot-4*K*kap
+    eta=kap*math.sqrt(E/(Z*D));etad=math.sqrt(E/(Z*D))*(kdot-0.5*kap*(Zdot/Z+Ddot/D))
+    assert eta>0.04 and etad>0.02
+
+
+def test_weighted_jacobi_forces_companion_two_step_coefficients_on_physical_helical_modes():
+    def mode(k,s): return (np.asarray(k,float),int(s))
+    def lam(m): return m[1]*float(np.linalg.norm(m[0]))
+    def ccoef(out,a,b):
+        ko,so=out;ka,sa=a;kb,sb=b
+        if np.linalg.norm(ko-ka-kb)>1e-12:return 0j
+        ho,ha,hb=helical_basis(ko,so),helical_basis(ka,sa),helical_basis(kb,sb)
+        return np.vdot(ho,1j*(np.dot(ha,kb)*hb-np.dot(hb,ka)*ha))
+    def fcoef(out,a,b): return ccoef(out,a,b)/lam(out)
+    I,J,K,L=mode((1,0,0),1),mode((0,1,0),-1),mode((0,0,1),1),mode((1,1,1),-1)
+    def term(a,b,c):
+        km=a[0]+b[0]
+        return sum(lam(M:=mode(km,sm))*fcoef(M,a,b)*fcoef(L,c,M) for sm in (-1,1))
+    A,B,C=term(J,K,I),term(K,I,J),term(I,J,K)
+    scale=max(abs(A),abs(B),abs(C))
+    assert abs(A+B+C)<=8e-15*scale
+    assert abs(A)**2<=2*(abs(B)**2+abs(C)**2)+1e-14
+    assert max(abs(B),abs(C))+1e-14>=abs(A)/2
+    outer=(0.7-0.2j)*(-0.4+0.6j)*(1.1+0.3j)*(0.5-0.8j)
+    assert abs(outer*(A+B+C))<=8e-15*abs(outer)*scale
 
 
 
@@ -2110,6 +2167,10 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "X_t=Y-nu L^2 X" in cert["primitive_energy_sphere_dynamics"]
     assert "tangent Rayleigh-gradient direction" in cert["primitive_critical_uphill_projection"]
     assert "A_escape=kappa^2/[N^2(EZ-K^2)]" in cert["primitive_scalar_triple_escape"]
+    assert "only the first term has fixed sign" in cert["primitive_euler_kappa_derivative"]
+    assert "all four sign quadrants" in cert["primitive_one_step_turning_guard"]
+    assert "A+B+C=0" in cert["primitive_weighted_jacobi_continuation"]
+    assert "1/lambda_M from C^-1" in cert["primitive_jacobi_biot_savart_seam"]
     assert "whole critical hierarchy is one boundary jet" in cert["primitive_poisson_energy_profile"]
     assert "P_y(fg)-P_yf P_yg" in cert["primitive_poisson_product_defect"]
     assert "R'_E(0)=-4kappa" in cert["primitive_poisson_boundary_critical_law"]
