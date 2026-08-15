@@ -741,7 +741,8 @@ and only the helicity-flip boost changes the critical norm:
 \]
 
 The equal opposite-helicity production law is simply the block form of this one pseudo-unitary
-boost, not a separate mechanism.
+boost, not a separate mechanism.  Section 6.1 later collapses it further to the scalar boundary-current
+identity `j_+^E(0)=j_-^E(0)=kappa` of the same Dirichlet-depth density.
 
 
 ---
@@ -1526,15 +1527,26 @@ Thus Euler is a zero-depth-integral return current: if it is nonzero it cannot k
 all depths.  Viscosity has no return branch.  This is the scalar conservation-law form of the same
 two-way/one-way split already encoded by the covariance reservoirs.
 
-The first two depth moments and the boundary value are exactly
+Because `mathfrak q` is a positive Laplace transform, it is completely monotone.  Whenever the displayed jet or low-frequency moment is finite,
 
 \[
-\boxed{
-M_0:=\int_0^\infty\mathfrak q\,dy=K,
-\qquad
-M_1:=\int_0^\infty y\mathfrak q\,dy=\frac E2,
-\qquad
-\mathfrak q(0)=2Z.}
+\boxed{(-1)^n\partial_y^n\mathfrak q(0)=2^{n+1}\|\Lambda^{(n+2)/2}u\|_2^2,}
+\]
+
+\[
+\boxed{\int_0^\infty y^n\mathfrak q(y)\,dy=\frac{n!}{2^n}\|\Lambda^{(1-n)/2}u\|_2^2.}
+\]
+
+On a smooth mean-zero torus state all these moments are finite.  On `R^3`, finite energy alone does not imply every negative-Sobolev moment for `n>=2`.  In particular
+
+\[
+\boxed{M_0:=\int_0^\infty\mathfrak q\,dy=K,
+\qquad M_1:=\int_0^\infty y\mathfrak q\,dy=\frac E2,}
+\]
+
+\[
+\boxed{\mathfrak q(0)=2Z,
+\qquad -\mathfrak q_y(0)=4M_3.}
 \]
 
 Consequently
@@ -1557,6 +1569,55 @@ M_1'=\int_0^\infty(j_E+j_\nu)\,dy=-\nu Z=\frac12E',}
 \]
 
 where the Euler contribution to `M_1'` is exactly zero.
+
+The same law is self-similar at every canonical depth.  Define
+
+\[
+\boxed{K_y(t):=\int_y^\infty\mathfrak q(s,t)\,ds
+=\langle P_yu,\Lambda P_yu\rangle.}
+\]
+
+Thus `K_y` is exactly the critical `H^{1/2}` stock of the Poisson-smoothed state, and, when the current vanishes at infinite depth,
+
+\[
+\boxed{(K_y)_t=j_E(y)+\frac\nu2\mathfrak q_y(y).}
+\]
+
+So the same critical NS law is nested at every semigroup depth; no analyst-selected cascade scale is required.
+
+Signed helicity is a signed companion reading of the same canonical depth, not information recoverable from the positive scalar `mathfrak q` alone: `mathfrak q` forgets the sign of curl.  Using the already fixed involution `mathsf J=sgn C`, put
+
+\[
+\boxed{\mathfrak q_H(y):=2\langle\Lambda P_yu,\mathsf J\Lambda P_yu\rangle,
+\qquad \mathsf J=\operatorname{sgn}C.}
+\]
+
+Then
+
+\[
+\boxed{\int_0^\infty\mathfrak q_H\,dy=H,
+\qquad
+\mathfrak q_\pm:=\frac{\mathfrak q\pm\mathfrak q_H}{2}
+=2\|\Lambda P_yP_\pm u\|_2^2\ge0,
+\qquad P_\pm:=\tfrac12(I\pm\mathsf J).}
+\]
+
+For the Euler part define
+
+\[
+\boxed{j_H^E(y):=2\langle\Lambda P_yu,\mathsf J P_yF_E\rangle
+=2\langle C P_yu,P_yF_E\rangle.}
+\]
+
+Euler helicity nullity gives `j_H^E(0)=2<Cu,F_E>=0`, hence
+
+\[
+\boxed{j_+^E(0)=j_-^E(0)=\kappa,
+\qquad
+j_\pm^E:=\frac{j_E\pm j_H^E}{2}.}
+\]
+
+Thus the Euler boundary flux splits equally between the two opposite-helicity roads.  This statement is signed: for `kappa>0` both are inward injections, while for `kappa<0` both are outward.  A pure-helicity road cannot by itself carry nonzero critical boundary growth.  This is the scalar-depth form of the pseudo-unitary helicity-flip law in Section 4, not a separate mechanism.
 
 The determinant is now the scalar endpoint/moment Hankel defect
 
@@ -3823,18 +3884,22 @@ j_E=2\langle\Lambda P_yu,P_yF_E\rangle,
 \frac\nu2\mathfrak q_y\le0.}
 \]
 
-Its complete critical bookkeeping is
+Its complete critical bookkeeping is already encoded in the same density:
 
 \[
 \boxed{
 \int\mathfrak q\,dy=K,
-\qquad
+\quad
 \int y\mathfrak q\,dy=\frac E2,
-\qquad
+\quad
 \mathfrak q(0)=2Z,
-\qquad
+\quad
+-\mathfrak q_y(0)=4M_3,
+\quad
 j_E(0)=2\kappa.}
 \]
+
+All higher absolute-curl Sobolev norms are boundary jets or depth moments of `mathfrak q` whenever the corresponding low-frequency moment exists; its tail `K_y=int_y^infinity mathfrak q` is the same critical stock at Poisson depth `y`.  Signed helicity is the companion `mathsf J`-reading at the same depth (not reconstructible from positive `mathfrak q` alone), with positive sector densities `mathfrak q_+/-` and exact boundary split `j_+^E(0)=j_-^E(0)=kappa`.
 
 Thus `K/E -> infinity` means the mean depth `E/(2K)` tends to zero.  The variance-like obstruction is
 only

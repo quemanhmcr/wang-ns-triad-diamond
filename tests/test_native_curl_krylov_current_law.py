@@ -1788,6 +1788,49 @@ def test_poisson_covariance_stress_two_reservoir_heat_and_fisher_laws_are_exact(
     assert -2.0*nu*M3 == pytest.approx(0.5*nu*(-4.0*M3),rel=3e-14,abs=3e-14)
     assert inner(u,FE) == pytest.approx(0.0,abs=5e-13)  # int_0^infinity j_E dy
 
+    # One completely monotone Dirichlet density encodes the full Sobolev jet/moment ladder.
+    live_r=radius>0.0; rp=radius[live_r]; mp=modal[live_r]
+    for order in range(5):
+        jet=float(np.sum(2.0*((-2.0*rp)**order)*(rp**2)*mp))
+        sob=(((-1.0)**order)*(2.0**(order+1))
+             *float(np.sum((rp**(order+2))*mp)))
+        assert jet == pytest.approx(sob,rel=3e-14,abs=3e-14)
+        moment=float(np.sum(2.0*(rp**2)*math.factorial(order)/((2.0*rp)**(order+1))*mp))
+        hnorm=(math.factorial(order)/(2.0**order))*float(np.sum((rp**(1-order))*mp))
+        assert moment == pytest.approx(hnorm,rel=3e-14,abs=3e-14)
+    assert float(np.sum(rp*mp)) == pytest.approx(inner(u,lam(u)),rel=3e-13,abs=3e-13)
+    assert 0.5*float(np.sum(mp)) == pytest.approx(0.5*E,rel=3e-13,abs=3e-13)
+
+    # The tail is exactly the same critical stock at Poisson depth y.
+    Ktail=inner(v,Lv)
+    Ktail_t=2.0*inner(vt_full,Lv)
+    assert Ktail_t == pytest.approx(jE+0.5*nu*qdir_y,rel=4e-12,abs=4e-12)
+
+    # Signed helicity is the difference channel of the same positive depth density.
+    def jop(a):
+        ah=fft(curl(a)); out=np.zeros_like(ah)
+        np.divide(ah,radius,out=out,where=radius>0.0)
+        return ifft(out)
+    Jv=jop(v); JFy=jop(Fy)
+    vp=0.5*(v+Jv); vm=0.5*(v-Jv)
+    Fp=0.5*(Fy+JFy); Fm=0.5*(Fy-JFy)
+    qH=2.0*inner(Lv,curl(v))
+    qp=0.5*(qdir+qH); qm=0.5*(qdir-qH)
+    assert qp >= -3e-13 and qm >= -3e-13
+    assert qp == pytest.approx(2.0*inner(lam(vp),lam(vp)),rel=4e-12,abs=4e-12)
+    assert qm == pytest.approx(2.0*inner(lam(vm),lam(vm)),rel=4e-12,abs=4e-12)
+    jH=2.0*inner(curl(v),Fy)
+    jp=0.5*(jE+jH); jm=0.5*(jE-jH)
+    assert jp == pytest.approx(2.0*inner(lam(vp),Fp),rel=4e-12,abs=4e-12)
+    assert jm == pytest.approx(2.0*inner(lam(vm),Fm),rel=4e-12,abs=4e-12)
+    qHt_euler=4.0*inner(lam(Fy),curl(v))
+    jH_y=-4.0*inner(lam(curl(v)),Fy)
+    assert qHt_euler+jH_y == pytest.approx(0.0,abs=6e-12)
+    jH0=2.0*inner(omega,FE)
+    assert jH0 == pytest.approx(0.0,abs=6e-13)
+    assert 0.5*(2.0*kappa+jH0) == pytest.approx(kappa,rel=4e-14,abs=4e-14)
+    assert 0.5*(2.0*kappa-jH0) == pytest.approx(kappa,rel=4e-14,abs=4e-14)
+
     M0dir=inner(u,lam(u)); M1dir=0.5*E; q0dir=2.0*Z
     defect=M1dir*q0dir-M0dir*M0dir
     assert M0dir == pytest.approx(K_fourier,rel=3e-13,abs=3e-13)
@@ -2040,6 +2083,9 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "A_(y+z)=A_z(P_yu)" in cert["primitive_poisson_transverse_activity"]
     assert "rho_t+div_4 J=0" in cert["primitive_poisson_dirichlet_local_current"]
     assert "M0=int mathfrak q dy=K" in cert["primitive_poisson_dirichlet_moments"]
+    assert "(-1)^n partial_y^n q(0)" in cert["primitive_poisson_dirichlet_sobolev_ladder"]
+    assert "K_y=int_y^infinity mathfrak q" in cert["primitive_poisson_dirichlet_tail_law"]
+    assert "j_+^E(0)=j_-^E(0)=kappa" in cert["primitive_poisson_helicity_depth_split"]
     assert "int j_E(y)^2/mathfrak q(y) dy" in cert["primitive_poisson_transport_action_guard"]
     assert "R_E^2/(4A_y)+R_align+R_reg" in cert["primitive_poisson_covariance_pythagoras"]
     assert "V_t=A_y/(2nu)" in cert["primitive_poisson_relative_completed_square"]
