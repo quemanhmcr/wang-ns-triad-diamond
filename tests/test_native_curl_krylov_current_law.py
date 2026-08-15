@@ -1409,6 +1409,21 @@ def test_primitive_pair_radial_transverse_split_and_pressure_converter_constants
     assert 0.5*(tr_x+tr_y) == pytest.approx(0.0,abs=1e-15)
 
 
+def test_primitive_pair_critical_scaling_is_neutral_only_at_K():
+    # Exact 3D NS dilation u_lambda=lambda u(lambda x,lambda^2 t).
+    E,Z,K,M3,kappa,N2,dt=2.3,1.7,0.91,4.2,-1.4,1.7/2.3,0.08
+    det=E*Z-K*K
+    for lam in (0.17,0.8,2.5,11.0):
+        El=E/lam; Zl=lam*Z; Kl=K; M3l=lam*lam*M3; kapl=lam*lam*kappa
+        N2l=lam*lam*N2; dtl=dt/(lam*lam)
+        assert Kl == K
+        assert El*Zl-Kl*Kl == pytest.approx(det,rel=2e-15)
+        assert M3l*dtl == pytest.approx(M3*dt,rel=2e-15)
+        action_l=kapl*kapl/(N2l*(El*Zl-Kl*Kl))*dtl
+        action=kappa*kappa/(N2*det)*dt
+        assert action_l == pytest.approx(action,rel=3e-14,abs=3e-14)
+
+
 def test_certificate_records_two_particle_critical_history_without_closure_claim():
     cert=theorem_certificate()
     assert "pressure has only the common-coordinate road" in cert["primitive_two_particle_transport"]
@@ -1427,8 +1442,12 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "homogeneous in C" in cert["primitive_pair_affine_defect"]
     assert "8E/(pi R)" in cert["primitive_pair_collision_concentration"]
     assert "exactly the enstrophy boundary law" in cert["primitive_pair_collision_boundary"]
+    assert "K->K" in cert["primitive_pair_scale_neutrality"]
+    assert "regeneration/accumulation of critical mass" in cert["primitive_pair_scale_neutrality"]
     assert "pair critical stock, physical energy-loss speed and critical heat" in cert["primitive_pair_material_scale_lock"]
-    assert "shrinking affine-like relative-energy front" in cert["primitive_two_road_frontier"]
+    assert "int kappa^2/[N^2(EZ-K^2)] dt=infinity" in cert["primitive_regeneration_persistence"]
+    assert "A(F_E)=-2 d_op^* V" in cert["primitive_regeneration_shortcut_guard"]
+    assert "successfully regenerated/accumulated infinitely often" in cert["primitive_two_road_frontier"]
     assert "unproved" in cert["primitive_two_road_frontier"]
     assert cert["global_regularity_claimed"] is False
 

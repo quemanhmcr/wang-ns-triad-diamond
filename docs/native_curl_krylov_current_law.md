@@ -1969,8 +1969,10 @@ On the exact critical null geometry `S omega=0`, so enstrophy also becomes one-w
 The tangent identity does **not** supply the closure.  A physical-Fourier referee rejects the
 proposed sharp factor `1/2` in
 `||S omega||_{Hdot^-1/2}^2 <= C int omega^T Gamma_u omega`; a refined search has approached `C=1`
-from below (about `0.99799`) without proving it.  No static contraction is used below.  The exact
-pair dynamics in the next section makes the remaining obstruction a history problem instead.
+from below (about `0.99799`) without proving it.  A separate numerical referee also rejects the
+tempting operator shortcut `A(F_E)=-2 d_op^* V` (order-one residual), while differentiating the
+affine defect simply climbs the old `H^{3/2}->H^{5/2}->...` ladder.  None of these shortcuts is used
+below; the exact pair dynamics makes the remaining obstruction a history problem instead.
 
 ### 11.8 The two-particle law lies below the critical metric
 
@@ -2255,10 +2257,44 @@ and therefore the boundary evolution is exactly the enstrophy law,
 \]
 
 Thus critical transport toward `r=0` does not enter an unknown boundary dynamics.  It lands on the
-existing vortex-stretching/heat law.  What remains unproved is the **no shrinking affine front**
-statement: a finite-energy trajectory cannot drive relative critical mass into `r=0` indefinitely
-while the homogeneous `C` equation regenerates just enough center non-affinity to offset its exact
-`-nu M_3` bill.
+existing vortex-stretching/heat law.  But concentration at the diagonal is only a **necessary
+location statement**, not critical growth by itself.  Under the exact NS dilation
+
+\[
+u_\lambda(x,t)=\lambda u(\lambda x,\lambda^2t),
+\]
+
+\[
+\boxed{E_\lambda=\lambda^{-1}E,\quad Z_\lambda=\lambda Z,\quad
+K_\lambda=K,\quad M_{3,\lambda}=\lambda^2M_3,\quad
+\kappa_\lambda=\lambda^2\kappa.}
+\]
+
+So a fixed critical profile may shrink toward `r=0` while carrying the **same** `K`.  Blowup of `K`
+requires regeneration/accumulation of additional critical mass, not scale motion alone.  A
+scale-covariant critical unit of size `rho` has the benchmark
+
+\[
+E_\rho\sim\rho,\qquad Z_\rho\sim\rho^{-1},\qquad
+M_{3,\rho}\sim\rho^{-2},\qquad \Delta t_\rho\sim\rho^2.
+\]
+
+Hence its physical-energy bill over one parabolic lifetime is `~nu rho`, while its critical-heat
+bill `nu M_3 Delta t` is scale-neutral (`~nu`).  This is a scaling benchmark, **not** a universal
+per-visit lower bound.  The exact persistence currency is the already proved productive action:
+with `N^2=Z/E`, critical escape requires
+
+\[
+\boxed{
+\int^T\frac{\kappa(0,t)^2}
+{N(t)^2[E(t)Z(t)-K(t)^2]}\,dt=\infty.}
+\]
+
+The remaining theorem is therefore not merely “no shrinking affine front.”  It is the historical
+statement that the actual common-relative Euler current cannot **successfully regenerate critical
+mass infinitely often in finite time** against the scale-neutral one-way critical heat.  The
+homogeneous affine-defect law identifies the non-affinity that such regeneration must maintain, but
+does not yet prove this persistence integral finite.
 
 ---
 
@@ -2657,11 +2693,21 @@ critical endpoints of the metric velocity,
 M_3=\frac12\|g_t\|_{\dot H_g^{1/2}}^2,}
 \]
 
-with `-E'=nu ||g_t||_g^2` at the middle rung.  The remaining theorem is therefore no longer a search
-for another mechanism: it is the **no shrinking affine front at finite energy** statement, excluding
-arbitrarily fast concentration of the common-relative exchange at `r=0` while the same state
-regenerates the non-affinity `C` needed to keep the front finite-energy.  This historical
-anti-concentration theorem is **not proved**, and no global-regularity claim is made.
+with `-E'=nu ||g_t||_g^2` at the middle rung.  Scale motion itself is neutral at criticality:
+`K_lambda=K`, whereas `M3_lambda=lambda^2 M3` and the parabolic clock scales `lambda^-2`.  Thus the
+remaining theorem is no longer an anti-concentration statement by itself.  It is the exact
+**regeneration/persistence** question
+
+\[
+\boxed{
+\int^T\frac{\kappa(0,t)^2}
+{N(t)^2[E(t)Z(t)-K(t)^2]}\,dt<\infty,}
+\]
+
+which would contradict the already proved necessary divergence for critical escape.  Pair language
+reads the same gap as exclusion of infinitely many successful common-to-relative regenerations
+against scale-neutral one-way critical heat.  This historical theorem is **not proved**, and no
+global-regularity claim is made.
 
 Material Hodge turnover remains the natural history gauge through
 
