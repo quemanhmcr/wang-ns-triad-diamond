@@ -1966,23 +1966,112 @@ On the exact critical null geometry `S omega=0`, so enstrophy also becomes one-w
 \to \text{a stronger one-way law}.}
 \]
 
-The tangent identity does **not** supply a static coercive shortcut.  The tempting estimate
+The tangent identity does **not** supply the closure.  A physical-Fourier referee rejects the
+proposed sharp factor `1/2` in
+`||S omega||_{Hdot^-1/2}^2 <= C int omega^T Gamma_u omega`; a refined search has approached `C=1`
+from below (about `0.99799`) without proving it.  No static contraction is used below.  The exact
+pair dynamics in the next section makes the remaining obstruction a history problem instead.
+
+### 11.8 The two-particle law lies below the critical metric
+
+Put
 
 \[
-\|S\omega\|_{\dot H^{-1/2}}^2\lesssim\int\omega^T\Gamma_u\omega
+x=c+\frac r2,\qquad y=c-\frac r2,\qquad
+\delta u=u(x)-u(y),\qquad \bar u=\frac{u(x)+u(y)}2,
 \]
 
-is withdrawn after a near-parallel two-mode Fourier referee: take `k_N=(N,0,0)`,
-`ell_N=(N,1,0)`, `u_k=(1-i)(0,1,1)` and
-`u_ell=(1+i)(-(N^2+1)^(-1/2),N(N^2+1)^(-1/2),1)`, plus conjugates.  Exact mode algebra gives
-scale-growing ratios (about `6.89, 13.56, 53.56` at `N=20,40,160`).  Localized projected wave
-packets retain the same low-beat mechanism.  No closure below uses this static estimate.
+\[
+\boxed{q(c,r,t):=\frac12|\delta u|^2.}
+\]
 
-This failure is structural rather than a reason to add a compensating analyst norm: near-parallel
-high carriers can make the instantaneous carre-du-champ frustration small while leaving an `O(1)`
-low-frequency stretching beat.  The remaining bridge is therefore genuinely historical: persistent
-small `mathcal G_c` in its native pair-space metric must be coupled to the **endogenous tensor heat
-law and turning of `Gamma_u`**, not replaced by a stronger externally imposed static inequality.
+Here `c` is common motion and `r` is physical separation; neither is an analyst-selected scale.
+Subtracting the two NS equations and using incompressibility gives the exact local law
+
+\[
+\boxed{
+\partial_tq
++\nabla_c\!\cdot(q\bar u+\delta p\,\delta u)
++\nabla_r\!\cdot(q\delta u)
+=\nu\left(\frac12\Delta_c+2\Delta_r\right)q
+-\nu\big(|\nabla u(x)|^2+|\nabla u(y)|^2\big).}
+\]
+
+Pressure occurs only in the **common-coordinate** flux `div_c(delta p delta u)`: it can relocate
+which pair is active but has no direct `r`-flux.  After integrating the common coordinate, define
+
+\[
+Q(r,t):=\int q(c,r,t)\,dc,\qquad
+J(r,t):=\int q(c,r,t)\,\delta u(c,r,t)\,dc.
+\]
+
+Then pressure disappears and the relative road closes:
+
+\[
+\boxed{\partial_tQ+\nabla_r\cdot J=2\nu\Delta_rQ-2\nu Z.}
+\]
+
+On continuum `R^3`, the critical stock and Euler critical work are moments of this same density/current,
+
+\[
+\boxed{
+K=\frac1{\pi^2}\int\frac{Q(r)}{|r|^4}\,dr,\qquad
+\kappa(0)=-\frac2{\pi^2}\int\frac{J(r)\cdot r}{|r|^6}\,dr.}
+\]
+
+Thus positive `kappa(0)` is weighted **net inward relative transport toward the collision diagonal
+`r=0`**, not merely a spectral transfer metaphor.
+
+On the same continuum geometry there is an equally intrinsic Lagrangian reading.  For material labels `a,b`, let
+`r_ab=Phi_t(a)-Phi_t(b)` and use inversion
+
+\[
+\mathcal I(r)=\frac r{|r|^2},\qquad
+D\mathcal I(r)=|r|^{-2}(I-2\hat r\otimes\hat r).
+\]
+
+The parenthesis is an orthogonal reflection, so incompressibility gives the exact kinetic identity
+
+\[
+\boxed{
+K(t)=\frac1{2\pi^2}\iint
+\left|\frac d{dt}\mathcal I(r_{ab}(t))\right|^2\,da\,db.}
+\]
+
+The inversion geometry itself produces the Euler cubic.  For `v=dot r`,
+
+\[
+\boxed{
+|D^2\mathcal I(r)[v,v]|=\frac{2|v|^2}{|r|^3},\qquad
+D\mathcal I(r)v\cdot D^2\mathcal I(r)[v,v]
+=-\frac{2|v|^2(v\cdot r)}{|r|^6}.}
+\]
+
+The pressure part of material pair acceleration is orthogonal in this kinetic metric:
+
+\[
+\boxed{
+\iint D\mathcal I(r)\dot r\cdot D\mathcal I(r)(-\delta\nabla p)\,da\,db
+=-\iint\frac{\delta u\cdot\delta\nabla p}{|r|^4}\,dx\,dy=0.}
+\]
+
+Hence pressure may turn/relay the actor but cannot directly mint critical kinetic energy; the
+critical balance remains `K'=2 kappa(0)-2 nu M_3`.
+
+Finally, `K^2<=EZ` and `-E'=2 nu Z` give a genuine finite-time history law:
+
+\[
+\boxed{
+\|\mathcal I(r_{ab}(T))-\mathcal I(r_{ab}(0))\|_{L^2_{a,b}}
+\le \sqrt{2\pi^2}\,E(0)^{1/4}T^{3/4}
+\left[\frac{E(0)-E(T)}{2\nu}\right]^{1/4}.}
+\]
+
+This is finite Hilbert path length, **not** a bound on endpoint velocity and not regularity.  The
+remaining loophole is relay: inward `r`-transport may move to fresh center/material labels.  There
+is no third pair coordinate.  The unresolved primitive seam is therefore to couple exact inward
+separation flux to the already intrinsic material Hodge/deformation turnover cost, rather than add
+a static analyst inequality.
 
 ---
 
@@ -2388,32 +2477,30 @@ The same law gives the native Gauss floor
 \rangle.}
 \]
 
-Critical escape still requires
+Beneath these operator readings, Section 11.8 gives the lower physical transport statement
 
 \[
 \boxed{
-\int^T
-\frac{\kappa(0,t)^2}{N(t)^2[E(t)Z(t)-K(t)^2]}\,dt=\infty.}
+K=\pi^{-2}\int Q(r)|r|^{-4}dr,\qquad
+\kappa(0)=-2\pi^{-2}\int J(r)\cdot r\,|r|^{-6}dr.}
 \]
 
-The remaining theorem is now a stability/history statement:
+Critical growth is therefore weighted inward `r`-flux of relative kinetic energy, while pressure
+has only the common `c` road.  The
+inverted material-pair configuration has finite Hilbert path length on every finite interval, so
+the unresolved escape mechanism is a relay between active center/material labels.  Schematically,
 
 \[
 \boxed{
-\begin{gathered}
-\mathcal G_c\ \text{small for enough productive critical action}
-\\\Downarrow\\
-(\beta\wedge)\mathcal A\ \text{small in }(\mathcal L_u^{(6)})^{-1}
-\\\Downarrow\\
-u\ \text{quantitatively approaches the intrinsic lower-dimensional null geometry}
-\\\Downarrow\\
-\text{Euler critical regeneration becomes integrable}.
-\end{gathered}}
+\text{infinite inward separation flux}
+\Longrightarrow
+\text{fixed-pair compression or center-label turnover}.}
 \]
 
-Only the first arrow is presently exact.  The zero case of the second is classified, but its
-quantitative stability version and the final historical integrability implication are **not
-proved**.  No global-regularity claim is made.
+The fixed-pair side has the exact inversion-history bound; the turnover side is not free because
+material deformation already obeys the Hodge/current history law below.  Proving that these two
+exact histories exclude infinite productive regeneration is the remaining **quantitative
+stability/history** theorem.  It is not proved, and no global-regularity claim is made.
 
 Material Hodge turnover remains the natural history gauge through
 
@@ -2425,6 +2512,6 @@ Material Hodge turnover remains the natural history gauge through
 \|D_\Gamma B\|_{L^2_g}^2=\|\delta_g\widetilde\beta\|_{L^2_g}^2.
 \]
 
-Reynolds, Krein, Poisson, midpoint and Hilbert--Schmidt formulations remain exact compressed
-readings above this lower Gauss--Bianchi law.  No shell, owner, packet, moving projector or analyst
+Reynolds, Krein, Poisson, midpoint, Hilbert--Schmidt and Gauss--Bianchi formulations remain exact
+compressed readings above this lower pair/current law.  No shell, owner, packet, moving projector or analyst
 clock is needed to state the remaining problem.

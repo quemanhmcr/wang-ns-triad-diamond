@@ -1330,11 +1330,55 @@ def test_certificate_collapses_gauss_source_to_intrinsic_positive_critical_metri
     assert "omega^T Gamma_u omega" in cert["primitive_critical_vorticity_metric"]
     assert "Loewner-positive" in cert["primitive_critical_metric_heat_law"]
     assert "finite-energy R3 has only vacuum" in cert["primitive_critical_rank_persistence"]
-    assert "static Hdot^-1/2 bridge is withdrawn" in cert["primitive_critical_stretching_bridge_guard"]
-    assert "near-parallel two-mode" in cert["primitive_critical_stretching_bridge_guard"]
-    assert "endogenous Gamma_u heat/turning history" in cert["primitive_critical_stretching_bridge_guard"]
+    assert "proposed factor 1/2 is numerically false" in cert["primitive_critical_stretching_bridge_guard"]
+    assert "factor 1 from below without a proof" in cert["primitive_critical_stretching_bridge_guard"]
     assert cert["global_regularity_claimed"] is False
 
+
+
+def test_primitive_two_particle_roads_and_inversion_geometry_are_exact():
+    import numpy as np
+
+    # Affine divergence-free state: the local pair law reduces to exact algebra,
+    # including the fact that pressure enters only through the center road.
+    A=np.array([[0.2,0.7,-0.1],[-0.3,-0.4,0.5],[0.6,-0.2,0.2]],float)
+    assert abs(np.trace(A)) < 1e-15
+    P=np.array([[0.4,-0.2,0.1],[-0.2,0.3,0.05],[0.1,0.05,-0.7]],float)
+    r=np.array([0.8,-0.6,0.9])
+    du=A@r
+    q=0.5*float(du@du)
+    dut=-(A@A)@r-P@r
+    q_t=float(du@dut)
+    center_pressure=float((P@r)@du)
+    relative_flux=float(du@(A.T@du))+q*float(np.trace(A))
+    nu=0.37
+    viscous=nu*(2.0*float(np.trace(A.T@A))-2.0*float(np.sum(A*A)))
+    assert q_t+center_pressure+relative_flux == pytest.approx(viscous,abs=2e-14)
+
+    # Inversion is a scaled reflection; its Hessian cubic is exactly the
+    # critical inward-compression integrand.
+    rr=np.array([1.1,-0.7,0.9])
+    v=np.array([0.4,0.8,-0.3])
+    rho=float(np.linalg.norm(rr)); e=rr/rho
+    DI=(np.eye(3)-2.0*np.outer(e,e))/rho**2
+    a=float(v@e); w=v-a*e
+    D2=(-4.0*a*w+2.0*(a*a-float(w@w))*e)/rho**3
+    assert float(np.linalg.norm(DI@v)) == pytest.approx(float(np.linalg.norm(v))/rho**2,rel=2e-15)
+    assert float(np.linalg.norm(D2)) == pytest.approx(2.0*float(v@v)/rho**3,rel=2e-15)
+    assert float((DI@v)@D2) == pytest.approx(-2.0*float(v@v)*float(v@rr)/rho**6,rel=2e-15)
+
+
+def test_certificate_records_two_particle_critical_history_without_closure_claim():
+    cert=theorem_certificate()
+    assert "pressure has only the common-coordinate road" in cert["primitive_two_particle_transport"]
+    assert "Q_t+div_r J=2nu Delta_r Q-2nu Z" in cert["primitive_relative_pressure_free_law"]
+    assert "weighted inward relative transport toward r=0" in cert["primitive_relative_pressure_free_law"]
+    assert "K=(2pi^2)^-1" in cert["primitive_inverted_pair_kinetic"]
+    assert "finite Hilbert path length" in cert["primitive_inverted_pair_history"]
+    assert "not endpoint-velocity control or regularity" in cert["primitive_inverted_pair_history"]
+    assert "center-label turnover" in cert["primitive_two_road_frontier"]
+    assert "unproved" in cert["primitive_two_road_frontier"]
+    assert cert["global_regularity_claimed"] is False
 
 def test_primitive_critical_gauss_bianchi_continuum_constants_are_exact():
     out=continuum_critical_gauss_bianchi_constants()
