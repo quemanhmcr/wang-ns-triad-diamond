@@ -2322,3 +2322,576 @@ problem.  It proves something methodological instead: no pointwise or purely
 finite-dimensional `SL(3)`, `SO(3,3)` or curl-line algebra can be the missing
 regularizer by itself.  The final theorem, if it exists in this grammar, must use
 the global exactness/degree/finite-energy history that this affine field violates.
+
+
+## 34. The same Cartan--Hodge current transports the whole local deformation spectrum
+
+The finite tangent-chord law has an exact time-local form.  Let
+
+\[
+A=\nabla u,
+\qquad
+\chi_A(\lambda)=\det(\lambda I-A).
+\]
+
+The derivative of a determinant and the Piola identity for the gradient map
+`lambda x-u(x,t)` give
+
+\[
+\boxed{
+\partial_t\chi_A(\lambda)
+=-\nabla\cdot\left[
+\operatorname{cof}(\lambda I-A)^T u_t
+\right].
+}
+\]
+
+This is valid for every spectral parameter `lambda`.  Navier--Stokes itself says
+
+\[
+\boxed{u_t=-P e,
+\qquad e=(\iota_u+\nu\delta)\beta,}
+\]
+
+so
+
+\[
+\boxed{
+\partial_t\chi_A(\lambda)
+=\nabla\cdot\left[
+\operatorname{cof}(\lambda I-A)^T P e
+\right].
+}
+\]
+
+Thus the same one-form current which evolves vorticity curvature and performs
+Poynting--Joule work also transports the **entire local characteristic polynomial
+of the deformation generator**.  In trace-free three dimensions,
+
+\[
+\chi_A(\lambda)
+=\lambda^3-\frac12\operatorname{tr}A^2\,\lambda-\det A,
+\]
+
+so the two coefficient conservation laws are
+
+\[
+\boxed{
+\partial_t\operatorname{tr}A^2
+=2\nabla\cdot(Au_t),
+}
+\]
+
+and
+
+\[
+\boxed{
+\partial_t\det A
+=\nabla\cdot\left[
+\left(A^2-\frac12\operatorname{tr}A^2 I\right)u_t
+\right].
+}
+\]
+
+There is no independent local eigenvalue charge left out of this grammar.  If
+`tr A=tr A^2=det A=0`, Cayley--Hamilton gives `A^3=0`: the instantaneous generator
+is nilpotent and has no nonzero exponential eigenvalue rate.  This is not a
+regularity theorem, because time-dependent/nonnormal nilpotent generators can
+still produce transient growth.  The structural point is that hyperbolic
+characteristic-polynomial content cannot be minted by a bulk source; it is
+redistributed by the same NS current.
+
+## 35. Away from vorticity zeros, full viscous vorticity is locally frozen into an incompressible flux velocity
+
+The local gauge correction can be sharpened one more step.  Seek a velocity `w`
+and scalar `psi` such that
+
+\[
+e-\iota_w\beta=d\psi.
+\]
+
+Then Faraday becomes exact Lie transport,
+
+\[
+\partial_t\beta+\mathcal L_w\beta=0.
+\]
+
+At a point where `omega` is nonzero, the first scalar characteristic equation is
+
+\[
+\boxed{
+\omega\cdot\nabla\psi=e\cdot\omega.
+}
+\]
+
+It makes `e-d psi` transverse to the vorticity and therefore determines the
+transverse part `w_perp` uniquely.  The parallel component of `w` remains free
+because `i_omega beta=0`.  Write it as `lambda omega`.  Since `div omega=0`, the
+condition that the flux velocity itself preserve volume reduces to a second
+scalar ODE on the same vortex line:
+
+\[
+\boxed{
+\omega\cdot\nabla\lambda
+=-\nabla\cdot w_\perp.
+}
+\]
+
+Both equations are locally solvable by characteristics wherever `omega != 0`.
+Hence
+
+\[
+\boxed{
+\partial_t\beta+\mathcal L_w\beta=0,
+\qquad
+\nabla\cdot w=0
+}
+\]
+
+has a local solution around every nonzero-vorticity point.  In that local
+vortex-flux gauge the full viscous two-form has an ordinary incompressible Cauchy
+transport formula; viscosity changes the vortex transport velocity instead of
+locally erasing the two-form.
+
+This statement is deliberately local.  The two characteristic ODEs can fail to
+produce single-valued global potentials/parallel corrections on closed or
+recurrent vortex lines, and the construction degenerates at vorticity zeros.  The
+first obstruction is the leafwise electromotive period already identified above;
+the global incompressibility correction has its own compatibility along recurrent
+leaves.  Thus the true remaining seams are global topology and concentration of
+the flux velocity gradient, not an arbitrary local heat-reset degree of freedom.
+
+
+## 38. Enstrophy is flux-weighted conformal vortex-line length
+
+The universal curl-polar vector has a direct intrinsic line geometry.  For any
+nonzero field `b=m n`, introduce the conformal metric
+
+\[
+\widetilde g_b=m^2g.
+\]
+
+A field line has conformal length
+
+\[
+\widetilde L_b(\gamma)=\int_\gamma m\,ds.
+\]
+
+The conformal Levi--Civita formula gives
+
+\[
+\boxed{
+\widetilde\nabla_{\widetilde n}\widetilde n
+=\frac1{m^2}
+\left[(n\cdot\nabla)n-\nabla_\perp\log m\right]
+=\frac{A_b}{m^2}.
+}
+\]
+
+Equivalently, for an instantaneous normal shape variation `V_perp` with `m`
+held as the ambient scalar field,
+
+\[
+\boxed{
+\delta\int_\gamma m\,ds
+=-\int_\gamma m A_b\cdot V_\perp\,ds.
+}
+\]
+
+Thus `A_b` is not an auxiliary slip defect; it is the normal gradient of the
+field-generated conformal line length.  For vorticity,
+
+\[
+v_{\rm slip}=\nu A_\omega
+\]
+
+points in the negative-gradient direction of this instantaneous line-shape
+functional.
+
+There is a local flux disintegration which makes the global PDE balance equally
+transparent.  On a nonvanishing vortex flow-box let `dPhi` denote the vorticity
+flux measure across a transverse section and `s` arclength along the field line.
+Since `beta=i_omega dV`,
+
+\[
+\boxed{dV=\frac{1}{m}\,d\Phi\,ds.}
+\]
+
+Therefore
+
+\[
+\boxed{
+Z=\int|\omega|^2dV
+=\int d\Phi\int_\gamma m\,ds,
+}
+\]
+
+so enstrophy is exactly **vorticity-flux-weighted conformal line length**.  The
+curl Pythagoras gives
+
+\[
+\boxed{
+P=\int|c|^2dV
+=\int d\Phi\int_\gamma
+m\left(|A_\omega|^2+\tau_\omega^2\right)ds.
+}
+\]
+
+The transverse piece is the squared line-length shape gradient; the longitudinal
+piece is Frobenius twist.  Finally
+
+\[
+\boxed{
+\int(u\times\omega)\cdot c\,dV
+=-\int d\Phi\int_\gamma m\,u_\perp\cdot A_\omega\,ds.
+}
+\]
+
+Thus the entire enstrophy law is the flux-weighted geometric work identity
+
+\[
+\boxed{
+\frac12Z'
+=-\int d\Phi\int_\gamma m
+\left[
+ u_\perp\cdot A_\omega
+ +\nu|A_\omega|^2
+ +\nu\tau_\omega^2
+\right]ds.
+}
+\]
+
+The dangerous equality geometry is now very concrete:
+
+\[
+A_\omega=-\frac{u_\perp}{2\nu},
+\qquad
+v_{\rm slip}=-\frac12u_\perp,
+\qquad
+\tau_\omega=0.
+\]
+
+Euler must move the vortex-line geometry uphill against the same conformal-length
+gradient which viscosity squares.
+
+This is **not** an autonomous curve-shortening theorem.  The first-variation
+formula freezes the instantaneous background magnitude while varying line shape;
+full Navier--Stokes simultaneously transports the line, changes `m`, and can have
+global flux-gauge obstruction.  Static scaling also preserves the relevant
+dimensionless geometry.  The value of the law is to identify the exact geometric
+quantity whose *persistence* is required for growth, not to claim a one-time
+coercive gap.
+
+
+## 39. Poynting equality is spatially frustrated by compulsory vortex twist
+
+All static alignment gaps fail, but the vortex-line geometry contains a stronger
+**differential compatibility**.  Write
+
+\[
+\omega=m\xi,
+\qquad
+A_\omega=(\xi\cdot\nabla)\xi-\nabla_\perp\log m,
+\qquad
+\tau=\xi\cdot\operatorname{curl}\xi.
+\]
+
+The curl-polar decomposition of `xi`, the identity `div curl xi=0`, and
+`div(m xi)=0` give the exact cancellation
+
+\[
+\boxed{
+\xi\cdot\operatorname{curl}A_\omega
+=\xi\cdot\nabla\tau.
+}
+\]
+
+Now use the actual defect from the Poynting--Joule square,
+
+\[
+\boxed{
+R:=u_\perp+2\nu A_\omega.
+}
+\]
+
+Because `curl u=omega`, its normal curl is
+
+\[
+\boxed{
+\xi\cdot\operatorname{curl}R
+=m-u_\parallel\tau+2\nu\,\xi\cdot\nabla\tau.
+}
+\]
+
+Equivalently,
+
+\[
+\boxed{
+m
+=u_\parallel\tau
+-2\nu\,\partial_s\tau
++\xi\cdot\operatorname{curl}R,
+}
+\]
+
+where `partial_s=xi.grad` is arclength differentiation along the vortex line.
+This is the spatial persistence law missing from every pointwise square.
+
+The instantaneous defect from the positive Poynting envelope is
+
+\[
+\mathcal D_{\rm eq}
+=\frac{m^2}{4\nu}|R|^2+\nu m^2\tau^2.
+\]
+
+At a single point, `R=tau=0` is compatible with nonzero `m` because derivatives
+of `R` and `tau` can be nonzero there.  This is why the previous pointwise
+Cauchy-gap searches correctly failed.  But if equality persisted on an open
+region, then `R=tau=0` throughout that region, their spatial derivatives vanish,
+and the boxed compatibility forces `m=0`.  Therefore
+
+\[
+\boxed{
+\text{perfect productive Poynting geometry cannot persist on an open region of nonzero vorticity.}
+}
+\]
+
+A branch-free quantitative consequence is
+
+\[
+\boxed{
+ m^2
+ \le
+ 3u_\parallel^2\tau^2
+ +12\nu^2|\partial_s\tau|^2
+ +3|\xi\cdot\operatorname{curl}R|^2.
+}
+\]
+
+Thus trying to suppress the instantaneous defect cannot annihilate the
+obstruction: it must reappear as twist, longitudinal twist variation, or spatial
+curl of the equality residual.  The identity is an **escalation law**, not a
+finished global estimate; the last two terms live one derivative higher and must
+be coupled to the existing Hodge/current hierarchy rather than declared bounded.
+
+An explicit nonvanishing periodic field
+
+\[
+\omega=(\sin z,\cos z,0.55\sin x)
+\]
+
+was used as an independent spectral referee.  The first identity held at
+`9e-15--1e-13` relative error from resolutions `24` through `96`.  The full
+residual-curl identity converged from the finite-product error `2.35e-6` at
+`24^3` to `6.05e-15` at `64^3` and `1.83e-14` at `96^3`.
+
+## 40. Twist-free leaves turn the same frustration into an exact Stokes flux law
+
+When `tau=0`, Frobenius gives locally
+
+\[
+\omega=\mu\nabla\phi
+\]
+
+with leaves `Sigma={phi=const}` transverse to the vorticity.  The curl-line
+geometry becomes
+
+\[
+A_\omega=-\nabla_\Sigma\log|\mu|.
+\]
+
+Hence the viscous part of `R` is an exact surface gradient.  For every leaf loop
+`gamma=partial D`, Stokes gives
+
+\[
+\boxed{
+\oint_\gamma R\cdot dl
+=\oint_\gamma u\cdot dl
+=\int_D\omega\cdot n\,dA
+=\Phi_D.
+}
+\]
+
+Therefore a twist-free leaf carrying nonzero vorticity flux cannot support
+`R=0` on a neighborhood.  Quantitatively,
+
+\[
+\boxed{
+\int_\gamma|R|^2ds
+\ge\frac{\Phi_D^2}{L_\gamma}.
+}
+\]
+
+This is the integrable-plane counterpart of the differential twist-frustration
+identity.  If the vortex plane field is nonintegrable, `tau` itself is paid by
+the sign-definite twist term.  If it becomes integrable to remove that cost, the
+residual is constrained by circulation/flux on the resulting leaves.  These are
+two coordinate readings of one continuous geometry; no event or owner split is
+introduced.
+
+
+## 41. The Poynting equality defect is one sourced covariant Gauss field
+
+The twist/residual frustration law itself is the polar decomposition of an even
+smaller vector identity.  Define the exact completed-square residual
+
+\[
+\boxed{
+G:=u\times\omega-2\nu c,
+\qquad c=\operatorname{curl}\omega.
+}
+\]
+
+The enstrophy square becomes
+
+\[
+\boxed{
+\frac12Z'
+=\frac1{4\nu}
+\left(\|u\times\omega\|_2^2-\|G\|_2^2\right).
+}
+\]
+
+Now use only the primitive self-return identities
+
+\[
+\nabla\cdot(u\times\omega)=|\omega|^2-u\cdot c,
+\qquad
+\nabla\cdot c=0,
+\qquad
+u\cdot(u\times\omega)=0.
+\]
+
+They collapse to the local Gauss law
+
+\[
+\boxed{
+|\omega|^2
+=\nabla\cdot G-\frac{u}{2\nu}\cdot G.
+}
+\]
+
+Thus the very field whose `L2` size measures failure of maximal enstrophy
+productivity is forced by the **positive enstrophy density itself**.  It is not a
+free alignment variable.
+
+The vortex-line quantities of the previous sections are merely its orthogonal
+polar components.  With
+
+\[
+R=u_\perp+2\nu A_\omega,
+\]
+
+one has
+
+\[
+\boxed{
+G=-m\,\xi\times R-2\nu m\tau\xi,
+}
+\]
+
+and therefore
+
+\[
+\boxed{
+|G|^2=m^2|R|^2+4\nu^2m^2\tau^2.
+}
+\]
+
+So `R` and `tau` should not be promoted to two mechanisms.  They are the
+transverse and longitudinal readings of one sourced equality-residual field.
+The normal-curl twist-frustration identity is the corresponding polar differential
+reading of this Gauss law.
+
+## 42. The Gauss law carries its own canonical Schrödinger coercivity
+
+Let
+
+\[
+D_uG:=\nabla\cdot G-\frac{u}{2\nu}\cdot G.
+\]
+
+The exact source equation is `D_u G=|omega|^2`.  Its adjoint on scalars is
+
+\[
+D_u^*\phi=-\nabla\phi-\frac{u}{2\nu}\phi.
+\]
+
+For every smooth scalar test,
+
+\[
+\boxed{
+\int|\omega|^2\phi
+=-\int G\cdot
+\left(\nabla\phi+\frac{u}{2\nu}\phi\right).
+}
+\]
+
+Incompressibility removes the cross term exactly:
+
+\[
+\boxed{
+\left\|\nabla\phi+\frac{u}{2\nu}\phi\right\|_2^2
+=\|\nabla\phi\|_2^2
++\frac1{4\nu^2}\|u\phi\|_2^2.
+}
+\]
+
+Hence
+
+\[
+\boxed{
+\|G\|_2^2
+\ge
+\sup_{\phi\ne0}
+\frac{\left(\int|\omega|^2\phi\right)^2}
+{\|\nabla\phi\|_2^2+rac1{4\nu^2}\|u\phi\|_2^2}.
+}
+\]
+
+The Riesz operator of this denominator is not selected by an analyst; it is the
+normal operator of the primitive Gauss law:
+
+\[
+\boxed{
+D_uD_u^*
+=-\Delta+\frac{|u|^2}{4\nu^2}.
+}
+\]
+
+When this operator is invertible in the relevant mean-zero/energy space, the
+right side is
+
+\[
+\left\langle
+|\omega|^2,
+\left(-\Delta+\frac{|u|^2}{4\nu^2}\right)^{-1}
+|\omega|^2
+\right\rangle.
+\]
+
+The constant test `phi=1` recovers
+
+\[
+\boxed{
+\|G\|_2^2\ge\frac{4\nu^2Z^2}{E},
+}
+\]
+
+so the earlier invariant-normal tax is only the zero-mode shadow of this full
+covariant-divergence coercivity.
+
+A dealiased Fourier referee verified the local Gauss equation to
+`2.3e-15--4.4e-15`.  On grids `12,16,20`, direct conjugate-gradient solution of
+the Schrödinger problem gave lower-bound/actual-residual fractions about
+`0.884,0.813,0.856`; the constant-test bound accounted for roughly
+`98.7--99.6%` of that Schrödinger lower in those generic states.  These numbers
+are referee diagnostics, not universal constants.  In particular no strict gap
+between the actual residual and the minimum covariant-divergence field is
+claimed.
+
+The structural gain is different: **near Poynting equality is a concentration
+problem for a sourced Gauss field**, not an unconstrained phase-alignment problem.
+To make `G` small while `|omega|^2` is large, NS must create spatial variation on
+the exact drift-divergence scale dictated by `u/(2nu)`.  This is precisely the
+kind of spatial persistence cost invisible to every pointwise alignment test.

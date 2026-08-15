@@ -10,30 +10,37 @@ from src.native_material_vorticity_heat_law import (
     klein_spacetime_vortex_worldsheet_algebra,
     canonical_poisson_scale_overlap,
     closed_vortex_line_period_cost,
+    conformal_fieldline_length_variation,
     curl_line_geometry_algebra,
+    covariant_divergence_test_coercivity,
     maxwell_duality_stress_algebra,
     primitive_spacetime_gauge_algebra,
     so33_exterior_square_algebra,
     sl3_cartan_casimir_algebra,
+    sl3_characteristic_polynomial_rate,
     sl3_tangent_chord_degree_algebra,
     material_hminus2_reset_identity,
     material_hodge_speed_ladder,
     material_log_distortion_energy_bound,
     local_flux_velocity_gauge_algebra,
+    local_incompressible_flux_velocity_odes,
     material_metric_path_action_bound,
     material_state_speed_lock,
     primitive_material_current_fourier_law,
     moving_polarization_memory_bound,
     pair_direction_mismatch_decomposition,
+    poynting_equality_residual_gauss_algebra,
     rank_one_incompressible_stretch_null,
     theorem_certificate,
     transverse_heat_determinant,
     symmetric_metric_cartan_balance,
     transverse_heat_log_rate,
     transverse_two_covector_area_identity,
+    twist_free_leaf_residual_circulation,
     two_level_curl_geometry_algebra,
     transported_twoform_transverse_determinant,
     vortex_slip_twist_algebra,
+    vortex_productivity_frustration_algebra,
     vorticity_stress_current_algebra,
 )
 
@@ -614,3 +621,104 @@ def test_certificate_records_finite_sl3_degree_law_and_local_blowup_guard_withou
     assert "no purely local finite-dimensional group law" in cert["affine_local_blowup_guard"]
     assert "is false" in cert["cofactor_force_falsification"]
     assert cert["global_regularity_claimed"] is False
+
+
+
+def test_full_sl3_characteristic_polynomial_rate_is_one_cofactor_current():
+    rng=np.random.default_rng(202608153101)
+    for _ in range(5000):
+        A=rng.normal(size=(3,3));At=rng.normal(size=(3,3));lam=float(rng.uniform(-4,4))
+        out=sl3_characteristic_polynomial_rate(A,At,lam)
+        eps=2e-6
+        fd=(np.linalg.det(lam*np.eye(3)-(A+eps*At))-np.linalg.det(lam*np.eye(3)-(A-eps*At)))/(2*eps)
+        assert out["characteristic_polynomial_rate"] == pytest.approx(fd,rel=2e-7,abs=2e-7)
+
+
+def test_local_incompressible_flux_velocity_needs_only_two_scalar_vortex_line_odes():
+    out=local_incompressible_flux_velocity_odes((2.,-1.,3.),(.4,.7,-.2),1.3)
+    assert out["psi_characteristic_rhs"] == pytest.approx(2*.4-1*.7+3*(-.2))
+    assert out["lambda_characteristic_rhs"] == pytest.approx(-1.3)
+    assert out["vorticity_magnitude"] == pytest.approx(math.sqrt(14.0))
+
+
+def test_certificate_records_one_current_deformation_spectrum_transport_and_local_flux_freezing():
+    cert=theorem_certificate()
+    assert "same Cartan-Hodge electromotive current" in cert["characteristic_polynomial_current"]
+    assert "A^3=0" in cert["nilpotent_zero_charge_guard"]
+    assert "locally beta_t+Lie_w beta=0 and div w=0" in cert["local_incompressible_flux_freezing"]
+    assert "need not globalize" in cert["flux_freezing_global_guard"]
+    assert cert["global_regularity_claimed"] is False
+
+
+
+def test_curl_transverse_defect_is_geodesic_gradient_of_field_generated_conformal_line_length():
+    rng=np.random.default_rng(202608153301)
+    for _ in range(5000):
+        m=10.0**rng.uniform(-3,3);n=rng.normal(size=3);n/=np.linalg.norm(n)
+        k=rng.normal(size=3);k-=n*np.dot(n,k);gm=rng.normal(size=3);V=rng.normal(size=3);V-=n*np.dot(n,V)
+        out=conformal_fieldline_length_variation(m,k,gm,n,V)
+        assert out["line_shape_variation_density"] == pytest.approx(out["represented_variation_density"],rel=2e-11,abs=2e-11)
+
+
+def test_certificate_reads_enstrophy_and_palinstrophy_as_vortex_flux_line_geometry_without_curve_flow_overclaim():
+    cert=theorem_certificate()
+    assert "intrinsic conformal line length" in cert["vorticity_conformal_line_length"]
+    assert "Z=int dPhi int m ds" in cert["flux_disintegrated_enstrophy"]
+    assert "must not be promoted" in cert["line_gradient_flow_guard"]
+    assert cert["global_regularity_claimed"] is False
+
+
+
+def test_vortex_productivity_frustration_identity_forces_derivative_obstruction_to_persistent_equality():
+    rng=np.random.default_rng(202608153401)
+    for _ in range(5000):
+        m=10.0**rng.uniform(-4,4);nu=10.0**rng.uniform(-5,2);up=rng.normal();tau=rng.normal();ts=rng.normal()
+        q=m-up*tau+2*nu*ts
+        out=vortex_productivity_frustration_algebra(m,up,tau,ts,q,nu)
+        assert out["compatibility_residual"] <= 2e-10*max(1.0,m)
+        assert out["coercive_margin"] >= -2e-9*max(1.0,m*m,out["coercive_rhs"])
+    # Open-set exact equality would also set the derivatives/curl to zero.
+    out=vortex_productivity_frustration_algebra(2.0,7.0,0.0,0.0,0.0,.3)
+    assert out["compatibility_residual"] == pytest.approx(2.0)
+
+
+def test_twist_free_leaf_poynting_residual_circulation_is_exact_vorticity_flux():
+    out=twist_free_leaf_residual_circulation(3.0,5.0)
+    assert out["residual_circulation"] == pytest.approx(3.0)
+    assert out["loop_l2_residual_lower"] == pytest.approx(9.0/5.0)
+
+
+def test_certificate_records_spatial_persistence_frustration_without_reintroducing_pointwise_gap():
+    cert=theorem_certificate()
+    assert "cannot persist" in cert["vortex_productivity_frustration"]
+    assert "pushes the obstruction" in cert["vortex_frustration_coercivity"]
+    assert "vorticity flux" in cert["twist_free_leaf_flux_obstruction"]
+    assert "does not create a pointwise amplitude gap" in cert["persistence_not_pointwise_guard"]
+    assert cert["global_regularity_claimed"] is False
+
+
+
+def test_poynting_equality_residual_obeys_exact_covariant_gauss_law():
+    rng=np.random.default_rng(202608153501)
+    for _ in range(5000):
+        u=rng.normal(size=3);om=rng.normal(size=3);c=rng.normal(size=3);nu=10.0**rng.uniform(-4,2)
+        ell=np.cross(u,om);G=ell-2*nu*c
+        # impose the exact divergence dictated by div(u x omega)=|omega|^2-u.c and div c=0
+        divG=np.dot(om,om)-np.dot(u,c)
+        out=poynting_equality_residual_gauss_algebra(u,om,c,divG,nu)
+        assert out["gauss_residual"] <= 2e-11*max(1.0,out["vorticity_squared"])
+
+
+def test_covariant_gauss_weak_form_recovers_constant_test_normal_tax():
+    E=7.0;Z=3.0;nu=.4
+    out=covariant_divergence_test_coercivity(Z,0.0,E,nu)
+    assert out["residual_l2_squared_lower"] == pytest.approx(4*nu*nu*Z*Z/E)
+
+
+def test_certificate_collapses_poynting_twist_residual_into_one_sourced_gauss_field():
+    cert=theorem_certificate()
+    assert "sourced covariant-divergence field" in cert["poynting_residual_gauss_law"]
+    assert "Schrödinger dual norm" in cert["poynting_residual_covariant_coercivity"]
+    assert "zero-frequency shadow" in cert["poynting_residual_zero_mode"]
+    assert "not separate mechanisms" in cert["poynting_residual_polar_collapse"]
+    assert "no uniform strict gap" in cert["schrodinger_gap_guard"]

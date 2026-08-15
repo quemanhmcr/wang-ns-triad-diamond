@@ -1455,6 +1455,307 @@ def affine_local_blowup_guard(time_to_pole: float, vorticity_scale: float=1.0) -
     if res>3e-9*max(1.0,np.linalg.norm(A)**2):raise AssertionError("affine local blowup compatibility failed")
     return {"strain_rate":a,"vorticity_magnitude":abs(b),"velocity_gradient_norm":float(np.linalg.norm(A)),"compatibility_residual":float(res),"finite_energy":False}
 
+
+
+def sl3_characteristic_polynomial_rate(
+    velocity_gradient: np.ndarray,
+    velocity_gradient_rate: np.ndarray,
+    spectral_parameter: float,
+) -> dict[str, float]:
+    """Time derivative of the full local ``sl(3)`` characteristic polynomial.
+
+    Let ``A=grad u`` and ``chi_A(lambda)=det(lambda I-A)``.  For any matrix rate
+    ``A_t`` one has
+
+        partial_t chi_A(lambda)=-cof(lambda I-A):A_t.
+
+    If ``A_t=grad u_t``, Piola exactness upgrades this pointwise derivative to
+
+        partial_t chi_A(lambda)
+        =-div[cof(lambda I-A)^T u_t].
+
+    In Navier--Stokes ``u_t=-P e`` with the one Cartan--Hodge current
+    ``e=(i_u+nu delta)beta``, so the entire local deformation characteristic
+    polynomial is transported by the same current that evolves vorticity.
+    """
+    A=np.asarray(velocity_gradient,float);At=np.asarray(velocity_gradient_rate,float);lam=float(spectral_parameter)
+    if A.shape!=(3,3) or At.shape!=(3,3) or not np.all(np.isfinite(A)) or not np.all(np.isfinite(At)) or not math.isfinite(lam):
+        raise ValueError("finite 3x3 gradient/rate and finite spectral parameter required")
+    M=lam*np.eye(3)-A
+    C=np.empty((3,3))
+    C[0,:]=np.cross(M[1,:],M[2,:]);C[1,:]=np.cross(M[2,:],M[0,:]);C[2,:]=np.cross(M[0,:],M[1,:])
+    rate=-float(np.sum(C*At))
+    return {"characteristic_polynomial":float(np.linalg.det(M)),"characteristic_polynomial_rate":rate,"cofactor_rate_pairing":rate}
+
+
+def local_incompressible_flux_velocity_odes(
+    vorticity: Sequence[float],
+    electromotive: Sequence[float],
+    transverse_flux_velocity_divergence: float,
+) -> dict[str, float]:
+    """The two characteristic ODEs producing a local incompressible flux velocity.
+
+    Away from ``omega=0`` seek ``e-i_w beta=d psi`` and ``div w=0``.  First solve
+    along the vorticity characteristics
+
+        omega.grad psi = e.omega.
+
+    Then ``e-d psi`` is transverse and uniquely determines ``w_perp``.  The
+    remaining freedom ``w=w_perp+lambda omega`` preserves the contraction because
+    ``i_omega beta=0``.  Since ``div omega=0``, incompressibility requires only
+
+        omega.grad lambda = -div w_perp.
+
+    Both are scalar first-order ODEs along the same nonzero vortex line and hence
+    are locally solvable.  Global single-valued solutions can still fail through
+    leafwise periods/recurrence or at vorticity zeros.
+
+    This helper returns the directional right-hand sides per unit parameter of
+    the vector field ``omega``; it does not pretend to solve global field-line
+    topology.
+    """
+    om=np.asarray(tuple(float(x) for x in vorticity),float);e=np.asarray(tuple(float(x) for x in electromotive),float);d=float(transverse_flux_velocity_divergence)
+    if om.shape!=(3,) or e.shape!=(3,) or not np.all(np.isfinite(om)) or not np.all(np.isfinite(e)) or not math.isfinite(d):
+        raise ValueError("finite vorticity/electromotive vectors and finite divergence required")
+    m=float(np.linalg.norm(om))
+    if m<=1e-12:raise ValueError("nonzero vorticity required")
+    return {"psi_characteristic_rhs":float(np.dot(e,om)),"lambda_characteristic_rhs":-d,"vorticity_magnitude":m}
+
+
+
+def graded_deformation_wedge_rate(
+    first_gradient_row: Sequence[float],
+    second_gradient_row: Sequence[float],
+    first_rate_row: Sequence[float],
+    second_rate_row: Sequence[float],
+) -> dict[str, float]:
+    """Degree-two sample of the universal exact-minor de Rham current law.
+
+    Component one-forms ``theta^i=du^i`` are exact.  Therefore
+
+        partial_t(theta^i wedge theta^j)
+        = d[u_t^i theta^j-u_t^j theta^i].
+
+    At one jet this is simply
+
+        theta_t^i wedge theta^j + theta^i wedge theta_t^j.
+
+    The helper checks that algebra through the Frobenius norm of the associated
+    antisymmetric coefficient matrix.  Degree one is ``d u_t^i`` and degree
+    three is the determinant/cofactor current already encoded above.  All
+    deformation minors are thus one graded consequence of ``d^2=0``.
+    """
+    a=np.asarray(tuple(float(x) for x in first_gradient_row),float);b=np.asarray(tuple(float(x) for x in second_gradient_row),float)
+    at=np.asarray(tuple(float(x) for x in first_rate_row),float);bt=np.asarray(tuple(float(x) for x in second_rate_row),float)
+    if any(x.shape!=(3,) for x in (a,b,at,bt)) or not all(np.all(np.isfinite(x)) for x in (a,b,at,bt)):
+        raise ValueError("four finite three-component one-form rows required")
+    wedge=lambda x,y:np.outer(x,y)-np.outer(y,x)
+    direct=wedge(at,b)+wedge(a,bt)
+    represented=wedge(at,b)-wedge(bt,a)
+    res=float(np.linalg.norm(direct-represented))
+    if res>2e-12*max(1.0,np.linalg.norm(direct),np.linalg.norm(represented)):
+        raise AssertionError("graded deformation two-minor current failed")
+    return {"two_minor_rate_norm":float(np.linalg.norm(direct)),"represented_rate_norm":float(np.linalg.norm(represented)),"identity_residual":res}
+
+
+
+def conformal_fieldline_length_variation(
+    magnitude: float,
+    line_curvature: Sequence[float],
+    magnitude_gradient: Sequence[float],
+    unit_tangent: Sequence[float],
+    normal_variation: Sequence[float],
+) -> dict[str, float]:
+    """First variation of the field-generated conformal line length.
+
+    For ``b=m n`` define ``g_tilde=m^2 g``.  The line length in this conformal
+    metric is ``I=integral m ds`` and
+
+        A_b=(n.grad)n-grad_perp log m
+
+    is its normal geodesic-curvature gradient.  Holding the instantaneous scalar
+    field ``m`` as the background during the shape variation,
+
+        delta I density = grad m . V_perp - m kappa . V_perp
+                        = -m A_b . V_perp.
+
+    The actual NS time derivative also changes ``m`` and transports the line;
+    this helper deliberately certifies only the exact instantaneous shape
+    variation, not a standalone curve-shortening evolution theorem.
+    """
+    m=float(magnitude);kap=np.asarray(tuple(float(x) for x in line_curvature),float);gm=np.asarray(tuple(float(x) for x in magnitude_gradient),float);n=np.asarray(tuple(float(x) for x in unit_tangent),float);V=np.asarray(tuple(float(x) for x in normal_variation),float)
+    if not math.isfinite(m) or m<=0 or any(x.shape!=(3,) for x in (kap,gm,n,V)) or not all(np.all(np.isfinite(x)) for x in (kap,gm,n,V)):
+        raise ValueError("positive magnitude and finite three-vectors required")
+    nn=float(np.linalg.norm(n))
+    if nn<=0:raise ValueError("nonzero tangent required")
+    n=n/nn;kap=kap-n*float(np.dot(n,kap));V=V-n*float(np.dot(n,V));gp=gm-n*float(np.dot(n,gm))
+    A=kap-gp/m
+    direct=float(np.dot(gm,V)-m*np.dot(kap,V));represented=-m*float(np.dot(A,V));res=abs(direct-represented)
+    if res>2e-11*max(1.0,abs(direct),abs(represented)):
+        raise AssertionError("conformal field-line first variation failed")
+    return {"line_shape_variation_density":direct,"represented_variation_density":represented,"conformal_geodesic_defect_norm":float(np.linalg.norm(A)),"identity_residual":res}
+
+
+
+def vortex_productivity_frustration_algebra(
+    vorticity_magnitude: float,
+    parallel_velocity: float,
+    frobenius_twist: float,
+    twist_line_derivative: float,
+    residual_normal_curl: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Exact scalar compatibility behind spatial frustration of Poynting equality.
+
+    For ``omega=m xi`` put
+
+        A=(xi.grad)xi-grad_perp log m,
+        R=u_perp+2 nu A,
+        tau=xi.curl xi.
+
+    The primitive geometric identity is
+
+        xi.curl A = xi.grad tau,
+
+    hence, because ``curl u=omega``, exactly
+
+        xi.curl R = m-u_parallel tau+2 nu xi.grad tau.
+
+    This helper accepts the five scalar readings of that identity and returns the
+    represented vorticity together with the branch-free consequence
+
+        m^2 <= 3 u_parallel^2 tau^2
+               +12 nu^2 |tau_s|^2
+               +3 |xi.curl R|^2.
+
+    Equality of the Poynting upper envelope on an *open* nonzero-vorticity region
+    would require ``R=tau=0`` there, hence their derivatives/curl vanish and the
+    exact identity forces ``m=0``.  Pointwise equality at an isolated point is
+    not excluded because derivatives can remain nonzero there.
+    """
+    m=float(vorticity_magnitude);up=float(parallel_velocity);tau=float(frobenius_twist);ts=float(twist_line_derivative);q=float(residual_normal_curl);nu=float(viscosity)
+    if not all(math.isfinite(x) for x in (m,up,tau,ts,q,nu)) or m<0.0 or nu<=0.0:
+        raise ValueError("finite data, nonnegative vorticity magnitude and positive viscosity required")
+    represented=up*tau-2.0*nu*ts+q
+    rhs=3.0*up*up*tau*tau+12.0*nu*nu*ts*ts+3.0*q*q
+    margin=rhs-m*m
+    # Only enforce the inequality when supplied scalars satisfy the exact compatibility.
+    residual=abs(m-represented)
+    scale=max(1.0,m,abs(represented),abs(up*tau),abs(2*nu*ts),abs(q))
+    if residual<=2e-11*scale and margin < -3e-10*max(1.0,m*m,rhs):
+        raise AssertionError("vortex productivity frustration coercivity failed")
+    return {
+        "represented_vorticity_magnitude":represented,
+        "compatibility_residual":residual,
+        "coercive_rhs":rhs,
+        "coercive_margin":margin if residual<=2e-11*scale else float("nan"),
+    }
+
+
+def twist_free_leaf_residual_circulation(vorticity_flux: float, loop_length: float) -> dict[str, float]:
+    """Stokes obstruction to persistent Poynting equality on a twist-free leaf.
+
+    If ``tau=0`` then locally ``omega=mu grad phi`` and
+    ``A_omega=-grad_Sigma log|mu|`` on a Frobenius leaf ``Sigma``.  Thus for the
+    equality residual ``R=u_perp+2nu A_omega`` and any loop ``gamma=partial D``
+    in the leaf,
+
+        integral_gamma R.dl = integral_D omega.n dA = Phi_D.
+
+    Consequently ``integral_gamma |R|^2 ds >= Phi_D^2/L_gamma``.  The helper
+    records this sharp Cauchy lower.  It is a leafwise circulation theorem, not a
+    volume-integrated regularity estimate.
+    """
+    Phi=float(vorticity_flux);L=float(loop_length)
+    if not math.isfinite(Phi) or not math.isfinite(L) or L<=0.0:
+        raise ValueError("finite flux and positive finite loop length required")
+    return {"residual_circulation":Phi,"loop_l2_residual_lower":Phi*Phi/L,"loop_length":L}
+
+
+
+def poynting_equality_residual_gauss_algebra(
+    velocity: Sequence[float],
+    vorticity: Sequence[float],
+    vorticity_current: Sequence[float],
+    divergence_of_residual: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Primitive Gauss law of the Poynting equality residual.
+
+    Put
+
+        ell = u cross omega,
+        c   = curl omega,
+        G   = ell - 2 nu c.
+
+    Since ``div c=0`` and
+
+        div(u cross omega)=|omega|^2-u.c,
+        u.G=-2nu u.c,
+
+    one has exactly
+
+        |omega|^2 = div G - (u/(2nu)).G.
+
+    The same field is the exact completed-square residual:
+
+        (1/2) Z' density = (|ell|^2-|G|^2)/(4nu)
+
+    after integration (the pointwise density differs only by the corresponding
+    divergence convention for enstrophy flux).  In vortex-line variables it is
+    the orthogonal combination of the previously defined Poynting residual and
+    Frobenius twist, so those are not independent mechanisms.
+    """
+    u=np.asarray(tuple(float(x) for x in velocity),float);om=np.asarray(tuple(float(x) for x in vorticity),float);c=np.asarray(tuple(float(x) for x in vorticity_current),float)
+    d=float(divergence_of_residual);nu=float(viscosity)
+    if any(x.shape!=(3,) for x in (u,om,c)) or not all(np.all(np.isfinite(x)) for x in (u,om,c)) or not math.isfinite(d) or not math.isfinite(nu) or nu<=0:
+        raise ValueError("finite three-vectors/divergence and positive viscosity required")
+    ell=np.cross(u,om);G=ell-2*nu*c
+    source=float(np.dot(om,om));represented=d-float(np.dot(u,G))/(2*nu)
+    residual=abs(source-represented)
+    return {
+        "vorticity_squared":source,
+        "represented_vorticity_squared":represented,
+        "gauss_residual":residual,
+        "lamb_squared":float(np.dot(ell,ell)),
+        "equality_residual_squared":float(np.dot(G,G)),
+        "completed_square_net_density":float((np.dot(ell,ell)-np.dot(G,G))/(4*nu)),
+    }
+
+
+def covariant_divergence_test_coercivity(
+    source_pairing: float,
+    test_gradient_l2_squared: float,
+    velocity_weighted_test_l2_squared: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """One test-function reading of the exact residual Gauss law.
+
+    If ``D_u G=div G-u.G/(2nu)=rho`` and ``phi`` is a smooth scalar test, then
+
+        <rho,phi>=-<G, grad phi + u phi/(2nu)>.
+
+    Incompressibility makes the covariant-gradient norm exactly
+
+        ||grad phi + u phi/(2nu)||^2
+        = ||grad phi||^2 + ||u phi||^2/(4nu^2).
+
+    Therefore every test gives the sharp Cauchy lower
+
+        ||G||^2 >= <rho,phi>^2 / denominator.
+
+    Supremizing over ``phi`` is equivalently the quadratic form of
+    ``(-Delta+|u|^2/(4nu^2))^-1`` applied to ``rho``.  This helper records one
+    test only; the test family is the weak form of the PDE, not a selected event
+    or spectral shell.
+    """
+    pair=float(source_pairing);g2=float(test_gradient_l2_squared);v2=float(velocity_weighted_test_l2_squared);nu=float(viscosity)
+    if not all(math.isfinite(x) for x in (pair,g2,v2,nu)) or g2<0 or v2<0 or nu<=0:
+        raise ValueError("finite pairing, nonnegative norm data and positive viscosity required")
+    denominator=g2+v2/(4*nu*nu)
+    lower=0.0 if denominator==0.0 and pair==0.0 else (math.inf if denominator==0.0 else pair*pair/denominator)
+    return {"covariant_test_denominator":denominator,"residual_l2_squared_lower":lower,"source_pairing_squared":pair*pair}
+
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
@@ -1491,6 +1792,19 @@ def theorem_certificate() -> dict[str, object]:
         "enstrophy_derivative_null": "integrating <curl omega,u cross omega> by parts gives sum_j <partial_j omega, partial_j u cross u>; the derivative-on-u self term vanishes pointwise by cross-product skewness, so nonlinear enstrophy production necessarily uses the same first vorticity derivative squared by Hodge heat",
         "curl_polar_line_geometry": "for every nonzero b=m n, curl b=m tau_b n+m n cross A_b with tau_b=n.curl n and A_b=(n.grad)n-grad_perp log m=-b cross curl b/|b|^2; helicity, Lamb force and curl norm are the longitudinal/transverse pieces of this one operator law",
         "iterated_curl_ns_grammar": "applying the same curl-polar law to u and then omega gives u cross omega=-|u|^2 A_u, v_slip=nu A_omega, |curl omega|^2=|omega|^2(tau_omega^2+|A_omega|^2), and stretching=|u|^2|omega|(xi cross A_u).A_omega; no separate phase/coherence mechanism is added",
+        "vorticity_conformal_line_length": "for b=m n the metric m^2 g makes int m ds the intrinsic conformal line length and A_b=(n.grad)n-grad_perp log m its normal geodesic-curvature gradient; for b=omega the canonical viscous slip nu A_omega is the negative instantaneous line-shape gradient direction",
+        "flux_disintegrated_enstrophy": "in a nonvanishing vortex flow-box dV=(1/m) dPhi ds, so Z=int dPhi int m ds and palinstrophy=int dPhi int m(|A_omega|^2+tau_omega^2)ds; Euler stretching=-int dPhi int m u_perp.A_omega ds.  Poynting-Joule is therefore flux-weighted work against the same line-length gradient plus twist",
+        "line_gradient_flow_guard": "the first variation delta int m ds=-int m A_omega.V ds is an instantaneous shape variation with m frozen as background; full NS also evolves m and the flux chart, so v_slip=nu A_omega must not be promoted to an autonomous curve-shortening theorem",
+        "poynting_residual_gauss_law": "with G=u cross omega-2nu curl omega, the exact self-return identities collapse to |omega|^2=div G-(u/(2nu)).G; the same G is the completed-square equality residual, so perfect productive geometry is a sourced covariant-divergence field rather than a free alignment variable",
+        "poynting_residual_covariant_coercivity": "for every scalar phi, <|omega|^2,phi>=-<G,grad phi+u phi/(2nu)> and incompressibility gives ||grad phi+u phi/(2nu)||^2=||grad phi||^2+||u phi||^2/(4nu^2); hence ||G||^2 is bounded below by the canonical Schrödinger dual norm with operator -Delta+|u|^2/(4nu^2)",
+        "poynting_residual_zero_mode": "choosing phi=1 in the residual Gauss law gives ||G||^2>=4nu^2 Z^2/E, showing the earlier Euler-invariant normal-current tax is only the constant-test/zero-frequency shadow of the full covariant-divergence coercivity",
+        "poynting_residual_polar_collapse": "in vortex-line variables G=-m xi cross R-2nu m tau xi and |G|^2=m^2|R|^2+4nu^2m^2tau^2; the residual R and Frobenius twist are transverse/longitudinal components of one primitive G, not separate mechanisms",
+        "schrodinger_gap_guard": "no uniform strict gap between actual ||G||^2 and the minimum covariant-divergence/Schrodinger energy is claimed; random dealiased referees already used about 81-88 percent of the lower envelope, so persistence rather than an instantaneous gap remains the theorem frontier",
+        "vortex_productivity_frustration": "with R=u_perp+2nu A_omega and tau=xi.curl xi, exact geometry gives xi.curl A_omega=xi.grad tau and xi.curl R=m-u_parallel tau+2nu xi.grad tau; therefore perfect Poynting-envelope equality R=tau=0 cannot persist on any open region with m>0",
+        "vortex_frustration_coercivity": "the same identity gives m^2<=3u_parallel^2 tau^2+12nu^2|xi.grad tau|^2+3|xi.curl R|^2; suppressing the instantaneous equality defect necessarily pushes the obstruction into twist or spatial derivatives of twist/residual",
+        "twist_free_leaf_flux_obstruction": "when tau=0, Frobenius gives omega=mu grad phi and A_omega=-grad_Sigma log|mu|; hence on every leaf loop gamma=partial D, integral_gamma (u_perp+2nu A_omega).dl equals the vorticity flux through D, so exact productive residual cannot vanish on a twist-free leaf carrying nonzero flux",
+        "persistence_not_pointwise_guard": "the frustration identity does not create a pointwise amplitude gap: R and tau can vanish at one point while their derivatives are nonzero.  Its content is spatial persistence incompatibility, consistent with the earlier 99.99-percent local Cauchy saturation falsification",
+        "iterated_curl_ns_grammar": "applying the same curl-polar law to u and then omega gives u cross omega=-|u|^2 A_u, v_slip=nu A_omega, |curl omega|^2=|omega|^2(tau_omega^2+|A_omega|^2), and stretching=|u|^2|omega|(xi cross A_u).A_omega; no separate phase/coherence mechanism is added",
         "rank_one_null": "a one-direction incompressible gradient a tensor xi has omega=xi cross a and S omega=0; self-stretching is absent at rank one",
         "flat_hodge_dirichlet": "because every g=Phi^*g0 is flat, <beta,L_g beta>_g=||nabla^g beta||_2^2; material spatial non-affinity and vorticity magnitude/direction variation are already part of the same heat Dirichlet form, not a separate escape channel",
         "pair_mismatch_collapse": "omega_a cross omega_b=F_a^-T(q_a cross q_b)+(F_a q_a) cross((F_b-F_a)q_b); these are coordinate pieces of one covariant material-two-form variation, whose intrinsic norm is the same nabla^g beta squared by Hodge heat",
@@ -1505,6 +1819,13 @@ def theorem_certificate() -> dict[str, object]:
         "symmetric_space_cubic_law": "with K=g^-1 g_t in the tangent of SL(3)/SO(3), Z=(1/2)int tr K^2 and the exact full law is (1/2)d_t int tr K^2+nu int|nabla^g K|^2=-int det K; the Euler source is the unique cubic Cartan invariant of the metric velocity",
         "sl3_fundamental_casimir_null": "for B=F^-1 F_t=P+Q in sl(3), tr B^2=tr P^2+tr Q^2 and tr B^3=tr P^3+3tr(PQ^2); because B comes from an actual incompressible gradient, the spatial integrals of both fundamental sl(3) invariant polynomials vanish",
         "finite_sdiff_chord_degree": "for every real s, the tangent chord X+s X_t has degree one and int det(F+s F_t)=volume; equivalently int det(I+sB)=volume.  The quadratic and cubic Betchov locks are exactly the s^2 and s^3 coefficients of this one finite degree law",
+        "characteristic_polynomial_current": "for chi_A(lambda)=det(lambda I-grad u), partial_t chi_A=-div[cof(lambda I-grad u)^T u_t]=div[cof(lambda I-grad u)^T P e]; the same Cartan-Hodge electromotive current transports the entire local sl(3) characteristic polynomial, whose only nontrivial coefficients are the quadratic/cubic Casimir charges",
+        "graded_deformation_minor_current": "the component one-forms theta^i=du^i are exact and partial_t(theta^{i1} wedge ... wedge theta^{ik})=d sum_m (-1)^(m-1)u_t^{im} wedge_{l!=m}theta^{il}; every 1x1, 2x2 and 3x3 deformation minor is therefore an exact current generated by the same u_t=-P e",
+        "two_velocity_local_ideal_form": "where the local incompressible flux gauge exists, full NS is u_t=P(w cross omega), beta_t+Lie_w beta=0 with div u=div w=0; viscosity appears locally only through the difference between momentum velocity u and vortex-flux velocity w",
+        "global_flux_freezing_helicity_obstruction": "if a single-valued global divergence-free flux velocity w and scalar psi satisfy e=i_w beta+d psi on a boundaryless domain, then H_prime=-2 int e wedge beta=0; nonzero helicity dissipation is therefore a gauge-invariant necessary obstruction to global vortex-flux freezing, though H_prime=0 is not sufficient",
+        "nilpotent_zero_charge_guard": "if tr A=tr A^2=det A=0 then Cayley-Hamilton gives A^3=0, so zero local sl(3) Casimir charge means a nilpotent instantaneous generator; this does not forbid transient growth from time-dependent/nonnormal nilpotent generators",
+        "local_incompressible_flux_freezing": "away from omega=0, solve omega.grad psi=e.omega, determine w_perp from e-d psi=i_w beta, then solve omega.grad lambda=-div w_perp and set w=w_perp+lambda omega; locally beta_t+Lie_w beta=0 and div w=0, so viscosity changes the vortex transport velocity rather than locally destroying flux",
+        "flux_freezing_global_guard": "the local incompressible flux velocity need not globalize: single-valued psi/lambda can fail on closed or recurrent vortex lines and the construction degenerates at omega=0; these are global/topological seams, not a pointwise reset term",
         "local_degree_transgression": "for A=grad u, det(I+sA)-1=div[-(s^2/2)(u.grad)u+(s^3/3)(cof A)^T u]; more generally det(F+sG)-det F is the integral in r of cof(F+rG):G, giving the local Piola transgression of the tangent chord",
         "affine_local_blowup_guard": "there are exact infinite-energy affine NS/Euler fields u=A(t)x with axisymmetric S=diag(a,a,-2a), a=1/(T-t), and omega proportional (T-t)^-1 e1; pressure supplies the symmetric material acceleration and Delta u=0, proving that no purely local finite-dimensional group law can close finite-energy regularity",
         "cofactor_force_falsification": "although int det K and vorticity Noether work agree after the correct pairings, P div(cof K)=3P(omega cross curl omega) is false; direct periodic referees gave Leray residual about 0.65-0.68, so the two local force densities must not be collapsed modulo pressure",
