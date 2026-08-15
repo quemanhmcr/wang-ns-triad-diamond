@@ -9,6 +9,7 @@ from src.native_material_vorticity_heat_law import (
     klein_spacetime_vortex_worldsheet_algebra,
     canonical_poisson_scale_overlap,
     closed_vortex_line_period_cost,
+    curl_line_geometry_algebra,
     maxwell_duality_stress_algebra,
     primitive_spacetime_gauge_algebra,
     so33_exterior_square_algebra,
@@ -26,6 +27,7 @@ from src.native_material_vorticity_heat_law import (
     transverse_heat_determinant,
     transverse_heat_log_rate,
     transverse_two_covector_area_identity,
+    two_level_curl_geometry_algebra,
     transported_twoform_transverse_determinant,
     vortex_slip_twist_algebra,
     vorticity_stress_current_algebra,
@@ -484,3 +486,32 @@ def test_certificate_distinguishes_klein_curvature_from_true_leafwise_topology_o
     assert "leafwise cohomology" in cert["leafwise_period_obstruction"]
     assert "not by itself a reconnection theorem" in cert["klein_topology_guard"]
     assert cert["global_regularity_claimed"] is False
+
+
+
+def test_universal_curl_polar_line_geometry_is_exact_at_one_jet():
+    rng=np.random.default_rng(202608151901)
+    for _ in range(5000):
+        b=rng.normal(size=3)
+        if np.linalg.norm(b)<.05:b[0]+=.2
+        G=rng.normal(size=(3,3))
+        out=curl_line_geometry_algebra(b,G)
+        assert out["curl_norm_squared"] == pytest.approx(out["twist_plus_defect_curl_norm_squared"],rel=2e-10,abs=2e-10)
+
+
+def test_ns_enstrophy_is_two_consecutive_readings_of_same_curl_geometry():
+    rng=np.random.default_rng(202608151902)
+    for _ in range(5000):
+        u=rng.normal(size=3);om=rng.normal(size=3);c=rng.normal(size=3)
+        if np.linalg.norm(u)<.05:u[0]+=.2
+        if np.linalg.norm(om)<.05:om[1]+=.2
+        out=two_level_curl_geometry_algebra(u,om,c,.37)
+        assert out["stretching_density"] == pytest.approx(out["represented_stretching_density"],rel=2e-10,abs=2e-10)
+        assert out["palinstrophy_density"] == pytest.approx(out["represented_palinstrophy_density"],rel=2e-10,abs=2e-10)
+
+
+def test_certificate_records_one_curl_geometry_not_new_owner_taxonomy():
+    cert=theorem_certificate()
+    assert "one operator law" in cert["curl_polar_line_geometry"]
+    assert "same curl-polar law" in cert["iterated_curl_ns_grammar"]
+    assert cert["case_taxonomy_used"] is False

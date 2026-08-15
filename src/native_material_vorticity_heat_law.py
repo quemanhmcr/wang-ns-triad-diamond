@@ -1212,6 +1212,127 @@ def closed_vortex_line_period_cost(
         "period_squared":P*P,
     }
 
+
+
+def curl_line_geometry_algebra(field: Sequence[float], field_gradient: np.ndarray) -> dict[str, float]:
+    """Universal polar line-geometry decomposition of the primitive curl operator.
+
+    For a nonzero vector field ``b=m n`` at one jet, define
+
+        kappa=(n.grad)n,
+        tau=n.curl n,
+        A=kappa-grad_perp log m.
+
+    Then exactly
+
+        curl b = m tau n + m n cross A,
+        b.curl b = m^2 tau,
+        b cross curl b = -m^2 A,
+        |curl b|^2 = m^2(tau^2+|A|^2).
+
+    This is not a new PDE variable: it is the longitudinal/transverse polar
+    decomposition of ``curl`` itself.  ``tau`` is Frobenius twist and ``A`` is
+    the curvature-minus-transverse-concentration defect of the field lines.
+    """
+    b=np.asarray(tuple(float(x) for x in field),dtype=float)
+    G=np.asarray(field_gradient,dtype=float)
+    if b.shape!=(3,) or G.shape!=(3,3) or not np.all(np.isfinite(b)) or not np.all(np.isfinite(G)):
+        raise ValueError("finite nonzero vector and finite 3x3 first jet required")
+    m=float(np.linalg.norm(b))
+    if m<=1e-12:
+        raise ValueError("nonzero field required")
+    n=b/m; dm=G@n; dn=(G-dm[:,None]*n[None,:])/m
+    kappa=n@dn
+    curln=np.array((dn[1,2]-dn[2,1],dn[2,0]-dn[0,2],dn[0,1]-dn[1,0]),dtype=float)
+    tau=float(np.dot(n,curln))
+    gradperp=dm-n*float(np.dot(n,dm))
+    A=kappa-gradperp/m
+    curlb=np.array((G[1,2]-G[2,1],G[2,0]-G[0,2],G[0,1]-G[1,0]),dtype=float)
+    represented=m*tau*n+m*np.cross(n,A)
+    hel=float(np.dot(b,curlb)); cross=np.cross(b,curlb)
+    curl2=float(np.dot(curlb,curlb)); rep2=m*m*(tau*tau+float(np.dot(A,A)))
+    scale=max(1.0,m,np.linalg.norm(curlb),m*m*(1.0+abs(tau)+np.linalg.norm(A)))
+    res=max(float(np.linalg.norm(curlb-represented)),abs(hel-m*m*tau),float(np.linalg.norm(cross+m*m*A)),abs(curl2-rep2))
+    if res>2e-10*scale:
+        raise AssertionError("curl line-geometry polar decomposition failed")
+    return {
+        "field_magnitude":m,
+        "frobenius_twist":tau,
+        "transverse_line_defect_norm":float(np.linalg.norm(A)),
+        "curl_norm_squared":curl2,
+        "twist_plus_defect_curl_norm_squared":rep2,
+        "helicity_density":hel,
+        "cross_curl_norm":float(np.linalg.norm(cross)),
+        "identity_residual":res,
+    }
+
+
+def two_level_curl_geometry_algebra(
+    velocity: Sequence[float],
+    vorticity: Sequence[float],
+    vorticity_current: Sequence[float],
+    viscosity: float,
+) -> dict[str, float]:
+    """Two consecutive applications of the same curl-line geometry in NS.
+
+    Let ``omega=curl u`` and ``c=curl omega`` at a point.  Algebraically define
+
+        A_u=-u cross omega/|u|^2,
+        tau_u=u.omega/|u|^2,
+        A_w=-omega cross c/|omega|^2,
+        tau_w=omega.c/|omega|^2.
+
+    These are exactly the ``A,tau`` data returned by ``curl_line_geometry`` when
+    the corresponding first jets exist.  The Euler and viscous objects are
+
+        u cross omega=-|u|^2 A_u,
+        v_slip=nu A_w,
+        |c|^2=|omega|^2(tau_w^2+|A_w|^2),
+
+    and the nonlinear enstrophy density is
+
+        (u cross omega).c
+        = |u|^2 |omega| (xi cross A_u).A_w.
+
+    Thus NS uses the same primitive curl geometry at two successive levels; the
+    longitudinal twist at the second level is invisible to nonlinear production
+    and remains a pure viscous cost.
+    """
+    u=np.asarray(tuple(float(x) for x in velocity),float)
+    om=np.asarray(tuple(float(x) for x in vorticity),float)
+    c=np.asarray(tuple(float(x) for x in vorticity_current),float)
+    nu=float(viscosity)
+    if u.shape!=(3,) or om.shape!=(3,) or c.shape!=(3,) or not np.all(np.isfinite(u)) or not np.all(np.isfinite(om)) or not np.all(np.isfinite(c)):
+        raise ValueError("finite velocity/vorticity/current vectors required")
+    if not math.isfinite(nu) or nu<0.0:
+        raise ValueError("finite nonnegative viscosity required")
+    a=float(np.linalg.norm(u));m=float(np.linalg.norm(om))
+    if a<=1e-12 or m<=1e-12:
+        raise ValueError("nonzero velocity and vorticity required")
+    xi=om/m
+    Au=-np.cross(u,om)/(a*a); tauu=float(np.dot(u,om)/(a*a))
+    Aw=-np.cross(om,c)/(m*m); tauw=float(np.dot(om,c)/(m*m))
+    lamb=np.cross(u,om); vslip=nu*Aw
+    crep=m*tauw*xi+m*np.cross(xi,Aw)
+    stretch=float(np.dot(lamb,c)); stretchrep=a*a*m*float(np.dot(np.cross(xi,Au),Aw))
+    p=float(np.dot(c,c)); prep=m*m*(tauw*tauw+float(np.dot(Aw,Aw)))
+    res=max(float(np.linalg.norm(lamb+a*a*Au)),float(np.linalg.norm(c-crep)),abs(stretch-stretchrep),abs(p-prep),float(np.linalg.norm(vslip-nu*Aw)))
+    if res>2e-10*max(1.0,np.linalg.norm(lamb),np.linalg.norm(c),abs(stretch),p):
+        raise AssertionError("two-level primitive curl geometry failed")
+    return {
+        "velocity_twist":tauu,
+        "velocity_transverse_defect_norm":float(np.linalg.norm(Au)),
+        "vorticity_twist":tauw,
+        "vorticity_transverse_defect_norm":float(np.linalg.norm(Aw)),
+        "lamb_norm":float(np.linalg.norm(lamb)),
+        "viscous_slip_speed":float(np.linalg.norm(vslip)),
+        "stretching_density":stretch,
+        "represented_stretching_density":stretchrep,
+        "palinstrophy_density":p,
+        "represented_palinstrophy_density":prep,
+        "identity_residual":res,
+    }
+
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
@@ -1243,6 +1364,8 @@ def theorem_certificate() -> dict[str, object]:
         "primitive_poynting_joule": "put e=i_u beta+nu c; the exact local law is partial_t |omega|^2/2+div(e cross omega)=-e.c, with -e.c=(u cross omega).c-nu|c|^2, so stretching and palinstrophy are one electromotive-current work law",
         "so33_duality_group": "volume-preserving four-dimensional deformation acts on two-forms through sl(4)->so(3,3); rotations commute with Hodge duality while trace-free strain anticommutes and is the unique noncompact duality-mixing boost, with ||rho(S)||_HS^2=2||S||^2",
         "enstrophy_derivative_null": "integrating <curl omega,u cross omega> by parts gives sum_j <partial_j omega, partial_j u cross u>; the derivative-on-u self term vanishes pointwise by cross-product skewness, so nonlinear enstrophy production necessarily uses the same first vorticity derivative squared by Hodge heat",
+        "curl_polar_line_geometry": "for every nonzero b=m n, curl b=m tau_b n+m n cross A_b with tau_b=n.curl n and A_b=(n.grad)n-grad_perp log m=-b cross curl b/|b|^2; helicity, Lamb force and curl norm are the longitudinal/transverse pieces of this one operator law",
+        "iterated_curl_ns_grammar": "applying the same curl-polar law to u and then omega gives u cross omega=-|u|^2 A_u, v_slip=nu A_omega, |curl omega|^2=|omega|^2(tau_omega^2+|A_omega|^2), and stretching=|u|^2|omega|(xi cross A_u).A_omega; no separate phase/coherence mechanism is added",
         "rank_one_null": "a one-direction incompressible gradient a tensor xi has omega=xi cross a and S omega=0; self-stretching is absent at rank one",
         "flat_hodge_dirichlet": "because every g=Phi^*g0 is flat, <beta,L_g beta>_g=||nabla^g beta||_2^2; material spatial non-affinity and vorticity magnitude/direction variation are already part of the same heat Dirichlet form, not a separate escape channel",
         "pair_mismatch_collapse": "omega_a cross omega_b=F_a^-T(q_a cross q_b)+(F_a q_a) cross((F_b-F_a)q_b); these are coordinate pieces of one covariant material-two-form variation, whose intrinsic norm is the same nabla^g beta squared by Hodge heat",

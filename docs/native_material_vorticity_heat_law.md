@@ -1890,3 +1890,105 @@ has a direct cost in the sign-definite twist dissipation already present in the
 Poynting--Joule law.  What is *not* yet proved is a conversion of these linewise
 costs into a global volume no-escape budget; closed vortex lines can be sparse,
 long, or organized in concentrating tubes.
+
+
+## 28. Curl itself has one primitive line-geometry polar law
+
+The slip/twist formulas are not a special construction for vorticity.  They are
+the polar geometry of the primitive `curl` operator itself.  Let any nonzero
+vector field be
+
+\[
+b=m n,\qquad |n|=1.
+\]
+
+Define its line curvature, Frobenius twist and transverse amplitude gradient by
+
+\[
+\kappa_b=(n\cdot\nabla)n,
+\qquad
+\tau_b=n\cdot\operatorname{curl}n,
+\qquad
+A_b=\kappa_b-\nabla_\perp\log m.
+\]
+
+Direct differentiation gives the exact four-in-one identity
+
+\[
+\boxed{
+\operatorname{curl}b
+=m\tau_b n+m\,n\times A_b,
+}
+\]
+
+\[
+\boxed{
+b\cdot\operatorname{curl}b=m^2\tau_b,
+\qquad
+b\times\operatorname{curl}b=-m^2A_b,
+}
+\]
+
+and
+
+\[
+\boxed{
+|\operatorname{curl}b|^2
+=m^2(\tau_b^2+|A_b|^2).
+}
+\]
+
+Thus `tau_b` and `A_b` are not two analyst-created mechanisms.  They are simply
+the longitudinal and transverse components of one application of `curl` relative
+to the field's own direction.  `tau_b` is the Frobenius twist of the orthogonal
+plane field; `A_b` is its curvature-minus-transverse-concentration defect.
+
+Navier--Stokes applies this same geometry twice in succession.  For `b=u`,
+
+\[
+\boxed{
+u\times\omega=-|u|^2A_u,
+\qquad
+u\cdot\omega=|u|^2\tau_u.
+}
+\]
+
+So the entire Euler/Lamb geometry is the transverse part `A_u`, while the
+longitudinal part is the local helicity density.  For `b=omega`,
+
+\[
+\boxed{
+ c=|\omega|\tau_\omega\xi
+   +|\omega|\,\xi\times A_\omega,
+\qquad
+v_{\rm slip}=\nu A_\omega.
+}
+\]
+
+Hence the exact nonlinear enstrophy work is only the cross-coupling of two
+successive transverse curl defects:
+
+\[
+\boxed{
+(u\times\omega)\cdot c
+=|u|^2|\omega|\,
+(\xi\times A_u)\cdot A_\omega.
+}
+\]
+
+The vorticity twist `tau_omega` cannot enter this production at all, while
+viscosity sees both pieces:
+
+\[
+\boxed{
+|c|^2
+=|\omega|^2(\tau_\omega^2+|A_\omega|^2).
+}
+\]
+
+Thus the local Poynting--Joule law can be read without introducing any independent
+coherence, phase, slip or topology currency: NS repeatedly applies one curl
+geometry, uses the transverse part of the first application to drive the
+transverse part of the second, and Hodge heat squares the complete second curl.
+The hard global question remains persistence/concentration of this iterated
+transverse geometry, not a missing local algebraic branch.
