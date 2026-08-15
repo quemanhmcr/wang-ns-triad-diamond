@@ -1097,24 +1097,88 @@ Again the quotient is understood as zero on the zero-trace set.  Moreover
 Thus the earlier increment-stress work identity is the boundary work of a positive covariance stress
 whose weighted divergence cost is paid directly by the same viscous gradient variance.
 
-The remaining positive factor can now be isolated without an `L^infinity` estimate.  Define the
-**transverse covariance activity**
+Put
+
+\[
+q_y:=\operatorname{tr}\tau_y,
+\qquad
+\boxed{C_y:=q_yI-\tau_y\succeq0.}
+\]
+
+At fixed `x`, `C_y=mathbb E_y(|X|^2I-X\otimes X)` and `D_y=mathbb E_y(X\times Y)`.  If
+`z in ker C_y`, positivity forces `z cross X=0` Poisson-a.s., hence `z dot D_y=0`.  Thus
+`D_y in Ran C_y` and the Moore--Penrose axis
+
+\[
+\boxed{a_y:=C_y^\dagger D_y}
+\]
+
+is state-generated rather than chosen.  Completing the pointwise least-squares problem for
+`Y-a cross X` gives
 
 \[
 \boxed{
-\mathscr A_y
-:=\int v^T\big[(\operatorname{tr}\tau_y)I-\tau_y\big]v\,dx
-\ge0.}
+Z-Z_y
+=\int D_y^TC_y^\dagger D_y\,dx+\mathcal R_{reg}(y),
+\qquad
+\mathcal R_{reg}\ge0.}
 \]
 
-A sharpened Cauchy estimate applied to
-`v dot D_y=E_y[(v cross X) dot Y]` gives
+Now define the **transverse covariance activity**
 
 \[
 \boxed{
-|\mathscr R_E(y)|^2
-\le4\,\mathscr A_y\,(Z-Z_y).}
+\mathscr A_y:=\int v^TC_yv\,dx\ge0.}
 \]
+
+Where `mathscr A_y>0`, projection of `a_y` onto `v` in the global `C_y` metric gives a second exact
+Pythagoras identity
+
+\[
+\boxed{
+\int a_y^TC_ya_y\,dx
+=\frac{\mathscr R_E(y)^2}{4\mathscr A_y}+\mathcal R_{align}(y),
+\qquad
+\mathcal R_{align}\ge0,}
+\]
+
+where `mathscr R_E=2 int v dot D_y`.  If `mathscr A_y=0`, then `mathscr R_E=0`; the productive quotient
+is taken as zero and the unsquared regression identity above remains the safe formulation.  Therefore
+
+\[
+\boxed{
+Z-Z_y
+=\frac{\mathscr R_E(y)^2}{4\mathscr A_y}
++\mathcal R_{align}(y)+\mathcal R_{reg}(y).}
+\]
+
+The former sharpened Cauchy bound is just the inequality obtained by dropping the two remainders.
+Since `mathscr V_t=-mathscr R_E-2nu(Z-Z_y)`, for `mathscr A_y>0` this gives the exact relative-reservoir
+completed square
+
+\[
+\boxed{
+\mathscr V_t
+=\frac{\mathscr A_y}{2\nu}
+-\frac{\nu}{2\mathscr A_y}
+\left(\mathscr R_E+\frac{\mathscr A_y}{\nu}\right)^2
+-2\nu\mathcal R_{align}-2\nu\mathcal R_{reg}.}
+\]
+
+Thus there is one positive activity term and three nonpositive frustration terms; this is an algebraic
+balance, not yet a historical estimate.  On regions where `a_y` has sufficient spatial regularity
+(for example fixed positive rank; otherwise one may first regularize `C_y`), the stress-divergence law
+also gives
+
+\[
+\boxed{
+\int a_y^TC_ya_y\,dx
+=\int\left(\tau_y-\frac12q_yI\right):\nabla a_y\,dx.}
+\]
+
+Hence a spatially constant regular least-squares axis carries no nonzero rotational current.  Rank
+changes of `C_y^dagger` are a genuine guard: this integration-by-parts identity is not promoted to a
+global coercive `grad a_y` bound without additional justification.
 
 Its boundary normalization is not new mathematics.  Since `tau'_0=Gamma_u`, and on continuum `R^3` using the repository pair-kernel normalization,
 
@@ -1134,7 +1198,49 @@ inequality
 \]
 
 So the pair-area/least-squares language is a boundary shadow of one finite-depth covariance-stress
-inequality, not a separate productive mechanism.
+inequality, not a separate productive mechanism.  In fact, using
+`mathscr A_y=2y||A_u||_pair^2+o(y)`, `mathscr R_E=-4kappa y+o(y)`,
+`Z-Z_y=2M3 y+o(y)` and `mathscr V_t=2yK'+o(y)`, the completed square above has the physical boundary
+germ
+
+\[
+\boxed{
+K'=\frac1{2\nu}
+\left(\|A_u\|_{pair}^2-\|A_u-2\nu D\omega\|_{pair}^2\right).}
+\]
+
+Thus the earlier pair critical square is the `y=0` germ of the finite-depth covariance law, not a
+separate construction.
+
+There is also a fixed-time depth-area guard.  Put `M_y=P_y(u tensor u)=tau_y+v tensor v`.  Pointwise
+rank-one algebra gives
+
+\[
+\boxed{
+v^TC_yv=e_2(M_y)-e_2(\tau_y)
+\le\frac13\big(P_y|u|^2\big)^2.}
+\]
+
+Consequently, on continuum `R^3` for smooth finite-energy states,
+
+\[
+\boxed{
+\int_0^\infty\mathscr A_y\,dy
+\le\frac16\,\||u|^2\|_{\dot H^{-1/2}}^2
+\lesssim K^2.}
+\]
+
+This is only a canonical **depth** area at one time.  Under the NS dilation,
+
+\[
+\boxed{
+\mathscr A_{u_\lambda}(y,t)
+=\lambda\,\mathscr A_u(\lambda y,\lambda^2t),}
+\]
+
+so its depth area is invariant while `mathscr A'_0` scales like `lambda^2` and the depth width scales
+like `lambda^-1`.  Therefore no static area bound rules out concentration of this nonnegative depth
+profile toward `y=0`; no unimodality is claimed.
 
 The Germano cocycle also splits transverse activity into two nonnegative depth contributions.  Put
 `w=P_zv_y=v_{y+z}`.  Linearity of `tau -> (tr tau)I-tau` gives
@@ -3532,6 +3638,7 @@ The separate material theorem adds the transverse determinant and Minkowski memo
 13. **No single-angle telescope.**  `-tan(theta) theta'_E=2kappa/K-P/Z`, and actual Galerkin states show that the two productions have independent signs.
 14. **No scalar zero-net closure without stress realizability.**  The Poisson covariance stress obeys a sharp Fisher budget, but arbitrary zero-net depth currents are still too large; the unresolved positive factor is the transverse covariance activity `A_y`.
 15. **No crude `L^infinity` closure for the transverse activity.**  `A_y<=||P_yu||_infinity^2 V_y` only returns to external BKM/Serrin control and is not used as the primitive boundary-stress theorem.
+16. **No fixed-time depth-area closure.**  `int_0^infinity A_y dy lesssim K^2` is scale invariant; the profile may narrow toward `y=0` while its boundary slope grows, so no unimodality or no-concentration theorem is assumed.
 
 ---
 
@@ -3616,11 +3723,13 @@ with
 \mathscr A'_0=2\|A_u\|_{pair}^2\quad(\mathbb R^3\text{ continuum normalization}).}
 \]
 
-Thus the old pair-area capacity is the boundary slope of the transverse covariance activity.  The
-remaining theorem is a historical boundary-stress estimate on `mathscr A_y` strong enough to imply
-finite normalized boundary action.  The affine-core scaling guard shows why this cannot be read off
-from `-E'=2nu Z` alone: the scale-invariant pair-area action can diverge while `int Z dt` stays finite.
-It is **not proved**.
+Thus the old pair-area capacity is the boundary slope of the transverse covariance activity, while
+the finite-depth Pythagoras splits the unresolved vorticity bill into productive, axis-misalignment and
+non-rotational parts.  The remaining theorem is a historical **no boundary-concentration** estimate on
+`mathscr A_y` strong enough to imply finite normalized boundary action.  Its fixed-time depth area is
+finite but scale invariant, so the profile can in principle narrow while `mathscr A'_0` grows; the
+affine-core guard likewise shows this cannot be read off from `-E'=2nu Z` alone.  No unimodality is
+assumed.  This concentration theorem is **not proved**.
 
 The previously exposed lossless tangent coordinate remains exact but is now a compressed boundary
 reading:

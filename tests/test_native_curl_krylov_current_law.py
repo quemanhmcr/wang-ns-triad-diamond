@@ -1648,12 +1648,51 @@ def test_poisson_covariance_stress_two_reservoir_heat_and_fisher_laws_are_exact(
     fisher=float(np.mean(ratio))
     assert fisher <= (Z-Zy)+2e-12
 
-    # Sharpened work Cauchy leaves exactly the transverse covariance activity.
-    M=np.eye(3)[:,:,None,None,None]*trtau-tau
-    activity=float(np.mean(np.einsum("i...,ij...,j...->...",v,M,v)))
+    # The product defect has a canonical covariance least-squares axis.
+    C=np.eye(3)[:,:,None,None,None]*trtau-tau
+    activity=float(np.mean(np.einsum("i...,ij...,j...->...",v,C,v)))
     RE=2.0*inner(v,D)
-    assert activity >= -2e-13
+    Cm=np.moveaxis(C,(0,1),(-2,-1)); Dm=np.moveaxis(D,0,-1)
+    ceig=np.linalg.eigvalsh(Cm)
+    assert float(ceig.min()) > 1e-5  # regular-rank referee for the axis-gradient identity below
+    am=np.einsum("...ij,...j->...i",np.linalg.inv(Cm),Dm); a=np.moveaxis(am,-1,0)
+    assert np.linalg.norm(D-np.einsum("ij...,j...->i...",C,a)) <= 4e-12*max(1.0,np.linalg.norm(D))
+
+    axis_density=np.einsum("i...,ij...,j...->...",a,C,a)
+    reg_density=cov_omega-axis_density
+    assert float(reg_density.min()) >= -2e-11
+    axis=float(np.mean(axis_density)); Rreg=float(np.mean(reg_density))
+    beta=RE/(2.0*activity)
+    align=float(np.mean(np.einsum("i...,ij...,j...->...",a-beta*v,C,a-beta*v)))
+    productive=RE*RE/(4.0*activity)
+    assert axis == pytest.approx(productive+align,rel=4e-12,abs=4e-12)
+    assert Z-Zy == pytest.approx(productive+align+Rreg,rel=4e-12,abs=4e-12)
     assert RE*RE <= 4.0*activity*(Z-Zy)+2e-12
+
+    # Exact relative-reservoir completed square: one positive term, three nonpositive terms.
+    Vt=-RE-2.0*nu*(Z-Zy)
+    Vt_square=(activity/(2.0*nu)
+               -nu*(RE+activity/nu)**2/(2.0*activity)
+               -2.0*nu*align-2.0*nu*Rreg)
+    assert Vt_square == pytest.approx(Vt,rel=4e-12,abs=4e-12)
+
+    # Pointwise rank-one e2 identity and Maclaurin depth-area integrand bound.
+    Mfull=tau+tensor(v,v)
+    def e2(T):
+        tr=np.trace(T,axis1=0,axis2=1)
+        return 0.5*(tr*tr-np.einsum("ij...,ji...->...",T,T))
+    point_activity=np.einsum("i...,ij...,j...->...",v,C,v)
+    assert np.max(np.abs(point_activity-(e2(Mfull)-e2(tau)))) <= 5e-12
+    assert np.max(point_activity-(np.trace(Mfull,axis1=0,axis2=1)**2)/3.0) <= 5e-12
+
+    # On this positive-rank periodic referee the conditional axis integration-by-parts sign is exact.
+    ah=fft(a); grad_a=np.empty((3,3,n,n,n),float)
+    for i in range(3):
+        for j,kj in enumerate((kx,ky,kz)):
+            grad_a[i,j]=ifft(1j*kj*ah[i])
+    stress=tau-0.5*np.eye(3)[:,:,None,None,None]*trtau
+    axis_ibp=float(np.mean(np.sum(stress*grad_a,axis=(0,1))))
+    assert axis_ibp == pytest.approx(axis,rel=6e-12,abs=6e-12)
 
     # Germano also splits transverse activity into inherited/new nonnegative pieces.
     w=py(v,z)
@@ -1889,6 +1928,10 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "constant 1" in cert["primitive_poisson_covariance_heat_fisher"]
     assert "<=2M3" in cert["primitive_poisson_covariance_boundary"]
     assert "A_(y+z)=A_z(P_yu)" in cert["primitive_poisson_transverse_activity"]
+    assert "R_E^2/(4A_y)+R_align+R_reg" in cert["primitive_poisson_covariance_pythagoras"]
+    assert "V_t=A_y/(2nu)" in cert["primitive_poisson_relative_completed_square"]
+    assert "rank changes of the pseudoinverse" in cert["primitive_poisson_axis_gradient_guard"]
+    assert "int_0^infinity A_y dy" in cert["primitive_poisson_activity_depth_area_guard"]
     assert "G4=2 nabla_4 A4" in cert["primitive_spacetime_critical_bianchi"]
     assert "Ec=-2nu[R,e wedge]" in cert["primitive_spacetime_critical_electric"]
     assert "not supply int||Ec||^2 dt" in cert["primitive_spacetime_transgression_guard"]
