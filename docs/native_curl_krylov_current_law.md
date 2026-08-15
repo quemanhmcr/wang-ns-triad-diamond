@@ -1782,16 +1782,8 @@ If `mathsf F mathcal A=0`, then
 \boxed{\omega(x)\cdot[u(y)-u(x)]=0\quad\forall x,y.}
 \]
 
-Let `V_u=span{u(y)-u(x)}`.  Modulo a constant velocity, `u` takes values in `V_u` and
-`omega(x) in V_u^perp`.  Hence:
-
-- `dim V_u=3` forces `omega=0`;
-- `dim V_u=2` forces an embedded 2D flow after rotation;
-- `dim V_u=1` gives `u=phi b`, `b dot grad phi=0`, hence `(u dot grad)u=0`;
-- `dim V_u=0` is uniform flow.
-
-This is the exact algebraic null geometry.  Fully decaying finite-energy `R^3` may exclude some
-nonzero lower-dimensional representatives.
+The resulting null geometry is classified more primitively by the positive critical
+carre-du-champ tensor in Section 11.7 below.
 
 For a top Hom test `Phi=phi(x,y)dV`,
 
@@ -1861,6 +1853,131 @@ u\ \text{near the intrinsic 2D/shear/null manifold}.
 That implication is a separate stability/compactness theorem.  The historical gap is then to show
 that a genuinely 3D trajectory cannot stay close enough to this null geometry for the infinite
 productive critical action required by escape while still regenerating `mathcal A` nonintegrably.
+
+### 11.7 The critical carre-du-champ is the positive metric behind the Gauss source
+
+For scalar functions let
+
+\[
+\Gamma(f,g):=f\Lambda g+g\Lambda f-\Lambda(fg),
+\]
+
+and for the velocity define the matrix `Gamma_u=(Gamma(u_i,u_j))`.  On continuum `R^3`,
+
+\[
+\boxed{
+\Gamma_u(x)=\frac1{\pi^2}\int
+\frac{[u(x)-u(y)]\otimes[u(x)-u(y)]}{|x-y|^4}\,dy\succeq0.}
+\]
+
+Thus criticality is already an intrinsic positive increment metric:
+
+\[
+\boxed{\int\operatorname{tr}\Gamma_u\,dx=2K.}
+\]
+
+The Gauss source from Section 11.5 is exactly vorticity measured in this same metric,
+
+\[
+\boxed{
+\|\mathsf F\mathcal A\|_{HS}^2
+=\frac1{4\pi^2}\int \omega^T\Gamma_u\omega\,dx.}
+\]
+
+It is also the finite-difference completion of vortex stretching.  For `y=x+h`,
+
+\[
+\boxed{
+\omega(x)\cdot[u(x+h)-u(x)]
+=(S\omega)(x)\cdot h+O(|h|^2),}
+\]
+
+because the antisymmetric part of `nabla u` annihilates `omega`.  The same source whose curvature
+controls the critical residual therefore has tangent `S omega`, the 3D Euler stretching vector.
+
+Let `V_u=span{u(y)-u(z)}`.  Positivity gives
+
+\[
+\boxed{\ker\Gamma_u(x)=V_u^\perp}
+\]
+
+for almost every `x` (with the usual essential-span interpretation).  Hence zero Gauss source has
+exactly the previous lower-dimensional alternatives: full span forces `omega=0`; rank two is a
+fixed embedded 2D flow; rank one is a shear `u=phi b`, `b dot grad phi=0`; rank zero is uniform.
+On finite-energy continuum `R^3` every nonzero 2D/shear/uniform representative is excluded by its
+translation-invariant direction, while curl-free divergence-free `L^2` fields vanish.  Therefore
+
+\[
+\boxed{
+\int\omega^T\Gamma_u\omega\,dx=0\quad\Longrightarrow\quad u=0
+\qquad (u\in L^2(\mathbb R^3)).}
+\]
+
+This is injectivity, not a uniform coercive gap.  On periodic geometry the nonzero null classes do
+exist, but they are invariant under NS: embedded 2D remains in its fixed plane, while shear has
+`F_E=0` and evolves only by heat.  A trajectory cannot use exact null geometry to rotate its plane
+and restart a 3D critical channel.
+
+The rank itself is intrinsic.  Writing `delta u_a=u(x)-u(y_a)`, Cauchy--Binet gives
+
+\[
+\boxed{
+e_2(\Gamma_u)=\frac1{2\pi^4}\iint
+\frac{|\delta u_1\times\delta u_2|^2}
+{|x-y_1|^4|x-y_2|^4}\,dy_1dy_2,}
+\]
+
+\[
+\boxed{
+\det\Gamma_u=\frac1{6\pi^6}\iiint
+\frac{\det(\delta u_1,\delta u_2,\delta u_3)^2}
+{|x-y_1|^4|x-y_2|^4|x-y_3|^4}\,dy_1dy_2dy_3.}
+\]
+
+Thus `det Gamma_u=0` exactly when the essential increment span is planar, while `e_2(Gamma_u)=0`
+exactly when it is one-dimensional.  No best plane or analyst-defined 3D coefficient is needed.
+
+The tensor also carries the literal one-way/two-way split.  Put `L=Lambda^2=-Delta`.  Since the
+Laplacian product defect is `-2 grad f dot grad g`, the full NS law is
+
+\[
+\boxed{
+(\partial_t+\nu L)\Gamma_u
+=\Gamma(F_E,u)+\Gamma(u,F_E)
+-2\nu\sum_{j=1}^3\Gamma_{\partial_j u}.}
+\]
+
+Every `Gamma_{partial_j u}` is positive semidefinite.  Heat is therefore a one-way Loewner sink of
+the critical metric, while Euler is the only two-way regeneration/reorientation term.  Integrating
+the trace recovers only the scalar shadow
+
+\[
+\boxed{K'=2\kappa(0)-2\nu M_3.}
+\]
+
+On the exact critical null geometry `S omega=0`, so enstrophy also becomes one-way; on shear
+`F_E=0`, every Sobolev quadratic is heat-only.  This gives the intrinsic dimensional ladder
+
+\[
+\boxed{
+\text{3D two-way criticality}
+\to \omega\in\ker\Gamma_u
+\to \text{dimensional collapse}
+\to \text{a stronger one-way law}.}
+\]
+
+A natural stronger estimate suggested by the tangent identity is
+
+\[
+\boxed{
+\|S\omega\|_{\dot H^{-1/2}}^2
+\stackrel{?}{\le} C\int\omega^T\Gamma_u\omega\,dx.}
+\]
+
+This inequality is **not proved and is not used**.  Even if true, the remaining historical bridge
+would still be to pass from persistent small `mathcal G_c`, which controls the source in the native
+negative six-dimensional Schrödinger metric, to sufficient time-integrated control of the stronger
+carre-du-champ source above.  The positive tensor heat law is the native place to seek that history.
 
 ---
 
@@ -2243,14 +2360,16 @@ K'=\frac{\pi^2}{2\nu}
 (\|\mathcal V\|^2-\|\mathcal G_c\|^2).}
 \]
 
-Thus the critical state creates its own residual current, and that residual is sourced by the
-vorticity/velocity-span quantity
+Thus the critical state creates its own residual current, sourced by
 
 \[
 \boxed{\omega(x)\cdot[u(y)-u(x)].}
 \]
 
-Exact vanishing of this source is lower-dimensional: irrotational, embedded 2D, shear, or uniform.
+Equivalently, the same `Lambda` that defines criticality generates the positive carre-du-champ
+`Gamma_u`: its trace integrates to `2K`, while
+`||F A||_HS^2=(4 pi^2)^-1 int omega^T Gamma_u omega`.  Its rank selects the intrinsic 3D/2D/shear
+geometry without an auxiliary plane or scale.
 The same law gives the native Gauss floor
 
 \[

@@ -1974,6 +1974,11 @@ def theorem_certificate() -> dict[str, object]:
         "primitive_critical_gauss_null_geometry": "exact vanishing of (beta wedge)A means omega(x) is orthogonal to the affine velocity-value span for every x; span dimension 3 is irrotational, dimension 2 is embedded 2D, dimension 1 is a shear u=phi b with (u.grad)u=0, and dimension 0 is uniform flow",
         "primitive_critical_six_dimensional_gauss_floor": "top-degree Hom tests give the quadratic-form normal operator L6=-nu^2(Delta_x+Delta_y)+|u(x)|^2/4 and ||Gc||^2>=<nu(beta wedge)A,L6^-1 nu(beta wedge)A>; the six variables are the two points already forced by |D|, not extra physical dimensions",
         "primitive_critical_gauss_stability_guard": "the Gauss floor gives exact control of the source in its native L6^-1 metric and the exact zero source is lower-dimensional, but quantitative near-zero proximity to the 2D/shear/null manifold is a separate stability/compactness theorem and is not assumed",
+        "primitive_critical_carre_du_champ": "Gamma_u,ij=u_i Lambda u_j+u_j Lambda u_i-Lambda(u_i u_j)=pi^-2 int delta u_i delta u_j/|x-y|^4 dy is positive semidefinite and int tr Gamma_u=2K; critical H^1/2 size is the trace mass of the intrinsic Lambda increment metric",
+        "primitive_critical_vorticity_metric": "||F A||_HS^2=(4pi^2)^-1 int omega^T Gamma_u omega; ker Gamma_u is the orthogonal complement of the affine velocity-value span, so the Gauss source is vorticity read in the same positive metric whose trace is critical size",
+        "primitive_critical_metric_heat_law": "with L=Lambda^2=-Delta, (partial_t+nu L)Gamma_u=Gamma(F_E,u)+Gamma(u,F_E)-2nu sum_j Gamma_{partial_j u}; the sink is Loewner-positive and integrated trace is exactly K'=2kappa(0)-2nu M3",
+        "primitive_critical_rank_persistence": "Cauchy-Binet makes e2(Gamma_u) the squared two-increment area and det Gamma_u the squared three-increment volume; exact null is fixed 2D/shear/irrotational geometry, finite-energy R3 has only vacuum, and periodic 2D/shear null classes are NS-invariant rather than reset surfaces",
+        "primitive_critical_stretching_bridge_guard": "omega(x).(u(x+h)-u(x))=(S omega)(x).h+O(|h|^2), so the Gauss source is the finite-difference completion of vortex stretching; the candidate ||S omega||_Hdot^-1/2^2 <= C int omega^T Gamma_u omega is unproved and is not used",
         "primitive_actual_current_operator": "the endogenous state operator is Q=nu delta+i_u with Q*=nu d+u^flat wedge; the physical electromotive current is e=Q beta, the projected momentum law is u_t=-P(Q beta), and therefore Q_t=-i_{P(Q beta)}",
         "primitive_current_curvature_square": "exterior Leibniz gives {delta,i_u}=(beta wedge)^*, hence Q^2=nu(beta wedge)^* on the whole graded exterior algebra and Q^2 beta=nu|beta|^2; vorticity is the failure of nilpotence of the actual NS current operator",
         "primitive_current_nilpotent_chords": "Q(u)-Q(v)=i_{u-v}, every chord/tangent contraction squares to zero, and any two contractions anticommute; the non-nilpotence of Q comes only from interaction of fixed delta with the physical contraction, not from nonlinear state-space chords",
@@ -1981,7 +1986,7 @@ def theorem_certificate() -> dict[str, object]:
         "primitive_intertwining_lamb": "for every closed eta=*b^flat, H^(1)(Q eta)-Q(H^(2)eta)=[Q*,Q^2]eta=nu^2 d(omega.b)+nu[b cross (u cross omega)]^flat; at b=omega the non-exact term locally reconstructs the Lamb field away from omega=0",
         "primitive_finite_current_chains": "Q* alpha=nu beta gives alpha -> nu beta -> nu e -> nu^2|beta|^2 ->0 and energy dissipation is adjointness of its first two arrows; on top degree dV -> *alpha -> nu omega^flat -> nu(u.omega) ->0 and Q^4=0 in three dimensions",
         "primitive_midpoint_status": "M=nu delta+(1/2)i_u is the canonical midpoint between pure Hodge heat and the actual operator Q, selected by the critical/Poynting reflection; it is a reading rather than the fundamental state operator and satisfies M(M beta)=(nu/2)|beta|^2",
-        "primitive_turning_frontier": "the previous persistent critical near-kernel/graded-turning frontier is now sharpened by the exact current Gc=2 nabla A and Gauss-Bianchi law nabla Gc=nu(beta wedge)A; infinite productive regeneration must keep the native Gauss source near the lower-dimensional null geometry long enough to escape, and the unproved step is quantitative stability/history leading to integrable Euler regeneration",
+        "primitive_turning_frontier": "the previous persistent critical near-kernel frontier is sharpened by Gc=2 nabla A, nabla Gc=nu(beta wedge)A and the same positive Gamma_u whose vorticity contraction is the Gauss source; infinite productive regeneration now leaves an unproved quantitative stability/history bridge from persistent small residual in the native L6^-1 metric to enough carre-du-champ control for dimensional collapse/integrable Euler regeneration",
         "graded_current_strain_parent": "with q=nu delta+(1/2)i_u, the positive Hodge-Dirac square q^*q+qq^* is (-nu^2 Delta+|u|^2/4)I+nu S on one-forms and the same scalar part minus nu S on two-forms; physical strain, hence the critical sech/Reynolds operator, is the degree imbalance of one midpoint current complex",
         "critical_gram_self_frustration": "for G_u b=u cross b-2nu curl b, the polarized Poynting law gives 4nu(PS)_odd=[P(U_u^*U_u-G_u^*G_u)P]_odd; the dangerous critical block is exactly a helicity-odd Gram imbalance, but odd projection destroys simple positivity so no free negative-square contraction follows",
         "critical_curvature_floor": "the mixed Gauss law (div-u/(2nu).)G_u b=omega.b implies G_u^*G_u>=M_omega^*(-Delta+|u|^2/(4nu^2))^-1M_omega in quadratic-form order; a persistent expanding Reynolds direction must continually avoid this state-generated curvature floor at the intrinsic Poisson depths",
@@ -2729,6 +2734,35 @@ def continuum_primitive_critical_channel_constants() -> dict[str, float]:
         "dirichlet_to_curvature_hs_ratio": channel / curvature,
     }
 
+
+
+def continuum_critical_carre_du_champ_constants() -> dict[str, float]:
+    """Exact R^3 constants for the critical ``Lambda=|D|`` carre-du-champ.
+
+    For scalar ``f,g`` use ``Gamma(f,g)=f Lambda g+g Lambda f-Lambda(fg)``.
+    The fractional-Laplacian kernel is ``pi^-2 |x-y|^-4``.  Consequently the
+    velocity matrix ``Gamma_u=(Gamma(u_i,u_j))`` is positive, its trace mass is
+    ``2K``, and the primitive Gauss source satisfies
+
+        ||(beta wedge) A||_HS^2
+          = (1/(4*pi^2)) int omega^T Gamma_u omega.
+
+    Cauchy--Binet gives the universal ``e2`` and determinant prefactors below.
+    The heat product law has sink ``-2 nu sum_j Gamma_{partial_j u}``.
+    """
+
+    kernel = 1.0 / math.pi**2
+    gauss_metric = 1.0 / (4.0 * math.pi**2)
+    e2 = 1.0 / (2.0 * math.pi**4)
+    det = 1.0 / (6.0 * math.pi**6)
+    return {
+        "fractional_laplacian_kernel_coefficient": kernel,
+        "critical_trace_integral_factor": 2.0,
+        "gauss_hs_to_vorticity_metric_factor": gauss_metric,
+        "second_elementary_symmetric_prefactor": e2,
+        "determinant_prefactor": det,
+        "heat_carre_du_champ_sink_coefficient": 2.0,
+    }
 
 
 def continuum_critical_gauss_bianchi_constants() -> dict[str, float]:

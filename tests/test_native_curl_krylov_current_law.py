@@ -8,6 +8,7 @@ from src.helical import coupling_magnitude_closed
 from src.native_curl_krylov_current_law import (
     continuum_midpoint_operator_sobolev_dictionary,
     continuum_primitive_critical_channel_constants,
+    continuum_critical_carre_du_champ_constants,
     continuum_critical_gauss_bianchi_constants,
     continuum_critical_operator_isometry_constant,
     closed_triad_critical_action_bound,
@@ -1278,6 +1279,59 @@ def test_certificate_records_primitive_critical_channel_as_self_dissipative_deri
     assert "not a uniform instantaneous gap" in cert["primitive_critical_channel_rigidity"]
     assert "A_t=A(F_E)-nu Delta_op A" in cert["primitive_critical_channel_dynamics"]
     assert "infinite productive regeneration" in cert["primitive_turning_frontier"]
+    assert cert["global_regularity_claimed"] is False
+
+
+def test_primitive_critical_carre_du_champ_constants_and_cauchy_binet_are_exact():
+    import itertools
+    import numpy as np
+
+    out=continuum_critical_carre_du_champ_constants()
+    assert out["fractional_laplacian_kernel_coefficient"] == pytest.approx(1.0/math.pi**2,rel=1e-15)
+    assert out["gauss_hs_to_vorticity_metric_factor"] == pytest.approx(1.0/(4.0*math.pi**2),rel=1e-15)
+    assert out["second_elementary_symmetric_prefactor"] == pytest.approx(1.0/(2.0*math.pi**4),rel=1e-15)
+    assert out["determinant_prefactor"] == pytest.approx(1.0/(6.0*math.pi**6),rel=1e-15)
+
+    v=[np.array([1.0,0.2,-0.1]),np.array([0.3,-0.7,0.4]),np.array([-0.2,0.5,0.9]),np.array([0.6,0.1,0.2])]
+    w=[0.4,0.7,0.3,0.6]
+    G=sum((wi/math.pi**2)*np.outer(vi,vi) for wi,vi in zip(w,v))
+    assert np.linalg.eigvalsh(G).min() >= -2e-15
+    e2=0.5*(np.trace(G)**2-np.trace(G@G))
+    e2_cb=sum(w[i]*w[j]*np.linalg.norm(np.cross(v[i],v[j]))**2
+              for i,j in itertools.product(range(len(v)),repeat=2))/(2.0*math.pi**4)
+    det_cb=sum(w[i]*w[j]*w[k]*np.linalg.det(np.stack([v[i],v[j],v[k]],axis=1))**2
+               for i,j,k in itertools.product(range(len(v)),repeat=3))/(6.0*math.pi**6)
+    assert e2 == pytest.approx(e2_cb,rel=2e-14,abs=2e-14)
+    assert np.linalg.det(G) == pytest.approx(det_cb,rel=2e-14,abs=2e-14)
+
+
+def test_critical_carre_du_champ_heat_product_law_has_negative_positive_sink():
+    import numpy as np
+
+    n=64
+    x=2.0*math.pi*np.arange(n)/n
+    k=np.fft.fftfreq(n,1.0/n)
+    def op(a,mult):
+        return np.fft.ifft(mult*np.fft.fft(a)).real
+    def lam(a): return op(a,np.abs(k))
+    def lap(a): return op(a,k*k)
+    def der(a): return op(a,1j*k)
+    def gam(a,b): return a*lam(b)+b*lam(a)-lam(a*b)
+    f=np.sin(x)+0.23*np.cos(2*x)
+    g=0.7*np.cos(x)-0.19*np.sin(3*x)
+    lhs=lap(gam(f,g))-gam(lap(f),g)-gam(f,lap(g))
+    rhs=-2.0*gam(der(f),der(g))
+    assert np.max(np.abs(lhs-rhs)) <= 2e-11
+
+
+def test_certificate_collapses_gauss_source_to_intrinsic_positive_critical_metric_without_claiming_bridge():
+    cert=theorem_certificate()
+    assert "int tr Gamma_u=2K" in cert["primitive_critical_carre_du_champ"]
+    assert "omega^T Gamma_u omega" in cert["primitive_critical_vorticity_metric"]
+    assert "Loewner-positive" in cert["primitive_critical_metric_heat_law"]
+    assert "finite-energy R3 has only vacuum" in cert["primitive_critical_rank_persistence"]
+    assert "candidate" in cert["primitive_critical_stretching_bridge_guard"]
+    assert "unproved" in cert["primitive_critical_stretching_bridge_guard"]
     assert cert["global_regularity_claimed"] is False
 
 
