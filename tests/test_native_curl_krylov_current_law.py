@@ -18,6 +18,8 @@ from src.native_curl_krylov_current_law import (
     sobolev_spectral_hilbert_square,
     critical_spectral_hminus_half_square,
     poisson_critical_scale_measure_moments,
+    poisson_energy_boundary_jet_geometry,
+    poisson_scalar_reversible_counterprofile,
     critical_loggap_collective_bound,
     critical_logscale_strain_kernel,
     sobolev_strain_transfer_multiplier,
@@ -1414,6 +1416,115 @@ def test_primitive_pair_radial_transverse_split_and_pressure_converter_constants
     assert 0.5*(tr_x+tr_y) == pytest.approx(0.0,abs=1e-15)
 
 
+def test_poisson_energy_boundary_jets_and_hankel_escape_action_are_exact():
+    E,K,Z,M3,kappa,nu=3.2,2.1,2.7,4.4,-0.63,0.18
+    assert E*Z-K*K > 0.0
+    out=poisson_energy_boundary_jet_geometry(E,K,Z,M3,kappa,nu)
+    assert out["energy_profile_value"] == pytest.approx(E)
+    assert out["energy_profile_first_derivative"] == pytest.approx(-2.0*K)
+    assert out["energy_profile_second_derivative"] == pytest.approx(4.0*Z)
+    assert out["energy_profile_third_derivative"] == pytest.approx(-8.0*M3)
+    assert out["euler_profile_value"] == 0.0
+    assert out["euler_profile_first_derivative"] == pytest.approx(-4.0*kappa)
+    assert out["hankel_determinant"] == pytest.approx(4.0*(E*Z-K*K),rel=2e-15)
+    assert out["energy_rate"] == pytest.approx(-2.0*nu*Z,rel=2e-15)
+    assert out["critical_rate"] == pytest.approx(2.0*kappa-2.0*nu*M3,rel=2e-15)
+    expected=kappa*kappa/((Z/E)*(E*Z-K*K))
+    assert out["escape_action_from_profile"] == pytest.approx(expected,rel=2e-15)
+    assert out["escape_action_physical"] == pytest.approx(expected,rel=2e-15)
+
+
+def test_poisson_scalar_counterprofile_is_zero_net_but_not_physically_realizable():
+    out=poisson_scalar_reversible_counterprofile(0.037,0.31,2.4,0.12)
+    assert out["energy_loss_integrability_power"] > 0.0
+    assert abs(out["hankel_determinant"]) <= 2e-12*max(1.0,out["critical_stock"]**2)
+    assert abs(out["reversible_source_area"]) <= 2e-15*max(1.0,abs(out["energy_rate"]))
+    assert out["fake_reversible_boundary_current"] == pytest.approx(
+        2.0*out["fake_curvature_height"],rel=2e-15
+    )
+    assert out["fake_reversible_boundary_current"] > 0.0
+    assert out["physical_equiradial_curvature_height"] == 0.0
+    assert out["fake_curvature_height"] > out["physical_equiradial_curvature_height"]
+
+
+def test_poisson_product_defect_realizes_depth_euler_work_and_boundary_derivative():
+    import numpy as np
+
+    n=12
+    rng=np.random.default_rng(20260815)
+    ks=np.fft.fftfreq(n,1.0/n)
+    kx,ky,kz=np.meshgrid(ks,ks,ks,indexing="ij")
+    k2=kx*kx+ky*ky+kz*kz
+    radius=np.sqrt(k2)
+    mask=(np.maximum.reduce([np.abs(kx),np.abs(ky),np.abs(kz)])<=1)&(k2>0)
+
+    u0=rng.normal(size=(3,n,n,n))
+    uh=np.fft.fftn(u0,axes=(1,2,3))*mask[None]
+    den=np.where(k2>0,k2,1.0)
+    dot=kx*uh[0]+ky*uh[1]+kz*uh[2]
+    for j,kj in enumerate((kx,ky,kz)):
+        uh[j]-=np.where(k2>0,kj*dot/den,0.0)
+    u=np.fft.ifftn(uh,axes=(1,2,3)).real
+
+    def multiplier(v,m):
+        vh=np.fft.fftn(v,axes=(1,2,3))
+        return np.fft.ifftn(vh*m,axes=(1,2,3)).real
+
+    def py(v,y): return multiplier(v,np.exp(-y*radius))
+    def lam(v): return multiplier(v,radius)
+    def curl(v):
+        vh=np.fft.fftn(v,axes=(1,2,3))
+        wh=np.empty_like(vh)
+        wh[0]=1j*(ky*vh[2]-kz*vh[1])
+        wh[1]=1j*(kz*vh[0]-kx*vh[2])
+        wh[2]=1j*(kx*vh[1]-ky*vh[0])
+        return np.fft.ifftn(wh,axes=(1,2,3)).real
+    def leray(v):
+        vh=np.fft.fftn(v,axes=(1,2,3))
+        dd=kx*vh[0]+ky*vh[1]+kz*vh[2]
+        out=vh.copy()
+        for j,kj in enumerate((kx,ky,kz)):
+            out[j]-=np.where(k2>0,kj*dd/den,0.0)
+        out[:,0,0,0]=0.0
+        return np.fft.ifftn(out,axes=(1,2,3)).real
+    def cross(a,b): return np.cross(a,b,axisa=0,axisb=0,axisc=0)
+    def inner(a,b): return float(np.mean(np.sum(a*b,axis=0)))
+
+    omega=curl(u)
+    lamb=cross(u,omega)
+    FE=leray(lamb)
+    kappa=inner(lam(u),FE)
+    assert abs(kappa) > 1e-8
+
+    y=0.29
+    uy=py(u,y); wy=py(omega,y)
+    Dy=py(lamb,y)-cross(uy,wy)
+    RE_direct=2.0*inner(uy,py(FE,y))
+    RE_defect=2.0*inner(uy,leray(Dy))
+    same_depth=inner(uy,cross(uy,wy))
+    assert abs(same_depth) <= 2e-13*max(1.0,abs(RE_direct))
+    assert RE_defect == pytest.approx(RE_direct,rel=3e-12,abs=3e-12)
+
+    # Simpson audit of the exact integral D_y=int P_(y-s) Gamma_cross(P_su,P_somega) ds.
+    count=81
+    ss=np.linspace(0.0,y,count)
+    vals=[]
+    for sv in ss:
+        us=py(u,sv); ws=py(omega,sv)
+        gam=cross(us,lam(ws))+cross(lam(us),ws)-lam(cross(us,ws))
+        vals.append(py(gam,y-sv))
+    vals=np.stack(vals)
+    weights=np.ones(count); weights[1:-1:2]=4.0; weights[2:-1:2]=2.0
+    Dint=(y/(count-1))/3.0*np.tensordot(weights,vals,axes=(0,0))
+    assert np.linalg.norm(Dy-Dint) <= 2e-9*max(1.0,np.linalg.norm(Dy))
+
+    gamma0=cross(u,lam(omega))+cross(lam(u),omega)-lam(lamb)
+    Rprime_gamma=2.0*inner(u,gamma0)
+    Rprime_semigroup=-2.0*inner(lam(u),FE)-2.0*inner(u,lam(FE))
+    assert Rprime_gamma == pytest.approx(-4.0*kappa,rel=3e-12,abs=3e-12)
+    assert Rprime_semigroup == pytest.approx(-4.0*kappa,rel=3e-12,abs=3e-12)
+
+
 def test_endogenous_euler_coefficient_pair_projection_and_static_cancellation_are_exact():
     # Scalar audit of A_u=nu_E Domega+C_perp in the canonical pair Hilbert metric.
     m3=3.7; nu_e=0.41; cperp2=1.9; nu=0.23
@@ -1589,6 +1700,12 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "X_t=Y-nu L^2 X" in cert["primitive_energy_sphere_dynamics"]
     assert "tangent Rayleigh-gradient direction" in cert["primitive_critical_uphill_projection"]
     assert "A_escape=kappa^2/[N^2(EZ-K^2)]" in cert["primitive_scalar_triple_escape"]
+    assert "whole critical hierarchy is one boundary jet" in cert["primitive_poisson_energy_profile"]
+    assert "P_y(fg)-P_yf P_yg" in cert["primitive_poisson_product_defect"]
+    assert "R'_E(0)=-4kappa" in cert["primitive_poisson_boundary_critical_law"]
+    assert "zero-net two-way depth redistribution" in cert["primitive_poisson_depth_two_road"]
+    assert "physical boundary action" in cert["primitive_poisson_hankel_escape"]
+    assert "fake scalar profile" in cert["primitive_poisson_realizability_guard"]
     assert "G4=2 nabla_4 A4" in cert["primitive_spacetime_critical_bianchi"]
     assert "Ec=-2nu[R,e wedge]" in cert["primitive_spacetime_critical_electric"]
     assert "not supply int||Ec||^2 dt" in cert["primitive_spacetime_transgression_guard"]

@@ -1941,6 +1941,12 @@ def theorem_certificate() -> dict[str, object]:
         "critical_loggap_locality": "the critical sech map is a contraction and a cross block separated by log gap L obeys the dimension-free bound min(1,csch(L/2)); deep signed-curl separation is therefore continuously suppressed without shell thresholds",
         "poisson_scale_law": "dmu(t)=2||exp(-t|C|)|C|u||^2 dt/K is a canonical probability scale law with mean E/(2K)=1/(2 mean|curl|); the critical boost Rayleigh rate is the mu-average of Poisson-smoothed odd-strain Rayleigh quotients",
         "poisson_heat_subordination": "exp(-t|C|)=t/(2sqrt(pi)) int s^(-3/2) exp(-t^2/(4s)) exp(-sC^2) ds, so the scale filter intrinsic to critical Euler growth is subordinate to the same quadratic heat generator used by viscosity",
+        "primitive_poisson_energy_profile": "Escript(y)=||exp(-y Lambda)u||^2 is completely monotone and Escript(0)=E, -Escript_y(0)/2=K, Escript_yy(0)/4=Z, -Escript_yyy(0)/8=M3; full NS is Escript_t=R_E-(nu/2)Escript_yy with R_E=2<P_yu,P_yF_E>, so the whole critical hierarchy is one boundary jet",
+        "primitive_poisson_product_defect": "with Gamma(f,g)=f Lambda g+g Lambda f-Lambda(fg), P_y(fg)-P_yf P_yg=int_0^y P_(y-s)Gamma(P_sf,P_sg)ds; hence D_y=P_y(u cross omega)-(P_yu) cross(P_yomega) is the corresponding Gamma_cross integral and R_E(y)=2<P_yu,P D_y>",
+        "primitive_poisson_boundary_critical_law": "D_0=0 gives R_E(0)=0 and D'_0=Gamma_cross(u,omega) gives R'_E(0)=-4kappa; therefore E'=-2nu Z and K'=2kappa-2nu M3 are the zeroth and first Poisson-normal boundary equations of the same depth law",
+        "primitive_poisson_depth_two_road": "Kscript=-Escript_y/2 is positive with int_0^infinity Kscript dy=E/2 on finite-energy R3 or mean-zero periodic states; Kscript_t=J_E-(nu/2)Kscript_yy, int J_E dy=0, Kscript_yy>=0 and J_E(0)=2kappa, so Euler is zero-net two-way depth redistribution while heat is pointwise one-way loss",
+        "primitive_poisson_hankel_escape": "Escript Escript_yy-Escript_y^2=4(EZ-K^2) at y=0 and the exact escape density equals Escript(0)|R'_E(0)|^2/[Escript_yy(0)(Escript(0)Escript_yy(0)-Escript_y(0)^2)]; the final theorem is finiteness of this physical boundary action",
+        "primitive_poisson_realizability_guard": "a fake scalar profile Kscript=E m exp(-2my), m=(T-t)^(-alpha), 0<alpha<1/2, with E'=-2nu m^2E admits a zero-area reversible source and K=Em->infinity while E stays positive; but EZ-K^2=0 forces kappa=0 for any actual state, whereas the fake source has J(0)=E m'>0, so scalar one-way/two-way budgets do not replace physical Poisson product-defect realizability",
         "radial_resolvent_square": "for m=K/E and s_m=(|C|-m)u, m'=2/E(<s_m,F_spec>-nu<(s_m),(|C|+m)s_m>); completing the exact (|C|+m) Hilbert square gives a sharper resolvent productive-action upper than the variance-only Fisher bound",
         "viscous_orientation_guard": "pure viscosity rescales each curl eigenspace amplitude but does not rotate its normalized direction, so normalized Cartan triple orientation has zero viscous derivative; no proof may rely on fictitious heat dephasing",
         "resolvent_gap_guard": "the weighted radial resolvent Cauchy fraction has no universal gap below one; closed three-node currents can approach saturation on extreme amplitude states",
@@ -2007,10 +2013,10 @@ def theorem_certificate() -> dict[str, object]:
         "primitive_pair_collision_boundary": "for radial critical density k(rho)=(2pi^2 rho^2)^-1 int_S2 int_c |v(c,rho n)|^2, smoothness gives k(0)=2Z/(3pi) and k_t(0)=4 int omega.Somega/(3pi)-4nu||curl omega||^2/(3pi), exactly the enstrophy boundary law",
         "primitive_pair_scale_neutrality": "under NS dilation u_lambda=lambda u(lambda x,lambda^2 t), E->lambda^-1 E, Z->lambda Z, K->K, M3->lambda^2 M3 and kappa->lambda^2 kappa; shrinking a fixed critical profile moves it toward r=0 without increasing K, so escape requires regeneration/accumulation of critical mass rather than scale motion alone",
         "primitive_pair_material_scale_lock": "the companion material Hodge speed law gives K=(1/2)||g_t||_Hdot_g^-1/2^2, Z=(1/2)||g_t||_L2_g^2 and M3=(1/2)||g_t||_Hdot_g^1/2^2; pair critical stock, physical energy-loss speed and critical heat are one metric-velocity scale",
-        "primitive_regeneration_persistence": "the nu_E=kappa/M3 reading remains exact, but the sharper frontier collapses further: A_escape=kappa^2/[N^2(EZ-K^2)]=|<omegahat,shat cross u>|^2, equivalently the old necessity int kappa^2/[N^2(EZ-K^2)] dt=infinity; K/E escape forces int A_escape dt=infinity, and proving finite A_escape action on every finite smooth positive-energy history is the remaining persistence theorem",
+        "primitive_regeneration_persistence": "the historical nu_E=kappa/M3 reading remains exact, and the old necessity int kappa^2/[N^2(EZ-K^2)] dt=infinity now has the lower Poisson-boundary form Escript|R'_E|^2/[Escript_yy(Escript Escript_yy-Escript_y^2)]=kappa^2/[N^2(EZ-K^2)]=|<omegahat,shat cross u>|^2; proving finiteness for the physical product-defect current is the remaining theorem",
         "primitive_affine_core_budget_falsifier": "a hypothetical non-solution core with tau=T-t, |grad u|~tau^-1 and R~tau^alpha has E~tau^(-2+5alpha), K~tau^(-2+4alpha), Z~tau^(-2+3alpha), M3~tau^(-2+2alpha), kappa~tau^(-3+4alpha); for 2/5<=alpha<1/2 energy and int Z stay finite while K and kappa/(nu M3) diverge, so budgets plus instantaneous rigidity alone cannot close NS",
         "primitive_regeneration_shortcut_guard": "no static shortcut is used: the factor-1/2 stretching/Gamma bridge is numerically false, factor 1 is unproved, a numerical referee rejects A(F_E)=-2 d_op^* V with order-one residual, and differentiating C only climbs the Sobolev ladder",
-        "primitive_two_road_frontier": "the former successfully regenerated/accumulated infinitely often and nu_E persistence language now has one lower scalar form: Euler must accumulate infinite normalized turning A_escape=|<omegahat,shat cross u>|^2 in finite time; the spacetime electric critical component is the endogenous compatibility carrier, but finite action is unproved",
+        "primitive_two_road_frontier": "the historical successfully regenerated/accumulated infinitely often language now has the lower Poisson depth form: Euler contributes a zero-net reversible current generated only by the physical multiplicativity defect D_y, while viscosity is pointwise negative; a scalar fake zero-net current can blow up K, so the remaining unproved theorem is physical realizability forcing finite normalized boundary action",
         "primitive_actual_current_operator": "the endogenous state operator is Q=nu delta+i_u with Q*=nu d+u^flat wedge; the physical electromotive current is e=Q beta, the projected momentum law is u_t=-P(Q beta), and therefore Q_t=-i_{P(Q beta)}",
         "primitive_current_curvature_square": "exterior Leibniz gives {delta,i_u}=(beta wedge)^*, hence Q^2=nu(beta wedge)^* on the whole graded exterior algebra and Q^2 beta=nu|beta|^2; vorticity is the failure of nilpotence of the actual NS current operator",
         "primitive_current_nilpotent_chords": "Q(u)-Q(v)=i_{u-v}, every chord/tangent contraction squares to zero, and any two contractions anticommute; the non-nilpotence of Q comes only from interaction of fixed delta with the physical contraction, not from nonlinear state-space chords",
@@ -2018,7 +2024,7 @@ def theorem_certificate() -> dict[str, object]:
         "primitive_intertwining_lamb": "for every closed eta=*b^flat, H^(1)(Q eta)-Q(H^(2)eta)=[Q*,Q^2]eta=nu^2 d(omega.b)+nu[b cross (u cross omega)]^flat; at b=omega the non-exact term locally reconstructs the Lamb field away from omega=0",
         "primitive_finite_current_chains": "Q* alpha=nu beta gives alpha -> nu beta -> nu e -> nu^2|beta|^2 ->0 and energy dissipation is adjointness of its first two arrows; on top degree dV -> *alpha -> nu omega^flat -> nu(u.omega) ->0 and Q^4=0 in three dimensions",
         "primitive_midpoint_status": "M=nu delta+(1/2)i_u is the canonical midpoint between pure Hodge heat and the actual operator Q, selected by the critical/Poynting reflection; it is a reading rather than the fundamental state operator and satisfies M(M beta)=(nu/2)|beta|^2",
-        "primitive_turning_frontier": "the previous persistent critical near-kernel and infinite productive regeneration problems collapse to one angular statement: finite-time escape requires infinite L_t^2 action of <omegahat,shat cross u>; exact spacetime Hom-Bianchi identifies the temporal carrier Ec, but the unproved quantitative stability/history step is converting compatibility plus Maxwell/heat positivity into the required finite-action theorem",
+        "primitive_turning_frontier": "the historical persistent critical near-kernel problem, infinite productive regeneration language and quantitative stability/history gap now sit above one Poisson-boundary statement: finite-time escape requires infinite normalized R'_E(0) action, while arbitrary zero-net depth sources are insufficient; the unproved step is that the actual product-defect realization D_y generated by u and omega forces finite action",
         "graded_current_strain_parent": "with q=nu delta+(1/2)i_u, the positive Hodge-Dirac square q^*q+qq^* is (-nu^2 Delta+|u|^2/4)I+nu S on one-forms and the same scalar part minus nu S on two-forms; physical strain, hence the critical sech/Reynolds operator, is the degree imbalance of one midpoint current complex",
         "critical_gram_self_frustration": "for G_u b=u cross b-2nu curl b, the polarized Poynting law gives 4nu(PS)_odd=[P(U_u^*U_u-G_u^*G_u)P]_odd; the dangerous critical block is exactly a helicity-odd Gram imbalance, but odd projection destroys simple positivity so no free negative-square contraction follows",
         "critical_curvature_floor": "the mixed Gauss law (div-u/(2nu).)G_u b=omega.b implies G_u^*G_u>=M_omega^*(-Delta+|u|^2/(4nu^2))^-1M_omega in quadratic-form order; a persistent expanding Reynolds direction must continually avoid this state-generated curvature floor at the intrinsic Poisson depths",
@@ -2402,6 +2408,113 @@ def poisson_critical_scale_measure_moments(
         "mean_poisson_scale_from_mean_curl": represented_mean,
         "second_poisson_scale_moment": second_t,
         "poisson_scale_variance": max(0.0, second_t - mean_t * mean_t),
+    }
+
+
+def poisson_energy_boundary_jet_geometry(
+    energy: float,
+    critical_stock: float,
+    enstrophy: float,
+    third_absolute_curl_moment: float,
+    curvature_height: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Exact boundary jets and normalized action of the Poisson energy profile.
+
+    For ``Escript(y)=||exp(-y Lambda)u||_2^2`` one has
+
+        Escript_y(0)=-2K, Escript_yy(0)=4Z, Escript_yyy(0)=-8M3,
+        R_E(0)=0, R'_E(0)=-4kappa,
+
+    and ``Escript_t=R_E-(nu/2)Escript_yy``.  Therefore the energy and
+    critical balances are consecutive boundary equations.  On strict
+    positive determinant states the escape action is exactly the normalized
+    Hankel-boundary expression returned below.
+    """
+    E=float(energy); K=float(critical_stock); Z=float(enstrophy)
+    M3=float(third_absolute_curl_moment); kap=float(curvature_height); nu=float(viscosity)
+    if not all(math.isfinite(x) for x in (E,K,Z,M3,kap,nu)):
+        raise ValueError("finite Poisson boundary data required")
+    if E <= 0.0 or Z <= 0.0 or M3 <= 0.0 or nu <= 0.0 or K < 0.0:
+        raise ValueError("positive E,Z,M3,nu and nonnegative K required")
+    det=E*Z-K*K
+    if det <= 0.0:
+        raise ValueError("strict positive Poisson Hankel determinant required")
+    ey=-2.0*K; eyy=4.0*Z; eyyy=-8.0*M3
+    rprime=-4.0*kap
+    hankel=E*eyy-ey*ey
+    if abs(hankel-4.0*det)>2.0e-12*max(1.0,abs(hankel),abs(4.0*det)):
+        raise AssertionError("Poisson boundary Hankel normalization failed")
+    action_profile=E*rprime*rprime/(eyy*hankel)
+    action_physical=kap*kap/((Z/E)*det)
+    if abs(action_profile-action_physical)>3.0e-12*max(1.0,abs(action_profile),abs(action_physical)):
+        raise AssertionError("Poisson boundary action lost physical normalization")
+    energy_rate=-0.5*nu*eyy
+    critical_rate=-0.5*rprime+0.25*nu*eyyy
+    expected_critical=2.0*kap-2.0*nu*M3
+    if abs(critical_rate-expected_critical)>2.0e-12*max(1.0,abs(critical_rate),abs(expected_critical)):
+        raise AssertionError("first Poisson-normal derivative lost critical balance")
+    return {
+        "energy_profile_value":E,
+        "energy_profile_first_derivative":ey,
+        "energy_profile_second_derivative":eyy,
+        "energy_profile_third_derivative":eyyy,
+        "euler_profile_value":0.0,
+        "euler_profile_first_derivative":rprime,
+        "critical_depth_profile_value":K,
+        "critical_depth_profile_second_derivative":4.0*M3,
+        "hankel_determinant":hankel,
+        "energy_rate":energy_rate,
+        "critical_rate":critical_rate,
+        "escape_action_from_profile":action_profile,
+        "escape_action_physical":action_physical,
+    }
+
+
+def poisson_scalar_reversible_counterprofile(
+    time_to_terminal: float,
+    exponent: float,
+    energy: float,
+    viscosity: float,
+) -> dict[str, float]:
+    """Scalar non-NS counterprofile showing why zero-net depth budgets do not close.
+
+    Put ``m=tau^-alpha`` with ``0<alpha<1/2`` and
+    ``Kscript(y)=E m exp(-2my)``, while ``E'=-2nu m^2 E``.  The scalar depth
+    equation admits a zero-area reversible source and ``Kscript(0)=Em`` can
+    diverge as ``tau->0`` while the total energy loss remains finite.  But the
+    one-radius Hankel determinant is zero, so an actual state forces kappa=0;
+    the fake scalar source instead has boundary current ``E m'``.  This helper
+    is a falsification guard, not an NS trajectory.
+    """
+    tau=float(time_to_terminal); alpha=float(exponent); E=float(energy); nu=float(viscosity)
+    if not all(math.isfinite(x) for x in (tau,alpha,E,nu)):
+        raise ValueError("finite scalar counterprofile data required")
+    if tau <= 0.0 or not (0.0 < alpha < 0.5) or E <= 0.0 or nu <= 0.0:
+        raise ValueError("tau,E,nu positive and 0<alpha<1/2 required")
+    m=tau**(-alpha)
+    mdot=alpha*tau**(-alpha-1.0)
+    Erate=-2.0*nu*m*m*E
+    K=E*m; Z=E*m*m; M3=E*m*m*m
+    Kdot=Erate*m+E*mdot
+    Kyy0=4.0*E*m*m*m
+    J0=Kdot+0.5*nu*Kyy0
+    source_area=0.5*Erate+nu*E*m*m
+    det=E*Z-K*K
+    return {
+        "mean_curl":m,
+        "mean_curl_rate":mdot,
+        "energy_rate":Erate,
+        "critical_stock":K,
+        "enstrophy":Z,
+        "third_absolute_curl_moment":M3,
+        "hankel_determinant":det,
+        "critical_depth_second_derivative_at_boundary":Kyy0,
+        "fake_reversible_boundary_current":J0,
+        "fake_curvature_height":0.5*J0,
+        "physical_equiradial_curvature_height":0.0,
+        "reversible_source_area":source_area,
+        "energy_loss_integrability_power":1.0-2.0*alpha,
     }
 
 
