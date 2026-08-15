@@ -3158,16 +3158,25 @@ M_3\sim\tau^{-2+2\alpha},\quad
 \kappa\sim\tau^{-3+4\alpha}.
 \]
 
+The covariance formulation fixes the remaining missing scale as well.  Since the core velocity size is
+`U~R|grad u|`, the continuum pair-area capacity obeys
+
+\[
+\boxed{\|A_u\|_{pair}^2\sim |\nabla u|^4R^6\sim\tau^{-4+6\alpha}.}
+\]
+
 For
 
 \[
 \boxed{\frac25\le\alpha<\frac12}
 \]
 
-this geometry has bounded core energy and finite `int Z dt`, yet `K` diverges and
-`kappa/(nu M_3)~tau^{2alpha-1}` diverges.  It is not a counterexample to NS; it is a countergeometry
-to any proof using only the energy law, the instantaneous heat bill, and local affine rigidity.
-Global dynamical compatibility must rule it out.
+this geometry has bounded core energy and finite `int Z dt`, yet `K` diverges while both
+`int M3 dt` and `int ||A_u||_pair^2 dt` diverge; also
+`kappa/(nu M_3)~tau^{2alpha-1}` diverges.  Thus the physical energy law does not by itself pay either
+the higher Fisher bill or the transverse covariance/pair-area bill.  This is not an NS
+counterexample; it is a countergeometry to closing the boundary-stress theorem from energy dissipation
+and instantaneous rigidity alone.  Global dynamical compatibility must rule it out.
 
 The latest falsification layer points the same way rather than opening another branch.  The static
 `1/2` stretching/`Gamma_u` bridge is false and factor `1` remains unproved; the simple
@@ -3609,7 +3618,9 @@ with
 
 Thus the old pair-area capacity is the boundary slope of the transverse covariance activity.  The
 remaining theorem is a historical boundary-stress estimate on `mathscr A_y` strong enough to imply
-finite normalized boundary action; it is **not proved**.
+finite normalized boundary action.  The affine-core scaling guard shows why this cannot be read off
+from `-E'=2nu Z` alone: the scale-invariant pair-area action can diverge while `int Z dt` stays finite.
+It is **not proved**.
 
 The previously exposed lossless tangent coordinate remains exact but is now a compressed boundary
 reading:

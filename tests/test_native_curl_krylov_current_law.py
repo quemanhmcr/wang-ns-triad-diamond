@@ -420,6 +420,7 @@ def test_certificate_refuses_case_taxonomy_and_global_overclaim():
     assert cert["temporal_matching_used"] is False
     assert "nu_E=kappa/M3" in cert["primitive_regeneration_persistence"]
     assert "2/5<=alpha<1/2" in cert["primitive_affine_core_budget_falsifier"]
+    assert "||A_u||_pair^2~tau^(-4+6alpha)" in cert["primitive_affine_core_budget_falsifier"]
     assert cert["global_regularity_claimed"] is False
 
 
@@ -1839,23 +1840,27 @@ def test_affine_core_budget_falsifier_exponents_leave_only_dynamic_compatibility
         eZ=-2.0+3.0*alpha
         eM3=-2.0+2.0*alpha
         eKap=-3.0+4.0*alpha
+        ePairArea=-4.0+6.0*alpha
         eRatio=eKap-eM3
         assert eE >= -2e-15          # bounded core energy
         assert eZ > -1.0             # int Z dt finite
         assert eK < 0.0              # K diverges
-        assert eRatio < 0.0          # kappa/(nu M3) diverges
+        assert eM3 <= -1.0           # int M3 dt diverges
+        assert ePairArea <= -1.0      # int ||A_u||_pair^2 dt diverges
+        assert eRatio < 0.0           # kappa/(nu M3) diverges
 
 
 def test_primitive_pair_critical_scaling_is_neutral_only_at_K():
     # Exact 3D NS dilation u_lambda=lambda u(lambda x,lambda^2 t).
-    E,Z,K,M3,kappa,N2,dt=2.3,1.7,0.91,4.2,-1.4,1.7/2.3,0.08
+    E,Z,K,M3,kappa,A2,N2,dt=2.3,1.7,0.91,4.2,-1.4,3.6,1.7/2.3,0.08
     det=E*Z-K*K
     for lam in (0.17,0.8,2.5,11.0):
-        El=E/lam; Zl=lam*Z; Kl=K; M3l=lam*lam*M3; kapl=lam*lam*kappa
+        El=E/lam; Zl=lam*Z; Kl=K; M3l=lam*lam*M3; kapl=lam*lam*kappa; A2l=lam*lam*A2
         N2l=lam*lam*N2; dtl=dt/(lam*lam)
         assert Kl == K
         assert El*Zl-Kl*Kl == pytest.approx(det,rel=2e-15)
         assert M3l*dtl == pytest.approx(M3*dt,rel=2e-15)
+        assert A2l*dtl == pytest.approx(A2*dt,rel=2e-15)
         action_l=kapl*kapl/(N2l*(El*Zl-Kl*Kl))*dtl
         action=kappa*kappa/(N2*det)*dt
         assert action_l == pytest.approx(action,rel=3e-14,abs=3e-14)
