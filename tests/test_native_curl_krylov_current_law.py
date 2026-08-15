@@ -7,6 +7,7 @@ from src.helical import coupling_magnitude_closed
 
 from src.native_curl_krylov_current_law import (
     continuum_midpoint_operator_sobolev_dictionary,
+    endogenous_euler_pair_projection,
     continuum_primitive_critical_channel_constants,
     continuum_critical_carre_du_champ_constants,
     continuum_critical_gauss_bianchi_constants,
@@ -413,6 +414,8 @@ def test_certificate_refuses_case_taxonomy_and_global_overclaim():
     assert "0.5981296" in cert["symmetric_transport_note"]
     assert cert["case_taxonomy_used"] is False
     assert cert["temporal_matching_used"] is False
+    assert "nu_E=kappa/M3" in cert["primitive_regeneration_persistence"]
+    assert "2/5<=alpha<1/2" in cert["primitive_affine_core_budget_falsifier"]
     assert cert["global_regularity_claimed"] is False
 
 
@@ -1409,6 +1412,44 @@ def test_primitive_pair_radial_transverse_split_and_pressure_converter_constants
     assert 0.5*(tr_x+tr_y) == pytest.approx(0.0,abs=1e-15)
 
 
+def test_endogenous_euler_coefficient_pair_projection_and_static_cancellation_are_exact():
+    # Scalar audit of A_u=nu_E Domega+C_perp in the canonical pair Hilbert metric.
+    m3=3.7; nu_e=0.41; cperp2=1.9; nu=0.23
+    kappa=nu_e*m3
+    a2=nu_e*nu_e*m3+cperp2
+    out=endogenous_euler_pair_projection(a2,m3,kappa,nu)
+    assert out["endogenous_euler_coefficient"] == pytest.approx(nu_e,rel=1e-15)
+    assert out["signed_productive_reynolds"] == pytest.approx(nu_e/nu,rel=1e-15)
+    assert out["orthogonal_reconfiguration_squared"] == pytest.approx(cperp2,rel=2e-15)
+    assert out["critical_rate"] == pytest.approx(2.0*m3*(nu_e-nu),rel=2e-15)
+    # Changing only the orthogonal 3D road cannot change the instantaneous K rate.
+    out2=endogenous_euler_pair_projection(a2+8.0,m3,kappa,nu)
+    assert out2["critical_rate"] == pytest.approx(out["critical_rate"],rel=1e-15)
+    assert out2["orthogonal_reconfiguration_squared"] == pytest.approx(cperp2+8.0,rel=2e-15)
+
+    # Triangle coboundary identity behind equality rigidity.
+    import numpy as np
+    ux=np.array([0.7,-0.4,1.2]); uy=np.array([-0.2,0.9,0.3]); uz=np.array([0.5,0.1,-0.6])
+    lhs=np.cross(ux,uy)+np.cross(uy,uz)+np.cross(uz,ux)
+    rhs=np.cross(ux-uz,uy-uz)
+    assert np.max(np.abs(lhs-rhs)) <= 4e-16
+
+
+def test_affine_core_budget_falsifier_exponents_leave_only_dynamic_compatibility():
+    # This is a scaling countergeometry, explicitly not an NS solution.
+    for alpha in (0.4,0.43,0.49):
+        eE=-2.0+5.0*alpha
+        eK=-2.0+4.0*alpha
+        eZ=-2.0+3.0*alpha
+        eM3=-2.0+2.0*alpha
+        eKap=-3.0+4.0*alpha
+        eRatio=eKap-eM3
+        assert eE >= -2e-15          # bounded core energy
+        assert eZ > -1.0             # int Z dt finite
+        assert eK < 0.0              # K diverges
+        assert eRatio < 0.0          # kappa/(nu M3) diverges
+
+
 def test_primitive_pair_critical_scaling_is_neutral_only_at_K():
     # Exact 3D NS dilation u_lambda=lambda u(lambda x,lambda^2 t).
     E,Z,K,M3,kappa,N2,dt=2.3,1.7,0.91,4.2,-1.4,1.7/2.3,0.08
@@ -1430,6 +1471,11 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "Euler only exchanging their energies" in cert["primitive_common_relative_pair_law"]
     assert "Delta_c v=4 Delta_r v" in cert["primitive_pair_endpoint_compatibility"]
     assert "center-Dirichlet cost of inverted-pair velocity" in cert["primitive_pair_critical_field"]
+    assert "nu_E=kappa/M3" in cert["endogenous_euler_coefficient"]
+    assert "argmin_lambda" in cert["primitive_productive_pair_projection"]
+    assert "affine line" in cert["primitive_productive_alignment_rigidity"]
+    assert "J_lambda=V+lambda B" in cert["primitive_hom_current_lambda_family"]
+    assert "cancels exactly" in cert["primitive_static_reconfiguration_cancellation"]
     assert "K_parallel=K/4" in cert["primitive_pair_radial_transverse_split"]
     assert "K_perp=3K/4" in cert["primitive_pair_radial_transverse_split"]
     assert "P_parallel=3(A3-B3)/(2pi^2)" in cert["primitive_pressure_pair_converter"]
