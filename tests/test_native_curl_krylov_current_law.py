@@ -529,6 +529,52 @@ def test_nonaffine_spectral_observable_has_no_phase_independent_euler_sign():
 
 
 
+def test_dirichlet_profile_does_not_quotient_euler_orientation_or_pay_escape_action():
+    import numpy as np
+
+    # One conditioned physical closed-triad witness.  The common Waleffe scalar is normalized
+    # to one because both compared actions are homogeneous of degree two in that scalar.
+    a=np.array((-0.12348794255990123,-0.1198258560874539,0.12269735720091647))
+    e=np.array((0.10384664767284751,0.04215218685969257,0.03798502944543756))
+    r=np.abs(a)
+    assert r[0]+r[1]>r[2] and r[1]+r[2]>r[0] and r[2]+r[0]>r[1]
+    signs=tuple(1 if x>0 else -1 for x in a)
+    assert coupling_magnitude_closed(*r,*signs) > 0.15
+    T=np.array((a[1]-a[2],a[2]-a[0],a[0]-a[1]))
+    assert float(np.sum(T)) == pytest.approx(0.0,abs=2e-16)
+    assert float(np.sum(a*T)) == pytest.approx(0.0,abs=2e-16)
+
+    # A pi common-phase reversal fixes every radial q datum but sends j_E,kappa to their negatives.
+    for y in (0.0,0.7/r.min(),3.0/r.min()):
+        decay=np.exp(-2.0*r*y)
+        q=2.0*float(np.sum(r*r*e*decay))
+        jp=float(np.sum(r*T*decay)); jm=float(np.sum(r*(-T)*decay))
+        assert q > 0.0
+        assert jm == pytest.approx(-jp,rel=2e-15,abs=2e-15)
+    kappa=0.5*float(np.sum(r*T))
+    assert kappa != 0.0
+    assert -kappa == pytest.approx(0.5*float(np.sum(r*(-T))),rel=2e-15,abs=2e-15)
+
+    # The tempting lower comparison A_escape <= int j_E^2/q is false with a wide margin.
+    E=float(np.sum(e)); K=float(np.sum(r*e)); Z=float(np.sum(r*r*e)); det=E*Z-K*K
+    relative_defect=det/(E*Z)
+    Aescape=kappa*kappa/((Z/E)*det)
+    assert relative_defect == pytest.approx(1.4642530609247162e-4,rel=2e-12)
+    nodes,weights=np.polynomial.legendre.leggauss(256); r0=float(r.min())
+    def fx(x):
+        decay=np.exp(-2.0*r*x/r0)
+        q=2.0*float(np.sum(r*r*e*decay)); j=float(np.sum(r*T*decay))
+        return 0.0 if q==0.0 else (j*j/q)/r0
+    transport=0.0
+    for lo,hi in ((0,1),(1,4),(4,12),(12,30),(30,80),(80,160),(160,320),(320,400)):
+        xx=0.5*(hi-lo)*nodes+0.5*(hi+lo)
+        transport += 0.5*(hi-lo)*float(weights@np.array([fx(float(x)) for x in xx]))
+    ratio=transport/Aescape
+    assert transport == pytest.approx(6.13902345443830e-4,rel=2e-12,abs=2e-15)
+    assert ratio == pytest.approx(3.39325211604616e-6,rel=3e-12)
+    assert ratio < 1.0e-5
+
+
 def test_krylov_impedance_is_exact_productive_coordinate_balance():
     st = curl_krylov_state((-3.1, -0.6, 1.2, 2.9, 4.0), (0.5, 1.2, 0.9, 0.7, 0.3))
     A = 0.83
@@ -2087,6 +2133,8 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "K_y=int_y^infinity mathfrak q" in cert["primitive_poisson_dirichlet_tail_law"]
     assert "j_+^E(0)=j_-^E(0)=kappa" in cert["primitive_poisson_helicity_depth_split"]
     assert "int j_E(y)^2/mathfrak q(y) dy" in cert["primitive_poisson_transport_action_guard"]
+    assert "pi common-phase reversal" in cert["primitive_poisson_orientation_incompleteness"]
+    assert "transport/action ratio 3.393252e-6" in cert["primitive_poisson_transport_lower_guard"]
     assert "R_E^2/(4A_y)+R_align+R_reg" in cert["primitive_poisson_covariance_pythagoras"]
     assert "V_t=A_y/(2nu)" in cert["primitive_poisson_relative_completed_square"]
     assert "rank changes of the pseudoinverse" in cert["primitive_poisson_axis_gradient_guard"]
