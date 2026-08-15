@@ -1125,3 +1125,86 @@ def test_certificate_connects_critical_reynolds_operator_to_the_graded_current_p
     assert "two-by-two Gram projection" in cert["critical_two_null_gauss_tax"]
     assert "does not prove large-data regularity" in cert["graded_current_persistence_guard"]
     assert cert["global_regularity_claimed"] is False
+
+
+def test_certificate_records_actual_Q_as_primitive_and_midpoint_as_reading():
+    cert=theorem_certificate()
+    assert "Q=nu delta+i_u" in cert["primitive_actual_current_operator"]
+    assert "Q^2=nu(beta wedge)^*" in cert["primitive_current_curvature_square"]
+    assert "chord/tangent contraction squares to zero" in cert["primitive_current_nilpotent_chords"]
+    assert "2nu S" in cert["primitive_full_hodge_gradient"]
+    assert "[Q*,Q^2]" in cert["primitive_intertwining_lamb"]
+    assert "alpha -> nu beta" in cert["primitive_finite_current_chains"]
+    assert "reading rather than the fundamental state operator" in cert["primitive_midpoint_status"]
+    assert "persistent critical near-kernel" in cert["primitive_turning_frontier"]
+    assert cert["global_regularity_claimed"] is False
+
+
+def test_primitive_Q_adjacent_degree_intertwining_recovers_lamb_interaction():
+    # Smooth low-bandwidth periodic referee for
+    # H1(Q eta)-Q(H2 eta)=nu^2 d(omega.b)+nu b x (u x omega).
+    # Frequencies are <=1 on a 16^3 grid, so all products in the identity stay
+    # below Nyquist and the FFT calculation is an exact trigonometric referee.
+    import numpy as np
+    N=16
+    rng=np.random.default_rng(202608151036)
+    k=np.fft.fftfreq(N)*N
+    kx,ky,kz=np.meshgrid(k,k,k,indexing="ij")
+    K=np.stack([kx,ky,kz],axis=-1)
+    k2=(K*K).sum(axis=-1)
+    mask=(np.max(np.abs(K),axis=-1)<=1)&(k2>0)
+
+    def fftv(v): return np.fft.fftn(v,axes=(0,1,2))
+    def ifftv(vh): return np.fft.ifftn(vh,axes=(0,1,2)).real
+    def divfree():
+        a=rng.normal(size=(N,N,N,3))
+        ah=fftv(a)*mask[...,None]
+        dot=(ah*K).sum(-1)
+        ah=ah-K*dot[...,None]/np.where(k2==0,1,k2)[...,None]
+        ah[k2==0]=0
+        return ifftv(ah)
+    def dvec(v,j): return ifftv((1j*K[...,j])[...,None]*fftv(v))
+    def grad(f):
+        fh=np.fft.fftn(f)
+        return np.stack([np.fft.ifftn(1j*K[...,j]*fh).real for j in range(3)],axis=-1)
+    def lap(v): return ifftv(-k2[...,None]*fftv(v))
+    def curl(v):
+        vh=fftv(v); out=np.empty_like(vh)
+        out[...,0]=1j*(ky*vh[...,2]-kz*vh[...,1])
+        out[...,1]=1j*(kz*vh[...,0]-kx*vh[...,2])
+        out[...,2]=1j*(kx*vh[...,1]-ky*vh[...,0])
+        return ifftv(out)
+    def strain(v):
+        g=np.empty(v.shape[:-1]+(3,3))
+        for j in range(3): g[..., :, j]=dvec(v,j)
+        return .5*(g+np.swapaxes(g,-1,-2))
+
+    nu=.37
+    u=divfree(); b=divfree(); omega=curl(u); S=strain(u)
+    Qeta=nu*curl(b)-np.cross(u,b)
+    H1Q=-nu**2*lap(Qeta)+(u*u).sum(-1)[...,None]*Qeta+2*nu*np.einsum("...ij,...j->...i",S,Qeta)
+    H2b=-nu**2*lap(b)+(u*u).sum(-1)[...,None]*b-2*nu*np.einsum("...ij,...j->...i",S,b)
+    QH2=nu*curl(H2b)-np.cross(u,H2b)
+    lhs=H1Q-QH2
+    rhs=nu**2*grad((omega*b).sum(-1))+nu*np.cross(b,np.cross(u,omega))
+    rel=np.linalg.norm(lhs-rhs)/max(1.0,np.linalg.norm(lhs),np.linalg.norm(rhs))
+    assert rel < 2e-11
+
+
+def test_primitive_Q_state_chords_are_square_zero_and_tangents_anticommute():
+    # Exterior-algebra matrix referee for i_v^2=0 and {i_v,i_w}=0 on Lambda^* R^3.
+    import numpy as np
+    basis=[(),(0,),(1,),(2,),(0,1),(0,2),(1,2),(0,1,2)]
+    index={b:i for i,b in enumerate(basis)}
+    def contraction(v):
+        M=np.zeros((8,8))
+        for col,I in enumerate(basis):
+            for pos,j in enumerate(I):
+                J=I[:pos]+I[pos+1:]
+                M[index[J],col]+=((-1.0)**pos)*v[j]
+        return M
+    v=np.array([.7,-1.2,.4]); w=np.array([-.3,.5,1.1])
+    Iv=contraction(v); Iw=contraction(w)
+    assert np.linalg.norm(Iv@Iv) < 1e-14
+    assert np.linalg.norm(Iw@Iw) < 1e-14
+    assert np.linalg.norm(Iv@Iw+Iw@Iv) < 1e-14

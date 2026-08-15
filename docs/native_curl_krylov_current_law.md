@@ -5,14 +5,15 @@ Status: **DRAFT STRUCTURAL THEOREM CANDIDATE — exact identities on smooth solu
 This note records the smallest operator structure reached so far in the curl-centered programme.
 Its purpose is not to accumulate representations.  It is to remove them.
 
-The same Navier--Stokes state generates
+The same Navier--Stokes state generates one actual graded current operator
 
-- one self-adjoint differential operator, curl;
-- one skew Cartan/Lamb action, projected cross product;
-- one vorticity curvature/current complex;
-- one symmetric strain commutator;
-- one critical helicity-flip midpoint operator;
-- one quadratic heat generator.
+\[
+Q=\nu\delta+\iota_u,
+\]
+
+whose curvature, Hodge square and state velocity recover the vorticity/strain/Lamb geometry.
+Curl, the Cartan three-current, the critical midpoint/Reynolds operator and quadratic heat are
+retained below only as exact readings of this smaller endogenous law.
 
 The old language of POWER, strain, triad class, spectral curvature, critical pair creation,
 Poisson scale, Reynolds operator, Poynting residual and Gauss coercivity will be retained only
@@ -1506,287 +1507,256 @@ are ordinary interpolation in this one operator heat scale.
 
 ---
 
-## 11. The smaller parent: a curved graded current already present in NS
-
-The preceding curl/operator laws have a still smaller Cartan--Hodge parent.
-Let
-
-\[
-\alpha=u^\flat,
-\qquad
-\beta=d\alpha,
-\qquad
-d\beta=0.
-\]
-
-For a real parameter `theta` define
-
-\[
-\boxed{
-q_\theta=\nu\delta+\theta\,\iota_u,
-\qquad
-q_\theta^*=\nu d+\theta\,\alpha\wedge.
-}
-\]
-
-These are not imported operators: `nu delta beta` and `i_u beta` are exactly the viscous and
-Euler pieces of the physical electromotive current.
-
-The exterior Leibniz identity is
-
-\[
-\{d,\alpha\wedge\}=d\alpha\wedge=\beta\wedge.
-\]
-
-Taking adjoints gives
-
-\[
-\boxed{
-\{\delta,\iota_u\}=(\beta\wedge)^*.
-}
-\]
-
-Since `delta^2=i_u^2=0`,
-
-\[
-\boxed{
-q_\theta^2
-=\theta\nu(\beta\wedge)^*.
-}
-\]
-
-Thus vorticity is literally the failure of the NS current differential to be nilpotent.
-
-### 11.1 Actual NS current
-
-The physical member is
-
-\[
-\boxed{
-q_1=\nu\delta+\iota_u,
-\qquad
-e=q_1\beta.
-}
-\]
-
-The rotational momentum and vorticity equations are
-
-\[
-\boxed{
-\alpha_t+dB=-q_1\beta,
-}
-\]
-
-\[
-\boxed{
-\beta_t=-d q_1\beta.
-}
-\]
-
-On the state itself,
-
-\[
-\boxed{
-q_1^2\beta=\nu|\beta|^2.
-}
-\]
-
-So the state current chain is
-
-\[
-\boxed{
-\beta
-\xrightarrow{q_1}
-e
-\xrightarrow{q_1}
-\nu|\beta|^2.
-}
-\]
-
-The same operator generates the vorticity PDE:
-
-\[
-\boxed{
-\{d,q_1\}
-=\mathcal L_u+\nu L.
-}
-\]
-
-Associativity gives
-
-\[
-[\{d,q_1\},q_1]
-=dq_1^2-q_1^2d.
-\]
-
-On `d beta=0`,
-
-\[
-\boxed{
-[\mathcal L_u+\nu L,q_1]\beta
-=\nu d|\beta|^2.
-}
-\]
-
-Concentration therefore forces a noncommutation between the current and the generator made by
-that same current.  This is a literal algebraic self-frustration law.
-
-### 11.2 Actual acceleration already obeys a Gauss law
-
-In vector notation
-
-\[
-e^\sharp
-=-u\times\omega+\nu\operatorname{curl}\omega,
-\]
-
-and
-
-\[
-u_t+\nabla B=-e^\sharp.
-\]
-
-The self-return identity gives
-
-\[
-\boxed{
--\nabla\cdot e^\sharp
-+\frac{u}{\nu}\cdot e^\sharp
-=|\omega|^2.
-}
-\]
-
-Equivalently,
-
-\[
-\boxed{
-\left(\nabla\cdot-\frac{u}{\nu}\cdot\right)
-(u_t+\nabla B)
-=|\omega|^2.
-}
-\]
-
-The physical NS acceleration itself is a positively sourced curvature current.
-
----
-
-## 12. The canonical midpoint current contains Schrödinger, strain, Poynting and Gauss
-
-The exact heat/Euler reflection square selects
-
-\[
-\boxed{
-q=q_{1/2}
-=\nu\delta+\frac12\iota_u,
-\qquad
-q^*=\nu d+\frac12u^\flat\wedge.
-}
-\]
-
-Its curvature square is
-
-\[
-\boxed{
-q^2
-=\frac\nu2(\beta\wedge)^*.
-}
-\]
+## 11. The primitive NS object is the actual current operator
 
 Put
 
 \[
-\boxed{
-L_u^{Sch}
-=-\nu^2\Delta+\frac{|u|^2}{4}.
-}
+\alpha=u^\flat,\qquad \beta=d\alpha,\qquad d\beta=0,
 \]
 
-On scalars,
+and define the actual graded current operator
+
+\[
+\boxed{Q:=\nu\delta+\iota_u,\qquad Q^*=\nu d+\alpha\wedge.}
+\]
+
+This is not auxiliary notation: the physical electromotive current and rotational momentum law are
+
+\[
+\boxed{e=Q\beta,\qquad \alpha_t+dB=-Q\beta,}
+\]
+
+hence, after Leray projection,
+
+\[
+\boxed{u_t=-P(Q\beta)^\sharp,\qquad Q_t=\iota_{u_t}=-\iota_{P(Q\beta)^\sharp}.}
+\]
+
+The current made by `Q` is therefore the velocity of the state variable which determines `Q`.
+
+### 11.1 Curvature is the failure of nilpotence
+
+Exterior Leibniz and adjointness give
+
+\[
+\{d,\alpha\wedge\}=\beta\wedge,\qquad
+\boxed{\{\delta,\iota_u\}=(\beta\wedge)^*.}
+\]
+
+Since `delta^2=i_u^2=0`, on the whole graded exterior algebra
+
+\[
+\boxed{Q^2=\nu(\beta\wedge)^*.}
+\]
+
+Thus vorticity curvature is the obstruction to nilpotence of the actual NS current differential.  In particular
+
+\[
+\boxed{Q^2\beta=\nu|\beta|^2.}
+\]
+
+Cartan's formula gives the vorticity generator
+
+\[
+\boxed{\{d,Q\}=\mathcal L_u+\nu L,\qquad \beta_t=-dQ\beta=-\{d,Q\}\beta,}
+\]
+
+and associativity gives, because `d beta=0`,
+
+\[
+\boxed{[\mathcal L_u+\nu L,Q]\beta=\nu d|\beta|^2.}
+\]
+
+Concentration therefore forces noncommutation between the current and the generator made by that current.
+
+### 11.2 Nilpotent chords and finite native chains
+
+The state dependence is affine:
+
+\[
+\boxed{Q(u)-Q(v)=\iota_{u-v},\qquad (Q(u)-Q(v))^2=0.}
+\]
+
+Every tangent is likewise square-zero and any two tangents anticommute,
+
+\[
+\boxed{Q_t^2=0,\qquad \iota_a\iota_b+\iota_b\iota_a=0.}
+\]
+
+So non-nilpotence comes only from the interaction of the fixed codifferential with physical contraction, not from nonlinear chords in state space.  This does not by itself control frequency concentration.
+
+Two finite chains expose the same point.  Since `Q^* alpha=nu beta`,
 
 \[
 \boxed{
-qq^*\big|_{\Omega^0}=L_u^{Sch}.
+\alpha\xrightarrow{Q^*}\nu\beta\xrightarrow{Q}\nu e
+\xrightarrow{Q}\nu^2|\beta|^2\xrightarrow{Q}0.
 }
 \]
 
-The drift cross term cancels exactly by incompressibility.
-
-On one-forms,
+Adjointness of the first two arrows is exactly
 
 \[
 \boxed{
-H^{(1)}:=q^*q+qq^*
-=L_u^{Sch}I+\nu S.
+\frac12E'=-\langle Q\beta,\alpha\rangle
+=-\langle\beta,Q^*\alpha\rangle
+=-\nu\|\beta\|_2^2.
 }
 \]
 
-After Hodge identification of two-forms with vectors,
+With the orientation convention of this note,
 
 \[
 \boxed{
-H^{(2)}:=q^*q+qq^*
-=L_u^{Sch}I-\nu S.
+ dV\xrightarrow{Q}\star\alpha\xrightarrow{Q}\nu\omega^\flat
+\xrightarrow{Q}\nu(u\cdot\omega)\xrightarrow{Q}0,\qquad Q^4=0.
 }
 \]
 
-Therefore
+Velocity, vorticity, helicity density and energy dissipation are readings of one lowering operator.
+
+---
+
+## 12. The full `Q`-Hodge square contains the velocity gradient and regenerates Lamb
+
+Define
+
+\[
+\boxed{\mathbb H:=Q^*Q+QQ^*,\qquad L_u^Q:=-\nu^2\Delta+|u|^2.}
+\]
+
+On one-forms and, after Hodge identification, on two-forms,
 
 \[
 \boxed{
-2\nu S
-=H^{(1)}-\star^{-1}H^{(2)}\star,
+\mathbb H^{(1)}=L_u^Q I+2\nu S,\qquad
+\star^{-1}\mathbb H^{(2)}\star=L_u^Q I-2\nu S.
 }
 \]
 
-and
+Hence
+
+\[
+\boxed{\mathbb H^{(1)}-\star^{-1}\mathbb H^{(2)}\star=4\nu S.}
+\]
+
+The antisymmetric part of `nabla u` is encoded by `Q^2`; the symmetric part is the adjacent-degree imbalance of `mathbb H`.  The full velocity gradient is therefore generated by `Q,Q^*`.
+
+### 12.1 Lamb is the adjacent-degree intertwining defect
+
+Associativity gives the graded commutator identity
+
+\[
+\boxed{\mathbb H Q-Q\mathbb H=Q^*Q^2-Q^2Q^*=[Q^*,Q^2].}
+\]
+
+Let `eta=star b^flat` be closed, equivalently `div b=0`.  Then
+
+\[
+Q^2\eta=\nu\,\omega\cdot b,\qquad
+Q^*\eta=(u\cdot b)dV,
+\]
+
+and therefore
 
 \[
 \boxed{
-2L_u^{Sch}I
-=H^{(1)}+\star^{-1}H^{(2)}\star.
+\mathbb H^{(1)}(Q\eta)-Q(\mathbb H^{(2)}\eta)
+=\nu^2d(\omega\cdot b)+\nu[\,b\times(u\times\omega)\,]^\flat.
 }
 \]
 
-Both Hodge squares are positive, so
+The exact first term is a gradient.  The second is the curvature-transverse Lamb interaction.  For `b=omega`,
 
 \[
 \boxed{
--L_u^{Sch}I
-\le\nu S
-\le L_u^{Sch}I
+\mathbb H^{(1)}(Q\beta)-Q(\mathbb H^{(2)}\beta)
+=\nu^2d|\omega|^2+\nu[\omega\times(u\times\omega)]^\flat.
 }
 \]
 
-in quadratic-form order.
+If
 
-The symmetric velocity gradient is therefore the degree imbalance of one positive graded
-current square.
+\[
+\Xi:=\bigl(\mathbb H^{(1)}(Q\beta)-Q(\mathbb H^{(2)}\beta)-\nu^2d|\omega|^2\bigr)^\sharp,
+\]
 
-### 12.1 Poynting and Gauss are the degree-two reading
+then, wherever `omega != 0`,
+
+\[
+\boxed{u\times\omega=-\frac{\omega\times\Xi}{\nu|\omega|^2}.}
+\]
+
+Thus Lamb is not an independent forcing object.  It is reconstructed from the failure of `Q` to intertwine the adjacent Hodge degrees generated by its own curvature.  The two primitive feedback loops are
+
+\[
+\boxed{Q\to Q^2\to\beta\to Q\beta\to Q_t,}
+\qquad
+\boxed{Q\to\mathbb H\to S\to[\mathbb H,Q]\to\text{Lamb interaction}.}
+\]
+
+---
+
+## 13. The midpoint `M` is canonical, but not fundamental
+
+Critical/Poynting reflection selects the midpoint between pure Hodge heat and the actual current:
+
+\[
+\boxed{
+M:=\nu\delta+\frac12\iota_u=\frac12(\nu\delta+Q),\qquad
+M^*=\nu d+\frac12\alpha\wedge.
+}
+\]
+
+It obeys
+
+\[
+\boxed{M^2=\frac\nu2(\beta\wedge)^*.}
+\]
+
+For
+
+\[
+L_u^M=-\nu^2\Delta+\frac{|u|^2}{4},\qquad \mathbb M=M^*M+MM^*,
+\]
+
+one has
+
+\[
+\boxed{
+\mathbb M^{(1)}=L_u^M I+\nu S,\qquad
+\star^{-1}\mathbb M^{(2)}\star=L_u^M I-\nu S,
+}
+\]
+
+so `2nu S` is their degree imbalance, while
+
+\[
+\boxed{MM^*|_{\Omega^0}=-\nu^2\Delta+\frac{|u|^2}{4}}
+\]
+
+is exactly the scalar Schrödinger normal operator.
+
+### 13.1 Poynting/Gauss is the midpoint self-return
 
 On vorticity,
 
 \[
 \boxed{
-(q\beta)^\sharp
-=\nu\operatorname{curl}\omega-rac12u\times\omega
-=-\frac12G,
+(M\beta)^\sharp=\nu\operatorname{curl}\omega-rac12u\times\omega=-\frac12G,
+\qquad
+G=u\times\omega-2\nu\operatorname{curl}\omega.
 }
 \]
 
-where
+But the same midpoint maps that current back to positive curvature:
 
 \[
-\boxed{G=u\times\omega-2\nu\operatorname{curl}\omega.}
+\boxed{M(M\beta)=M^2\beta=\frac\nu2|\beta|^2,}
 \]
 
-Together with
-
-\[
-\boxed{q^2\beta=\frac\nu2|\beta|^2,}
-\]
-
-this gives
+or equivalently
 
 \[
 \boxed{
@@ -1794,23 +1764,16 @@ this gives
 }
 \]
 
-Thus the completed Poynting square and the Gauss source are degree-two readings of the same
-midpoint current.
+Thus the current which critical growth tries to make small is not an arbitrary error.
 
-### 12.2 Mixed Gauss law acts on every strain direction
+### 13.2 Mixed Gauss law and the curvature floor
 
 For any smooth vector field `b`,
 
 \[
-\boxed{\mathfrak G_\nu[u;b]=u\times b-2\nu\operatorname{curl}b}
-\]
-
-obeys
-
-\[
 \boxed{
-\left(\nabla\cdot-\frac{u}{2\nu}\cdot\right)\mathfrak G_\nu[u;b]
-=\omega\cdot b.
+\mathfrak G_\nu[u;b]=u\times b-2\nu\operatorname{curl}b,\qquad
+\left(\nabla\cdot-\frac{u}{2\nu}\cdot\right)\mathfrak G_\nu[u;b]=\omega\cdot b.
 }
 \]
 
@@ -1823,373 +1786,273 @@ For divergence-free `b`,
 }
 \]
 
-Hence, in quadratic-form notation,
+Hence, with `A_u=PS` and `U_u b=u cross b`,
 
 \[
-\boxed{
-4\nu A_u
-=P(4\nu^2C^2+U_u^*U_u-\mathfrak G_u^*\mathfrak G_u)P.
-}
+\boxed{4\nu A_u=P(4\nu^2C^2+U_u^*U_u-\mathfrak G_u^*\mathfrak G_u)P.}
 \]
 
-On the helicity-odd block the even heat term disappears.  The result is a difference of Gram
-currents, not a negative square; odd projection does not preserve positivity.
-
-### 12.3 Canonical curvature floor
-
-Let
+The helicity-odd block is a difference of Gram currents, not a negative square.  If
 
 \[
-D_u
-=\nabla\cdot-\frac{u}{2\nu}\cdot,
-\qquad
-M_\omega b=\omega\cdot b.
+D_u=\nabla\cdot-\frac{u}{2\nu}\cdot,\qquad M_\omega b=\omega\cdot b,
 \]
 
-The mixed Gauss law is
+then `D_u mathfrak G_u=M_omega` and
 
 \[
-D_u\mathfrak G_u=M_\omega.
+\boxed{D_uD_u^*=-\Delta+\frac{|u|^2}{4\nu^2}.}
 \]
 
-Its scalar normal operator is
-
-\[
-\boxed{
-D_uD_u^*
-=-\Delta+\frac{|u|^2}{4\nu^2}.
-}
-\]
-
-Hence, wherever the inverse is defined in the relevant energy space,
+Therefore, wherever the inverse is defined,
 
 \[
 \boxed{
 \mathfrak G_u^*\mathfrak G_u
-\ge
-M_\omega^*
-\left(
--\Delta+\frac{|u|^2}{4\nu^2}
-\right)^{-1}
-M_\omega.
+\ge M_\omega^*\left(-\Delta+\frac{|u|^2}{4\nu^2}\right)^{-1}M_\omega.
 }
 \]
 
-A dangerous strain direction with nontrivial `omega dot b` overlap therefore carries a
-canonical curvature floor.
-
 ---
 
-## 13. The midpoint current also gives the pressure-free critical tax
+## 14. The midpoint gives the pressure-free critical tax, and static coercivity stops there
 
 Let
 
 \[
-F_E=P(u\times\omega),
-\qquad
-G=u\times\omega-2\nu C\omega.
+F_E=P(u\times\omega),\qquad
+j_0=\nu C^2u,\qquad
+j_1=\nu C^2u-F_E=-u_t.
 \]
 
-The endpoint currents
+Their midpoint is
 
 \[
-j_0=\nu C^2u,
-\qquad
-j_1=\nu C^2u-F_E=-u_t
+\boxed{j_{1/2}=\frac{j_0+j_1}{2}=\nu C^2u-\frac12F_E=-\frac12PG.}
 \]
 
-have midpoint
-
-\[
-\boxed{j_{1/2}=\nu C^2u-\tfrac12F_E=-\tfrac12PG.}
-\]
-
-For every `K_s=||Lambda^s u||^2`,
+For every `K_s=||Lambda^s u||_2^2`,
 
 \[
 \boxed{
-K_s'
-=\frac1{2\nu}
-\left(
-\|\Lambda^{s-1}F_E\|_2^2
--
-\|\Lambda^{s-1}PG\|_2^2
-\right).
+K_s'=\frac1{2\nu}
+\left(\|\Lambda^{s-1}F_E\|_2^2-\|\Lambda^{s-1}PG\|_2^2\right).
 }
 \]
 
-At criticality,
+At `s=1/2`, Euler energy nullity implies
 
 \[
 \boxed{
-K'
-=\frac1{2\nu}
-\left(
-\|\Lambda^{-1/2}F_E\|_2^2
--
-\|\Lambda^{-1/2}PG\|_2^2
-\right).
+\|\Lambda^{-1/2}PG\|_2^2\ge\frac{4\nu^2Z^2}{K},
 }
 \]
 
-Euler energy nullity forces
+and therefore
 
 \[
 \boxed{
-\|\Lambda^{-1/2}PG\|_2^2
-\ge\frac{4\nu^2Z^2}{K},
+K'\le\frac1{2\nu}\|\Lambda^{-1/2}F_E\|_2^2-2\nu\frac{Z^2}{K}.
 }
 \]
 
-so
+Helicity nullity supplies the second invariant-normal projection and the sharpened two-null Gram-plane tax recorded in the theorem certificate; no new stock is introduced.
+
+Static Gauss coercivity cannot close the projected gap.  For
 
 \[
-\boxed{
-K'
-\le\frac1{2\nu}\|\Lambda^{-1/2}F_E\|_2^2
--2\nu\frac{Z^2}{K}.
-}
+q_\theta^*\phi=\nu d\phi+\theta\alpha\phi,
 \]
 
-Helicity nullity supplies a second compulsory projection of the same residual onto the Gram
-plane generated by the two invariant directions.  This is the two-null tax; it introduces no
-new stock.
-
-There is also a sharp no-go.  Since
-
-\[
-q_\theta^*\phi=\nu d\phi+\theta u^\flat\phi,
-\]
-
-requiring this scalar Gauss test to be divergence-free gives
+requiring this scalar test to be divergence-free gives
 
 \[
 \nu\Delta\phi+\theta u\cdot\nabla\phi=0.
 \]
 
-On periodic/decaying domains incompressibility implies
+On periodic/decaying domains incompressibility yields
 
 \[
 \boxed{\phi=\text{constant}.}
 \]
 
-Thus the constant test is the only scalar Gauss test living entirely in the Leray-horizontal
-sector.  Static Schrödinger coercivity alone cannot close the projected critical gap; the missing
-argument must control persistence dynamically.
-
+Thus every nonconstant Schrödinger refinement necessarily reads the exact/pressure sector.
 
 ---
 
-## 14. Material coordinates show where the same strain writes heat memory
+## 15. Material Hodge geometry measures the same turning in another gauge
 
-The critical operator does not live apart from the material vorticity law.
-Let `Phi_t` be the incompressible flow map and define
-
-\[
-\widetilde\varpi=\Phi_t^*\varpi,
-\qquad
- g_t=\Phi_t^*g_0.
-\]
-
-For the vorticity two-form, Navier--Stokes becomes
+Let `Phi_t` be the incompressible flow and set
 
 \[
-\boxed{
-\partial_t\widetilde\varpi
-=\nu\Delta_{g_t}\widetilde\varpi.
-}
+\widetilde\beta=\Phi_t^*\beta,\qquad g=\Phi_t^*g_0,\qquad L_g=d\delta_g+\delta_gd.
 \]
 
-There is no explicit Euler stretching source left.  Euler moves the material metric:
+Then
+
+\[
+\boxed{\partial_t\widetilde\beta=-\nu L_g\widetilde\beta,}
+\]
+
+while Euler moves the Hodge frame:
 
 \[
 \boxed{
-\partial_t g_t
-=2\Phi_t^*S,
-\qquad
-\det g_t=1.
+\partial_tL_g=[\mathcal L_v,L_g],\qquad
+\partial_t\delta_g=[\mathcal L_v,\delta_g].
 }
 \]
 
-Thus the same physical strain which forms the midpoint critical Reynolds operator is exactly the
-metric velocity seen by material Hodge heat.
-
-The feedback is one closed chain:
+For `c=delta_g tilde beta`,
 
 \[
 \boxed{
-\widetilde\varpi
-\longrightarrow u
-\longrightarrow S
-\longrightarrow g_t
-\longrightarrow\Delta_{g_t}
-\longrightarrow\widetilde\varpi.
+\partial_t c=[\mathcal L_v,\delta_g]\widetilde\beta-\nu L_g^{(1)}c.
 }
 \]
 
-The separate material-current note proves the transverse determinant and Minkowski memory laws.
-The present curl note needs only their structural meaning: sustained critical reorientation is
-not free of history, because the same strain continuously rewrites the metric in which heat acts.
+With deformation gradient `F=D_a Phi`, Maurer--Cartan fields
+
+\[
+\Gamma=F^{-1}dF,\qquad B=F^{-1}F_t
+\]
+
+obey
+
+\[
+\boxed{d\Gamma+\Gamma\wedge\Gamma=0,\qquad \partial_t\Gamma=D_\Gamma B,}
+\]
+
+and the turnover speed is locked to the Hodge current:
+
+\[
+\boxed{
+\|D_\Gamma B\|_{L^2_g}^2=\|\delta_g\widetilde\beta\|_{L^2_g}^2,\qquad
+\|\nabla^g g_t\|_{L^2_g}^2=2\|\delta_g\widetilde\beta\|_{L^2_g}^2.
+}
+\]
+
+The separate material theorem adds the transverse determinant and Minkowski memory laws.  Thus critical/current reorientation and material heat memory are two gauges of the same state-generated turning, not independent escape mechanisms.
 
 ---
 
-## 15. Falsification guards: what the primitive law does **not** say
+## 16. Falsification guards after the `Q` collapse
 
-The reduction is useful only if its negative statements are kept explicit.
-
-1. **No global-regularity claim.**  Concentrated many-mode deformation can still create a large,
-   time-dependent Reynolds operator and reorient the state toward expanding directions.
-2. **No spectral-only monotone beyond energy/helicity.**  Physical phase reversal flips every
-   non-affine triad current while leaving the signed-curl energy measure fixed.
-3. **No universal Cauchy, Schrödinger or pressure gap.**  The exact state-dependent bounds can
-   approach saturation, and Leray projection has no fixed loss fraction.
-4. **No low Krylov-rank closure.**  High curl--Krylov fitness components can reconfigure the state
-   even when they do not instantaneously change enstrophy.
-5. **No automatic viscous dephasing.**  Heat damps amplitudes and translation-frequency carriers;
-   it does not rotate normalized curl-eigenspace directions by fiat.
-6. **No unrestricted Nambu--Poisson theorem.**  The exact structure retained is Cartan/Jacobi.
-7. **No eigenvalue-only nonlinear closure.**  The lossless midpoint operator retains orientation
-   and translation structure which its eigenvalues forget.
-8. **No negative-square theorem after helicity projection.**  The odd Gram difference has no fixed
-   sign, so the graded-current identity does not imply `||mathscr R_c||<=1` at large data.
-9. **No purely local finite-dimensional closure.**  Any regularity theorem must use the full
-   spatial current, its transport compatibility and its heat coupling.
-
+1. **No global-regularity claim.**  Concentrated many-mode states can still produce large critical action and rapid reorientation.
+2. **No static Gauss/Schrödinger closure.**  Nonconstant scalar tests enter the pressure/exact sector.
+3. **No negative square after helicity projection.**  The critical odd block is a Gram difference with no fixed inherited sign.
+4. **No moving-projector proof without spectral-gap information.**  Reynolds eigenspaces remain a representation, not the ontology.
+5. **No free `L^4_omega` damping.**  The apparent quartic Gauss term cancels in the exact current-energy calculation.
+6. **No higher-Sobolev control from `Q_t^2=0`.**  Nilpotent tangents do not prevent high-frequency concentration.
+7. **No spectral-only monotone beyond energy/helicity**, no low-Krylov closure and no automatic viscous dephasing.
+8. **No eigenvalue-only Riccati law** and no unrestricted Nambu--Poisson theorem; the surviving structure is lossless Cartan/Jacobi current geometry.
+9. **No local finite-dimensional closure.**  The missing theorem must couple full spatial current persistence to material Hodge memory.
 
 ---
 
-## 16. Minimal ontology and the remaining theorem
+## 17. Minimal ontology and the remaining primitive theorem
 
-After all collapses, the primitive objects are
+The deepest state-dependent object reached here is
+
+\[
+\boxed{Q=\nu\delta+\iota_u,\qquad Q^*=\nu d+u^\flat\wedge.}
+\]
+
+Its core closure laws are
+
+\[
+\boxed{Q^2=\nu(\beta\wedge)^*,\qquad
+\alpha_t+dB=-Q\beta,\qquad
+Q_t=-\iota_{P(Q\beta)^\sharp},}
+\]
 
 \[
 \boxed{
-C=\operatorname{curl},
-\qquad
-J_uv=\mathbb P(u\times v),
-\qquad
-q_1=\nu\delta+\iota_u.
+\mathbb H=Q^*Q+QQ^*,\qquad
+\mathbb H^{(1)}-\star^{-1}\mathbb H^{(2)}\star=4\nu S,
 }
 \]
 
-Their basic laws are
-
-\[
-\boxed{u_t=J_uCu-\nu C^2u,}
-\qquad
-\boxed{[C,J_u]=2\mathbb P S,}
-\]
+and, for closed `eta=star b^flat`,
 
 \[
 \boxed{
-\beta_t=-dq_1\beta,
-\qquad
-q_1^2=\nu(\beta\wedge)^*.
+\mathbb H^{(1)}(Q\eta)-Q(\mathbb H^{(2)}\eta)
+=\nu^2d(\omega\cdot b)+\nu[\,b\times(u\times\omega)\,]^\flat.
 }
 \]
 
-The unique critical symmetric Euler operator is
+So one endogenous operation closes the loop
 
 \[
 \boxed{
-\Sigma_c
-=-\operatorname{sech}\!\left(
-\frac12\operatorname{ad}_{\log|C|}
-\right)(\mathbb P S)_{odd},
+\text{operation}\to\text{curvature}\to\text{degree imbalance}
+\to\text{self-force}\to\text{operation}.
 }
 \]
 
-and
+The midpoint
 
 \[
-\boxed{\mathscr R_c=\nu^{-1}\Lambda^{-1}\Sigma_c\Lambda^{-1}.}
+M=\nu\delta+\frac12\iota_u
 \]
 
-Critical growth is exactly
+is the canonical critical/Poynting reading of `Q`, not a second fundamental operator, and
+
+\[
+\boxed{M(M\beta)=\frac\nu2|\beta|^2.}
+\]
+
+Sections 4--10 show that the Krein/sech/Poisson/Reynolds/HS language is a higher representation of this same strain/current law.  Critical escape still requires
 
 \[
 \boxed{
-K'
-=2\nu\langle\Lambda^{3/2}u,
-(\mathscr R_c-I)\Lambda^{3/2}u\rangle.
+\int^T\frac{\kappa(0,t)^2}{N(t)^2[E(t)Z(t)-K(t)^2]}
+\,dt=\infty.
 }
 \]
 
-On `R^3`, the same state is represented losslessly by
+The primitive persistence question is lower than a moving eigenspace: can the **projected** midpoint current `P(M beta)` remain near-null in the shifted critical metric while the unprojected current satisfies
+
+\[
+M(M\beta)=\frac\nu2|\beta|^2
+\]
+
+and the actual current continuously changes the differential through `Q_t`?
+
+The exact candidate turning operator is already present:
+
+\[
+\boxed{[\mathbb H,Q]=Q^*Q^2-Q^2Q^*.}
+\]
+
+Its degree-two-to-degree-one non-exact component is the curvature-transverse Lamb interaction, from which the Lamb field is locally reconstructed when `omega != 0`.  The next theorem should therefore be sought in the form
 
 \[
 \boxed{
-\mathcal Q_c=\Lambda^{-1}\Sigma_c\Lambda^{-1},
-\qquad
-\|\mathcal Q_c\|_{HS}^2=K/64.
-}
-\]
-
-The midpoint current simultaneously obeys
-
-\[
-\boxed{q_{1/2}^2=\frac\nu2(\beta\wedge)^*,}
-\]
-
-and
-
-\[
-\boxed{
-\left(\nabla\cdot-\frac{u}{2\nu}\cdot\right)
-\mathfrak G_\nu[u;b]=\omega\cdot b.
-}
-\]
-
-Thus the apparently separate theories collapse to one chain:
-
-\[
-\boxed{
-\text{state}
-\to\text{current}
-\to\text{curvature}
-\to\text{strain}
-\to\text{critical Reynolds boost}
-\to\text{operator/material heat}.
-}
-\]
-
-The unresolved theorem is now narrow:
-
-> **Can the state sustain a helicity-odd Reynolds expansion above identity heat for the infinite
-> productive action required by critical escape, while the same curvature/current law forces
-> reflected-current cost, Cartan/Jacobi compatibility forces reorientation structure, and the
-> same strain writes material heat memory?**
-
-Equivalently one needs a dynamical implication of the form
-
-\[
-\boxed{
-\text{persistent critical backward-heat alignment}
+\text{persistent critical near-kernel of }P M
 \Longrightarrow
-\text{integrable current-turning / curvature-memory cost}.
+\text{non-summable objective graded turning generated by }[\mathbb H,Q].
 }
 \]
 
-If it forces
+That implication is **not proved**.  To close regularity it must be quantitatively coupled to
 
 \[
-\int^T
-\frac{\kappa(0,t)^2}
-{N(t)^2[E(t)Z(t)-K(t)^2]}
-\,dt<\infty,
+\partial_tL_g=[\mathcal L_v,L_g],\qquad
+\partial_t\Gamma=D_\Gamma B,\qquad
+\|D_\Gamma B\|_{L^2_g}^2=\|\delta_g\widetilde\beta\|_{L^2_g}^2
 \]
 
-then the necessary escape condition of Section 7 is contradicted.  No such persistence theorem
-is proved here.
+and the transverse heat-memory law, so that the turnover forced by critical persistence cannot be sustained on the relevant finite positive-energy history.  Establishing that bridge is the remaining theorem, not an already available action bound.
 
-The methodological rule is therefore strict:
+The methodological rule is now:
 
 \[
 \boxed{
-\text{do not add a mechanism unless Navier--Stokes itself generates the object.}
+\text{do not add an object unless it is generated by }Q,Q^*,Q^2
+\text{ or by their natural material pullback.}
 }
 \]
 
-Curl, Cartan contraction, codifferential, strain, helicity modulus, Poisson calculus, operator
-heat and material Hodge heat survive this test.  A future proof should go deeper into this closed
-current/curvature law rather than rebuild shells, owners or clocks around it.
+No shell, owner, packet, moving projector, entropy budget or analyst clock is needed to state the remaining problem.
