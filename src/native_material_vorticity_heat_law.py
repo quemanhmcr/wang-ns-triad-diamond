@@ -897,6 +897,137 @@ def so33_exterior_square_algebra(generator: np.ndarray) -> dict[str, float]:
         "boost_speed_identity_residual":norm_res,
     }
 
+
+
+def transported_twoform_transverse_determinant(
+    deformation: np.ndarray,
+    material_twoform_vector: Sequence[float],
+) -> dict[str, float]:
+    """Cofactor law for a transported two-form under an arbitrary orientation-preserving flow.
+
+    If ``F`` is a deformation gradient with ``J=det F>0`` and a material
+    two-form is ``beta=i_q da``, then its physical vector representative is
+
+        omega = F q / J.
+
+    With ``g=F^T F`` one has exactly
+
+        det(g^-1|_{q^perp}) = |Fq|^2/(J^2 |q|^2)=|omega|^2/|q|^2.
+
+    Thus the transverse inverse-metric determinant law is a property of
+    transported two-forms themselves; incompressibility is the special case
+    ``J=1``.
+    """
+    F=np.asarray(deformation,dtype=float)
+    q=np.asarray(tuple(float(x) for x in material_twoform_vector),dtype=float)
+    if F.shape!=(3,3) or not np.all(np.isfinite(F)) or q.shape!=(3,) or not np.all(np.isfinite(q)):
+        raise ValueError("finite 3x3 deformation and material two-form vector required")
+    J=float(np.linalg.det(F)); nq=float(np.linalg.norm(q))
+    if J<=0.0 or nq<=0.0:
+        raise ValueError("orientation-preserving nonsingular deformation and nonzero two-form vector required")
+    g=F.T@F; qn=q/nq; P=_transverse_frame(qn)
+    detperp=float(np.linalg.det(P.T@np.linalg.inv(g)@P))
+    amp2=float(np.dot(F@q,F@q)/(J*J*nq*nq))
+    res=abs(detperp-amp2)
+    cond=float(np.linalg.cond(F))
+    tol=5e-9*max(1.0,cond*cond)*max(1.0,abs(detperp),abs(amp2))
+    if res>tol:
+        raise AssertionError("general transported-two-form cofactor identity failed")
+    return {
+        "jacobian":J,
+        "physical_amplification_squared":amp2,
+        "transverse_inverse_metric_determinant":detperp,
+        "deformation_condition_number":cond,
+        "identity_residual":res,
+    }
+
+
+def vortex_slip_twist_algebra(
+    velocity: Sequence[float],
+    vorticity: Sequence[float],
+    vorticity_gradient: np.ndarray,
+    viscosity: float,
+) -> dict[str, float]:
+    """Exact vortex-line slip/Frobenius-twist decomposition of the Hodge current.
+
+    Write ``omega=m xi`` and ``c=curl omega``.  Away from ``m=0`` put
+
+        tau = xi.curl xi,
+        c_parallel = m tau xi,
+        v_slip = -nu (omega x c)/m^2
+               = nu[(xi.grad)xi-grad_perp log m],
+        w = u + v_slip.
+
+    Then, with the repository convention ``i_v beta=-v x omega``, the exact
+    Ohm/Faraday field is
+
+        e = i_u beta + nu c = i_w beta + nu c_parallel.
+
+    Hence the perpendicular viscous current is exactly a change of vortex-line
+    transport velocity.  Only the parallel one-form remains outside Lie
+    transport; an exact-gradient part of that remainder is still gauge, so this
+    function does *not* identify pointwise ``c_parallel`` with reconnection.
+
+    The current norm and Poynting--Joule density obey
+
+        nu |c|^2 = (m^2/nu)|v_slip|^2 + nu m^2 tau^2,
+
+        -e.c = m^2|u_perp|^2/(4nu)
+               -(m^2/nu)|v_slip+u_perp/2|^2-nu m^2 tau^2.
+    """
+    u=np.asarray(tuple(float(x) for x in velocity),dtype=float)
+    wv=np.asarray(tuple(float(x) for x in vorticity),dtype=float)
+    G=np.asarray(vorticity_gradient,dtype=float)
+    nu=float(viscosity)
+    if u.shape!=(3,) or wv.shape!=(3,) or G.shape!=(3,3) or not np.all(np.isfinite(u)) or not np.all(np.isfinite(wv)) or not np.all(np.isfinite(G)):
+        raise ValueError("finite velocity, vorticity and 3x3 vorticity gradient required")
+    if not math.isfinite(nu) or nu<=0.0:
+        raise ValueError("positive finite viscosity required")
+    div=float(np.trace(G)); gscale=max(1.0,float(np.linalg.norm(G)))
+    if abs(div)>3e-10*gscale:
+        raise ValueError("vorticity gradient must satisfy div omega=0")
+    m=float(np.linalg.norm(wv))
+    if m<=1e-12:
+        raise ValueError("nonzero vorticity required for vortex-line gauge")
+    xi=wv/m
+    c=np.array((G[1,2]-G[2,1],G[2,0]-G[0,2],G[0,1]-G[1,0]),dtype=float)
+    dm=G@xi
+    dxi=(G-dm[:,None]*xi[None,:])/m
+    curlxi=np.array((dxi[1,2]-dxi[2,1],dxi[2,0]-dxi[0,2],dxi[0,1]-dxi[1,0]),dtype=float)
+    tau=float(np.dot(xi,curlxi))
+    cpar=m*tau*xi
+    cperp=c-cpar
+    gradperp=dm-xi*float(np.dot(xi,dm))
+    curvature=xi@dxi
+    vslip=nu*(curvature-gradperp/m)
+    vdirect=-nu*np.cross(wv,c)/(m*m)
+    W=u+vslip
+    e=-np.cross(u,wv)+nu*c
+    erep=-np.cross(W,wv)+nu*cpar
+    uperp=u-xi*float(np.dot(u,xi))
+    current_cost=nu*float(np.dot(c,c))
+    cost_rep=(m*m/nu)*float(np.dot(vslip,vslip))+nu*m*m*tau*tau
+    joule=-float(np.dot(e,c))
+    square=(m*m/(4.0*nu))*float(np.dot(uperp,uperp))-(m*m/nu)*float(np.dot(vslip+.5*uperp,vslip+.5*uperp))-nu*m*m*tau*tau
+    scale=max(1.0,np.linalg.norm(e),np.linalg.norm(erep),np.linalg.norm(c)*nu,abs(current_cost),abs(joule),abs(square))
+    res=max(float(np.linalg.norm(vslip-vdirect)),float(np.linalg.norm(cpar-xi*np.dot(c,xi))),float(np.linalg.norm(e-erep)),abs(current_cost-cost_rep),abs(joule-square))
+    if res>2e-8*scale:
+        raise AssertionError("vortex-line slip/twist algebra failed")
+    return {
+        "vorticity_magnitude":m,
+        "frobenius_twist":tau,
+        "parallel_current_norm":float(np.linalg.norm(cpar)),
+        "perpendicular_current_norm":float(np.linalg.norm(cperp)),
+        "slip_speed":float(np.linalg.norm(vslip)),
+        "vortex_transport_speed":float(np.linalg.norm(W)),
+        "viscous_current_cost_density":current_cost,
+        "slip_twist_cost_density":cost_rep,
+        "negative_joule_work_density":joule,
+        "slip_twist_square_density":square,
+        "parallel_residual_magnitude_sink":nu*m*tau*tau,
+        "identity_residual":res,
+    }
+
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
@@ -915,6 +1046,11 @@ def theorem_certificate() -> dict[str, object]:
         "maxwell_duality_stress": "the 4D Maxwell extension splits into self-dual/anti-self-dual energies (K+H)/2 and (K-H)/2; each pure duality has zero stress and |T|^2=4|F+|^2|F-|^2, so critical Euler work is intrinsically cross-duality stress",
         "poisson_sech_origin": "unit critical Maxwell depth profiles sqrt(2r)e^-ry have overlap 2sqrt(rs)/(r+s)=sech((log r-log s)/2); critical log-scale locality is harmonic-depth overlap, not a shell cutoff",
         "primitive_spacetime_curvature": "with alpha=u^flat, beta=d alpha, c=delta beta and Bernoulli B=p+|u|^2/2, the Abelian spacetime connection A4=alpha-B dt has curvature F4=beta-dt wedge(i_u beta+nu c); d_4F4=0 is exactly the vorticity equation, Euler obeys (i_u beta) wedge beta=0 pointwise, and F4 wedge F4 is purely viscous",
+        "vortex_line_slip_gauge": "away from omega=0, split c=delta beta into c_perp+c_parallel and set w=u-nu(omega cross c)/|omega|^2; then e=i_w beta+nu c_parallel and beta_t+Lie_w beta=-nu d(c_parallel^flat), so all perpendicular viscous current is exact vortex-line slip and only a parallel one-form remains outside Lie transport",
+        "frobenius_twist_current": "for omega=m xi, c_parallel=m(xi.curl xi)xi; xi.curl xi is the Frobenius obstruction xi^flat wedge d xi^flat, and xi.curl(m tau xi)=m tau^2 makes the parallel residual a direct magnitude sink in the vortex-line gauge",
+        "slip_twist_pythagoras": "v_slip=nu[(xi.grad)xi-grad_perp log m] and nu|c|^2=(m^2/nu)|v_slip|^2+nu m^2 tau^2; the Poynting-Joule density completes the same slip square plus the pure twist sink",
+        "vortex_line_topology_guard": "pointwise c_parallel is only the possible non-Lie remainder, not itself a reconnection theorem: exact-gradient pieces are gauge and only d(c_parallel^flat) rewrites beta in the vortex-line frame",
+        "general_twoform_cofactor": "for any orientation-preserving transport F with J=det F, det((F^T F)^-1|q^perp)=|Fq|^2/(J^2|q|^2), exactly the squared amplification of a transported two-form vector; the transverse determinant law is not restricted to incompressible fluid labels",
         "primitive_poynting_joule": "put e=i_u beta+nu c; the exact local law is partial_t |omega|^2/2+div(e cross omega)=-e.c, with -e.c=(u cross omega).c-nu|c|^2, so stretching and palinstrophy are one electromotive-current work law",
         "so33_duality_group": "volume-preserving four-dimensional deformation acts on two-forms through sl(4)->so(3,3); rotations commute with Hodge duality while trace-free strain anticommutes and is the unique noncompact duality-mixing boost, with ||rho(S)||_HS^2=2||S||^2",
         "enstrophy_derivative_null": "integrating <curl omega,u cross omega> by parts gives sum_j <partial_j omega, partial_j u cross u>; the derivative-on-u self term vanishes pointwise by cross-product skewness, so nonlinear enstrophy production necessarily uses the same first vorticity derivative squared by Hodge heat",

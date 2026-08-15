@@ -1397,3 +1397,166 @@ This square is only a readout of the null identity.  The companion term must **n
 promoted to an independent causal current.  The unresolved theorem remains historical:
 large-data NS might still arrange the surviving first-derivative current coherently on
 shrinking sets.  No uniform alignment gap or global-regularity conclusion is asserted.
+
+
+## 21. Viscosity has an intrinsic vortex-line gauge: slip versus Frobenius twist
+
+The physical spacetime curvature law admits a sharper factorization away from
+`omega=0` which does not introduce an analysis packet or a selected scale.  Write
+
+\[
+\omega=m\xi,\qquad |\xi|=1,\qquad c=\operatorname{curl}\omega,
+\]
+
+and split the actual Hodge current orthogonally,
+
+\[
+c=c_\perp+c_\parallel,
+\qquad
+c_\parallel=(c\cdot\xi)\xi.
+\]
+
+Because contraction by the vorticity two-form maps transverse velocities onto
+transverse one-forms, the whole perpendicular current can be absorbed into a
+change of transport velocity.  Define
+
+\[
+\boxed{
+ v_{\rm slip}=-\nu\frac{\omega\times c}{|\omega|^2},
+ \qquad w=u+v_{\rm slip}.
+}
+\]
+
+With the convention `i_v beta=-v cross omega`, the exact electromotive field is
+
+\[
+\boxed{
+e=\iota_w\beta+\nu c_\parallel^\flat.
+}
+\]
+
+Hence Bianchi/Faraday becomes
+
+\[
+\boxed{
+\partial_t\beta+\mathcal L_w\beta
+=-\nu\,d(c_\parallel^\flat).
+}
+\]
+
+This corrects an over-strong reading of the earlier material-reset language.  The
+perpendicular viscous current is not a genuine destruction of vortex-line
+transport: it is exactly vortex-line **slip relative to the fluid**.  Only a
+parallel one-form remains outside Lie transport.  Even that statement must not be
+over-read as a pointwise reconnection theorem: an exact-gradient part is still
+pure gauge, and only `d(c_parallel^flat)` actually rewrites the two-form in the
+vortex-line frame.
+
+The parallel current has a primitive differential-geometric meaning:
+
+\[
+\boxed{
+ c_\parallel=m\tau\xi,
+ \qquad
+ \tau:=\xi\cdot\operatorname{curl}\xi,
+}
+\]
+
+where
+
+\[
+\xi^\flat\wedge d\xi^\flat=\tau\,dV.
+\]
+
+Thus `tau` is exactly the Frobenius obstruction of the transverse plane field.
+Moreover
+
+\[
+\boxed{
+\xi\cdot\operatorname{curl}(m\tau\xi)=m\tau^2,
+}
+\]
+
+so the parallel residual contributes a sign-definite magnitude sink
+`-nu m tau^2` in the vortex-line gauge.  Positive amplification is therefore
+kinematic deformation of the transported two-form; the genuine parallel residual
+cannot directly amplify its magnitude.
+
+The perpendicular part is equally concrete.  If
+`kappa=(xi.grad)xi` is vortex-line curvature,
+
+\[
+\boxed{
+ v_{\rm slip}
+ =\nu\left(\kappa-\nabla_\perp\log m\right).
+}
+\]
+
+Consequently
+
+\[
+\boxed{
+\nu|c|^2
+=\frac{m^2}{\nu}|v_{\rm slip}|^2
+ +\nu m^2\tau^2,
+}
+\]
+
+and the Poynting--Joule density completes the same geometry:
+
+\[
+\boxed{
+-e\cdot c
+=\frac{m^2}{4\nu}|u_\perp|^2
+ -\frac{m^2}{\nu}
+  \left|v_{\rm slip}+\frac12u_\perp\right|^2
+ -\nu m^2\tau^2.
+}
+\]
+
+There is a revealing limiting geometry.  If `tau=0`, Frobenius gives locally
+
+\[
+\omega=\mu\nabla\phi.
+\]
+
+Then
+
+\[
+c=\nabla\mu\times\nabla\phi,
+\qquad
+(\xi\cdot\nabla)\xi
+=\nabla_\perp\log|\nabla\phi|,
+\]
+
+and line curvature cancels from the viscous slip:
+
+\[
+\boxed{
+ v_{\rm slip}=-\nu\nabla_\perp\log|\mu|,
+ \qquad
+ \nu|c|^2
+ =\nu|\nabla\phi|^2|\nabla_\perp\mu|^2.
+}
+\]
+
+So the low-twist limit forced by efficient growth is not arbitrary 3D alignment:
+it is an integrable transverse foliation on which perpendicular viscosity is
+surface-gradient slip of one scalar amplitude.
+
+Finally, the transverse determinant is a transported-two-form identity and does
+not require an incompressible transport velocity.  For any orientation-preserving
+`F`, with `J=det F` and `g=F^T F`,
+
+\[
+\boxed{
+\det(g^{-1}|_{q^\perp})
+=\frac{|Fq|^2}{J^2|q|^2}.
+}
+\]
+
+Since `Fq/J` is exactly the vector representative of a transported two-form, the
+same inverse-metric area law remains available in the vortex-line gauge even when
+`w` is not volume preserving.  What remains open is a history theorem coupling
+this vortex-line transport memory to the residual Frobenius-twist term without
+replacing either by an analyst-defined event taxonomy.

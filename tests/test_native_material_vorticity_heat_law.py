@@ -22,6 +22,8 @@ from src.native_material_vorticity_heat_law import (
     transverse_heat_determinant,
     transverse_heat_log_rate,
     transverse_two_covector_area_identity,
+    transported_twoform_transverse_determinant,
+    vortex_slip_twist_algebra,
     vorticity_stress_current_algebra,
 )
 
@@ -320,3 +322,56 @@ def test_maxwell_stress_has_only_two_equal_positive_and_two_equal_negative_princ
         m=rng.normal(size=(4,4));f=m-m.T
         out=maxwell_duality_stress_algebra(f)
         assert out["stress_square_scalar_residual"] <= 3e-10*max(1.0,out["maxwell_stress_norm_squared"])
+
+
+
+def test_general_transport_cofactor_reads_twoform_amplification_without_incompressibility():
+    rng=np.random.default_rng(202608151101)
+    for _ in range(3000):
+        q,_=np.linalg.qr(rng.normal(size=(3,3)))
+        vals=np.exp(rng.uniform(-2.0,2.0,3))
+        f=q@np.diag(vals)
+        qv=rng.normal(size=3)
+        out=transported_twoform_transverse_determinant(f,qv)
+        assert out["transverse_inverse_metric_determinant"] == pytest.approx(out["physical_amplification_squared"],rel=2e-10,abs=2e-10)
+
+
+def test_vortex_line_slip_absorbs_perpendicular_current_and_twist_is_orthogonal_sink():
+    rng=np.random.default_rng(202608151102)
+    for _ in range(4000):
+        omega=rng.normal(size=3)
+        if np.linalg.norm(omega)<.05: omega[0]+=.2
+        G=rng.normal(size=(3,3));G-=np.trace(G)/3*np.eye(3)
+        u=rng.normal(size=3);nu=10.0**rng.uniform(-4,1)
+        out=vortex_slip_twist_algebra(u,omega,G,nu)
+        assert out["viscous_current_cost_density"] == pytest.approx(out["slip_twist_cost_density"],rel=2e-9,abs=2e-9)
+        assert out["negative_joule_work_density"] == pytest.approx(out["slip_twist_square_density"],rel=2e-8,abs=2e-8)
+        assert out["parallel_residual_magnitude_sink"] >= 0.0
+
+
+def test_twist_free_frobenius_leaf_cancels_normal_curvature_from_slip():
+    rng=np.random.default_rng(202608151103)
+    for _ in range(3000):
+        gradphi=rng.normal(size=3);g=np.linalg.norm(gradphi)
+        if g<.05: gradphi[0]+=.2;g=np.linalg.norm(gradphi)
+        xi=gradphi/g
+        H=rng.normal(size=(3,3));H=.5*(H+H.T)
+        gradmu=rng.normal(size=3);mu=float(rng.normal())
+        if abs(mu)<.05: mu+=.2
+        perp=lambda z:z-xi*np.dot(xi,z)
+        curvature=perp(H@xi)/g
+        gradg=H@xi
+        assert curvature == pytest.approx(perp(gradg)/g,rel=1e-13,abs=1e-13)
+        omega=mu*gradphi;c=np.cross(gradmu,gradphi);m=np.linalg.norm(omega);nu=.37
+        direct=-nu*np.cross(omega,c)/(m*m)
+        surface=-nu*perp(gradmu/mu)
+        assert direct == pytest.approx(surface,rel=2e-11,abs=2e-11)
+        assert nu*np.dot(c,c) == pytest.approx(nu*g*g*np.dot(perp(gradmu),perp(gradmu)),rel=2e-11,abs=2e-11)
+
+
+def test_certificate_records_vortex_line_gauge_without_reconnection_overclaim():
+    cert=theorem_certificate()
+    assert "perpendicular viscous current" in cert["vortex_line_slip_gauge"]
+    assert "Frobenius obstruction" in cert["frobenius_twist_current"]
+    assert "not itself a reconnection theorem" in cert["vortex_line_topology_guard"]
+    assert cert["global_regularity_claimed"] is False
