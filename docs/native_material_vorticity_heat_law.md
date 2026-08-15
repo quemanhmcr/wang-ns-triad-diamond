@@ -1992,3 +1992,133 @@ geometry, uses the transverse part of the first application to drive the
 transverse part of the second, and Hodge heat squares the complete second curl.
 The hard global question remains persistence/concentration of this iterated
 transverse geometry, not a missing local algebraic branch.
+
+
+## 29. The whole pressure-free PDE is one Cartan--Hodge constitutive current law
+
+The preceding material, spacetime, Klein, Maxwell and line-geometry laws can be
+placed under a still smaller equation.  Return to physical space and keep only
+the closed vorticity two-form `beta`.  In Coulomb/mean-zero gauge the velocity is
+not an independent state variable:
+
+\[
+\boxed{
+u^\flat=\delta L^{-1}\beta.}
+\]
+
+Cartan's formula and `d beta=0` give
+
+\[
+\mathcal L_u\beta=d\iota_u\beta,
+\]
+
+while on a closed two-form Hodge heat is
+
+\[
+L\beta=d\delta\beta.
+\]
+
+Therefore the entire three-dimensional Navier--Stokes vorticity equation is the
+single autonomous constitutive law
+
+\[
+\boxed{
+\partial_t\beta
+=-d e_\beta,
+\qquad
+e_\beta
+=(\iota_u+\nu\delta)\beta,
+\qquad
+u^\flat=\delta L^{-1}\beta,
+\qquad
+d\beta=0.
+}
+\]
+
+Pressure has disappeared because exact one-forms have been quotiented before the
+curvature equation is written.  No shell, packet, event clock, spectral owner or
+selected persistence variable occurs.  The two physical pieces of the one
+one-form current are simply
+
+\[
+\boxed{
+e_E=\iota_u\beta,
+\qquad
+e_\nu=\nu\delta\beta.
+}
+\]
+
+Both lower form degree by one; the same exterior derivative `d` returns them to
+the curvature evolution.
+
+The elementary exterior algebra already explains why Euler has two exact nulls.
+Pointwise,
+
+\[
+\boxed{
+\langle u^\flat,\iota_u\beta\rangle=0,
+}
+\]
+
+and in three spatial dimensions
+
+\[
+\boxed{
+(\iota_u\beta)\wedge\beta
+=\frac12\iota_u(\beta\wedge\beta)=0.
+}
+\]
+
+Thus energy conservation, helicity conservation and tangency of the ideal
+spacetime curvature to the Klein quadric are not separate depletion theorems.
+They are different readings of the same Cartan contraction identity.
+
+The same total current `e=e_E+e_nu` generates the first three physical quadratic
+balances.  With
+
+\[
+E=\langle\beta,L^{-1}\beta\rangle,
+\qquad
+H=\int\alpha\wedge\beta,
+\qquad
+Z=\|\beta\|_2^2,
+\qquad
+c=\delta\beta,
+\]
+
+one gets
+
+\[
+\boxed{
+E'=-2\langle e,u^\flat\rangle=-2\nu Z,
+}
+\]
+
+\[
+\boxed{
+H'=-2\int e\wedge\beta
+=-2\nu\langle c,\omega\rangle,
+}
+\]
+
+and
+
+\[
+\boxed{
+Z'=-2\langle e,c\rangle.
+}
+\]
+
+The ideal current is identically invisible to the first two pairings and can do
+work only in the third.  The Poynting--Joule law, material heat equation, Kelvin
+current, Klein worldsheet, slip/twist decomposition and canonical Maxwell
+extension are therefore not competing mechanisms.  They are representations of
+one closed-curvature constitutive equation.
+
+A direct `16^3`/`20^3` dealiased Fourier referee reconstructed `u` from `beta`,
+formed the one current `e`, and recovered the full vorticity PDE plus all three
+balances at roundoff scale.  The remaining regularity question can now be stated
+without any auxiliary ontology: can the Cartan part of this one current sustain
+unbounded negative Joule work against its own Hodge-adjoint part on a finite
+energy-loss history, despite Klein tangency, Hodge isospectrality and the global
+self-return identities forced by `d^*=delta`?

@@ -1336,6 +1336,9 @@ def two_level_curl_geometry_algebra(
 def theorem_certificate() -> dict[str, object]:
     return {
         "status": STATUS,
+        "primitive_one_field_cartan_hodge": "in physical space the full pressure-free NS vorticity PDE is one autonomous closed-two-form law: beta_t=-d[(i_u+nu delta)beta], u^flat=delta L^-1 beta, d beta=0; Euler contraction and viscous codifferential are the two degree-lowering pieces of one electromotive current",
+        "single_current_balance_ladder": "with e=(i_u+nu delta)beta, the same current gives E_prime=-2<e,u>=-2nu||beta||^2, H_prime=-2 int e wedge beta=-2nu<delta beta,*beta>, and Z_prime=-2<e,delta beta>; Euler is algebraically null in the first two and can work only in the third",
+        "exterior_algebra_euler_null": "the ideal current satisfies <u,i_u beta>=0 and (i_u beta) wedge beta=(1/2)i_u(beta wedge beta)=0 in three spatial dimensions; energy/helicity conservation and Klein tangency are consequences of Cartan exterior algebra, not separate depletion estimates",
         "primitive_material_system": "with L_g=d delta_g+delta_g d, beta_t=-nu L_g beta, alpha=delta_g L_g^-1 beta, v=alpha^sharp_g, g_t=Lie_v g, d beta=0, det g=1 and Riem(g)=0; beta and g form a closed autonomous material NS system",
         "primitive_hodge_energy": "kinetic energy is exactly <beta,L_g^-1 beta>_g, enstrophy is ||beta||_g^2, and the heat part gives E'=-2nu||beta||_g^2 while Euler metric motion contributes zero",
         "transverse_determinant": "for beta=i_q da, det(g^-1|q^perp)=q.g.q/|q|^2=|Fq|^2/|q|^2; vortex amplification is exactly transverse heat-symbol determinant",

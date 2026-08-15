@@ -515,3 +515,53 @@ def test_certificate_records_one_curl_geometry_not_new_owner_taxonomy():
     assert "one operator law" in cert["curl_polar_line_geometry"]
     assert "same curl-polar law" in cert["iterated_curl_ns_grammar"]
     assert cert["case_taxonomy_used"] is False
+
+
+
+def test_one_field_cartan_hodge_law_reconstructs_full_dealiased_vorticity_pde():
+    rng=np.random.default_rng(202608152101)
+    for n in (16,20):
+        k1=np.fft.fftfreq(n,1/n)
+        K=np.stack(np.meshgrid(k1,k1,k1,indexing='ij'),-1);K2=np.sum(K*K,-1);nz=K2>0
+        u0=rng.normal(size=(n,n,n,3));uh=np.fft.fftn(u0,axes=(0,1,2))
+        dot=np.sum(K*uh,axis=-1);uh[nz]-=K[nz]*(dot[nz]/K2[nz])[:,None];uh[~nz]=0
+        uh*=((np.max(np.abs(K),axis=-1)<=n//8)[...,None])
+        omh=1j*np.cross(K,uh);ch=K2[...,None]*uh
+        urec=np.zeros_like(uh);urec[nz]=1j*np.cross(K[nz],omh[nz])/K2[nz,None]
+        assert urec == pytest.approx(uh,rel=2e-11,abs=2e-11)
+        u=np.fft.ifftn(uh,axes=(0,1,2)).real
+        om=np.fft.ifftn(omh,axes=(0,1,2)).real
+        c=np.fft.ifftn(ch,axes=(0,1,2)).real
+        nu=.37;e=-np.cross(u,om)+nu*c;eh=np.fft.fftn(e,axes=(0,1,2))
+        beta_t=-1j*np.cross(K,eh)
+        direct=1j*np.cross(K,np.fft.fftn(np.cross(u,om),axes=(0,1,2)))-nu*K2[...,None]*omh
+        assert beta_t == pytest.approx(direct,rel=2e-10,abs=2e-10)
+
+
+def test_one_cartan_hodge_current_gives_energy_helicity_and_enstrophy_balances():
+    rng=np.random.default_rng(202608152102);n=20
+    k1=np.fft.fftfreq(n,1/n);K=np.stack(np.meshgrid(k1,k1,k1,indexing='ij'),-1);K2=np.sum(K*K,-1);nz=K2>0
+    u0=rng.normal(size=(n,n,n,3));uh=np.fft.fftn(u0,axes=(0,1,2));dot=np.sum(K*uh,axis=-1);uh[nz]-=K[nz]*(dot[nz]/K2[nz])[:,None];uh[~nz]=0
+    uh*=((np.max(np.abs(K),axis=-1)<=n//8)[...,None]);omh=1j*np.cross(K,uh);ch=K2[...,None]*uh
+    u=np.fft.ifftn(uh,axes=(0,1,2)).real;om=np.fft.ifftn(omh,axes=(0,1,2)).real;c=np.fft.ifftn(ch,axes=(0,1,2)).real;nu=.41
+    e=-np.cross(u,om)+nu*c;eh=np.fft.fftn(e,axes=(0,1,2));bt=-1j*np.cross(K,eh)
+    def innh(a,b):return float(np.vdot(a,b).real)/(n**3)
+    Z=innh(omh,omh);Linv=np.zeros_like(omh);Linv[nz]=omh[nz]/K2[nz,None]
+    Eprime=2*innh(bt,Linv)
+    Hprime=-2*float(np.sum(e*om));Hrep=-2*nu*float(np.sum(c*om))
+    Zprime=2*innh(omh,bt);Zrep=-2*float(np.sum(e*c))
+    assert Eprime == pytest.approx(-2*nu*Z,rel=2e-10,abs=2e-10)
+    assert Hprime == pytest.approx(Hrep,rel=2e-10,abs=2e-10)
+    assert Zprime == pytest.approx(Zrep,rel=2e-10,abs=2e-10)
+    # Euler ideal current is exactly null against u and omega pointwise/integrated.
+    ideal=-np.cross(u,om)
+    assert float(np.max(np.abs(np.sum(ideal*u,axis=-1)))) <= 3e-12
+    assert float(np.max(np.abs(np.sum(ideal*om,axis=-1)))) <= 3e-12
+
+
+def test_certificate_places_one_field_cartan_hodge_law_above_representations():
+    cert=theorem_certificate()
+    assert "one autonomous closed-two-form law" in cert["primitive_one_field_cartan_hodge"]
+    assert "same current" in cert["single_current_balance_ladder"]
+    assert "Cartan exterior algebra" in cert["exterior_algebra_euler_null"]
+    assert cert["global_regularity_claimed"] is False
