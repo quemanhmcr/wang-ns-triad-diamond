@@ -1525,6 +1525,177 @@ def test_poisson_product_defect_realizes_depth_euler_work_and_boundary_derivativ
     assert Rprime_semigroup == pytest.approx(-4.0*kappa,rel=3e-12,abs=3e-12)
 
 
+
+def test_poisson_covariance_stress_two_reservoir_heat_and_fisher_laws_are_exact():
+    import numpy as np
+
+    n=12
+    rng=np.random.default_rng(20260815)
+    ks=np.fft.fftfreq(n,1.0/n)
+    kx,ky,kz=np.meshgrid(ks,ks,ks,indexing="ij")
+    k2=kx*kx+ky*ky+kz*kz
+    radius=np.sqrt(k2)
+    den=np.where(k2>0.0,k2,1.0)
+
+    # Random real low-band state; products remain below Nyquist, so the tensor
+    # and Lamb identities are not testing an aliasing artifact.
+    raw=rng.normal(size=(3,n,n,n))
+    uh=np.fft.fftn(raw,axes=(1,2,3))*(radius<=2.2)[None]
+    dot=kx*uh[0]+ky*uh[1]+kz*uh[2]
+    for j,kj in enumerate((kx,ky,kz)):
+        uh[j]-=np.where(k2>0.0,kj*dot/den,0.0)
+    uh[:,0,0,0]=0.0
+    u=np.fft.ifftn(uh,axes=(1,2,3)).real
+    u/=math.sqrt(float(np.mean(np.sum(u*u,axis=0))))
+
+    def spatial_axes(a): return tuple(range(a.ndim-3,a.ndim))
+    def fft(a): return np.fft.fftn(a,axes=spatial_axes(a))
+    def ifft(h): return np.fft.ifftn(h,axes=spatial_axes(h)).real
+    def py(a,y): return ifft(fft(a)*np.exp(-y*radius))
+    def lam(a): return ifft(fft(a)*radius)
+    def lap(a): return ifft(fft(a)*k2)
+    def tensor(a,b): return np.einsum("i...,j...->ij...",a,b)
+    def cross(a,b): return np.cross(a,b,axisa=0,axisb=0,axisc=0)
+    def inner(a,b): return float(np.mean(np.sum(a*b,axis=0)))
+    def tensor_inner(a,b): return float(np.mean(np.sum(a*b,axis=(0,1))))
+    def curl(a):
+        ah=fft(a)
+        wh=np.empty_like(ah)
+        wh[0]=1j*(ky*ah[2]-kz*ah[1])
+        wh[1]=1j*(kz*ah[0]-kx*ah[2])
+        wh[2]=1j*(kx*ah[1]-ky*ah[0])
+        return ifft(wh)
+    def leray(a):
+        ah=fft(a); dd=kx*ah[0]+ky*ah[1]+kz*ah[2]
+        out=ah.copy()
+        for j,kj in enumerate((kx,ky,kz)):
+            out[j]-=np.where(k2>0.0,kj*dd/den,0.0)
+        out[:,0,0,0]=0.0
+        return ifft(out)
+    def grad_scalar(a):
+        ah=fft(a)
+        return np.stack([ifft(1j*kx*ah),ifft(1j*ky*ah),ifft(1j*kz*ah)])
+    def div_tensor(a):
+        ah=fft(a)
+        return ifft(1j*(kx*ah[:,0]+ky*ah[:,1]+kz*ah[:,2]))
+    def strain(a):
+        ah=fft(a); G=np.empty((3,3,n,n,n),float)
+        for i in range(3):
+            for j,kj in enumerate((kx,ky,kz)):
+                G[i,j]=ifft(1j*kj*ah[i])
+        return 0.5*(G+np.swapaxes(G,0,1))
+
+    omega=curl(u)
+    y=0.31; z=0.23; nu=0.41
+    v=py(u,y); wy=py(omega,y)
+    tau=py(tensor(u,u),y)-tensor(v,v)
+    trtau=np.trace(tau,axis1=0,axis2=1)
+
+    # Positive Markov covariance and exact two-depth Germano cocycle.
+    eig=np.linalg.eigvalsh(np.moveaxis(tau,(0,1),(-2,-1)))
+    assert float(eig.min()) >= -2e-12
+    tau_yz=py(tensor(u,u),y+z)-tensor(py(u,y+z),py(u,y+z))
+    tau_z_v=py(tensor(v,v),z)-tensor(py(v,z),py(v,z))
+    cocycle=py(tau,z)+tau_z_v
+    assert np.linalg.norm(tau_yz-cocycle) <= 3e-12*max(1.0,np.linalg.norm(tau_yz))
+
+    # (partial_y+Lambda)tau=Gamma_v.
+    partial_y_tau=-lam(py(tensor(u,u),y))+tensor(lam(v),v)+tensor(v,lam(v))
+    gamma_v=tensor(v,lam(v))+tensor(lam(v),v)-lam(tensor(v,v))
+    assert np.linalg.norm(partial_y_tau+lam(tau)-gamma_v) <= 4e-12*max(1.0,np.linalg.norm(gamma_v))
+
+    # Product defect is exactly the covariance stress divergence.
+    lamb=cross(u,omega)
+    D=py(lamb,y)-cross(v,wy)
+    stress_D=0.5*grad_scalar(trtau)-div_tensor(tau)
+    assert np.linalg.norm(D-stress_D) <= 5e-12*max(1.0,np.linalg.norm(D))
+    filtered=py(leray(lamb),y)
+    stress_rhs=leray(cross(v,curl(v)))-leray(div_tensor(tau))
+    assert np.linalg.norm(filtered-stress_rhs) <= 5e-12*max(1.0,np.linalg.norm(filtered))
+
+    # Exactly two scalar reservoirs and a genuinely nonzero reversible exchange.
+    E=inner(u,u); U=inner(v,v); V=float(np.mean(trtau))
+    assert U+V == pytest.approx(E,rel=3e-14,abs=3e-14)
+    Ut_euler=2.0*inner(v,py(leray(lamb),y))
+    stress_work=2.0*tensor_inner(tau,strain(v))
+    assert abs(Ut_euler) > 1e-5
+    assert Ut_euler == pytest.approx(stress_work,rel=3e-12,abs=3e-12)
+
+    Z=inner(omega,omega); Zy=inner(wy,wy)
+    assert -2.0*nu*Zy < 0.0
+    assert -2.0*nu*(Z-Zy) < 0.0
+
+    # Pure heat Loewner law and exact unresolved gradient-variance bill.
+    ut=-nu*lap(u); vt=py(ut,y)
+    tau_t=py(tensor(ut,u)+tensor(u,ut),y)-tensor(vt,v)-tensor(v,vt)
+    heat_lhs=tau_t+nu*lap(tau)
+    heat_rhs=np.zeros_like(tau)
+    uh2=fft(u)
+    for kj in (kx,ky,kz):
+        du=ifft(1j*kj*uh2); dv=py(du,y)
+        heat_rhs += -2.0*nu*(py(tensor(du,du),y)-tensor(dv,dv))
+    assert np.linalg.norm(heat_lhs-heat_rhs) <= 8e-12*max(1.0,np.linalg.norm(heat_rhs))
+    grad_cov=-float(np.mean(np.trace(heat_rhs,axis1=0,axis2=1)))/(2.0*nu)
+    assert grad_cov == pytest.approx(Z-Zy,rel=3e-13,abs=3e-13)
+
+    # Constant-one covariance Fisher estimate.
+    cov_omega=py(np.sum(omega*omega,axis=0),y)-np.sum(wy*wy,axis=0)
+    d2=np.sum(D*D,axis=0)
+    assert np.max(d2-trtau*cov_omega) <= 2e-11*max(1.0,float(np.max(trtau*cov_omega)))
+    ratio=np.zeros_like(trtau); live=trtau>1e-13
+    ratio[live]=d2[live]/trtau[live]
+    fisher=float(np.mean(ratio))
+    assert fisher <= (Z-Zy)+2e-12
+
+    # Sharpened work Cauchy leaves exactly the transverse covariance activity.
+    M=np.eye(3)[:,:,None,None,None]*trtau-tau
+    activity=float(np.mean(np.einsum("i...,ij...,j...->...",v,M,v)))
+    RE=2.0*inner(v,D)
+    assert activity >= -2e-13
+    assert RE*RE <= 4.0*activity*(Z-Zy)+2e-12
+
+    # Germano also splits transverse activity into inherited/new nonnegative pieces.
+    w=py(v,z)
+    inherited_tau=py(tau,z)
+    inherited_M=np.eye(3)[:,:,None,None,None]*np.trace(inherited_tau,axis1=0,axis2=1)-inherited_tau
+    inherited_activity=float(np.mean(np.einsum("i...,ij...,j...->...",w,inherited_M,w)))
+    new_M=np.eye(3)[:,:,None,None,None]*np.trace(tau_z_v,axis1=0,axis2=1)-tau_z_v
+    new_activity=float(np.mean(np.einsum("i...,ij...,j...->...",w,new_M,w)))
+    tau_total=tau_yz
+    total_M=np.eye(3)[:,:,None,None,None]*np.trace(tau_total,axis1=0,axis2=1)-tau_total
+    total_activity=float(np.mean(np.einsum("i...,ij...,j...->...",w,total_M,w)))
+    assert inherited_activity >= -2e-13
+    assert new_activity >= -2e-13
+    assert total_activity == pytest.approx(inherited_activity+new_activity,rel=3e-12,abs=3e-12)
+
+    # Boundary jets: tau/y->Gamma_u, D/y->Gamma_cross, and the Fisher bill is 2 M3.
+    gamma_u=tensor(u,lam(u))+tensor(lam(u),u)-lam(tensor(u,u))
+    gamma_x=cross(u,lam(omega))+cross(lam(u),omega)-lam(lamb)
+    trgamma=np.trace(gamma_u,axis1=0,axis2=1)
+    assert np.linalg.norm(gamma_x-(0.5*grad_scalar(trgamma)-div_tensor(gamma_u))) <= 6e-12*max(1.0,np.linalg.norm(gamma_x))
+    M3=inner(omega,lam(omega))
+    boundary_ratio=np.zeros_like(trgamma); live=trgamma>1e-13
+    boundary_ratio[live]=np.sum(gamma_x*gamma_x,axis=0)[live]/trgamma[live]
+    boundary_fisher=float(np.mean(boundary_ratio))
+    assert boundary_fisher <= 2.0*M3+2e-12
+
+    FE=leray(lamb); kappa=inner(lam(u),FE)
+    boundary_work=inner(u,gamma_x)
+    gamma_strain=tensor_inner(gamma_u,strain(u))
+    assert boundary_work == pytest.approx(gamma_strain,rel=5e-12,abs=5e-12)
+    assert boundary_work == pytest.approx(-2.0*kappa,rel=5e-12,abs=5e-12)
+
+    # The activity slope is the exact abstract boundary pair-area quantity.
+    M0=np.eye(3)[:,:,None,None,None]*trgamma-gamma_u
+    activity_prime=float(np.mean(np.einsum("i...,ij...,j...->...",u,M0,u)))
+    assert kappa*kappa <= 0.5*activity_prime*M3+2e-12
+    eps=1.0e-4
+    ve=py(u,eps); te=py(tensor(u,u),eps)-tensor(ve,ve)
+    tre=np.trace(te,axis1=0,axis2=1)
+    Me=np.eye(3)[:,:,None,None,None]*tre-te
+    Ae=float(np.mean(np.einsum("i...,ij...,j...->...",ve,Me,ve)))
+    assert Ae/eps == pytest.approx(activity_prime,rel=8e-4,abs=8e-4)
+
 def test_endogenous_euler_coefficient_pair_projection_and_static_cancellation_are_exact():
     # Scalar audit of A_u=nu_E Domega+C_perp in the canonical pair Hilbert metric.
     m3=3.7; nu_e=0.41; cperp2=1.9; nu=0.23
@@ -1706,6 +1877,13 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "zero-net two-way depth redistribution" in cert["primitive_poisson_depth_two_road"]
     assert "physical boundary action" in cert["primitive_poisson_hankel_escape"]
     assert "fake scalar profile" in cert["primitive_poisson_realizability_guard"]
+    assert "positive covariance-stress lift" in cert["primitive_poisson_covariance_stress"]
+    assert "tau_(y+z)(u)=P_z tau_y(u)+tau_z(P_yu)" in cert["primitive_poisson_germano_cocycle"]
+    assert "(1/2) partial_y V|_0=K" in cert["primitive_poisson_two_reservoir_exchange"]
+    assert "stress-energy tensor" in cert["primitive_poisson_stress_divergence"]
+    assert "constant 1" in cert["primitive_poisson_covariance_heat_fisher"]
+    assert "<=2M3" in cert["primitive_poisson_covariance_boundary"]
+    assert "A_(y+z)=A_z(P_yu)" in cert["primitive_poisson_transverse_activity"]
     assert "G4=2 nabla_4 A4" in cert["primitive_spacetime_critical_bianchi"]
     assert "Ec=-2nu[R,e wedge]" in cert["primitive_spacetime_critical_electric"]
     assert "not supply int||Ec||^2 dt" in cert["primitive_spacetime_transgression_guard"]
