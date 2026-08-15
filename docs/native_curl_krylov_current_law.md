@@ -692,10 +692,119 @@ changing only the complex amplitudes realizes all four sign pairs
 \]
 
 Even `kappa/[N sqrt(EZ-K^2)]` can be positive and increasing.  There is therefore no one-step
-self-turning theorem.
+**sign** theorem.  There is, however, an exact one-step law for the direction in which critical
+productivity is measured.
 
-The first new structure appears only when an interaction is **continued**.  In the fixed curl basis,
-one nested path
+Normalize on the Euler energy sphere and assume `delta>0`:
+
+\[
+\boxed{
+ e=\frac{u}{\sqrt E},\quad
+ m=\langle e,\Lambda e\rangle=\frac KE,\quad
+ \delta^2=\|(\Lambda-m)e\|_2^2=\frac{EZ-K^2}{E^2},\quad
+ n=\frac{(\Lambda-m)e}{\delta}.}
+\]
+
+Euler energy tangency gives `f=F_E/sqrt(E)=a n+w` with `w perpendicular e,n`, and
+
+\[
+\boxed{
+a=\langle n,f\rangle=\frac{\kappa}{\sqrt{EZ-K^2}},\qquad
+\mathcal A_{escape}=\frac{a^2}{N^2}.}
+\]
+
+Put `alpha_1=<n,Lambda n>` and `h=P_{\{e,n\}^perp} Lambda n`.  Direct Euler differentiation gives
+
+\[
+\boxed{
+\begin{aligned}
+m'_E&=2a\delta,\\
+\delta'_E&=a(\alpha_1-m)+\langle h,w\rangle,\\
+n'_E&=-ae+\delta^{-1}\!\left[a h+P_{\{e,n\}^\perp}(\Lambda-m)w\right].
+\end{aligned}}
+\]
+
+So the failure of a one-step **sign** theorem does not make the productive frame static.  On the
+saturation branch `w=0`,
+
+\[
+\boxed{P_{\{e,n\}^\perp}n'_E=\frac a\delta h.}
+\]
+
+Productivity couples to self-turning through the endogenous next absolute-curl Krylov opening `h`;
+there is no uniform turning gap because `h` may vanish.
+
+Helicity supplies a separate exact compatibility.  With
+
+\[
+c_H=\langle Ce,n\rangle,\qquad v_H=P_{\{e,n\}^\perp}Ce,
+\]
+
+Euler helicity tangency is
+
+\[
+\boxed{a c_H+\langle v_H,w\rangle=0.}
+\]
+
+If `v_H!=0`, then
+
+\[
+\boxed{\|w\|_2^2\ge a^2\frac{|c_H|^2}{\|v_H\|_2^2};}
+\]
+
+if `v_H=0`, the exact statement is `a c_H=0`, with no `0/0` quotient.  Thus nonzero `w=0`
+saturation requires the helicity-compatible face `<Ce,n>=0`.
+
+The same saturation branch has a canonical integrable reading.  If `p(r)` is the radial `Lambda`
+spectral law,
+
+\[
+\boxed{\partial_t p(r)|_E=2\frac a\delta(r-m)p(r).}
+\]
+
+After the endogenous time change `ds/dt=a/delta`, this is the first Toda spectral-measure flow
+`partial_s p=2(r-m)p`; its first Jacobi equations are exactly
+
+\[
+\boxed{m'_E=2a\delta,\qquad \delta'_E=a(\alpha_1-m).}
+\]
+
+This is an instantaneous saturation identity, not a global integrable reduction of NS.  The Krylov
+recurrence
+
+\[
+\Lambda e=me+\delta n,\qquad \Lambda n=\delta e+\alpha_1n+h
+\]
+
+also gives the exact rigidity
+
+\[
+\boxed{h=0\Longrightarrow \operatorname{span}\{e,n\}\text{ is }\Lambda\text{-invariant}
+\Longrightarrow \#\operatorname{supp}_{|C|}\rho\le2.}
+\]
+
+Finally set
+
+\[
+\Theta=P_{\{e,n\}^\perp}(n'_E+ae),\qquad
+R_w=P_{\{e,n\}^\perp}(\Lambda-m)w.
+\]
+
+Then
+
+\[
+\boxed{\delta\Theta=a h+R_w,\qquad
+a^2\|h\|_2^2\le2\delta^2\|\Theta\|_2^2+2\|R_w\|_2^2.}
+\]
+
+This is an exact productivity--turning/reconfiguration law, not yet an `a^2` action bound: no lower
+bound on `||h||/delta` is known, `h=0` is the two-radius face, and `R_w` carries one extra `|C|` weight.
+The existing material lock `-E'=nu||g_t||_{L_g^2}^2`,
+`M3=(1/2)||g_t||_{Hdot_g^(1/2)}^2` shows why finite energy loss does not automatically pay that
+higher-frequency cost.  No crude interpolation is inserted.
+
+The interaction-network structure below is a higher reading of how this turning/reconfiguration can be
+realized.  In the fixed curl basis, one nested path
 
 \[
 (J,K)\to M,
@@ -813,9 +922,10 @@ scale displacement.**
 This still does not close history.  `Q_triangle` is positive for one oriented triad occurrence, but a
 sum of positive occurrence-wise curvatures is a representation-dependent gross-traffic quantity.  The
 full Nijenhuis curvature is representation-free but signed and can contain coherent cancellation.
-No positive global composition law is obtained by summing `Q_triangle^+`.  The remaining theorem must
-compose actual Cartan gaps, Jacobi compatibility, carrier geometry, Galilean nullity and diagonal heat
-without inventing such a gross budget.
+No positive global composition law is obtained by summing `Q_triangle^+`.  This leaves a genuine
+**network-level composition problem** for the Cartan/Nijenhuis reading, but it is no longer the lowest
+way to state the gap: the intrinsic absolute-curl Krylov frame below records the same persistence issue
+before any triad expansion.
 
 
 ---
@@ -1947,13 +2057,12 @@ j_E(0,t)^2M_1(t)
 
 Its integrand is exactly the already proved escape action.  Escape would force the same integral to
 diverge.  What remains unproved is therefore not a scalar-`mathfrak q` closure and not a one-step
-orientation sign law.  Productive history must continue through the fixed Cartan network.  Weighted
-Jacobi constrains the underlying bracket compositions, but signed-curl gaps can erase the corresponding
-full Euler companions.  The missing theorem is a representation-free positive composition law that
-turns actual nontrivial logarithmic continuation into heat-visible carrier cost without summing an
-analyst-chosen gross positive triad variation.  The covariance, Pythagoras and local half-space
-identities remain realizability constraints/readings of that current, not additional mechanisms.  No
-regularity claim is inserted here.
+orientation sign law.  The lowest state-space reading is the absolute-curl Krylov identity
+`delta Theta=a h+R_w`: productive history must either turn through a nontrivial next-Krylov opening,
+reconfigure through `w`, or remain near the rigid two-radius face.  Cartan/Jacobi/Nijenhuis positive
+composition is a higher network realization of this same history problem, not an additional ontology.
+The covariance, Pythagoras and local half-space identities likewise remain realizability
+constraints/readings.  No regularity claim is inserted here.
 
 ### 6.2 Galilean null
 
@@ -4099,7 +4208,10 @@ The separate material theorem adds the transverse determinant and Minkowski memo
 21. **No one-step turning theorem.**  The exact Euler derivative of `kappa` contains tangent turning not fixed by the two invariant normal accelerations, and one fixed physical triad realizes all four `(sign kappa, sign kappa'_E)` quadrants.
 22. **No full-Euler companion theorem from Jacobi alone.**  Weighted Jacobi controls bracket compositions `sum lambda_M f f`; actual nested Euler coefficients carry additional signed-curl gaps `(lambda_M-lambda_I)`, and a physical helical witness has one nonzero full continuation with both cyclic full companions zero.
 23. **No global fixed-loss `10/13` law.**  That ceiling belongs to the signed-good `3/5--5/8` window.  On the full strict UV triangle `(D+S)/(1+S)->1`; the primitive replacement is the sharp continuous law `M^2 F_log<=Q_triangle`, with retained fraction tending one only as log progress tends zero.
-24. **No gross positive curvature budget.**  `Q_triangle>=0` is occurrence-wise; summing positive triad curvatures creates a representation-dependent traffic quantity.  The full Nijenhuis curvature is representation-free but signed, so a positive composition theorem is still required.
+24. **No gross positive curvature budget.**  `Q_triangle>=0` is occurrence-wise; summing positive triad curvatures creates a representation-dependent traffic quantity.  The full Nijenhuis curvature is representation-free but signed, so this network reading does not close the lower Krylov-history frontier.
+25. **No uniform productivity-to-turning gap.**  Under `w=0`, intrinsic turning is `(a/delta)h`, but `h` can vanish exactly on the two-radius radial face; no positive lower bound for `||h||/delta` is assumed.
+26. **No global Toda reduction.**  The first Toda spectral-measure law is exact only on the instantaneous saturation branch `w=0`, after the endogenous time change `ds/dt=a/delta`; generic Euler motion has side reconfiguration and helicity compatibility.
+27. **No derivative-lowering shortcut.**  `R_w=P_perp(Lambda-m)w` carries an extra absolute-curl weight.  Finite energy loss pays the `Z`/material-`L2` level, so no crude Cauchy or interpolation is used to manufacture the missing historical action.
 
 ---
 
@@ -4160,19 +4272,36 @@ quantity: an exact physical triad violates the proposed lower comparison by more
 magnitude.  Nor is there a one-step orientation monotone: on one fixed physical triad, `kappa` and its
 Euler derivative realize all four sign quadrants.
 
-The sharper historical statement begins only when productive motion is **continued**.  Actual nested
-Euler paths carry signed-curl gaps `(lambda_K-lambda_J)(lambda_M-lambda_I)`.  Weighted Jacobi forces
-companion compositions only at the underlying bracket level; it does not force comparable full Euler
-companions after those gaps are restored.  Fourier diamonds separately guarantee that at least one of
-the three intermediate locations has radius at least `2|ell|/3`, and the global strict-UV law says that
-near-perfect one-step retention is possible only with vanishing logarithmic scale progress.
+The lowest historical statement can now be made before any triad decomposition.  In the normalized
+absolute-curl frame above,
 
-The remaining theorem is therefore a **representation-free positive composition theorem**: persistent
-nontrivial logarithmic escape must force enough actual, non-cancelling Cartan/Nijenhuis carrier activity
-at heat-visible frequencies to make the exact normalized escape action finite on every finite smooth
-interval.  One may not prove this by summing `Q_triangle^+`; that would be an analyst-created gross
-traffic budget.  Galilean nullity and `nu|m|^2` heat are exact endpoint constraints, but the positive
-composition bridge through coherent many-triad cancellation is **not proved**.
+\[
+\boxed{\mathcal A_{escape}=a^2/N^2,\qquad
+\delta\Theta=a h+R_w.}
+\]
+
+Hence persistent productive action must negotiate only endogenous alternatives: nontrivial Krylov
+opening `h` turns the productive direction, helicity can force side motion `w`, while suppressing both
+pushes the radial state toward the rigid two-radius face `h=0`.  None of these alternatives currently
+has a proved finite energy-paid historical action: `R_w` is one `|C|` weight higher, and no quantitative
+near-two-radius persistence theorem is assumed.
+
+The Cartan/Jacobi/Nijenhuis continuation laws remain exact **network readings** of this same
+reconfiguration.  They show how many-mode continuation can realize `w` and frame turning, but they are
+no longer needed to state the lowest frontier.  In particular, one may not close history by summing
+`Q_triangle^+`; that would be an analyst-created gross traffic budget.
+
+The remaining theorem is therefore a **Krylov-turning/reconfiguration history theorem**: finite smooth
+energy-loss histories must make
+
+\[
+\boxed{\int_0^T\frac{a(t)^2}{N(t)^2}\,dt<\infty,}
+\]
+
+using only the exact turning identity, helicity compatibility, two-radius rigidity and physical heat,
+without losing the extra `|C|` weight.  This is precisely the old escape action, so critical escape
+would force the same integral to diverge.  The required derivative-preserving historical bridge is
+**not proved**.
 
 The previously exposed lossless tangent coordinate remains exact but is now a compressed boundary
 reading:

@@ -827,6 +827,45 @@ def test_euler_acceleration_normals_and_critical_leaf_turning_decomposition_are_
     assert direct == pytest.approx(represented,abs=3e-14)
 
 
+def test_absolute_curl_productive_frame_turning_helicity_toda_and_two_radius_rigidity():
+    r=np.array((0.7,1.1,1.9,2.4,3.3,4.2));sgn=np.array((1.,-1.,1.,-1.,1.,-1.));C=sgn*r
+    e=np.array((0.31,-0.27,0.44,0.18,-0.53,0.39));e=e/np.linalg.norm(e)
+    raw=np.array((0.8,-0.2,0.6,-0.7,0.15,0.4));A=np.stack((e,C*e),axis=1)
+    f=raw-A@np.linalg.solve(A.T@A,A.T@raw)  # Euler-like E/H tangent velocity
+    m=float(e@(r*e));delta=math.sqrt(float(e@(r*r*e))-m*m);n=(r-m)*e/delta
+    a=float(n@f);w=f-a*n;alpha=float(n@(r*n));Ln=r*n
+    h=Ln-e*float(e@Ln)-n*float(n@Ln)
+    md=2*float((r*e)@f);zd=2*float((r*r*e)@f);dd=(zd-2*m*md)/(2*delta)
+    P=lambda x:x-e*float(e@x)-n*float(n@x)
+    nd=((r-m)*f-md*e)/delta-(dd/delta)*n
+    represented=-a*e+(a*h+P((r-m)*w))/delta
+    assert md == pytest.approx(2*a*delta,abs=3e-14)
+    assert dd == pytest.approx(a*(alpha-m)+float(h@w),abs=3e-14)
+    assert np.linalg.norm(nd-represented) < 8e-14
+
+    cH=float((C*e)@n);vH=P(C*e)
+    assert a*cH+float(vH@w) == pytest.approx(0.0,abs=5e-14)
+    assert float(w@w)+2e-14 >= a*a*cH*cH/float(vH@vH)
+    theta=P(nd+a*e);Rw=P((r-m)*w)
+    assert np.linalg.norm(delta*theta-a*h-Rw) < 8e-14
+    assert a*a*float(h@h) <= 2*delta*delta*float(theta@theta)+2*float(Rw@Rw)+2e-13
+
+    # Perfect radial productivity is the first Toda spectral-measure vector field after ds/dt=a/delta.
+    rr=np.array((0.8,1.7,3.6,4.4));p0=np.array((0.17,0.29,0.31,0.23));mt=float(p0@rr)
+    dt=math.sqrt(float(p0@((rr-mt)**2)));at=0.73
+    pdot=2*(at/dt)*(rr-mt)*p0;alphat=float((p0*((rr-mt)**2))@rr)/(dt*dt)
+    assert float(pdot.sum()) == pytest.approx(0.0,abs=2e-14)
+    assert float(pdot@rr) == pytest.approx(2*at*dt,abs=3e-14)
+    vard=float(pdot@((rr-mt)**2)); assert vard/(2*dt) == pytest.approx(at*(alphat-mt),abs=3e-14)
+    assert np.max(np.abs((dt/at)*pdot-2*(rr-mt)*p0)) < 2e-14
+
+    # Two occupied absolute-curl radii make span{e,n} Lambda-invariant; a third generic radius opens h.
+    rr=np.array((1.,1.,3.,3.));ee=np.array((.3,.4,.5,math.sqrt(.5)));mt=float(ee@(rr*ee));dt=math.sqrt(float(ee@(rr*rr*ee))-mt*mt);nn=(rr-mt)*ee/dt
+    hh=rr*nn-ee*float(ee@(rr*nn))-nn*float(nn@(rr*nn)); assert np.linalg.norm(hh)<5e-14
+    rr=np.array((1.,2.,4.));ee=np.sqrt(np.array((.2,.3,.5)));mt=float(ee@(rr*ee));dt=math.sqrt(float(ee@(rr*rr*ee))-mt*mt);nn=(rr-mt)*ee/dt
+    hh=rr*nn-ee*float(ee@(rr*nn))-nn*float(nn@(rr*nn)); assert np.linalg.norm(hh)>0.6
+
+
 def test_one_fixed_cartan_triple_reconstructs_same_canonical_spectral_energy_source():
     lam=(-2.0,0.6,3.1);z=(0.8,-0.5,1.2);f=0.37
     out=fixed_curl_cocycle_rhs(lam,z,((0,1,2,f),))
@@ -2215,6 +2254,12 @@ def test_certificate_records_two_particle_critical_history_without_closure_claim
     assert "A_escape=kappa^2/[N^2(EZ-K^2)]" in cert["primitive_scalar_triple_escape"]
     assert "only the first term has fixed sign" in cert["primitive_euler_kappa_derivative"]
     assert "remaining freedom is tangent turning" in cert["primitive_euler_acceleration_leaf"]
+    assert "A_escape=a^2/N^2" in cert["primitive_absolute_curl_productive_frame"]
+    assert "self-turning" in cert["primitive_absolute_curl_self_turning"]
+    assert "no 0/0 quotient" in cert["primitive_helicity_side_motion"]
+    assert "first Toda spectral-measure flow" in cert["primitive_toda_saturation_flow"]
+    assert "at most two radii" in cert["primitive_two_radius_krylov_rigidity"]
+    assert "extra |C| weight" in cert["primitive_turning_reconfiguration_balance"]
     assert "all four sign quadrants" in cert["primitive_one_step_turning_guard"]
     assert "(lambda_M-lambda_I)" in cert["primitive_full_two_step_gap"]
     assert "bracket-level A+B+C=0" in cert["primitive_weighted_jacobi_continuation"]
